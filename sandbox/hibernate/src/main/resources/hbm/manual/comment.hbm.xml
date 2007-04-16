@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.suggs.sandbox.hibernate.caveatEmptor">
+	
+	<class name="Comment" table="COMMENT">
+		<!-- -->
+		<id name="id" column="ID" type="long">
+			<generator class="native"/>
+		</id>
+		<!-- rating -->
+		<property name="rating" column="RARTING" type="integer" not-null="true"/>
+		<!-- text -->
+		<property name="text" column="TEXT" type="string" not-null="false"/>
+		<!-- created -->
+		<property name="created" column="CREATED" type="timestamp" not-null="true"/>
+		<!-- -->
+		
+	</class>
+	
+</hibernate-mapping>

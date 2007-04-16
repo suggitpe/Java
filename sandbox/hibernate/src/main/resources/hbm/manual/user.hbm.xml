@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.suggs.sandbox.hibernate.caveatEmptor">
+	
+	<class name="User" table="USER">
+		<id name="id" column="ID" type="long">
+			<generator class="native"/>
+		</id>
+		<!-- -->
+		<property name="firstName" column="FIRST_NAME" type="string" not-null="true"/>
+		<!-- -->
+		<property name="lastName" column="LAST_NAME" type="string" not-null="true"/>
+		<!-- -->
+		<property name="username" column="USERNAME" type="string" not-null="true"/>
+		<!-- -->
+		<property name="password" column="PASSWORD" type="string" not-null="true"/>
+		<!-- -->
+		<property name="email" column="EMAIL" type="string" not-null="true"/>
+		<!-- -->
+		<property name="ranking" column="RANKING" type="integer" not-null="true"/>
+		<!-- -->
+		<property name="created" column="CREATED" type="timestamp" not-null="true"/>
+		<!-- -->
+		<property name="" column="" type="" not-null="true"/>
+		<!-- address has no persistemnt identity outside the context of the user class/table -->
+		<component name="homeAddress" class="Address">
+			<property name="street" type="string" column="HOME_STREET" not-null="true"/>
+			<property name="city" type="string" column="HOME_CITY" not-null="true"/>
+			<property name="zipcode" type="string" column="HOME_ZIPCODE" not-null="true"/>
+		</component>
+		<!-- -->	
+		<component name="billingAddress" class="Address">
+			<property name="street" type="string" column="BILLING_STREET" not-null="true"/>
+			<property name="city" type="string" column="BILLING_CITY" not-null="true"/>
+			<property name="zipcode" type="string" column="BILLING_ZIPCODE" not-null="true"/>
+		</component>
+	</class>
+	
+</hibernate-mapping>

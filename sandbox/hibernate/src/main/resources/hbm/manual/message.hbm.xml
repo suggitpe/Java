@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<class name="com.suggs.sandbox.hibernate.chapter2.Message" table="MESSAGES">
+		<!-- -->
+		<id name="id" column="MESSAGE_ID">
+			<!-- 
+			<generator class="sequence">
+				<param name="sequence">message_seq</param>
+			</generator>
+			-->
+			<generator class="increment"/>
+		</id>
+		<!-- -->
+		<property name="text" column="MESSAGE_TEXT"/>
+		<!-- -->
+		<many-to-one name="nextMessage" cascade="all" column="NEXT_MESSAGE_ID"/>
+	</class>
+	
+</hibernate-mapping>

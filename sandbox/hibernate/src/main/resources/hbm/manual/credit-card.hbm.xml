@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.suggs.sandbox.hibernate.caveatEmptor">
+	
+	<joined-subclass name="CreditCard" extends="BillingDetails">
+		<!-- -->
+		<key column="ID" foreign-key="ID" not-null="true"/>
+		<!-- -->
+		<property name="type" column="TYPE" not-null="true"/>
+		<!-- -->
+		<property name="expMonth" column="EXP_MONTH" not-null="true"/>
+		<!-- -->
+		<property name="expYear" column="EXP_YEAR" not-null="true"/>
+	</joined-subclass>
+	
+</hibernate-mapping>

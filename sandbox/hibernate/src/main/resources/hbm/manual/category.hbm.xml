@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.suggs.sandbox.hibernate.caveatEmptor">
+	
+	<class name="Category" table="CATEGORY">
+		<!-- -->
+		<id name="id" column="ID" type="long">
+			<generator class="native"/>
+		</id>
+		<!-- This one uses the defaults to map the type and colUmn name -->
+		<property name="name" not-null="true"/>
+	</class>
+	
+</hibernate-mapping>

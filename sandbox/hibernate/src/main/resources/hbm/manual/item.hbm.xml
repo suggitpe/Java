@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.suggs.sandbox.hibernate.caveatEmptor">
+	
+	<class name="Item" table="ITEM">
+		<id name="id" column="ID" type="long">
+			<generator class="native"/>
+		</id>
+		<!-- -->
+		<property name="name" column="NAME" type="string" not-null="true"/>
+		<!-- -->
+		<property name="description" column="DESCRIPTION" type="string" not-null="true"/>
+		<!-- -->
+		<!-- -->
+		<!-- -->
+		<!-- -->
+		<property name="initialPrice" column="INITIAL_PRICE" type="double" not-null="false"/>
+		<!-- -->
+		<property name="reservePrice" column="RESERVE_PRICE" type="double" not-null="false"/>
+		<!-- -->
+		<property name="startDate" column="START_DATE" type="date" not-null="true"/>
+		<!-- -->
+		<property name="endDate" column="END_DATE" type="date" not-null="true"/>
+		<!-- -->
+		<property name="created" column="CREATED" type="timestamp" not-null="true"/>
+		<!-- -->
+		<!-- -->
+	</class>
+	
+</hibernate-mapping>
