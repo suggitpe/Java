@@ -29,7 +29,7 @@ public abstract class AbstractPersistentBaseClass
         return mId_;
     }
 
-    private void setId( Long aId )
+    protected void setId( Long aId )
     {
         mId_ = aId;
     }

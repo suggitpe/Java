@@ -11,8 +11,10 @@
 		<property name="amount" column="AMOUNT" type="double" not-null="true"/>
 		<!-- created date -->
 		<property name="created" column="CREATED" type="timestamp" not-null="true"/>
-		<!-- -->
-		<!-- -->
+		<!-- the bid table holds a ref to the item table many bids to one item -->
+        <many-to-one name="item" column="ITEM_ID" class="Item" not-null="true"/>
+		<!-- bidder property -->
+        <one-to-one name="bidder" class="User" foreign-key="BIDDER_ID"/>
 	</class>
 	
 </hibernate-mapping>

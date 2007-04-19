@@ -20,20 +20,38 @@
 		<property name="ranking" column="RANKING" type="integer" not-null="true"/>
 		<!-- -->
 		<property name="created" column="CREATED" type="timestamp" not-null="true"/>
-		<!-- -->
-		<property name="" column="" type="" not-null="true"/>
 		<!-- address has no persistemnt identity outside the context of the user class/table -->
 		<component name="homeAddress" class="Address">
 			<property name="street" type="string" column="HOME_STREET" not-null="true"/>
 			<property name="city" type="string" column="HOME_CITY" not-null="true"/>
-			<property name="zipcode" type="string" column="HOME_ZIPCODE" not-null="true"/>
+			<property name="zipCode" type="string" column="HOME_ZIPCODE" not-null="true"/>
 		</component>
-		<!-- -->	
+		<!-- billing details -->	
 		<component name="billingAddress" class="Address">
 			<property name="street" type="string" column="BILLING_STREET" not-null="true"/>
 			<property name="city" type="string" column="BILLING_CITY" not-null="true"/>
-			<property name="zipcode" type="string" column="BILLING_ZIPCODE" not-null="true"/>
+			<property name="zipCode" type="string" column="BILLING_ZIPCODE" not-null="true"/>
 		</component>
+        <!-- billing details ... refs to the user are held in the billingDetails table -->
+        <set name="billingDetails" inverse="true" cascade="all-delete-orphan">
+            <key column="USER_ID"/>
+            <one-to-many class="BillingDetails"/>
+        </set>
+        <!-- items for sale ... refs to Users (selers) held in Items table -->
+        <set name="itemsForSale" inverse="true" cascade="all-delete-orphan">
+            <key column="USER_ID"/>
+            <one-to-many class="Item"/>
+        </set>
+        <!-- bids ... refs to Users held in Bids table -->
+        <set name="bids" inverse="true" cascade="all-delete-orphan">
+            <key column="USER_ID"/>
+            <one-to-many class="Bid"/>
+        </set>
+        <!-- comments ... refs to Users held in Comments table -->
+        <set name="comments" inverse="true" cascade="all-delete-orphan">
+            <key column="FROM_USER_ID"/>
+            <one-to-many class="Comment"/>
+        </set>
 	</class>
 	
 </hibernate-mapping>

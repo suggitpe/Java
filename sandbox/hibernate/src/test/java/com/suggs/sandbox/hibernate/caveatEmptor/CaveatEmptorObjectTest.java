@@ -11,7 +11,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 import org.springframework.util.Assert;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class CaveatEmptorObjectTest extends AbstractDependencyInjectionSpringContextTests implements InitializingBean
@@ -84,10 +86,69 @@ public class CaveatEmptorObjectTest extends AbstractDependencyInjectionSpringCon
         sessionFactory_ = aFactory;
     }
 
-    public void testMe()
+    /**
+     * This is a simple interface to allow you to drop in a test to a
+     * defined hibernate transaction.
+     * 
+     * @author suggitpe
+     * @version 1.0 19 Apr 2007
+     */
+    private interface TestCallback
     {
-        LOG.info( "----------------------------------- testMe start" );
-        LOG.info( "----------------------------------- testMe end" );
+
+        /**
+         * This is used by the defining impl to allow the test name to
+         * be shown
+         * 
+         * @return the test name
+         */
+        String getTestName();
+
+        /**
+         * This is the core test interface. Here we pass in a session
+         * object so that we can get access to the persistent layer.
+         * 
+         * @param aTrans
+         */
+        void runTest( Session aSession );
+    }
+
+    /**
+     * This is the core test impl that will allow us to wrap up the
+     * session and transaction to a single impl
+     * 
+     * @param testMetaData
+     *            the test metadata impl including the name and core
+     *            test impl that will be called by this method.
+     */
+    private void runTest( TestCallback testMetaData )
+    {
+        LOG.info( "----------------------------------- " + testMetaData.getTestName() + " start" );
+        Session sess = sessionFactory_.openSession();
+        Transaction tran = sess.beginTransaction();
+
+        testMetaData.runTest( sess );
+
+        tran.commit();
+        sess.close();
+        LOG.info( "----------------------------------- " + testMetaData.getTestName() + " end" );
+    }
+
+    public void testCreateNewCreditCard()
+    {
+        runTest( new TestCallback()
+        {
+
+            public String getTestName()
+            {
+                return "testCreateNewCreditCard";
+            }
+
+            public void runTest( Session aSession )
+            {
+                
+            }
+        } );
     }
 
 }

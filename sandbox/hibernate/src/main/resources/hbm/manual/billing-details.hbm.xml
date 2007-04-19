@@ -9,6 +9,10 @@
 		</id>
 		<!-- owner property -->
 		<property name="owner" column="OWNER" type="string" not-null="true"/>
+        <!-- number property -->
+        <property name="number" column="NUMBER" type="string" not-null="true"/>
+        <!-- created -->
+		<property name="created" column="CREATED" type="timestamp" not-null="true"/>
 	</class>
 	
 </hibernate-mapping>
