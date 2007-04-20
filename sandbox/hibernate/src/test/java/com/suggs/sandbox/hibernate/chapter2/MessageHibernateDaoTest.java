@@ -5,7 +5,7 @@ package com.suggs.sandbox.hibernate.chapter2;
  * 
  */
 
-import com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest;
+import com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
 
 import java.util.Iterator;
 import java.util.List;

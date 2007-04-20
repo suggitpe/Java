@@ -4,7 +4,7 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
-import com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest;
+import com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
