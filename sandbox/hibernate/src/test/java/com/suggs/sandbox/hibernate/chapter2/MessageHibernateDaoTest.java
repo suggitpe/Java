@@ -5,7 +5,7 @@ package com.suggs.sandbox.hibernate.chapter2;
  * 
  */
 
-import com.suggs.sandbox.hibernate.chapter2.Message;
+import com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest;
 
 import java.util.Iterator;
 import java.util.List;
@@ -14,48 +14,59 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
-import org.springframework.util.Assert;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
-public class MessageHibernateDaoTest extends AbstractDependencyInjectionSpringContextTests implements InitializingBean
+public class MessageHibernateDaoTest extends AbstractHibernateSpringTest implements InitializingBean
 {
 
     private static final Log LOG = LogFactory.getLog( MessageHibernateDaoTest.class );
 
-    protected SessionFactory sessionFactory_;
-
     public MessageHibernateDaoTest()
     {
         super();
-        setPopulateProtectedVariables( true );
     }
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#doAfterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
+    protected void doAfterPropertiesSet() throws Exception
     {
-        Assert.notNull( sessionFactory_, "You must set the session factory object on this test" );
     }
 
     /**
-     * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#onSetUp()
+     * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#getHibernateMapFilenames()
      */
-    protected void onSetUp() throws Exception
+    protected String[] getHibernateMapFilenames()
     {
-        LOG.debug( "running on setup" );
-        Configuration cfg = new Configuration();
-        cfg.addResource( "hbm/manual/message.hbm.xml" );
-        sessionFactory_ = cfg.buildSessionFactory();
+        return new String[] { "hbm/manual/message.hbm.xml" };
+    }
 
-        cleanDownMessagesTable();
+    /**
+     * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#doCleanUpOldData()
+     */
+    protected void doCleanUpOldData()
+    {
+        LOG.debug( "---> CLEANING MESSAGES" );
+        Session s = getSessionFactory().openSession();
+        Transaction t = s.beginTransaction();
+
+        Criteria c = s.createCriteria( Message.class );
+        List res = c.list();
+
+        for ( Iterator i = res.iterator(); i.hasNext(); )
+        {
+            Message m = (Message) i.next();
+            LOG.debug( "deleting message [" + m.getId() + "]" );
+            s.delete( m );
+        }
+
+        t.commit();
+        s.close();
+        LOG.debug( "---> MESSAGES CLEANED" );
     }
 
     /**
@@ -64,17 +75,6 @@ public class MessageHibernateDaoTest extends AbstractDependencyInjectionSpringCo
     protected String[] getConfigLocations()
     {
         return new String[] { "xml/ut-messagetest.xml" };
-    }
-
-    public void setSessionFactory( SessionFactory aFact )
-    {
-
-        sessionFactory_ = aFact;
-    }
-
-    public SessionFactory getSessionFactory()
-    {
-        return sessionFactory_;
     }
 
     /**
@@ -206,28 +206,4 @@ public class MessageHibernateDaoTest extends AbstractDependencyInjectionSpringCo
         return m;
     }
 
-    /**
-     * Simple method to go to the database and clean down the messages
-     * table.
-     */
-    private void cleanDownMessagesTable()
-    {
-        LOG.debug( "---> CLEANING MESSAGES" );
-        Session s = getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
-
-        Criteria c = s.createCriteria( Message.class );
-        List res = c.list();
-
-        for ( Iterator i = res.iterator(); i.hasNext(); )
-        {
-            Message m = (Message) i.next();
-            LOG.debug( "deleting message [" + m.getId() + "]" );
-            s.delete( m );
-        }
-
-        t.commit();
-        s.close();
-        LOG.debug( "---> MESSAGES CLEANED" );
-    }
 }
