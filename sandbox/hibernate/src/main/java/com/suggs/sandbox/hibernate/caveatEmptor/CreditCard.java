@@ -4,6 +4,8 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -20,6 +22,14 @@ public class CreditCard extends BillingDetails
     {
         super();
         LOG.debug( "Creating a new CreditCard" );
+    }
+
+    public CreditCard( String aOwner, String aNumber, Date aCreateDate, Integer aType, String aExpMonth, String aExpYear )
+    {
+        super( aOwner, aNumber, aCreateDate );
+        mType_ = aType;
+        mExpMonth_ = aExpMonth;
+        mExpYear_ = aExpYear;
     }
 
     public String getExpMonth()

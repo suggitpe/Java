@@ -4,6 +4,8 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -19,6 +21,14 @@ public class BankAccount extends BillingDetails
     {
         super();
         LOG.debug( "Creating a new BankAccount" );
+    }
+
+    public BankAccount( String aOwner, String aNumber, Date aCreateDate, String aBankName, String aBankSwift )
+    {
+        super( aOwner, aNumber, aCreateDate );
+        mBankName_ = aBankName;
+        mBankSwift_ = aBankSwift;
+
     }
 
     public String getBankName()

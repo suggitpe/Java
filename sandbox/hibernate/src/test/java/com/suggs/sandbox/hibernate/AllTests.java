@@ -21,6 +21,7 @@ public class AllTests
         TestSuite s = new TestSuite();
         s.addTestSuite( com.suggs.sandbox.hibernate.chapter2.MessageHibernateDaoTest.class );
         s.addTestSuite( com.suggs.sandbox.hibernate.caveatEmptor.CaveatEmptorObjectTest.class );
+        s.addTestSuite( com.suggs.sandbox.hibernate.schemaCreator.SchemaCreatorTest.class );
         return s;
     }
 }

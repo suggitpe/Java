@@ -2,7 +2,7 @@
  * AbstractHibernateSpringTest.java created on 19 Apr 2007 18:27:36 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.common;
+package com.suggs.sandbox.hibernate.support;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -9,7 +9,7 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class BillingDetails extends AbstractPersistentBaseClass
+public abstract class BillingDetails extends AbstractPersistentBaseClass
 {
 
     private static final Log LOG = LogFactory.getLog( BillingDetails.class );
@@ -22,6 +22,22 @@ public class BillingDetails extends AbstractPersistentBaseClass
     {
         super();
         LOG.debug( "Creating a new Billing Details" );
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aOwner
+     * @param aNumber
+     * @param aCreatDate
+     */
+    public BillingDetails( String aOwner, String aNumber, Date aCreatDate )
+    {
+        super();
+
+        mOwner_ = aOwner;
+        mNumber_ = aNumber;
+        mCreated_ = aCreatDate;
     }
 
     public Date getCreated()
