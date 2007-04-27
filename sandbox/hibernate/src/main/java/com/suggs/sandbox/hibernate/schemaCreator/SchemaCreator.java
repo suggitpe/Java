@@ -2,7 +2,7 @@
  * ScemaCreator.java created on 23 Apr 2007 18:35:39 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.schema_generator;
+package com.suggs.sandbox.hibernate.schemaCreator;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -20,6 +20,22 @@ public class SchemaCreator
 
     private static final Log LOG = LogFactory.getLog( SchemaCreator.class );
 
+    private final static String FILE = "suggsSchema";
+
+    private File mSrcDir_;
+
+    private SchemaCreator()
+    {
+        // hidden
+    }
+
+    public SchemaCreator( final File aSrcDir )
+    {
+        Assert.notNull( aSrcDir, "Invalid src dir for hbm files" );
+        Assert.isTrue( ( aSrcDir.exists() && aSrcDir.isDirectory() ), "The src directory is invalid" );
+        mSrcDir_ = aSrcDir;
+    }
+
     /**
      * Main method that will manage the passing of the files to the
      * hibernate impl
@@ -29,20 +45,15 @@ public class SchemaCreator
      * @param aDestDir
      *            a directory to drop all of the resulting sql files
      */
-    public void createSqlFiles( String aSrcDir, String aDestDir )
+    public void createDDL( File aDestDir )
     {
         // search for all opf the hbm files from a passed in dir
-        Assert.notNull( aSrcDir, "invalid src dir for hbm files" );
         Assert.notNull( aDestDir, "invalid dest dir for sql files" );
 
-        File src = new File( aSrcDir );
-        File dest = new File( aDestDir );
-
-        Assert.isTrue( ( src.exists() && src.isDirectory() ), "The src directory is invalid" );
-        Assert.isTrue( ( dest.exists() && dest.isDirectory() ), "The dest directory is invalid" );
+        Assert.isTrue( ( aDestDir.exists() && aDestDir.isDirectory() ), "The dest directory is invalid" );
 
         // first we go through all of the
-        File[] hbms = src.listFiles( new FilenameFilter()
+        File[] hbms = mSrcDir_.listFiles( new FilenameFilter()
         {
 
             public boolean accept( File dir, String filename )
@@ -53,12 +64,25 @@ public class SchemaCreator
 
         Configuration cfg = createCfg( hbms );
 
-        for ( int i = 0; i < hbms.length; ++i )
+        createSql( createNewSqlFile( aDestDir ), cfg );
+    }
+
+    /**
+     * This method will create a new file in the destination directory
+     * after archiving off the exiting files so that no data is lost
+     * 
+     * @param aDestDir
+     *            the directory for the new file
+     * @return the name of the new file
+     */
+    private String createNewSqlFile( File aDestDir )
+    {
+        File dest = new File( aDestDir.getAbsolutePath()  + "/" + FILE + ".sql" );
+        if ( dest.exists() )
         {
-            LOG.debug( "converting hbm file [" + hbms[i] + "]" );
-            createSql( hbms[i], dest, cfg );
-            LOG.debug( "converted file [" + hbms[i] + "]" );
+            LOG.error( "Overwriting previous sql file with [" + dest.getAbsolutePath() + "]" );
         }
+        return dest.getAbsolutePath();
     }
 
     /**
@@ -74,7 +98,7 @@ public class SchemaCreator
         Configuration cfg = new Configuration();
         for ( int i = 0; i < aListOfHbms.length; ++i )
         {
-            cfg.addResource( aListOfHbms[i].getPath() );
+            cfg.addResource( "hbm/manual/" + aListOfHbms[i].getName() );
         }
 
         return cfg;
@@ -84,18 +108,18 @@ public class SchemaCreator
      * Method to interact to the hibernate interface to manage the
      * underlying sql file creation
      * 
-     * @param aHbmFile
-     *            an hbm file to forward generate
-     * @param aDestDir
-     *            a destination dir for the sql file
+     * @param aDestFilename
+     *            a destination filename for the sql file
      * @param aCfg
      *            Configuartion obejct used by the schemaexport
      *            process
      */
-    private void createSql( File aHbmFile, File aDestDir, Configuration aCfg )
+    private void createSql( String aDestFilename, Configuration aCfg )
     {
-
         SchemaExport export = new SchemaExport( aCfg );
-
+        export.setHaltOnError( true );
+        export.setDelimiter( ";" );
+        export.setOutputFile( aDestFilename );
+        export.create( true, true );
     }
 }

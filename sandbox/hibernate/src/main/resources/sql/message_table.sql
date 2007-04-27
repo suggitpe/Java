@@ -1,6 +1,5 @@
 DROP table "MESSAGES" cascade constraints ;
 
-
 CREATE table "MESSAGES"
 (
     "MESSAGE_ID"      NUMBER(10,0) NOT NULL,
