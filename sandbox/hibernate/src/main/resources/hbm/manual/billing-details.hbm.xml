@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.suggs.sandbox.hibernate.caveatEmptor">
 	
-	<class name="BillingDetails" table="BILLING_DETAILS">
+	<class name="BillingDetails" table="CE_BILLING_DETAILS">
 		<!-- main id -->
         <id name="id" column="ID" type="long">
             <generator class="sequence">
@@ -10,11 +10,11 @@
             </generator>
         </id>
 		<!-- owner property -->
-		<property name="owner" column="OWNER" type="string" not-null="true"/>
+		<property name="owner" column="BILLING_OWNER" type="string" not-null="true"/>
         <!-- number property -->
-        <property name="number" column="NUMBER" type="string" not-null="true"/>
+        <property name="number" column="BILLING_NUMBER" type="string" not-null="true"/>
         <!-- created -->
-		<property name="created" column="CREATED" type="timestamp" not-null="true"/>
+		<property name="created" column="BILLING_CREATED" type="timestamp" not-null="true"/>
 	</class>
 	
 </hibernate-mapping>

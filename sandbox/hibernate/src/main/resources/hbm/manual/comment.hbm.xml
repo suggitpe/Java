@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.suggs.sandbox.hibernate.caveatEmptor">
 	
-	<class name="Comment" table="COMMENT">
+	<class name="Comment" table="CE_COMMENT">
 		<!-- default id -->
 		<id name="id" column="ID" type="long">
             <generator class="sequence">
