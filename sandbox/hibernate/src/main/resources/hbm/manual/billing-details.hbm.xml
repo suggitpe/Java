@@ -4,9 +4,11 @@
 	
 	<class name="BillingDetails" table="BILLING_DETAILS">
 		<!-- main id -->
-		<id name="id" column="ID" type="long">
-			<generator class="native"/>
-		</id>
+        <id name="id" column="ID" type="long">
+            <generator class="sequence">
+                <param name="sequence">BILLING_DETAILS_SEQ</param>
+            </generator>
+        </id>
 		<!-- owner property -->
 		<property name="owner" column="OWNER" type="string" not-null="true"/>
         <!-- number property -->

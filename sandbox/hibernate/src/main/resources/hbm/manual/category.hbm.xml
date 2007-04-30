@@ -5,7 +5,9 @@
 	<class name="Category" table="CATEGORY">
 		<!-- -->
 		<id name="id" column="ID" type="long">
-			<generator class="native"/>
+            <generator class="sequence">
+                <param name="sequence">CATEGORY_SEQ</param>
+            </generator>
 		</id>
 		<!-- This one uses the defaults to map the type and colUmn name -->
 		<property name="name" not-null="true"/>

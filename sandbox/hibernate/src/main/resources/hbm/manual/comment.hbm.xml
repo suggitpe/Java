@@ -5,7 +5,9 @@
 	<class name="Comment" table="COMMENT">
 		<!-- default id -->
 		<id name="id" column="ID" type="long">
-			<generator class="native"/>
+            <generator class="sequence">
+                <param name="sequence">COMMENT_SEQ</param>
+            </generator>
 		</id>
 		<!-- rating property -->
 		<property name="rating" column="RARTING" type="integer" not-null="true"/>

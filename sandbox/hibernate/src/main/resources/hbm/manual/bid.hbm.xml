@@ -5,7 +5,9 @@
 	<class name="Bid" table="BID">
 		<!-- -->
 		<id name="id" column="ID" type="long">
-			<generator class="native"/>
+            <generator class="sequence">
+                <param name="sequence">BID_SEQ</param>
+            </generator>
 		</id>
 		<!-- bid amount -->
 		<property name="amount" column="AMOUNT" type="double" not-null="true"/>

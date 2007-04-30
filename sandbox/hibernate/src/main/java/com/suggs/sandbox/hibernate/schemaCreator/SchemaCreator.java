@@ -117,9 +117,9 @@ public class SchemaCreator
     private void createSql( String aDestFilename, Configuration aCfg )
     {
         SchemaExport export = new SchemaExport( aCfg );
-        export.setHaltOnError( true );
+        //export.setHaltOnError( true );
         export.setDelimiter( ";" );
         export.setOutputFile( aDestFilename );
-        export.create( true, true );
+        export.create( false, false );
     }
 }
