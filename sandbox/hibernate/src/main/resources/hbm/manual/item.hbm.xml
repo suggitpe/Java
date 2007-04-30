@@ -5,7 +5,7 @@
     <class name="Item" table="CE_ITEM">
         <id name="id" column="ID" type="long">
             <generator class="sequence">
-                <param name="sequence">ITEM_SEQ</param>
+                <param name="sequence">CE_ITEM_SEQ</param>
             </generator>
         </id>
         <!-- nasme property -->

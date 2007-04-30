@@ -6,7 +6,7 @@
 		<!-- -->
 		<id name="id" column="ID" type="long">
             <generator class="sequence">
-                <param name="sequence">BID_SEQ</param>
+                <param name="sequence">CE_BID_SEQ</param>
             </generator>
 		</id>
 		<!-- bid amount -->

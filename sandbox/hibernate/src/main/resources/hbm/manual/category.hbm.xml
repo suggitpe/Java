@@ -6,7 +6,7 @@
 		<!-- -->
 		<id name="id" column="ID" type="long">
             <generator class="sequence">
-                <param name="sequence">CATEGORY_SEQ</param>
+                <param name="sequence">CE_CATEGORY_SEQ</param>
             </generator>
 		</id>
 		<!-- This one uses the defaults to map the type and colUmn name -->
