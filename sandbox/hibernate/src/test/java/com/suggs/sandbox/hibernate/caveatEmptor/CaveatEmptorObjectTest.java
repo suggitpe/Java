@@ -10,11 +10,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Expression;
 
 public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
 {
@@ -30,13 +34,6 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
     }
 
     /**
-     * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#doAfterPropertiesSet()
-     */
-    protected void doAfterPropertiesSet() throws Exception
-    {
-    }
-
-    /**
      * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#getHibernateMapFilenames()
      */
     protected String[] getHibernateMapFilenames()
@@ -44,13 +41,6 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
         return new String[] { "hbm/manual/billing-details.hbm.xml", "hbm/manual/credit-card.hbm.xml", "hbm/manual/bank-account.hbm.xml",
                              "hbm/manual/bid.hbm.xml", "hbm/manual/category.hbm.xml", "hbm/manual/comment.hbm.xml",
                              "hbm/manual/item.hbm.xml", "hbm/manual/user.hbm.xml" };
-    }
-
-    /**
-     * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#doCleanUpOldData()
-     */
-    protected void doCleanUpOldData()
-    {
     }
 
     /**
@@ -69,6 +59,15 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
         runTest( new TestCallback()
         {
 
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] { CreditCard.class, BillingDetails.class };
+            }
+
+            public void preTestSetup( Session aSession )
+            {
+            }
+
             public String getTestName()
             {
                 return "testCreateNewCreditCard";
@@ -82,6 +81,153 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
                 // getObjectAsString( card ) );
                 aSession.save( card );
             }
+
+        } );
+    }
+
+    /**
+     * Test the bank account object
+     */
+    public void testCreateNewBankAccount()
+    {
+        runTest( new TestCallback()
+        {
+
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] {};
+            }
+
+            public void preTestSetup( Session aSession )
+            {
+            }
+
+            public String getTestName()
+            {
+                return "testCreateNewBankAccounT";
+            }
+
+            public void runTest( Session aSession )
+            {
+                LOG.debug( "Creating a new Bank Account" );
+                BankAccount ba = new BankAccount( "PGDS", "0987654321", Calendar.getInstance().getTime(), "DummyBankName", "DUMMGB2LXXXX" );
+
+                aSession.save( ba );
+            }
+
+        } );
+
+    }
+
+    /**
+     * Test a new category object
+     */
+    public void testCreateNewCategory()
+    {
+        runTest( new TestCallback()
+        {
+
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] { Category.class };
+            }
+
+            public void preTestSetup( Session aSession )
+            {
+            }
+
+            public String getTestName()
+            {
+                return "testCreateNewCategory";
+            }
+
+            public void runTest( Session aSession )
+            {
+                LOG.debug( "Creating a new Category" );
+                Category c = new Category( "dummy category name" );
+                aSession.save( c );
+
+            }
+
+        } );
+    }
+
+    public void testCreateNewNestedCategory()
+    {
+        runTest( new TestCallback()
+        {
+
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] { Category.class };
+            }
+
+            public void preTestSetup( Session aSession )
+            {
+                Session s = getSessionFactory().openSession();
+                Transaction t = s.beginTransaction();
+
+                Category parent = new Category( "Parent category" );
+                s.save( parent );
+
+                t.commit();
+                s.close();
+
+            }
+
+            public String getTestName()
+            {
+                return "createNewNestedCategory";
+            }
+
+            public void runTest( Session aSession )
+            {
+
+                Criteria c = aSession.createCriteria( Category.class );
+                c.add( Expression.like( "name", "Parent%" ) );
+
+                List l = c.list();
+                LOG.debug( "Category objects in the database number [" + l.size() + "]" );
+
+                Category child = new Category( "Child category" );
+                aSession.save( child );
+
+            }
+
+        } );
+    }
+
+    /**
+     * Test the creation of a new User
+     */
+    public void testCreateNewUser()
+    {
+        runTest( new TestCallback()
+        {
+
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] { User.class };
+            }
+
+            public void preTestSetup( Session aSession )
+            {
+            }
+
+            public String getTestName()
+            {
+                return "testCreateNewUser";
+            }
+
+            public void runTest( Session aSession )
+            {
+                LOG.debug( "Creating a new user" );
+                Address home = new Address( "high street north", "leighton buzzard", "LU7 0EX" );
+                Address bill = new Address( "100 liverpool street", "london", "EC2M 2RH" );
+                User u = new User( "Peter", "Suggitt", "suggitpe", "welcome", "me@suggs.org.uk", home, bill );
+                aSession.save( u );
+            }
+
         } );
     }
 

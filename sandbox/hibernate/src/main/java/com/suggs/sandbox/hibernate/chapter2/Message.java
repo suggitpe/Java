@@ -4,7 +4,12 @@
  */
 package com.suggs.sandbox.hibernate.chapter2;
 
-
+/**
+ * Data object for persistence
+ * 
+ * @author suggitpe
+ * @version 1.0 8 May 2007
+ */
 public class Message
 {
 

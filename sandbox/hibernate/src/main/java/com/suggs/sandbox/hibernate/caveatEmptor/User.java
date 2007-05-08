@@ -4,6 +4,7 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,8 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.springframework.util.Assert;
 
 public class User extends AbstractPersistentBaseClass
 {
@@ -37,7 +40,51 @@ public class User extends AbstractPersistentBaseClass
     public User()
     {
         super();
-        LOG.debug( "Creating a new User" );
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aFirstName
+     *            the users first name
+     * @param aLastName
+     *            the users last name
+     * @param aUserName
+     *            the users username
+     * @param aPassword
+     *            tyhe users password
+     * @param aEmail
+     *            the users email address
+     * @param aHomeAddress
+     *            the users home address
+     * @param aBillingAddress
+     *            the users billing address
+     */
+    public User( String aFirstName, String aLastName, String aUserName, String aPassword, String aEmail, Address aHomeAddress,
+                 Address aBillingAddress )
+    {
+        super();
+        mFirstName_ = aFirstName;
+        mLastName_ = aLastName;
+        Assert.notNull( aUserName, "Must set the username" );
+        mUsername_ = aUserName;
+        mPassword_ = aPassword;
+        Assert.notNull( aEmail, "Must set the email address" );
+        mEmail_ = aEmail;
+        mRanking_ = 0;
+        mCreated_ = Calendar.getInstance().getTime();
+        Assert.notNull( aHomeAddress, "Must set the home adress" );
+        mHomeAddress_ = aHomeAddress;
+        if ( aBillingAddress == null )
+        {
+            LOG.info( "Using home address as billing address as default" );
+            mBillingAddress_ = aHomeAddress;
+        }
+        else
+        {
+            mBillingAddress_ = aBillingAddress;
+        }
+
     }
 
     public Set<BillingDetails> getBillingDetails()

@@ -13,14 +13,15 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Expression;
 
-public class MessageHibernateDaoTest extends AbstractHibernateSpringTest implements InitializingBean
+public class MessageHibernateDaoTest extends AbstractHibernateSpringTest
 {
 
     private static final Log LOG = LogFactory.getLog( MessageHibernateDaoTest.class );
@@ -28,13 +29,6 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest impleme
     public MessageHibernateDaoTest()
     {
         super();
-    }
-
-    /**
-     * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#doAfterPropertiesSet()
-     */
-    protected void doAfterPropertiesSet() throws Exception
-    {
     }
 
     /**
@@ -50,7 +44,6 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest impleme
      */
     protected void doCleanUpOldData()
     {
-        LOG.debug( "---> CLEANING MESSAGES" );
         Session s = getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
 
@@ -66,7 +59,6 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest impleme
 
         t.commit();
         s.close();
-        LOG.debug( "---> MESSAGES CLEANED" );
     }
 
     /**
@@ -96,17 +88,32 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest impleme
      */
     public void testNewObject()
     {
-        LOG.info( "----------------------------------- testNewObject start" );
-        Session sess = getSessionFactory().openSession();
-        Transaction trans = sess.beginTransaction();
 
-        Message msg = new Message( "Hello world" );
-        sess.save( msg );
+        runTest( new TestCallback()
+        {
 
-        trans.commit();
-        sess.close();
-        LOG.debug( "New object created [" + msg.toString() + "]" );
-        LOG.info( "----------------------------------- testNewObject end" );
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] { Message.class };
+            }
+
+            public String getTestName()
+            {
+                return "testNewObject";
+            }
+
+            public void preTestSetup( Session aSession )
+            {
+            }
+
+            public void runTest( Session aSession )
+            {
+                Message msg = new Message( "Hello world" );
+                aSession.save( msg );
+                LOG.debug( "New object created [" + msg.toString() + "]" );
+            }
+        } );
+
     }
 
     /**
@@ -115,58 +122,94 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest impleme
      */
     public void testUpdatingObject()
     {
-        LOG.info( "----------------------------------- testUpdatingObject start" );
-        Message m1 = createNewMessageForTest( "This is a message to be updated" );
+        runTest( new TestCallback()
+        {
 
-        Session sess = getSessionFactory().openSession();
-        Transaction trans = sess.beginTransaction();
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] { Message.class };
+            }
 
-        Message m = (Message) sess.get( Message.class, m1.getId() );
-        LOG.debug( m.getText() );
-        m.setText( "This has been modified" );
-        Message next = new Message( "This is an additional message" );
-        m.setNextMessage( next );
+            public String getTestName()
+            {
+                return "testUpdatingObject";
+            }
 
-        trans.commit();
-        sess.close();
-        LOG.info( "----------------------------------- testUpdatingObject end" );
+            public void preTestSetup( Session aSession )
+            {
+                Message m = new Message( "This is a message to be updated" );
+                aSession.save( m );
+            }
+
+            public void runTest( Session aSession )
+            {
+                Criteria c = aSession.createCriteria( Message.class );
+                c.add( Expression.like( "text", "This is a message%" ) );
+                List l = c.list();
+
+                Assert.isTrue( l.size() == 1, "Expecting 1 object in the database but we actually got [" + l.size() + "]" );
+                Message m = (Message) l.get( 0 );
+                LOG.debug( "current text = [" + m.getText() + "]" );
+                m.setText( "This is the changed text for message obj" );
+
+                Message next = new Message( "This is the next message" );
+
+                m.setNextMessage( next );
+
+            }
+        } );
+
     }
 
     /**
-     * Test the extractiona nd iteraton of a table is objects
+     * Test the extraction and iteraton of a table is objects
      */
     public void testGettingDatabaseObjects()
     {
-        LOG.info( "----------------------------------- testGettingDatabaseObjects start" );
-        createNewMessageForTest( "Test message 1" );
-        createNewMessageForTest( "Test message 2" );
-        createNewMessageForTest( "Test message 3" );
-        createNewMessageForTest( "Test message 4" );
+        runTest( new TestCallback()
+        {
 
-        Session s = getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] { Message.class };
+            }
 
-        LOG.debug( "Testing Query approach" );
-        Query q1 = s.createQuery( "from Message" );
-        List l1 = q1.list();
-        dumpListContents( l1 );
+            public String getTestName()
+            {
+                return "testGettingDatabaseObjects";
+            }
 
-        // can't get this working
-        /*
-         * LOG.debug( "Testing SQL Query approach" ); SQLQuery q2 =
-         * s.createSQLQuery( "select {m.*} from MESSAGES {m}" ); List
-         * l2 = q2.list(); dumpListContents( l2 );
-         */
+            public void preTestSetup( Session aSession )
+            {
+                int numMsgs = 4;
+                Message last = null;
+                for ( int i = 0; i < numMsgs; ++i )
+                {
+                    Message m = new Message( "Test message [" + i + "]" );
+                    if ( i != 0 )
+                    {
+                        m.setNextMessage( last );
+                    }
+                    last = m;
+                    aSession.save( m );
+                }
+            }
 
-        LOG.debug( "Testing Criteria approach" );
-        Criteria c = s.createCriteria( Message.class );
-        List l3 = c.list();
-        dumpListContents( l3 );
+            public void runTest( Session aSession )
+            {
+                // use a query
+                LOG.debug( "Testing query approach" );
+                Query q = aSession.createQuery( "from Message" );
+                List l1 = q.list();
+                dumpListContents( l1 );
 
-        t.commit();
-        s.close();
-
-        LOG.info( "----------------------------------- testGettingDatabaseObjects end" );
+                // use a criterion
+                LOG.debug( "Testing criterion approach" );
+                Criteria c = aSession.createCriteria( Message.class );
+                List l2 = c.list();
+                dumpListContents( l2 );
+            }
+        } );
     }
 
     /**
@@ -182,28 +225,6 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest impleme
             Message m = (Message) i.next();
             LOG.debug( m.toString() );
         }
-    }
-
-    /**
-     * Simple method that will create and persist an object to the
-     * database.
-     * 
-     * @param aText
-     *            The text to use in the new object
-     * @return the newly created text message
-     */
-    private Message createNewMessageForTest( String aText )
-    {
-        LOG.debug( "---> creating a test message with [" + aText + "]" );
-        Session s = getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();
-        Message m = new Message( aText );
-        s.save( m );
-        s.flush();
-        t.commit();
-        s.close();
-        LOG.debug( "---> message created" );
-        return m;
     }
 
 }

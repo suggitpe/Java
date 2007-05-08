@@ -22,7 +22,6 @@ public class Bid extends AbstractPersistentBaseClass
     public Bid()
     {
         super();
-        LOG.debug( "Creating a new Bid" );
     }
 
     public Double getAmount()

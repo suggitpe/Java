@@ -4,31 +4,25 @@
  */
 package com.suggs.sandbox.hibernate.support;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
-import org.springframework.util.Assert;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public abstract class AbstractHibernateSpringTest extends AbstractDependencyInjectionSpringContextTests implements InitializingBean
+public abstract class AbstractHibernateSpringTest extends AbstractDependencyInjectionSpringContextTests
 {
 
     private static final Log LOG = LogFactory.getLog( AbstractHibernateSpringTest.class );
     private SessionFactory sessionFactory_;
-
-    /**
-     * This method is used so that we can enforce the derived classes
-     * to have a hook into the spring injection checks.
-     * 
-     * @throws Exception
-     */
-    protected abstract void doAfterPropertiesSet() throws Exception;
 
     /**
      * This allows any derived classses to define the hbm files that
@@ -39,30 +33,11 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     protected abstract String[] getHibernateMapFilenames();
 
     /**
-     * This is used as an extension to the onSetup method call. The
-     * onSetup call will create the configuration object and pass in
-     * the hbm files to it. Onec this is done the doCleanUpOldData is
-     * called that allows you to clean up the database. The theory
-     * here is that we have configured up the hibernate env to allow
-     * for the relevant objects.
-     */
-    protected abstract void doCleanUpOldData();
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( sessionFactory_, "Must initialise an instance of session factory for this test" );
-        doAfterPropertiesSet();
-    }
-
-    /**
      * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#onSetUp()
      */
     protected void onSetUp() throws Exception
     {
-        LOG.debug( "running on setup" );
+        LOG.debug( "********* running on setup" );
         Configuration cfg = new Configuration();
         String[] files = getHibernateMapFilenames();
         for ( int i = 0; i < files.length; ++i )
@@ -71,8 +46,6 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
         }
 
         setSessionFactory( cfg.buildSessionFactory() );
-
-        doCleanUpOldData();
     }
 
     /**
@@ -85,6 +58,61 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     }
 
     /**
+     * This will clean up all of the tables that
+     * 
+     * @param aClassList
+     */
+    private void cleanTestTables( Class[] aClassList )
+    {
+        Session s = getSessionFactory().openSession();
+        Transaction t = s.beginTransaction();
+        for ( int i = 0; i < aClassList.length; ++i )
+        {
+            LOG.debug( "Cleaning table [" + aClassList[i].getSimpleName() + "]" );
+            Criteria c = s.createCriteria( aClassList[i] );
+            List l = c.list();
+            for ( Iterator iter = l.iterator(); iter.hasNext(); )
+            {
+                s.delete( iter.next() );
+            }
+        }
+
+        t.commit();
+        s.close();
+    }
+
+    /**
+     * This is the core test impl that will allow us to wrap up the
+     * session and transaction to a single impl
+     * 
+     * @param testMetaData
+     *            the test metadata impl including the name and core
+     *            test impl that will be called by this method.
+     */
+    protected void runTest( TestCallback testMetaData )
+    {
+
+        String testName = testMetaData.getTestName();
+        LOG.info( "----------------------------------- " + testName + " cleaning class tables for tests" );
+        cleanTestTables( testMetaData.getClassesForCleaning() );
+
+        LOG.debug( "----------------------------------- " + testName + " preTest" );
+        Session sess = sessionFactory_.openSession();
+        Transaction tran = sess.beginTransaction();
+
+        testMetaData.preTestSetup( sess );
+        
+        sess.flush();
+        
+        LOG.debug( "----------------------------------- " + testName + " start" );
+        testMetaData.runTest( sess );
+
+        tran.commit();
+        sess.close();
+        LOG.debug( "----------------------------------- " + testName + " end" );
+    }
+
+    /**
      * This is a simple interface to allow you to drop in a test to a
      * defined hibernate transaction.
      * 
@@ -93,6 +121,24 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
      */
     protected interface TestCallback
     {
+
+        /**
+         * This method is used to get a collection of classes so that
+         * we can clean down any tables used in the test.
+         * 
+         * @return an array of classes
+         */
+        Class[] getClassesForCleaning();
+
+        /**
+         * This is called by a test execution so that they can set up
+         * any pre test activities such as persisting an object to the
+         * database
+         * 
+         * @param aSession
+         *            a session to the database
+         */
+        void preTestSetup( Session aSession );
 
         /**
          * This is used by the defining impl to allow the test name to
@@ -109,27 +155,7 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
          * @param aTrans
          */
         void runTest( Session aSession );
-    }
 
-    /**
-     * This is the core test impl that will allow us to wrap up the
-     * session and transaction to a single impl
-     * 
-     * @param testMetaData
-     *            the test metadata impl including the name and core
-     *            test impl that will be called by this method.
-     */
-    protected void runTest( TestCallback testMetaData )
-    {
-        LOG.info( "----------------------------------- " + testMetaData.getTestName() + " start" );
-        Session sess = sessionFactory_.openSession();
-        Transaction tran = sess.beginTransaction();
-
-        testMetaData.runTest( sess );
-
-        tran.commit();
-        sess.close();
-        LOG.info( "----------------------------------- " + testMetaData.getTestName() + " end" );
     }
 
     /**

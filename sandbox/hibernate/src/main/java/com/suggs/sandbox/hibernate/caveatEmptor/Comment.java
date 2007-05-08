@@ -23,7 +23,6 @@ public class Comment extends AbstractPersistentBaseClass
     public Comment()
     {
         super();
-        LOG.debug( "Creating a new Comment" );
     }
 
     public Date getCreated()

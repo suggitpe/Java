@@ -11,6 +11,16 @@
 		</id>
 		<!-- This one uses the defaults to map the type and colUmn name -->
 		<property name="name" not-null="true"/>
+        <!-- item association -  this is a unidirectional association -->
+        <set name="items">
+            <key column="CATEGORY_ID"/>
+            <one-to-many class="Item"/>
+        </set>
+        
+        <set name="childCategories" catalog="all-delete-orphan">
+            <key column="PARENT_CATEGORY"/>
+            <one-to-many class="Category"/>
+        </set>
 	</class>
 	
 </hibernate-mapping>

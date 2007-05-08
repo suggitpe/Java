@@ -19,7 +19,14 @@ public class Address
     public Address()
     {
         super();
-        LOG.debug( "Creating a new Address" );
+    }
+
+    public Address( String aStreet, String aCity, String aZip )
+    {
+        super();
+        mStreet_ = aStreet;
+        mCity_ = aCity;
+        mZipCode_ = aZip;
     }
 
     public String getCity()

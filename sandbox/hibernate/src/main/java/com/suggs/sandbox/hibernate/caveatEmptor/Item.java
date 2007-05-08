@@ -32,7 +32,6 @@ public class Item extends AbstractPersistentBaseClass
     public Item()
     {
         super();
-        LOG.debug( "Creating a new Item" );
     }
 
     public String getName()

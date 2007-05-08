@@ -23,7 +23,12 @@ public class Category extends AbstractPersistentBaseClass
     public Category()
     {
         super();
-        LOG.debug( "Creating a new Category" );
+    }
+    
+    public Category( String aName )
+    {
+        super();
+        mName_ = aName;
     }
 
     public String getName()

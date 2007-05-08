@@ -12,11 +12,6 @@
         <property name="name" column="NAME" type="string" not-null="true"/>
         <!-- description property -->
         <property name="description" column="DESCRIPTION" type="string" not-null="true"/>
-        <!-- category association -  this is a unidirectional association -->
-        <set name="categories">
-            <key column="CATEGORY_ID"/>
-            <one-to-many class="Category"/>
-        </set>
         <!-- Bid association - this is a bidirectional association and as 
             such we must state that there is an inverse mapping defined, also
             we need to state that if a new Bid is associated with this persistent 

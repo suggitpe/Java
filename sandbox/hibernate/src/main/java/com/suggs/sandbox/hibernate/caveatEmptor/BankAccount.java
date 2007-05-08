@@ -20,7 +20,6 @@ public class BankAccount extends BillingDetails
     public BankAccount()
     {
         super();
-        LOG.debug( "Creating a new BankAccount" );
     }
 
     public BankAccount( String aOwner, String aNumber, Date aCreateDate, String aBankName, String aBankSwift )

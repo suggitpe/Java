@@ -21,7 +21,6 @@ public class CreditCard extends BillingDetails
     public CreditCard()
     {
         super();
-        LOG.debug( "Creating a new CreditCard" );
     }
 
     public CreditCard( String aOwner, String aNumber, Date aCreateDate, Integer aType, String aExpMonth, String aExpYear )

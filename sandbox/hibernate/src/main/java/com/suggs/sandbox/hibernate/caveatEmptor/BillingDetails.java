@@ -21,7 +21,6 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
     public BillingDetails()
     {
         super();
-        LOG.debug( "Creating a new Billing Details" );
     }
 
     /**
