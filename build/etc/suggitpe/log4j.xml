@@ -37,7 +37,7 @@
     </category>
 
     <category name="org.hibernate">
-        <priority value="info" />
+        <priority value="warn" />
     </category>
 
     <category name="org.springframework.jdbc">
