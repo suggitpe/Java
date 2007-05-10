@@ -38,7 +38,7 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     protected void onSetUp() throws Exception
     {
         LOG.debug( "********* running on setup" );
-        Configuration cfg = new Configuration();
+        Configuration cfg = new Configuration().configure( "hibernate.cfg.xml" );
         String[] files = getHibernateMapFilenames();
         for ( int i = 0; i < files.length; ++i )
         {
