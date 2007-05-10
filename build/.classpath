@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="lib" path="repository/antlr/jars/antlr-2.7.6rc1.jar"/>
+	<classpathentry exported="true" kind="lib" path="repository/oracle/jars/aqapi13_g-10.2.0.jar"/>
+	<classpathentry kind="lib" path="repository/asm/jars/asm-1.5.3.jar"/>
+	<classpathentry kind="lib" path="repository/asm/jars/asm-attrs-1.5.3.jar"/>
+	<classpathentry kind="lib" path="repository/cglib/jars/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="repository/commons-collections/jars/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="repository/commons-lang/jars/commons-lang-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="repository/commons-logging/jars/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="repository/dom4j/jars/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="repository/easymock/jars/easymock-1.1.jar" sourcepath="repository/easymock/jars/easymock-src-1.1.zip"/>
+	<classpathentry kind="lib" path="repository/easymock/jars/easymockclassextension-1.1.jar" sourcepath="repository/easymock/jars/easymockclassextension-src-1.1.zip"/>
+	<classpathentry kind="lib" path="repository/ehcache/jars/ehcache-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="repository/hibernate/jars/hibernate-3.2.3.jar" sourcepath="repository/hibernate/jars/hibernate-src-3.2.3.zip"/>
+	<classpathentry kind="lib" path="repository/jdom/jars/jaxen-core-0.9.jar"/>
+	<classpathentry kind="lib" path="repository/jdom/jars/jaxen-jdom-0.9.jar"/>
+	<classpathentry kind="lib" path="repository/jdom/jars/jdom-0.9.jar"/>
+	<classpathentry kind="lib" path="repository/javax/jars/jta-1.0.1B.jar"/>
+	<classpathentry exported="true" kind="lib" path="repository/junit/jars/junit-3.8.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="repository/log4j/jars/log4j-1.2.12.jar"/>
+	<classpathentry exported="true" kind="lib" path="repository/oracle/jars/ojdbc14_g-10.2.0.jar"/>
+	<classpathentry kind="lib" path="repository/jdom/jars/saxpath-0.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="repository/spring/jars/spring-1.2.8.jar" sourcepath="repository/spring/jars/spring-src-1.2.8.zip"/>
+	<classpathentry exported="true" kind="lib" path="repository/spring/jars/spring-mock-1.2.8.jar" sourcepath="repository/spring/jars/spring-mock-src-1.2.8.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
