@@ -13,6 +13,7 @@
 	<classpathentry kind="lib" path="repository/easymock/jars/easymockclassextension-1.1.jar" sourcepath="repository/easymock/jars/easymockclassextension-src-1.1.zip"/>
 	<classpathentry kind="lib" path="repository/ehcache/jars/ehcache-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="repository/hibernate/jars/hibernate-3.2.3.jar" sourcepath="repository/hibernate/jars/hibernate-src-3.2.3.zip"/>
+	<classpathentry exported="true" kind="lib" path="repository/hibernate/jars/hibernate-annotations-3.3.0.jar"/>
 	<classpathentry kind="lib" path="repository/jdom/jars/jaxen-core-0.9.jar"/>
 	<classpathentry kind="lib" path="repository/jdom/jars/jaxen-jdom-0.9.jar"/>
 	<classpathentry kind="lib" path="repository/jdom/jars/jdom-0.9.jar"/>
@@ -21,7 +22,7 @@
 	<classpathentry exported="true" kind="lib" path="repository/log4j/jars/log4j-1.2.12.jar"/>
 	<classpathentry exported="true" kind="lib" path="repository/oracle/jars/ojdbc14_g-10.2.0.jar"/>
 	<classpathentry kind="lib" path="repository/jdom/jars/saxpath-0.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="repository/spring/jars/spring-1.2.8.jar" sourcepath="repository/spring/jars/spring-src-1.2.8.zip"/>
-	<classpathentry exported="true" kind="lib" path="repository/spring/jars/spring-mock-1.2.8.jar" sourcepath="repository/spring/jars/spring-mock-src-1.2.8.zip"/>
+	<classpathentry exported="true" kind="lib" path="repository/spring/jars/spring-2.0.4.jar" sourcepath="repository/spring/jars/spring-src-2.0.4.zip"/>
+	<classpathentry exported="true" kind="lib" path="repository/spring/jars/spring-mock-2.0.4.jar" sourcepath="repository/spring/jars/spring-mock-src-2.0.4.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
