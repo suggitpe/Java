@@ -95,7 +95,7 @@ public class SchemaCreator
      */
     private Configuration createCfg( File[] aListOfHbms )
     {
-        Configuration cfg = new Configuration();
+        Configuration cfg = new Configuration().configure( "hibernate.cfg.xml" );
         for ( int i = 0; i < aListOfHbms.length; ++i )
         {
             cfg.addResource( "hbm/manual/" + aListOfHbms[i].getName() );
