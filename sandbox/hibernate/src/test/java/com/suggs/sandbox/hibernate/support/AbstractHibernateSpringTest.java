@@ -37,7 +37,6 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
      */
     protected void onSetUp() throws Exception
     {
-        LOG.debug( "********* running on setup" );
         Configuration cfg = new Configuration().configure( "hibernate.cfg.xml" );
         String[] files = getHibernateMapFilenames();
         for ( int i = 0; i < files.length; ++i )
@@ -93,23 +92,24 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     {
 
         String testName = testMetaData.getTestName();
-        LOG.info( "----------------------------------- " + testName + " cleaning class tables for tests" );
+        LOG.debug( "---------- " + testName + " cleaning class tables for tests" );
         cleanTestTables( testMetaData.getClassesForCleaning() );
 
-        LOG.debug( "----------------------------------- " + testName + " preTest" );
+        LOG.debug( "---------- " + testName + " preTest" );
         Session sess = sessionFactory_.openSession();
         Transaction tran = sess.beginTransaction();
 
         testMetaData.preTestSetup( sess );
-        
+
         sess.flush();
-        
-        LOG.debug( "----------------------------------- " + testName + " start" );
+
+        LOG.info( "---------- " + testName + " start" );
         testMetaData.runTest( sess );
 
         tran.commit();
         sess.close();
-        LOG.debug( "----------------------------------- " + testName + " end" );
+        LOG.info( "---------- " + testName + " end" );
+        LOG.info( "=============================================================" );
     }
 
     /**

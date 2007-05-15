@@ -4,8 +4,6 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
-import com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
@@ -15,20 +13,21 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.util.Assert;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
 
-public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
+public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorTest
 {
 
-    private static final Log LOG = LogFactory.getLog( CaveatEmptorObjectTest.class );
+    private static final Log LOG = LogFactory.getLog( CaveatEmptorHbmObjectTest.class );
 
     /**
      * Constructs a new instance.
      */
-    public CaveatEmptorObjectTest()
+    public CaveatEmptorHbmObjectTest()
     {
         super();
     }
@@ -61,11 +60,14 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
 
             public Class[] getClassesForCleaning()
             {
-                return new Class[] { CreditCard.class, BillingDetails.class };
+                return new Class[] { CreditCard.class, BillingDetails.class, User.class };
             }
 
             public void preTestSetup( Session aSession )
             {
+                User u = createTestUser( "foo", "bar" );
+                aSession.save( u );
+                aSession.flush();
             }
 
             public String getTestName()
@@ -75,10 +77,16 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
 
             public void runTest( Session aSession )
             {
+                Criteria crit = aSession.createCriteria( User.class );
+                crit.add( Expression.eq( "username", "barfo" ) );
+                List l = crit.list();
+
+                Assert.isTrue( l.size() == 1, "Found zero or more then one User with the username [barfo]" );
+
+                User u = (User) l.get( 0 );
+
                 LOG.debug( "Creating a new credit card" );
                 CreditCard card = new CreditCard( "PGDS", "0123456789", Calendar.getInstance().getTime(), 99, "03", "2009" );
-                // LOG.debug( "Creditcard methods are: " +
-                // getObjectAsString( card ) );
                 aSession.save( card );
             }
 
@@ -95,11 +103,14 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
 
             public Class[] getClassesForCleaning()
             {
-                return new Class[] {};
+                return new Class[] { BankAccount.class, BillingDetails.class, User.class };
             }
 
             public void preTestSetup( Session aSession )
             {
+                User u = createTestUser( "foo", "bar" );
+                aSession.save( u );
+                aSession.flush();
             }
 
             public String getTestName()
@@ -109,6 +120,13 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
 
             public void runTest( Session aSession )
             {
+                Criteria crit = aSession.createCriteria( User.class );
+                crit.add( Expression.eq( "username", "barfo" ) );
+                List l = crit.list();
+
+                Assert.isTrue( l.size() == 1, "Found zero or more then one User with the username [barfo]" );
+
+                User u = (User) l.get( 0 );
                 LOG.debug( "Creating a new Bank Account" );
                 BankAccount ba = new BankAccount( "PGDS", "0987654321", Calendar.getInstance().getTime(), "DummyBankName", "DUMMGB2LXXXX" );
 
@@ -146,51 +164,6 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
                 LOG.debug( "Creating a new Category" );
                 Category c = new Category( "dummy category name" );
                 aSession.save( c );
-
-            }
-
-        } );
-    }
-
-    public void testCreateNewNestedCategory()
-    {
-        runTest( new TestCallback()
-        {
-
-            public Class[] getClassesForCleaning()
-            {
-                return new Class[] { Category.class };
-            }
-
-            public void preTestSetup( Session aSession )
-            {
-                Session s = getSessionFactory().openSession();
-                Transaction t = s.beginTransaction();
-
-                Category parent = new Category( "Parent category" );
-                s.save( parent );
-
-                t.commit();
-                s.close();
-
-            }
-
-            public String getTestName()
-            {
-                return "createNewNestedCategory";
-            }
-
-            public void runTest( Session aSession )
-            {
-
-                Criteria c = aSession.createCriteria( Category.class );
-                c.add( Expression.like( "name", "Parent%" ) );
-
-                List l = c.list();
-                LOG.debug( "Category objects in the database number [" + l.size() + "]" );
-
-                Category child = new Category( "Child category" );
-                aSession.save( child );
 
             }
 
@@ -275,4 +248,5 @@ public class CaveatEmptorObjectTest extends AbstractHibernateSpringTest
 
         return buff.toString();
     }
+
 }

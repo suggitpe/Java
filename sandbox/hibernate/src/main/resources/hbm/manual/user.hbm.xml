@@ -35,7 +35,7 @@
 			<property name="zipCode" type="string" column="BILLING_ZIPCODE" not-null="true"/>
 		</component>
         <!-- billing details ... refs to the user are held in the billingDetails table -->
-        <set name="billingDetails" inverse="true" cascade="all-delete-orphan">
+        <set name="billingDetails" cascade="all-delete-orphan">
             <key column="USER_ID"/>
             <one-to-many class="BillingDetails"/>
         </set>

@@ -9,7 +9,7 @@
                 <param name="sequence">CE_CATEGORY_SEQ</param>
             </generator>
 		</id>
-		<!-- This one uses the defaults to map the type and colUmn name -->
+		<!-- This one uses the defaults to map the type and column name -->
 		<property name="name" not-null="true"/>
         <!-- item association -  this is a unidirectional association -->
         <set name="items">
