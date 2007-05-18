@@ -7,6 +7,8 @@ package com.suggs.sandbox.hibernate.chapter2;
 
 import com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,7 +21,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Restrictions;
 
 public class MessageHibernateDaoTest extends AbstractHibernateSpringTest
 {
@@ -29,14 +31,6 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest
     public MessageHibernateDaoTest()
     {
         super();
-    }
-
-    /**
-     * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#getHibernateMapFilenames()
-     */
-    protected String[] getHibernateMapFilenames()
-    {
-        return new String[] { "hbm/manual/message.hbm.xml" };
     }
 
     /**
@@ -144,7 +138,7 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest
             public void runTest( Session aSession )
             {
                 Criteria c = aSession.createCriteria( Message.class );
-                c.add( Expression.like( "text", "This is a message%" ) );
+                c.add( Restrictions.like( "text", "This is a message%" ) );
                 List l = c.list();
 
                 Assert.isTrue( l.size() == 1, "Expecting 1 object in the database but we actually got [" + l.size() + "]" );
@@ -181,18 +175,7 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest
 
             public void preTestSetup( Session aSession )
             {
-                int numMsgs = 4;
-                Message last = null;
-                for ( int i = 0; i < numMsgs; ++i )
-                {
-                    Message m = new Message( "Test message [" + i + "]" );
-                    if ( i != 0 )
-                    {
-                        m.setNextMessage( last );
-                    }
-                    last = m;
-                    aSession.save( m );
-                }
+                addTestMessages( aSession );
             }
 
             public void runTest( Session aSession )
@@ -208,8 +191,83 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest
                 Criteria c = aSession.createCriteria( Message.class );
                 List l2 = c.list();
                 dumpListContents( l2 );
+
             }
         } );
+    }
+
+    public void testHqlQuery()
+    {
+        runTest( new TestCallback()
+        {
+
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] { Message.class };
+            }
+
+            public String getTestName()
+            {
+                return "testHqlQuery";
+            }
+
+            public void preTestSetup( Session aSession )
+            {
+                addTestMessages( aSession );
+            }
+
+            public void runTest( Session aSession )
+            {
+                LOG.debug( "Test getting unique result with a HQl" );
+                Collection<String> col = new ArrayList<String>();
+                col.add( "Test message [1]" );
+                col.add( "Test message [3]" );
+
+                StringBuffer query = new StringBuffer( "from Message as msg where msg.text in (" );
+                Object[] params = col.toArray();
+                for ( int i = 0; i < params.length; ++i )
+                {
+                    if ( i != 0 )
+                    {
+                        query.append( "," );
+                    }
+                    query.append( ":colParam" ).append( i );
+                }
+                query.append( ")" );
+
+                LOG.debug( "query: " + query.toString() );
+                Query h = aSession.createQuery( query.toString() );
+                for ( int i = 0; i < params.length; ++i )
+                {
+                    h.setParameter( "colParam" + i, params[i] );
+                }
+
+                List l3 = h.list();
+                dumpListContents( l3 );
+
+            }
+        } );
+    }
+
+    /**
+     * Simple one that allows us to add a few messages to the db
+     * 
+     * @param aSession
+     */
+    private void addTestMessages( Session aSession )
+    {
+        int numMsgs = 4;
+        Message last = null;
+        for ( int i = 0; i < numMsgs; ++i )
+        {
+            Message m = new Message( "Test message [" + i + "]" );
+            if ( i != 0 )
+            {
+                m.setNextMessage( last );
+            }
+            last = m;
+            aSession.save( m );
+        }
     }
 
     /**

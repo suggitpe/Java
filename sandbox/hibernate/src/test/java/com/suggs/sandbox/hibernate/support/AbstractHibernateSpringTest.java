@@ -16,7 +16,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 public abstract class AbstractHibernateSpringTest extends AbstractDependencyInjectionSpringContextTests
 {
@@ -25,26 +24,10 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     private SessionFactory sessionFactory_;
 
     /**
-     * This allows any derived classses to define the hbm files that
-     * are required for a particular test.
-     * 
-     * @return string array of hibernate files names
-     */
-    protected abstract String[] getHibernateMapFilenames();
-
-    /**
      * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#onSetUp()
      */
     protected void onSetUp() throws Exception
     {
-        Configuration cfg = new Configuration().configure( "hibernate.cfg.xml" );
-        String[] files = getHibernateMapFilenames();
-        for ( int i = 0; i < files.length; ++i )
-        {
-            cfg.addResource( files[i] );
-        }
-
-        setSessionFactory( cfg.buildSessionFactory() );
     }
 
     /**
@@ -53,7 +36,6 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     public AbstractHibernateSpringTest()
     {
         super();
-        setPopulateProtectedVariables( true );
     }
 
     /**

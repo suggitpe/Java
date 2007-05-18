@@ -38,7 +38,7 @@
         <!-- sucessful bid reference -->
         <one-to-one name="successfulBid" class="Bid" foreign-key="SUCCESSFUL_BID_ID"/>
         <!-- seller ref -->
-        <one-to-one name="seller" class="User" foreign-key="SELLER_ID"/>
+        <one-to-one name="seller" class="User" foreign-key="USER_ID"/>
     </class>
 	
 </hibernate-mapping>

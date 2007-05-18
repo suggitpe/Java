@@ -17,7 +17,7 @@ import org.springframework.util.Assert;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Restrictions;
 
 public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorTest
 {
@@ -30,16 +30,6 @@ public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorTest
     public CaveatEmptorHbmObjectTest()
     {
         super();
-    }
-
-    /**
-     * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#getHibernateMapFilenames()
-     */
-    protected String[] getHibernateMapFilenames()
-    {
-        return new String[] { "hbm/manual/billing-details.hbm.xml", "hbm/manual/credit-card.hbm.xml", "hbm/manual/bank-account.hbm.xml",
-                             "hbm/manual/bid.hbm.xml", "hbm/manual/category.hbm.xml", "hbm/manual/comment.hbm.xml",
-                             "hbm/manual/item.hbm.xml", "hbm/manual/user.hbm.xml" };
     }
 
     /**
@@ -78,7 +68,7 @@ public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorTest
             public void runTest( Session aSession )
             {
                 Criteria crit = aSession.createCriteria( User.class );
-                crit.add( Expression.eq( "username", "barfo" ) );
+                crit.add( Restrictions.eq( "username", "barfo" ) );
                 List l = crit.list();
 
                 Assert.isTrue( l.size() == 1, "Found zero or more then one User with the username [barfo]" );
@@ -87,6 +77,7 @@ public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorTest
 
                 LOG.debug( "Creating a new credit card" );
                 CreditCard card = new CreditCard( "PGDS", "0123456789", Calendar.getInstance().getTime(), 99, "03", "2009" );
+                u.addBillingDetails( card );
                 aSession.save( card );
             }
 
@@ -121,7 +112,7 @@ public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorTest
             public void runTest( Session aSession )
             {
                 Criteria crit = aSession.createCriteria( User.class );
-                crit.add( Expression.eq( "username", "barfo" ) );
+                crit.add( Restrictions.eq( "username", "barfo" ) );
                 List l = crit.list();
 
                 Assert.isTrue( l.size() == 1, "Found zero or more then one User with the username [barfo]" );
@@ -129,6 +120,7 @@ public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorTest
                 User u = (User) l.get( 0 );
                 LOG.debug( "Creating a new Bank Account" );
                 BankAccount ba = new BankAccount( "PGDS", "0987654321", Calendar.getInstance().getTime(), "DummyBankName", "DUMMGB2LXXXX" );
+                u.addBillingDetails( ba );
 
                 aSession.save( ba );
             }
@@ -201,6 +193,50 @@ public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorTest
                 aSession.save( u );
             }
 
+        } );
+    }
+
+    /**
+     * Test for a new item
+     */
+    public void testNewItem()
+    {
+        runTest( new TestCallback()
+        {
+
+            public Class[] getClassesForCleaning()
+            {
+                return new Class[] { Item.class, Category.class, User.class };
+            }
+
+            public String getTestName()
+            {
+                return "testNewItem";
+            }
+
+            public void preTestSetup( Session aSession )
+            {
+                Category c = createTestCategory( "ItemTestCat" );
+                aSession.save( c );
+                User u = createTestUser( "peter", "suggitt" );
+                aSession.save( u );
+                aSession.flush();
+            }
+
+            public void runTest( Session aSession )
+            {
+                Criteria crit = aSession.createCriteria( Category.class );
+                Category c = (Category) crit.uniqueResult();
+                Criteria usr = aSession.createCriteria( User.class );
+                User u = (User) usr.uniqueResult();
+
+                LOG.debug( "Creating a new Item" );
+                Item i = createTestItem( "testItem_1000" );
+                i.addCategory( c );
+                i.setSeller( u );
+
+                aSession.save( i );
+            }
         } );
     }
 

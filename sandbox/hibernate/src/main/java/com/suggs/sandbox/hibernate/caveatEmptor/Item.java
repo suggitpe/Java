@@ -4,6 +4,7 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,9 +30,34 @@ public class Item extends AbstractPersistentBaseClass
     private Bid mSuccessfulBid_;
     private User mSeller_;
 
+    /**
+     * Constructs a new instance.
+     */
     public Item()
     {
         super();
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aName
+     * @param aDescription
+     * @param aInitialPrice
+     * @param aReservePrice
+     * @param aStartDate
+     * @param aEndDate
+     */
+    public Item( String aName, String aDescription, Double aInitialPrice, Double aReservePrice, Date aStartDate, Date aEndDate )
+    {
+        super();
+        mName_ = aName;
+        mDescription_ = aDescription;
+        mInitialPrice_ = aInitialPrice;
+        mReservePrice_ = aReservePrice;
+        mStartDate_ = aStartDate;
+        mEndDate_ = aEndDate;
+        mCreated_ = Calendar.getInstance().getTime();
     }
 
     public String getName()

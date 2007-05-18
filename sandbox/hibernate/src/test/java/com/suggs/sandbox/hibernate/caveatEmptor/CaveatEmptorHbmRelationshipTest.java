@@ -4,8 +4,6 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
-import com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -17,7 +15,7 @@ import org.springframework.util.Assert;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Restrictions;
 
 public class CaveatEmptorHbmRelationshipTest extends AbstractCaveatEmptorTest
 {
@@ -30,16 +28,6 @@ public class CaveatEmptorHbmRelationshipTest extends AbstractCaveatEmptorTest
     public CaveatEmptorHbmRelationshipTest()
     {
         super();
-    }
-
-    /**
-     * @see com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest#getHibernateMapFilenames()
-     */
-    protected String[] getHibernateMapFilenames()
-    {
-        return new String[] { "hbm/manual/billing-details.hbm.xml", "hbm/manual/credit-card.hbm.xml", "hbm/manual/bank-account.hbm.xml",
-                             "hbm/manual/bid.hbm.xml", "hbm/manual/category.hbm.xml", "hbm/manual/comment.hbm.xml",
-                             "hbm/manual/item.hbm.xml", "hbm/manual/user.hbm.xml" };
     }
 
     /**
@@ -84,7 +72,7 @@ public class CaveatEmptorHbmRelationshipTest extends AbstractCaveatEmptorTest
             {
 
                 Criteria c = aSession.createCriteria( Category.class );
-                c.add( Expression.like( "name", "Parent%" ) );
+                c.add( Restrictions.like( "name", "Parent%" ) );
 
                 List l = c.list();
                 LOG.debug( "Category objects in the database number [" + l.size() + "]" );
@@ -126,7 +114,7 @@ public class CaveatEmptorHbmRelationshipTest extends AbstractCaveatEmptorTest
             public void runTest( Session aSession )
             {
                 Criteria c = aSession.createCriteria( User.class );
-                c.add( Expression.eq( "username", "suggitpe" ) );
+                c.add( Restrictions.eq( "username", "suggitpe" ) );
                 List l = c.list();
 
                 LOG.debug( "Have retrieved [" + l.size() + "] users from the database" );
