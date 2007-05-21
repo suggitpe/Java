@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.AnnotationSessionFactoryBean"
+        parent="abstractSessionFactoryBean">
+        <property name="annotatedClasses">
+            <list>
+                <value>com.suggs.sandbox.hibernate.caveatEmptor.BankAccount</value>
+                <value>com.suggs.sandbox.hibernate.caveatEmptor.Bid</value>
+                <value>com.suggs.sandbox.hibernate.caveatEmptor.BillingDetails</value>
+                <value>com.suggs.sandbox.hibernate.caveatEmptor.Category</value>
+                <value>com.suggs.sandbox.hibernate.caveatEmptor.Comment</value>
+                <value>com.suggs.sandbox.hibernate.caveatEmptor.CreditCard</value>
+                <value>com.suggs.sandbox.hibernate.caveatEmptor.Item</value>
+                <value>com.suggs.sandbox.hibernate.caveatEmptor.User</value>
+            </list>
+        </property>
+    </bean>
+    
+</beans>
+    

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    
+    <!-- import all of the common bean refS -->
+    <import resource="ut-common.xml"/>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.AnnottaionSessionFactoryBean"
+        parent="abstractSessionFactoryBean">
+        <property name="annotationClasses">
+            <list>
+                <value>com.suggs.sandbox.hibernate.chapter2.Message</value>
+            </list>
+        </property>
+    </bean>
+    
+</beans>

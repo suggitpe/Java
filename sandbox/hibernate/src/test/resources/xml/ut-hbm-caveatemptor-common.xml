@@ -2,7 +2,8 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
     
-    <bean id="sessionFactory" parent="abstractSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+        parent="abstractSessionFactoryBean">
         <property name="mappingResources">
             <list>
                 <value>hbm/manual/bank-account.hbm.xml</value>
