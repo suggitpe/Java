@@ -3,7 +3,7 @@
 <beans>
     
     <!-- import all of the common bean refS -->
-    <import resource="ut-common.xml"/>
+    <import resource="ut-hbm-common.xml"/>
     
     <bean id="sessionFactory" parent="abstractSessionFactoryBean">
         <property name="mappingResources">

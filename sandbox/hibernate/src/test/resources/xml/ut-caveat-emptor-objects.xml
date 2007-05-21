@@ -2,21 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
     
-    <import resource="ut-common.xml"/>
-    
-    <bean id="sessionFactory" parent="abstractSessionFactoryBean">
-        <property name="mappingResources">
-            <list>
-                <value>hbm/manual/bank-account.hbm.xml</value>
-                <value>hbm/manual/bid.hbm.xml</value>
-                <value>hbm/manual/billing-details.hbm.xml</value>
-                <value>hbm/manual/category.hbm.xml</value>
-                <value>hbm/manual/comment.hbm.xml</value>
-                <value>hbm/manual/credit-card.hbm.xml</value>
-                <value>hbm/manual/item.hbm.xml</value>
-                <value>hbm/manual/user.hbm.xml</value>
-            </list>
-        </property>
-    </bean>
+    <import resource="ut-hbm-common.xml"/>
+    <import resource="ut-hbm-caveatemptor-common.xml"/>
     
 </beans>

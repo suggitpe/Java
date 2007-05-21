@@ -6,7 +6,10 @@ package com.suggs.sandbox.hibernate.caveatEmptor;
 
 import com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,6 +18,51 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
 {
 
     private static final Log LOG = LogFactory.getLog( AbstractCaveatEmptorTest.class );
+
+    /**
+     * This should do a bit of a debug operation on any class.
+     * 
+     * @param aObject
+     *            object to debug
+     * @return the string dumped version of the obejct
+     */
+    protected static String getObjectAsString( Object aObject )
+    {
+        StringBuffer buff = new StringBuffer();
+        buff.append( aObject.getClass().getSimpleName() + ":" );
+        Method[] meths = aObject.getClass().getMethods();
+        for ( int i = 0; i < meths.length; ++i )
+        {
+            if ( meths[i].getName().startsWith( "get" ) )
+            {
+                buff.append( meths[i].getName() ).append( "[" );
+                Class c = meths[i].getReturnType();
+                if ( c.equals( String.class ) || c.equals( Integer.class ) || c.equals( Date.class ) || c.equals( Long.class ) )
+                {
+                    try
+                    {
+                        buff.append( meths[i].invoke( aObject, new Object[] {} ) );
+                    }
+                    catch ( IllegalAccessException iae )
+                    {
+                        throw new IllegalStateException( "no access to method [" + meths[i].getName() + "]", iae );
+
+                    }
+                    catch ( InvocationTargetException ita )
+                    {
+                        throw new IllegalStateException( "no target for method [" + meths[i].getName() + "]", ita );
+                    }
+                }
+                else
+                {
+                    buff.append( "???" + "{" + c.getName() + "}" );
+                }
+                buff.append( "] " );
+            }
+        }
+
+        return buff.toString();
+    }
 
     /**
      * Helper method for the tests that will create a new User
