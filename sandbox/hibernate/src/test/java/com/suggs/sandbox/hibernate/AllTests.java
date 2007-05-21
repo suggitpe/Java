@@ -22,6 +22,8 @@ public class AllTests
         s.addTestSuite( com.suggs.sandbox.hibernate.chapter2.MessageHibernateDaoTest.class );
         s.addTestSuite( com.suggs.sandbox.hibernate.caveatEmptor.CaveatEmptorHbmObjectTest.class );
         s.addTestSuite( com.suggs.sandbox.hibernate.caveatEmptor.CaveatEmptorHbmRelationshipTest.class );
+        s.addTestSuite( com.suggs.sandbox.hibernate.caveatEmptor.CaveatEmptorAnnotationObjectTest.class );
+        s.addTestSuite( com.suggs.sandbox.hibernate.caveatEmptor.CaveatEmptorAnnotationRelationshipTest.class );
         return s;
     }
 }

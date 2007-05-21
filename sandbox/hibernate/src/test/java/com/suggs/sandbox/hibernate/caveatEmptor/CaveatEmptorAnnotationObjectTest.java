@@ -4,13 +4,13 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
-public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorObjectTest
+public class CaveatEmptorAnnotationObjectTest extends AbstractCaveatEmptorObjectTest
 {
 
     /**
      * Constructs a new instance.
      */
-    public CaveatEmptorHbmObjectTest()
+    public CaveatEmptorAnnotationObjectTest()
     {
         super();
     }
@@ -20,7 +20,7 @@ public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorObjectTest
      */
     protected String[] getConfigLocations()
     {
-        return new String[] { "xml/ut-hbm-caveatemptor-objects.xml" };
+        return new String[] { "xml/ut-annotation-caveatemptor-objects.xml" };
     }
 
 }

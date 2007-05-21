@@ -5,13 +5,13 @@
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
 
-public class CaveatEmptorHbmRelationshipTest extends AbstractCaveatEmptorRelationshipTest
+public class CaveatEmptorAnnotationRelationshipTest extends AbstractCaveatEmptorRelationshipTest
 {
 
     /**
      * Constructs a new instance.
      */
-    public CaveatEmptorHbmRelationshipTest()
+    public CaveatEmptorAnnotationRelationshipTest()
     {
         super();
     }
@@ -21,7 +21,7 @@ public class CaveatEmptorHbmRelationshipTest extends AbstractCaveatEmptorRelatio
      */
     protected String[] getConfigLocations()
     {
-        return new String[] { "xml/ut-hbm-caveatemptor-relationships.xml" };
+        return new String[] { "xml/ut-annotation-caveatemptor-relationships.xml" };
     }
 
 }

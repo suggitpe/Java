@@ -60,7 +60,7 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest
      */
     protected String[] getConfigLocations()
     {
-        return new String[] { "xml/ut-messagetest.xml" };
+        return new String[] { "xml/ut-hbm-messagetest.xml" };
     }
 
     /**
