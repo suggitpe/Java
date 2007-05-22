@@ -1,9 +1,8 @@
-package com.suggs.sandbox.hibernate.chapter2;
-
 /*
- * MessageTest.java created on 19 Mar 2007 16:50:51 by suggitpe for project SandBox - Hibernate
+ * AbstractMessageHibernateDaoTest.java created on 21 May 2007 18:47:27 by suggitpe for project SandBox - Hibernate
  * 
  */
+package com.suggs.sandbox.hibernate.chapter2;
 
 import com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
 
@@ -23,12 +22,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-public class MessageHibernateDaoTest extends AbstractHibernateSpringTest
+public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateSpringTest
 {
 
-    private static final Log LOG = LogFactory.getLog( MessageHibernateDaoTest.class );
+    private static final Log LOG = LogFactory.getLog( AbstractMessageHibernateDaoTest.class );
 
-    public MessageHibernateDaoTest()
+    public AbstractMessageHibernateDaoTest()
     {
         super();
     }
@@ -53,14 +52,6 @@ public class MessageHibernateDaoTest extends AbstractHibernateSpringTest
 
         t.commit();
         s.close();
-    }
-
-    /**
-     * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#getConfigLocations()
-     */
-    protected String[] getConfigLocations()
-    {
-        return new String[] { "xml/ut-hbm-messagetest.xml" };
     }
 
     /**
