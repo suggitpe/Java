@@ -10,13 +10,13 @@
             </generator>
 		</id>
 		<!-- bid amount -->
-		<property name="amount" column="AMOUNT" type="double" not-null="true"/>
+		<property name="amount" column="BID_AMOUNT" type="double" not-null="true"/>
 		<!-- created date -->
-		<property name="created" column="CREATED" type="timestamp" not-null="true"/>
+		<property name="created" column="BID_CREATED" type="timestamp" not-null="true"/>
 		<!-- the bid table holds a ref to the item table many bids to one item -->
-        <many-to-one name="item" column="ITEM_ID" class="Item" not-null="true"/>
+        <many-to-one name="item" column="BID_ITEM_ID" class="Item" not-null="true"/>
 		<!-- bidder property -->
-        <one-to-one name="bidder" class="User" foreign-key="BIDDER_ID"/>
+        <one-to-one name="bidder" class="User" foreign-key="BID_USER_ID"/>
 	</class>
 	
 </hibernate-mapping>

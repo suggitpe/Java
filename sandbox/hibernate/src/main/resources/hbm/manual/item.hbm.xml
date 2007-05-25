@@ -9,36 +9,36 @@
             </generator>
         </id>
         <!-- nasme property -->
-        <property name="name" column="NAME" type="string" not-null="true"/>
+        <property name="name" column="ITEM_NAME" type="string" not-null="true"/>
         <!-- description property -->
-        <property name="description" column="DESCRIPTION" type="string" not-null="true"/>
+        <property name="description" column="ITEM_DESCRIPTION" type="string" not-null="true"/>
         <!-- Bid association - this is a bidirectional association and as 
             such we must state that there is an inverse mapping defined, also
             we need to state that if a new Bid is associated with this persistent 
             Item then that too should be persisted/deleted -->
         <set name="bids" inverse="true" cascade="all-delete-orphan">
-            <key column="ITEM_ID"/>
+            <key column="BID_ITEM_ID"/>
             <one-to-many class="Bid"/>
         </set>
         <!-- Comments association -->
         <set name="comments" inverse="true" cascade="all-delete-orphan">
-            <key column="ABOUT_ITEM_ID"/>
+            <key column="CMNT_ABOUT_ITEM_ID"/>
             <one-to-many class="Comment"/>
         </set>
         <!-- initial price property -->
-        <property name="initialPrice" column="INITIAL_PRICE" type="double" not-null="false"/>
+        <property name="initialPrice" column="ITEM_INITIAL_PRICE" type="double" not-null="false"/>
         <!-- reserve price property -->
-        <property name="reservePrice" column="RESERVE_PRICE" type="double" not-null="false"/>
+        <property name="reservePrice" column="ITEM_RESERVE_PRICE" type="double" not-null="false"/>
         <!-- start date for the item -->
-        <property name="startDate" column="START_DATE" type="date" not-null="true"/>
+        <property name="startDate" column="ITEM_START_DATE" type="date" not-null="true"/>
         <!-- end date for the item -->
-        <property name="endDate" column="END_DATE" type="date" not-null="true"/>
+        <property name="endDate" column="ITEM_END_DATE" type="date" not-null="true"/>
         <!-- creation date of the item -->
-        <property name="created" column="CREATED" type="timestamp" not-null="true"/>
+        <property name="created" column="ITEM_CREATED" type="timestamp" not-null="true"/>
         <!-- sucessful bid reference -->
         <one-to-one name="successfulBid" class="Bid" foreign-key="SUCCESSFUL_BID_ID"/>
         <!-- seller ref -->
-        <one-to-one name="seller" class="User" foreign-key="USER_ID"/>
+        <one-to-one name="seller" class="User" foreign-key="SELLER_USER_ID"/>
     </class>
 	
 </hibernate-mapping>

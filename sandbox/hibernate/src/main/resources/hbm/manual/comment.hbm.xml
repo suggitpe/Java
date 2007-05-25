@@ -10,15 +10,15 @@
             </generator>
 		</id>
 		<!-- rating property -->
-		<property name="rating" column="RARTING" type="integer" not-null="true"/>
+		<property name="rating" column="CMNT_RATING" type="integer" not-null="true"/>
 		<!-- text property -->
-		<property name="text" column="TEXT" type="string" not-null="false"/>
+		<property name="text" column="CMNT_TEXT" type="string" not-null="false"/>
 		<!-- created property -->
-		<property name="created" column="CREATED" type="timestamp" not-null="true"/>
+		<property name="created" column="CMNT_CREATED" type="timestamp" not-null="true"/>
 		<!-- aboutItem ... locally held ref to the item that the comment is about -->
-        <many-to-one name="aboutItem" column="ABOUT_ITEM_ID" class="Item" not-null="true"/>
+        <many-to-one name="aboutItem" column="CMNT_ABOUT_ITEM_ID" class="Item" not-null="true"/>
         <!-- fromUser ... locally held ref to the user that craeted the comment -->
-        <many-to-one name="fromUser" column="FROM_USER_ID" class="User" not-null="true"/>
+        <many-to-one name="fromUser" column="CMNT_FROM_USER_ID" class="User" not-null="true"/>
 		
 	</class>
 	
