@@ -3,6 +3,6 @@
 <beans>
     
     <import resource="ut-common.xml"/>
-    <import resource="ut-hbm-caveatemptor-common.xml"/>
+    <import resource="ut-annotation-caveatemptor-common.xml"/>
     
 </beans>

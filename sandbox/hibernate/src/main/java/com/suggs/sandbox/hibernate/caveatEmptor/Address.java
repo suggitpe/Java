@@ -4,13 +4,11 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.persistence.Embeddable;
 
+@Embeddable
 public class Address
 {
-
-    private static final Log LOG = LogFactory.getLog( Address.class );
 
     private String mStreet_;
     private String mCity_;

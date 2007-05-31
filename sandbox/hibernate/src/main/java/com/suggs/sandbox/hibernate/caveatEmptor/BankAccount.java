@@ -6,45 +6,87 @@ package com.suggs.sandbox.hibernate.caveatEmptor;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "CE_BANK_ACCOUNT")
 public class BankAccount extends BillingDetails
 {
-
-    private static final Log LOG = LogFactory.getLog( BankAccount.class );
 
     private String mBankName_;
     private String mBankSwift_;
 
+    /**
+     * Constructs a new instance.
+     */
     public BankAccount()
     {
         super();
     }
 
-    public BankAccount( String aOwner, String aNumber, Date aCreateDate, String aBankName, String aBankSwift )
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aOwner
+     *            owner from billing details
+     * @param aNumber
+     *            number from billing details
+     * @param aCreateDate
+     *            creation date of the bank account
+     * @param aBankName
+     *            the name of the bank
+     * @param aBankSwift
+     *            the dswift address of the bank
+     */
+    public BankAccount( String aOwner, String aNumber, Date aCreateDate, User aUser, String aBankName, String aBankSwift )
     {
-        super( aOwner, aNumber, aCreateDate );
+        super( aOwner, aNumber, aCreateDate, aUser );
         mBankName_ = aBankName;
         mBankSwift_ = aBankSwift;
 
     }
 
+    /**
+     * getter for the bank name
+     * 
+     * @return the bank name
+     */
+    @Column(name = "BANK_NAME")
     public String getBankName()
     {
         return mBankName_;
     }
 
+    /**
+     * Setter for the bank name
+     * 
+     * @param bankName
+     *            the bank name to set
+     */
     public void setBankName( String bankName )
     {
         mBankName_ = bankName;
     }
 
+    /**
+     * getter for the bank swift
+     * 
+     * @return the swift address
+     */
+    @Column(name = "BANK_SWIFT")
     public String getBankSwift()
     {
         return mBankSwift_;
     }
 
+    /**
+     * setter for the bank swift address
+     * 
+     * @param bankSwift
+     *            the swift address
+     */
     public void setBankSwift( String bankSwift )
     {
         mBankSwift_ = bankSwift;

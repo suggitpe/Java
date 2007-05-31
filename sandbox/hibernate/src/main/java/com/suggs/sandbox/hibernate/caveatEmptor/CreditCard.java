@@ -6,56 +6,106 @@ package com.suggs.sandbox.hibernate.caveatEmptor;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "CE_CREDIT_CARD")
 public class CreditCard extends BillingDetails
 {
-
-    private static final Log LOG = LogFactory.getLog( CreditCard.class );
 
     private Integer mType_;
     private String mExpMonth_;
     private String mExpYear_;
 
+    /**
+     * Constructs a new instance.
+     */
     public CreditCard()
     {
         super();
     }
 
-    public CreditCard( String aOwner, String aNumber, Date aCreateDate, Integer aType, String aExpMonth, String aExpYear )
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aOwner
+     * @param aNumber
+     * @param aCreateDate
+     * @param aType
+     * @param aExpMonth
+     * @param aExpYear
+     */
+    public CreditCard( String aOwner, String aNumber, Date aCreateDate, User aUser, Integer aType, String aExpMonth, String aExpYear )
     {
-        super( aOwner, aNumber, aCreateDate );
+        super( aOwner, aNumber, aCreateDate, aUser );
         mType_ = aType;
         mExpMonth_ = aExpMonth;
         mExpYear_ = aExpYear;
     }
 
+    /**
+     * getter for the expiry month
+     * 
+     * @return the expiry month
+     */
+    @Column(name = "CC_EXP_MONTH")
     public String getExpMonth()
     {
         return mExpMonth_;
     }
 
+    /**
+     * setter for the expiry month
+     * 
+     * @param expMonth
+     *            the month to set
+     */
     public void setExpMonth( String expMonth )
     {
         mExpMonth_ = expMonth;
     }
 
+    /**
+     * getter for the expiry year
+     * 
+     * @return the year of expiry
+     */
+    @Column(name = "CC_EXP_YEAR")
     public String getExpYear()
     {
         return mExpYear_;
     }
 
+    /**
+     * setter for the year of expiry
+     * 
+     * @param expYear
+     *            the year that the card expires
+     */
     public void setExpYear( String expYear )
     {
         mExpYear_ = expYear;
     }
 
+    /**
+     * getter for the type of card
+     * 
+     * @return the type of card
+     */
+    @Column(name = "CC_TYPE")
     public Integer getType()
     {
         return mType_;
     }
 
+    /**
+     * setter for the type of card
+     * 
+     * @param type
+     *            the type to set
+     */
     public void setType( Integer type )
     {
         mType_ = type;

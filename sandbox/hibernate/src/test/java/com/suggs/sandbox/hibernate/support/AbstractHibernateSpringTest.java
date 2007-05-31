@@ -47,11 +47,11 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     {
         Session s = getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
-        for ( int i = 0; i < aClassList.length; ++i )
+        for ( Class c : aClassList )
         {
-            LOG.debug( "Cleaning table [" + aClassList[i].getSimpleName() + "]" );
-            Criteria c = s.createCriteria( aClassList[i] );
-            List l = c.list();
+            LOG.debug( "Cleaning table [" + c.getSimpleName() + "]" );
+            Criteria cr = s.createCriteria( c );
+            List l = cr.list();
             for ( Iterator iter = l.iterator(); iter.hasNext(); )
             {
                 s.delete( iter.next() );

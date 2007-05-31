@@ -4,13 +4,8 @@
  */
 package com.suggs.sandbox.hibernate.chapter2;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class MessageHibernateAnnotationDaoTest extends AbstractMessageHibernateDaoTest
 {
-
-    private static final Log LOG = LogFactory.getLog( MessageHibernateAnnotationDaoTest.class );
 
     public MessageHibernateAnnotationDaoTest()
     {

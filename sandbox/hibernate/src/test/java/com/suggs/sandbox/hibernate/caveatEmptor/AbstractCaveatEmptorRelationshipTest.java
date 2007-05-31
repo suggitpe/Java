@@ -116,6 +116,7 @@ public abstract class AbstractCaveatEmptorRelationshipTest extends AbstractCavea
                 CreditCard cc = new CreditCard( "Mr P G D Suggitt",
                                                 "aNumber for suggitt",
                                                 Calendar.getInstance().getTime(),
+                                                null,
                                                 1,
                                                 "January",
                                                 "2009" );

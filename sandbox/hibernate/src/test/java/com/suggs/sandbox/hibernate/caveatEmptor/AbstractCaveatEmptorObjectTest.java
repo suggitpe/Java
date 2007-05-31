@@ -65,7 +65,7 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
                 User u = (User) l.get( 0 );
 
                 LOG.debug( "Creating a new credit card" );
-                CreditCard card = new CreditCard( "PGDS", "0123456789", Calendar.getInstance().getTime(), 99, "03", "2009" );
+                CreditCard card = new CreditCard( "PGDS", "0123456789", Calendar.getInstance().getTime(), null, 99, "03", "2009" );
                 u.addBillingDetails( card );
                 aSession.save( card );
             }
@@ -108,7 +108,7 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
 
                 User u = (User) l.get( 0 );
                 LOG.debug( "Creating a new Bank Account" );
-                BankAccount ba = new BankAccount( "PGDS", "0987654321", Calendar.getInstance().getTime(), "DummyBankName", "DUMMGB2LXXXX" );
+                BankAccount ba = new BankAccount( "PGDS", "0987654321", Calendar.getInstance().getTime(), null, "DummyBankName", "DUMMGB2LXXXX" );
                 u.addBillingDetails( ba );
 
                 aSession.save( ba );

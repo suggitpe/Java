@@ -138,6 +138,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
                 m.setText( "This is the changed text for message obj" );
 
                 Message next = new Message( "This is the next message" );
+                aSession.save( next );
 
                 m.setNextMessage( next );
 

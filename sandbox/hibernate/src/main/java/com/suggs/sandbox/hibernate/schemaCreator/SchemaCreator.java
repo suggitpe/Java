@@ -77,7 +77,7 @@ public class SchemaCreator
      */
     private String createNewSqlFile( File aDestDir )
     {
-        File dest = new File( aDestDir.getAbsolutePath()  + "/" + FILE + ".sql" );
+        File dest = new File( aDestDir.getAbsolutePath() + "/" + FILE + ".sql" );
         if ( dest.exists() )
         {
             LOG.error( "Overwriting previous sql file with [" + dest.getAbsolutePath() + "]" );
@@ -96,9 +96,9 @@ public class SchemaCreator
     private Configuration createCfg( File[] aListOfHbms )
     {
         Configuration cfg = new Configuration().configure( "hibernate.cfg.xml" );
-        for ( int i = 0; i < aListOfHbms.length; ++i )
+        for ( File f : aListOfHbms )
         {
-            cfg.addResource( "hbm/manual/" + aListOfHbms[i].getName() );
+            cfg.addResource( "hbm/manual/" + f.getName() );
         }
 
         return cfg;
@@ -117,7 +117,7 @@ public class SchemaCreator
     private void createSql( String aDestFilename, Configuration aCfg )
     {
         SchemaExport export = new SchemaExport( aCfg );
-        //export.setHaltOnError( true );
+        // export.setHaltOnError( true );
         export.setDelimiter( ";" );
         export.setOutputFile( aDestFilename );
         export.create( false, false );

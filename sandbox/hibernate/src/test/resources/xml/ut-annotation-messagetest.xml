@@ -5,9 +5,9 @@
     <!-- import all of the common bean refS -->
     <import resource="ut-common.xml"/>
     
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.AnnottaionSessionFactoryBean"
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
         parent="abstractSessionFactoryBean">
-        <property name="annotationClasses">
+        <property name="annotatedClasses">
             <list>
                 <value>com.suggs.sandbox.hibernate.chapter2.Message</value>
             </list>

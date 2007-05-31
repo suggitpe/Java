@@ -31,26 +31,26 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
         StringBuffer buff = new StringBuffer();
         buff.append( aObject.getClass().getSimpleName() + ":" );
         Method[] meths = aObject.getClass().getMethods();
-        for ( int i = 0; i < meths.length; ++i )
+        for ( Method m : meths )
         {
-            if ( meths[i].getName().startsWith( "get" ) )
+            if ( m.getName().startsWith( "get" ) )
             {
-                buff.append( meths[i].getName() ).append( "[" );
-                Class c = meths[i].getReturnType();
+                buff.append( m.getName() ).append( "[" );
+                Class c = m.getReturnType();
                 if ( c.equals( String.class ) || c.equals( Integer.class ) || c.equals( Date.class ) || c.equals( Long.class ) )
                 {
                     try
                     {
-                        buff.append( meths[i].invoke( aObject, new Object[] {} ) );
+                        buff.append( m.invoke( aObject, new Object[] {} ) );
                     }
                     catch ( IllegalAccessException iae )
                     {
-                        throw new IllegalStateException( "no access to method [" + meths[i].getName() + "]", iae );
+                        throw new IllegalStateException( "no access to method [" + m.getName() + "]", iae );
 
                     }
                     catch ( InvocationTargetException ita )
                     {
-                        throw new IllegalStateException( "no target for method [" + meths[i].getName() + "]", ita );
+                        throw new IllegalStateException( "no target for method [" + m.getName() + "]", ita );
                     }
                 }
                 else

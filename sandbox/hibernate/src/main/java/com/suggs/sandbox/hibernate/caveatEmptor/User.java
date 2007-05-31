@@ -10,11 +10,25 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.util.Assert;
 
+@Entity
+@Table(name = "CE_USER")
+@SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_USER_SEQ")
 public class User extends AbstractPersistentBaseClass
 {
 
@@ -40,6 +54,7 @@ public class User extends AbstractPersistentBaseClass
     public User()
     {
         super();
+        mCreated_ = Calendar.getInstance().getTime();
     }
 
     /**
@@ -87,16 +102,34 @@ public class User extends AbstractPersistentBaseClass
 
     }
 
+    /**
+     * Getter for the billing details
+     * 
+     * @return the set of billing details
+     */
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Set<BillingDetails> getBillingDetails()
     {
         return mBillingDetails_;
     }
 
+    /**
+     * setter for billing details
+     * 
+     * @param billingDetails
+     *            the billing details set
+     */
     public void setBillingDetails( Set<BillingDetails> billingDetails )
     {
         mBillingDetails_ = billingDetails;
     }
 
+    /**
+     * Accessor method to add a simple billing details to the user
+     * 
+     * @param aBillingDetails
+     *            the single billing details to add
+     */
     public void addBillingDetails( BillingDetails aBillingDetails )
     {
         if ( aBillingDetails == null )
@@ -106,6 +139,7 @@ public class User extends AbstractPersistentBaseClass
         mBillingDetails_.add( aBillingDetails );
     }
 
+    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
     public Set<Item> getItemsForSale()
     {
         return mItemsForSale_;
@@ -126,6 +160,7 @@ public class User extends AbstractPersistentBaseClass
         mItemsForSale_.add( aItem );
     }
 
+    @OneToMany(mappedBy = "fromUser", fetch = FetchType.LAZY)
     public Set<Comment> getComments()
     {
         return mComments_;
@@ -146,21 +181,35 @@ public class User extends AbstractPersistentBaseClass
         mComments_.add( aComment );
     }
 
-    public String getFirstName()
-    {
-        return mFirstName_;
-    }
-
+    /**
+     * Getter for the bids
+     * 
+     * @return the collection of bids that the user has made
+     */
+    @OneToMany(mappedBy = "bidder", fetch = FetchType.LAZY)
     public Set<Bid> getBids()
     {
         return mBids_;
     }
 
+    /**
+     * setter for the users bids
+     * 
+     * @param aBids
+     *            the collection of bids that the user has made
+     */
     public void setBids( Set<Bid> aBids )
     {
         mBids_ = aBids;
     }
 
+    /**
+     * Accessor method allowing us to add a singke bid to the
+     * collection of bids that this user has made
+     * 
+     * @param aBid
+     *            the bid to make
+     */
     public void addBid( Bid aBid )
     {
         if ( aBid == null )
@@ -171,21 +220,51 @@ public class User extends AbstractPersistentBaseClass
         mBids_.add( aBid );
     }
 
+    /**
+     * getter for first name
+     * 
+     * @return the given name
+     */
+    @Column(name = "USER_FIRST_NAME")
+    public String getFirstName()
+    {
+        return mFirstName_;
+    }
+
+    /**
+     * setter for first name
+     * 
+     * @param aName
+     *            the given name
+     */
     public void setFirstName( String aName )
     {
         mFirstName_ = aName;
     }
 
+    /**
+     * getter for the last name
+     * 
+     * @return the last name
+     */
+    @Column(name = "USER_LAST_NAME")
     public String getLastName()
     {
         return mLastName_;
     }
 
+    /**
+     * setter for last name
+     * 
+     * @param aName
+     *            the family name
+     */
     public void setLastName( String aName )
     {
         mLastName_ = aName;
     }
 
+    @Transient
     public String getName()
     {
         return mFirstName_ + " " + mLastName_;
@@ -198,71 +277,161 @@ public class User extends AbstractPersistentBaseClass
         mLastName_ = t.nextToken();
     }
 
+    /**
+     * getter for the username
+     * 
+     * @return the user name
+     */
+    @Column(name = "USER_USERNAME")
     public String getUsername()
     {
         return mUsername_;
     }
 
+    /**
+     * set the username
+     * 
+     * @param aName
+     *            the username
+     */
     public void setUsername( String aName )
     {
         mUsername_ = aName;
     }
 
+    /**
+     * Getter for the home address object
+     * 
+     * @return the home address
+     */
+    @Embedded
+    @AttributeOverrides( { @AttributeOverride(name = "street", column = @Column(name = "USER_HOME_STREET")),
+                          @AttributeOverride(name = "city", column = @Column(name = "USER_HOME_CITY")),
+                          @AttributeOverride(name = "zipCode", column = @Column(name = "USER_HOME_ZIPCODE")) })
     public Address getHomeAddress()
     {
         return mHomeAddress_;
     }
 
+    /**
+     * setter for the home address
+     * 
+     * @param aAddress
+     *            the address to set
+     */
     public void setHomeAddress( Address aAddress )
     {
         mHomeAddress_ = aAddress;
     }
 
+    /**
+     * Getter for tjhe billing address object
+     * 
+     * @return the billing address
+     */
+    @Embedded
+    @AttributeOverrides( { @AttributeOverride(name = "street", column = @Column(name = "USER_BILLING_STREET")),
+                          @AttributeOverride(name = "city", column = @Column(name = "USER_BILLING_CITY")),
+                          @AttributeOverride(name = "zipCode", column = @Column(name = "USER_BILLING_ZIPCODE")) })
     public Address getBillingAddress()
     {
         return mBillingAddress_;
     }
 
+    /**
+     * setter for the billing address
+     * 
+     * @param aAddress
+     *            the address to set
+     */
     public void setBillingAddress( Address aAddress )
     {
         mBillingAddress_ = aAddress;
     }
 
+    /**
+     * getter for the creation date
+     * 
+     * @return the date that the user was created
+     */
+    @Column(name = "USER_CREATED")
     public Date getCreated()
     {
         return mCreated_;
     }
 
-    public void setCreated( Date created )
+    /**
+     * setter for the creation date
+     * 
+     * @param created
+     *            the date that the user was created
+     */
+    protected void setCreated( Date created )
     {
         mCreated_ = created;
     }
 
+    /**
+     * getter for the user email
+     * 
+     * @return the user email address
+     */
+    @Column(name = "USER_EMAIL")
     public String getEmail()
     {
         return mEmail_;
     }
 
+    /**
+     * setter for the uiser email address
+     * 
+     * @param email
+     *            the email to set
+     */
     public void setEmail( String email )
     {
         mEmail_ = email;
     }
 
+    /**
+     * getter for the user password
+     * 
+     * @return the user password
+     */
+    @Column(name = "USER_PASSWORD")
     public String getPassword()
     {
         return mPassword_;
     }
 
+    /**
+     * setter for the user password
+     * 
+     * @param password
+     *            the user password
+     */
     public void setPassword( String password )
     {
         mPassword_ = password;
     }
 
+    /**
+     * getter for the user rank
+     * 
+     * @return the user rank
+     */
+    @Column(name = "USER_RANKING")
     public Integer getRanking()
     {
         return mRanking_;
     }
 
+    /**
+     * setter for the user rank
+     * 
+     * @param ranking
+     *            the rank to set
+     */
     public void setRanking( Integer ranking )
     {
         mRanking_ = ranking;
