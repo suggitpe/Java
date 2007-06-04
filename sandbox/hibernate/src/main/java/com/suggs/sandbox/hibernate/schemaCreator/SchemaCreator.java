@@ -5,7 +5,6 @@
 package com.suggs.sandbox.hibernate.schemaCreator;
 
 import java.io.File;
-import java.io.FilenameFilter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,26 +44,14 @@ public class SchemaCreator
      * @param aDestDir
      *            a directory to drop all of the resulting sql files
      */
-    public void createDDL( File aDestDir )
+    public void createDDL( File aDestDir, Configuration aCfg )
     {
         // search for all opf the hbm files from a passed in dir
         Assert.notNull( aDestDir, "invalid dest dir for sql files" );
 
         Assert.isTrue( ( aDestDir.exists() && aDestDir.isDirectory() ), "The dest directory is invalid" );
 
-        // first we go through all of the
-        File[] hbms = mSrcDir_.listFiles( new FilenameFilter()
-        {
-
-            public boolean accept( File dir, String filename )
-            {
-                return filename.endsWith( "hbm.xml" );
-            }
-        } );
-
-        Configuration cfg = createCfg( hbms );
-
-        createSql( createNewSqlFile( aDestDir ), cfg );
+        createSql( createNewSqlFile( aDestDir ), aCfg );
     }
 
     /**
@@ -83,25 +70,6 @@ public class SchemaCreator
             LOG.error( "Overwriting previous sql file with [" + dest.getAbsolutePath() + "]" );
         }
         return dest.getAbsolutePath();
-    }
-
-    /**
-     * simple method to create and add the resources to the
-     * configuration object
-     * 
-     * @param aListOfHbms
-     *            the hbm files to add
-     * @return a new configuration object
-     */
-    private Configuration createCfg( File[] aListOfHbms )
-    {
-        Configuration cfg = new Configuration().configure( "hibernate.cfg.xml" );
-        for ( File f : aListOfHbms )
-        {
-            cfg.addResource( "hbm/manual/" + f.getName() );
-        }
-
-        return cfg;
     }
 
     /**

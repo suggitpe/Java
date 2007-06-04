@@ -4,6 +4,8 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
+import com.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,7 +17,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CE_TABLE")
+@Table(name = "CE_COMMENT")
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_COMMENT_SEQ")
 public class Comment extends AbstractPersistentBaseClass
 {

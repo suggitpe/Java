@@ -4,9 +4,12 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
+import com.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
+
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -74,7 +77,7 @@ public class Category extends AbstractPersistentBaseClass
      * 
      * @return all items in this category
      */
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories", targetEntity = com.suggs.sandbox.hibernate.caveatEmptor.Item.class)
     public Set<Item> getItems()
     {
         return mItems_;

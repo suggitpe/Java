@@ -56,7 +56,7 @@ public class Message
      * @return the id of the object
      */
     @Id
-    @Column(name = "MESSAGE_ID", unique=true)
+    @Column(name = "MESSAGE_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MSG_SEQ_STR")
     public Long getId()
     {

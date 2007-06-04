@@ -2,7 +2,7 @@
  * AbstractPersistentBaseClass.java created on 22 Mar 2007 17:42:27 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor;
+package com.suggs.sandbox.hibernate.caveatEmptor.support;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -33,7 +33,7 @@ public abstract class AbstractPersistentBaseClass
      * @return the id
      */
     @Id
-    @Column(name = "ID", unique = true)
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CE_SEQ_STR")
     public long getId()
     {
