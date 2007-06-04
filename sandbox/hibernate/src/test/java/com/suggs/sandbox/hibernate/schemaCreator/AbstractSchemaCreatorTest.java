@@ -14,7 +14,6 @@ import com.suggs.sandbox.hibernate.caveatEmptor.CreditCard;
 import com.suggs.sandbox.hibernate.caveatEmptor.Item;
 import com.suggs.sandbox.hibernate.caveatEmptor.User;
 import com.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
-import com.suggs.sandbox.hibernate.caveatEmptor.support.ItemCategoryBridge;
 import com.suggs.sandbox.hibernate.chapter2.Message;
 
 import java.io.File;
