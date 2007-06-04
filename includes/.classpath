@@ -14,7 +14,7 @@
 	<classpathentry kind="lib" path="/_build/repository/ehcache/jars/ehcache-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="/_build/repository/hibernate/jars/hibernate-3.2.3.jar" sourcepath="/_build/repository/hibernate/jars/hibernate-src-3.2.3.zip"/>
 	<classpathentry exported="true" kind="lib" path="/_build/repository/hibernate/jars/hibernate-commons-annotations-3.3.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="/_build/repository/hibernate/jars/hibernate-annotations-3.3.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/_build/repository/hibernate/jars/hibernate-annotations-3.3.0.jar" sourcepath="/_build/repository/hibernate/jars/hibernate-annotations-src-3.3.0.zip"/>
 	<classpathentry kind="lib" path="/_build/repository/jdom/jars/jaxen-core-0.9.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/jdom/jars/jaxen-jdom-0.9.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/jdom/jars/jdom-0.9.jar"/>
