@@ -21,18 +21,9 @@ public class SchemaCreator
 
     private final static String FILE = "suggsSchema";
 
-    private File mSrcDir_;
-
-    private SchemaCreator()
+    public SchemaCreator()
     {
-        // hidden
-    }
-
-    public SchemaCreator( final File aSrcDir )
-    {
-        Assert.notNull( aSrcDir, "Invalid src dir for hbm files" );
-        Assert.isTrue( ( aSrcDir.exists() && aSrcDir.isDirectory() ), "The src directory is invalid" );
-        mSrcDir_ = aSrcDir;
+        super();
     }
 
     /**
