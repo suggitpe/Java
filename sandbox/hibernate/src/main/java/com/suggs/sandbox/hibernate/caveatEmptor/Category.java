@@ -55,7 +55,7 @@ public class Category extends AbstractPersistentBaseClass
      * 
      * @return the category name
      */
-    @Column(name = "CATEGORY_NAME")
+    @Column(name = "CATEGORY_NAME", nullable = false, length = 64)
     public String getName()
     {
         return mName_;
@@ -77,7 +77,7 @@ public class Category extends AbstractPersistentBaseClass
      * 
      * @return all items in this category
      */
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories", targetEntity = com.suggs.sandbox.hibernate.caveatEmptor.Item.class)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories", targetEntity = com.suggs.sandbox.hibernate.caveatEmptor.Item.class, fetch = FetchType.LAZY)
     public Set<Item> getItems()
     {
         return mItems_;

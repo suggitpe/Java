@@ -60,7 +60,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * 
      * @return the created timestamp
      */
-    @Column(name = "BILLING_CREATED")
+    @Column(name = "BILLING_CREATED", nullable = false, updatable = false)
     public Date getCreated()
     {
         return mCreated_;
@@ -82,7 +82,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * 
      * @return the number
      */
-    @Column(name = "BILLING_NUMBER")
+    @Column(name = "BILLING_NUMBER", nullable = false, length = 32)
     public String getNumber()
     {
         return mNumber_;
@@ -104,7 +104,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * 
      * @return the owner
      */
-    @Column(name = "BILLING_OWNER")
+    @Column(name = "BILLING_OWNER", nullable=false, length=128)
     public String getOwner()
     {
         return mOwner_;

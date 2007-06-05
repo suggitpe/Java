@@ -50,7 +50,7 @@ public class CreditCard extends BillingDetails
      * 
      * @return the expiry month
      */
-    @Column(name = "CC_EXP_MONTH")
+    @Column(name = "CC_EXP_MONTH", nullable = false, length = 2)
     public String getExpMonth()
     {
         return mExpMonth_;
@@ -72,7 +72,7 @@ public class CreditCard extends BillingDetails
      * 
      * @return the year of expiry
      */
-    @Column(name = "CC_EXP_YEAR")
+    @Column(name = "CC_EXP_YEAR", nullable = false, length = 2)
     public String getExpYear()
     {
         return mExpYear_;
@@ -94,7 +94,7 @@ public class CreditCard extends BillingDetails
      * 
      * @return the type of card
      */
-    @Column(name = "CC_TYPE")
+    @Column(name = "CC_TYPE", nullable = false, updatable = false)
     public Integer getType()
     {
         return mType_;

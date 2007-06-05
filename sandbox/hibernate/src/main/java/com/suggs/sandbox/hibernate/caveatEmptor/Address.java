@@ -4,6 +4,7 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -27,6 +28,7 @@ public class Address
         mZipCode_ = aZip;
     }
 
+    @Column(length = 64, nullable = false)
     public String getCity()
     {
         return mCity_;
@@ -37,6 +39,7 @@ public class Address
         mCity_ = city;
     }
 
+    @Column(length = 64, nullable = false)
     public String getStreet()
     {
         return mStreet_;
@@ -47,6 +50,7 @@ public class Address
         mStreet_ = street;
     }
 
+    @Column(length = 25, nullable = false)
     public String getZipCode()
     {
         return mZipCode_;

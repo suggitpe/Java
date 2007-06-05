@@ -53,7 +53,7 @@ public class BankAccount extends BillingDetails
      * 
      * @return the bank name
      */
-    @Column(name = "BANK_NAME")
+    @Column(name = "BANK_NAME", nullable = false, length = 128)
     public String getBankName()
     {
         return mBankName_;
@@ -75,7 +75,7 @@ public class BankAccount extends BillingDetails
      * 
      * @return the swift address
      */
-    @Column(name = "BANK_SWIFT")
+    @Column(name = "BANK_SWIFT", nullable = false, length = 12)
     public String getBankSwift()
     {
         return mBankSwift_;

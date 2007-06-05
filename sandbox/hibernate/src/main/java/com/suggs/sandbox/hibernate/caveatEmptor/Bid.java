@@ -57,7 +57,7 @@ public class Bid extends AbstractPersistentBaseClass
      * 
      * @return the bid amount
      */
-    @Column(name = "BID_AMOUNT")
+    @Column(name = "BID_AMOUNT", nullable = false, updatable = false)
     public Double getAmount()
     {
         return mAmount_;
@@ -79,7 +79,7 @@ public class Bid extends AbstractPersistentBaseClass
      * 
      * @return the created timestamp
      */
-    @Column(name = "BID_CREATED")
+    @Column(name = "BID_CREATED", nullable = false, updatable = false)
     public Date getCreated()
     {
         return mCreated_;
@@ -102,7 +102,7 @@ public class Bid extends AbstractPersistentBaseClass
      * @return the bid that this item relates to
      */
     @ManyToOne
-    @JoinColumn(name = "BID_ITEM_ID")
+    @JoinColumn(name = "BID_ITEM_ID", nullable = false, updatable = false)
     public Item getItem()
     {
         return mItem_;
@@ -125,7 +125,7 @@ public class Bid extends AbstractPersistentBaseClass
      * @return the bidder user details
      */
     @ManyToOne
-    @JoinColumn(name = "BID_USER_ID")
+    @JoinColumn(name = "BID_USER_ID", nullable = false, updatable = false)
     public User getBidder()
     {
         return mBidder_;

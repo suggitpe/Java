@@ -76,7 +76,7 @@ public class Item extends AbstractPersistentBaseClass
         mCreated_ = Calendar.getInstance().getTime();
     }
 
-    @Column(name = "ITEM_NAME")
+    @Column(name = "ITEM_NAME", nullable = false, length = 64)
     public String getName()
     {
         return mName_;
@@ -99,7 +99,7 @@ public class Item extends AbstractPersistentBaseClass
      * 
      * @return the description of the item
      */
-    @Column(name = "ITEM_DESCRIPTION")
+    @Column(name = "ITEM_DESCRIPTION", nullable = false, length = 255)
     public String getDescription()
     {
         return mDescription_;
@@ -243,7 +243,7 @@ public class Item extends AbstractPersistentBaseClass
      * 
      * @return the time that the item was created
      */
-    @Column(name = "ITEM_CREATED")
+    @Column(name = "ITEM_CREATED", nullable = false, updatable = false)
     public Date getCreated()
     {
         return mCreated_;
@@ -265,7 +265,7 @@ public class Item extends AbstractPersistentBaseClass
      * 
      * @return the end date
      */
-    @Column(name = "ITEM_END_DATE")
+    @Column(name = "ITEM_END_DATE", nullable = false)
     public Date getEndDate()
     {
         return mEndDate_;
@@ -287,7 +287,7 @@ public class Item extends AbstractPersistentBaseClass
      * 
      * @return the initial price
      */
-    @Column(name = "ITEM_INITIAL_PRICE")
+    @Column(name = "ITEM_INITIAL_PRICE", updatable = false)
     public Double getInitialPrice()
     {
         return mInitialPrice_;
@@ -309,7 +309,7 @@ public class Item extends AbstractPersistentBaseClass
      * 
      * @return the reserve price
      */
-    @Column(name = "ITEM_RESERVE_PRICE")
+    @Column(name = "ITEM_RESERVE_PRICE", nullable = false)
     public Double getReservePrice()
     {
         return mReservePrice_;
@@ -331,7 +331,7 @@ public class Item extends AbstractPersistentBaseClass
      * 
      * @return the date that the item starts
      */
-    @Column(name = "ITEM_START_DATE")
+    @Column(name = "ITEM_START_DATE", nullable = false, updatable = false)
     public Date getStartDate()
     {
         return mStartDate_;

@@ -38,7 +38,7 @@ public class Comment extends AbstractPersistentBaseClass
      * 
      * @return the creation timestamp
      */
-    @Column(name = "CMNT_CREATED")
+    @Column(name = "CMNT_CREATED", nullable = false, updatable = false)
     public Date getCreated()
     {
         return mCreated_;
@@ -82,7 +82,7 @@ public class Comment extends AbstractPersistentBaseClass
      * 
      * @return the comment text
      */
-    @Column(name = "CMNT_TEXT")
+    @Column(name = "CMNT_TEXT", length = 255)
     public String getText()
     {
         return mText_;

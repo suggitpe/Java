@@ -227,7 +227,7 @@ public class User extends AbstractPersistentBaseClass
      * 
      * @return the given name
      */
-    @Column(name = "USER_FIRST_NAME")
+    @Column(name = "USER_FIRST_NAME", nullable = false, length = 64)
     public String getFirstName()
     {
         return mFirstName_;
@@ -249,7 +249,7 @@ public class User extends AbstractPersistentBaseClass
      * 
      * @return the last name
      */
-    @Column(name = "USER_LAST_NAME")
+    @Column(name = "USER_LAST_NAME", nullable = false, length = 64)
     public String getLastName()
     {
         return mLastName_;
@@ -284,7 +284,7 @@ public class User extends AbstractPersistentBaseClass
      * 
      * @return the user name
      */
-    @Column(name = "USER_USERNAME")
+    @Column(name = "USER_USERNAME", length = 8, nullable = false, updatable = false, unique = true)
     public String getUsername()
     {
         return mUsername_;
@@ -356,7 +356,7 @@ public class User extends AbstractPersistentBaseClass
      * 
      * @return the date that the user was created
      */
-    @Column(name = "USER_CREATED")
+    @Column(name = "USER_CREATED", nullable = false, updatable = false)
     public Date getCreated()
     {
         return mCreated_;
@@ -378,7 +378,7 @@ public class User extends AbstractPersistentBaseClass
      * 
      * @return the user email address
      */
-    @Column(name = "USER_EMAIL")
+    @Column(name = "USER_EMAIL", nullable = false, length = 64)
     public String getEmail()
     {
         return mEmail_;
@@ -400,7 +400,7 @@ public class User extends AbstractPersistentBaseClass
      * 
      * @return the user password
      */
-    @Column(name = "USER_PASSWORD")
+    @Column(name = "USER_PASSWORD", nullable = false, length = 16)
     public String getPassword()
     {
         return mPassword_;
