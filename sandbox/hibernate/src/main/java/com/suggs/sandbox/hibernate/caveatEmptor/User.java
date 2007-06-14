@@ -284,7 +284,7 @@ public class User extends AbstractPersistentBaseClass
      * 
      * @return the user name
      */
-    @Column(name = "USER_USERNAME", length = 8, nullable = false, updatable = false, unique = true)
+    @Column(name = "USER_USERNAME", length = 10, nullable = false, updatable = false, unique = true)
     public String getUsername()
     {
         return mUsername_;

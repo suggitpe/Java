@@ -72,7 +72,7 @@ public class CreditCard extends BillingDetails
      * 
      * @return the year of expiry
      */
-    @Column(name = "CC_EXP_YEAR", nullable = false, length = 2)
+    @Column(name = "CC_EXP_YEAR", nullable = false, length = 4)
     public String getExpYear()
     {
         return mExpYear_;
