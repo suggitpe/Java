@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- Copyright 2006 UBS Investment Bank -->
+<beans>
+    
+    <!-- this is the main loader impl -->
+    <bean id="jmsHelper" class="org.suggs.gui.impl.JmsHelper">
+        
+    </bean>
+    
+</beans>
