@@ -15,6 +15,7 @@ public class MessageHibernateAnnotationDaoTest extends AbstractMessageHibernateD
     /**
      * @see org.springframework.test.AbstractSingleSpringContextTests#getConfigLocations()
      */
+    @Override
     protected String[] getConfigLocations()
     {
         return new String[] { "xml/ut-annotation-messagetest.xml" };

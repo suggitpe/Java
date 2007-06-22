@@ -26,6 +26,7 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     /**
      * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#onSetUp()
      */
+    @Override
     protected void onSetUp() throws Exception
     {
     }

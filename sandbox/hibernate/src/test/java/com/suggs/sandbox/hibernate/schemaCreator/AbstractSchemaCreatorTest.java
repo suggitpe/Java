@@ -20,6 +20,7 @@ public abstract class AbstractSchemaCreatorTest extends AbstractDependencyInject
 
     private static final Log LOG = LogFactory.getLog( AbstractSchemaCreatorTest.class );
 
+    @Override
     protected String[] getConfigLocations()
     {
         return new String[] { "xml/ut-schema-creator-test.xml" };

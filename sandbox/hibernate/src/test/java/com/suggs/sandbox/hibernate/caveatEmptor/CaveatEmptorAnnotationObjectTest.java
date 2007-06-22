@@ -18,6 +18,7 @@ public class CaveatEmptorAnnotationObjectTest extends AbstractCaveatEmptorObject
     /**
      * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#getConfigLocations()
      */
+    @Override
     protected String[] getConfigLocations()
     {
         return new String[] { "xml/ut-annotation-caveatemptor-objects.xml" };

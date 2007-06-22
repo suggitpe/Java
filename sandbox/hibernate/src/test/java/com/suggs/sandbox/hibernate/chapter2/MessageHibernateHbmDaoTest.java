@@ -15,6 +15,7 @@ public class MessageHibernateHbmDaoTest extends AbstractMessageHibernateDaoTest
     /**
      * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#getConfigLocations()
      */
+    @Override
     protected String[] getConfigLocations()
     {
         return new String[] { "xml/ut-hbm-messagetest.xml" };

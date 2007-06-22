@@ -18,6 +18,7 @@ public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorObjectTest
     /**
      * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#getConfigLocations()
      */
+    @Override
     protected String[] getConfigLocations()
     {
         return new String[] { "xml/ut-hbm-caveatemptor-objects.xml" };
