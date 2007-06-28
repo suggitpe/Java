@@ -5,7 +5,16 @@
     
     <!-- this is the main loader impl -->
     <bean id="jmsHelper" class="org.suggs.gui.impl.JmsHelper">
-        
+        <property name="connectionPanel" ref="connMgrPanel"/>
+    </bean>
+    
+    <!-- This is the panel interface to the connection manager  -->
+    <bean id="connMgrPanel" class="org.suggs.gui.panel.JmsConnectionManagerPanel">
+        <property name="connectionManager" ref="connMgr"/>
+    </bean>
+    
+    <!-- This is the main connection manager bean -->
+    <bean id="connMgr" class="org.suggs.gui.connection.impl.JmsConnectionManager">
     </bean>
     
 </beans>
