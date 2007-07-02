@@ -16,6 +16,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+/**
+ * TODO Write javadoc for AbstractCaveatEmptorRelationshipTest
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public abstract class AbstractCaveatEmptorRelationshipTest extends AbstractCaveatEmptorTest
 {
 

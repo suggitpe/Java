@@ -7,6 +7,12 @@ package com.suggs.sandbox.hibernate.caveatEmptor;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+/**
+ * Address class .. to be used within other classes
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 @Embeddable
 public class Address
 {
@@ -15,11 +21,21 @@ public class Address
     private String mCity_;
     private String mZipCode_;
 
+    /**
+     * Constructs a new instance.
+     */
     public Address()
     {
         super();
     }
 
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aStreet
+     * @param aCity
+     * @param aZip
+     */
     public Address( String aStreet, String aCity, String aZip )
     {
         super();
@@ -28,34 +44,52 @@ public class Address
         mZipCode_ = aZip;
     }
 
+    /**
+     * @return
+     */
     @Column(length = 64, nullable = false)
     public String getCity()
     {
         return mCity_;
     }
 
+    /**
+     * @param city
+     */
     public void setCity( String city )
     {
         mCity_ = city;
     }
 
+    /**
+     * @return
+     */
     @Column(length = 64, nullable = false)
     public String getStreet()
     {
         return mStreet_;
     }
 
+    /**
+     * @param street
+     */
     public void setStreet( String street )
     {
         mStreet_ = street;
     }
 
+    /**
+     * @return
+     */
     @Column(length = 25, nullable = false)
     public String getZipCode()
     {
         return mZipCode_;
     }
 
+    /**
+     * @param zipCode
+     */
     public void setZipCode( String zipCode )
     {
         mZipCode_ = zipCode;

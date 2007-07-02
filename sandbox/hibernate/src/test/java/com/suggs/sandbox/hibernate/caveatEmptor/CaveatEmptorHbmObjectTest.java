@@ -4,6 +4,13 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
+/**
+ * 
+ * TODO Write javadoc for CaveatEmptorHbmObjectTest
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public class CaveatEmptorHbmObjectTest extends AbstractCaveatEmptorObjectTest
 {
 

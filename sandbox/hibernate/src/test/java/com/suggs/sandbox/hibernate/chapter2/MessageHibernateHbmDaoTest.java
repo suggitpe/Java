@@ -4,9 +4,18 @@
  */
 package com.suggs.sandbox.hibernate.chapter2;
 
+/**
+ * TODO Write javadoc for MessageHibernateHbmDaoTest
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public class MessageHibernateHbmDaoTest extends AbstractMessageHibernateDaoTest
 {
 
+    /**
+     * Constructs a new instance.
+     */
     public MessageHibernateHbmDaoTest()
     {
         super();

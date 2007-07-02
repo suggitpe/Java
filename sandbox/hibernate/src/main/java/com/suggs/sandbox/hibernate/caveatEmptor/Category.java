@@ -20,6 +20,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * Class to represent a category
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 @Entity
 @Table(name = "CE_CATEGORY")
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_CATEGORY_SEQ")

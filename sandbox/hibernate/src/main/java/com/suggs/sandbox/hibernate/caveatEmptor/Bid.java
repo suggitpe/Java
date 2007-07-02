@@ -15,7 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+/**
+ * 
+ * Class to represent a Bid
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 @Entity
 @Table(name = "CE_BID")
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_BID_SEQ")

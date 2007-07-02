@@ -28,6 +28,12 @@ import org.apache.commons.logging.LogFactory;
 
 import org.springframework.util.Assert;
 
+/**
+ * TODO Write javadoc for User
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 @Entity
 @Table(name = "CE_USER")
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_USER_SEQ")
@@ -141,17 +147,26 @@ public class User extends AbstractPersistentBaseClass
         mBillingDetails_.add( aBillingDetails );
     }
 
+    /**
+     * @return
+     */
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
     public Set<Item> getItemsForSale()
     {
         return mItemsForSale_;
     }
 
+    /**
+     * @param aItems
+     */
     public void setItemsForSale( Set<Item> aItems )
     {
         mItemsForSale_ = aItems;
     }
 
+    /**
+     * @param aItem
+     */
     public void addItemForSale( Item aItem )
     {
         if ( aItem == null )
@@ -162,17 +177,26 @@ public class User extends AbstractPersistentBaseClass
         mItemsForSale_.add( aItem );
     }
 
+    /**
+     * @return
+     */
     @OneToMany(mappedBy = "fromUser", fetch = FetchType.LAZY)
     public Set<Comment> getComments()
     {
         return mComments_;
     }
 
+    /**
+     * @param aComments
+     */
     public void setComments( Set<Comment> aComments )
     {
         mComments_ = aComments;
     }
 
+    /**
+     * @param aComment
+     */
     public void addComment( Comment aComment )
     {
         if ( aComment == null )
@@ -266,12 +290,18 @@ public class User extends AbstractPersistentBaseClass
         mLastName_ = aName;
     }
 
+    /**
+     * @return
+     */
     @Transient
     public String getName()
     {
         return mFirstName_ + " " + mLastName_;
     }
 
+    /**
+     * @param aName
+     */
     public void setName( String aName )
     {
         StringTokenizer t = new StringTokenizer( aName );

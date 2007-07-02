@@ -4,7 +4,12 @@
  */
 package com.suggs.sandbox.hibernate.caveatEmptor;
 
-
+/**
+ * TODO Write javadoc for CaveatEmptorAnnotationRelationshipTest
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public class CaveatEmptorAnnotationRelationshipTest extends AbstractCaveatEmptorRelationshipTest
 {
 

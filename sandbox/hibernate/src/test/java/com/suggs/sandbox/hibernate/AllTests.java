@@ -16,6 +16,10 @@ import junit.framework.TestSuite;
 public class AllTests
 {
 
+    /**
+     * 
+     * @return
+     */
     public static Test suite()
     {
         TestSuite s = new TestSuite();

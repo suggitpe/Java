@@ -46,6 +46,11 @@ public class Message
         return buff.toString();
     }
 
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aText
+     */
     public Message( String aText )
     {
         text_ = aText;
@@ -64,22 +69,34 @@ public class Message
         return id;
     }
 
+    /**
+     * @param aId
+     */
     public void setId( Long aId )
     {
         id = aId;
     }
 
+    /**
+     * @return
+     */
     @Column(name = "MESSAGE_TEXT", nullable = false, length = 255)
     public String getText()
     {
         return text_;
     }
 
+    /**
+     * @param aText
+     */
     public void setText( String aText )
     {
         text_ = aText;
     }
 
+    /**
+     * @return
+     */
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinColumn(name = "NEXT_MESSAGE_ID", nullable = true)
     public Message getNextMessage()
@@ -87,6 +104,9 @@ public class Message
         return nextMessage_;
     }
 
+    /**
+     * @param aMsg
+     */
     public void setNextMessage( Message aMsg )
     {
         nextMessage_ = aMsg;

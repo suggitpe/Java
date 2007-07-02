@@ -25,6 +25,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * TODO Write javadoc for Item
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 @Entity
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_ITEM_SEQ")
 @Table(name = "CE_ITEM", uniqueConstraints = { @UniqueConstraint(columnNames = { "SUCCESSFUL_BID_ID" }),
@@ -76,6 +82,11 @@ public class Item extends AbstractPersistentBaseClass
         mCreated_ = Calendar.getInstance().getTime();
     }
 
+    /**
+     * Getter for the ame field
+     * 
+     * @return
+     */
     @Column(name = "ITEM_NAME", nullable = false, length = 64)
     public String getName()
     {

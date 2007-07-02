@@ -18,6 +18,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * Class to represent a billing detail
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 @Entity
 @Table(name = "CE_BILLING_DETAILS")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -44,6 +50,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * @param aOwner
      * @param aNumber
      * @param aCreatDate
+     * @param aUser
      */
     public BillingDetails( String aOwner, String aNumber, Date aCreatDate, User aUser )
     {
@@ -104,7 +111,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * 
      * @return the owner
      */
-    @Column(name = "BILLING_OWNER", nullable=false, length=128)
+    @Column(name = "BILLING_OWNER", nullable = false, length = 128)
     public String getOwner()
     {
         return mOwner_;

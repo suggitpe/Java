@@ -12,6 +12,13 @@ import org.springframework.core.io.ClassPathResource;
 
 import org.hibernate.cfg.Configuration;
 
+/**
+ * 
+ * TODO Write javadoc for HbmSchemaCreatorTest
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public class HbmSchemaCreatorTest extends AbstractSchemaCreatorTest
 {
 

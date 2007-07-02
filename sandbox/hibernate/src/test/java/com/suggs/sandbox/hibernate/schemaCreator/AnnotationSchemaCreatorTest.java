@@ -19,6 +19,13 @@ import com.suggs.sandbox.hibernate.chapter2.Message;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * 
+ * TODO Write javadoc for AnnotationSchemaCreatorTest
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public class AnnotationSchemaCreatorTest extends AbstractSchemaCreatorTest
 {
 

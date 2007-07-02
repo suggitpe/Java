@@ -14,6 +14,12 @@ import org.springframework.util.Assert;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
+/**
+ * TODO Write javadoc for SchemaCreator
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public class SchemaCreator
 {
 
@@ -21,6 +27,9 @@ public class SchemaCreator
 
     private final static String FILE = "suggsSchema";
 
+    /**
+     * Constructs a new instance.
+     */
     public SchemaCreator()
     {
         super();
@@ -30,10 +39,10 @@ public class SchemaCreator
      * Main method that will manage the passing of the files to the
      * hibernate impl
      * 
-     * @param aSrcDir
-     *            a directory that contains the hbm files
      * @param aDestDir
      *            a directory to drop all of the resulting sql files
+     * @param aCfg
+     *            the configuration
      */
     public void createDDL( File aDestDir, Configuration aCfg )
     {

@@ -16,6 +16,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * Abstract class to create a base class for persistent objects
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 @Entity
 @Table(name = "CE_COMMENT")
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_COMMENT_SEQ")
@@ -28,6 +34,9 @@ public class Comment extends AbstractPersistentBaseClass
     private Item mAboutItem_;
     private User mFromUser_;
 
+    /**
+     * Constructs a new instance.
+     */
     public Comment()
     {
         super();

@@ -22,11 +22,20 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+/**
+ * TODO Write javadoc for AbstractMessageHibernateDaoTest
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateSpringTest
 {
 
     private static final Log LOG = LogFactory.getLog( AbstractMessageHibernateDaoTest.class );
 
+    /**
+     * Constructs a new instance.
+     */
     public AbstractMessageHibernateDaoTest()
     {
         super();
@@ -188,6 +197,10 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
         } );
     }
 
+    /**
+     * 
+     *
+     */
     public void testHqlQuery()
     {
         runTest( new TestCallback()

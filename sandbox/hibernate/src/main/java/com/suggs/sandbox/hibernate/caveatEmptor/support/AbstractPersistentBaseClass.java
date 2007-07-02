@@ -25,6 +25,9 @@ public abstract class AbstractPersistentBaseClass
     private long mId_;
     private long mVer_;
 
+    /**
+     * Constructs a new instance.
+     */
     public AbstractPersistentBaseClass()
     {
     }

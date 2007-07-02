@@ -14,6 +14,13 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * 
+ * TODO Write javadoc for AbstractCaveatEmptorTest
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTest
 {
 

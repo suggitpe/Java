@@ -10,6 +10,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+/**
+ * Class to represent a bank account
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 @Entity
 @Table(name = "CE_BANK_ACCOUNT")
 public class BankAccount extends BillingDetails
@@ -35,6 +41,8 @@ public class BankAccount extends BillingDetails
      *            number from billing details
      * @param aCreateDate
      *            creation date of the bank account
+     * @param aUser
+     *            the user to whom the bank account is affiliated
      * @param aBankName
      *            the name of the bank
      * @param aBankSwift

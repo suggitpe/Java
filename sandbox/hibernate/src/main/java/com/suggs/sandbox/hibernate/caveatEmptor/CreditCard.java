@@ -10,6 +10,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+/**
+ * TODO Write javadoc for CreditCard
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 @Entity
 @Table(name = "CE_CREDIT_CARD")
 public class CreditCard extends BillingDetails
@@ -33,6 +39,7 @@ public class CreditCard extends BillingDetails
      * @param aOwner
      * @param aNumber
      * @param aCreateDate
+     * @param aUser
      * @param aType
      * @param aExpMonth
      * @param aExpYear

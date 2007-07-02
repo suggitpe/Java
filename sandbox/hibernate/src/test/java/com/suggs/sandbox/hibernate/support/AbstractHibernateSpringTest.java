@@ -17,6 +17,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * 
+ * TODO Write javadoc for AbstractHibernateSpringTest
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public abstract class AbstractHibernateSpringTest extends AbstractDependencyInjectionSpringContextTests
 {
 
@@ -135,7 +142,7 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
          * This is the core test interface. Here we pass in a session
          * object so that we can get access to the persistent layer.
          * 
-         * @param aTrans
+         * @param aSession
          */
         void runTest( Session aSession );
 
