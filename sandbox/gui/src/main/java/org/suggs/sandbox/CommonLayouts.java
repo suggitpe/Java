@@ -18,11 +18,18 @@ import javax.swing.JInternalFrame;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
 
+/**
+ * Test impl
+ * 
+ * @author suggitpe
+ * @version 1.0 2 Jul 2007
+ */
 public class CommonLayouts extends JFrame
 {
 
-    public Integer LAYOUT_FRAME_LAYER = new Integer( 1 );
-
+    /**
+     * Constructs a new instance.
+     */
     public CommonLayouts()
     {
         super( "Common Layout Managers" );
@@ -113,6 +120,11 @@ public class CommonLayouts extends JFrame
         desktop.setSelectedFrame( fr6 );
     }
 
+    /**
+     * Main impl.
+     * 
+     * @param argv
+     */
     public static void main( String argv[] )
     {
         CommonLayouts frame = new CommonLayouts();
