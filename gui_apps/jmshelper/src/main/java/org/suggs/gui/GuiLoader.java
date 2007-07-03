@@ -23,6 +23,12 @@ public class GuiLoader
 
     private static final Log LOG = LogFactory.getLog( GuiLoader.class );
 
+    /**
+     * Main method. Entry point into the application
+     * 
+     * @param aArgs
+     *            args passed into the main app.
+     */
     public static void main( String[] aArgs )
     {
 

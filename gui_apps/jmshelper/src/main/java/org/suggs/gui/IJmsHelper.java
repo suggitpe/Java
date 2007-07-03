@@ -15,6 +15,8 @@ public interface IJmsHelper
 
     /**
      * Build the GUI and displays it to the user
+     * 
+     * @throws JmsHelperException
      */
     void buildGui() throws JmsHelperException;
 

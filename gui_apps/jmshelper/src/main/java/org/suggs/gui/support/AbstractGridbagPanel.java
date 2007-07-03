@@ -114,6 +114,8 @@ public abstract class AbstractGridbagPanel extends JPanel
      *            number of columns to span
      * @param aHeight
      *            numof rows to span
+     * @param aAnchor
+     *            the anchor for the component
      */
     public void addAnchoredComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight, int aAnchor )
     {

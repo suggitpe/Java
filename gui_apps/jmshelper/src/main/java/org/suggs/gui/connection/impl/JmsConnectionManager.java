@@ -6,6 +6,8 @@ package org.suggs.gui.connection.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.suggs.gui.JmsHelperException;
+import org.suggs.gui.connection.EConnectionState;
 import org.suggs.gui.connection.IJmsConnectionDetails;
 import org.suggs.gui.connection.IJmsConnectionManager;
 
@@ -20,8 +22,7 @@ public class JmsConnectionManager implements IJmsConnectionManager
 
     private static final Log LOG = LogFactory.getLog( JmsConnectionManager.class );
 
-    private boolean mParametersLoaded_ = false;
-    private String mConnectionState_ = "Disconnected";
+    private EConnectionState mConnectionState_ = EConnectionState.INITIAL;
 
     /**
      * Constructs a new instance.
@@ -32,49 +33,37 @@ public class JmsConnectionManager implements IJmsConnectionManager
     }
 
     /**
-     * @see org.suggs.gui.connection.IJmsConnectionManager#loadConnectionParameters()
-     */
-    public IJmsConnectionDetails loadConnectionParameters( String aName )
-    {
-        // firstly validate that all of the conn parameters are there,
-        // and then we can load them into the class
-        mParametersLoaded_ = true;
-        LOG.debug( "Loaded connecvtion parameters" );
-
-        return new JmsConnectionDetails( aName );
-
-    }
-
-    /**
-     * @see org.suggs.gui.connection.IJmsConnectionManager#testConnection()
-     */
-    public boolean testConnection()
-    {
-        // first check that the conn params have been loaded
-        if ( mParametersLoaded_ == false )
-        {
-            LOG.debug( "no params loaded" );
-            return false;
-
-        }
-
-        LOG.debug( "test ok" );
-        return true;
-    }
-
-    /**
      * @see org.suggs.gui.connection.IJmsConnectionManager#getConnectionState()
      */
-    public String getConnectionState()
+    public EConnectionState getConnectionState()
     {
         return mConnectionState_;
     }
 
     /**
-     * @see org.suggs.gui.connection.IJmsConnectionManager#getListOfKnownConnectionNames()
+     * @see org.suggs.gui.connection.IJmsConnectionManager#connect(org.suggs.gui.connection.IJmsConnectionDetails)
      */
-    public String[] getListOfKnownConnectionNames()
+    public void connect( IJmsConnectionDetails aConnDetails ) throws JmsHelperException
     {
-        return new String[] { "Conn1", "Conn2" };
+        mConnectionState_ = EConnectionState.CONNECTED;
+        LOG.warn( "Connection not implemented" );
     }
+
+    /**
+     * @see org.suggs.gui.connection.IJmsConnectionManager#testConnection(org.suggs.gui.connection.IJmsConnectionDetails)
+     */
+    public boolean testConnection( IJmsConnectionDetails aConnectionDetails )
+    {
+        mConnectionState_ = EConnectionState.DISCONNECTED;
+        return false;
+    }
+
+    /**
+     * @see org.suggs.gui.connection.IJmsConnectionManager#disconnect()
+     */
+    public void disconnect() throws JmsHelperException
+    {
+        mConnectionState_ = EConnectionState.DISCONNECTED;
+    }
+
 }

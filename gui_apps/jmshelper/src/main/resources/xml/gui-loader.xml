@@ -10,11 +10,14 @@
     
     <!-- This is the panel interface to the connection manager  -->
     <bean id="connMgrPanel" class="org.suggs.gui.panel.JmsConnectionManagerPanel">
-        <property name="connectionManager" ref="connMgr"/>
+        <property name="connectionManager" ref="connMgrBean"/>
+        <property name="connectionStore" ref="connStrBean"/>
     </bean>
     
     <!-- This is the main connection manager bean -->
-    <bean id="connMgr" class="org.suggs.gui.connection.impl.JmsConnectionManager">
-    </bean>
+    <bean id="connMgrBean" class="org.suggs.gui.connection.impl.JmsConnectionManager"/>
+    
+    <!-- This is the main connection store bean -->
+    <bean id="connStrBean" class="org.suggs.gui.connection.impl.JmsConnectionStore"/>
     
 </beans>

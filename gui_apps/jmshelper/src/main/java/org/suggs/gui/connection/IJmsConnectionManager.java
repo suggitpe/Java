@@ -4,6 +4,8 @@
  */
 package org.suggs.gui.connection;
 
+import org.suggs.gui.JmsHelperException;
+
 /**
  * This interface manages all of the connections available to the GUI
  * 
@@ -14,34 +16,35 @@ public interface IJmsConnectionManager
 {
 
     /**
-     * This will go to the persistent connection store and retrieve a
-     * list of the avialable and known connections
-     * 
-     * @return an array of the names of the connections
-     */
-    String[] getListOfKnownConnectionNames();
-
-    /**
-     * LOad a connection parameter for a given name
-     * 
-     * @param aName
-     *            the name of the connection to load
-     * @return the details fo the connection
-     */
-    IJmsConnectionDetails loadConnectionParameters( String aName );
-
-    /**
      * Test the connection parameters (makes a connection)
      * 
+     * @param aConnectionDetails
+     *            the connection details with which to connect
      * @return true if the connection succeeds, else false
      */
-    boolean testConnection();
+    boolean testConnection( IJmsConnectionDetails aConnectionDetails );
 
     /**
      * Returns the current state of the connection
      * 
      * @return the current state of the connection
      */
-    String getConnectionState();
+    EConnectionState getConnectionState();
+
+    /**
+     * Connect to a defined JMS resource
+     * 
+     * @param aConnDetails
+     * @throws JmsHelperException
+     */
+    void connect( IJmsConnectionDetails aConnDetails ) throws JmsHelperException;
+
+    /**
+     * Disconnect from the current connection
+     * 
+     * @throws JmsHelperException
+     *             if there are any problems in the disconnect
+     */
+    void disconnect() throws JmsHelperException;
 
 }

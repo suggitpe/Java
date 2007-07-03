@@ -4,6 +4,7 @@
  */
 package org.suggs.gui.connection.impl;
 
+import org.suggs.gui.connection.EConnectionType;
 import org.suggs.gui.connection.IJmsConnectionDetails;
 
 /**
@@ -16,10 +17,9 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
 {
 
     private String mName_;
-    private String mType_;
+    private EConnectionType mType_;
     private String mServer_;
     private String mPort_;
-    private String mDestination_;
 
     /**
      * Constructs a new instance.
@@ -29,7 +29,26 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     public JmsConnectionDetails( String aName )
     {
         mName_ = aName;
+    }
 
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aName
+     *            the name of the connection
+     * @param aType
+     *            the type of the connection
+     * @param aServer
+     *            the address of the server
+     * @param aPort
+     *            the port number for the server
+     */
+    public JmsConnectionDetails( String aName, EConnectionType aType, String aServer, String aPort )
+    {
+        mName_ = aName;
+        mType_ = aType;
+        mServer_ = aServer;
+        mPort_ = aPort;
     }
 
     /**
@@ -43,7 +62,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     /**
      * @see org.suggs.gui.connection.IJmsConnectionDetails#getConnectionType()
      */
-    public String getConnectionType()
+    public EConnectionType getConnectionType()
     {
         return mType_;
     }
@@ -64,11 +83,4 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
         return mPort_;
     }
 
-    /**
-     * @see org.suggs.gui.connection.IJmsConnectionDetails#getConnectionDestination()
-     */
-    public String getConnectionDestination()
-    {
-        return mDestination_;
-    }
 }

@@ -25,7 +25,7 @@ public interface IJmsConnectionDetails
      * 
      * @return the type of the connection
      */
-    String getConnectionType();
+    EConnectionType getConnectionType();
 
     /**
      * Get the name for the server for the connection
@@ -40,12 +40,5 @@ public interface IJmsConnectionDetails
      * @return the port number for the connection
      */
     String getConnectionPort();
-
-    /**
-     * Get the name of the destination (queue or topic)
-     * 
-     * @return the name of the destination
-     */
-    String getConnectionDestination();
 
 }
