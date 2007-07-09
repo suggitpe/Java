@@ -2,7 +2,7 @@
  * JmsHelperException.java created on 21 Jun 2007 08:07:19 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui;
+package org.suggs.gui.jms;
 
 /**
  * This exception class is used by all elements within the application

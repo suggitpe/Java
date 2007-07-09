@@ -2,7 +2,7 @@
  * ConnectionType.java created on 3 Jul 2007 07:53:33 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.connection;
+package org.suggs.gui.jms.connection;
 
 /**
  * Enumeration to define the allowable connection types

@@ -2,7 +2,7 @@
  * JmsHelperGuiBuilder.java created on 22 Jun 2007 07:27:52 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.support;
+package org.suggs.gui.jms.support;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 
-import org.suggs.gui.JmsHelperException;
+import org.suggs.gui.jms.JmsHelperException;
 
 import org.springframework.util.Assert;
 

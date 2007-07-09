@@ -2,7 +2,7 @@
  * GuiLoader.java created on 20 Jun 2007 18:50:53 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui;
+package org.suggs.gui.jms;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

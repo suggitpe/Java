@@ -2,7 +2,7 @@
  * JmsHelper.java created on 20 Jun 2007 18:49:45 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.impl;
+package org.suggs.gui.jms.impl;
 
 import java.awt.Container;
 import java.awt.GridBagConstraints;
@@ -19,10 +19,10 @@ import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.suggs.gui.IJmsHelper;
-import org.suggs.gui.JmsHelperException;
-import org.suggs.gui.dialog.AboutDialog;
-import org.suggs.gui.support.JmsHelperGuiBuilder;
+import org.suggs.gui.jms.IJmsHelper;
+import org.suggs.gui.jms.JmsHelperException;
+import org.suggs.gui.jms.dialog.AboutDialog;
+import org.suggs.gui.jms.support.JmsHelperGuiBuilder;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -58,7 +58,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
     }
 
     /**
-     * @see org.suggs.gui.IJmsHelper#buildGui()
+     * @see org.suggs.gui.jms.IJmsHelper#buildGui()
      */
     public void buildGui() throws JmsHelperException
     {

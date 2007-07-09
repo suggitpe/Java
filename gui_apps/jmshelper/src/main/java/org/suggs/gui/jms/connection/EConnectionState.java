@@ -2,7 +2,7 @@
  * ConnectionState.java created on 2 Jul 2007 18:48:36 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.connection;
+package org.suggs.gui.jms.connection;
 
 /**
  * Enumerated type for connection state

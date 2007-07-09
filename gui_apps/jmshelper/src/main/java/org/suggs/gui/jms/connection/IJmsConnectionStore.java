@@ -2,7 +2,7 @@
  * IJmsConnectionStore.java created on 28 Jun 2007 18:35:20 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.connection;
+package org.suggs.gui.jms.connection;
 
 /**
  * Defines a persistence mechanism for storing connection details
