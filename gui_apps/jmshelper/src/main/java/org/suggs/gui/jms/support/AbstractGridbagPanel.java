@@ -4,12 +4,16 @@
  */
 package org.suggs.gui.jms.support;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 /**
  * Abstract Panel class used by deriving Panels to make the addition
@@ -29,25 +33,55 @@ public abstract class AbstractGridbagPanel extends JPanel
     private static final int C_WIDTH = 1;
     private static final int C_HEIGHT = 1;
 
+    protected static final Dimension SHORT_FIELD = new Dimension( 40, 20 );
+    protected static final Dimension MEDIUM_FIELD = new Dimension( 120, 20 );
+    protected static final Dimension LONG_FIELD = new Dimension( 240, 20 );
+    protected static final Dimension HUGE_FIELD = new Dimension( 240, 80 );
+
     /**
      * Constructs a new instance.
      */
     public AbstractGridbagPanel()
     {
-        this( new Insets( 2, 2, 2, 2 ) );
+        this( "" );
     }
 
     /**
      * Constructs a new instance.
      * 
+     * @param aBorderText
+     */
+    public AbstractGridbagPanel( String aBorderText )
+    {
+        this( aBorderText, new Insets( 2, 2, 2, 2 ) );
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aBorderText
      * @param aInsets
      */
-    public AbstractGridbagPanel( Insets aInsets )
+    public AbstractGridbagPanel( String aBorderText, Insets aInsets )
     {
         super( new GridBagLayout() );
+        this.setBorder( new TitledBorder( new EtchedBorder(), aBorderText ) );
         mConstraints_ = new GridBagConstraints();
         mConstraints_.anchor = GridBagConstraints.WEST;
         mConstraints_.insets = aInsets;
+    }
+
+    /**
+     * Shows an error message dialog box
+     * 
+     * @param aMessage
+     *            the message to show
+     * @param aHeader
+     *            the header of the dialog box
+     */
+    protected void showErrorDialog( String aMessage, String aHeader )
+    {
+        JOptionPane.showMessageDialog( this, aMessage, aHeader, JOptionPane.ERROR_MESSAGE );
     }
 
     /**

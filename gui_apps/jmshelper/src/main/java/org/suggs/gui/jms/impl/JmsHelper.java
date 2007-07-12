@@ -39,7 +39,10 @@ public class JmsHelper implements IJmsHelper, InitializingBean
 
     private static final Log LOG = LogFactory.getLog( JmsHelper.class );
 
+    private JPanel mConnectionStorePanel_;
+    private JPanel mconnectionStoreButtons_;
     private JPanel mConnectionManagerPanel_;
+    private JPanel mConnectionManagerButtons_;
 
     /**
      * Constructs a new instance.
@@ -54,7 +57,10 @@ public class JmsHelper implements IJmsHelper, InitializingBean
      */
     public void afterPropertiesSet() throws Exception
     {
+        Assert.notNull( mConnectionStorePanel_, "There must be a connection store panel set in the main gui" );
+        Assert.notNull( mconnectionStoreButtons_, "There must be a connection store buttons panel set in the main gui" );
         Assert.notNull( mConnectionManagerPanel_, "There must be a connection manager panel set in the main gui" );
+        Assert.notNull( mConnectionManagerPanel_, "There must be a connection manager buttons panel set in the main gui" );
     }
 
     /**
@@ -101,13 +107,30 @@ public class JmsHelper implements IJmsHelper, InitializingBean
         GridBagLayout mainLayout = new GridBagLayout();
         aCntr.setLayout( mainLayout );
 
-        // add in the conn manager
         GridBagConstraints gbc = new GridBagConstraints();
+
+        // add in the connection store panel
         gbc.gridx = 1;
         gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        mainLayout.setConstraints( mConnectionStorePanel_, gbc );
+        aCntr.add( mConnectionStorePanel_ );
+
+        // add in the connection str buttons
+        gbc.gridx = 2;
+        mainLayout.setConstraints( mconnectionStoreButtons_, gbc );
+        aCntr.add( mconnectionStoreButtons_ );
+
+        // add in the connection manager store
+        gbc.gridx = 1;
+        gbc.gridy = 2;
         mainLayout.setConstraints( mConnectionManagerPanel_, gbc );
         aCntr.add( mConnectionManagerPanel_ );
 
+        // add in the connection manager buttons
+        gbc.gridx = 2;
+        mainLayout.setConstraints( mConnectionManagerButtons_, gbc );
+        aCntr.add( mConnectionManagerButtons_ );
     }
 
     /**
@@ -170,7 +193,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
      * 
      * @return the connection manager panel
      */
-    public JPanel getConnectionPanel()
+    public JPanel getConnectionManagerPanel()
     {
         return mConnectionManagerPanel_;
     }
@@ -181,9 +204,74 @@ public class JmsHelper implements IJmsHelper, InitializingBean
      * @param aPanel
      *            the panel to set as the connection manager panel
      */
-    public void setConnectionPanel( JPanel aPanel )
+    public void setConnectionManagerPanel( JPanel aPanel )
     {
         mConnectionManagerPanel_ = aPanel;
+    }
+
+    /**
+     * Getter for the connection manager buttons panel
+     * 
+     * @return the connection manager buttons panel
+     */
+    public JPanel getConnectionManagerButtons()
+    {
+        return mConnectionManagerButtons_;
+    }
+
+    /**
+     * Setter for the connection manager buttons panel
+     * 
+     * @param aPanel
+     *            the panel to set as the connection manager buttons
+     *            panel
+     */
+    public void setConnectionManagerButtons( JPanel aPanel )
+    {
+        mConnectionManagerButtons_ = aPanel;
+    }
+
+    /**
+     * Setter for the connection store panel
+     * 
+     * @param aPanel
+     *            the panel to set as the connection store panel
+     */
+    public void setConnectionStorePanel( JPanel aPanel )
+    {
+        mConnectionStorePanel_ = aPanel;
+    }
+
+    /**
+     * Getter for the connection store panel
+     * 
+     * @return the connection store panel
+     */
+    public JPanel getConnectionStorePanel()
+    {
+        return mConnectionStorePanel_;
+    }
+
+    /**
+     * Setter for the connection store buttons panel
+     * 
+     * @param aPanel
+     *            the panel to set as the connection store buttons
+     *            panel
+     */
+    public void setConnectionStoreButtons( JPanel aPanel )
+    {
+        mconnectionStoreButtons_ = aPanel;
+    }
+
+    /**
+     * Getter for the connection store buttons panel
+     * 
+     * @return the connection store buttons panel
+     */
+    public JPanel getConnectionStoreButtons()
+    {
+        return mconnectionStoreButtons_;
     }
 
 }
