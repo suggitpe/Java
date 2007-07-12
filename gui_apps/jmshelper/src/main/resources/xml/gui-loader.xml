@@ -12,21 +12,20 @@
     </bean>
     
     <!-- This is the panel interface to the connection manager  -->
-    <bean id="connMgrPanelBean" class="org.suggs.gui.jms.view.JmsConnectionManagerPanel">
+    <bean id="connMgrPanelBean" class="org.suggs.gui.jms.view.connection.JmsConnectionManagerPanel">
         <property name="connectionManager" ref="connMgrBean"/>
     </bean>
-    <bean id="connMgrButtonsBean" class="org.suggs.gui.jms.view.JmsConnectionManagerButtons"/>
+    <bean id="connMgrButtonsBean" class="org.suggs.gui.jms.view.connection.JmsConnectionManagerButtons"/>
     
-    <bean id="connStrPanelBean" class="org.suggs.gui.jms.view.JmsConnectionStorePanel">
+    <bean id="connStrPanelBean" class="org.suggs.gui.jms.view.connection.JmsConnectionStorePanel">
         <property name="connectionStore" ref="connStrBean"/>
     </bean>
-    <bean id="connStrButtonsBean" class="org.suggs.gui.jms.view.JmsConnectionStoreButtons"/>
-    
+    <bean id="connStrButtonsBean" class="org.suggs.gui.jms.view.connection.JmsConnectionStoreButtons"/>
     
     <!-- This is the main connection manager bean -->
-    <bean id="connMgrBean" class="org.suggs.gui.jms.connection.impl.JmsConnectionManager"/>
+    <bean id="connMgrBean" class="org.suggs.gui.jms.model.connection.impl.JmsConnectionManager"/>
     
     <!-- This is the main connection store bean -->
-    <bean id="connStrBean" class="org.suggs.gui.jms.connection.impl.JmsConnectionStore"/>
+    <bean id="connStrBean" class="org.suggs.gui.jms.model.connection.impl.JmsConnectionStore"/>
     
 </beans>

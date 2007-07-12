@@ -2,7 +2,8 @@
  * IJmsConnectionDetails.java created on 28 Jun 2007 06:05:41 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.connection;
+package org.suggs.gui.jms.model.connection;
+
 
 /**
  * An object to wrap up the connection details for a given connection

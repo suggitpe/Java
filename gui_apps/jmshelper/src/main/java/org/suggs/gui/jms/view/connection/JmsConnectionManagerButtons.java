@@ -2,7 +2,7 @@
  * JmsConnectionManagerButtons.java created on 11 Jul 2007 18:18:17 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.view;
+package org.suggs.gui.jms.view.connection;
 
 import java.awt.event.ActionListener;
 

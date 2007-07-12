@@ -2,14 +2,14 @@
  * JmsConnectionManager.java created on 22 Jun 2007 08:18:48 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.connection.impl;
+package org.suggs.gui.jms.model.connection.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.suggs.gui.jms.JmsHelperException;
-import org.suggs.gui.jms.connection.EConnectionState;
-import org.suggs.gui.jms.connection.IJmsConnectionDetails;
-import org.suggs.gui.jms.connection.IJmsConnectionManager;
+import org.suggs.gui.jms.model.connection.EConnectionState;
+import org.suggs.gui.jms.model.connection.IJmsConnectionDetails;
+import org.suggs.gui.jms.model.connection.IJmsConnectionManager;
 
 /**
  * Implementation of the jms connection manager interface
@@ -33,7 +33,7 @@ public class JmsConnectionManager implements IJmsConnectionManager
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionManager#getConnectionState()
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionManager#getConnectionState()
      */
     public EConnectionState getConnectionState()
     {
@@ -41,7 +41,7 @@ public class JmsConnectionManager implements IJmsConnectionManager
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionManager#connect(org.suggs.gui.jms.connection.IJmsConnectionDetails)
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionManager#connect(org.suggs.gui.jms.model.connection.IJmsConnectionDetails)
      */
     public void connect( IJmsConnectionDetails aConnDetails ) throws JmsHelperException
     {
@@ -50,7 +50,7 @@ public class JmsConnectionManager implements IJmsConnectionManager
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionManager#testConnection(org.suggs.gui.jms.connection.IJmsConnectionDetails)
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionManager#testConnection(org.suggs.gui.jms.model.connection.IJmsConnectionDetails)
      */
     public boolean testConnection( IJmsConnectionDetails aConnectionDetails )
     {
@@ -59,7 +59,7 @@ public class JmsConnectionManager implements IJmsConnectionManager
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionManager#disconnect()
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionManager#disconnect()
      */
     public void disconnect() throws JmsHelperException
     {

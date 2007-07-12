@@ -2,10 +2,10 @@
  * JmsConnectionDetails.java created on 28 Jun 2007 06:07:29 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.connection.impl;
+package org.suggs.gui.jms.model.connection.impl;
 
-import org.suggs.gui.jms.connection.EConnectionType;
-import org.suggs.gui.jms.connection.IJmsConnectionDetails;
+import org.suggs.gui.jms.model.connection.EConnectionType;
+import org.suggs.gui.jms.model.connection.IJmsConnectionDetails;
 
 /**
  * Implementation bean of the connection details interface
@@ -52,7 +52,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionDetails#getConnectionName()
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionDetails#getConnectionName()
      */
     public String getConnectionName()
     {
@@ -60,7 +60,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionDetails#getConnectionType()
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionDetails#getConnectionType()
      */
     public EConnectionType getConnectionType()
     {
@@ -68,7 +68,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionDetails#getConnectionServer()
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionDetails#getConnectionServer()
      */
     public String getConnectionServer()
     {
@@ -76,7 +76,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionDetails#getConnectionPort()
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionDetails#getConnectionPort()
      */
     public String getConnectionPort()
     {

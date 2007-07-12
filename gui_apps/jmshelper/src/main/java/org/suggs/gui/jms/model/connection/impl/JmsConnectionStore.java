@@ -2,12 +2,12 @@
  * JmsConnectionStore.java created on 28 Jun 2007 18:36:21 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.connection.impl;
+package org.suggs.gui.jms.model.connection.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.suggs.gui.jms.connection.IJmsConnectionDetails;
-import org.suggs.gui.jms.connection.IJmsConnectionStore;
+import org.suggs.gui.jms.model.connection.IJmsConnectionDetails;
+import org.suggs.gui.jms.model.connection.IJmsConnectionStore;
 
 /**
  * Implementation of the IJmsConnectionStore. This implementation will
@@ -23,7 +23,7 @@ public class JmsConnectionStore implements IJmsConnectionStore
     private static final Log LOG = LogFactory.getLog( JmsConnectionStore.class );
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
      */
     public IJmsConnectionDetails loadConnectionParameters( String aName )
     {
@@ -36,7 +36,7 @@ public class JmsConnectionStore implements IJmsConnectionStore
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionStore#getListOfKnownConnectionNames()
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionStore#getListOfKnownConnectionNames()
      */
     public String[] getListOfKnownConnectionNames()
     {
@@ -44,7 +44,7 @@ public class JmsConnectionStore implements IJmsConnectionStore
     }
 
     /**
-     * @see org.suggs.gui.jms.connection.IJmsConnectionStore#saveConnectionParameters(org.suggs.gui.jms.connection.IJmsConnectionDetails)
+     * @see org.suggs.gui.jms.model.connection.IJmsConnectionStore#saveConnectionParameters(org.suggs.gui.jms.model.connection.IJmsConnectionDetails)
      */
     public void saveConnectionParameters( IJmsConnectionDetails aDetails )
     {

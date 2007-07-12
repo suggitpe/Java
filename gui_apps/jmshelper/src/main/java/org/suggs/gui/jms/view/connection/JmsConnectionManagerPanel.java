@@ -2,7 +2,7 @@
  * JmsConnectionManagerPanel.java created on 22 Jun 2007 07:47:15 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.view;
+package org.suggs.gui.jms.view.connection;
 
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
@@ -16,8 +16,8 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.suggs.gui.jms.connection.EConnectionState;
-import org.suggs.gui.jms.connection.IJmsConnectionManager;
+import org.suggs.gui.jms.model.connection.EConnectionState;
+import org.suggs.gui.jms.model.connection.IJmsConnectionManager;
 import org.suggs.gui.jms.support.AbstractGridbagPanel;
 
 import org.springframework.beans.factory.InitializingBean;
