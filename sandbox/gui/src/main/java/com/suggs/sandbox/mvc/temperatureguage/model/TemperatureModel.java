@@ -2,7 +2,7 @@
  * TemperatureModel.java created on 9 Jul 2007 07:42:13 by suggitpe for project SandBox - GUI
  * 
  */
-package org.suggs.sandbox.mvc.temperatureguage.model;
+package com.suggs.sandbox.mvc.temperatureguage.model;
 
 import java.util.Observable;
 

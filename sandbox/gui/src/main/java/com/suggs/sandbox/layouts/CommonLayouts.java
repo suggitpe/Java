@@ -2,7 +2,7 @@
  * CommonLayouts.java created on 22 Jun 2007 17:39:31 by suggitpe for project SandBox - GUI
  * 
  */
-package org.suggs.sandbox.layouts;
+package com.suggs.sandbox.layouts;
 
 import java.awt.BorderLayout;
 import java.awt.Container;

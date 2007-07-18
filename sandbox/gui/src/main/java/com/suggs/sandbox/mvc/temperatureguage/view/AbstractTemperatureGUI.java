@@ -2,7 +2,7 @@
  * TemperatureGUI.java created on 9 Jul 2007 07:57:25 by suggitpe for project SandBox - GUI
  * 
  */
-package org.suggs.sandbox.mvc.temperatureguage.view;
+package com.suggs.sandbox.mvc.temperatureguage.view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -17,7 +17,8 @@ import javax.swing.JTextField;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.suggs.sandbox.mvc.temperatureguage.model.TemperatureModel;
+
+import com.suggs.sandbox.mvc.temperatureguage.model.TemperatureModel;
 
 /**
  * TODO Write javadoc for TemperatureGUI
