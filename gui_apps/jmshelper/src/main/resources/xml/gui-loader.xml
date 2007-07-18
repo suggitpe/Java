@@ -4,7 +4,7 @@
 <beans>
     
     <!-- this is the main loader impl -->
-    <bean id="jmsHelper" class="org.suggs.gui.jms.impl.JmsHelper">
+    <bean id="jmsHelper" class="com.suggs.gui.jms.impl.JmsHelper">
         <property name="connectionManagerPanel" ref="connMgrPanelBean"/>
         <property name="connectionManagerButtons" ref="connMgrButtonsBean"/>
         <property name="connectionStorePanel" ref="connStrPanelBean"/>
@@ -12,20 +12,20 @@
     </bean>
     
     <!-- This is the panel interface to the connection manager  -->
-    <bean id="connMgrPanelBean" class="org.suggs.gui.jms.view.connection.JmsConnectionManagerPanel">
+    <bean id="connMgrPanelBean" class="com.suggs.gui.jms.view.connection.JmsConnectionManagerPanel">
         <property name="connectionManager" ref="connMgrBean"/>
     </bean>
-    <bean id="connMgrButtonsBean" class="org.suggs.gui.jms.view.connection.JmsConnectionManagerButtons"/>
+    <bean id="connMgrButtonsBean" class="com.suggs.gui.jms.view.connection.JmsConnectionManagerButtons"/>
     
-    <bean id="connStrPanelBean" class="org.suggs.gui.jms.view.connection.JmsConnectionStorePanel">
+    <bean id="connStrPanelBean" class="com.suggs.gui.jms.view.connection.JmsConnectionStorePanel">
         <property name="connectionStore" ref="connStrBean"/>
     </bean>
-    <bean id="connStrButtonsBean" class="org.suggs.gui.jms.view.connection.JmsConnectionStoreButtons"/>
+    <bean id="connStrButtonsBean" class="com.suggs.gui.jms.view.connection.JmsConnectionStoreButtons"/>
     
     <!-- This is the main connection manager bean -->
-    <bean id="connMgrBean" class="org.suggs.gui.jms.model.connection.impl.JmsConnectionManager"/>
+    <bean id="connMgrBean" class="com.suggs.gui.jms.model.connection.impl.JmsConnectionManager"/>
     
     <!-- This is the main connection store bean -->
-    <bean id="connStrBean" class="org.suggs.gui.jms.model.connection.impl.JmsConnectionStore"/>
+    <bean id="connStrBean" class="com.suggs.gui.jms.model.connection.impl.JmsConnectionStore"/>
     
 </beans>
