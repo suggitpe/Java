@@ -7,8 +7,11 @@ package org.suggs.gui.jms.view.connection;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -17,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.suggs.gui.jms.model.connection.EConnectionState;
-import org.suggs.gui.jms.model.connection.IJmsConnectionManager;
+import org.suggs.gui.jms.model.connection.impl.JmsConnectionManager;
 import org.suggs.gui.jms.support.AbstractGridbagPanel;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -30,23 +33,39 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean
+public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean, Observer
 {
 
-    private static final Log LOG = LogFactory.getLog( JmsConnectionManagerPanel.class );
+    private static Log LOG = LogFactory.getLog( JmsConnectionManagerPanel.class );
 
-    private IJmsConnectionManager mConnMgr_;
+    private JmsConnectionManager mConnMgr_;
 
     private static final ImageIcon IMG_ = new ImageIcon( "jms.gif" );
 
     private JTextField mStatus_ = new JTextField( EConnectionState.INITIAL.name() );
+    private JComboBox mConnectionFactories_ = new JComboBox();
+    private JComboBox mDestinations_ = new JComboBox();
+
+    /**
+     * Constructs a new instance. This is hidden as it is silly to
+     * have an observer with nothing to observe.
+     */
+    private JmsConnectionManagerPanel()
+    {
+        throw new IllegalStateException();
+    }
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aConnectionManager
+     *            The connection manager that we will be observing
      */
-    public JmsConnectionManagerPanel()
+    public JmsConnectionManagerPanel( JmsConnectionManager aConnectionManager )
     {
-        super();
+        super( "Connection Manager" );
+        mConnMgr_ = aConnectionManager;
+        mConnMgr_.addObserver( this );
 
         EmptyBorder eb = new EmptyBorder( 0, 0, 0, 10 );
 
@@ -63,10 +82,55 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
         final JLabel lConnFact = new JLabel( "Conn Factories:" );
         addFilledComponent( lConnFact, 2, 1 );
 
+        mConnectionFactories_.setPreferredSize( LONG_FIELD );
+        addComponent( mConnectionFactories_, 2, 2 );
+
         // destinations
         final JLabel lDestinations = new JLabel( "Destinations:" );
         addFilledComponent( lDestinations, 3, 1 );
 
+        mDestinations_.setPreferredSize( LONG_FIELD );
+        addComponent( mDestinations_, 3, 2 );
+
+    }
+
+    /**
+     * @see java.util.Observer#update(java.util.Observable,
+     *      java.lang.Object)
+     */
+    public void update( Observable aObserved, Object arg1 )
+    {
+        LOG.info( "Observable has changed [" + aObserved.getClass().getName() + "]" );
+    }
+
+    /**
+     * Populate the connection factory combo box with values
+     * 
+     * @param aItems
+     *            the values to add to the combo box
+     */
+    public void updateConnectionFactories( String[] aItems )
+    {
+        for ( String item : aItems )
+        {
+            mConnectionFactories_.addItem( item );
+        }
+        mConnectionFactories_.setEditable( true );
+    }
+
+    /**
+     * Populate the destinations combo box
+     * 
+     * @param aItems
+     *            the items to add to the destinations combo box
+     */
+    public void updateDestinations( String[] aItems )
+    {
+        for ( String item : aItems )
+        {
+            mDestinations_.addItem( item );
+        }
+        mDestinations_.setEditable( true );
     }
 
     /**
@@ -137,7 +201,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      * 
      * @return the connection manager
      */
-    public IJmsConnectionManager getConnectionManager()
+    public JmsConnectionManager getConnectionManager()
     {
         return mConnMgr_;
     }
@@ -148,7 +212,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      * @param aConnMgr
      *            the connection manager to set
      */
-    public void setConnectionManager( IJmsConnectionManager aConnMgr )
+    public void setConnectionManager( JmsConnectionManager aConnMgr )
     {
         mConnMgr_ = aConnMgr;
     }

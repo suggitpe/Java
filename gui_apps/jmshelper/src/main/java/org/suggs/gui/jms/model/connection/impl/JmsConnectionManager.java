@@ -4,6 +4,8 @@
  */
 package org.suggs.gui.jms.model.connection.impl;
 
+import java.util.Observable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.suggs.gui.jms.JmsHelperException;
@@ -17,7 +19,7 @@ import org.suggs.gui.jms.model.connection.IJmsConnectionManager;
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public class JmsConnectionManager implements IJmsConnectionManager
+public class JmsConnectionManager extends Observable implements IJmsConnectionManager
 {
 
     private static final Log LOG = LogFactory.getLog( JmsConnectionManager.class );

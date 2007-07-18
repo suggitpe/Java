@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.suggs.gui.jms.model.connection.EConnectionType;
-import org.suggs.gui.jms.model.connection.IJmsConnectionStore;
+import org.suggs.gui.jms.model.connection.impl.JmsConnectionStore;
 import org.suggs.gui.jms.support.AbstractGridbagPanel;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -32,7 +32,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
 {
 
     private static final Log LOG = LogFactory.getLog( JmsConnectionStorePanel.class );
-    private IJmsConnectionStore mConnectionStore_;
+    private JmsConnectionStore mConnectionStore_;
 
     private JTextField mName_ = new JTextField();
     private JComboBox mType_ = new JComboBox();
@@ -42,9 +42,25 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
     /**
      * Constructs a new instance.
      */
-    public JmsConnectionStorePanel()
+    private JmsConnectionStorePanel()
     {
-        super();
+        throw new IllegalStateException();
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aConnectionStore
+     *            the connection store that this class will be
+     *            observing
+     */
+    public JmsConnectionStorePanel( JmsConnectionStore aConnectionStore )
+    {
+        super( "Connection Store" );
+
+        // set up the observable
+        mConnectionStore_ = aConnectionStore;
+        mConnectionStore_.addObserver( this );
 
         EmptyBorder eb = new EmptyBorder( 0, 0, 0, 10 );
 
@@ -118,7 +134,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      * 
      * @return the connection store
      */
-    public IJmsConnectionStore getConnectionStore()
+    public JmsConnectionStore getConnectionStore()
     {
         return mConnectionStore_;
     }
@@ -129,7 +145,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      * @param aConnStr
      *            the connection store to set
      */
-    public void setConnectionStore( IJmsConnectionStore aConnStr )
+    public void setConnectionStore( JmsConnectionStore aConnStr )
     {
         mConnectionStore_ = aConnStr;
     }

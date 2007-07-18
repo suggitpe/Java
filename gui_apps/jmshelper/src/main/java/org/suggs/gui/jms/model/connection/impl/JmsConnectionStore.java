@@ -4,6 +4,8 @@
  */
 package org.suggs.gui.jms.model.connection.impl;
 
+import java.util.Observable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.suggs.gui.jms.model.connection.IJmsConnectionDetails;
@@ -17,10 +19,11 @@ import org.suggs.gui.jms.model.connection.IJmsConnectionStore;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class JmsConnectionStore implements IJmsConnectionStore
+public class JmsConnectionStore extends Observable implements IJmsConnectionStore
 {
 
     private static final Log LOG = LogFactory.getLog( JmsConnectionStore.class );
+    private String mStoreState_ = new String( "Unsaved" );
 
     /**
      * @see org.suggs.gui.jms.model.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
@@ -32,7 +35,6 @@ public class JmsConnectionStore implements IJmsConnectionStore
         LOG.debug( "Loaded connecvtion parameters" );
 
         return new JmsConnectionDetails( aName );
-
     }
 
     /**
@@ -49,6 +51,19 @@ public class JmsConnectionStore implements IJmsConnectionStore
     public void saveConnectionParameters( IJmsConnectionDetails aDetails )
     {
         LOG.warn( "Save impl has not been done yet" );
+        mStoreState_ = "Saved";
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Getter for the store state
+     * 
+     * @return the state of the store
+     */
+    public String getState()
+    {
+        return mStoreState_;
     }
 
 }

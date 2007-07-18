@@ -96,7 +96,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      */
     public void addComponent( JComponent aComp, int aRow, int aColumn )
     {
-        addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, C_WEST, C_NONE );
+        addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, 1, 1, C_WEST, C_NONE );
     }
 
     /**
@@ -115,7 +115,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      */
     public void addComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight )
     {
-        addComponent( aComp, aRow, aColumn, aWidth, aHeight, C_WEST, C_NONE );
+        addComponent( aComp, aRow, aColumn, aWidth, aHeight, 1, 1, C_WEST, C_NONE );
     }
 
     /**
@@ -132,7 +132,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      */
     public void addAnchoredComponent( JComponent aComp, int aRow, int aColumn, int aAnchor )
     {
-        addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, aAnchor, C_NONE );
+        addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, 1, 1, aAnchor, C_NONE );
     }
 
     /**
@@ -153,7 +153,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      */
     public void addAnchoredComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight, int aAnchor )
     {
-        addComponent( aComp, aRow, aColumn, aWidth, aHeight, aAnchor, C_NONE );
+        addComponent( aComp, aRow, aColumn, aWidth, aHeight, 1, 1, aAnchor, C_NONE );
     }
 
     /**
@@ -168,7 +168,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      */
     public void addFilledComponent( JComponent aComp, int aRow, int aColumn )
     {
-        addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, C_WEST, C_HORZ );
+        addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, 1, 1, C_WEST, C_HORZ );
     }
 
     /**
@@ -185,7 +185,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      */
     public void addFilledComponent( JComponent aComp, int aRow, int aColumn, int aFill )
     {
-        addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, C_WEST, aFill );
+        addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, 1, 1, C_WEST, aFill );
     }
 
     /**
@@ -206,7 +206,26 @@ public abstract class AbstractGridbagPanel extends JPanel
      */
     public void addFilledComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight, int aFill )
     {
-        addComponent( aComp, aRow, aColumn, aWidth, aHeight, C_WEST, aFill );
+        addComponent( aComp, aRow, aColumn, aWidth, aHeight, 1, 1, C_WEST, aFill );
+    }
+
+    /**
+     * Add a filled component to the panel
+     * 
+     * @param aComp
+     *            the component to add
+     * @param aRow
+     *            the row to add it to
+     * @param aColumn
+     *            the column to add it to
+     * @param aWidthPad
+     *            the padding use in the width
+     * @param aHeightPad
+     *            the padding to use in the height
+     */
+    public void addFilledComponent( JComponent aComp, int aRow, int aColumn, int aWidthPad, int aHeightPad )
+    {
+        addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, aWidthPad, aHeightPad, C_WEST, C_HORZ );
     }
 
     /**
@@ -222,18 +241,25 @@ public abstract class AbstractGridbagPanel extends JPanel
      *            number of columns to span
      * @param aHeight
      *            numof rows to span
+     * @param aWidthPad
+     *            the padding use in the width
+     * @param aHeightPad
+     *            the padding to use in the height
      * @param aAnchor
      *            the anchor to use in the cell
      * @param aFill
      *            the filling to use
      */
-    public void addComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight, int aAnchor, int aFill )
+    public void addComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight, int aWidthPad, int aHeightPad, int aAnchor,
+                              int aFill )
     {
         mConstraints_.gridx = aColumn;
         mConstraints_.gridy = aRow;
         mConstraints_.gridwidth = aWidth;
         mConstraints_.gridheight = aHeight;
         mConstraints_.anchor = aAnchor;
+        mConstraints_.ipadx = aWidthPad;
+        mConstraints_.ipady = aHeightPad;
         double weightx = 0.0;
         double weighty = 0.0;
 
