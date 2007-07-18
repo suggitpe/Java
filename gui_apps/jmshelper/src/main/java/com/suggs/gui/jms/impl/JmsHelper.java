@@ -2,7 +2,7 @@
  * JmsHelper.java created on 20 Jun 2007 18:49:45 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.impl;
+package com.suggs.gui.jms.impl;
 
 import java.awt.Container;
 import java.awt.GridBagConstraints;

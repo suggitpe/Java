@@ -2,7 +2,7 @@
  * JmsConnectionManager.java created on 22 Jun 2007 08:18:48 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.model.connection.impl;
+package com.suggs.gui.jms.model.connection.impl;
 
 import java.util.Observable;
 
@@ -10,10 +10,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.suggs.gui.jms.JmsHelperException;
+import com.suggs.gui.jms.model.connection.EConnectionState;
+import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
+import com.suggs.gui.jms.model.connection.IJmsConnectionManager;
 
-import org.suggs.gui.jms.model.connection.EConnectionState;
-import org.suggs.gui.jms.model.connection.IJmsConnectionDetails;
-import org.suggs.gui.jms.model.connection.IJmsConnectionManager;
 
 /**
  * Implementation of the jms connection manager interface
@@ -37,7 +37,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see org.suggs.gui.jms.model.connection.IJmsConnectionManager#getConnectionState()
+     * @see com.suggs.gui.jms.model.connection.IJmsConnectionManager#getConnectionState()
      */
     public EConnectionState getConnectionState()
     {
@@ -45,7 +45,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see org.suggs.gui.jms.model.connection.IJmsConnectionManager#connect(org.suggs.gui.jms.model.connection.IJmsConnectionDetails)
+     * @see com.suggs.gui.jms.model.connection.IJmsConnectionManager#connect(com.suggs.gui.jms.model.connection.IJmsConnectionDetails)
      */
     public void connect( IJmsConnectionDetails aConnDetails ) throws JmsHelperException
     {
@@ -54,7 +54,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see org.suggs.gui.jms.model.connection.IJmsConnectionManager#testConnection(org.suggs.gui.jms.model.connection.IJmsConnectionDetails)
+     * @see com.suggs.gui.jms.model.connection.IJmsConnectionManager#testConnection(com.suggs.gui.jms.model.connection.IJmsConnectionDetails)
      */
     public boolean testConnection( IJmsConnectionDetails aConnectionDetails )
     {
@@ -63,7 +63,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see org.suggs.gui.jms.model.connection.IJmsConnectionManager#disconnect()
+     * @see com.suggs.gui.jms.model.connection.IJmsConnectionManager#disconnect()
      */
     public void disconnect() throws JmsHelperException
     {

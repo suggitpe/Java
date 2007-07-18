@@ -15,8 +15,10 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.suggs.gui.jms.model.connection.EConnectionType;
-import org.suggs.gui.jms.model.connection.impl.JmsConnectionStore;
+
+import com.suggs.gui.jms.model.connection.EConnectionType;
+import com.suggs.gui.jms.model.connection.impl.JmsConnectionStore;
+
 import org.suggs.gui.jms.support.AbstractGridbagPanel;
 
 import org.springframework.beans.factory.InitializingBean;

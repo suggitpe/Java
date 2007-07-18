@@ -2,7 +2,7 @@
  * IConnectionManager.java created on 22 Jun 2007 08:08:33 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.model.connection;
+package com.suggs.gui.jms.model.connection;
 
 import com.suggs.gui.jms.JmsHelperException;
 

@@ -2,14 +2,15 @@
  * JmsConnectionStore.java created on 28 Jun 2007 18:36:21 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.model.connection.impl;
+package com.suggs.gui.jms.model.connection.impl;
 
 import java.util.Observable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.suggs.gui.jms.model.connection.IJmsConnectionDetails;
-import org.suggs.gui.jms.model.connection.IJmsConnectionStore;
+
+import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
+import com.suggs.gui.jms.model.connection.IJmsConnectionStore;
 
 /**
  * Implementation of the IJmsConnectionStore. This implementation will
@@ -26,7 +27,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     private String mStoreState_ = new String( "Unsaved" );
 
     /**
-     * @see org.suggs.gui.jms.model.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
+     * @see com.suggs.gui.jms.model.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
      */
     public IJmsConnectionDetails loadConnectionParameters( String aName )
     {
@@ -38,7 +39,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see org.suggs.gui.jms.model.connection.IJmsConnectionStore#getListOfKnownConnectionNames()
+     * @see com.suggs.gui.jms.model.connection.IJmsConnectionStore#getListOfKnownConnectionNames()
      */
     public String[] getListOfKnownConnectionNames()
     {
@@ -46,7 +47,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see org.suggs.gui.jms.model.connection.IJmsConnectionStore#saveConnectionParameters(org.suggs.gui.jms.model.connection.IJmsConnectionDetails)
+     * @see com.suggs.gui.jms.model.connection.IJmsConnectionStore#saveConnectionParameters(com.suggs.gui.jms.model.connection.IJmsConnectionDetails)
      */
     public void saveConnectionParameters( IJmsConnectionDetails aDetails )
     {
