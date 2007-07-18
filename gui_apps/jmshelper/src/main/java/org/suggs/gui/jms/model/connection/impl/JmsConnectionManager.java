@@ -8,7 +8,9 @@ import java.util.Observable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.suggs.gui.jms.JmsHelperException;
+
+import com.suggs.gui.jms.JmsHelperException;
+
 import org.suggs.gui.jms.model.connection.EConnectionState;
 import org.suggs.gui.jms.model.connection.IJmsConnectionDetails;
 import org.suggs.gui.jms.model.connection.IJmsConnectionManager;

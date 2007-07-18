@@ -2,7 +2,7 @@
  * IJmsHelper.java created on 20 Jun 2007 18:46:20 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms;
+package com.suggs.gui.jms;
 
 /**
  * This is the main route through to the GUI itself

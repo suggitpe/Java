@@ -2,14 +2,15 @@
  * ConnectionController.java created on 12 Jul 2007 16:30:12 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.controller.impl;
+package com.suggs.gui.jms.controller.impl;
 
-import org.suggs.gui.jms.controller.IConnectionController;
 import org.suggs.gui.jms.model.connection.IJmsConnectionManager;
 import org.suggs.gui.jms.model.connection.IJmsConnectionStore;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.suggs.gui.jms.controller.IConnectionController;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
