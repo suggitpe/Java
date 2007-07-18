@@ -23,9 +23,9 @@ import org.apache.commons.logging.LogFactory;
 import com.suggs.gui.jms.IJmsHelper;
 import com.suggs.gui.jms.JmsHelperException;
 import com.suggs.gui.jms.controller.impl.ConnectionController;
+import com.suggs.gui.jms.support.JmsHelperGuiBuilder;
+import com.suggs.gui.jms.view.dialog.AboutDialog;
 
-import org.suggs.gui.jms.support.JmsHelperGuiBuilder;
-import org.suggs.gui.jms.view.dialog.AboutDialog;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;

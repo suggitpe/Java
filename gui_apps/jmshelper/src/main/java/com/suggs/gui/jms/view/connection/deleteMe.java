@@ -2,9 +2,9 @@
  * JmsConnectionManagerButtons.java created on 11 Jul 2007 18:18:17 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.view.connection;
+package com.suggs.gui.jms.view.connection;
 
-import org.suggs.gui.jms.support.AbstractGridbagPanel;
+import com.suggs.gui.jms.support.AbstractGridbagPanel;
 
 /**
  * Buttons panel for the connection manager

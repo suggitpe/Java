@@ -2,7 +2,7 @@
  * JmsHelperGuiBuilder.java created on 22 Jun 2007 07:27:52 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.support;
+package com.suggs.gui.jms.support;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;

@@ -2,7 +2,7 @@
  * AboutDialog.java created on 27 Jun 2007 06:00:05 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.view.dialog;
+package com.suggs.gui.jms.view.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Font;

@@ -2,7 +2,7 @@
  * JmsConnectionStorePanel.java created on 9 Jul 2007 17:32:45 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.gui.jms.view.connection;
+package com.suggs.gui.jms.view.connection;
 
 import java.awt.GridBagConstraints;
 import java.util.Observable;
@@ -18,8 +18,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.suggs.gui.jms.model.connection.EConnectionType;
 import com.suggs.gui.jms.model.connection.impl.JmsConnectionStore;
+import com.suggs.gui.jms.support.AbstractGridbagPanel;
 
-import org.suggs.gui.jms.support.AbstractGridbagPanel;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
