@@ -39,5 +39,11 @@ public interface IJmsConnectionStore
      *            the connection parameters to store
      */
     void saveConnectionParameters( IJmsConnectionDetails aDetails );
+    
+    /**
+     * Getter for the internal status of the Connection Store
+     * @return
+     */
+    String getState();
 
 }

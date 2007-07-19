@@ -4,6 +4,12 @@
  */
 package com.suggs.gui.jms.view.connection;
 
+import com.suggs.gui.jms.model.connection.EConnectionType;
+import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
+import com.suggs.gui.jms.model.connection.impl.JmsConnectionDetails;
+import com.suggs.gui.jms.model.connection.impl.JmsConnectionStore;
+import com.suggs.gui.jms.support.AbstractGridbagPanel;
+
 import java.awt.GridBagConstraints;
 import java.util.Observable;
 import java.util.Observer;
@@ -18,10 +24,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
-
-import com.suggs.gui.jms.model.connection.EConnectionType;
-import com.suggs.gui.jms.model.connection.impl.JmsConnectionStore;
-import com.suggs.gui.jms.support.AbstractGridbagPanel;
 
 /**
  * Panel to represent the connection store.
@@ -79,11 +81,13 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
         // add in the status label
         final JLabel lStatus = new JLabel( "Save Status:" );
         lStatus.setBorder( eb );
-        addComponent( lStatus, row, 1 );
+        // addComponent( lStatus, row, 1 );
 
+        mStatus.setText( aInitialStatus );
         mStatus.setEditable( false );
         mStatus.setPreferredSize( MEDIUM_FIELD );
-        addFilledComponent( mStatus, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
+        // addFilledComponent( mStatus, row++, 2, 3, 1,
+        // GridBagConstraints.HORIZONTAL );
 
         // add in the connection name
         final JLabel lName = new JLabel( "Name:" );
@@ -120,6 +124,21 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
 
         mPort_.setPreferredSize( MEDIUM_FIELD );
         addFilledComponent( mPort_, row++, 2, 1, 1, GridBagConstraints.HORIZONTAL );
+    }
+
+    /**
+     * Creates a new JMS connection details object
+     * 
+     * @return a new JMS connection details object
+     */
+    public IJmsConnectionDetails getConnectionDetails()
+    {
+        if ( mServer_.getText().length() == 0 || mPort_.getText().length() == 0 )
+        {
+            return null;
+        }
+
+        return new JmsConnectionDetails( mName_.getText(), (EConnectionType) mType_.getSelectedItem(), mServer_.getText(), mPort_.getText() );
     }
 
     /**

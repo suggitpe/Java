@@ -4,13 +4,13 @@
  */
 package com.suggs.gui.jms.model.connection.impl;
 
+import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
+import com.suggs.gui.jms.model.connection.IJmsConnectionStore;
+
 import java.util.Observable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
-import com.suggs.gui.jms.model.connection.IJmsConnectionStore;
 
 /**
  * Implementation of the IJmsConnectionStore. This implementation will
@@ -58,13 +58,22 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * Getter for the store state
-     * 
-     * @return the state of the store
+     * @see com.suggs.gui.jms.model.connection.IJmsConnectionStore#getState()
      */
     public String getState()
     {
         return mStoreState_;
+    }
+
+    /**
+     * Setter for the store state
+     * 
+     * @param aState
+     *            the state to set
+     */
+    public void setState( String aState )
+    {
+        mStoreState_ = aState;
     }
 
 }

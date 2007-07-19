@@ -4,12 +4,19 @@
  */
 package com.suggs.gui.jms.controller.impl;
 
+import com.suggs.gui.jms.JmsHelperException;
 import com.suggs.gui.jms.controller.IConnectionController;
 import com.suggs.gui.jms.model.connection.IJmsConnectionManager;
 import com.suggs.gui.jms.model.connection.IJmsConnectionStore;
 import com.suggs.gui.jms.view.connection.JmsConnectionButtons;
 import com.suggs.gui.jms.view.connection.JmsConnectionManagerPanel;
 import com.suggs.gui.jms.view.connection.JmsConnectionStorePanel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,6 +34,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
 {
 
     private static final Log LOG = LogFactory.getLog( ConnectionController.class );
+    private static final ImageIcon IMG_ = new ImageIcon( "jms.gif" );
 
     // models
     private IJmsConnectionStore mConnStoreModel_;
@@ -79,9 +87,15 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     private void init()
     {
         LOG.debug( "Initialising the Connection Controller" );
-        mConnStoreView_.initialise( "Initial" );
+        mConnStoreView_.initialise( mConnStoreModel_.getState() );
         mConnStoreView_.loadDefaultValues();
         mConnManagerView_.initialise( "Initial" );
+
+        mButtonsView_.addLoadActionListener( createLoadActionListener() );
+        mButtonsView_.addSaveActionListener( createSaveActionListener() );
+        mButtonsView_.addTestActionListener( createTestConnActionListener() );
+        mButtonsView_.addConnectActionListener( createConnectActionListener() );
+        mButtonsView_.addDisconnectActionListener( createDisconnectActionListener() );
     }
 
     /**
@@ -94,6 +108,130 @@ public class ConnectionController implements InitializingBean, IConnectionContro
         Assert.notNull( mButtonsView_, "Must set the buttons view in the connection controller" );
         Assert.notNull( mConnStoreView_, "Must set the connection store view in the connection controller" );
         Assert.notNull( mConnManagerView_, "Must set the connection manager view in the connection controller" );
+    }
+
+    /**
+     * Creates a new Test connection action listener
+     * 
+     * @return a new test connection action listener
+     */
+    private ActionListener createTestConnActionListener()
+    {
+        return new ActionListener()
+        {
+
+            public void actionPerformed( ActionEvent arg0 )
+            {
+                mConnManagerModel_.testConnection( mConnStoreView_.getConnectionDetails() );
+            }
+        };
+    }
+
+    /**
+     * Creates a new connect action listsner
+     * 
+     * @return a new connect action listener
+     */
+    private ActionListener createConnectActionListener()
+    {
+        return new ActionListener()
+        {
+
+            public void actionPerformed( ActionEvent arg0 )
+            {
+                try
+                {
+                    mConnManagerModel_.connect( mConnStoreView_.getConnectionDetails() );
+                }
+                catch ( JmsHelperException jhe )
+                {
+                }
+            }
+        };
+    }
+
+    /**
+     * Creates a new disconnect action listsner
+     * 
+     * @return a new disconnect action listener
+     */
+    private ActionListener createDisconnectActionListener()
+    {
+        return new ActionListener()
+        {
+
+            public void actionPerformed( ActionEvent arg0 )
+            {
+                try
+                {
+                    mConnManagerModel_.disconnect();
+                }
+                catch ( JmsHelperException jhe )
+                {
+                }
+            }
+        };
+    }
+
+    /**
+     * Creates an action listener for the loading of connection
+     * pramters from a source
+     * 
+     * @return
+     */
+    private ActionListener createLoadActionListener()
+    {
+        return new ActionListener()
+        {
+
+            public void actionPerformed( ActionEvent arg0 )
+            {
+                LOG.debug( "action performed is " + arg0.getActionCommand() );
+                String[] connLIst = new String[] { "test1", "TEST2" };
+                String input = (String) JOptionPane.showInputDialog( mConnStoreView_,
+                                                                     "Please select the connection to load:",
+                                                                     "Select connection",
+                                                                     JOptionPane.INFORMATION_MESSAGE,
+                                                                     IMG_,
+                                                                     connLIst,
+                                                                     "..." );
+                if ( input != null )
+                {
+                    LOG.debug( "Loading connection [" + input + "]" );
+                }
+                else
+                {
+                    LOG.debug( "Load canceled" );
+                }
+            }
+        };
+    }
+
+    /**
+     * Creates a new action listener for the saving of a set of
+     * connection parameters
+     * 
+     * @return the action listener
+     */
+    private ActionListener createSaveActionListener()
+    {
+        return new ActionListener()
+        {
+
+            public void actionPerformed( ActionEvent arg0 )
+            {
+                // first we should make sure that the conn dedtails
+                // have been saved correctly
+                String input = (String) JOptionPane.showInputDialog( mConnStoreView_,
+                                                                     "Please enter a name for this conection",
+                                                                     "Save connection",
+                                                                     JOptionPane.INFORMATION_MESSAGE,
+                                                                     IMG_,
+                                                                     null,
+                                                                     "..." );
+                LOG.debug( "Saving connection as [" + input + "] [" + arg0.getActionCommand() + "]" );
+            }
+        };
     }
 
     /**

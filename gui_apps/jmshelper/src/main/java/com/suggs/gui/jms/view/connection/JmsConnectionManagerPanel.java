@@ -4,16 +4,18 @@
  */
 package com.suggs.gui.jms.view.connection;
 
+import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
+import com.suggs.gui.jms.model.connection.impl.JmsConnectionDetails;
+import com.suggs.gui.jms.model.connection.impl.JmsConnectionManager;
+import com.suggs.gui.jms.support.AbstractGridbagPanel;
+
 import java.awt.GridBagConstraints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -22,9 +24,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
-
-import com.suggs.gui.jms.model.connection.impl.JmsConnectionManager;
-import com.suggs.gui.jms.support.AbstractGridbagPanel;
 
 /**
  * This class will manage the user interaction with the Connection
@@ -39,8 +38,6 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
     private static Log LOG = LogFactory.getLog( JmsConnectionManagerPanel.class );
 
     private JmsConnectionManager mConnMgr_;
-
-    private static final ImageIcon IMG_ = new ImageIcon( "jms.gif" );
 
     private JTextField mStatus_ = new JTextField();
     private JComboBox mConnectionFactories_ = new JComboBox();
@@ -112,6 +109,8 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
         LOG.info( "Observable has changed [" + aObserved.getClass().getName() + "]" );
     }
 
+    
+
     /**
      * Populate the connection factory combo box with values
      * 
@@ -140,60 +139,6 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
             mDestinations_.addItem( item );
         }
         mDestinations_.setEditable( true );
-    }
-
-    /**
-     * Creates an action listener for the loading of connection
-     * pramters from a source
-     * 
-     * @return
-     */
-    private ActionListener createLoadActionListener()
-    {
-        return new ActionListener()
-        {
-
-            public void actionPerformed( ActionEvent arg0 )
-            {
-                String[] connLIst = new String[] { "test1", "TEST2" };
-                String input = (String) JOptionPane.showInputDialog( JmsConnectionManagerPanel.this,
-                                                                     "Please select the connection to load:",
-                                                                     "Select connection",
-                                                                     JOptionPane.INFORMATION_MESSAGE,
-                                                                     IMG_,
-                                                                     connLIst,
-                                                                     "..." );
-                LOG.debug( "Loading connection [" + input + "]" );
-                mStatus_.setText( "Loaded details" );
-            }
-        };
-    }
-
-    /**
-     * Creates a new action listener for the saving of a set of
-     * connection parameters
-     * 
-     * @return the action listener
-     */
-    private ActionListener createSaveActionListener()
-    {
-        return new ActionListener()
-        {
-
-            public void actionPerformed( ActionEvent arg0 )
-            {
-                // first we should make sure that the conn dedtails
-                // have been saved correctly
-                String input = (String) JOptionPane.showInputDialog( JmsConnectionManagerPanel.this,
-                                                                     "Please enter a name for this conection",
-                                                                     "Save connection",
-                                                                     JOptionPane.INFORMATION_MESSAGE,
-                                                                     IMG_,
-                                                                     null,
-                                                                     "..." );
-                LOG.debug( "Saving connection as [" + input + "]" );
-            }
-        };
     }
 
     /**
