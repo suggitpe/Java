@@ -4,19 +4,21 @@
  */
 package com.suggs.gui.jms.controller.impl;
 
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.suggs.gui.jms.controller.IConnectionController;
 import com.suggs.gui.jms.model.connection.IJmsConnectionManager;
 import com.suggs.gui.jms.model.connection.IJmsConnectionStore;
+import com.suggs.gui.jms.view.connection.JmsConnectionButtons;
+import com.suggs.gui.jms.view.connection.JmsConnectionManagerPanel;
+import com.suggs.gui.jms.view.connection.JmsConnectionStorePanel;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * TODO Write javadoc for ConnectionController
+ * This is the main controller for theconnection part of the GUI.
  * 
  * @author suggitpe
  * @version 1.0 12 Jul 2007
@@ -26,8 +28,22 @@ public class ConnectionController implements InitializingBean, IConnectionContro
 
     private static final Log LOG = LogFactory.getLog( ConnectionController.class );
 
-    private IJmsConnectionStore mConnectionStore_;
-    private IJmsConnectionManager mConnectionManager_;
+    // models
+    private IJmsConnectionStore mConnStoreModel_;
+    private IJmsConnectionManager mConnManagerModel_;
+
+    // views
+    private JmsConnectionButtons mButtonsView_;
+    private JmsConnectionManagerPanel mConnManagerView_;
+    private JmsConnectionStorePanel mConnStoreView_;
+
+    /**
+     * Constructs a new instance.
+     */
+    private ConnectionController()
+    {
+        throw new IllegalStateException();
+    }
 
     /**
      * Constructs a new instance.
@@ -36,13 +52,36 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      *            the connection store
      * @param aMgr
      *            the connection manager
+     * @param aButtons
+     *            the buttons panel
+     * @param aStrPanel
+     *            the connection store panel
+     * @param aMgrPanel
+     *            the onnection manager panel
      */
-    public ConnectionController( IJmsConnectionStore aStr, IJmsConnectionManager aMgr )
+    public ConnectionController( IJmsConnectionStore aStr, IJmsConnectionManager aMgr, JmsConnectionButtons aButtons,
+                                 JmsConnectionStorePanel aStrPanel, JmsConnectionManagerPanel aMgrPanel )
     {
         super();
-        mConnectionStore_ = aStr;
-        mConnectionManager_ = aMgr;
+        mConnStoreModel_ = aStr;
+        mConnManagerModel_ = aMgr;
+        mButtonsView_ = aButtons;
+        mConnStoreView_ = aStrPanel;
+        mConnManagerView_ = aMgrPanel;
 
+        init();
+    }
+
+    /**
+     * Local method to initialise itself and all of the inter related
+     * objects
+     */
+    private void init()
+    {
+        LOG.debug( "Initialising the Connection Controller" );
+        mConnStoreView_.initialise( "Initial" );
+        mConnStoreView_.loadDefaultValues();
+        mConnManagerView_.initialise( "Initial" );
     }
 
     /**
@@ -50,8 +89,11 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      */
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( mConnectionStore_, "Must set the connection store in the connection controller" );
-        Assert.notNull( mConnectionManager_, "Must set the connection manager in the connection controller" );
+        Assert.notNull( mConnStoreModel_, "Must set the connection store in the connection controller" );
+        Assert.notNull( mConnManagerModel_, "Must set the connection manager in the connection controller" );
+        Assert.notNull( mButtonsView_, "Must set the buttons view in the connection controller" );
+        Assert.notNull( mConnStoreView_, "Must set the connection store view in the connection controller" );
+        Assert.notNull( mConnManagerView_, "Must set the connection manager view in the connection controller" );
     }
 
     /**
@@ -61,18 +103,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      */
     public IJmsConnectionManager getConnectionManager()
     {
-        return mConnectionManager_;
-    }
-
-    /**
-     * Sets the ConnectionManager field to the specified value.
-     * 
-     * @param connectionManager
-     *            The ConnectionManager to set.
-     */
-    public void setConnectionManager( IJmsConnectionManager connectionManager )
-    {
-        mConnectionManager_ = connectionManager;
+        return mConnManagerModel_;
     }
 
     /**
@@ -82,18 +113,37 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      */
     public IJmsConnectionStore getConnectionStore()
     {
-        return mConnectionStore_;
+        return mConnStoreModel_;
     }
 
     /**
-     * Sets the ConnectionStore field to the specified value.
+     * Returns the value of ButtonsView.
      * 
-     * @param connectionStore
-     *            The ConnectionStore to set.
+     * @return Returns the ButtonsView.
      */
-    public void setConnectionStore( IJmsConnectionStore connectionStore )
+    public JmsConnectionButtons getButtonsView()
     {
-        mConnectionStore_ = connectionStore;
+        return mButtonsView_;
+    }
+
+    /**
+     * Returns the value of ConnManagerView.
+     * 
+     * @return Returns the ConnManagerView.
+     */
+    public JmsConnectionManagerPanel getConnManagerView()
+    {
+        return mConnManagerView_;
+    }
+
+    /**
+     * Returns the value of ConnStoreView.
+     * 
+     * @return Returns the ConnStoreView.
+     */
+    public JmsConnectionStorePanel getConnStoreView()
+    {
+        return mConnStoreView_;
     }
 
 }

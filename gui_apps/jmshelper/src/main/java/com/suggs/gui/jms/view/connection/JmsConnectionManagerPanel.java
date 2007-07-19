@@ -20,13 +20,11 @@ import javax.swing.border.EmptyBorder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.suggs.gui.jms.model.connection.EConnectionState;
-import com.suggs.gui.jms.model.connection.impl.JmsConnectionManager;
-import com.suggs.gui.jms.support.AbstractGridbagPanel;
-
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
+
+import com.suggs.gui.jms.model.connection.impl.JmsConnectionManager;
+import com.suggs.gui.jms.support.AbstractGridbagPanel;
 
 /**
  * This class will manage the user interaction with the Connection
@@ -44,7 +42,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
 
     private static final ImageIcon IMG_ = new ImageIcon( "jms.gif" );
 
-    private JTextField mStatus_ = new JTextField( EConnectionState.INITIAL.name() );
+    private JTextField mStatus_ = new JTextField();
     private JComboBox mConnectionFactories_ = new JComboBox();
     private JComboBox mDestinations_ = new JComboBox();
 
@@ -68,7 +66,16 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
         super( "Connection Manager" );
         mConnMgr_ = aConnectionManager;
         mConnMgr_.addObserver( this );
+    }
 
+    /**
+     * Called through the controller to initialise the panel
+     * 
+     * @param aInitialStatus
+     *            the initial status for the panel to display
+     */
+    public void initialise( String aInitialStatus )
+    {
         EmptyBorder eb = new EmptyBorder( 0, 0, 0, 10 );
 
         // status field
@@ -76,6 +83,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
         lStatus.setBorder( eb );
         addComponent( lStatus, 1, 1 );
 
+        mStatus_.setText( aInitialStatus );
         mStatus_.setEditable( false );
         mStatus_.setPreferredSize( LONG_FIELD );
         addFilledComponent( mStatus_, 1, 2, 3, 1, GridBagConstraints.HORIZONTAL );
@@ -93,7 +101,6 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
 
         mDestinations_.setPreferredSize( LONG_FIELD );
         addComponent( mDestinations_, 3, 2 );
-
     }
 
     /**

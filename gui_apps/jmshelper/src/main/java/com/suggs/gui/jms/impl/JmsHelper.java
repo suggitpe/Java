@@ -63,6 +63,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
         Assert.notNull( mConnectionStorePanel_, "There must be a connection store panel set in the main gui" );
         Assert.notNull( mConnectionButtons_, "There must be a connection store buttons panel set in the main gui" );
         Assert.notNull( mConnectionManagerPanel_, "There must be a connection manager panel set in the main gui" );
+        Assert.notNull( mConnectionController_, "There must be a connection controller set in the main gui" );
     }
 
     /**
@@ -131,7 +132,6 @@ public class JmsHelper implements IJmsHelper, InitializingBean
         gbc.gridy = 2;
         mainLayout.setConstraints( mConnectionManagerPanel_, gbc );
         aCntr.add( mConnectionManagerPanel_ );
-
     }
 
     /**

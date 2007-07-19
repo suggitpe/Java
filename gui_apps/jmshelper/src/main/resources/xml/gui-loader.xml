@@ -6,26 +6,36 @@
     <!-- this is the main loader impl -->
     <bean id="jmsHelper" class="com.suggs.gui.jms.impl.JmsHelper">
         <property name="connectionManagerPanel" ref="connMgrPanelBean"/>
-        <property name="connectionManagerButtons" ref="connMgrButtonsBean"/>
         <property name="connectionStorePanel" ref="connStrPanelBean"/>
-        <property name="connectionStoreButtons" ref="connStrButtonsBean"/>
+        <property name="connectionButtons" ref="connButtonsBean"/>
+        <property name="connectionController" ref="connCtrlBean"/>
     </bean>
     
     <!-- This is the panel interface to the connection manager  -->
     <bean id="connMgrPanelBean" class="com.suggs.gui.jms.view.connection.JmsConnectionManagerPanel">
-        <property name="connectionManager" ref="connMgrBean"/>
+        <constructor-arg ref="connMgrBean"/>
     </bean>
-    <bean id="connMgrButtonsBean" class="com.suggs.gui.jms.view.connection.JmsConnectionManagerButtons"/>
     
     <bean id="connStrPanelBean" class="com.suggs.gui.jms.view.connection.JmsConnectionStorePanel">
-        <property name="connectionStore" ref="connStrBean"/>
+        <constructor-arg ref="connStrBean"/>
     </bean>
-    <bean id="connStrButtonsBean" class="com.suggs.gui.jms.view.connection.JmsConnectionStoreButtons"/>
+    
+    <!-- Main functional interface -->
+    <bean id="connButtonsBean" class="com.suggs.gui.jms.view.connection.JmsConnectionButtons"/>
     
     <!-- This is the main connection manager bean -->
     <bean id="connMgrBean" class="com.suggs.gui.jms.model.connection.impl.JmsConnectionManager"/>
     
     <!-- This is the main connection store bean -->
     <bean id="connStrBean" class="com.suggs.gui.jms.model.connection.impl.JmsConnectionStore"/>
+    
+    <!-- This is the MVC controller for the connections -->
+    <bean id="connCtrlBean" class="com.suggs.gui.jms.controller.impl.ConnectionController">
+        <constructor-arg ref="connStrBean"/>
+        <constructor-arg ref="connMgrBean"/>
+        <constructor-arg ref="connButtonsBean"/>
+        <constructor-arg ref="connStrPanelBean"/>
+        <constructor-arg ref="connMgrPanelBean"/>
+    </bean>
     
 </beans>

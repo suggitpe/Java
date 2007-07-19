@@ -16,13 +16,12 @@ import javax.swing.border.EmptyBorder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
+
 import com.suggs.gui.jms.model.connection.EConnectionType;
 import com.suggs.gui.jms.model.connection.impl.JmsConnectionStore;
 import com.suggs.gui.jms.support.AbstractGridbagPanel;
-
-
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
 
 /**
  * Panel to represent the connection store.
@@ -36,6 +35,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
     private static final Log LOG = LogFactory.getLog( JmsConnectionStorePanel.class );
     private JmsConnectionStore mConnectionStore_;
 
+    private JTextField mStatus = new JTextField();
     private JTextField mName_ = new JTextField();
     private JComboBox mType_ = new JComboBox();
     private JTextField mServer_ = new JTextField();
@@ -63,46 +63,63 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
         // set up the observable
         mConnectionStore_ = aConnectionStore;
         mConnectionStore_.addObserver( this );
+    }
 
+    /**
+     * Initialise the panel
+     * 
+     * @param aInitialStatus
+     *            the initial status of the row
+     */
+    public void initialise( String aInitialStatus )
+    {
+        int row = 1;
         EmptyBorder eb = new EmptyBorder( 0, 0, 0, 10 );
+
+        // add in the status label
+        final JLabel lStatus = new JLabel( "Save Status:" );
+        lStatus.setBorder( eb );
+        addComponent( lStatus, row, 1 );
+
+        mStatus.setEditable( false );
+        mStatus.setPreferredSize( MEDIUM_FIELD );
+        addFilledComponent( mStatus, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
 
         // add in the connection name
         final JLabel lName = new JLabel( "Name:" );
         lName.setBorder( eb );
-        addComponent( lName, 1, 1 );
+        addComponent( lName, row, 1 );
 
         mName_.setEditable( false );
         mName_.setPreferredSize( LONG_FIELD );
-        addFilledComponent( mName_, 1, 2, 3, 1, GridBagConstraints.HORIZONTAL );
+        addFilledComponent( mName_, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
 
         // add in the connection type
         final JLabel lType = new JLabel( "Type:" );
         lType.setBorder( eb );
-        addComponent( lType, 2, 1 );
+        addComponent( lType, row, 1 );
 
         mType_.setEditable( true );
         mType_.addItem( EConnectionType.EMS );
         mType_.addItem( EConnectionType.MQ );
         mType_.setPreferredSize( MEDIUM_FIELD );
-        addComponent( mType_, 2, 2 );
+        addComponent( mType_, row++, 2 );
 
         // add in the server
         final JLabel lServer = new JLabel( "Server:" );
         lServer.setBorder( eb );
-        addComponent( lServer, 3, 1 );
+        addComponent( lServer, row, 1 );
 
         mServer_.setPreferredSize( LONG_FIELD );
-        addFilledComponent( mServer_, 3, 2, 3, 1, GridBagConstraints.HORIZONTAL );
+        addFilledComponent( mServer_, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
 
         // add in the port
         final JLabel lPort = new JLabel( "Port:" );
         lServer.setBorder( eb );
-        addComponent( lPort, 4, 1 );
+        addComponent( lPort, row, 1 );
 
         mPort_.setPreferredSize( MEDIUM_FIELD );
-        addFilledComponent( mPort_, 4, 2, 1, 1, GridBagConstraints.HORIZONTAL );
-
-        loadDefaultValues();
+        addFilledComponent( mPort_, row++, 2, 1, 1, GridBagConstraints.HORIZONTAL );
     }
 
     /**

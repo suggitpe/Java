@@ -4,13 +4,12 @@
  */
 package com.suggs.gui.jms.view.connection;
 
+import com.suggs.gui.jms.support.AbstractGridbagPanel;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
-import com.suggs.gui.jms.support.AbstractGridbagPanel;
-
 
 /**
  * Buttons for the connection store.
@@ -40,17 +39,20 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
         mSaveButton_.setToolTipText( "Save the current connection settings as a named connection" );
         addFilledComponent( mSaveButton_, 2, 1 );
 
+        // padding
         addFilledComponent( new JLabel( " " ), 3, 1 );
         addFilledComponent( new JLabel( " " ), 4, 1 );
+        addFilledComponent( new JLabel( " " ), 5, 1 );
+        addFilledComponent( new JLabel( " " ), 6, 1 );
 
         mTestButton_.setToolTipText( "Test connection settings with current setting" );
-        addFilledComponent( mTestButton_, 5, 1 );
+        addFilledComponent( mTestButton_, 15, 1 );
 
         mConnectButton_.setToolTipText( "Connect with the defined connection parameters" );
-        addFilledComponent( mConnectButton_, 6, 1 );
+        addFilledComponent( mConnectButton_, 16, 1 );
 
         mDisconnectButton_.setToolTipText( "Disconnect from the current connection" );
-        addFilledComponent( mDisconnectButton_, 7, 1 );
+        addFilledComponent( mDisconnectButton_, 17, 1 );
     }
 
     /**
