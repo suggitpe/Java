@@ -8,6 +8,7 @@ import org.suggs.apps.mercury.IJmsHelper;
 import org.suggs.apps.mercury.JmsHelperException;
 import org.suggs.apps.mercury.controller.impl.ConnectionController;
 import org.suggs.apps.mercury.support.JmsHelperGuiBuilder;
+import org.suggs.apps.mercury.view.dialog.AboutDialog;
 
 import java.awt.Container;
 import java.awt.GridBagConstraints;
@@ -25,7 +26,6 @@ import javax.swing.UIManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.suggs.gui.jms.view.dialog.AboutDialog;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;

@@ -8,6 +8,9 @@ import org.suggs.apps.mercury.JmsHelperException;
 import org.suggs.apps.mercury.controller.IConnectionController;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionManager;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
+import org.suggs.apps.mercury.view.connection.JmsConnectionButtons;
+import org.suggs.apps.mercury.view.connection.JmsConnectionManagerPanel;
+import org.suggs.apps.mercury.view.connection.JmsConnectionStorePanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,9 +21,6 @@ import javax.swing.JOptionPane;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.suggs.gui.jms.view.connection.JmsConnectionButtons;
-import com.suggs.gui.jms.view.connection.JmsConnectionManagerPanel;
-import com.suggs.gui.jms.view.connection.JmsConnectionStorePanel;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;

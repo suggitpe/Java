@@ -2,7 +2,7 @@
  * JmsConnectionStoreButtons.java created on 11 Jul 2007 18:18:35 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.view.connection;
+package org.suggs.apps.mercury.view.connection;
 
 import org.suggs.apps.mercury.support.AbstractGridbagPanel;
 

@@ -2,7 +2,7 @@
  * JmsConnectionManagerPanel.java created on 22 Jun 2007 07:47:15 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.view.connection;
+package org.suggs.apps.mercury.view.connection;
 
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.impl.JmsConnectionDetails;

@@ -2,7 +2,7 @@
  * JmsConnectionStorePanel.java created on 9 Jul 2007 17:32:45 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.view.connection;
+package org.suggs.apps.mercury.view.connection;
 
 import org.suggs.apps.mercury.model.connection.EConnectionType;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
