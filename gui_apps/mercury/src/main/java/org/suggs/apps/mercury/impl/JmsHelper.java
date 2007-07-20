@@ -2,7 +2,7 @@
  * JmsHelper.java created on 20 Jun 2007 18:49:45 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.impl;
+package org.suggs.apps.mercury.impl;
 
 import org.suggs.apps.mercury.IJmsHelper;
 import org.suggs.apps.mercury.JmsHelperException;
