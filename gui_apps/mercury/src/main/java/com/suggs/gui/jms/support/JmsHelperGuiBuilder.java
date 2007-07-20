@@ -4,15 +4,13 @@
  */
 package com.suggs.gui.jms.support;
 
+import org.suggs.apps.mercury.JmsHelperException;
+
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
 
 import javax.swing.JFrame;
-
-import org.suggs.mercury.JmsHelperException;
-
-
 
 import org.springframework.util.Assert;
 

@@ -4,16 +4,16 @@
  */
 package com.suggs.gui.jms.model.connection.impl;
 
-import com.suggs.gui.jms.model.connection.EConnectionState;
-import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
-import com.suggs.gui.jms.model.connection.IJmsConnectionManager;
+import org.suggs.apps.mercury.JmsHelperException;
 
 import java.util.Observable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.suggs.mercury.JmsHelperException;
 
+import com.suggs.gui.jms.model.connection.EConnectionState;
+import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
+import com.suggs.gui.jms.model.connection.IJmsConnectionManager;
 
 /**
  * Implementation of the jms connection manager interface
