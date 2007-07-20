@@ -2,7 +2,7 @@
  * ComplaintsDialog.java created on 25 Jun 2007 06:07:02 by suggitpe for project SandBox - GUI
  * 
  */
-package com.suggs.sandbox.dialog;
+package org.suggs.sandbox.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

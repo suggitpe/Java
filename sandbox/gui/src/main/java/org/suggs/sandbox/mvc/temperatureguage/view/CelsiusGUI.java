@@ -2,13 +2,14 @@
  * FarenheightGUI.java created on 9 Jul 2007 08:30:32 by suggitpe for project SandBox - GUI
  * 
  */
-package com.suggs.sandbox.mvc.temperatureguage.view;
+package org.suggs.sandbox.mvc.temperatureguage.view;
+
+import org.suggs.sandbox.mvc.temperatureguage.model.TemperatureModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
-import com.suggs.sandbox.mvc.temperatureguage.model.TemperatureModel;
 
 
 /**
