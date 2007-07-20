@@ -39,20 +39,20 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
         mSaveButton_.setToolTipText( "Save the current connection settings as a named connection" );
         addFilledComponent( mSaveButton_, 2, 1 );
 
-        // padding
-        addFilledComponent( new JLabel( " " ), 3, 1 );
-        addFilledComponent( new JLabel( " " ), 4, 1 );
-        //addFilledComponent( new JLabel( " " ), 5, 1 );
-        //addFilledComponent( new JLabel( " " ), 6, 1 );
-
-        mTestButton_.setToolTipText( "Test connection settings with current setting" );
-        addFilledComponent( mTestButton_, 15, 1 );
-
         mConnectButton_.setToolTipText( "Connect with the defined connection parameters" );
-        addFilledComponent( mConnectButton_, 16, 1 );
+        addFilledComponent( mConnectButton_, 3, 1 );
 
         mDisconnectButton_.setToolTipText( "Disconnect from the current connection" );
-        addFilledComponent( mDisconnectButton_, 17, 1 );
+        addFilledComponent( mDisconnectButton_, 4, 1 );
+
+        // padding
+        addFilledComponent( new JLabel( " " ), 10, 1 );
+        addFilledComponent( new JLabel( " " ), 11, 1 );
+         addFilledComponent( new JLabel( " " ), 12, 1 );
+        // addFilledComponent( new JLabel( " " ), 13, 1 );
+
+        mTestButton_.setToolTipText( "Test connection settings with current setting" );
+        addFilledComponent( mTestButton_, 30, 1 );
     }
 
     /**

@@ -89,7 +89,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
         LOG.debug( "Initialising the Connection Controller" );
         mConnStoreView_.initialise( mConnStoreModel_.getState() );
         mConnStoreView_.loadDefaultValues();
-        mConnManagerView_.initialise( "Initial" );
+        mConnManagerView_.initialise( mConnManagerModel_.getConnectionState().name() );
 
         mButtonsView_.addLoadActionListener( createLoadActionListener() );
         mButtonsView_.addSaveActionListener( createSaveActionListener() );
