@@ -6,14 +6,14 @@
         parent="abstractSessionFactoryBean">
         <property name="annotatedClasses">
             <list>
-                <value>com.suggs.sandbox.hibernate.caveatEmptor.BankAccount</value>
-                <value>com.suggs.sandbox.hibernate.caveatEmptor.BillingDetails</value>
-                <value>com.suggs.sandbox.hibernate.caveatEmptor.CreditCard</value>
-                <value>com.suggs.sandbox.hibernate.caveatEmptor.Category</value>
-                <value>com.suggs.sandbox.hibernate.caveatEmptor.Bid</value>
-                <value>com.suggs.sandbox.hibernate.caveatEmptor.Comment</value>
-                <value>com.suggs.sandbox.hibernate.caveatEmptor.Item</value>
-                <value>com.suggs.sandbox.hibernate.caveatEmptor.User</value>
+                <value>org.suggs.sandbox.hibernate.caveatEmptor.BankAccount</value>
+                <value>org.suggs.sandbox.hibernate.caveatEmptor.BillingDetails</value>
+                <value>org.suggs.sandbox.hibernate.caveatEmptor.CreditCard</value>
+                <value>org.suggs.sandbox.hibernate.caveatEmptor.Category</value>
+                <value>org.suggs.sandbox.hibernate.caveatEmptor.Bid</value>
+                <value>org.suggs.sandbox.hibernate.caveatEmptor.Comment</value>
+                <value>org.suggs.sandbox.hibernate.caveatEmptor.Item</value>
+                <value>org.suggs.sandbox.hibernate.caveatEmptor.User</value>
             </list>
         </property>
     </bean>

@@ -2,9 +2,14 @@
  * AbstractCaveatEmptorTest.java created on 14 May 2007 06:16:25 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor;
+package org.suggs.sandbox.hibernate.caveatEmptor;
 
-import com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
+import org.suggs.sandbox.hibernate.caveatEmptor.Address;
+import org.suggs.sandbox.hibernate.caveatEmptor.Category;
+import org.suggs.sandbox.hibernate.caveatEmptor.Item;
+import org.suggs.sandbox.hibernate.caveatEmptor.User;
+import org.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
+
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

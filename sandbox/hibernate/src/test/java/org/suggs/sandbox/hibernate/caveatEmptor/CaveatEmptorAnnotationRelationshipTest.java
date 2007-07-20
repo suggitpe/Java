@@ -2,7 +2,7 @@
  * CaveatEmptorRelationshipTest.java created on 11 May 2007 18:55:00 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor;
+package org.suggs.sandbox.hibernate.caveatEmptor;
 
 /**
  * TODO Write javadoc for CaveatEmptorAnnotationRelationshipTest

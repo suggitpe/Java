@@ -9,7 +9,7 @@
         parent="abstractSessionFactoryBean">
         <property name="annotatedClasses">
             <list>
-                <value>com.suggs.sandbox.hibernate.chapter2.Message</value>
+                <value>org.suggs.sandbox.hibernate.chapter2.Message</value>
             </list>
         </property>
     </bean>

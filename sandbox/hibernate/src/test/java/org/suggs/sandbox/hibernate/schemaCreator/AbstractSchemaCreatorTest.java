@@ -2,7 +2,9 @@
  * SchemaCreatorTest.java created on 24 Apr 2007 18:21:26 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.schemaCreator;
+package org.suggs.sandbox.hibernate.schemaCreator;
+
+import org.suggs.sandbox.hibernate.schemaCreator.SchemaCreator;
 
 import java.io.File;
 import java.io.IOException;

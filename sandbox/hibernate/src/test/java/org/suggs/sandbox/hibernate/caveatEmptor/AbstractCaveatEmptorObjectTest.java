@@ -2,7 +2,15 @@
  * AbstractCaveatEmptorObjectTest.java created on 18 May 2007 18:59:42 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor;
+package org.suggs.sandbox.hibernate.caveatEmptor;
+
+import org.suggs.sandbox.hibernate.caveatEmptor.Address;
+import org.suggs.sandbox.hibernate.caveatEmptor.BankAccount;
+import org.suggs.sandbox.hibernate.caveatEmptor.BillingDetails;
+import org.suggs.sandbox.hibernate.caveatEmptor.Category;
+import org.suggs.sandbox.hibernate.caveatEmptor.CreditCard;
+import org.suggs.sandbox.hibernate.caveatEmptor.Item;
+import org.suggs.sandbox.hibernate.caveatEmptor.User;
 
 import java.util.Calendar;
 import java.util.List;

@@ -2,19 +2,20 @@
  * AnnottaionSchemaCreatorTest.java created on 5 Jun 2007 06:19:35 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.schemaCreator;
+package org.suggs.sandbox.hibernate.schemaCreator;
 
-import com.suggs.sandbox.hibernate.caveatEmptor.Address;
-import com.suggs.sandbox.hibernate.caveatEmptor.BankAccount;
-import com.suggs.sandbox.hibernate.caveatEmptor.Bid;
-import com.suggs.sandbox.hibernate.caveatEmptor.BillingDetails;
-import com.suggs.sandbox.hibernate.caveatEmptor.Category;
-import com.suggs.sandbox.hibernate.caveatEmptor.Comment;
-import com.suggs.sandbox.hibernate.caveatEmptor.CreditCard;
-import com.suggs.sandbox.hibernate.caveatEmptor.Item;
-import com.suggs.sandbox.hibernate.caveatEmptor.User;
-import com.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
-import com.suggs.sandbox.hibernate.chapter2.Message;
+import org.suggs.sandbox.hibernate.caveatEmptor.Address;
+import org.suggs.sandbox.hibernate.caveatEmptor.BankAccount;
+import org.suggs.sandbox.hibernate.caveatEmptor.Bid;
+import org.suggs.sandbox.hibernate.caveatEmptor.BillingDetails;
+import org.suggs.sandbox.hibernate.caveatEmptor.Category;
+import org.suggs.sandbox.hibernate.caveatEmptor.Comment;
+import org.suggs.sandbox.hibernate.caveatEmptor.CreditCard;
+import org.suggs.sandbox.hibernate.caveatEmptor.Item;
+import org.suggs.sandbox.hibernate.caveatEmptor.User;
+import org.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
+import org.suggs.sandbox.hibernate.chapter2.Message;
+
 
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;

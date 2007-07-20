@@ -2,7 +2,7 @@
  * MessageHibernateAnnotationDaoTest.java created on 22 May 2007 06:04:41 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.chapter2;
+package org.suggs.sandbox.hibernate.chapter2;
 
 /**
  * TODO Write javadoc for MessageHibernateAnnotationDaoTest

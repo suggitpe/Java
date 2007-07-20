@@ -2,7 +2,7 @@
  * AbstractHibernateSpringTest.java created on 19 Apr 2007 18:27:36 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.support;
+package org.suggs.sandbox.hibernate.support;
 
 import java.util.Iterator;
 import java.util.List;

@@ -2,7 +2,7 @@
  * HbmSchemaCreatorTest.java created on 5 Jun 2007 06:20:59 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.schemaCreator;
+package org.suggs.sandbox.hibernate.schemaCreator;
 
 import java.io.File;
 import java.io.FilenameFilter;

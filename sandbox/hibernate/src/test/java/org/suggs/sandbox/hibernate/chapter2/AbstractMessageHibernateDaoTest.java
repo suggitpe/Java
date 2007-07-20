@@ -2,9 +2,11 @@
  * AbstractMessageHibernateDaoTest.java created on 21 May 2007 18:47:27 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.chapter2;
+package org.suggs.sandbox.hibernate.chapter2;
 
-import com.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
+import org.suggs.sandbox.hibernate.chapter2.Message;
+import org.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,7 +44,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
     }
 
     /**
-     * @see com.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#doCleanUpOldData()
+     * @see org.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#doCleanUpOldData()
      */
     protected void doCleanUpOldData()
     {

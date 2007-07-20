@@ -2,7 +2,7 @@
  * MessageTest.java created on 19 Mar 2007 16:50:51 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.chapter2;
+package org.suggs.sandbox.hibernate.chapter2;
 
 /**
  * TODO Write javadoc for MessageHibernateHbmDaoTest
