@@ -4,7 +4,7 @@
 
     <parent>
         <artifactId>suggs-parent</artifactId>
-        <groupId>com.suggs</groupId>
+        <groupId>org.suggs</groupId>
         <relativePath>../build</relativePath>
         <version>1.0-SNAPSHOT</version>
     </parent>

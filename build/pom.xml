@@ -4,7 +4,7 @@
     
     <!-- high level main project details -->
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.suggs</groupId>
+    <groupId>org.suggs</groupId>
     <artifactId>suggs-parent</artifactId>
     <packaging>pom</packaging>
     <name>Suggs parent</name>
