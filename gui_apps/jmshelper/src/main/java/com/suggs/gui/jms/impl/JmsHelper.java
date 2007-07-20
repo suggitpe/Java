@@ -19,9 +19,9 @@ import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.suggs.mercury.IJmsHelper;
+import org.suggs.mercury.JmsHelperException;
 
-import com.suggs.gui.jms.IJmsHelper;
-import com.suggs.gui.jms.JmsHelperException;
 import com.suggs.gui.jms.controller.impl.ConnectionController;
 import com.suggs.gui.jms.support.JmsHelperGuiBuilder;
 import com.suggs.gui.jms.view.dialog.AboutDialog;
@@ -67,7 +67,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
     }
 
     /**
-     * @see com.suggs.gui.jms.IJmsHelper#buildGui()
+     * @see org.suggs.mercury.IJmsHelper#buildGui()
      */
     public void buildGui() throws JmsHelperException
     {

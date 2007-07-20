@@ -10,7 +10,8 @@ import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 
-import com.suggs.gui.jms.JmsHelperException;
+import org.suggs.mercury.JmsHelperException;
+
 
 
 import org.springframework.util.Assert;

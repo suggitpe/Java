@@ -4,7 +4,6 @@
  */
 package com.suggs.gui.jms.controller.impl;
 
-import com.suggs.gui.jms.JmsHelperException;
 import com.suggs.gui.jms.controller.IConnectionController;
 import com.suggs.gui.jms.model.connection.IJmsConnectionManager;
 import com.suggs.gui.jms.model.connection.IJmsConnectionStore;
@@ -20,6 +19,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.suggs.mercury.JmsHelperException;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;

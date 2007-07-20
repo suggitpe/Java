@@ -4,7 +4,7 @@
  */
 package com.suggs.gui.jms.model.connection;
 
-import com.suggs.gui.jms.JmsHelperException;
+import org.suggs.mercury.JmsHelperException;
 
 /**
  * This interface manages all of the connections available to the GUI
