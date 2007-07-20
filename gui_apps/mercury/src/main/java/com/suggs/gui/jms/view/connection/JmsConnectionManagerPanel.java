@@ -4,10 +4,11 @@
  */
 package com.suggs.gui.jms.view.connection;
 
+import org.suggs.apps.mercury.support.AbstractGridbagPanel;
+
 import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
 import com.suggs.gui.jms.model.connection.impl.JmsConnectionDetails;
 import com.suggs.gui.jms.model.connection.impl.JmsConnectionManager;
-import com.suggs.gui.jms.support.AbstractGridbagPanel;
 
 import java.awt.GridBagConstraints;
 import java.util.Observable;

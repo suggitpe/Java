@@ -4,7 +4,7 @@
  */
 package com.suggs.gui.jms.view.connection;
 
-import com.suggs.gui.jms.support.AbstractGridbagPanel;
+import org.suggs.apps.mercury.support.AbstractGridbagPanel;
 
 import java.awt.event.ActionListener;
 

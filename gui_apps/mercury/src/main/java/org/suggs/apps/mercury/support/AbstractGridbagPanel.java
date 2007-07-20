@@ -2,7 +2,7 @@
  * AbstractGridbagPanel.java created on 25 Jun 2007 06:14:27 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.support;
+package org.suggs.apps.mercury.support;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
