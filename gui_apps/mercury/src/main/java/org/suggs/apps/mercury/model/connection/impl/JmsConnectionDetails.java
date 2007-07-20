@@ -2,10 +2,10 @@
  * JmsConnectionDetails.java created on 28 Jun 2007 06:07:29 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.model.connection.impl;
+package org.suggs.apps.mercury.model.connection.impl;
 
-import com.suggs.gui.jms.model.connection.EConnectionType;
-import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.EConnectionType;
+import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 
 /**
  * Implementation bean of the connection details interface
@@ -52,7 +52,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionDetails#getConnectionName()
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getConnectionName()
      */
     public String getConnectionName()
     {
@@ -60,7 +60,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionDetails#getConnectionType()
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getConnectionType()
      */
     public EConnectionType getConnectionType()
     {
@@ -68,7 +68,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionDetails#getConnectionServer()
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getConnectionServer()
      */
     public String getConnectionServer()
     {
@@ -76,7 +76,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionDetails#getConnectionPort()
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getConnectionPort()
      */
     public String getConnectionPort()
     {

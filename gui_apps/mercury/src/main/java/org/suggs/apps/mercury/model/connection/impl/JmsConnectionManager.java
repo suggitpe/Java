@@ -2,18 +2,18 @@
  * JmsConnectionManager.java created on 22 Jun 2007 08:18:48 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.model.connection.impl;
+package org.suggs.apps.mercury.model.connection.impl;
 
 import org.suggs.apps.mercury.JmsHelperException;
+import org.suggs.apps.mercury.model.connection.EConnectionState;
+import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IJmsConnectionManager;
 
 import java.util.Observable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.suggs.gui.jms.model.connection.EConnectionState;
-import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
-import com.suggs.gui.jms.model.connection.IJmsConnectionManager;
 
 /**
  * Implementation of the jms connection manager interface
@@ -37,7 +37,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionManager#getConnectionState()
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#getConnectionState()
      */
     public EConnectionState getConnectionState()
     {
@@ -45,7 +45,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionManager#connect(com.suggs.gui.jms.model.connection.IJmsConnectionDetails)
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#connect(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
      */
     public void connect( IJmsConnectionDetails aConnDetails ) throws JmsHelperException
     {
@@ -54,7 +54,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionManager#testConnection(com.suggs.gui.jms.model.connection.IJmsConnectionDetails)
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#testConnection(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
      */
     public boolean testConnection( IJmsConnectionDetails aConnectionDetails )
     {
@@ -63,7 +63,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionManager#disconnect()
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#disconnect()
      */
     public void disconnect() throws JmsHelperException
     {

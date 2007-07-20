@@ -2,7 +2,7 @@
  * IJmsConnectionDetails.java created on 28 Jun 2007 06:05:41 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.model.connection;
+package org.suggs.apps.mercury.model.connection;
 
 
 /**

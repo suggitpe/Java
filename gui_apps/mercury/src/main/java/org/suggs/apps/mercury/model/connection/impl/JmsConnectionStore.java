@@ -2,10 +2,10 @@
  * JmsConnectionStore.java created on 28 Jun 2007 18:36:21 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.model.connection.impl;
+package org.suggs.apps.mercury.model.connection.impl;
 
-import com.suggs.gui.jms.model.connection.IJmsConnectionDetails;
-import com.suggs.gui.jms.model.connection.IJmsConnectionStore;
+import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
 
 import java.util.Observable;
 
@@ -27,7 +27,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     private String mStoreState_ = new String( "Unsaved" );
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
      */
     public IJmsConnectionDetails loadConnectionParameters( String aName )
     {
@@ -39,7 +39,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionStore#getListOfKnownConnectionNames()
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#getListOfKnownConnectionNames()
      */
     public String[] getListOfKnownConnectionNames()
     {
@@ -47,7 +47,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionStore#saveConnectionParameters(com.suggs.gui.jms.model.connection.IJmsConnectionDetails)
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#saveConnectionParameters(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
      */
     public void saveConnectionParameters( IJmsConnectionDetails aDetails )
     {
@@ -58,7 +58,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see com.suggs.gui.jms.model.connection.IJmsConnectionStore#getState()
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#getState()
      */
     public String getState()
     {
