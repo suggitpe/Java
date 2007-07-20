@@ -2,9 +2,9 @@
  * User.java created on 21 Mar 2007 17:37:14 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor;
+package org.suggs.sandbox.hibernate.caveatEmptor;
 
-import com.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
+import org.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
 
 import java.util.Calendar;
 import java.util.Date;

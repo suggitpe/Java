@@ -2,7 +2,7 @@
  * CreditCard.java created on 22 Mar 2007 17:51:24 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor;
+package org.suggs.sandbox.hibernate.caveatEmptor;
 
 import java.util.Date;
 

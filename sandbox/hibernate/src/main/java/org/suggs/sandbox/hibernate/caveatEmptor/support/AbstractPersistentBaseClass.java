@@ -2,7 +2,7 @@
  * AbstractPersistentBaseClass.java created on 22 Mar 2007 17:42:27 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor.support;
+package org.suggs.sandbox.hibernate.caveatEmptor.support;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

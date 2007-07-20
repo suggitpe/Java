@@ -2,9 +2,9 @@
  * Category.java created on 21 Mar 2007 17:43:41 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor;
+package org.suggs.sandbox.hibernate.caveatEmptor;
 
-import com.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
+import org.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -83,7 +83,7 @@ public class Category extends AbstractPersistentBaseClass
      * 
      * @return all items in this category
      */
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories", targetEntity = com.suggs.sandbox.hibernate.caveatEmptor.Item.class, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories", targetEntity = org.suggs.sandbox.hibernate.caveatEmptor.Item.class, fetch = FetchType.LAZY)
     public Set<Item> getItems()
     {
         return mItems_;

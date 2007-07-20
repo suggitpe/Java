@@ -2,9 +2,9 @@
  * Item.java created on 21 Mar 2007 17:58:25 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor;
+package org.suggs.sandbox.hibernate.caveatEmptor;
 
-import com.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
+import org.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -132,7 +132,7 @@ public class Item extends AbstractPersistentBaseClass
      * 
      * @return the set of categories tht this item relates to
      */
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = com.suggs.sandbox.hibernate.caveatEmptor.Category.class, cascade = {
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = org.suggs.sandbox.hibernate.caveatEmptor.Category.class, cascade = {
                                                                                                                            CascadeType.PERSIST,
                                                                                                                            CascadeType.MERGE })
     @JoinTable(name = "CE_ITM_CAT_BRDG", joinColumns = { @JoinColumn(name = "ITMCAT_ITEMS_ID") }, inverseJoinColumns = { @JoinColumn(name = "ITMCAT_CATEGORIES_ID") })

@@ -2,7 +2,7 @@
  * Address.java created on 21 Mar 2007 17:40:54 by suggitpe for project SandBox - Hibernate
  * 
  */
-package com.suggs.sandbox.hibernate.caveatEmptor;
+package org.suggs.sandbox.hibernate.caveatEmptor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
