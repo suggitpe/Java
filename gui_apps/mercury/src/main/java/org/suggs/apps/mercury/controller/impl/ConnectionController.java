@@ -2,9 +2,10 @@
  * ConnectionController.java created on 12 Jul 2007 16:30:12 by suggitpe for project GUI - JmsHelper
  * 
  */
-package com.suggs.gui.jms.controller.impl;
+package org.suggs.apps.mercury.controller.impl;
 
 import org.suggs.apps.mercury.JmsHelperException;
+import org.suggs.apps.mercury.controller.IConnectionController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +16,6 @@ import javax.swing.JOptionPane;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.suggs.gui.jms.controller.IConnectionController;
 import com.suggs.gui.jms.model.connection.IJmsConnectionManager;
 import com.suggs.gui.jms.model.connection.IJmsConnectionStore;
 import com.suggs.gui.jms.view.connection.JmsConnectionButtons;
