@@ -48,8 +48,8 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
         // padding
         addFilledComponent( new JLabel( " " ), 10, 1 );
         addFilledComponent( new JLabel( " " ), 11, 1 );
-         addFilledComponent( new JLabel( " " ), 12, 1 );
-        // addFilledComponent( new JLabel( " " ), 13, 1 );
+        addFilledComponent( new JLabel( " " ), 12, 1 );
+        addFilledComponent( new JLabel( " " ), 13, 1 );
 
         mTestButton_.setToolTipText( "Test connection settings with current setting" );
         addFilledComponent( mTestButton_, 30, 1 );

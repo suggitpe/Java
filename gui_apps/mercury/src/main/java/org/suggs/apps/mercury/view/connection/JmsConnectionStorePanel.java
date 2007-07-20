@@ -6,10 +6,9 @@ package org.suggs.apps.mercury.view.connection;
 
 import org.suggs.apps.mercury.model.connection.EConnectionType;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.impl.JmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.impl.JmsConnectionStore;
+import org.suggs.apps.mercury.model.connection.store.JmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.store.JmsConnectionStore;
 import org.suggs.apps.mercury.support.AbstractGridbagPanel;
-
 
 import java.awt.GridBagConstraints;
 import java.util.Observable;
@@ -82,13 +81,12 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
         // add in the status label
         final JLabel lStatus = new JLabel( "Save Status:" );
         lStatus.setBorder( eb );
-        // addComponent( lStatus, row, 1 );
+        addComponent( lStatus, row, 1 );
 
         mStatus.setText( aInitialStatus );
         mStatus.setEditable( false );
         mStatus.setPreferredSize( MEDIUM_FIELD );
-        // addFilledComponent( mStatus, row++, 2, 3, 1,
-        // GridBagConstraints.HORIZONTAL );
+        addFilledComponent( mStatus, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
 
         // add in the connection name
         final JLabel lName = new JLabel( "Name:" );

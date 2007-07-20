@@ -2,10 +2,11 @@
  * JmsConnectionStore.java created on 28 Jun 2007 18:36:21 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.apps.mercury.model.connection.impl;
+package org.suggs.apps.mercury.model.connection.store;
 
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
+import org.suggs.apps.mercury.model.connection.JmsConnectionException;
 
 import java.util.Observable;
 
@@ -25,14 +26,21 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
 
     private static final Log LOG = LogFactory.getLog( JmsConnectionStore.class );
     private String mStoreState_ = new String( "Unsaved" );
+    private static final String HOME_DIR = System.getProperty( "user.home" );
+
+    /**
+     * Constructs a new instance.
+     */
+    public JmsConnectionStore()
+    {
+        super();
+    }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
      */
-    public IJmsConnectionDetails loadConnectionParameters( String aName )
+    public IJmsConnectionDetails loadConnectionParameters( String aName ) throws JmsConnectionException
     {
-        // firstly validate that all of the conn parameters are there,
-        // and then we can load them into the class
         LOG.debug( "Loaded connecvtion parameters" );
 
         return new JmsConnectionDetails( aName );
@@ -49,7 +57,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     /**
      * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#saveConnectionParameters(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
      */
-    public void saveConnectionParameters( IJmsConnectionDetails aDetails )
+    public void saveConnectionParameters( IJmsConnectionDetails aDetails ) throws JmsConnectionException
     {
         LOG.warn( "Save impl has not been done yet" );
         mStoreState_ = "Saved";

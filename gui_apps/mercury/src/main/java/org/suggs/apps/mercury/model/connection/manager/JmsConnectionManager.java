@@ -2,7 +2,7 @@
  * JmsConnectionManager.java created on 22 Jun 2007 08:18:48 by suggitpe for project GUI - JmsHelper
  * 
  */
-package org.suggs.apps.mercury.model.connection.impl;
+package org.suggs.apps.mercury.model.connection.manager;
 
 import org.suggs.apps.mercury.JmsHelperException;
 import org.suggs.apps.mercury.model.connection.EConnectionState;

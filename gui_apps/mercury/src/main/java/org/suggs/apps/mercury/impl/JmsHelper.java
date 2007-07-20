@@ -26,7 +26,6 @@ import javax.swing.UIManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
@@ -67,7 +66,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
     }
 
     /**
-     * @see org.suggs.mercury.IJmsHelper#buildGui()
+     * @see org.suggs.apps.mercury.IJmsHelper#buildGui()
      */
     public void buildGui() throws JmsHelperException
     {

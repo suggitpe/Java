@@ -4,17 +4,13 @@
  */
 package org.suggs.apps.mercury.view.connection;
 
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.impl.JmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.impl.JmsConnectionManager;
+import org.suggs.apps.mercury.model.connection.manager.JmsConnectionManager;
 import org.suggs.apps.mercury.support.AbstractGridbagPanel;
-
 
 import java.awt.GridBagConstraints;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -109,8 +105,6 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
     {
         LOG.info( "Observable has changed [" + aObserved.getClass().getName() + "]" );
     }
-
-    
 
     /**
      * Populate the connection factory combo box with values

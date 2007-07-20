@@ -4,7 +4,7 @@
 <beans>
     
     <!-- this is the main loader impl -->
-    <bean id="jmsHelper" class="org.suggs.gui.jms.impl.JmsHelper">
+    <bean id="jmsHelper" class="org.suggs.apps.mercury.impl.JmsHelper">
         <property name="connectionManagerPanel" ref="connMgrPanelBean"/>
         <property name="connectionStorePanel" ref="connStrPanelBean"/>
         <property name="connectionButtons" ref="connButtonsBean"/>
@@ -12,25 +12,25 @@
     </bean>
     
     <!-- This is the panel interface to the connection manager  -->
-    <bean id="connMgrPanelBean" class="org.suggs.gui.jms.view.connection.JmsConnectionManagerPanel">
+    <bean id="connMgrPanelBean" class="org.suggs.apps.mercury.view.connection.JmsConnectionManagerPanel">
         <constructor-arg ref="connMgrBean"/>
     </bean>
     
-    <bean id="connStrPanelBean" class="org.suggs.gui.jms.view.connection.JmsConnectionStorePanel">
+    <bean id="connStrPanelBean" class="org.suggs.apps.mercury.view.connection.JmsConnectionStorePanel">
         <constructor-arg ref="connStrBean"/>
     </bean>
     
     <!-- Main functional interface -->
-    <bean id="connButtonsBean" class="org.suggs.gui.jms.view.connection.JmsConnectionButtons"/>
+    <bean id="connButtonsBean" class="org.suggs.apps.mercury.view.connection.JmsConnectionButtons"/>
     
     <!-- This is the main connection manager bean -->
-    <bean id="connMgrBean" class="org.suggs.gui.jms.model.connection.impl.JmsConnectionManager"/>
+    <bean id="connMgrBean" class="org.suggs.apps.mercury.model.connection.manager.JmsConnectionManager"/>
     
     <!-- This is the main connection store bean -->
-    <bean id="connStrBean" class="org.suggs.gui.jms.model.connection.impl.JmsConnectionStore"/>
+    <bean id="connStrBean" class="org.suggs.apps.mercury.model.connection.store.JmsConnectionStore"/>
     
     <!-- This is the MVC controller for the connections -->
-    <bean id="connCtrlBean" class="org.suggs.gui.jms.controller.impl.ConnectionController">
+    <bean id="connCtrlBean" class="org.suggs.apps.mercury.controller.impl.ConnectionController">
         <constructor-arg ref="connStrBean"/>
         <constructor-arg ref="connMgrBean"/>
         <constructor-arg ref="connButtonsBean"/>
