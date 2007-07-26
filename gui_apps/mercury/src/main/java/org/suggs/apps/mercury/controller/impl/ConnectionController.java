@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.controller.impl;
 
-import org.suggs.apps.mercury.JmsHelperException;
+import org.suggs.apps.mercury.MercuryException;
 import org.suggs.apps.mercury.controller.IConnectionController;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionManager;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
@@ -14,13 +14,13 @@ import org.suggs.apps.mercury.view.connection.JmsConnectionStorePanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -144,7 +144,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                 {
                     mConnManagerModel_.connect( mConnStoreView_.getConnectionDetails() );
                 }
-                catch ( JmsHelperException jhe )
+                catch ( MercuryException jhe )
                 {
                 }
             }
@@ -167,7 +167,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                 {
                     mConnManagerModel_.disconnect();
                 }
-                catch ( JmsHelperException jhe )
+                catch ( MercuryException jhe )
                 {
                 }
             }
@@ -188,13 +188,13 @@ public class ConnectionController implements InitializingBean, IConnectionContro
             public void actionPerformed( ActionEvent arg0 )
             {
                 LOG.debug( "action performed is " + arg0.getActionCommand() );
-                String[] connLIst = new String[] { "test1", "TEST2" };
+                String[] conns = mConnStoreModel_.getListOfKnownConnectionNames();
                 String input = (String) JOptionPane.showInputDialog( mConnStoreView_,
                                                                      "Please select the connection to load:",
                                                                      "Select connection",
                                                                      JOptionPane.INFORMATION_MESSAGE,
                                                                      IMG_,
-                                                                     connLIst,
+                                                                     conns,
                                                                      "..." );
                 if ( input != null )
                 {

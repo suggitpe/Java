@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.support;
 
-import org.suggs.apps.mercury.JmsHelperException;
+import org.suggs.apps.mercury.MercuryException;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -29,9 +29,9 @@ public class JmsHelperGuiBuilder
      * 
      * @param aFrame
      *            the frame to packake and show
-     * @throws JmsHelperException
+     * @throws MercuryException
      */
-    public static final void displayFrame( JFrame aFrame ) throws JmsHelperException
+    public static final void displayFrame( JFrame aFrame ) throws MercuryException
     {
 
         Assert.notNull( aFrame, "Passed in a null JFrame object" );

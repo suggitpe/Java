@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.model.connection.manager;
 
-import org.suggs.apps.mercury.JmsHelperException;
+import org.suggs.apps.mercury.MercuryException;
 import org.suggs.apps.mercury.model.connection.EConnectionState;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionManager;
@@ -47,7 +47,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     /**
      * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#connect(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
      */
-    public void connect( IJmsConnectionDetails aConnDetails ) throws JmsHelperException
+    public void connect( IJmsConnectionDetails aConnDetails ) throws MercuryException
     {
         mConnectionState_ = EConnectionState.CONNECTED;
         LOG.warn( "Connection not implemented" );
@@ -65,7 +65,7 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     /**
      * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#disconnect()
      */
-    public void disconnect() throws JmsHelperException
+    public void disconnect() throws MercuryException
     {
         mConnectionState_ = EConnectionState.DISCONNECTED;
     }

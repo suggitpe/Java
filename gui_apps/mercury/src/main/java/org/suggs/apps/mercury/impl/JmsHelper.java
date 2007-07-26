@@ -5,7 +5,7 @@
 package org.suggs.apps.mercury.impl;
 
 import org.suggs.apps.mercury.IJmsHelper;
-import org.suggs.apps.mercury.JmsHelperException;
+import org.suggs.apps.mercury.MercuryException;
 import org.suggs.apps.mercury.controller.impl.ConnectionController;
 import org.suggs.apps.mercury.support.JmsHelperGuiBuilder;
 import org.suggs.apps.mercury.view.dialog.AboutDialog;
@@ -68,7 +68,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
     /**
      * @see org.suggs.apps.mercury.IJmsHelper#buildGui()
      */
-    public void buildGui() throws JmsHelperException
+    public void buildGui() throws MercuryException
     {
 
         LOG.debug( "Building GUI" );
@@ -78,7 +78,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
         }
         catch ( Exception e )
         {
-            throw new JmsHelperException( "Failed to set UI look and feel", e );
+            throw new MercuryException( "Failed to set UI look and feel", e );
         }
 
         JFrame.setDefaultLookAndFeelDecorated( true );
@@ -100,9 +100,9 @@ public class JmsHelper implements IJmsHelper, InitializingBean
      * 
      * @param aCtnr
      *            the container to build upon
-     * @throws JmsHelperException
+     * @throws MercuryException
      */
-    private final void buildGuiPanels( Container aCntr ) throws JmsHelperException
+    private final void buildGuiPanels( Container aCntr ) throws MercuryException
     {
         LOG.debug( "Building GUI Panels" );
 

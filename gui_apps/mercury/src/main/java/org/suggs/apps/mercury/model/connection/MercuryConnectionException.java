@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.model.connection;
 
-import org.suggs.apps.mercury.JmsHelperException;
+import org.suggs.apps.mercury.MercuryException;
 
 /**
  * Exception to be used when there is an issue regarding the jms
@@ -13,13 +13,13 @@ import org.suggs.apps.mercury.JmsHelperException;
  * @author suggitpe
  * @version 1.0 20 Jul 2007
  */
-public class JmsConnectionException extends JmsHelperException
+public class MercuryConnectionException extends MercuryException
 {
 
     /**
      * Constructs a new instance.
      */
-    public JmsConnectionException()
+    public MercuryConnectionException()
     {
         super();
     }
@@ -29,7 +29,7 @@ public class JmsConnectionException extends JmsHelperException
      * 
      * @param aMessage
      */
-    public JmsConnectionException( String aMessage )
+    public MercuryConnectionException( String aMessage )
     {
         super( aMessage );
     }
@@ -40,7 +40,7 @@ public class JmsConnectionException extends JmsHelperException
      * @param aMessage
      * @param aError
      */
-    public JmsConnectionException( String aMessage, Throwable aError )
+    public MercuryConnectionException( String aMessage, Throwable aError )
     {
         super( aMessage, aError );
     }
@@ -50,7 +50,7 @@ public class JmsConnectionException extends JmsHelperException
      * 
      * @param aError
      */
-    public JmsConnectionException( Throwable aError )
+    public MercuryConnectionException( Throwable aError )
     {
         super( aError );
     }

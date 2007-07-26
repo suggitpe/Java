@@ -10,13 +10,13 @@ package org.suggs.apps.mercury;
  * @author suggitpe
  * @version 1.0 21 Jun 2007
  */
-public class JmsHelperException extends Exception
+public class MercuryRuntimeException extends RuntimeException
 {
 
     /**
      * Constructs a new instance.
      */
-    public JmsHelperException()
+    public MercuryRuntimeException()
     {
         super();
     }
@@ -26,7 +26,7 @@ public class JmsHelperException extends Exception
      * 
      * @param aMessage
      */
-    public JmsHelperException( String aMessage )
+    public MercuryRuntimeException( String aMessage )
     {
         super( aMessage );
     }
@@ -37,7 +37,7 @@ public class JmsHelperException extends Exception
      * @param aMessage
      * @param aError
      */
-    public JmsHelperException( String aMessage, Throwable aError )
+    public MercuryRuntimeException( String aMessage, Throwable aError )
     {
         super( aMessage, aError );
     }
@@ -47,7 +47,7 @@ public class JmsHelperException extends Exception
      * 
      * @param aError
      */
-    public JmsHelperException( Throwable aError )
+    public MercuryRuntimeException( Throwable aError )
     {
         super( aError );
     }

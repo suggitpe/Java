@@ -62,7 +62,7 @@ public class GuiLoader
                 {
                     helper.buildGui();
                 }
-                catch ( JmsHelperException jhe )
+                catch ( MercuryException jhe )
                 {
                     LOG.error( "Exception thrown when trying to build GUI app" );
                     jhe.printStackTrace();
