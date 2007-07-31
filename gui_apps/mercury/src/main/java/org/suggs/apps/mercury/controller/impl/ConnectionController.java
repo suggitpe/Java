@@ -6,15 +6,16 @@ package org.suggs.apps.mercury.controller.impl;
 
 import org.suggs.apps.mercury.MercuryException;
 import org.suggs.apps.mercury.controller.IConnectionController;
+import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionManager;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
+import org.suggs.apps.mercury.model.connection.MercuryConnectionException;
 import org.suggs.apps.mercury.view.connection.JmsConnectionButtons;
 import org.suggs.apps.mercury.view.connection.JmsConnectionManagerPanel;
 import org.suggs.apps.mercury.view.connection.JmsConnectionStorePanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -89,7 +90,6 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     {
         LOG.debug( "Initialising the Connection Controller" );
         mConnStoreView_.initialise( mConnStoreModel_.getState() );
-        mConnStoreView_.loadDefaultValues();
         mConnManagerView_.initialise( mConnManagerModel_.getConnectionState().name() );
 
         mButtonsView_.addLoadActionListener( createLoadActionListener() );
@@ -199,10 +199,20 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                 if ( input != null )
                 {
                     LOG.debug( "Loading connection [" + input + "]" );
+                    try
+                    {
+                        IJmsConnectionDetails dtls = mConnStoreModel_.loadConnectionParameters( input );
+                        mConnStoreView_.loadValues( dtls );
+                    }
+                    catch ( MercuryConnectionException mce )
+                    {
+                        JOptionPane.showMessageDialog( mConnStoreView_, "Failed to load named configuration [" + input + "]\n"
+                                                                        + mce.getMessage(), "Load failure", JOptionPane.ERROR_MESSAGE );
+                    }
                 }
                 else
                 {
-                    LOG.debug( "Load canceled" );
+                    LOG.debug( "Load action canceled" );
                 }
             }
         };
@@ -230,7 +240,32 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                                                                      IMG_,
                                                                      null,
                                                                      "..." );
-                LOG.debug( "Saving connection as [" + input + "] [" + arg0.getActionCommand() + "]" );
+
+                if ( input != null )
+                {
+                    LOG.debug( "Saving connection as [" + input + "]" );
+                    IJmsConnectionDetails dtls = mConnStoreView_.getConnectionDetails();
+                    try
+                    {
+                        mConnStoreModel_.saveConnectionParameters( input, dtls );
+                    }
+                    catch ( MercuryConnectionException mce )
+                    {
+                        JOptionPane.showMessageDialog( mConnStoreView_,
+                                                       "Failed to save named configuration [" + input + "]\n" + mce.getMessage(),
+                                                       "Internal save failure",
+                                                       JOptionPane.ERROR_MESSAGE );
+                    }
+                    catch ( Exception e )
+                    {
+                        JOptionPane.showMessageDialog( mConnStoreView_, "Failed to save named configuration [" + input + "]\n"
+                                                                        + e.getMessage(), "Save failure", JOptionPane.ERROR_MESSAGE );
+                    }
+                }
+                else
+                {
+                    LOG.debug( "Save action cancelled" );
+                }
             }
         };
     }

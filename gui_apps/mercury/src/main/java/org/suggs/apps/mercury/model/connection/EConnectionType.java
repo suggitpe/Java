@@ -18,6 +18,27 @@ public enum EConnectionType {
     /**
      * Tibco EMS connection type
      */
-    EMS
+    EMS;
+
+    /**
+     * Simple builder method so that you can create an enum form a
+     * string
+     * 
+     * @param aTypeName
+     *            the name for the enum
+     * @return the enumeration for the string (null if none found)
+     */
+    public static final EConnectionType createTypeFromString( String aTypeName )
+    {
+        if ( aTypeName.equalsIgnoreCase( "ems" ) )
+        {
+            return EMS;
+        }
+        else if ( aTypeName.equalsIgnoreCase( "mq" ) )
+        {
+            return MQ;
+        }
+        return null;
+    }
 
 }

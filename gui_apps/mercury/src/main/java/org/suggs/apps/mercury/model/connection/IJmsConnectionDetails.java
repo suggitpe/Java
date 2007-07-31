@@ -4,7 +4,6 @@
  */
 package org.suggs.apps.mercury.model.connection;
 
-
 /**
  * An object to wrap up the connection details for a given connection
  * 
@@ -20,6 +19,14 @@ public interface IJmsConnectionDetails
      * @return the name of the connection
      */
     String getConnectionName();
+
+    /**
+     * Setter for the connection name
+     * 
+     * @param aName
+     *            the name for the connection details
+     */
+    void setConnectionName( String aName );
 
     /**
      * Get the connection type
@@ -41,5 +48,14 @@ public interface IJmsConnectionDetails
      * @return the port number for the connection
      */
     String getConnectionPort();
+
+    /**
+     * Internal verification method that will self certify that the
+     * current IJmsConnectionDetails object is fully populated for a
+     * connection (including a name)
+     * 
+     * @return true of the connection details are valid, else false
+     */
+    boolean isConnectionDetailsValid();
 
 }

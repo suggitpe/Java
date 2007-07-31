@@ -6,6 +6,7 @@ package org.suggs.apps.mercury.view.connection;
 
 import org.suggs.apps.mercury.model.connection.EConnectionType;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
 import org.suggs.apps.mercury.model.connection.store.JmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.store.JmsConnectionStore;
 import org.suggs.apps.mercury.support.AbstractGridbagPanel;
@@ -103,6 +104,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
         addComponent( lType, row, 1 );
 
         mType_.setEditable( true );
+        mType_.addItem( null );
         mType_.addItem( EConnectionType.EMS );
         mType_.addItem( EConnectionType.MQ );
         mType_.setPreferredSize( MEDIUM_FIELD );
@@ -132,8 +134,9 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      */
     public IJmsConnectionDetails getConnectionDetails()
     {
-        if ( mServer_.getText().length() == 0 || mPort_.getText().length() == 0 )
+        if ( mServer_.getText().length() == 0 || mPort_.getText().length() == 0 || mType_.getSelectedItem() == null )
         {
+            LOG.warn( "invalid data returning null" );
             return null;
         }
 
@@ -141,12 +144,18 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
     }
 
     /**
-     * Sets all of the values in the store to specific defaults
+     * LOad the details into the panel (populates the text fields)
+     * 
+     * @param aDtls
+     *            the jms connection detaiols object from which we can
+     *            populate the panel components
      */
-    public void loadDefaultValues()
+    public void loadValues( IJmsConnectionDetails aDtls )
     {
-        mPort_.setText( "7222" );
-        mServer_.setText( "localhost" );
+        mName_.setText( aDtls.getConnectionName() );
+        mServer_.setText( aDtls.getConnectionServer() );
+        mPort_.setText( aDtls.getConnectionPort() );
+        mType_.setSelectedItem( aDtls.getConnectionType() );
     }
 
     /**
@@ -164,6 +173,10 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
     public void update( Observable aObserved, Object aObj )
     {
         LOG.info( "Observable has changed [" + aObserved.getClass().getName() + "]" );
+        if ( aObserved instanceof IJmsConnectionStore )
+        {
+            mStatus.setText( ( (IJmsConnectionStore) aObserved ).getState() );
+        }
     }
 
     /**

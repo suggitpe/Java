@@ -4,7 +4,6 @@
  */
 package org.suggs.apps.mercury.model.connection;
 
-
 /**
  * Defines a persistence mechanism for storing connection details
  * 
@@ -39,11 +38,13 @@ public interface IJmsConnectionStore
      * 
      * @param aDetails
      *            the connection parameters to store
+     * @param aName
+     *            the name of the connection
      * @throws MercuryConnectionException
      *             when there is an issue in the saving of connection
      *             details
      */
-    void saveConnectionParameters( IJmsConnectionDetails aDetails ) throws MercuryConnectionException;
+    void saveConnectionParameters( String aName, IJmsConnectionDetails aDetails ) throws MercuryConnectionException;
 
     /**
      * Getter for the internal status of the Connection Store

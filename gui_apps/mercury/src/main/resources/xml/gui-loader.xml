@@ -27,8 +27,11 @@
     <bean id="connMgrBean" class="org.suggs.apps.mercury.model.connection.manager.JmsConnectionManager"/>
     
     <!-- This is the main connection store bean -->
-    <bean id="connStrBean" class="org.suggs.apps.mercury.model.connection.store.JmsConnectionStore"/>
-    
+    <bean id="connStrBean" class="org.suggs.apps.mercury.model.connection.store.JmsConnectionStore">
+        <property name="persistenceLayer">
+            <bean class="org.suggs.apps.mercury.model.connection.store.persistence.XmlPersistenceLayer"/>
+        </property>
+    </bean>
     <!-- This is the MVC controller for the connections -->
     <bean id="connCtrlBean" class="org.suggs.apps.mercury.controller.impl.ConnectionController">
         <constructor-arg ref="connStrBean"/>

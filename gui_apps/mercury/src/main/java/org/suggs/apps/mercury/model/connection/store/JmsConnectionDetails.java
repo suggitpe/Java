@@ -52,11 +52,44 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#isConnectionDetailsValid()
+     */
+    public boolean isConnectionDetailsValid()
+    {
+        boolean ret = true;
+        if ( mName_ == null || mName_.length() < 1 )
+        {
+            ret = false;
+        }
+        else if ( mType_ == null )
+        {
+            ret = false;
+        }
+        else if ( mServer_ == null || mServer_.length() < 1 )
+        {
+            ret = false;
+        }
+        else if ( mPort_ == null || mPort_.length() < 1 )
+        {
+            ret = false;
+        }
+        return ret;
+    }
+
+    /**
      * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getConnectionName()
      */
     public String getConnectionName()
     {
         return mName_;
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#setConnectionName(java.lang.String)
+     */
+    public void setConnectionName( String aName )
+    {
+        mName_ = aName;
     }
 
     /**

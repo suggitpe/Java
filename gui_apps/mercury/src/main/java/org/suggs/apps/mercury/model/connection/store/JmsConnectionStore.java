@@ -9,20 +9,17 @@ import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
 import org.suggs.apps.mercury.model.connection.MercuryConnectionException;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Set;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xml.sax.SAXException;
+
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
 
 /**
  * Implementation of the IJmsConnectionStore. This implementation will
@@ -32,15 +29,15 @@ import org.xml.sax.SAXException;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class JmsConnectionStore extends Observable implements IJmsConnectionStore
+public class JmsConnectionStore extends Observable implements IJmsConnectionStore, InitializingBean
 {
 
     private static final Log LOG = LogFactory.getLog( JmsConnectionStore.class );
-    private static final String MERCURY_HOME_DIR = System.getProperty( "user.home" ) + "/.mercury";
-    private static final File MERCURY_FILE = new File( MERCURY_HOME_DIR + "/connectionStore.xml" );
 
     private String mStoreState_ = new String( "Unsaved" );
     private Map<String, IJmsConnectionDetails> mConnStore_ = new HashMap<String, IJmsConnectionDetails>();
+
+    private IPersistenceLayer mPersistenceLayer_;
 
     /**
      * Constructs a new instance.
@@ -48,10 +45,19 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     public JmsConnectionStore()
     {
         super();
-        verifyPersistenceLayerExists();
+    }
+
+    /**
+     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     */
+    public void afterPropertiesSet() throws Exception
+    {
+        Assert.notNull( mPersistenceLayer_, "Must inject a persisztence layer into the connection store" );
+
+        mPersistenceLayer_.verifyPersistenceLayer();
         try
         {
-            readPersistenceLayer();
+            mConnStore_ = mPersistenceLayer_.readPersistenceLayer();
         }
         catch ( MercuryException jhe )
         {
@@ -77,113 +83,64 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
      */
     public String[] getListOfKnownConnectionNames()
     {
-        Set<String> keys = mConnStore_.keySet();
+        SortedSet<String> keys = new TreeSet<String>( mConnStore_.keySet() );
         return keys.toArray( new String[keys.size()] );
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#saveConnectionParameters(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#saveConnectionParameters(java.lang.String,
+     *      org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
      */
-    public void saveConnectionParameters( IJmsConnectionDetails aDetails ) throws MercuryConnectionException
+    public void saveConnectionParameters( String aName, IJmsConnectionDetails aDetails ) throws MercuryConnectionException
     {
-        LOG.warn( "Save impl has not been done yet" );
-        mStoreState_ = "Saved";
+        if ( aDetails == null )
+        {
+            throw new MercuryConnectionException( "Connection details null" );
+        }
+
+        aDetails.setConnectionName( aName.toUpperCase() );
+
+        if ( !( aDetails.isConnectionDetailsValid() ) )
+        {
+            throw new MercuryConnectionException( "Connection details are invalid, pls check data entry" );
+        }
+
+        if ( connectionExists( aDetails ) )
+        {
+            mStoreState_ = "Duplicate (ignored)";
+        }
+        else
+        {
+            mStoreState_ = "Saved";
+            mConnStore_.put( aDetails.getConnectionName(), aDetails );
+            mPersistenceLayer_.savePersistenceLayer( mConnStore_ );
+        }
         setChanged();
         notifyObservers();
     }
 
     /**
-     * Reads in the persistence layer file and constructs the
-     * connection store map
+     * tests to see if the connection details actually exists in the
+     * conn store
+     * 
+     * @param aConnDtls
+     *            the jms connection details to test for
+     * @return true if the jms connection store details exists, else
+     *         false
      */
-    private static final void readPersistenceLayer() throws MercuryException
+    private boolean connectionExists( IJmsConnectionDetails aConnDtls )
     {
-        try
+        if ( mConnStore_.containsKey( aConnDtls.getConnectionName() ) )
         {
-            SAXParserFactory fact = SAXParserFactory.newInstance();
-            fact.setValidating( true );
-            SAXParser saxp = fact.newSAXParser();
-            saxp.parse( MERCURY_FILE, new ConnectionStoreHandler() );
-
-        }
-        catch ( SAXException se )
-        {
-            throw new MercuryException( se );
-        }
-        catch ( ParserConfigurationException pce )
-        {
-            throw new MercuryException( pce );
-        }
-        catch ( IOException ioe )
-        {
-            throw new MercuryException( ioe );
-        }
-    }
-
-    /**
-     * Verify that the persistence directory exists for the mercury
-     * application
-     */
-    private static final void verifyPersistenceLayerExists()
-    {
-        // check that the persistence dir exists
-        File dir = new File( MERCURY_HOME_DIR );
-        if ( !( dir.exists() ) )
-        {
-            LOG.warn( "Mercury home dir does not exist or is not writable ... assuming firt application execution" );
-            LOG.info( "Creating MERCURY xml persistence store dir [" + dir.getAbsolutePath() + "]" );
-            if ( !( dir.mkdir() ) )
-            {
-                throw new IllegalStateException( "Failed to create persistence dir [" + MERCURY_HOME_DIR + "]" );
-            }
-            createPersistenceFile();
-        }
-        else
-        {
-            if ( !( dir.isDirectory() ) || !( dir.canWrite() ) )
-            {
-                String err = "Cannot write to the mercury persistence directory [" + MERCURY_HOME_DIR + "]";
-                LOG.error( err );
-                throw new IllegalStateException( err );
-            }
+            return true;
         }
 
-        // now check that the actual file exists
-        if ( !( MERCURY_FILE.exists() ) )
+        for ( String i : mConnStore_.keySet() )
         {
-            createPersistenceFile();
-        }
-        else
-        {
-            if ( !( MERCURY_FILE.isFile() ) || !( MERCURY_FILE.canWrite() ) )
-            {
-                String err = "Cannot write to mercury persistence layer [" + MERCURY_FILE.getAbsolutePath() + "]";
-                LOG.error( err );
-                throw new IllegalStateException( err );
-            }
+            LOG.debug( "name  " + i );
         }
 
-        LOG.debug( "Mercury connection store persistence layer correctly set up" );
-    }
-
-    /**
-     * Create the underlying xml persistence file
-     */
-    private static final void createPersistenceFile()
-    {
-        LOG.info( "Creating MERCURY xml persistence store [" + MERCURY_FILE.getAbsolutePath() + "]" );
-        try
-        {
-            if ( !( MERCURY_FILE.createNewFile() ) )
-            {
-                throw new IllegalStateException( "Failed to create the persistence xml file [" + MERCURY_FILE.getAbsolutePath() + "]" );
-            }
-        }
-        catch ( IOException ioe )
-        {
-            LOG.error( "Failed to create persistence file [" + ioe.getMessage() + "]" );
-            throw new IllegalStateException( ioe );
-        }
+        return false;
     }
 
     /**
@@ -203,6 +160,28 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     public void setState( String aState )
     {
         mStoreState_ = aState;
+    }
+
+    /**
+     * getter for the persistence layer
+     * 
+     * @return the persistence layer
+     */
+    public IPersistenceLayer getPersistenceLayer()
+    {
+        return mPersistenceLayer_;
+    }
+
+    /**
+     * setter for the persistence layer
+     * 
+     * @param aLayer
+     *            the persistence layer to inject
+     */
+    public void setPersistenceLayer( IPersistenceLayer aLayer )
+    {
+        mPersistenceLayer_ = aLayer;
+
     }
 
 }
