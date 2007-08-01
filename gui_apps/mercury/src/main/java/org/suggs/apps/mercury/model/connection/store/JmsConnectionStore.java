@@ -7,7 +7,7 @@ package org.suggs.apps.mercury.model.connection.store;
 import org.suggs.apps.mercury.MercuryException;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
-import org.suggs.apps.mercury.model.connection.MercuryConnectionException;
+import org.suggs.apps.mercury.model.connection.MercuryConnectionStoreException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,12 +68,12 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     /**
      * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
      */
-    public IJmsConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionException
+    public IJmsConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException
     {
         IJmsConnectionDetails ret = mConnStore_.get( aName );
         if ( ret == null )
         {
-            throw new MercuryConnectionException( "Connection [" + aName + "] does not exist in the connection store" );
+            throw new MercuryConnectionStoreException( "Connection [" + aName + "] does not exist in the connection store" );
         }
         return ret;
     }
@@ -88,21 +88,35 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#deleteNamedConnection(java.lang.String)
+     */
+    public void deleteNamedConnection( String aName ) throws MercuryConnectionStoreException
+    {
+        LOG.debug( "Deleting connection with name [" + aName + "]" );
+        mConnStore_.remove( aName );
+
+        mStoreState_ = "Connection removed";
+        mPersistenceLayer_.savePersistenceLayer( mConnStore_ );
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
      * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#saveConnectionParameters(java.lang.String,
      *      org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
      */
-    public void saveConnectionParameters( String aName, IJmsConnectionDetails aDetails ) throws MercuryConnectionException
+    public void saveConnectionParameters( String aName, IJmsConnectionDetails aDetails ) throws MercuryConnectionStoreException
     {
         if ( aDetails == null )
         {
-            throw new MercuryConnectionException( "Connection details null" );
+            throw new MercuryConnectionStoreException( "Connection details null" );
         }
 
         aDetails.setConnectionName( aName.toUpperCase() );
 
         if ( !( aDetails.isConnectionDetailsValid() ) )
         {
-            throw new MercuryConnectionException( "Connection details are invalid, pls check data entry" );
+            throw new MercuryConnectionStoreException( "Connection details are invalid, pls check data entry" );
         }
 
         if ( connectionExists( aDetails ) )

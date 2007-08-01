@@ -9,7 +9,7 @@ import org.suggs.apps.mercury.controller.IConnectionController;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionManager;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
-import org.suggs.apps.mercury.model.connection.MercuryConnectionException;
+import org.suggs.apps.mercury.model.connection.MercuryConnectionStoreException;
 import org.suggs.apps.mercury.view.connection.JmsConnectionButtons;
 import org.suggs.apps.mercury.view.connection.JmsConnectionManagerPanel;
 import org.suggs.apps.mercury.view.connection.JmsConnectionStorePanel;
@@ -94,6 +94,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
 
         mButtonsView_.addLoadActionListener( createLoadActionListener() );
         mButtonsView_.addSaveActionListener( createSaveActionListener() );
+        mButtonsView_.addDeleteActionListener( createDeleteActionListener() );
         mButtonsView_.addTestActionListener( createTestConnActionListener() );
         mButtonsView_.addConnectActionListener( createConnectActionListener() );
         mButtonsView_.addDisconnectActionListener( createDisconnectActionListener() );
@@ -175,10 +176,74 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     }
 
     /**
+     * Creates a new delete action listener
+     * 
+     * @return a new delete action listsner
+     */
+    private ActionListener createDeleteActionListener()
+    {
+        return new ActionListener()
+        {
+
+            public void actionPerformed( ActionEvent arg0 )
+            {
+                String[] conns = mConnStoreModel_.getListOfKnownConnectionNames();
+                String input = (String) JOptionPane.showInputDialog( mConnStoreView_,
+                                                                     "Please select the connection to delete:",
+                                                                     "Select connection for delete",
+                                                                     JOptionPane.INFORMATION_MESSAGE,
+                                                                     IMG_,
+                                                                     conns,
+                                                                     "..." );
+
+                if ( input != null )
+                {
+                    int choice = JOptionPane.showConfirmDialog( mConnStoreView_,
+                                                                "Are you sure that you want to delete the named connection[" + input + "]",
+                                                                "Delete Confirmation",
+                                                                JOptionPane.YES_NO_CANCEL_OPTION );
+                    if ( choice == JOptionPane.OK_OPTION )
+                    {
+                        int sure = JOptionPane.showConfirmDialog( mConnStoreView_,
+                                                                  "Are you sure?\n[" + input + "] could be useful",
+                                                                  "Delete Verify",
+                                                                  JOptionPane.YES_NO_CANCEL_OPTION );
+                        if ( sure == JOptionPane.OK_OPTION )
+                        {
+                            try
+                            {
+                                LOG.info( "Deleting named connection [" + input + "]" );
+                                mConnStoreModel_.deleteNamedConnection( input );
+                            }
+                            catch ( MercuryConnectionStoreException mcse )
+                            {
+                                JOptionPane.showMessageDialog( mConnStoreView_, "Delete failed", "Failed to delete connection [" + input
+                                                                                                 + "]", JOptionPane.ERROR_MESSAGE );
+                            }
+                        }
+                        else
+                        {
+                            LOG.debug( "Delete cancelled at the last minute for [" + input + "]" );
+                        }
+                    }
+                    else
+                    {
+                        LOG.debug( "Delete action for [" + input + "] canceled" );
+                    }
+                }
+                else
+                {
+                    LOG.debug( "Delete ction cancelled" );
+                }
+            }
+        };
+    }
+
+    /**
      * Creates an action listener for the loading of connection
      * pramters from a source
      * 
-     * @return
+     * @returN
      */
     private ActionListener createLoadActionListener()
     {
@@ -187,7 +252,6 @@ public class ConnectionController implements InitializingBean, IConnectionContro
 
             public void actionPerformed( ActionEvent arg0 )
             {
-                LOG.debug( "action performed is " + arg0.getActionCommand() );
                 String[] conns = mConnStoreModel_.getListOfKnownConnectionNames();
                 String input = (String) JOptionPane.showInputDialog( mConnStoreView_,
                                                                      "Please select the connection to load:",
@@ -204,7 +268,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                         IJmsConnectionDetails dtls = mConnStoreModel_.loadConnectionParameters( input );
                         mConnStoreView_.loadValues( dtls );
                     }
-                    catch ( MercuryConnectionException mce )
+                    catch ( MercuryConnectionStoreException mce )
                     {
                         JOptionPane.showMessageDialog( mConnStoreView_, "Failed to load named configuration [" + input + "]\n"
                                                                         + mce.getMessage(), "Load failure", JOptionPane.ERROR_MESSAGE );
@@ -249,7 +313,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                     {
                         mConnStoreModel_.saveConnectionParameters( input, dtls );
                     }
-                    catch ( MercuryConnectionException mce )
+                    catch ( MercuryConnectionStoreException mce )
                     {
                         JOptionPane.showMessageDialog( mConnStoreView_,
                                                        "Failed to save named configuration [" + input + "]\n" + mce.getMessage(),

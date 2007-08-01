@@ -7,7 +7,7 @@ package org.suggs.apps.mercury.model.connection.store.persistence;
 import org.suggs.apps.mercury.MercuryException;
 import org.suggs.apps.mercury.model.connection.EConnectionType;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.MercuryConnectionException;
+import org.suggs.apps.mercury.model.connection.MercuryConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.store.IPersistenceLayer;
 import org.suggs.apps.mercury.model.connection.store.JmsConnectionDetails;
 
@@ -57,7 +57,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
     /**
      * @see org.suggs.apps.mercury.model.connection.store.IPersistenceLayer#readPersistenceLayer()
      */
-    public Map<String, IJmsConnectionDetails> readPersistenceLayer() throws MercuryConnectionException
+    public Map<String, IJmsConnectionDetails> readPersistenceLayer() throws MercuryConnectionStoreException
     {
         Map<String, IJmsConnectionDetails> ret = new HashMap<String, IJmsConnectionDetails>();
         try
@@ -106,22 +106,22 @@ public class XmlPersistenceLayer implements IPersistenceLayer
         }
         catch ( SAXException se )
         {
-            throw new MercuryConnectionException( se );
+            throw new MercuryConnectionStoreException( se );
         }
         catch ( ParserConfigurationException pce )
         {
-            throw new MercuryConnectionException( pce );
+            throw new MercuryConnectionStoreException( pce );
         }
         catch ( IOException ioe )
         {
-            throw new MercuryConnectionException( ioe );
+            throw new MercuryConnectionStoreException( ioe );
         }
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.store.IPersistenceLayer#savePersistenceLayer(java.util.Map)
      */
-    public void savePersistenceLayer( Map<String, IJmsConnectionDetails> aMap ) throws MercuryConnectionException
+    public void savePersistenceLayer( Map<String, IJmsConnectionDetails> aMap ) throws MercuryConnectionStoreException
     {
         LOG.info( "Saving prsistence layer" );
 
@@ -156,7 +156,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
         }
         catch ( MercuryException me )
         {
-            throw new MercuryConnectionException( "Failed to serialise xml doc", me );
+            throw new MercuryConnectionStoreException( "Failed to serialise xml doc", me );
         }
 
         LOG.debug( "New XML doc:\n" + xml );
@@ -181,7 +181,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
         }
         catch ( IOException ioe )
         {
-            throw new MercuryConnectionException( ioe );
+            throw new MercuryConnectionStoreException( ioe );
         }
         finally
         {

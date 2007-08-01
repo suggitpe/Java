@@ -27,10 +27,10 @@ public interface IJmsConnectionStore
      * @param aName
      *            the name of the connection to load
      * @return the details fo the connection
-     * @throws MercuryConnectionException
+     * @throws MercuryConnectionStoreException
      *             when there is an issue with the connection store
      */
-    IJmsConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionException;
+    IJmsConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException;
 
     /**
      * Save a set of connection parameters to the local connection
@@ -40,11 +40,21 @@ public interface IJmsConnectionStore
      *            the connection parameters to store
      * @param aName
      *            the name of the connection
-     * @throws MercuryConnectionException
+     * @throws MercuryConnectionStoreException
      *             when there is an issue in the saving of connection
      *             details
      */
-    void saveConnectionParameters( String aName, IJmsConnectionDetails aDetails ) throws MercuryConnectionException;
+    void saveConnectionParameters( String aName, IJmsConnectionDetails aDetails ) throws MercuryConnectionStoreException;
+
+    /**
+     * Allows the deletion of a known connection
+     * 
+     * @param aName
+     *            the name of the connection
+     * @throws MercuryConnectionStoreException
+     *             if there are any problems
+     */
+    void deleteNamedConnection( String aName ) throws MercuryConnectionStoreException;
 
     /**
      * Getter for the internal status of the Connection Store

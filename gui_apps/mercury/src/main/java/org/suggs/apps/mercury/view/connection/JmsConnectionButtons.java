@@ -6,10 +6,14 @@ package org.suggs.apps.mercury.view.connection;
 
 import org.suggs.apps.mercury.support.AbstractGridbagPanel;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JSeparator;
 
 /**
  * Buttons for the connection store.
@@ -22,9 +26,12 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
 
     private JButton mSaveButton_ = new JButton( "Save" );
     private JButton mLoadButton_ = new JButton( "Load" );
+    private JButton mDeleteButton_ = new JButton( "Delete" );
     private JButton mConnectButton_ = new JButton( "Connect" );
     private JButton mDisconnectButton_ = new JButton( "Disconnect" );
     private JButton mTestButton_ = new JButton( "Test" );
+
+    AbstractButton b;
 
     /**
      * Constructs a new instance.
@@ -32,27 +39,83 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
     public JmsConnectionButtons()
     {
         super( "Ctrl" );
+        initButons();
 
-        mLoadButton_.setToolTipText( "Load a previously saved connection into the window" );
-        addFilledComponent( mLoadButton_, 1, 1 );
+        addFilledComponent( new JSeparator(), 1, 1 );
+        addFilledComponent( mLoadButton_, 2, 1 );
+        addFilledComponent( mSaveButton_, 3, 1 );
+        addFilledComponent( mDeleteButton_, 4, 1 );
+        addFilledComponent( new JSeparator(), 9, 1 );
 
-        mSaveButton_.setToolTipText( "Save the current connection settings as a named connection" );
-        addFilledComponent( mSaveButton_, 2, 1 );
-
-        mConnectButton_.setToolTipText( "Connect with the defined connection parameters" );
-        addFilledComponent( mConnectButton_, 3, 1 );
-
-        mDisconnectButton_.setToolTipText( "Disconnect from the current connection" );
-        addFilledComponent( mDisconnectButton_, 4, 1 );
-
-        // padding
         addFilledComponent( new JLabel( " " ), 10, 1 );
-        addFilledComponent( new JLabel( " " ), 11, 1 );
-        addFilledComponent( new JLabel( " " ), 12, 1 );
-        addFilledComponent( new JLabel( " " ), 13, 1 );
 
+        addFilledComponent( new JSeparator(), 11, 1 );
+        addFilledComponent( mConnectButton_, 13, 1 );
+        addFilledComponent( mDisconnectButton_, 14, 1 );
+
+        addFilledComponent( new JSeparator(), 30, 1 );
+        addFilledComponent( mTestButton_, 31, 1 );
+        addFilledComponent( new JSeparator(), 40, 1 );
+    }
+
+    private void initButons()
+    {
+        mLoadButton_.setToolTipText( "Load a previously saved connection into the window" );
+        mSaveButton_.setToolTipText( "Save the current connection settings as a named connection" );
+        mDeleteButton_.setToolTipText( "Allows you to remove a named connection from the connection store" );
+        mConnectButton_.setToolTipText( "Connect with the defined connection parameters" );
+        mDisconnectButton_.setToolTipText( "Disconnect from the current connection" );
         mTestButton_.setToolTipText( "Test connection settings with current setting" );
-        addFilledComponent( mTestButton_, 30, 1 );
+
+        ActionListener l = createDefaultActionListener();
+        mSaveButton_.addActionListener( l );
+        mLoadButton_.addActionListener( l );
+        mDeleteButton_.addActionListener( l );
+        mConnectButton_.addActionListener( l );
+        mDisconnectButton_.addActionListener( l );
+        mTestButton_.addActionListener( l );
+    }
+
+    private ActionListener createDefaultActionListener()
+    {
+        return new ActionListener()
+        {
+
+            public void actionPerformed( ActionEvent e )
+            {
+                JOptionPane.showMessageDialog( JmsConnectionButtons.this,
+                                               "This button has not been implemented",
+                                               "No implementation",
+                                               JOptionPane.INFORMATION_MESSAGE );
+            }
+        };
+    }
+
+    /**
+     * Cleans all action listeners from a given JButton
+     * 
+     * @param aBut
+     *            the button to remove the action listeners from
+     */
+    private void cleanListeners( JButton aBut )
+    {
+        ActionListener[] als = aBut.getActionListeners();
+        for ( ActionListener a : als )
+        {
+            aBut.removeActionListener( a );
+        }
+    }
+
+    /**
+     * add an action listsnere to the delete button
+     * 
+     * @param al
+     *            the action litsner to add to the delete button
+     */
+    public void addDeleteActionListener( ActionListener al )
+    {
+        cleanListeners( mDeleteButton_ );
+        mDeleteButton_.addActionListener( al );
     }
 
     /**
@@ -63,6 +126,7 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
      */
     public void addSaveActionListener( ActionListener al )
     {
+        cleanListeners( mSaveButton_ );
         mSaveButton_.addActionListener( al );
     }
 
@@ -74,6 +138,7 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
      */
     public void addLoadActionListener( ActionListener al )
     {
+        cleanListeners( mLoadButton_ );
         mLoadButton_.addActionListener( al );
     }
 
@@ -85,6 +150,7 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
      */
     public void addTestActionListener( ActionListener al )
     {
+        cleanListeners( mTestButton_ );
         mTestButton_.addActionListener( al );
     }
 
@@ -96,6 +162,7 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
      */
     public void addConnectActionListener( ActionListener al )
     {
+        cleanListeners( mConnectButton_ );
         mConnectButton_.addActionListener( al );
     }
 
@@ -107,6 +174,7 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
      */
     public void addDisconnectActionListener( ActionListener al )
     {
+        cleanListeners( mDisconnectButton_ );
         mDisconnectButton_.addActionListener( al );
     }
 }
