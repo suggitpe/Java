@@ -14,7 +14,6 @@ import java.util.Observable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * Implementation of the jms connection manager interface
  * 
@@ -50,7 +49,18 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     public void connect( IJmsConnectionDetails aConnDetails ) throws MercuryException
     {
         mConnectionState_ = EConnectionState.CONNECTED;
-        LOG.warn( "Connection not implemented" );
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#disconnect()
+     */
+    public void disconnect() throws MercuryException
+    {
+        mConnectionState_ = EConnectionState.DISCONNECTED;
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -60,14 +70,6 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     {
         mConnectionState_ = EConnectionState.DISCONNECTED;
         return false;
-    }
-
-    /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#disconnect()
-     */
-    public void disconnect() throws MercuryException
-    {
-        mConnectionState_ = EConnectionState.DISCONNECTED;
     }
 
 }

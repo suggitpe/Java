@@ -103,7 +103,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      */
     public void update( Observable aObserved, Object arg1 )
     {
-        LOG.info( "Observable has changed [" + aObserved.getClass().getName() + "]" );
+        mStatus_.setText( mConnMgr_.getConnectionState().name() );
     }
 
     /**

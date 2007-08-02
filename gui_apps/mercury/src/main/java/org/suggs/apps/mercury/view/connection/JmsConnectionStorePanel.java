@@ -7,6 +7,7 @@ package org.suggs.apps.mercury.view.connection;
 import org.suggs.apps.mercury.model.connection.EConnectionType;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
+import org.suggs.apps.mercury.model.connection.MercuryConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.store.JmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.store.JmsConnectionStore;
 import org.suggs.apps.mercury.support.AbstractGridbagPanel;
@@ -131,13 +132,15 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      * Creates a new JMS connection details object
      * 
      * @return a new JMS connection details object
+     * @throws MercuryConnectionStoreException
+     *             if the data collected is not enough for a
+     *             connection
      */
-    public IJmsConnectionDetails getConnectionDetails()
+    public IJmsConnectionDetails getConnectionDetails() throws MercuryConnectionStoreException
     {
         if ( mServer_.getText().length() == 0 || mPort_.getText().length() == 0 || mType_.getSelectedItem() == null )
         {
-            LOG.warn( "invalid data returning null" );
-            return null;
+            throw new MercuryConnectionStoreException( "Invalid data in the connection store fields" );
         }
 
         return new JmsConnectionDetails( mName_.getText(), (EConnectionType) mType_.getSelectedItem(), mServer_.getText(), mPort_.getText() );

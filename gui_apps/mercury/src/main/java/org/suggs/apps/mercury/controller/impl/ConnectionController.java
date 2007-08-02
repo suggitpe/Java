@@ -124,7 +124,16 @@ public class ConnectionController implements InitializingBean, IConnectionContro
 
             public void actionPerformed( ActionEvent arg0 )
             {
-                mConnManagerModel_.testConnection( mConnStoreView_.getConnectionDetails() );
+                try
+                {
+                    mConnManagerModel_.testConnection( mConnStoreView_.getConnectionDetails() );
+                }
+                catch ( MercuryConnectionStoreException mcse )
+                {
+                    String err = "Failed to get connection details:\n" + mcse.getMessage();
+                    LOG.warn( err );
+                    JOptionPane.showMessageDialog( mConnManagerView_, err, "Connect failure", JOptionPane.ERROR_MESSAGE );
+                }
             }
         };
     }
@@ -147,6 +156,9 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                 }
                 catch ( MercuryException jhe )
                 {
+                    String err = "Exception caught when trying to connect to connection:\n" + jhe.getMessage();
+                    LOG.warn( err );
+                    JOptionPane.showMessageDialog( mConnManagerView_, err, "Connect failure", JOptionPane.ERROR_MESSAGE );
                 }
             }
         };
@@ -170,6 +182,9 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                 }
                 catch ( MercuryException jhe )
                 {
+                    String err = "Exception caught when trying to disconnect from connection:\n" + jhe.getMessage();
+                    LOG.warn( err );
+                    JOptionPane.showMessageDialog( mConnManagerView_, err, "Disconnect failure", JOptionPane.ERROR_MESSAGE );
                 }
             }
         };
@@ -308,9 +323,9 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                 if ( input != null )
                 {
                     LOG.debug( "Saving connection as [" + input + "]" );
-                    IJmsConnectionDetails dtls = mConnStoreView_.getConnectionDetails();
                     try
                     {
+                        IJmsConnectionDetails dtls = mConnStoreView_.getConnectionDetails();
                         mConnStoreModel_.saveConnectionParameters( input, dtls );
                     }
                     catch ( MercuryConnectionStoreException mce )
