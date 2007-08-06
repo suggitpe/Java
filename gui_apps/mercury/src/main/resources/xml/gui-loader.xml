@@ -3,6 +3,8 @@
 <!-- Copyright 2006 UBS Investment Bank -->
 <beans>
     
+    <import resource="mercury-connection.xml"/>
+    
     <!-- this is the main loader impl -->
     <bean id="jmsHelper" class="org.suggs.apps.mercury.impl.JmsHelper">
         <property name="connectionManagerPanel" ref="connMgrPanelBean"/>
@@ -23,16 +25,7 @@
     <!-- Main functional interface -->
     <bean id="connButtonsBean" class="org.suggs.apps.mercury.view.connection.JmsConnectionButtons"/>
     
-    <!-- This is the main connection manager bean -->
-    <bean id="connMgrBean" class="org.suggs.apps.mercury.model.connection.manager.JmsConnectionManager"/>
-    
-    <!-- This is the main connection store bean -->
-    <bean id="connStrBean" class="org.suggs.apps.mercury.model.connection.store.JmsConnectionStore">
-        <property name="persistenceLayer">
-            <bean class="org.suggs.apps.mercury.model.connection.store.persistence.XmlPersistenceLayer"/>
-        </property>
-    </bean>
-    <!-- This is the MVC controller for the connections -->
+       <!-- This is the MVC controller for the connections -->
     <bean id="connCtrlBean" class="org.suggs.apps.mercury.controller.impl.ConnectionController">
         <constructor-arg ref="connStrBean"/>
         <constructor-arg ref="connMgrBean"/>

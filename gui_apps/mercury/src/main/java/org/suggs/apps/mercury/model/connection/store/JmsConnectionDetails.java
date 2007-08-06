@@ -18,7 +18,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
 
     private String mName_;
     private EConnectionType mType_;
-    private String mServer_;
+    private String mHostName_;
     private String mPort_;
 
     /**
@@ -47,8 +47,25 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     {
         mName_ = aName;
         mType_ = aType;
-        mServer_ = aServer;
+        mHostName_ = aServer;
         mPort_ = aPort;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+        return new StringBuffer( "JmsConnectionDetails: name=[" ).append( mName_ )
+            .append( "], type=[" )
+            .append( mType_.name() )
+            .append( "], hostname=[" )
+            .append( mHostName_ )
+            .append( "], port=[" )
+            .append( mPort_ )
+            .append( "]" )
+            .toString();
     }
 
     /**
@@ -65,7 +82,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
         {
             ret = false;
         }
-        else if ( mServer_ == null || mServer_.length() < 1 )
+        else if ( mHostName_ == null || mHostName_.length() < 1 )
         {
             ret = false;
         }
@@ -101,11 +118,11 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getConnectionServer()
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getConnectionHostname()
      */
-    public String getConnectionServer()
+    public String getConnectionHostname()
     {
-        return mServer_;
+        return mHostName_;
     }
 
     /**

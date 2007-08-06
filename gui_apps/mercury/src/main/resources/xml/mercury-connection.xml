@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- Copyright 2006 UBS Investment Bank -->
+<beans>
+ 
+    <!-- This is the main connection manager bean -->
+    <bean id="connMgrBean" class="org.suggs.apps.mercury.model.connection.manager.JmsConnectionManager">
+        <property name="adapters" ref="adapterMapBean"/>
+    </bean>
+    
+    <!-- This is the main connection store bean -->
+    <bean id="connStrBean" class="org.suggs.apps.mercury.model.connection.store.JmsConnectionStore">
+        <property name="persistenceLayer">
+            <bean class="org.suggs.apps.mercury.model.connection.store.persistence.XmlPersistenceLayer"/>
+        </property>
+    </bean>
+    
+    <!-- The map of adapters that are required for the connection manager -->
+    <bean id="adapterMapBean" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="EMS" value-ref="emsAdapterBean"/>
+                <entry key="MQ" value-ref="mqAdapterBean"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    
+    <!-- the underlying connectiopn adapters -->
+    <bean id="emsAdapterBean" class="org.suggs.apps.mercury.model.connection.manager.adapters.EmsConnectionAdapter">
+        <property name="initialContextFactory" value="com.tibco.tibjms.naming.TibjmsInitialContextFactory"/>
+    </bean>
+    
+    <bean id="mqAdapterBean" class="org.suggs.apps.mercury.model.connection.manager.adapters.MqConnectionAdapter">
+    </bean>
+    
+</beans>

@@ -4,7 +4,6 @@
  */
 package org.suggs.apps.mercury.model.connection;
 
-import org.suggs.apps.mercury.MercuryException;
 
 /**
  * This interface manages all of the connections available to the GUI
@@ -35,16 +34,16 @@ public interface IJmsConnectionManager
      * Connect to a defined JMS resource
      * 
      * @param aConnDetails
-     * @throws MercuryException
+     * @throws MercuryConnectionException
      */
-    void connect( IJmsConnectionDetails aConnDetails ) throws MercuryException;
+    void connect( IJmsConnectionDetails aConnDetails ) throws MercuryConnectionException;
 
     /**
      * Disconnect from the current connection
      * 
-     * @throws MercuryException
+     * @throws MercuryConnectionException
      *             if there are any problems in the disconnect
      */
-    void disconnect() throws MercuryException;
+    void disconnect() throws MercuryConnectionException;
 
 }

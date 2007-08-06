@@ -16,9 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
@@ -31,8 +28,6 @@ import org.springframework.util.Assert;
  */
 public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean, Observer
 {
-
-    private static Log LOG = LogFactory.getLog( JmsConnectionManagerPanel.class );
 
     private JmsConnectionManager mConnMgr_;
 

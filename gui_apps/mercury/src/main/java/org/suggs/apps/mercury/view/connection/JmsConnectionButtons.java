@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
@@ -27,6 +26,7 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
     private JButton mSaveButton_ = new JButton( "Save" );
     private JButton mLoadButton_ = new JButton( "Load" );
     private JButton mDeleteButton_ = new JButton( "Delete" );
+    private JButton mSearchButton_ = new JButton( "Search" );
     private JButton mConnectButton_ = new JButton( "Connect" );
     private JButton mDisconnectButton_ = new JButton( "Disconnect" );
     private JButton mTestButton_ = new JButton( "Test" );
@@ -47,7 +47,7 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
         addFilledComponent( mDeleteButton_, 4, 1 );
         addFilledComponent( new JSeparator(), 9, 1 );
 
-        addFilledComponent( new JLabel( " " ), 10, 1 );
+        addFilledComponent( mSearchButton_, 10, 1 );
 
         addFilledComponent( new JSeparator(), 11, 1 );
         addFilledComponent( mConnectButton_, 13, 1 );
@@ -58,11 +58,16 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
         addFilledComponent( new JSeparator(), 40, 1 );
     }
 
+    /**
+     * Initialises the buttons with tool tips and a default action
+     * listener
+     */
     private void initButons()
     {
         mLoadButton_.setToolTipText( "Load a previously saved connection into the window" );
         mSaveButton_.setToolTipText( "Save the current connection settings as a named connection" );
         mDeleteButton_.setToolTipText( "Allows you to remove a named connection from the connection store" );
+        mSearchButton_.setToolTipText( "Searches for destinations and connection factories" );
         mConnectButton_.setToolTipText( "Connect with the defined connection parameters" );
         mDisconnectButton_.setToolTipText( "Disconnect from the current connection" );
         mTestButton_.setToolTipText( "Test connection settings with current setting" );
@@ -71,11 +76,18 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
         mSaveButton_.addActionListener( l );
         mLoadButton_.addActionListener( l );
         mDeleteButton_.addActionListener( l );
+        mSearchButton_.addActionListener( l );
         mConnectButton_.addActionListener( l );
         mDisconnectButton_.addActionListener( l );
         mTestButton_.addActionListener( l );
     }
 
+    /**
+     * Creates a default action listsner so that we can feed back to
+     * the user that this has no impl.
+     * 
+     * @return the defauly action listener
+     */
     private ActionListener createDefaultActionListener()
     {
         return new ActionListener()
@@ -140,6 +152,18 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
     {
         cleanListeners( mLoadButton_ );
         mLoadButton_.addActionListener( al );
+    }
+
+    /**
+     * Add an action listener to the Search button
+     * 
+     * @param al
+     *            the action listener to add
+     */
+    public void addSearchActionListener( ActionListener al )
+    {
+        cleanListeners( mSearchButton_ );
+        mSearchButton_.addActionListener( al );
     }
 
     /**

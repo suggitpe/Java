@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- Copyright 2006 UBS Investment Bank -->
+<beans>
+    
+    <import resource="classpath:xml/mercury-connection.xml"/>
+    
+    <alias name="connMgrBean" alias="mConnMgr_"/>
+    
+    <!-- ======== USED FOR TESTS TO CONNECT TO SVR ======== -->
+    <bean id="mPortNum_" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="7222"/>
+    </bean>
+    
+    <bean id="mServer_" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="localhost"/>
+    </bean>
+    
+    <bean id="mType_" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="ems"/>
+    </bean>
+    
+</beans>

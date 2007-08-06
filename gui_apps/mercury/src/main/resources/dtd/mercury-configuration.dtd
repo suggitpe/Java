@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT connectionStore (connection*) >
-    <!ELEMENT connection (server, port) >
+    <!ELEMENT connection (hostname, port, channel?, serverName?) >
     <!ATTLIST connection
         name CDATA #REQUIRED
         type CDATA #REQUIRED >
-        <!ELEMENT server (#PCDATA) >
+        <!ELEMENT hostname (#PCDATA) >
         <!ELEMENT port (#PCDATA) >
+        <!ELEMENT channel (#PCDATA) >
+        <!ELEMENT serverName (#PCDATA) >

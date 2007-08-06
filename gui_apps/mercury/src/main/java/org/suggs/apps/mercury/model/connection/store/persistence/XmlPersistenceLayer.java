@@ -81,16 +81,16 @@ public class XmlPersistenceLayer implements IPersistenceLayer
                 String name = atts.getNamedItem( "name" ).getTextContent();
                 EConnectionType type = EConnectionType.createTypeFromString( atts.getNamedItem( "type" ).getTextContent() );
                 NodeList childList = list.item( i ).getChildNodes();
-                String svr = null;
+                String host = null;
                 String port = null;
                 for ( int j = 0; j < childList.getLength(); ++j )
                 {
                     Node n = childList.item( j );
                     if ( n.getTextContent() != null )
                     {
-                        if ( n.getNodeName().equals( "server" ) )
+                        if ( n.getNodeName().equals( "hostname" ) )
                         {
-                            svr = n.getTextContent();
+                            host = n.getTextContent();
                         }
                         else if ( n.getNodeName().equals( "port" ) )
                         {
@@ -99,7 +99,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
                     }
                 }
 
-                ret.put( name, new JmsConnectionDetails( name, type, svr, port ) );
+                ret.put( name, new JmsConnectionDetails( name, type, host, port ) );
             }
 
             return ret;
@@ -140,7 +140,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
             conn.setAttribute( "name", dtls.getConnectionName() );
             conn.setAttribute( "type", dtls.getConnectionType().name() );
             Element svr = newDoc.createElement( "server" );
-            svr.setTextContent( dtls.getConnectionServer() );
+            svr.setTextContent( dtls.getConnectionHostname() );
             conn.appendChild( svr );
             Element port = newDoc.createElement( "port" );
             port.setTextContent( dtls.getConnectionPort() );

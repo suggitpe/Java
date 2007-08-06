@@ -40,7 +40,7 @@ public interface IJmsConnectionDetails
      * 
      * @return the name of the server
      */
-    String getConnectionServer();
+    String getConnectionHostname();
 
     /**
      * Get the port number to connect to
