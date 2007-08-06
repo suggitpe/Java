@@ -7,6 +7,8 @@ package org.suggs.apps.mercury.model.connection.manager.adapters;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.manager.IConnectionAdapter;
 
+import java.util.Map;
+
 import javax.naming.Context;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -31,6 +33,15 @@ public class MqConnectionAdapter implements IConnectionAdapter
     {
         LOG.debug( "createJmsContext has not been implemented yet for the mq adapter" );
         throw new NotImplementedException();
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.manager.IConnectionAdapter#findAllBrokerObjects()
+     */
+    public Map<String, String> findAllBrokerObjects()
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

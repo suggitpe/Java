@@ -6,6 +6,8 @@ package org.suggs.apps.mercury.model.connection.manager;
 
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 
+import java.util.Map;
+
 import javax.naming.Context;
 
 /**
@@ -27,5 +29,13 @@ public interface IConnectionAdapter
      * @return the connection context
      */
     Context createJmsContext( IJmsConnectionDetails aConnDetails );
+
+    /**
+     * Finds all objects on the messaging broker (queues, topics,
+     * connectionFactories)
+     * 
+     * @return a map of the broker objects
+     */
+    Map<String, String> findAllBrokerObjects();
 
 }

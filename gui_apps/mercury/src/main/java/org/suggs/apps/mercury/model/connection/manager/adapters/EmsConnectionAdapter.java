@@ -7,6 +7,7 @@ package org.suggs.apps.mercury.model.connection.manager.adapters;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.manager.IConnectionAdapter;
 
+import java.util.Map;
 import java.util.Properties;
 
 import javax.naming.Context;
@@ -61,6 +62,15 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
         }
 
         return ret;
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.manager.IConnectionAdapter#findAllBrokerObjects()
+     */
+    public Map<String, String> findAllBrokerObjects()
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     /**
