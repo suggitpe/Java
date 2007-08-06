@@ -13,7 +13,7 @@ import java.util.Observable;
 
 
 /**
- * TODO Write javadoc for FarenheightGUI
+ * Simple GUI for the celcius part of the temperature demo
  * 
  * @author suggitpe
  * @version 1.0 9 Jul 2007

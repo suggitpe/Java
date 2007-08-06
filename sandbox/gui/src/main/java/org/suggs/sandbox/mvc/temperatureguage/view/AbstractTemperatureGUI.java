@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 
 
 /**
- * TODO Write javadoc for TemperatureGUI
+ * Abstract class for the temperature guage demol
  * 
  * @author suggitpe
  * @version 1.0 9 Jul 2007

@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 
 
 /**
- * TODO Write javadoc for TemperatureGuage
+ * Temperature guage impl for a MVC demo
  * 
  * @author suggitpe
  * @version 1.0 9 Jul 2007
