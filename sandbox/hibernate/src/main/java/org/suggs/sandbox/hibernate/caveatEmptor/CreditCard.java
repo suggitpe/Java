@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * TODO Write javadoc for CreditCard
+ * Hibernate object for a credit card
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

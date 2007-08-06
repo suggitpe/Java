@@ -26,7 +26,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 /**
- * TODO Write javadoc for Item
+ * Hibernate object representing an Item that can be auctioned
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

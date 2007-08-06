@@ -25,7 +25,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 /**
- * TODO Write javadoc for AbstractMessageHibernateDaoTest
+ * Test object
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

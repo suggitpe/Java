@@ -15,7 +15,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 /**
- * TODO Write javadoc for SchemaCreator
+ * Schema creation class uses the hibernate configuration to drive the
+ * creation of the schema
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

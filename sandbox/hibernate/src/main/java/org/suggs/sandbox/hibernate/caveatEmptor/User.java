@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
 /**
- * TODO Write javadoc for User
+ * Hibernate object representing a user
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

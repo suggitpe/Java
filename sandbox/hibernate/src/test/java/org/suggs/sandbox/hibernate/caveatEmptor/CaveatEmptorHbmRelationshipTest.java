@@ -5,7 +5,7 @@
 package org.suggs.sandbox.hibernate.caveatEmptor;
 
 /**
- * TODO Write javadoc for CaveatEmptorHbmRelationshipTest
+ * Test object
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

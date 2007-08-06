@@ -19,7 +19,7 @@ import org.hibernate.Transaction;
 
 /**
  * 
- * TODO Write javadoc for AbstractHibernateSpringTest
+ * Test object
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

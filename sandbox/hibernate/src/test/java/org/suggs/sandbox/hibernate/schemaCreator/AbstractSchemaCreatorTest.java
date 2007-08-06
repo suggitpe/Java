@@ -19,7 +19,7 @@ import org.hibernate.cfg.Configuration;
 
 /**
  * 
- * TODO Write javadoc for AbstractSchemaCreatorTest
+ * Test object
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

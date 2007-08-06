@@ -6,7 +6,7 @@ package org.suggs.sandbox.hibernate.caveatEmptor;
 
 /**
  * 
- * TODO Write javadoc for CaveatEmptorHbmObjectTest
+ * Test object
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

@@ -5,7 +5,7 @@
 package org.suggs.sandbox.hibernate.chapter2;
 
 /**
- * TODO Write javadoc for MessageHibernateHbmDaoTest
+ * Test object
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007

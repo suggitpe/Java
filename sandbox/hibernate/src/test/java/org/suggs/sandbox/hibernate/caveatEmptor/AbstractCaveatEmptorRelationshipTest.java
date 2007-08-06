@@ -22,7 +22,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
- * TODO Write javadoc for AbstractCaveatEmptorRelationshipTest
+ * Test object
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007
