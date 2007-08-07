@@ -50,7 +50,7 @@ public class GuiLoader
         final String cfgFile = aArgs[0];
 
         BeanFactory fact = new XmlBeanFactory( new ClassPathResource( cfgFile ) );
-        final IJmsHelper helper = (IJmsHelper) fact.getBean( "jmsHelper" );
+        final IMercuryApp helper = (IMercuryApp) fact.getBean( "mercuryApplication" );
 
         javax.swing.SwingUtilities.invokeLater( new Runnable()
         {

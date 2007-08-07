@@ -112,7 +112,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
             throw new MercuryConnectionStoreException( "Connection details null" );
         }
 
-        aDetails.setConnectionName( aName.toUpperCase() );
+        aDetails.setName( aName.toUpperCase() );
 
         if ( !( aDetails.isConnectionDetailsValid() ) )
         {
@@ -126,7 +126,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
         else
         {
             mStoreState_ = "Saved";
-            mConnStore_.put( aDetails.getConnectionName(), aDetails );
+            mConnStore_.put( aDetails.getName(), aDetails );
             mPersistenceLayer_.savePersistenceLayer( mConnStore_ );
         }
         setChanged();
@@ -135,7 +135,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
 
     /**
      * tests to see if the connection details actually exists in the
-     * conn store
+     * conn store. TODO: need to finish off this impl
      * 
      * @param aConnDtls
      *            the jms connection details to test for
@@ -144,7 +144,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
      */
     private boolean connectionExists( IJmsConnectionDetails aConnDtls )
     {
-        if ( mConnStore_.containsKey( aConnDtls.getConnectionName() ) )
+        if ( mConnStore_.containsKey( aConnDtls.getName() ) )
         {
             return true;
         }

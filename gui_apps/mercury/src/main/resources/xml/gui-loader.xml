@@ -6,7 +6,7 @@
     <import resource="mercury-connection.xml"/>
     
     <!-- this is the main loader impl -->
-    <bean id="jmsHelper" class="org.suggs.apps.mercury.impl.JmsHelper">
+    <bean id="mercuryApplication" class="org.suggs.apps.mercury.impl.MercuryApplication">
         <property name="connectionManagerPanel" ref="connMgrPanelBean"/>
         <property name="connectionStorePanel" ref="connStrPanelBean"/>
         <property name="connectionButtons" ref="connButtonsBean"/>

@@ -155,10 +155,10 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      */
     public void loadValues( IJmsConnectionDetails aDtls )
     {
-        mName_.setText( aDtls.getConnectionName() );
-        mServer_.setText( aDtls.getConnectionHostname() );
-        mPort_.setText( aDtls.getConnectionPort() );
-        mType_.setSelectedItem( aDtls.getConnectionType() );
+        mName_.setText( aDtls.getName() );
+        mServer_.setText( aDtls.getHostname() );
+        mPort_.setText( aDtls.getPort() );
+        mType_.setSelectedItem( aDtls.getType() );
     }
 
     /**

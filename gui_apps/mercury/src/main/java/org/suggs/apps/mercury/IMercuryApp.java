@@ -10,7 +10,7 @@ package org.suggs.apps.mercury;
  * @author suggitpe
  * @version 1.0 20 Jun 2007
  */
-public interface IJmsHelper
+public interface IMercuryApp
 {
 
     /**

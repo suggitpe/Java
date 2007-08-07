@@ -66,14 +66,14 @@ public class JmsConnectionManagerTest extends AbstractMercuryModelTest
                                                                        mPortNum_ );
 
                 LOG.debug( "Initial state is [" + mConnMgr_.getConnectionState().name() + "]" );
-                try
+                /*try
                 {
                     mConnMgr_.connect( dtls );
                 }
                 catch ( MercuryConnectionException me )
                 {
                     fail( "Exception thrown when trying to connect: " + me.getMessage() );
-                }
+                }*/
 
                 LOG.debug( "Connected state is [" + mConnMgr_.getConnectionState().name() + "]" );
                 if ( mConnMgr_.getConnectionState() != EConnectionState.CONNECTED )

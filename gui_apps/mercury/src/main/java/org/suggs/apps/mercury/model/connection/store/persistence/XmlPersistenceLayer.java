@@ -42,7 +42,8 @@ import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 /**
- * TODO Write javadoc for XmlPersistenceLayer
+ * Implementation of the persistence layer interface using an XML file
+ * as its storage layer
  * 
  * @author suggitpe
  * @version 1.0 27 Jul 2007
@@ -83,6 +84,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
                 NodeList childList = list.item( i ).getChildNodes();
                 String host = null;
                 String port = null;
+                Map<String, String> metadata = new HashMap<String, String>();
                 for ( int j = 0; j < childList.getLength(); ++j )
                 {
                     Node n = childList.item( j );
@@ -96,10 +98,19 @@ public class XmlPersistenceLayer implements IPersistenceLayer
                         {
                             port = n.getTextContent();
                         }
+                        else if ( n.getNodeName().equals( "metadata" ) )
+                        {
+                            NodeList meta = n.getChildNodes();
+                            for ( int k = 0; k < meta.getLength(); ++k )
+                            {
+                                Node g = meta.item( k );
+                                metadata.put( g.getAttributes().getNamedItem( "name" ).getTextContent(), g.getTextContent() );
+                            }
+                        }
                     }
                 }
 
-                ret.put( name, new JmsConnectionDetails( name, type, host, port ) );
+                ret.put( name, new JmsConnectionDetails( name, type, host, port, metadata ) );
             }
 
             return ret;
@@ -137,14 +148,36 @@ public class XmlPersistenceLayer implements IPersistenceLayer
             IJmsConnectionDetails dtls = aMap.get( key );
 
             Element conn = newDoc.createElement( "connection" );
-            conn.setAttribute( "name", dtls.getConnectionName() );
-            conn.setAttribute( "type", dtls.getConnectionType().name() );
-            Element svr = newDoc.createElement( "server" );
-            svr.setTextContent( dtls.getConnectionHostname() );
+            conn.setAttribute( "name", dtls.getName() );
+            conn.setAttribute( "type", dtls.getType().name() );
+
+            Element svr = newDoc.createElement( "hostname" );
+            svr.setTextContent( dtls.getHostname() );
             conn.appendChild( svr );
+
             Element port = newDoc.createElement( "port" );
-            port.setTextContent( dtls.getConnectionPort() );
+            port.setTextContent( dtls.getPort() );
             conn.appendChild( port );
+
+            Map<String, String> m = dtls.getMetaData();
+            if ( m.size() > 0 )
+            {
+                Element metadata = newDoc.createElement( "metadata" );
+                for ( String s : m.keySet() )
+                {
+                    Element data = newDoc.createElement( "data" );
+                    data.setAttribute( "name", s );
+                    data.setTextContent( m.get( s ) );
+                    metadata.appendChild( data );
+                }
+                conn.appendChild( metadata );
+            }
+
+            Element connFacts = newDoc.createElement( "connectionFactories" );
+            conn.appendChild( connFacts );
+
+            Element dests = newDoc.createElement( "destinations" );
+            conn.appendChild( dests );
 
             newDoc.getDocumentElement().appendChild( conn );
         }

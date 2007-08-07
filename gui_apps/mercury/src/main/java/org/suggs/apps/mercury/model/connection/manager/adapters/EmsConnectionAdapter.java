@@ -45,7 +45,7 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
      */
     public Context createJmsContext( IJmsConnectionDetails aConnDetails )
     {
-        String url = "tcp://" + aConnDetails.getConnectionHostname() + ":" + aConnDetails.getConnectionPort();
+        String url = "tcp://" + aConnDetails.getHostname() + ":" + aConnDetails.getPort();
         LOG.debug( "Creating EMS context with [" + mInitialontextFactory_ + "] and [" + url + "]" );
         Properties p = new Properties();
         p.put( Context.INITIAL_CONTEXT_FACTORY, mInitialontextFactory_ );
@@ -69,7 +69,8 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
      */
     public Map<String, String> findAllBrokerObjects()
     {
-        // TODO Auto-generated method stub
+        // TODO need to do the impl for all of the broker metadata
+        // info
         return null;
     }
 

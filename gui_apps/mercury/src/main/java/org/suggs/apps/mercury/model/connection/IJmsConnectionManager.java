@@ -4,7 +4,6 @@
  */
 package org.suggs.apps.mercury.model.connection;
 
-
 /**
  * This interface manages all of the connections available to the GUI
  * 
@@ -17,11 +16,13 @@ public interface IJmsConnectionManager
     /**
      * Test the connection parameters (makes a connection)
      * 
-     * @param aConnectionDetails
-     *            the connection details with which to connect
-     * @return true if the connection succeeds, else false
+     * @param aDetails
+     *            the context with which to connect
+     * @param aConnectionFactoryName
+     *            the connection factory name
+     * @return
      */
-    boolean testConnection( IJmsConnectionDetails aConnectionDetails );
+    boolean testConnection( IJmsConnectionDetails aDetails, String aConnectionFactoryName );
 
     /**
      * Returns the current state of the connection
@@ -33,10 +34,13 @@ public interface IJmsConnectionManager
     /**
      * Connect to a defined JMS resource
      * 
-     * @param aConnDetails
+     * @param aDetails
+     *            the connection details
+     * @param aConnectionFactoryName
+     *            the connection factory name
      * @throws MercuryConnectionException
      */
-    void connect( IJmsConnectionDetails aConnDetails ) throws MercuryConnectionException;
+    void connect( IJmsConnectionDetails aDetails, String aConnectionFactoryName ) throws MercuryConnectionException;
 
     /**
      * Disconnect from the current connection

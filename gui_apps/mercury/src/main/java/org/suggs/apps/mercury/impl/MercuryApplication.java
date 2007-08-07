@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.impl;
 
-import org.suggs.apps.mercury.IJmsHelper;
+import org.suggs.apps.mercury.IMercuryApp;
 import org.suggs.apps.mercury.MercuryException;
 import org.suggs.apps.mercury.controller.impl.ConnectionController;
 import org.suggs.apps.mercury.support.JmsHelperGuiBuilder;
@@ -36,10 +36,10 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 21 Jun 2007
  */
-public class JmsHelper implements IJmsHelper, InitializingBean
+public class MercuryApplication implements IMercuryApp, InitializingBean
 {
 
-    private static final Log LOG = LogFactory.getLog( JmsHelper.class );
+    private static final Log LOG = LogFactory.getLog( MercuryApplication.class );
 
     private JPanel mConnectionStorePanel_;
     private JPanel mConnectionManagerPanel_;
@@ -49,7 +49,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
     /**
      * Constructs a new instance.
      */
-    public JmsHelper()
+    public MercuryApplication()
     {
         super();
     }
@@ -66,7 +66,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
     }
 
     /**
-     * @see org.suggs.apps.mercury.IJmsHelper#buildGui()
+     * @see org.suggs.apps.mercury.IMercuryApp#buildGui()
      */
     public void buildGui() throws MercuryException
     {
@@ -83,7 +83,7 @@ public class JmsHelper implements IJmsHelper, InitializingBean
 
         JFrame.setDefaultLookAndFeelDecorated( true );
 
-        final JFrame frame = new JFrame( "JMS Helper Tool" );
+        final JFrame frame = new JFrame( "Mercury - a messaging helper" );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
         buildGuiPanels( frame.getContentPane() );

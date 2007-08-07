@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
 /**
- * TODO Write javadoc for AbstractMercuryModelTest
+ * Test object
  * 
  * @author suggitpe
  * @version 1.0 2 Aug 2007

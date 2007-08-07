@@ -9,7 +9,6 @@ import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.IJmsConnectionManager;
 import org.suggs.apps.mercury.model.connection.MercuryConnectionException;
 
-import java.util.Enumeration;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
@@ -17,14 +16,9 @@ import java.util.Set;
 import javax.jms.Connection;
 import javax.jms.ConnectionMetaData;
 import javax.jms.JMSException;
-import javax.naming.Context;
-import javax.naming.NamingException;
-import javax.naming.Reference;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.tibco.tibjms.naming.TibjmsContext;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -70,22 +64,14 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#connect(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#connect(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails,
+     *      java.lang.String)
      */
-    public void connect( IJmsConnectionDetails aConnDetails ) throws MercuryConnectionException
+    public void connect( IJmsConnectionDetails aDetails, String aConnectionFactoryName ) throws MercuryConnectionException
 
     {
-        LOG.debug( "Connecting using:" + aConnDetails );
         mConnectionState_ = EConnectionState.CONNECTED;
 
-        String connType = aConnDetails.getConnectionType().name().toUpperCase();
-        IConnectionAdapter adapter = mAdapters_.get( connType );
-        if ( adapter == null )
-        {
-            throw new MercuryConnectionException( "No adapter found for connection type [" + connType + "]" );
-        }
-        Context c = adapter.createJmsContext( aConnDetails );
-        
         setChanged();
         notifyObservers();
     }
@@ -129,9 +115,10 @@ public class JmsConnectionManager extends Observable implements IJmsConnectionMa
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#testConnection(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionManager#testConnection(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails,
+     *      java.lang.String)
      */
-    public boolean testConnection( IJmsConnectionDetails aConnectionDetails )
+    public boolean testConnection( IJmsConnectionDetails aDetails, String aConnectionFactoryName )
     {
         mConnectionState_ = EConnectionState.DISCONNECTED;
         return false;

@@ -4,6 +4,8 @@
  */
 package org.suggs.apps.mercury.model.connection;
 
+import java.util.Map;
+
 /**
  * An object to wrap up the connection details for a given connection
  * 
@@ -18,7 +20,7 @@ public interface IJmsConnectionDetails
      * 
      * @return the name of the connection
      */
-    String getConnectionName();
+    String getName();
 
     /**
      * Setter for the connection name
@@ -26,28 +28,35 @@ public interface IJmsConnectionDetails
      * @param aName
      *            the name for the connection details
      */
-    void setConnectionName( String aName );
+    void setName( String aName );
 
     /**
      * Get the connection type
      * 
      * @return the type of the connection
      */
-    EConnectionType getConnectionType();
+    EConnectionType getType();
 
     /**
      * Get the name for the server for the connection
      * 
      * @return the name of the server
      */
-    String getConnectionHostname();
+    String getHostname();
 
     /**
      * Get the port number to connect to
      * 
      * @return the port number for the connection
      */
-    String getConnectionPort();
+    String getPort();
+
+    /**
+     * Get any additional connection metadata for the connection
+     * 
+     * @return the connection metadata
+     */
+    Map<String, String> getMetaData();
 
     /**
      * Internal verification method that will self certify that the

@@ -124,13 +124,9 @@ public class ConnectionController implements InitializingBean, IConnectionContro
 
             public void actionPerformed( ActionEvent arg0 )
             {
-                try
+                if ( !( mConnManagerModel_.testConnection( null, null ) ) )
                 {
-                    mConnManagerModel_.testConnection( mConnStoreView_.getConnectionDetails() );
-                }
-                catch ( MercuryConnectionStoreException mcse )
-                {
-                    String err = "Failed to get connection details:\n" + mcse.getMessage();
+                    String err = "Test connection failed";
                     LOG.warn( err );
                     JOptionPane.showMessageDialog( mConnManagerView_, err, "Connect failure", JOptionPane.ERROR_MESSAGE );
                 }
@@ -152,7 +148,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
             {
                 try
                 {
-                    mConnManagerModel_.connect( mConnStoreView_.getConnectionDetails() );
+                    mConnManagerModel_.connect( null, null );
                 }
                 catch ( MercuryException jhe )
                 {

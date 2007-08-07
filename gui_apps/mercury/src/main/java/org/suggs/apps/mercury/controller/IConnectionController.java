@@ -6,7 +6,7 @@ package org.suggs.apps.mercury.controller;
 
 
 /**
- * TODO Write javadoc for IConnectionController
+ * Interface for the connection controller
  * 
  * @author suggitpe
  * @version 1.0 17 Jul 2007

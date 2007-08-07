@@ -16,7 +16,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * TODO Write javadoc for MqConnectionAdapter
+ * TODO this class needs to be implemented. This is the connection
+ * adaopter for the MQ connections.
  * 
  * @author suggitpe
  * @version 1.0 3 Aug 2007
@@ -40,7 +41,6 @@ public class MqConnectionAdapter implements IConnectionAdapter
      */
     public Map<String, String> findAllBrokerObjects()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
