@@ -5,6 +5,7 @@
 package org.suggs.apps.mercury.model.connection;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * An object to wrap up the connection details for a given connection
@@ -57,6 +58,20 @@ public interface IJmsConnectionDetails
      * @return the connection metadata
      */
     Map<String, String> getMetaData();
+
+    /**
+     * Getter for the connection factory map
+     * 
+     * @return the connection factory map
+     */
+    public Map<String, Set<String>> getConnectionFactories();
+
+    /**
+     * Getter for the destinations
+     * 
+     * @return the destinations
+     */
+    public Map<String, Set<String>> getDestinations();
 
     /**
      * Internal verification method that will self certify that the

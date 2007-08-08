@@ -19,6 +19,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -55,6 +56,18 @@ public class XmlPersistenceLayer implements IPersistenceLayer
     private static final String MERCURY_HOME_DIR = System.getProperty( "user.home" ) + "/.mercury";
     private static final File MERCURY_FILE = new File( MERCURY_HOME_DIR + "/connectionStore.xml" );
 
+    private static final String CONNECTION = "connection";
+    private static final String NAME = "name";
+    private static final String TYPE = "type";
+    private static final String HOSTNAME = "hostname";
+    private static final String PORT = "port";
+    private static final String METADATA = "metadata";
+    private static final String DATA = "data";
+    private static final String CONN_FACTS_NODE = "connectionFactories";
+    private static final String CONN_FACT = "factory";
+    private static final String DESTINATIONS_NODE = "destinations";
+    private static final String DESTINATION = "destination";
+
     /**
      * @see org.suggs.apps.mercury.model.connection.store.IPersistenceLayer#readPersistenceLayer()
      */
@@ -64,53 +77,104 @@ public class XmlPersistenceLayer implements IPersistenceLayer
         try
         {
             XmlPersistenceLayerHandler handler = new XmlPersistenceLayerHandler();
-            DocumentBuilderFactory fact = DocumentBuilderFactory.newInstance();
-            fact.setValidating( true );
-            fact.setIgnoringElementContentWhitespace( true );
-            DocumentBuilder builder = fact.newDocumentBuilder();
+            DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+            builderFactory.setValidating( true );
+            builderFactory.setIgnoringElementContentWhitespace( true );
+            DocumentBuilder builder = builderFactory.newDocumentBuilder();
             builder.setEntityResolver( handler );
             builder.setErrorHandler( handler );
 
             LOG.debug( "Parsing configuration file [" + MERCURY_FILE + "]" );
             Document d = builder.parse( MERCURY_FILE );
 
-            NodeList list = d.getElementsByTagName( "connection" );
+            NodeList list = d.getElementsByTagName( CONNECTION );
             for ( int i = 0; i < list.getLength(); ++i )
             {
                 Node c = list.item( i );
                 NamedNodeMap atts = c.getAttributes();
-                String name = atts.getNamedItem( "name" ).getTextContent();
-                EConnectionType type = EConnectionType.createTypeFromString( atts.getNamedItem( "type" ).getTextContent() );
+                String name = atts.getNamedItem( NAME ).getTextContent();
+                EConnectionType type = EConnectionType.createTypeFromString( atts.getNamedItem( TYPE ).getTextContent() );
                 NodeList childList = list.item( i ).getChildNodes();
-                String host = null;
-                String port = null;
-                Map<String, String> metadata = new HashMap<String, String>();
+
+                JmsConnectionDetails connDtls = new JmsConnectionDetails( name, type );
+
                 for ( int j = 0; j < childList.getLength(); ++j )
                 {
                     Node n = childList.item( j );
                     if ( n.getTextContent() != null )
                     {
-                        if ( n.getNodeName().equals( "hostname" ) )
+                        if ( n.getNodeName().equals( HOSTNAME ) )
                         {
-                            host = n.getTextContent();
+                            connDtls.setHostname( n.getTextContent() );
                         }
-                        else if ( n.getNodeName().equals( "port" ) )
+                        else if ( n.getNodeName().equals( PORT ) )
                         {
-                            port = n.getTextContent();
+                            connDtls.setPort( n.getTextContent() );
                         }
-                        else if ( n.getNodeName().equals( "metadata" ) )
+                        else if ( n.getNodeName().equals( METADATA ) )
                         {
+                            Map<String, String> metadata = new HashMap<String, String>();
                             NodeList meta = n.getChildNodes();
                             for ( int k = 0; k < meta.getLength(); ++k )
                             {
                                 Node g = meta.item( k );
-                                metadata.put( g.getAttributes().getNamedItem( "name" ).getTextContent(), g.getTextContent() );
+                                metadata.put( g.getAttributes().getNamedItem( NAME ).getTextContent(), g.getTextContent() );
+
+                            }
+                            connDtls.setMetaData( metadata );
+                        }
+                        else if ( n.getNodeName().equals( CONN_FACTS_NODE ) )
+                        {
+                            NodeList factList = n.getChildNodes();
+                            if ( factList.getLength() > 0 )
+                            {
+                                Map<String, Set<String>> factories = new HashMap<String, Set<String>>();
+                                for ( int f = 0; f < factList.getLength(); ++f )
+                                {
+                                    Node fact = factList.item( f );
+                                    String factType = fact.getAttributes().getNamedItem( TYPE ).getTextContent();
+                                    // first make sure that we have a
+                                    // map entry for this type of
+                                    // factory
+                                    if ( !( factories.containsKey( factType ) ) )
+                                    {
+                                        factories.put( factType, new TreeSet<String>() );
+                                    }
+                                    // Then we put the destination in
+                                    // the map->set
+                                    factories.get( factType ).add( fact.getTextContent() );
+                                }
+                                connDtls.setConnectionFactories( factories );
+                            }
+                        }
+                        else if ( n.getNodeName().equals( DESTINATIONS_NODE ) )
+                        {
+                            NodeList destList = n.getChildNodes();
+                            if ( destList.getLength() > 0 )
+                            {
+                                Map<String, Set<String>> destinations = new HashMap<String, Set<String>>();
+                                for ( int z = 0; z < destList.getLength(); ++z )
+                                {
+                                    Node dest = destList.item( z );
+                                    String destType = dest.getAttributes().getNamedItem( TYPE ).getTextContent();
+                                    // first make sure that we have a
+                                    // map entry for this type of
+                                    // destination
+                                    if ( !( destinations.containsKey( destType ) ) )
+                                    {
+                                        destinations.put( destType, new TreeSet<String>() );
+                                    }
+                                    // Then we put the destination in
+                                    // the map->set
+                                    destinations.get( destType ).add( dest.getTextContent() );
+                                }
+                                connDtls.setDestinations( destinations );
                             }
                         }
                     }
                 }
 
-                ret.put( name, new JmsConnectionDetails( name, type, host, port, metadata ) );
+                ret.put( name, connDtls );
             }
 
             return ret;
@@ -147,39 +211,63 @@ public class XmlPersistenceLayer implements IPersistenceLayer
             LOG.debug( "Building key [" + key + "]" );
             IJmsConnectionDetails dtls = aMap.get( key );
 
-            Element conn = newDoc.createElement( "connection" );
-            conn.setAttribute( "name", dtls.getName() );
-            conn.setAttribute( "type", dtls.getType().name() );
+            Element connElem = newDoc.createElement( CONNECTION );
+            connElem.setAttribute( NAME, dtls.getName() );
+            connElem.setAttribute( TYPE, dtls.getType().name() );
 
-            Element svr = newDoc.createElement( "hostname" );
-            svr.setTextContent( dtls.getHostname() );
-            conn.appendChild( svr );
+            Element svrElem = newDoc.createElement( HOSTNAME );
+            svrElem.setTextContent( dtls.getHostname() );
+            connElem.appendChild( svrElem );
 
-            Element port = newDoc.createElement( "port" );
-            port.setTextContent( dtls.getPort() );
-            conn.appendChild( port );
+            Element portElem = newDoc.createElement( PORT );
+            portElem.setTextContent( dtls.getPort() );
+            connElem.appendChild( portElem );
 
             Map<String, String> m = dtls.getMetaData();
             if ( m.size() > 0 )
             {
-                Element metadata = newDoc.createElement( "metadata" );
+                Element metadataElem = newDoc.createElement( METADATA );
                 for ( String s : m.keySet() )
                 {
-                    Element data = newDoc.createElement( "data" );
-                    data.setAttribute( "name", s );
-                    data.setTextContent( m.get( s ) );
-                    metadata.appendChild( data );
+                    Element dataElem = newDoc.createElement( DATA );
+                    dataElem.setAttribute( NAME, s );
+                    dataElem.setTextContent( m.get( s ) );
+                    metadataElem.appendChild( dataElem );
                 }
-                conn.appendChild( metadata );
+                connElem.appendChild( metadataElem );
             }
 
-            Element connFacts = newDoc.createElement( "connectionFactories" );
-            conn.appendChild( connFacts );
+            Map<String, Set<String>> factMap = dtls.getConnectionFactories();
+            Element connFactsElem = newDoc.createElement( CONN_FACTS_NODE );
+            for ( String factType : factMap.keySet() )
+            {
+                Set<String> facts = factMap.get( factType );
+                for ( String f : facts )
+                {
+                    Element factoryElem = newDoc.createElement( CONN_FACT );
+                    factoryElem.setAttribute( TYPE, factType );
+                    factoryElem.setTextContent( f );
+                    connFactsElem.appendChild( factoryElem );
+                }
+            }
+            connElem.appendChild( connFactsElem );
 
-            Element dests = newDoc.createElement( "destinations" );
-            conn.appendChild( dests );
+            Map<String, Set<String>> destMap = dtls.getDestinations();
+            Element destsElem = newDoc.createElement( DESTINATIONS_NODE );
+            for ( String destType : destMap.keySet() )
+            {
+                Set<String> dests = destMap.get( destType );
+                for ( String d : dests )
+                {
+                    Element destinationElem = newDoc.createElement( DESTINATION );
+                    destinationElem.setAttribute( TYPE, destType );
+                    destinationElem.setTextContent( d );
+                    destsElem.appendChild( destinationElem );
+                }
+            }
+            connElem.appendChild( destsElem );
 
-            newDoc.getDocumentElement().appendChild( conn );
+            newDoc.getDocumentElement().appendChild( connElem );
         }
 
         String xml = null;
@@ -194,18 +282,34 @@ public class XmlPersistenceLayer implements IPersistenceLayer
 
         LOG.debug( "New XML doc:\n" + xml );
 
+        persistClob( xml, MERCURY_FILE );
+
+    }
+
+    /**
+     * Persist CLOB data to the underlying persistence layer
+     * 
+     * @param aClob
+     *            the clob data to persist
+     * @param aFile
+     *            the file to persist the data
+     * @throws MercuryConnectionStoreException
+     *             if there are any issues in the persistence
+     */
+    public static final void persistClob( String aClob, File aFile ) throws MercuryConnectionStoreException
+    {
         // now we persiste the new values to the persistent xml file
-        LOG.debug( "Overwriting existing xml persistence layer with new file at [" + MERCURY_FILE + "]" );
         FileOutputStream out = null;
         FileChannel chan = null;
         try
         {
-            out = new FileOutputStream( MERCURY_FILE );
+            LOG.debug( "Overwriting existing xml persistence layer with new file at [" + aFile.getCanonicalPath() + "]" );
+            out = new FileOutputStream( aFile );
             chan = out.getChannel();
-            int xmlSize = xml.getBytes().length;
+            int xmlSize = aClob.getBytes().length;
 
             ByteBuffer buff = ByteBuffer.allocate( xmlSize );
-            buff.put( xml.getBytes() );
+            buff.put( aClob.getBytes() );
             // flip will move the buffer limit to where the buffer
             // pointer now sits
             buff.flip();
@@ -228,13 +332,12 @@ public class XmlPersistenceLayer implements IPersistenceLayer
                 LOG.warn( "Caught IOException when closing file channel [" + ioe.getMessage() + "]" );
             }
         }
-
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.store.IPersistenceLayer#verifyPersistenceLayer()
      */
-    public void verifyPersistenceLayer()
+    public final void verifyPersistenceLayer()
     {
         // check that the persistence dir exists
         File dir = new File( MERCURY_HOME_DIR );

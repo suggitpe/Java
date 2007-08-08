@@ -9,6 +9,7 @@ import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Implementation bean of the connection details interface
@@ -23,7 +24,9 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     private EConnectionType mType_;
     private String mHostName_;
     private String mPort_;
-    private Map<String, String> mMetaData_ = new HashMap();
+    private Map<String, String> mMetaData_ = new HashMap<String, String>();
+    private Map<String, Set<String>> mConnectionFactories_ = new HashMap<String, Set<String>>();
+    private Map<String, Set<String>> mDestinations_ = new HashMap<String, Set<String>>();
 
     /**
      * Constructs a new instance.
@@ -33,6 +36,20 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     public JmsConnectionDetails( String aName )
     {
         mName_ = aName;
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aName
+     *            the name of the connection
+     * @param aType
+     *            the type of the connection
+     */
+    public JmsConnectionDetails( String aName, EConnectionType aType )
+    {
+        mName_ = aName;
+        mType_ = aType;
     }
 
     /**
@@ -158,6 +175,17 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
+     * Setter for the host name
+     * 
+     * @param aHost
+     *            the host to set
+     */
+    public void setHostname( String aHost )
+    {
+        mHostName_ = aHost;
+    }
+
+    /**
      * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getPort()
      */
     public String getPort()
@@ -166,11 +194,71 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
+     * Setter for the port number
+     * 
+     * @param aPort
+     *            the port number to set
+     */
+    public void setPort( String aPort )
+    {
+        mPort_ = aPort;
+    }
+
+    /**
      * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getMetaData()
      */
     public Map<String, String> getMetaData()
     {
         return mMetaData_;
+    }
+
+    /**
+     * Setter for the connection metadata
+     * 
+     * @param aMap
+     *            the map of metadata to set
+     */
+    public void setMetaData( Map<String, String> aMap )
+    {
+        mMetaData_ = aMap;
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getConnectionFactories()
+     */
+    public Map<String, Set<String>> getConnectionFactories()
+    {
+        return mConnectionFactories_;
+    }
+
+    /**
+     * Setter for the connection factory map
+     * 
+     * @param aMap
+     *            the map of connection factories
+     */
+    public void setConnectionFactories( Map<String, Set<String>> aMap )
+    {
+        mConnectionFactories_ = aMap;
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getDestinations()
+     */
+    public Map<String, Set<String>> getDestinations()
+    {
+        return mDestinations_;
+    }
+
+    /**
+     * Setter for the map of destinations
+     * 
+     * @param aMap
+     *            the map of destinations
+     */
+    public void setDestinations( Map<String, Set<String>> aMap )
+    {
+        mDestinations_ = aMap;
     }
 
 }
