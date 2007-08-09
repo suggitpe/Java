@@ -154,7 +154,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      */
     public void loadConnectionValues( String aType )
     {
-        if ( aType == null )
+        if ( aType == null || aType.length() < 1 )
         {
             mConnectionFactories_.removeAllItems();
             mConnectionFactories_.setEditable( false );
