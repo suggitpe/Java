@@ -13,9 +13,9 @@
 <!ATTLIST data
     name CDATA #REQUIRED >
 
-<!ELEMENT connectionFactories (connectionFactory*) >
-<!ELEMENT connectionFactory (#PCDATA) >
-<!ATTLIST connectionFactory
+<!ELEMENT connectionFactories (factory*) >
+<!ELEMENT factory (#PCDATA) >
+<!ATTLIST factory
     type CDATA #REQUIRED >
 
 <!ELEMENT destinations (destination*) >
