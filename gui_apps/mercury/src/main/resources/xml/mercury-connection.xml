@@ -4,12 +4,12 @@
 <beans>
  
     <!-- This is the main connection manager bean -->
-    <bean id="connMgrBean" class="org.suggs.apps.mercury.model.connection.manager.JmsConnectionManager">
+    <bean id="connMgrBean" class="org.suggs.apps.mercury.model.connection.manager.ConnectionManager">
         <property name="adapters" ref="adapterMapBean"/>
     </bean>
     
     <!-- This is the main connection store bean -->
-    <bean id="connStrBean" class="org.suggs.apps.mercury.model.connection.store.JmsConnectionStore">
+    <bean id="connStrBean" class="org.suggs.apps.mercury.model.connection.store.ConnectionStore">
         <property name="persistenceLayer">
             <bean class="org.suggs.apps.mercury.model.connection.store.persistence.XmlPersistenceLayer"/>
         </property>

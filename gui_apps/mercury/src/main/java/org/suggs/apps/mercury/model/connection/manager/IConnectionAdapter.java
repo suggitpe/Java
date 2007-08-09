@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.model.connection.manager;
 
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IConnectionDetails;
 
 import java.util.Map;
 
@@ -28,7 +28,7 @@ public interface IConnectionAdapter
      *            the connection details required for the connection
      * @return the connection context
      */
-    Context createJmsContext( IJmsConnectionDetails aConnDetails );
+    Context createJmsContext( IConnectionDetails aConnDetails );
 
     /**
      * Finds all objects on the messaging broker (queues, topics,

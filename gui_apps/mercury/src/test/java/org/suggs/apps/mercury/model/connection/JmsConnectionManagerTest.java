@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.model.connection;
 
-import org.suggs.apps.mercury.model.connection.store.JmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.store.ConnectionDetails;
 import org.suggs.apps.mercury.model.support.AbstractMercuryModelTest;
 
 import org.apache.commons.logging.Log;
@@ -24,7 +24,7 @@ public class JmsConnectionManagerTest extends AbstractMercuryModelTest
     protected String mPortNum_;
     protected String mServer_;
     protected String mType_;
-    protected IJmsConnectionManager mConnMgr_;
+    protected IConnectionManager mConnMgr_;
 
     /**
      * Constructs a new instance.
@@ -60,7 +60,7 @@ public class JmsConnectionManagerTest extends AbstractMercuryModelTest
 
             public void runTest()
             {
-                IJmsConnectionDetails dtls = new JmsConnectionDetails( "TestConnection",
+                IConnectionDetails dtls = new ConnectionDetails( "TestConnection",
                                                                        EConnectionType.valueOf( "EMS" ),
                                                                        mServer_,
                                                                        mPortNum_ );

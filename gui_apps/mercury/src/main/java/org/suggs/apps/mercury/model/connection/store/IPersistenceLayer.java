@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.model.connection.store;
 
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IConnectionDetails;
 import org.suggs.apps.mercury.model.connection.MercuryConnectionStoreException;
 
 import java.util.Map;
@@ -34,7 +34,7 @@ public interface IPersistenceLayer
      * @throws MercuryConnectionStoreException
      *             if there are problems in the reading of the data;
      */
-    Map<String, IJmsConnectionDetails> readPersistenceLayer() throws MercuryConnectionStoreException;
+    Map<String, IConnectionDetails> readPersistenceLayer() throws MercuryConnectionStoreException;
 
     /**
      * Saves a given map of connection details to the underlying
@@ -47,6 +47,6 @@ public interface IPersistenceLayer
      *             if there are any problems in the persistence of the
      *             data
      */
-    void savePersistenceLayer( Map<String, IJmsConnectionDetails> aMap ) throws MercuryConnectionStoreException;
+    void savePersistenceLayer( Map<String, IConnectionDetails> aMap ) throws MercuryConnectionStoreException;
 
 }

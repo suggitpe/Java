@@ -8,12 +8,13 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * An object to wrap up the connection details for a given connection
+ * An object to wrap up the connection details for a given connection,
+ * including all available connection factories.
  * 
  * @author suggitpe
  * @version 1.0 28 Jun 2007
  */
-public interface IJmsConnectionDetails
+public interface IConnectionDetails
 {
 
     /**

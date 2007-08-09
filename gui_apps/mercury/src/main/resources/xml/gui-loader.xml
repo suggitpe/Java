@@ -14,16 +14,16 @@
     </bean>
     
     <!-- This is the panel interface to the connection manager  -->
-    <bean id="connMgrPanelBean" class="org.suggs.apps.mercury.view.connection.JmsConnectionManagerPanel">
+    <bean id="connMgrPanelBean" class="org.suggs.apps.mercury.view.connection.ConnectionManagerPanel">
         <constructor-arg ref="connMgrBean"/>
     </bean>
     
-    <bean id="connStrPanelBean" class="org.suggs.apps.mercury.view.connection.JmsConnectionStorePanel">
+    <bean id="connStrPanelBean" class="org.suggs.apps.mercury.view.connection.ConnectionStorePanel">
         <constructor-arg ref="connStrBean"/>
     </bean>
     
     <!-- Main functional interface -->
-    <bean id="connButtonsBean" class="org.suggs.apps.mercury.view.connection.JmsConnectionButtons"/>
+    <bean id="connButtonsBean" class="org.suggs.apps.mercury.view.connection.ConnectionButtons"/>
     
        <!-- This is the MVC controller for the connections -->
     <bean id="connCtrlBean" class="org.suggs.apps.mercury.controller.impl.ConnectionController">

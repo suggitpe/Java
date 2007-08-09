@@ -10,7 +10,7 @@ package org.suggs.apps.mercury.model.connection;
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public interface IJmsConnectionManager
+public interface IConnectionManager
 {
 
     /**
@@ -22,7 +22,7 @@ public interface IJmsConnectionManager
      *            the connection factory name
      * @return
      */
-    boolean testConnection( IJmsConnectionDetails aDetails, String aConnectionFactoryName );
+    boolean testConnection( IConnectionDetails aDetails, String aConnectionFactoryName );
 
     /**
      * Returns the current state of the connection
@@ -40,7 +40,7 @@ public interface IJmsConnectionManager
      *            the connection factory name
      * @throws MercuryConnectionException
      */
-    void connect( IJmsConnectionDetails aDetails, String aConnectionFactoryName ) throws MercuryConnectionException;
+    void connect( IConnectionDetails aDetails, String aConnectionFactoryName ) throws MercuryConnectionException;
 
     /**
      * Disconnect from the current connection

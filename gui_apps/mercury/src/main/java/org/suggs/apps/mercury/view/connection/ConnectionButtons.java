@@ -20,7 +20,7 @@ import javax.swing.JSeparator;
  * @author suggitpe
  * @version 1.0 11 Jul 2007
  */
-public class JmsConnectionButtons extends AbstractGridbagPanel
+public class ConnectionButtons extends AbstractGridbagPanel
 {
 
     private JButton mSaveButton_ = new JButton( "Save" );
@@ -36,7 +36,7 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
     /**
      * Constructs a new instance.
      */
-    public JmsConnectionButtons()
+    public ConnectionButtons()
     {
         super( "Ctrl" );
         initButons();
@@ -95,7 +95,7 @@ public class JmsConnectionButtons extends AbstractGridbagPanel
 
             public void actionPerformed( ActionEvent e )
             {
-                JOptionPane.showMessageDialog( JmsConnectionButtons.this,
+                JOptionPane.showMessageDialog( ConnectionButtons.this,
                                                "This button has not been implemented",
                                                "No implementation",
                                                JOptionPane.INFORMATION_MESSAGE );

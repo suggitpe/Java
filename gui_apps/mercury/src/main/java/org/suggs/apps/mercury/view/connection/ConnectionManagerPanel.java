@@ -4,8 +4,8 @@
  */
 package org.suggs.apps.mercury.view.connection;
 
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.manager.JmsConnectionManager;
+import org.suggs.apps.mercury.model.connection.IConnectionDetails;
+import org.suggs.apps.mercury.model.connection.manager.ConnectionManager;
 import org.suggs.apps.mercury.support.AbstractGridbagPanel;
 
 import java.awt.GridBagConstraints;
@@ -34,12 +34,12 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean, Observer
+public class ConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean, Observer
 {
 
-    private static final Log LOG = LogFactory.getLog( JmsConnectionManagerPanel.class );
+    private static final Log LOG = LogFactory.getLog( ConnectionManagerPanel.class );
 
-    private JmsConnectionManager mConnMgr_;
+    private ConnectionManager mConnMgr_;
 
     private JTextField mStatus_ = new JTextField();
     private JComboBox mType_ = new JComboBox();
@@ -53,7 +53,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      * Constructs a new instance. This is hidden as it is silly to
      * have an observer with nothing to observe.
      */
-    private JmsConnectionManagerPanel()
+    private ConnectionManagerPanel()
     {
         throw new IllegalStateException();
     }
@@ -64,7 +64,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      * @param aConnectionManager
      *            The connection manager that we will be observing
      */
-    public JmsConnectionManagerPanel( JmsConnectionManager aConnectionManager )
+    public ConnectionManagerPanel( ConnectionManager aConnectionManager )
     {
         super( "Connection Manager" );
         mConnMgr_ = aConnectionManager;
@@ -138,7 +138,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      *            the details from which you can derive the required
      *            data
      */
-    public void loadTypeValues( IJmsConnectionDetails aDetails )
+    public void loadTypeValues( IConnectionDetails aDetails )
     {
         mAvailableConnFacts_ = aDetails.getConnectionFactories();
         mAvailableDests_ = aDetails.getDestinations();
@@ -166,7 +166,10 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
             Set<String> conns = mAvailableConnFacts_.get( aType.toLowerCase() );
             updateConnectionFactories( conns.toArray( new String[conns.size()] ) );
             Set<String> dests = mAvailableDests_.get( aType.toLowerCase() );
-            updateDestinations( dests.toArray( new String[dests.size()] ) );
+            if ( dests != null && dests.size() > 0 )
+            {
+                updateDestinations( dests.toArray( new String[dests.size()] ) );
+            }
         }
     }
 
@@ -233,7 +236,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      * 
      * @return the connection manager
      */
-    public JmsConnectionManager getConnectionManager()
+    public ConnectionManager getConnectionManager()
     {
         return mConnMgr_;
     }
@@ -244,7 +247,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      * @param aConnMgr
      *            the connection manager to set
      */
-    public void setConnectionManager( JmsConnectionManager aConnMgr )
+    public void setConnectionManager( ConnectionManager aConnMgr )
     {
         mConnMgr_ = aConnMgr;
     }

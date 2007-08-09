@@ -6,13 +6,13 @@ package org.suggs.apps.mercury.controller.impl;
 
 import org.suggs.apps.mercury.MercuryException;
 import org.suggs.apps.mercury.controller.IConnectionController;
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.IJmsConnectionManager;
-import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
+import org.suggs.apps.mercury.model.connection.IConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IConnectionManager;
+import org.suggs.apps.mercury.model.connection.IConnectionStore;
 import org.suggs.apps.mercury.model.connection.MercuryConnectionStoreException;
-import org.suggs.apps.mercury.view.connection.JmsConnectionButtons;
-import org.suggs.apps.mercury.view.connection.JmsConnectionManagerPanel;
-import org.suggs.apps.mercury.view.connection.JmsConnectionStorePanel;
+import org.suggs.apps.mercury.view.connection.ConnectionButtons;
+import org.suggs.apps.mercury.view.connection.ConnectionManagerPanel;
+import org.suggs.apps.mercury.view.connection.ConnectionStorePanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,13 +39,13 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     private static final ImageIcon IMG_ = new ImageIcon( "jms.gif" );
 
     // models
-    private IJmsConnectionStore mConnStoreModel_;
-    private IJmsConnectionManager mConnManagerModel_;
+    private IConnectionStore mConnStoreModel_;
+    private IConnectionManager mConnManagerModel_;
 
     // views
-    private JmsConnectionButtons mButtonsView_;
-    private JmsConnectionManagerPanel mConnManagerView_;
-    private JmsConnectionStorePanel mConnStoreView_;
+    private ConnectionButtons mButtonsView_;
+    private ConnectionManagerPanel mConnManagerView_;
+    private ConnectionStorePanel mConnStoreView_;
 
     /**
      * Constructs a new instance.
@@ -69,8 +69,8 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * @param aMgrPanel
      *            the onnection manager panel
      */
-    public ConnectionController( IJmsConnectionStore aStr, IJmsConnectionManager aMgr, JmsConnectionButtons aButtons,
-                                 JmsConnectionStorePanel aStrPanel, JmsConnectionManagerPanel aMgrPanel )
+    public ConnectionController( IConnectionStore aStr, IConnectionManager aMgr, ConnectionButtons aButtons,
+                                 ConnectionStorePanel aStrPanel, ConnectionManagerPanel aMgrPanel )
     {
         super();
         mConnStoreModel_ = aStr;
@@ -276,7 +276,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                     LOG.debug( "Loading connection [" + input + "]" );
                     try
                     {
-                        IJmsConnectionDetails dtls = mConnStoreModel_.loadConnectionParameters( input );
+                        IConnectionDetails dtls = mConnStoreModel_.loadConnectionParameters( input );
                         mConnStoreView_.loadValues( dtls );
                         mConnManagerView_.loadTypeValues( dtls );
                     }
@@ -322,7 +322,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                     LOG.debug( "Saving connection as [" + input + "]" );
                     try
                     {
-                        IJmsConnectionDetails dtls = mConnStoreView_.getConnectionDetails();
+                        IConnectionDetails dtls = mConnStoreView_.getConnectionDetails();
                         mConnStoreModel_.saveConnectionParameters( input, dtls );
                     }
                     catch ( MercuryConnectionStoreException mce )
@@ -351,7 +351,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ConnectionManager.
      */
-    public IJmsConnectionManager getConnectionManager()
+    public IConnectionManager getConnectionManager()
     {
         return mConnManagerModel_;
     }
@@ -361,7 +361,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ConnectionStore.
      */
-    public IJmsConnectionStore getConnectionStore()
+    public IConnectionStore getConnectionStore()
     {
         return mConnStoreModel_;
     }
@@ -371,7 +371,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ButtonsView.
      */
-    public JmsConnectionButtons getButtonsView()
+    public ConnectionButtons getButtonsView()
     {
         return mButtonsView_;
     }
@@ -381,7 +381,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ConnManagerView.
      */
-    public JmsConnectionManagerPanel getConnManagerView()
+    public ConnectionManagerPanel getConnManagerView()
     {
         return mConnManagerView_;
     }
@@ -391,7 +391,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ConnStoreView.
      */
-    public JmsConnectionStorePanel getConnStoreView()
+    public ConnectionStorePanel getConnStoreView()
     {
         return mConnStoreView_;
     }

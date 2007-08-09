@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.model.connection.manager.adapters;
 
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IConnectionDetails;
 import org.suggs.apps.mercury.model.connection.manager.IConnectionAdapter;
 
 import java.util.Map;
@@ -28,9 +28,9 @@ public class MqConnectionAdapter implements IConnectionAdapter
     private static final Log LOG = LogFactory.getLog( MqConnectionAdapter.class );
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.manager.IConnectionAdapter#createJmsContext(org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
+     * @see org.suggs.apps.mercury.model.connection.manager.IConnectionAdapter#createJmsContext(org.suggs.apps.mercury.model.connection.IConnectionDetails)
      */
-    public Context createJmsContext( IJmsConnectionDetails aConnDetails )
+    public Context createJmsContext( IConnectionDetails aConnDetails )
     {
         LOG.debug( "createJmsContext has not been implemented yet for the mq adapter" );
         throw new NotImplementedException();

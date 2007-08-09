@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT connectionStore (connection*) >
 
-<!ELEMENT connection (hostname, port, metadata?, connectionFactories, destinations) >
+<!ELEMENT connection (hostname, port, metadata?, connectionFactories, destinations?) >
 <!ATTLIST connection 
     name CDATA #REQUIRED 
     type CDATA #REQUIRED >

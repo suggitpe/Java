@@ -10,7 +10,7 @@ package org.suggs.apps.mercury.model.connection;
  * @author suggitpe
  * @version 1.0 28 Jun 2007
  */
-public interface IJmsConnectionStore
+public interface IConnectionStore
 {
 
     /**
@@ -30,7 +30,7 @@ public interface IJmsConnectionStore
      * @throws MercuryConnectionStoreException
      *             when there is an issue with the connection store
      */
-    IJmsConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException;
+    IConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException;
 
     /**
      * Save a set of connection parameters to the local connection
@@ -44,7 +44,7 @@ public interface IJmsConnectionStore
      *             when there is an issue in the saving of connection
      *             details
      */
-    void saveConnectionParameters( String aName, IJmsConnectionDetails aDetails ) throws MercuryConnectionStoreException;
+    void saveConnectionParameters( String aName, IConnectionDetails aDetails ) throws MercuryConnectionStoreException;
 
     /**
      * Allows the deletion of a known connection

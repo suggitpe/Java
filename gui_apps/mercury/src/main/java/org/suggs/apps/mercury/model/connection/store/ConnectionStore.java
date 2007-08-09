@@ -5,8 +5,8 @@
 package org.suggs.apps.mercury.model.connection.store;
 
 import org.suggs.apps.mercury.MercuryException;
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
+import org.suggs.apps.mercury.model.connection.IConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IConnectionStore;
 import org.suggs.apps.mercury.model.connection.MercuryConnectionStoreException;
 
 import java.util.HashMap;
@@ -29,20 +29,20 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class JmsConnectionStore extends Observable implements IJmsConnectionStore, InitializingBean
+public class ConnectionStore extends Observable implements IConnectionStore, InitializingBean
 {
 
-    private static final Log LOG = LogFactory.getLog( JmsConnectionStore.class );
+    private static final Log LOG = LogFactory.getLog( ConnectionStore.class );
 
     private String mStoreState_ = new String( "Unsaved" );
-    private Map<String, IJmsConnectionDetails> mConnStore_ = new HashMap<String, IJmsConnectionDetails>();
+    private Map<String, IConnectionDetails> mConnStore_ = new HashMap<String, IConnectionDetails>();
 
     private IPersistenceLayer mPersistenceLayer_;
 
     /**
      * Constructs a new instance.
      */
-    public JmsConnectionStore()
+    public ConnectionStore()
     {
         super();
     }
@@ -66,11 +66,11 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#loadConnectionParameters(java.lang.String)
+     * @see org.suggs.apps.mercury.model.connection.IConnectionStore#loadConnectionParameters(java.lang.String)
      */
-    public IJmsConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException
+    public IConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException
     {
-        IJmsConnectionDetails ret = mConnStore_.get( aName );
+        IConnectionDetails ret = mConnStore_.get( aName );
         if ( ret == null )
         {
             throw new MercuryConnectionStoreException( "Connection [" + aName + "] does not exist in the connection store" );
@@ -79,7 +79,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#getListOfKnownConnectionNames()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionStore#getListOfKnownConnectionNames()
      */
     public String[] getListOfKnownConnectionNames()
     {
@@ -88,7 +88,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#deleteNamedConnection(java.lang.String)
+     * @see org.suggs.apps.mercury.model.connection.IConnectionStore#deleteNamedConnection(java.lang.String)
      */
     public void deleteNamedConnection( String aName ) throws MercuryConnectionStoreException
     {
@@ -102,10 +102,10 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#saveConnectionParameters(java.lang.String,
-     *      org.suggs.apps.mercury.model.connection.IJmsConnectionDetails)
+     * @see org.suggs.apps.mercury.model.connection.IConnectionStore#saveConnectionParameters(java.lang.String,
+     *      org.suggs.apps.mercury.model.connection.IConnectionDetails)
      */
-    public void saveConnectionParameters( String aName, IJmsConnectionDetails aDetails ) throws MercuryConnectionStoreException
+    public void saveConnectionParameters( String aName, IConnectionDetails aDetails ) throws MercuryConnectionStoreException
     {
         if ( aDetails == null )
         {
@@ -142,7 +142,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
      * @return true if the jms connection store details exists, else
      *         false
      */
-    private boolean connectionExists( IJmsConnectionDetails aConnDtls )
+    private boolean connectionExists( IConnectionDetails aConnDtls )
     {
         if ( mConnStore_.containsKey( aConnDtls.getName() ) )
         {
@@ -158,7 +158,7 @@ public class JmsConnectionStore extends Observable implements IJmsConnectionStor
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionStore#getState()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionStore#getState()
      */
     public String getState()
     {

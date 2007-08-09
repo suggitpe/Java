@@ -5,7 +5,7 @@
 package org.suggs.apps.mercury.model.connection.store;
 
 import org.suggs.apps.mercury.model.connection.EConnectionType;
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IConnectionDetails;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ import java.util.Set;
  * @author suggitpe
  * @version 1.0 28 Jun 2007
  */
-public class JmsConnectionDetails implements IJmsConnectionDetails
+public class ConnectionDetails implements IConnectionDetails
 {
 
     private String mName_;
@@ -33,7 +33,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
      * 
      * @param aName
      */
-    public JmsConnectionDetails( String aName )
+    public ConnectionDetails( String aName )
     {
         mName_ = aName;
     }
@@ -46,7 +46,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
      * @param aType
      *            the type of the connection
      */
-    public JmsConnectionDetails( String aName, EConnectionType aType )
+    public ConnectionDetails( String aName, EConnectionType aType )
     {
         mName_ = aName;
         mType_ = aType;
@@ -64,7 +64,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
      * @param aPort
      *            the port number for the server
      */
-    public JmsConnectionDetails( String aName, EConnectionType aType, String aHostname, String aPort )
+    public ConnectionDetails( String aName, EConnectionType aType, String aHostname, String aPort )
     {
         mName_ = aName;
         mType_ = aType;
@@ -86,7 +86,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
      * @param aMetaData
      *            additional connection metadata
      */
-    public JmsConnectionDetails( String aName, EConnectionType aType, String aHostname, String aPort, Map<String, String> aMetaData )
+    public ConnectionDetails( String aName, EConnectionType aType, String aHostname, String aPort, Map<String, String> aMetaData )
     {
         mName_ = aName;
         mType_ = aType;
@@ -118,7 +118,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#isConnectionDetailsValid()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#isConnectionDetailsValid()
      */
     public boolean isConnectionDetailsValid()
     {
@@ -143,7 +143,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getName()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#getName()
      */
     public String getName()
     {
@@ -151,7 +151,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#setName(java.lang.String)
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#setName(java.lang.String)
      */
     public void setName( String aName )
     {
@@ -159,7 +159,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getType()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#getType()
      */
     public EConnectionType getType()
     {
@@ -167,7 +167,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getHostname()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#getHostname()
      */
     public String getHostname()
     {
@@ -186,7 +186,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getPort()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#getPort()
      */
     public String getPort()
     {
@@ -205,7 +205,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getMetaData()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#getMetaData()
      */
     public Map<String, String> getMetaData()
     {
@@ -224,7 +224,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getConnectionFactories()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#getConnectionFactories()
      */
     public Map<String, Set<String>> getConnectionFactories()
     {
@@ -243,7 +243,7 @@ public class JmsConnectionDetails implements IJmsConnectionDetails
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IJmsConnectionDetails#getDestinations()
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#getDestinations()
      */
     public Map<String, Set<String>> getDestinations()
     {

@@ -6,10 +6,10 @@ package org.suggs.apps.mercury.model.connection.store.persistence;
 
 import org.suggs.apps.mercury.MercuryException;
 import org.suggs.apps.mercury.model.connection.EConnectionType;
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IConnectionDetails;
 import org.suggs.apps.mercury.model.connection.MercuryConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.store.IPersistenceLayer;
-import org.suggs.apps.mercury.model.connection.store.JmsConnectionDetails;
+import org.suggs.apps.mercury.model.connection.store.ConnectionDetails;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -71,9 +71,9 @@ public class XmlPersistenceLayer implements IPersistenceLayer
     /**
      * @see org.suggs.apps.mercury.model.connection.store.IPersistenceLayer#readPersistenceLayer()
      */
-    public Map<String, IJmsConnectionDetails> readPersistenceLayer() throws MercuryConnectionStoreException
+    public Map<String, IConnectionDetails> readPersistenceLayer() throws MercuryConnectionStoreException
     {
-        Map<String, IJmsConnectionDetails> ret = new HashMap<String, IJmsConnectionDetails>();
+        Map<String, IConnectionDetails> ret = new HashMap<String, IConnectionDetails>();
         try
         {
             XmlPersistenceLayerHandler handler = new XmlPersistenceLayerHandler();
@@ -96,7 +96,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
                 EConnectionType type = EConnectionType.createTypeFromString( atts.getNamedItem( TYPE ).getTextContent() );
                 NodeList childList = list.item( i ).getChildNodes();
 
-                JmsConnectionDetails connDtls = new JmsConnectionDetails( name, type );
+                ConnectionDetails connDtls = new ConnectionDetails( name, type );
 
                 for ( int j = 0; j < childList.getLength(); ++j )
                 {
@@ -196,7 +196,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
     /**
      * @see org.suggs.apps.mercury.model.connection.store.IPersistenceLayer#savePersistenceLayer(java.util.Map)
      */
-    public void savePersistenceLayer( Map<String, IJmsConnectionDetails> aMap ) throws MercuryConnectionStoreException
+    public void savePersistenceLayer( Map<String, IConnectionDetails> aMap ) throws MercuryConnectionStoreException
     {
         LOG.info( "Saving prsistence layer" );
 
@@ -209,7 +209,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
         for ( String key : keys )
         {
             LOG.debug( "Building key [" + key + "]" );
-            IJmsConnectionDetails dtls = aMap.get( key );
+            IConnectionDetails dtls = aMap.get( key );
 
             Element connElem = newDoc.createElement( CONNECTION );
             connElem.setAttribute( NAME, dtls.getName() );

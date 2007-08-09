@@ -5,11 +5,11 @@
 package org.suggs.apps.mercury.view.connection;
 
 import org.suggs.apps.mercury.model.connection.EConnectionType;
-import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.IJmsConnectionStore;
+import org.suggs.apps.mercury.model.connection.IConnectionDetails;
+import org.suggs.apps.mercury.model.connection.IConnectionStore;
 import org.suggs.apps.mercury.model.connection.MercuryConnectionStoreException;
-import org.suggs.apps.mercury.model.connection.store.JmsConnectionDetails;
-import org.suggs.apps.mercury.model.connection.store.JmsConnectionStore;
+import org.suggs.apps.mercury.model.connection.store.ConnectionDetails;
+import org.suggs.apps.mercury.model.connection.store.ConnectionStore;
 import org.suggs.apps.mercury.support.AbstractGridbagPanel;
 
 import java.awt.GridBagConstraints;
@@ -33,11 +33,11 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 9 Jul 2007
  */
-public class JmsConnectionStorePanel extends AbstractGridbagPanel implements InitializingBean, Observer
+public class ConnectionStorePanel extends AbstractGridbagPanel implements InitializingBean, Observer
 {
 
-    private static final Log LOG = LogFactory.getLog( JmsConnectionStorePanel.class );
-    private JmsConnectionStore mConnectionStore_;
+    private static final Log LOG = LogFactory.getLog( ConnectionStorePanel.class );
+    private ConnectionStore mConnectionStore_;
 
     private JTextField mStatus = new JTextField();
     private JTextField mName_ = new JTextField();
@@ -48,7 +48,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
     /**
      * Constructs a new instance.
      */
-    private JmsConnectionStorePanel()
+    private ConnectionStorePanel()
     {
         throw new IllegalStateException();
     }
@@ -60,7 +60,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      *            the connection store that this class will be
      *            observing
      */
-    public JmsConnectionStorePanel( JmsConnectionStore aConnectionStore )
+    public ConnectionStorePanel( ConnectionStore aConnectionStore )
     {
         super( "Connection Store" );
 
@@ -136,14 +136,14 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      *             if the data collected is not enough for a
      *             connection
      */
-    public IJmsConnectionDetails getConnectionDetails() throws MercuryConnectionStoreException
+    public IConnectionDetails getConnectionDetails() throws MercuryConnectionStoreException
     {
         if ( mServer_.getText().length() == 0 || mPort_.getText().length() == 0 || mType_.getSelectedItem() == null )
         {
             throw new MercuryConnectionStoreException( "Invalid data in the connection store fields" );
         }
 
-        return new JmsConnectionDetails( mName_.getText(), (EConnectionType) mType_.getSelectedItem(), mServer_.getText(), mPort_.getText() );
+        return new ConnectionDetails( mName_.getText(), (EConnectionType) mType_.getSelectedItem(), mServer_.getText(), mPort_.getText() );
     }
 
     /**
@@ -153,7 +153,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      *            the jms connection detaiols object from which we can
      *            populate the panel components
      */
-    public void loadValues( IJmsConnectionDetails aDtls )
+    public void loadValues( IConnectionDetails aDtls )
     {
         mName_.setText( aDtls.getName() );
         mServer_.setText( aDtls.getHostname() );
@@ -176,9 +176,9 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
     public void update( Observable aObserved, Object aObj )
     {
         LOG.info( "Observable has changed [" + aObserved.getClass().getName() + "]" );
-        if ( aObserved instanceof IJmsConnectionStore )
+        if ( aObserved instanceof IConnectionStore )
         {
-            mStatus.setText( ( (IJmsConnectionStore) aObserved ).getState() );
+            mStatus.setText( ( (IConnectionStore) aObserved ).getState() );
         }
     }
 
@@ -187,7 +187,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      * 
      * @return the connection store
      */
-    public JmsConnectionStore getConnectionStore()
+    public ConnectionStore getConnectionStore()
     {
         return mConnectionStore_;
     }
@@ -198,7 +198,7 @@ public class JmsConnectionStorePanel extends AbstractGridbagPanel implements Ini
      * @param aConnStr
      *            the connection store to set
      */
-    public void setConnectionStore( JmsConnectionStore aConnStr )
+    public void setConnectionStore( ConnectionStore aConnStr )
     {
         mConnectionStore_ = aConnStr;
     }
