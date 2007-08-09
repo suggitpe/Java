@@ -4,17 +4,25 @@
  */
 package org.suggs.apps.mercury.view.connection;
 
+import org.suggs.apps.mercury.model.connection.IJmsConnectionDetails;
 import org.suggs.apps.mercury.model.connection.manager.JmsConnectionManager;
 import org.suggs.apps.mercury.support.AbstractGridbagPanel;
 
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -29,11 +37,17 @@ import org.springframework.util.Assert;
 public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean, Observer
 {
 
+    private static final Log LOG = LogFactory.getLog( JmsConnectionManagerPanel.class );
+
     private JmsConnectionManager mConnMgr_;
 
     private JTextField mStatus_ = new JTextField();
+    private JComboBox mType_ = new JComboBox();
     private JComboBox mConnectionFactories_ = new JComboBox();
     private JComboBox mDestinations_ = new JComboBox();
+
+    private Map<String, Set<String>> mAvailableConnFacts_;
+    private Map<String, Set<String>> mAvailableDests_;
 
     /**
      * Constructs a new instance. This is hidden as it is silly to
@@ -65,31 +79,47 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      */
     public void initialise( String aInitialStatus )
     {
+        int i = 1;
         EmptyBorder eb = new EmptyBorder( 0, 0, 0, 10 );
 
         // status field
         final JLabel lStatus = new JLabel( "Connection Status:" );
         lStatus.setBorder( eb );
-        addComponent( lStatus, 1, 1 );
+        addComponent( lStatus, i, 1 );
 
         mStatus_.setText( aInitialStatus );
         mStatus_.setEditable( false );
         mStatus_.setPreferredSize( LONG_FIELD );
-        addFilledComponent( mStatus_, 1, 2, 3, 1, GridBagConstraints.HORIZONTAL );
+        addFilledComponent( mStatus_, i, 2, 3, 1, GridBagConstraints.HORIZONTAL );
+
+        // connection type
+        final JLabel lType = new JLabel( "Conn Type" );
+        addFilledComponent( lType, ++i, 1 );
+        mType_.setPreferredSize( MEDIUM_FIELD );
+        addComponent( mType_, i, 2 );
 
         // connection factories
         final JLabel lConnFact = new JLabel( "Conn Factories:" );
-        addFilledComponent( lConnFact, 2, 1 );
-
+        addFilledComponent( lConnFact, ++i, 1 );
         mConnectionFactories_.setPreferredSize( LONG_FIELD );
-        addComponent( mConnectionFactories_, 2, 2 );
+        addComponent( mConnectionFactories_, i, 2 );
 
         // destinations
         final JLabel lDestinations = new JLabel( "Destinations:" );
-        addFilledComponent( lDestinations, 3, 1 );
-
+        addFilledComponent( lDestinations, ++i, 1 );
         mDestinations_.setPreferredSize( LONG_FIELD );
-        addComponent( mDestinations_, 3, 2 );
+        addComponent( mDestinations_, i, 2 );
+
+        mType_.addActionListener( new ActionListener()
+        {
+
+            public void actionPerformed( ActionEvent e )
+            {
+                String choice = (String) ( (JComboBox) e.getSource() ).getSelectedItem();
+                LOG.debug( "Connection type =[" + choice + "]" );
+                loadConnectionValues( choice );
+            }
+        } );
     }
 
     /**
@@ -102,6 +132,62 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
     }
 
     /**
+     * Populate the combo boxes with the relevant data
+     * 
+     * @param aDetails
+     *            the details from which you can derive the required
+     *            data
+     */
+    public void loadTypeValues( IJmsConnectionDetails aDetails )
+    {
+        mAvailableConnFacts_ = aDetails.getConnectionFactories();
+        mAvailableDests_ = aDetails.getDestinations();
+        Set<String> s = mAvailableConnFacts_.keySet();
+        updateType( s.toArray( new String[s.size()] ) );
+    }
+
+    /**
+     * Loads the connection data into the comboboxes
+     * 
+     * @param aType
+     *            the connection type
+     */
+    public void loadConnectionValues( String aType )
+    {
+        if ( aType == null )
+        {
+            mConnectionFactories_.removeAllItems();
+            mConnectionFactories_.setEditable( false );
+            mDestinations_.removeAllItems();
+            mDestinations_.setEditable( false );
+        }
+        else
+        {
+            Set<String> conns = mAvailableConnFacts_.get( aType.toLowerCase() );
+            updateConnectionFactories( conns.toArray( new String[conns.size()] ) );
+            Set<String> dests = mAvailableDests_.get( aType.toLowerCase() );
+            updateDestinations( dests.toArray( new String[dests.size()] ) );
+        }
+    }
+
+    /**
+     * Populate the connection type combo box
+     * 
+     * @param aItems
+     *            the values to add to the combo box
+     */
+    public void updateType( String[] aItems )
+    {
+        mType_.removeAllItems();
+        mType_.addItem( null );
+        for ( String item : aItems )
+        {
+            mType_.addItem( item.toUpperCase() );
+        }
+        mType_.setEditable( true );
+    }
+
+    /**
      * Populate the connection factory combo box with values
      * 
      * @param aItems
@@ -109,6 +195,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      */
     public void updateConnectionFactories( String[] aItems )
     {
+        mConnectionFactories_.removeAllItems();
         for ( String item : aItems )
         {
             mConnectionFactories_.addItem( item );
@@ -124,6 +211,7 @@ public class JmsConnectionManagerPanel extends AbstractGridbagPanel implements I
      */
     public void updateDestinations( String[] aItems )
     {
+        mDestinations_.removeAllItems();
         for ( String item : aItems )
         {
             mDestinations_.addItem( item );

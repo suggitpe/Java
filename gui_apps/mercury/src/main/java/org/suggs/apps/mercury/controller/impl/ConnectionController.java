@@ -278,6 +278,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                     {
                         IJmsConnectionDetails dtls = mConnStoreModel_.loadConnectionParameters( input );
                         mConnStoreView_.loadValues( dtls );
+                        mConnManagerView_.loadTypeValues( dtls );
                     }
                     catch ( MercuryConnectionStoreException mce )
                     {
