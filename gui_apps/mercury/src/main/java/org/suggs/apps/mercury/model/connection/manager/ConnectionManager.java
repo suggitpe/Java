@@ -5,8 +5,8 @@
 package org.suggs.apps.mercury.model.connection.manager;
 
 import org.suggs.apps.mercury.model.connection.EConnectionState;
-import org.suggs.apps.mercury.model.connection.IConnectionDetails;
 import org.suggs.apps.mercury.model.connection.IConnectionManager;
+import org.suggs.apps.mercury.model.connection.IConnectionParameters;
 import org.suggs.apps.mercury.model.connection.MercuryConnectionException;
 
 import java.util.Map;
@@ -64,10 +64,9 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IConnectionManager#connect(org.suggs.apps.mercury.model.connection.IConnectionDetails,
-     *      java.lang.String)
+     * @see org.suggs.apps.mercury.model.connection.IConnectionManager#connect(org.suggs.apps.mercury.model.connection.IConnectionParameters)
      */
-    public void connect( IConnectionDetails aDetails, String aConnectionFactoryName ) throws MercuryConnectionException
+    public void connect( IConnectionParameters aDetails ) throws MercuryConnectionException
 
     {
         mConnectionState_ = EConnectionState.CONNECTED;
@@ -115,10 +114,9 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.IConnectionManager#testConnection(org.suggs.apps.mercury.model.connection.IConnectionDetails,
-     *      java.lang.String)
+     * @see org.suggs.apps.mercury.model.connection.IConnectionManager#testConnection(org.suggs.apps.mercury.model.connection.IConnectionParameters)
      */
-    public boolean testConnection( IConnectionDetails aDetails, String aConnectionFactoryName )
+    public boolean testConnection( IConnectionParameters aDetails )
     {
         mConnectionState_ = EConnectionState.DISCONNECTED;
         return false;

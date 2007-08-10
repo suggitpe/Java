@@ -174,6 +174,19 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
     }
 
     /**
+     * Populate the connection details object with the rest of the
+     * connection parameters
+     * 
+     * @param aDtls
+     *            the details to populate
+     */
+    public void populateConnectionDetails( IConnectionDetails aDtls )
+    {
+        aDtls.setConnectionFactories( mAvailableConnFacts_ );
+        aDtls.setDestinations( mAvailableDests_ );
+    }
+
+    /**
      * Populate the connection type combo box
      * 
      * @param aItems

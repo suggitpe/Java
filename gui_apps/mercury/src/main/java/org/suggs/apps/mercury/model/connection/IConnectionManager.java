@@ -18,11 +18,9 @@ public interface IConnectionManager
      * 
      * @param aDetails
      *            the context with which to connect
-     * @param aConnectionFactoryName
-     *            the connection factory name
      * @return
      */
-    boolean testConnection( IConnectionDetails aDetails, String aConnectionFactoryName );
+    boolean testConnection( IConnectionParameters aDetails );
 
     /**
      * Returns the current state of the connection
@@ -36,11 +34,9 @@ public interface IConnectionManager
      * 
      * @param aDetails
      *            the connection details
-     * @param aConnectionFactoryName
-     *            the connection factory name
      * @throws MercuryConnectionException
      */
-    void connect( IConnectionDetails aDetails, String aConnectionFactoryName ) throws MercuryConnectionException;
+    void connect( IConnectionParameters aDetails ) throws MercuryConnectionException;
 
     /**
      * Disconnect from the current connection

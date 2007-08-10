@@ -65,14 +65,30 @@ public interface IConnectionDetails
      * 
      * @return the connection factory map
      */
-    public Map<String, Set<String>> getConnectionFactories();
+    Map<String, Set<String>> getConnectionFactories();
+
+    /**
+     * Setter for the connection factory map
+     * 
+     * @param aMap
+     *            the map of connection factories
+     */
+    void setConnectionFactories( Map<String, Set<String>> aMap );
 
     /**
      * Getter for the destinations
      * 
      * @return the destinations
      */
-    public Map<String, Set<String>> getDestinations();
+    Map<String, Set<String>> getDestinations();
+
+    /**
+     * Setter for the map of destinations
+     * 
+     * @param aMap
+     *            the map of destinations
+     */
+    void setDestinations( Map<String, Set<String>> aMap );
 
     /**
      * Internal verification method that will self certify that the

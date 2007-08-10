@@ -124,7 +124,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
 
             public void actionPerformed( ActionEvent arg0 )
             {
-                if ( !( mConnManagerModel_.testConnection( null, null ) ) )
+                if ( !( mConnManagerModel_.testConnection( null ) ) )
                 {
                     String err = "Test connection failed";
                     LOG.warn( err );
@@ -148,7 +148,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
             {
                 try
                 {
-                    mConnManagerModel_.connect( null, null );
+                    mConnManagerModel_.connect( null );
                 }
                 catch ( MercuryException jhe )
                 {
@@ -320,9 +320,23 @@ public class ConnectionController implements InitializingBean, IConnectionContro
                 if ( input != null )
                 {
                     LOG.debug( "Saving connection as [" + input + "]" );
+
+                    if ( mConnStoreModel_.doesConnectionExist( input ) )
+                    {
+                        int sure = JOptionPane.showConfirmDialog( mConnStoreView_,
+                                                                  "This will overwrite the exitsing connection\ncontinue?",
+                                                                  "Overwrite existing",
+                                                                  JOptionPane.YES_NO_CANCEL_OPTION );
+                        if ( sure != JOptionPane.OK_OPTION )
+                        {
+                            return;
+                        }
+                    }
+
                     try
                     {
                         IConnectionDetails dtls = mConnStoreView_.getConnectionDetails();
+                        mConnManagerView_.populateConnectionDetails( dtls );
                         mConnStoreModel_.saveConnectionParameters( input, dtls );
                     }
                     catch ( MercuryConnectionStoreException mce )

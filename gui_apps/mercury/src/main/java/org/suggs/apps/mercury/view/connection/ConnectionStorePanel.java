@@ -18,8 +18,11 @@ import java.util.Observer;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableColumn;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -39,11 +42,15 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
     private static final Log LOG = LogFactory.getLog( ConnectionStorePanel.class );
     private ConnectionStore mConnectionStore_;
 
+    private static final String[] TITLES = new String[] { "Name", "Value" };
+
     private JTextField mStatus = new JTextField();
     private JTextField mName_ = new JTextField();
     private JComboBox mType_ = new JComboBox();
     private JTextField mServer_ = new JTextField();
     private JTextField mPort_ = new JTextField();
+    private JTable mMetaData_ = new JTable();
+    private JScrollPane mMetaDataPane_ = new JScrollPane( mMetaData_ );
 
     /**
      * Constructs a new instance.
@@ -126,6 +133,37 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
 
         mPort_.setPreferredSize( MEDIUM_FIELD );
         addFilledComponent( mPort_, row++, 2, 1, 1, GridBagConstraints.HORIZONTAL );
+
+        final JLabel lMetaData = new JLabel( "MetaData:" );
+        lMetaData.setBorder( eb );
+        addComponent( lMetaData, row, 1 );
+
+        buildMetaDataTable();
+        addFilledComponent( mMetaDataPane_, row++, 2, 1, 1, GridBagConstraints.HORIZONTAL );
+    }
+
+    /**
+     * Abstracted out the creation of the metadata table away from the
+     * main gui initialisation
+     */
+    private void buildMetaDataTable()
+    {
+        // set up the scroll pane
+        mMetaDataPane_.doLayout();
+        
+        
+        // now set up the table
+        mMetaData_.setColumnSelectionAllowed( true );
+        mMetaData_.setCellSelectionEnabled( true );
+
+        // name column
+        TableColumn name = new TableColumn();
+
+        // value column
+        TableColumn value = new TableColumn();
+
+        mMetaData_.addColumn( name );
+        mMetaData_.addColumn( value );
     }
 
     /**

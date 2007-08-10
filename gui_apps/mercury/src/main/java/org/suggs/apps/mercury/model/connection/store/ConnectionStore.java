@@ -88,6 +88,14 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     }
 
     /**
+     * @see org.suggs.apps.mercury.model.connection.IConnectionStore#doesConnectionExist(java.lang.String)
+     */
+    public boolean doesConnectionExist( String aConnectionName )
+    {
+        return mConnStore_.containsKey( aConnectionName.toUpperCase() );
+    }
+
+    /**
      * @see org.suggs.apps.mercury.model.connection.IConnectionStore#deleteNamedConnection(java.lang.String)
      */
     public void deleteNamedConnection( String aName ) throws MercuryConnectionStoreException
@@ -121,14 +129,14 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
 
         if ( connectionExists( aDetails ) )
         {
-            mStoreState_ = "Duplicate (ignored)";
+            mStoreState_ = "Overwritten existing";
         }
         else
         {
             mStoreState_ = "Saved";
-            mConnStore_.put( aDetails.getName(), aDetails );
-            mPersistenceLayer_.savePersistenceLayer( mConnStore_ );
         }
+        mConnStore_.put( aDetails.getName(), aDetails );
+        mPersistenceLayer_.savePersistenceLayer( mConnStore_ );
         setChanged();
         notifyObservers();
     }

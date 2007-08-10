@@ -22,6 +22,15 @@ public interface IConnectionStore
     String[] getListOfKnownConnectionNames();
 
     /**
+     * Checks to see if a connection exists already (by name only)
+     * 
+     * @param aConnectionName
+     *            the name of the connection to look for
+     * @return true if the connection exists else false
+     */
+    boolean doesConnectionExist( String aConnectionName );
+
+    /**
      * LOad a connection parameter for a given name
      * 
      * @param aName

@@ -232,10 +232,7 @@ public class ConnectionDetails implements IConnectionDetails
     }
 
     /**
-     * Setter for the connection factory map
-     * 
-     * @param aMap
-     *            the map of connection factories
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#setConnectionFactories(java.util.Map)
      */
     public void setConnectionFactories( Map<String, Set<String>> aMap )
     {
@@ -251,10 +248,7 @@ public class ConnectionDetails implements IConnectionDetails
     }
 
     /**
-     * Setter for the map of destinations
-     * 
-     * @param aMap
-     *            the map of destinations
+     * @see org.suggs.apps.mercury.model.connection.IConnectionDetails#setDestinations(java.util.Map)
      */
     public void setDestinations( Map<String, Set<String>> aMap )
     {
