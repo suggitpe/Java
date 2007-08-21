@@ -4,12 +4,7 @@
  */
 package org.suggs.sandbox.hibernate.caveatEmptor;
 
-import org.suggs.sandbox.hibernate.caveatEmptor.Address;
-import org.suggs.sandbox.hibernate.caveatEmptor.Category;
-import org.suggs.sandbox.hibernate.caveatEmptor.Item;
-import org.suggs.sandbox.hibernate.caveatEmptor.User;
 import org.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
-
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -20,7 +15,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * 
  * Test object
  * 
  * @author suggitpe
@@ -105,7 +99,8 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
      */
     protected Item createTestItem( String aName )
     {
-        return new Item( aName, "dummyDesc", 1.0, 3.0, Calendar.getInstance().getTime(), Calendar.getInstance().getTime() );
+        return new Item( aName, "dummyDesc", new Double( 1.0 ), new Double( 3.0 ), Calendar.getInstance().getTime(), Calendar.getInstance()
+            .getTime() );
     }
 
     /**

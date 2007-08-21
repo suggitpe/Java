@@ -31,6 +31,7 @@ public class Message
     private String text_;
     private Message nextMessage_;
 
+    @SuppressWarnings("unused")
     private Message()
     {
     }

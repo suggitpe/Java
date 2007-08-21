@@ -4,11 +4,6 @@
  */
 package org.suggs.sandbox.hibernate.caveatEmptor;
 
-import org.suggs.sandbox.hibernate.caveatEmptor.BillingDetails;
-import org.suggs.sandbox.hibernate.caveatEmptor.Category;
-import org.suggs.sandbox.hibernate.caveatEmptor.CreditCard;
-import org.suggs.sandbox.hibernate.caveatEmptor.User;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -128,7 +123,7 @@ public abstract class AbstractCaveatEmptorRelationshipTest extends AbstractCavea
                                                 "aNumber for suggitt",
                                                 Calendar.getInstance().getTime(),
                                                 null,
-                                                1,
+                                                new Integer( 1 ),
                                                 "January",
                                                 "2009" );
 

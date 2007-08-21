@@ -94,7 +94,7 @@ public class User extends AbstractPersistentBaseClass
         mPassword_ = aPassword;
         Assert.notNull( aEmail, "Must set the email address" );
         mEmail_ = aEmail;
-        mRanking_ = 0;
+        mRanking_ = new Integer( 0 );
         mCreated_ = Calendar.getInstance().getTime();
         Assert.notNull( aHomeAddress, "Must set the home adress" );
         mHomeAddress_ = aHomeAddress;

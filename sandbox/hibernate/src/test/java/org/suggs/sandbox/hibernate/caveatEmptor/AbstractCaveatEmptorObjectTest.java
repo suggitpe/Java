@@ -4,14 +4,6 @@
  */
 package org.suggs.sandbox.hibernate.caveatEmptor;
 
-import org.suggs.sandbox.hibernate.caveatEmptor.Address;
-import org.suggs.sandbox.hibernate.caveatEmptor.BankAccount;
-import org.suggs.sandbox.hibernate.caveatEmptor.BillingDetails;
-import org.suggs.sandbox.hibernate.caveatEmptor.Category;
-import org.suggs.sandbox.hibernate.caveatEmptor.CreditCard;
-import org.suggs.sandbox.hibernate.caveatEmptor.Item;
-import org.suggs.sandbox.hibernate.caveatEmptor.User;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -25,7 +17,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
- * 
  * Test object
  * 
  * @author suggitpe
@@ -80,7 +71,13 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
                 User u = (User) l.get( 0 );
 
                 LOG.debug( "Creating a new credit card" );
-                CreditCard card = new CreditCard( "PGDS", "0123456789", Calendar.getInstance().getTime(), null, 99, "03", "2009" );
+                CreditCard card = new CreditCard( "PGDS",
+                                                  "0123456789",
+                                                  Calendar.getInstance().getTime(),
+                                                  null,
+                                                  new Integer( 99 ),
+                                                  "03",
+                                                  "2009" );
                 u.addBillingDetails( card );
                 aSession.save( card );
             }
@@ -123,7 +120,12 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
 
                 User u = (User) l.get( 0 );
                 LOG.debug( "Creating a new Bank Account" );
-                BankAccount ba = new BankAccount( "PGDS", "0987654321", Calendar.getInstance().getTime(), null, "DummyBankName", "DUMMGB2LXXXX" );
+                BankAccount ba = new BankAccount( "PGDS",
+                                                  "0987654321",
+                                                  Calendar.getInstance().getTime(),
+                                                  null,
+                                                  "DummyBankName",
+                                                  "DUMMGB2LXXXX" );
                 u.addBillingDetails( ba );
 
                 aSession.save( ba );
