@@ -44,17 +44,18 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
 
     private static final String[] TITLES = new String[] { "Name", "Value" };
 
-    private JTextField mStatus = new JTextField();
-    private JTextField mName_ = new JTextField();
-    private JComboBox mType_ = new JComboBox();
-    private JTextField mServer_ = new JTextField();
-    private JTextField mPort_ = new JTextField();
-    private JTable mMetaData_ = new JTable();
-    private JScrollPane mMetaDataPane_ = new JScrollPane( mMetaData_ );
+    private final JTextField mStatus = new JTextField();
+    private final JTextField mName_ = new JTextField();
+    private final JComboBox mType_ = new JComboBox();
+    private final JTextField mServer_ = new JTextField();
+    private final JTextField mPort_ = new JTextField();
+    private final JTable mMetaData_ = new JTable();
+    private final JScrollPane mMetaDataPane_ = new JScrollPane( mMetaData_ );
 
     /**
      * Constructs a new instance.
      */
+    @SuppressWarnings("unused")
     private ConnectionStorePanel()
     {
         throw new IllegalStateException();
@@ -150,8 +151,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
     {
         // set up the scroll pane
         mMetaDataPane_.doLayout();
-        
-        
+
         // now set up the table
         mMetaData_.setColumnSelectionAllowed( true );
         mMetaData_.setCellSelectionEnabled( true );

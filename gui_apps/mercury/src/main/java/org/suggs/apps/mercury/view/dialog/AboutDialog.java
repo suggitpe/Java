@@ -39,6 +39,7 @@ public class AboutDialog extends JDialog
     /**
      * Hidden Constructs a new instance.
      */
+    @SuppressWarnings("unused")
     private AboutDialog()
     {
         super();

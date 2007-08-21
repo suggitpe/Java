@@ -50,6 +50,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     /**
      * Constructs a new instance.
      */
+    @SuppressWarnings("unused")
     private ConnectionController()
     {
         throw new IllegalStateException();

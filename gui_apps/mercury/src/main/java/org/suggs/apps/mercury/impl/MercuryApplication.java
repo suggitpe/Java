@@ -165,8 +165,8 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
 
             public void actionPerformed( ActionEvent arg0 )
             {
-                AboutDialog about = new AboutDialog( aFrame );
-                about.setVisible( true );
+                AboutDialog aboutDialog = new AboutDialog( aFrame );
+                aboutDialog.setVisible( true );
             }
         } );
 

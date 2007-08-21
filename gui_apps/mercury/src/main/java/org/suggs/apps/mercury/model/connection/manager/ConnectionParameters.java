@@ -28,6 +28,7 @@ public class ConnectionParameters implements IConnectionParameters
     /**
      * Constructs a new instance.
      */
+    @SuppressWarnings("unused")
     private ConnectionParameters()
     {
         super();

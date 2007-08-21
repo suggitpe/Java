@@ -41,10 +41,10 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
 
     private ConnectionManager mConnMgr_;
 
-    private JTextField mStatus_ = new JTextField();
-    private JComboBox mType_ = new JComboBox();
-    private JComboBox mConnectionFactories_ = new JComboBox();
-    private JComboBox mDestinations_ = new JComboBox();
+    private final JTextField mStatus_ = new JTextField();
+    private final JComboBox mType_ = new JComboBox();
+    private final JComboBox mConnectionFactories_ = new JComboBox();
+    private final JComboBox mDestinations_ = new JComboBox();
 
     private Map<String, Set<String>> mAvailableConnFacts_;
     private Map<String, Set<String>> mAvailableDests_;
@@ -53,6 +53,7 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
      * Constructs a new instance. This is hidden as it is silly to
      * have an observer with nothing to observe.
      */
+    @SuppressWarnings("unused")
     private ConnectionManagerPanel()
     {
         throw new IllegalStateException();
