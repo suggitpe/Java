@@ -42,7 +42,8 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
     private static final Log LOG = LogFactory.getLog( ConnectionStorePanel.class );
     private ConnectionStore mConnectionStore_;
 
-    private static final String[] TITLES = new String[] { "Name", "Value" };
+    // private static final String[] TITLES = new String[] { "Name",
+    // "Value" };
 
     private final JTextField mStatus = new JTextField();
     private final JTextField mName_ = new JTextField();
@@ -101,6 +102,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
         // add in the connection name
         final JLabel lName = new JLabel( "Name:" );
         lName.setBorder( eb );
+
         addComponent( lName, row, 1 );
 
         mName_.setEditable( false );
@@ -158,9 +160,11 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
 
         // name column
         TableColumn name = new TableColumn();
+        name.setHeaderValue( "Name" );
 
         // value column
         TableColumn value = new TableColumn();
+        value.setHeaderValue( "Value" );
 
         mMetaData_.addColumn( name );
         mMetaData_.addColumn( value );
