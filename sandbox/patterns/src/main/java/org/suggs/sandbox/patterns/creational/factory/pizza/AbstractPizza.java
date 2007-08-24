@@ -10,7 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * TODO Write javadoc for AbstractPizza
+ * Abstract implementation of the pizza
  * 
  * @author suggitpe
  * @version 1.0 23 Aug 2007
