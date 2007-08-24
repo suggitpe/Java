@@ -4,13 +4,12 @@
  */
 package org.suggs.sandbox.patterns.creational;
 
+import org.suggs.sandbox.patterns.AbstractPatternTestCase;
 import org.suggs.sandbox.patterns.creational.factory.IPizza;
 import org.suggs.sandbox.patterns.creational.factory.IPizzaStore;
 import org.suggs.sandbox.patterns.creational.factory.PizzaStoreException;
 import org.suggs.sandbox.patterns.creational.factory.pizzastore.BarPizzaStore;
 import org.suggs.sandbox.patterns.creational.factory.pizzastore.FooPizzaStore;
-
-import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 23 Aug 2007
  */
-public class FactoryMethodTestCase extends TestCase
+public class FactoryMethodTestCase extends AbstractPatternTestCase
 {
 
     private static final Log LOG = LogFactory.getLog( FactoryMethodTestCase.class );
@@ -71,7 +70,6 @@ public class FactoryMethodTestCase extends TestCase
      */
     private void runTest( String aTestName, IPizzaStore aStore, String aType, boolean expectException )
     {
-        LOG.info( " --------------- [" + aTestName + "] start" );
         LOG.debug( "Testing Pizza Store for a [" + aType + "] pizza" );
 
         IPizza pizza = null;
@@ -98,7 +96,5 @@ public class FactoryMethodTestCase extends TestCase
                 LOG.debug( "Correctly threw exception from the Pizza Store" );
             }
         }
-
-        LOG.info( " --------------- [" + aTestName + "] end" );
     }
 }

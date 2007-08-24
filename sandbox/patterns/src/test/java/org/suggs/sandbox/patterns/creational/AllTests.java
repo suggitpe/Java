@@ -26,6 +26,7 @@ public class AllTests
         TestSuite s = new TestSuite();
 
         s.addTestSuite( FactoryMethodTestCase.class );
+        s.addTestSuite( SingletonTestCase.class );
 
         return s;
     }
