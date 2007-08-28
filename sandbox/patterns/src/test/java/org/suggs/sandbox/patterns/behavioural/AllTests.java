@@ -25,7 +25,7 @@ public class AllTests
     {
         TestSuite s = new TestSuite();
 
-        // s.addTestSuite( FactoryMethodTestCase.class );
+        s.addTestSuite( ObserverTestCase.class );
 
         return s;
     }
