@@ -21,6 +21,14 @@ public class SingletonTestCase extends AbstractPatternTestCase
 
     private static final Log LOG = LogFactory.getLog( SingletonTestCase.class );
 
+    /**
+     * Shows the pattern name
+     */
+    public void testName()
+    {
+        LOG.debug( "SINGLETON PATTERN" );
+    }
+
     public void testSingletonCreate()
     {
         LOG.debug( "Calling Singleton for the first time" );

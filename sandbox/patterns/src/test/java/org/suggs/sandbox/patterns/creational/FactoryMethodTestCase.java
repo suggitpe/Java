@@ -26,6 +26,14 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
     private static final Log LOG = LogFactory.getLog( FactoryMethodTestCase.class );
 
     /**
+     * Shows the pattern name
+     */
+    public void testName()
+    {
+        LOG.debug( "FACTORY PATTERN" );
+    }
+
+    /**
      * Test the normal flow for the foo store
      */
     public void testFooPizzaStore()

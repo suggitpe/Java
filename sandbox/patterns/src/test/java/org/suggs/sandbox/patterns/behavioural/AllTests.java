@@ -25,6 +25,7 @@ public class AllTests
     {
         TestSuite s = new TestSuite();
 
+        s.addTestSuite( CommandTestCase.class );
         s.addTestSuite( ObserverTestCase.class );
 
         return s;

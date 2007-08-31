@@ -27,6 +27,14 @@ public class DecoratorTestCase extends AbstractPatternTestCase
     private static final Log LOG = LogFactory.getLog( DecoratorTestCase.class );
 
     /**
+     * Shows the pattern name
+     */
+    public void testName()
+    {
+        LOG.debug( "DECORATOR PATTERN" );
+    }
+
+    /**
      * Test for the straight Espresso coffee class
      */
     public void testNormalEspresso()
