@@ -12,11 +12,11 @@
 	problems. This package contains the following specific patterns.
 	<ul>
 		<li>Adapter pattern - this pattern is similar to the Decorator pattern in that it is
-			about the wrapping of objects with others. The Decorator pattern wraps objects
-			to extend their functionality whereas the adapter pattern wraps an object to
-			hide its interface and expose a new (more desirable interface). This pattern is
-			all about creating an object interface and then mapping it to another
-			objects interface.</li>
+			about the wrapping of objects with others and thus changing their interface. The
+			Decorator pattern wraps objects to extend their functionality whereas the
+			adapter pattern wraps an object to hide its interface and expose a new (more
+			desirable interface). This pattern is all about creating an object interface
+			and then mapping it to another objects interface.</li>
 		<li>Bridge pattern - </li>
 		<li>Composite pattern - </li>
 		<li>Decorator pattern - in this pattern we 'wrap' up an object with another instance
@@ -26,7 +26,13 @@
 			class). So for example if we have an object deriving from an interface containing
 			a method called foo(), we then create a wrapper object that also derives from that
 			object that will first call the inner foo() andthen its local impl of foo().</li>
-		<li>Facade pattern - </li>
+		<li>Facade pattern - in this pattern we create a class that will simplify a collection
+			of interfaces into a consolidated and more simple one. The existing interfaces
+			remain but a new, more simple one also exists to remove some of the complexities
+			from the existing interfaces. The most common implementation of this would be to
+			put a high level interface above an entire subsystem so that there is a common
+			client interface to that functionality (and thus an entire subsystem can be
+			replaced more easily).</li>
 		<li>Flyweight pattern - </li>
 		<li>Proxy pattern - </li>
 	</ul>
