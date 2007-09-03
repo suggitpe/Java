@@ -25,7 +25,9 @@ public class AllTests
     {
         TestSuite s = new TestSuite();
 
+        s.addTestSuite( AdapterTestCase.class );
         s.addTestSuite( DecoratorTestCase.class );
+        s.addTestSuite( FacadeTestCase.class );
 
         return s;
     }
