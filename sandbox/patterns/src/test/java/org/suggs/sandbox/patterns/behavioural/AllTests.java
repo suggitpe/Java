@@ -27,6 +27,7 @@ public class AllTests
 
         s.addTestSuite( CommandTestCase.class );
         s.addTestSuite( ObserverTestCase.class );
+        s.addTestSuite( TemplateTestCase.class );
 
         return s;
     }

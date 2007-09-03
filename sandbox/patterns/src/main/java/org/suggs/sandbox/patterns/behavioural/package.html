@@ -29,7 +29,14 @@
 			not use the built in Observer class/interface in the language.</li>
 		<li>State pattern - </li>
 		<li>Strategy pattern - </li>
-		<li>Template pattern - </li>
+		<li>Template pattern - this pattern is concerned with a templatised algorithm
+			implementation within a base class in preference to an implementation within a
+			concrete classes calling back up the hierarchy for common methods. To implement
+			this method you really need to look at an algorithm used by subclasses and work out
+			what the common pieces of functionality are (functionaldecomposition) and
+			create called abstract methods for the non common ones. The addition of
+			implemented hooks (ie methods that can be overridden by subclasses)
+			allows for further design extension.</li>
 		<li>Visitor pattern - </li>
 	</ul>
 	<h2>Package Specification</h2>
