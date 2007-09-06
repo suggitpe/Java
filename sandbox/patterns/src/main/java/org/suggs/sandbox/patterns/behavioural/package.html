@@ -20,7 +20,13 @@
 			The command object will be the one that has compile time bindings against
 			the Receiver object.</li>
 		<li>Interpretor pattern - </li>
-		<li>Iterator pattern - </li>
+		<li>Iterator pattern - this pattern concerns itself with moving through a list of
+			objects in a collection (aggregates). If the aggregates have different
+			interfaces then the algorithm for traversing the aggregate will be different.
+			Here we encapsulate the traversal of the aggregate into an object with a single
+			interface. The implementation of the interator is a drivation of an 'Interator'
+			interface for each type of concrete aggregate, with the concrete iterator
+			having a composite relationship to the collection.</li>
 		<li>Mediator pattern - </li>
 		<li>Memento pattern - </li>
 		<li>Observer pattern - this pattern defines communications in a one-to-many object

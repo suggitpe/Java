@@ -26,6 +26,7 @@ public class AllTests
         TestSuite s = new TestSuite();
 
         s.addTestSuite( CommandTestCase.class );
+        s.addTestSuite( IteratorTestCase.class );
         s.addTestSuite( ObserverTestCase.class );
         s.addTestSuite( TemplateTestCase.class );
 
