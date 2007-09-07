@@ -26,10 +26,12 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
     private static final Log LOG = LogFactory.getLog( FactoryMethodTestCase.class );
 
     /**
-     * Shows the pattern name
+     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
      */
+    @Override
     public void testName()
     {
+        LOG.info( "=================================" );
         LOG.debug( "FACTORY PATTERN" );
     }
 

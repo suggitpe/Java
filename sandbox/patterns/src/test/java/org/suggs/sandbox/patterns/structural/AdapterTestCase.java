@@ -26,6 +26,7 @@ public class AdapterTestCase extends AbstractPatternTestCase
 
     public void testName()
     {
+        LOG.info( "=================================" );
         LOG.debug( "ADAPTER PATTERN" );
     }
 

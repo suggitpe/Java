@@ -37,10 +37,12 @@ public class CommandTestCase extends AbstractPatternTestCase
     private static final Log LOG = LogFactory.getLog( CommandTestCase.class );
 
     /**
-     * Shows the pattern name
+     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
      */
+    @Override
     public void testName()
     {
+        LOG.info( "=================================" );
         LOG.debug( "COMMAND PATTERN" );
     }
 

@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 24 Aug 2007
  */
-public class AbstractPatternTestCase extends TestCase
+public abstract class AbstractPatternTestCase extends TestCase
 {
 
     private static final Log LOG = LogFactory.getLog( "Test Base" );
@@ -24,7 +24,7 @@ public class AbstractPatternTestCase extends TestCase
     @Override
     protected void setUp() throws Exception
     {
-        LOG.info( "================================ " + this.getName() + " test" );
+        LOG.info( "--------------------------------- " + this.getName() + " test" );
     }
 
     @Override
@@ -32,5 +32,10 @@ public class AbstractPatternTestCase extends TestCase
     {
         LOG.info( "---------------------------------" );
     }
+
+    /**
+     * Enforce the impl of a test case called testName
+     */
+    public abstract void testName();
 
 }

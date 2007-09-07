@@ -29,8 +29,13 @@ public class FacadeTestCase extends AbstractPatternTestCase
 
     private static final Log LOG = LogFactory.getLog( FacadeTestCase.class );
 
+    /**
+     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
+     */
+    @Override
     public void testName()
     {
+        LOG.info( "=================================" );
         LOG.debug( "FACADE PATTERN" );
     }
 
