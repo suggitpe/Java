@@ -24,6 +24,10 @@ public class AdapterTestCase extends AbstractPatternTestCase
 
     private static final Log LOG = LogFactory.getLog( AdapterTestCase.class );
 
+    /**
+     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
+     */
+    @Override
     public void testName()
     {
         LOG.info( "=================================" );
