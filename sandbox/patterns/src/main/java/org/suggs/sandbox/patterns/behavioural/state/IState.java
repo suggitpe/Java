@@ -1,0 +1,36 @@
+/*
+ * IState.java created on 10 Sep 2007 18:08:25 by suggitpe for project SandBox - Patterns
+ * 
+ */
+package org.suggs.sandbox.patterns.behavioural.state;
+
+/**
+ * High level state object for the gumball machine.
+ * 
+ * @author suggitpe
+ * @version 1.0 10 Sep 2007
+ */
+public interface IState
+{
+
+    /**
+     * Insert a quarter into the gumball machine
+     */
+    void insertQuarter();
+
+    /**
+     * Eject a quarter that is already in the machine
+     */
+    void ejectQuarter();
+
+    /**
+     * Turn the crank on the machine
+     */
+    void turnCrank();
+
+    /**
+     * Dispense a gumball
+     */
+    void dispense();
+
+}
