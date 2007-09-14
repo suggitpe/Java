@@ -29,6 +29,7 @@ public class AllTests
         s.addTestSuite( CompositeTestCase.class );
         s.addTestSuite( DecoratorTestCase.class );
         s.addTestSuite( FacadeTestCase.class );
+        s.addTestSuite( ProxyTestCase.class );
 
         return s;
     }

@@ -39,7 +39,19 @@
 			client interface to that functionality (and thus an entire subsystem can be
 			replaced more easily).</li>
 		<li>Flyweight pattern - </li>
-		<li>Proxy pattern - </li>
+		<li>Proxy pattern - the core of this pattern is to create an object controller and put
+			this in the execution path of a client, thus a client does not interact with the
+			intended object and instead interacts with the controller (or proxy).
+			Essentially a proxy will controll access to another object, and this is why it
+			must share the same underlying interface. Some obvious uses are: remote proxy,
+			where the proxy manages the remote communication (RMI); virtual proxy, where
+			the proxy manages the construction of an object where the object is expensive to
+			create (or takes a while due to network latency); dynamic proxy, where the proxy
+			involves itself with providing a layer of functionality (typically security)
+			to an execution stack; firewall proxy; smart reference proxy (smart pointers);
+			caching proxy, providing temporary results for expensive operations;
+			synchronisation proxy, providing mutex access to objects in a multi-threaded
+			environment; facade proxy (doing what the facade pattern does); </li>
 	</ul>
 	<h2>Package Specification</h2>
 	
