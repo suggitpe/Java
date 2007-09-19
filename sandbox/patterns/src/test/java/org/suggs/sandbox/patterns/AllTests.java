@@ -26,6 +26,7 @@ public class AllTests
         TestSuite s = new TestSuite();
 
         s.addTest( org.suggs.sandbox.patterns.behavioural.AllTests.suite() );
+        s.addTest( org.suggs.sandbox.patterns.compound.AllTests.suite() );
         s.addTest( org.suggs.sandbox.patterns.creational.AllTests.suite() );
         s.addTest( org.suggs.sandbox.patterns.structural.AllTests.suite() );
 
