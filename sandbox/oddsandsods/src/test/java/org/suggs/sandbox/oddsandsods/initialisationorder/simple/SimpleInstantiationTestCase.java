@@ -29,9 +29,11 @@ public class SimpleInstantiationTestCase extends TestCase
 
     public void testBuildTestClass()
     {
+        System.out.println( "=====================================" );
         TestClass t = new TestClass();
         System.out.println( "Calling print three from the test case" );
         t.printThree();
+        System.out.println( "=====================================" );
     }
 
 }
