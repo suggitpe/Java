@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!-- This parent build.xml is there to be used for all the tomcat-ant tasks
+rather than having them all put in the underlying build.xml files.  Thus, when
+we need to get a webapp deployed to tomcat you should create a build.xml and 
+simply use the import ant task to get these tasks and properties into the 
+underlying (concrete) build.xml file -->
+
+<project name="imported" basedir=".">
+
+    <!-- ================= SETUP THE BUILD ================= -->
+    <!-- define some of the basics for the script -->
+    <property name="path" value="overrideMe-relativePathOnServer (eg /Catalog)"/>
+    <property name="build" value="overrideMe-dirOfWarFile (eg c:/dev)"/>
+    <property name="file" value="overrideMe-nameOfWarFile (eg Catalog.war)"/>
+
+    <!-- define the properties for the manager app (tomcat) -->
+    <property name="url" value="http://localhost:7999/manager"/>
+    <property name="username" value="antbuild"/>
+    <property name="password" value="letmein"/>
+
+    <!-- list all of the ant tasks for tomcat -->
+    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask"/>
+    <taskdef name="list" classname="org.apache.catalina.ant.ListTask"/>
+    <taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask"/>
+    <taskdef name="resources" classname="org.apache.catalina.ant.ResourcesTask"/>
+    <taskdef name="roles" classname="org.apache.catalina.ant.RolesTask"/>
+    <taskdef name="start" classname="org.apache.catalina.ant.StartTask"/>
+    <taskdef name="stop" classname="org.apache.catalina.ant.StopTask"/>
+    <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask"/>
+
+    <!-- ================= TOMACT TASKS ================= -->
+    <target name="deploy" description="Deploy the webapp">
+        <deploy url="${url}" username="${username}" password="${password}" 
+            path="$path}" war="file:${build}/${file}"/>
+    </target>
+
+    <target name="list" description="List all of the web apps">
+        <list url="${url}" username="${username}" password="${password}"/>
+    </target>
+
+    <target name="reload" description="Reload web application">
+        <reload url="${url}" username="${username}" password="${password}" 
+            path="${path}"/>
+    </target>
+
+    <target name="resources" description="List all JNDI resources">
+        <resources url="${url}" username="${username}" password="${password}"/>
+    </target>
+
+    <target name="roles" description="List all roles">
+        <roles url="${url}" username="${username}" password="${password}"/>
+    </target>
+
+    <target name="start" description="Start web application">
+        <start url="${url}" username="${username}" password="${password}" 
+            path="${path}"/>
+    </target>
+
+    <target name="stop" description="Stop web application">
+        <stop url="${url}" username="${username}" password="${password}" 
+            path="${path}"/>
+    </target>
+
+    <target name="undeploy" description="Undeploy web application">
+        <undeploy url="${url}" username="${username}" password="${password}" 
+            path="${path}"/>
+    </target>
+
+</project>
