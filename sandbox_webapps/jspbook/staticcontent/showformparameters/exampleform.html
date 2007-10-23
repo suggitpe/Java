@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+    <head>
+        <title>Example Form</title>
+        <link rel="stylesheet" type="text/css" href="/format.css"/>
+    </head>
+    <body>
+        <h1>Example Form</h1>
+        <hr/>
+        <p>To debug an HTML form set its 'action' attribute to point at the
+            ShowFormParameters servlet.</p>
+            <hr/>
+        <form action="/jspbook/ShowFormParameters" method="post"> Please complete the
+            below form:
+            <br/>Name:
+            <input type="text" name="name"/>
+            
+            <br/>Password:
+            <input type="text" name="password"/>
+            
+            <br/>Select Box:
+            <select name="selectBox">
+                <option value="Option1">Option 1</option>
+                <option value="Option2">Option 2</option>
+                <option value="Option3">Option 3</option>
+            </select>
+            
+            <br/>Importance:
+            <input type="radio" name="importance" value="very"/>Very
+            <input type="radio" name="importance" value="normal"/>Normal
+            <input type="radio" name="importance" value="not"/>Not
+            
+            <br/>Comment:
+            <br/>
+            <textarea name="textarea" cols="40" rows="5"></textarea>
+            
+            <br/>
+            <input value="Submit" type="submit"/> </form>
+    </body>
+</html>

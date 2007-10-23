@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+    <head>
+        <title>Upload File</title>
+        <link rel="stylesheet" type="text/css" href="/format.css"/>
+    </head>
+    <body>
+        <h1>File upload form</h1>
+        <hr/>
+        <p>Use this form to upload a file to the server</p>
+        <br/>
+        <p>Select a file to upload or <a href="/jspbook/files">browse those that have been
+            uploaded already</a> </p>
+        <hr/>
+        
+        <form action="/jspbook/FileUpload" method="post"
+            enctype="multipart/form-data">
+            File: <input type="file" name="file"/><br/>
+            <input value="Submit" type="submit"/>
+        </form>
+    </body>
+</html>

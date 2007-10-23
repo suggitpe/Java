@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+    <head>
+        <title>Show File Content</title>
+        <link rel="stylesheet" type="text/css" href="/format.css"/>
+    </head>
+    <body>
+        <h1>Show File Content</h1>
+        <hr/>
+        <p>This form will end up with the show form servlet being called which will show
+            you the content of the file selected in this form.</p>
+        <hr/>
+        
+        <form action="/jspbook/ShowForm" method="post"
+            enctype="multipart/form-data">
+            <br/> Name:
+            <input type="text" name="name"/>
+            <br/> File:
+            <input type="file" name="file"/>
+            <br/>
+            <input value="Submit" type="submit"/> </form>
+    </body>
+</html>
