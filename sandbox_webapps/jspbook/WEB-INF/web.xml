@@ -7,5 +7,72 @@
     <display-name>ROOT web application</display-name>
     <description> Users should place their static HTML files here. </description>
     
+    <!-- SERVLETS -->
+    <servlet>
+        <servlet-name>DynamicImage</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.image.DynamicImage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowRequestHeaders</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.showrequestheaders.ShowRequestHeaders</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowFormParameters</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.showformparameters.ShowFormParameters</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowForm</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.fileupload.ShowForm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FileUpload</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.fileupload.FileUpload</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CallingServlet</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.linkedservlets.CallingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CalledServlet</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.linkedservlets.CalledServlet</servlet-class>
+    </servlet>
+    
+    <!-- SERVLET MAPPING -->
+    <servlet-mapping>
+        <servlet-name>DynamicImage</servlet-name>
+        <url-pattern>/DynamicImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowRequestHeaders</servlet-name>
+        <url-pattern>/ShowRequestHeaders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowFormParameters</servlet-name>
+        <url-pattern>/ShowFormParameters</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowForm</servlet-name>
+        <url-pattern>/ShowForm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileUpload</servlet-name>
+        <url-pattern>/FileUpload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CallingServlet</servlet-name>
+        <url-pattern>/CallingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CalledServlet</servlet-name>
+        <url-pattern>/CalledServlet</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
 
