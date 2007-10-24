@@ -63,7 +63,15 @@ public class FileUpload extends AbstractBasePostHttpServlet
             for ( int i = 0; i < l.size(); ++i )
             {
                 FileItem item = (FileItem) l.get( i );
-                item.write( new File( path + "/" + item.getName() ) );
+                String rawFileName = item.getName();
+                // TODO: this should really use the system directory
+                // separator
+                int last = rawFileName.lastIndexOf( '\\' );
+                if ( last == -1 )
+                {
+                    throw new IllegalStateException( "Could not find last instance of directory separator" );
+                }
+                item.write( new File( path + "/" + item.getName().substring( last ) ) );
             }
         }
         catch ( FileUploadException fue )

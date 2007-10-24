@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * TODO Write javadoc for AbstractBaseHttpServlet
+ * This is a base class that sets you up for a doGet implementtion
+ * including setting the doGet impl to call the doPost impl.
  * 
  * @author suggitpe
  * @version 1.0 18 Oct 2007

@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * TODO Write javadoc for ShowFormParameters
+ * This servlet is a useful debugging servlet as it will show you the
+ * parameters passed into a servlet from a form submission.
  * 
  * @author suggitpe
  * @version 1.0 18 Oct 2007

@@ -1,26 +1,26 @@
 /*
- * CalledServlet.java created on 22 Oct 2007 07:05:42 by suggitpe for project SandBoxWebApps - JSP Book
+ * MockError.java created on 23 Oct 2007 18:13:59 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.linkedservlets;
+package org.suggs.sandbox_webapps.servletcontext;
 
 import org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Example servlet that is called by another one. Based on the other
- * calling servlets parameters, it will display what is passed in
+ * This is a mock error reporting servlet so that we can show how
  * 
  * @author suggitpe
- * @version 1.0 22 Oct 2007
+ * @version 1.0 23 Oct 2007
  */
-public class CalledServlet extends AbstractBaseGetHttpServlet
+public class MockErrorServlet extends AbstractBaseGetHttpServlet
 {
 
     /**
@@ -32,16 +32,13 @@ public class CalledServlet extends AbstractBaseGetHttpServlet
     protected void buildReponse( PrintWriter out, HttpServletRequest request, HttpServletResponse response ) throws IOException,
                     ServletException
     {
-        out.println( "<h1>Called Servlet</h1>" );
-        String val = (String) request.getAttribute( "value" );
-        if ( val != null && !val.equals( "" ) )
-        {
-            out.println( "Calling Servlet passed a string object via request scope.  The value of that string is [<b>" + val + "</b>]" );
-        }
-        else
-        {
-            out.println( "No values passed in!" );
-        }
+        ServletContext ctx = getServletConfig().getServletContext();
+        String adminEmail = ctx.getInitParameter( "AdminEmail" );
+        StringBuffer buff = new StringBuffer( "<h1>Mock Error Page</h1>\n" ).append( "<p>Sorry!  But an unexpected error has occured.</p>\n" )
+            .append( "Please send an error report to " )
+            .append( adminEmail )
+            .append( "." );
+        out.println( buff.toString() );
     }
 
     /**
@@ -50,6 +47,7 @@ public class CalledServlet extends AbstractBaseGetHttpServlet
     @Override
     protected String getTitle()
     {
-        return "Called Servlet";
+        return "An error has occurred!";
     }
+
 }

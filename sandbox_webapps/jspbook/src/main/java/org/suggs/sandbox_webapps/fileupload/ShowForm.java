@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * TODO Write javadoc for ShowForm
+ * This servlet is called by a form and will show the contents of the
+ * file (as a stream).
  * 
  * @author suggitpe
  * @version 1.0 18 Oct 2007

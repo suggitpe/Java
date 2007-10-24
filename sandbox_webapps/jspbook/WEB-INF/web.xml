@@ -7,6 +7,12 @@
     <display-name>ROOT web application</display-name>
     <description> Users should place their static HTML files here. </description>
     
+    <!-- INITIAL CONTEXT FOR APP -->
+    <context-param>
+        <param-name>AdminEmail</param-name>
+        <param-value>me@suggs.org.uk</param-value>
+    </context-param>
+    
     <!-- SERVLETS -->
     <servlet>
         <servlet-name>DynamicImage</servlet-name>
@@ -43,6 +49,16 @@
         <servlet-class>
             org.suggs.sandbox_webapps.linkedservlets.CalledServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MockError</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.servletcontext.MockErrorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowAppSource</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.showsource.ShowWebAppSource</servlet-class>
+    </servlet>
     
     <!-- SERVLET MAPPING -->
     <servlet-mapping>
@@ -72,6 +88,14 @@
     <servlet-mapping>
         <servlet-name>CalledServlet</servlet-name>
         <url-pattern>/CalledServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MockError</servlet-name>
+        <url-pattern>/MockError</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAppSource</servlet-name>
+        <url-pattern>/ShowAppSource</url-pattern>
     </servlet-mapping>
     
 </web-app>

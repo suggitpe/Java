@@ -20,7 +20,8 @@ import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
- * TODO Write javadoc for DynamicImage
+ * This servlet will create an image dynamically snd show to the
+ * calling client
  * 
  * @author suggitpe
  * @version 1.0 17 Oct 2007

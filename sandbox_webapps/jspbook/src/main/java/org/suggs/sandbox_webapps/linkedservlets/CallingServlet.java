@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * TODO Write javadoc for CallingServerlet
+ * Example servlet that will call another servlet (CalledServlet)
+ * passing a string through
  * 
  * @author suggitpe
  * @version 1.0 22 Oct 2007

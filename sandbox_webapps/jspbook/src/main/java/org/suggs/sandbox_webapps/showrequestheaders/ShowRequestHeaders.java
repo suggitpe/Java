@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * TODO Write javadoc for ShowRequestHeaders
+ * This servlet is a useful debugging servlet as it shows you the
+ * headers passed into the servlet in the request
  * 
  * @author suggitpe
  * @version 1.0 17 Oct 2007
