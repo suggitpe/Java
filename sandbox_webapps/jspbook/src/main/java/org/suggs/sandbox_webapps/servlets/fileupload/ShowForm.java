@@ -2,7 +2,7 @@
  * ShowForm.java created on 18 Oct 2007 18:22:55 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.fileupload;
+package org.suggs.sandbox_webapps.servlets.fileupload;
 
 import java.io.IOException;
 import java.io.PrintWriter;

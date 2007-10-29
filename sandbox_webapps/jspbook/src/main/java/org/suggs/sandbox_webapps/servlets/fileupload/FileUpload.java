@@ -2,9 +2,9 @@
  * FileUpload.java created on 19 Oct 2007 07:12:19 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.fileupload;
+package org.suggs.sandbox_webapps.servlets.fileupload;
 
-import org.suggs.sandbox_webapps.support.AbstractBasePostHttpServlet;
+import org.suggs.sandbox_webapps.servlets.support.AbstractBasePostHttpServlet;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class FileUpload extends AbstractBasePostHttpServlet
     public static final String TEMP_FILE_CACHE = "c:\temp";
 
     /**
-     * @see org.suggs.sandbox_webapps.support.AbstractBasePostHttpServlet#buildReponse(java.io.PrintWriter,
+     * @see org.suggs.sandbox_webapps.servlets.support.AbstractBasePostHttpServlet#buildReponse(java.io.PrintWriter,
      *      javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
@@ -87,7 +87,7 @@ public class FileUpload extends AbstractBasePostHttpServlet
     }
 
     /**
-     * @see org.suggs.sandbox_webapps.support.AbstractBasePostHttpServlet#getTitle()
+     * @see org.suggs.sandbox_webapps.servlets.support.AbstractBasePostHttpServlet#getTitle()
      */
     @Override
     protected String getTitle()

@@ -2,9 +2,9 @@
  * CalledServlet.java created on 22 Oct 2007 07:05:42 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.linkedservlets;
+package org.suggs.sandbox_webapps.servlets.linkedservlets;
 
-import org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet;
+import org.suggs.sandbox_webapps.servlets.support.AbstractBaseGetHttpServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ public class CalledServlet extends AbstractBaseGetHttpServlet
 {
 
     /**
-     * @see org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet#buildReponse(java.io.PrintWriter,
+     * @see org.suggs.sandbox_webapps.servlets.support.AbstractBaseGetHttpServlet#buildReponse(java.io.PrintWriter,
      *      javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
@@ -45,7 +45,7 @@ public class CalledServlet extends AbstractBaseGetHttpServlet
     }
 
     /**
-     * @see org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet#getTitle()
+     * @see org.suggs.sandbox_webapps.servlets.support.AbstractBaseGetHttpServlet#getTitle()
      */
     @Override
     protected String getTitle()

@@ -2,7 +2,7 @@
  * DynamicImage.java created on 17 Oct 2007 06:59:29 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.image;
+package org.suggs.sandbox_webapps.servlets.image;
 
 import java.awt.Color;
 import java.awt.Font;

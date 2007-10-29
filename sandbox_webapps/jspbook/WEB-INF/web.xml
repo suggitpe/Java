@@ -17,47 +17,47 @@
     <servlet>
         <servlet-name>DynamicImage</servlet-name>
         <servlet-class>
-            org.suggs.sandbox_webapps.image.DynamicImage</servlet-class>
+            org.suggs.sandbox_webapps.servlets.image.DynamicImage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShowRequestHeaders</servlet-name>
         <servlet-class>
-            org.suggs.sandbox_webapps.showrequestheaders.ShowRequestHeaders</servlet-class>
+            org.suggs.sandbox_webapps.servlets.showrequestheaders.ShowRequestHeaders</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShowFormParameters</servlet-name>
         <servlet-class>
-            org.suggs.sandbox_webapps.showformparameters.ShowFormParameters</servlet-class>
+            org.suggs.sandbox_webapps.servlets.showformparameters.ShowFormParameters</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShowForm</servlet-name>
         <servlet-class>
-            org.suggs.sandbox_webapps.fileupload.ShowForm</servlet-class>
+            org.suggs.sandbox_webapps.servlets.fileupload.ShowForm</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FileUpload</servlet-name>
         <servlet-class>
-            org.suggs.sandbox_webapps.fileupload.FileUpload</servlet-class>
+            org.suggs.sandbox_webapps.servlets.fileupload.FileUpload</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CallingServlet</servlet-name>
         <servlet-class>
-            org.suggs.sandbox_webapps.linkedservlets.CallingServlet</servlet-class>
+            org.suggs.sandbox_webapps.servlets.linkedservlets.CallingServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CalledServlet</servlet-name>
         <servlet-class>
-            org.suggs.sandbox_webapps.linkedservlets.CalledServlet</servlet-class>
+            org.suggs.sandbox_webapps.servlets.linkedservlets.CalledServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MockError</servlet-name>
         <servlet-class>
-            org.suggs.sandbox_webapps.servletcontext.MockErrorServlet</servlet-class>
+            org.suggs.sandbox_webapps.servlets.servletcontext.MockErrorServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShowAppSource</servlet-name>
         <servlet-class>
-            org.suggs.sandbox_webapps.showsource.ShowWebAppSource</servlet-class>
+            org.suggs.sandbox_webapps.servlets.showsource.ShowWebAppSource</servlet-class>
     </servlet>
     
     <!-- SERVLET MAPPING -->

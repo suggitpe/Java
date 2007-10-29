@@ -2,7 +2,7 @@
  * ShowWebAppSource.java created on 24 Oct 2007 06:35:40 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.showsource;
+package org.suggs.sandbox_webapps.servlets.showsource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +11,6 @@ import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +33,6 @@ public class ShowWebAppSource extends HttpServlet
     @Override
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws IOException, ServletException
     {
-        ServletConfig cfg = getServletConfig();
         ServletContext ctx = getServletContext();
 
         PrintWriter out = response.getWriter();

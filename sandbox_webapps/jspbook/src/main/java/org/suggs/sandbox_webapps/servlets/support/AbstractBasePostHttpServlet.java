@@ -1,8 +1,8 @@
 /*
- * AbstractBaseHttpServlet.java created on 18 Oct 2007 07:16:52 by suggitpe for project SandBoxWebApps - JSP Book
+ * AbstractBasePostHttpServlet.java created on 18 Oct 2007 07:16:52 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.support;
+package org.suggs.sandbox_webapps.servlets.support;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This is a base class that sets you up for a doGet implementtion
- * including setting the doGet impl to call the doPost impl.
+ * This is a base class impl for the doPost method that also
+ * imoplements the doGet method to call the doPost method for you
  * 
  * @author suggitpe
  * @version 1.0 18 Oct 2007
  */
-public abstract class AbstractBaseGetHttpServlet extends HttpServlet
+public abstract class AbstractBasePostHttpServlet extends HttpServlet
 {
 
     /**
@@ -27,7 +27,7 @@ public abstract class AbstractBaseGetHttpServlet extends HttpServlet
      *      javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public void doGet( HttpServletRequest aRequest, HttpServletResponse aResponse ) throws IOException, ServletException
+    public void doPost( HttpServletRequest aRequest, HttpServletResponse aResponse ) throws IOException, ServletException
     {
 
         aResponse.setContentType( "text/html" );
@@ -37,23 +37,23 @@ public abstract class AbstractBaseGetHttpServlet extends HttpServlet
             .append( "</title>\n" )
             .append( "<link rel=\"stylesheet\" type=\"text/css\" href=\"format.css\" />\n" )
             .append( "</head>\n" )
-            .append( "<body>" );
+            .append( "" );
         out.println( head.toString() );
 
         buildReponse( out, aRequest, aResponse );
 
-        out.println( "</body></html>" );
+        out.println( "</html>" );
 
     }
 
     /**
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
+     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public void doPost( HttpServletRequest aRequest, HttpServletResponse aResponse ) throws IOException, ServletException
+    public void doGet( HttpServletRequest aRequest, HttpServletResponse aResponse ) throws IOException, ServletException
     {
-        doGet( aRequest, aResponse );
+        doPost( aRequest, aResponse );
     }
 
     protected abstract String getTitle();

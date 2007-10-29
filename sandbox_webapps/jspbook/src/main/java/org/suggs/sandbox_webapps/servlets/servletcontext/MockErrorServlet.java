@@ -2,9 +2,9 @@
  * MockError.java created on 23 Oct 2007 18:13:59 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.servletcontext;
+package org.suggs.sandbox_webapps.servlets.servletcontext;
 
-import org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet;
+import org.suggs.sandbox_webapps.servlets.support.AbstractBaseGetHttpServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ public class MockErrorServlet extends AbstractBaseGetHttpServlet
 {
 
     /**
-     * @see org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet#buildReponse(java.io.PrintWriter,
+     * @see org.suggs.sandbox_webapps.servlets.support.AbstractBaseGetHttpServlet#buildReponse(java.io.PrintWriter,
      *      javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
@@ -42,7 +42,7 @@ public class MockErrorServlet extends AbstractBaseGetHttpServlet
     }
 
     /**
-     * @see org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet#getTitle()
+     * @see org.suggs.sandbox_webapps.servlets.support.AbstractBaseGetHttpServlet#getTitle()
      */
     @Override
     protected String getTitle()

@@ -2,7 +2,7 @@
  * ServletHelper.java created on 18 Oct 2007 07:01:42 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.support;
+package org.suggs.sandbox_webapps.servlets.support;
 
 /**
  * Helper class to use to help in the building of HTML pages.

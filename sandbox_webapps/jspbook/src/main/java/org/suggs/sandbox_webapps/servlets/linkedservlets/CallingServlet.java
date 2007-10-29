@@ -2,9 +2,9 @@
  * CallingServerlet.java created on 22 Oct 2007 07:01:38 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.linkedservlets;
+package org.suggs.sandbox_webapps.servlets.linkedservlets;
 
-import org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet;
+import org.suggs.sandbox_webapps.servlets.support.AbstractBaseGetHttpServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,7 +29,7 @@ public class CallingServlet extends AbstractBaseGetHttpServlet
      * calls itself. If the data has been set then it calls the called
      * servlet else it will just rebuild the servlet.
      * 
-     * @see org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet#buildReponse(java.io.PrintWriter,
+     * @see org.suggs.sandbox_webapps.servlets.support.AbstractBaseGetHttpServlet#buildReponse(java.io.PrintWriter,
      *      javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
@@ -53,7 +53,7 @@ public class CallingServlet extends AbstractBaseGetHttpServlet
     }
 
     /**
-     * @see org.suggs.sandbox_webapps.support.AbstractBaseGetHttpServlet#getTitle()
+     * @see org.suggs.sandbox_webapps.servlets.support.AbstractBaseGetHttpServlet#getTitle()
      */
     @Override
     protected String getTitle()
