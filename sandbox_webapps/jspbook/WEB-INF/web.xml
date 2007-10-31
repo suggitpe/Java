@@ -59,6 +59,11 @@
         <servlet-class>
             org.suggs.sandbox_webapps.servlets.showsource.ShowWebAppSource</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ErrorServlet</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.servlets.errorpage.ErrorPage</servlet-class>
+    </servlet>
     
     <!-- SERVLET MAPPING -->
     <servlet-mapping>
@@ -96,6 +101,10 @@
     <servlet-mapping>
         <servlet-name>ShowAppSource</servlet-name>
         <url-pattern>/ShowAppSource</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErrorServlet</servlet-name>
+        <url-pattern>/ErrorServlet</url-pattern>
     </servlet-mapping>
     
 </web-app>

@@ -35,7 +35,7 @@ public abstract class AbstractBaseGetHttpServlet extends HttpServlet
 
         StringBuffer head = new StringBuffer( "<html>\n<head><title>" ).append( getTitle() )
             .append( "</title>\n" )
-            .append( "<link rel=\"stylesheet\" type=\"text/css\" href=\"format.css\" />\n" )
+            .append( "<link rel=\"stylesheet\" type=\"text/css\" href=\"/format.css\" />\n" )
             .append( "</head>\n" )
             .append( "<body>" );
         out.println( head.toString() );
