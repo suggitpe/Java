@@ -2,15 +2,15 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="/format.css"/>
-        <title>An error has occurred</title>
+        <title>File not found</title>
     </head>
     <body>
-        <h3>An error has occurred</h3>
+        <h3>File not found</h3>
         <hr/>
         <p>
-            Sorry, but this site is currently unavailable to render the 
-            service you requested.  A bug in the system has caused this
-            error to occur.  Please send adescription of the problem to
+            Sorry, but the file you have requested <%=request.getRequestURL() %> has 
+            not been found, please can you try again later.  If you have any
+            concerns about this please can you send a mail to 
             <%= application.getInitParameter("AdminEmail") %>.  Thanks.</p>
             <p>The cause of the exception was '<code><%=exception.getMessage() %></code>'.</p>
             <hr/>

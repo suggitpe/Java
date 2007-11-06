@@ -43,7 +43,8 @@ public class ErrorPage extends AbstractBaseGetHttpServlet
             .append( ". Thanks.</p>" )
             .append( "<p>The cause of the exception was '<code>" )
             .append( e.getMessage() )
-            .append( "</code>'.</p>" );
+            .append( "</code>'.</p><hr/>" )
+            .append( "<p><i>By the way I am a Servlet</i></p>" );
 
         out.println( buff.toString() );
     }

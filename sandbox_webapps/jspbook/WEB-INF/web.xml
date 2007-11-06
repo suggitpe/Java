@@ -4,16 +4,29 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     version="2.5">
     
-    <display-name>ROOT web application</display-name>
-    <description> Users should place their static HTML files here. </description>
+    <display-name>JSP Book web.xml</display-name>
+    <description>This web app is used to house all of the content of the
+        jspbook web app in.</description>
     
-    <!-- INITIAL CONTEXT FOR APP -->
+    <!-- ===========================================
+         ========= INITIAL CONTEXT FOR APP =========
+         =========================================== -->
     <context-param>
         <param-name>AdminEmail</param-name>
         <param-value>me@suggs.org.uk</param-value>
     </context-param>
     
-    <!-- SERVLETS -->
+    <!-- ===========================================
+         ================ LISTENERS ================
+         =========================================== -->
+    <listener>
+        <listener-class>
+            org.suggs.sandbox_webapps.logging.logger.SiteLogger</listener-class>
+    </listener>
+    
+    <!-- ===========================================    
+         ================= SERVLETS ================    
+         =========================================== -->
     <servlet>
         <servlet-name>DynamicImage</servlet-name>
         <servlet-class>
@@ -65,7 +78,9 @@
             org.suggs.sandbox_webapps.servlets.errorpage.ErrorPage</servlet-class>
     </servlet>
     
-    <!-- SERVLET MAPPING -->
+    <!-- ===========================================    
+         ============= SERVLET MAPPING =============    
+         =========================================== -->
     <servlet-mapping>
         <servlet-name>DynamicImage</servlet-name>
         <url-pattern>/DynamicImage</url-pattern>
@@ -106,6 +121,23 @@
         <servlet-name>ErrorServlet</servlet-name>
         <url-pattern>/ErrorServlet</url-pattern>
     </servlet-mapping>
+    
+    <!-- ===========================================    
+         =============== ERROR PAGES ===============    
+         =========================================== -->
+    <!-- Error codes -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>
+            /staticcontent/jsp/exceptions/FileNotFoundErrorPage.jsp</location>
+    </error-page>
+    
+    <!-- Exceptions caught -->
+    <error-page>
+        <exception-type>java.lang.IllegalArgumentException</exception-type>
+        <location>/staticcontent/jsp/exceptions/ErrorPage.jsp</location>
+    </error-page>
+   
     
 </web-app>
 
