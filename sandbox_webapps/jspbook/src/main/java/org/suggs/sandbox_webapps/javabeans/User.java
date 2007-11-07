@@ -64,7 +64,7 @@ public class User implements Serializable
      * @param password
      *            The password to set.
      */
-    public void setPassword_( String password )
+    public void setPassword( String password )
     {
         this.password_ = password;
     }

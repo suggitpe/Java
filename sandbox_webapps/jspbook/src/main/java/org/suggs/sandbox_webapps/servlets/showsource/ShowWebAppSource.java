@@ -56,7 +56,7 @@ public class ShowWebAppSource extends HttpServlet
         else
         {
             response.setContentType( "text/html" );
-            StringBuffer buff = new StringBuffer( "<html>\n<head>\n" ).append( "<link rel=\"stylesheet\" type=\"text/css\" href=\"format.css\" />\n" )
+            StringBuffer buff = new StringBuffer( "<html>\n<head>\n" ).append( "<link rel=\"stylesheet\" type=\"text/css\" href=\"/format.css\" />\n" )
                 .append( "<title>Source Code Servlet</title>\n</head>\n" )
                 .append( "<body>\n<h1>Web application source code viewer</h1>\n" )
                 .append( "<form>Choose a resource to see the source<br/><select name=\"resource\">" );

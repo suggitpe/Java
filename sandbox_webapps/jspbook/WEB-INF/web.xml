@@ -129,13 +129,13 @@
     <error-page>
         <error-code>404</error-code>
         <location>
-            /staticcontent/jsp/exceptions/FileNotFoundErrorPage.jsp</location>
+            /staticcontent/jsp/exceptions/fileNotFoundErrorPage.jsp</location>
     </error-page>
     
     <!-- Exceptions caught -->
     <error-page>
         <exception-type>java.lang.IllegalArgumentException</exception-type>
-        <location>/staticcontent/jsp/exceptions/ErrorPage.jsp</location>
+        <location>/staticcontent/jsp/exceptions/errorPage.jsp</location>
     </error-page>
    
     
