@@ -29,7 +29,6 @@
                     <c:when test="false">false</c:when>
                     <c:otherwise>true</c:otherwise>
                 </c:choose>]</li>
-                <li></li>
         </ul>
     </body>
 </html>

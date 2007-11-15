@@ -41,7 +41,6 @@ public class SiteLogger implements ServletContextListener
      */
     public void contextInitialized( ServletContextEvent e )
     {
-        System.out.println( "Starting SiteLogger" );
         ServletContext ctx = e.getServletContext();
         mLogger_.setLevel( Level.INFO );
 

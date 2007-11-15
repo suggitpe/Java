@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/apache/tomcat-6.0/lib/servlet-api.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/_includes"/>
+	<classpathentry kind="lib" path="C:/apache/tomcat-6.0/lib/jsp-api.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
