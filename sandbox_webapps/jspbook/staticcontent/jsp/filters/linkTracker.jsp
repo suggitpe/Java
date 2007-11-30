@@ -21,7 +21,7 @@ request.setAttribute("responses", responses);
         <h5>Requests</h5>
         <p class="nopad">
             <c:forEach var="r" begin="0" items="${requests}">
-                url=[<a href="${r.url} }">${r.url}</a>] count=[${r.count}] ${r.lastVisited}<br/>
+                url=[<a href="${r.url}">${r.url}</a>] count=[${r.count}] ${r.lastVisited}<br/>
             </c:forEach>
         </p>
         <hr/>
@@ -29,7 +29,7 @@ request.setAttribute("responses", responses);
         <h5>Responses</h5>
         <p class="nopad">
             <c:forEach var="r" begin="0" items="${responses}">
-                url=[<a href="${r.url} }">${r.url}</a>] count=[${r.count}] ${r.lastVisited}
+                url=[<a href="${r.url}">${r.url}</a>] count=[${r.count}] ${r.lastVisited}
             </c:forEach>
         </p>
         
@@ -37,7 +37,7 @@ request.setAttribute("responses", responses);
         <h5>Refrers</h5>
         <p class="nopad">
             <c:forEach var="r" begin="0" items="${referers}">
-                url=[<a href="${r.url} }">${r.url}</a>] count=[${r.count}] ${r.lastVisited}
+                url=[<a href="${r.url}">${r.url}</a>] count=[${r.count}] ${r.lastVisited}
             </c:forEach>
         </p>
         <hr/>
