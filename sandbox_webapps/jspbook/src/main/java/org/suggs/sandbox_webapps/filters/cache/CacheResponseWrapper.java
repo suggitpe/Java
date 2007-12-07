@@ -1,10 +1,11 @@
 /*
- * GzipResponseWrapper.java created on 28 Nov 2007 07:05:15 by suggitpe for project SandBoxWebApps - JSP Book
+ * CacheResponseWrapper.java created on 4 Dec 2007 20:15:23 by suggitpe for project SandBoxWebApps - JSP Book
  * 
  */
-package org.suggs.sandbox_webapps.filters.compression;
+package org.suggs.sandbox_webapps.filters.cache;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
@@ -13,63 +14,41 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * The main purpose of this class is to overload the
- * createOutputStream so that it creates a Gzip reposnse stream rather
- * than a servlet output stream.
+ * Response wrapper for the cache filter
  * 
  * @author suggitpe
- * @version 1.0 28 Nov 2007
+ * @version 1.0 4 Dec 2007
  */
-public class GzipResponseWrapper extends HttpServletResponseWrapper
+public class CacheResponseWrapper extends HttpServletResponseWrapper
 {
 
     private HttpServletResponse origResponse_;
     private ServletOutputStream outStrm_;
     private PrintWriter writer_;
+    private OutputStream cache_;
 
     /**
      * Constructs a new instance.
      * 
      * @param aResponse
+     * @param aStream
      */
-    public GzipResponseWrapper( HttpServletResponse aResponse )
+    public CacheResponseWrapper( HttpServletResponse aResponse, OutputStream aStream )
     {
         super( aResponse );
         origResponse_ = aResponse;
+        cache_ = aStream;
     }
 
     /**
+     * creates a new cache response stream
+     * 
      * @return
      * @throws IOException
      */
-    private ServletOutputStream createOutputStream() throws IOException
+    public ServletOutputStream createOutputStream() throws IOException
     {
-        return ( new GzipResponseStream( origResponse_ ) );
-    }
-
-    /**
-     * Close the internal i/o
-     */
-    public void finishResponse()
-    {
-        try
-        {
-            if ( writer_ != null )
-            {
-                writer_.close();
-            }
-            else
-            {
-                if ( outStrm_ != null )
-                {
-                    outStrm_.close();
-                }
-            }
-        }
-        catch ( IOException ioe )
-        {
-            // nadda
-        }
+        return new CacheResponseStream( origResponse_, cache_ );
     }
 
     /**
@@ -118,14 +97,6 @@ public class GzipResponseWrapper extends HttpServletResponseWrapper
         outStrm_ = createOutputStream();
         writer_ = new PrintWriter( new OutputStreamWriter( outStrm_, "UTF-8" ) );
         return writer_;
-
-    }
-
-    /**
-     * 
-     */
-    public void setContentLength()
-    {
     }
 
 }

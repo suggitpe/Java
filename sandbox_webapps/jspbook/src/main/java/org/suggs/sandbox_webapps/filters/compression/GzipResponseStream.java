@@ -112,7 +112,7 @@ public class GzipResponseStream extends ServletOutputStream
     @Override
     public void write( byte aBytes[], int aOffset, int aLength ) throws IOException
     {
-        SiteLogger.getLogger().info( "writing ..." );
+        SiteLogger.getLogger().config( "writing gzip bytes ..." );
         if ( closed_ )
         {
             throw new IOException( "Cannot write to a closed output stream" );

@@ -41,7 +41,7 @@ public class AuditRequestWrapper extends HttpServletRequestWrapper
     public String getContentType()
     {
         String type = super.getContentType();
-        logger_.config( "ContentTYpe=[" + type + "]" );
+        logger_.fine( "ContentTYpe=[" + type + "]" );
         return type;
     }
 
@@ -52,7 +52,7 @@ public class AuditRequestWrapper extends HttpServletRequestWrapper
     public int getContentLength()
     {
         int len = super.getContentLength();
-        logger_.config( "ContentLength=[" + len + "]" );
+        logger_.fine( "ContentLength=[" + len + "]" );
         return len;
     }
 
@@ -63,7 +63,7 @@ public class AuditRequestWrapper extends HttpServletRequestWrapper
     public long getDateHeader( String s )
     {
         long date = super.getDateHeader( s );
-        logger_.config( "DateHeader<" + s + ">=[" + date + "]" );
+        logger_.fine( "DateHeader<" + s + ">=[" + date + "]" );
         return date;
     }
 
@@ -74,7 +74,7 @@ public class AuditRequestWrapper extends HttpServletRequestWrapper
     public String getHeader( String s )
     {
         String header = super.getHeader( s );
-        logger_.config( "Header<" + s + ">=[" + header + "]" );
+        logger_.fine( "Header<" + s + ">=[" + header + "]" );
         return header;
     }
 
@@ -85,7 +85,7 @@ public class AuditRequestWrapper extends HttpServletRequestWrapper
     public int getIntHeader( String s )
     {
         int header = super.getIntHeader( s );
-        logger_.config( "IntHeader<" + s + ">=[" + header + "]" );
+        logger_.fine( "IntHeader<" + s + ">=[" + header + "]" );
         return header;
     }
 
@@ -96,7 +96,7 @@ public class AuditRequestWrapper extends HttpServletRequestWrapper
     public String getQueryString()
     {
         String s = super.getQueryString();
-        logger_.config( "QueryString=[" + s + "]" );
+        logger_.fine( "QueryString=[" + s + "]" );
         return s;
     }
 }

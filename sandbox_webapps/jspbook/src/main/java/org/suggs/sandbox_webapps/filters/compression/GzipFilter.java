@@ -60,7 +60,7 @@ public class GzipFilter implements Filter
             {
                 logger_.config( "GZIP supported: compressing" );
                 GzipResponseWrapper wrapper = new GzipResponseWrapper( res );
-                aChain.doFilter( aRequest, aResponse );
+                aChain.doFilter( aRequest, wrapper );
                 wrapper.finishResponse();
                 return;
             }
