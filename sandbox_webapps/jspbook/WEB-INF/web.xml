@@ -139,6 +139,11 @@
         <servlet-class>
             org.suggs.sandbox_webapps.servlets.compressiontest.CompressionTest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditCookies</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.sessionstate.EditCookies</servlet-class>
+    </servlet>
     
     <!-- ===========================================    
          ============= SERVLET MAPPING =============    
@@ -186,6 +191,10 @@
     <servlet-mapping>
         <servlet-name>CompressionTest</servlet-name>
         <url-pattern>/CompressionTest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCookies</servlet-name>
+        <url-pattern>/EditCookies</url-pattern>
     </servlet-mapping>
     
     <!-- ===========================================    
