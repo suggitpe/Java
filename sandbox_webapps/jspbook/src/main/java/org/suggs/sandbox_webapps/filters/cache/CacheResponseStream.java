@@ -23,8 +23,8 @@ public class CacheResponseStream extends ServletOutputStream
 {
 
     private boolean closed_ = false;
-    private HttpServletResponse response_;
-    private ServletOutputStream out_;
+    // private HttpServletResponse response_;
+    // private ServletOutputStream out_;
     private OutputStream cache_;
 
     /**
@@ -35,11 +35,10 @@ public class CacheResponseStream extends ServletOutputStream
      * @throws IOException
      */
     public CacheResponseStream( HttpServletResponse aResponse, OutputStream aCache )
-        throws IOException
     {
         super();
         SiteLogger.getLogger().config( "creating a new cache reponse stream" );
-        response_ = aResponse;
+        // response_ = aResponse;
         cache_ = aCache;
     }
 

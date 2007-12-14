@@ -30,5 +30,4 @@
 	<classpathentry exported="true" kind="lib" path="/_build/repository/spring/jars/spring-mock-2.0.4.jar" sourcepath="/_build/repository/spring/jars/spring-mock-src-2.0.4.zip"/>
 	<classpathentry kind="lib" path="C:/tibco/ems/clients/java/tibjms.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/tibco/ems/clients/java/tibjmsadmin.jar"/>
-	<classpathentry kind="output" path="bin"/>
 </classpath>

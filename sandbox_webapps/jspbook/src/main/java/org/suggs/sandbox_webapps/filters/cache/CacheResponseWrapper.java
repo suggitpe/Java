@@ -46,7 +46,7 @@ public class CacheResponseWrapper extends HttpServletResponseWrapper
      * @return
      * @throws IOException
      */
-    public ServletOutputStream createOutputStream() throws IOException
+    public ServletOutputStream createOutputStream()
     {
         return new CacheResponseStream( origResponse_, cache_ );
     }

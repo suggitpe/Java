@@ -212,7 +212,35 @@
         <exception-type>java.lang.IllegalArgumentException</exception-type>
         <location>/staticcontent/jsp/exceptions/errorPage.jsp</location>
     </error-page>
+    
    
+    <!-- ===========================================    
+         ================= SECURITY ================    
+         =========================================== -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>SecuredBookSite</web-resource-name>
+            <url-pattern>/staticcontent/jsp/security/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>jspbook-reader</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <!-- ===========================================    
+         ================== LOGINS =================    
+         =========================================== -->
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>
+                /staticcontent/jsp/security/login.jsp</form-login-page>
+            <form-error-page>
+                /staticcontent/jsp/security/loginError.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
     
 </web-app>
 
