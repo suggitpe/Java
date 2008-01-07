@@ -48,6 +48,11 @@
             <param-value>1</param-value>
         </init-param>
     </filter>
+    <filter>
+        <filter-name>ControlFilter</filter-name>
+        <filter-class>
+            org.suggs.sandbox_webapps.designpatterns.model2.filter.ControlFilter</filter-class>
+    </filter>
     
     <!-- ===========================================
          ============= FILTER MAPPING ==============
@@ -71,6 +76,10 @@
     <filter-mapping>
         <filter-name>CacheFilter</filter-name>
         <url-pattern>/staticcontent/jsp/filters/timeMonger.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ControlFilter</filter-name>
+        <url-pattern>/staticcontent/jsp/designpatterns/model2/*</url-pattern>
     </filter-mapping>
     
     <!-- ===========================================
