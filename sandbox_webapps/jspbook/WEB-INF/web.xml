@@ -153,6 +153,11 @@
         <servlet-class>
             org.suggs.sandbox_webapps.sessionstate.EditCookies</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>i18nHelloWorld</servlet-name>
+        <servlet-class>
+            org.suggs.sandbox_webapps.servlets.i18n.I18nHelloWorld</servlet-class>
+    </servlet>
     
     <!-- ===========================================    
          ============= SERVLET MAPPING =============    
@@ -204,6 +209,10 @@
     <servlet-mapping>
         <servlet-name>EditCookies</servlet-name>
         <url-pattern>/EditCookies</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>i18nHelloWorld</servlet-name>
+        <url-pattern>/i18nHelloWorld</url-pattern>
     </servlet-mapping>
     
     <!-- ===========================================    

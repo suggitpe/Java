@@ -5,9 +5,11 @@
 package org.suggs.sandbox_webapps.servlets.support;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,11 +29,13 @@ public abstract class AbstractBaseGetHttpServlet extends HttpServlet
      *      javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public void doGet( HttpServletRequest aRequest, HttpServletResponse aResponse ) throws IOException, ServletException
+    public void doGet( HttpServletRequest aRequest, HttpServletResponse aResponse )
+                    throws IOException, ServletException
     {
-
-        aResponse.setContentType( "text/html" );
-        PrintWriter out = aResponse.getWriter();
+        aResponse.setContentType( "text/html; charset=UTF-8" );
+        ServletOutputStream sos = aResponse.getOutputStream();
+        PrintWriter out = new PrintWriter( new OutputStreamWriter( sos, "UTF-8" ), true );
+        // PrintWriter out = aResponse.getWriter();
 
         StringBuffer head = new StringBuffer( "<html>\n<head><title>" ).append( getTitle() )
             .append( "</title>\n" )
@@ -51,14 +55,16 @@ public abstract class AbstractBaseGetHttpServlet extends HttpServlet
      *      javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public void doPost( HttpServletRequest aRequest, HttpServletResponse aResponse ) throws IOException, ServletException
+    public void doPost( HttpServletRequest aRequest, HttpServletResponse aResponse )
+                    throws IOException, ServletException
     {
         doGet( aRequest, aResponse );
     }
 
     protected abstract String getTitle();
 
-    protected abstract void buildReponse( PrintWriter aOut, HttpServletRequest aRequest, HttpServletResponse aResponse )
-                    throws IOException, ServletException;
+    protected abstract void buildReponse( PrintWriter aOut, HttpServletRequest aRequest,
+                                          HttpServletResponse aResponse ) throws IOException,
+                    ServletException;
 
 }
