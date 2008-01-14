@@ -3,10 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     version="2.5">
-    
+ 
+    <!-- <icon></icon> -->   
     <display-name>JSP Book web.xml</display-name>
     <description>This web app is used to house all of the content of the
         jspbook web app in.</description>
+    
+    
+    <!-- <distributable></distributable> -->   
     
     <!-- ===========================================
          ========= INITIAL CONTEXT FOR APP =========
@@ -215,6 +219,11 @@
         <url-pattern>/i18nHelloWorld</url-pattern>
     </servlet-mapping>
     
+    
+    <!-- <session-config></session-config> -->   
+    <!-- <mime-mapping></mime-mapping> -->   
+    <!-- <welcome-file-list></welcome-file-list> -->   
+    
     <!-- ===========================================    
          =============== ERROR PAGES ===============    
          =========================================== -->
@@ -231,6 +240,21 @@
         <location>/staticcontent/jsp/exceptions/errorPage.jsp</location>
     </error-page>
     
+    <!-- <jsp-config></jsp-config> -->   
+    <!-- <resource-env-ref></resource-env-ref> --> 
+      
+    <!-- ===========================================    
+         =============== RESOURCE REF ==============    
+         =========================================== -->
+    <!--
+    <resource-ref>
+        <description>Resource ref to the globally defined jdbc datasource
+            for the local db</description>
+        <res-ref-name>jdbc/localdb</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+        -->   
    
     <!-- ===========================================    
          ================= SECURITY ================    
@@ -262,6 +286,15 @@
                 /staticcontent/jsp/security/loginError.jsp</form-error-page>
         </form-login-config>
     </login-config>
+    
+    <!-- <security-role></security-role> -->   
+    <!-- <env-entry></env-entry> -->   
+    <!-- <ejb-ref></ejb-ref> -->   
+    <!-- <ejb-local-ref></ejb-local-ref> -->   
+    <!-- <service-ref></service-ref> -->   
+    <!-- <message-destination-ref></message-destination-ref> -->   
+    <!-- <message-destination></message-destination> -->   
+    <!-- <local-encoding-mapping-list></local-encoding-mapping-list> -->   
     
 </web-app>
 
