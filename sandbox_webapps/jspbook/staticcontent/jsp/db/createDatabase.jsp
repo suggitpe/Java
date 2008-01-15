@@ -13,6 +13,7 @@
     DataSource src = (DataSource)ctx.lookup("jdbc/localdb");
  
     Connection conn = src.getConnection();
+    conn.setAutoCommit(false);
     
     try
     {
@@ -74,6 +75,20 @@
             errBuff.append("CreateUri [").append(e.getMessage()).append("]<br/>");
         }
         
+        s.execute( "insert into link values ('test-1','test-1','This has been automatically inserted at table creation')" );
+        s.execute( "insert into link values ('test-2','test-2','This has been automatically inserted at table creation')" );
+        s.execute( "insert into link values ('test-3','test-3','This has been automatically inserted at table creation')" );
+        s.execute( "insert into link values ('test-4','test-4','This has been automatically inserted at table creation')" );
+        
+        s.execute("insert into uri values('test-a', 'test-b')");
+        
+        conn.commit();
+        
+    }
+    catch(SQLException se)
+    {
+        errBuff.append("******** Rolling back transaction");
+        conn.rollback();
     }
     finally
     {
