@@ -5,13 +5,86 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
     id="WebApp_ID" 
     version="2.5">
-  <display-name>JspbookSite</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+    
+    <!-- <icon></icon> -->   
+    <display-name>JspbookSite</display-name>
+    <description>This web app is the culmination of the rest of the chapters
+        from the jsp book</description>
+    
+    <!-- <distributable></distributable> --> 
+      
+    <!-- ===========================================
+         ========= INITIAL CONTEXT FOR APP =========
+         =========================================== -->
+    <context-param>
+        <param-name>AdminEmail</param-name>
+        <param-value>me@suggs.org.uk</param-value>
+    </context-param>
+    
+    <!-- ===========================================
+         ================= FILTERS =================
+         =========================================== -->
+    <filter>
+        <filter-name>ControlFilter</filter-name>
+        <filter-class>
+            org.suggs.sandbox_webapps.jspbook_site.filter.ControlFilter</filter-class>
+    </filter>
+    
+    <!-- ===========================================
+         ============= FILTER MAPPING ==============
+         =========================================== -->
+    <filter-mapping>
+        <filter-name>ControlFilter</filter-name>
+        <url-pattern>/jsp/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- ===========================================
+         ================ LISTENERS ================
+         =========================================== -->
+    <!-- <listener></listener> -->
+    
+    <!-- ===========================================    
+         ================= SERVLETS ================    
+         =========================================== -->
+    
+    
+    <!-- ===========================================    
+         ============= SERVLET MAPPING =============    
+         =========================================== -->
+    
+    
+    <!-- <session-config></session-config> -->   
+    <!-- <mime-mapping></mime-mapping> -->   
+    <!-- <welcome-file-list></welcome-file-list> -->   
+    
+    <!-- ===========================================    
+         =============== ERROR PAGES ===============    
+         =========================================== -->
+    <!-- <error-page></error-page> -->
+    
+    <!-- <jsp-config></jsp-config> -->   
+    <!-- <resource-env-ref></resource-env-ref> --> 
+      
+    <!-- <resource-ref></resource-ref> -->
+    
+    
+    <!-- ===========================================    
+         ================= SECURITY ================    
+         =========================================== -->
+    <!-- <security-constraint></security-constraint> --> 
+    
+    <!-- ===========================================    
+         ================== LOGINS =================    
+         =========================================== -->
+    <!-- <login-config></login-config> -->
+    
+    <!-- <security-role></security-role> -->   
+    <!-- <env-entry></env-entry> -->   
+    <!-- <ejb-ref></ejb-ref> -->   
+    <!-- <ejb-local-ref></ejb-local-ref> -->   
+    <!-- <service-ref></service-ref> -->   
+    <!-- <message-destination-ref></message-destination-ref> -->   
+    <!-- <message-destination></message-destination> -->   
+    <!-- <local-encoding-mapping-list></local-encoding-mapping-list> -->   
+
 </web-app>
