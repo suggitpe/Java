@@ -4,7 +4,6 @@
  */
 package org.suggs.apps.mercury.model.connection;
 
-import org.suggs.apps.mercury.model.connection.store.ConnectionDetails;
 import org.suggs.apps.mercury.model.support.AbstractMercuryModelTest;
 
 import org.apache.commons.logging.Log;
@@ -60,20 +59,18 @@ public class JmsConnectionManagerTest extends AbstractMercuryModelTest
 
             public void runTest()
             {
-                IConnectionDetails dtls = new ConnectionDetails( "TestConnection",
-                                                                       EConnectionType.valueOf( "EMS" ),
-                                                                       mServer_,
-                                                                       mPortNum_ );
+                // IConnectionDetails dtls = new ConnectionDetails(
+                // "TestConnection",
+                // EConnectionType.valueOf( "EMS" ),
+                // mServer_,
+                // mPortNum_ );
 
                 LOG.debug( "Initial state is [" + mConnMgr_.getConnectionState().name() + "]" );
-                /*try
-                {
-                    mConnMgr_.connect( dtls );
-                }
-                catch ( MercuryConnectionException me )
-                {
-                    fail( "Exception thrown when trying to connect: " + me.getMessage() );
-                }*/
+                /*
+                 * try { mConnMgr_.connect( dtls ); } catch (
+                 * MercuryConnectionException me ) { fail( "Exception
+                 * thrown when trying to connect: " + me.getMessage() ); }
+                 */
 
                 LOG.debug( "Connected state is [" + mConnMgr_.getConnectionState().name() + "]" );
                 if ( mConnMgr_.getConnectionState() != EConnectionState.CONNECTED )
