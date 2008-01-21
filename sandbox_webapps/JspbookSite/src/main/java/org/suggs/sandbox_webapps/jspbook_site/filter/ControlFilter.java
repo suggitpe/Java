@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ControlFilter implements Filter
 {
 
-    private static final String CLASS_PREFIX = "org.suggs.sandbox_webapps.designpatterns.model2.control.";
+    private static final String CLASS_PREFIX = "org.suggs.sandbox_webapps.jspbook_site.control.";
 
     /**
      * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
@@ -44,6 +44,7 @@ public class ControlFilter implements Filter
     public void doFilter( ServletRequest aRequest, ServletResponse aResponse, FilterChain aChain )
                     throws IOException, ServletException
     {
+        System.out.println( "In doFilter of the control filter" );
         if ( !( aRequest instanceof HttpServletRequest ) )
         {
             throw new ServletException( "ControlFilter only accepts HTTP Servlet Requests" );
