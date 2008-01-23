@@ -7,6 +7,10 @@
     id="WebApp_ID" 
     version="2.5">
     
+    <welcome-file-list>
+        <welcome-file>home.htm</welcome-file>
+    </welcome-file-list>
+    
     <!-- <icon></icon> -->
     <display-name>SpringMvcTest</display-name>
     <description>This is a test spring MVC web app solely for the purposes of
