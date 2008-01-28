@@ -11,7 +11,7 @@
         <h3>Recent Rantz:</h3>
         <ul>
             <c:forEach items="${rants}" var="rant">
-                <li>${rant}</li>
+                <li>${rant.rantText}</li>
             </c:forEach>            
         </ul>
     </body>

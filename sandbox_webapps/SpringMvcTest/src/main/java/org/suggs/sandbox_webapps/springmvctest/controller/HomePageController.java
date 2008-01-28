@@ -4,6 +4,7 @@
  */
 package org.suggs.sandbox_webapps.springmvctest.controller;
 
+import org.suggs.sandbox_webapps.springmvctest.domainmodel.Rant;
 import org.suggs.sandbox_webapps.springmvctest.service.IRantService;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class HomePageController extends AbstractController
     protected ModelAndView handleRequestInternal( HttpServletRequest arg0, HttpServletResponse arg1 )
                     throws Exception
     {
-        List<String> recentRants = mRantService_.getRecentRants();
+        List<Rant> recentRants = mRantService_.getRecentRants();
         return new ModelAndView( "home", "rants", recentRants );
     }
 
