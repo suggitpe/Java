@@ -68,7 +68,7 @@ public class RantValidator implements Validator
     private void validatePlateNumber( String aPlateNum, Errors aErr )
     {
         Perl5Util p5u = new Perl5Util();
-        if ( !p5u.match( PLATE_REGEXP, aPlateNum ) )
+        if ( aPlateNum == null || aPlateNum.equals( "" ) || !p5u.match( PLATE_REGEXP, aPlateNum ) )
         {
             aErr.reject( "invalid.plateNumber", "Invalid license plate number." );
         }

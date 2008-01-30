@@ -90,10 +90,23 @@
     <bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
-            <value>/WEB-INF/view/</value>
+            <value>/WEB-INF/view/jsp/</value>
         </property>
         <property name="suffix">
             <value>.jsp</value>
+        </property>
+    </bean>
+    
+    <bean id="beanNameViewResolver"
+        class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order"><value>1</value></property>
+    </bean>
+    
+    <bean id="xmlFileViewResolver"
+        class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="order"><value>2</value></property>
+        <property name="location">
+            <value>/WEB-INF/roadrantz-views.xml</value>
         </property>
     </bean>
     
@@ -101,6 +114,7 @@
     <!--============================ 
     ====== EXCEPTION HANDLING ====== 
     =============================-->
+    <!--
     <bean id="exceptionResolver"
         class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
@@ -109,5 +123,6 @@
             </props>
         </property>
     </bean>
+    -->
     
 </beans>
