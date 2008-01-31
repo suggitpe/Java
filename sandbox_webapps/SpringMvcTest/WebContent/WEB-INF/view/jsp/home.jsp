@@ -3,6 +3,7 @@
 <html>
     <head>
         <title>Rantz</title>
+        <format:includeFormat/>
     </head>
     <body>
         <h2>Welcome to RoadRantz!</h2>

@@ -112,6 +112,15 @@
     
     
     <!--============================ 
+    ======= RESOURCE BUNDLES ======= 
+    =============================-->
+    <bean id="messageSource"
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
+    
+    
+    <!--============================ 
     ====== EXCEPTION HANDLING ====== 
     =============================-->
     <!--

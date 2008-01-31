@@ -2,25 +2,29 @@
 <html>
     <head>
         <title>Add Rant</title>
+        <format:includeFormat/>
     </head>
     <body>
         <h2>Enter a rant ... </h2>
-        <form method="POST" action="addRant.htm">
+        <form:form method="POST" action="addRant.htm" commandName="rant">
             <table>
                 <tr>
-                    <td>State:</td>
-                    <td><form:input path="rant.vehicle.state"/></td>
+                    <td><spring:message code="field.state"/></td>
+                    <td><form:input path="vehicle.state"/></td>
+                    <td><form:errors path="vehicle.state" cssClass="error"/></td>
                 </tr>
                 <tr>
-                    <td>Plate num:</td>
-                    <td><input type="text" name="rant.vehicle.plateNumber"/></td>
+                    <td><spring:message code="field.plateNumber"/></td>
+                    <td><form:input path="vehicle.plateNumber"/></td>
+                    <td><form:errors path="vehicle.plateNumber" cssClass="error"/></td>
                 </tr>
                 <tr>
-                    <td>Rant:</td>
-                    <td><textarea name="rant.rantText" rows="5" cols="50"></textarea></td>
+                    <td><spring:message code="field.rantText"/></td>
+                    <td><form:textarea path="rantText" rows="5" cols="50"/></td>
+                    <td><form:errors path="rantText" cssClass="error"/></td>
                 </tr>
             </table>
             <input type="submit" value="Submit" />
-        </form>
+        </form:form>
     </body>
 </html>
