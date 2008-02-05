@@ -29,7 +29,6 @@
         </property>
     </bean>
     
-    
     <!--============================ 
     =========== HANDLERS ===========
     =============================-->
@@ -38,7 +37,6 @@
     
     <bean id="throwawayHandler"
         class="org.springframework.web.servlet.mvc.throwaway.ThrowawayControllerHandlerAdapter"/>
-    
     
     <!--============================
     ========= CONTROLLERS ==========
@@ -83,7 +81,6 @@
         <property name="rantService" ref="rantService"/>
     </bean>
     
-    
     <!--============================ 
     ========= VIEW RESOLUTION ====== 
     =============================-->
@@ -97,19 +94,35 @@
         </property>
     </bean>
     
-    <bean id="beanNameViewResolver"
-        class="org.springframework.web.servlet.view.BeanNameViewResolver">
+    <bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
         <property name="order"><value>1</value></property>
     </bean>
     
     <bean id="xmlFileViewResolver"
         class="org.springframework.web.servlet.view.XmlViewResolver">
-        <property name="order"><value>2</value></property>
+        <property name="order">
+            <value>2</value>
+        </property>
         <property name="location">
             <value>/WEB-INF/roadrantz-views.xml</value>
         </property>
     </bean>
     
+    <!--
+    <bean id="viewResolver"
+    class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+    <property name="basename" value="roadrantz-views"/>
+    </bean>
+    
+    <bean id="tilesConfigurer"
+    class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+    <property name="definitions">
+    <list>
+    <value>/WEB-INF/roadrantz-tiles.xml</value>
+    </list>
+    </property>
+    </bean>
+    -->
     
     <!--============================ 
     ======= RESOURCE BUNDLES ======= 
@@ -119,19 +132,17 @@
         <property name="basename" value="messages"/>
     </bean>
     
-    
     <!--============================ 
     ====== EXCEPTION HANDLING ====== 
     =============================-->
     <!--
     <bean id="exceptionResolver"
-        class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <prop key="java.lang.Exception">friendlyError</prop>
-            </props>
-        </property>
+    class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <property name="exceptionMappings">
+    <props>
+    <prop key="java.lang.Exception">friendlyError</prop>
+    </props>
+    </property>
     </bean>
     -->
-    
 </beans>
