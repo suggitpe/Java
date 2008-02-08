@@ -29,8 +29,7 @@
     </target>
     
     <!-- deploy the war to jboss -->
-    <target name="deploy">
-        <antcall target="deploy"/>
+    <target name="deploy" depends="main">
         <echo message="Deploying app to JBoss"/>
         <copy file="${top.dir}/quote.war" todir="${jboss.deploy.dir}"/>
     </target>
