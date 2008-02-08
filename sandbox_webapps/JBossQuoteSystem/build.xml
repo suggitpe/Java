@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JBoss Quote Build file" default="main" basedir=".">
+    
+    <!-- build properties -->
+    <property name="top.dir" value="."/>
+    <property name="src.dir" value="src/main/java"/>
+    <property name="lib.dir" value=""/>
+    <property name="jboss.dir" value="C:/Jboss/jboss-4.2.2.GA"/>
+    <property name="jboss.deploy.dir" value="${jboss.dir}/server/default/deploy"/>
+    <property name="lib.rep" value="../../build/repository"/>
+    
+    <!-- clean up from the last build of the war -->
+    <target name="clean">
+        <echo message="Cleaning"/>
+        <delete file="${top.dir}/quote.war"/>
+    </target>
+    
+    <!-- build the war file -->
+    <target name="main" depends="clean">
+        <echo message="Main build"/>
+        <war warfile="quote.war" webxml="${top.dir}/WebContent/WEB-INF/web.xml">
+            <fileset dir="WebContent"/>
+            <lib dir="${lib.rep}/jslt/jars">
+                <include name="jstl.jar"/>
+                <include name="standard.jar"/>
+            </lib>
+            <classes dir="${src.dir}"/>
+        </war>
+    </target>
+    
+    <!-- deploy the war to jboss -->
+    <target name="deploy">
+        <antcall target="deploy"/>
+        <echo message="Deploying app to JBoss"/>
+        <copy file="${top.dir}/quote.war" todir="${jboss.deploy.dir}"/>
+    </target>
+    
+    <target name="undeploy">
+        <echo message="Undeploying app from JBoss"/>
+        <delete>
+            <fileset id="quote_wars" dir="${jboss.deploy.dir}"
+                includes="*quote*.war"/>
+        </delete>
+    </target>
+    
+</project>
