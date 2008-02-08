@@ -7,7 +7,7 @@
     id="WebApp_ID" 
     version="2.5">
     
-    <display-name>JBossQuoteSystem</display-name>
+    <display-name>EinsteinQuoteSystem</display-name>
     
     <welcome-file-list>
         <welcome-file>jsp/quote.jsp</welcome-file>
