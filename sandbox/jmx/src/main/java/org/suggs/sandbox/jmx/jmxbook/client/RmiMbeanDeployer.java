@@ -16,7 +16,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * TODO Write javadoc for RmiMbeanDeployer
+ * Class that will allow you to connect to an MBean server and deploy
+ * an MBean
  * 
  * @author suggitpe
  * @version 1.0 15 Feb 2008
@@ -34,8 +35,11 @@ public class RmiMbeanDeployer
         LOG.debug( "Deploying hello world mbean" );
         try
         {
-            MBeanServerConnection conn = RmiClientFactory.getClient();
+            MBeanServerConnection client = RmiClientFactory.getClient();
             ObjectName name = new ObjectName( "JmxBookAgent:name=helloWorld" );
+
+            client.createMBean( "org.suggs.sandbox.jmx.helloworld.HelloWorld", name );
+            client.invoke( name, "printGreeting", null, null );
         }
         catch ( MalformedObjectNameException e )
         {
@@ -46,6 +50,11 @@ public class RmiMbeanDeployer
         {
             LOG.error( "Problem creating RMI Mbean server client:" + ioe.getMessage() );
             ExceptionUtil.printException( ioe );
+        }
+        catch ( Exception e )
+        {
+            LOG.error( "Problem with JMX RMI: " + e.getMessage() );
+            ExceptionUtil.printException( e );
         }
     }
 

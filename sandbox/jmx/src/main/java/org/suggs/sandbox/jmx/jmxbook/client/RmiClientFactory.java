@@ -20,7 +20,6 @@ import javax.management.remote.JMXServiceURL;
  * @version 1.0 14 Feb 2008
  */
 public class RmiClientFactory
-
 {
 
     /**
@@ -35,5 +34,4 @@ public class RmiClientFactory
         c.connect();
         return c.getMBeanServerConnection();
     }
-
 }
