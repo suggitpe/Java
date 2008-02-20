@@ -9,7 +9,17 @@
         This package is a
         This package contains the following:
         <ul>
-            <li></li>
+            <li>helloworld - this package contains a really simple MBean interface to show
+                how easily an MBean can be deployed to an MBean server. It uses the
+                HttpAdapter to gain access to the Mbean server.</li>
+            <li>jmxbook - this package breaks down the JMX agent to have two access points:
+                the HttpAdapter as used before; and the RMI Connector server. This is then
+                access via an MBean server connection to manage the deployed MBeans. This
+                implementation also deploys an MBean to the servr through the RMI
+                Connector.</li>
+            <li>propertymanager - this package provides an implementation that shows how
+                you can use JMX to dynamically controll and configure an application
+                through its deployed MBeans.</li>
         </ul>
         
         <h2>Package Specification</h2>
