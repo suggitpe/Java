@@ -2,7 +2,7 @@
  * TestConstruction.java created on 21 Sep 2007 06:50:33 by suggitpe for project SandBox - OddsAndSods
  * 
  */
-package org.suggs.sandbox.oddsandsods.initialisationorder.detailed;
+package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
 
 import junit.framework.TestCase;
 

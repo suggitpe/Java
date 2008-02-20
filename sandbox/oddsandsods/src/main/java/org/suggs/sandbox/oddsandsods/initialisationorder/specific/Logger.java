@@ -2,7 +2,7 @@
  * Logger.java created on 20 Sep 2007 18:18:06 by suggitpe for project SandBox - OddsAndSods
  * 
  */
-package org.suggs.sandbox.oddsandsods.initialisationorder.detailed;
+package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
 
 import java.util.List;
 import java.util.Vector;

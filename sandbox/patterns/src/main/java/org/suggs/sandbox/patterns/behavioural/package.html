@@ -1,67 +1,67 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN" "" >
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN" "">
 <html>
-	<head>
-		<!--
-		Copyright (c) 2007 Peter Suggitt
-		-->
-	</head>
-	<body bgcolor="white">
-		<p>This top level package contains example code for the behavioural patterns, ie
-			those patterns that are concerned with the communications between objects.
-			This package contains the following specific patterns.
-			<ul>
-				<li>Chain of Responsibility pattern - </li>
-				<li>Command pattern - encasulates a request in an object with a simple
-					execute method. Each command that can be executed by an invoker is
-					encapsulated into an object. Each command has an object that it can
-					execute a command on. Thus the command objects provide a simple and
-					standard interface to a varying interface on the recipient object
-					(receiver). There are three main parties in the pattern: Client
-					(initiates the request by creating the command); Invoker (who manages
-					the invokation of the command); and Receiver (who the command is
-					executed on). The command object will be the one that has compile time
-					bindings against the Receiver object.</li>
-				<li>Interpretor pattern - </li>
-				<li>Iterator pattern - this pattern concerns itself with moving through a
-					list of objects in a collection (aggregates). If the aggregates have
-					different interfaces then the algorithm for traversing the aggregate
-					will be different. Here we encapsulate the traversal of the aggregate
-					into an object with a single interface. The implementation of the
-					interator is a drivation of an 'Interator' interface for each type of
-					concrete aggregate, with the concrete iterator having a composite
-					relationship to the collection.</li>
-				<li>Mediator pattern - </li>
-				<li>Memento pattern - </li>
-				<li>Observer pattern - this pattern defines communications in a
-					one-to-many object relationship. When the state of the subject object
-					changes, the change must be communicated to the depemndent objects.
-					Please note that this impl does not use the built in Observer
-					class/interface in the language.</li>
-				<li>State pattern - this pattern allows the internal behaviour of a class to
-					alter depending on the state of the class. The object's state is
-					encapsulated into a collection of state objects that define the way
-					that actions/events will work on a class and thus its behaviour to those
-					actions/events. Thus it can be said that the implementation of the
-					state patterns allows for an object to appear to change its class. This
-					differs from the strategy pattern in that the client does not know about
-					the state and indeed the state changes.</li>
-				<li>Strategy pattern - </li>
-				<li>Template pattern - this pattern is concerned with a templatised
-					algorithm implementation within a base class in preference to an
-					implementation within a concrete classes calling back up the
-					hierarchy for common methods. To implement this method you really need
-					to look at an algorithm used by subclasses and work out what the common
-					pieces of functionality are (functionaldecomposition) and create
-					called abstract methods for the non common ones. The addition of
-					implemented hooks (ie methods that can be overridden by subclasses)
-					allows for further design extension.</li>
-				<li>Visitor pattern - </li>
-			</ul></p>
-		
-		<h2>Package Specification</h2>
-		
-		<h2>Related Documentation</h2>
-		
-		<!-- Put @see and @since tags down here. -->
-	</body>
+    <head>
+        <!--
+        Copyright (c) 2007 Peter Suggitt
+        -->
+    </head>
+    <body bgcolor="white">
+        <p>This top level package contains example code for the behavioural patterns, ie
+            those patterns that are concerned with the communications between objects.
+            This package contains the following specific patterns.
+            <ul>
+                <li>Chain of Responsibility pattern - </li>
+                <li>Command pattern - encasulates a request in an object with a simple
+                    execute method. Each command that can be executed by an invoker is
+                    encapsulated into an object. Each command has an object that it can
+                    execute a command on. Thus the command objects provide a simple and
+                    standard interface to a varying interface on the recipient object
+                    (receiver). There are three main parties in the pattern: Client
+                    (initiates the request by creating the command); Invoker (who manages
+                    the invokation of the command); and Receiver (who the command is
+                    executed on). The command object will be the one that has compile time
+                    bindings against the Receiver object.</li>
+                <li>Interpretor pattern - </li>
+                <li>Iterator pattern - this pattern concerns itself with moving through a
+                    list of objects in a collection (aggregates). If the aggregates have
+                    different interfaces then the algorithm for traversing the aggregate
+                    will be different. Here we encapsulate the traversal of the aggregate
+                    into an object with a single interface. The implementation of the
+                    interator is a drivation of an 'Interator' interface for each type of
+                    concrete aggregate, with the concrete iterator having a composite
+                    relationship to the collection.</li>
+                <li>Mediator pattern - </li>
+                <li>Memento pattern - </li>
+                <li>Observer pattern - this pattern defines communications in a
+                    one-to-many object relationship. When the state of the subject object
+                    changes, the change must be communicated to the depemndent objects.
+                    Please note that this impl does not use the built in Observer
+                    class/interface in the language.</li>
+                <li>State pattern - this pattern allows the internal behaviour of a class to
+                    alter depending on the state of the class. The object's state is
+                    encapsulated into a collection of state objects that define the way
+                    that actions/events will work on a class and thus its behaviour to those
+                    actions/events. Thus it can be said that the implementation of the
+                    state patterns allows for an object to appear to change its class. This
+                    differs from the strategy pattern in that the client does not know about
+                    the state and indeed the state changes.</li>
+                <li>Strategy pattern - </li>
+                <li>Template pattern - this pattern is concerned with a templatised
+                    algorithm implementation within a base class in preference to an
+                    implementation within a concrete classes calling back up the
+                    hierarchy for common methods. To implement this method you really need
+                    to look at an algorithm used by subclasses and work out what the common
+                    pieces of functionality are (functionaldecomposition) and create
+                    called abstract methods for the non common ones. The addition of
+                    implemented hooks (ie methods that can be overridden by subclasses)
+                    allows for further design extension.</li>
+                <li>Visitor pattern - </li>
+            </ul></p>
+        
+        <h2>Package Specification</h2>
+        
+        <h2>Related Documentation</h2>
+        
+        <!-- Put @see and @since tags down here. -->
+    </body>
 </html>

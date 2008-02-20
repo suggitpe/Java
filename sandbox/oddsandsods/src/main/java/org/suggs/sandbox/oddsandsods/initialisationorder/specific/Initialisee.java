@@ -2,7 +2,7 @@
  * Initialisee.java created on 21 Sep 2007 06:30:30 by suggitpe for project SandBox - OddsAndSods
  * 
  */
-package org.suggs.sandbox.oddsandsods.initialisationorder.detailed;
+package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
 
 /**
  * A class that can be initialised in different ways
