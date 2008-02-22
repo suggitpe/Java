@@ -42,7 +42,9 @@ public class JmxBookAgent
     public JmxBookAgent()
     {
         LOG.debug( "Creating MBean server " );
-        mServer_ = MBeanServerFactory.createMBeanServer( "JmxBookAgent" );
+        String svrName = JmxBookConfig.getInstance()
+            .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+        mServer_ = MBeanServerFactory.createMBeanServer( svrName );
 
         if ( !startHtmlAdapter() )
         {
@@ -78,7 +80,9 @@ public class JmxBookAgent
         ObjectName adapterName;
         try
         {
-            adapterName = new ObjectName( "JmxBookAgent:name=html,port=" + httpPort );
+            String svrName = JmxBookConfig.getInstance()
+                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+            adapterName = new ObjectName( svrName + ":name=html,port=" + httpPort );
             mServer_.registerMBean( adapter, adapterName );
             adapter.start();
         }
@@ -124,7 +128,9 @@ public class JmxBookAgent
         ObjectName connectorName;
         try
         {
-            connectorName = new ObjectName( "JmxBookAgent:name=RMIConnector" );
+            String svrName = JmxBookConfig.getInstance()
+                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+            connectorName = new ObjectName( svrName + ":name=RMIConnector" );
             mServer_.registerMBean( conn, connectorName );
         }
         catch ( MalformedObjectNameException mone )

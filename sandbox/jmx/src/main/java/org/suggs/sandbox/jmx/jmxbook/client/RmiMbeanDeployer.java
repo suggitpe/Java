@@ -5,6 +5,7 @@
 package org.suggs.sandbox.jmx.jmxbook.client;
 
 import org.suggs.sandbox.jmx.jmxbook.ExceptionUtil;
+import org.suggs.sandbox.jmx.jmxbook.config.JmxBookConfig;
 
 import java.io.IOException;
 
@@ -36,7 +37,9 @@ public class RmiMbeanDeployer
         try
         {
             MBeanServerConnection client = RmiClientFactory.getClient();
-            ObjectName name = new ObjectName( "JmxBookAgent:name=helloWorld" );
+            String svrName = JmxBookConfig.getInstance()
+                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+            ObjectName name = new ObjectName( svrName + ":name=helloWorld" );
 
             client.createMBean( "org.suggs.sandbox.jmx.helloworld.HelloWorld", name );
             client.invoke( name, "printGreeting", null, null );

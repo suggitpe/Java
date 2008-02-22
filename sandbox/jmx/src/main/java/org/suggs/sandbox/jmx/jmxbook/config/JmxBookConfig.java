@@ -32,6 +32,7 @@ public class JmxBookConfig
     public static final String RMI_PORT = "agent.rmi.port";
     public static final String RMI_URL_PREFIX = "agent.rmi.url.prefix";
     public static final String RMI_URL_POSTFIX = "agent.rmi.url.postfix";
+    public static final String MBEAN_SERVERNAME = "server.mbean.name";
 
     static
     {
@@ -79,10 +80,12 @@ public class JmxBookConfig
         try
         {
             mProperties_.load( is );
+            is.close();
         }
         catch ( IOException ioe )
         {
-            throw new IllegalStateException( "Could not load configuration file [" + name + "]" );
+            throw new IllegalStateException( "Could not load configuration file [" + name + "]",
+                                             ioe );
         }
     }
 
