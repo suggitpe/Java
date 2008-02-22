@@ -2,7 +2,7 @@
  * DBSource.java created on 20 Feb 2008 19:33:31 by suggitpe for project SandBox - JMX
  * 
  */
-package org.suggs.sandbox.jmx.configmanager.dbmanager;
+package org.suggs.sandbox.jmx.jmxbook.components.dbmanager;
 
 import org.suggs.sandbox.jmx.jmxbook.ExceptionUtil;
 
@@ -41,7 +41,7 @@ public class DBSource implements DBSourceMBean
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.dbmanager.DBSourceMBean#resetDataSource(java.lang.String)
+     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#resetDataSource(java.lang.String)
      */
     public void resetDataSource( String name )
     {
@@ -58,7 +58,7 @@ public class DBSource implements DBSourceMBean
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.dbmanager.DBSourceMBean#getConnection()
+     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#getConnection()
      */
     public Connection getConnection()
     {
@@ -78,7 +78,7 @@ public class DBSource implements DBSourceMBean
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.dbmanager.DBSourceMBean#getAutoCommit()
+     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#getAutoCommit()
      */
     public boolean getAutoCommit()
     {
@@ -86,7 +86,7 @@ public class DBSource implements DBSourceMBean
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.dbmanager.DBSourceMBean#setAutoCommit()
+     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#setAutoCommit()
      */
     public void setAutoCommit( boolean commit )
     {

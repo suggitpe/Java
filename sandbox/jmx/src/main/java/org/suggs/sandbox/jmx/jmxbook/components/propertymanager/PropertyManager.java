@@ -2,7 +2,8 @@
  * PropertyManager.java created on 20 Feb 2008 19:20:37 by suggitpe for project SandBox - JMX
  * 
  */
-package org.suggs.sandbox.jmx.configmanager.propertymanager;
+package org.suggs.sandbox.jmx.jmxbook.components.propertymanager;
+
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -45,7 +46,7 @@ public class PropertyManager implements PropertyManagerMBean
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.propertymanager.PropertyManagerMBean#getProperty(java.lang.String)
+     * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#getProperty(java.lang.String)
      */
     public String getProperty( String name )
     {
@@ -53,7 +54,7 @@ public class PropertyManager implements PropertyManagerMBean
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.propertymanager.PropertyManagerMBean#setProperty(java.lang.String,
+     * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#setProperty(java.lang.String,
      *      java.lang.String)
      */
     public void setProperty( String name, String value )
@@ -62,7 +63,7 @@ public class PropertyManager implements PropertyManagerMBean
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.propertymanager.PropertyManagerMBean#keys()
+     * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#keys()
      */
     public Enumeration keys()
     {
@@ -70,7 +71,7 @@ public class PropertyManager implements PropertyManagerMBean
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.propertymanager.PropertyManagerMBean#setSource(java.lang.String)
+     * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#setSource(java.lang.String)
      */
     public void setSource( String path )
     {

@@ -2,7 +2,7 @@
  * DBSourceMBean.java created on 20 Feb 2008 19:31:07 by suggitpe for project SandBox - JMX
  * 
  */
-package org.suggs.sandbox.jmx.configmanager.dbmanager;
+package org.suggs.sandbox.jmx.jmxbook.components.dbmanager;
 
 import java.sql.Connection;
 

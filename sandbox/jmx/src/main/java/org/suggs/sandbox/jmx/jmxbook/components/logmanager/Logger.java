@@ -2,7 +2,7 @@
  * Logger.java created on 21 Feb 2008 08:17:49 by suggitpe for project SandBox - JMX
  * 
  */
-package org.suggs.sandbox.jmx.configmanager.logmanager;
+package org.suggs.sandbox.jmx.jmxbook.components.logmanager;
 
 import org.suggs.sandbox.jmx.jmxbook.ExceptionUtil;
 import org.suggs.sandbox.jmx.jmxbook.config.JmxBookConfig;
@@ -51,7 +51,7 @@ public class Logger implements LoggerMBean, MBeanRegistration
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.logmanager.LoggerMBean#getLogLevel()
+     * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#getLogLevel()
      */
     public int getLogLevel()
     {
@@ -59,7 +59,7 @@ public class Logger implements LoggerMBean, MBeanRegistration
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.logmanager.LoggerMBean#retrieveLog(int)
+     * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#retrieveLog(int)
      */
     public String retrieveLog( int linesBack )
     {
@@ -68,7 +68,7 @@ public class Logger implements LoggerMBean, MBeanRegistration
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.logmanager.LoggerMBean#setLogLevel(int)
+     * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#setLogLevel(int)
      */
     public void setLogLevel( int level )
     {
@@ -76,7 +76,7 @@ public class Logger implements LoggerMBean, MBeanRegistration
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.configmanager.logmanager.LoggerMBean#writeLog(java.lang.String,
+     * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#writeLog(java.lang.String,
      *      int)
      */
     public void writeLog( String message, int type )

@@ -2,7 +2,7 @@
  * PropertyManagerMBean.java created on 20 Feb 2008 19:18:14 by suggitpe for project SandBox - JMX
  * 
  */
-package org.suggs.sandbox.jmx.configmanager.propertymanager;
+package org.suggs.sandbox.jmx.jmxbook.components.propertymanager;
 
 import java.util.Enumeration;
 

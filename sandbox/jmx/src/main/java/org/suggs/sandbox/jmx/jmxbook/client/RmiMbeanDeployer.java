@@ -62,6 +62,81 @@ public class RmiMbeanDeployer
     }
 
     /**
+     * Constructs a new instance.
+     */
+    public static void deployPropertyManager()
+    {
+        LOG.debug( "Running the property manager setup application" );
+        try
+        {
+            // get a connection to the MBean server
+            MBeanServerConnection conn = RmiClientFactory.getClient();
+
+            // create the object name
+            String svrName = JmxBookConfig.getInstance()
+                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+            ObjectName propertyName = new ObjectName( svrName + ":name=propertyManager" );
+
+            // now create the MBean uing the correct parameters for
+            // the ctor
+            conn.createMBean( "org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManager",
+                              propertyName,
+                              new Object[] { new String( "propertyManager.properties" ) },
+                              new String[] { "java.lang.String" } );
+        }
+        catch ( IOException ioe )
+        {
+            LOG.error( "Failed to connect to the MBean server" );
+            ExceptionUtil.printException( ioe );
+        }
+        catch ( MalformedObjectNameException mon )
+        {
+            LOG.error( "Badly named object name for MBean server" );
+            ExceptionUtil.printException( mon );
+        }
+        catch ( Exception e )
+        {
+            LOG.error( "Failed to create MBean on the remote server" );
+            ExceptionUtil.printException( e );
+        }
+    }
+
+    public static void deployLogger()
+    {
+        LOG.debug( "Running the logger setup application" );
+        try
+        {
+            // get a connection to the MBean server
+            MBeanServerConnection conn = RmiClientFactory.getClient();
+
+            // create the object name
+            String svrName = JmxBookConfig.getInstance()
+                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+            ObjectName loggerName = new ObjectName( svrName + ":name=logger" );
+
+            // now create the MBean using the correct parameters for
+            // the ctor
+            conn.createMBean( "org.suggs.sandbox.jmx.jmxbook.components.logmanager.Logger",
+                              loggerName );
+        }
+        catch ( IOException ioe )
+        {
+            LOG.error( "Failed to connect to the MBean server" );
+            ExceptionUtil.printException( ioe );
+        }
+        catch ( MalformedObjectNameException mon )
+        {
+            LOG.error( "Badly named object name for MBean server" );
+            ExceptionUtil.printException( mon );
+        }
+        catch ( Exception e )
+        {
+            LOG.error( "Failed to create MBean on the remote server" );
+            ExceptionUtil.printException( e );
+        }
+    }
+
+    /**
      * Main method
      * 
      * @param aArgs
@@ -70,6 +145,10 @@ public class RmiMbeanDeployer
     public static void main( String[] aArgs )
     {
         RmiMbeanDeployer.deployHelloWorldBean();
+        LOG.debug( "Deploying propertyManager ..." );
+        RmiMbeanDeployer.deployPropertyManager();
+        LOG.debug( "Deploying Logger ..." );
+        RmiMbeanDeployer.deployLogger();
     }
 
 }
