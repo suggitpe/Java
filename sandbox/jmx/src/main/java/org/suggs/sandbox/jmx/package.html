@@ -16,11 +16,17 @@
                 the HttpAdapter as used before; and the RMI Connector server. This is then
                 access via an MBean server connection to manage the deployed MBeans. This
                 implementation also deploys an MBean to the servr through the RMI
-                Connector.</li>
-            <li>configmanager - this package provides mplementation examples that show
-                how you can use JMX to dynamically control and configure an application
-                through its deployed MBeans. Not all of these have been deployed but they do
-                provide a good level of examples from which to refer to.</li>
+                Connector. This package also contains a collection of MBean components
+                that can be deployed to the MBean server with the client:
+                <ul>
+                    <li>propertymanager - Standard MBean that allows access to a
+                        properties file</li>
+                    <li>dbmanager - Stanadrd MBean that allows access to a
+                        datasource through JNDI</li>
+                    <li>logmanager - Standard MBean that allows access to a log manager
+                        class (this utilises an MBen to Mbean lookup)</li>
+                </ul>
+            </li>
         </ul>
         
         <h2>Package Specification</h2>

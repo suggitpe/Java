@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="/_build/repository/commons-logging/jars/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/jmx/jmxtools/jars/jmxtools-1.2.1.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/log4j/jars/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/jini/jars/jini-core-2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
