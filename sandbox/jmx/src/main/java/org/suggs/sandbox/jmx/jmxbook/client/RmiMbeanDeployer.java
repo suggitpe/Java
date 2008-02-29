@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Class that will allow you to connect to an MBean server and deploy
- * an MBean
+ * an MBean.
  * 
  * @author suggitpe
  * @version 1.0 15 Feb 2008
@@ -136,6 +136,41 @@ public class RmiMbeanDeployer
         }
     }
 
+    private static void deployPolling()
+    {
+        try
+        {
+            LOG.debug( "Deploying the polling application" );
+            // get a connection to the MBean server
+            MBeanServerConnection conn = RmiClientFactory.getClient();
+
+            // create the object name
+            String svrName = JmxBookConfig.getInstance()
+                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+            ObjectName pollingName = new ObjectName( svrName + ":name=polling" );
+
+            // now create the MBean using the correct parameters for
+            // the ctor
+            conn.createMBean( "org.suggs.sandbox.jmx.jmxbook.components.polling.Polling",
+                              pollingName );
+        }
+        catch ( IOException ioe )
+        {
+            LOG.error( "Failed to connect to the MBean server" );
+            ExceptionUtil.printException( ioe );
+        }
+        catch ( MalformedObjectNameException mon )
+        {
+            LOG.error( "Badly named object name for MBean server" );
+            ExceptionUtil.printException( mon );
+        }
+        catch ( Exception e )
+        {
+            LOG.error( "Failed to create MBean on the remote server" );
+            ExceptionUtil.printException( e );
+        }
+    }
+
     /**
      * Main method
      * 
@@ -144,11 +179,18 @@ public class RmiMbeanDeployer
      */
     public static void main( String[] aArgs )
     {
+
+        LOG.debug( "Deploying hello world bean" );
         RmiMbeanDeployer.deployHelloWorldBean();
+
         LOG.debug( "Deploying propertyManager ..." );
         RmiMbeanDeployer.deployPropertyManager();
+
         LOG.debug( "Deploying Logger ..." );
         RmiMbeanDeployer.deployLogger();
+
+        LOG.debug( "Deploying Poller ..." );
+        RmiMbeanDeployer.deployPolling();
     }
 
 }

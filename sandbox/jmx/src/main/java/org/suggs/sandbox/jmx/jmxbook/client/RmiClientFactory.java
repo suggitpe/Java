@@ -14,7 +14,9 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
 /**
- * Factory class to enable you to create RMI clients.
+ * Factory class to enable you to create RMI clients. This centralises
+ * the process of discovery of the JMX Agent (and thus the MBEan
+ * server).
  * 
  * @author suggitpe
  * @version 1.0 14 Feb 2008
