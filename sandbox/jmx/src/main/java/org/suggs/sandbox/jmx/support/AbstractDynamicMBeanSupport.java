@@ -2,7 +2,7 @@
  * AbstractDynamicMBeanSupport.java created on 26 Feb 2008 08:23:12 by suggitpe for project SandBox - JMX
  * 
  */
-package org.suggs.sandbox.jmx.jmxbook.support;
+package org.suggs.sandbox.jmx.support;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

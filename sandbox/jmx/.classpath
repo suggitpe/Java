@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="/_build/repository/jmx/jmxtools/jars/jmxtools-1.2.1.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/log4j/jars/log4j-1.2.12.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/jini/jars/jini-core-2.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/spring/jars/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
