@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Sandbox Test Eclipse Plugin
+Bundle-SymbolicName: SandboxTestEclipsePlugin; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: org.suggs.sandbox_eclipse.testplugin.TestEclipsePlugin
+Bundle-Vendor: Peter Suggitt
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.help,
+ org.eclipse.core.resources
+Eclipse-LazyStart: true
+Bundle-RequiredExecutionEnvironment: J2SE-1.4,
+ J2SE-1.5
+Export-Package: org.suggs.sandbox_eclipse.testplugin,
+ org.suggs.sandbox_eclipse.testplugin.actions
