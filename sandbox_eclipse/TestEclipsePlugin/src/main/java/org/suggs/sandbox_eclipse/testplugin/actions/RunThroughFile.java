@@ -6,9 +6,14 @@ import org.eclipse.core.internal.resources.File;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Layout;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 public class RunThroughFile implements IObjectActionDelegate
 {
@@ -39,6 +44,22 @@ public class RunThroughFile implements IObjectActionDelegate
             File f;
         }
 
+        Shell shell = new Shell();
+        // MessageDialog.openInformation( shell, "DeleeMe Plug-in",
+        // "New Action was executed." );
+
+        FormToolkit toolKit = new FormToolkit( shell.getDisplay() );
+        ScrolledForm form = toolKit.createScrolledForm( shell );
+
+        form.setText( "This is a test form" );
+
+        Layout lay = new GridLayout( 2, false );
+        form.getBody().setLayout( lay );
+
+        form.pack();
+        form.redraw();
+
+        toolKit.paintBordersFor( form.getBody() );
     }
 
     /**

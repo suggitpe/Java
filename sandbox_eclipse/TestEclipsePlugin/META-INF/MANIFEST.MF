@@ -8,7 +8,8 @@ Bundle-Vendor: Peter Suggitt
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.help,
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ org.eclipse.ui.forms
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.4,
  J2SE-1.5
