@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-    
-    
-    <extension point="org.eclipse.ui.popupMenus">
-       <objectContribution
-             id="SandboxTestEclipsePlugin.contribution1"
-             objectClass="org.eclipse.core.runtime.IAdaptable">
-          <menu
-                id="SandboxTestEclipsePlugin.menu1"
-                label="Scribbler"
-                path="additions">
-             <separator
-                   name="group1">
-             </separator>
-          </menu>
-          <action
-                class="org.suggs.sandbox_eclipse.testplugin.actions.RunThroughFile"
-                enablesFor="1"
-                id="SandboxTestEclipsePlugin.newAction"
-                label="Generate Spring XML"
-                menubarPath="SandboxTestEclipsePlugin.menu1/group1">
-          </action>
-       </objectContribution>
-    </extension>
-    
+
+	<extension point="org.eclipse.ui.popupMenus">
+		<objectContribution id="SandboxTestEclipsePlugin.contribution1"
+			objectClass="org.eclipse.core.runtime.IAdaptable">
+			<menu id="SandboxTestEclipsePlugin.menu1" label="Scribbler"
+				path="additions">
+				<separator name="group1"></separator>
+			</menu>
+			<action
+				class="org.suggs.sandbox_eclipse.testplugin.actions.CreateXmlActionPopupDelegate"
+				enablesFor="1" id="SandboxTestEclipsePlugin.newAction"
+				label="Generate Spring XML"
+				menubarPath="SandboxTestEclipsePlugin.menu1/group1">
+			</action>
+		</objectContribution>
+	</extension>
+
+	<extension point="org.eclipse.ui.actionSets">
+		<actionSet id="Scribbler.actionSet" label="Scribbler Actions"
+			visible="true">
+			<menu id="scribblerMenu" label="Scribbler">
+				<separator name="scribblerGroup"></separator>
+			</menu>
+			<action
+				class="org.suggs.sandbox_eclipse.testplugin.actions.CreateXmlActionMenuDelegate"
+				icon="icons/sample.gif"
+				id="org.suggs.sandbox_eclipse.sandboxtesteclipseplugin.actions.HelloWorldAction"
+				label="&amp;Sample Action"
+				menubarPath="scribblerMenu/scribblerGroup"
+				toolbarPath="scribblerGroup" tooltip="Hello, Eclipse world">
+			</action>
+		</actionSet>
+	</extension>
+
 </plugin>
