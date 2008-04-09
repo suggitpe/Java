@@ -1,0 +1,58 @@
+/*
+ * LayoutExample.java created on 8 Apr 2008 06:45:42 by suggitpe for project SandBox - SWT
+ * 
+ */
+package org.suggs.sandbox.swt.layout.filllayout;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+
+/**
+ * This example is a very simple implementation of the FillLayout
+ * 
+ * @author suggitpe
+ * @version 1.0 8 Apr 2008
+ */
+public class SimpleFillLayoutExample
+{
+
+    private static final Log LOG = LogFactory.getLog( SimpleFillLayoutExample.class );
+
+    /**
+     * @param args
+     */
+    public static void main( String[] args )
+    {
+        LOG.debug( "Building dialog" );
+        Display d = new Display();
+        Shell shell = new Shell( d );
+
+        // create the layout
+        FillLayout lay = new FillLayout();
+        // optionally set some of the layout fields
+        shell.setLayout( lay );
+
+        // now populate
+        new Button( shell, SWT.PUSH ).setText( "B1" );
+        new Button( shell, SWT.PUSH ).setText( "Wide Button ?" );
+        new Button( shell, SWT.PUSH ).setText( "Button 3" );
+
+        shell.pack();
+        shell.open();
+        LOG.debug( "Dialog opened" );
+        while ( !shell.isDisposed() )
+        {
+            if ( !d.readAndDispatch() )
+            {
+                d.sleep();
+            }
+        }
+        LOG.debug( "All done" );
+    }
+
+}
