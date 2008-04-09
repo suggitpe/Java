@@ -14,4 +14,6 @@ Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.4,
  J2SE-1.5
 Export-Package: org.suggs.sandbox_eclipse.testplugin,
- org.suggs.sandbox_eclipse.testplugin.actions
+ org.suggs.sandbox_eclipse.testplugin.actions,
+ org.suggs.sandbox_eclipse.testplugin.dialogs,
+ org.suggs.sandbox_eclipse.testplugin.fsmgeneration

@@ -36,7 +36,7 @@ public class FsmXmlGenerator
     {
         StringBuffer buff = new StringBuffer( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" ).append( "<beans>\n" )
             .append( "\t<bean id=\"duffBean\" class=\"org.suggs.sandbox.scribbler.duffBeanClass\">\n" )
-            .append( "\t\t<property name=\"sampleProperty\" value=\"sampleName\">\n" )
+            .append( "\t\t<property name=\"sampleProperty1\" value=\"sampleName\">\n" )
             .append( "\t</bean>\n" )
             .append( "</beans>\n" );
         return buff.toString();
