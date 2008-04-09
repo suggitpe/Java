@@ -47,12 +47,8 @@ public class DisplaySpringXmlDialog extends Dialog
         grp.setText( "Spring XML" );
 
         // set the layout
-        GridLayout lay = new GridLayout( 1, false );
-        grp.setLayout( lay );
-
-        // set the layout data
-        GridData data = new GridData( GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL );
-        grp.setLayoutData( data );
+        grp.setLayout( new GridLayout( 3, false ) );
+        grp.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
 
         // now we can build the internal widgets
         Text res = new Text( grp, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL
@@ -60,6 +56,14 @@ public class DisplaySpringXmlDialog extends Dialog
         res.setText( mXml_ );
         res.selectAll();
 
+        // now we want to set up the layout data for the text area
+        GridData data = new GridData();
+        data.widthHint = 700;
+        data.heightHint = 300;
+        data.horizontalSpan = 3;
+        res.setLayoutData( data );
+
+        ret.pack();
         return ret;
     }
 
