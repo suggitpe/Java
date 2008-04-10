@@ -10,7 +10,7 @@
 				<separator name="group1"></separator>
 			</menu>
 			<action
-				class="org.suggs.sandbox_eclipse.testplugin.actions.CreateXmlActionPopupDelegate"
+				class="org.suggs.sandbox_eclipse.testplugin.actions.CreateXmlActionDelegate"
 				enablesFor="1" id="SandboxTestEclipsePlugin.newAction"
 				label="Generate Spring XML"
 				menubarPath="SandboxTestEclipsePlugin.menu1/group1">
@@ -25,12 +25,12 @@
 				<separator name="scribblerGroup"></separator>
 			</menu>
 			<action
-				class="org.suggs.sandbox_eclipse.testplugin.actions.CreateXmlActionMenuDelegate"
+				class="org.suggs.sandbox_eclipse.testplugin.actions.CreateXmlActionDelegate"
 				icon="icons/sample.gif"
 				id="org.suggs.sandbox_eclipse.sandboxtesteclipseplugin.actions.HelloWorldAction"
-				label="&amp;Sample Action"
+				label="Generate Spring XML"
 				menubarPath="scribblerMenu/scribblerGroup"
-				toolbarPath="scribblerGroup" tooltip="Hello, Eclipse world">
+				toolbarPath="scribblerGroup" tooltip="Generate Spring XML from model item">
 			</action>
 		</actionSet>
 	</extension>
