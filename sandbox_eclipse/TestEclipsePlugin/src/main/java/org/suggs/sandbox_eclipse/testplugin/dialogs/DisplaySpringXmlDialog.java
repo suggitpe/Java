@@ -54,7 +54,7 @@ public class DisplaySpringXmlDialog extends Dialog
         Text res = new Text( grp, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL
                                   | SWT.READ_ONLY );
         res.setText( mXml_ );
-        res.selectAll();
+        // res.selectAll();
 
         // now we want to set up the layout data for the text area
         GridData data = new GridData();

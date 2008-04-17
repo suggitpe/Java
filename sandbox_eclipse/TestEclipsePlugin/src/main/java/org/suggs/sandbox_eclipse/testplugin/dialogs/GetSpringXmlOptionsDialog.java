@@ -4,7 +4,10 @@
  */
 package org.suggs.sandbox_eclipse.testplugin.dialogs;
 
+import java.io.File;
+
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -133,6 +136,43 @@ public class GetSpringXmlOptionsDialog extends Dialog
         createDestinationSection( ret );
         ret.pack();
         return ret;
+    }
+
+    /**
+     * This method is overriden so that we can add in some validation
+     * logic around the passed in filenames.
+     * 
+     * @see org.eclipse.jface.dialogs.Dialog#okPressed()
+     */
+    @Override
+    protected void okPressed()
+    {
+        // now we do the validation
+        if ( mFileRadio_.getSelection() )
+        {
+            String name = mFileName_.getText();
+            if ( name == null || name.equals( "" ) )
+            {
+                MessageDialog.openError( Display.getCurrent().getActiveShell(),
+                                         "Incomplete input",
+                                         "If you select the file destination, then "
+                                                         + "you also need to select a filename" );
+                return;
+            }
+
+            File dest = new File( name );
+            if ( !dest.exists() )
+            {
+                MessageDialog.openError( Display.getCurrent().getActiveShell(),
+                                         "Bad data",
+                                         "The filename entered ["
+                                                         + name
+                                                         + "], does not exist. Please make sure that the file exists before continuing." );
+                return;
+            }
+        }
+
+        super.okPressed();
     }
 
     /**

@@ -26,7 +26,7 @@
 			</menu>
 			<action
 				class="org.suggs.sandbox_eclipse.testplugin.actions.CreateXmlActionDelegate"
-				icon="icons/sample.gif"
+				icon="icons/scribe_icon_sm.gif"
 				id="org.suggs.sandbox_eclipse.sandboxtesteclipseplugin.actions.HelloWorldAction"
 				label="Generate Spring XML"
 				menubarPath="scribblerMenu/scribblerGroup"

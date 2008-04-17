@@ -4,15 +4,22 @@
  */
 package org.suggs.sandbox_eclipse.testplugin.actions;
 
+import org.suggs.sandbox_eclipse.testplugin.FsmGenerationException;
+import org.suggs.sandbox_eclipse.testplugin.compare.FsmGenDataInput;
+import org.suggs.sandbox_eclipse.testplugin.compare.FsmGenerationEditorInput;
 import org.suggs.sandbox_eclipse.testplugin.dialogs.DisplaySpringXmlDialog;
 import org.suggs.sandbox_eclipse.testplugin.dialogs.GetSpringXmlOptionsDialog;
 import org.suggs.sandbox_eclipse.testplugin.fsmgeneration.FsmXmlGenerator;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+import org.eclipse.compare.CompareUI;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -61,6 +68,7 @@ public class CreateXmlFileAction extends Action
         {
             FsmXmlGenerator gen = new FsmXmlGenerator( mModel_ );
             String xml = gen.generateXml( d.getFsmKeySelection() );
+
             if ( d.getDestination() == GetSpringXmlOptionsDialog.DEST_POPUP )
             {
                 dispatchXmlToPopup( xml );
@@ -72,14 +80,19 @@ public class CreateXmlFileAction extends Action
         }
         catch ( Exception e )
         {
+            MessageDialog.openError( Display.getDefault().getActiveShell(),
+                                     "FSM Generation Failure",
+                                     "Failed to generate FSM XML file because:\n" + e.getMessage() );
             e.printStackTrace();
         }
     }
 
     /**
-     * Drop the contents of the
+     * Drop the contents of the the xml generation process to a popup
+     * dialog window for the user do do with as they wish.
      * 
      * @param aXml
+     *            the xml to show to the user.
      */
     private void dispatchXmlToPopup( String aXml )
     {
@@ -88,8 +101,58 @@ public class CreateXmlFileAction extends Action
         d.open();
     }
 
-    private void dispatchXmlToFile( String aXml, String aFilename ) throws IOException
+    /**
+     * Take the contents of the generated XML and drops it to a diff
+     * viewer for review.
+     * 
+     * @param aXml
+     *            the generasted xml
+     * @param aFilename
+     *            the filename to write to
+     * @throws IOException
+     */
+    private void dispatchXmlToFile( String aXml, String aFilename ) throws IOException,
+                    FsmGenerationException
     {
+        if ( aFilename == null || aFilename.equals( "" ) )
+        {
+            throw new FsmGenerationException( "No filename has been specified by the options dialog (cannot procedd without a filename" );
+        }
+        File dest = new File( aFilename );
+
+        if ( !dest.exists() || !dest.isFile() || !dest.canWrite() )
+        {
+            throw new FsmGenerationException( "The filename specified [" + aFilename
+                                              + "] does not exist or is not writable" );
+        }
+
+        StringBuffer existingXml = new StringBuffer();
+        BufferedReader reader = new BufferedReader( new FileReader( dest ) );
+        String ln = null;
+        while ( ( ln = reader.readLine() ) != null )
+        {
+            existingXml.append( ln ).append( "\n" );
+        }
+
+        FsmGenerationEditorInput diag = new FsmGenerationEditorInput( new FsmGenDataInput( existingXml.toString(),
+                                                                                           "From file "
+                                                                                                           + aFilename ),
+                                                                      new FsmGenDataInput( aXml,
+                                                                                           "New FSM XML" ) );
+        CompareUI.openCompareDialog( diag );
+        if ( diag.wasCancelPressed() )
+        {
+            MessageDialog.openWarning( Display.getCurrent().getActiveShell(),
+                                       "Operation cancelled",
+                                       "FSM Spring XML generation cancelled by user." );
+            return;
+        }
+
+        if ( diag.getCompareResult() == null )
+        {
+            return;
+        }
+
         FileOutputStream fos = new FileOutputStream( aFilename );
         FileChannel chan = fos.getChannel();
         try
@@ -112,4 +175,5 @@ public class CreateXmlFileAction extends Action
                                        "Have written " + aXml.getBytes().length + " bytes to "
                                                        + aFilename + " correctly" );
     }
+
 }
