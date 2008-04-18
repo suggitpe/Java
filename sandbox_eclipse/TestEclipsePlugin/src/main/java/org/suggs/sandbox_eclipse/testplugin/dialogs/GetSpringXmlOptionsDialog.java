@@ -6,8 +6,12 @@ package org.suggs.sandbox_eclipse.testplugin.dialogs;
 
 import java.io.File;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -17,11 +21,11 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog;
 
 /**
  * This class is a dialog class that allows us to collect data from
@@ -259,11 +263,22 @@ public class GetSpringXmlOptionsDialog extends Dialog
 
             public void widgetSelected( SelectionEvent e )
             {
-                FileDialog fd = new FileDialog( Display.getCurrent().getActiveShell() );
-                fd.setFilterPath( "c:\\" );
-                fd.setFilterExtensions( new String[] { "*.xml" } );
-                String selected = fd.open();
-                mFileName_.setText( selected );
+                FilteredResourcesSelectionDialog fd = new FilteredResourcesSelectionDialog( Display.getCurrent()
+                                                                                                .getActiveShell(),
+                                                                                            false,
+                                                                                            ResourcesPlugin.getWorkspace()
+                                                                                                .getRoot(),
+                                                                                            IResource.FILE );
+                fd.setInitialPattern( "*.xml" );
+
+                if ( fd.open() == Window.OK )
+                {
+                    IFile selectedFile = (IFile) fd.getFirstResult();
+                    if ( selectedFile != null )
+                    {
+                        mFileName_.setText( selectedFile.getLocation().toFile().getAbsolutePath() );
+                    }
+                }
             }
         } );
 
