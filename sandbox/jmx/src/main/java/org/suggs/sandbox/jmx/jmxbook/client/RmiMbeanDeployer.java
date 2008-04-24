@@ -5,6 +5,7 @@
 package org.suggs.sandbox.jmx.jmxbook.client;
 
 import org.suggs.sandbox.jmx.jmxbook.ExceptionUtil;
+import org.suggs.sandbox.jmx.jmxbook.components.modelmbeanexample.ExposableBean;
 import org.suggs.sandbox.jmx.jmxbook.config.JmxBookConfig;
 
 import java.io.IOException;
@@ -172,6 +173,58 @@ public class RmiMbeanDeployer
     }
 
     /**
+     * Deploys the example Model mbean.
+     */
+    private static void deployModelMBeanExample()
+    {
+        try
+        {
+            LOG.debug( "Deploying the exposable model mbean " );
+            // get a connection to the MBean server
+            MBeanServerConnection conn = RmiClientFactory.getClient();
+
+            // create the object name
+            String svrName = JmxBookConfig.getInstance()
+                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+            ObjectName modelName = new ObjectName( svrName + ":name=modeled" );
+
+            // now create the mbean on the server - note that this is
+            // not our bean but a model mbean stub
+            conn.createMBean( "javax.management.modelmbean.RequiredModelMBean", modelName );
+
+            // now we need to configure the model mbean
+            String[] sig = { "java.lang.Object", "java.lang.String" };
+            Object[] params = { new ExposableBean(), "ObjectReference" };
+            conn.invoke( modelName, "setManagedResource", params, sig );
+
+            sig = new String[1];
+            sig[0] = "javax.management.modelmbean.ModelMBeanInfo";
+            params = new Object[1];
+            params[0] = ExposableBean.buildModelMBeanInfo();
+            conn.invoke( modelName, "setModelMBeanInfo", params, sig );
+
+            // now we store it
+            conn.invoke( modelName, "store", null, null );
+        }
+        catch ( IOException ioe )
+        {
+            LOG.error( "Failed to connect to the MBean server" );
+            ExceptionUtil.printException( ioe );
+        }
+        catch ( MalformedObjectNameException mon )
+        {
+            LOG.error( "Badly named object name for MBean server" );
+            ExceptionUtil.printException( mon );
+        }
+        catch ( Exception e )
+        {
+            LOG.error( "Failed to create MBean on the remote server" );
+            ExceptionUtil.printException( e );
+        }
+
+    }
+
+    /**
      * Main method
      * 
      * @param aArgs
@@ -191,6 +244,10 @@ public class RmiMbeanDeployer
 
         LOG.debug( "Deploying Poller ..." );
         RmiMbeanDeployer.deployPolling();
+
+        LOG.debug( "Deploying ModelMBeanExample" );
+        RmiMbeanDeployer.deployModelMBeanExample();
+
     }
 
 }
