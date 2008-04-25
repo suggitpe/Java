@@ -10,10 +10,13 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-webapps-parent</artifactId>
+    <artifactId>sandbox-eclipse-parent</artifactId>
     <packaging>pom</packaging>
-    <name>WebApps Sandbox Parent</name>
+    <name>Eclipse Sandbox Parent</name>
 
     <modules>
+    <!--
+        <module>mercury</module>
+        -->
     </modules>
 </project>

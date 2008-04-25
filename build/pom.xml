@@ -45,7 +45,12 @@
     
     <!-- This links up the main pom to the module poms -->
     <modules>
+        <module>../gui_apps</module>
         <module>../sandbox</module>
+        <module>../sandbox_eclipse</module>
+        <module>../sandbox_ejb</module>
+        <module>../sandbox_webapps</module>
+        <module>../web_apps</module>
     </modules>
     
     <build>
@@ -62,83 +67,16 @@
                 </configuration>
             </plugin>
             
-            <!-- XML Beans -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>xmlbeans-maven-plugin</artifactId>
-                
-                <!-- see: http://mojo.codehaus.org/xmlbeans-maven-plugin/xmlbeans-mojo.html -->
-                
-                <!-- see: http://xmlbeans.apache.org/docs/2.0.0/guide/antXmlbean.html -->
-                <executions>
-                    <execution>
-                        <id>exec-xmlbeans-1</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>xmlbeans</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                
-                <configuration>
-                    <memoryInitialSize> 128m</memoryInitialSize>
-                    <memoryMaximumSize> 1024m</memoryMaximumSize>
-                    <quiet>false</quiet>
-                    <schemaDirectory> src/main/resources</schemaDirectory>
-                    <outputJar> ${project.build.directory}/boxer-msg-${pom.version}.jar</outputJar>
-                    <xmlConfigs>
-                        <xmlConfig implementation="java.io.File">src/main/resources/boxer-msg.xsdconfig</xmlConfig>
-                    </xmlConfigs>
-                </configuration>
-            </plugin>
-            
         </plugins>
     </build>
     
     <!-- this is where we pick up dependent jar files and define the main Scribe 
     repository (when localised jars are 'installed') -->
     <repositories>
-        <!--
-        <repository>
-            <id>codehaus</id>
-            <url>http://dist.codehaus.org/</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>codehaus-legacy</id>
-            <url>http://dist.codehaus.org/</url>
-            <layout>legacy</layout>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        -->
     </repositories>
     
     <!-- this is where we define the location of standard and local Maven plugins -->
     <pluginRepositories>
-    <!--
-        <pluginRepository>
-            <id>codehaus-plugins</id>
-            <url>http://dist.codehaus.org</url>
-            <layout>legacy</layout>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
-        -->
     </pluginRepositories>
     
     <!-- this is where we define the additional report to run as the main build -->
@@ -175,12 +113,14 @@
         </dependency>
         
         <!-- site dependencies -->
+        <!--
         <dependency>
             <groupId>clover</groupId>
             <artifactId>clover</artifactId>
             <version>1.3.6</version>
             <scope>test</scope>
         </dependency>
+        -->
     </dependencies>
     
 </project>

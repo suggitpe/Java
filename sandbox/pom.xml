@@ -15,8 +15,10 @@
     <name>Sandbox Parent</name>
 
     <modules>
+    <!--
         <module>gui</module>
         <module>hibernate</module>
         <module>patterns</module>
+        -->
     </modules>
 </project>
