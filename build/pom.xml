@@ -59,13 +59,25 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId> maven-compiler-plugin</artifactId>
-                
+                <version>2.0</version>
                 <!-- best lock down version of the plugin too -->
                 <configuration>
                     <source>1.5</source>
                     <target>1.5</target>
                 </configuration>
             </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<useSystemClassLoader>true</useSystemClassLoader>
+					<trimStackTrace>false</trimStackTrace>
+					<argLine>${test.jvm.args}</argLine>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+				</configuration>
+			</plugin>
             
         </plugins>
     </build>
