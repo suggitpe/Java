@@ -5,12 +5,12 @@
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/_build/repository/javax/jars/persistence-api-1.0.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/commons-logging/jars/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/spring/jars/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/hibernate/jars/hibernate-3.2.3.jar" sourcepath="/_build/repository/hibernate/jars/hibernate-src-3.2.3.zip"/>
-	<classpathentry kind="lib" path="/_build/repository/spring/jars/spring-test-2.5.1.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/junit/jars/junit-3.8.1.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/hibernate/jars/hibernate-annotations-3.3.0.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/junit/junit/3.8.1/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/org/springframework/spring-test/2.5.1/spring-test-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/org/hibernate/hibernate/3.2.3.ga/hibernate-3.2.3.ga.jar" sourcepath="/_build/repository/hibernate/jars/hibernate-src-3.2.3.zip"/>
+	<classpathentry kind="lib" path="/_build/repository/org/hibernate/hibernate-annotations/3.3.0.ga/hibernate-annotations-3.3.0.ga.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

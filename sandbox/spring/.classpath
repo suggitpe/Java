@@ -4,8 +4,8 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
-	<classpathentry kind="lib" path="/_build/repository/spring/jars/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/spring/jars/spring-test-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/org/springframework/spring-test/2.5.1/spring-test-2.5.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

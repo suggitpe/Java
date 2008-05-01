@@ -15,10 +15,12 @@
     <name>Sandbox Parent</name>
 
     <modules>
-    <!--
         <module>gui</module>
         <module>hibernate</module>
+        <module>jmx</module>
+        <module>oddsandsods</module>
         <module>patterns</module>
-        -->
+        <module>spring</module>
+        <module>swt</module>
     </modules>
 </project>

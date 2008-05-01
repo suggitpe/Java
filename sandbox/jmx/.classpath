@@ -5,10 +5,10 @@
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/_build/repository/commons-logging/jars/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/jmx/jmxtools/jars/jmxtools-1.2.1.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/log4j/jars/log4j-1.2.12.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/jini/jars/jini-core-2.1.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/spring/jars/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/com/sun/jdmk/jmxtools/1.2.1/jmxtools-1.2.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/log4j/log4j/1.2.12/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/net/jini/jini-core/2.1/jini-core-2.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

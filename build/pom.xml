@@ -54,6 +54,27 @@
     </modules>
     
     <build>
+        <testResources>
+            <testResource>
+				<directory>c:/codebase/java/trunk/build/etc/mavenBuild</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</testResource>
+            <testResource>
+				<directory>src/test/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.xsl</include>
+					<include>**/*.xsd</include>
+					<include>**/*.sql</include>
+					<include>**/*.properties</include>
+				</includes>
+			</testResource>
+        </testResources>
+
         <plugins>
             <!--  -->
             <plugin>
@@ -123,7 +144,12 @@
             <version>2.5.1</version>
             <scope>compile</scope>
         </dependency>
-        
+        <dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.12</version>
+			<scope>test</scope>
+		</dependency>
         <!-- site dependencies -->
         <dependency>
             <groupId>clover</groupId>

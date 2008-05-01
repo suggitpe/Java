@@ -10,9 +10,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-hibernate-lib</artifactId>
+    <artifactId>sandbox-jmx-lib</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox Hibernate</name>
+    <name>Sandbox JMX</name>
 
     <build>
 		<plugins>
@@ -21,11 +21,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<excludes> 
-						<exclude>**/Hbm*Test.java</exclude>
-						<exclude>**/Annotatation*Test.java</exclude>
-						<exclude>**/MessageHiber*Test.java</exclude>
-						<exclude>**/CaveatEmptor*Test.java</exclude>
-						<exclude>**/AnnotationSchemaCreatorTest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -34,21 +29,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate</artifactId>
-            <version>3.2.3.ga</version>
+            <groupId>com.sun.jdmk</groupId>
+            <artifactId>jmxtools</artifactId>
+            <version>1.2.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <version>3.3.0.ga</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>1.0</version>
+            <groupId>net.jini</groupId>
+            <artifactId>jini-core</artifactId>
+            <version>2.1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
