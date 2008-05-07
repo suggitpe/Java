@@ -15,5 +15,7 @@
     <name>WebApps Sandbox Parent</name>
 
     <modules>
+        <module>SpringMvcTest</module>
     </modules>
+
 </project>

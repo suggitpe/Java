@@ -28,6 +28,15 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>swt</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.swt.win32.win32</groupId>
+            <artifactId>x86</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
-  
 </project>

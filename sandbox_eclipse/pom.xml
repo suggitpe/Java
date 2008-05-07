@@ -15,8 +15,40 @@
     <name>Eclipse Sandbox Parent</name>
 
     <modules>
-    <!--
-        <module>mercury</module>
+        <!--
+        <module>TestEclipsePlugin</module>
         -->
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>swt</artifactId>
+            <version>3.3.0-v3346</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.swt.win32.win32</groupId>
+            <artifactId>x86</artifactId>
+            <version>3.3.0-v3346</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>compare</artifactId>
+            <version>3.3.0-I20070606</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>resources</artifactId>
+            <version>3.3.0-I20070606</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+
+    </dependencies>
+
+
 </project>

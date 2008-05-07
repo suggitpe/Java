@@ -3,16 +3,16 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <artifactId>sandbox-parent</artifactId>
+        <artifactId>sandbox-webapps-parent</artifactId>
         <groupId>org.suggs</groupId>
         <relativePath>..</relativePath>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-jmx-lib</artifactId>
-    <packaging>jar</packaging>
-    <name>Sandbox JMX</name>
+    <artifactId>sandbox-spring-mvc-test</artifactId>
+    <packaging>war</packaging>
+    <name>Sandbox Spring MVC WebApp</name>
 
     <build>
 		<plugins>
@@ -28,16 +28,6 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>com.sun.jdmk</groupId>
-            <artifactId>jmxtools</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.jini</groupId>
-            <artifactId>jini-core</artifactId>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
   
 </project>
