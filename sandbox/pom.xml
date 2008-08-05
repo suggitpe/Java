@@ -22,5 +22,6 @@
         <module>patterns</module>
         <module>spring</module>
         <module>swt</module>
+        <module>tibco</module>
     </modules>
 </project>
