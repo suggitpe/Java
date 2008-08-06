@@ -41,20 +41,14 @@ public class CompositeIterator implements Iterator
         {
             return false;
         }
-        else
+        Iterator i = mStack_.peek();
+        if ( !i.hasNext() )
         {
-            Iterator i = mStack_.peek();
-            if ( !i.hasNext() )
-            {
-                mStack_.pop();
-                return hasNext();
+            mStack_.pop();
+            return hasNext();
 
-            }
-            else
-            {
-                return true;
-            }
         }
+        return true;
     }
 
     /**
@@ -72,10 +66,7 @@ public class CompositeIterator implements Iterator
             }
             return comp;
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 
     /**

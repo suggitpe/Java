@@ -41,10 +41,7 @@ public class PancakeHouseMenuIterator implements IIterator
         {
             return false;
         }
-        else
-        {
-            return true;
-        }
+        return true;
     }
 
     /**

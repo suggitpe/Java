@@ -36,10 +36,7 @@ public class DinerMenuIterator implements IIterator
         {
             return false;
         }
-        else
-        {
-            return true;
-        }
+        return true;
     }
 
     /**

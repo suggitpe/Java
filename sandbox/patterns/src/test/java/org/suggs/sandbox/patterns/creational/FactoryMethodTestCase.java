@@ -40,7 +40,7 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
      */
     public void testFooPizzaStore()
     {
-        runTest( "testFooPizzaStore", new FooPizzaStore(), "ham", false );
+        runTest( new FooPizzaStore(), "ham", false );
     }
 
     /**
@@ -48,7 +48,7 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
      */
     public void testBarPizzaStore()
     {
-        runTest( "testBarPizzaStore", new BarPizzaStore(), "cheese", false );
+        runTest( new BarPizzaStore(), "cheese", false );
 
     }
 
@@ -57,7 +57,7 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
      */
     public void testFooPizzaStoreFailure()
     {
-        runTest( "testFooPizzaStoreFailure", new FooPizzaStore(), "dog-poo", true );
+        runTest( new FooPizzaStore(), "dog-poo", true );
     }
 
     /**
@@ -65,7 +65,7 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
      */
     public void testBarPizzaStoreFailure()
     {
-        runTest( "testBarPizzaStoreFailure", new BarPizzaStore(), "cat-wee", true );
+        runTest( new BarPizzaStore(), "cat-wee", true );
     }
 
     /**
@@ -78,7 +78,7 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
      * @param expectException
      *            whether we expect an exception to be thrown
      */
-    private void runTest( String aTestName, IPizzaStore aStore, String aType, boolean expectException )
+    private void runTest( IPizzaStore aStore, String aType, boolean expectException )
     {
         LOG.debug( "Testing Pizza Store for a [" + aType + "] pizza" );
 
