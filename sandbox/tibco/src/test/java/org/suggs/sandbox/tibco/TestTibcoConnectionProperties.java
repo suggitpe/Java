@@ -11,6 +11,9 @@ import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.tibco.tibjms.admin.TibjmsAdmin;
+import com.tibco.tibjms.admin.TibjmsAdminException;
+
 /**
  * Unit test for the Tibco connection properties class
  * 
@@ -35,7 +38,27 @@ public class TestTibcoConnectionProperties extends TestCase
         }
         catch ( NamingException ne )
         {
+            ne.printStackTrace();
             fail( "Naming exception thrown from getter" );
+        }
+    }
+
+    /**
+     * Tests that we can connect to the EMS broker as admin
+     */
+    public void testTibcoAdminConnection()
+    {
+        try
+        {
+            LOG.debug( "Creating instance of Tibco admin connection" );
+            TibcoAdminConnectionProperties conn = TibcoAdminConnectionProperties.instance();
+            TibjmsAdmin admin = conn.getAdmin();
+            admin.close();
+        }
+        catch ( TibjmsAdminException e )
+        {
+            e.printStackTrace();
+            fail( "Something bad happened" );
         }
     }
 }
