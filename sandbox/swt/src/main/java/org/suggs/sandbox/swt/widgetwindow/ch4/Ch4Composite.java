@@ -11,7 +11,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * TODO Write javadoc for Ch4Composite
+ * A composite class that shows mouse events in motion plus provides
+ * access to a GUI full of event listeners.
  * 
  * @author suggitpe
  * @version 1.0 18 Aug 2008

@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.swt.widgetwindow;
 
-import org.suggs.sandbox.swt.widgetwindow.ch4.Ch4MouseKey;
+import org.suggs.sandbox.swt.widgetwindow.ch5.Ch5ComboComposite;
 
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.widgets.Composite;
@@ -36,7 +36,12 @@ public class ComponentViewer extends ApplicationWindow
     {
         // new Ch3Group( parent );
         // new Ch3SashForm( parent );
-        new Ch4MouseKey( parent );
+
+        // new Ch4MouseKey( parent );
+
+        // new Ch5Capitaliser( parent );
+        // new Ch5Undoable( parent );
+        new Ch5ComboComposite( parent );
         return parent;
     }
 

@@ -6,6 +6,7 @@ package org.suggs.sandbox.swt.widgetwindow;
 
 import org.suggs.sandbox.swt.widgetwindow.ch3.Ch3Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch4.Ch4Composite;
+import org.suggs.sandbox.swt.widgetwindow.ch5.Ch5Composite;
 
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
@@ -41,13 +42,17 @@ public class WidgetWindow extends ApplicationWindow
     {
         TabFolder f = new TabFolder( parent, SWT.NONE );
 
-        TabItem chap3 = new TabItem( f, SWT.NONE );
-        chap3.setText( "Chapter 3" );
-        chap3.setControl( new Ch3Composite( f ) );
+        TabItem chap3b = new TabItem( f, SWT.NONE );
+        chap3b.setText( "Chapter 3" );
+        chap3b.setControl( new Ch3Composite( f ) );
 
         TabItem chap4 = new TabItem( f, SWT.NONE );
         chap4.setText( "Chapter 4" );
         chap4.setControl( new Ch4Composite( f ) );
+
+        TabItem chap5 = new TabItem( f, SWT.NONE );
+        chap5.setText( "Chapter 5" );
+        chap5.setControl( new Ch5Composite( f ) );
 
         getShell().setText( "Widget Window" );
         return parent;
