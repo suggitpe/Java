@@ -32,7 +32,9 @@ public class SimpleFillLayoutExample
         Display d = new Display();
         Shell shell = new Shell( d );
 
-        // create the layout
+        // create the layout. Note that you can use the SWT.VERTICLE
+        // and SWT.HORIZONTAL attributes in the ctor to define the way
+        // that the fill works
         FillLayout lay = new FillLayout();
         // optionally set some of the layout fields
         shell.setLayout( lay );
