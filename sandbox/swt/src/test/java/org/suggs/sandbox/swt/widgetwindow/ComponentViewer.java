@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.swt.widgetwindow;
 
-import org.suggs.sandbox.swt.widgetwindow.ch6.Ch6RadialLayoutComposite;
+import org.suggs.sandbox.swt.widgetwindow.ch7.Ch7Composite;
 
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.widgets.Composite;
@@ -46,7 +46,11 @@ public class ComponentViewer extends ApplicationWindow
         // new Ch6FillLayoutComposite( parent );
         // new Ch6RowLayoutComposite( parent );
         // new Ch6GridLayoutComposite( parent );
-        new Ch6RadialLayoutComposite( parent );
+        // new Ch6RadialLayoutComposite( parent );
+
+        // new Ch7Colors( parent );
+        // new Ch7Fonts( parent );
+        new Ch7Composite( parent );
         return parent;
     }
 

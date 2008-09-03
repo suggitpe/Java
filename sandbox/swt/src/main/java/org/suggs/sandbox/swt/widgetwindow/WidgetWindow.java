@@ -8,6 +8,7 @@ import org.suggs.sandbox.swt.widgetwindow.ch3.Ch3Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch4.Ch4Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch5.Ch5Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch6.Ch6FormLayoutComposite;
+import org.suggs.sandbox.swt.widgetwindow.ch7.Ch7Composite;
 
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
@@ -58,6 +59,10 @@ public class WidgetWindow extends ApplicationWindow
         TabItem chap6 = new TabItem( f, SWT.NONE );
         chap6.setText( "Chapter 6 layout" );
         chap6.setControl( new Ch6FormLayoutComposite( f ) );
+
+        TabItem chap7 = new TabItem( f, SWT.NONE );
+        chap7.setText( "Chapter 7 graphics" );
+        chap7.setControl( new Ch7Composite( f ) );
 
         getShell().setText( "Widget Window" );
         return parent;
