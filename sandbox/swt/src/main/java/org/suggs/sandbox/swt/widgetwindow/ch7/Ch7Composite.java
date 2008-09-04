@@ -49,7 +49,7 @@ public class Ch7Composite extends Canvas
             {
                 Display d = pe.display;
                 GC gc = pe.gc;
-                InputStream is = getClass().getResourceAsStream( "FlagGIF.gif" );
+                InputStream is = getClass().getClassLoader().getResourceAsStream( "FlagGIF.gif" );
                 if ( is == null )
                 {
                     throw new IllegalStateException( "No resource found" );
