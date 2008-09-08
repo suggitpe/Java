@@ -2,7 +2,7 @@
  * Ch5Composite.java created on 19 Aug 2008 18:41:24 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch5;
+package org.suggs.sandbox.swt.widgetwindow.ch5_widgets;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;

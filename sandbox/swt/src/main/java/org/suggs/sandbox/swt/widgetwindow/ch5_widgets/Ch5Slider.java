@@ -2,7 +2,7 @@
  * Ch5Slider.java created on 19 Aug 2008 18:35:04 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch5;
+package org.suggs.sandbox.swt.widgetwindow.ch5_widgets;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;

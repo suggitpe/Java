@@ -2,7 +2,7 @@
  * Ch4Contributions.java created on 13 Aug 2008 18:41:01 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch4;
+package org.suggs.sandbox.swt.widgetwindow.ch4_events;
 
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.MenuManager;

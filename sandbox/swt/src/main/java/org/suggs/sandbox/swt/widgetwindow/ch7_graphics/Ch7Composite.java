@@ -2,7 +2,7 @@
  * Ch7Composite.java created on 2 Sep 2008 18:48:40 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch7;
+package org.suggs.sandbox.swt.widgetwindow.ch7_graphics;
 
 import java.io.InputStream;
 

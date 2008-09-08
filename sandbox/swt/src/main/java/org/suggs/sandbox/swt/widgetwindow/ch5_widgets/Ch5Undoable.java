@@ -2,7 +2,7 @@
  * Ch5Undoable.java created on 18 Aug 2008 18:49:48 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch5;
+package org.suggs.sandbox.swt.widgetwindow.ch5_widgets;
 
 import java.util.LinkedList;
 import java.util.List;

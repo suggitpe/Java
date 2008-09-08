@@ -2,7 +2,7 @@
  * Ch3Composite.java created on 12 Aug 2008 18:32:29 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch3;
+package org.suggs.sandbox.swt.widgetwindow.ch3_composites;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;

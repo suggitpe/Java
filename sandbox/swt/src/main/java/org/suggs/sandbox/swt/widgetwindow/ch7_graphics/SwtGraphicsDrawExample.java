@@ -2,7 +2,7 @@
  * SwtGraphicsDrawExample.java created on 22 Aug 2008 18:11:57 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch7;
+package org.suggs.sandbox.swt.widgetwindow.ch7_graphics;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;

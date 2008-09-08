@@ -2,7 +2,7 @@
  * Ch6RadialLayoutComposite.java created on 22 Aug 2008 17:53:11 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch6;
+package org.suggs.sandbox.swt.widgetwindow.ch6_layouts;
 
 import org.suggs.sandbox.swt.widgetwindow.RadialLayout;
 

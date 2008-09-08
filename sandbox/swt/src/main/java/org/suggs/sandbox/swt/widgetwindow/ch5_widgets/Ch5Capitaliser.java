@@ -2,7 +2,7 @@
  * Ch5Capitaliser.java created on 18 Aug 2008 07:06:29 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch5;
+package org.suggs.sandbox.swt.widgetwindow.ch5_widgets;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.VerifyEvent;

@@ -2,7 +2,7 @@
  * Ch3Group.java created on 11 Aug 2008 18:48:32 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch3;
+package org.suggs.sandbox.swt.widgetwindow.ch3_composites;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;

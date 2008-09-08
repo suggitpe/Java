@@ -2,7 +2,7 @@
  * Ch6FillLayoutComposite.java created on 21 Aug 2008 07:00:47 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch6;
+package org.suggs.sandbox.swt.widgetwindow.ch6_layouts;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;

@@ -2,7 +2,7 @@
  * Ch4StatusAction.java created on 13 Aug 2008 18:30:01 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch4;
+package org.suggs.sandbox.swt.widgetwindow.ch4_events;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.StatusLineManager;

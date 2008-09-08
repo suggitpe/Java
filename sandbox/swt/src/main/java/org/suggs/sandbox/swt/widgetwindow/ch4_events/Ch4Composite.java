@@ -2,7 +2,7 @@
  * Ch4Composite.java created on 18 Aug 2008 06:53:30 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch4;
+package org.suggs.sandbox.swt.widgetwindow.ch4_events;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;

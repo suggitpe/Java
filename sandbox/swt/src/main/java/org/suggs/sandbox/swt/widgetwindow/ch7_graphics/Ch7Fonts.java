@@ -2,7 +2,7 @@
  * Ch7Fonts.java created on 2 Sep 2008 18:30:40 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.ch7;
+package org.suggs.sandbox.swt.widgetwindow.ch7_graphics;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
