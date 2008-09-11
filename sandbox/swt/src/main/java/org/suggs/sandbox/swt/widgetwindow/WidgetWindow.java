@@ -4,11 +4,15 @@
  */
 package org.suggs.sandbox.swt.widgetwindow;
 
+import org.suggs.sandbox.swt.widgetwindow.Ch10Dialogs.Ch10CustomDialogComposite;
+import org.suggs.sandbox.swt.widgetwindow.Ch9Tables.Ch9TableEditorComposite;
 import org.suggs.sandbox.swt.widgetwindow.ch3_composites.Ch3Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch4_events.Ch4Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch5_widgets.Ch5Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch6_layouts.Ch6FormLayoutComposite;
 import org.suggs.sandbox.swt.widgetwindow.ch7_graphics.Ch7Composite;
+import org.suggs.sandbox.swt.widgetwindow.ch8_trees.Ch8ListComposite;
+import org.suggs.sandbox.swt.widgetwindow.ch8_trees.Ch8TreeComposite;
 
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
@@ -63,6 +67,22 @@ public class WidgetWindow extends ApplicationWindow
         TabItem chap7 = new TabItem( f, SWT.NONE );
         chap7.setText( "Chapter 7 graphics" );
         chap7.setControl( new Ch7Composite( f ) );
+
+        TabItem chap8a = new TabItem( f, SWT.NONE );
+        chap8a.setText( "Chapter 8a Trees" );
+        chap8a.setControl( new Ch8TreeComposite( f ) );
+
+        TabItem chap8b = new TabItem( f, SWT.NONE );
+        chap8b.setText( "Chapter 8b Lists" );
+        chap8b.setControl( new Ch8ListComposite( f ) );
+
+        TabItem chap9 = new TabItem( f, SWT.NONE );
+        chap9.setText( "Chapter 9 tables" );
+        chap9.setControl( new Ch9TableEditorComposite( f ) );
+
+        TabItem chap10 = new TabItem( f, SWT.NONE );
+        chap10.setText( "Chapter 10 dialogs" );
+        chap10.setControl( new Ch10CustomDialogComposite( f ) );
 
         getShell().setText( "Widget Window" );
         return parent;

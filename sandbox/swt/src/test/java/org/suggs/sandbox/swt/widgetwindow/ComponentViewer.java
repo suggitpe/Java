@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.swt.widgetwindow;
 
-import org.suggs.sandbox.swt.widgetwindow.ch7_graphics.Ch7Composite;
+import org.suggs.sandbox.swt.widgetwindow.Ch10Dialogs.Ch10CustomDialogComposite;
 
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.widgets.Composite;
@@ -50,7 +50,14 @@ public class ComponentViewer extends ApplicationWindow
 
         // new Ch7Colors( parent );
         // new Ch7Fonts( parent );
-        new Ch7Composite( parent );
+        // new Ch7Composite( parent );
+
+        // new Ch8ListComposite( parent );
+        // new Ch8TreeComposite( parent );
+
+        // new Ch9TableEditorComposite( parent );
+
+        new Ch10CustomDialogComposite( parent );
         return parent;
     }
 
