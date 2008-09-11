@@ -2,7 +2,7 @@
  * UsernamePasswordDialog.java created on 10 Sep 2008 18:39:23 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.Ch10Dialogs;
+package org.suggs.sandbox.swt.widgetwindow.ch10_dialogs;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;

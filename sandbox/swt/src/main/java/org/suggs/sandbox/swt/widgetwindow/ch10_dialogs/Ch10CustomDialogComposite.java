@@ -2,7 +2,7 @@
  * Ch10CustomDialogComposite.java created on 10 Sep 2008 18:54:09 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.Ch10Dialogs;
+package org.suggs.sandbox.swt.widgetwindow.ch10_dialogs;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;

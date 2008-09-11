@@ -2,7 +2,7 @@
  * Ch9TableEditorComposite.java created on 9 Sep 2008 07:03:55 by suggitpe for project SandBox - SWT
  * 
  */
-package org.suggs.sandbox.swt.widgetwindow.Ch9Tables;
+package org.suggs.sandbox.swt.widgetwindow.ch9_tbles;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;

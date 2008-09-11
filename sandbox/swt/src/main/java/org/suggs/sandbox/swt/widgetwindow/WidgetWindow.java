@@ -4,8 +4,7 @@
  */
 package org.suggs.sandbox.swt.widgetwindow;
 
-import org.suggs.sandbox.swt.widgetwindow.Ch10Dialogs.Ch10CustomDialogComposite;
-import org.suggs.sandbox.swt.widgetwindow.Ch9Tables.Ch9TableEditorComposite;
+import org.suggs.sandbox.swt.widgetwindow.ch10_dialogs.Ch10CustomDialogComposite;
 import org.suggs.sandbox.swt.widgetwindow.ch3_composites.Ch3Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch4_events.Ch4Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch5_widgets.Ch5Composite;
@@ -13,6 +12,7 @@ import org.suggs.sandbox.swt.widgetwindow.ch6_layouts.Ch6FormLayoutComposite;
 import org.suggs.sandbox.swt.widgetwindow.ch7_graphics.Ch7Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch8_trees.Ch8ListComposite;
 import org.suggs.sandbox.swt.widgetwindow.ch8_trees.Ch8TreeComposite;
+import org.suggs.sandbox.swt.widgetwindow.ch9_tbles.Ch9TableEditorComposite;
 
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
