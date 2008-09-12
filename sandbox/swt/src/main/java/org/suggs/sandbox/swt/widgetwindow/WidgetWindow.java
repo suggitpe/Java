@@ -5,6 +5,7 @@
 package org.suggs.sandbox.swt.widgetwindow;
 
 import org.suggs.sandbox.swt.widgetwindow.ch10_dialogs.Ch10CustomDialogComposite;
+import org.suggs.sandbox.swt.widgetwindow.ch11_wizards.Ch11WizardComposite;
 import org.suggs.sandbox.swt.widgetwindow.ch3_composites.Ch3Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch4_events.Ch4Composite;
 import org.suggs.sandbox.swt.widgetwindow.ch5_widgets.Ch5Composite;
@@ -83,6 +84,10 @@ public class WidgetWindow extends ApplicationWindow
         TabItem chap10 = new TabItem( f, SWT.NONE );
         chap10.setText( "Chapter 10 dialogs" );
         chap10.setControl( new Ch10CustomDialogComposite( f ) );
+
+        TabItem chap11 = new TabItem( f, SWT.NONE );
+        chap11.setText( "Chapter 11 wizards" );
+        chap11.setControl( new Ch11WizardComposite( f ) );
 
         getShell().setText( "Widget Window" );
         return parent;
