@@ -5,6 +5,9 @@
 package org.suggs.apps.mercury.model.connection;
 
 import org.suggs.apps.mercury.model.support.AbstractMercuryModelTest;
+import org.suggs.apps.mercury_old.model.connection.EConnectionState;
+import org.suggs.apps.mercury_old.model.connection.IConnectionManager;
+import org.suggs.apps.mercury_old.model.connection.MercuryConnectionException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
