@@ -2,12 +2,12 @@
  * JmsConnectionTest.java created on 2 Aug 2007 06:03:25 by suggitpe for project GUI - Mercury
  * 
  */
-package org.suggs.apps.mercury.model.connection;
+package org.suggs.apps.mercury_old.model.connection;
 
-import org.suggs.apps.mercury.model.support.AbstractMercuryModelTest;
 import org.suggs.apps.mercury_old.model.connection.EConnectionState;
 import org.suggs.apps.mercury_old.model.connection.IConnectionManager;
 import org.suggs.apps.mercury_old.model.connection.MercuryConnectionException;
+import org.suggs.apps.mercury_old.model.support.AbstractMercuryModelTest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

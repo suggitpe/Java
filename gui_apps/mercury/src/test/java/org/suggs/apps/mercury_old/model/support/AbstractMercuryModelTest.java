@@ -2,7 +2,7 @@
  * AbstractMercuryModelTest.java created on 2 Aug 2007 06:35:50 by suggitpe for project GUI - Mercury
  * 
  */
-package org.suggs.apps.mercury.model.support;
+package org.suggs.apps.mercury_old.model.support;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
