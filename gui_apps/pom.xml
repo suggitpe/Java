@@ -15,6 +15,7 @@
     <name>GUI Parent</name>
 
     <modules>
+        <module>mercury_old</module>
         <module>mercury</module>
     </modules>
 </project>

@@ -254,6 +254,26 @@
                 <version>3.3.0-v3346</version>
             </dependency>
             <dependency>
+                <groupId>org.eclipse</groupId>
+                <artifactId>jface</artifactId>
+                <version>3.3.0-I20070606-0010</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse</groupId>
+                <artifactId>compare</artifactId>
+                <version>3.3.0-I20070606</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.core</groupId>
+                <artifactId>boot</artifactId>
+                <version>3.1.100-v20060603</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.core</groupId>
+                <artifactId>resources</artifactId>
+                <version>3.3.0-v20070604</version>
+            </dependency>
+            <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>jstl</artifactId>
                 <version>1.2</version>
