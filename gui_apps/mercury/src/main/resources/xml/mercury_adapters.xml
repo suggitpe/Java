@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- Copyright 2008 suggs.org -->
+<beans>
+
+    <!-- This file should contain all of the JMS adapters that we will use -->
+
+    <bean id="adapterList" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="IBM MQ Series" value-ref="ibmMqAdapter"/>
+                <entry key="Tibco EMS" value-ref="tibcoEmsAdapter"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="ibmMqAdapter" class="java.lang.String"/>
+
+    <bean id="tibcoEmsAdapter" class="java.lang.String"/>
+    
+</beans>

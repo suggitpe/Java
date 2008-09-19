@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- Copyright 2008 suggs.org -->
+<beans>
+
+    <import resource="classpath:xml/mercury_actions.xml"  />
+    <import resource="classpath:xml/mercury_adapters.xml"  />
+    
+    <bean id="menuFactory" class="org.suggs.apps.mercury.view.factories.MenuFactory">
+        <property name="actionManager" ref="actionManager"/>
+    </bean>
+    
+    <bean id="toolBarFactory" class="org.suggs.apps.mercury.view.factories.ToolBarFactory">
+        <property name="actionManager" ref="actionManager"/>
+    </bean>
+    
+    <bean id="actionManager" class="org.suggs.apps.mercury.view.actions.ActionManager">
+        <property name="actionMap" ref="mercuryActionMap"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- Copyright 2008 suggs.org -->
+<beans>
+
+    <bean id="mercuryActionMap" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="CONNECTION_WIZARD" value-ref="connWizard"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="connWizard" class="org.suggs.apps.mercury.view.actions.CreateConnectionWizardAction"/>
+
+</beans>
