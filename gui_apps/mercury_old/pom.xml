@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mercury_old</artifactId>
     <packaging>jar</packaging>
-    <name>Mercury Messaging Helper</name>
+    <name>Mercury Messaging Helper (OLD)</name>
 
     <dependencies>
         <dependency>
