@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/ConnectionStore"
+	xmlns:tns="http://www.example.org/ConnectionStore"
+	elementFormDefault="qualified">
+
+	<element name="ConnectionStore" type="tns:ConnectionStoreType"></element>
+
+	<complexType name="ConnectionStoreType">
+		<sequence>
+			<element name="Connection" type="tns:ConnectionType" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ConnectionType">
+		<sequence>
+			<element name="HostName" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="Port" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+		<attribute name="name" type="string"></attribute>
+		<attribute name="type" type="string"></attribute>
+	</complexType>
+</schema>
