@@ -120,7 +120,9 @@
                         <includeBinding>*.xjb</includeBinding>
                     </includeBindings>
                     <strict>true</strict>
-                    <verbose>true</verbose>       
+                    <verbose>true</verbose> 
+                    <generateDirectory>src/main/java</generateDirectory>
+                    <forceRegeneration>true</forceRegeneration>
                 </configuration>
             </plugin>
         </plugins>
