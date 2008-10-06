@@ -8,12 +8,13 @@
 	<classpathentry kind="lib" path="/_build/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/javax/jms/jms/1.1/jms-1.1.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/commons-lang/commons-lang/2.1/commons-lang-2.1.jar"/>
-	<classpathentry kind="lib" path="/_build/repository/junit/junit/3.8.1/junit-3.8.1.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/org/springframework/spring-test/2.5.1/spring-test-2.5.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsEclipseLibs"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsTestRunTime"/>
 	<classpathentry kind="lib" path="/_build/etc/suggitpe"/>
+	<classpathentry kind="lib" path="/_build/repository/javax/xml/bind/jaxb-api/2.0/jaxb-api-2.0.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/org/suggs/mercury-schemas/1.0-SNAPSHOT/mercury-schemas-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsTestLibraries"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
