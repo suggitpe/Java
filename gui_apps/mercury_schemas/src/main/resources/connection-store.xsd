@@ -20,8 +20,48 @@
 			<element name="Port" type="string" minOccurs="1"
 				maxOccurs="1">
 			</element>
+			<element name="ConnectionFactories"
+				type="tns:ConnectionFactoryType" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="Destinations" type="tns:DestinationType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+
 		</sequence>
-		<attribute name="name" type="string"></attribute>
-		<attribute name="type" type="string"></attribute>
+		<attribute name="name" type="string" use="required"></attribute>
+		<attribute name="type" type="string" use="required"></attribute>
 	</complexType>
+
+    <complexType name="ConnectionDataType"></complexType>
+
+
+    <complexType name="DestinationType">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="Name" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="DestType" minOccurs="1" maxOccurs="1"
+    			type="tns:JmsType">
+
+    		</element>
+    	</sequence>
+    </complexType>
+    
+
+    <complexType name="ConnectionFactoryType">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="Name" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="FactType" type="tns:JmsType"></element>
+    	</sequence>
+    	
+    </complexType>
+
+    <simpleType name="JmsType">
+    	<restriction base="string">
+    		<enumeration value="Queue"></enumeration>
+    		<enumeration value="Topic"></enumeration>
+    	</restriction>
+    </simpleType>
 </schema>

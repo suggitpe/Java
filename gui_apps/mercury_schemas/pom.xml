@@ -14,6 +14,40 @@
     <packaging>jar</packaging>
     <name>Mercury Messaging Schemas</name>
 
+    <build>
+        <plugins>
+            <!--  -->
+            <plugin>
+                <groupId>com.sun.tools.xjc.maven2</groupId>
+                <artifactId>maven-jaxb-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includeSchemas>
+                        <includeSchema>**/*.xsd</includeSchema>
+                    </includeSchemas>
+                    <excludeSchemas>
+                        <excludeSchema>test*.xsd</excludeSchema>
+                    </excludeSchemas>
+                    <includeBindings>
+                        <includeBinding>*.xjb</includeBinding>
+                    </includeBindings>
+                    <!--
+                    <generateDirectory>src/main/java</generateDirectory>
+                    -->
+                    <forceRegeneration>true</forceRegeneration>
+                    <strict>true</strict>
+                    <verbose>true</verbose> 
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
     </dependencies>
   
