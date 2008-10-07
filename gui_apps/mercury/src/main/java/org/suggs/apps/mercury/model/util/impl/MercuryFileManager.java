@@ -90,47 +90,51 @@ public class MercuryFileManager implements IMercuryFileManager
      */
     private static void verifyPersistenceLayer( File aFile ) throws IOException
     {
+        if ( aFile.getParentFile().getParentFile() == null )
+        {
+            throw new IOException( "Trying to create a file too close to the root of the file system is dangerous" );
+        }
+
         // check that the persistence dir exists
-        File dir = new File( aFile.getAbsolutePath() );
+        File dir = new File( aFile.getParentFile().getAbsolutePath() );
 
         if ( !( dir.exists() ) )
         {
-            LOG.warn( "Mercury home dir does not exist or is not writable ... assuming firt application execution" );
-            LOG.info( "Creating MERCURY xml persistence store dir [" + dir.getAbsolutePath() + "]" );
+            LOG.warn( "Persistence dir does not exist ... assuming first application execution" );
+            LOG.info( "Creating persistence dir [" + dir.getAbsolutePath() + "]" );
             if ( !( dir.mkdir() ) )
             {
-                throw new IOException( "Failed to create persistence dir [" + MERCURY_HOME_DIR
-                                       + "]" );
+                throw new IOException( "Failed to create persistence directory ["
+                                       + aFile.getAbsolutePath() + "]" );
             }
         }
         else
         {
             if ( !( dir.isDirectory() ) || !( dir.canWrite() ) )
             {
-                String err = "Cannot write to the mercury persistence directory ["
-                             + MERCURY_HOME_DIR + "]";
+                String err = "Cannot write to the persistence directory ["
+                             + aFile.getAbsolutePath() + "]";
                 LOG.error( err );
                 throw new IOException( err );
             }
         }
 
         // now check that the actual file exists
-        if ( !( MERCURY_FILE.exists() ) )
+        if ( !( aFile.exists() ) )
         {
-            createPersistenceFile();
+            createPersistenceFile( aFile );
         }
         else
         {
-            if ( !( MERCURY_FILE.isFile() ) || !( MERCURY_FILE.canWrite() ) )
+            if ( !( aFile.isFile() ) || !( aFile.canWrite() ) )
             {
-                String err = "Cannot write to mercury persistence layer ["
-                             + MERCURY_FILE.getAbsolutePath() + "]";
+                String err = "Cannot write to persistence file [" + aFile.getAbsolutePath() + "]";
                 LOG.error( err );
                 throw new IOException( err );
             }
         }
 
-        LOG.debug( "XML connection store manager persistence layer correctly set up for persistence" );
+        LOG.debug( "Persistence file correctly set up" );
     }
 
     /**
@@ -139,15 +143,15 @@ public class MercuryFileManager implements IMercuryFileManager
      * @throws IOException
      *             if there are issues in the creation of the file
      */
-    private static final void createPersistenceFile() throws IOException
+    private static final void createPersistenceFile( File aFile ) throws IOException
     {
-        LOG.info( "Creating MERCURY xml persistence store [" + MERCURY_FILE.getAbsolutePath() + "]" );
+        LOG.info( "Creating persistence file [" + aFile.getAbsolutePath() + "]" );
         try
         {
-            if ( !( MERCURY_FILE.createNewFile() ) )
+            if ( !( aFile.createNewFile() ) )
             {
-                throw new IOException( "Failed to create the persistence xml file ["
-                                       + MERCURY_FILE.getAbsolutePath() + "]" );
+                throw new IOException( "Failed to create the persistence file ["
+                                       + aFile.getAbsolutePath() + "]" );
             }
         }
         catch ( IOException ioe )

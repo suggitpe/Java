@@ -4,6 +4,8 @@
  */
 package org.suggs.apps.mercury;
 
+import org.suggs.apps.mercury.model.AllIntegrationTests;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -14,6 +16,6 @@ import org.junit.runners.Suite;
  * @version 1.0 25 Sep 2008
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { org.suggs.apps.mercury.model.AllUnitTests.class })
+@Suite.SuiteClasses( { org.suggs.apps.mercury.model.AllUnitTests.class, AllIntegrationTests.class })
 public class AllTests
 {}
