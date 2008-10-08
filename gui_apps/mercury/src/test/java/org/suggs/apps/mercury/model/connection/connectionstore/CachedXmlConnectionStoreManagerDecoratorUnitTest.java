@@ -28,10 +28,10 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 2 Oct 2008
  */
-public class CachedXmlConnectionStoreManagerDecoratorTest
+public class CachedXmlConnectionStoreManagerDecoratorUnitTest
 {
 
-    private static final Log LOG = LogFactory.getLog( CachedXmlConnectionStoreManagerDecoratorTest.class );
+    private static final Log LOG = LogFactory.getLog( CachedXmlConnectionStoreManagerDecoratorUnitTest.class );
 
     private CachedXmlConnectionStoreManagerDecorator mDecorator_;
     private IXmlConnectionStoreManager mMock_;

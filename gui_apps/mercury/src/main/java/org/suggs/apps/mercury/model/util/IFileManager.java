@@ -10,14 +10,14 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * This interface manages the persistence of all files to the
- * underlying operating system. The interfaces here are at the file
- * level and have no concept of the use of these files.
+ * This interface manages the persistence and retrieval of all files
+ * to the underlying operating system. The interfaces here are at the
+ * file level and have no concept of the use of these files.
  * 
  * @author suggitpe
  * @version 1.0 3 Oct 2008
  */
-public interface IMercuryFileManager
+public interface IFileManager
 {
 
     /**
@@ -33,5 +33,17 @@ public interface IMercuryFileManager
      *             if there are any issues in the persistence layer
      */
     void persistClob( String aClob, File aFile ) throws IOException;
+
+    /**
+     * This method will retrieve a file from the persistence layer and
+     * return the data in the form of a String.
+     * 
+     * @param aFile
+     *            the file from which to read the data
+     * @return the String representation of the data in the file
+     * @throws IOException
+     *             if there are any issues in rading the file data
+     */
+    String retrieveClob( File aFile ) throws IOException;
 
 }

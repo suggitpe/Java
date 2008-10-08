@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.model.util;
 
-import org.suggs.apps.mercury.model.util.impl.MercuryFileManager;
+import org.suggs.apps.mercury.model.util.impl.FileManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,11 +25,11 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 6 Oct 2008
  */
-public class TestMercuryFileManager
+public class FileManagerIntegrationTest
 {
 
-    private static final Log LOG = LogFactory.getLog( TestMercuryFileManager.class );
-    private IMercuryFileManager mFileManager_;
+    private static final Log LOG = LogFactory.getLog( FileManagerIntegrationTest.class );
+    private IFileManager mFileManager_;
     private static final String TEST_ROOT = "c:";
     private static final String TEST_DIR = TEST_ROOT + "/test";
     private static final String TEST_FILE = "dummyFile.txt";
@@ -44,8 +44,8 @@ public class TestMercuryFileManager
     @Before
     public void setUp() throws Exception
     {
-        LOG.debug( "------------------- TestMercuryFileManager" );
-        mFileManager_ = new MercuryFileManager();
+        LOG.debug( "------------------- TestFileManager" );
+        mFileManager_ = new FileManager();
     }
 
     /**
@@ -98,29 +98,21 @@ public class TestMercuryFileManager
      *             if there is any issue in the persistence of the
      *             file.
      */
-    @Test
-    public void testFileTooCloseToRoot()
+    @Test(expected = IOException.class)
+    public void testFileTooCloseToRoot() throws IOException
     {
         String err = "";
-        try
-        {
-            mFileManager_.persistClob( DUMMY_CLOB, new File( TEST_ROOT + "/" + TEST_FILE ) );
-            LOG.error( err );
-            Assert.fail( err );
-        }
-        catch ( IOException ioe )
-        {
-            LOG.debug( "Correctly caught the IOEXception [" + ioe.getMessage() + "]" );
-        }
+        mFileManager_.persistClob( DUMMY_CLOB, new File( TEST_ROOT + "/" + TEST_FILE ) );
+        LOG.error( err );
+        Assert.fail( err );
     }
 
     /**
      * Test that if the file already exits and the file is not
-     * writable then an exception is thrown. Note this test is not
-     * allowed to throw an IOException.
+     * writable then an exception is thrown.
      */
-    @Test
-    public void testNotWritableFile()
+    @Test(expected = IOException.class)
+    public void testNotWritableFile() throws IOException
     {
         LOG.debug( "Creating read-only directly to test with" );
         File file = new File( TEST_DIR + "/" + TEST_FILE );
@@ -145,17 +137,31 @@ public class TestMercuryFileManager
             Assert.fail( "Failed to set the file to read only" );
         }
 
-        try
-        {
-            mFileManager_.persistClob( DUMMY_CLOB, new File( TEST_DIR + "/" + TEST_FILE ) );
-            String err1 = "No IOException was thrown from persistClob call";
-            LOG.error( err1 );
-            Assert.fail( err1 );
-        }
-        catch ( IOException ioe )
-        {
-            LOG.debug( "Correctly caught IOException [" + ioe.getMessage() + "]" );
-        }
+        mFileManager_.persistClob( DUMMY_CLOB, new File( TEST_DIR + "/" + TEST_FILE ) );
+        String err1 = "No IOException was thrown from persistClob call";
+        LOG.error( err1 );
+        Assert.fail( err1 );
+    }
 
+    /**
+     * This test will create a new file and then will retrieve the
+     * data from that file and compare that the returned data is the
+     * same as the data that was persisted.
+     * 
+     * @throws IOException
+     *             if there are any issues in persisting the data
+     */
+    @Test
+    public void testWriteAndRead() throws IOException
+    {
+        LOG.debug( "Testing the read and then write of a file to ensure they are the same" );
+        String file = TEST_DIR + "/" + TEST_FILE;
+
+        String data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<test></test>";
+
+        mFileManager_.persistClob( data, new File( file ) );
+        String compareWith = mFileManager_.retrieveClob( new File( file ) );
+
+        Assert.assertEquals( data, compareWith );
     }
 }

@@ -4,9 +4,10 @@
  */
 package org.suggs.apps.mercury.model.util.impl;
 
-import org.suggs.apps.mercury.model.util.IMercuryFileManager;
+import org.suggs.apps.mercury.model.util.IFileManager;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -22,10 +23,34 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Oct 2008
  */
-public class MercuryFileManager implements IMercuryFileManager
+public class FileManager implements IFileManager
 {
 
-    private static final Log LOG = LogFactory.getLog( MercuryFileManager.class );
+    private static final Log LOG = LogFactory.getLog( FileManager.class );
+    private static final String CHARSET = "UTF-8";
+
+    /**
+     * @see org.suggs.apps.mercury.model.util.IFileManager#retrieveClob(java.io.File)
+     */
+    public String retrieveClob( File file ) throws IOException
+    {
+        FileInputStream fis = null;
+        FileChannel chan = null;
+        try
+        {
+            fis = new FileInputStream( file );
+            chan = fis.getChannel();
+            ByteBuffer buff = ByteBuffer.allocate( (int) chan.size() );
+            chan.read( buff );
+            byte[] data = buff.array();
+            return new String( data, CHARSET );
+        }
+        finally
+        {
+            chan.close();
+            fis.close();
+        }
+    }
 
     /**
      * Persist CLOB data to the underlying persistence layer
@@ -54,7 +79,7 @@ public class MercuryFileManager implements IMercuryFileManager
             int xmlSize = aClob.getBytes().length;
 
             ByteBuffer buff = ByteBuffer.allocate( xmlSize );
-            buff.put( aClob.getBytes() );
+            buff.put( aClob.getBytes( CHARSET ) );
             // flip will move the buffer limit to where the buffer
             // pointer now sits
             buff.flip();
