@@ -35,7 +35,9 @@ public interface IXmlConnectionStoreManager
     /**
      * Saves a given map of connection details to the underlying
      * persistence layer. This will completely replace the content of
-     * the existing layer contents.
+     * the existing layer contents. The process is to first marshall
+     * the data into xml and then serialise that xml to a string (then
+     * persist).
      * 
      * @param aMap
      *            the map of connection details to persist

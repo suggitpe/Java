@@ -5,7 +5,6 @@
 package org.suggs.apps.mercury.model.connection.connectionstore;
 
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
-import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.impl.CachedXmlConnectionStoreManagerDecorator;
 

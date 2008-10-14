@@ -4,8 +4,18 @@
  */
 package org.suggs.apps.mercury.model.connection.connectionstore;
 
+import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.impl.JaxbXmlConnectionStoreManager;
 import org.suggs.apps.mercury.model.util.IFileManager;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import junit.framework.Assert;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,15 +35,15 @@ public class JaxbXmlConnectionStoreManagerUnitTest
 
     private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManagerUnitTest.class );
     private JaxbXmlConnectionStoreManager mManager_;
-    private IFileManager mFileManager_;
+    private IFileManager mFileManagerMock_;
 
     @Before
     public void setUp() throws Exception
     {
         LOG.debug( "------------------- JaxbXmlConnectionStoreManagerTest" );
         mManager_ = new JaxbXmlConnectionStoreManager();
-        mFileManager_ = EasyMock.createStrictMock( IFileManager.class );
-        mManager_.setFileManager( mFileManager_ );
+        mFileManagerMock_ = EasyMock.createStrictMock( IFileManager.class );
+        mManager_.setFileManager( mFileManagerMock_ );
     }
 
     /**
@@ -42,21 +52,205 @@ public class JaxbXmlConnectionStoreManagerUnitTest
      * String clob and then return it in a form that is understood
      */
     @Test
-    public void testReadConnectionData()
+    public void testReadConnectionData() throws ConnectionStoreException, IOException
     {
-        // mManager_.readConnectionData();
+        // ------- MOCK PREP
+        EasyMock.expect( mFileManagerMock_.retrieveClob( (File) EasyMock.anyObject() ) )
+            .andReturn( createTestXML() )
+            .times( 1 );
+
+        // ------- MOCK LOAD
+        EasyMock.replay( mFileManagerMock_ );
+
+        // ------- TEST EXEC
+        Map<String, ConnectionDetails> map = mManager_.readConnectionData();
+        Assert.assertTrue( map.size() == 2 );
+        Assert.assertTrue( map.containsKey( "CONN_1" ) && map.containsKey( "CONN_2" ) );
+
+        // ------- MOCK VERIFY
+        EasyMock.verify( mFileManagerMock_ );
+
+    }
+
+    /**
+     * Test that when we pass in a valid map of data into the manager
+     * that the correct amount of xml is generated.
+     * 
+     * @throws ConnectionStoreException
+     * @throws IOException
+     */
+    @Test
+    public void testSaveConnectionDataWithValidData() throws ConnectionStoreException, IOException
+    {
+        Map<String, ConnectionDetails> in = new HashMap<String, ConnectionDetails>();
+        populateMapWithDetails( in );
+
+        // ------- MOCK PREP
+        mFileManagerMock_.persistClob( (String) EasyMock.anyObject(), (File) EasyMock.anyObject() );
+        EasyMock.expectLastCall().times( 1 );
+
+        // ------- MOCK LOAD
+        EasyMock.replay( mFileManagerMock_ );
+
+        // ------- TEST EXEC
+        LOG.debug( "Testing that we can save marshall an map of empty connection details objects" );
+        mManager_.saveConnectionData( in );
+
+        // ------- MOCK VERIFY
+        EasyMock.verify( mFileManagerMock_ );
 
     }
 
     /**
      * This test will ensure that when we pass in a map object that
      * this is then serialised back down into the correct form into
-     * the clob.
+     * the clob when passed only partial information (this is an empty
+     * map). Here we ensure that even though the data is empty that we
+     * can ensure that not exceptions are thrown.
+     * 
+     * @throws ConnectionStoreException
+     * @throws IOException
      */
     @Test
-    public void testSaveConnectionData()
+    public void testSaveConnectionDataWithEmptyData() throws ConnectionStoreException, IOException
     {
-        // mManager_.saveConnectionData();
+        Map<String, ConnectionDetails> in = new HashMap<String, ConnectionDetails>();
+
+        // ------- MOCK PREP
+        mFileManagerMock_.persistClob( (String) EasyMock.anyObject(), (File) EasyMock.anyObject() );
+        EasyMock.expectLastCall().times( 1 );
+
+        // ------- MOCK LOAD
+        EasyMock.replay( mFileManagerMock_ );
+
+        // ------- TEST EXEC
+        LOG.debug( "Testing that we can save marshall an map of empty connection details objects" );
+        mManager_.saveConnectionData( in );
+
+        // ------- MOCK VERIFY
+        EasyMock.verify( mFileManagerMock_ );
+    }
+
+    /**
+     * This test will ensure that if we pass in a null map of data
+     * then an exception is thrown.
+     */
+    @Test(expected = ConnectionStoreException.class)
+    public void testSaveConnectionDataWithNullData() throws ConnectionStoreException
+    {
+        // ------- MOCK PREP
+        Map<String, ConnectionDetails> in = new HashMap<String, ConnectionDetails>();
+        populateMapWithDetails( in );
+        // ------- MOCK LOAD
+        EasyMock.replay( mFileManagerMock_ );
+
+        // ------- TEST EXEC
+        LOG.debug( "Testing that we throw an error if the map is null" );
+        mManager_.saveConnectionData( null );
+
+        // ------- MOCK VERIFY
+        EasyMock.verify( mFileManagerMock_ );
+    }
+
+    /**
+     * This is the be all and end all of tests for the Jaxb
+     * implementation
+     */
+    @Test
+    public void testReadAndWriteConnectionData() throws ConnectionStoreException
+    {
+        Map<String, ConnectionDetails> origMap = new HashMap<String, ConnectionDetails>();
+        populateMapWithDetails( origMap );
+
+        // ------- TEST EXEC
+        mManager_.setFileManager( new FileManagerStub() );
+        mManager_.saveConnectionData( origMap );
+        Map<String, ConnectionDetails> newMap = mManager_.readConnectionData();
+
+        // ------- VALIDATE
+        Assert.assertTrue( origMap.size() == newMap.size() );
+
+        for ( String s : origMap.keySet() )
+        {
+            LOG.debug( "........." );
+            LOG.debug( "Original: " + origMap.get( s ).toString() );
+            LOG.debug( "New map : " + newMap.get( s ).toString() );
+        }
+
+        for ( String s : origMap.keySet() )
+        {
+            ConnectionDetails orig = origMap.get( s );
+            ConnectionDetails nw = newMap.get( s );
+            Assert.assertEquals( orig, nw );
+        }
+    }
+
+    // ##########################################
+    // /////////////// HELPERS //////////////////
+    // ##########################################
+    /**
+     * This little helper will centralise the construction of a set of
+     * connections that can be used as needed.
+     */
+    private void populateMapWithDetails( Map<String, ConnectionDetails> map )
+    {
+        ConnectionDetails d1 = new ConnectionDetails( "CONN_1", "EMS" );
+        d1.setPort( 123 );
+        d1.setHostname( "pgdsx01.org.suggs.uk" );
+        Set<String> s1 = new HashSet<String>();
+        s1.add( "TopicConnFact1" );
+        d1.getConnectionFactories().put( "Topic", s1 );
+
+        Set<String> s2 = new HashSet<String>();
+        s2.add( "QueueConnFact2" );
+        d1.getConnectionFactories().put( "Queue", s2 );
+
+        Set<String> s3 = new HashSet<String>();
+        s3.add( "GenericConnFact3" );
+        d1.getConnectionFactories().put( "Generic", s3 );
+
+        Set<String> s4 = new HashSet<String>();
+        s4.add( "TopicDest1" );
+        d1.getDestinations().put( "Topic", s4 );
+
+        map.put( d1.getName(), d1 );
+
+        ConnectionDetails d2 = new ConnectionDetails( "CONN_2" );
+        d2.setPort( 456 );
+        d2.setHostname( "pgdsx02.org.suggs.uk" );
+        d2.setType( "MQ" );
+        map.put( d2.getName(), d2 );
+
+        ConnectionDetails d3 = new ConnectionDetails( "CONN_3", "TEST_TYPE" );
+        d3.setPort( 789 );
+        d3.setHostname( "pgdsx03.org.suggs.uk" );
+        map.put( d3.getName(), d3 );
+    }
+
+    /**
+     * This method is used by the file manager mock to create the
+     * serialised XML that can then be read
+     * 
+     * @return some test serialised xml
+     */
+    private String createTestXML()
+    {
+        StringBuffer ret = new StringBuffer( "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" );
+        ret.append( "<ConnectionStore xmlns=\"http://www.suggs.org.uk/ConnectionStore\">\n" );
+        ret.append( "<Connection type=\"TEST_TYPE\" name=\"CONN_1\">\n" )
+            .append( " <Hostname>pgdsx01.org.suggs.uk</Hostname>" )
+            .append( "<Port>123</Port>" )
+            .append( "<ConnectionFactories/>\n" )
+            .append( "<Destinations/>\n" )
+            .append( "</Connection>\n" );
+        ret.append( "<Connection type=\"TEST_TYPE\" name=\"CONN_2\">\n" )
+            .append( " <Hostname>pgdsx02.org.suggs.uk</Hostname>" )
+            .append( "<Port>456</Port>" )
+            .append( "<ConnectionFactories/>\n" )
+            .append( "<Destinations/>\n" )
+            .append( "</Connection>\n" );
+        ret.append( "</ConnectionStore>" );
+        return ret.toString();
     }
 
 }

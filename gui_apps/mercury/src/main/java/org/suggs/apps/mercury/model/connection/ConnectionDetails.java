@@ -20,7 +20,7 @@ public class ConnectionDetails
     private String mName_;
     private String mType_;
     private String mHostName_;
-    private long mPort_ = 0;
+    private int mPort_ = 0;
     private Map<String, String> mMetaData_ = new HashMap<String, String>();
     private Map<String, Set<String>> mConnectionFactories_ = new HashMap<String, Set<String>>();
     private Map<String, Set<String>> mDestinations_ = new HashMap<String, Set<String>>();
@@ -61,7 +61,7 @@ public class ConnectionDetails
      * @param aPort
      *            the port number for the server
      */
-    public ConnectionDetails( String aName, String aType, String aHostname, long aPort )
+    public ConnectionDetails( String aName, String aType, String aHostname, int aPort )
     {
         mName_ = aName;
         mType_ = aType;
@@ -83,7 +83,7 @@ public class ConnectionDetails
      * @param aMetaData
      *            additional connection metadata
      */
-    public ConnectionDetails( String aName, String aType, String aHostname, long aPort,
+    public ConnectionDetails( String aName, String aType, String aHostname, int aPort,
                               Map<String, String> aMetaData )
     {
         mName_ = aName;
@@ -91,6 +91,49 @@ public class ConnectionDetails
         mHostName_ = aHostname;
         mPort_ = aPort;
         mMetaData_ = aMetaData;
+    }
+
+    /**
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals( Object other )
+    {
+        if ( this == other )
+        {
+            return true;
+        }
+
+        if ( other != null && getClass() == other.getClass() )
+        {
+            boolean ret = true;
+            ConnectionDetails rhs = (ConnectionDetails) other;
+            if ( mName_.equals( rhs.mName_ ) && mType_.equals( rhs.mType_ )
+                 && mHostName_.equals( rhs.mHostName_ ) && mPort_ == rhs.mPort_
+                 && mConnectionFactories_.size() == rhs.mConnectionFactories_.size()
+                 && mDestinations_.size() == rhs.mDestinations_.size() )
+            {
+                for ( String s : mConnectionFactories_.keySet() )
+                {
+                    if ( !mConnectionFactories_.get( s )
+                        .equals( rhs.mConnectionFactories_.get( s ) ) )
+                    {
+                        ret = false;
+                    }
+                }
+
+                for ( String s : mDestinations_.keySet() )
+                {
+                    if ( !mDestinations_.get( s ).equals( rhs.mDestinations_.get( s ) ) )
+                    {
+                        ret = false;
+                    }
+                }
+                return ret;
+            }
+        }
+        return false;
+
     }
 
     /**
@@ -110,8 +153,19 @@ public class ConnectionDetails
         {
             buff.append( "], " ).append( s ).append( "=[" ).append( mMetaData_.get( s ) );
         }
-
         buff.append( "]" );
+
+        buff.append( ", ConnectionFactories: " );
+        for ( String s : mConnectionFactories_.keySet() )
+        {
+            buff.append( s ).append( "={" ).append( mConnectionFactories_.get( s ) ).append( "} " );
+        }
+
+        buff.append( ", Destinations:" );
+        for ( String s : mDestinations_.keySet() )
+        {
+            buff.append( s ).append( "={" ).append( mDestinations_.get( s ) ).append( "} " );
+        }
         return buff.toString();
     }
 
@@ -175,6 +229,17 @@ public class ConnectionDetails
     }
 
     /**
+     * Setter for the type
+     * 
+     * @param aType
+     *            the type to set
+     */
+    public void setType( String aType )
+    {
+        mType_ = aType;
+    }
+
+    /**
      * Getter for the hostname
      * 
      * @return the hostname
@@ -200,7 +265,7 @@ public class ConnectionDetails
      * 
      * @return the port number
      */
-    public long getPort()
+    public int getPort()
     {
         return mPort_;
     }
@@ -211,7 +276,7 @@ public class ConnectionDetails
      * @param aPort
      *            the port number to set
      */
-    public void setPort( long aPort )
+    public void setPort( int aPort )
     {
         mPort_ = aPort;
     }

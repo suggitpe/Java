@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://www.example.org/ConnectionStore"
-	xmlns:tns="http://www.example.org/ConnectionStore"
-	elementFormDefault="qualified">
+<schema targetNamespace="http://www.suggs.org.uk/ConnectionStore"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.suggs.org.uk/ConnectionStore">
 
 	<element name="ConnectionStore" type="tns:ConnectionStoreType"></element>
 
@@ -14,16 +12,16 @@
 
 	<complexType name="ConnectionType">
 		<sequence>
-			<element name="HostName" type="string" minOccurs="1"
+			<element name="Hostname" type="string" minOccurs="1"
 				maxOccurs="1">
 			</element>
-			<element name="Port" type="string" minOccurs="1"
+			<element name="Port" type="int" minOccurs="1"
 				maxOccurs="1">
 			</element>
 			<element name="ConnectionFactories"
-				type="tns:ConnectionFactoryType" minOccurs="1" maxOccurs="1">
+				type="tns:ConnectionFactoryGroup" minOccurs="1" maxOccurs="1">
 			</element>
-			<element name="Destinations" type="tns:DestinationType"
+			<element name="Destinations" type="tns:DestinationGroup"
 				maxOccurs="1" minOccurs="1">
 			</element>
 
@@ -36,7 +34,7 @@
 
 
     <complexType name="DestinationType">
-    	<sequence minOccurs="0" maxOccurs="unbounded">
+    	<sequence>
     		<element name="Name" type="string" minOccurs="1"
     			maxOccurs="1">
     		</element>
@@ -48,20 +46,31 @@
     </complexType>
     
 
-    <complexType name="ConnectionFactoryType">
-    	<sequence minOccurs="0" maxOccurs="unbounded">
-    		<element name="Name" type="string" minOccurs="1"
-    			maxOccurs="1">
-    		</element>
-    		<element name="FactType" type="tns:JmsType"></element>
-    	</sequence>
-    	
-    </complexType>
 
     <simpleType name="JmsType">
     	<restriction base="string">
     		<enumeration value="Queue"></enumeration>
     		<enumeration value="Topic"></enumeration>
+    		<enumeration value="Generic"></enumeration>
     	</restriction>
     </simpleType>
+
+    <complexType name="ConnectionFactoryGroup">
+    	<sequence>
+    		<element name="ConnectionFactory" type="tns:ConnectionFactoryType" minOccurs="1" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ConnectionFactoryType">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="FactType" type="tns:JmsType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="DestinationGroup">
+    	<sequence>
+    		<element name="Destination" type="tns:DestinationType" minOccurs="1" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
 </schema>
