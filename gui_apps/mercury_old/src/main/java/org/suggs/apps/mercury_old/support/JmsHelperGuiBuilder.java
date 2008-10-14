@@ -31,7 +31,7 @@ public class JmsHelperGuiBuilder
      *            the frame to packake and show
      * @throws MercuryException
      */
-    public static final void displayFrame( JFrame aFrame ) throws MercuryException
+    public static final void displayFrame( JFrame aFrame )
     {
 
         Assert.notNull( aFrame, "Passed in a null JFrame object" );

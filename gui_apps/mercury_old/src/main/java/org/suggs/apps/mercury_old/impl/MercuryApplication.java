@@ -59,10 +59,14 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      */
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( mConnectionStorePanel_, "There must be a connection store panel set in the main gui" );
-        Assert.notNull( mConnectionButtons_, "There must be a connection store buttons panel set in the main gui" );
-        Assert.notNull( mConnectionManagerPanel_, "There must be a connection manager panel set in the main gui" );
-        Assert.notNull( mConnectionController_, "There must be a connection controller set in the main gui" );
+        Assert.notNull( mConnectionStorePanel_,
+                        "There must be a connection store panel set in the main gui" );
+        Assert.notNull( mConnectionButtons_,
+                        "There must be a connection store buttons panel set in the main gui" );
+        Assert.notNull( mConnectionManagerPanel_,
+                        "There must be a connection manager panel set in the main gui" );
+        Assert.notNull( mConnectionController_,
+                        "There must be a connection controller set in the main gui" );
     }
 
     /**
@@ -102,7 +106,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      *            the container to build upon
      * @throws MercuryException
      */
-    private final void buildGuiPanels( Container aCntr ) throws MercuryException
+    private final void buildGuiPanels( Container aCntr )
     {
         LOG.debug( "Building GUI Panels" );
 
