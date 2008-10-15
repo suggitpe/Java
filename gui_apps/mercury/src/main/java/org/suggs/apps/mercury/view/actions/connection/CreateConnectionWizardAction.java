@@ -2,7 +2,7 @@
  * CreateConnectionWizardAction.java created on 15 Sep 2008 18:42:43 by suggitpe for project GUI - Mercury
  * 
  */
-package org.suggs.apps.mercury.view.actions;
+package org.suggs.apps.mercury.view.actions.connection;
 
 import org.suggs.apps.mercury.view.wizards.createconnection.CreateConnectionWizard;
 
@@ -33,7 +33,7 @@ public class CreateConnectionWizardAction extends Action
         setToolTipText( "Create new connection" );
         setImageDescriptor( ImageDescriptor.createFromURL( this.getClass()
             .getClassLoader()
-            .getResource( "eclipse.gif" ) ) );
+            .getResource( "images/connect.png" ) ) );
     }
 
     /**

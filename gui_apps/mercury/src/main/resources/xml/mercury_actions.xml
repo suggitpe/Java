@@ -6,11 +6,16 @@
     <bean id="mercuryActionMap" class="java.util.HashMap">
         <constructor-arg>
             <map>
-                <entry key="CONNECTION_WIZARD" value-ref="connWizard"/>
+                <entry key="CONNECTION_WIZARD" value-ref="connection_wizard"/>
+                <entry key="CONNECTION_DEBUG" value-ref="connection_debug"/>
+                <entry key="HELP_ABOUT" value-ref="help_about"/>
             </map>
         </constructor-arg>
     </bean>
     
-    <bean id="connWizard" class="org.suggs.apps.mercury.view.actions.CreateConnectionWizardAction"/>
+    <bean id="connection_wizard" class="org.suggs.apps.mercury.view.actions.connection.CreateConnectionWizardAction"/>
+    <bean id="connection_debug" class="org.suggs.apps.mercury.view.actions.connection.DebugAction"/>
+    
+    <bean id="help_about" class="org.suggs.apps.mercury.view.actions.help.AboutAction"/>
 
 </beans>
