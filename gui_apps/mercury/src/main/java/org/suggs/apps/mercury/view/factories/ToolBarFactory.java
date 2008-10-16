@@ -6,7 +6,6 @@ package org.suggs.apps.mercury.view.factories;
 
 import org.suggs.apps.mercury.view.IActionManager;
 import org.suggs.apps.mercury.view.IToolBarFactory;
-import org.suggs.apps.mercury.view.actions.connection.CreateConnectionWizardAction;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.logging.Log;
@@ -68,7 +67,7 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
     private final ToolBarManager buildMainToolbar( int style )
     {
         ToolBarManager mgr = new ToolBarManager( style );
-        mgr.add( new CreateConnectionWizardAction() );
+        // mgr.add( new CreateConnectionWizardAction() );
         return mgr;
     }
 

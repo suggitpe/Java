@@ -6,6 +6,10 @@
     <import resource="classpath:xml/mercury_actions.xml"  />
     <import resource="classpath:xml/mercury_adapters.xml"  />
     
+    <bean id="mercuryVersion" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="1.0"/>
+    </bean>
+    
     <bean id="menuFactory" class="org.suggs.apps.mercury.view.factories.MenuFactory">
         <property name="actionManager" ref="actionManager"/>
     </bean>
