@@ -37,8 +37,6 @@ public class Ch7Composite extends Canvas
         Ch7Fonts f = new Ch7Fonts( this );
         f.setBounds( 0, 150, 500, 200 );
 
-        @SuppressWarnings("unused")
-        Ch7Images i = new Ch7Images();
         addPaintListener( new PaintListener()
         {
 

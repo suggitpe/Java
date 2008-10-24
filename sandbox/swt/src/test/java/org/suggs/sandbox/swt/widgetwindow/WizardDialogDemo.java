@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.swt.widgetwindow;
 
-import org.suggs.sandbox.swt.widgetwindow.ch11_wizards.ProjectWizard;
+import org.suggs.sandbox.swt.wizards.AddEntryWizard;
 
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -28,7 +28,7 @@ public class WizardDialogDemo
         w.setBlockOnOpen( false );
         w.open();
 
-        ProjectWizard wiz = new ProjectWizard();
+        AddEntryWizard wiz = new AddEntryWizard();
         WizardDialog d = new WizardDialog( w.getShell(), wiz );
 
         d.create();
