@@ -7,6 +7,7 @@ package org.suggs.apps.mercury.view.wizards.createconnection.pages;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -19,6 +20,8 @@ import org.eclipse.swt.widgets.Composite;
  */
 public abstract class AbstractCreateConnectionPage extends WizardPage
 {
+
+    protected static final GridData TEXT_BOX_STYLE = new GridData( GridData.FILL_HORIZONTAL );
 
     /**
      * Constructs a new instance.

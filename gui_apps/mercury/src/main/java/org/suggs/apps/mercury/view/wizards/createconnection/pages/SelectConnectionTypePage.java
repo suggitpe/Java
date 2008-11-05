@@ -15,6 +15,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -39,10 +40,11 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
     /**
      * Constructs a new instance.
      */
+    @SuppressWarnings("unchecked")
     public SelectConnectionTypePage()
     {
         super( PAGE_NAME, "Connection Type Selection" );
-        setDescription( "Select the underlying middleware implementation from the list below" );
+        setDescription( "Select the middleware implementation from the list below" );
         setPageComplete( false );
 
         HashMap map = (HashMap) ContextProvider.instance().getBean( "adapterList" );
@@ -55,40 +57,12 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
     @Override
     public void doBuildControls( Composite controlComposite )
     {
-
-        new Label( controlComposite, SWT.NONE ).setText( "Connection name" );
-        final Text name = new Text( controlComposite, SWT.BORDER );
-        name.addModifyListener( new ModifyListener()
-        {
-
-            public void modifyText( ModifyEvent e )
-            {
-                mConnName_ = name.getText();
-                checkIfPageComplete();
-            }
-        } );
-
-        new Label( controlComposite, SWT.CENTER ).setText( "Please select connection type ..." );
-        final Combo combo = new Combo( controlComposite, SWT.DROP_DOWN );
-
-        combo.setItems( mOptions_ );
-        combo.addSelectionListener( new SelectionAdapter()
-        {
-
-            /**
-             * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
-             */
-            @Override
-            public void widgetSelected( SelectionEvent selEv )
-            {
-                mConnType_ = combo.getText();
-                checkIfPageComplete();
-            }
-
-        } );
-
+        new SelectConnectionComposite( controlComposite );
     }
 
+    /**
+     * Checks to see if the pge has been correctly set up
+     */
     private void checkIfPageComplete()
     {
         if ( mConnName_.length() > 0 && mConnType_.length() > 0 )
@@ -141,4 +115,56 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
         return mConnName_;
     }
 
+    /**
+     * This composite class is created to house the widgets associated
+     * with this screen.
+     * 
+     * @author suggitpe
+     * @version 1.0 5 Nov 2008
+     */
+    private class SelectConnectionComposite extends Composite
+    {
+
+        /**
+         * Constructs a new instance.
+         */
+        public SelectConnectionComposite( Composite comp )
+        {
+            super( comp, SWT.NONE );
+            setLayout( new GridLayout( 2, false ) );
+
+            new Label( this, SWT.NONE ).setText( "Connection Name:" );
+            final Text name = new Text( this, SWT.BORDER );
+            name.setLayoutData( TEXT_BOX_STYLE );
+            name.addModifyListener( new ModifyListener()
+            {
+
+                public void modifyText( ModifyEvent e )
+                {
+                    mConnName_ = name.getText();
+                    checkIfPageComplete();
+                }
+            } );
+
+            new Label( this, SWT.CENTER ).setText( "Connection Type:" );
+            final Combo combo = new Combo( this, SWT.DROP_DOWN );
+            combo.setLayoutData( TEXT_BOX_STYLE );
+
+            combo.setItems( mOptions_ );
+            combo.addSelectionListener( new SelectionAdapter()
+            {
+
+                /**
+                 * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
+                 */
+                @Override
+                public void widgetSelected( SelectionEvent selEv )
+                {
+                    mConnType_ = combo.getText();
+                    checkIfPageComplete();
+                }
+
+            } );
+        }
+    }
 }
