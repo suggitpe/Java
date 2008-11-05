@@ -65,25 +65,29 @@ public class MenuFactory implements IMenuFactory, InitializingBean
      */
     private final MenuManager buildMainMenu()
     {
+        // get action manager factory
+        ActionManager mgr = (ActionManager) ContextProvider.instance()
+            .getBean( ActionManager.BEAN_NAME );
 
         MenuManager main = new MenuManager( null );
 
         // create the top level menus
+        MenuManager file = new MenuManager( "File" );
+        main.add( file );
         MenuManager conn = new MenuManager( "Connection" );
         main.add( conn );
         MenuManager help = new MenuManager( "Help" );
         main.add( help );
 
-        // get action manager factory
-        ActionManager mgr = (ActionManager) ContextProvider.instance()
-            .getBean( ActionManager.BEAN_NAME );
+        // build file menu
+        file.add( mgr.getAction( "FILE_EXIT" ) );
 
         // build connection menu
         conn.add( mgr.getAction( "CONNECTION_WIZARD" ) );
-        conn.add( mgr.getAction( "CONNECTION_DEBUG" ) );
 
         // build help menu
         help.add( mgr.getAction( "HELP_ABOUT" ) );
+        help.add( mgr.getAction( "CONNECTION_DEBUG" ) );
 
         return main;
     }

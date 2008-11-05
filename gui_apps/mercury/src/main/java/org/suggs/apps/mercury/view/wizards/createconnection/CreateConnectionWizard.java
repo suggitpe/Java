@@ -4,14 +4,16 @@
  */
 package org.suggs.apps.mercury.view.wizards.createconnection;
 
-import org.suggs.apps.mercury.view.wizards.createconnection.pages.CreateConnTypePage;
+import org.suggs.apps.mercury.model.util.ImageManager;
+import org.suggs.apps.mercury.view.wizards.createconnection.pages.SelectConnectionTypePage;
+import org.suggs.apps.mercury.view.wizards.createconnection.pages.WelcomePage;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.wizard.Wizard;
 
 /**
- * TODO Write javadoc for CreateConnectionWizard
+ * A wizard that allows you to create a new connection.
  * 
  * @author suggitpe
  * @version 1.0 17 Sep 2008
@@ -27,6 +29,10 @@ public class CreateConnectionWizard extends Wizard
     public CreateConnectionWizard()
     {
         super();
+        setWindowTitle( "Create Connection Wizard" );
+        setDefaultPageImageDescriptor( ImageManager.getImageDescriptor( getClass().getClassLoader(),
+                                                                        ImageManager.IMAGE_CONNECTION ) );
+        setHelpAvailable( true );
     }
 
     /**
@@ -35,7 +41,8 @@ public class CreateConnectionWizard extends Wizard
     @Override
     public void addPages()
     {
-        addPage( new CreateConnTypePage() );
+        addPage( new WelcomePage() );
+        addPage( new SelectConnectionTypePage() );
     }
 
     /**
@@ -44,6 +51,7 @@ public class CreateConnectionWizard extends Wizard
     @Override
     public boolean performFinish()
     {
+        System.out.println( "perf finish" );
         return true;
     }
 

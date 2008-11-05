@@ -4,6 +4,8 @@
  */
 package org.suggs.apps.mercury.view.images;
 
+import org.suggs.apps.mercury.model.util.ImageManager;
+
 import java.io.InputStream;
 
 import org.apache.commons.logging.Log;
@@ -41,7 +43,8 @@ public class MercuryImageCanvas extends Canvas
 
             public void paintControl( PaintEvent pe )
             {
-                InputStream is = getClass().getClassLoader().getResourceAsStream( IMG );
+                InputStream is = ImageManager.getImageStream( getClass().getClassLoader(),
+                                                              ImageManager.IMAGE_MERCURY );
                 if ( is == null )
                 {
                     LOG.warn( "Cannot find image [" + IMG + "]" );

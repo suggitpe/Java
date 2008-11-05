@@ -9,7 +9,6 @@ import org.suggs.apps.mercury.view.wizards.createconnection.CreateConnectionWiza
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Display;
 
@@ -31,9 +30,9 @@ public class CreateConnectionWizardAction extends Action
     {
         super( "&Create Connection" );
         setToolTipText( "Create new connection" );
-        setImageDescriptor( ImageDescriptor.createFromURL( this.getClass()
-            .getClassLoader()
-            .getResource( "images/connect.png" ) ) );
+        // setImageDescriptor( ImageManager.getImageDescriptor(
+        // getClass().getClassLoader(), ImageManager.IMAGE_CONNECTION
+        // ) );
     }
 
     /**

@@ -4,12 +4,13 @@
  */
 package org.suggs.apps.mercury.view.actions.connection;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.suggs.apps.mercury.view.dialogs.HelpConnectionDebugDialog;
+
 import org.eclipse.jface.action.Action;
+import org.eclipse.swt.widgets.Display;
 
 /**
- * TODO Write javadoc for DebugAction
+ * This is the action that supports the help connection debug screen.
  * 
  * @author suggitpe
  * @version 1.0 15 Oct 2008
@@ -17,14 +18,12 @@ import org.eclipse.jface.action.Action;
 public class DebugAction extends Action
 {
 
-    private static final Log LOG = LogFactory.getLog( DebugAction.class );
-
     /**
      * Constructs a new instance.
      */
     public DebugAction()
     {
-        super( "&Debug" );
+        super( "&Debug Connections" );
         setToolTipText( "This will debug the currently known connection set" );
     }
 
@@ -34,7 +33,9 @@ public class DebugAction extends Action
     @Override
     public void run()
     {
-        LOG.debug( "Opening up connection debug dialog" );
+        HelpConnectionDebugDialog d = new HelpConnectionDebugDialog( Display.getCurrent()
+            .getActiveShell() );
+        d.open();
     }
 
 }

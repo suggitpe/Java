@@ -4,6 +4,7 @@
  */
 package org.suggs.apps.mercury;
 
+import org.suggs.apps.mercury.model.util.ImageManager;
 import org.suggs.apps.mercury.view.IMenuFactory;
 import org.suggs.apps.mercury.view.IToolBarFactory;
 
@@ -50,8 +51,9 @@ public class MercuryMain extends ApplicationWindow
     protected Control createContents( Composite parent )
     {
         getShell().setText( "Mercury messenger" );
-        getShell().setImage( new Image( getShell().getDisplay(), getClass().getClassLoader()
-            .getResourceAsStream( "images/mercury.png" ) ) );
+        getShell().setImage( new Image( getShell().getDisplay(),
+                                        ImageManager.getImageStream( getClass().getClassLoader(),
+                                                                     ImageManager.IMAGE_MERCURY ) ) );
         // remove this
         parent.setSize( 400, 200 );
         return parent;

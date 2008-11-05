@@ -6,8 +6,6 @@ package org.suggs.apps.mercury.view.actions.help;
 
 import org.suggs.apps.mercury.view.dialogs.HelpAboutDialog;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.Action;
 import org.eclipse.swt.widgets.Display;
 
@@ -19,8 +17,6 @@ import org.eclipse.swt.widgets.Display;
  */
 public class AboutAction extends Action
 {
-
-    private static final Log LOG = LogFactory.getLog( AboutAction.class );
 
     /**
      * Constructs a new instance.
@@ -37,7 +33,6 @@ public class AboutAction extends Action
     @Override
     public void run()
     {
-        LOG.debug( "Opening About dialog" );
         HelpAboutDialog had = new HelpAboutDialog( Display.getCurrent().getActiveShell() );
         had.open();
     }

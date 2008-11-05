@@ -4,9 +4,10 @@
  */
 package org.suggs.apps.mercury.view;
 
-import org.suggs.apps.mercury.view.dialogs.HelpAboutDialog;
+import org.suggs.apps.mercury.view.wizards.createconnection.CreateConnectionWizard;
 
 import org.eclipse.jface.window.ApplicationWindow;
+import org.eclipse.jface.wizard.WizardDialog;
 
 /**
  * This test class when executed will open up a dialog box and show it
@@ -28,8 +29,12 @@ public class DialogViewer
         w.setBlockOnOpen( false );
         w.open();
 
-        HelpAboutDialog d = new HelpAboutDialog( w.getShell() );
-        d.open();
+        // HelpAboutDialog d = new HelpAboutDialog( w.getShell() );
+        // HelpConnectionDebugDialog d = new
+        // HelpConnectionDebugDialog( w.getShell() );
+        // d.open();
+        WizardDialog wiz = new WizardDialog( w.getShell(), new CreateConnectionWizard() );
+        wiz.open();
     }
 
 }

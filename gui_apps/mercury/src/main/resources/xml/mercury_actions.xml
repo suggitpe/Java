@@ -6,12 +6,20 @@
     <bean id="mercuryActionMap" class="java.util.HashMap">
         <constructor-arg>
             <map>
+                <!-- FILE -->
+                <entry key="FILE_EXIT" value-ref="file_exit"/>
+                
+                <!-- CONNECTION -->
                 <entry key="CONNECTION_WIZARD" value-ref="connection_wizard"/>
                 <entry key="CONNECTION_DEBUG" value-ref="connection_debug"/>
+                
+                <!-- HELP -->
                 <entry key="HELP_ABOUT" value-ref="help_about"/>
             </map>
         </constructor-arg>
     </bean>
+    
+    <bean id="file_exit" class="org.suggs.apps.mercury.view.actions.file.ExitAction" />
     
     <bean id="connection_wizard" class="org.suggs.apps.mercury.view.actions.connection.CreateConnectionWizardAction"/>
     <bean id="connection_debug" class="org.suggs.apps.mercury.view.actions.connection.DebugAction"/>

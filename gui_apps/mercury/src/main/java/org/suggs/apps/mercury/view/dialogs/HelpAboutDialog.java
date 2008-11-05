@@ -35,6 +35,7 @@ public class HelpAboutDialog extends Dialog
     {
 
         super( parentShell );
+        parentShell.setText( "Mercury About" );
     }
 
     /**
@@ -46,7 +47,6 @@ public class HelpAboutDialog extends Dialog
     protected Control createDialogArea( Composite parent )
     {
         Composite comp = (Composite) super.createDialogArea( parent );
-        comp.getShell().setText( "Mercury About" );
 
         GridLayout layout = (GridLayout) comp.getLayout();
         layout.numColumns = 3;
@@ -71,6 +71,12 @@ public class HelpAboutDialog extends Dialog
         return comp;
     }
 
+    /**
+     * This method will manage the creation of the JVM dta that we
+     * present to the user.
+     * 
+     * @return
+     */
     private String createJvmText()
     {
         return new StringBuffer( "JVM Version " ).append( System.getProperty( "java.version" ) )
@@ -88,17 +94,6 @@ public class HelpAboutDialog extends Dialog
     protected void createButtonsForButtonBar( Composite parent )
     {
         createButton( parent, IDialogConstants.OK_ID, "OK", true );
-    }
-
-    /**
-     * Allows us to define the functionality that the OK will provide
-     * 
-     * @see org.eclipse.jface.dialogs.Dialog#buttonPressed(int)
-     */
-    @Override
-    protected void buttonPressed( int buttonId )
-    {
-        super.buttonPressed( buttonId );
     }
 
 }
