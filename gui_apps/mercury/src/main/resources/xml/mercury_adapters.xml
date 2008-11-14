@@ -8,14 +8,14 @@
     <bean id="adapterList" class="java.util.HashMap">
         <constructor-arg>
             <map>
-                <entry key="IBM MQ Series" value-ref="ibmMqAdapter"/>
-                <entry key="Tibco EMS" value-ref="tibcoEmsAdapter"/>
+                <entry key="IBM_MQ" value-ref="ibmMqAdapter"/>
+                <entry key="TIBCO_EMS" value-ref="tibcoEmsAdapter"/>
             </map>
         </constructor-arg>
     </bean>
     
-    <bean id="ibmMqAdapter" class="java.lang.String"/>
+    <bean id="ibmMqAdapter" class="org.suggs.apps.mercury.model.adapters.ibmmq.IbmMqAdapter"/>
 
-    <bean id="tibcoEmsAdapter" class="java.lang.String"/>
+    <bean id="tibcoEmsAdapter" class="org.suggs.apps.mercury.model.adapters.tibcoems.TibcoEmsAdapter"/>
     
 </beans>

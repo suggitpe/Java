@@ -6,8 +6,8 @@ package org.suggs.apps.mercury.view.wizards.createconnection.pages;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -38,8 +38,7 @@ public abstract class AbstractCreateConnectionPage extends WizardPage
     {
 
         Composite topLevel = new Composite( parent, SWT.NONE );
-        topLevel.setLayout( new FillLayout( SWT.VERTICAL ) );
-
+        topLevel.setLayout( new GridLayout( 1, false ) );
         doBuildControls( topLevel );
 
         setControl( topLevel );

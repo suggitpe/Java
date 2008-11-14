@@ -4,7 +4,6 @@
  */
 package org.suggs.apps.mercury.view.wizards.createconnection.pages;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -19,7 +18,6 @@ public class WelcomePage extends AbstractCreateConnectionPage
 {
 
     public static final String PAGE_NAME = "WelcomePage";
-    private static final String PAGE_HELP = "This is a welcome page no help should be needed.\n\nPress next for the next page in the wizard.";
 
     /**
      * Constructs a new instance.
@@ -48,18 +46,6 @@ public class WelcomePage extends AbstractCreateConnectionPage
         new Label( contextComposite, SWT.NONE ).setText( "In addition you may need to have:\n"
                                                          + " - username and password to access the server"
                                                          + " - any other additional information for the broker connection" );
-    }
-
-    /**
-     * @see org.eclipse.jface.dialogs.DialogPage#performHelp()
-     */
-    @Override
-    public void performHelp()
-    {
-        MessageDialog.openInformation( getWizard().getContainer().getShell(),
-                                       "Welcome page help",
-                                       PAGE_HELP );
-
     }
 
 }

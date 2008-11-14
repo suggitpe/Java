@@ -8,13 +8,12 @@ import org.suggs.apps.mercury.ContextProvider;
 
 import java.util.HashMap;
 
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -32,7 +31,6 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
 {
 
     public static final String PAGE_NAME = "CreateConnectionType";
-    private static final String PAGE_HELP = "Populate the name of the connection and then select the connection type.\n\nThen press next to move to the next page.";
     private String mConnType_ = "";
     private String mConnName_ = "";
     private String[] mOptions_;
@@ -45,10 +43,11 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
     {
         super( PAGE_NAME, "Connection Type Selection" );
         setDescription( "Select the middleware implementation from the list below" );
-        setPageComplete( false );
 
         HashMap map = (HashMap) ContextProvider.instance().getBean( "adapterList" );
         mOptions_ = (String[]) map.keySet().toArray( new String[0] );
+
+        setPageComplete( false );
     }
 
     /**
@@ -57,7 +56,8 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
     @Override
     public void doBuildControls( Composite controlComposite )
     {
-        new SelectConnectionComposite( controlComposite );
+        Composite c = new SelectConnectionComposite( controlComposite );
+        c.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
     }
 
     /**
@@ -73,26 +73,6 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
         {
             setPageComplete( false );
         }
-    }
-
-    /**
-     * @see org.eclipse.jface.dialogs.DialogPage#performHelp()
-     */
-    @Override
-    public void performHelp()
-    {
-        MessageDialog.openInformation( getWizard().getContainer().getShell(),
-                                       "Create Connection Help",
-                                       PAGE_HELP );
-    }
-
-    /**
-     * @see org.eclipse.jface.wizard.WizardPage#getNextPage()
-     */
-    @Override
-    public IWizardPage getNextPage()
-    {
-        return null;
     }
 
     /**
@@ -122,7 +102,7 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
      * @author suggitpe
      * @version 1.0 5 Nov 2008
      */
-    private class SelectConnectionComposite extends Composite
+    protected class SelectConnectionComposite extends Composite
     {
 
         /**
@@ -133,6 +113,7 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
             super( comp, SWT.NONE );
             setLayout( new GridLayout( 2, false ) );
 
+            // build the name entry textbox
             new Label( this, SWT.NONE ).setText( "Connection Name:" );
             final Text name = new Text( this, SWT.BORDER );
             name.setLayoutData( TEXT_BOX_STYLE );
@@ -146,10 +127,10 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
                 }
             } );
 
+            // build the middleware selector
             new Label( this, SWT.CENTER ).setText( "Connection Type:" );
             final Combo combo = new Combo( this, SWT.DROP_DOWN );
             combo.setLayoutData( TEXT_BOX_STYLE );
-
             combo.setItems( mOptions_ );
             combo.addSelectionListener( new SelectionAdapter()
             {
