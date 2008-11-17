@@ -6,25 +6,29 @@
 
 	<complexType name="ConnectionStoreType">
 		<sequence>
-			<element name="Connection" type="tns:ConnectionType" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="connection" type="tns:ConnectionType" minOccurs="0" maxOccurs="unbounded"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="ConnectionType">
 		<sequence>
-			<element name="Hostname" type="string" minOccurs="1"
+			<element name="hostname" type="string" minOccurs="1"
 				maxOccurs="1">
 			</element>
-			<element name="Port" type="int" minOccurs="1"
+			<element name="port" type="int" minOccurs="1"
 				maxOccurs="1">
 			</element>
-			<element name="ConnectionFactories"
+			<element name="connectionFactories"
 				type="tns:ConnectionFactoryGroup" minOccurs="1" maxOccurs="1">
 			</element>
-			<element name="Destinations" type="tns:DestinationGroup"
+			<element name="destinations" type="tns:DestinationGroup"
 				maxOccurs="1" minOccurs="1">
 			</element>
 
+			<element name="security" type="tns:ConnectionSecurityType"
+				minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="metadata" type="tns:ConnectionMetadataType" minOccurs="1" maxOccurs="1"></element>
 		</sequence>
 		<attribute name="name" type="string" use="required"></attribute>
 		<attribute name="type" type="string" use="required"></attribute>
@@ -35,10 +39,10 @@
 
     <complexType name="DestinationType">
     	<sequence>
-    		<element name="Name" type="string" minOccurs="1"
+    		<element name="name" type="string" minOccurs="1"
     			maxOccurs="1">
     		</element>
-    		<element name="DestType" minOccurs="1" maxOccurs="1"
+    		<element name="destType" minOccurs="1" maxOccurs="1"
     			type="tns:JmsType">
 
     		</element>
@@ -57,20 +61,40 @@
 
     <complexType name="ConnectionFactoryGroup">
     	<sequence>
-    		<element name="ConnectionFactory" type="tns:ConnectionFactoryType" minOccurs="1" maxOccurs="unbounded"></element>
+    		<element name="connectionFactory" type="tns:ConnectionFactoryType" minOccurs="1" maxOccurs="unbounded"></element>
     	</sequence>
     </complexType>
 
     <complexType name="ConnectionFactoryType">
     	<sequence>
-    		<element name="Name" type="string"></element>
-    		<element name="FactType" type="tns:JmsType"></element>
+    		<element name="name" type="string"></element>
+    		<element name="factType" type="tns:JmsType"></element>
     	</sequence>
     </complexType>
 
     <complexType name="DestinationGroup">
     	<sequence>
-    		<element name="Destination" type="tns:DestinationType" minOccurs="1" maxOccurs="unbounded"></element>
+    		<element name="destination" type="tns:DestinationType" minOccurs="1" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ConnectionSecurityType">
+    	<sequence>
+    		<element name="username" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="password" type="string" minOccurs="0" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ConnectionMetadataType">
+    	<sequence>
+    		<element name="metadata" type="tns:MetadataType" minOccurs="1" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="MetadataType">
+    	<sequence>
+    		<element name="key" type="string"></element>
+    		<element name="value" type="string"></element>
     	</sequence>
     </complexType>
 </schema>
