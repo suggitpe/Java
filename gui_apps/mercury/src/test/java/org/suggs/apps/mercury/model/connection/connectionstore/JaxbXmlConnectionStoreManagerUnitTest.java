@@ -11,9 +11,7 @@ import org.suggs.apps.mercury.model.util.IFileManager;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import junit.framework.Assert;
 
@@ -139,8 +137,7 @@ public class JaxbXmlConnectionStoreManagerUnitTest
     public void testSaveConnectionDataWithNullData() throws ConnectionStoreException
     {
         // ------- MOCK PREP
-        Map<String, ConnectionDetails> in = new HashMap<String, ConnectionDetails>();
-        populateMapWithDetails( in );
+
         // ------- MOCK LOAD
         EasyMock.replay( mFileManagerMock_ );
 
@@ -197,23 +194,18 @@ public class JaxbXmlConnectionStoreManagerUnitTest
         ConnectionDetails d1 = new ConnectionDetails( "CONN_1", "EMS" );
         d1.setPort( 123 );
         d1.setHostname( "pgdsx01.org.suggs.uk" );
-        Set<String> s1 = new HashSet<String>();
-        s1.add( "TopicConnFact1" );
-        d1.getConnectionFactories().put( "Topic", s1 );
 
-        Set<String> s2 = new HashSet<String>();
-        s2.add( "QueueConnFact2" );
-        d1.getConnectionFactories().put( "Queue", s2 );
+        d1.setSecurityDetails( "username", "password" );
 
-        Set<String> s3 = new HashSet<String>();
-        s3.add( "GenericConnFact3" );
-        d1.getConnectionFactories().put( "Generic", s3 );
+        d1.addConnectionFactory( "Topic", "TopicConnFact1" );
+        d1.addConnectionFactory( "Topic", "TopicConnFact2" );
+        d1.addConnectionFactory( "Queue", "QueueConnFact1" );
+        d1.addConnectionFactory( "Generic", "GenericConnFact1" );
 
-        Set<String> s4 = new HashSet<String>();
-        s4.add( "TopicDest1" );
-        d1.getDestinations().put( "Topic", s4 );
-
-        map.put( d1.getName(), d1 );
+        d1.addDestination( "Topic", "TopicDest1" );
+        d1.addDestination( "Topic", "TopicDest2" );
+        d1.addDestination( "Topic", "TopicDest3" );
+        d1.addDestination( "Generic", "GenericDest1" );
 
         ConnectionDetails d2 = new ConnectionDetails( "CONN_2" );
         d2.setPort( 456 );
@@ -236,20 +228,22 @@ public class JaxbXmlConnectionStoreManagerUnitTest
     private String createTestXML()
     {
         StringBuffer ret = new StringBuffer( "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" );
-        ret.append( "<ConnectionStore xmlns=\"http://www.suggs.org.uk/ConnectionStore\">\n" );
-        ret.append( "<Connection type=\"TEST_TYPE\" name=\"CONN_1\">\n" )
-            .append( " <Hostname>pgdsx01.org.suggs.uk</Hostname>" )
-            .append( "<Port>123</Port>" )
-            .append( "<ConnectionFactories/>\n" )
-            .append( "<Destinations/>\n" )
-            .append( "</Connection>\n" );
-        ret.append( "<Connection type=\"TEST_TYPE\" name=\"CONN_2\">\n" )
-            .append( " <Hostname>pgdsx02.org.suggs.uk</Hostname>" )
-            .append( "<Port>456</Port>" )
-            .append( "<ConnectionFactories/>\n" )
-            .append( "<Destinations/>\n" )
-            .append( "</Connection>\n" );
-        ret.append( "</ConnectionStore>" );
+        ret.append( "<connectionStore xmlns=\"http://www.suggs.org.uk/ConnectionStore\">\n" );
+        ret.append( "<connection type=\"TEST_TYPE\" name=\"CONN_1\">\n" )
+            .append( " <hostname>pgdsx01.org.suggs.uk</hostname>" )
+            .append( "<port>123</port>\n" )
+            .append( "<connectionFactories/>\n" )
+            .append( "<destinations/>\n" )
+            .append( "<metadata/>\n" )
+            .append( "</connection>\n" );
+        ret.append( "<connection type=\"TEST_TYPE\" name=\"CONN_2\">\n" )
+            .append( " <hostname>pgdsx02.org.suggs.uk</hostname>" )
+            .append( "<port>456</port>\n" )
+            .append( "<connectionFactories/>\n" )
+            .append( "<destinations/>\n" )
+            .append( "<metadata/>\n" )
+            .append( "</connection>\n" );
+        ret.append( "</connectionStore>" );
         return ret.toString();
     }
 

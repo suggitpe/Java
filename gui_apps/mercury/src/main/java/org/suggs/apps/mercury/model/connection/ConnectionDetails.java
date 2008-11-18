@@ -5,6 +5,7 @@
 package org.suggs.apps.mercury.model.connection;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,10 +18,15 @@ import java.util.Set;
 public class ConnectionDetails
 {
 
+    public static final String META_CHANNEL = "ChannelName";
+
     private String mName_;
     private String mType_;
     private String mHostName_;
     private int mPort_ = 0;
+    private boolean mIsSecurityEnabled_;
+    private String mUsername_;
+    private String mPassword_;
     private Map<String, String> mMetaData_ = new HashMap<String, String>();
     private Map<String, Set<String>> mConnectionFactories_ = new HashMap<String, Set<String>>();
     private Map<String, Set<String>> mDestinations_ = new HashMap<String, Set<String>>();
@@ -198,6 +204,22 @@ public class ConnectionDetails
     }
 
     /**
+     * This is a convenience method that allows you to set up the
+     * security details in one fell swoop
+     * 
+     * @param username
+     *            the username to use
+     * @param password
+     *            the password to use
+     */
+    public void setSecurityDetails( String username, String password )
+    {
+        mIsSecurityEnabled_ = true;
+        mUsername_ = username;
+        mPassword_ = password;
+    }
+
+    /**
      * Getter for the connection name
      * 
      * @return the name of the connection
@@ -282,6 +304,74 @@ public class ConnectionDetails
     }
 
     /**
+     * Getter for the security enabled flag
+     * 
+     * @return
+     */
+    public boolean isSecurityEnabled()
+    {
+        return mIsSecurityEnabled_;
+    }
+
+    /**
+     * Sets the security enabled flag
+     */
+    public void setSecurityEnabled()
+    {
+        mIsSecurityEnabled_ = true;
+    }
+
+    /**
+     * Unsets the security enabled flag
+     */
+    public void unsetSecurityEnabled()
+    {
+        mIsSecurityEnabled_ = false;
+    }
+
+    /**
+     * Getter for the username
+     * 
+     * @return the username value
+     */
+    public String getUsername()
+    {
+        return mUsername_;
+    }
+
+    /**
+     * Setter for the username
+     * 
+     * @param aUsername
+     *            the username to set
+     */
+    public void setUsername( String aUsername )
+    {
+        mUsername_ = aUsername;
+    }
+
+    /**
+     * Getter for the password
+     * 
+     * @return the password value
+     */
+    public String getPassword()
+    {
+        return mPassword_;
+    }
+
+    /**
+     * Setter for the password field
+     * 
+     * @param aPassword
+     *            the password to set
+     */
+    public void setPassword( String aPassword )
+    {
+        mPassword_ = aPassword;
+    }
+
+    /**
      * Getter for the metadata associated with the connection
      * 
      * @return the metadata map
@@ -303,6 +393,26 @@ public class ConnectionDetails
     }
 
     /**
+     * Adds a new key value pair to the connection store data
+     * 
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @throws ConnectionDataException
+     *             if the key already exists
+     */
+    public void addMetaDataItem( String key, String value ) throws ConnectionDataException
+    {
+        if ( mMetaData_.containsKey( key ) )
+        {
+            throw new ConnectionDataException( "Key [" + key + "] already exists in meta data" );
+        }
+
+        mMetaData_.put( key, value );
+    }
+
+    /**
      * Getter for the connection factories
      * 
      * @return the connection factories
@@ -313,21 +423,73 @@ public class ConnectionDetails
     }
 
     /**
+     * Setter for the connection factories member
+     * 
      * @param aMap
+     *            the map of connection factories
      */
     public void setConnectionFactories( Map<String, Set<String>> aMap )
     {
         mConnectionFactories_ = aMap;
     }
 
+    /**
+     * Allows you to add a new connection factory to the bean
+     * 
+     * @param type
+     *            the type of connection factory to use
+     * @param connectionFactory
+     *            the connection factory
+     */
+    public void addConnectionFactory( String type, String connectionFactory )
+    {
+        // if set does not exist then create one
+        if ( !mConnectionFactories_.containsKey( type ) )
+        {
+            mConnectionFactories_.put( type, new HashSet<String>() );
+        }
+
+        // now we are safe to add
+        mConnectionFactories_.get( type ).add( connectionFactory );
+    }
+
+    /**
+     * Getter for the destinations
+     * 
+     * @return the destinations map
+     */
     public Map<String, Set<String>> getDestinations()
     {
         return mDestinations_;
     }
 
+    /**
+     * Setter for the destinations map
+     * 
+     * @param aMap
+     *            the map of destinations
+     */
     public void setDestinations( Map<String, Set<String>> aMap )
     {
         mDestinations_ = aMap;
     }
 
+    /**
+     * Allows you to add a new destination to the map of destinations
+     * 
+     * @param type
+     *            the type of destination to add
+     * @param destination
+     */
+    public void addDestination( String type, String destination )
+    {
+        // if set does not exist then create one
+        if ( !mDestinations_.containsKey( type ) )
+        {
+            mDestinations_.put( type, new HashSet<String>() );
+        }
+
+        // now we are safe to add
+        mDestinations_.get( type ).add( destination );
+    }
 }

@@ -14,18 +14,24 @@ import org.suggs.apps.mercury.model.util.IFileManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.net.URL;
 import java.util.Map;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.xml.sax.SAXException;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -44,8 +50,8 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     private static final String MERCURY_HOME_DIR = System.getProperty( "user.home" ) + "/.mercury";
     private static final File MERCURY_FILE = new File( MERCURY_HOME_DIR + "/connectionStore.xml" );
 
-    private IFileManager mFileManager_;
-    private static JAXBContext mJaxbContext_;
+    private IFileManager mFileManager_ = null;
+    private static JAXBContext mJaxbContext_ = null;
 
     static
     {
@@ -61,6 +67,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
             throw new IllegalStateException( "Unable to create JAXB context in Connection Store Manager",
                                              je );
         }
+
     }
 
     /**
@@ -89,17 +96,56 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
             throw new ConnectionStoreException( err, ioe );
         }
 
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "Retrieved clob with length [" + xmlClob.length()
+                       + "] from the file manager" );
+        }
+
         ConnectionStoreType connStr = null;
         try
         {
             Unmarshaller uMrsh = mJaxbContext_.createUnmarshaller();
+
+            // this could be pulled out to the class levl but as this
+            // is not doing many repetitions of the unmarshall I am
+            // comfortable to leave in this method
+            Schema s = null;
+            try
+            {
+                SchemaFactory sf = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );
+                URL url = getClass().getClassLoader().getResource( "connection-store.xsd" );
+                s = sf.newSchema( url );
+            }
+            catch ( SAXException sx )
+            {
+                throw new ConnectionStoreException( "Unable to retrieve schema for validation of connction store xml",
+                                                    sx );
+            }
+            uMrsh.setSchema( s );
+
+            // now we need to load the xml schema so we can validate
+            // the input xml
+            InputStream is = getClass().getClassLoader()
+                .getResourceAsStream( "connection-store.xsd" );
+            if ( is == null )
+            {
+                throw new ConnectionStoreException( "Unable to load connection store schema" );
+            }
+
             JAXBElement<ConnectionStoreType> elem = (JAXBElement<ConnectionStoreType>) uMrsh.unmarshal( new StringReader( xmlClob ) );
             connStr = elem.getValue();
         }
         catch ( JAXBException je )
         {
-            throw new ConnectionStoreException( "Error found when trying to unmarshal connection store data",
-                                                je );
+            String err = "Error found when trying to unmarshal connection store data";
+            LOG.error( err + ":\n" + xmlClob );
+            throw new ConnectionStoreException( err, je );
+        }
+
+        if ( connStr.getConnection().size() == 0 )
+        {
+            LOG.warn( "Have pased XML but cannot find any valid connections within: returning an empty connection store (either this is first time use or the connection store xml is corrupt in some way)" );
         }
 
         return JaxbXmlConnectionStoreManagerHelper.createDetailsFromConnection( connStr );

@@ -5,6 +5,7 @@
 package org.suggs.apps.mercury.view.wizards.createconnection;
 
 import org.suggs.apps.mercury.model.adapters.ibmmq.IbmMqAdapter;
+import org.suggs.apps.mercury.model.connection.ConnectionDataException;
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.util.ImageManager;
 import org.suggs.apps.mercury.view.wizards.createconnection.pages.ConnectionDataSummaryPage;
@@ -13,8 +14,8 @@ import org.suggs.apps.mercury.view.wizards.createconnection.pages.IbmMqConnectio
 import org.suggs.apps.mercury.view.wizards.createconnection.pages.SelectConnectionTypePage;
 import org.suggs.apps.mercury.view.wizards.createconnection.pages.WelcomePage;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -114,7 +115,7 @@ public class CreateConnectionWizard extends Wizard
         GenericConnectionDetailsPage genConnPg = (GenericConnectionDetailsPage) getPage( GenericConnectionDetailsPage.PAGE_NAME );
         IbmMqConnectionDataPage ibmMqPg = (IbmMqConnectionDataPage) getPage( IbmMqConnectionDataPage.PAGE_NAME );
 
-        Map<String, String> ret = new TreeMap<String, String>();
+        Map<String, String> ret = new HashMap<String, String>();
 
         ret.put( CONN_NAME, selPg.getConnectionName() );
         ret.put( CONN_TYPE, selPg.getConnectionType() );
@@ -155,7 +156,7 @@ public class CreateConnectionWizard extends Wizard
         catch ( NumberFormatException nfe )
         {
             // only warn as the gui should ensure that is a
-            // validinteger
+            // valid integer
             LOG.warn( "Failed to parse integer for port number" );
         }
         ConnectionDetails dtls = new ConnectionDetails( map.get( CONN_NAME ),
@@ -163,8 +164,26 @@ public class CreateConnectionWizard extends Wizard
                                                         map.get( CONN_HOST ),
                                                         port );
 
-        return dtls;
+        // add in the security
+        if ( Boolean.parseBoolean( map.get( CONN_SEC ) ) )
+        {
+            dtls.setSecurityDetails( map.get( CONN_USER ), map.get( CONN_PASS ) );
+        }
 
+        // add in the additional metadata
+        if ( map.containsKey( CONN_CHANNEL ) )
+        {
+            try
+            {
+                dtls.addMetaDataItem( ConnectionDetails.META_CHANNEL, map.get( CONN_CHANNEL ) );
+            }
+            catch ( ConnectionDataException cde )
+            {
+                LOG.warn( "Trying to add duplicate metadata item ["
+                          + ConnectionDetails.META_CHANNEL + "]" );
+            }
+        }
+        return dtls;
     }
 
     /**
