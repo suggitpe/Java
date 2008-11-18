@@ -2,7 +2,7 @@
 <schema targetNamespace="http://www.suggs.org.uk/ConnectionStore"
 	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.suggs.org.uk/ConnectionStore">
 
-	<element name="ConnectionStore" type="tns:ConnectionStoreType"></element>
+	<element name="connectionStore" type="tns:ConnectionStoreType"></element>
 
 	<complexType name="ConnectionStoreType">
 		<sequence>
@@ -28,7 +28,7 @@
 			<element name="security" type="tns:ConnectionSecurityType"
 				minOccurs="0" maxOccurs="1">
 			</element>
-			<element name="metadata" type="tns:ConnectionMetadataType" minOccurs="1" maxOccurs="1"></element>
+			<element name="metadata" type="tns:MetadataGroup" minOccurs="1" maxOccurs="1"></element>
 		</sequence>
 		<attribute name="name" type="string" use="required"></attribute>
 		<attribute name="type" type="string" use="required"></attribute>
@@ -61,7 +61,7 @@
 
     <complexType name="ConnectionFactoryGroup">
     	<sequence>
-    		<element name="connectionFactory" type="tns:ConnectionFactoryType" minOccurs="1" maxOccurs="unbounded"></element>
+    		<element name="connectionFactory" type="tns:ConnectionFactoryType" minOccurs="0" maxOccurs="unbounded"></element>
     	</sequence>
     </complexType>
 
@@ -74,7 +74,7 @@
 
     <complexType name="DestinationGroup">
     	<sequence>
-    		<element name="destination" type="tns:DestinationType" minOccurs="1" maxOccurs="unbounded"></element>
+    		<element name="destination" type="tns:DestinationType" minOccurs="0" maxOccurs="unbounded"></element>
     	</sequence>
     </complexType>
 
@@ -85,9 +85,9 @@
     	</sequence>
     </complexType>
 
-    <complexType name="ConnectionMetadataType">
+    <complexType name="MetadataGroup">
     	<sequence>
-    		<element name="metadata" type="tns:MetadataType" minOccurs="1" maxOccurs="unbounded"></element>
+    		<element name="metadata" type="tns:MetadataType" minOccurs="0" maxOccurs="unbounded"></element>
     	</sequence>
     </complexType>
 

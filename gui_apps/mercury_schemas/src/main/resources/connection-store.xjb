@@ -6,7 +6,7 @@
             collectionType="java.util.ArrayList"
             typesafeEnumMemberName="generateError"
             enableFailFastCheck="false"
-            generateIsSetMethod="false"
+            generateIsSetMethod="true"
             underscoreBinding="asCharInWord" />
         
         <jxb:schemaBindings>
