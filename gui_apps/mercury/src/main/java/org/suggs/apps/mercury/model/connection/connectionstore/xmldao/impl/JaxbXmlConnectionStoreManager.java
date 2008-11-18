@@ -52,6 +52,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
 
     private IFileManager mFileManager_ = null;
     private static JAXBContext mJaxbContext_ = null;
+    private Schema mSchemaCache_;
 
     static
     {
@@ -107,22 +108,27 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
         {
             Unmarshaller uMrsh = mJaxbContext_.createUnmarshaller();
 
-            // this could be pulled out to the class levl but as this
-            // is not doing many repetitions of the unmarshall I am
-            // comfortable to leave in this method
-            Schema s = null;
-            try
+            if ( mSchemaCache_ == null )
             {
-                SchemaFactory sf = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );
-                URL url = getClass().getClassLoader().getResource( "connection-store.xsd" );
-                s = sf.newSchema( url );
+                try
+                {
+                    SchemaFactory sf = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );
+                    URL url = getClass().getClassLoader().getResource( "connection-store.xsd" );
+                    mSchemaCache_ = sf.newSchema( url );
+                }
+                catch ( SAXException sx )
+                {
+                    throw new ConnectionStoreException( "Unable to retrieve schema for validation of connction store xml",
+                                                        sx );
+                }
             }
-            catch ( SAXException sx )
+
+            if ( mSchemaCache_ == null )
             {
-                throw new ConnectionStoreException( "Unable to retrieve schema for validation of connction store xml",
-                                                    sx );
+                throw new ConnectionStoreException( "Failed to create validating schema for marshaller" );
             }
-            uMrsh.setSchema( s );
+
+            uMrsh.setSchema( mSchemaCache_ );
 
             // now we need to load the xml schema so we can validate
             // the input xml
