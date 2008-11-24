@@ -21,7 +21,10 @@
     
     <bean id="file_exit" class="org.suggs.apps.mercury.view.actions.file.ExitAction" />
     
-    <bean id="connection_wizard" class="org.suggs.apps.mercury.view.actions.connection.CreateConnectionWizardAction"/>
+    <bean id="connection_wizard" class="org.suggs.apps.mercury.view.actions.connection.CreateConnectionWizardAction">
+        <property name="connectionStore" ref="connectionStoreManager"/>
+    </bean>
+    
     <bean id="connection_debug" class="org.suggs.apps.mercury.view.actions.connection.DebugAction"/>
     
     <bean id="help_about" class="org.suggs.apps.mercury.view.actions.help.AboutAction"/>

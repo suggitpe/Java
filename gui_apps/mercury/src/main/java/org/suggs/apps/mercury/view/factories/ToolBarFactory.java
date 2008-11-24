@@ -4,9 +4,10 @@
  */
 package org.suggs.apps.mercury.view.factories;
 
+import org.suggs.apps.mercury.ContextProvider;
 import org.suggs.apps.mercury.view.IActionManager;
 import org.suggs.apps.mercury.view.IToolBarFactory;
-import org.suggs.apps.mercury.view.actions.connection.CreateConnectionWizardAction;
+import org.suggs.apps.mercury.view.actions.ActionManager;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.logging.Log;
@@ -67,9 +68,14 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
      */
     private final ToolBarManager buildMainToolbar( int style )
     {
-        ToolBarManager mgr = new ToolBarManager( style );
-        mgr.add( new CreateConnectionWizardAction() );
-        return mgr;
+        // get action manager factory
+        ActionManager mgr = (ActionManager) ContextProvider.instance()
+            .getBean( ActionManager.BEAN_NAME );
+
+        ToolBarManager main = new ToolBarManager( style );
+        main.add( mgr.getAction( "CONNECTION_WIZARD" ) );
+
+        return main;
     }
 
     /**

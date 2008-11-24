@@ -161,6 +161,13 @@ public class ConnectionDetails
         }
         buff.append( "]" );
 
+        buff.append( ", securityEnabled=[" ).append( mIsSecurityEnabled_ ).append( "]" );
+
+        if ( mIsSecurityEnabled_ )
+        {
+            buff.append( ", username=[" ).append( mUsername_ ).append( "], password=[*****]" );
+        }
+
         buff.append( ", ConnectionFactories: " );
         for ( String s : mConnectionFactories_.keySet() )
         {

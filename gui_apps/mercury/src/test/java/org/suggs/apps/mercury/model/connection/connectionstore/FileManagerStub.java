@@ -39,7 +39,7 @@ public class FileManagerStub implements IFileManager
      * @see org.suggs.apps.mercury.model.util.IFileManager#persistClob(java.lang.String,
      *      java.io.File)
      */
-    public void persistClob( String clob, File file ) throws IOException
+    public void persistClobToFile( String clob, File file ) throws IOException
     {
         LOG.debug( "Storing the persisted clob data in memory for file [" + file.getAbsolutePath()
                    + "]" );
@@ -49,7 +49,16 @@ public class FileManagerStub implements IFileManager
     /**
      * @see org.suggs.apps.mercury.model.util.IFileManager#retrieveClob(java.io.File)
      */
-    public String retrieveClob( File file ) throws IOException
+    public String retrieveClobFromFile( File file ) throws IOException
+    {
+        LOG.debug( "Retrieving the clob data from the in memory store" );
+        return mData_;
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.util.IFileManager#retrieveClobFromResource(java.lang.String)
+     */
+    public String retrieveClobFromResource( String resource ) throws IOException
     {
         LOG.debug( "Retrieving the clob data from the in memory store" );
         return mData_;

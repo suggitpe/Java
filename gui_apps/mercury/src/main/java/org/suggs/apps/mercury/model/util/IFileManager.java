@@ -32,7 +32,7 @@ public interface IFileManager
      * @throws ConnectionStoreException
      *             if there are any issues in the persistence layer
      */
-    void persistClob( String aClob, File aFile ) throws IOException;
+    void persistClobToFile( String aClob, File aFile ) throws IOException;
 
     /**
      * This method will retrieve a file from the persistence layer and
@@ -42,8 +42,20 @@ public interface IFileManager
      *            the file from which to read the data
      * @return the String representation of the data in the file
      * @throws IOException
-     *             if there are any issues in rading the file data
+     *             if there are any issues in reading the file data
      */
-    String retrieveClob( File aFile ) throws IOException;
+    String retrieveClobFromFile( File aFile ) throws IOException;
+
+    /**
+     * This method will retrieve a file from a persistence layer on
+     * the classpath
+     * 
+     * @param aResource
+     *            the resource to retrieve
+     * @return the String representation of the resource
+     * @throws IOException
+     *             if there are any issues in reading the file
+     */
+    String retrieveClobFromResource( String aResource ) throws IOException;
 
 }

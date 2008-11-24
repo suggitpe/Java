@@ -14,7 +14,7 @@ import java.util.Set;
  * @author suggitpe
  * @version 1.0 22 Sep 2008
  */
-public interface IConnectionStoreDao
+public interface IConnectionStore
 {
 
     /**

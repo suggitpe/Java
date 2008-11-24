@@ -53,7 +53,7 @@ public class JaxbXmlConnectionStoreManagerUnitTest
     public void testReadConnectionData() throws ConnectionStoreException, IOException
     {
         // ------- MOCK PREP
-        EasyMock.expect( mFileManagerMock_.retrieveClob( (File) EasyMock.anyObject() ) )
+        EasyMock.expect( mFileManagerMock_.retrieveClobFromFile( (File) EasyMock.anyObject() ) )
             .andReturn( createTestXML() )
             .times( 1 );
 
@@ -84,7 +84,8 @@ public class JaxbXmlConnectionStoreManagerUnitTest
         populateMapWithDetails( in );
 
         // ------- MOCK PREP
-        mFileManagerMock_.persistClob( (String) EasyMock.anyObject(), (File) EasyMock.anyObject() );
+        mFileManagerMock_.persistClobToFile( (String) EasyMock.anyObject(),
+                                             (File) EasyMock.anyObject() );
         EasyMock.expectLastCall().times( 1 );
 
         // ------- MOCK LOAD
@@ -115,7 +116,8 @@ public class JaxbXmlConnectionStoreManagerUnitTest
         Map<String, ConnectionDetails> in = new HashMap<String, ConnectionDetails>();
 
         // ------- MOCK PREP
-        mFileManagerMock_.persistClob( (String) EasyMock.anyObject(), (File) EasyMock.anyObject() );
+        mFileManagerMock_.persistClobToFile( (String) EasyMock.anyObject(),
+                                             (File) EasyMock.anyObject() );
         EasyMock.expectLastCall().times( 1 );
 
         // ------- MOCK LOAD

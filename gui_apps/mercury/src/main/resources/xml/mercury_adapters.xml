@@ -8,8 +8,8 @@
     <bean id="adapterList" class="java.util.HashMap">
         <constructor-arg>
             <map>
-                <entry key="IBM_MQ" value-ref="ibmMqAdapter"/>
-                <entry key="TIBCO_EMS" value-ref="tibcoEmsAdapter"/>
+                <entry key="${ibm_mq.adapter.name}" value-ref="ibmMqAdapter"/>
+                <entry key="${tibco_ems.name}" value-ref="tibcoEmsAdapter"/>
             </map>
         </constructor-arg>
     </bean>

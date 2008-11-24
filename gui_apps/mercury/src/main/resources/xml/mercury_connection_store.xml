@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- Copyright 2008 suggs.org -->
+<beans>
+
+	<!--  Main connection store dao -->
+	<bean id="connectionStoreManager"
+		class="org.suggs.apps.mercury.model.connection.connectionstore.xmldao.XmlConnectionStoreDao">
+		<property name="connectionStoreManager" ref="connStrCache" />
+	</bean>
+
+	<!-- XML Connection store cache -->
+	<bean id="connStrCache"
+		class="org.suggs.apps.mercury.model.connection.connectionstore.xmldao.impl.CachedXmlConnectionStoreManagerDecorator">
+		<property name="connectionStoreManager" ref="connStr"/>
+	</bean>
+
+	<!-- xml connection store -->
+	<bean id="connStr"
+		class="org.suggs.apps.mercury.model.connection.connectionstore.xmldao.impl.JaxbXmlConnectionStoreManager">
+		<property name="persistentFile" value="${mercury.home}/${connection.store.file}"/>
+		<property name="fileManager" ref="fileMgr"/>
+	</bean>
+	
+	<!-- file manager -->
+	<bean id="fileMgr" class="org.suggs.apps.mercury.model.util.impl.FileManager"/>
+
+</beans>

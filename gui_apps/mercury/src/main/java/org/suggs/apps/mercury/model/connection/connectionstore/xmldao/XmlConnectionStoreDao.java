@@ -6,7 +6,7 @@ package org.suggs.apps.mercury.model.connection.connectionstore.xmldao;
 
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
-import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreDao;
+import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -25,7 +25,7 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 22 Sep 2008
  */
-public class XmlConnectionStoreDao implements IConnectionStoreDao, InitializingBean
+public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
 {
 
     private static final Log LOG = LogFactory.getLog( XmlConnectionStoreDao.class );
@@ -41,7 +41,7 @@ public class XmlConnectionStoreDao implements IConnectionStoreDao, InitializingB
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreDao#deleteNamedConnection(java.lang.String)
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#deleteNamedConnection(java.lang.String)
      */
     public void deleteNamedConnection( String name ) throws ConnectionStoreException
     {
@@ -68,16 +68,20 @@ public class XmlConnectionStoreDao implements IConnectionStoreDao, InitializingB
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreDao#doesConnectionExist(java.lang.String)
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#doesConnectionExist(java.lang.String)
      */
     public boolean doesConnectionExist( String connectionName )
     {
         try
         {
             Map<String, ConnectionDetails> conns = mXmlStore_.readConnectionData();
-            if ( conns.containsKey( connectionName ) )
+            // we want to check ignoring the case
+            for ( String s : conns.keySet() )
             {
-                return true;
+                if ( connectionName.equalsIgnoreCase( s ) )
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -91,7 +95,7 @@ public class XmlConnectionStoreDao implements IConnectionStoreDao, InitializingB
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreDao#getListOfKnownConnectionNames()
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#getListOfKnownConnectionNames()
      */
     public Set<String> getListOfKnownConnectionNames()
     {
@@ -109,7 +113,7 @@ public class XmlConnectionStoreDao implements IConnectionStoreDao, InitializingB
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreDao#loadConnectionParameters(java.lang.String)
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#loadConnectionParameters(java.lang.String)
      */
     public ConnectionDetails loadConnectionParameters( String name )
                     throws ConnectionStoreException
@@ -124,7 +128,7 @@ public class XmlConnectionStoreDao implements IConnectionStoreDao, InitializingB
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreDao#saveConnectionParameters(java.lang.String,
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#saveConnectionParameters(java.lang.String,
      *      org.suggs.apps.mercury.model.connection.ConnectionDetails)
      */
     public void saveConnectionParameters( String name, ConnectionDetails details )

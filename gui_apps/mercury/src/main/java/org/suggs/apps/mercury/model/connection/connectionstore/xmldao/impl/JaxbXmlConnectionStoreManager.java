@@ -47,12 +47,10 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
 
     private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManager.class );
 
-    private static final String MERCURY_HOME_DIR = System.getProperty( "user.home" ) + "/.mercury";
-    private static final File MERCURY_FILE = new File( MERCURY_HOME_DIR + "/connectionStore.xml" );
-
     private IFileManager mFileManager_ = null;
     private static JAXBContext mJaxbContext_ = null;
     private Schema mSchemaCache_;
+    private String mPersistentFile_;
 
     static
     {
@@ -77,6 +75,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     public void afterPropertiesSet() throws Exception
     {
         Assert.notNull( mFileManager_, "The file manager cannot be null, this needs to be injected" );
+        Assert.notNull( mPersistentFile_, "The name of the persisten file cannot be null" );
     }
 
     /**
@@ -88,7 +87,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
         String xmlClob = null;
         try
         {
-            xmlClob = mFileManager_.retrieveClob( new File( MERCURY_HOME_DIR + MERCURY_FILE ) );
+            xmlClob = mFileManager_.retrieveClobFromFile( new File( mPersistentFile_ ) );
         }
         catch ( IOException ioe )
         {
@@ -151,7 +150,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
 
         if ( connStr.getConnection().size() == 0 )
         {
-            LOG.warn( "Have pased XML but cannot find any valid connections within: returning an empty connection store (either this is first time use or the connection store xml is corrupt in some way)" );
+            LOG.warn( "Have parsed connection store XML but cannot find any valid connections within: returning an empty connection store (either this is first time use or the connection store xml is corrupt in some way)" );
         }
 
         return JaxbXmlConnectionStoreManagerHelper.createDetailsFromConnection( connStr );
@@ -198,8 +197,8 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
         // now we need to persist the xml clob
         try
         {
-            LOG.debug( "Persisting XML:\n" + xmlClob );
-            mFileManager_.persistClob( xmlClob, new File( MERCURY_HOME_DIR + MERCURY_FILE ) );
+            LOG.debug( "Persisting XML of length [" + xmlClob.length() + "]" );
+            mFileManager_.persistClobToFile( xmlClob, new File( mPersistentFile_ ) );
         }
         catch ( IOException ioe )
         {
@@ -226,6 +225,17 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     public IFileManager getFileManager()
     {
         return mFileManager_;
+    }
+
+    /**
+     * Setter for the persistent filename to set
+     * 
+     * @param aFilename
+     *            the name of the persistent file
+     */
+    public void setPersistentFile( String aFilename )
+    {
+        mPersistentFile_ = aFilename;
     }
 
 }

@@ -6,6 +6,7 @@ package org.suggs.apps.mercury.view.wizards.createconnection.pages;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.IWizardPage;
+import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -70,6 +71,7 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
         {
             return getWizard().getPage( IbmMqConnectionDataPage.PAGE_NAME );
         }
+        ( (WizardPage) getWizard().getPage( IbmMqConnectionDataPage.PAGE_NAME ) ).setPageComplete( true );
         return getWizard().getPage( ConnectionDataSummaryPage.PAGE_NAME );
 
     }

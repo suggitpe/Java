@@ -71,7 +71,7 @@ public class CachedXmlConnectionStoreManagerDecorator
      * 
      * @return the connection store manager
      */
-    public IXmlConnectionStoreManager getXmlConnectionStoreManager()
+    public IXmlConnectionStoreManager getConnectionStoreManager()
     {
         return mXmlConnectionStoreManager_;
     }
@@ -82,7 +82,7 @@ public class CachedXmlConnectionStoreManagerDecorator
      * @param connStrManager
      *            the connection store manager to set
      */
-    public void setXmlConnectionStoreManager( IXmlConnectionStoreManager connStrManager )
+    public void setConnectionStoreManager( IXmlConnectionStoreManager connStrManager )
     {
         mXmlConnectionStoreManager_ = connStrManager;
     }

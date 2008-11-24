@@ -4,9 +4,14 @@
  */
 package org.suggs.apps.mercury;
 
+import org.suggs.apps.mercury.model.util.IFileManager;
 import org.suggs.apps.mercury.model.util.ImageManager;
+import org.suggs.apps.mercury.model.util.impl.FileManager;
 import org.suggs.apps.mercury.view.IMenuFactory;
 import org.suggs.apps.mercury.view.IToolBarFactory;
+
+import java.io.File;
+import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -67,7 +72,6 @@ public class MercuryMain extends ApplicationWindow
     {
         IMenuFactory fact = (IMenuFactory) ContextProvider.instance().getBean( "menuFactory" );
         return fact.createMenuManager( "MAIN" );
-
     }
 
     /**
@@ -79,6 +83,53 @@ public class MercuryMain extends ApplicationWindow
         IToolBarFactory fact = (IToolBarFactory) ContextProvider.instance()
             .getBean( "toolBarFactory" );
         return fact.createToolbar( "MAIN", style );
+    }
+
+    /**
+     * This method is used to initialise the users file system
+     * correctly. If there are no default files set up then this
+     * method will initialise them.
+     */
+    protected static void setupFileSystem()
+    {
+        LOG.debug( "Checking that the file system is correctly set up" );
+
+        String dir = System.getProperty( "user.home" ) + "/.mercury";
+        File c = new File( dir + "/connectionStore.xml" );
+        File ctx = new File( dir + "/context.properties" );
+
+        IFileManager fm = new FileManager();
+
+        if ( !c.exists() )
+        {
+            LOG.info( "Creating default connectionStore xml file" );
+            try
+            {
+                String storeXml = fm.retrieveClobFromResource( "default_config/connection_store_default.xml" );
+                fm.persistClobToFile( storeXml, c );
+            }
+            catch ( IOException ioe )
+            {
+                throw new IllegalStateException( "Failed to create default connection store file for Mercury",
+                                                 ioe );
+            }
+        }
+
+        // this creates the basic
+        if ( !ctx.exists() )
+        {
+            LOG.info( "Creating default context.properties file" );
+            try
+            {
+                String ctxProps = fm.retrieveClobFromResource( "default_config/context_default.properties" );
+                fm.persistClobToFile( ctxProps, ctx );
+            }
+            catch ( IOException ioe )
+            {
+                throw new IllegalStateException( "Failed to create default context.properties for Mercury",
+                                                 ioe );
+            }
+        }
     }
 
     /**
@@ -98,6 +149,10 @@ public class MercuryMain extends ApplicationWindow
             LOG.debug( "*************************************" );
         }
 
+        // this mut be done first so it can set up the file system
+        MercuryMain.setupFileSystem();
+
+        // this then kicks everything off
         MercuryMain m = new MercuryMain();
         m.setBlockOnOpen( true );
         m.open();

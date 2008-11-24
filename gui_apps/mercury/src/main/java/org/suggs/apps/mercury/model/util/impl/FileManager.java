@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
@@ -32,7 +34,7 @@ public class FileManager implements IFileManager
     /**
      * @see org.suggs.apps.mercury.model.util.IFileManager#retrieveClob(java.io.File)
      */
-    public String retrieveClob( File file ) throws IOException
+    public final String retrieveClobFromFile( File file ) throws IOException
     {
         FileInputStream fis = null;
         FileChannel chan = null;
@@ -53,6 +55,37 @@ public class FileManager implements IFileManager
     }
 
     /**
+     * @see org.suggs.apps.mercury.model.util.IFileManager#retrieveClobFromResource(java.lang.String)
+     */
+    public String retrieveClobFromResource( String resource ) throws IOException
+    {
+        InputStream is = null;
+        StringWriter w = new StringWriter();
+        String ret = null;
+        try
+        {
+            is = getClass().getClassLoader().getResourceAsStream( resource );
+            if ( is == null )
+            {
+                throw new IOException( "Failed to retrieve data from resource [" + resource + "]" );
+            }
+
+            for ( int i = is.read(); i != -1; i = is.read() )
+            {
+                w.write( i );
+            }
+            ret = w.toString();
+        }
+        finally
+        {
+            is.close();
+            w.close();
+        }
+
+        return ret;
+    }
+
+    /**
      * Persist CLOB data to the underlying persistence layer
      * 
      * @param aClob
@@ -62,7 +95,7 @@ public class FileManager implements IFileManager
      * @throws IOException
      *             if there are any issues in the persistence
      */
-    public final void persistClob( String aClob, File aFile ) throws IOException
+    public final void persistClobToFile( String aClob, File aFile ) throws IOException
     {
         // first ensure that the persistence layer is OK to use
         verifyPersistenceLayer( aFile );
@@ -72,8 +105,7 @@ public class FileManager implements IFileManager
         FileChannel chan = null;
         try
         {
-            LOG.debug( "Overwriting existing xml persistence layer with new file at ["
-                       + aFile.getCanonicalPath() + "]" );
+            LOG.debug( "Creating new file at [" + aFile.getCanonicalPath() + "]" );
             out = new FileOutputStream( aFile );
             chan = out.getChannel();
             int xmlSize = aClob.getBytes().length;
@@ -125,20 +157,18 @@ public class FileManager implements IFileManager
 
         if ( !( dir.exists() ) )
         {
-            LOG.warn( "Persistence dir does not exist ... assuming first application execution" );
-            LOG.info( "Creating persistence dir [" + dir.getAbsolutePath() + "]" );
+            LOG.info( "Creating directory [" + dir.getAbsolutePath() + "]" );
             if ( !( dir.mkdir() ) )
             {
-                throw new IOException( "Failed to create persistence directory ["
-                                       + aFile.getAbsolutePath() + "]" );
+                throw new IOException( "Failed to create directory [" + aFile.getAbsolutePath()
+                                       + "]" );
             }
         }
         else
         {
             if ( !( dir.isDirectory() ) || !( dir.canWrite() ) )
             {
-                String err = "Cannot write to the persistence directory ["
-                             + aFile.getAbsolutePath() + "]";
+                String err = "Cannot write to the directory [" + aFile.getAbsolutePath() + "]";
                 LOG.error( err );
                 throw new IOException( err );
             }
@@ -153,13 +183,13 @@ public class FileManager implements IFileManager
         {
             if ( !( aFile.isFile() ) || !( aFile.canWrite() ) )
             {
-                String err = "Cannot write to persistence file [" + aFile.getAbsolutePath() + "]";
+                String err = "Cannot write to file [" + aFile.getAbsolutePath() + "]";
                 LOG.error( err );
                 throw new IOException( err );
             }
         }
 
-        LOG.debug( "Persistence file correctly set up" );
+        LOG.debug( "File correctly set up" );
     }
 
     /**

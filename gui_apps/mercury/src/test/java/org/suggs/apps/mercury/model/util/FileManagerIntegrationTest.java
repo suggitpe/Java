@@ -85,7 +85,7 @@ public class FileManagerIntegrationTest
     @Test
     public void testCorrectlyWriteFile() throws IOException
     {
-        mFileManager_.persistClob( DUMMY_CLOB, new File( TEST_DIR + "/" + TEST_FILE ) );
+        mFileManager_.persistClobToFile( DUMMY_CLOB, new File( TEST_DIR + "/" + TEST_FILE ) );
         File file = new File( TEST_DIR + "/" + TEST_FILE );
         Assert.assertTrue( file.exists() );
     }
@@ -102,7 +102,7 @@ public class FileManagerIntegrationTest
     public void testFileTooCloseToRoot() throws IOException
     {
         String err = "";
-        mFileManager_.persistClob( DUMMY_CLOB, new File( TEST_ROOT + "/" + TEST_FILE ) );
+        mFileManager_.persistClobToFile( DUMMY_CLOB, new File( TEST_ROOT + "/" + TEST_FILE ) );
         LOG.error( err );
         Assert.fail( err );
     }
@@ -137,7 +137,7 @@ public class FileManagerIntegrationTest
             Assert.fail( "Failed to set the file to read only" );
         }
 
-        mFileManager_.persistClob( DUMMY_CLOB, new File( TEST_DIR + "/" + TEST_FILE ) );
+        mFileManager_.persistClobToFile( DUMMY_CLOB, new File( TEST_DIR + "/" + TEST_FILE ) );
         String err1 = "No IOException was thrown from persistClob call";
         LOG.error( err1 );
         Assert.fail( err1 );
@@ -159,8 +159,8 @@ public class FileManagerIntegrationTest
 
         String data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<test></test>";
 
-        mFileManager_.persistClob( data, new File( file ) );
-        String compareWith = mFileManager_.retrieveClob( new File( file ) );
+        mFileManager_.persistClobToFile( data, new File( file ) );
+        String compareWith = mFileManager_.retrieveClobFromFile( new File( file ) );
 
         Assert.assertEquals( data, compareWith );
     }

@@ -32,6 +32,7 @@ public class CreateConnectionWizard extends Wizard
 {
 
     private static final Log LOG = LogFactory.getLog( CreateConnectionWizard.class );
+    private ConnectionDetails mConnDetails_;
 
     public static final String CONN_NAME = "Connection Name";
     public static final String CONN_TYPE = "Connection Type";
@@ -96,6 +97,8 @@ public class CreateConnectionWizard extends Wizard
             LOG.debug( "In finish with: " + dtls.toString() );
         }
 
+        mConnDetails_ = createConnectionDetails();
+
         // now we can put them into the store and lt the store manage
         // the persistence for us
 
@@ -143,7 +146,7 @@ public class CreateConnectionWizard extends Wizard
      * 
      * @return
      */
-    public ConnectionDetails createConnectionDetails()
+    private ConnectionDetails createConnectionDetails()
     {
         LOG.debug( "Building connection details from page data" );
         Map<String, String> map = getConnectionData();
@@ -194,6 +197,16 @@ public class CreateConnectionWizard extends Wizard
     {
         LOG.debug( "Cancelled from create connection wizard" );
         return true;
+    }
+
+    /**
+     * Getter for the connection details
+     * 
+     * @return the connection details created in the wizard
+     */
+    public ConnectionDetails getConnectionDetails()
+    {
+        return mConnDetails_;
     }
 
 }

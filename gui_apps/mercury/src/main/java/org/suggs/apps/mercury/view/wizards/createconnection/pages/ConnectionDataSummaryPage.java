@@ -161,7 +161,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
                 @Override
                 public void widgetSelected( SelectionEvent e )
                 {
-                    ConnectionDetails dtls = ( (CreateConnectionWizard) getWizard() ).createConnectionDetails();
+                    ConnectionDetails dtls = ( (CreateConnectionWizard) getWizard() ).getConnectionDetails();
                     LOG.debug( "Testing connection with connection details [" + dtls + "]" );
                 }
             } );

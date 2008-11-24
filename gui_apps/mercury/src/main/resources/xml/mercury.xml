@@ -3,23 +3,32 @@
 <!-- Copyright 2008 suggs.org -->
 <beans>
 
-    <import resource="classpath:xml/mercury_actions.xml"  />
-    <import resource="classpath:xml/mercury_adapters.xml"  />
-    
-    <bean id="mercuryVersion" class="java.lang.String">
-        <constructor-arg type="java.lang.String" value="1.0"/>
-    </bean>
-    
-    <bean id="menuFactory" class="org.suggs.apps.mercury.view.factories.MenuFactory">
-        <property name="actionManager" ref="actionManager"/>
-    </bean>
-    
-    <bean id="toolBarFactory" class="org.suggs.apps.mercury.view.factories.ToolBarFactory">
-        <property name="actionManager" ref="actionManager"/>
-    </bean>
-    
-    <bean id="actionManager" class="org.suggs.apps.mercury.view.actions.ActionManager">
-        <property name="actionMap" ref="mercuryActionMap"/>
-    </bean>
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="file:${user.home}/.mercury/context.properties"/>
+	</bean>
+
+	<import resource="classpath:xml/mercury_actions.xml" />
+	<import resource="classpath:xml/mercury_adapters.xml" />
+	<import resource="classpath:xml/mercury_connection_store.xml" />
+
+	<bean id="mercuryVersion" class="java.lang.String">
+		<constructor-arg type="java.lang.String" value="${mercury.version}" />
+	</bean>
+
+	<bean id="menuFactory"
+		class="org.suggs.apps.mercury.view.factories.MenuFactory">
+		<property name="actionManager" ref="actionManager" />
+	</bean>
+
+	<bean id="toolBarFactory"
+		class="org.suggs.apps.mercury.view.factories.ToolBarFactory">
+		<property name="actionManager" ref="actionManager" />
+	</bean>
+
+	<bean id="actionManager"
+		class="org.suggs.apps.mercury.view.actions.ActionManager">
+		<property name="actionMap" ref="mercuryActionMap" />
+	</bean>
 
 </beans>
