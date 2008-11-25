@@ -30,6 +30,7 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
     private static final Log LOG = LogFactory.getLog( ToolBarFactory.class );
 
     private IActionManager mActionManager_;
+    private boolean mShowToolbar_;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -51,6 +52,11 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
             LOG.debug( "Constructing toolbar manager for type [" + toolBarType + "]" );
         }
 
+        if ( !mShowToolbar_ )
+        {
+            return null;
+        }
+
         if ( toolBarType.equals( "MAIN" ) )
         {
             return buildMainToolbar( style );
@@ -68,11 +74,12 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
      */
     private final ToolBarManager buildMainToolbar( int style )
     {
+        ToolBarManager main = new ToolBarManager( style );
+
         // get action manager factory
         ActionManager mgr = (ActionManager) ContextProvider.instance()
             .getBean( ActionManager.BEAN_NAME );
 
-        ToolBarManager main = new ToolBarManager( style );
         main.add( mgr.getAction( "CONNECTION_WIZARD" ) );
 
         return main;
@@ -87,6 +94,17 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
     public void setActionManager( IActionManager actionManager )
     {
         mActionManager_ = actionManager;
+    }
+
+    /**
+     * Setter for showing the toolbar
+     * 
+     * @param showToolbar
+     *            flag to set the toolbar switch
+     */
+    public void setShowToolbar( boolean showToolbar )
+    {
+        mShowToolbar_ = showToolbar;
     }
 
 }

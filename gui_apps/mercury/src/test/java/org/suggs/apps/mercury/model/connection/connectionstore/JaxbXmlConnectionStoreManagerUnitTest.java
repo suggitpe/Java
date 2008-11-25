@@ -42,6 +42,8 @@ public class JaxbXmlConnectionStoreManagerUnitTest
         mManager_ = new JaxbXmlConnectionStoreManager();
         mFileManagerMock_ = EasyMock.createStrictMock( IFileManager.class );
         mManager_.setFileManager( mFileManagerMock_ );
+        mManager_.setPersistentFile( "no care" );
+        mManager_.afterPropertiesSet();
     }
 
     /**

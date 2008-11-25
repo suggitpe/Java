@@ -9,6 +9,7 @@ import org.suggs.apps.mercury.model.util.ImageManager;
 import org.suggs.apps.mercury.model.util.impl.FileManager;
 import org.suggs.apps.mercury.view.IMenuFactory;
 import org.suggs.apps.mercury.view.IToolBarFactory;
+import org.suggs.apps.mercury.view.panels.MainWindow;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,8 +60,10 @@ public class MercuryMain extends ApplicationWindow
         getShell().setImage( new Image( getShell().getDisplay(),
                                         ImageManager.getImageStream( getClass().getClassLoader(),
                                                                      ImageManager.IMAGE_MERCURY ) ) );
+
+        new MainWindow( parent );
+
         // remove this
-        parent.setSize( 400, 200 );
         return parent;
     }
 

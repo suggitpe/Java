@@ -5,7 +5,6 @@
 package org.suggs.apps.mercury.model.connection.connectionstore;
 
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
-import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.XmlConnectionStoreDao;
 
@@ -227,11 +226,11 @@ public class XmlConnectionStoreDaoUnitTest
     public void testDoesValidConnectionExist() throws ConnectionStoreException
     {
         final String FIND_ME = "find_me";
+        final Set<String> set = new HashSet<String>();
+        set.add( FIND_ME );
         // ------- MOCK PREP
         EasyMock.expect( mMock_.readConnectionData() ).andReturn( mMapMock_ ).times( 1 );
-        EasyMock.expect( new Boolean( mMapMock_.containsKey( FIND_ME ) ) )
-            .andReturn( new Boolean( true ) )
-            .times( 1 );
+        EasyMock.expect( mMapMock_.keySet() ).andReturn( set ).times( 1 );
 
         // ------- MOCK LOAD
         EasyMock.replay( mMock_ );
@@ -263,11 +262,11 @@ public class XmlConnectionStoreDaoUnitTest
     public void testDoesInvalidConnectionExist() throws ConnectionStoreException
     {
         final String DONT_FIND_ME = "dont_find_me";
+        final Set<String> set = new HashSet<String>();
+        set.add( "hahhahahahaha" );
         // ------- MOCK PREP
         EasyMock.expect( mMock_.readConnectionData() ).andReturn( mMapMock_ ).times( 1 );
-        EasyMock.expect( new Boolean( mMapMock_.containsKey( DONT_FIND_ME ) ) )
-            .andReturn( new Boolean( false ) )
-            .times( 1 );
+        EasyMock.expect( mMapMock_.keySet() ).andReturn( set ).times( 1 );
 
         // ------- MOCK LOAD
         EasyMock.replay( mMock_ );
