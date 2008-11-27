@@ -6,7 +6,7 @@ package org.suggs.apps.mercury.model.connection.connectionstore;
 
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.impl.JaxbXmlConnectionStoreManager;
-import org.suggs.apps.mercury.model.util.IFileManager;
+import org.suggs.apps.mercury.model.util.file.IFileManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -201,16 +201,6 @@ public class JaxbXmlConnectionStoreManagerUnitTest
 
         d1.setSecurityDetails( "username", "password" );
 
-        d1.addConnectionFactory( "Topic", "TopicConnFact1" );
-        d1.addConnectionFactory( "Topic", "TopicConnFact2" );
-        d1.addConnectionFactory( "Queue", "QueueConnFact1" );
-        d1.addConnectionFactory( "Generic", "GenericConnFact1" );
-
-        d1.addDestination( "Topic", "TopicDest1" );
-        d1.addDestination( "Topic", "TopicDest2" );
-        d1.addDestination( "Topic", "TopicDest3" );
-        d1.addDestination( "Generic", "GenericDest1" );
-
         ConnectionDetails d2 = new ConnectionDetails( "CONN_2" );
         d2.setPort( 456 );
         d2.setHostname( "pgdsx02.org.suggs.uk" );
@@ -236,16 +226,12 @@ public class JaxbXmlConnectionStoreManagerUnitTest
         ret.append( "<connection type=\"TEST_TYPE\" name=\"CONN_1\">\n" )
             .append( " <hostname>pgdsx01.org.suggs.uk</hostname>" )
             .append( "<port>123</port>\n" )
-            .append( "<connectionFactories/>\n" )
-            .append( "<destinations/>\n" )
-            .append( "<metadata/>\n" )
+            .append( "<connectiondataitems/>\n" )
             .append( "</connection>\n" );
         ret.append( "<connection type=\"TEST_TYPE\" name=\"CONN_2\">\n" )
             .append( " <hostname>pgdsx02.org.suggs.uk</hostname>" )
             .append( "<port>456</port>\n" )
-            .append( "<connectionFactories/>\n" )
-            .append( "<destinations/>\n" )
-            .append( "<metadata/>\n" )
+            .append( "<connectiondataitems/>\n" )
             .append( "</connection>\n" );
         ret.append( "</connectionStore>" );
         return ret.toString();

@@ -2,7 +2,7 @@
  * IMercuryXmlFilePersister.java created on 3 Oct 2008 18:48:46 by suggitpe for project GUI - Mercury
  * 
  */
-package org.suggs.apps.mercury.model.util;
+package org.suggs.apps.mercury.model.util.file;
 
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 

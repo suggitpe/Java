@@ -7,7 +7,7 @@ package org.suggs.apps.mercury.view.wizards.createconnection;
 import org.suggs.apps.mercury.model.adapters.ibmmq.IbmMqAdapter;
 import org.suggs.apps.mercury.model.connection.ConnectionDataException;
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
-import org.suggs.apps.mercury.model.util.ImageManager;
+import org.suggs.apps.mercury.model.util.image.ImageManager;
 import org.suggs.apps.mercury.view.wizards.createconnection.pages.ConnectionDataSummaryPage;
 import org.suggs.apps.mercury.view.wizards.createconnection.pages.GenericConnectionDetailsPage;
 import org.suggs.apps.mercury.view.wizards.createconnection.pages.IbmMqConnectionDataPage;
@@ -178,7 +178,7 @@ public class CreateConnectionWizard extends Wizard
         {
             try
             {
-                dtls.addMetaDataItem( ConnectionDetails.META_CHANNEL, map.get( CONN_CHANNEL ) );
+                dtls.addConnectionDataItem( ConnectionDetails.META_CHANNEL, map.get( CONN_CHANNEL ) );
             }
             catch ( ConnectionDataException cde )
             {

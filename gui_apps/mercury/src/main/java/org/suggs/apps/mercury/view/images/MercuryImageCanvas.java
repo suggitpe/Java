@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.view.images;
 
-import org.suggs.apps.mercury.model.util.ImageManager;
+import org.suggs.apps.mercury.model.util.image.ImageManager;
 
 import java.io.InputStream;
 

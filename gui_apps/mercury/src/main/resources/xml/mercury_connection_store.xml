@@ -3,6 +3,10 @@
 <!-- Copyright 2008 suggs.org -->
 <beans>
 
+    <bean id="connStoreFile" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="${mercury.home}/${connection.store.file}"/>
+    </bean>
+
 	<!--  Main connection store dao -->
 	<bean id="connectionStoreManager"
 		class="org.suggs.apps.mercury.model.connection.connectionstore.xmldao.XmlConnectionStoreDao">
@@ -18,11 +22,11 @@
 	<!-- xml connection store -->
 	<bean id="connStr"
 		class="org.suggs.apps.mercury.model.connection.connectionstore.xmldao.impl.JaxbXmlConnectionStoreManager">
-		<property name="persistentFile" value="${mercury.home}/${connection.store.file}"/>
+		<property name="persistentFile" ref="connStoreFile"/>
 		<property name="fileManager" ref="fileMgr"/>
 	</bean>
 	
 	<!-- file manager -->
-	<bean id="fileMgr" class="org.suggs.apps.mercury.model.util.impl.FileManager"/>
+	<bean id="fileMgr" class="org.suggs.apps.mercury.model.util.file.impl.FileManager"/>
 
 </beans>

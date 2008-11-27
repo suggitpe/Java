@@ -2,9 +2,9 @@
  * MercuryFilePersister.java created on 3 Oct 2008 18:49:23 by suggitpe for project GUI - Mercury
  * 
  */
-package org.suggs.apps.mercury.model.util.impl;
+package org.suggs.apps.mercury.model.util.file.impl;
 
-import org.suggs.apps.mercury.model.util.IFileManager;
+import org.suggs.apps.mercury.model.util.file.IFileManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +32,7 @@ public class FileManager implements IFileManager
     private static final String CHARSET = "UTF-8";
 
     /**
-     * @see org.suggs.apps.mercury.model.util.IFileManager#retrieveClob(java.io.File)
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClob(java.io.File)
      */
     public final String retrieveClobFromFile( File file ) throws IOException
     {
@@ -55,7 +55,7 @@ public class FileManager implements IFileManager
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.util.IFileManager#retrieveClobFromResource(java.lang.String)
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClobFromResource(java.lang.String)
      */
     public String retrieveClobFromResource( String resource ) throws IOException
     {

@@ -4,9 +4,9 @@
  */
 package org.suggs.apps.mercury;
 
-import org.suggs.apps.mercury.model.util.IFileManager;
-import org.suggs.apps.mercury.model.util.ImageManager;
-import org.suggs.apps.mercury.model.util.impl.FileManager;
+import org.suggs.apps.mercury.model.util.file.IFileManager;
+import org.suggs.apps.mercury.model.util.file.impl.FileManager;
+import org.suggs.apps.mercury.model.util.image.ImageManager;
 import org.suggs.apps.mercury.view.IMenuFactory;
 import org.suggs.apps.mercury.view.IToolBarFactory;
 import org.suggs.apps.mercury.view.panels.MainWindow;

@@ -4,7 +4,8 @@
  */
 package org.suggs.apps.mercury.model.util;
 
-import org.suggs.apps.mercury.model.util.impl.FileManager;
+import org.suggs.apps.mercury.model.util.file.IFileManager;
+import org.suggs.apps.mercury.model.util.file.impl.FileManager;
 
 import java.io.File;
 import java.io.IOException;

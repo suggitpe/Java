@@ -5,9 +5,7 @@
 package org.suggs.apps.mercury.model.connection;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * A bean to represent the connection details.
@@ -27,9 +25,7 @@ public class ConnectionDetails
     private boolean mIsSecurityEnabled_;
     private String mUsername_;
     private String mPassword_;
-    private Map<String, String> mMetaData_ = new HashMap<String, String>();
-    private Map<String, Set<String>> mConnectionFactories_ = new HashMap<String, Set<String>>();
-    private Map<String, Set<String>> mDestinations_ = new HashMap<String, Set<String>>();
+    private Map<String, String> mConnectionData_ = new HashMap<String, String>();
 
     /**
      * Constructs a new instance.
@@ -90,13 +86,13 @@ public class ConnectionDetails
      *            additional connection metadata
      */
     public ConnectionDetails( String aName, String aType, String aHostname, int aPort,
-                              Map<String, String> aMetaData )
+                              Map<String, String> aConnData )
     {
         mName_ = aName;
         mType_ = aType;
         mHostName_ = aHostname;
         mPort_ = aPort;
-        mMetaData_ = aMetaData;
+        mConnectionData_ = aConnData;
     }
 
     /**
@@ -115,26 +111,8 @@ public class ConnectionDetails
             boolean ret = true;
             ConnectionDetails rhs = (ConnectionDetails) other;
             if ( mName_.equals( rhs.mName_ ) && mType_.equals( rhs.mType_ )
-                 && mHostName_.equals( rhs.mHostName_ ) && mPort_ == rhs.mPort_
-                 && mConnectionFactories_.size() == rhs.mConnectionFactories_.size()
-                 && mDestinations_.size() == rhs.mDestinations_.size() )
+                 && mHostName_.equals( rhs.mHostName_ ) && mPort_ == rhs.mPort_ )
             {
-                for ( String s : mConnectionFactories_.keySet() )
-                {
-                    if ( !mConnectionFactories_.get( s )
-                        .equals( rhs.mConnectionFactories_.get( s ) ) )
-                    {
-                        ret = false;
-                    }
-                }
-
-                for ( String s : mDestinations_.keySet() )
-                {
-                    if ( !mDestinations_.get( s ).equals( rhs.mDestinations_.get( s ) ) )
-                    {
-                        ret = false;
-                    }
-                }
                 return ret;
             }
         }
@@ -155,9 +133,9 @@ public class ConnectionDetails
             .append( mHostName_ )
             .append( "], port=[" )
             .append( mPort_ );
-        for ( String s : mMetaData_.keySet() )
+        for ( String s : mConnectionData_.keySet() )
         {
-            buff.append( "], " ).append( s ).append( "=[" ).append( mMetaData_.get( s ) );
+            buff.append( "], " ).append( s ).append( "=[" ).append( mConnectionData_.get( s ) );
         }
         buff.append( "]" );
 
@@ -168,17 +146,6 @@ public class ConnectionDetails
             buff.append( ", username=[" ).append( mUsername_ ).append( "], password=[*****]" );
         }
 
-        buff.append( ", ConnectionFactories: " );
-        for ( String s : mConnectionFactories_.keySet() )
-        {
-            buff.append( s ).append( "={" ).append( mConnectionFactories_.get( s ) ).append( "} " );
-        }
-
-        buff.append( ", Destinations:" );
-        for ( String s : mDestinations_.keySet() )
-        {
-            buff.append( s ).append( "={" ).append( mDestinations_.get( s ) ).append( "} " );
-        }
         return buff.toString();
     }
 
@@ -383,9 +350,9 @@ public class ConnectionDetails
      * 
      * @return the metadata map
      */
-    public Map<String, String> getMetaData()
+    public Map<String, String> getConnectionData()
     {
-        return mMetaData_;
+        return mConnectionData_;
     }
 
     /**
@@ -394,9 +361,9 @@ public class ConnectionDetails
      * @param aMap
      *            the map of metadata to set
      */
-    public void setMetaData( Map<String, String> aMap )
+    public void setConnectionData( Map<String, String> aMap )
     {
-        mMetaData_ = aMap;
+        mConnectionData_ = aMap;
     }
 
     /**
@@ -409,94 +376,14 @@ public class ConnectionDetails
      * @throws ConnectionDataException
      *             if the key already exists
      */
-    public void addMetaDataItem( String key, String value ) throws ConnectionDataException
+    public void addConnectionDataItem( String key, String value ) throws ConnectionDataException
     {
-        if ( mMetaData_.containsKey( key ) )
+        if ( mConnectionData_.containsKey( key ) )
         {
             throw new ConnectionDataException( "Key [" + key + "] already exists in meta data" );
         }
 
-        mMetaData_.put( key, value );
+        mConnectionData_.put( key, value );
     }
 
-    /**
-     * Getter for the connection factories
-     * 
-     * @return the connection factories
-     */
-    public Map<String, Set<String>> getConnectionFactories()
-    {
-        return mConnectionFactories_;
-    }
-
-    /**
-     * Setter for the connection factories member
-     * 
-     * @param aMap
-     *            the map of connection factories
-     */
-    public void setConnectionFactories( Map<String, Set<String>> aMap )
-    {
-        mConnectionFactories_ = aMap;
-    }
-
-    /**
-     * Allows you to add a new connection factory to the bean
-     * 
-     * @param type
-     *            the type of connection factory to use
-     * @param connectionFactory
-     *            the connection factory
-     */
-    public void addConnectionFactory( String type, String connectionFactory )
-    {
-        // if set does not exist then create one
-        if ( !mConnectionFactories_.containsKey( type ) )
-        {
-            mConnectionFactories_.put( type, new HashSet<String>() );
-        }
-
-        // now we are safe to add
-        mConnectionFactories_.get( type ).add( connectionFactory );
-    }
-
-    /**
-     * Getter for the destinations
-     * 
-     * @return the destinations map
-     */
-    public Map<String, Set<String>> getDestinations()
-    {
-        return mDestinations_;
-    }
-
-    /**
-     * Setter for the destinations map
-     * 
-     * @param aMap
-     *            the map of destinations
-     */
-    public void setDestinations( Map<String, Set<String>> aMap )
-    {
-        mDestinations_ = aMap;
-    }
-
-    /**
-     * Allows you to add a new destination to the map of destinations
-     * 
-     * @param type
-     *            the type of destination to add
-     * @param destination
-     */
-    public void addDestination( String type, String destination )
-    {
-        // if set does not exist then create one
-        if ( !mDestinations_.containsKey( type ) )
-        {
-            mDestinations_.put( type, new HashSet<String>() );
-        }
-
-        // now we are safe to add
-        mDestinations_.get( type ).add( destination );
-    }
 }

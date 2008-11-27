@@ -2,7 +2,7 @@
  * ImageManager.java created on 20 Oct 2008 18:57:59 by suggitpe for project GUI - Mercury
  * 
  */
-package org.suggs.apps.mercury.model.util;
+package org.suggs.apps.mercury.model.util.image;
 
 import java.io.InputStream;
 

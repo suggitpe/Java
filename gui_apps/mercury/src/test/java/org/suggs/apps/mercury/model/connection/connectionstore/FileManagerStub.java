@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.model.connection.connectionstore;
 
-import org.suggs.apps.mercury.model.util.IFileManager;
+import org.suggs.apps.mercury.model.util.file.IFileManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class FileManagerStub implements IFileManager
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.util.IFileManager#persistClob(java.lang.String,
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#persistClob(java.lang.String,
      *      java.io.File)
      */
     public void persistClobToFile( String clob, File file ) throws IOException
@@ -47,7 +47,7 @@ public class FileManagerStub implements IFileManager
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.util.IFileManager#retrieveClob(java.io.File)
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClob(java.io.File)
      */
     public String retrieveClobFromFile( File file ) throws IOException
     {
@@ -56,7 +56,7 @@ public class FileManagerStub implements IFileManager
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.util.IFileManager#retrieveClobFromResource(java.lang.String)
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClobFromResource(java.lang.String)
      */
     public String retrieveClobFromResource( String resource ) throws IOException
     {

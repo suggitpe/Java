@@ -10,7 +10,7 @@ import org.suggs.apps.mercury.connectionstore.ObjectFactory;
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager;
-import org.suggs.apps.mercury.model.util.IFileManager;
+import org.suggs.apps.mercury.model.util.file.IFileManager;
 
 import java.io.File;
 import java.io.IOException;
