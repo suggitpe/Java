@@ -6,6 +6,7 @@ package org.suggs.apps.mercury.model.connection.connectionstore.xmldao.impl;
 
 import org.suggs.apps.mercury.connectionstore.ConnectionDataGroup;
 import org.suggs.apps.mercury.connectionstore.ConnectionDataItemType;
+import org.suggs.apps.mercury.connectionstore.ConnectionParamatersType;
 import org.suggs.apps.mercury.connectionstore.ConnectionSecurityType;
 import org.suggs.apps.mercury.connectionstore.ConnectionStoreType;
 import org.suggs.apps.mercury.connectionstore.ConnectionType;
@@ -63,15 +64,17 @@ public class JaxbXmlConnectionStoreManagerHelper
     {
         ConnectionDetails ret = new ConnectionDetails( connType.getName(),
                                                        connType.getType(),
-                                                       connType.getHostname(),
-                                                       connType.getPort() );
-        if ( connType.isSetSecurity() )
+                                                       connType.getParameters().getHostname(),
+                                                       connType.getParameters().getPort() );
+        if ( connType.getParameters().isSetSecurity() )
         {
-            ret.setSecurityDetails( connType.getSecurity().getUsername(), connType.getSecurity()
-                .getPassword() );
+            ret.setSecurityDetails( connType.getParameters().getSecurity().getUsername(),
+                                    connType.getParameters().getSecurity().getPassword() );
         }
 
-        List<ConnectionDataItemType> cData = connType.getConnectiondataitems().getConnectiondata();
+        List<ConnectionDataItemType> cData = connType.getParameters()
+            .getConnectiondataitems()
+            .getConnectiondata();
         for ( ConnectionDataItemType t : cData )
         {
             try
@@ -102,16 +105,17 @@ public class JaxbXmlConnectionStoreManagerHelper
         ConnectionType ret = factory.createConnectionType();
 
         ret.setName( connDtls.getName() );
-        ret.setHostname( connDtls.getHostname() );
-        ret.setPort( connDtls.getPort() );
         ret.setType( connDtls.getType() );
+        ConnectionParamatersType params = factory.createConnectionParamatersType();
+        params.setHostname( connDtls.getHostname() );
+        params.setPort( connDtls.getPort() );
 
         if ( connDtls.isSecurityEnabled() )
         {
             ConnectionSecurityType t = factory.createConnectionSecurityType();
             t.setUsername( connDtls.getUsername() );
             t.setPassword( connDtls.getPassword() );
-            ret.setSecurity( t );
+            params.setSecurity( t );
         }
 
         ConnectionDataGroup mt = factory.createConnectionDataGroup();
@@ -122,7 +126,9 @@ public class JaxbXmlConnectionStoreManagerHelper
             data.setValue( connDtls.getConnectionData().get( key ) );
             mt.getConnectiondata().add( data );
         }
-        ret.setConnectiondataitems( mt );
+        params.setConnectiondataitems( mt );
+
+        ret.setParameters( params );
 
         return ret;
     }

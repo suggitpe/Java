@@ -4,6 +4,10 @@
  */
 package org.suggs.apps.mercury.view.panels;
 
+import org.suggs.apps.mercury.ContextProvider;
+import org.suggs.apps.mercury.model.util.MercuryUtilityException;
+import org.suggs.apps.mercury.model.util.xml.DomParserHelper;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -15,6 +19,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -31,6 +36,8 @@ public class ConnectionTreePanel extends Composite
     private static final Log LOG = LogFactory.getLog( ConnectionTreePanel.class );
 
     TreeViewer mViewer_ = null;
+    DomParserHelper mDomHelper_;
+    String mConnectionStoreFilename_;
 
     /**
      * Constructs a new instance.
@@ -39,16 +46,46 @@ public class ConnectionTreePanel extends Composite
     {
         super( parent, SWT.BORDER );
         setLayout( new FillLayout() );
+        mDomHelper_ = (DomParserHelper) ContextProvider.instance().getBean( "domParserHelper" );
+        mConnectionStoreFilename_ = (String) ContextProvider.instance().getBean( "connStoreFile" );
         populateCtrls();
 
     }
 
+    /**
+     * Populates the tree and its contents
+     */
     private void populateCtrls()
     {
-        mViewer_ = new TreeViewer( this, SWT.NONE );
+        mViewer_ = new TreeViewer( this, SWT.BORDER );
         mViewer_.getTree().setToolTipText( "Select a connection" );
         mViewer_.setContentProvider( new ConnectionTreeContentProvider() );
         mViewer_.setLabelProvider( new ConnectionTreeLabelProvider() );
+
+        // now lets populate the table itself
+        ConnectionTreeDataBuilder b = new ConnectionTreeDataBuilder();
+        mViewer_.setInput( b.createConnectionData() );
+
+    }
+
+    class ConnectionTreeDataBuilder
+    {
+
+        public Element createConnectionData()
+        {
+            try
+            {
+                return mDomHelper_.createDocFromXmlFile( mConnectionStoreFilename_,
+                                                         "classpath:connection-store.xsd" )
+                    .getDocumentElement();
+            }
+            catch ( MercuryUtilityException mue )
+            {
+                throw new IllegalStateException( "Failed to parse xml document for connections",
+                                                 mue );
+            }
+
+        }
     }
 
     /**
@@ -66,17 +103,21 @@ public class ConnectionTreePanel extends Composite
          */
         public Image getImage( Object arg0 )
         {
-            // nadda
             return null;
         }
 
         /**
          * @see org.eclipse.jface.viewers.ILabelProvider#getText(java.lang.Object)
          */
-        public String getText( Object arg0 )
+        public String getText( Object node )
         {
-            // TODO Auto-generated method stub
-            return null;
+            Node n = (Node) node;
+            if ( n.getNodeName().equals( "connection" ) )
+            {
+                return n.getAttributes().getNamedItem( "name" ).getTextContent();
+
+            }
+            return ( (Node) node ).getTextContent();
         }
 
         /**

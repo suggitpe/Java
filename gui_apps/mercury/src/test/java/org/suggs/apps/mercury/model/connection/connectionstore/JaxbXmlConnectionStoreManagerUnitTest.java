@@ -224,14 +224,18 @@ public class JaxbXmlConnectionStoreManagerUnitTest
         StringBuffer ret = new StringBuffer( "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" );
         ret.append( "<connectionStore xmlns=\"http://www.suggs.org.uk/ConnectionStore\">\n" );
         ret.append( "<connection type=\"TEST_TYPE\" name=\"CONN_1\">\n" )
-            .append( " <hostname>pgdsx01.org.suggs.uk</hostname>" )
+            .append( "<parameters>" )
+            .append( "<hostname>pgdsx01.org.suggs.uk</hostname>" )
             .append( "<port>123</port>\n" )
             .append( "<connectiondataitems/>\n" )
+            .append( "</parameters>" )
             .append( "</connection>\n" );
         ret.append( "<connection type=\"TEST_TYPE\" name=\"CONN_2\">\n" )
-            .append( " <hostname>pgdsx02.org.suggs.uk</hostname>" )
+            .append( "<parameters>" )
+            .append( "<hostname>pgdsx02.org.suggs.uk</hostname>" )
             .append( "<port>456</port>\n" )
             .append( "<connectiondataitems/>\n" )
+            .append( "</parameters>" )
             .append( "</connection>\n" );
         ret.append( "</connectionStore>" );
         return ret.toString();

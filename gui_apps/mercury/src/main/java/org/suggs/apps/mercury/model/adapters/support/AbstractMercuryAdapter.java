@@ -6,9 +6,6 @@ package org.suggs.apps.mercury.model.adapters.support;
 
 import org.suggs.apps.mercury.model.adapters.IMercuryConnectionAdapter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * Abstract Mercury Adapater base class for all adapters
  * 
@@ -17,7 +14,5 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class AbstractMercuryAdapter implements IMercuryConnectionAdapter
 {
-
-    private static final Log LOG = LogFactory.getLog( AbstractMercuryAdapter.class );
 
 }

@@ -31,7 +31,7 @@ public class MainWindow extends Composite
         // now create the two underlying composites
         SashForm sf = new SashForm( this, SWT.HORIZONTAL );
 
-        Composite tree = new ConnectionTreePanel( sf );
+        new ConnectionTreePanel( sf );
 
         TabFolder tf = new TabFolder( sf, SWT.NONE );
 
@@ -81,6 +81,6 @@ class AdminTab extends Composite
         super( comp, SWT.NONE );
         setLayout( new FillLayout() );
 
-        Composite msg = new MessagePanel( this );
+        new MessagePanel( this );
     }
 }

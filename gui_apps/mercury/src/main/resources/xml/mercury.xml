@@ -31,5 +31,7 @@
 		class="org.suggs.apps.mercury.view.actions.ActionManager">
 		<property name="actionMap" ref="mercuryActionMap" />
 	</bean>
+	
+	<bean id="domParserHelper" class="org.suggs.apps.mercury.model.util.xml.DomParserHelper"/>
 
 </beans>

@@ -4,10 +4,7 @@
  */
 package org.suggs.apps.mercury.view.actions.connection;
 
-import org.suggs.apps.mercury.view.dialogs.HelpConnectionDebugDialog;
-
 import org.eclipse.jface.action.Action;
-import org.eclipse.swt.widgets.Display;
 
 /**
  * This is the action that supports the help connection debug screen.
@@ -33,9 +30,10 @@ public class DebugAction extends Action
     @Override
     public void run()
     {
-        HelpConnectionDebugDialog d = new HelpConnectionDebugDialog( Display.getCurrent()
-            .getActiveShell() );
-        d.open();
+        // HelpConnectionDebugDialog d = new
+        // HelpConnectionDebugDialog( Display.getCurrent()
+        // .getActiveShell() );
+        // d.open();
     }
 
 }
