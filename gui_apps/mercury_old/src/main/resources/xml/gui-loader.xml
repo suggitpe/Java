@@ -6,7 +6,7 @@
     <import resource="mercury-connection.xml"/>
     
     <!-- this is the main loader impl -->
-    <bean id="mercuryApplication" class="org.suggs.apps.mercury.impl.MercuryApplication">
+    <bean id="mercuryApplication" class="org.suggs.apps.mercury_old.impl.MercuryApplication">
         <property name="connectionManagerPanel" ref="connMgrPanelBean"/>
         <property name="connectionStorePanel" ref="connStrPanelBean"/>
         <property name="connectionButtons" ref="connButtonsBean"/>
@@ -14,19 +14,19 @@
     </bean>
     
     <!-- This is the panel interface to the connection manager  -->
-    <bean id="connMgrPanelBean" class="org.suggs.apps.mercury.view.connection.ConnectionManagerPanel">
+    <bean id="connMgrPanelBean" class="org.suggs.apps.mercury_old.view.connection.ConnectionManagerPanel">
         <constructor-arg ref="connMgrBean"/>
     </bean>
     
-    <bean id="connStrPanelBean" class="org.suggs.apps.mercury.view.connection.ConnectionStorePanel">
+    <bean id="connStrPanelBean" class="org.suggs.apps.mercury_old.view.connection.ConnectionStorePanel">
         <constructor-arg ref="connStrBean"/>
     </bean>
     
     <!-- Main functional interface -->
-    <bean id="connButtonsBean" class="org.suggs.apps.mercury.view.connection.ConnectionButtons"/>
+    <bean id="connButtonsBean" class="org.suggs.apps.mercury_old.view.connection.ConnectionButtons"/>
     
        <!-- This is the MVC controller for the connections -->
-    <bean id="connCtrlBean" class="org.suggs.apps.mercury.controller.impl.ConnectionController">
+    <bean id="connCtrlBean" class="org.suggs.apps.mercury_old.controller.impl.ConnectionController">
         <constructor-arg ref="connStrBean"/>
         <constructor-arg ref="connMgrBean"/>
         <constructor-arg ref="connButtonsBean"/>

@@ -4,14 +4,14 @@
 <beans>
  
     <!-- This is the main connection manager bean -->
-    <bean id="connMgrBean" class="org.suggs.apps.mercury.model.connection.manager.ConnectionManager">
+    <bean id="connMgrBean" class="org.suggs.apps.mercur_old.model.connection.manager.ConnectionManager">
         <property name="adapters" ref="adapterMapBean"/>
     </bean>
     
     <!-- This is the main connection store bean -->
-    <bean id="connStrBean" class="org.suggs.apps.mercury.model.connection.store.ConnectionStore">
+    <bean id="connStrBean" class="org.suggs.apps.mercury_old.model.connection.store.ConnectionStore">
         <property name="persistenceLayer">
-            <bean class="org.suggs.apps.mercury.model.connection.store.persistence.XmlPersistenceLayer"/>
+            <bean class="org.suggs.apps.mercury_old.model.connection.store.persistence.XmlPersistenceLayer"/>
         </property>
     </bean>
     
@@ -26,11 +26,11 @@
     </bean>
     
     <!-- the underlying connectiopn adapters -->
-    <bean id="emsAdapterBean" class="org.suggs.apps.mercury.model.connection.manager.adapters.EmsConnectionAdapter">
+    <bean id="emsAdapterBean" class="org.suggs.apps.mercury_old.model.connection.manager.adapters.EmsConnectionAdapter">
         <property name="initialContextFactory" value="com.tibco.tibjms.naming.TibjmsInitialContextFactory"/>
     </bean>
     
-    <bean id="mqAdapterBean" class="org.suggs.apps.mercury.model.connection.manager.adapters.MqConnectionAdapter">
+    <bean id="mqAdapterBean" class="org.suggs.apps.mercury_old.model.connection.manager.adapters.MqConnectionAdapter">
     </bean>
     
 </beans>
