@@ -24,7 +24,7 @@
 
     <complexType name="ConnectionFactoryGroup">
         <sequence>
-            <element name="connectionFactory" type="tns:ConnectionFactoryType" minOccurs="0" maxOccurs="unbounded"></element>
+            <element name="connectionfactory" type="tns:ConnectionFactoryType" minOccurs="0" maxOccurs="unbounded"></element>
         </sequence>
     </complexType>
 
@@ -37,9 +37,10 @@
     
     <complexType name="DestinationGroup">
         <sequence>
-            <element name="destination" type="tns:DestinationType" minOccurs="0" maxOccurs="unbounded"></element>
+            <element name="destinations" type="tns:DestinationType" minOccurs="0" maxOccurs="unbounded"></element>
         </sequence>
     </complexType>
 
-    <complexType name="ConnectionMetadataType"></complexType>
+    <complexType name="ConnectionMetadataType">
+    </complexType>
 </schema>

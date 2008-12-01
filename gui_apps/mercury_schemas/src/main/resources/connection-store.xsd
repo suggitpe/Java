@@ -15,28 +15,17 @@
 	</complexType>
 
 	<complexType name="ConnectionType">
-		<sequence>
-			<element name="hostname" type="string" minOccurs="1"
-				maxOccurs="1">
-			</element>
-			<element name="port" type="int" minOccurs="1"
-				maxOccurs="1">
-			</element>
+		<sequence>
 
 
 
-			<element name="description" type="string" minOccurs="0"
-				maxOccurs="1">
-			</element>
-			<element name="security" type="tns:ConnectionSecurityType"
-				minOccurs="0" maxOccurs="1">
-			</element>
-			<element name="connectiondataitems"
-				type="tns:ConnectionDataGroup" minOccurs="1" maxOccurs="1">
-			</element>
+            <element name="description" type="string" minOccurs="0" maxOccurs="1">
+			</element>
 
-			<element name="metadata" type="Q1:ConnectionMetadataType" minOccurs="0" maxOccurs="1"></element>
-		</sequence>
+			<element name="parameters" type="tns:ConnectionParamatersType"></element>
+            <element name="metadata" type="Q1:ConnectionMetadataType" minOccurs="0" maxOccurs="1">
+			</element>
+        </sequence>
 		<attribute name="name" type="string" use="required"></attribute>
 		<attribute name="type" type="string" use="required"></attribute>
 	</complexType>
@@ -67,4 +56,19 @@
 			<element name="value" type="string"></element>
 		</sequence>
 	</complexType>
+
+	<complexType name="ConnectionParamatersType">
+		<sequence>
+            <element name="hostname" type="string" minOccurs="1" maxOccurs="1">
+			</element>
+            <element name="port" type="int" minOccurs="1" maxOccurs="1">
+			</element>
+            <element name="security" type="tns:ConnectionSecurityType" minOccurs="0" maxOccurs="1">
+			</element>
+            <element name="connectiondataitems" type="tns:ConnectionDataGroup" minOccurs="1" maxOccurs="1">
+			</element>
+        </sequence>
+	</complexType>
+	
+    <complexType name="ConnectionMetadataType"></complexType>
 </schema>
