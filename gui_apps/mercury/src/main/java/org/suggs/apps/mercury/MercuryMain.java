@@ -46,6 +46,17 @@ public class MercuryMain extends ApplicationWindow
     {
         // let the parent set up the shell
         super( null );
+    }
+
+    /**
+     * Run the gui setup
+     */
+    public void run()
+    {
+        setBlockOnOpen( true );
+        open();
+        Display.getCurrent().dispose();
+
         addMenuBar();
         addToolBar( SWT.FLAT | SWT.WRAP );
     }
@@ -156,9 +167,6 @@ public class MercuryMain extends ApplicationWindow
         MercuryMain.setupFileSystem();
 
         // this then kicks everything off
-        MercuryMain m = new MercuryMain();
-        m.setBlockOnOpen( true );
-        m.open();
-        Display.getCurrent().dispose();
+        new MercuryMain().run();
     }
 }

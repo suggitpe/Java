@@ -109,7 +109,6 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
             final Table table = new Table( this, SWT.BORDER | SWT.FULL_SELECTION );
             table.setToolTipText( "Review contents for new connection" );
 
-            table.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
             table.setLinesVisible( true );
             table.setHeaderVisible( true );
 
@@ -117,10 +116,8 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
             layout.addColumnData( new ColumnWeightData( 25, 75, true ) );
             layout.addColumnData( new ColumnWeightData( 75, 75, true ) );
 
-            TableColumn nameCol = new TableColumn( table, SWT.LEFT );
-            nameCol.setText( "Name" );
-            TableColumn valueCol = new TableColumn( table, SWT.LEFT );
-            valueCol.setText( "Value" );
+            new TableColumn( table, SWT.LEFT ).setText( "Name" );
+            new TableColumn( table, SWT.LEFT ).setText( "Value" );
 
             table.setLayout( layout );
             table.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
