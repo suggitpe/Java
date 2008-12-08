@@ -2,7 +2,7 @@
  * TestMercuryFileManager.java created on 6 Oct 2008 06:42:58 by suggitpe for project GUI - Mercury
  * 
  */
-package org.suggs.apps.mercury.model.util;
+package org.suggs.apps.mercury.model.util.file;
 
 import org.suggs.apps.mercury.model.util.file.IFileManager;
 import org.suggs.apps.mercury.model.util.file.impl.FileManager;

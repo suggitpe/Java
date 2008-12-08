@@ -4,7 +4,7 @@
  */
 package org.suggs.apps.mercury.model;
 
-import org.suggs.apps.mercury.model.util.FileManagerIntegrationTest;
+import org.suggs.apps.mercury.model.util.file.FileManagerIntegrationTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
