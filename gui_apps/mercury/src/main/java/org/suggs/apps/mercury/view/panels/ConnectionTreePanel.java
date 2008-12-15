@@ -6,7 +6,7 @@ package org.suggs.apps.mercury.view.panels;
 
 import org.suggs.apps.mercury.ContextProvider;
 import org.suggs.apps.mercury.model.util.MercuryUtilityException;
-import org.suggs.apps.mercury.model.util.xml.DomParserHelper;
+import org.suggs.apps.mercury.model.util.xml.impl.DomParserUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,7 +36,7 @@ public class ConnectionTreePanel extends Composite
     private static final Log LOG = LogFactory.getLog( ConnectionTreePanel.class );
 
     TreeViewer mViewer_ = null;
-    DomParserHelper mDomHelper_;
+    DomParserUtil mDomHelper_;
     String mConnectionStoreFilename_;
 
     /**
@@ -46,7 +46,7 @@ public class ConnectionTreePanel extends Composite
     {
         super( parent, SWT.BORDER );
         setLayout( new FillLayout() );
-        mDomHelper_ = (DomParserHelper) ContextProvider.instance().getBean( "domParserHelper" );
+        mDomHelper_ = (DomParserUtil) ContextProvider.instance().getBean( "domParserHelper" );
         mConnectionStoreFilename_ = (String) ContextProvider.instance().getBean( "connStoreFile" );
         populateCtrls();
 
@@ -76,7 +76,7 @@ public class ConnectionTreePanel extends Composite
             try
             {
                 return mDomHelper_.createDocFromXmlFile( mConnectionStoreFilename_,
-                                                         "classpath:connection-store.xsd" )
+                                                         "connection-store.xsd" )
                     .getDocumentElement();
             }
             catch ( MercuryUtilityException mue )

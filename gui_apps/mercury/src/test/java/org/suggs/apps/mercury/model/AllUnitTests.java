@@ -4,9 +4,8 @@
  */
 package org.suggs.apps.mercury.model;
 
-import org.suggs.apps.mercury.model.connection.connectionstore.CachedXmlConnectionStoreManagerDecoratorUnitTest;
-import org.suggs.apps.mercury.model.connection.connectionstore.JaxbXmlConnectionStoreManagerUnitTest;
-import org.suggs.apps.mercury.model.connection.connectionstore.XmlConnectionStoreDaoUnitTest;
+import org.suggs.apps.mercury.model.connection.connectionstore.AllConnUnitTests;
+import org.suggs.apps.mercury.model.util.AllUtilUnitTests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -18,8 +17,6 @@ import org.junit.runners.Suite;
  * @version 1.0 25 Sep 2008
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { XmlConnectionStoreDaoUnitTest.class,
-                      CachedXmlConnectionStoreManagerDecoratorUnitTest.class,
-                      JaxbXmlConnectionStoreManagerUnitTest.class })
+@Suite.SuiteClasses( { AllConnUnitTests.class, AllUtilUnitTests.class })
 public class AllUnitTests
 {}

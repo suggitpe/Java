@@ -4,7 +4,6 @@
  */
 package org.suggs.apps.mercury.model.util.file;
 
-import org.suggs.apps.mercury.model.util.file.IFileManager;
 import org.suggs.apps.mercury.model.util.file.impl.FileManager;
 
 import java.io.File;
@@ -32,7 +31,7 @@ public class FileManagerIntegrationTest
     private static final Log LOG = LogFactory.getLog( FileManagerIntegrationTest.class );
     private IFileManager mFileManager_;
     private static final String TEST_ROOT = "c:";
-    private static final String TEST_DIR = TEST_ROOT + "/test";
+    private static final String TEST_DIR = TEST_ROOT + "/test/filetest";
     private static final String TEST_FILE = "dummyFile.txt";
     private static final String DUMMY_CLOB = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
@@ -153,9 +152,9 @@ public class FileManagerIntegrationTest
      *             if there are any issues in persisting the data
      */
     @Test
-    public void testWriteAndRead() throws IOException
+    public void testWriteAndReadClob() throws IOException
     {
-        LOG.debug( "Testing the read and then write of a file to ensure they are the same" );
+        LOG.debug( "Testing the write and then read of a file to ensure they are the same" );
         String file = TEST_DIR + "/" + TEST_FILE;
 
         String data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<test></test>";
@@ -164,5 +163,28 @@ public class FileManagerIntegrationTest
         String compareWith = mFileManager_.retrieveClobFromFile( new File( file ) );
 
         Assert.assertEquals( data, compareWith );
+    }
+
+    /**
+     * This test will create a new file and then will retrieve the
+     * data from that file and compare that the returned data is the
+     * same as the data that was persisted.
+     * 
+     * @throws IOException
+     *             if there are any issues in persisting the data
+     */
+    @Test
+    public void testWriteAndReadBytes() throws IOException
+    {
+        LOG.debug( "Testing the write and then read of a file to ensure they are the same" );
+        String file = TEST_DIR + "/" + TEST_FILE;
+
+        String data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<test></test>";
+
+        mFileManager_.persistClobToFile( data, new File( file ) );
+        byte[] readFile = mFileManager_.retrieveBytesFromFile( new File( file ) );
+
+        Assert.assertEquals( readFile.length, 52 );
+
     }
 }

@@ -2,18 +2,22 @@
  * DomParserHelper.java created on 27 Nov 2008 07:37:37 by suggitpe for project GUI - Mercury
  * 
  */
-package org.suggs.apps.mercury.model.util.xml;
+package org.suggs.apps.mercury.model.util.xml.impl;
 
 import org.suggs.apps.mercury.model.util.MercuryUtilityException;
+import org.suggs.apps.mercury.model.util.xml.IDomParserUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,10 +36,10 @@ import org.xml.sax.SAXParseException;
  * @author suggitpe
  * @version 1.0 27 Nov 2008
  */
-public class DomParserHelper
+public class DomParserUtil implements IDomParserUtil
 {
 
-    private static final Log LOG = LogFactory.getLog( DomParserHelper.class );
+    private static final Log LOG = LogFactory.getLog( DomParserUtil.class );
 
     private Object lock = new Object();
     private Map<String, DocumentBuilder> mBuilderMap_ = new HashMap<String, DocumentBuilder>();
@@ -53,35 +57,7 @@ public class DomParserHelper
     public Document createDocFromXmlFile( String aFilename, String aSchemaLocation )
                     throws MercuryUtilityException
     {
-
-        synchronized ( lock )
-        {
-            if ( !mBuilderMap_.containsKey( aSchemaLocation ) )
-            {
-                DocumentBuilder builder = null;
-                try
-                {
-                    DocumentBuilderFactory fact = DocumentBuilderFactory.newInstance();
-                    fact.setNamespaceAware( true );
-                    fact.setValidating( true );
-                    fact.setAttribute( "http://java.sun.com/xml/jaxp/properties/schemaLanguage",
-                                       "http://www.w3.org/2001/XMLSchema" );
-                    fact.setAttribute( "http://java.sun.com/xml/jaxp/properties/schemaSource",
-                                       aSchemaLocation );
-
-                    builder = fact.newDocumentBuilder();
-                }
-                catch ( ParserConfigurationException pce )
-                {
-                    throw new IllegalStateException( "Failed to create parser, pce" );
-                }
-
-                builder.setErrorHandler( new MercuryDomErrorHandler() );
-                mBuilderMap_.put( aSchemaLocation, builder );
-            }
-        }
-
-        DocumentBuilder b = mBuilderMap_.get( aSchemaLocation );
+        DocumentBuilder b = createDocumentBuilder( aSchemaLocation );
 
         try
         {
@@ -95,7 +71,63 @@ public class DomParserHelper
         {
             throw new MercuryUtilityException( se );
         }
+    }
 
+    /**
+     * Create a document builder for the particular schema.
+     * 
+     * @param aSchemaLocation
+     *            the location of the schema for validation
+     * @return the document builder configured to validate the defined
+     *         schema
+     */
+    private DocumentBuilder createDocumentBuilder( String aSchemaLocation )
+                    throws MercuryUtilityException
+    {
+        if ( mBuilderMap_.containsKey( aSchemaLocation ) )
+        {
+            return mBuilderMap_.get( aSchemaLocation );
+        }
+
+        DocumentBuilder builder = null;
+        try
+        {
+            DocumentBuilderFactory fact = DocumentBuilderFactory.newInstance();
+            fact.setNamespaceAware( true );
+            fact.setValidating( false );
+
+            SchemaFactory sf = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );
+            URL url = getClass().getClassLoader().getResource( aSchemaLocation );
+            if ( url == null )
+            {
+                throw new MercuryUtilityException( "Unable to locate resource [" + aSchemaLocation
+                                                   + "]" );
+            }
+            fact.setSchema( sf.newSchema( url ) );
+
+            builder = fact.newDocumentBuilder();
+        }
+        catch ( ParserConfigurationException pce )
+        {
+            throw new IllegalStateException( "Failed to create parser, pce" );
+        }
+        catch ( SAXException se )
+        {
+            LOG.error( "Sax exception", se );
+            se.printStackTrace();
+        }
+
+        builder.setErrorHandler( new MercuryDomErrorHandler() );
+
+        synchronized ( lock )
+        {
+            if ( !mBuilderMap_.containsKey( aSchemaLocation ) )
+            {
+                mBuilderMap_.put( aSchemaLocation, builder );
+            }
+        }
+
+        return builder;
     }
 
     /**

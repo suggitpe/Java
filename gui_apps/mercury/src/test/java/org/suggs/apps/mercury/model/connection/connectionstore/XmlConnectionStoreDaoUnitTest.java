@@ -130,7 +130,6 @@ public class XmlConnectionStoreDaoUnitTest
      * 
      * @throws ConnectionStoreException.
      */
-    @SuppressWarnings("unchecked")
     @Test
     public void testDeleteNamedConnection() throws ConnectionStoreException
     {
@@ -179,7 +178,6 @@ public class XmlConnectionStoreDaoUnitTest
      * 
      * @throws ConnectionStoreException.
      */
-    @SuppressWarnings("unchecked")
     @Test
     public void testDeleteUnknownConnection() throws ConnectionStoreException
     {

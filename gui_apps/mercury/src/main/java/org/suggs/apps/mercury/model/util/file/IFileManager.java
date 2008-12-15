@@ -58,4 +58,6 @@ public interface IFileManager
      */
     String retrieveClobFromResource( String aResource ) throws IOException;
 
+    byte[] retrieveBytesFromFile( File aFile ) throws IOException;
+
 }

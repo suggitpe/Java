@@ -64,4 +64,12 @@ public class FileManagerStub implements IFileManager
         return mData_;
     }
 
+    /**
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveBytesFromFile(java.io.File)
+     */
+    public byte[] retrieveBytesFromFile( File file ) throws IOException
+    {
+        return mData_.getBytes();
+    }
+
 }

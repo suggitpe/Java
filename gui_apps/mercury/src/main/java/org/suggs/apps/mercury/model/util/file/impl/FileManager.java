@@ -36,6 +36,15 @@ public class FileManager implements IFileManager
      */
     public final String retrieveClobFromFile( File file ) throws IOException
     {
+        byte[] data = retrieveBytesFromFile( file );
+        return new String( data, CHARSET );
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveBytesFromFile(java.io.File)
+     */
+    public byte[] retrieveBytesFromFile( File file ) throws IOException
+    {
         FileInputStream fis = null;
         FileChannel chan = null;
         try
@@ -44,8 +53,7 @@ public class FileManager implements IFileManager
             chan = fis.getChannel();
             ByteBuffer buff = ByteBuffer.allocate( (int) chan.size() );
             chan.read( buff );
-            byte[] data = buff.array();
-            return new String( data, CHARSET );
+            return buff.array();
         }
         finally
         {
@@ -158,10 +166,9 @@ public class FileManager implements IFileManager
         if ( !( dir.exists() ) )
         {
             LOG.info( "Creating directory [" + dir.getAbsolutePath() + "]" );
-            if ( !( dir.mkdir() ) )
+            if ( !( dir.mkdirs() ) )
             {
-                throw new IOException( "Failed to create directory [" + aFile.getAbsolutePath()
-                                       + "]" );
+                throw new IOException( "Failed to create directory [" + dir.getAbsolutePath() + "]" );
             }
         }
         else

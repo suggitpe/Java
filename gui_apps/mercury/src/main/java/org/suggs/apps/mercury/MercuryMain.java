@@ -168,5 +168,6 @@ public class MercuryMain extends ApplicationWindow
 
         // this then kicks everything off
         new MercuryMain().run();
+
     }
 }
