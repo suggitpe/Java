@@ -5,7 +5,7 @@
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsTestRunTime"/>
-	<classpathentry kind="lib" path="/_build/repository/junit/junit/3.8.1/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/_build/repository/junit/junit/4.5/junit-4.5.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/com/tibco/ems/tibjmsadmin/4.2.0/tibjmsadmin-4.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
