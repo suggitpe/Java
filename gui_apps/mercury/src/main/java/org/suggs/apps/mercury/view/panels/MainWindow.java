@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 /**
- * TODO Write javadoc for MainWindow
+ * This class manages what the main window looks like
  * 
  * @author suggitpe
  * @version 1.0 24 Nov 2008

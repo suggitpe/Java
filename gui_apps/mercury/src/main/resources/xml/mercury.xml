@@ -20,7 +20,7 @@
 		class="org.suggs.apps.mercury.view.factories.MenuFactory">
 		<property name="actionManager" ref="actionManager" />
 	</bean>
-
+	
 	<bean id="toolBarFactory"
 		class="org.suggs.apps.mercury.view.factories.ToolBarFactory">
 		<property name="actionManager" ref="actionManager" />
@@ -32,6 +32,7 @@
 		<property name="actionMap" ref="mercuryActionMap" />
 	</bean>
 	
-	<bean id="domParserHelper" class="org.suggs.apps.mercury.model.util.xml.DomParserHelper"/>
-
+	<bean id="domParserUtil" class="org.suggs.apps.mercury.model.util.xml.impl.DomParserUtil"/>
+	<bean id="xsltUtil" class="org.suggs.apps.mercury.model.util.xml.impl.CachedXsltTransformerUtil"/>
+	
 </beans>

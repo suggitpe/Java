@@ -53,12 +53,12 @@ public class MercuryMain extends ApplicationWindow
      */
     public void run()
     {
+        addMenuBar();
+        addToolBar( SWT.FLAT | SWT.WRAP );
         setBlockOnOpen( true );
         open();
         Display.getCurrent().dispose();
 
-        addMenuBar();
-        addToolBar( SWT.FLAT | SWT.WRAP );
     }
 
     /**
