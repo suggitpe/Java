@@ -47,4 +47,15 @@ public interface IXmlConnectionStoreManager
      */
     void saveConnectionData( Map<String, ConnectionDetails> aMap ) throws ConnectionStoreException;
 
+    /**
+     * This accessor is there to get access to the raw underlying XML
+     * for the connection store.
+     * 
+     * @return the raw xml that is on the file system
+     * @throws ConnectionStoreException
+     *             if there is a problem getting hold of the raw xml
+     *             data
+     */
+    String getRawXml() throws ConnectionStoreException;
+
 }

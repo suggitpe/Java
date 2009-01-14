@@ -70,4 +70,30 @@ public interface IConnectionStore
      */
     void deleteNamedConnection( String aName ) throws ConnectionStoreException;
 
+    /**
+     * This is the way to get a dump of the connection store data that
+     * is currently configured in the system.
+     * 
+     * @return serialised dump of the connection store data in XML
+     *         form
+     * @throws ConnectionStoreException
+     *             if there are any issues in creating the dump
+     */
+    String getConnectionStoreDumpAsXml() throws ConnectionStoreException;
+
+    /**
+     * Adds a new listener to the connection store impl
+     * 
+     * @param aListener
+     *            the listener that will be activated once the
+     */
+    void addConnectionStoreChangeListener( IConnectionStoreChangeListener aListener );
+
+    /**
+     * Removes a known listener from the set of listeners
+     * 
+     * @param aListener
+     *            the listsner to remove
+     */
+    void removeConnectionStoreChangeListener( IConnectionStoreChangeListener aListener );
 }

@@ -7,10 +7,13 @@ package org.suggs.apps.mercury.model.connection.connectionstore.xmldao;
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
+import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,6 +34,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     private static final Log LOG = LogFactory.getLog( XmlConnectionStoreDao.class );
 
     private IXmlConnectionStoreManager mXmlStore_;
+    private List<IConnectionStoreChangeListener> mListeners_ = new Vector<IConnectionStoreChangeListener>();
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -65,6 +69,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
 
         mXmlStore_.saveConnectionData( conns );
 
+        notifyAllListeners();
     }
 
     /**
@@ -143,6 +148,43 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
         LOG.debug( "Saving connection [" + name + "] to the underlying connection store mechanism" );
         conns.put( name, details );
         mXmlStore_.saveConnectionData( conns );
+        notifyAllListeners();
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#addConnectionStoreChangeListener(org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener)
+     */
+    public void addConnectionStoreChangeListener( IConnectionStoreChangeListener aListener )
+    {
+        mListeners_.add( aListener );
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#removeConnectionStoreChangeListener(org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener)
+     */
+    public void removeConnectionStoreChangeListener( IConnectionStoreChangeListener aListener )
+    {
+        mListeners_.remove( aListener );
+    }
+
+    /**
+     * This method is used to put out the change notification to all
+     * of the listeners that have registered their interest.
+     */
+    private void notifyAllListeners()
+    {
+        for ( IConnectionStoreChangeListener l : mListeners_ )
+        {
+            l.handleConnectionStoreChange();
+        }
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#getConnectionStoreDumpAsXml()
+     */
+    public String getConnectionStoreDumpAsXml() throws ConnectionStoreException
+    {
+        return mXmlStore_.getRawXml();
     }
 
     /**

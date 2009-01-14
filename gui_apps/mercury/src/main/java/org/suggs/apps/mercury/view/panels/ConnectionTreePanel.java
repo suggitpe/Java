@@ -5,14 +5,13 @@
 package org.suggs.apps.mercury.view.panels;
 
 import org.suggs.apps.mercury.ContextProvider;
+import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
+import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
+import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener;
 import org.suggs.apps.mercury.model.util.MercuryUtilityException;
-import org.suggs.apps.mercury.model.util.file.impl.FileManager;
 import org.suggs.apps.mercury.model.util.xml.IXmlSerialiser;
 import org.suggs.apps.mercury.model.util.xml.IXsltTransformerUtil;
 import org.suggs.apps.mercury.model.util.xml.impl.XmlSerialiser;
-
-import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,22 +32,22 @@ import org.w3c.dom.NodeList;
  * @author suggitpe
  * @version 1.0 24 Nov 2008
  */
-public class ConnectionTreePanel extends Composite
+public class ConnectionTreePanel extends Composite implements IConnectionStoreChangeListener
 {
 
     private static final Log LOG = LogFactory.getLog( ConnectionTreePanel.class );
     private static final String XSLT = "xslt/connection-tree.xsl";
 
-    TreeViewer mViewer_ = null;
-    IXsltTransformerUtil mXsltUtil_;
-    String mConnectionStoreFilename_;
-    FileManager mFileManager_;
+    private TreeViewer mViewer_ = null;
+    private IXsltTransformerUtil mXsltUtil_;
+    private IConnectionStore mConnStr_;
 
     // initialiser
     {
         mXsltUtil_ = (IXsltTransformerUtil) ContextProvider.instance().getBean( "xsltUtil" );
-        mConnectionStoreFilename_ = (String) ContextProvider.instance().getBean( "connStoreFile" );
-        mFileManager_ = (FileManager) ContextProvider.instance().getBean( "fileMgr" );
+        mConnStr_ = (IConnectionStore) ContextProvider.instance()
+            .getBean( "connectionStoreManager" );
+        mConnStr_.addConnectionStoreChangeListener( this );
     }
 
     /**
@@ -86,9 +85,8 @@ public class ConnectionTreePanel extends Composite
     {
         try
         {
-            String filename = (String) ContextProvider.instance().getBean( "connStoreFile" );
-            byte[] b = mFileManager_.retrieveBytesFromFile( new File( filename ) );
-            Node elem = mXsltUtil_.transformXmlToDom( b, XSLT );
+            String b = mConnStr_.getConnectionStoreDumpAsXml();
+            Node elem = mXsltUtil_.transformXmlToDom( b.getBytes(), XSLT );
             if ( LOG.isDebugEnabled() )
             {
                 IXmlSerialiser ser = new XmlSerialiser();
@@ -97,15 +95,24 @@ public class ConnectionTreePanel extends Composite
             return elem;
 
         }
+        catch ( ConnectionStoreException cse )
+        {
+            throw new IllegalStateException( "Failed to retrieve connection store details from the internal connection store",
+                                             cse );
+        }
         catch ( MercuryUtilityException mue )
         {
             throw new IllegalStateException( "Failed to parse xml document for connections", mue );
         }
-        catch ( IOException ioe )
-        {
-            throw new IllegalStateException( "Failed to read file" );
-        }
 
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener#handleConnectionStoreChange()
+     */
+    public void handleConnectionStoreChange()
+    {
+        mViewer_.setInput( createConnectionData() );
     }
 
     /**

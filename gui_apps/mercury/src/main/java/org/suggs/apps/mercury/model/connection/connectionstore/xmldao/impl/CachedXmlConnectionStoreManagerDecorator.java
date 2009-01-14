@@ -55,6 +55,14 @@ public class CachedXmlConnectionStoreManagerDecorator
     }
 
     /**
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#getRawXml()
+     */
+    public String getRawXml() throws ConnectionStoreException
+    {
+        return mXmlConnectionStoreManager_.getRawXml();
+    }
+
+    /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#saveConnectionData(java.util.Map)
      */
     public void saveConnectionData( Map<String, ConnectionDetails> map )

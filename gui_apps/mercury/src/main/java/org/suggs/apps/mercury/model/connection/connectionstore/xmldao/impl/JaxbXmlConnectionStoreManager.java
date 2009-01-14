@@ -37,7 +37,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * TODO Write javadoc for CachedXmlConnectionStore
+ * This class is the main JAXB implementation of the xml connection
+ * manager.
  * 
  * @author suggitpe
  * @version 1.0 29 Sep 2008
@@ -51,6 +52,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     private static JAXBContext mJaxbContext_ = null;
     private Schema mSchemaCache_;
     private String mPersistentFile_;
+    private String mConnectionDataCache_;
 
     static
     {
@@ -79,22 +81,34 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     }
 
     /**
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#getRawXml()
+     */
+    public String getRawXml() throws ConnectionStoreException
+    {
+        if ( mConnectionDataCache_ == null || mConnectionDataCache_.length() == 0 )
+        {
+            try
+            {
+                mConnectionDataCache_ = mFileManager_.retrieveClobFromFile( new File( mPersistentFile_ ) );
+
+            }
+            catch ( IOException ioe )
+            {
+                String err = "IOException caught when trying to retrieve data from the ";
+                LOG.error( err, ioe );
+                throw new ConnectionStoreException( err, ioe );
+            }
+        }
+        return mConnectionDataCache_;
+    }
+
+    /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#readConnectionData()
      */
     @SuppressWarnings("unchecked")
     public Map<String, ConnectionDetails> readConnectionData() throws ConnectionStoreException
     {
-        String xmlClob = null;
-        try
-        {
-            xmlClob = mFileManager_.retrieveClobFromFile( new File( mPersistentFile_ ) );
-        }
-        catch ( IOException ioe )
-        {
-            String err = "IOException caught when trying to retrieve data from the ";
-            LOG.error( err, ioe );
-            throw new ConnectionStoreException( err, ioe );
-        }
+        String xmlClob = getRawXml();
 
         if ( LOG.isDebugEnabled() )
         {
@@ -193,6 +207,9 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
         {
             throw new ConnectionStoreException( "Failed to marshall (JAXB) xml document", je );
         }
+
+        // update internal cache with copy
+        mConnectionDataCache_ = new String( xmlClob );
 
         // now we need to persist the xml clob
         try
