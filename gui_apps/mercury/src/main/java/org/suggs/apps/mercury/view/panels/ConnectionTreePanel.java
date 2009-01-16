@@ -9,12 +9,8 @@ import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreEx
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener;
 import org.suggs.apps.mercury.model.util.MercuryUtilityException;
-import org.suggs.apps.mercury.model.util.xml.IXmlSerialiser;
 import org.suggs.apps.mercury.model.util.xml.IXsltTransformerUtil;
-import org.suggs.apps.mercury.model.util.xml.impl.XmlSerialiser;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -35,7 +31,6 @@ import org.w3c.dom.NodeList;
 public class ConnectionTreePanel extends Composite implements IConnectionStoreChangeListener
 {
 
-    private static final Log LOG = LogFactory.getLog( ConnectionTreePanel.class );
     private static final String XSLT = "xslt/connection-tree.xsl";
 
     private TreeViewer mViewer_ = null;
@@ -87,11 +82,6 @@ public class ConnectionTreePanel extends Composite implements IConnectionStoreCh
         {
             String b = mConnStr_.getConnectionStoreDumpAsXml();
             Node elem = mXsltUtil_.transformXmlToDom( b.getBytes(), XSLT );
-            if ( LOG.isDebugEnabled() )
-            {
-                IXmlSerialiser ser = new XmlSerialiser();
-                LOG.debug( "\n" + ser.serialiseXmlToString( elem ) );
-            }
             return elem;
 
         }

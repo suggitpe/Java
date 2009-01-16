@@ -132,16 +132,6 @@ public class CreateConnectionWizardAction extends Action implements Initializing
                                            "Failed to store new connection:\n" + cse.getMessage() );
             }
 
-            // so that the user does not loose the connectionstore
-            // data that they have added we now try again with a
-            // different name
-            /*
-             * try { mConnectionStore_.saveConnectionParameters(
-             * "tempConnectionName_" + System.currentTimeMillis(),
-             * dtls ); } catch ( ConnectionStoreException cse ) {
-             * LOG.error( "Again we failed to store the connection
-             * (something else must be up here)", cse ); }
-             */
         }
 
     }
