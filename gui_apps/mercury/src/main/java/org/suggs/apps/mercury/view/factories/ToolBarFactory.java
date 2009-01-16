@@ -80,7 +80,8 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
         ActionManager mgr = (ActionManager) ContextProvider.instance()
             .getBean( ActionManager.BEAN_NAME );
 
-        main.add( mgr.getAction( "CREATE_CONNECTION_WIZARD" ) );
+        main.add( mgr.getAction( "CREATE_CONNECTION" ) );
+        main.add( mgr.getAction( "EDIT_CONNECTION" ) );
         main.add( mgr.getAction( "REMOVE_CONNECTION" ) );
 
         return main;

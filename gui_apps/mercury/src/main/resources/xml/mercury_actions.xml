@@ -10,7 +10,8 @@
                 <entry key="FILE_EXIT" value-ref="file_exit"/>
                 
                 <!-- CONNECTION -->
-                <entry key="CREATE_CONNECTION_WIZARD" value-ref="create_connection_wizard"/>
+                <entry key="CREATE_CONNECTION" value-ref="create_connection"/>
+                <entry key="EDIT_CONNECTION" value-ref="edit_connection"/>
                 <entry key="REMOVE_CONNECTION" value-ref="remove_connection"/>
                 <entry key="CONNECTION_DEBUG" value-ref="connection_debug"/>
                 
@@ -22,7 +23,11 @@
     
     <bean id="file_exit" class="org.suggs.apps.mercury.view.actions.file.ExitAction" />
     
-    <bean id="create_connection_wizard" class="org.suggs.apps.mercury.view.actions.connection.CreateConnectionWizardAction">
+    <bean id="create_connection" class="org.suggs.apps.mercury.view.actions.connection.CreateConnectionAction">
+        <property name="connectionStore" ref="connectionStoreManager"/>
+    </bean>
+    
+    <bean id="edit_connection" class="org.suggs.apps.mercury.view.actions.connection.EditConnectionAction">
         <property name="connectionStore" ref="connectionStoreManager"/>
     </bean>
     

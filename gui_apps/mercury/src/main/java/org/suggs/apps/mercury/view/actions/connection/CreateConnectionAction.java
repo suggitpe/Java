@@ -1,5 +1,5 @@
 /*
- * CreateConnectionWizardAction.java created on 15 Sep 2008 18:42:43 by suggitpe for project GUI - Mercury
+ * CreateConnectionAction.java created on 15 Sep 2008 18:42:43 by suggitpe for project GUI - Mercury
  * 
  */
 package org.suggs.apps.mercury.view.actions.connection;
@@ -29,17 +29,17 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 15 Sep 2008
  */
-public class CreateConnectionWizardAction extends Action implements InitializingBean
+public class CreateConnectionAction extends Action implements InitializingBean
 {
 
-    private static final Log LOG = LogFactory.getLog( CreateConnectionWizardAction.class );
+    private static final Log LOG = LogFactory.getLog( CreateConnectionAction.class );
 
     private IConnectionStore mConnectionStore_;
 
     /**
      * Constructs a new instance.
      */
-    public CreateConnectionWizardAction()
+    public CreateConnectionAction()
     {
         super( "&Create Connection" );
         setToolTipText( "Create new connection" );

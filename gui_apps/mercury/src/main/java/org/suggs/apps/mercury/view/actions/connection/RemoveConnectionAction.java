@@ -6,7 +6,7 @@ package org.suggs.apps.mercury.view.actions.connection;
 
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
-import org.suggs.apps.mercury.view.dialogs.RemoveConnectionDialog;
+import org.suggs.apps.mercury.view.dialogs.SelectConnectionDialog;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.Dialog;
@@ -28,14 +28,31 @@ public class RemoveConnectionAction extends Action implements InitializingBean
 {
 
     private IConnectionStore mConnectionStore_;
+    private String mConnectionToRemove_;
+
+    {
+        setToolTipText( "Remove an existing connection" );
+        setText( "&Remove Connection" );
+    }
 
     /**
      * Constructs a new instance.
      */
     public RemoveConnectionAction()
     {
-        super( "&Remove Connection" );
-        setToolTipText( "Remove an existing connection" );
+        super();
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aConnectionToRemove
+     *            the name of the connection to remove
+     */
+    public RemoveConnectionAction( String aConnectionToRemove )
+    {
+        super();
+        mConnectionToRemove_ = aConnectionToRemove;
     }
 
     /**
@@ -55,35 +72,49 @@ public class RemoveConnectionAction extends Action implements InitializingBean
     {
         Shell s = Display.getCurrent().getActiveShell();
 
-        RemoveConnectionDialog rcd = new RemoveConnectionDialog( s,
-                                                                 mConnectionStore_.getListOfKnownConnectionNames() );
-        int ok = rcd.open();
-        String conn = rcd.getChoice();
+        // only get the connection if we need to, else we will proceed
+        // with removal
+        if ( mConnectionToRemove_ == null || mConnectionToRemove_.length() == 0 )
+        {
+            SelectConnectionDialog rcd = new SelectConnectionDialog( s,
+                                                                     mConnectionStore_.getListOfKnownConnectionNames(),
+                                                                     "Remove existing connection",
+                                                                     "Select the connection that you wish to remove from the below list" );
+            int ok = rcd.open();
+            mConnectionToRemove_ = rcd.getChoice();
 
-        if ( ok == Dialog.OK && conn != null && conn.length() > 0 )
+            if ( ok != Dialog.OK )
+            {
+                return;
+            }
+        }
+
+        // here we check we have valid data
+        if ( mConnectionToRemove_ != null && mConnectionToRemove_.length() > 0 )
         {
             // check they do actually want it removed
             if ( !MessageDialog.openConfirm( s,
                                              "Confirm connection removal",
                                              "Please confirm that you wish to remove connection ["
-                                                             + conn + "]" ) )
+                                                             + mConnectionToRemove_ + "]" ) )
             {
                 return;
             }
 
             // be bullet proof
-            if ( !mConnectionStore_.doesConnectionExist( conn ) )
+            if ( !mConnectionStore_.doesConnectionExist( mConnectionToRemove_ ) )
             {
                 MessageDialog.openError( s,
                                          "Connection removal error",
-                                         "The connection [" + conn + "] does not actually exist" );
+                                         "The connection [" + mConnectionToRemove_
+                                                         + "] does not actually exist" );
                 return;
             }
 
             // now we actually remove the connection
             try
             {
-                mConnectionStore_.deleteNamedConnection( conn );
+                mConnectionStore_.deleteNamedConnection( mConnectionToRemove_ );
             }
             catch ( ConnectionStoreException e )
             {

@@ -83,7 +83,8 @@ public class MenuFactory implements IMenuFactory, InitializingBean
         file.add( mgr.getAction( "FILE_EXIT" ) );
 
         // build connection menu
-        conn.add( mgr.getAction( "CREATE_CONNECTION_WIZARD" ) );
+        conn.add( mgr.getAction( "CREATE_CONNECTION" ) );
+        conn.add( mgr.getAction( "EDIT_CONNECTION" ) );
         conn.add( mgr.getAction( "REMOVE_CONNECTION" ) );
 
         // build help menu

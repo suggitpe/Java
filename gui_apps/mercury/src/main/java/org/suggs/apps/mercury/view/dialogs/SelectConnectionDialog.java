@@ -1,5 +1,5 @@
 /*
- * RemoveConnectionDialog.java created on 14 Jan 2009 19:28:12 by suggitpe for project GUI - Mercury
+ * SelectConnectionDialog.java created on 14 Jan 2009 19:28:12 by suggitpe for project GUI - Mercury
  * 
  */
 package org.suggs.apps.mercury.view.dialogs;
@@ -20,28 +20,32 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * This dialog will be responsible for selecting the connection to
- * remove.
+ * This dialog will be responsible for selecting the connection to.
  * 
  * @author suggitpe
  * @version 1.0 14 Jan 2009
  */
-public class RemoveConnectionDialog extends TitleAreaDialog
+public class SelectConnectionDialog extends TitleAreaDialog
 {
 
     String[] mConnectionNames_;
     String mChoice_;
+    String mTitle_;
+    String mMessage_;
 
     /**
      * Constructs a new instance.
      * 
      * @param aParentShell
      */
-    public RemoveConnectionDialog( Shell aParentShell, Set<String> aConnectionNames )
+    public SelectConnectionDialog( Shell aParentShell, Set<String> aConnectionNames, String aTitle,
+                                   String aMessage )
     {
         super( aParentShell );
         mConnectionNames_ = aConnectionNames.toArray( new String[0] );
         Arrays.sort( mConnectionNames_ );
+        mTitle_ = aTitle;
+        mMessage_ = aMessage;
     }
 
     /**
@@ -53,8 +57,8 @@ public class RemoveConnectionDialog extends TitleAreaDialog
     protected Control createContents( Composite aParent )
     {
         Control contents = super.createContents( aParent );
-        setTitle( "Remove existing connection" );
-        setMessage( "Select the connection that you wish to remove from the below list" );
+        setTitle( mTitle_ );
+        setMessage( mMessage_ );
         return contents;
     }
 
