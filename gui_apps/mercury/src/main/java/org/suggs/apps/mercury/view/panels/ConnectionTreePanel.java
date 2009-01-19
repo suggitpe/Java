@@ -10,7 +10,15 @@ import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener;
 import org.suggs.apps.mercury.model.util.MercuryUtilityException;
 import org.suggs.apps.mercury.model.util.xml.IXsltTransformerUtil;
+import org.suggs.apps.mercury.view.actions.ActionManager;
+import org.suggs.apps.mercury.view.actions.connection.EditConnectionAction;
+import org.suggs.apps.mercury.view.actions.connection.RemoveConnectionAction;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -18,6 +26,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -31,6 +40,7 @@ import org.w3c.dom.NodeList;
 public class ConnectionTreePanel extends Composite implements IConnectionStoreChangeListener
 {
 
+    private static final Log LOG = LogFactory.getLog( ConnectionTreePanel.class );
     private static final String XSLT = "xslt/connection-tree.xsl";
 
     private TreeViewer mViewer_ = null;
@@ -68,6 +78,8 @@ public class ConnectionTreePanel extends Composite implements IConnectionStoreCh
 
         // now lets populate the table itself
         mViewer_.setInput( createConnectionData() );
+
+        mViewer_.getTree().setMenu( buildTreeMenu() );
     }
 
     /**
@@ -95,6 +107,43 @@ public class ConnectionTreePanel extends Composite implements IConnectionStoreCh
             throw new IllegalStateException( "Failed to parse xml document for connections", mue );
         }
 
+    }
+
+    /**
+     * Build the menu that the tree will be associated with the
+     * underlying tree.
+     * 
+     * @return a new popup menu to associate with the tree.
+     */
+    private Menu buildTreeMenu()
+    {
+
+        final ActionManager mgr = (ActionManager) ContextProvider.instance()
+            .getBean( ActionManager.BEAN_NAME );
+
+        final IConnectionStore str = (IConnectionStore) ContextProvider.instance()
+            .getBean( "connectionStoreManager" );
+
+        MenuManager popupMenu = new MenuManager();
+        popupMenu.addMenuListener( new IMenuListener()
+        {
+
+            public void menuAboutToShow( IMenuManager aMenuMgr )
+            {
+                aMenuMgr.removeAll();
+                aMenuMgr.add( mgr.getAction( "CREATE_CONNECTION" ) );
+                if ( mViewer_.getTree().getSelectionCount() == 1 )
+                {
+                    String nm = mViewer_.getTree().getSelection()[0].getText();
+                    aMenuMgr.add( new EditConnectionAction( str, nm ) );
+                    aMenuMgr.add( new RemoveConnectionAction( str, nm ) );
+                    LOG.debug( "menuabouttoshow for [" + nm + "]" );
+                }
+
+            }
+        } );
+
+        return popupMenu.createContextMenu( mViewer_.getTree() );
     }
 
     /**

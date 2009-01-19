@@ -28,7 +28,6 @@ public class EditConnectionAction extends Action
     private String mConnectionToEdit_;
 
     {
-        setText( "&Edit Connection" );
         setToolTipText( "Edit an existing connection" );
     }
 
@@ -38,6 +37,7 @@ public class EditConnectionAction extends Action
     public EditConnectionAction()
     {
         super();
+        setText( "&Edit Connection" );
     }
 
     /**
@@ -46,8 +46,11 @@ public class EditConnectionAction extends Action
      * @param mConnectionToEdit_
      *            the connecrtion to edit
      */
-    public EditConnectionAction( String aConnectionToEdit )
+    public EditConnectionAction( IConnectionStore aConnStr, String aConnectionToEdit )
     {
+        super();
+        setText( "&Edit " + aConnectionToEdit );
+        mConnectionStore_ = aConnStr;
         mConnectionToEdit_ = aConnectionToEdit;
     }
 

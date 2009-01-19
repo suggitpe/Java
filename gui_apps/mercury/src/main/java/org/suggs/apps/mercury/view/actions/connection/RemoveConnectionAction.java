@@ -32,7 +32,6 @@ public class RemoveConnectionAction extends Action implements InitializingBean
 
     {
         setToolTipText( "Remove an existing connection" );
-        setText( "&Remove Connection" );
     }
 
     /**
@@ -41,6 +40,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean
     public RemoveConnectionAction()
     {
         super();
+        setText( "&Remove Connection" );
     }
 
     /**
@@ -49,10 +49,12 @@ public class RemoveConnectionAction extends Action implements InitializingBean
      * @param aConnectionToRemove
      *            the name of the connection to remove
      */
-    public RemoveConnectionAction( String aConnectionToRemove )
+    public RemoveConnectionAction( IConnectionStore aConnStr, String aConnectionToRemove )
     {
         super();
+        mConnectionStore_ = aConnStr;
         mConnectionToRemove_ = aConnectionToRemove;
+        setText( "&Remove " + aConnectionToRemove );
     }
 
     /**
