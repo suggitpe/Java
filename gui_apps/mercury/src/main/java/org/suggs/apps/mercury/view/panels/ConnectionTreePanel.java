@@ -5,17 +5,17 @@
 package org.suggs.apps.mercury.view.panels;
 
 import org.suggs.apps.mercury.ContextProvider;
+import org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager;
+import org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener;
+import org.suggs.apps.mercury.model.connection.connectionmanager.impl.ConnectionManager;
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
-import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener;
 import org.suggs.apps.mercury.model.util.MercuryUtilityException;
 import org.suggs.apps.mercury.model.util.xml.IXsltTransformerUtil;
 import org.suggs.apps.mercury.view.actions.ActionManager;
 import org.suggs.apps.mercury.view.actions.connection.EditConnectionAction;
 import org.suggs.apps.mercury.view.actions.connection.RemoveConnectionAction;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -37,22 +37,18 @@ import org.w3c.dom.NodeList;
  * @author suggitpe
  * @version 1.0 24 Nov 2008
  */
-public class ConnectionTreePanel extends Composite implements IConnectionStoreChangeListener
+public class ConnectionTreePanel extends Composite implements IConnectionManagerListener
 {
 
-    private static final Log LOG = LogFactory.getLog( ConnectionTreePanel.class );
     private static final String XSLT = "xslt/connection-tree.xsl";
 
     private TreeViewer mViewer_ = null;
     private IXsltTransformerUtil mXsltUtil_;
-    private IConnectionStore mConnStr_;
 
     // initialiser
     {
         mXsltUtil_ = (IXsltTransformerUtil) ContextProvider.instance().getBean( "xsltUtil" );
-        mConnStr_ = (IConnectionStore) ContextProvider.instance()
-            .getBean( "connectionStoreManager" );
-        mConnStr_.addConnectionStoreChangeListener( this );
+        ConnectionManager.instance().addConnectionManagerListener( this );
     }
 
     /**
@@ -80,6 +76,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionStoreCh
         mViewer_.setInput( createConnectionData() );
 
         mViewer_.getTree().setMenu( buildTreeMenu() );
+        mViewer_.expandAll();
     }
 
     /**
@@ -92,7 +89,8 @@ public class ConnectionTreePanel extends Composite implements IConnectionStoreCh
     {
         try
         {
-            String b = mConnStr_.getConnectionStoreDumpAsXml();
+            IConnectionManager connMgr = ConnectionManager.instance();
+            String b = connMgr.getConnectionDump();
             Node elem = mXsltUtil_.transformXmlToDom( b.getBytes(), XSLT );
             return elem;
 
@@ -106,7 +104,6 @@ public class ConnectionTreePanel extends Composite implements IConnectionStoreCh
         {
             throw new IllegalStateException( "Failed to parse xml document for connections", mue );
         }
-
     }
 
     /**
@@ -132,14 +129,13 @@ public class ConnectionTreePanel extends Composite implements IConnectionStoreCh
             {
                 aMenuMgr.removeAll();
                 aMenuMgr.add( mgr.getAction( "CREATE_CONNECTION" ) );
-                if ( mViewer_.getTree().getSelectionCount() == 1 )
+                String nm = mViewer_.getTree().getSelection()[0].getText();
+                IConnectionManager connMgr = ConnectionManager.instance();
+                if ( mViewer_.getTree().getSelectionCount() == 1 && connMgr.containsConnection( nm ) )
                 {
-                    String nm = mViewer_.getTree().getSelection()[0].getText();
                     aMenuMgr.add( new EditConnectionAction( str, nm ) );
                     aMenuMgr.add( new RemoveConnectionAction( str, nm ) );
-                    LOG.debug( "menuabouttoshow for [" + nm + "]" );
                 }
-
             }
         } );
 
@@ -152,6 +148,32 @@ public class ConnectionTreePanel extends Composite implements IConnectionStoreCh
     public void handleConnectionStoreChange()
     {
         mViewer_.setInput( createConnectionData() );
+    }
+
+    /**
+     * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener#handleConnectionManagerChange(java.lang.String,
+     *      org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener.ConnectionManagerEvent)
+     */
+    public void handleConnectionManagerChange( String aConnectionName, ConnectionManagerEvent aEvent )
+    {
+        switch ( aEvent )
+        {
+            case CREATE:
+                mViewer_.setInput( createConnectionData() );
+                break;
+            case EDIT:
+                mViewer_.setInput( createConnectionData() );
+                break;
+            case REMOVE:
+                mViewer_.setInput( createConnectionData() );
+                break;
+            default:
+                throw new IllegalStateException( "Unknown ConnectionStoreEvent ["
+                                                 + aEvent.toString() + "]" );
+        }
+
+        mViewer_.expandAll();
+
     }
 
     /**

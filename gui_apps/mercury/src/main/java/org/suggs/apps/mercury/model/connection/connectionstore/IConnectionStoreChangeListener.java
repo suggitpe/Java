@@ -15,11 +15,15 @@ package org.suggs.apps.mercury.model.connection.connectionstore;
 public interface IConnectionStoreChangeListener
 {
 
+    enum ConnectionStoreEvent {
+        CREATE, EDIT, REMOVE
+    }
+
     /**
      * This interface method is really a notification method but its
      * name suggests that change may happen in the future where an
      * event can be passed in.
      */
-    void handleConnectionStoreChange();
+    void handleConnectionStoreChange( String aConnectionTarget, ConnectionStoreEvent aEvent );
 
 }

@@ -69,7 +69,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
 
         mXmlStore_.saveConnectionData( conns );
 
-        notifyAllListeners();
+        notifyAllListeners( name, IConnectionStoreChangeListener.ConnectionStoreEvent.REMOVE );
     }
 
     /**
@@ -148,7 +148,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
         LOG.debug( "Saving connection [" + name + "] to the underlying connection store mechanism" );
         conns.put( name, details );
         mXmlStore_.saveConnectionData( conns );
-        notifyAllListeners();
+        notifyAllListeners( name, IConnectionStoreChangeListener.ConnectionStoreEvent.CREATE );
     }
 
     /**
@@ -171,11 +171,12 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
      * This method is used to put out the change notification to all
      * of the listeners that have registered their interest.
      */
-    private void notifyAllListeners()
+    private void notifyAllListeners( String aConnectionName,
+                                     IConnectionStoreChangeListener.ConnectionStoreEvent aEvent )
     {
         for ( IConnectionStoreChangeListener l : mListeners_ )
         {
-            l.handleConnectionStoreChange();
+            l.handleConnectionStoreChange( aConnectionName, aEvent );
         }
     }
 
