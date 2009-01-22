@@ -9,10 +9,9 @@ import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreEx
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.logging.Log;
@@ -102,18 +101,18 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#getListOfKnownConnectionNames()
      */
-    public Set<String> getListOfKnownConnectionNames()
+    public Map<String, ConnectionDetails> getKnownConnections()
     {
         try
         {
             Map<String, ConnectionDetails> conns = mXmlStore_.readConnectionData();
-            return conns.keySet();
+            return conns;
         }
         catch ( ConnectionStoreException ce )
         {
             LOG.error( "Exception caught when trying to read the connection data for getListOfKnownConnectionNames",
                        ce );
-            return new HashSet<String>();
+            return new HashMap<String, ConnectionDetails>();
         }
     }
 

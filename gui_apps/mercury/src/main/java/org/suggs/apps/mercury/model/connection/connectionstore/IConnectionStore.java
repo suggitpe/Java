@@ -6,7 +6,7 @@ package org.suggs.apps.mercury.model.connection.connectionstore;
 
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Defines a persistence mechanism for storing connection details
@@ -19,11 +19,12 @@ public interface IConnectionStore
 
     /**
      * This will go to the persistent connection store and retrieve a
-     * list of the available and known connections
+     * map of the available and known connections
      * 
-     * @return an array of the names of the connections
+     * @return a map of the names and connection details of the
+     *         connections
      */
-    Set<String> getListOfKnownConnectionNames();
+    Map<String, ConnectionDetails> getKnownConnections();
 
     /**
      * Checks to see if a connection exists already (by name only)

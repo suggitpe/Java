@@ -76,7 +76,8 @@ public class EditConnectionAction extends Action
         if ( mConnectionToEdit_ == null || mConnectionToEdit_.length() == 0 )
         {
             SelectConnectionDialog rcd = new SelectConnectionDialog( s,
-                                                                     mConnectionStore_.getListOfKnownConnectionNames(),
+                                                                     mConnectionStore_.getKnownConnections()
+                                                                         .keySet(),
                                                                      "Edit existing connection",
                                                                      "Select the connection that you wish to edit from the below list" );
             int ok = rcd.open();

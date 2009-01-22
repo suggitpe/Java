@@ -5,6 +5,7 @@
 package org.suggs.apps.mercury.model.connection.connectionmanager.impl;
 
 import org.suggs.apps.mercury.ContextProvider;
+import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.connection.connection.IConnection;
 import org.suggs.apps.mercury.model.connection.connection.impl.Connection;
 import org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager;
@@ -51,9 +52,10 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
     {
         mConnStore_ = (IConnectionStore) ContextProvider.instance()
             .getBean( "connectionStoreManager" );
-        for ( String s : mConnStore_.getListOfKnownConnectionNames() )
+        Map<String, ConnectionDetails> map = mConnStore_.getKnownConnections();
+        for ( String s : map.keySet() )
         {
-            mConnectionMap_.put( s, new Connection() );
+            mConnectionMap_.put( s, new Connection( map.get( s ) ) );
         }
         mConnStore_.addConnectionStoreChangeListener( this );
     }
@@ -102,7 +104,16 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
         {
             case CREATE:
                 LOG.debug( "Adding " + aConnectionName + " to conn mgr" );
-                mConnectionMap_.put( aConnectionName, new Connection() );
+                try
+                {
+                    mConnectionMap_.put( aConnectionName,
+                                         new Connection( mConnStore_.loadConnectionParameters( aConnectionName ) ) );
+                }
+                catch ( ConnectionStoreException cse )
+                {
+                    LOG.warn( "Failed to load connection parameters from the connection store for connection ["
+                              + aConnectionName + "]" );
+                }
                 notifyAllListeners( aConnectionName,
                                     IConnectionManagerListener.ConnectionManagerEvent.CREATE );
                 break;

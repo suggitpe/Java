@@ -79,7 +79,8 @@ public class RemoveConnectionAction extends Action implements InitializingBean
         if ( mConnectionToRemove_ == null || mConnectionToRemove_.length() == 0 )
         {
             SelectConnectionDialog rcd = new SelectConnectionDialog( s,
-                                                                     mConnectionStore_.getListOfKnownConnectionNames(),
+                                                                     mConnectionStore_.getKnownConnections()
+                                                                         .keySet(),
                                                                      "Remove existing connection",
                                                                      "Select the connection that you wish to remove from the below list" );
             int ok = rcd.open();

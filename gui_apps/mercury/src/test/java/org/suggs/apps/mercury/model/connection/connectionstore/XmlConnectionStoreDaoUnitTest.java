@@ -79,7 +79,7 @@ public class XmlConnectionStoreDaoUnitTest
         EasyMock.replay( mMapMock_ );
 
         // ------- TEST EXEC
-        Set<String> set = mDao_.getListOfKnownConnectionNames();
+        Set<String> set = mDao_.getKnownConnections().keySet();
         LOG.debug( "Connection list returned: " + set );
 
         Assert.assertTrue( set.size() == 2 );
@@ -111,7 +111,7 @@ public class XmlConnectionStoreDaoUnitTest
         EasyMock.replay( mMapMock_ );
 
         // ------- TEST EXEC
-        Set<String> set = mDao_.getListOfKnownConnectionNames();
+        Set<String> set = mDao_.getKnownConnections().keySet();
         LOG.debug( "Connection list returned: " + set );
 
         Assert.assertTrue( set.size() == 0 );
