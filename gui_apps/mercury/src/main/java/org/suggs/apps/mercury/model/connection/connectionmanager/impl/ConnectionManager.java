@@ -89,6 +89,14 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
     }
 
     /**
+     * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#getConnection(java.lang.String)
+     */
+    public IConnection getConnection( String aConnectionName )
+    {
+        return mConnectionMap_.get( aConnectionName );
+    }
+
+    /**
      * This is the part where we have registered interest in any
      * changes in the connection store so that we can correctly
      * reflect these changes in the manager (and those that register

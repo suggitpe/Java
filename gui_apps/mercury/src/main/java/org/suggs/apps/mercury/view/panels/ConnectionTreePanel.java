@@ -27,6 +27,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -143,14 +144,6 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener#handleConnectionStoreChange()
-     */
-    public void handleConnectionStoreChange()
-    {
-        mViewer_.setInput( createConnectionData() );
-    }
-
-    /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener#handleConnectionManagerChange(java.lang.String,
      *      org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener.ConnectionManagerEvent)
      */
@@ -162,18 +155,43 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
                 mViewer_.setInput( createConnectionData() );
                 break;
             case EDIT:
-                mViewer_.setInput( createConnectionData() );
+                // no change to the tree
                 break;
             case REMOVE:
                 mViewer_.setInput( createConnectionData() );
                 break;
             default:
-                throw new IllegalStateException( "Unknown ConnectionStoreEvent ["
+                throw new IllegalStateException( "Unknown ConnectionStoreEvent received ["
                                                  + aEvent.toString() + "]" );
         }
-
         mViewer_.expandAll();
+    }
 
+    /**
+     * Recursive algorithm to find the required text in the tree
+     * 
+     * @param aStart
+     *            the starting treeitem
+     * @param aText
+     *            the text to look for
+     * @return the tree item that we are looking for
+     */
+    TreeItem findTreeItem( TreeItem aStart, String aText )
+    {
+        if ( aStart.getText().equals( aText ) )
+        {
+            return aStart;
+        }
+
+        for ( TreeItem t : aStart.getItems() )
+        {
+            TreeItem tr = findTreeItem( t, aText );
+            if ( tr != null )
+            {
+                return tr;
+            }
+        }
+        return null;
     }
 
     /**

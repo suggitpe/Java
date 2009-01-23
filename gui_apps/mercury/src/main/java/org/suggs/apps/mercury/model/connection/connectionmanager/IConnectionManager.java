@@ -4,6 +4,7 @@
  */
 package org.suggs.apps.mercury.model.connection.connectionmanager;
 
+import org.suggs.apps.mercury.model.connection.connection.IConnection;
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 
 /**
@@ -27,6 +28,13 @@ public interface IConnectionManager
      *         name.
      */
     boolean containsConnection( String aConnectionName );
+
+    /**
+     * Gets a connection from the connection manager
+     * 
+     * @return a connection
+     */
+    IConnection getConnection( String aConnectionName );
 
     /**
      * delete me wjhen this ois done properly TODO: deleyte me

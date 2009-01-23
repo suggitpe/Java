@@ -4,6 +4,8 @@
  */
 package org.suggs.apps.mercury.model.connection.connection;
 
+import org.suggs.apps.mercury.model.connection.ConnectionDetails;
+
 /**
  * TODO Write javadoc for IConnection
  * 
@@ -12,5 +14,12 @@ package org.suggs.apps.mercury.model.connection.connection;
  */
 public interface IConnection
 {
+
+    /**
+     * Getter for the connection details
+     * 
+     * @return
+     */
+    ConnectionDetails getConnectionDetails();
 
 }

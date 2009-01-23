@@ -5,6 +5,7 @@
 package org.suggs.apps.mercury.model.connection.connectionstore;
 
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
+import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener.ConnectionStoreEvent;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.XmlConnectionStoreDao;
 
@@ -61,7 +62,7 @@ public class XmlConnectionStoreDaoUnitTest
      * @throws ConnectionStoreException.
      */
     @Test
-    public void testFullGetListOfKnownConnectionNames() throws ConnectionStoreException
+    public void testFullGetKnownConnections() throws ConnectionStoreException
     {
         // prepare data for the mock object
         final String TEST_1 = "test1";
@@ -100,7 +101,7 @@ public class XmlConnectionStoreDaoUnitTest
      * @throws ConnectionStoreException.
      */
     @Test
-    public void testEmptyGetListOfKnownConnectionNames() throws ConnectionStoreException
+    public void testEmptyGetKnownConnections() throws ConnectionStoreException
     {
         // ------- MOCK PREP
         EasyMock.expect( mMock_.readConnectionData() ).andReturn( mMapMock_ ).times( 1 );
@@ -375,6 +376,109 @@ public class XmlConnectionStoreDaoUnitTest
         EasyMock.verify( mMapMock_ );
 
         LOG.debug( "Test has successfully failed to retrieve a connection called [" + LOAD_ME + "]" );
+    }
+
+    /**
+     * This test will verify that the listeners are added and removed
+     * when the api call is made.
+     */
+    @Test
+    public void testAddListenersForDelete() throws ConnectionStoreException
+    {
+        IConnectionStoreChangeListener mockList = EasyMock.createStrictMock( IConnectionStoreChangeListener.class );
+        final String TO_DELETE = "to_delete";
+
+        // ------- MOCK PREP
+        EasyMock.expect( mMock_.readConnectionData() ).andReturn( mMapMock_ ).times( 1 );
+
+        EasyMock.expect( new Boolean( mMapMock_.containsKey( TO_DELETE ) ) )
+            .andReturn( new Boolean( true ) )
+            .times( 1 );
+
+        mMapMock_.remove( TO_DELETE );
+        EasyMock.expectLastCall().andReturn( mMapMock_ ).times( 1 );
+
+        mMock_.saveConnectionData( mMapMock_ );
+        EasyMock.expectLastCall().times( 1 );
+
+        mockList.handleConnectionStoreChange( (String) EasyMock.anyObject(),
+                                              (ConnectionStoreEvent) EasyMock.anyObject() );
+        EasyMock.expectLastCall().times( 1 );
+
+        // ------- MOCK LOAD
+        EasyMock.replay( mMock_ );
+        EasyMock.replay( mMapMock_ );
+        EasyMock.replay( mockList );
+
+        // ------- TEST EXEC
+        mDao_.addConnectionStoreChangeListener( mockList );
+        try
+        {
+            mDao_.deleteNamedConnection( TO_DELETE );
+
+        }
+        catch ( ConnectionStoreException e )
+        {
+            LOG.error( "Failed to delete connection with name [" + TO_DELETE + "]", e );
+            Assert.fail( "Failed to delete connection with the name [" + TO_DELETE + "]" );
+        }
+
+        // ------- MOCK VERIFY
+        EasyMock.verify( mMock_ );
+        EasyMock.verify( mMapMock_ );
+        EasyMock.verify( mockList );
+
+        LOG.debug( "Test has correctly called remove and save on the underlying containers" );
+    }
+
+    /**
+     * This test will verify that the listeners are added and removed
+     * when the api call is made.
+     */
+    @Test
+    public void testAddAndRemoveListenersForDelete() throws ConnectionStoreException
+    {
+        IConnectionStoreChangeListener mockList = EasyMock.createStrictMock( IConnectionStoreChangeListener.class );
+        final String TO_DELETE = "to_delete";
+
+        // ------- MOCK PREP
+        EasyMock.expect( mMock_.readConnectionData() ).andReturn( mMapMock_ ).times( 1 );
+
+        EasyMock.expect( new Boolean( mMapMock_.containsKey( TO_DELETE ) ) )
+            .andReturn( new Boolean( true ) )
+            .times( 1 );
+
+        mMapMock_.remove( TO_DELETE );
+        EasyMock.expectLastCall().andReturn( mMapMock_ ).times( 1 );
+
+        mMock_.saveConnectionData( mMapMock_ );
+        EasyMock.expectLastCall().times( 1 );
+
+        // ------- MOCK LOAD
+        EasyMock.replay( mMock_ );
+        EasyMock.replay( mMapMock_ );
+        EasyMock.replay( mockList );
+
+        // ------- TEST EXEC
+        mDao_.addConnectionStoreChangeListener( mockList );
+        mDao_.removeConnectionStoreChangeListener( mockList );
+        try
+        {
+            mDao_.deleteNamedConnection( TO_DELETE );
+
+        }
+        catch ( ConnectionStoreException e )
+        {
+            LOG.error( "Failed to delete connection with name [" + TO_DELETE + "]", e );
+            Assert.fail( "Failed to delete connection with the name [" + TO_DELETE + "]" );
+        }
+
+        // ------- MOCK VERIFY
+        EasyMock.verify( mMock_ );
+        EasyMock.verify( mMapMock_ );
+        EasyMock.verify( mockList );
+
+        LOG.debug( "Test has correctly called remove and save on the underlying containers" );
     }
 
     /**

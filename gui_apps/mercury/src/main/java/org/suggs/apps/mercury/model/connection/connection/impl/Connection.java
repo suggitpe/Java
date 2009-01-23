@@ -30,4 +30,12 @@ public class Connection implements IConnection
         mDetails_ = aDetails;
     }
 
+    /**
+     * @see org.suggs.apps.mercury.model.connection.connection.IConnection#getConnectionDetails()
+     */
+    public ConnectionDetails getConnectionDetails()
+    {
+        return mDetails_;
+    }
+
 }
