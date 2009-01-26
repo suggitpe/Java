@@ -6,6 +6,7 @@ package org.suggs.apps.mercury.view.actions.connection;
 
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
+import org.suggs.apps.mercury.model.util.image.ImageManager;
 import org.suggs.apps.mercury.view.dialogs.SelectConnectionDialog;
 
 import org.eclipse.jface.action.Action;
@@ -32,6 +33,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean
 
     {
         setToolTipText( "Remove an existing connection" );
+        setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_DELETE ) );
     }
 
     /**

@@ -7,6 +7,7 @@ package org.suggs.apps.mercury.view.actions.connection;
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
+import org.suggs.apps.mercury.model.util.image.ImageManager;
 import org.suggs.apps.mercury.view.wizards.createconnection.CreateConnectionWizard;
 
 import org.apache.commons.logging.Log;
@@ -43,6 +44,7 @@ public class CreateConnectionAction extends Action implements InitializingBean
     {
         super( "&Create Connection" );
         setToolTipText( "Create new connection" );
+        setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONN_NEW_CONN ) );
     }
 
     /**

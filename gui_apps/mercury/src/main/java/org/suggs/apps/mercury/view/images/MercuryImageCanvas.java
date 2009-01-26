@@ -43,8 +43,7 @@ public class MercuryImageCanvas extends Canvas
 
             public void paintControl( PaintEvent pe )
             {
-                InputStream is = ImageManager.getImageStream( getClass().getClassLoader(),
-                                                              ImageManager.IMAGE_MERCURY );
+                InputStream is = ImageManager.getImageStream( ImageManager.IMAGE_MERCURY );
                 if ( is == null )
                 {
                     LOG.warn( "Cannot find image [" + IMG + "]" );

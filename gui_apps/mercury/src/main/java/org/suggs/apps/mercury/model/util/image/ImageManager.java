@@ -17,23 +17,27 @@ import org.eclipse.jface.resource.ImageDescriptor;
 public class ImageManager
 {
 
-    public static final String IMAGE_CONNECTION = "images/connect.png";
     public static final String IMAGE_MERCURY = "images/mercury.png";
+    public static final String IMAGE_CONNECTION = "images/connect.png";
+    public static final String IMAGE_CONN_DISCONNECT = "images/conn-disconnect.gif";
+    public static final String IMAGE_CONN_CONNECT = "images/";
+    public static final String IMAGE_CONN_NEW_CONN = "images/conn-new.gif";
+    public static final String IMAGE_CONN_EDIT_CONN = "images/conn-edit.gif";
+    public static final String IMAGE_DELETE = "images/conn-delete.gif";
 
     /**
      * This static method will utilise the passed in classloader to
      * retrieve the image from the classpath and create it into an
      * ImageDescriptor to be used.
      * 
-     * @param loader
-     *            the classloader from which the image can be loaded
      * @param imagename
      *            the name of the image to load
      * @return an Image descriptor object for the passed in image name
      */
-    public static final ImageDescriptor getImageDescriptor( ClassLoader loader, String imagename )
+    public static final ImageDescriptor getImageDescriptor( String imagename )
     {
-        return ImageDescriptor.createFromURL( loader.getResource( imagename ) );
+        return ImageDescriptor.createFromURL( ImageManager.class.getClassLoader()
+            .getResource( imagename ) );
     }
 
     /**
@@ -41,15 +45,13 @@ public class ImageManager
      * retrieve the image fromt he classpath and return it as a
      * stream.
      * 
-     * @param loader
-     *            the classloader from which the image can be loaded
      * @param imagename
      *            the name of the image to load
      * @return an input stream for the image from the classpath
      */
-    public static final InputStream getImageStream( ClassLoader loader, String imagename )
+    public static final InputStream getImageStream( String imagename )
     {
-        return loader.getResourceAsStream( imagename );
+        return ImageManager.class.getClassLoader().getResourceAsStream( imagename );
     }
 
 }

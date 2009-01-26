@@ -50,8 +50,7 @@ public class CreateConnectionWizard extends Wizard
     {
         super();
         setWindowTitle( "Create Connection Wizard" );
-        setDefaultPageImageDescriptor( ImageManager.getImageDescriptor( getClass().getClassLoader(),
-                                                                        ImageManager.IMAGE_CONNECTION ) );
+        setDefaultPageImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONNECTION ) );
     }
 
     /**

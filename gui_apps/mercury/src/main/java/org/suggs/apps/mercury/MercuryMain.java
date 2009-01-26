@@ -69,8 +69,7 @@ public class MercuryMain extends ApplicationWindow
     {
         getShell().setText( "Mercury messenger" );
         getShell().setImage( new Image( getShell().getDisplay(),
-                                        ImageManager.getImageStream( getClass().getClassLoader(),
-                                                                     ImageManager.IMAGE_MERCURY ) ) );
+                                        ImageManager.getImageStream( ImageManager.IMAGE_MERCURY ) ) );
 
         new MainWindow( parent );
 
