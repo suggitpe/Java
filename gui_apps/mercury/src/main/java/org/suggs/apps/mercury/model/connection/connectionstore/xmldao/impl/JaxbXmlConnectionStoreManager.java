@@ -65,7 +65,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
         }
         catch ( JAXBException je )
         {
-            throw new IllegalStateException( "Unable to create JAXB context in Connection Store Manager",
+            throw new IllegalStateException( "Unable to create JAXB context in ConnectionContext Store Manager",
                                              je );
         }
 

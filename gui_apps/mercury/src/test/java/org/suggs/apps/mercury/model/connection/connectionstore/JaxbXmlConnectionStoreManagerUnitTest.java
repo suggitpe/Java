@@ -22,7 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * This test tests the Jaxb Xml Connection Store Manager using a Mock
+ * This test tests the Jaxb Xml ConnectionContext Store Manager using a Mock
  * for the File Manager.
  * 
  * @author suggitpe

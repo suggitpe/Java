@@ -4,6 +4,7 @@
  */
 package org.suggs.apps.mercury.view.actions.help;
 
+import org.suggs.apps.mercury.model.util.image.ImageManager;
 import org.suggs.apps.mercury.view.dialogs.HelpAboutDialog;
 
 import org.eclipse.jface.action.Action;
@@ -25,6 +26,7 @@ public class AboutAction extends Action
     {
         super( "&About" );
         setToolTipText( "Info about Mercury" );
+        setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_MERCURY_SMALL ) );
     }
 
     /**

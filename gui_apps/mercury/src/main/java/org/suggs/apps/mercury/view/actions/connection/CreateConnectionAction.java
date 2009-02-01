@@ -42,7 +42,7 @@ public class CreateConnectionAction extends Action implements InitializingBean
      */
     public CreateConnectionAction()
     {
-        super( "&Create Connection" );
+        super( "&Create ConnectionContext" );
         setToolTipText( "Create new connection" );
         setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONN_NEW_CONN ) );
     }
@@ -100,7 +100,7 @@ public class CreateConnectionAction extends Action implements InitializingBean
                 };
 
                 InputDialog id = new InputDialog( Display.getCurrent().getActiveShell(),
-                                                  "New Connection name",
+                                                  "New ConnectionContext name",
                                                   "The connection name you have chosen has already been used",
                                                   "newConnection_" + System.currentTimeMillis(),
                                                   validator );
@@ -130,7 +130,7 @@ public class CreateConnectionAction extends Action implements InitializingBean
             catch ( ConnectionStoreException cse )
             {
                 MessageDialog.openWarning( Display.getCurrent().getActiveShell(),
-                                           "Connection Store error",
+                                           "ConnectionContext Store error",
                                            "Failed to store new connection:\n" + cse.getMessage() );
             }
 

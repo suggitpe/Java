@@ -11,7 +11,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * This is the abstract class for all of the Create Connection wizard
+ * This is the abstract class for all of the Create ConnectionContext wizard
  * pages and manages the majority of the boiler plate code that is
  * required.
  * 

@@ -34,14 +34,14 @@ public class CreateConnectionWizard extends Wizard
     private static final Log LOG = LogFactory.getLog( CreateConnectionWizard.class );
     private ConnectionDetails mConnDetails_;
 
-    public static final String CONN_NAME = "Connection Name";
-    public static final String CONN_TYPE = "Connection Type";
-    public static final String CONN_HOST = "Connection Hostname";
-    public static final String CONN_PORT = "Connection Port";
-    public static final String CONN_SEC = "Connection Security Set";
-    public static final String CONN_USER = "Connection Username";
-    public static final String CONN_PASS = "Connection Password";
-    public static final String CONN_CHANNEL = "Connection Channel name";
+    public static final String CONN_NAME = "ConnectionContext Name";
+    public static final String CONN_TYPE = "ConnectionContext Type";
+    public static final String CONN_HOST = "ConnectionContext Hostname";
+    public static final String CONN_PORT = "ConnectionContext Port";
+    public static final String CONN_SEC = "ConnectionContext Security Set";
+    public static final String CONN_USER = "ConnectionContext Username";
+    public static final String CONN_PASS = "ConnectionContext Password";
+    public static final String CONN_CHANNEL = "ConnectionContext Channel name";
 
     /**
      * Constructs a new instance.
@@ -49,8 +49,8 @@ public class CreateConnectionWizard extends Wizard
     public CreateConnectionWizard()
     {
         super();
-        setWindowTitle( "Create Connection Wizard" );
-        setDefaultPageImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONNECTION ) );
+        setWindowTitle( "Create ConnectionContext Wizard" );
+        setDefaultPageImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONN_CONNECTION ) );
     }
 
     /**

@@ -52,7 +52,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
      */
     public ConnectionDataSummaryPage()
     {
-        super( PAGE_NAME, "Create Connection Summary Page" );
+        super( PAGE_NAME, "Create ConnectionContext Summary Page" );
         setPageComplete( true );
         setDescription( "Please review the connection data provided here before hitting finish." );
     }
@@ -148,7 +148,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
             setLayout( new GridLayout( 1, false ) );
 
             final Button test = new Button( this, SWT.PUSH );
-            test.setText( "Test Connection" );
+            test.setText( "Test ConnectionContext" );
             test.addSelectionListener( new SelectionAdapter()
             {
 

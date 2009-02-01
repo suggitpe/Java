@@ -41,7 +41,7 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
     @SuppressWarnings("unchecked")
     public SelectConnectionTypePage()
     {
-        super( PAGE_NAME, "Connection Type Selection" );
+        super( PAGE_NAME, "ConnectionContext Type Selection" );
         setDescription( "Select the middleware implementation from the list below" );
 
         HashMap map = (HashMap) ContextProvider.instance().getBean( "adapterList" );
@@ -114,7 +114,7 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
             setLayout( new GridLayout( 2, false ) );
 
             // build the name entry textbox
-            new Label( this, SWT.NONE ).setText( "Connection Name:" );
+            new Label( this, SWT.NONE ).setText( "ConnectionContext Name:" );
             final Text name = new Text( this, SWT.BORDER );
             name.setLayoutData( TEXT_BOX_STYLE );
             name.addModifyListener( new ModifyListener()
@@ -128,7 +128,7 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
             } );
 
             // build the middleware selector
-            new Label( this, SWT.CENTER ).setText( "Connection Type:" );
+            new Label( this, SWT.CENTER ).setText( "ConnectionContext Type:" );
             final Combo combo = new Combo( this, SWT.DROP_DOWN );
             combo.setLayoutData( TEXT_BOX_STYLE );
             combo.setItems( mOptions_ );

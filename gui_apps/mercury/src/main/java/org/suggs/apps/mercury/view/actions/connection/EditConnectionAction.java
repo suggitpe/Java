@@ -39,7 +39,7 @@ public class EditConnectionAction extends Action
     public EditConnectionAction()
     {
         super();
-        setText( "&Edit Connection" );
+        setText( "&Edit ConnectionContext" );
     }
 
     /**

@@ -81,7 +81,7 @@ public class XmlConnectionStoreDaoUnitTest
 
         // ------- TEST EXEC
         Set<String> set = mDao_.getKnownConnections().keySet();
-        LOG.debug( "Connection list returned: " + set );
+        LOG.debug( "ConnectionContext list returned: " + set );
 
         Assert.assertTrue( set.size() == 2 );
         Assert.assertTrue( set.contains( TEST_1 ) );
@@ -113,7 +113,7 @@ public class XmlConnectionStoreDaoUnitTest
 
         // ------- TEST EXEC
         Set<String> set = mDao_.getKnownConnections().keySet();
-        LOG.debug( "Connection list returned: " + set );
+        LOG.debug( "ConnectionContext list returned: " + set );
 
         Assert.assertTrue( set.size() == 0 );
 
@@ -237,7 +237,7 @@ public class XmlConnectionStoreDaoUnitTest
 
         // ------- TEST EXEC
         boolean exists = mDao_.doesConnectionExist( FIND_ME );
-        LOG.debug( "Connection exists test for connection [" + FIND_ME + "] returns [" + exists
+        LOG.debug( "ConnectionContext exists test for connection [" + FIND_ME + "] returns [" + exists
                    + "]" );
         if ( !exists )
         {
@@ -273,7 +273,7 @@ public class XmlConnectionStoreDaoUnitTest
 
         // ------- TEST EXEC
         boolean exists = mDao_.doesConnectionExist( DONT_FIND_ME );
-        LOG.debug( "Connection exists test for connection [" + DONT_FIND_ME + "] returns ["
+        LOG.debug( "ConnectionContext exists test for connection [" + DONT_FIND_ME + "] returns ["
                    + exists + "]" );
         if ( exists )
         {

@@ -12,6 +12,7 @@ import org.suggs.apps.mercury.view.actions.ActionManager;
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.ToolBarManager;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -83,6 +84,8 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
         main.add( mgr.getAction( "CREATE_CONNECTION" ) );
         main.add( mgr.getAction( "EDIT_CONNECTION" ) );
         main.add( mgr.getAction( "REMOVE_CONNECTION" ) );
+
+        main.add( new Separator() );
 
         return main;
     }

@@ -20,7 +20,7 @@ public class IbmMqAdapter extends AbstractMercuryAdapter
     private static final String FRIENDLY_NAME = "IBM MQ Adapter";
 
     /**
-     * @see org.suggs.apps.mercury.model.adapters.IMercuryConnectionAdapter#getFriendlyName()
+     * @see org.suggs.apps.mercury.model.adapters.IConnectionAdapter#getFriendlyName()
      */
     public String getFriendlyName()
     {
@@ -28,7 +28,7 @@ public class IbmMqAdapter extends AbstractMercuryAdapter
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.adapters.IMercuryConnectionAdapter#getType()
+     * @see org.suggs.apps.mercury.model.adapters.IConnectionAdapter#getType()
      */
     public String getType()
     {

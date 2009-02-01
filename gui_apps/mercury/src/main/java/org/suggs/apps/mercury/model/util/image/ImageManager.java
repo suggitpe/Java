@@ -18,12 +18,16 @@ public class ImageManager
 {
 
     public static final String IMAGE_MERCURY = "images/mercury.png";
-    public static final String IMAGE_CONNECTION = "images/connect.png";
-    public static final String IMAGE_CONN_DISCONNECT = "images/conn-disconnect.gif";
-    public static final String IMAGE_CONN_CONNECT = "images/";
-    public static final String IMAGE_CONN_NEW_CONN = "images/conn-new.gif";
-    public static final String IMAGE_CONN_EDIT_CONN = "images/conn-edit.gif";
-    public static final String IMAGE_DELETE = "images/conn-delete.gif";
+    public static final String IMAGE_MERCURY_SMALL = "images/mercury-small.png";
+
+    public static final String IMAGE_EXIT = "images/exit.png";
+
+    public static final String IMAGE_CONN_CONNECTION = "images/connect.png";
+    public static final String IMAGE_CONN_DISCONNECT = "images/conn-disconnect.png";
+    public static final String IMAGE_CONN_CONNECT = "images/conn-connect.png";
+    public static final String IMAGE_CONN_NEW_CONN = "images/conn-create.png";
+    public static final String IMAGE_CONN_EDIT_CONN = "images/conn-edit.png";
+    public static final String IMAGE_CONN_REMOVE_CONN = "images/conn-remove.png";
 
     /**
      * This static method will utilise the passed in classloader to

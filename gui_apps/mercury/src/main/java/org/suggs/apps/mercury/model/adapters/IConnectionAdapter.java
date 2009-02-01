@@ -11,7 +11,7 @@ package org.suggs.apps.mercury.model.adapters;
  * @author suggitpe
  * @version 1.0 10 Nov 2008
  */
-public interface IMercuryConnectionAdapter
+public interface IConnectionAdapter
 {
 
     /**

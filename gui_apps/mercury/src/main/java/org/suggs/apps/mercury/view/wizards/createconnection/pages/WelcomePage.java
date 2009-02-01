@@ -27,7 +27,7 @@ public class WelcomePage extends AbstractCreateConnectionPage
     public WelcomePage()
     {
         super( PAGE_NAME, "Welcome" );
-        setDescription( "Welcome to the Create Connection Wizard" );
+        setDescription( "Welcome to the Create ConnectionContext Wizard" );
         setPageComplete( true );
     }
 

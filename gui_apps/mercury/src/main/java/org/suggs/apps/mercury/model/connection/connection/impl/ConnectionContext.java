@@ -1,5 +1,5 @@
 /*
- * Connection.java created on 20 Jan 2009 19:41:12 by suggitpe for project GUI - Mercury
+ * ConnectionContext.java created on 20 Jan 2009 19:41:12 by suggitpe for project GUI - Mercury
  * 
  */
 package org.suggs.apps.mercury.model.connection.connection.impl;
@@ -11,21 +11,21 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * TODO Write javadoc for Connection
+ * TODO Write javadoc for ConnectionContext
  * 
  * @author suggitpe
  * @version 1.0 20 Jan 2009
  */
-public class Connection implements IConnection
+public class ConnectionContext implements IConnection
 {
 
-    private static final Log LOG = LogFactory.getLog( Connection.class );
+    private static final Log LOG = LogFactory.getLog( ConnectionContext.class );
     private ConnectionDetails mDetails_;
 
     /**
      * Constructs a new instance.
      */
-    public Connection( ConnectionDetails aDetails )
+    public ConnectionContext( ConnectionDetails aDetails )
     {
         mDetails_ = aDetails;
     }

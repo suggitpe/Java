@@ -7,7 +7,7 @@ package org.suggs.apps.mercury.model.connection.connectionmanager.impl;
 import org.suggs.apps.mercury.ContextProvider;
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.connection.connection.IConnection;
-import org.suggs.apps.mercury.model.connection.connection.impl.Connection;
+import org.suggs.apps.mercury.model.connection.connection.impl.ConnectionContext;
 import org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager;
 import org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener;
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
@@ -55,7 +55,7 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
         Map<String, ConnectionDetails> map = mConnStore_.getKnownConnections();
         for ( String s : map.keySet() )
         {
-            mConnectionMap_.put( s, new Connection( map.get( s ) ) );
+            mConnectionMap_.put( s, new ConnectionContext( map.get( s ) ) );
         }
         mConnStore_.addConnectionStoreChangeListener( this );
     }
@@ -115,7 +115,7 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
                 try
                 {
                     mConnectionMap_.put( aConnectionName,
-                                         new Connection( mConnStore_.loadConnectionParameters( aConnectionName ) ) );
+                                         new ConnectionContext( mConnStore_.loadConnectionParameters( aConnectionName ) ) );
                 }
                 catch ( ConnectionStoreException cse )
                 {

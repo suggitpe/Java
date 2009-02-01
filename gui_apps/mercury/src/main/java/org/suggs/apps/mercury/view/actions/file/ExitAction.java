@@ -4,6 +4,8 @@
  */
 package org.suggs.apps.mercury.view.actions.file;
 
+import org.suggs.apps.mercury.model.util.image.ImageManager;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.Action;
@@ -27,6 +29,7 @@ public class ExitAction extends Action
     {
         super( "&Exit" );
         setToolTipText( "Exit Mercury application" );
+        setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_EXIT ) );
     }
 
     /**

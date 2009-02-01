@@ -33,7 +33,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean
 
     {
         setToolTipText( "Remove an existing connection" );
-        setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_DELETE ) );
+        setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONN_REMOVE_CONN ) );
     }
 
     /**
@@ -42,7 +42,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean
     public RemoveConnectionAction()
     {
         super();
-        setText( "&Remove Connection" );
+        setText( "&Remove ConnectionContext" );
     }
 
     /**
@@ -110,7 +110,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean
             if ( !mConnectionStore_.doesConnectionExist( mConnectionToRemove_ ) )
             {
                 MessageDialog.openError( s,
-                                         "Connection removal error",
+                                         "ConnectionContext removal error",
                                          "The connection [" + mConnectionToRemove_
                                                          + "] does not actually exist" );
                 return;
@@ -124,7 +124,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean
             catch ( ConnectionStoreException e )
             {
                 MessageDialog.openError( s,
-                                         "Connection removal error",
+                                         "ConnectionContext removal error",
                                          "Failed to remove connection [conn] because of the following error\n"
                                                          + e.getMessage() );
             }

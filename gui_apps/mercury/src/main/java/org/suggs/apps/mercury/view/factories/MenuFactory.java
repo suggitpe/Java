@@ -74,7 +74,7 @@ public class MenuFactory implements IMenuFactory, InitializingBean
         // create the top level menus
         MenuManager file = new MenuManager( "File" );
         main.add( file );
-        MenuManager conn = new MenuManager( "Connection" );
+        MenuManager conn = new MenuManager( "ConnectionContext" );
         main.add( conn );
         MenuManager help = new MenuManager( "Help" );
         main.add( help );
