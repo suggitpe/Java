@@ -15,7 +15,7 @@ import org.suggs.apps.mercury.model.adapters.support.AbstractMercuryAdapter;
 public class IbmMqAdapter extends AbstractMercuryAdapter
 {
 
-    public static final String TYPE = "IBM_MQ";
+    public static final CONNECTION_TYPE TYPE = CONNECTION_TYPE.IBM_MQ;
 
     private static final String FRIENDLY_NAME = "IBM MQ Adapter";
 
@@ -32,7 +32,7 @@ public class IbmMqAdapter extends AbstractMercuryAdapter
      */
     public String getType()
     {
-        return TYPE;
+        return TYPE.toString();
     }
 
 }

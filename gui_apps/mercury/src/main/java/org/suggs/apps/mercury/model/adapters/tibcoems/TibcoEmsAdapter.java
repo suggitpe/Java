@@ -15,7 +15,7 @@ import org.suggs.apps.mercury.model.adapters.support.AbstractMercuryAdapter;
 public class TibcoEmsAdapter extends AbstractMercuryAdapter
 {
 
-    public static final String TYPE = "TIBCO_EMS";
+    public static final CONNECTION_TYPE TYPE = CONNECTION_TYPE.TIBCO_EMS;
 
     private static final String FRIENDLY_NAME = "Tibco Ems Adapter";
 
@@ -32,7 +32,7 @@ public class TibcoEmsAdapter extends AbstractMercuryAdapter
      */
     public String getType()
     {
-        return TYPE;
+        return TYPE.toString();
     }
 
 }
