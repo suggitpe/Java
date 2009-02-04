@@ -14,6 +14,6 @@ import org.junit.runners.Suite;
  * @version 1.0 10 Dec 2008
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( {})
+@Suite.SuiteClasses( { ConnectionStateManagerUnitTests.class })
 public class AllConnectionUnitTests
 {}
