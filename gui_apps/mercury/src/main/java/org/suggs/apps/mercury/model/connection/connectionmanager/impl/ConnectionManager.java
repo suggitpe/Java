@@ -6,8 +6,8 @@ package org.suggs.apps.mercury.model.connection.connectionmanager.impl;
 
 import org.suggs.apps.mercury.ContextProvider;
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
+import org.suggs.apps.mercury.model.connection.connection.ConnectionContext;
 import org.suggs.apps.mercury.model.connection.connection.IConnection;
-import org.suggs.apps.mercury.model.connection.connection.impl.ConnectionContext;
 import org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager;
 import org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener;
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
@@ -174,7 +174,7 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#removeConnectionManagerListsner(org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener)
      */
-    public void removeConnectionManagerListsner( IConnectionManagerListener aListener )
+    public void removeConnectionManagerListener( IConnectionManagerListener aListener )
     {
         mListsners.remove( aListener );
     }

@@ -55,8 +55,8 @@ public interface IConnectionManager
      * Removes a connection manager listener
      * 
      * @param aListener
-     *            a connection manager listsner to remove
+     *            a connection manager listener to remove
      */
-    void removeConnectionManagerListsner( IConnectionManagerListener aListener );
+    void removeConnectionManagerListener( IConnectionManagerListener aListener );
 
 }
