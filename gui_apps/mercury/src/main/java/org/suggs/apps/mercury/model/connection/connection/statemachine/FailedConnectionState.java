@@ -31,24 +31,6 @@ public class FailedConnectionState implements IConnectionState
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connection.statemachine.IConnectionState#connectTransition()
-     */
-    public boolean connect()
-    {
-        mContext_.setToConnectedState();
-        return true;
-    }
-
-    /**
-     * @see org.suggs.apps.mercury.model.connection.connection.statemachine.IConnectionState#disconnectTransition()
-     */
-    public boolean disconnect()
-    {
-        LOG.info( "Connection previously failed to connect" );
-        return false;
-    }
-
-    /**
      * @see org.suggs.apps.mercury.model.connection.connection.statemachine.IConnectionState#getState()
      */
     public String getState()

@@ -31,24 +31,6 @@ public class ConnectedConnectionState implements IConnectionState
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connection.statemachine.IConnectionState#connectTransition()
-     */
-    public boolean connect()
-    {
-        LOG.info( "Connection already connected" );
-        return false;
-    }
-
-    /**
-     * @see org.suggs.apps.mercury.model.connection.connection.statemachine.IConnectionState#disconnectTransition()
-     */
-    public boolean disconnect()
-    {
-        mContext_.setToDisconnectedState();
-        return true;
-    }
-
-    /**
      * @see org.suggs.apps.mercury.model.connection.connection.statemachine.IConnectionState#getState()
      */
     public String getState()

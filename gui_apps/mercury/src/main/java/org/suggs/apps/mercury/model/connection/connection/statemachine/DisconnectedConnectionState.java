@@ -32,24 +32,6 @@ public class DisconnectedConnectionState implements IConnectionState
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connection.statemachine.IConnectionState#connect()
-     */
-    public boolean connect()
-    {
-        mContext_.setToConnectedState();
-        return true;
-    }
-
-    /**
-     * @see org.suggs.apps.mercury.model.connection.connection.statemachine.IConnectionState#disconnect()
-     */
-    public boolean disconnect()
-    {
-        LOG.info( "Connection already disconnected" );
-        return false;
-    }
-
-    /**
      * @see org.suggs.apps.mercury.model.connection.connection.statemachine.IConnectionState#getState()
      */
     public String getState()

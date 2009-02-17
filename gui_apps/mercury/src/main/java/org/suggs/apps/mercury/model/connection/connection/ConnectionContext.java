@@ -62,8 +62,22 @@ public class ConnectionContext implements IConnection
      */
     public void connect()
     {
-        if ( mCurrentState_.connect() )
+        LOG.debug( "Connecting" );
+        if ( !mCurrentState_.performConnect() )
         {
+            // throw error
+        }
+
+        // do connect logic
+
+        if ( !mCurrentState_.failToConnect() )
+        {
+            // throw error
+        }
+
+        if ( !mCurrentState_.completeConnect() )
+        {
+            // throw error
         }
     }
 
@@ -72,8 +86,17 @@ public class ConnectionContext implements IConnection
      */
     public void disconnect()
     {
-        if ( mCurrentState_.disconnect() )
+        LOG.debug( "Disconnecting" );
+        if ( !mCurrentState_.performDisconnect() )
         {
+            // throw error
+        }
+
+        // perform disconnect
+
+        if ( !mCurrentState_.completeDisconnect() )
+        {
+            // throw error
         }
     }
 

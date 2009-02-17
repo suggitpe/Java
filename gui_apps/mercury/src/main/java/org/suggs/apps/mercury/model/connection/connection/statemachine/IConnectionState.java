@@ -26,14 +26,39 @@ public interface IConnectionState
     };
 
     /**
-     * Transition to a connected state.
+     * Perform the connection process
+     * 
+     * @return true if the transition is allowed
      */
-    boolean connect();
+    boolean performConnect();
 
     /**
-     * Transition to a disconnected state
+     * Complete the connection
+     * 
+     * @return true if the transition is allowed
      */
-    boolean disconnect();
+    boolean completeConnect();
+
+    /**
+     * Perform the disconnection process
+     * 
+     * @return true if the transition is allowed
+     */
+    boolean performDisconnect();
+
+    /**
+     * Complete the disconnection process
+     * 
+     * @return true if the transition is allowed
+     */
+    boolean completeDisconnect();
+
+    /**
+     * Fail to connect to the connection
+     * 
+     * @return true if the transition is allowed
+     */
+    boolean failToConnect();
 
     /**
      * Gets the state of the underlying state represented as an

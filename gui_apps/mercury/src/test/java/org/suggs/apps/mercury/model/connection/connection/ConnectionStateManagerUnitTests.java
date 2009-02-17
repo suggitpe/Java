@@ -6,6 +6,7 @@ package org.suggs.apps.mercury.model.connection.connection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * This test will unit test that the connection state manager goes
@@ -18,5 +19,10 @@ public class ConnectionStateManagerUnitTests
 {
 
     private static final Log LOG = LogFactory.getLog( ConnectionStateManagerUnitTests.class );
+
+    @Test
+    public void testStateManagers()
+    {
+    }
 
 }
