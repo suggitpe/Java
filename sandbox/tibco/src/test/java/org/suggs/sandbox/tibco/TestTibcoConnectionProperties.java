@@ -6,10 +6,11 @@ package org.suggs.sandbox.tibco;
 
 import javax.naming.NamingException;
 
-import junit.framework.TestCase;
+import junit.framework.Assert;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 import com.tibco.tibjms.admin.TibjmsAdmin;
 import com.tibco.tibjms.admin.TibjmsAdminException;
@@ -20,7 +21,7 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
  * @author suggitpe
  * @version 1.0 6 Aug 2008
  */
-public class TestTibcoConnectionProperties extends TestCase
+public class TestTibcoConnectionProperties
 {
 
     private static final Log LOG = LogFactory.getLog( TestTibcoConnectionProperties.class );
@@ -28,6 +29,7 @@ public class TestTibcoConnectionProperties extends TestCase
     /**
      * Tests the connection details class
      */
+    @Test
     public void testTibcoConnection()
     {
         LOG.debug( "Creating instance of Tibco Conection Details" );
@@ -39,13 +41,14 @@ public class TestTibcoConnectionProperties extends TestCase
         catch ( NamingException ne )
         {
             ne.printStackTrace();
-            fail( "Naming exception thrown from getter" );
+            Assert.fail( "Naming exception thrown from getter" );
         }
     }
 
     /**
      * Tests that we can connect to the EMS broker as admin
      */
+    @Test
     public void testTibcoAdminConnection()
     {
         try
@@ -58,7 +61,7 @@ public class TestTibcoConnectionProperties extends TestCase
         catch ( TibjmsAdminException e )
         {
             e.printStackTrace();
-            fail( "Something bad happened" );
+            Assert.fail( "Something bad happened" );
         }
     }
 }

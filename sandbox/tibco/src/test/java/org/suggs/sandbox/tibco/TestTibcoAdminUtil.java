@@ -6,10 +6,9 @@ package org.suggs.sandbox.tibco;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * TODO Write javadoc for TestTibcoAdminUtil
@@ -17,11 +16,12 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 7 Aug 2008
  */
-public class TestTibcoAdminUtil extends TestCase
+public class TestTibcoAdminUtil
 {
 
     private static final Log LOG = LogFactory.getLog( TestTibcoAdminUtil.class );
 
+    @Test
     public void testGetConectionFactories()
     {
         List<String> facts = TibcoAdminUtil.getConnectionFactoryNames();
@@ -31,6 +31,7 @@ public class TestTibcoAdminUtil extends TestCase
         }
     }
 
+    @Test
     public void testDurables()
     {
         List<String> durs = TibcoAdminUtil.getDurableNames();
