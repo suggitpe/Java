@@ -4,8 +4,6 @@
  */
 package org.suggs.sandbox_osgi.tutorial;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -18,14 +16,12 @@ import org.osgi.framework.BundleContext;
 public class HelloWorldActivator implements BundleActivator
 {
 
-    private static final Log LOG = LogFactory.getLog( HelloWorldActivator.class );
-
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
     public void start( BundleContext aArg0 ) throws Exception
     {
-        LOG.info( "Hello world" );
+        System.out.println( "Hello world" );
     }
 
     /**
@@ -33,7 +29,7 @@ public class HelloWorldActivator implements BundleActivator
      */
     public void stop( BundleContext aArg0 ) throws Exception
     {
-        LOG.info( "Good-bye world" );
+        System.out.println( "Good-bye world" );
     }
 
 }
