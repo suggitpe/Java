@@ -2,7 +2,7 @@
  * HelloWorldActivator.java created on 17 Feb 2009 08:07:03 by suggitpe for project SandBox_OSGI - OsgiTutorial
  * 
  */
-package org.suggs.sandbox_osgi.tutorial;
+package org.suggs.sandbox_osgi.tutorial.basics.helloworld;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
