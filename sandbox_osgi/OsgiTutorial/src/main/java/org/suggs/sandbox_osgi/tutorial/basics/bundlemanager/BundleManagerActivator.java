@@ -27,7 +27,6 @@ public class BundleManagerActivator implements BundleActivator
 
     private static final long INTERVAL = 5000;
     private static final String BUND_LOC = "src/main/resources/";
-    private static final String BUNDLE = BUND_LOC + "helloworld.jar";
 
     private final Thread mThread_ = new Thread( new BundleUpdator() );
     private volatile BundleContext mContext_;
