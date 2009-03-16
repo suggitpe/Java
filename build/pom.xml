@@ -49,6 +49,8 @@
         <module>../sandbox</module>
         <module>../sandbox_eclipse</module>
         <module>../sandbox_ejb</module>
+        <module>../sandbox_osgi</module>
+        <module>../sandbox_osgi_mailbox</module>
         <module>../sandbox_webapps</module>
         <module>../web_apps</module>
     </modules>

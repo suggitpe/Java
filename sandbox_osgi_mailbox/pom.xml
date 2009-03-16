@@ -10,11 +10,11 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-osgi-parent</artifactId>
+    <artifactId>sandbox-osgi-mailbox-parent</artifactId>
     <packaging>pom</packaging>
-    <name>Sandbox OSGI Parent</name>
+    <name>Sandbox OSGI Mailbox Parent</name>
 
     <modules>
-        <module>OsgiTutorial</module>
+        <module>mailbox_api</module>
     </modules>
 </project>
