@@ -16,5 +16,6 @@
 
     <modules>
         <module>mailbox_api</module>
+        <module>mailbox_static</module>
     </modules>
 </project>
