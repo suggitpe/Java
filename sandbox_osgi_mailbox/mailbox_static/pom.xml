@@ -10,9 +10,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-osgi-mailbox-static</artifactId>
+    <artifactId>sandbox-osgi-mailbox-fixed</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox OSGI Mailbox - Static Mailbox</name>
+    <name>Sandbox OSGI Mailbox - Fixed Mailbox</name>
 
     <build>
 		<plugins>
