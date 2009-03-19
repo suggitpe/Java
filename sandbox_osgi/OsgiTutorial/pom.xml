@@ -24,6 +24,27 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+            <!-- bundle plugin  -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Private-Package>org.suggs.sandbox_osgi.tutorial.basics.bundlemanager</Private-Package>
+                        <Bundle-Activator>org.suggs.sandbox_osgi.tutorial.basics.bundlemanager.BundleManagerActivator</Bundle-Activator>
+                        
+                        <!--
+                        <Export-Package>org.suggs.sandbox.osgi.mailbox.api</Export-Package>
+                        <Private-Package>org.apache.felix.log.impl</Private-Package>
+                        <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Activator>${pom.artifactId}.impl.Activator</Bundle-Activator>
+                        <Export-Service>org.osgi.service.log.LogService,org.osgi.service.log.LogReaderService</Export-Service>
+                        -->
+                    </instructions>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
