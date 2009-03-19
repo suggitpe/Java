@@ -107,63 +107,10 @@
     <!-- this is where we pick up dependent jar files and define the main Scribe 
     repository (when localised jars are 'installed') -->
     <repositories>
-        <repository>
-            <id>maven2-repository.dev.java.net</id>
-            <name>Java.net Maven 2 Repository</name>
-            <releases>
-			    <enabled>true</enabled>
-			    <updatePolicy>never</updatePolicy>
-			    <checksumPolicy>ignore</checksumPolicy>
-			</releases>
-            <url>http://download.java.net/maven/2</url>
-        </repository>
-        <repository>
-            <id>maven-repository.dev.java.net</id>
-            <name>Java.net Maven 1 Repository (legacy)</name>
-            <releases>
-			    <enabled>true</enabled>
-			    <updatePolicy>never</updatePolicy>
-			    <checksumPolicy>ignore</checksumPolicy>
-			</releases>
-            <url>http://download.java.net/maven/1</url>
-            <layout>legacy</layout>
-        </repository>
-        <repository>
-            <id>java.net</id>
-            <name>java.net Maven Repository</name>
-            <releases>
-			    <enabled>true</enabled>
-			    <updatePolicy>never</updatePolicy>
-			    <checksumPolicy>ignore</checksumPolicy>
-			</releases>
-            <url>https://maven-repository.dev.java.net/nonav/repository</url>
-            <layout>legacy</layout>
-        </repository>
     </repositories>
     
     <!-- this is where we define the location of standard and local Maven plugins -->
     <pluginRepositories>
-        <pluginRepository>
-            <id>maven2-repository.dev.java.net</id>
-            <name>Java.net Maven 2 Repository</name>
-            <releases>
-			    <enabled>true</enabled>
-			    <updatePolicy>never</updatePolicy>
-			    <checksumPolicy>ignore</checksumPolicy>
-			</releases>
-            <url>http://download.java.net/maven/2</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>maven-repository.dev.java.net</id>
-            <name>Java.net Maven 1 Repository (legacy)</name>
-            <releases>
-			    <enabled>true</enabled>
-			    <updatePolicy>never</updatePolicy>
-			    <checksumPolicy>ignore</checksumPolicy>
-			</releases>
-            <url>http://download.java.net/maven/1</url>
-            <layout>legacy</layout>
-        </pluginRepository>
     </pluginRepositories>
     
     <!-- this is where we define the additional report to run as the main build -->
@@ -211,7 +158,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>javax.xml</groupId>
+            <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <scope>compile</scope>
         </dependency>
@@ -419,7 +366,7 @@
                 <version>1.4</version>
             </dependency>
             <dependency>
-                <groupId>javax.xml</groupId>
+                <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>2.1</version>
             </dependency>
@@ -427,6 +374,16 @@
                 <groupId>javax.xml</groupId>
                 <artifactId>jaxb-impl</artifactId>
                 <version>2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi</artifactId>
+                <version>3.0</version>
+            </dependency> 
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.framework</artifactId>
+                <version>1.4.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
