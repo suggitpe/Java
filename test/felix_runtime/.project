@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Test - Felix Runtime</name>
+	<comment>This projects is solely here to manage the execution of the felix runtime.  There is no other use for this project.</comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>com.ibm.etools.ctc.javaprojectnature</nature>
+	</natures>
+</projectDescription>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Felix"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SandBox_OSGI - OsgiTutorial"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SandBox_OSGI_Mailbox - mailbox_api"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SandBox_OSGI_Mailbox - mailbox_fixed"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
