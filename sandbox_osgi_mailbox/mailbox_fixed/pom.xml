@@ -11,7 +11,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-osgi-mailbox-fixed</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>Sandbox OSGI Mailbox - Fixed Mailbox</name>
 
     <build>
@@ -24,9 +24,34 @@
 					</excludes>
 				</configuration>
 			</plugin>
+        
+            <!-- felix plugin for osgi bundles -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+                        <Private-Package>org.suggs.sandbox.osgi.mailbox.fixed</Private-Package>
+                        <!-- explicitly don't want to export anything -->
+                        <Export-Package></Export-Package>
+                        <!--
+                        <Bundle-Activator>${pom.artifactId}.impl.Activator</Bundle-Activator>
+                        <Export-Service>org.osgi.service.log.LogService,org.osgi.service.log.LogReaderService</Export-Service>
+                        -->
+                    </instructions>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.suggs</groupId>
+            <artifactId>sandbox-osgi-mailbox-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
