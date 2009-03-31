@@ -11,6 +11,9 @@ import org.suggs.sandbox.osgi.mailbox.api.Message;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * This is a sham implementation of the mailbox api. It does not do
  * any dynamic message retention and merely creates a few messages to
@@ -23,6 +26,7 @@ public class FixedMailbox implements Mailbox
 {
 
     private final List<Message> mMessages_ = new ArrayList<Message>( 2 );
+    private static final Log LOG = LogFactory.getLog( FixedMailbox.class );
 
     /**
      * Constructs a new instance.
