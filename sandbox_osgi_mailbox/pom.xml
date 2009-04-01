@@ -17,6 +17,7 @@
     <modules>
         <module>mailbox_api</module>
         <module>mailbox_fixed</module>
+        <module>mailbox_file</module>
     </modules>
 
     <dependencies> 
