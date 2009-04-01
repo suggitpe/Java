@@ -32,10 +32,12 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
+                        <Bundle-Activator>org.suggs.sandbox.osgi.mailbox.fixed.WelcomeMailboxActivator</Bundle-Activator>
                         <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
                         <Private-Package>org.suggs.sandbox.osgi.mailbox.fixed</Private-Package>
                         <Export-Package></Export-Package>
                         <!--
+                        <Bundle-Activator></Bundle-Activator>
                         <Bundle-SymbolicName></Bundle-SymbolicName>
                         <Export-Package></Export-Package>
                         <Private-Package></Private-Package>

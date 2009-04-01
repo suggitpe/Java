@@ -35,6 +35,7 @@
                     <instructions>
                         <Export-Package>org.suggs.sandbox.osgi.mailbox.api</Export-Package>
                         <!--
+                        <Bundle-Activator></Bundle-Activator>
                         <Bundle-SymbolicName></Bundle-SymbolicName>
                         <Export-Package></Export-Package>
                         <Private-Package></Private-Package>

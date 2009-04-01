@@ -1,0 +1,43 @@
+/*
+ * WelcomeMailboxActivator.java created on 1 Apr 2009 06:43:07 by suggitpe for project SandBox_OSGI_Mailbox - mailbox_fixed
+ * 
+ */
+package org.suggs.sandbox.osgi.mailbox.fixed;
+
+import org.suggs.sandbox.osgi.mailbox.api.Mailbox;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+
+/**
+ * OSGI Bundle activator for a mailbox
+ * 
+ * @author suggitpe
+ * @version 1.0 1 Apr 2009
+ */
+public class WelcomeMailboxActivator implements BundleActivator
+{
+
+    private static final Log LOG = LogFactory.getLog( WelcomeMailboxActivator.class );
+
+    /**
+     * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+     */
+    public void start( BundleContext ctx ) throws Exception
+    {
+        LOG.debug( "Starting mailbox service" );
+        Mailbox mbox = new FixedMailbox();
+        ctx.registerService( Mailbox.class.getName(), mbox, null );
+    }
+
+    /**
+     * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     */
+    public void stop( BundleContext ctx ) throws Exception
+    {
+        LOG.debug( "Stopping Mailbox service" );
+    }
+
+}

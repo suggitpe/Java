@@ -4,6 +4,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SandBox_OSGI - OsgiTutorial"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SandBox_OSGI_Mailbox - mailbox_api"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SandBox_OSGI_Mailbox - mailbox_fixed"/>
-	<classpathentry kind="lib" path="/_build/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="conf"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
