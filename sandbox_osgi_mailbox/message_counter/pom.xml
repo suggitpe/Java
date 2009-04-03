@@ -32,7 +32,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>org.suggs.sandbox.osgi.mailbox.messagecounter.MessageCounterActivator</Bundle-Activator>
+                        <Bundle-Activator>org.suggs.sandbox.osgi.mailbox.messagecounter.MessageCounterWithTrackerActivator</Bundle-Activator>
                         <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
                         <Private-Package>org.suggs.sandbox.osgi.mailbox.messagecounter</Private-Package>
                         <Export-Package></Export-Package>
