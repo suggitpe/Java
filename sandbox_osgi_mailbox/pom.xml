@@ -18,6 +18,7 @@
         <module>mailbox_api</module>
         <module>mailbox_fixed</module>
         <module>mailbox_file</module>
+        <module>mailbox_db</module>
         <module>message_counter</module>
     </modules>
 
