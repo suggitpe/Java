@@ -6,6 +6,8 @@ package org.suggs.sandbox.osgi.mailbox.fixed;
 
 import org.suggs.sandbox.osgi.mailbox.api.Mailbox;
 
+import java.util.Properties;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleActivator;
@@ -29,7 +31,11 @@ public class WelcomeMailboxActivator implements BundleActivator
     {
         LOG.debug( "Starting mailbox service" );
         Mailbox mbox = new FixedMailbox();
-        ctx.registerService( Mailbox.class.getName(), mbox, null );
+
+        Properties props = new Properties();
+        props.put( Mailbox.NAME_PROPERTY, "Welcome" );
+
+        ctx.registerService( Mailbox.class.getName(), mbox, props );
     }
 
     /**
