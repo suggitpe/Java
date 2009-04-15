@@ -17,6 +17,7 @@
     <modules>
         <module>gui</module>
         <module>hibernate</module>
+        <module>jms</module>
         <module>jmx</module>
         <module>oddsandsods</module>
         <module>patterns</module>
