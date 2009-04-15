@@ -7,5 +7,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/_build/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="/_build/repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsTestLibraries"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsTestRunTime"/>
+	<classpathentry kind="lib" path="/_build/etc/suggitpe"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
