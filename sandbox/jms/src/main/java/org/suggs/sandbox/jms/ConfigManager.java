@@ -11,7 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Wrapper class to encapsulate the configuration file
+ * Wrapper class to encapsulate the configuration file.
  * 
  * @author suggitpe
  * @version 1.0 15 Apr 2009
@@ -28,6 +28,8 @@ public class ConfigManager
     public static final String USERNAME = "tibco.username";
     public static final String PASSWORD = "tibco.password";
     public static final String TOPIC_CONN_FACT = "topic.connectionfactory";
+    public static final String SUBSCR_MSG_SELECTOR = "subscriber.message.selector";
+    public static final String SUBSCR_DURABLE = "subscriber.durable.name";
 
     private static ConfigManager mInstance_;
     private Properties mData_;
@@ -70,7 +72,8 @@ public class ConfigManager
     }
 
     /**
-     * Accessor method to the underlying properties
+     * Accessor method to the underlying properties, does not allow
+     * for null properties
      * 
      * @return the configuration property that the name relates to
      */
@@ -80,6 +83,16 @@ public class ConfigManager
         if ( ret == null )
             throw new IllegalStateException( "no configuration data found for " + aPropName );
         return ret;
+    }
+
+    /**
+     * Accessor method to the underlying properties
+     * 
+     * @return the configuration property that the name relates to
+     */
+    public String getNullableProperty( String aPropName )
+    {
+        return mData_.getProperty( aPropName );
     }
 
 }
