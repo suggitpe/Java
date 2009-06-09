@@ -20,6 +20,7 @@
         <module>jms</module>
         <module>jmx</module>
         <module>oddsandsods</module>
+        <module>osgi</module>
         <module>patterns</module>
         <module>spring</module>
         <module>swt</module>
