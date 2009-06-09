@@ -1,3 +1,0 @@
-# helloworld.bnd
-Private-Package: org.suggs.sandbox_osgi.tutorial.basics.heartbeat
-Bundle-Activator: org.suggs.sandbox_osgi.tutorial.basics.heartbeat.HeartbeatActivator
