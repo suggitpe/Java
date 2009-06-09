@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="/build/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="/build/repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
 	<classpathentry kind="lib" path="/build/etc/suggitpe"/>
+	<classpathentry kind="lib" path="/build/repository/junit/junit/4.5/junit-4.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
