@@ -8,16 +8,16 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsEclipseLibs"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsTestRunTime"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/build/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="/build/repository/javax/jms/jms/1.1/jms-1.1.jar"/>
-	<classpathentry kind="lib" path="/build/repository/commons-lang/commons-lang/2.1/commons-lang-2.1.jar"/>
-	<classpathentry kind="lib" path="/build/repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/_build/repository/spring/jars/src/spring-sources-2.5.1.jar"/>
-	<classpathentry kind="lib" path="/build/repository/org/springframework/spring-test/2.5.1/spring-test-2.5.1.jar"/>
-	<classpathentry kind="lib" path="/build/repository/javax/xml/bind/jaxb-api/2.0/jaxb-api-2.0.jar"/>
-	<classpathentry kind="lib" path="/build/repository/org/suggs/mercury-schemas/1.0-SNAPSHOT/mercury-schemas-1.0-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="/build/repository/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar"/>
-	<classpathentry kind="lib" path="/build/repository/javax/xml/bind/jsr173_api/1.0/jsr173_api-1.0.jar"/>
-	<classpathentry kind="lib" path="/build/repository/com/sun/xml/bind/jaxb-impl/2.0.2/jaxb-impl-2.0.2.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/javax/jms/jms/1.1/jms-1.1.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/commons-lang/commons-lang/2.1/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/Maven Repository/m2repository/spring/jars/src/spring-sources-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/org/springframework/spring-test/2.5.1/spring-test-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/javax/xml/bind/jaxb-api/2.0/jaxb-api-2.0.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/org/suggs/mercury-schemas/1.0-SNAPSHOT/mercury-schemas-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/javax/xml/bind/jsr173_api/1.0/jsr173_api-1.0.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/com/sun/xml/bind/jaxb-impl/2.0.2/jaxb-impl-2.0.2.jar"/>
 	<classpathentry kind="lib" path="/build/etc/suggitpe"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

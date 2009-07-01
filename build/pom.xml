@@ -46,6 +46,7 @@
     <!-- This links up the main pom to the module poms -->
     <modules>
         <module>../gui_apps</module>
+        <module>../osgi_tools</module>
         <module>../sandbox</module>
         <module>../sandbox_eclipse</module>
         <module>../sandbox_ejb</module>
@@ -57,7 +58,7 @@
     <build>
         <testResources>
             <testResource>
-                <directory>c:/codebase/java/trunk/build/etc/mavenBuild</directory>
+                <directory>${suggs.test.home}</directory>
                 <filtering>false</filtering>
                 <includes>
                     <include>**/*</include>

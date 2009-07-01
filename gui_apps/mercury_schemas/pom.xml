@@ -16,35 +16,36 @@
 
     <build>
         <plugins>
-            <!--  -->
             <plugin>
-                <groupId>com.sun.tools.xjc.maven2</groupId>
-                <artifactId>maven-jaxb-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
+			    <groupId>org.jvnet.jaxb2.maven2</groupId>
+			    <artifactId>maven-jaxb2-plugin</artifactId>
+			    <executions>
+				    <execution>
+					    <goals>
+						    <goal>generate</goal>
+					    </goals>
+				    </execution>
+			    </executions>
                 <configuration>
-                    <includeSchemas>
-                        <includeSchema>**/*.xsd</includeSchema>
-                    </includeSchemas>
-                    <excludeSchemas>
-                        <excludeSchema>test*.xsd</excludeSchema>
-                    </excludeSchemas>
-                    <includeBindings>
-                        <includeBinding>*.xjb</includeBinding>
-                    </includeBindings>
+                    <schemaIncludes>
+                        <include>**/*.xsd</include>
+                    </schemaIncludes>
+                    <schemaExcludes>
+                        <exclude>test*.xsd</exclude>
+                    </schemaExcludes>
+                    <bindingDirectory>src/main/resources</bindingDirectory>
+                    <bindingIncludes>
+                        <include>*.xjb</include>
+                    </bindingIncludes>
                     <!--
                     <generateDirectory>src/main/java</generateDirectory>
                     -->
-                    <forceRegeneration>true</forceRegeneration>
+                    <forceRegenerate>true</forceRegenerate>
                     <strict>true</strict>
                     <verbose>true</verbose> 
                 </configuration>
-            </plugin>
+		    </plugin>
+
         </plugins>
     </build>
 
