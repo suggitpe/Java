@@ -13,7 +13,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This class will manage the choose
+ * This class will manage the choosing of a file and then making that
+ * file available to the caller.
  * 
  * @author suggitpe
  * @version 1.0 8 Jul 2009
@@ -24,7 +25,7 @@ public class ChooseBundleJarAction extends Thread
     // static logger
     private static final Log LOG = LogFactory.getLog( ChooseBundleJarAction.class );
 
-    private String mBundleJarName_;
+    private String mBundleJar_;
 
     /**
      * @see java.lang.Thread#run()
@@ -73,7 +74,8 @@ public class ChooseBundleJarAction extends Thread
             return;
         }
 
-        mBundleJarName_ = chooser.getSelectedFile().getAbsolutePath();
+        File jar = chooser.getSelectedFile();
+        mBundleJar_ = jar.toURI().toString();
     }
 
     /**
@@ -85,7 +87,7 @@ public class ChooseBundleJarAction extends Thread
      */
     public String getBundleJarName()
     {
-        return mBundleJarName_;
+        return mBundleJar_;
     }
 
 }

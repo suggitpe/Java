@@ -4,6 +4,9 @@
  */
 package org.suggs.osgitools.bundlereleasetool.GUI;
 
+import org.suggs.osgitools.bundlereleasetool.BundleData;
+import org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback;
+
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -11,19 +14,26 @@ import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Label;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.AbstractTableModel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,14 +50,22 @@ public class BundleReleaseToolGui
     // static logger
     private static final Log LOG = LogFactory.getLog( BundleReleaseToolGui.class );
 
-    private boolean mExitOnClose_ = false;
+    private boolean mExitOnClose_;
+    private final JTextField mBundleName_ = new JTextField();
+    private IBundleReleaseToolContextCallback mCallback_;
+    private BundleDataModel mModel_ = new BundleDataModel();
+    private JTable mTable_ = new JTable();
 
     /**
-     * Constructs a new instance (builds the frame amnd inserts a new
+     * Constructs a new instance (builds the frame and inserts a new
      * pane).
+     * 
+     * @param aCallback
+     *            used for any bundle related activity
      */
-    public BundleReleaseToolGui()
+    public BundleReleaseToolGui( IBundleReleaseToolContextCallback aCallback )
     {
+        this( aCallback, false );
     }
 
     /**
@@ -56,15 +74,16 @@ public class BundleReleaseToolGui
      * @param aExitOnClose
      *            specify whether the GUI should exit on close of GUI
      *            window
+     * @param aCallback
+     *            callback used to encapsulate any bundle related
+     *            activity
      */
-    public BundleReleaseToolGui( boolean aExitOnClose )
+    public BundleReleaseToolGui( IBundleReleaseToolContextCallback aCallback, boolean aExitOnClose )
     {
-        mExitOnClose_ = aExitOnClose;
-    }
-
-    public void buildGui( WindowListener aWindowListener )
-    {
+        super();
         LOG.debug( "Building Bundle Release Tool GUI" );
+        mExitOnClose_ = aExitOnClose;
+        mCallback_ = aCallback;
 
         try
         {
@@ -81,16 +100,176 @@ public class BundleReleaseToolGui
         {
             desktop.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         }
-        desktop.addWindowListener( aWindowListener );
+        desktop.addWindowListener( mCallback_.buildWindowListener() );
 
         // delegate the construction of the panel
-        buildPane( desktop.getContentPane() );
+        buildDesktop( desktop.getContentPane() );
 
         displayFrame( desktop );
     }
 
     /**
+     * Builds up the pane.
+     */
+    private void buildDesktop( final Container aDesktop )
+    {
+        // set up for using the gridbag layout
+        aDesktop.setLayout( new GridBagLayout() );
+
+        aDesktop.setLayout( new GridBagLayout() );
+        GridBagConstraints dc = new GridBagConstraints();
+        dc.insets = new Insets( 2, 2, 2, 2 );
+
+        int row = 0;
+
+        dc.anchor = GridBagConstraints.CENTER;
+        dc.gridx = 0;
+        dc.gridy = row++;
+        aDesktop.add( buildBundlePanel(), dc );
+
+        dc.anchor = GridBagConstraints.EAST;
+        dc.gridx = 0;
+        dc.gridy = row++;
+        aDesktop.add( buildInstallPanel(), dc );
+
+        dc.anchor = GridBagConstraints.EAST;
+        dc.gridx = 0;
+        dc.gridy = row++;
+        aDesktop.add( buildButtonsPanel(), dc );
+    }
+
+    /**
+     * Delegation to create the Bundle view panel
      * 
+     * @return the JPanel that is responsible for showing the bundle
+     *         in a tble format
+     */
+    private JComponent buildBundlePanel()
+    {
+        // build the table
+        mTable_.setColumnSelectionAllowed( true );
+        mTable_.setCellSelectionEnabled( true );
+        mTable_.setAutoCreateColumnsFromModel( true );
+        mTable_.getTableHeader().setUpdateTableInRealTime( false );
+        mTable_.setModel( mModel_ );
+
+        mModel_.setBundleData( mCallback_.getBundleData() );
+        mTable_.tableChanged( new TableModelEvent( mModel_ ) );
+        JScrollPane ret = new JScrollPane();
+        ret.doLayout();
+        ret.getViewport().setBackground( mTable_.getBackground() );
+        ret.getViewport().add( mTable_ );
+
+        return ret;
+    }
+
+    /**
+     * Delegation to create the main panel
+     * 
+     * @return
+     */
+    private JComponent buildInstallPanel()
+    {
+        JPanel ret = new JPanel();
+        ret.setLayout( new GridBagLayout() );
+
+        // set up the defaults to use throughout main
+        EmptyBorder border = new EmptyBorder( new Insets( 0, 0, 0, 10 ) );
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = new Insets( 2, 2, 2, 2 );
+        c.anchor = GridBagConstraints.WEST;
+
+        c.gridx = 0;
+        c.gridy = 0;
+        JLabel l = new JLabel( "Please select a bundle jar to release" );
+        l.setBorder( border );
+        ret.add( l, c );
+
+        // add in the text box
+        c.gridx = 0;
+        c.gridy = 1;
+        mBundleName_.setPreferredSize( new Dimension( 440, 20 ) );
+        mBundleName_.setEditable( false );
+        ret.add( mBundleName_, c );
+
+        // add a button to select the file
+        c.gridx = 1;
+        c.gridy = 1;
+        JButton button = new JButton( "..." );
+        button.addActionListener( new ActionListener()
+        {
+
+            /**
+             * Open up a file chooser dialog so that we can get a file
+             * name.
+             * 
+             * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+             */
+            @Override
+            public void actionPerformed( ActionEvent event )
+            {
+                ChooseBundleJarAction action = new ChooseBundleJarAction();
+                action.run();
+                if ( action.getBundleJarName() != null && action.getBundleJarName().length() > 0 )
+                {
+                    mBundleName_.setText( action.getBundleJarName() );
+                }
+            }
+        } );
+        ret.add( button, c );
+
+        return ret;
+    }
+
+    /**
+     * Delegation to create the buttons panel
+     * 
+     * @return a new panel for the buttons
+     */
+    private JComponent buildButtonsPanel()
+    {
+        final JPanel ret = new JPanel();
+        // set up the layout for the panel
+        ret.setLayout( new GridBagLayout() );
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = new Insets( 2, 2, 2, 2 );
+        c.anchor = GridBagConstraints.EAST;
+
+        // create the OK button
+        c.gridx = 0;
+        c.gridy = 0;
+        JButton load = new JButton( "Load" );
+        load.addActionListener( new ActionListener()
+        {
+
+            /**
+             * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+             */
+            @Override
+            public void actionPerformed( ActionEvent event )
+            {
+                if ( mBundleName_.getText() == null || mBundleName_.getText().length() == 0 )
+                {
+                    JOptionPane.showMessageDialog( ret,
+                                                   "No Bundle name selected",
+                                                   "User error!",
+                                                   JOptionPane.ERROR_MESSAGE );
+                    return;
+                }
+
+                mCallback_.installBundle( mBundleName_.getText() );
+
+                mModel_.setBundleData( mCallback_.getBundleData() );
+                mTable_.tableChanged( new TableModelEvent( mModel_ ) );
+            }
+        } );
+        ret.add( load );
+
+        return ret;
+    }
+
+    /**
+     * Method to pop the GUI in the middle of the screen
      */
     private void displayFrame( JFrame aFrame )
     {
@@ -119,80 +298,108 @@ public class BundleReleaseToolGui
     }
 
     /**
-     * Builds up the pane.
+     * Table data model
+     * 
+     * @author suggitpe
+     * @version 1.0 10 Jul 2009
      */
-    private void buildPane( final Container aDesktop )
+    class BundleDataModel extends AbstractTableModel
     {
-        // set up for using the gridbag layout
-        aDesktop.setLayout( new GridBagLayout() );
 
-        // set up the defaults to use throughout
-        EmptyBorder border = new EmptyBorder( new Insets( 0, 0, 0, 10 ) );
-        GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets( 2, 2, 2, 2 );
-        c.anchor = GridBagConstraints.WEST;
+        private final ColumnData cols[] = { new ColumnData( "ID", 10, Label.LEFT ),
+                                           new ColumnData( "State", 10, Label.LEFT ),
+                                           new ColumnData( "Location", 10, Label.LEFT ),
+                                           new ColumnData( "Bundle Name", 100, Label.LEFT ) };
+        protected Vector<BundleData> mVector_ = new Vector<BundleData>();
 
-        c.gridx = 0;
-        c.gridy = 0;
-        JLabel l = new JLabel( "Please select a bundle jar to release" );
-        l.setBorder( border );
-        aDesktop.add( l, c );
-
-        // add in the text box
-        c.gridx = 0;
-        c.gridy = 1;
-        final JTextField text = new JTextField();
-        text.setPreferredSize( new Dimension( 440, 20 ) );
-        text.setEditable( false );
-        aDesktop.add( text, c );
-
-        // add a button to select the file
-        c.gridx = 1;
-        c.gridy = 1;
-        JButton button = new JButton( "..." );
-        button.addActionListener( new ActionListener()
+        /**
+         * Setter for the bundle data
+         * 
+         * @param aVector
+         */
+        public void setBundleData( Vector<BundleData> aVector )
         {
-
-            /**
-             * Open up a file chooser dialog so that we can get a file
-             * name.
-             * 
-             * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-             */
-            @Override
-            public void actionPerformed( ActionEvent event )
+            mVector_.removeAllElements();
+            for ( BundleData d : aVector )
             {
-                ChooseBundleJarAction action = new ChooseBundleJarAction();
-                action.run();
-                if ( action.getBundleJarName() != null && action.getBundleJarName().length() > 0 )
-                {
-                    text.setText( action.getBundleJarName() );
-                }
+                mVector_.add( d );
             }
-        } );
-        aDesktop.add( button, c );
+        }
+
+        /**
+         * @see javax.swing.table.TableModel#getColumnCount()
+         */
+        @Override
+        public int getColumnCount()
+        {
+            return cols.length;
+        }
+
+        /**
+         * @see javax.swing.table.TableModel#getRowCount()
+         */
+        @Override
+        public int getRowCount()
+        {
+            return mVector_ == null ? 0 : mVector_.size();
+        }
+
+        /**
+         * @see javax.swing.table.TableModel#getValueAt(int, int)
+         */
+        @Override
+        public Object getValueAt( int row, int col )
+        {
+            if ( row < 0 || row >= getRowCount() )
+            {
+                return "";
+            }
+
+            BundleData dataRow = mVector_.get( row );
+            switch ( col )
+            {
+                case 0:
+                    return dataRow.id;
+                case 1:
+                    return dataRow.state;
+                case 2:
+                    return dataRow.location;
+                case 3:
+                    return dataRow.bundleName;
+            }
+            return "";
+        }
+
+        /**
+         * @see javax.swing.table.AbstractTableModel#getColumnName(int)
+         */
+        @Override
+        public String getColumnName( int col )
+        {
+            return cols[col].title;
+        }
+
     }
 
     /**
-     * This is just so we can easily test it (not worth building a
-     * JUnit for a Swing layer)
+     * Simple class to encapsulate the column data for the table
      * 
-     * @param args
+     * @author suggitpe
+     * @version 1.0 10 Jul 2009
      */
-    public static void main( String[] args )
+    class ColumnData
     {
-        final BundleReleaseToolGui gui = new BundleReleaseToolGui( true );
-        javax.swing.SwingUtilities.invokeLater( new Runnable()
+
+        public String title;
+        public int width;
+        public int align;
+
+        public ColumnData( String aTitle, int aWidth, int aAlign )
         {
-
-            public void run()
-            {
-                LOG.debug( "Executing Run to build GUI" );
-                gui.buildGui( new WindowAdapter()
-                {} );
-                LOG.debug( "GUI Run execution complete" );
-            }
-
-        } );
+            title = aTitle;
+            width = aWidth;
+            align = aAlign;
+        }
     }
+
 }

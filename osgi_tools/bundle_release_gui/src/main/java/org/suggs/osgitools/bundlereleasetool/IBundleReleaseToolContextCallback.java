@@ -1,0 +1,42 @@
+/*
+ * BundleReleaseToolContextCallback.java created on 9 Jul 2009 19:51:04 by suggitpe for project OSGi Bundle Release Tool
+ * 
+ */
+package org.suggs.osgitools.bundlereleasetool;
+
+import java.awt.event.WindowListener;
+import java.util.Vector;
+
+/**
+ * Callback used by the GUI to encapsulate any of the
+ * 
+ * @author suggitpe
+ * @version 1.0 9 Jul 2009
+ */
+public interface IBundleReleaseToolContextCallback
+{
+
+    /**
+     * Build a window listener so that we can do anything context
+     * related from the caller
+     * 
+     * @return a WindowListener
+     */
+    WindowListener buildWindowListener();
+
+    /**
+     * Installs a bundle to the bundle context
+     * 
+     * @param aUri
+     *            the location of the bundle
+     * @return true if the bundle was installed correctly
+     */
+    boolean installBundle( String aUri );
+
+    /**
+     * Extracts the bundle data from the bundle context
+     * 
+     * @return a Vector of bundle metadata
+     */
+    Vector<BundleData> getBundleData();
+}
