@@ -39,4 +39,40 @@ public interface IBundleReleaseToolContextCallback
      * @return a Vector of bundle metadata
      */
     Vector<BundleData> getBundleData();
+
+    /**
+     * Starts a bundle with a given ID
+     * 
+     * @param aBundleId
+     *            the id of the bundle
+     * @throws BundleGuiException
+     */
+    void startBundle( Long aBundleId ) throws BundleGuiException;
+
+    /**
+     * Stops a bundle with agiven ID
+     * 
+     * @param aBundleId
+     *            teh id of the bundle
+     * @throws BundleGuiException
+     */
+    void stopBundle( Long aBundleId ) throws BundleGuiException;
+
+    /**
+     * Updates a bundle with a given ID
+     * 
+     * @param aBundleId
+     *            the id of the bundle
+     * @throws BundleGuiException
+     */
+    void updateBundle( Long aBundleId ) throws BundleGuiException;
+
+    /**
+     * Removes a bundle with a given ID
+     * 
+     * @param aBundleId
+     *            the id of the bundle
+     * @throws BundleGuiException
+     */
+    void removeBundle( Long aBundleId ) throws BundleGuiException;
 }

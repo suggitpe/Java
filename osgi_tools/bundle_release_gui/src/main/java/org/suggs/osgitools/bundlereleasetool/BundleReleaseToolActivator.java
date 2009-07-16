@@ -59,7 +59,10 @@ public class BundleReleaseToolActivator implements BundleActivator
                     try
                     {
                         LOG.debug( "Stopping bundle" );
-                        mCtx_.getBundle().stop();
+                        if ( mCtx_ != null )
+                        {
+                            mCtx_.getBundle().stop();
+                        }
                     }
                     catch ( BundleException be )
                     {
@@ -112,6 +115,13 @@ public class BundleReleaseToolActivator implements BundleActivator
             return ret;
         }
 
+        /**
+         * Private method to get the correct state of the bundle from
+         * the state int
+         * 
+         * @param aState
+         * @return
+         */
         private String getBundleState( int aState )
         {
             switch ( aState )
@@ -132,6 +142,88 @@ public class BundleReleaseToolActivator implements BundleActivator
                     return "Unknown";
             }
         }
+
+        /**
+         * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#removeBundle(java.lang.Long)
+         */
+        @Override
+        public void removeBundle( Long bundleId ) throws BundleGuiException
+        {
+            Bundle b = mCtx_.getBundle( bundleId.longValue() );
+
+            try
+            {
+                b.uninstall();
+            }
+            catch ( BundleException be )
+            {
+                LOG.error( "Bundle Exception thrown when calling uninstall on Bundle with name ["
+                           + b.getSymbolicName() + "]", be );
+                throw new BundleGuiException( "Failed to uninstall bundle with ID ["
+                                              + b.getBundleId() + "]", be );
+            }
+        }
+
+        /**
+         * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#startBundle(java.lang.Long)
+         */
+        @Override
+        public void startBundle( Long bundleId ) throws BundleGuiException
+        {
+            Bundle b = mCtx_.getBundle( bundleId.longValue() );
+            try
+            {
+                b.start();
+            }
+            catch ( BundleException be )
+            {
+                LOG.error( "Bundle Exception thrown when calling start on Bundle with name ["
+                           + b.getSymbolicName() + "]", be );
+                throw new BundleGuiException( "Failed to start bundle with ID [" + b.getBundleId()
+                                              + "]", be );
+            }
+        }
+
+        /**
+         * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#stopBundle(java.lang.Long)
+         */
+        @Override
+        public void stopBundle( Long bundleId ) throws BundleGuiException
+        {
+            Bundle b = mCtx_.getBundle( bundleId.longValue() );
+            try
+            {
+                b.stop();
+            }
+            catch ( BundleException be )
+            {
+                LOG.error( "Bundle Exception thrown when calling stop on Bundle with name ["
+                           + b.getSymbolicName() + "]", be );
+                throw new BundleGuiException( "Failed to stop bundle with ID [" + b.getBundleId()
+                                              + "]", be );
+            }
+        }
+
+        /**
+         * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#updateBundle(java.lang.Long)
+         */
+        @Override
+        public void updateBundle( Long bundleId ) throws BundleGuiException
+        {
+            Bundle b = mCtx_.getBundle( bundleId.longValue() );
+            try
+            {
+                b.update();
+            }
+            catch ( BundleException be )
+            {
+                LOG.error( "Bundle Exception thrown when calling update on Bundle with name ["
+                           + b.getSymbolicName() + "]", be );
+                throw new BundleGuiException( "Failed to update bundle with ID [" + b.getBundleId()
+                                              + "]", be );
+            }
+        }
+
     };
 
     /**

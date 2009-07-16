@@ -5,6 +5,7 @@
 package org.suggs.osgitools.bundlereleasetool.GUI;
 
 import org.suggs.osgitools.bundlereleasetool.BundleData;
+import org.suggs.osgitools.bundlereleasetool.BundleGuiException;
 import org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback;
 
 import java.awt.Container;
@@ -19,14 +20,18 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -34,6 +39,8 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableColumn;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,11 +57,16 @@ public class BundleReleaseToolGui
     // static logger
     private static final Log LOG = LogFactory.getLog( BundleReleaseToolGui.class );
 
+    private JFrame mDesktopFrame_ = new JFrame( "Bundle release tool" );
     private boolean mExitOnClose_;
     private final JTextField mBundleName_ = new JTextField();
     private IBundleReleaseToolContextCallback mCallback_;
     private BundleDataModel mModel_ = new BundleDataModel();
     private JTable mTable_ = new JTable();
+    public final ColumnData cols[] = { new ColumnData( "ID", 5, Label.LEFT ),
+                                      new ColumnData( "State", 10, Label.LEFT ),
+                                      new ColumnData( "Location", 150, Label.LEFT ),
+                                      new ColumnData( "Bundle Name", 150, Label.LEFT ) };
 
     /**
      * Constructs a new instance (builds the frame and inserts a new
@@ -95,17 +107,16 @@ public class BundleReleaseToolGui
             LOG.warn( "Unable to set look and feel ... do not consider this something to worry about" );
         }
 
-        final JFrame desktop = new JFrame( "Bundle release tool" );
         if ( mExitOnClose_ )
         {
-            desktop.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+            mDesktopFrame_.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         }
-        desktop.addWindowListener( mCallback_.buildWindowListener() );
+        mDesktopFrame_.addWindowListener( mCallback_.buildWindowListener() );
 
         // delegate the construction of the panel
-        buildDesktop( desktop.getContentPane() );
+        buildDesktop( mDesktopFrame_.getContentPane() );
 
-        displayFrame( desktop );
+        displayFrame( mDesktopFrame_ );
     }
 
     /**
@@ -152,13 +163,183 @@ public class BundleReleaseToolGui
         mTable_.setAutoCreateColumnsFromModel( true );
         mTable_.getTableHeader().setUpdateTableInRealTime( false );
         mTable_.setModel( mModel_ );
+        mTable_.setColumnModel( new BundleTableColumnData() );
 
-        mModel_.setBundleData( mCallback_.getBundleData() );
-        mTable_.tableChanged( new TableModelEvent( mModel_ ) );
+        refreshTableData();
+
+        mTable_.addMouseListener( new MouseAdapter()
+        {
+
+            /**
+             * @see java.awt.event.MouseAdapter#mousePressed(java.awt.event.MouseEvent)
+             */
+            @Override
+            public void mousePressed( MouseEvent me )
+            {
+                maybeShowPopup( me );
+            }
+
+            /**
+             * @see java.awt.event.MouseAdapter#mouseReleased(java.awt.event.MouseEvent)
+             */
+            @Override
+            public void mouseReleased( MouseEvent me )
+            {
+                maybeShowPopup( me );
+            }
+
+            /**
+             * @param me
+             */
+            private void maybeShowPopup( MouseEvent me )
+            {
+                // only do for popup menu ctrl
+                if ( me.isPopupTrigger() && mTable_.isEnabled() )
+                {
+                    Point p = new Point( me.getX(), me.getY() );
+                    int rowNum = mTable_.rowAtPoint( p );
+
+                    if ( rowNum >= 0 && rowNum < mTable_.getRowCount() )
+                    {
+                        // create & show the context menu
+                        JPopupMenu contextMenu = createContextMenu( rowNum );
+                        if ( contextMenu != null && contextMenu.getComponentCount() > 0 )
+                        {
+                            contextMenu.show( mTable_, p.x, p.y );
+                        }
+                    }
+                }
+            }
+        } );
+
+        // now create the scroll pane to house the table
         JScrollPane ret = new JScrollPane();
         ret.doLayout();
         ret.getViewport().setBackground( mTable_.getBackground() );
         ret.getViewport().add( mTable_ );
+
+        return ret;
+    }
+
+    /**
+     * Creates the context menu for the table
+     * 
+     * @param rowNum
+     *            the rown number in the table from which to build the
+     *            context
+     * @return a context menu
+     */
+    private JPopupMenu createContextMenu( int rowNum )
+    {
+
+        final Long bundleId = mModel_.getBundleIdFromRow( rowNum );
+
+        JMenuItem start = new JMenuItem( "start bundle " + bundleId );
+        start.addActionListener( new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed( ActionEvent event )
+            {
+                try
+                {
+                    mCallback_.startBundle( bundleId );
+                    refreshTableData();
+                }
+                catch ( BundleGuiException bge )
+                {
+                    JOptionPane.showMessageDialog( mTable_,
+                                                   "When calling start on Bundle ["
+                                                                   + bundleId
+                                                                   + "] the following exception was caught:\n"
+                                                                   + bge.getStackTrace(),
+                                                   "Bundle exception",
+                                                   JOptionPane.ERROR_MESSAGE );
+                }
+            }
+        } );
+
+        JMenuItem stop = new JMenuItem( "stop bundle " + bundleId );
+        stop.addActionListener( new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed( ActionEvent event )
+            {
+                try
+                {
+                    mCallback_.stopBundle( bundleId );
+                    refreshTableData();
+                }
+                catch ( BundleGuiException bge )
+                {
+                    JOptionPane.showMessageDialog( mTable_,
+                                                   "When calling stop on Bundle ["
+                                                                   + bundleId
+                                                                   + "] the following exception was caught:\n"
+                                                                   + bge.getStackTrace(),
+                                                   "Bundle exception",
+                                                   JOptionPane.ERROR_MESSAGE );
+                }
+            }
+        } );
+
+        JMenuItem update = new JMenuItem( "update bundle " + bundleId );
+        update.addActionListener( new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed( ActionEvent event )
+            {
+                try
+                {
+                    mCallback_.updateBundle( bundleId );
+                    refreshTableData();
+                }
+                catch ( BundleGuiException bge )
+                {
+                    JOptionPane.showMessageDialog( mTable_,
+                                                   "When calling update on Bundle ["
+                                                                   + bundleId
+                                                                   + "] the following exception was caught:\n"
+                                                                   + bge.getStackTrace(),
+                                                   "Bundle exception",
+                                                   JOptionPane.ERROR_MESSAGE );
+                }
+            }
+        } );
+
+        JMenuItem uninstall = new JMenuItem( "uninstall bundle " + bundleId );
+        uninstall.addActionListener( new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed( ActionEvent event )
+            {
+                try
+                {
+                    mCallback_.removeBundle( bundleId );
+                    refreshTableData();
+                }
+                catch ( BundleGuiException bge )
+                {
+                    JOptionPane.showMessageDialog( mTable_,
+                                                   "When calling uninstall on Bundle ["
+                                                                   + bundleId
+                                                                   + "] the following exception was caught:\n"
+                                                                   + bge.getStackTrace(),
+                                                   "Bundle exception",
+                                                   JOptionPane.ERROR_MESSAGE );
+                }
+            }
+        } );
+
+        JPopupMenu ret = new JPopupMenu();
+
+        ret.add( start );
+        ret.add( stop );
+        ret.add( update );
+        ret.add( uninstall );
 
         return ret;
     }
@@ -222,6 +403,16 @@ public class BundleReleaseToolGui
     }
 
     /**
+     * Repopulates the data in the table and then alters any observers
+     * of the table that the data has changed.
+     */
+    private void refreshTableData()
+    {
+        mModel_.setBundleData( mCallback_.getBundleData() );
+        mTable_.tableChanged( new TableModelEvent( mModel_ ) );
+    }
+
+    /**
      * Delegation to create the buttons panel
      * 
      * @return a new panel for the buttons
@@ -235,8 +426,26 @@ public class BundleReleaseToolGui
         c.insets = new Insets( 2, 2, 2, 2 );
         c.anchor = GridBagConstraints.EAST;
 
-        // create the OK button
+        // create the refresh button
         c.gridx = 0;
+        c.gridy = 0;
+        JButton refresh = new JButton( "Refresh" );
+        refresh.addActionListener( new ActionListener()
+        {
+
+            /**
+             * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+             */
+            @Override
+            public void actionPerformed( ActionEvent paramActionEvent )
+            {
+                refreshTableData();
+            }
+        } );
+        ret.add( refresh );
+
+        // create the OK button
+        c.gridx = 1;
         c.gridy = 0;
         JButton load = new JButton( "Load" );
         load.addActionListener( new ActionListener()
@@ -250,7 +459,7 @@ public class BundleReleaseToolGui
             {
                 if ( mBundleName_.getText() == null || mBundleName_.getText().length() == 0 )
                 {
-                    JOptionPane.showMessageDialog( ret,
+                    JOptionPane.showMessageDialog( mDesktopFrame_,
                                                    "No Bundle name selected",
                                                    "User error!",
                                                    JOptionPane.ERROR_MESSAGE );
@@ -259,8 +468,7 @@ public class BundleReleaseToolGui
 
                 mCallback_.installBundle( mBundleName_.getText() );
 
-                mModel_.setBundleData( mCallback_.getBundleData() );
-                mTable_.tableChanged( new TableModelEvent( mModel_ ) );
+                refreshTableData();
             }
         } );
         ret.add( load );
@@ -306,10 +514,6 @@ public class BundleReleaseToolGui
     class BundleDataModel extends AbstractTableModel
     {
 
-        private final ColumnData cols[] = { new ColumnData( "ID", 10, Label.LEFT ),
-                                           new ColumnData( "State", 10, Label.LEFT ),
-                                           new ColumnData( "Location", 10, Label.LEFT ),
-                                           new ColumnData( "Bundle Name", 100, Label.LEFT ) };
         protected Vector<BundleData> mVector_ = new Vector<BundleData>();
 
         /**
@@ -345,6 +549,24 @@ public class BundleReleaseToolGui
         }
 
         /**
+         * Gets the bundle ID from a row in the table
+         * 
+         * @param row
+         *            the row from which to get the bundle ID
+         * @return teh ID of the bundle at a specific row
+         */
+        public Long getBundleIdFromRow( int row )
+        {
+            if ( row < 0 || row >= getRowCount() )
+            {
+                return null;
+            }
+
+            BundleData dataRow = mVector_.get( row );
+            return dataRow.id;
+        }
+
+        /**
          * @see javax.swing.table.TableModel#getValueAt(int, int)
          */
         @Override
@@ -377,6 +599,33 @@ public class BundleReleaseToolGui
         public String getColumnName( int col )
         {
             return cols[col].title;
+        }
+
+    }
+
+    /**
+     * This extended class allows us to change the column data for the
+     * table
+     * 
+     * @author suggitpe
+     * @version 1.0 14 Jul 2009
+     */
+    class BundleTableColumnData extends DefaultTableColumnModel
+    {
+
+        /**
+         * Constructs a new instance.
+         */
+        public BundleTableColumnData()
+        {
+            super();
+            for ( int i = 0; i < cols.length; ++i )
+            {
+                TableColumn col = new TableColumn( i, cols[i].width );
+                col.setHeaderValue( cols[i].title );
+                addColumn( col );
+            }
+
         }
 
     }

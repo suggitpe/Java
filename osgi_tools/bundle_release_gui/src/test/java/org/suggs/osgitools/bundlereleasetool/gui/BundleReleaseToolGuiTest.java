@@ -5,6 +5,7 @@
 package org.suggs.osgitools.bundlereleasetool.gui;
 
 import org.suggs.osgitools.bundlereleasetool.BundleData;
+import org.suggs.osgitools.bundlereleasetool.BundleGuiException;
 import org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback;
 import org.suggs.osgitools.bundlereleasetool.GUI.BundleReleaseToolGui;
 
@@ -103,9 +104,56 @@ public class BundleReleaseToolGuiTest
             {
                 Vector<BundleData> ret = new Vector<BundleData>();
                 LOG.debug( "Adding in some fake bundle data" );
-                ret.add( new BundleData( 7, "Active", "location of bundle", "System Bundle (1.4.1)" ) );
+                ret.add( new BundleData( 0,
+                                         "Active",
+                                         "location of bundle 0",
+                                         "System Bundle (1.4.1)" ) );
+                ret.add( new BundleData( 7,
+                                         "Active",
+                                         "location of bundle 7",
+                                         "Apache Felix Shell Service (1.0.2)" ) );
+                ret.add( new BundleData( 8,
+                                         "Active",
+                                         "location of bundle 8",
+                                         "Apache Felix Shell TUI (1.0.2)" ) );
+                ret.add( new BundleData( 9,
+                                         "Active",
+                                         "location of bundle 9",
+                                         "Apache Felix Bundle Repository (1.2.1)" ) );
+                ret.add( new BundleData( 10,
+                                         "Installed",
+                                         "location of bundle 10",
+                                         "Bundle Release GUI (1.0.0.SNAPSHOT)" ) );
+                ret.add( new BundleData( 15,
+                                         "Installed",
+                                         "location of bundle 15",
+                                         "Sandbox OSGI Mailbox - API (1.0.0.SNAPSHOT)" ) );
 
                 return ret;
+            }
+
+            @Override
+            public void removeBundle( Long bundleId )
+            {
+                LOG.debug( "Pretending to remove a bundle with ID [" + bundleId + "]" );
+            }
+
+            @Override
+            public void startBundle( Long bundleId )
+            {
+                LOG.debug( "Pretending to start a bundle with ID [" + bundleId + "]" );
+            }
+
+            @Override
+            public void stopBundle( Long bundleId ) throws BundleGuiException
+            {
+                LOG.debug( "Pretending to stop a bundle with ID [" + bundleId + "]" );
+            }
+
+            @Override
+            public void updateBundle( Long bundleId )
+            {
+                LOG.debug( "Pretending to update a bundle with ID [" + bundleId + "]" );
             }
 
         };
