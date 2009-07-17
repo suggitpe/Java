@@ -50,6 +50,9 @@ public class Ch9TableEditorComposite extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composite to associate this class with
      */
     public Ch9TableEditorComposite( Composite parent )
     {

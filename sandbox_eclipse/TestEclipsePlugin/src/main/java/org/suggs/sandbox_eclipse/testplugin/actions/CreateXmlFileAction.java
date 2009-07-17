@@ -41,6 +41,8 @@ public class CreateXmlFileAction extends Action
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aModel
      */
     public CreateXmlFileAction( IFile aModel )
     {

@@ -22,6 +22,8 @@ public class BeatController implements IController
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aModel
      */
     public BeatController( IBeatModel aModel )
     {

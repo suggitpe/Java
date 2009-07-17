@@ -22,6 +22,9 @@ public class TeamBean
 
     /**
      * Constructs a new instance.
+     * 
+     * @param name
+     * @param year
      */
     public TeamBean( String name, int year )
     {

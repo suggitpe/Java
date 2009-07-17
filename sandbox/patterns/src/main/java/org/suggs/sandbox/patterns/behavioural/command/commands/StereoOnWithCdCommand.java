@@ -20,6 +20,8 @@ public class StereoOnWithCdCommand implements ICommand
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aStereo
      */
     public StereoOnWithCdCommand( Stereo aStereo )
     {

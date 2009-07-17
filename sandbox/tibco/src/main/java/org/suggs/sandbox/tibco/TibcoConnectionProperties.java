@@ -114,6 +114,7 @@ public class TibcoConnectionProperties
      * 
      * @return a hashtable of the relevant properties for the Tibco
      *         Initial Context
+     * @throws NamingException
      */
     public InitialContext getInitialContext() throws NamingException
     {

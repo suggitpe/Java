@@ -21,6 +21,7 @@ public interface IManagedJiniService extends Remote
      * @param aEntry
      * @throws RemoteException
      */
+    @SuppressWarnings("unchecked")
     public void addEntries( Vector aEntry ) throws RemoteException;
 
     /**
@@ -30,6 +31,7 @@ public interface IManagedJiniService extends Remote
      * @param aNewEntries
      * @throws RemoteException
      */
+    @SuppressWarnings("unchecked")
     public void modifyEntries( Vector aOldEntries, Vector aNewEntries ) throws RemoteException;
 
 }

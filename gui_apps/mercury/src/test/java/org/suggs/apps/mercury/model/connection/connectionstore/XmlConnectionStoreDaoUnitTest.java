@@ -59,7 +59,7 @@ public class XmlConnectionStoreDaoUnitTest
      * This test will test that the correct list of connection names
      * is returned
      * 
-     * @throws ConnectionStoreException.
+     * @throws ConnectionStoreException
      */
     @Test
     public void testFullGetKnownConnections() throws ConnectionStoreException
@@ -98,7 +98,7 @@ public class XmlConnectionStoreDaoUnitTest
      * This test will test that the correct list of connection names
      * is returned for an empty list of connections
      * 
-     * @throws ConnectionStoreException.
+     * @throws ConnectionStoreException
      */
     @Test
     public void testEmptyGetKnownConnections() throws ConnectionStoreException
@@ -129,7 +129,7 @@ public class XmlConnectionStoreDaoUnitTest
      * here. Here we want to check that if we call delete then we end
      * calling the get list of names and then the save them down again
      * 
-     * @throws ConnectionStoreException.
+     * @throws ConnectionStoreException
      */
     @Test
     public void testDeleteNamedConnection() throws ConnectionStoreException
@@ -177,7 +177,7 @@ public class XmlConnectionStoreDaoUnitTest
      * here. Here we want to check that if we call delete then we end
      * up with an exception being thrown.
      * 
-     * @throws ConnectionStoreException.
+     * @throws ConnectionStoreException
      */
     @Test
     public void testDeleteUnknownConnection() throws ConnectionStoreException
@@ -219,7 +219,7 @@ public class XmlConnectionStoreDaoUnitTest
      * here we simply want to find out of the connection exists or not
      * in the persistent store
      * 
-     * @throws ConnectionStoreException.
+     * @throws ConnectionStoreException
      */
     @Test
     public void testDoesValidConnectionExist() throws ConnectionStoreException
@@ -237,8 +237,8 @@ public class XmlConnectionStoreDaoUnitTest
 
         // ------- TEST EXEC
         boolean exists = mDao_.doesConnectionExist( FIND_ME );
-        LOG.debug( "ConnectionContext exists test for connection [" + FIND_ME + "] returns [" + exists
-                   + "]" );
+        LOG.debug( "ConnectionContext exists test for connection [" + FIND_ME + "] returns ["
+                   + exists + "]" );
         if ( !exists )
         {
             Assert.fail( "The connection [" + FIND_ME + "] should exist" );

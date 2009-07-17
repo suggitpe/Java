@@ -28,6 +28,10 @@ public class StringMessage implements Message
 
     /**
      * Constructs a new instance.
+     * 
+     * @param id
+     * @param subject
+     * @param text
      */
     public StringMessage( long id, String subject, String text )
     {

@@ -15,6 +15,8 @@ public final class ReferenceClass
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aName
      */
     public ReferenceClass( String aName )
     {

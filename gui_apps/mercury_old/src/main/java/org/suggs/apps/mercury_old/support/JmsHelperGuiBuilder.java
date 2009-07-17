@@ -4,8 +4,7 @@
  */
 package org.suggs.apps.mercury_old.support;
 
-import org.suggs.apps.mercury_old.MercuryException;
-
+import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -29,7 +28,6 @@ public class JmsHelperGuiBuilder
      * 
      * @param aFrame
      *            the frame to packake and show
-     * @throws MercuryException
      */
     public static final void displayFrame( JFrame aFrame )
     {
@@ -48,7 +46,7 @@ public class JmsHelperGuiBuilder
         aFrame.setBounds( x, y, w, h );
         if ( w == bounds.width && h == bounds.height )
         {
-            aFrame.setExtendedState( JFrame.MAXIMIZED_BOTH );
+            aFrame.setExtendedState( Frame.MAXIMIZED_BOTH );
         }
 
         aFrame.validate();

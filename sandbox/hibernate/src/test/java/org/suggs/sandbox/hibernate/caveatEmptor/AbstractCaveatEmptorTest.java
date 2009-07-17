@@ -32,6 +32,7 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
      *            object to debug
      * @return the string dumped version of the obejct
      */
+    @SuppressWarnings("unchecked")
     protected static String getObjectAsString( Object aObject )
     {
         StringBuffer buff = new StringBuffer();
@@ -43,7 +44,8 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
             {
                 buff.append( m.getName() ).append( "[" );
                 Class c = m.getReturnType();
-                if ( c.equals( String.class ) || c.equals( Integer.class ) || c.equals( Date.class ) || c.equals( Long.class ) )
+                if ( c.equals( String.class ) || c.equals( Integer.class ) || c.equals( Date.class )
+                     || c.equals( Long.class ) )
                 {
                     try
                     {
@@ -51,12 +53,14 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
                     }
                     catch ( IllegalAccessException iae )
                     {
-                        throw new IllegalStateException( "no access to method [" + m.getName() + "]", iae );
+                        throw new IllegalStateException( "no access to method [" + m.getName()
+                                                         + "]", iae );
 
                     }
                     catch ( InvocationTargetException ita )
                     {
-                        throw new IllegalStateException( "no target for method [" + m.getName() + "]", ita );
+                        throw new IllegalStateException( "no target for method [" + m.getName()
+                                                         + "]", ita );
                     }
                 }
                 else
@@ -99,8 +103,12 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
      */
     protected Item createTestItem( String aName )
     {
-        return new Item( aName, "dummyDesc", new Double( 1.0 ), new Double( 3.0 ), Calendar.getInstance().getTime(), Calendar.getInstance()
-            .getTime() );
+        return new Item( aName,
+                         "dummyDesc",
+                         new Double( 1.0 ),
+                         new Double( 3.0 ),
+                         Calendar.getInstance().getTime(),
+                         Calendar.getInstance().getTime() );
     }
 
     /**

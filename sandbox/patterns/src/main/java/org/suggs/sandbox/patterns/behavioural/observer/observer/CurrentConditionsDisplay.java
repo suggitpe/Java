@@ -29,6 +29,8 @@ public class CurrentConditionsDisplay implements IObserver, IDisplayElement
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aData
      */
     public CurrentConditionsDisplay( ISubject aData )
     {

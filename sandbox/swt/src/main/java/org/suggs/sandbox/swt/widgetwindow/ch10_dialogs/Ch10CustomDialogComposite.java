@@ -33,6 +33,9 @@ public class Ch10CustomDialogComposite extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composite to associate with
      */
     public Ch10CustomDialogComposite( Composite parent )
     {

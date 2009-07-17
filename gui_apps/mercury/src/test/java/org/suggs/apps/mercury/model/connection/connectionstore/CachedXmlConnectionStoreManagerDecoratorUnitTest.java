@@ -60,7 +60,7 @@ public class CachedXmlConnectionStoreManagerDecoratorUnitTest
      * few times that we only ever call the persistent/ store once (ie
      * it uses the cache).
      * 
-     * @throws ConnectionStoreException.
+     * @throws ConnectionStoreException
      */
     @Test
     public void testReadConectionData() throws ConnectionStoreException

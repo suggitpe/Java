@@ -61,6 +61,7 @@ public class PancakeHouseMenu implements IMenu
      * 
      * @return the list of menu items
      */
+    @SuppressWarnings("unchecked")
     public List getMenuItems()
     {
         return mMenuItems_;

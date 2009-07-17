@@ -256,7 +256,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
     }
 
     /**
-     * @return
+     * @return connection controller
      */
     public ConnectionController getConnectionConroller()
     {

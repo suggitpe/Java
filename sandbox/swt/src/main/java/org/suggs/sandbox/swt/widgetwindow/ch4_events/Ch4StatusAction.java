@@ -22,6 +22,8 @@ public class Ch4StatusAction extends Action
 
     /**
      * Constructs a new instance.
+     * 
+     * @param mgr
      */
     public Ch4StatusAction( StatusLineManager mgr )
     {

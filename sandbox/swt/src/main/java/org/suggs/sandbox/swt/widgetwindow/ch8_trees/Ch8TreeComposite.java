@@ -30,6 +30,9 @@ public class Ch8TreeComposite extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composite to associate this class with
      */
     public Ch8TreeComposite( Composite parent )
     {
@@ -147,6 +150,7 @@ public class Ch8TreeComposite extends Composite
             return this;
         }
 
+        @SuppressWarnings("unchecked")
         public List getChildren()
         {
             return mChildren_;

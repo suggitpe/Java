@@ -19,6 +19,7 @@ public interface PropertyManagerMBean
 
     public void setProperty( String aName, String aValue );
 
+    @SuppressWarnings("unchecked")
     public Enumeration keys();
 
     public void setSource( String aPath );

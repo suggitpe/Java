@@ -23,6 +23,8 @@ public class HeartController implements IController
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aModel
      */
     public HeartController( IHeartModel aModel )
     {

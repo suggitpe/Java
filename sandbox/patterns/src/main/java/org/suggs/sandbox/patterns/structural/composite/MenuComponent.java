@@ -83,6 +83,7 @@ public class MenuComponent extends AbstractMenuComponent
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#print()
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void print()
     {
@@ -101,6 +102,7 @@ public class MenuComponent extends AbstractMenuComponent
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#createIterator()
      */
+    @SuppressWarnings("unchecked")
     public Iterator createIterator()
     {
         return new CompositeIterator( mMenuComps_.iterator() );

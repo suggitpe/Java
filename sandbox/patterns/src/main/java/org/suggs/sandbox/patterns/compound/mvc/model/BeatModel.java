@@ -112,7 +112,7 @@ public class BeatModel implements IBeatModel, MetaEventListener
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#registerObserver(BeatObserver)
+     * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#registerObserver(org.suggs.sandbox.patterns.compound.mvc.IBeatObserver)
      */
     public void registerObserver( IBeatObserver observer )
     {
@@ -120,7 +120,7 @@ public class BeatModel implements IBeatModel, MetaEventListener
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#removeObserver(BeatObserver)
+     * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#removeObserver(org.suggs.sandbox.patterns.compound.mvc.IBeatObserver)
      */
     public void removeObserver( IBeatObserver observer )
     {
@@ -139,7 +139,7 @@ public class BeatModel implements IBeatModel, MetaEventListener
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#registerObsrver(BpmObserver)
+     * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#registerObserver(org.suggs.sandbox.patterns.compound.mvc.IBpmObserver)
      */
     public void registerObserver( IBpmObserver observer )
     {
@@ -147,7 +147,7 @@ public class BeatModel implements IBeatModel, MetaEventListener
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#removeObserver(BpmObserver)
+     * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#removeObserver(org.suggs.sandbox.patterns.compound.mvc.IBpmObserver)
      */
     public void removeObserver( IBpmObserver observer )
     {
@@ -232,7 +232,7 @@ public class BeatModel implements IBeatModel, MetaEventListener
      * @param aOne
      * @param aTwo
      * @param aTick
-     * @return
+     * @return a new MidiEvent
      */
     public MidiEvent makeEvent( int aComd, int aChan, int aOne, int aTwo, int aTick )
     {

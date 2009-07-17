@@ -23,7 +23,7 @@ public interface IBeverage
     /**
      * Returns the cost of the beverage
      * 
-     * @return
+     * @return cost
      */
     double cost();
 

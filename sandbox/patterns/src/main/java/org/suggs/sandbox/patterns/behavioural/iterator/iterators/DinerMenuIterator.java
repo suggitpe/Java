@@ -21,6 +21,8 @@ public class DinerMenuIterator implements IIterator
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aItems
      */
     public DinerMenuIterator( MenuItem[] aItems )
     {

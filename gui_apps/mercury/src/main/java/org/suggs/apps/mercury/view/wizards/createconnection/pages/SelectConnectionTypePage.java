@@ -88,7 +88,7 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
     /**
      * Getter for the connection name
      * 
-     * @return
+     * @return the name of the connection
      */
     public String getConnectionName()
     {

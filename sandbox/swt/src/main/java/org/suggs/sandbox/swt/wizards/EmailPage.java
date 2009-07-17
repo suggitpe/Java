@@ -68,7 +68,7 @@ public class EmailPage extends WizardPage
     /**
      * Getter for the email address
      * 
-     * @return
+     * @return email address
      */
     public String getEmailAddress()
     {

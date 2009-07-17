@@ -12,6 +12,7 @@ import java.util.Iterator;
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
+@SuppressWarnings("unchecked")
 public class NullIterator implements Iterator
 {
 

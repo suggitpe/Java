@@ -33,7 +33,8 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_ITEM_SEQ")
-@Table(name = "CE_ITEM", uniqueConstraints = { @UniqueConstraint(columnNames = { "SUCCESSFUL_BID_ID" }),
+@Table(name = "CE_ITEM", uniqueConstraints = {
+                                              @UniqueConstraint(columnNames = { "SUCCESSFUL_BID_ID" }),
                                               @UniqueConstraint(columnNames = "SELLER_USER_ID") })
 public class Item extends AbstractPersistentBaseClass
 {
@@ -70,7 +71,8 @@ public class Item extends AbstractPersistentBaseClass
      * @param aStartDate
      * @param aEndDate
      */
-    public Item( String aName, String aDescription, Double aInitialPrice, Double aReservePrice, Date aStartDate, Date aEndDate )
+    public Item( String aName, String aDescription, Double aInitialPrice, Double aReservePrice,
+                 Date aStartDate, Date aEndDate )
     {
         super();
         mName_ = aName;
@@ -85,7 +87,7 @@ public class Item extends AbstractPersistentBaseClass
     /**
      * Getter for the ame field
      * 
-     * @return
+     * @return name
      */
     @Column(name = "ITEM_NAME", nullable = false, length = 64)
     public String getName()

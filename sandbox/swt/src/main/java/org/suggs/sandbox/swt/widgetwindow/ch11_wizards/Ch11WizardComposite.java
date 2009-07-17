@@ -23,6 +23,9 @@ public class Ch11WizardComposite extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composite to attach to
      */
     public Ch11WizardComposite( Composite parent )
     {

@@ -280,7 +280,7 @@ public class ConnectionDetails
     /**
      * Getter for the security enabled flag
      * 
-     * @return
+     * @return true if the security is enabled, else false
      */
     public boolean isSecurityEnabled()
     {

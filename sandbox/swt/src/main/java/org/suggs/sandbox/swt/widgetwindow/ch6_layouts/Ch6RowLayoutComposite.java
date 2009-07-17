@@ -22,6 +22,9 @@ public class Ch6RowLayoutComposite extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch6RowLayoutComposite( Composite parent )
     {

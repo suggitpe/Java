@@ -27,6 +27,8 @@ public class DuckSimulator
 
     /**
      * Simulation main
+     * 
+     * @param aFact
      */
     public void simulate( AbstractDuckFactory aFact )
     {

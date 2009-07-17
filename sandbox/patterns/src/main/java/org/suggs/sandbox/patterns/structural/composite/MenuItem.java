@@ -84,12 +84,14 @@ public class MenuItem extends AbstractMenuComponent
     @Override
     public void print()
     {
-        System.out.println( " " + getName() + ( isVegetarian() ? "(v), " : ", " ) + getPrice() + "\n\t -- " + getDescription() );
+        System.out.println( " " + getName() + ( isVegetarian() ? "(v), " : ", " ) + getPrice()
+                            + "\n\t -- " + getDescription() );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#createIterator()
      */
+    @SuppressWarnings("unchecked")
     public Iterator createIterator()
     {
         return new NullIterator();

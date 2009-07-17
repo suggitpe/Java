@@ -39,7 +39,8 @@ public interface IConnectionStore
      * @throws MercuryConnectionStoreException
      *             when there is an issue with the connection store
      */
-    IConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException;
+    IConnectionDetails loadConnectionParameters( String aName )
+                    throws MercuryConnectionStoreException;
 
     /**
      * Save a set of connection parameters to the local connection
@@ -53,7 +54,8 @@ public interface IConnectionStore
      *             when there is an issue in the saving of connection
      *             details
      */
-    void saveConnectionParameters( String aName, IConnectionDetails aDetails ) throws MercuryConnectionStoreException;
+    void saveConnectionParameters( String aName, IConnectionDetails aDetails )
+                    throws MercuryConnectionStoreException;
 
     /**
      * Allows the deletion of a known connection
@@ -68,7 +70,7 @@ public interface IConnectionStore
     /**
      * Getter for the internal status of the Connection Store
      * 
-     * @return
+     * @return state
      */
     String getState();
 

@@ -18,7 +18,7 @@ public interface IConnectionManager
      * 
      * @param aDetails
      *            the context with which to connect
-     * @return
+     * @return true if the connection succeeds else false
      */
     boolean testConnection( IConnectionParameters aDetails );
 

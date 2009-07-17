@@ -35,6 +35,9 @@ public class Ch7Fonts extends Canvas
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composite to associate this class with
      */
     public Ch7Fonts( Composite parent )
     {

@@ -86,7 +86,7 @@ public class DBSource implements DBSourceMBean
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#setAutoCommit()
+     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#setAutoCommit(boolean)
      */
     public void setAutoCommit( boolean commit )
     {

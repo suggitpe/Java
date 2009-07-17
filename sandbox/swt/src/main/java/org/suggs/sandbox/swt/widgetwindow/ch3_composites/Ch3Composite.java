@@ -18,6 +18,9 @@ public class Ch3Composite extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch3Composite( Composite parent )
     {

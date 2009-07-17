@@ -75,6 +75,8 @@ public class ConfigManager
      * Accessor method to the underlying properties, does not allow
      * for null properties
      * 
+     * @param aPropName
+     *            the name of the property to set
      * @return the configuration property that the name relates to
      */
     public String getProperty( String aPropName )
@@ -88,6 +90,8 @@ public class ConfigManager
     /**
      * Accessor method to the underlying properties
      * 
+     * @param aPropName
+     *            the name of the property to set
      * @return the configuration property that the name relates to
      */
     public String getNullableProperty( String aPropName )

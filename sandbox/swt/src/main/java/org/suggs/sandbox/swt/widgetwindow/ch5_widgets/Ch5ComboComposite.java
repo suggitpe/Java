@@ -21,6 +21,9 @@ public class Ch5ComboComposite extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch5ComboComposite( Composite parent )
     {

@@ -23,6 +23,9 @@ public class Ch5Capitaliser extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch5Capitaliser( Composite parent )
     {

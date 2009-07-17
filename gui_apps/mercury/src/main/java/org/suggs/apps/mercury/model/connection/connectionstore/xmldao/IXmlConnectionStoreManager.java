@@ -27,7 +27,7 @@ public interface IXmlConnectionStoreManager
      * layer and passes back to the caller in the form of a map
      * 
      * @return a map of connection details objects
-     * @throws MercuryConnectionStoreException
+     * @throws ConnectionStoreException
      *             if there are problems in the reading of the data;
      */
     Map<String, ConnectionDetails> readConnectionData() throws ConnectionStoreException;
@@ -41,7 +41,7 @@ public interface IXmlConnectionStoreManager
      * 
      * @param aMap
      *            the map of connection details to persist
-     * @throws MercuryConnectionStoreException
+     * @throws ConnectionStoreException
      *             if there are any problems in the persistence of the
      *             data
      */

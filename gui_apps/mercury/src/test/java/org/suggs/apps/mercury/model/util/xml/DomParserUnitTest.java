@@ -145,6 +145,9 @@ public class DomParserUnitTest
     /**
      * This will test the parsing of a file that is not valid for the
      * schema.
+     * 
+     * @throws IOException
+     *             , MercuryUtilityException
      */
     @Test(expected = IllegalStateException.class)
     public void testParseBadXmlFile() throws IOException, MercuryUtilityException

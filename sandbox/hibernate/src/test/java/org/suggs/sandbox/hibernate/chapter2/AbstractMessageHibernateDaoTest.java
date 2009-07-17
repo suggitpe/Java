@@ -4,9 +4,7 @@
  */
 package org.suggs.sandbox.hibernate.chapter2;
 
-import org.suggs.sandbox.hibernate.chapter2.Message;
 import org.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
-
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,6 +44,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
     /**
      * @see org.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#doCleanUpOldData()
      */
+    @SuppressWarnings("unchecked")
     protected void doCleanUpOldData()
     {
         Session s = getSessionFactory().openSession();
@@ -88,6 +87,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { Message.class };
@@ -121,6 +121,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { Message.class };
@@ -137,13 +138,16 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
                 aSession.save( m );
             }
 
+            @SuppressWarnings("unchecked")
             public void runTest( Session aSession )
             {
                 Criteria c = aSession.createCriteria( Message.class );
                 c.add( Restrictions.like( "text", "This is a message%" ) );
                 List l = c.list();
 
-                Assert.isTrue( l.size() == 1, "Expecting 1 object in the database but we actually got [" + l.size() + "]" );
+                Assert.isTrue( l.size() == 1,
+                               "Expecting 1 object in the database but we actually got ["
+                                               + l.size() + "]" );
                 Message m = (Message) l.get( 0 );
                 LOG.debug( "current text = [" + m.getText() + "]" );
                 m.setText( "This is the changed text for message obj" );
@@ -166,6 +170,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { Message.class };
@@ -181,6 +186,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
                 addTestMessages( aSession );
             }
 
+            @SuppressWarnings("unchecked")
             public void runTest( Session aSession )
             {
                 // use a query
@@ -208,6 +214,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { Message.class };
@@ -223,6 +230,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
                 addTestMessages( aSession );
             }
 
+            @SuppressWarnings("unchecked")
             public void runTest( Session aSession )
             {
                 LOG.debug( "Test getting unique result with a HQl" );
@@ -283,6 +291,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
      * @param aList
      *            The list from which to do the dump.
      */
+    @SuppressWarnings("unchecked")
     private void dumpListContents( List aList )
     {
         for ( Iterator i = aList.iterator(); i.hasNext(); )

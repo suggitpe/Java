@@ -33,8 +33,6 @@ public class PlayerViewer extends ApplicationWindow
 
     /**
      * Constructs a new instance.
-     * 
-     * @param parentShell
      */
     public PlayerViewer()
     {

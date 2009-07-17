@@ -21,6 +21,9 @@ public class Ch6GridLayoutComposite extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch6GridLayoutComposite( Composite parent )
     {

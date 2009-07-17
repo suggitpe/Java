@@ -33,6 +33,9 @@ public class Ch5Undoable extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch5Undoable( Composite parent )
     {

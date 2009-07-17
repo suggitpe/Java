@@ -105,6 +105,7 @@ public class CreateXmlActionDelegate
     /**
      * Simple one for debugging the selected items
      */
+    @SuppressWarnings("unchecked")
     private void debug()
     {
         System.out.println( "======================================" );

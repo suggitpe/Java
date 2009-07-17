@@ -18,7 +18,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 /**
- * 
  * Test object
  * 
  * @author suggitpe
@@ -51,6 +50,7 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
      * 
      * @param aClassList
      */
+    @SuppressWarnings("unchecked")
     private void cleanTestTables( Class[] aClassList )
     {
         Session s = getSessionFactory().openSession();
@@ -118,6 +118,7 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
          * 
          * @return an array of classes
          */
+        @SuppressWarnings("unchecked")
         Class[] getClassesForCleaning();
 
         /**

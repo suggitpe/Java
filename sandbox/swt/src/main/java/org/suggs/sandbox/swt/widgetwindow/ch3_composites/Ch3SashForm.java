@@ -20,6 +20,9 @@ public class Ch3SashForm extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch3SashForm( Composite parent )
     {

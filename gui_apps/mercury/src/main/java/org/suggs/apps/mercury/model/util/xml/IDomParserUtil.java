@@ -20,8 +20,10 @@ public interface IDomParserUtil
     /**
      * @param aFilename
      * @param aSchemaLocation
-     * @return
+     * @return a document created from the filname and a schema
      * @throws MercuryUtilityException
+     *             if there is an issue in parsing the file contents
+     *             into a document
      */
     Document createDocFromXmlFile( String aFilename, String aSchemaLocation )
                     throws MercuryUtilityException;

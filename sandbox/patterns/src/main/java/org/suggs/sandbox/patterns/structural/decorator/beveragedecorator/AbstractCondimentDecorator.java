@@ -30,6 +30,9 @@ public abstract class AbstractCondimentDecorator extends AbstractBeverage
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aBeverage
+     *            the decorating object
      */
     public AbstractCondimentDecorator( IBeverage aBeverage )
     {

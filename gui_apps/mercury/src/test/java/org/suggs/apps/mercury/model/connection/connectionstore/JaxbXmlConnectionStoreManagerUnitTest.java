@@ -22,8 +22,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * This test tests the Jaxb Xml ConnectionContext Store Manager using a Mock
- * for the File Manager.
+ * This test tests the Jaxb Xml ConnectionContext Store Manager using
+ * a Mock for the File Manager.
  * 
  * @author suggitpe
  * @version 1.0 2 Oct 2008
@@ -50,6 +50,9 @@ public class JaxbXmlConnectionStoreManagerUnitTest
      * This test will ensure that the xml connection store manager
      * will read data from the persistent store, transform it from the
      * String clob and then return it in a form that is understood
+     * 
+     * @throws ConnectionStoreException
+     *             , IOException
      */
     @Test
     public void testReadConnectionData() throws ConnectionStoreException, IOException
@@ -136,6 +139,8 @@ public class JaxbXmlConnectionStoreManagerUnitTest
     /**
      * This test will ensure that if we pass in a null map of data
      * then an exception is thrown.
+     * 
+     * @throws ConnectionStoreException
      */
     @Test(expected = ConnectionStoreException.class)
     public void testSaveConnectionDataWithNullData() throws ConnectionStoreException
@@ -156,6 +161,8 @@ public class JaxbXmlConnectionStoreManagerUnitTest
     /**
      * This is the be all and end all of tests for the Jaxb
      * implementation
+     * 
+     * @throws ConnectionStoreException
      */
     @Test
     public void testReadAndWriteConnectionData() throws ConnectionStoreException

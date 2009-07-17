@@ -28,6 +28,7 @@ public class RmiClientFactory
      * Static method to return an instance of the JMXConnector
      * 
      * @return the JMXConnector
+     * @throws IOException
      */
     public static final MBeanServerConnection getClient() throws IOException
     {

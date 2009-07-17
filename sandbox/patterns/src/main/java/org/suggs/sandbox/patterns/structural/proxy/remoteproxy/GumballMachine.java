@@ -45,6 +45,8 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
      *            the number of gumballs in the system
      * @param aLocation
      *            the location of the gumball machine
+     * @throws RemoteException
+     *             if there is a connection error
      */
     public GumballMachine( String aLocation, int aCount ) throws RemoteException
     {
@@ -105,7 +107,8 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
     @Override
     public String toString()
     {
-        return new StringBuffer( "Gumball Machine: gumball count=[" + mCount_ + "];  state=[" + mState_.getClass().getSimpleName() + "]" ).toString();
+        return new StringBuffer( "Gumball Machine: gumball count=[" + mCount_ + "];  state=["
+                                 + mState_.getClass().getSimpleName() + "]" ).toString();
     }
 
     // =================

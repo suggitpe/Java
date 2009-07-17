@@ -30,6 +30,8 @@ public class OpenAction extends Action implements ISelectionChangedListener
 
     /**
      * Constructs a new instance.
+     * 
+     * @param exp
      */
     public OpenAction( Explorer exp )
     {

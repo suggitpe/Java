@@ -40,6 +40,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
     // private Hashtable<String, MBeanNotificationInfo>
     // mNotifications_ = new Hashtable<String,
     // MBeanNotificationInfo>();
+    @SuppressWarnings("unchecked")
     private Hashtable<Constructor, MBeanConstructorInfo> mConstructors_ = new Hashtable<Constructor, MBeanConstructorInfo>();
     private Hashtable<String, MBeanOperationInfo> mOperations_ = new Hashtable<String, MBeanOperationInfo>();
 
@@ -105,6 +106,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
     /**
      * @see javax.management.DynamicMBean#setAttribute(javax.management.Attribute)
      */
+    @SuppressWarnings("unchecked")
     public void setAttribute( Attribute attribute ) throws AttributeNotFoundException,
                     InvalidAttributeValueException, MBeanException, ReflectionException
     {
@@ -162,6 +164,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
      * @see javax.management.DynamicMBean#invoke(java.lang.String,
      *      java.lang.Object[], java.lang.String[])
      */
+    @SuppressWarnings("unchecked")
     public Object invoke( String actionName, Object[] params, String[] signature )
                     throws MBeanException, ReflectionException
     {
@@ -273,6 +276,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
      * @param description
      *            a description of the constructor
      */
+    @SuppressWarnings("unchecked")
     protected void addMBeanConstructor( Constructor cons, String description )
     {
         mConstructors_.put( cons, new MBeanConstructorInfo( description, cons ) );

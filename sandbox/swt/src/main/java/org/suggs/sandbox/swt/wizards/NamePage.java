@@ -102,7 +102,7 @@ public class NamePage extends WizardPage
     /**
      * Getter for the last name
      * 
-     * @return
+     * @return last name
      */
     public String getLastName()
     {

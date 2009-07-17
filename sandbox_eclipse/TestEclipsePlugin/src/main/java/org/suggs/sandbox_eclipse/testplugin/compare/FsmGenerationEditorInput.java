@@ -30,6 +30,9 @@ public class FsmGenerationEditorInput extends CompareEditorInput
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aLhs
+     * @param aRhs
      */
     public FsmGenerationEditorInput( ITypedElement aLhs, ITypedElement aRhs )
     {

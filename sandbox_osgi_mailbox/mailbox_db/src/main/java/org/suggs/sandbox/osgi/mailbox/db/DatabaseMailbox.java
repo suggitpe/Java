@@ -30,6 +30,9 @@ public class DatabaseMailbox implements Mailbox
 
     /**
      * Constructs a new instance.
+     * 
+     * @param ds
+     *            a datasource
      */
     public DatabaseMailbox( DataSource ds )
     {

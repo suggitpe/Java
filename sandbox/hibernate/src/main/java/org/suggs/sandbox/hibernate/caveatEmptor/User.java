@@ -83,8 +83,8 @@ public class User extends AbstractPersistentBaseClass
      * @param aBillingAddress
      *            the users billing address
      */
-    public User( String aFirstName, String aLastName, String aUserName, String aPassword, String aEmail, Address aHomeAddress,
-                 Address aBillingAddress )
+    public User( String aFirstName, String aLastName, String aUserName, String aPassword,
+                 String aEmail, Address aHomeAddress, Address aBillingAddress )
     {
         super();
         mFirstName_ = aFirstName;
@@ -148,7 +148,7 @@ public class User extends AbstractPersistentBaseClass
     }
 
     /**
-     * @return
+     * @return items for sale
      */
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
     public Set<Item> getItemsForSale()
@@ -178,7 +178,7 @@ public class User extends AbstractPersistentBaseClass
     }
 
     /**
-     * @return
+     * @return comments
      */
     @OneToMany(mappedBy = "fromUser", fetch = FetchType.LAZY)
     public Set<Comment> getComments()
@@ -291,7 +291,7 @@ public class User extends AbstractPersistentBaseClass
     }
 
     /**
-     * @return
+     * @return name
      */
     @Transient
     public String getName()
@@ -337,7 +337,8 @@ public class User extends AbstractPersistentBaseClass
      * @return the home address
      */
     @Embedded
-    @AttributeOverrides( { @AttributeOverride(name = "street", column = @Column(name = "USER_HOME_STREET")),
+    @AttributeOverrides( {
+                          @AttributeOverride(name = "street", column = @Column(name = "USER_HOME_STREET")),
                           @AttributeOverride(name = "city", column = @Column(name = "USER_HOME_CITY")),
                           @AttributeOverride(name = "zipCode", column = @Column(name = "USER_HOME_ZIPCODE")) })
     public Address getHomeAddress()
@@ -362,7 +363,8 @@ public class User extends AbstractPersistentBaseClass
      * @return the billing address
      */
     @Embedded
-    @AttributeOverrides( { @AttributeOverride(name = "street", column = @Column(name = "USER_BILLING_STREET")),
+    @AttributeOverrides( {
+                          @AttributeOverride(name = "street", column = @Column(name = "USER_BILLING_STREET")),
                           @AttributeOverride(name = "city", column = @Column(name = "USER_BILLING_CITY")),
                           @AttributeOverride(name = "zipCode", column = @Column(name = "USER_BILLING_ZIPCODE")) })
     public Address getBillingAddress()

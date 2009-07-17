@@ -23,6 +23,8 @@ public class TurkeyAdapter implements IDuck
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aTurkey
      */
     public TurkeyAdapter( ITurkey aTurkey )
     {

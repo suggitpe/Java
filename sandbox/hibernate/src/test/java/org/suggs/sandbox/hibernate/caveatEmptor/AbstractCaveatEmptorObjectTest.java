@@ -43,6 +43,7 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { CreditCard.class, BillingDetails.class, User.class };
@@ -60,24 +61,21 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
                 return "testCreateNewCreditCard";
             }
 
+            @SuppressWarnings("unchecked")
             public void runTest( Session aSession )
             {
                 Criteria crit = aSession.createCriteria( User.class );
                 crit.add( Restrictions.eq( "username", "barfo" ) );
                 List l = crit.list();
 
-                Assert.isTrue( l.size() == 1, "Found zero or more then one User with the username [barfo]" );
+                Assert.isTrue( l.size() == 1,
+                               "Found zero or more then one User with the username [barfo]" );
 
                 User u = (User) l.get( 0 );
 
                 LOG.debug( "Creating a new credit card" );
-                CreditCard card = new CreditCard( "PGDS",
-                                                  "0123456789",
-                                                  Calendar.getInstance().getTime(),
-                                                  null,
-                                                  new Integer( 99 ),
-                                                  "03",
-                                                  "2009" );
+                CreditCard card = new CreditCard( "PGDS", "0123456789", Calendar.getInstance()
+                    .getTime(), null, new Integer( 99 ), "03", "2009" );
                 u.addBillingDetails( card );
                 aSession.save( card );
             }
@@ -93,6 +91,7 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { BankAccount.class, BillingDetails.class, User.class };
@@ -110,22 +109,20 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
                 return "testCreateNewBankAccounT";
             }
 
+            @SuppressWarnings("unchecked")
             public void runTest( Session aSession )
             {
                 Criteria crit = aSession.createCriteria( User.class );
                 crit.add( Restrictions.eq( "username", "barfo" ) );
                 List l = crit.list();
 
-                Assert.isTrue( l.size() == 1, "Found zero or more then one User with the username [barfo]" );
+                Assert.isTrue( l.size() == 1,
+                               "Found zero or more then one User with the username [barfo]" );
 
                 User u = (User) l.get( 0 );
                 LOG.debug( "Creating a new Bank Account" );
-                BankAccount ba = new BankAccount( "PGDS",
-                                                  "0987654321",
-                                                  Calendar.getInstance().getTime(),
-                                                  null,
-                                                  "DummyBankName",
-                                                  "DUMMGB2LXXXX" );
+                BankAccount ba = new BankAccount( "PGDS", "0987654321", Calendar.getInstance()
+                    .getTime(), null, "DummyBankName", "DUMMGB2LXXXX" );
                 u.addBillingDetails( ba );
 
                 aSession.save( ba );
@@ -143,6 +140,7 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { Category.class };
@@ -176,6 +174,7 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { User.class };
@@ -195,7 +194,13 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
                 LOG.debug( "Creating a new user" );
                 Address home = new Address( "high street north", "leighton buzzard", "LU7 0EX" );
                 Address bill = new Address( "100 liverpool street", "london", "EC2M 2RH" );
-                User u = new User( "Peter", "Suggitt", "suggitpe", "welcome", "me@suggs.org.uk", home, bill );
+                User u = new User( "Peter",
+                                   "Suggitt",
+                                   "suggitpe",
+                                   "welcome",
+                                   "me@suggs.org.uk",
+                                   home,
+                                   bill );
                 aSession.save( u );
             }
 
@@ -210,6 +215,7 @@ public abstract class AbstractCaveatEmptorObjectTest extends AbstractCaveatEmpto
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { Item.class, Category.class, User.class };

@@ -4,7 +4,6 @@
  */
 package org.suggs.sandbox.jmx.jmxbook.components.propertymanager;
 
-
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Enumeration;
@@ -65,6 +64,7 @@ public class PropertyManager implements PropertyManagerMBean
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#keys()
      */
+    @SuppressWarnings("unchecked")
     public Enumeration keys()
     {
         return mProps_.keys();

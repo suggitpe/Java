@@ -39,6 +39,7 @@ public class Waitress
     /**
      * Using the composite iterator, print out the vegetarian menu.
      */
+    @SuppressWarnings("unchecked")
     public void printVegetarianMenu()
     {
         Iterator iter = mAllMenus_.createIterator();

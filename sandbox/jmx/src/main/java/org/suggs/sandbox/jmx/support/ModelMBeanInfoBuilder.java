@@ -31,6 +31,7 @@ public class ModelMBeanInfoBuilder
 
     private Hashtable<String, ModelMBeanAttributeInfo> mAttributes_ = new Hashtable<String, ModelMBeanAttributeInfo>();
     private Hashtable<String, ModelMBeanNotificationInfo> mNotifications_ = new Hashtable<String, ModelMBeanNotificationInfo>();
+    @SuppressWarnings("unchecked")
     private Hashtable<Constructor, ModelMBeanConstructorInfo> mConstructors_ = new Hashtable<Constructor, ModelMBeanConstructorInfo>();
     private Hashtable<String, ModelMBeanOperationInfo> mOperations_ = new Hashtable<String, ModelMBeanOperationInfo>();
 
@@ -146,6 +147,7 @@ public class ModelMBeanInfoBuilder
      * @param aDescriptor
      *            the descriptor of the constructor
      */
+    @SuppressWarnings("unchecked")
     public void addModelMBeanConstructor( Constructor aCtor, String aDescription,
                                           Descriptor aDescriptor )
     {

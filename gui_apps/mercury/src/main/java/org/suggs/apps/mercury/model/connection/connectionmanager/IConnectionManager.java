@@ -32,6 +32,8 @@ public interface IConnectionManager
     /**
      * Gets a connection from the connection manager
      * 
+     * @param aConnectionName
+     *            the name of the connection to get
      * @return a connection
      */
     IConnection getConnection( String aConnectionName );
@@ -39,7 +41,8 @@ public interface IConnectionManager
     /**
      * delete me wjhen this ois done properly TODO: deleyte me
      * 
-     * @return
+     * @return teh dump of connections
+     * @throws ConnectionStoreException
      */
     String getConnectionDump() throws ConnectionStoreException;
 

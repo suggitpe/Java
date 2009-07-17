@@ -26,6 +26,9 @@ public class Ch7Composite extends Canvas
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch7Composite( Composite parent )
     {

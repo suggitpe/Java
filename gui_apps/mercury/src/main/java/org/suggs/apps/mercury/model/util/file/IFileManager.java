@@ -4,8 +4,6 @@
  */
 package org.suggs.apps.mercury.model.util.file;
 
-import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -29,7 +27,7 @@ public interface IFileManager
      *            the string to create the file with
      * @param aFile
      *            the file that you want to use to persist the file
-     * @throws ConnectionStoreException
+     * @throws IOException
      *             if there are any issues in the persistence layer
      */
     void persistClobToFile( String aClob, File aFile ) throws IOException;

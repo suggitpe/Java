@@ -79,7 +79,7 @@ public class Message
     }
 
     /**
-     * @return
+     * @return text
      */
     @Column(name = "MESSAGE_TEXT", nullable = false, length = 255)
     public String getText()
@@ -96,7 +96,7 @@ public class Message
     }
 
     /**
-     * @return
+     * @return nest message
      */
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinColumn(name = "NEXT_MESSAGE_ID", nullable = true)

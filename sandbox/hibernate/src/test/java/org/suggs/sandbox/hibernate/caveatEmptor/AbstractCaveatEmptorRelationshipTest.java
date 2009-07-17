@@ -43,6 +43,7 @@ public abstract class AbstractCaveatEmptorRelationshipTest extends AbstractCavea
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { Category.class };
@@ -59,6 +60,7 @@ public abstract class AbstractCaveatEmptorRelationshipTest extends AbstractCavea
                 return "createNewNestedCategory";
             }
 
+            @SuppressWarnings("unchecked")
             public void runTest( Session aSession )
             {
 
@@ -68,7 +70,8 @@ public abstract class AbstractCaveatEmptorRelationshipTest extends AbstractCavea
                 List l = c.list();
                 LOG.debug( "Category objects in the database number [" + l.size() + "]" );
 
-                Assert.isTrue( l.size() == 1, "Did not find a Parent Category object in the database" );
+                Assert.isTrue( l.size() == 1,
+                               "Did not find a Parent Category object in the database" );
                 Category parent = (Category) l.get( 0 );
 
                 Category child = new Category( "Child category" );
@@ -88,6 +91,7 @@ public abstract class AbstractCaveatEmptorRelationshipTest extends AbstractCavea
         runTest( new TestCallback()
         {
 
+            @SuppressWarnings("unchecked")
             public Class[] getClassesForCleaning()
             {
                 return new Class[] { User.class, BillingDetails.class };
@@ -104,6 +108,7 @@ public abstract class AbstractCaveatEmptorRelationshipTest extends AbstractCavea
                 aSession.save( u );
             }
 
+            @SuppressWarnings("unchecked")
             public void runTest( Session aSession )
             {
                 Criteria c = aSession.createCriteria( User.class );

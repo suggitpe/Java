@@ -16,6 +16,7 @@ import java.util.Stack;
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
+@SuppressWarnings("unchecked")
 public class CompositeIterator implements Iterator
 {
 
@@ -33,7 +34,7 @@ public class CompositeIterator implements Iterator
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.structural.composite.IIterator#hasNext()
+     * @see java.util.Iterator#hasNext()
      */
     public boolean hasNext()
     {
@@ -52,7 +53,7 @@ public class CompositeIterator implements Iterator
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.structural.composite.IIterator#next()
+     * @see java.util.Iterator#next()
      */
     public Object next()
     {

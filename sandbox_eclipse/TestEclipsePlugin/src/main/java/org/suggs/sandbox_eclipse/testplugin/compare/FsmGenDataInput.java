@@ -26,6 +26,9 @@ public class FsmGenDataInput implements ITypedElement, IStreamContentAccessor
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aString
+     * @param aName
      */
     public FsmGenDataInput( String aString, String aName )
     {

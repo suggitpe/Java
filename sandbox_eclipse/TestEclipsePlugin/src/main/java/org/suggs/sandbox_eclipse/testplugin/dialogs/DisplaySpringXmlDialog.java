@@ -27,6 +27,9 @@ public class DisplaySpringXmlDialog extends Dialog
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aParentShell
+     * @param aXml
      */
     public DisplaySpringXmlDialog( Shell aParentShell, String aXml )
     {

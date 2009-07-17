@@ -35,6 +35,8 @@ public class XsltTransformerUtilTest
     /**
      * This is run before all of the tests so that they are correctly
      * set up
+     * 
+     * @throws Exception
      */
     @Before
     public void setUp() throws Exception

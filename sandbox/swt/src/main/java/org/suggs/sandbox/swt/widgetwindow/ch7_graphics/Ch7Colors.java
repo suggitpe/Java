@@ -24,6 +24,9 @@ public class Ch7Colors extends Canvas
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch7Colors( Composite parent )
     {

@@ -4,13 +4,20 @@
  */
 package org.suggs.sandbox.jmx.jmxbook.components.jiniservicemanager;
 
+import net.jini.core.discovery.LookupLocator;
 import net.jini.core.entry.Entry;
+import net.jini.core.event.EventRegistration;
+import net.jini.core.event.RemoteEventListener;
+import net.jini.core.lookup.ServiceID;
 import net.jini.core.lookup.ServiceItem;
 import net.jini.core.lookup.ServiceMatches;
 import net.jini.core.lookup.ServiceRegistrar;
+import net.jini.core.lookup.ServiceRegistration;
 import net.jini.core.lookup.ServiceTemplate;
 
 import java.lang.reflect.Method;
+import java.rmi.MarshalledObject;
+import java.rmi.RemoteException;
 
 import javax.management.Attribute;
 import javax.management.AttributeList;
@@ -47,6 +54,8 @@ public class JiniServiceManager implements DynamicMBean
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aInitAtt
      */
     public JiniServiceManager( Entry aInitAtt )
     {
@@ -106,6 +115,7 @@ public class JiniServiceManager implements DynamicMBean
      * @see javax.management.DynamicMBean#invoke(java.lang.String,
      *      java.lang.Object[], java.lang.String[])
      */
+    @SuppressWarnings("unchecked")
     public Object invoke( String actionName, Object[] params, String[] signature )
                     throws MBeanException, ReflectionException
     {
@@ -137,6 +147,7 @@ public class JiniServiceManager implements DynamicMBean
      * 
      * @see javax.management.DynamicMBean#getMBeanInfo()
      */
+    @SuppressWarnings("unchecked")
     public MBeanInfo getMBeanInfo()
     {
         MBeanConstructorInfo[] cons = new MBeanConstructorInfo[1];
@@ -199,6 +210,7 @@ public class JiniServiceManager implements DynamicMBean
      * 
      * @return
      */
+    @SuppressWarnings("unchecked")
     private Object lookupService()
     {
         try
@@ -209,7 +221,87 @@ public class JiniServiceManager implements DynamicMBean
             ents[0] = mInitialAttribute_;
 
             ServiceTemplate template = new ServiceTemplate( null, interfaces, ents );
-            ServiceRegistrar reg = null;
+            // This is a dummy implementation o as to remove all of
+            // teh warnings .. it is not a real impl
+            ServiceRegistrar reg = new ServiceRegistrar()
+            {
+
+                @Override
+                public Class[] getEntryClasses( ServiceTemplate arg0 ) throws RemoteException
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+
+                @Override
+                public Object[] getFieldValues( ServiceTemplate arg0, int arg1, String arg2 )
+                                throws NoSuchFieldException, RemoteException
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+
+                @Override
+                public String[] getGroups() throws RemoteException
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+
+                @Override
+                public LookupLocator getLocator() throws RemoteException
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+
+                @Override
+                public ServiceID getServiceID()
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+
+                @Override
+                public Class[] getServiceTypes( ServiceTemplate arg0, String arg1 )
+                                throws RemoteException
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+
+                @Override
+                public Object lookup( ServiceTemplate arg0 ) throws RemoteException
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+
+                @Override
+                public ServiceMatches lookup( ServiceTemplate arg0, int arg1 )
+                                throws RemoteException
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+
+                @Override
+                public EventRegistration notify( ServiceTemplate arg0, int arg1,
+                                                 RemoteEventListener arg2, MarshalledObject arg3,
+                                                 long arg4 ) throws RemoteException
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+
+                @Override
+                public ServiceRegistration register( ServiceItem arg0, long arg1 )
+                                throws RemoteException
+                {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+            };
             ServiceMatches matches = reg.lookup( template, 10000 );
 
             ServiceItem item = matches.items[1];

@@ -44,7 +44,7 @@ public class Observable implements IQuackObservable
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(java.util.Observer)
+     * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
      */
     public void registerObserver( IObserver observer )
     {

@@ -23,6 +23,8 @@ public class GooseAdapter implements IQuackable
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aGoose
      */
     public GooseAdapter( Goose aGoose )
     {

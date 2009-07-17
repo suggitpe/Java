@@ -20,6 +20,8 @@ public class StereoOffCommand implements ICommand
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aStereo
      */
     public StereoOffCommand( Stereo aStereo )
     {

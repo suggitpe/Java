@@ -32,6 +32,9 @@ public class UsernamePasswordDialog extends Dialog
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parentShell
+     *            a composite to associate this class with
      */
     public UsernamePasswordDialog( Shell parentShell )
     {

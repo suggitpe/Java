@@ -30,6 +30,8 @@ public class FileMailbox implements Mailbox
 
     /**
      * Constructs a new instance.
+     * 
+     * @param file
      */
     public FileMailbox( File file )
     {

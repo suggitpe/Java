@@ -20,6 +20,9 @@ public class Ch5Slider extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch5Slider( Composite parent )
     {

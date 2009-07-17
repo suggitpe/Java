@@ -26,6 +26,9 @@ public class Ch4MouseKey extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composit to associate this class with
      */
     public Ch4MouseKey( Composite parent )
     {

@@ -24,6 +24,11 @@ public class MailboxPanel extends JPanel
 
     /**
      * Constructs a new instance.
+     * 
+     * @param mbox
+     *            mailbox to show
+     * @throws MailboxException
+     *             if an issue is found
      */
     public MailboxPanel( Mailbox mbox ) throws MailboxException
     {

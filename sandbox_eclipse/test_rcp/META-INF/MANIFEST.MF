@@ -6,4 +6,3 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: Peter Suggitt
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui
-Bundle-RequiredExecutionEnvironment: J2SE-1.5

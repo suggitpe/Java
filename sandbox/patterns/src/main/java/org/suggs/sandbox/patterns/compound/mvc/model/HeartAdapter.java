@@ -22,6 +22,8 @@ public class HeartAdapter implements IBeatModel
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aModel
      */
     public HeartAdapter( IHeartModel aModel )
     {

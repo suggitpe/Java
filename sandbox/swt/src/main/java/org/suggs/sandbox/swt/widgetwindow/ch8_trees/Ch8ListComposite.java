@@ -30,6 +30,9 @@ public class Ch8ListComposite extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
+     *            a composite to associate this class with
      */
     public Ch8ListComposite( Composite parent )
     {
@@ -77,8 +80,8 @@ public class Ch8ListComposite extends Composite
              *      java.lang.Object, java.lang.Object)
              */
             @Override
-            public boolean select( @SuppressWarnings("hiding")
-            Viewer viewer, Object parent, Object element )
+            public boolean select( @SuppressWarnings("hiding") Viewer viewer, Object parent,
+                                   Object element )
             {
                 return ( (ListItem) element ).mValue_ % 2 == 0;
             }
@@ -93,8 +96,7 @@ public class Ch8ListComposite extends Composite
              *      java.lang.Object, java.lang.Object)
              */
             @Override
-            public int compare( @SuppressWarnings("hiding")
-            Viewer viewer, Object obj1, Object obj2 )
+            public int compare( @SuppressWarnings("hiding") Viewer viewer, Object obj1, Object obj2 )
             {
                 return ( (ListItem) obj2 ).mValue_ - ( (ListItem) obj1 ).mValue_;
             }
@@ -106,6 +108,7 @@ public class Ch8ListComposite extends Composite
             /**
              * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
              */
+            @SuppressWarnings("unchecked")
             public Object[] getElements( Object inputElement )
             {
                 return ( (List) inputElement ).toArray();

@@ -45,7 +45,7 @@ public class Address
     }
 
     /**
-     * @return
+     * @return city
      */
     @Column(length = 64, nullable = false)
     public String getCity()
@@ -62,7 +62,7 @@ public class Address
     }
 
     /**
-     * @return
+     * @return street
      */
     @Column(length = 64, nullable = false)
     public String getStreet()
@@ -79,7 +79,7 @@ public class Address
     }
 
     /**
-     * @return
+     * @return zip code`
      */
     @Column(length = 25, nullable = false)
     public String getZipCode()

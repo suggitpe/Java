@@ -71,9 +71,9 @@ public class ChooseDirectoryPage extends WizardPage
     }
 
     /**
-     * Getter for the inputed text
+     * Getter for the inputed text @ text
      * 
-     * @return
+     * @return the directory name
      */
     public String getDirectory()
     {

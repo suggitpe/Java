@@ -13,6 +13,7 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
@@ -22,7 +23,7 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 16 Jan 2009
  */
-public class EditConnectionAction extends Action
+public class EditConnectionAction extends Action implements InitializingBean
 {
 
     private IConnectionStore mConnectionStore_;
@@ -45,7 +46,8 @@ public class EditConnectionAction extends Action
     /**
      * Constructs a new instance.
      * 
-     * @param mConnectionToEdit_
+     * @param aConnStr
+     * @param aConnectionToEdit
      *            the connecrtion to edit
      */
     public EditConnectionAction( IConnectionStore aConnStr, String aConnectionToEdit )
@@ -59,7 +61,7 @@ public class EditConnectionAction extends Action
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
+    public void afterPropertiesSet()
     {
         Assert.notNull( mConnectionStore_,
                         "No connection store set on the create connection wizard" );

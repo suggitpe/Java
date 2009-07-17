@@ -29,6 +29,9 @@ public class OwnerInvocationHandler implements InvocationHandler
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aPerson
+     *            the person to invoke
      */
     public OwnerInvocationHandler( IPerson aPerson )
     {
@@ -58,8 +61,9 @@ public class OwnerInvocationHandler implements InvocationHandler
         }
         catch ( InvocationTargetException ite )
         {
-            LOG.error( "Exception thrown from object [" + aObject.getClass().getSimpleName() + "] in method [" + aMethod.getName()
-                       + "]: error=[" + ite.getMessage() + "]" );
+            LOG.error( "Exception thrown from object [" + aObject.getClass().getSimpleName()
+                       + "] in method [" + aMethod.getName() + "]: error=[" + ite.getMessage()
+                       + "]" );
         }
         return null;
 

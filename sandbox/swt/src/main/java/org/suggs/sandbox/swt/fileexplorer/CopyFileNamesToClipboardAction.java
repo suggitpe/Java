@@ -32,6 +32,8 @@ public class CopyFileNamesToClipboardAction extends Action
 
     /**
      * Constructs a new instance.
+     * 
+     * @param expl
      */
     public CopyFileNamesToClipboardAction( Explorer expl )
     {
@@ -45,6 +47,7 @@ public class CopyFileNamesToClipboardAction extends Action
     /**
      * @see org.eclipse.jface.action.Action#run()
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void run()
     {

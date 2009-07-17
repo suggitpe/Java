@@ -19,6 +19,8 @@ public class FsmXmlGenerator
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aModel
      */
     public FsmXmlGenerator( IFile aModel )
     {

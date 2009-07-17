@@ -66,6 +66,10 @@ public class FileMailboxActivator implements BundleActivator
 
         /**
          * Constructs a new instance.
+         * 
+         * @param ctx
+         * @param file
+         * @param props
          */
         public RegistrationRunnable( BundleContext ctx, File file, Properties props )
         {

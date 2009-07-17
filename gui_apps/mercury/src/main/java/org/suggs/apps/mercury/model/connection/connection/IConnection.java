@@ -19,7 +19,7 @@ public interface IConnection
     /**
      * Getter for the connection details held in the connection.
      * 
-     * @return
+     * @return the connection details
      */
     ConnectionDetails getConnectionDetails();
 

@@ -17,8 +17,7 @@ public class AllTests
 {
 
     /**
-     * 
-     * @return
+     * @return test suite
      */
     public static Test suite()
     {

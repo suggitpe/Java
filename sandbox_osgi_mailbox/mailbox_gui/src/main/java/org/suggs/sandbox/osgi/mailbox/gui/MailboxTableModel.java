@@ -29,6 +29,9 @@ public class MailboxTableModel extends AbstractTableModel
 
     /**
      * Constructs a new instance.
+     * 
+     * @param mailbox
+     * @throws MailboxException
      */
     public MailboxTableModel( Mailbox mailbox ) throws MailboxException
     {

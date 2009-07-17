@@ -23,7 +23,7 @@ public class Stereo
     /**
      * Constructs a new instance.
      * 
-     * @param aLOcation
+     * @param aLocation
      *            the location of the Steroa
      */
     public Stereo( String aLocation )

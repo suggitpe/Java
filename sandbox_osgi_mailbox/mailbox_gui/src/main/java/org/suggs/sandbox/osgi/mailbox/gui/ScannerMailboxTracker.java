@@ -37,6 +37,9 @@ public class ScannerMailboxTracker extends ServiceTracker
 
     /**
      * Constructs a new instance.
+     * 
+     * @param ctx
+     * @param pane
      */
     public ScannerMailboxTracker( BundleContext ctx, JTabbedPane pane )
     {
