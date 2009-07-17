@@ -22,6 +22,7 @@ public class GuiLoader
 {
 
     private static final Log LOG = LogFactory.getLog( GuiLoader.class );
+    private static final String DEFAULT_CFG_FILE = "xml/gui-loader.xml";
 
     /**
      * Main method. Entry point into the application
@@ -40,14 +41,24 @@ public class GuiLoader
             LOG.debug( "*************************************" );
         }
 
-        if ( aArgs.length != 1 )
+        String cfgFile = null;
+
+        if ( aArgs.length == 0 )
         {
-            String err = "No spring configuration file name set on cmd line ";
+            LOG.debug( "Using defaul spring configuration from [" + DEFAULT_CFG_FILE + "]" );
+            cfgFile = DEFAULT_CFG_FILE;
+        }
+        else if ( aArgs.length == 1 )
+        {
+            LOG.debug( "Using defaul spring configuration from [" + aArgs[0] + "]" );
+            cfgFile = aArgs[0];
+        }
+        else
+        {
+            String err = "Invalid parameters passed into gui loader";
             LOG.error( err );
             throw new IllegalArgumentException( err );
         }
-
-        final String cfgFile = aArgs[0];
 
         BeanFactory fact = new XmlBeanFactory( new ClassPathResource( cfgFile ) );
         final IMercuryApp helper = (IMercuryApp) fact.getBean( "mercuryApplication" );

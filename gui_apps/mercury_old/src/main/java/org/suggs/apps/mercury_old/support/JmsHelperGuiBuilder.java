@@ -34,6 +34,7 @@ public class JmsHelperGuiBuilder
 
         Assert.notNull( aFrame, "Passed in a null JFrame object" );
 
+        aFrame.pack();
         // first center the frame
         GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Point c = e.getCenterPoint();
@@ -52,7 +53,6 @@ public class JmsHelperGuiBuilder
         aFrame.validate();
 
         // then show it
-        aFrame.pack();
         aFrame.setVisible( true );
         aFrame.setResizable( true );
         aFrame.toFront();

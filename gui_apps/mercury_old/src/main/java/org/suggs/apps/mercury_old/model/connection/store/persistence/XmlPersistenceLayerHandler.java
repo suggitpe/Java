@@ -17,7 +17,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXParseException;
 
 /**
- * Connection store dome parser handler
+ * Connection store dom parser handler
  * 
  * @author suggitpe
  * @version 1.0 23 Jul 2007
@@ -64,7 +64,8 @@ final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler
 
         String dtdFileName = "dtd/" + systemId.substring( pos + 1 );
 
-        InputStream stream = XmlPersistenceLayerHandler.class.getClassLoader().getResourceAsStream( dtdFileName );
+        InputStream stream = XmlPersistenceLayerHandler.class.getClassLoader()
+            .getResourceAsStream( dtdFileName );
         if ( stream == null )
         {
             String err = "Unable to load dtd file [" + dtdFileName + "]";

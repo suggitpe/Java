@@ -52,28 +52,35 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
      */
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( mPersistenceLayer_, "Must inject a persisztence layer into the connection store" );
+        Assert.notNull( mPersistenceLayer_,
+                        "Must inject a persisztence layer into the connection store" );
 
         mPersistenceLayer_.verifyPersistenceLayer();
         try
         {
-            mConnStore_ = mPersistenceLayer_.readPersistenceLayer();
+            Map<String, IConnectionDetails> cs = mPersistenceLayer_.readPersistenceLayer();
+            if ( cs != null )
+            {
+                mConnStore_ = cs;
+            }
         }
         catch ( MercuryException jhe )
         {
-            LOG.warn( "UNable to read in connection store details [" + jhe.getMessage() + "]" );
+            LOG.warn( "Unable to read in connection store details [" + jhe.getMessage() + "]" );
         }
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#loadConnectionParameters(java.lang.String)
      */
-    public IConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException
+    public IConnectionDetails loadConnectionParameters( String aName )
+                    throws MercuryConnectionStoreException
     {
         IConnectionDetails ret = mConnStore_.get( aName );
         if ( ret == null )
         {
-            throw new MercuryConnectionStoreException( "Connection [" + aName + "] does not exist in the connection store" );
+            throw new MercuryConnectionStoreException( "Connection [" + aName
+                                                       + "] does not exist in the connection store" );
         }
         return ret;
     }
@@ -113,7 +120,8 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#saveConnectionParameters(java.lang.String,
      *      org.suggs.apps.mercury_old.model.connection.IConnectionDetails)
      */
-    public void saveConnectionParameters( String aName, IConnectionDetails aDetails ) throws MercuryConnectionStoreException
+    public void saveConnectionParameters( String aName, IConnectionDetails aDetails )
+                    throws MercuryConnectionStoreException
     {
         if ( aDetails == null )
         {
