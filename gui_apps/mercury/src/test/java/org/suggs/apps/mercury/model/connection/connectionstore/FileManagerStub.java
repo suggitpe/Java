@@ -36,7 +36,7 @@ public class FileManagerStub implements IFileManager
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.util.file.IFileManager#persistClob(java.lang.String,
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#persistClobToFile(java.lang.String,
      *      java.io.File)
      */
     public void persistClobToFile( String clob, File file ) throws IOException
@@ -47,7 +47,7 @@ public class FileManagerStub implements IFileManager
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClob(java.io.File)
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClobFromFile(java.io.File)
      */
     public String retrieveClobFromFile( File file ) throws IOException
     {

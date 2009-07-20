@@ -84,6 +84,8 @@ public class IbmMqConnectionDataPage extends AbstractCreateConnectionPage
 
         /**
          * Constructs a new instance.
+         * 
+         * @param comp
          */
         public IbmConnectionDetailsComposite( Composite comp )
         {

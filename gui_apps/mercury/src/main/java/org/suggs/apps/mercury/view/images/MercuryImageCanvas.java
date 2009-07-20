@@ -33,6 +33,8 @@ public class MercuryImageCanvas extends Canvas
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
      */
     public MercuryImageCanvas( Composite parent )
     {

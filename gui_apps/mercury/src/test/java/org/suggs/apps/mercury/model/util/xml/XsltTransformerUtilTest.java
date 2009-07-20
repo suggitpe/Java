@@ -48,6 +48,9 @@ public class XsltTransformerUtilTest
     /**
      * This test ensures that we can apply some xslt to a given set of
      * xml and ensure that the outcome matches the expected result.
+     * 
+     * @throws UnsupportedEncodingException
+     * @throws MercuryUtilityException
      */
     @Test
     public void testSimpleTransform() throws UnsupportedEncodingException, MercuryUtilityException
@@ -73,6 +76,9 @@ public class XsltTransformerUtilTest
     /**
      * This test ensures that we can apply some xslt to a given set of
      * xml and ensure that the outcome matches the expected result.
+     * 
+     * @throws UnsupportedEncodingException
+     * @throws MercuryUtilityException
      */
     @Test(expected = MercuryUtilityException.class)
     public void testFailTransformForInvalidXml() throws UnsupportedEncodingException,
@@ -99,6 +105,8 @@ public class XsltTransformerUtilTest
     /**
      * In this test we ensure that if we pass in a zero byte xml, then
      * the whole process falls over
+     * 
+     * @throws MercuryUtilityException
      */
     @Test(expected = MercuryUtilityException.class)
     public void testFailDueToNoXmlBytes() throws MercuryUtilityException
@@ -109,6 +117,8 @@ public class XsltTransformerUtilTest
     /**
      * Here we are testing that if we pass in a null xml object then
      * the whole process falls over
+     * 
+     * @throws MercuryUtilityException
      */
     @Test(expected = MercuryUtilityException.class)
     public void testFailDueToNullXmlBytes() throws MercuryUtilityException
@@ -119,6 +129,9 @@ public class XsltTransformerUtilTest
     /**
      * Tests that when you pass in some xslt that no one can find then
      * we get the correct exception thrown
+     * 
+     * @throws MercuryUtilityException
+     * @throws UnsupportedEncodingException
      */
     @Test(expected = MercuryUtilityException.class)
     public void testUnfoundXslt() throws MercuryUtilityException, UnsupportedEncodingException
@@ -130,6 +143,9 @@ public class XsltTransformerUtilTest
     /**
      * Tests that when you pass in some xslt that no one can find then
      * we get the correct exception thrown
+     * 
+     * @throws MercuryUtilityException
+     * @throws UnsupportedEncodingException
      */
     @Test(expected = MercuryUtilityException.class)
     public void testNullXslt() throws MercuryUtilityException, UnsupportedEncodingException

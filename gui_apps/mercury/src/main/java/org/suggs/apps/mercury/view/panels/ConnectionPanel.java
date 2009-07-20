@@ -19,6 +19,8 @@ public class ConnectionPanel extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
      */
     public ConnectionPanel( Composite parent )
     {

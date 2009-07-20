@@ -82,8 +82,7 @@ public class ConnectionDetails
      *            the name of the host for the broker
      * @param aPort
      *            the port number to access the broker
-     * @param aMetaData
-     *            additional connection metadata
+     * @param aConnData
      */
     public ConnectionDetails( String aName, String aType, String aHostname, int aPort,
                               Map<String, String> aConnData )

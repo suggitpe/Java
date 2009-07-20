@@ -22,6 +22,8 @@ public class MainWindow extends Composite
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
      */
     public MainWindow( Composite parent )
     {

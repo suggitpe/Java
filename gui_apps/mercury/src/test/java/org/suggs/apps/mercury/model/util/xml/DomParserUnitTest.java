@@ -83,6 +83,9 @@ public class DomParserUnitTest
     /**
      * This will test the parsing of a file that is valid for the
      * schema.
+     * 
+     * @throws IOException
+     * @throws MercuryUtilityException
      */
     @Test
     public void testParseValidXmlFile() throws IOException, MercuryUtilityException
@@ -123,6 +126,9 @@ public class DomParserUnitTest
     /**
      * This will test the parsing of a file that is not valid for the
      * schema.
+     * 
+     * @throws IOException
+     * @throws MercuryUtilityException
      */
     @Test(expected = IllegalStateException.class)
     public void testParseInvalidXmlFile() throws IOException, MercuryUtilityException
@@ -147,7 +153,7 @@ public class DomParserUnitTest
      * schema.
      * 
      * @throws IOException
-     *             , MercuryUtilityException
+     * @throws MercuryUtilityException
      */
     @Test(expected = IllegalStateException.class)
     public void testParseBadXmlFile() throws IOException, MercuryUtilityException
@@ -170,6 +176,8 @@ public class DomParserUnitTest
     /**
      * This will try and run the parser but without finding a schema
      * and thus will throw an exception.
+     * 
+     * @throws MercuryUtilityException
      */
     @Test(expected = MercuryUtilityException.class)
     public void testCantFindXsd() throws MercuryUtilityException

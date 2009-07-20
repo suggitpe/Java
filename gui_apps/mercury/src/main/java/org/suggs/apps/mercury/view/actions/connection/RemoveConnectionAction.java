@@ -10,8 +10,8 @@ import org.suggs.apps.mercury.model.util.image.ImageManager;
 import org.suggs.apps.mercury.view.dialogs.SelectConnectionDialog;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -48,6 +48,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean
     /**
      * Constructs a new instance.
      * 
+     * @param aConnStr
      * @param aConnectionToRemove
      *            the name of the connection to remove
      */
@@ -88,7 +89,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean
             int ok = rcd.open();
             mConnectionToRemove_ = rcd.getChoice();
 
-            if ( ok != Dialog.OK )
+            if ( ok != Window.OK )
             {
                 return;
             }

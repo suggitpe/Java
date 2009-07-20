@@ -52,7 +52,7 @@ public class JaxbXmlConnectionStoreManagerUnitTest
      * String clob and then return it in a form that is understood
      * 
      * @throws ConnectionStoreException
-     *             , IOException
+     * @throws IOException
      */
     @Test
     public void testReadConnectionData() throws ConnectionStoreException, IOException

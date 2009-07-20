@@ -43,6 +43,8 @@ public class ConnectionContext implements IConnection
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aDetails
      */
     public ConnectionContext( ConnectionDetails aDetails )
     {

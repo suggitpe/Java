@@ -23,6 +23,9 @@ public interface IConnectionStoreChangeListener
      * This interface method is really a notification method but its
      * name suggests that change may happen in the future where an
      * event can be passed in.
+     * 
+     * @param aConnectionTarget
+     * @param aEvent
      */
     void handleConnectionStoreChange( String aConnectionTarget, ConnectionStoreEvent aEvent );
 

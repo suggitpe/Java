@@ -13,7 +13,6 @@ import org.suggs.apps.mercury.view.wizards.createconnection.CreateConnectionWiza
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -65,7 +64,7 @@ public class CreateConnectionAction extends Action implements InitializingBean
         CreateConnectionWizard ccw = new CreateConnectionWizard();
         WizardDialog d = new WizardDialog( Display.getCurrent().getActiveShell(), ccw );
         int ret = d.open();
-        if ( Dialog.OK == ret )
+        if ( Window.OK == ret )
         {
             ConnectionDetails dtls = ccw.getConnectionDetails();
             if ( dtls == null )

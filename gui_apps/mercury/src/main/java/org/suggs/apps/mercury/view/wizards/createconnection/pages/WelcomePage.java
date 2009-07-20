@@ -21,8 +21,6 @@ public class WelcomePage extends AbstractCreateConnectionPage
 
     /**
      * Constructs a new instance.
-     * 
-     * @param pageName
      */
     public WelcomePage()
     {

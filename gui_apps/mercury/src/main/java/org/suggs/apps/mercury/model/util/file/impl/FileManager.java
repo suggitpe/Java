@@ -32,7 +32,7 @@ public class FileManager implements IFileManager
     private static final String CHARSET = "UTF-8";
 
     /**
-     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClob(java.io.File)
+     * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClobFromFile(java.io.File)
      */
     public final String retrieveClobFromFile( File file ) throws IOException
     {

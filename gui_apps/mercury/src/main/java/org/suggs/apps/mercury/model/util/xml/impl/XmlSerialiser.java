@@ -30,7 +30,7 @@ public class XmlSerialiser implements IXmlSerialiser
     private static final Log LOG = LogFactory.getLog( XmlSerialiser.class );
 
     /**
-     * @see org.suggs.apps.mercury.model.util.xml.IXmlSerialiser#serialiseXmlToString(org.w3c.dom.Document)
+     * @see org.suggs.apps.mercury.model.util.xml.IXmlSerialiser#serialiseXmlToString(org.w3c.dom.Node)
      */
     public String serialiseXmlToString( Node document ) throws MercuryUtilityException
     {

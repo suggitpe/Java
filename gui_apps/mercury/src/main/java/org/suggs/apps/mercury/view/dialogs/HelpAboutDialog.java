@@ -30,6 +30,8 @@ public class HelpAboutDialog extends Dialog
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parentShell
      */
     public HelpAboutDialog( Shell parentShell )
     {

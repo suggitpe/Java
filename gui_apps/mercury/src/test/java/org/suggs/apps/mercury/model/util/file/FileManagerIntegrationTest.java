@@ -110,6 +110,8 @@ public class FileManagerIntegrationTest
     /**
      * Test that if the file already exits and the file is not
      * writable then an exception is thrown.
+     * 
+     * @throws IOException
      */
     @Test(expected = IOException.class)
     public void testNotWritableFile() throws IOException

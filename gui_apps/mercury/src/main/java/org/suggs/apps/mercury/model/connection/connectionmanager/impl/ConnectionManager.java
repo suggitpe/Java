@@ -102,7 +102,8 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
      * reflect these changes in the manager (and those that register
      * interest in the connections).
      * 
-     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener#handleConnectionStoreChange()
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener#handleConnectionStoreChange(java.lang.String,
+     *      org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener.ConnectionStoreEvent)
      */
     public void handleConnectionStoreChange(
                                              String aConnectionName,
@@ -147,7 +148,7 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#containsConnection()
+     * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#containsConnection(java.lang.String)
      */
     public boolean containsConnection( String aConnectionName )
     {
@@ -172,7 +173,7 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#removeConnectionManagerListsner(org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener)
+     * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#removeConnectionManagerListener(org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener)
      */
     public void removeConnectionManagerListener( IConnectionManagerListener aListener )
     {

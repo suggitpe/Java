@@ -54,6 +54,8 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
 
     /**
      * Constructs a new instance.
+     * 
+     * @param parent
      */
     public ConnectionTreePanel( Composite parent )
     {

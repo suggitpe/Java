@@ -37,6 +37,9 @@ public class SelectConnectionDialog extends TitleAreaDialog
      * Constructs a new instance.
      * 
      * @param aParentShell
+     * @param aConnectionNames
+     * @param aTitle
+     * @param aMessage
      */
     public SelectConnectionDialog( Shell aParentShell, Set<String> aConnectionNames, String aTitle,
                                    String aMessage )

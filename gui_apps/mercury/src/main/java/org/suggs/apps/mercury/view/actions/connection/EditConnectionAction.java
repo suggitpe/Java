@@ -9,7 +9,7 @@ import org.suggs.apps.mercury.model.util.image.ImageManager;
 import org.suggs.apps.mercury.view.dialogs.SelectConnectionDialog;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -87,7 +87,7 @@ public class EditConnectionAction extends Action implements InitializingBean
             int ok = rcd.open();
             mConnectionToEdit_ = rcd.getChoice();
 
-            if ( ok != Dialog.OK )
+            if ( ok != Window.OK )
             {
                 return;
             }

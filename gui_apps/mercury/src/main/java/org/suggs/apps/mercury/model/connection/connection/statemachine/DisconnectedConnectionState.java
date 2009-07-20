@@ -6,9 +6,6 @@ package org.suggs.apps.mercury.model.connection.connection.statemachine;
 
 import org.suggs.apps.mercury.model.connection.connection.ConnectionContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * State to represent when we try and close an existing connection and
  * the underlying connection close attempt has succeeded.
@@ -19,12 +16,12 @@ import org.apache.commons.logging.LogFactory;
 public class DisconnectedConnectionState implements IConnectionState
 {
 
-    private static final Log LOG = LogFactory.getLog( DisconnectedConnectionState.class );
-
     private ConnectionContext mContext_;
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aContext
      */
     public DisconnectedConnectionState( ConnectionContext aContext )
     {

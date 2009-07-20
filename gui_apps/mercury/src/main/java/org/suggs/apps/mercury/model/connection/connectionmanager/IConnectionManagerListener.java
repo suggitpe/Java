@@ -22,6 +22,7 @@ public interface IConnectionManagerListener
      * This is the impl method that the observers of the
      * 
      * @param aConnectionName
+     * @param aEvent
      */
     void handleConnectionManagerChange( String aConnectionName, ConnectionManagerEvent aEvent );
 

@@ -39,8 +39,6 @@ public class MercuryMain extends ApplicationWindow
 
     /**
      * Constructs a new instance.
-     * 
-     * @param parentShell
      */
     public MercuryMain()
     {

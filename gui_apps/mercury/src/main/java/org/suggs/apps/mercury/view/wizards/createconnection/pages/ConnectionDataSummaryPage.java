@@ -97,6 +97,8 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
 
         /**
          * Constructs a new instance.
+         * 
+         * @param comp
          */
         public SummaryDataComposite( Composite comp )
         {
@@ -141,6 +143,8 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
 
         /**
          * Constructs a new instance.
+         * 
+         * @param comp
          */
         public TestConnectionSummary( Composite comp )
         {

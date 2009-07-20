@@ -78,8 +78,6 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
 
     /**
      * Checking method to see if this page is complete
-     * 
-     * @return true if the page is complete, else false
      */
     protected void checkIfPageComplete()
     {
@@ -166,6 +164,8 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
 
         /**
          * Constructs a new instance.
+         * 
+         * @param comp
          */
         public ConnectionDetailsComposite( Composite comp )
         {

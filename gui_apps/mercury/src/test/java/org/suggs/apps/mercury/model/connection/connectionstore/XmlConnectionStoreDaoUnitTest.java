@@ -381,6 +381,8 @@ public class XmlConnectionStoreDaoUnitTest
     /**
      * This test will verify that the listeners are added and removed
      * when the api call is made.
+     * 
+     * @throws ConnectionStoreException
      */
     @Test
     public void testAddListenersForDelete() throws ConnectionStoreException
@@ -434,6 +436,8 @@ public class XmlConnectionStoreDaoUnitTest
     /**
      * This test will verify that the listeners are added and removed
      * when the api call is made.
+     * 
+     * @throws ConnectionStoreException
      */
     @Test
     public void testAddAndRemoveListenersForDelete() throws ConnectionStoreException

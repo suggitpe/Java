@@ -99,7 +99,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     }
 
     /**
-     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#getListOfKnownConnectionNames()
+     * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#getKnownConnections()
      */
     public Map<String, ConnectionDetails> getKnownConnections()
     {

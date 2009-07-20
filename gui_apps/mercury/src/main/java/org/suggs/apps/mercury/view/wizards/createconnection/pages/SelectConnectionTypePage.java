@@ -107,6 +107,8 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage
 
         /**
          * Constructs a new instance.
+         * 
+         * @param comp
          */
         public SelectConnectionComposite( Composite comp )
         {
