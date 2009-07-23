@@ -2,7 +2,7 @@
  * IState.java created on 10 Sep 2007 18:08:25 by suggitpe for project SandBox - Patterns
  * 
  */
-package org.suggs.sandbox.patterns.behavioural.state;
+package org.suggs.sandbox.patterns.behavioural.state.gumball;
 
 /**
  * High level state object for the gumball machine.

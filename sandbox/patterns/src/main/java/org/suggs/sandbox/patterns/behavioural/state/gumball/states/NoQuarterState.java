@@ -2,10 +2,10 @@
  * NoQuarterState.java created on 10 Sep 2007 18:14:38 by suggitpe for project SandBox - Patterns
  * 
  */
-package org.suggs.sandbox.patterns.behavioural.state.states;
+package org.suggs.sandbox.patterns.behavioural.state.gumball.states;
 
-import org.suggs.sandbox.patterns.behavioural.state.GumballMachine;
-import org.suggs.sandbox.patterns.behavioural.state.IState;
+import org.suggs.sandbox.patterns.behavioural.state.gumball.GumballMachine;
+import org.suggs.sandbox.patterns.behavioural.state.gumball.IState;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,7 +35,7 @@ public class NoQuarterState implements IState
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.IState#dispense()
+     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
     public void dispense()
     {
@@ -43,7 +43,7 @@ public class NoQuarterState implements IState
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.IState#ejectQuarter()
+     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
     public void ejectQuarter()
     {
@@ -51,7 +51,7 @@ public class NoQuarterState implements IState
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.IState#insertQuarter()
+     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
     public void insertQuarter()
     {
@@ -60,7 +60,7 @@ public class NoQuarterState implements IState
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.IState#turnCrank()
+     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
     public void turnCrank()
     {

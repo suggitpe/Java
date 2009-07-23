@@ -35,7 +35,7 @@ public class WinnerState implements IState
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.IState#dispense()
+     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
     public void dispense()
     {
@@ -63,7 +63,7 @@ public class WinnerState implements IState
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.IState#ejectQuarter()
+     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
     public void ejectQuarter()
     {
@@ -71,7 +71,7 @@ public class WinnerState implements IState
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.IState#insertQuarter()
+     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
     public void insertQuarter()
     {
@@ -79,7 +79,7 @@ public class WinnerState implements IState
     }
 
     /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.IState#turnCrank()
+     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
     public void turnCrank()
     {

@@ -5,7 +5,7 @@
 package org.suggs.sandbox.patterns.behavioural;
 
 import org.suggs.sandbox.patterns.AbstractPatternTestCase;
-import org.suggs.sandbox.patterns.behavioural.state.GumballMachine;
+import org.suggs.sandbox.patterns.behavioural.state.gumball.GumballMachine;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,10 +16,10 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class StateTestCase extends AbstractPatternTestCase
+public class StateGumballTestCase extends AbstractPatternTestCase
 {
 
-    private static final Log LOG = LogFactory.getLog( StateTestCase.class );
+    private static final Log LOG = LogFactory.getLog( StateGumballTestCase.class );
 
     /**
      * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()

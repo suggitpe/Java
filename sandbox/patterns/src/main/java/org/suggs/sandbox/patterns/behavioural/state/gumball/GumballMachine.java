@@ -2,13 +2,13 @@
  * GumballMachine.java created on 10 Sep 2007 17:58:21 by suggitpe for project SandBox - Patterns
  * 
  */
-package org.suggs.sandbox.patterns.behavioural.state;
+package org.suggs.sandbox.patterns.behavioural.state.gumball;
 
-import org.suggs.sandbox.patterns.behavioural.state.states.HasQuarterState;
-import org.suggs.sandbox.patterns.behavioural.state.states.NoQuarterState;
-import org.suggs.sandbox.patterns.behavioural.state.states.SoldOutState;
-import org.suggs.sandbox.patterns.behavioural.state.states.SoldState;
-import org.suggs.sandbox.patterns.behavioural.state.states.WinnerState;
+import org.suggs.sandbox.patterns.behavioural.state.gumball.states.HasQuarterState;
+import org.suggs.sandbox.patterns.behavioural.state.gumball.states.NoQuarterState;
+import org.suggs.sandbox.patterns.behavioural.state.gumball.states.SoldOutState;
+import org.suggs.sandbox.patterns.behavioural.state.gumball.states.SoldState;
+import org.suggs.sandbox.patterns.behavioural.state.gumball.states.WinnerState;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

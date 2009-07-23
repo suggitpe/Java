@@ -28,7 +28,7 @@ public class AllTests
         s.addTestSuite( CommandTestCase.class );
         s.addTestSuite( IteratorTestCase.class );
         s.addTestSuite( ObserverTestCase.class );
-        s.addTestSuite( StateTestCase.class );
+        s.addTestSuite( StateGumballTestCase.class );
         s.addTestSuite( TemplateTestCase.class );
 
         return s;
