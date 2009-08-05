@@ -4,8 +4,10 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="lib" path="/build/etc/suggitpe"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/junit/junit/4.5/junit-4.5.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/log4j/log4j/1.2.7/log4j-1.2.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

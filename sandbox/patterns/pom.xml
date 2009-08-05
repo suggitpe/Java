@@ -13,6 +13,21 @@
     <artifactId>sandbox-patterns-lib</artifactId>
     <packaging>jar</packaging>
     <name>Sandbox Patterns</name>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes> 
+                        <exclude>**/StateCalendarDataCreator.java</exclude>
+                        <exclude>**/StateCalendarGuiTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
     </dependencies>
