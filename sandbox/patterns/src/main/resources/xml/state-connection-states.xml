@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <import resource="classpath:xml/state-connection-transitions.xml" />
+
+    <!-- STATE MACHINE -->
+    <bean id="stateMachine"
+        class="org.suggs.sandbox.patterns.behavioural.state.connection.impl.StateMachine">
+        <constructor-arg ref="initialState" />
+    </bean>
+
+    <!--  STATES -->
+    <bean id="initialState"
+        class="org.suggs.sandbox.patterns.behavioural.state.connection.impl.State">
+        <constructor-arg value="Connection:Initial" />
+    </bean>
+
+    <bean id="disconnectedState"
+        class="org.suggs.sandbox.patterns.behavioural.state.connection.impl.State">
+        <constructor-arg value="Connection:Disconnected" />
+    </bean>
+
+    <bean id="connectingState"
+        class="org.suggs.sandbox.patterns.behavioural.state.connection.impl.State">
+        <constructor-arg value="Connection:ConnectionInProgress" />
+    </bean>
+
+    <bean id="connectedState"
+        class="org.suggs.sandbox.patterns.behavioural.state.connection.impl.State">
+        <constructor-arg value="Connection:Connected" />
+    </bean>
+
+    <bean id="failedState"
+        class="org.suggs.sandbox.patterns.behavioural.state.connection.impl.State">
+        <constructor-arg value="Connection:Failed" />
+    </bean>
+
+    <bean id="disconnectingState"
+        class="org.suggs.sandbox.patterns.behavioural.state.connection.impl.State">
+        <constructor-arg value="Connection:DisconnectionInProgress" />
+    </bean>
+
+</beans>
