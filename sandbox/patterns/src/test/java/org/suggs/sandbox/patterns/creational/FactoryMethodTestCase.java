@@ -11,8 +11,11 @@ import org.suggs.sandbox.patterns.creational.factory.PizzaStoreException;
 import org.suggs.sandbox.patterns.creational.factory.pizzastore.BarPizzaStore;
 import org.suggs.sandbox.patterns.creational.factory.pizzastore.FooPizzaStore;
 
+import junit.framework.Assert;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * Test case for the factory pattern
@@ -25,44 +28,25 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
 
     private static final Log LOG = LogFactory.getLog( FactoryMethodTestCase.class );
 
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "FACTORY PATTERN" );
-    }
-
-    /**
-     * Test the normal flow for the foo store
-     */
+    @Test
     public void testFooPizzaStore()
     {
         runTest( new FooPizzaStore(), "ham", false );
     }
 
-    /**
-     * Test the normal flow for the bar pizza store
-     */
+    @Test
     public void testBarPizzaStore()
     {
         runTest( new BarPizzaStore(), "cheese", false );
-
     }
 
-    /**
-     * Test the alternate flow for the foo store
-     */
+    @Test
     public void testFooPizzaStoreFailure()
     {
         runTest( new FooPizzaStore(), "dog-poo", true );
     }
 
-    /**
-     * Test the alternate flow for the bar store
-     */
+    @Test
     public void testBarPizzaStoreFailure()
     {
         runTest( new BarPizzaStore(), "cat-wee", true );
@@ -88,7 +72,7 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
             pizza = aStore.orderPizza( aType );
             if ( expectException )
             {
-                fail( "The test should have thrown an exception" );
+                Assert.fail( "The test should have thrown an exception" );
             }
             else
             {
@@ -99,7 +83,7 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
         {
             if ( !expectException )
             {
-                fail( "Caught exception in the pizza store [" + e.getMessage() + "]" );
+                Assert.fail( "Caught exception in the pizza store [" + e.getMessage() + "]" );
             }
             else
             {

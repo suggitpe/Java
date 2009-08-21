@@ -11,6 +11,7 @@ import org.suggs.sandbox.patterns.behavioural.template.untemplatized.Tea;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * Test case for the template pattern tests
@@ -23,16 +24,7 @@ public class TemplateTestCase extends AbstractPatternTestCase
 
     private static final Log LOG = LogFactory.getLog( TemplateTestCase.class );
 
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "TEMPLATE PATTERN" );
-    }
-
+    @Test
     public void testNonTemplatized()
     {
         LOG.debug( "**** Calling prepareRecipe for coffee" );
@@ -45,6 +37,7 @@ public class TemplateTestCase extends AbstractPatternTestCase
         tea.prepareReceipe();
     }
 
+    @Test
     public void testTemplatized()
     {
         LOG.debug( "**** Calling prepareRecipe for coffee" );

@@ -9,6 +9,7 @@ import org.suggs.sandbox.patterns.creational.singleton.SingletonImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * TestCase for the singleton pattern.
@@ -21,16 +22,7 @@ public class SingletonTestCase extends AbstractPatternTestCase
 
     private static final Log LOG = LogFactory.getLog( SingletonTestCase.class );
 
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "SINGLETON PATTERN" );
-    }
-
+    @Test
     public void testSingletonCreate()
     {
         LOG.debug( "Calling Singleton for the first time" );
@@ -50,7 +42,8 @@ public class SingletonTestCase extends AbstractPatternTestCase
         long last = new Long( SingletonImpl.instance().getConstructionTime() ).longValue();
         long now = new Long( System.currentTimeMillis() ).longValue();
 
-        LOG.debug( "Initial=[" + initial + "] and last=[" + last + "] now=[" + now + "], should be=[" + ( now - initial ) + "], diff=["
-                   + ( last - initial ) + "] - we would expect this to be a zero diff" );
+        LOG.debug( "Initial=[" + initial + "] and last=[" + last + "] now=[" + now
+                   + "], should be=[" + ( now - initial ) + "], diff=[" + ( last - initial )
+                   + "] - we would expect this to be a zero diff" );
     }
 }

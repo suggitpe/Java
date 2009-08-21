@@ -4,10 +4,10 @@
  */
 package org.suggs.sandbox.patterns;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  * Abstract test that will do all of the formatting for the pre and
@@ -16,26 +16,23 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 24 Aug 2007
  */
-public abstract class AbstractPatternTestCase extends TestCase
+public abstract class AbstractPatternTestCase
 {
 
     private static final Log LOG = LogFactory.getLog( "Test Base" );
 
-    @Override
-    protected void setUp() throws Exception
+    @BeforeClass
+    public static void doubleLine()
     {
-        LOG.info( "--------------------------------- " + this.getName() + " test" );
+        LOG.info( "=================================" );
     }
 
-    @Override
-    protected void tearDown() throws Exception
+    @Before
+    public void singleLine() throws Exception
     {
         LOG.info( "---------------------------------" );
+        LOG.info( "Executing: " + getClass().getSimpleName() );
+        LOG.info( "---------------------------------" );
     }
-
-    /**
-     * Enforce the impl of a test case called testName
-     */
-    public abstract void testName();
 
 }

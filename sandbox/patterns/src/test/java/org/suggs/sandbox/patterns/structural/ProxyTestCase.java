@@ -11,6 +11,7 @@ import org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.PersonProxyHelpe
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * Test case for the facade pattern
@@ -23,19 +24,7 @@ public class ProxyTestCase extends AbstractPatternTestCase
 
     private static final Log LOG = LogFactory.getLog( ProxyTestCase.class );
 
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "PROXY PATTERN" );
-    }
-
-    /**
-     * Test the dynamic proxy approach for the owner proxy
-     */
+    @Test
     public void testPersonOwnerProxy()
     {
         LOG.debug( "Testing a dynamic proxy implementation for the owner proxy" );
@@ -51,15 +40,15 @@ public class ProxyTestCase extends AbstractPatternTestCase
         }
         catch ( Exception e )
         {
-            LOG.warn( "Setting the hot or not under the owner proxy gives rise to a [" + e.getClass().getSimpleName() + "] exception" );
+            LOG.warn( "Setting the hot or not under the owner proxy gives rise to a ["
+                      + e.getClass().getSimpleName() + "] exception" );
 
         }
-        LOG.debug( "The hot or not rating for [" + joeProxy.getName() + "] is [" + joeProxy.getHotOrNotRating() + "]" );
+        LOG.debug( "The hot or not rating for [" + joeProxy.getName() + "] is ["
+                   + joeProxy.getHotOrNotRating() + "]" );
     }
 
-    /**
-     * Test the dynamic proxy approach for the non owner proxy
-     */
+    @Test
     public void testPersonNonOwnerProxy()
     {
         LOG.debug( "Testing a dynamic proxy implementation for the non owner proxy" );
@@ -74,12 +63,13 @@ public class ProxyTestCase extends AbstractPatternTestCase
         }
         catch ( Exception e )
         {
-            LOG.warn( "Setting the interests under the non owner proxy gives rise to a [" + e.getClass().getSimpleName() + "] exception" );
+            LOG.warn( "Setting the interests under the non owner proxy gives rise to a ["
+                      + e.getClass().getSimpleName() + "] exception" );
         }
 
         bobProxy.setHotOrNotRating( 9 );
-        LOG.debug( "The hot or not rating for [" + bobProxy.getName() + "] is [" + bobProxy.getHotOrNotRating() + "]" );
-
+        LOG.debug( "The hot or not rating for [" + bobProxy.getName() + "] is ["
+                   + bobProxy.getHotOrNotRating() + "]" );
     }
 
     /**

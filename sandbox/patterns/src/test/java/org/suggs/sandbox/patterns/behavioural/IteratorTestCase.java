@@ -9,8 +9,7 @@ import org.suggs.sandbox.patterns.behavioural.iterator.Waitress;
 import org.suggs.sandbox.patterns.behavioural.iterator.aggregates.DinerMenu;
 import org.suggs.sandbox.patterns.behavioural.iterator.aggregates.PancakeHouseMenu;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * Test case for the Iterator pattern
@@ -21,24 +20,14 @@ import org.apache.commons.logging.LogFactory;
 public class IteratorTestCase extends AbstractPatternTestCase
 {
 
-    private static final Log LOG = LogFactory.getLog( IteratorTestCase.class );
-
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "ITERATOR PATTERN" );
-    }
-
+    @Test
     public void testPrintMenu()
     {
         Waitress waitress = new Waitress( new PancakeHouseMenu(), new DinerMenu() );
         waitress.printMenu();
     }
 
+    @Test
     public void testPrintLunchMenu()
     {
         Waitress waitress = new Waitress( new PancakeHouseMenu(), new DinerMenu() );

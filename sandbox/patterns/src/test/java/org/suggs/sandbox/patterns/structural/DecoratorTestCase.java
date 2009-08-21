@@ -14,6 +14,7 @@ import org.suggs.sandbox.patterns.structural.decorator.beveragedecorator.Whipped
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * Test case for the decorator pattern
@@ -26,28 +27,14 @@ public class DecoratorTestCase extends AbstractPatternTestCase
 
     private static final Log LOG = LogFactory.getLog( DecoratorTestCase.class );
 
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "DECORATOR PATTERN" );
-    }
-
-    /**
-     * Test for the straight Espresso coffee class
-     */
+    @Test
     public void testNormalEspresso()
     {
         IBeverage e = new Espresso();
         LOG.debug( "Normal espresso - " + e );
     }
 
-    /**
-     * Test for a decorated espresso
-     */
+    @Test
     public void testEspressoWithExtras()
     {
         IBeverage e = new Espresso();
@@ -57,23 +44,18 @@ public class DecoratorTestCase extends AbstractPatternTestCase
         LOG.debug( "Espresso with extras - " + e );
     }
 
-    /**
-     * Test for the normal house blend
-     */
+    @Test
     public void testHouseBlend()
     {
         IBeverage h = new HouseBlend();
         LOG.debug( "Normal house blend - " + h );
     }
 
-    /**
-     * Test the decorated house blend
-     */
+    @Test
     public void testHouseBlendWithExtras()
     {
         IBeverage h = new HouseBlend();
         h = new SteamedMilk( h );
         LOG.debug( "House blend with extras - " + h );
     }
-
 }

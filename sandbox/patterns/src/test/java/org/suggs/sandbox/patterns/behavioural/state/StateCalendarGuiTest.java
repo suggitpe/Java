@@ -2,7 +2,7 @@
  * StateCalendarGuiTest.java created on 5 Aug 2009 07:10:10 by suggitpe for project SandBox - Patterns
  * 
  */
-package org.suggs.sandbox.patterns.behavioural;
+package org.suggs.sandbox.patterns.behavioural.state;
 
 import org.suggs.sandbox.patterns.behavioural.state.appointments.CalendarEditor;
 import org.suggs.sandbox.patterns.behavioural.state.appointments.StateGui;

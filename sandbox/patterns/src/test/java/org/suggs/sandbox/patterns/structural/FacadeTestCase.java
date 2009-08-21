@@ -15,8 +15,7 @@ import org.suggs.sandbox.patterns.structural.facade.subsystem.Screen;
 import org.suggs.sandbox.patterns.structural.facade.subsystem.TheatreLights;
 import org.suggs.sandbox.patterns.structural.facade.subsystem.Tuner;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * Test case for the facade pattern
@@ -27,30 +26,14 @@ import org.apache.commons.logging.LogFactory;
 public class FacadeTestCase extends AbstractPatternTestCase
 {
 
-    private static final Log LOG = LogFactory.getLog( FacadeTestCase.class );
-
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "FACADE PATTERN" );
-    }
-
-    /**
-     * Test the watching of a movie
-     */
+    @Test
     public void testWatchMovie()
     {
         HomeTheatreFacade facade = createFacade();
         facade.watchMovie( "Rambo" );
     }
 
-    /**
-     * Test the closing down of the theatre
-     */
+    @Test
     public void testCloseDown()
     {
         HomeTheatreFacade facade = createFacade();

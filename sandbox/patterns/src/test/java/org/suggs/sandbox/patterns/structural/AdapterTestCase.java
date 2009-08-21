@@ -12,6 +12,7 @@ import org.suggs.sandbox.patterns.structural.adapter.WildTurkey;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * Test case for the adapter pattern
@@ -24,16 +25,7 @@ public class AdapterTestCase extends AbstractPatternTestCase
 
     private static final Log LOG = LogFactory.getLog( AdapterTestCase.class );
 
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "ADAPTER PATTERN" );
-    }
-
+    @Test
     public void testTurkeyAdapter()
     {
         IDuck mallard = new MallardDuck();
@@ -53,11 +45,10 @@ public class AdapterTestCase extends AbstractPatternTestCase
 
     }
 
-    private static void testDuck( IDuck aDuck )
+    private void testDuck( IDuck aDuck )
     {
         LOG.debug( "Testing a duck object [" + aDuck.getClass().getSimpleName() + "]" );
         aDuck.quack();
         aDuck.fly();
     }
-
 }

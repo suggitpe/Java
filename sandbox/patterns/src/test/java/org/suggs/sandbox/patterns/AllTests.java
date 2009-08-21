@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * Test suite for all tests for the mercury model
@@ -13,24 +13,10 @@ import junit.framework.TestSuite;
  * @author suggitpe
  * @version 1.0 2 Aug 2007
  */
+@RunWith(Suite.class)
+@Suite.SuiteClasses( { org.suggs.sandbox.patterns.behavioural.AllTests.class,
+                      org.suggs.sandbox.patterns.compound.AllTests.class,
+                      org.suggs.sandbox.patterns.creational.AllTests.class,
+                      org.suggs.sandbox.patterns.structural.AllTests.class })
 public class AllTests
-{
-
-    /**
-     * This is the underlying test suite itself
-     * 
-     * @return the test suite to run
-     */
-    public static Test suite()
-    {
-        TestSuite s = new TestSuite();
-
-        s.addTest( org.suggs.sandbox.patterns.behavioural.AllTests.suite() );
-        s.addTest( org.suggs.sandbox.patterns.compound.AllTests.suite() );
-        s.addTest( org.suggs.sandbox.patterns.creational.AllTests.suite() );
-        s.addTest( org.suggs.sandbox.patterns.structural.AllTests.suite() );
-
-        return s;
-    }
-
-}
+{}

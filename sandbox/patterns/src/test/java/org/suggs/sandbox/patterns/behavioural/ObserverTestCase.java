@@ -9,8 +9,7 @@ import org.suggs.sandbox.patterns.behavioural.observer.observer.CurrentCondition
 import org.suggs.sandbox.patterns.behavioural.observer.observer.StatisticsDisplay;
 import org.suggs.sandbox.patterns.behavioural.observer.subject.WeatherData;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * Tests for the observer pattern impl.
@@ -21,18 +20,7 @@ import org.apache.commons.logging.LogFactory;
 public class ObserverTestCase extends AbstractPatternTestCase
 {
 
-    private static final Log LOG = LogFactory.getLog( ObserverTestCase.class );
-
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "OBSERVER PATTERN" );
-    }
-
+    @Test
     public void testWeatherStation()
     {
         WeatherData data = new WeatherData();
@@ -46,5 +34,4 @@ public class ObserverTestCase extends AbstractPatternTestCase
         data.setMeasurements( 82, 67, 29.2f );
         data.setMeasurements( 78, 63, 27.8f );
     }
-
 }

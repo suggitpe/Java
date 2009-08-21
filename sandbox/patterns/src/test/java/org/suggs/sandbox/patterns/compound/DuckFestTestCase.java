@@ -8,8 +8,7 @@ import org.suggs.sandbox.patterns.AbstractPatternTestCase;
 import org.suggs.sandbox.patterns.compound.quackfest.DuckSimulator;
 import org.suggs.sandbox.patterns.compound.quackfest.factory.CountingDuckFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  * Test case for the compound pattern example duck fest
@@ -20,27 +19,11 @@ import org.apache.commons.logging.LogFactory;
 public class DuckFestTestCase extends AbstractPatternTestCase
 {
 
-    private static final Log LOG = LogFactory.getLog( DuckFestTestCase.class );
-
-    /**
-     * @see org.suggs.sandbox.patterns.AbstractPatternTestCase#testName()
-     */
-    @Override
-    public void testName()
-    {
-        LOG.info( "=================================" );
-        LOG.debug( "COMPOUND PATTERNS - DuckFest" );
-    }
-
-    /**
-     * Test the duck simulator
-     */
+    @Test
     public void testDuckSimulator()
     {
         DuckSimulator sim = new DuckSimulator();
-
         sim.simulate( new CountingDuckFactory() );
-
     }
 
 }

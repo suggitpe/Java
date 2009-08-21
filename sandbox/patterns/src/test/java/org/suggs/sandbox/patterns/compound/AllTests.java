@@ -4,31 +4,16 @@
  */
 package org.suggs.sandbox.patterns.compound;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
- * Test suite for all tests for the mercury connection model
+ * Test suite for all tests for the compound pattern unit tests
  * 
  * @author suggitpe
  * @version 1.0 2 Aug 2007
  */
+@RunWith(Suite.class)
+@Suite.SuiteClasses( { DuckFestTestCase.class })
 public class AllTests
-{
-
-    /**
-     * This is the underlying test suite itself
-     * 
-     * @return the test suite to run
-     */
-    public static Test suite()
-    {
-        TestSuite s = new TestSuite();
-
-        s.addTestSuite( DuckFestTestCase.class );
-        s.addTestSuite( MvcTestCase.class );
-
-        return s;
-    }
-
-}
+{}

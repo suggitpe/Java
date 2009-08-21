@@ -2,7 +2,7 @@
  * StateCalendarDataCreator.java created on 4 Aug 2009 19:54:36 by suggitpe for project SandBox - Patterns
  * 
  */
-package org.suggs.sandbox.patterns.behavioural;
+package org.suggs.sandbox.patterns.behavioural.state;
 
 import org.suggs.sandbox.patterns.behavioural.state.appointments.Appointment;
 import org.suggs.sandbox.patterns.behavioural.state.appointments.Contact;

@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.structural;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * Test suite for all tests for the mercury connection model
@@ -13,25 +13,8 @@ import junit.framework.TestSuite;
  * @author suggitpe
  * @version 1.0 2 Aug 2007
  */
+@RunWith(Suite.class)
+@Suite.SuiteClasses( { AdapterTestCase.class, CompositeTestCase.class, DecoratorTestCase.class,
+                      FacadeTestCase.class, ProxyTestCase.class })
 public class AllTests
-{
-
-    /**
-     * This is the underlying test suite itself
-     * 
-     * @return the test suite to run
-     */
-    public static Test suite()
-    {
-        TestSuite s = new TestSuite();
-
-        s.addTestSuite( AdapterTestCase.class );
-        s.addTestSuite( CompositeTestCase.class );
-        s.addTestSuite( DecoratorTestCase.class );
-        s.addTestSuite( FacadeTestCase.class );
-        s.addTestSuite( ProxyTestCase.class );
-
-        return s;
-    }
-
-}
+{}
