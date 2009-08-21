@@ -45,7 +45,7 @@
     </category>
 
     <category name="org.springframework">
-        <priority value="warn" />
+        <priority value="info" />
     </category>
 
     <root>
