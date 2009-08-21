@@ -14,6 +14,6 @@ import org.junit.runners.Suite;
  * @version 1.0 25 Sep 2008
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( {})
+@Suite.SuiteClasses( { TestPublishToTopic.class, TestSubscribeToTopic.class })
 public class AllTests
 {}
