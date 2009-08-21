@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Test construction of an object
@@ -12,9 +12,10 @@ import junit.framework.TestCase;
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public class TestConstruction extends TestCase
+public class TestConstruction
 {
 
+    @Test
     public void testConstruction()
     {
         System.out.println( "=====================================" );

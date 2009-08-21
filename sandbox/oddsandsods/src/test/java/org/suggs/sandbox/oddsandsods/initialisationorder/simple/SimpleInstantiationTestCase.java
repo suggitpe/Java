@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder.simple;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Test case for the simple instantiation classes. The purpose of this
@@ -24,9 +24,10 @@ import junit.framework.TestCase;
  * @author suggitpe
  * @version 1.0 20 Sep 2007
  */
-public class SimpleInstantiationTestCase extends TestCase
+public class SimpleInstantiationTestCase
 {
 
+    @Test
     public void testBuildTestClass()
     {
         System.out.println( "=====================================" );

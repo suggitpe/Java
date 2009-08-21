@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Test case to test the use of a static method.
@@ -12,9 +12,10 @@ import junit.framework.TestCase;
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public class StaticMethodTest extends TestCase
+public class StaticMethodTest
 {
 
+    @Test
     public void testStaticMethod()
     {
         Logger.log( "=====================================" );

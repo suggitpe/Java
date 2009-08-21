@@ -4,10 +4,14 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder;
 
+import org.suggs.sandbox.oddsandsods.initialisationorder.basic.TestBasics;
 import org.suggs.sandbox.oddsandsods.initialisationorder.simple.SimpleInstantiationTestCase;
+import org.suggs.sandbox.oddsandsods.initialisationorder.specific.StaticMemberTest;
+import org.suggs.sandbox.oddsandsods.initialisationorder.specific.StaticMethodTest;
+import org.suggs.sandbox.oddsandsods.initialisationorder.specific.TestConstruction;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * Test suite for all tests for the mercury model
@@ -15,20 +19,8 @@ import junit.framework.TestSuite;
  * @author suggitpe
  * @version 1.0 2 Aug 2007
  */
+@RunWith(Suite.class)
+@Suite.SuiteClasses( { SimpleInstantiationTestCase.class, TestBasics.class, StaticMemberTest.class,
+                      StaticMethodTest.class, TestConstruction.class })
 public class AllTests
-{
-
-    /**
-     * This is the underlying test suite itself
-     * 
-     * @return the test suite to run
-     */
-    public static Test suite()
-    {
-        TestSuite s = new TestSuite();
-
-        s.addTestSuite( SimpleInstantiationTestCase.class );
-
-        return s;
-    }
-}
+{}

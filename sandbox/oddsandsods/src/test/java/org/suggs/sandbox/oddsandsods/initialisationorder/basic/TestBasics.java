@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder.basic;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * TODO Write javadoc for TestBasics
@@ -12,13 +12,13 @@ import junit.framework.TestCase;
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public class TestBasics extends TestCase
+public class TestBasics
 {
 
+    @Test
     public void testBasics()
     {
-        @SuppressWarnings("unused")
-        TestClass t = new TestClass();
+        new TestClass();
     }
 
 }
