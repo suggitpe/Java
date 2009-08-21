@@ -5,7 +5,7 @@
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsTestRunTime"/>
-	<classpathentry kind="lib" path="/Maven Repository/m2repository/junit/junit/4.5/junit-4.5.jar"/>
+	<classpathentry kind="lib" path="/home/suggitpe/codebase/repository/m2repository/junit/junit/4.6/junit-4.6.jar"/>
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/com/tibco/ems/tibjmsadmin/4.2.0/tibjmsadmin-4.2.0.jar"/>
 	<classpathentry kind="lib" path="/build/etc/suggitpe"/>
 	<classpathentry kind="output" path="bin"/>
