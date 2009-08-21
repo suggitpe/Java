@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/_Maven Repository/m2repository/spring/jars/src/spring-sources-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/build/etc/suggitpe"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
