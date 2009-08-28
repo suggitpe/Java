@@ -7,5 +7,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/_Maven Repository/m2repository/spring/jars/src/spring-sources-2.5.1.jar"/>
 	<classpathentry kind="lib" path="/build/etc/suggitpe"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsTestRunTime"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
