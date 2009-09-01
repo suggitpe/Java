@@ -35,7 +35,8 @@ public interface IStateMachine
      * @param aContext
      *            the event context from which the transition logic
      *            can be triggered.
+     * @throws StateMachineException
      */
-    void step( IStateMachineContext aContext );
+    void step( IStateMachineContext aContext ) throws StateMachineException;
 
 }

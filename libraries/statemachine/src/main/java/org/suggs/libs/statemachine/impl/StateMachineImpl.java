@@ -7,6 +7,7 @@ package org.suggs.libs.statemachine.impl;
 import org.suggs.libs.statemachine.IState;
 import org.suggs.libs.statemachine.IStateMachine;
 import org.suggs.libs.statemachine.IStateMachineContext;
+import org.suggs.libs.statemachine.StateMachineException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,13 +34,13 @@ public class StateMachineImpl implements IStateMachine, InitializingBean
     /**
      * Constructs a new instance.
      * 
-     * @param aState
+     * @param aInitialState
      *            an initial state for the state machine
      */
-    public StateMachineImpl( IState aState )
+    public StateMachineImpl( IState aInitialState )
     {
         super();
-        mCurrentState_ = aState;
+        mCurrentState_ = aInitialState;
     }
 
     /**
@@ -54,23 +55,23 @@ public class StateMachineImpl implements IStateMachine, InitializingBean
     /**
      * This method delegates down to the underlying current state to
      * perform the state transition evaluation. If we get a new state
-     * back from that delegation, then we update our internal state to
-     * reflect this.
+     * back from that delegating call, then we update our internal
+     * state to reflect this.
      * 
      * @see org.suggs.libs.statemachine.IStateMachine#step(org.suggs.libs.statemachine.IStateMachineContext)
      */
     @Override
-    public void step( IStateMachineContext aContext )
+    public void step( IStateMachineContext aContext ) throws StateMachineException
     {
         IState newState = mCurrentState_.step( aContext );
         if ( newState == null || mCurrentState_.equals( newState ) )
         {
-            LOG.info( "No valid transitions found from curentState=["
-                      + mCurrentState_.getStateName() + "], state remain unchanged." );
+            LOG.info( "No valid transitions found from state=[" + mCurrentState_
+                      + "], state remain unchanged." );
         }
         else
         {
-            LOG.info( "Transitioning state machine to new state=[" + newState.getStateName() + "]" );
+            LOG.info( "Transitioning state machine to new state=[" + newState + "]" );
             mCurrentState_ = newState;
             // this may look odd: we need to call step again when we
             // reach a new state to allow for transitory states within
@@ -97,5 +98,16 @@ public class StateMachineImpl implements IStateMachine, InitializingBean
     public void setCurrentState( IState aState )
     {
         mCurrentState_ = aState;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+        StringBuffer buff = new StringBuffer( "StateMachineImpl:" );
+        buff.append( " currentState=[" ).append( mCurrentState_ ).append( "]" );
+        return buff.toString();
     }
 }

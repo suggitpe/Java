@@ -23,4 +23,7 @@ public interface IStateTransition
 
     IState getEndingState();
 
+    boolean evaluateTransitionValidity( IStateMachineContext aContext )
+                    throws StateMachineException;
+
 }

@@ -7,6 +7,7 @@ package org.suggs.libs.statemachine.impl;
 import org.suggs.libs.statemachine.IState;
 import org.suggs.libs.statemachine.IStateMachine;
 import org.suggs.libs.statemachine.IStateMachineContext;
+import org.suggs.libs.statemachine.StateMachineException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,7 +48,7 @@ public class StateMachineTest
     public void testStateMachineInitiation()
     {
         // create mocks
-        IState initialStateMock = EasyMock.createStrictMock( IState.class );
+        IState initialStateMock = EasyMock.createMock( IState.class );
         EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
 
         // replay
@@ -69,20 +70,21 @@ public class StateMachineTest
      * Tests that when SM calls step on a state and the state returns
      * with a new state, that we actually transition to that new
      * state.
+     * 
+     * @throws StateMachineException
      */
     @Test
-    public void testStepResultsInNewCurrentState()
+    public void testStepResultsInNewCurrentState() throws StateMachineException
     {
         // create mocks
-        IStateMachineContext contextMock = EasyMock.createStrictMock( IStateMachineContext.class );
-        IState newStateMock = EasyMock.createStrictMock( IState.class );
-        IState initialStateMock = EasyMock.createStrictMock( IState.class );
+        IStateMachineContext contextMock = EasyMock.createMock( IStateMachineContext.class );
+        IState newStateMock = EasyMock.createMock( IState.class );
+        IState initialStateMock = EasyMock.createMock( IState.class );
 
         EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
         EasyMock.expect( initialStateMock.step( contextMock ) ).andReturn( newStateMock );
         EasyMock.expect( newStateMock.getStateName() ).andReturn( "NewState" ).anyTimes();
         EasyMock.expect( newStateMock.step( contextMock ) ).andReturn( newStateMock );
-        EasyMock.expect( newStateMock.getStateName() ).andReturn( "NewState" ).anyTimes();
 
         // replay
         EasyMock.replay( initialStateMock );
@@ -104,16 +106,21 @@ public class StateMachineTest
         EasyMock.verify( contextMock );
     }
 
+    /**
+     * Tests that when a step call returns the same object that we do
+     * not then transition to a new state.
+     * 
+     * @throws StateMachineException
+     */
     @Test
-    public void testNoStepResultsInSameCurrentState()
+    public void testNoStepResultsInSameCurrentState() throws StateMachineException
     {
         // create mocks
-        IState initialStateMock = EasyMock.createStrictMock( IState.class );
-        IStateMachineContext contextMock = EasyMock.createStrictMock( IStateMachineContext.class );
+        IState initialStateMock = EasyMock.createMock( IState.class );
+        IStateMachineContext contextMock = EasyMock.createMock( IStateMachineContext.class );
 
         EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
         EasyMock.expect( initialStateMock.step( contextMock ) ).andReturn( initialStateMock );
-        EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
 
         // replay
         EasyMock.replay( initialStateMock );
@@ -133,16 +140,22 @@ public class StateMachineTest
         EasyMock.verify( contextMock );
     }
 
+    /**
+     * Tests that when a step call returns a null object that we do
+     * not then transition to a new state.
+     * 
+     * @throws StateMachineException
+     *             from the call to step
+     */
     @Test
-    public void testNullStepResultsInSameCurrentState()
+    public void testNullStepResultsInSameCurrentState() throws StateMachineException
     {
         // create mocks
-        IState initialStateMock = EasyMock.createStrictMock( IState.class );
-        IStateMachineContext contextMock = EasyMock.createStrictMock( IStateMachineContext.class );
+        IState initialStateMock = EasyMock.createMock( IState.class );
+        IStateMachineContext contextMock = EasyMock.createMock( IStateMachineContext.class );
 
         EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
         EasyMock.expect( initialStateMock.step( contextMock ) ).andReturn( null );
-        EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
 
         // replay
         EasyMock.replay( initialStateMock );
@@ -159,5 +172,4 @@ public class StateMachineTest
         EasyMock.verify( initialStateMock );
         EasyMock.verify( contextMock );
     }
-
 }

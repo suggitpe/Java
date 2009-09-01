@@ -68,11 +68,12 @@ public class StateTransitionManagerTest
     public void testAddAndRetrieveSameTransitionForState()
     {
         // prep mock
-        IState stateMock = EasyMock.createStrictMock( IState.class );
+        IState stateMock = EasyMock.createMock( IState.class );
+        IStateTransition transMock = EasyMock.createMock( IStateTransition.class );
+
         EasyMock.expect( stateMock.getStateName() ).andReturn( "testState" ).anyTimes();
 
-        IStateTransition transMock = EasyMock.createStrictMock( IStateTransition.class );
-        EasyMock.expect( transMock.getStartingState() ).andReturn( stateMock );
+        EasyMock.expect( transMock.getStartingState() ).andReturn( stateMock ).anyTimes();
         EasyMock.expect( transMock.getTransitionName() ).andReturn( "testTransition" ).anyTimes();
 
         // load mock
@@ -109,7 +110,7 @@ public class StateTransitionManagerTest
     public void testRetrieveNoTransition()
     {
         // prep mock
-        IState stateMock = EasyMock.createStrictMock( IState.class );
+        IState stateMock = EasyMock.createMock( IState.class );
         EasyMock.expect( stateMock.getStateName() ).andReturn( "testState" ).anyTimes();
 
         // load mock
@@ -141,16 +142,17 @@ public class StateTransitionManagerTest
     public void testExceptionThrownWhenTwoTransitionsForSameStateLoaded()
     {
         // prep mock
-        IState stateMock = EasyMock.createStrictMock( IState.class );
+        IState stateMock = EasyMock.createMock( IState.class );
+        IStateTransition transMock1 = EasyMock.createMock( IStateTransition.class );
+        IStateTransition transMock2 = EasyMock.createMock( IStateTransition.class );
+
+        EasyMock.expect( transMock1.getStartingState() ).andReturn( stateMock ).anyTimes();
         EasyMock.expect( stateMock.getStateName() ).andReturn( "testState" ).anyTimes();
-
-        IStateTransition transMock1 = EasyMock.createStrictMock( IStateTransition.class );
-        EasyMock.expect( transMock1.getStartingState() ).andReturn( stateMock );
         EasyMock.expect( transMock1.getTransitionName() ).andReturn( "testTransition" ).anyTimes();
+        EasyMock.expect( transMock1.getStartingState() ).andReturn( stateMock ).anyTimes();
 
-        IStateTransition transMock2 = EasyMock.createStrictMock( IStateTransition.class );
-        EasyMock.expect( transMock2.getStartingState() ).andReturn( stateMock );
-        EasyMock.expect( transMock2.getTransitionName() ).andReturn( "testTransition" ).anyTimes();
+        EasyMock.expect( transMock2.getStartingState() ).andReturn( stateMock ).anyTimes();
+        EasyMock.expect( transMock2.getStartingState() ).andReturn( stateMock ).anyTimes();
 
         // load mock
         EasyMock.replay( stateMock );
@@ -177,26 +179,25 @@ public class StateTransitionManagerTest
     public void testAddAndRetrieveMultipleTransitionForState()
     {
         // prep mock
-        IState stateMock1 = EasyMock.createStrictMock( IState.class );
+        IState stateMock1 = EasyMock.createMock( IState.class );
+        IState stateMock2 = EasyMock.createMock( IState.class );
+        IStateTransition transMock1 = EasyMock.createMock( IStateTransition.class );
+        IStateTransition transMock2 = EasyMock.createMock( IStateTransition.class );
+        IStateTransition transMock3 = EasyMock.createMock( IStateTransition.class );
+        IStateTransition transMock4 = EasyMock.createMock( IStateTransition.class );
+
+        EasyMock.expect( transMock1.getStartingState() ).andReturn( stateMock1 ).anyTimes();
         EasyMock.expect( stateMock1.getStateName() ).andReturn( "testState1" ).anyTimes();
-
-        IState stateMock2 = EasyMock.createStrictMock( IState.class );
-        EasyMock.expect( stateMock2.getStateName() ).andReturn( "testState2" ).anyTimes();
-
-        IStateTransition transMock1 = EasyMock.createStrictMock( IStateTransition.class );
-        EasyMock.expect( transMock1.getStartingState() ).andReturn( stateMock1 );
         EasyMock.expect( transMock1.getTransitionName() ).andReturn( "testTransition1" ).anyTimes();
 
-        IStateTransition transMock2 = EasyMock.createStrictMock( IStateTransition.class );
-        EasyMock.expect( transMock2.getStartingState() ).andReturn( stateMock1 );
+        EasyMock.expect( transMock2.getStartingState() ).andReturn( stateMock1 ).anyTimes();
         EasyMock.expect( transMock2.getTransitionName() ).andReturn( "testTransition2" ).anyTimes();
 
-        IStateTransition transMock3 = EasyMock.createStrictMock( IStateTransition.class );
-        EasyMock.expect( transMock3.getStartingState() ).andReturn( stateMock1 );
+        EasyMock.expect( transMock3.getStartingState() ).andReturn( stateMock1 ).anyTimes();
         EasyMock.expect( transMock3.getTransitionName() ).andReturn( "testTransition3" ).anyTimes();
 
-        IStateTransition transMock4 = EasyMock.createStrictMock( IStateTransition.class );
-        EasyMock.expect( transMock4.getStartingState() ).andReturn( stateMock2 );
+        EasyMock.expect( transMock4.getStartingState() ).andReturn( stateMock2 ).anyTimes();
+        EasyMock.expect( stateMock2.getStateName() ).andReturn( "testState2" ).anyTimes();
         EasyMock.expect( transMock4.getTransitionName() ).andReturn( "testTransition4" ).anyTimes();
 
         // load mock

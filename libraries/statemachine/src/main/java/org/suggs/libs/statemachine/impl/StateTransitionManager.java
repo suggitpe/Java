@@ -15,6 +15,9 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
+
 /**
  * This class is used to store all of the state transitions in a
  * single accessible place. Realistically it is a fancy collections
@@ -26,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 24 Aug 2009
  */
-public class StateTransitionManager
+public class StateTransitionManager implements InitializingBean
 {
 
     private static final Log LOG = LogFactory.getLog( StateTransitionManager.class );
@@ -42,6 +45,16 @@ public class StateTransitionManager
     }
 
     /**
+     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception
+    {
+        Assert.isTrue( mTransitionMap_.size() > 0,
+                       "In creation of the state transition manager, it is expected that more than 0 state transitions should be loaded" );
+    }
+
+    /**
      * Accessor method to the underlying singleton instance.
      * 
      * @return the singleton instance of the State Transition Manager
@@ -51,6 +64,15 @@ public class StateTransitionManager
         return mInstance_;
     }
 
+    /**
+     * Getter for a list of transitions relating to one starting
+     * state.
+     * 
+     * @param aState
+     *            The state that the transitions work from
+     * @return a list of state specific transitions, if there are no
+     *         states that relate then an empty list will be returned.
+     */
     public List<IStateTransition> getListOfTransitionsForState( IState aState )
     {
         List<IStateTransition> listOfTransitions = new ArrayList<IStateTransition>();
@@ -71,7 +93,7 @@ public class StateTransitionManager
             throw new IllegalArgumentException( "Cannot use null for State Transition lookup" );
         }
 
-        LOG.debug( "Searching for all transitions for state=[" + aState.getStateName() + "]" );
+        LOG.debug( "Searching for all transitions for state=[" + aState + "]" );
         if ( mTransitionMap_.containsKey( aState.getStateName() ) )
         {
             return mTransitionMap_.get( aState.getStateName() );
@@ -79,6 +101,12 @@ public class StateTransitionManager
         return new HashMap<String, IStateTransition>();
     }
 
+    /**
+     * Accessor to the transitions held within the manager
+     * 
+     * @return a list of transitions, if no transitions held in the
+     *         manager then this will return an empty (typed) list.
+     */
     public List<IStateTransition> getAllTransitions()
     {
         List<IStateTransition> listOfTransitions = new ArrayList<IStateTransition>();
@@ -93,6 +121,12 @@ public class StateTransitionManager
         return listOfTransitions;
     }
 
+    /**
+     * Allows a single transition to be added to the manager.
+     * 
+     * @param aStateTransition
+     *            the transition to add.
+     */
     public void addTransitionToManager( IStateTransition aStateTransition )
     {
         if ( aStateTransition == null )
@@ -107,17 +141,17 @@ public class StateTransitionManager
         if ( innerMap.containsKey( aStateTransition.getTransitionName() ) )
         {
             throw new IllegalStateException( "Cannot add more than one State Transition with the same name for the same state: State=["
-                                             + startStateName
-                                             + "], Transition=["
-                                             + aStateTransition.getTransitionName() + "], " );
+                                             + aStateTransition.getStartingState()
+                                             + "], Transition=[" + aStateTransition + "], " );
         }
 
         innerMap.put( aStateTransition.getTransitionName(), aStateTransition );
 
         if ( LOG.isDebugEnabled() )
         {
-            LOG.debug( "Successfully loaded transition: state=[" + startStateName
-                       + "], transition=[" + aStateTransition.getTransitionName() + "]" );
+            LOG.debug( "Successfully loaded transition: state=["
+                       + aStateTransition.getStartingState() + "], transition=[" + aStateTransition
+                       + "]" );
         }
     }
 
@@ -129,6 +163,13 @@ public class StateTransitionManager
         }
     }
 
+    /**
+     * Setter for the transition list. This method is important if you
+     * are injecting the transitions through spring.
+     * 
+     * @param aListOfTransitions
+     *            the list of transitions
+     */
     public void setTransitions( List<IStateTransition> aListOfTransitions )
     {
         if ( aListOfTransitions == null )
@@ -142,8 +183,14 @@ public class StateTransitionManager
         }
     }
 
+    /**
+     * Used to clear the transition manager of all of its transitions.
+     * It is envisaged that this will really only be used for its unit
+     * tests.
+     */
     public void clearTransitionsFromTransitionManager()
     {
+        LOG.info( "Clearing all transitions from the transition manager" );
         mTransitionMap_.clear();
     }
 
@@ -167,4 +214,5 @@ public class StateTransitionManager
 
         return ret.toString();
     }
+
 }

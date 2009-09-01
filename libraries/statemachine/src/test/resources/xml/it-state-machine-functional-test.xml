@@ -2,4 +2,22 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
+    <!-- STATE MACHINE -->
+    <bean id="stateMachine"
+        class="org.suggs.libs.statemachine.impl.StateMachineImpl">
+        <constructor-arg ref="initialState" />
+    </bean>
+    
+    <!-- TRANSITIONS MANAGER -->
+    <bean id="transitionManager"
+        class="org.suggs.libs.statemachine.impl.StateTransitionManager"
+        factory-method="instance">
+        <property name="transitions">
+            <list>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- TRANSITIONS -->
+
 </beans>

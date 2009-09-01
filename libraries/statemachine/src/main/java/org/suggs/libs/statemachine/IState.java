@@ -17,8 +17,29 @@ package org.suggs.libs.statemachine;
 public interface IState
 {
 
+    /**
+     * Accessor to the name of the state
+     * 
+     * @return the name of the state.
+     */
     String getStateName();
 
-    IState step( IStateMachineContext aContext );
+    /**
+     * Attempt to perform a state transition.
+     * 
+     * @param aContext
+     *            a context object so that meaningful information can
+     *            be passed to the state to aid in transition
+     *            evaluation.
+     * @return the new IState that is the end result of that state
+     *         transition evaluation. If in the process of the
+     *         transition evaluation, it deems that no transition is
+     *         valid, then it will return itself to signify no
+     *         transition.
+     * @throws StateMachineException
+     *             if there are any issues in the execution of state
+     *             transition.
+     */
+    IState step( IStateMachineContext aContext ) throws StateMachineException;
 
 }
