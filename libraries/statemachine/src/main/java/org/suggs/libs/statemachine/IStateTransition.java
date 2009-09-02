@@ -17,12 +17,40 @@ package org.suggs.libs.statemachine;
 public interface IStateTransition
 {
 
+    /**
+     * Accessor to the name of the transition
+     * 
+     * @return the name of the transition
+     */
     String getTransitionName();
 
+    /**
+     * Accessor to the state at the beginning of the transition
+     * 
+     * @return the starting state
+     */
     IState getStartingState();
 
+    /**
+     * Accessor to the state at the end of the transition
+     * 
+     * @return the ending state
+     */
     IState getEndingState();
 
+    /**
+     * This is the core delegation method on the transitions. It is
+     * here that a transition evaluates itself for validity against
+     * the passed in context.
+     * 
+     * @param aContext
+     *            the context from which to evaluate whether the state
+     *            transition is valid
+     * @return true if the state transition is valid, else false
+     * @throws StateMachineException
+     *             when any issues are encountered in the evaluation
+     *             of the state transition
+     */
     boolean evaluateTransitionValidity( IStateMachineContext aContext )
                     throws StateMachineException;
 

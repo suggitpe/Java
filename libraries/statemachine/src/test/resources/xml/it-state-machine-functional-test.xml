@@ -2,13 +2,40 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
+    <!-- =============================== -->
     <!-- STATE MACHINE -->
-    <bean id="stateMachine"
-        class="org.suggs.libs.statemachine.impl.StateMachineImpl">
+    <bean id="stateMachine" class="org.suggs.libs.statemachine.impl.StateMachineImpl">
         <constructor-arg ref="initialState" />
     </bean>
-    
-    <!-- TRANSITIONS MANAGER -->
+
+    <!-- =============================== -->
+    <!-- STATES -->
+    <bean id="initialState" class="org.suggs.libs.statemachine.impl.StateImpl">
+        <constructor-arg value="Connection:Initial" />
+    </bean>
+
+    <bean id="disconnectedState" class="org.suggs.libs.statemachine.impl.StateImpl">
+        <constructor-arg value="Connection:Disconnected" />
+    </bean>
+
+    <bean id="connectingState" class="org.suggs.libs.statemachine.impl.StateImpl">
+        <constructor-arg value="Connection:ConnectionInProgress" />
+    </bean>
+
+    <bean id="connectedState" class="org.suggs.libs.statemachine.impl.StateImpl">
+        <constructor-arg value="Connection:Connected" />
+    </bean>
+
+    <bean id="failedState" class="org.suggs.libs.statemachine.impl.StateImpl">
+        <constructor-arg value="Connection:Failed" />
+    </bean>
+
+    <bean id="disconnectingState" class="org.suggs.libs.statemachine.impl.StateImpl">
+        <constructor-arg value="Connection:DisconnectionInProgress" />
+    </bean>
+
+    <!-- =============================== -->
+    <!-- TRANSITION MANAGER -->
     <bean id="transitionManager"
         class="org.suggs.libs.statemachine.impl.StateTransitionManager"
         factory-method="instance">
@@ -17,7 +44,8 @@
             </list>
         </property>
     </bean>
-    
+
+    <!-- =============================== -->
     <!-- TRANSITIONS -->
 
 </beans>

@@ -56,9 +56,33 @@ public class StateTest
     }
 
     /**
-     * Tests that when there are valid transitions set up, step will
+     * Tests the that the equals, hashcode and toString methods work
+     * correctly
+     */
+    @Test
+    public void testEqualsHashcodeAndToString()
+    {
+        StateImpl state1a = new StateImpl( "state1" );
+        StateImpl state1b = new StateImpl( "state1" );
+        StateImpl state2 = new StateImpl( "state2" );
+
+        // check equals method
+        Assert.assertNotSame( state1a, state1b );
+        Assert.assertNotSame( state1a, state2 );
+        Assert.assertEquals( state1a, state1b );
+        Assert.assertFalse( state1a.equals( state2 ) );
+
+        // check hashcode
+        Assert.assertEquals( state1a.hashCode(), state1b.hashCode() );
+        Assert.assertFalse( state1a.hashCode() == state2.hashCode() );
+
+        LOG.debug( "State1a: " + state1a );
+        LOG.debug( "State2: " + state2 );
+    }
+
+    /*
+     * * Tests that when there are valid transitions set up, step will
      * return the correct new end state.
-     * 
      * @throws StateMachineException
      */
     @SuppressWarnings("boxing")

@@ -122,12 +122,20 @@ public class StateImpl implements IState, InitializingBean
     @Override
     public boolean equals( Object aRhs )
     {
-        if ( aRhs == null || this != aRhs )
+
+        if ( aRhs == null )
         {
             return false;
         }
 
-        if ( aRhs instanceof StateImpl && getClass() == aRhs.getClass() && super.equals( aRhs ) )
+        if ( this == aRhs )
+        {
+            return true;
+        }
+
+        // if this class extends any other classes then we need to
+        // call super.equals(aRhs), else don't
+        if ( aRhs instanceof StateImpl && getClass() == aRhs.getClass() )
         {
             StateImpl rhs = (StateImpl) aRhs;
             if ( mStateName_.equals( rhs.mStateName_ ) )

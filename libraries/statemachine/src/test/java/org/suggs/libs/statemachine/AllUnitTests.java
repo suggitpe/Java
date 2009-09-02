@@ -6,7 +6,9 @@ package org.suggs.libs.statemachine;
 
 import org.suggs.libs.statemachine.impl.StateMachineTest;
 import org.suggs.libs.statemachine.impl.StateTest;
+import org.suggs.libs.statemachine.impl.StateTransitionEventTest;
 import org.suggs.libs.statemachine.impl.StateTransitionManagerTest;
+import org.suggs.libs.statemachine.impl.StateTransitionTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -18,6 +20,7 @@ import org.junit.runners.Suite;
  * @version 1.0 24 Aug 2009
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { StateTransitionManagerTest.class, StateMachineTest.class, StateTest.class })
+@Suite.SuiteClasses( { StateTransitionManagerTest.class, StateMachineTest.class, StateTest.class,
+                      StateTransitionTest.class, StateTransitionEventTest.class })
 public class AllUnitTests
 {}
