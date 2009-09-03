@@ -39,33 +39,47 @@ public class StateTransitionEventImpl implements IStateTransitionEvent
     }
 
     /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+        StringBuilder buff = new StringBuilder( "StateTransitionEventImpl:" );
+        buff.append( " eventName=[" ).append( mEventName_ ).append( "]" );
+        return buff.toString();
+    }
+
+    /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object aRhs )
+    public boolean equals( Object obj )
     {
-
-        if ( aRhs == null )
-        {
-            return false;
-        }
-
-        if ( this == aRhs )
+        if ( this == obj )
         {
             return true;
         }
-
-        // if this class extends any other classes then we need to
-        // call super.equals(aRhs), else don't
-        if ( aRhs instanceof StateTransitionEventImpl && getClass() == aRhs.getClass() )
+        if ( obj == null )
         {
-            StateTransitionEventImpl rhs = (StateTransitionEventImpl) aRhs;
-            if ( mEventName_.equals( rhs.mEventName_ ) )
+            return false;
+        }
+        if ( getClass() != obj.getClass() )
+        {
+            return false;
+        }
+        StateTransitionEventImpl other = (StateTransitionEventImpl) obj;
+        if ( mEventName_ == null )
+        {
+            if ( other.mEventName_ != null )
             {
-                return true;
+                return false;
             }
         }
-        return false;
+        else if ( !mEventName_.equals( other.mEventName_ ) )
+        {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -74,17 +88,9 @@ public class StateTransitionEventImpl implements IStateTransitionEvent
     @Override
     public int hashCode()
     {
-        return mEventName_.hashCode();
-    }
-
-    /**
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString()
-    {
-        StringBuffer buff = new StringBuffer( "StateTransitionEventImpl:" );
-        buff.append( " eventName=[" ).append( mEventName_ ).append( "]" );
-        return buff.toString();
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ( ( mEventName_ == null ) ? 0 : mEventName_.hashCode() );
+        return result;
     }
 }

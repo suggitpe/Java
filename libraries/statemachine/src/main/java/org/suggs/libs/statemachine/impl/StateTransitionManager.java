@@ -200,7 +200,7 @@ public class StateTransitionManager implements InitializingBean
     @Override
     public String toString()
     {
-        StringBuffer ret = new StringBuffer( "TransitionManager: " );
+        StringBuilder ret = new StringBuilder( "TransitionManager: " );
         ret.append( "{" ).append( Integer.toHexString( super.hashCode() ) ).append( "} " );
         ret.append( "numStates=[" ).append( mTransitionMap_.size() ).append( "]" );
         for ( String startState : mTransitionMap_.keySet() )

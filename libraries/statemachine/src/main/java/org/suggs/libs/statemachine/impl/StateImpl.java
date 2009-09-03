@@ -120,30 +120,44 @@ public class StateImpl implements IState, InitializingBean
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object aRhs )
+    public boolean equals( Object obj )
     {
-
-        if ( aRhs == null )
-        {
-            return false;
-        }
-
-        if ( this == aRhs )
+        if ( this == obj )
         {
             return true;
         }
-
-        // if this class extends any other classes then we need to
-        // call super.equals(aRhs), else don't
-        if ( aRhs instanceof StateImpl && getClass() == aRhs.getClass() )
+        if ( obj == null )
         {
-            StateImpl rhs = (StateImpl) aRhs;
-            if ( mStateName_.equals( rhs.mStateName_ ) )
+            return false;
+        }
+        if ( getClass() != obj.getClass() )
+        {
+            return false;
+        }
+        StateImpl other = (StateImpl) obj;
+        if ( mStateName_ == null )
+        {
+            if ( other.mStateName_ != null )
             {
-                return true;
+                return false;
             }
         }
-        return false;
+        else if ( !mStateName_.equals( other.mStateName_ ) )
+        {
+            return false;
+        }
+        if ( mTransitions_ == null )
+        {
+            if ( other.mTransitions_ != null )
+            {
+                return false;
+            }
+        }
+        else if ( !mTransitions_.equals( other.mTransitions_ ) )
+        {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -152,7 +166,11 @@ public class StateImpl implements IState, InitializingBean
     @Override
     public int hashCode()
     {
-        return mStateName_.hashCode();
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ( ( mStateName_ == null ) ? 0 : mStateName_.hashCode() );
+        result = prime * result + ( ( mTransitions_ == null ) ? 0 : mTransitions_.hashCode() );
+        return result;
     }
 
     /**
@@ -161,7 +179,7 @@ public class StateImpl implements IState, InitializingBean
     @Override
     public String toString()
     {
-        StringBuffer buff = new StringBuffer( "StateImpl:" );
+        StringBuilder buff = new StringBuilder( "StateImpl:" );
         buff.append( " stateName=[" ).append( mStateName_ ).append( "]" );
         return buff.toString();
     }

@@ -13,4 +13,6 @@ package org.suggs.libs.statemachine;
 public interface IStateMachineContext
 {
 
+    IStateTransitionEvent getStateTransitionEvent();
+
 }

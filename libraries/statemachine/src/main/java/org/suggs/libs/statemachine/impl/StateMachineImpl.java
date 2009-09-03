@@ -106,7 +106,7 @@ public class StateMachineImpl implements IStateMachine, InitializingBean
     @Override
     public String toString()
     {
-        StringBuffer buff = new StringBuffer( "StateMachineImpl:" );
+        StringBuilder buff = new StringBuilder( "StateMachineImpl:" );
         buff.append( " currentState=[" ).append( mCurrentState_ ).append( "]" );
         return buff.toString();
     }
