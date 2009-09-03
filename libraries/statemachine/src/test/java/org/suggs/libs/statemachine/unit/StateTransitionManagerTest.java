@@ -2,10 +2,11 @@
  * TransitionManagerTests.java created on 24 Aug 2009 07:11:03 by suggitpe for project Libraries - State Machine
  * 
  */
-package org.suggs.libs.statemachine.impl;
+package org.suggs.libs.statemachine.unit;
 
 import org.suggs.libs.statemachine.IState;
 import org.suggs.libs.statemachine.IStateTransition;
+import org.suggs.libs.statemachine.impl.StateTransitionManager;
 
 import java.util.List;
 

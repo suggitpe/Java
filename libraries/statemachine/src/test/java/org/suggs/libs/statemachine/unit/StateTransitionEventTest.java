@@ -2,9 +2,10 @@
  * StateTransitionEventTest.java created on 2 Sep 2009 07:11:50 by suggitpe for project Libraries - State Machine
  * 
  */
-package org.suggs.libs.statemachine.impl;
+package org.suggs.libs.statemachine.unit;
 
 import org.suggs.libs.statemachine.IStateTransitionEvent;
+import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

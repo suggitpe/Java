@@ -4,11 +4,11 @@
  */
 package org.suggs.libs.statemachine;
 
-import org.suggs.libs.statemachine.impl.StateMachineTest;
-import org.suggs.libs.statemachine.impl.StateTest;
-import org.suggs.libs.statemachine.impl.StateTransitionEventTest;
-import org.suggs.libs.statemachine.impl.StateTransitionManagerTest;
-import org.suggs.libs.statemachine.impl.StateTransitionTest;
+import org.suggs.libs.statemachine.unit.StateMachineTest;
+import org.suggs.libs.statemachine.unit.StateTest;
+import org.suggs.libs.statemachine.unit.StateTransitionEventTest;
+import org.suggs.libs.statemachine.unit.StateTransitionManagerTest;
+import org.suggs.libs.statemachine.unit.StateTransitionTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

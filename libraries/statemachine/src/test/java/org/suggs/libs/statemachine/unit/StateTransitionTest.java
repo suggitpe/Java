@@ -2,13 +2,16 @@
  * StateTransitionTest.java created on 1 Sep 2009 07:20:51 by suggitpe for project Libraries - State Machine
  * 
  */
-package org.suggs.libs.statemachine.impl;
+package org.suggs.libs.statemachine.unit;
 
 import org.suggs.libs.statemachine.IState;
 import org.suggs.libs.statemachine.IStateMachineContext;
 import org.suggs.libs.statemachine.IStateTransition;
 import org.suggs.libs.statemachine.IStateTransitionEvent;
 import org.suggs.libs.statemachine.StateMachineException;
+import org.suggs.libs.statemachine.impl.StateImpl;
+import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
+import org.suggs.libs.statemachine.impl.StateTransitionImpl;
 import org.suggs.libs.statemachine.stub.FalseGuardStub;
 import org.suggs.libs.statemachine.stub.TrueGuardStub;
 

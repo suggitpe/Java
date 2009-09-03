@@ -2,12 +2,14 @@
  * StateTest.java created on 28 Aug 2009 18:15:18 by suggitpe for project Libraries - State Machine
  * 
  */
-package org.suggs.libs.statemachine.impl;
+package org.suggs.libs.statemachine.unit;
 
 import org.suggs.libs.statemachine.IState;
 import org.suggs.libs.statemachine.IStateMachineContext;
 import org.suggs.libs.statemachine.IStateTransition;
 import org.suggs.libs.statemachine.StateMachineException;
+import org.suggs.libs.statemachine.impl.StateImpl;
+import org.suggs.libs.statemachine.impl.StateTransitionManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
