@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    
+    <!-- high level main project details -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ubs.orca</groupId>
+    <artifactId>orca-bridge</artifactId>
+    <packaging>jar</packaging>
+    <name>Orca Bridge</name>
+    <version>1.0-SNAPSHOT</version>
+    <description> Orca Bridge stand alone project</description>
+    <url>http://www.ubs.com</url>
+    <inceptionYear>2007</inceptionYear>
+    
+    <!-- Mailing lists -->
+    <mailingLists>
+    </mailingLists>
+    
+    <!-- team developers -->
+    <developers>
+        <developer>
+            <id>suggitpe</id>
+            <name>Peter Suggitt</name>
+            <email>me@suggs.org.uk</email>
+            <roles>
+                <role>Design and Development</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+    </developers>
+    
+    <!-- -->
+    <contributors>
+    </contributors>
+    
+    <!-- here we define our own organsation (entered into the jar/ear manifests) -->
+    <organization>
+    </organization>
+    
+    <!-- -->
+    <profiles>
+    </profiles>
+    
+    <!-- This links up the main pom to the module poms -->
+    <modules>
+    </modules>
+    
+    <build>
+        <testResources>
+            <testResource>
+                <directory>${orca.test.home}</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <!--  -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0</version>
+                <!-- best lock down version of the plugin too -->
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <useSystemClassLoader>true</useSystemClassLoader>
+                    <trimStackTrace>false</trimStackTrace>
+                    <argLine>${test.jvm.args}</argLine>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <!-- this is where we pick up dependent jar files and define the main Scribe 
+    repository (when localised jars are 'installed') -->
+    <repositories>
+    </repositories>
+    
+    <!-- this is where we define the location of standard and local Maven plugins -->
+    <pluginRepositories>
+    </pluginRepositories>
+    
+    <!-- this is where we define the additional report to run as the main build -->
+    <reporting>
+    </reporting>
+
+    <!-- this is where we define the high level dependencies 
+    (ie those that are not project specific) -->
+    <dependencies>
+        <!-- main compile time dependencies -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency> 
+        <dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+            <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.easymock</groupId>
+		    <artifactId>easymockclassextension</artifactId>
+            <scope>test</scope>
+		</dependency>
+    </dependencies>
+
+    <!-- This is where we define all of the application 
+        dependencies version requirements -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.6</version>
+            </dependency> 
+            <dependency>
+			    <groupId>org.easymock</groupId>
+			    <artifactId>easymock</artifactId>
+			    <version>2.4</version>
+		    </dependency>
+		    <dependency>
+			    <groupId>org.easymock</groupId>
+			    <artifactId>easymockclassextension</artifactId>
+			    <version>2.4</version>
+		    </dependency>
+            <!-- external jars -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.12</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.jms</groupId>
+                <artifactId>jms</artifactId>
+                <version>1.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+</project>
