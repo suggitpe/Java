@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <!-- =============================== -->
+    <!-- TRANSITION MANAGER -->
+    <bean id="transitionManager"
+        class="org.suggs.libs.statemachine.impl.StateTransitionManager"
+        factory-method="instance">
+        <property name="transitions">
+            <list>
+                <ref bean="fromInitialToDisconnected" />
+                <ref bean="fromDisconnectedToConnecting" />
+                <ref bean="fromConnectingToConnected" />
+                <ref bean="fromConnectingToFailed" />
+                <ref bean="fromFailedToConnecting" />
+                <ref bean="fromConnectedToDisconnecting" />
+                <ref bean="fromDisconnectingToDisconnected" />
+            </list>
+        </property>
+    </bean>
+
+    <!-- =============================== -->
+    <!-- TRANSITIONS -->
+
+    <bean id="fromInitialToDisconnected" class="org.suggs.libs.statemachine.impl.StateTransitionImpl">
+        <constructor-arg value="fromInitialToDisconnected" />
+        <constructor-arg ref="initialState" />
+        <constructor-arg ref="disconnectedState" />
+    </bean>
+
+    <bean id="fromDisconnectedToConnecting" class="org.suggs.libs.statemachine.impl.StateTransitionImpl">
+        <constructor-arg value="fromDisconnectedToConnecting" />
+        <constructor-arg ref="disconnectedState" />
+        <constructor-arg ref="connectingState" />
+        <property name="transitionEvents">
+            <list>
+                <bean
+                    class="org.suggs.libs.statemachine.impl.StateTransitionEventImpl">
+                    <constructor-arg value="connect" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="fromConnectingToConnected" class="org.suggs.libs.statemachine.impl.StateTransitionImpl">
+        <constructor-arg value="fromConnectingToConnected" />
+        <constructor-arg ref="connectingState" />
+        <constructor-arg ref="connectedState" />
+        <property name="transitionGuards">
+            <list>
+                <bean class="org.suggs.libs.statemachine.stub.TrueGuardStub"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="fromConnectingToFailed" class="org.suggs.libs.statemachine.impl.StateTransitionImpl">
+        <constructor-arg value="fromConnectingToFailed" />
+        <constructor-arg ref="connectingState" />
+        <constructor-arg ref="failedState" />
+        <property name="transitionGuards">
+            <list>
+                <bean class="org.suggs.libs.statemachine.stub.FalseGuardStub"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="fromFailedToConnecting" class="org.suggs.libs.statemachine.impl.StateTransitionImpl">
+        <constructor-arg value="fromFailedToConnecting" />
+        <constructor-arg ref="failedState" />
+        <constructor-arg ref="connectingState" />
+    </bean>
+
+    <bean id="fromConnectedToDisconnecting" class="org.suggs.libs.statemachine.impl.StateTransitionImpl">
+        <constructor-arg value="fromConnectedToDisconnecting" />
+        <constructor-arg ref="connectedState" />
+        <constructor-arg ref="disconnectingState" />
+        <property name="transitionEvents">
+            <list>
+                <bean
+                    class="org.suggs.libs.statemachine.impl.StateTransitionEventImpl">
+                    <constructor-arg value="disconnect" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="fromDisconnectingToDisconnected" class="org.suggs.libs.statemachine.impl.StateTransitionImpl">
+        <constructor-arg value="fromDisconnectingToDisconnected" />
+        <constructor-arg ref="disconnectingState" />
+        <constructor-arg ref="disconnectedState" />
+        <property name="transitionGuards">
+            <list>
+                <bean class="org.suggs.libs.statemachine.stub.TrueGuardStub"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

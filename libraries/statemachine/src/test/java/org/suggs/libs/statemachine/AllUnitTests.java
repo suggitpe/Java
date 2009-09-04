@@ -10,6 +10,9 @@ import org.suggs.libs.statemachine.unit.StateTransitionEventTest;
 import org.suggs.libs.statemachine.unit.StateTransitionManagerTest;
 import org.suggs.libs.statemachine.unit.StateTransitionTest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -23,4 +26,13 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses( { StateTransitionManagerTest.class, StateMachineTest.class, StateTest.class,
                       StateTransitionTest.class, StateTransitionEventTest.class })
 public class AllUnitTests
-{}
+{
+
+    private static final Log LOG = LogFactory.getLog( AllUnitTests.class );
+
+    @BeforeClass
+    public static void doBefore()
+    {
+        LOG.debug( "================== STATE MACHINE LIBRARY UNIT TESTS" );
+    }
+}
