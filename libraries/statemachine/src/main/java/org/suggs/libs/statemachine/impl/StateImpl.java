@@ -10,13 +10,10 @@ import org.suggs.libs.statemachine.IStateTransition;
 import org.suggs.libs.statemachine.StateMachineException;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
 
 /**
  * This main purpose of this class is to act as the source of state
@@ -28,13 +25,13 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 28 Aug 2009
  */
-public class StateImpl implements IState, InitializingBean
+public class StateImpl implements IState
 {
 
     private static final Log LOG = LogFactory.getLog( StateImpl.class );
 
     private final String mStateName_;
-    private List<IStateTransition> mTransitions_ = new ArrayList<IStateTransition>();
+    private Collection<IStateTransition> mTransitions_ = new ArrayList<IStateTransition>();
 
     /**
      * Constructs a new instance.
@@ -46,16 +43,6 @@ public class StateImpl implements IState, InitializingBean
     {
         super();
         mStateName_ = aStateName;
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mStateName_,
-                        "In initialisation of state, the final state name must be used." );
     }
 
     /**
@@ -79,7 +66,10 @@ public class StateImpl implements IState, InitializingBean
     @Override
     public IState step( IStateMachineContext aContext ) throws StateMachineException
     {
-        LOG.debug( "Step called from state=[" + mStateName_ + "]" );
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "Step called from state=[" + mStateName_ + "]" );
+        }
         loadTransitionsIntoState();
         return evaluateTransitionsToNewState( aContext );
     }
@@ -100,7 +90,10 @@ public class StateImpl implements IState, InitializingBean
         {
             if ( transInLoop.evaluateTransitionValidity( aContext ) )
             {
-                LOG.info( "State Transition [" + transInLoop + "] is valid" );
+                if ( LOG.isInfoEnabled() )
+                {
+                    LOG.info( "State Transition [" + transInLoop + "] is valid" );
+                }
                 if ( successfulTransition != null )
                 {
                     throw new StateMachineException( "More than one transition appears to be valid (only one should be valid for any given starting state)" );
@@ -109,7 +102,10 @@ public class StateImpl implements IState, InitializingBean
             }
             else
             {
-                LOG.info( "State Transition [" + transInLoop + "] is not valid" );
+                if ( LOG.isInfoEnabled() )
+                {
+                    LOG.info( "State Transition [" + transInLoop + "] is not valid" );
+                }
             }
         }
 

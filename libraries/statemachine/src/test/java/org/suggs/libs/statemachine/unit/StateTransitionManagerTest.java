@@ -8,7 +8,7 @@ import org.suggs.libs.statemachine.IState;
 import org.suggs.libs.statemachine.IStateTransition;
 import org.suggs.libs.statemachine.impl.StateTransitionManager;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -82,21 +82,21 @@ public class StateTransitionManagerTest
         EasyMock.replay( stateMock );
 
         // test exec
-        List<IStateTransition> list = StateTransitionManager.instance()
+        Collection<IStateTransition> collection = StateTransitionManager.instance()
             .getListOfTransitionsForState( stateMock );
-        Assert.assertEquals( 0, list.size() );
-        LOG.debug( "Retrieved [" + list.size() + "] transitions for mocked state transition" );
+        Assert.assertEquals( 0, collection.size() );
+        LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state transition" );
         LOG.debug( StateTransitionManager.instance() );
 
         LOG.debug( "Loading Mock transition" );
         StateTransitionManager.instance().addTransitionToManager( transMock );
 
-        list = StateTransitionManager.instance().getListOfTransitionsForState( stateMock );
-        Assert.assertEquals( 1, list.size() );
-        LOG.debug( "Retrieved [" + list.size() + "] transitions for mocked state transition" );
+        collection = StateTransitionManager.instance().getListOfTransitionsForState( stateMock );
+        Assert.assertEquals( 1, collection.size() );
+        LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state transition" );
         LOG.debug( StateTransitionManager.instance() );
 
-        Assert.assertEquals( transMock, list.get( 0 ) );
+        Assert.assertEquals( transMock, collection.iterator().next() );
 
         // verify mock
         EasyMock.verify( transMock );
@@ -120,7 +120,7 @@ public class StateTransitionManagerTest
         // test exec
         LOG.debug( "Calling StateTransitionManager with state=[" + stateMock.getStateName()
                    + "] argument so expecting no transitions to be returned" );
-        List<IStateTransition> list = StateTransitionManager.instance()
+        Collection<IStateTransition> list = StateTransitionManager.instance()
             .getListOfTransitionsForState( stateMock );
         Assert.assertEquals( 0, list.size() );
         LOG.debug( StateTransitionManager.instance() );
@@ -217,18 +217,18 @@ public class StateTransitionManagerTest
         StateTransitionManager.instance().addTransitionToManager( transMock4 );
         LOG.debug( StateTransitionManager.instance() );
 
-        List<IStateTransition> list = StateTransitionManager.instance()
+        Collection<IStateTransition> collection = StateTransitionManager.instance()
             .getListOfTransitionsForState( stateMock1 );
-        Assert.assertEquals( 3, list.size() );
-        LOG.debug( "Retrieved [" + list.size() + "] transitions for mocked state 1" );
+        Assert.assertEquals( 3, collection.size() );
+        LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state 1" );
 
-        list = StateTransitionManager.instance().getListOfTransitionsForState( stateMock2 );
-        Assert.assertEquals( 1, list.size() );
-        LOG.debug( "Retrieved [" + list.size() + "] transitions for mocked state 2" );
+        collection = StateTransitionManager.instance().getListOfTransitionsForState( stateMock2 );
+        Assert.assertEquals( 1, collection.size() );
+        LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state 2" );
 
-        list = StateTransitionManager.instance().getAllTransitions();
-        Assert.assertEquals( 4, list.size() );
-        LOG.debug( "Retrieved [" + list.size() + "] transitions for all states" );
+        collection = StateTransitionManager.instance().getAllTransitions();
+        Assert.assertEquals( 4, collection.size() );
+        LOG.debug( "Retrieved [" + collection.size() + "] transitions for all states" );
 
         // verify mock
         EasyMock.verify( transMock1 );

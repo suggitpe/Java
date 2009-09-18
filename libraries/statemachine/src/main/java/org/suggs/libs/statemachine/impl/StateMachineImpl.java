@@ -12,9 +12,6 @@ import org.suggs.libs.statemachine.StateMachineException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * Implementation of the IStateMachine interface. This implementation
  * will delegate all transition evaluation to the underlying current
@@ -24,7 +21,7 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 24 Aug 2009
  */
-public class StateMachineImpl implements IStateMachine, InitializingBean
+public class StateMachineImpl implements IStateMachine
 {
 
     private static final Log LOG = LogFactory.getLog( StateMachineImpl.class );
@@ -44,15 +41,6 @@ public class StateMachineImpl implements IStateMachine, InitializingBean
     }
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mCurrentState_, "State Machines must be initialised with an initial state" );
-    }
-
-    /**
      * This method delegates down to the underlying current state to
      * perform the state transition evaluation. If we get a new state
      * back from that delegating call, then we update our internal
@@ -66,12 +54,18 @@ public class StateMachineImpl implements IStateMachine, InitializingBean
         IState newState = mCurrentState_.step( aContext );
         if ( newState == null || mCurrentState_.equals( newState ) )
         {
-            LOG.info( "No valid transitions found from state=[" + mCurrentState_
-                      + "], state remain unchanged." );
+            if ( LOG.isInfoEnabled() )
+            {
+                LOG.info( "No valid transitions found from state=[" + mCurrentState_
+                          + "], state remain unchanged." );
+            }
         }
         else
         {
-            LOG.info( "Transitioning state machine to new state=[" + newState + "]" );
+            if ( LOG.isInfoEnabled() )
+            {
+                LOG.info( "Transitioning state machine to new state=[" + newState + "]" );
+            }
             mCurrentState_ = newState;
             // this may look odd: we need to call step again when we
             // reach a new state to allow for transitory states within

@@ -17,8 +17,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * The purpose of this class is to encapsulate a transition between
  * two states. It understands that it has a relationship between two
@@ -29,7 +27,7 @@ import org.springframework.beans.factory.InitializingBean;
  * @author suggitpe
  * @version 1.0 1 Sep 2009
  */
-public class StateTransitionImpl implements IStateTransition, InitializingBean
+public class StateTransitionImpl implements IStateTransition
 {
 
     private static final Log LOG = LogFactory.getLog( StateTransitionImpl.class );
@@ -57,14 +55,6 @@ public class StateTransitionImpl implements IStateTransition, InitializingBean
         mStateTransitionName_ = aStateTransitionName;
         mStartingState_ = aStartingState;
         mEndingState_ = aEndingState;
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() throws Exception
-    {
     }
 
     /**
@@ -108,12 +98,18 @@ public class StateTransitionImpl implements IStateTransition, InitializingBean
         {
             if ( aContext.getStateTransitionEvent().equals( event ) )
             {
-                LOG.debug( "Transition event [" + event + "] is found on [" + this + "]" );
+                if ( LOG.isDebugEnabled() )
+                {
+                    LOG.debug( "Transition event [" + event + "] is found on [" + this + "]" );
+                }
                 return true;
             }
         }
-        LOG.debug( "No valid transition events found on [" + this + "] to match the context ["
-                   + aContext + "]" );
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "No valid transition events found on [" + this + "] to match the context ["
+                       + aContext + "]" );
+        }
         return false;
     }
 

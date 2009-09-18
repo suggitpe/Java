@@ -8,15 +8,13 @@ import org.suggs.libs.statemachine.IState;
 import org.suggs.libs.statemachine.IStateTransition;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
 
 /**
  * This class is used to store all of the state transitions in a
@@ -29,11 +27,11 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 24 Aug 2009
  */
-public class StateTransitionManager implements InitializingBean
+public class StateTransitionManager
 {
 
     private static final Log LOG = LogFactory.getLog( StateTransitionManager.class );
-    private static final StateTransitionManager mInstance_ = new StateTransitionManager();
+    private static final StateTransitionManager INSTANCE = new StateTransitionManager();
     private final Map<String, Map<String, IStateTransition>> mTransitionMap_ = new HashMap<String, Map<String, IStateTransition>>();
 
     /**
@@ -45,23 +43,13 @@ public class StateTransitionManager implements InitializingBean
     }
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.isTrue( mTransitionMap_.size() > 0,
-                       "In creation of the state transition manager, it is expected that more than 0 state transitions should be loaded" );
-    }
-
-    /**
      * Accessor method to the underlying singleton instance.
      * 
      * @return the singleton instance of the State Transition Manager
      */
     public static final StateTransitionManager instance()
     {
-        return mInstance_;
+        return INSTANCE;
     }
 
     /**
@@ -73,32 +61,23 @@ public class StateTransitionManager implements InitializingBean
      * @return a list of state specific transitions, if there are no
      *         states that relate then an empty list will be returned.
      */
-    public List<IStateTransition> getListOfTransitionsForState( IState aState )
-    {
-        List<IStateTransition> listOfTransitions = new ArrayList<IStateTransition>();
-
-        Map<String, IStateTransition> mapOfTransitions = getMapOfTransitionsForState( aState );
-        for ( String transitionName : mapOfTransitions.keySet() )
-        {
-            listOfTransitions.add( mapOfTransitions.get( transitionName ) );
-        }
-
-        return listOfTransitions;
-    }
-
-    private Map<String, IStateTransition> getMapOfTransitionsForState( IState aState )
+    public Collection<IStateTransition> getListOfTransitionsForState( IState aState )
     {
         if ( aState == null )
         {
             throw new IllegalArgumentException( "Cannot use null for State Transition lookup" );
         }
 
-        LOG.debug( "Searching for all transitions for state=[" + aState + "]" );
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "Searching for all transitions for state=[" + aState + "]" );
+        }
+
         if ( mTransitionMap_.containsKey( aState.getStateName() ) )
         {
-            return mTransitionMap_.get( aState.getStateName() );
+            return mTransitionMap_.get( aState.getStateName() ).values();
         }
-        return new HashMap<String, IStateTransition>();
+        return new HashMap<String, IStateTransition>().values();
     }
 
     /**
@@ -107,16 +86,13 @@ public class StateTransitionManager implements InitializingBean
      * @return a list of transitions, if no transitions held in the
      *         manager then this will return an empty (typed) list.
      */
-    public List<IStateTransition> getAllTransitions()
+    public Collection<IStateTransition> getAllTransitions()
     {
         List<IStateTransition> listOfTransitions = new ArrayList<IStateTransition>();
         for ( String stateName : mTransitionMap_.keySet() )
         {
             Map<String, IStateTransition> innerMapOfTransitions = mTransitionMap_.get( stateName );
-            for ( String transitionName : innerMapOfTransitions.keySet() )
-            {
-                listOfTransitions.add( innerMapOfTransitions.get( transitionName ) );
-            }
+            listOfTransitions.addAll( innerMapOfTransitions.values() );
         }
         return listOfTransitions;
     }
@@ -157,7 +133,7 @@ public class StateTransitionManager implements InitializingBean
 
     private void buildInnerTransitionMapIfNeeded( String aStateName )
     {
-        if ( !mTransitionMap_.keySet().contains( aStateName ) )
+        if ( !mTransitionMap_.containsKey( aStateName ) )
         {
             mTransitionMap_.put( aStateName, new HashMap<String, IStateTransition>() );
         }
@@ -190,7 +166,10 @@ public class StateTransitionManager implements InitializingBean
      */
     public void clearTransitionsFromTransitionManager()
     {
-        LOG.info( "Clearing all transitions from the transition manager" );
+        if ( LOG.isInfoEnabled() )
+        {
+            LOG.info( "Clearing all transitions from the transition manager" );
+        }
         mTransitionMap_.clear();
     }
 
