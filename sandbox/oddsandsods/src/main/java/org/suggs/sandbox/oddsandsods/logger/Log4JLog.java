@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
  * mechanism.
  */
 
-public class Log4JLog implements Log
+class Log4JLog implements Log
 {
 
     private final Logger logger;
