@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_7EdWsKNGEd6Nks2hzoiX1w" name="com.ubs.orca.orcabridge">
+  <elementImport xmi:id="_7IrIUKNGEd6Nks2hzoiX1w">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_7I2ugKNGEd6Nks2hzoiX1w">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_7I2ugaNGEd6Nks2hzoiX1w">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_7I2ugqNGEd6Nks2hzoiX1w">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_WY3HcKc2Ed6PFasWOpK91g" name="Application"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Ys-fIKc2Ed6PFasWOpK91g" name="OrcaMessageReader">
+    <generalization xmi:id="_qpcrwKc2Ed6PFasWOpK91g" general="_itb3cKc2Ed6PFasWOpK91g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_bEuZoKc2Ed6PFasWOpK91g" name="IMessageReader" clientDependency="_ng6NgKc2Ed6PFasWOpK91g"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_f2e4cKc2Ed6PFasWOpK91g" name="JmsMessageReader">
+    <generalization xmi:id="_qJ3z0Kc2Ed6PFasWOpK91g" general="_itb3cKc2Ed6PFasWOpK91g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_itb3cKc2Ed6PFasWOpK91g" name="AbstractMessageReader"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_ng6NgKc2Ed6PFasWOpK91g" supplier="_itb3cKc2Ed6PFasWOpK91g" client="_bEuZoKc2Ed6PFasWOpK91g"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_sitTcKc2Ed6PFasWOpK91g" name="IMessageSender" clientDependency="_zvtFoKc2Ed6PFasWOpK91g"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v35toKc2Ed6PFasWOpK91g" name="" memberEnd="_v367wKc2Ed6PFasWOpK91g _v38J4Kc2Ed6PFasWOpK91g">
+    <ownedEnd xmi:id="_v367wKc2Ed6PFasWOpK91g" name="src" type="_itb3cKc2Ed6PFasWOpK91g" association="_v35toKc2Ed6PFasWOpK91g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v37i0ac2Ed6PFasWOpK91g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v37i0Kc2Ed6PFasWOpK91g" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_v38J4Kc2Ed6PFasWOpK91g" name="dst" type="_sitTcKc2Ed6PFasWOpK91g" aggregation="shared" association="_v35toKc2Ed6PFasWOpK91g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v38w8Kc2Ed6PFasWOpK91g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v38J4ac2Ed6PFasWOpK91g" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_xlM88Kc2Ed6PFasWOpK91g" name="AbstractMessageSender"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_zvtFoKc2Ed6PFasWOpK91g" name="" supplier="_xlM88Kc2Ed6PFasWOpK91g" client="_sitTcKc2Ed6PFasWOpK91g"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_7wGDoKc2Ed6PFasWOpK91g" name="OrcaMessageSender">
+    <generalization xmi:id="__LhBoKc2Ed6PFasWOpK91g" general="_xlM88Kc2Ed6PFasWOpK91g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_BIoOkKc3Ed6PFasWOpK91g" name="JmsMessageSender">
+    <generalization xmi:id="_DqaO0Kc3Ed6PFasWOpK91g" general="_xlM88Kc2Ed6PFasWOpK91g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_MbAhwKc3Ed6PFasWOpK91g" memberEnd="_MbBv4Kc3Ed6PFasWOpK91g _MbC-AKc3Ed6PFasWOpK91g">
+    <ownedEnd xmi:id="_MbBv4Kc3Ed6PFasWOpK91g" name="src" type="_WY3HcKc2Ed6PFasWOpK91g" association="_MbAhwKc3Ed6PFasWOpK91g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MbCW8ac3Ed6PFasWOpK91g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MbCW8Kc3Ed6PFasWOpK91g" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_MbC-AKc3Ed6PFasWOpK91g" name="dst" type="_bEuZoKc2Ed6PFasWOpK91g" association="_MbAhwKc3Ed6PFasWOpK91g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MbC-Aqc3Ed6PFasWOpK91g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MbC-Aac3Ed6PFasWOpK91g" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

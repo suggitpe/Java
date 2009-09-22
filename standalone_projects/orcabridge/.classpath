@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="/home/suggitpe/codebase/repository/m2repository/junit/junit/4.6/junit-4.6.jar"/>
 	<classpathentry kind="lib" path="/build/etc/mavenBuild"/>
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/com/ubs/orca/orca/2.3.2/orca-2.3.2.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/javax/jms/jms/1.1/jms-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

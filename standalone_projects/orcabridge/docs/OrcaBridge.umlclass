@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_7QRlIKNGEd6Nks2hzoiX1w" type="UMLClass" name="OrcaBridge.umlclass" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="__sM94KNGEd6Nks2hzoiX1w" type="2014">
+    <children xmi:type="notation:Node" xmi:id="__sNk8KNGEd6Nks2hzoiX1w" type="5020"/>
+    <children xmi:type="notation:Node" xmi:id="__sOMAKNGEd6Nks2hzoiX1w" type="7032">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="__sOMAaNGEd6Nks2hzoiX1w" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="__sOMAqNGEd6Nks2hzoiX1w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="__sOMA6NGEd6Nks2hzoiX1w"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="__sOMBKNGEd6Nks2hzoiX1w"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="__sM94aNGEd6Nks2hzoiX1w" fontName="Sans"/>
+    <element xmi:type="uml:Package" href="OrcaBridge.uml#_7EdWsKNGEd6Nks2hzoiX1w"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__sM94qNGEd6Nks2hzoiX1w"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_WZv4QKc2Ed6PFasWOpK91g" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_WZyUgKc2Ed6PFasWOpK91g" type="5003">
+      <styles xmi:type="notation:FontStyle" xmi:id="_WZ8FgKc2Ed6PFasWOpK91g" bold="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_WZy7kKc2Ed6PFasWOpK91g" type="5019"/>
+    <children xmi:type="notation:Node" xmi:id="_WZ0JsKc2Ed6PFasWOpK91g" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_WZ0Jsac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_WZ0Jsqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_WZ0Js6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_WZ0JtKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_WZ0Jtac2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_WZ1X0Kc2Ed6PFasWOpK91g" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_WZ1X0ac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_WZ1X0qc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_WZ1X06c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_WZ1X1Kc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_WZ1X1ac2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_WZ3NAKc2Ed6PFasWOpK91g" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_WZ3NAac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_WZ3NAqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_WZ3NA6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_WZ3NBKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_WZ3NBac2Ed6PFasWOpK91g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_WZv4Qac2Ed6PFasWOpK91g" fontName="Sans"/>
+    <styles xmi:type="notation:CanonicalStyle" xmi:id="_WZv4Qqc2Ed6PFasWOpK91g"/>
+    <element xmi:type="uml:Class" href="OrcaBridge.uml#_WY3HcKc2Ed6PFasWOpK91g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WZv4Q6c2Ed6PFasWOpK91g" y="85"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_YtYu0Kc2Ed6PFasWOpK91g" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_YtZ88Kc2Ed6PFasWOpK91g" type="5003">
+      <styles xmi:type="notation:FontStyle" xmi:id="_YteOYKc2Ed6PFasWOpK91g" bold="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_YtZ88ac2Ed6PFasWOpK91g" type="5019"/>
+    <children xmi:type="notation:Node" xmi:id="_YtZ88qc2Ed6PFasWOpK91g" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_YtZ886c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_YtZ89Kc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_YtZ89ac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_YtZ89qc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_YtZ896c2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_YtakAKc2Ed6PFasWOpK91g" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_YtakAac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_YtakAqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_YtakA6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_YtakBKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_YtakBac2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_YtbLEKc2Ed6PFasWOpK91g" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_YtbLEac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_YtbLEqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_YtbLE6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_YtbLFKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_YtbLFac2Ed6PFasWOpK91g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_YtYu0ac2Ed6PFasWOpK91g" fontName="Sans"/>
+    <styles xmi:type="notation:CanonicalStyle" xmi:id="_YtYu0qc2Ed6PFasWOpK91g"/>
+    <element xmi:type="uml:Class" href="OrcaBridge.uml#_Ys-fIKc2Ed6PFasWOpK91g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YtYu06c2Ed6PFasWOpK91g" x="45" y="380"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_bFDJwKc2Ed6PFasWOpK91g" type="2013">
+    <children xmi:type="notation:Node" xmi:id="_bFEX4Kc2Ed6PFasWOpK91g" type="5018"/>
+    <children xmi:type="notation:Node" xmi:id="_bFGNEKc2Ed6PFasWOpK91g" type="7029">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_bFGNEac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_bFGNEqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_bFGNE6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_bFGNFKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_bFGNFac2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bFHbMKc2Ed6PFasWOpK91g" type="7030">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_bFHbMac2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_bFHbMqc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_bFHbM6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_bFHbNKc2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bFIpUKc2Ed6PFasWOpK91g" type="7031">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_bFIpUac2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_bFIpUqc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_bFIpU6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_bFIpVKc2Ed6PFasWOpK91g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_bFDJwac2Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Interface" href="OrcaBridge.uml#_bEuZoKc2Ed6PFasWOpK91g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bFDJwqc2Ed6PFasWOpK91g" x="205" y="85"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_f2sT0Kc2Ed6PFasWOpK91g" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_f2s64Kc2Ed6PFasWOpK91g" type="5003">
+      <styles xmi:type="notation:FontStyle" xmi:id="_f2vXIKc2Ed6PFasWOpK91g" bold="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_f2s64ac2Ed6PFasWOpK91g" type="5019"/>
+    <children xmi:type="notation:Node" xmi:id="_f2s64qc2Ed6PFasWOpK91g" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_f2s646c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_f2s65Kc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_f2s65ac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_f2s65qc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_f2s656c2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_f2s66Kc2Ed6PFasWOpK91g" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_f2s66ac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_f2th8Kc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_f2th8ac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_f2th8qc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_f2th86c2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_f2th9Kc2Ed6PFasWOpK91g" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_f2th9ac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_f2th9qc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_f2th96c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_f2th-Kc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_f2th-ac2Ed6PFasWOpK91g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_f2sT0ac2Ed6PFasWOpK91g" fontName="Sans"/>
+    <styles xmi:type="notation:CanonicalStyle" xmi:id="_f2sT0qc2Ed6PFasWOpK91g"/>
+    <element xmi:type="uml:Class" href="OrcaBridge.uml#_f2e4cKc2Ed6PFasWOpK91g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_f2sT06c2Ed6PFasWOpK91g" x="275" y="385"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_itwnkKc2Ed6PFasWOpK91g" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_itx1sKc2Ed6PFasWOpK91g" type="5003">
+      <styles xmi:type="notation:FontStyle" xmi:id="_it1gEKc2Ed6PFasWOpK91g" bold="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_itx1sac2Ed6PFasWOpK91g" type="5019"/>
+    <children xmi:type="notation:Node" xmi:id="_itx1sqc2Ed6PFasWOpK91g" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_itx1s6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_itx1tKc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_itx1tac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_itx1tqc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_itx1t6c2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_itycwKc2Ed6PFasWOpK91g" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_itycwac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_itycwqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_itycw6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_itycxKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_itycxac2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_itzD0Kc2Ed6PFasWOpK91g" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_itzD0ac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_itzD0qc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_itzD06c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_itzD1Kc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_itzD1ac2Ed6PFasWOpK91g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_itwnkac2Ed6PFasWOpK91g" fontName="Sans"/>
+    <styles xmi:type="notation:CanonicalStyle" xmi:id="_itwnkqc2Ed6PFasWOpK91g"/>
+    <element xmi:type="uml:Class" href="OrcaBridge.uml#_itb3cKc2Ed6PFasWOpK91g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_itwnk6c2Ed6PFasWOpK91g" x="175" y="230"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_sjJ_YKc2Ed6PFasWOpK91g" type="2013">
+    <children xmi:type="notation:Node" xmi:id="_sjL0kKc2Ed6PFasWOpK91g" type="5018"/>
+    <children xmi:type="notation:Node" xmi:id="_sjL0kac2Ed6PFasWOpK91g" type="7029">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_sjL0kqc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_sjL0k6c2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_sjL0lKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_sjL0lac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_sjL0lqc2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_sjMboKc2Ed6PFasWOpK91g" type="7030">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_sjMboac2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_sjMboqc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_sjMbo6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_sjMbpKc2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_sjNCsKc2Ed6PFasWOpK91g" type="7031">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_sjNCsac2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_sjNCsqc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_sjNCs6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_sjNCtKc2Ed6PFasWOpK91g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_sjJ_Yac2Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Interface" href="OrcaBridge.uml#_sitTcKc2Ed6PFasWOpK91g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sjJ_Yqc2Ed6PFasWOpK91g" x="556" y="223"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_xlge8Kc2Ed6PFasWOpK91g" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_xlhGAKc2Ed6PFasWOpK91g" type="5003">
+      <styles xmi:type="notation:FontStyle" xmi:id="_xluhYKc2Ed6PFasWOpK91g" bold="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xlhGAac2Ed6PFasWOpK91g" type="5019"/>
+    <children xmi:type="notation:Node" xmi:id="_xlhtEKc2Ed6PFasWOpK91g" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_xlhtEac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_xlhtEqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_xlhtE6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_xlhtFKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_xlhtFac2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xlhtFqc2Ed6PFasWOpK91g" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_xlhtF6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_xlhtGKc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_xlhtGac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_xlhtGqc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_xlhtG6c2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xliUIKc2Ed6PFasWOpK91g" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_xliUIac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_xliUIqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_xliUI6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_xliUJKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_xliUJac2Ed6PFasWOpK91g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_xlge8ac2Ed6PFasWOpK91g" fontName="Sans"/>
+    <styles xmi:type="notation:CanonicalStyle" xmi:id="_xlge8qc2Ed6PFasWOpK91g"/>
+    <element xmi:type="uml:Class" href="OrcaBridge.uml#_xlM88Kc2Ed6PFasWOpK91g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xlge86c2Ed6PFasWOpK91g" x="520" y="365"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_7wd3EKc2Ed6PFasWOpK91g" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_7weeIKc2Ed6PFasWOpK91g" type="5003">
+      <styles xmi:type="notation:FontStyle" xmi:id="_7wivkKc2Ed6PFasWOpK91g" bold="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_7weeIac2Ed6PFasWOpK91g" type="5019"/>
+    <children xmi:type="notation:Node" xmi:id="_7wfFMKc2Ed6PFasWOpK91g" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_7wfFMac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_7wfFMqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_7wfFM6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_7wfFNKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_7wfFNac2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_7wfFNqc2Ed6PFasWOpK91g" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_7wfFN6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_7wfFOKc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_7wfFOac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_7wfFOqc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_7wfFO6c2Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_7wfsQKc2Ed6PFasWOpK91g" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_7wfsQac2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_7wfsQqc2Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_7wfsQ6c2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_7wfsRKc2Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_7wfsRac2Ed6PFasWOpK91g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_7wd3Eac2Ed6PFasWOpK91g" fontName="Sans"/>
+    <styles xmi:type="notation:CanonicalStyle" xmi:id="_7wd3Eqc2Ed6PFasWOpK91g"/>
+    <element xmi:type="uml:Class" href="OrcaBridge.uml#_7wGDoKc2Ed6PFasWOpK91g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7wd3E6c2Ed6PFasWOpK91g" x="437" y="530"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_BI7JgKc3Ed6PFasWOpK91g" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_BI7wkKc3Ed6PFasWOpK91g" type="5003">
+      <styles xmi:type="notation:FontStyle" xmi:id="_BI-M0Kc3Ed6PFasWOpK91g" bold="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_BI7wkac3Ed6PFasWOpK91g" type="5019"/>
+    <children xmi:type="notation:Node" xmi:id="_BI7wkqc3Ed6PFasWOpK91g" type="7001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_BI7wk6c3Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_BI7wlKc3Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_BI7wlac3Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_BI7wlqc3Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_BI7wl6c3Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_BI8XoKc3Ed6PFasWOpK91g" type="7002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_BI8Xoac3Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_BI8Xoqc3Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_BI8Xo6c3Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_BI8XpKc3Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_BI8Xpac3Ed6PFasWOpK91g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_BI8-sKc3Ed6PFasWOpK91g" type="7003">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_BI8-sac3Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_BI8-sqc3Ed6PFasWOpK91g" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_BI8-s6c3Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_BI8-tKc3Ed6PFasWOpK91g"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_BI8-tac3Ed6PFasWOpK91g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_BI7Jgac3Ed6PFasWOpK91g" fontName="Sans"/>
+    <styles xmi:type="notation:CanonicalStyle" xmi:id="_BI7Jgqc3Ed6PFasWOpK91g"/>
+    <element xmi:type="uml:Class" href="OrcaBridge.uml#_BIoOkKc3Ed6PFasWOpK91g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BI7Jg6c3Ed6PFasWOpK91g" x="701" y="534"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_7QRlIaNGEd6Nks2hzoiX1w"/>
+  <styles xmi:type="notation:FilteringStyle" xmi:id="_7QRlIqNGEd6Nks2hzoiX1w"/>
+  <element xmi:type="uml:Package" href="OrcaBridge.uml#_7EdWsKNGEd6Nks2hzoiX1w"/>
+  <edges xmi:type="notation:Edge" xmi:id="_nhDXcKc2Ed6PFasWOpK91g" type="4010" source="_bFDJwKc2Ed6PFasWOpK91g" target="_itwnkKc2Ed6PFasWOpK91g">
+    <children xmi:type="notation:Node" xmi:id="_nhFMoKc2Ed6PFasWOpK91g" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_nhFMoac2Ed6PFasWOpK91g" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_nhDXcac2Ed6PFasWOpK91g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_nhDXcqc2Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Realization" href="OrcaBridge.uml#_ng6NgKc2Ed6PFasWOpK91g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_nhDXc6c2Ed6PFasWOpK91g" points="[1, 15, -2, -51]$[0, 55, -3, -11]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nhI3AKc2Ed6PFasWOpK91g" id="(0.41732284,0.7912088)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nhJeEKc2Ed6PFasWOpK91g" id="(0.44387755,0.15384616)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_qJ5B8Kc2Ed6PFasWOpK91g" type="4001" source="_f2sT0Kc2Ed6PFasWOpK91g" target="_itwnkKc2Ed6PFasWOpK91g">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_qJ5B8ac2Ed6PFasWOpK91g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_qJ5B8qc2Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Generalization" href="OrcaBridge.uml#_qJ3z0Kc2Ed6PFasWOpK91g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_qJ5B86c2Ed6PFasWOpK91g" points="[-5, -13, 52, 75]$[17, -63, 74, 25]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qKEBEKc2Ed6PFasWOpK91g" id="(0.57419354,0.1978022)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_qpeg8Kc2Ed6PFasWOpK91g" type="4001" source="_YtYu0Kc2Ed6PFasWOpK91g" target="_itwnkKc2Ed6PFasWOpK91g">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_qpeg8ac2Ed6PFasWOpK91g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_qpeg8qc2Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Generalization" href="OrcaBridge.uml#_qpcrwKc2Ed6PFasWOpK91g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_qpeg86c2Ed6PFasWOpK91g" points="[9, -10, -87, 79]$[23, -63, -73, 26]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qpg9MKc2Ed6PFasWOpK91g" id="(0.591716,0.15384616)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_v4JlQKc2Ed6PFasWOpK91g" type="4005" source="_itwnkKc2Ed6PFasWOpK91g" target="_sjJ_YKc2Ed6PFasWOpK91g">
+    <children xmi:type="notation:Node" xmi:id="_v4KzYKc2Ed6PFasWOpK91g" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_v4KzYac2Ed6PFasWOpK91g" y="20"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_v4MBgKc2Ed6PFasWOpK91g" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_v4MBgac2Ed6PFasWOpK91g" y="-15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_v4MokKc2Ed6PFasWOpK91g" type="6005">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_v4Mokac2Ed6PFasWOpK91g" y="-15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_v4N2sKc2Ed6PFasWOpK91g" type="6006">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_v4N2sac2Ed6PFasWOpK91g" y="-30"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_v4OdwKc2Ed6PFasWOpK91g" type="6007">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_v4Odwac2Ed6PFasWOpK91g" y="-30"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_v4Pr4Kc2Ed6PFasWOpK91g" type="6008">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_v4Pr4ac2Ed6PFasWOpK91g" y="15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_v4QS8Kc2Ed6PFasWOpK91g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_v4QS8ac2Ed6PFasWOpK91g" y="15"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_v4JlQac2Ed6PFasWOpK91g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_v4JlQqc2Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Association" href="OrcaBridge.uml#_v35toKc2Ed6PFasWOpK91g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_v4JlQ6c2Ed6PFasWOpK91g" points="[25, -1, -115, 2]$[133, -3, -7, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_v4VygKc2Ed6PFasWOpK91g" id="(0.8316327,0.46153846)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_v4Vygac2Ed6PFasWOpK91g" id="(0.069767445,0.52747256)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_zv0aYKc2Ed6PFasWOpK91g" type="4010" source="_sjJ_YKc2Ed6PFasWOpK91g" target="_xlge8Kc2Ed6PFasWOpK91g">
+    <children xmi:type="notation:Node" xmi:id="_zv0aZKc2Ed6PFasWOpK91g" type="6011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zv0aZac2Ed6PFasWOpK91g" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zv0aYac2Ed6PFasWOpK91g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zv0aYqc2Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Realization" href="OrcaBridge.uml#_zvtFoKc2Ed6PFasWOpK91g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zv0aY6c2Ed6PFasWOpK91g" points="[1, 16, -2, -72]$[6, 54, 3, -34]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_zv3dsKc2Ed6PFasWOpK91g" id="(0.4496124,0.7692308)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="__LkE8Kc2Ed6PFasWOpK91g" type="4001" source="_7wd3EKc2Ed6PFasWOpK91g" target="_xlge8Kc2Ed6PFasWOpK91g">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="__LkE8ac2Ed6PFasWOpK91g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="__LkE8qc2Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Generalization" href="OrcaBridge.uml#__LhBoKc2Ed6PFasWOpK91g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__LkE86c2Ed6PFasWOpK91g" points="[16, -34, -56, 90]$[-1, -109, -73, 15]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_DqcrEKc3Ed6PFasWOpK91g" type="4001" source="_BI7JgKc3Ed6PFasWOpK91g" target="_xlge8Kc2Ed6PFasWOpK91g">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_DqcrEac3Ed6PFasWOpK91g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_DqcrEqc3Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Generalization" href="OrcaBridge.uml#_DqaO0Kc3Ed6PFasWOpK91g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_DqcrE6c3Ed6PFasWOpK91g" points="[-12, -14, 68, 93]$[-73, -72, 7, 35]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_DqfHUKc3Ed6PFasWOpK91g" id="(0.1411043,0.1978022)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_MbHPcKc3Ed6PFasWOpK91g" type="4005" source="_WZv4QKc2Ed6PFasWOpK91g" target="_bFDJwKc2Ed6PFasWOpK91g">
+    <children xmi:type="notation:Node" xmi:id="_MbH2gKc3Ed6PFasWOpK91g" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MbH2gac3Ed6PFasWOpK91g" y="20"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_MbH2gqc3Ed6PFasWOpK91g" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MbH2g6c3Ed6PFasWOpK91g" y="-15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_MbH2hKc3Ed6PFasWOpK91g" type="6005">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MbH2hac3Ed6PFasWOpK91g" y="-15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_MbIdkKc3Ed6PFasWOpK91g" type="6006">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MbIdkac3Ed6PFasWOpK91g" y="-30"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_MbIdkqc3Ed6PFasWOpK91g" type="6007">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MbIdk6c3Ed6PFasWOpK91g" y="-30"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_MbIdlKc3Ed6PFasWOpK91g" type="6008">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MbIdlac3Ed6PFasWOpK91g" y="15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_MbIdlqc3Ed6PFasWOpK91g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_MbIdl6c3Ed6PFasWOpK91g" y="15"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_MbHPcac3Ed6PFasWOpK91g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_MbHPcqc3Ed6PFasWOpK91g" fontName="Sans"/>
+    <element xmi:type="uml:Association" href="OrcaBridge.uml#_MbAhwKc3Ed6PFasWOpK91g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MbHPc6c3Ed6PFasWOpK91g" points="[12, -2, -96, 1]$[108, -15, 0, -12]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MbNWEKc3Ed6PFasWOpK91g" id="(0.8611111,0.20879121)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MbNWEac3Ed6PFasWOpK91g" id="(0.24409449,0.17582418)"/>
+  </edges>
+</notation:Diagram>
