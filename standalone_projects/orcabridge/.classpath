@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="/build/etc/mavenBuild"/>
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/com/ubs/orca/orca/2.3.2/orca-2.3.2.jar"/>
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/javax/jms/jms/1.1/jms-1.1.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/org/springframework/spring/2.5.1/spring-2.5.1.jar" sourcepath="/Maven Repository/m2repository/spring/jars/src/spring-sources-2.5.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
