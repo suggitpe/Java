@@ -15,6 +15,7 @@ import com.ubs.orca.client.api.ITextConversationMessage;
 import com.ubs.orca.client.api.OrcaClientFactory;
 import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.common.bus.IOrcaMessage;
+import com.ubs.orca.orcabridge.IMessageSender;
 import com.ubs.orca.orcabridge.MessageFacade;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 
@@ -34,9 +35,34 @@ public class OrcaMessageReader extends AbstractMessageReader
 
     private String mOrcaConnectionUrl_;
 
-    private String mOrcaClientToken_;
     private IOrcaClient mOrcaClient_;
     private IOrcaIdentity mOrcaIdentity_;
+
+    /**
+     * Constructs a new instance.
+     */
+    public OrcaMessageReader()
+    {
+        super();
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aOrcaIdentity
+     *            Orca token
+     * @param aOrcaConnectionUrl
+     *            URL to the Orca broker
+     * @param aMessageSender
+     *            the message sender
+     */
+    public OrcaMessageReader( IOrcaIdentity aOrcaIdentity, String aOrcaConnectionUrl,
+                              IMessageSender aMessageSender )
+    {
+        super( aMessageSender );
+        mOrcaIdentity_ = aOrcaIdentity;
+        mOrcaConnectionUrl_ = aOrcaConnectionUrl;
+    }
 
     /**
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
@@ -46,14 +72,11 @@ public class OrcaMessageReader extends AbstractMessageReader
     {
         Assert.notNull( mOrcaConnectionUrl_,
                         "No Orca connection URL has been set in the OrcaMessageReader" );
-        Assert.notNull( mOrcaClientToken_,
-                        "No Orca client token has been set in the OrcaMessageReader" );
-        Assert.notNull( mOrcaClient_,
-                        "Orca Client is null, has the init method been called on the OrcaMessageReader?" );
+        Assert.notNull( mOrcaIdentity_, "No Orca Identity has been set in the OrcaMessageReader" );
     }
 
     /**
-     * Public method to be called by the creator of the class.
+     * This init method is called once the class has been initialised.
      * 
      * @throws OrcaBridgeException
      */
@@ -61,38 +84,40 @@ public class OrcaMessageReader extends AbstractMessageReader
     {
         try
         {
-            // TODO: can this be injected through spring so the class
-            // only knows about the orca interfaces?
             mOrcaClient_ = OrcaClientFactory.createOrcaClient( mOrcaIdentity_,
                                                                mOrcaConnectionUrl_,
                                                                true,
-                                                               new OrcaReaderCallback() );
+                                                               new OrcaBridgeReaderCallback() );
         }
         catch ( OrcaException oe )
         {
-            throw new OrcaBridgeException( oe );
+            String err = "Failed to create Orca Client from init method";
+            LOG.error( err, oe );
+            throw new OrcaBridgeException( err, oe );
         }
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.IMessageReader#startReader()
+     * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doStartReader()
      */
     @Override
-    public void startReader() throws OrcaBridgeException
+    public void doStartReader() throws OrcaBridgeException
     {
         if ( mOrcaClient_ == null )
         {
-            throw new OrcaBridgeException( "Cannot start OrcaMessageReader: Orca Client has not yet been initalised on the class" );
+            throw new OrcaBridgeException( "Must initialise the OrcaBridge prior to test execution" );
         }
 
         if ( LOG.isInfoEnabled() )
         {
-            LOG.info( "Starting Orca client with url=[" + mOrcaConnectionUrl_ + "] and token=["
-                      + mOrcaClientToken_ + "]" );
+            LOG.info( "Connecting Orca client with url=[" + mOrcaConnectionUrl_ + "] and token=["
+                      + mOrcaIdentity_.getToken() + "] ..." );
         }
 
         try
         {
+            mOrcaClient_.connect();
+            LOG.info( "Starting Orca Client ..." );
             mOrcaClient_.start();
         }
         catch ( OrcaException oe )
@@ -104,20 +129,37 @@ public class OrcaMessageReader extends AbstractMessageReader
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.IMessageReader#stopReader()
+     * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doStopReader()
      */
     @Override
-    public void stopReader() throws OrcaBridgeException
+    protected void doStopReader() throws OrcaBridgeException
     {
-        try
+        if ( mOrcaClient_ != null )
         {
-            mOrcaClient_.stop();
-        }
-        catch ( OrcaException oe )
-        {
-            String err = "Failed to stop Orca Client";
-            LOG.error( err, oe );
-            throw new OrcaBridgeException( err, oe );
+            try
+            {
+                LOG.info( "Stopping Orca client ..." );
+                mOrcaClient_.stop();
+            }
+            catch ( OrcaException oe )
+            {
+                String err = "Failed to stop Orca Client";
+                LOG.error( err, oe );
+            }
+            finally
+            {
+                try
+                {
+                    LOG.info( "Disconnecting from client ..." );
+                    mOrcaClient_.disconnect();
+                }
+                catch ( OrcaException oe )
+                {
+                    String err = "Failed to disconnect from Orca Client";
+                    LOG.error( err, oe );
+                    throw new OrcaBridgeException( err, oe );
+                }
+            }
         }
     }
 
@@ -143,48 +185,6 @@ public class OrcaMessageReader extends AbstractMessageReader
     }
 
     /**
-     * Returns the value of orcaClientToken.
-     * 
-     * @return Returns the orcaClientToken.
-     */
-    public String getOrcaClientToken()
-    {
-        return mOrcaClientToken_;
-    }
-
-    /**
-     * Sets the orcaClientToken field to the specified value.
-     * 
-     * @param aOrcaClientToken
-     *            The orcaClientToken to set.
-     */
-    public void setOrcaClientToken( String aOrcaClientToken )
-    {
-        mOrcaClientToken_ = aOrcaClientToken;
-    }
-
-    /**
-     * Returns the value of orcaClient.
-     * 
-     * @return Returns the orcaClient.
-     */
-    public IOrcaClient getOrcaClient()
-    {
-        return mOrcaClient_;
-    }
-
-    /**
-     * Sets the orcaClient field to the specified value.
-     * 
-     * @param aOrcaClient
-     *            The orcaClient to set.
-     */
-    public void setOrcaClient( IOrcaClient aOrcaClient )
-    {
-        mOrcaClient_ = aOrcaClient;
-    }
-
-    /**
      * Returns the value of orcaIdentity.
      * 
      * @return Returns the orcaIdentity.
@@ -206,14 +206,29 @@ public class OrcaMessageReader extends AbstractMessageReader
     }
 
     /**
-     * This is the core callback that we are passing to the
+     * Sets the orcaClient. This method is here to support replacing
+     * the orca client with mocks for unit tests.
+     * 
+     * @param aOrcaClient
+     *            the orca client
+     */
+    void setOrcaClient( IOrcaClient aOrcaClient )
+    {
+        mOrcaClient_ = aOrcaClient;
+    }
+
+    /**
+     * This is the core orca callback that we are passing to the
      * OrcaClient. It is called each time a new message is received
-     * onto the sink client token.
+     * onto the sink client token.<br/>
+     * <b>We have to be careful with transactions in this callback.
+     * The completion of the Orca onReceived methods will end up with
+     * a rollback and ultimate failure on the Orca client itself.</b>
      * 
      * @author suggitpe
      * @version 1.0 23 Sep 2009
      */
-    private class OrcaReaderCallback implements IOrcaSinkSingleMsgCallback
+    private class OrcaBridgeReaderCallback implements IOrcaSinkSingleMsgCallback
     {
 
         /**
@@ -238,6 +253,11 @@ public class OrcaMessageReader extends AbstractMessageReader
         private void passOrcaMessageToTheMessageSender( IOrcaMessage aMessage )
                         throws OrcaBridgeException
         {
+            if ( LOG.isInfoEnabled() )
+            {
+                LOG.info( "Passing received message [" + aMessage + "] to message sender." );
+            }
+
             try
             {
                 getMessageSender().sendMessage( new MessageFacade( aMessage ) );
@@ -246,6 +266,13 @@ public class OrcaMessageReader extends AbstractMessageReader
             {
                 LOG.error( "Issue ocurred in the sending of a message", throwable );
                 throw new OrcaBridgeException( throwable );
+            }
+
+            if ( LOG.isInfoEnabled() )
+            {
+                LOG.info( "Message routing for message ["
+                          + aMessage
+                          + "] completed.  Allowing callback to complete so that Orca transaction can be committed." );
             }
         }
     }

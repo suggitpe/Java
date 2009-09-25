@@ -4,7 +4,6 @@
  */
 package com.ubs.orca.orcabridge;
 
-
 /**
  * TODO Write javadoc for IMessageSender
  * 
@@ -13,6 +12,10 @@ package com.ubs.orca.orcabridge;
  */
 public interface IMessageSender
 {
+
+    void startSender() throws OrcaBridgeException;
+
+    void stopSender() throws OrcaBridgeException;
 
     void sendMessage( MessageFacade aMessageFacade ) throws OrcaBridgeException;
 
