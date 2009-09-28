@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 
 import com.ubs.orca.orcabridge.IMessageReader;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
+import com.ubs.orca.orcabridge.teststubs.OrcaClientTestStub;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -59,9 +60,9 @@ public class OrcaReaderSpringInjectionUnitTest
      * Tests that the Orca Reader will work correctly with Spring
      * injection.
      */
+    @Test
     public void testSpringInjectedOrcaReader()
     {
-        LOG.debug( "------------------- " );
         LOG.debug( "Testing that the Orca Reader has been injected correctly" );
         Assert.assertNotNull( mOrcaReader_ );
     }
@@ -74,7 +75,9 @@ public class OrcaReaderSpringInjectionUnitTest
     @Test
     public void testStartAndStopOrcaReader() throws OrcaBridgeException
     {
+        OrcaMessageReader reader = (OrcaMessageReader) mOrcaReader_;
+        reader.setOrcaClient( new OrcaClientTestStub() );
         mOrcaReader_.startReader();
-    }
 
+    }
 }
