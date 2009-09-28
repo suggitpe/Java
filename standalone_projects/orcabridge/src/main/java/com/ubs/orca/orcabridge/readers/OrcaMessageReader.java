@@ -82,6 +82,8 @@ public class OrcaMessageReader extends AbstractMessageReader
      */
     public void init() throws OrcaBridgeException
     {
+        LOG.info( "Initialising OrcaMessageReader ... " );
+
         try
         {
             mOrcaClient_ = OrcaClientFactory.createOrcaClient( mOrcaIdentity_,

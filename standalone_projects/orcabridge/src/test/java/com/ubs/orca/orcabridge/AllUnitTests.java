@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import com.ubs.orca.orcabridge.readers.OrcaReaderSpringInjectionUnitTest;
 import com.ubs.orca.orcabridge.readers.OrcaReaderUnitTest;
 
 /**
@@ -19,7 +20,7 @@ import com.ubs.orca.orcabridge.readers.OrcaReaderUnitTest;
  * @version 1.0 24 Aug 2009
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { OrcaReaderUnitTest.class })
+@Suite.SuiteClasses( { OrcaReaderUnitTest.class, OrcaReaderSpringInjectionUnitTest.class })
 public class AllUnitTests
 {
 
