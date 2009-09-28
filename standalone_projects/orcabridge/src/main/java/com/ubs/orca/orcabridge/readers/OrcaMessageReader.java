@@ -15,7 +15,7 @@ import com.ubs.orca.client.api.ITextConversationMessage;
 import com.ubs.orca.client.api.OrcaClientFactory;
 import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.common.bus.IOrcaMessage;
-import com.ubs.orca.orcabridge.IMessageSender;
+import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.MessageFacade;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 
@@ -53,13 +53,13 @@ public class OrcaMessageReader extends AbstractMessageReader
      *            Orca token
      * @param aOrcaConnectionUrl
      *            URL to the Orca broker
-     * @param aMessageSender
-     *            the message sender
+     * @param aMessageProcessor
+     *            the message Processor
      */
     public OrcaMessageReader( IOrcaIdentity aOrcaIdentity, String aOrcaConnectionUrl,
-                              IMessageSender aMessageSender )
+                              IMessageProcessor aMessageProcessor )
     {
-        super( aMessageSender );
+        super( aMessageProcessor );
         mOrcaIdentity_ = aOrcaIdentity;
         mOrcaConnectionUrl_ = aOrcaConnectionUrl;
     }
@@ -239,7 +239,7 @@ public class OrcaMessageReader extends AbstractMessageReader
         @Override
         public void onReceived( IAttributesConversationMessage aAttributesMesage ) throws Throwable
         {
-            passOrcaMessageToTheMessageSender( aAttributesMesage );
+            passOrcaMessageToTheMessageProcessor( aAttributesMesage );
         }
 
         /**
@@ -249,20 +249,20 @@ public class OrcaMessageReader extends AbstractMessageReader
         public void onReceived( ITextConversationMessage aTextConversationMessage )
                         throws Throwable
         {
-            passOrcaMessageToTheMessageSender( aTextConversationMessage );
+            passOrcaMessageToTheMessageProcessor( aTextConversationMessage );
         }
 
-        private void passOrcaMessageToTheMessageSender( IOrcaMessage aMessage )
+        private void passOrcaMessageToTheMessageProcessor( IOrcaMessage aMessage )
                         throws OrcaBridgeException
         {
             if ( LOG.isInfoEnabled() )
             {
-                LOG.info( "Passing received message [" + aMessage + "] to message sender." );
+                LOG.info( "Passing received message [" + aMessage + "] to message Processor." );
             }
 
             try
             {
-                getMessageSender().sendMessage( new MessageFacade( aMessage ) );
+                getMessageProcessor().processMessage( new MessageFacade( aMessage ) );
             }
             catch ( Throwable throwable )
             {

@@ -7,8 +7,8 @@ package com.ubs.orca.orcabridge.readers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.IMessageReader;
-import com.ubs.orca.orcabridge.IMessageSender;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -16,7 +16,7 @@ import org.springframework.util.Assert;
 
 /**
  * Abstract class that will manage the message reader interaction with
- * the message senders.
+ * the message processors.
  * 
  * @author suggitpe
  * @version 1.0 22 Sep 2009
@@ -30,7 +30,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     static final String STATE_RUNNING = "Running";
     static final String STATE_STOPPING = "Stopping";
     static final String STATE_STOPPED = "Stopped";
-    private IMessageSender mMessageSender_;
+    private IMessageProcessor mMessageProcessor_;
     private String mState_ = STATE_UNINITIALISED;
 
     /**
@@ -44,23 +44,23 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     /**
      * Constructs a new instance.
      * 
-     * @param aMessageSender
-     *            the message sender
+     * @param aMessageProcessor
+     *            the message processor
      */
-    public AbstractMessageReader( IMessageSender aMessageSender )
+    public AbstractMessageReader( IMessageProcessor aMessageProcessor )
     {
-        mMessageSender_ = aMessageSender;
+        mMessageProcessor_ = aMessageProcessor;
     }
 
     /**
-     * Verifies that the message sender has been set on the class
+     * Verifies that the message processor has been set on the class
      * 
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( mMessageSender_, "Must set the Message Sender on the Message Reader" );
+        Assert.notNull( mMessageProcessor_, "Must set the Message Processor on the Message Reader" );
         doAfterPropertiesSet();
     }
 
@@ -81,7 +81,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     {
         LOG.debug( "Starting Orca Bridge." );
         mState_ = STATE_STARTING;
-        mMessageSender_.startSender();
+        mMessageProcessor_.startProcessor();
         doStartReader();
         mState_ = STATE_RUNNING;
     }
@@ -103,7 +103,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
         mState_ = STATE_STOPPING;
         LOG.debug( "Stopping Orca Bridge." );
         doStopReader();
-        mMessageSender_.stopSender();
+        mMessageProcessor_.stopProcessor();
         mState_ = STATE_STOPPED;
     }
 
@@ -116,32 +116,32 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     protected abstract void doStopReader() throws OrcaBridgeException;
 
     /**
-     * Getter for the message sender. This is protected as we only
+     * Getter for the message processor. This is protected as we only
      * want it exposed to the children of this class.
      * 
-     * @return the message sender class
+     * @return the message processor instance
      */
-    protected IMessageSender getMessageSender()
+    protected IMessageProcessor getMessageProcessor()
     {
-        return mMessageSender_;
+        return mMessageProcessor_;
     }
 
     /**
-     * Setter for the message sender. This is mostly used for spring
-     * injection.
+     * Setter for the message processor. This is mostly used for
+     * spring injection.
      * 
-     * @param aSender
-     *            the message sender to set.
+     * @param aProcessor
+     *            the message processor to set.
      */
-    public void setMessageSender( IMessageSender aSender )
+    public void setMessageProcessor( IMessageProcessor aProcessor )
     {
-        mMessageSender_ = aSender;
+        mMessageProcessor_ = aProcessor;
     }
 
     /**
      * Getter for the state of the reader.
      * 
-     * @return ther state of the reader
+     * @return the state of the reader
      */
     public String getState()
     {

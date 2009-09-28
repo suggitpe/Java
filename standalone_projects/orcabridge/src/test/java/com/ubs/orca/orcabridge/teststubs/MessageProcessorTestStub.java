@@ -7,7 +7,7 @@ package com.ubs.orca.orcabridge.teststubs;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ubs.orca.orcabridge.IMessageSender;
+import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.MessageFacade;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 
@@ -17,34 +17,31 @@ import com.ubs.orca.orcabridge.OrcaBridgeException;
  * @author suggitpe
  * @version 1.0 27 Sep 2009
  */
-public class MessageSenderTestStub implements IMessageSender
+public class MessageProcessorTestStub implements IMessageProcessor
 {
 
-    private static final Log LOG = LogFactory.getLog( MessageSenderTestStub.class );
+    private static final Log LOG = LogFactory.getLog( MessageProcessorTestStub.class );
 
     /**
-     * @see com.ubs.orca.orcabridge.IMessageSender#sendMessage(com.ubs.orca.orcabridge.MessageFacade)
+     * @see com.ubs.orca.orcabridge.IMessageProcessor#processMessage(com.ubs.orca.orcabridge.MessageFacade)
      */
     @Override
-    public void sendMessage( MessageFacade aMessageFacade ) throws OrcaBridgeException
+    public void processMessage( MessageFacade aMessageFacade ) throws OrcaBridgeException
     {
         LOG.debug( "Test sending a message on the Test Stub Message Sender" );
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.IMessageSender#startSender()
+     * @see com.ubs.orca.orcabridge.IMessageProcessor#startProcessor()
      */
     @Override
-    public void startSender() throws OrcaBridgeException
+    public void startProcessor() throws OrcaBridgeException
     {
         LOG.debug( "Starting sender on the Test Stub Message Sender" );
     }
 
-    /**
-     * @see com.ubs.orca.orcabridge.IMessageSender#stopSender()
-     */
     @Override
-    public void stopSender() throws OrcaBridgeException
+    public void stopProcessor() throws OrcaBridgeException
     {
         LOG.debug( "Stopping sender on the Test Stub Message Sender" );
     }

@@ -10,13 +10,13 @@ package com.ubs.orca.orcabridge;
  * @author suggitpe
  * @version 1.0 22 Sep 2009
  */
-public interface IMessageSender
+public interface IMessageProcessor
 {
 
-    void startSender() throws OrcaBridgeException;
+    void startProcessor() throws OrcaBridgeException;
 
-    void stopSender() throws OrcaBridgeException;
+    void stopProcessor() throws OrcaBridgeException;
 
-    void sendMessage( MessageFacade aMessageFacade ) throws OrcaBridgeException;
+    void processMessage( MessageFacade aMessageFacade ) throws OrcaBridgeException;
 
 }
