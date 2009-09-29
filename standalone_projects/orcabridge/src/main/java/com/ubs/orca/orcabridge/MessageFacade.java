@@ -6,9 +6,6 @@ package com.ubs.orca.orcabridge;
 
 import javax.jms.Message;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.ubs.orca.common.bus.IOrcaMessage;
 
 /**
@@ -32,8 +29,6 @@ import com.ubs.orca.common.bus.IOrcaMessage;
  */
 public class MessageFacade
 {
-
-    private static final Log LOG = LogFactory.getLog( MessageFacade.class );
 
     private Message mJmsMessage_;
     private IOrcaMessage mOrcaMessage_;
@@ -61,4 +56,47 @@ public class MessageFacade
         super();
         mOrcaMessage_ = aOrcaMessage;
     }
+
+    /**
+     * Returns the value of jmsMessage.
+     * 
+     * @return Returns the jmsMessage.
+     */
+    public Message getJmsMessage()
+    {
+        return mJmsMessage_;
+    }
+
+    /**
+     * Sets the jmsMessage field to the specified value.
+     * 
+     * @param aJmsMessage
+     *            The jmsMessage to set.
+     */
+    public void setJmsMessage( Message aJmsMessage )
+    {
+        mJmsMessage_ = aJmsMessage;
+    }
+
+    /**
+     * Returns the value of orcaMessage.
+     * 
+     * @return Returns the orcaMessage.
+     */
+    public IOrcaMessage getOrcaMessage()
+    {
+        return mOrcaMessage_;
+    }
+
+    /**
+     * Sets the orcaMessage field to the specified value.
+     * 
+     * @param aOrcaMessage
+     *            The orcaMessage to set.
+     */
+    public void setOrcaMessage( IOrcaMessage aOrcaMessage )
+    {
+        mOrcaMessage_ = aOrcaMessage;
+    }
+
 }

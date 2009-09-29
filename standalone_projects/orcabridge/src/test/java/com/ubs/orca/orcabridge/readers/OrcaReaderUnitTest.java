@@ -27,7 +27,7 @@ public class OrcaReaderUnitTest
 {
 
     private static final Log LOG = LogFactory.getLog( OrcaReaderUnitTest.class );
-    private OrcaMessageReader mOrcaReader_;
+    private OrcaSingleMessageReader mOrcaReader_;
     private IOrcaClient mMockOrcaClient_;
     private IMessageProcessor mMockMessageProcessor_;
 
@@ -45,7 +45,7 @@ public class OrcaReaderUnitTest
         LOG.debug( "-----------------" );
         mMockOrcaClient_ = EasyMock.createMock( IOrcaClient.class );
         mMockMessageProcessor_ = EasyMock.createMock( IMessageProcessor.class );
-        mOrcaReader_ = new OrcaMessageReader( new OrcaIdentity( ORCA_TOKEN ),
+        mOrcaReader_ = new OrcaSingleMessageReader( new OrcaIdentity( ORCA_TOKEN ),
                                               ORCA_URL,
                                               mMockMessageProcessor_ );
         mOrcaReader_.setOrcaClient( mMockOrcaClient_ );
@@ -61,16 +61,12 @@ public class OrcaReaderUnitTest
     @Test
     public void testCleanStart() throws Exception
     {
-        mMockMessageProcessor_.startProcessor();
-        EasyMock.expectLastCall().once();
-
         mMockOrcaClient_.connect();
         EasyMock.expectLastCall().once();
         mMockOrcaClient_.start();
         EasyMock.expectLastCall().once();
 
         EasyMock.replay( mMockOrcaClient_ );
-        EasyMock.replay( mMockMessageProcessor_ );
 
         mOrcaReader_.afterPropertiesSet();
         Assert.assertSame( "OrcaReader state is not correct:",
@@ -82,7 +78,6 @@ public class OrcaReaderUnitTest
                            AbstractMessageReader.STATE_RUNNING );
 
         EasyMock.verify( mMockOrcaClient_ );
-        EasyMock.verify( mMockMessageProcessor_ );
     }
 
     /**
@@ -94,18 +89,11 @@ public class OrcaReaderUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testBadStart() throws Exception
     {
-        mMockMessageProcessor_.startProcessor();
-        EasyMock.expectLastCall().once();
-
-        mMockMessageProcessor_.startProcessor();
-        EasyMock.expectLastCall().once();
-
         mMockOrcaClient_.connect();
         EasyMock.expectLastCall()
             .andThrow( new OrcaException( "This is an expected exception thrown from the OrcaBridge" ) );
 
         EasyMock.replay( mMockOrcaClient_ );
-        EasyMock.replay( mMockMessageProcessor_ );
 
         mOrcaReader_.afterPropertiesSet();
         Assert.assertSame( "OrcaReader state is not correct:",
@@ -115,7 +103,6 @@ public class OrcaReaderUnitTest
         Assert.fail( "Test should not have reached this part of the test" );
 
         EasyMock.verify( mMockOrcaClient_ );
-        EasyMock.verify( mMockMessageProcessor_ );
     }
 
     /**
@@ -132,17 +119,12 @@ public class OrcaReaderUnitTest
         mMockOrcaClient_.disconnect();
         EasyMock.expectLastCall().once();
 
-        mMockMessageProcessor_.stopProcessor();
-        EasyMock.expectLastCall().once();
-
         EasyMock.replay( mMockOrcaClient_ );
-        EasyMock.replay( mMockMessageProcessor_ );
 
         mOrcaReader_.afterPropertiesSet();
         mOrcaReader_.stopReader();
 
         EasyMock.verify( mMockOrcaClient_ );
-        EasyMock.verify( mMockMessageProcessor_ );
     }
 
     /**
@@ -160,11 +142,7 @@ public class OrcaReaderUnitTest
         EasyMock.expectLastCall()
             .andThrow( new OrcaException( "This is an expected exception to be thrown" ) );
 
-        mMockMessageProcessor_.stopProcessor();
-        EasyMock.expectLastCall().once();
-
         EasyMock.replay( mMockOrcaClient_ );
-        EasyMock.replay( mMockMessageProcessor_ );
 
         mOrcaReader_.afterPropertiesSet();
         mOrcaReader_.stopReader();
@@ -172,7 +150,6 @@ public class OrcaReaderUnitTest
         Assert.fail( "The test should not have reached this part of the code" );
 
         EasyMock.verify( mMockOrcaClient_ );
-        EasyMock.verify( mMockMessageProcessor_ );
     }
 
 }

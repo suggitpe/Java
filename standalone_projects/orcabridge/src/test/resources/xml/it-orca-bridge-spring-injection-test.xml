@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-    <bean id="orcaReader" class="com.ubs.orca.orcabridge.readers.OrcaMessageReader" init-method="init">
+    <bean id="orcaReader" class="com.ubs.orca.orcabridge.readers.OrcaSingleMessageReader" init-method="init">
         <property name="messageProcessor">
             <bean class="com.ubs.orca.orcabridge.teststubs.MessageProcessorTestStub"/>
         </property>

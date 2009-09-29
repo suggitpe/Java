@@ -5,17 +5,13 @@
 package com.ubs.orca.orcabridge;
 
 /**
- * TODO Write javadoc for IMessageSender
+ * Provides the ability to process a message in some way.
  * 
  * @author suggitpe
  * @version 1.0 22 Sep 2009
  */
 public interface IMessageProcessor
 {
-
-    void startProcessor() throws OrcaBridgeException;
-
-    void stopProcessor() throws OrcaBridgeException;
 
     void processMessage( MessageFacade aMessageFacade ) throws OrcaBridgeException;
 

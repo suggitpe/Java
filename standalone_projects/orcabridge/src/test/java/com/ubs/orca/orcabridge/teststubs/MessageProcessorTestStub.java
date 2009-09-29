@@ -30,20 +30,4 @@ public class MessageProcessorTestStub implements IMessageProcessor
     {
         LOG.debug( "Test sending a message on the Test Stub Message Sender" );
     }
-
-    /**
-     * @see com.ubs.orca.orcabridge.IMessageProcessor#startProcessor()
-     */
-    @Override
-    public void startProcessor() throws OrcaBridgeException
-    {
-        LOG.debug( "Starting sender on the Test Stub Message Sender" );
-    }
-
-    @Override
-    public void stopProcessor() throws OrcaBridgeException
-    {
-        LOG.debug( "Stopping sender on the Test Stub Message Sender" );
-    }
-
 }

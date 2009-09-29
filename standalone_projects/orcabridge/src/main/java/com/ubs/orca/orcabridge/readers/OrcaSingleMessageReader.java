@@ -23,15 +23,15 @@ import org.springframework.util.Assert;
 
 /**
  * Message reader class that will extract a message from the Orca
- * source and will pass it to a message reader.
+ * source and will pass it to a message processor.
  * 
  * @author suggitpe
  * @version 1.0 22 Sep 2009
  */
-public class OrcaMessageReader extends AbstractMessageReader
+public class OrcaSingleMessageReader extends AbstractMessageReader
 {
 
-    private static final Log LOG = LogFactory.getLog( OrcaMessageReader.class );
+    private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReader.class );
 
     private String mOrcaConnectionUrl_;
 
@@ -41,7 +41,7 @@ public class OrcaMessageReader extends AbstractMessageReader
     /**
      * Constructs a new instance.
      */
-    public OrcaMessageReader()
+    public OrcaSingleMessageReader()
     {
         super();
     }
@@ -56,8 +56,8 @@ public class OrcaMessageReader extends AbstractMessageReader
      * @param aMessageProcessor
      *            the message Processor
      */
-    public OrcaMessageReader( IOrcaIdentity aOrcaIdentity, String aOrcaConnectionUrl,
-                              IMessageProcessor aMessageProcessor )
+    public OrcaSingleMessageReader( IOrcaIdentity aOrcaIdentity, String aOrcaConnectionUrl,
+                                    IMessageProcessor aMessageProcessor )
     {
         super( aMessageProcessor );
         mOrcaIdentity_ = aOrcaIdentity;
@@ -71,8 +71,9 @@ public class OrcaMessageReader extends AbstractMessageReader
     public void doAfterPropertiesSet() throws Exception
     {
         Assert.notNull( mOrcaConnectionUrl_,
-                        "No Orca connection URL has been set in the OrcaMessageReader" );
-        Assert.notNull( mOrcaIdentity_, "No Orca Identity has been set in the OrcaMessageReader" );
+                        "No Orca connection URL has been set in the OrcaSingleMessageReader" );
+        Assert.notNull( mOrcaIdentity_,
+                        "No Orca Identity has been set in the OrcaSingleMessageReader" );
     }
 
     /**
@@ -110,16 +111,9 @@ public class OrcaMessageReader extends AbstractMessageReader
             throw new OrcaBridgeException( "Must initialise the OrcaBridge prior to test execution" );
         }
 
-        if ( LOG.isInfoEnabled() )
-        {
-            LOG.info( "Connecting Orca client with url=[" + mOrcaConnectionUrl_ + "] and token=["
-                      + mOrcaIdentity_.getToken() + "] ..." );
-        }
-
         try
         {
             mOrcaClient_.connect();
-            LOG.info( "Starting Orca Client ..." );
             mOrcaClient_.start();
         }
         catch ( OrcaException oe )
@@ -140,7 +134,6 @@ public class OrcaMessageReader extends AbstractMessageReader
         {
             try
             {
-                LOG.info( "Stopping Orca client ..." );
                 mOrcaClient_.stop();
             }
             catch ( OrcaException oe )
@@ -152,7 +145,6 @@ public class OrcaMessageReader extends AbstractMessageReader
             {
                 try
                 {
-                    LOG.info( "Disconnecting from client ..." );
                     mOrcaClient_.disconnect();
                 }
                 catch ( OrcaException oe )
@@ -278,5 +270,4 @@ public class OrcaMessageReader extends AbstractMessageReader
             }
         }
     }
-
 }

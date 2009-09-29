@@ -75,7 +75,7 @@ public class OrcaReaderSpringInjectionUnitTest
     @Test
     public void testStartAndStopOrcaReader() throws OrcaBridgeException
     {
-        OrcaMessageReader reader = (OrcaMessageReader) mOrcaReader_;
+        OrcaSingleMessageReader reader = (OrcaSingleMessageReader) mOrcaReader_;
         reader.setOrcaClient( new OrcaClientTestStub() );
         mOrcaReader_.startReader();
 

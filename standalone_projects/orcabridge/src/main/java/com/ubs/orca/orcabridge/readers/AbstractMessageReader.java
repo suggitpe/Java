@@ -81,7 +81,6 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     {
         LOG.debug( "Starting Orca Bridge." );
         mState_ = STATE_STARTING;
-        mMessageProcessor_.startProcessor();
         doStartReader();
         mState_ = STATE_RUNNING;
     }
@@ -103,7 +102,6 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
         mState_ = STATE_STOPPING;
         LOG.debug( "Stopping Orca Bridge." );
         doStopReader();
-        mMessageProcessor_.stopProcessor();
         mState_ = STATE_STOPPED;
     }
 
