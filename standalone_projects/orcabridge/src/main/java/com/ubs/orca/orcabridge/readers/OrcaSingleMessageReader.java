@@ -90,7 +90,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
             mOrcaClient_ = OrcaClientFactory.createOrcaClient( mOrcaIdentity_,
                                                                mOrcaConnectionUrl_,
                                                                true,
-                                                               new OrcaBridgeReaderCallback() );
+                                                               new OrcaReaderCallback() );
         }
         catch ( OrcaException oe )
         {
@@ -222,7 +222,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
      * @author suggitpe
      * @version 1.0 23 Sep 2009
      */
-    private class OrcaBridgeReaderCallback implements IOrcaSinkSingleMsgCallback
+    private class OrcaReaderCallback implements IOrcaSinkSingleMsgCallback
     {
 
         /**

@@ -132,7 +132,7 @@
   </children>
   <children xmi:type="notation:Node" xmi:id="_itwnkKc2Ed6PFasWOpK91g" type="2001">
     <children xmi:type="notation:Node" xmi:id="_itx1sKc2Ed6PFasWOpK91g" type="5003">
-      <styles xmi:type="notation:FontStyle" xmi:id="_it1gEKc2Ed6PFasWOpK91g" bold="true"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_it1gEKc2Ed6PFasWOpK91g" bold="true" italic="true"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_itx1sac2Ed6PFasWOpK91g" type="5019"/>
     <children xmi:type="notation:Node" xmi:id="_itx1sqc2Ed6PFasWOpK91g" type="7001">
@@ -188,7 +188,7 @@
   </children>
   <children xmi:type="notation:Node" xmi:id="_xlge8Kc2Ed6PFasWOpK91g" type="2001">
     <children xmi:type="notation:Node" xmi:id="_xlhGAKc2Ed6PFasWOpK91g" type="5003">
-      <styles xmi:type="notation:FontStyle" xmi:id="_xluhYKc2Ed6PFasWOpK91g" bold="true"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_xluhYKc2Ed6PFasWOpK91g" bold="true" italic="true"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_xlhGAac2Ed6PFasWOpK91g" type="5019"/>
     <children xmi:type="notation:Node" xmi:id="_xlhtEKc2Ed6PFasWOpK91g" type="7001">
@@ -215,7 +215,7 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_xlge8ac2Ed6PFasWOpK91g" fontName="Sans"/>
     <styles xmi:type="notation:CanonicalStyle" xmi:id="_xlge8qc2Ed6PFasWOpK91g"/>
     <element xmi:type="uml:Class" href="OrcaBridge.uml#_xlM88Kc2Ed6PFasWOpK91g"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xlge86c2Ed6PFasWOpK91g" x="520" y="365"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xlge86c2Ed6PFasWOpK91g" x="515" y="365"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_7wd3EKc2Ed6PFasWOpK91g" type="2001">
     <children xmi:type="notation:Node" xmi:id="_7weeIKc2Ed6PFasWOpK91g" type="5003">
@@ -278,6 +278,31 @@
     <styles xmi:type="notation:CanonicalStyle" xmi:id="_BI7Jgqc3Ed6PFasWOpK91g"/>
     <element xmi:type="uml:Class" href="OrcaBridge.uml#_BIoOkKc3Ed6PFasWOpK91g"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BI7Jg6c3Ed6PFasWOpK91g" x="701" y="534"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_U__v4K6xEd6wX4IutfUZ6w" type="2013">
+    <children xmi:type="notation:Node" xmi:id="_VAA-AK6xEd6wX4IutfUZ6w" type="5018"/>
+    <children xmi:type="notation:Node" xmi:id="_VACzMK6xEd6wX4IutfUZ6w" type="7029">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_VACzMa6xEd6wX4IutfUZ6w"/>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_VACzMq6xEd6wX4IutfUZ6w" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VACzM66xEd6wX4IutfUZ6w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VACzNK6xEd6wX4IutfUZ6w"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_VACzNa6xEd6wX4IutfUZ6w"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_VAEBUK6xEd6wX4IutfUZ6w" type="7030">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_VAEBUa6xEd6wX4IutfUZ6w" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VAEBUq6xEd6wX4IutfUZ6w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VAEBU66xEd6wX4IutfUZ6w"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_VAEBVK6xEd6wX4IutfUZ6w"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_VAGdkK6xEd6wX4IutfUZ6w" type="7031">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_VAGdka6xEd6wX4IutfUZ6w" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VAGdkq6xEd6wX4IutfUZ6w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VAGdk66xEd6wX4IutfUZ6w"/>
+      <styles xmi:type="notation:CanonicalStyle" xmi:id="_VAGdlK6xEd6wX4IutfUZ6w"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_U__v4a6xEd6wX4IutfUZ6w" fontName="Sans"/>
+    <element xmi:type="uml:Interface" href="OrcaBridge.uml#_U_eLcK6xEd6wX4IutfUZ6w"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_U__v4q6xEd6wX4IutfUZ6w" x="75" y="530"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_7QRlIaNGEd6Nks2hzoiX1w"/>
   <styles xmi:type="notation:FilteringStyle" xmi:id="_7QRlIqNGEd6Nks2hzoiX1w"/>
@@ -387,5 +412,60 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MbHPc6c3Ed6PFasWOpK91g" points="[12, -2, -96, 1]$[108, -15, 0, -12]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MbNWEKc3Ed6PFasWOpK91g" id="(0.8611111,0.20879121)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MbNWEac3Ed6PFasWOpK91g" id="(0.24409449,0.17582418)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_bOZy4K6xEd6wX4IutfUZ6w" type="4005" source="_7wd3EKc2Ed6PFasWOpK91g" target="_U__v4K6xEd6wX4IutfUZ6w">
+    <children xmi:type="notation:Node" xmi:id="_bOaZ8K6xEd6wX4IutfUZ6w" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bOaZ8a6xEd6wX4IutfUZ6w" y="20"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bOaZ8q6xEd6wX4IutfUZ6w" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bOaZ866xEd6wX4IutfUZ6w" y="-15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bOaZ9K6xEd6wX4IutfUZ6w" type="6005">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bOaZ9a6xEd6wX4IutfUZ6w" y="-15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bObBAK6xEd6wX4IutfUZ6w" type="6006">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bObBAa6xEd6wX4IutfUZ6w" y="-30"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bObBAq6xEd6wX4IutfUZ6w" type="6007">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bObBA66xEd6wX4IutfUZ6w" y="-30"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bOboEK6xEd6wX4IutfUZ6w" type="6008">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bOboEa6xEd6wX4IutfUZ6w" y="15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_bOboEq6xEd6wX4IutfUZ6w" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bOboE66xEd6wX4IutfUZ6w" y="15"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_bOZy4a6xEd6wX4IutfUZ6w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_bOZy4q6xEd6wX4IutfUZ6w" fontName="Sans"/>
+    <element xmi:type="uml:Association" href="OrcaBridge.uml#_bOVhcK6xEd6wX4IutfUZ6w"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_bOZy466xEd6wX4IutfUZ6w" points="[-71, 3, 202, -10]$[-233, 11, 40, -2]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_b7KyQK6xEd6wX4IutfUZ6w" type="4005" source="_YtYu0Kc2Ed6PFasWOpK91g" target="_U__v4K6xEd6wX4IutfUZ6w">
+    <children xmi:type="notation:Node" xmi:id="_b7KyRK6xEd6wX4IutfUZ6w" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b7KyRa6xEd6wX4IutfUZ6w" y="20"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_b7LZUK6xEd6wX4IutfUZ6w" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b7LZUa6xEd6wX4IutfUZ6w" y="-15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_b7LZUq6xEd6wX4IutfUZ6w" type="6005">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b7LZU66xEd6wX4IutfUZ6w" y="-15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_b7LZVK6xEd6wX4IutfUZ6w" type="6006">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b7LZVa6xEd6wX4IutfUZ6w" y="-30"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_b7MAYK6xEd6wX4IutfUZ6w" type="6007">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b7MAYa6xEd6wX4IutfUZ6w" y="-30"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_b7MAYq6xEd6wX4IutfUZ6w" type="6008">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b7MAY66xEd6wX4IutfUZ6w" y="15"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_b7MAZK6xEd6wX4IutfUZ6w" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b7MAZa6xEd6wX4IutfUZ6w" y="15"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_b7KyQa6xEd6wX4IutfUZ6w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_b7KyQq6xEd6wX4IutfUZ6w" fontName="Sans"/>
+    <element xmi:type="uml:Association" href="OrcaBridge.uml#_b7Gg0K6xEd6wX4IutfUZ6w"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_b7KyQ66xEd6wX4IutfUZ6w" points="[19, 37, -38, -79]$[58, 99, 1, -17]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_b7Q44K6xEd6wX4IutfUZ6w" id="(0.5463917,0.23076923)"/>
   </edges>
 </notation:Diagram>

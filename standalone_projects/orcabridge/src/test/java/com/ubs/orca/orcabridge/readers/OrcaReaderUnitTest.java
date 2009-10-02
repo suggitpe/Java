@@ -46,8 +46,8 @@ public class OrcaReaderUnitTest
         mMockOrcaClient_ = EasyMock.createMock( IOrcaClient.class );
         mMockMessageProcessor_ = EasyMock.createMock( IMessageProcessor.class );
         mOrcaReader_ = new OrcaSingleMessageReader( new OrcaIdentity( ORCA_TOKEN ),
-                                              ORCA_URL,
-                                              mMockMessageProcessor_ );
+                                                    ORCA_URL,
+                                                    mMockMessageProcessor_ );
         mOrcaReader_.setOrcaClient( mMockOrcaClient_ );
 
     }
