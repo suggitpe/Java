@@ -4,13 +4,19 @@
  */
 package com.ubs.orca.orcabridge.readers;
 
+import javax.jms.Message;
+import javax.naming.Context;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.ubs.orca.orcabridge.MessageFacade;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
+import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
-import com.ubs.orca.orcabridge.jmsclient.JmsClientFactory;
+import com.ubs.orca.orcabridge.jmsclient.impl.ContextBuilder;
+import com.ubs.orca.orcabridge.jmsclient.impl.JmsClientFactory;
 
 import org.springframework.util.Assert;
 
@@ -26,7 +32,11 @@ public class JmsSingleMessageReader extends AbstractMessageReader
 
     private static final Log LOG = LogFactory.getLog( JmsSingleMessageReader.class );
 
+    private String mContextFactory_;
     private String mBrokerUrl_;
+    private String mConnectionFactoryName_;
+    private String mDestinationName_;
+
     private IJmsClient mJmsClient_;
 
     /**
@@ -37,14 +47,10 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         super();
     }
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aBrokerUrl
-     */
-    public JmsSingleMessageReader( String aBrokerUrl )
+    public JmsSingleMessageReader( String aContextFactory, String aBrokerUrl )
     {
         super();
+        mContextFactory_ = aContextFactory;
         mBrokerUrl_ = aBrokerUrl;
     }
 
@@ -54,6 +60,8 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     @Override
     protected void doAfterPropertiesSet() throws Exception
     {
+        Assert.notNull( mContextFactory_,
+                        "No Context factory has been set on the JmsSingleMessageReader" );
         Assert.notNull( mBrokerUrl_, "No Broker URL has been set on the JmsSingleMessageReader" );
     }
 
@@ -67,11 +75,15 @@ public class JmsSingleMessageReader extends AbstractMessageReader
 
         try
         {
-            mJmsClient_ = JmsClientFactory.createJmsClient();
+            Context ctx = ContextBuilder.buildInitialContextToJndi( mContextFactory_, mBrokerUrl_ );
+            mJmsClient_ = JmsClientFactory.createReceivingJmsClient( ctx,
+                                                                     mConnectionFactoryName_,
+                                                                     mDestinationName_,
+                                                                     new JmsReaderCallback() );
         }
         catch ( JmsClientException je )
         {
-            String err = "Failed to create JMS Client from init method";
+            final String err = "Failed to create JMS Client from init method";
             LOG.error( err, je );
             throw new OrcaBridgeException( err, je );
         }
@@ -90,12 +102,12 @@ public class JmsSingleMessageReader extends AbstractMessageReader
 
         try
         {
-            mJmsClient_.connectAndStart();
+            mJmsClient_.connect();
         }
         catch ( JmsClientException je )
         {
-            String err = "Failed to start JMS Client";
-            LOG.error( err, je );
+            final String err = "Failed to start JMS Client";
+            LOG.error( err );
             throw new OrcaBridgeException( err, je );
         }
     }
@@ -110,15 +122,97 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         {
             try
             {
-                mJmsClient_.stopAndDisconnect();
+                mJmsClient_.disconnect();
             }
             catch ( JmsClientException je )
             {
-                String err = "Failed to stop Orca Client";
-                LOG.error( err, je );
+                LOG.error( "Errors occured when trying to stop the JMS client", je );
             }
         }
+    }
 
+    /**
+     * Returns the value of contextFactory.
+     * 
+     * @return Returns the contextFactory.
+     */
+    public String getContextFactory()
+    {
+        return mContextFactory_;
+    }
+
+    /**
+     * Sets the contextFactory field to the specified value.
+     * 
+     * @param aContextFactory
+     *            The contextFactory to set.
+     */
+    public void setContextFactory( String aContextFactory )
+    {
+        mContextFactory_ = aContextFactory;
+    }
+
+    /**
+     * Returns the value of brokerUrl.
+     * 
+     * @return Returns the brokerUrl.
+     */
+    public String getBrokerUrl()
+    {
+        return mBrokerUrl_;
+    }
+
+    /**
+     * Sets the brokerUrl field to the specified value.
+     * 
+     * @param aBrokerUrl
+     *            The brokerUrl to set.
+     */
+    public void setBrokerUrl( String aBrokerUrl )
+    {
+        mBrokerUrl_ = aBrokerUrl;
+    }
+
+    // ===============================================
+    /**
+     * This is the callback class that will be passed into the
+     * JMSClient so that we can pass the message received back to the
+     * message processor.
+     * 
+     * @author suggitpe
+     * @version 1.0 30 Sep 2009
+     */
+    private class JmsReaderCallback implements IJmsClientSingleMsgCallback
+    {
+
+        /**
+         * @see com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback#onReceived(javax.jms.Message)
+         */
+        @Override
+        public void onReceived( Message aMessage ) throws Throwable
+        {
+            if ( LOG.isInfoEnabled() )
+            {
+                LOG.info( "Passing received message [" + aMessage + "] to message Processor." );
+            }
+
+            try
+            {
+                getMessageProcessor().processMessage( new MessageFacade( aMessage ) );
+            }
+            catch ( Throwable throwable )
+            {
+                LOG.error( "Issue ocurred in the sending of a message", throwable );
+                throw new OrcaBridgeException( throwable );
+            }
+
+            if ( LOG.isInfoEnabled() )
+            {
+                LOG.info( "Message routing for message ["
+                          + aMessage
+                          + "] completed.  Allowing callback to complete so that JMS transaction can be committed." );
+            }
+        }
     }
 
 }

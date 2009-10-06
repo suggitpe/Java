@@ -4,8 +4,12 @@
  */
 package com.ubs.orca.orcabridge;
 
+import javax.jms.JMSException;
 import javax.jms.Message;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 
+import com.ubs.orca.client.api.IOrcaClient;
 import com.ubs.orca.common.bus.IOrcaMessage;
 
 /**
@@ -55,6 +59,17 @@ public class MessageFacade
     {
         super();
         mOrcaMessage_ = aOrcaMessage;
+    }
+
+    public Message buildJmsMessage( Session aSession ) throws JMSException
+    {
+        TextMessage msg = aSession.createTextMessage();
+        return msg;
+    }
+
+    public IOrcaMessage buildOrcaMessage( IOrcaClient aClient )
+    {
+        return null;
     }
 
     /**
