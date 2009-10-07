@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/org/easymock/easymock/2.4/easymock-2.4.jar"/>
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/org/springframework/spring-test/2.5.1/spring-test-2.5.1.jar"/>
 	<classpathentry kind="lib" path="/home/suggitpe/codebase/repository/m2repository/junit/junit/4.6/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="/Maven Repository/m2repository/com/tibco/ems/tibjms/4.2.0/tibjms-4.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

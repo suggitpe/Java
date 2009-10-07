@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import com.ubs.orca.orcabridge.jmsclient.impl.ContextBuilderTest;
+import com.ubs.orca.orcabridge.message.MessageFacadeFactoryTest;
 import com.ubs.orca.orcabridge.readers.OrcaReaderSpringInjectionUnitTest;
 import com.ubs.orca.orcabridge.readers.OrcaReaderUnitTest;
 
@@ -22,7 +23,7 @@ import com.ubs.orca.orcabridge.readers.OrcaReaderUnitTest;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { OrcaReaderUnitTest.class, OrcaReaderSpringInjectionUnitTest.class,
-                      ContextBuilderTest.class })
+                      ContextBuilderTest.class, MessageFacadeFactoryTest.class })
 public class AllUnitTests
 {
 

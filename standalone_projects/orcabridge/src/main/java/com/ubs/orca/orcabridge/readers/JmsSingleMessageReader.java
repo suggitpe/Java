@@ -10,13 +10,13 @@ import javax.naming.Context;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ubs.orca.orcabridge.MessageFacade;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 import com.ubs.orca.orcabridge.jmsclient.impl.ContextBuilder;
 import com.ubs.orca.orcabridge.jmsclient.impl.JmsClientFactory;
+import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
 
 import org.springframework.util.Assert;
 
@@ -76,10 +76,9 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         try
         {
             Context ctx = ContextBuilder.buildInitialContextToJndi( mContextFactory_, mBrokerUrl_ );
-            mJmsClient_ = JmsClientFactory.createReceivingJmsClient( ctx,
-                                                                     mConnectionFactoryName_,
-                                                                     mDestinationName_,
-                                                                     new JmsReaderCallback() );
+            mJmsClient_ = JmsClientFactory.createSingleMessageClient( ctx,
+                                                                      mConnectionFactoryName_,
+                                                                      mDestinationName_ );
         }
         catch ( JmsClientException je )
         {
@@ -103,6 +102,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         try
         {
             mJmsClient_.connect();
+            mJmsClient_.startDurableSubscription( new JmsReaderCallback() );
         }
         catch ( JmsClientException je )
         {
@@ -122,6 +122,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         {
             try
             {
+                mJmsClient_.stopDurbleSubscription();
                 mJmsClient_.disconnect();
             }
             catch ( JmsClientException je )
@@ -198,7 +199,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
 
             try
             {
-                getMessageProcessor().processMessage( new MessageFacade( aMessage ) );
+                getMessageProcessor().processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
             }
             catch ( Throwable throwable )
             {

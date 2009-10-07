@@ -13,6 +13,6 @@ package com.ubs.orca.orcabridge;
 public interface IMessageProcessor
 {
 
-    void processMessage( MessageFacade aMessageFacade ) throws OrcaBridgeException;
+    void processMessage( IMessageFacade aMessageFacade ) throws OrcaBridgeException;
 
 }

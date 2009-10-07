@@ -16,8 +16,8 @@ import com.ubs.orca.client.api.OrcaClientFactory;
 import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.common.bus.IOrcaMessage;
 import com.ubs.orca.orcabridge.IMessageProcessor;
-import com.ubs.orca.orcabridge.MessageFacade;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
+import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
 
 import org.springframework.util.Assert;
 
@@ -254,7 +254,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
 
             try
             {
-                getMessageProcessor().processMessage( new MessageFacade( aMessage ) );
+                getMessageProcessor().processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
             }
             catch ( Throwable throwable )
             {

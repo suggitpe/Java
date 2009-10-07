@@ -4,7 +4,7 @@
  */
 package com.ubs.orca.orcabridge.jmsclient;
 
-import com.ubs.orca.orcabridge.MessageFacade;
+import com.ubs.orca.orcabridge.IMessageFacade;
 
 /**
  * Top level interface for the JMS client interaction. The whole
@@ -21,13 +21,13 @@ public interface IJmsClient
 
     void connect( String aUsername, String aPassword ) throws JmsClientException;
 
-    void start() throws JmsClientException;
-
-    void stop() throws JmsClientException;
-
     void disconnect() throws JmsClientException;
 
-    void startDurableSubscription() throws JmsClientException;
+    void sendMessageToDestination( IMessageFacade aMessageFacade ) throws JmsClientException;
 
-    void sendMessageToDestination( MessageFacade aMessageFacade ) throws JmsClientException;
+    void startDurableSubscription( IJmsClientSingleMsgCallback aCallback )
+                    throws JmsClientException;
+
+    void stopDurbleSubscription() throws JmsClientException;
+
 }

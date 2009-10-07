@@ -17,7 +17,7 @@ import org.junit.runner.RunWith;
 
 import com.ubs.orca.orcabridge.IMessageReader;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
-import com.ubs.orca.orcabridge.teststubs.OrcaClientTestStub;
+import com.ubs.orca.orcabridge.support.OrcaClientTestStub;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
