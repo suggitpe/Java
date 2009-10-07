@@ -7,9 +7,13 @@
         class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
-                value="%d{yyy-MM-dd'T'HH:mm:ss.SSS} | %-10.10t | %-20.20c{1} | %-6p - %m %n" />
+                value="%d{yyy-MM-dd'T'HH:mm:ss.SSS} | %-10.10t | %-30.30c{1} | %-6p - %m %n" />
         </layout>
     </appender>
+    
+    <category name="com.ubs.orca">
+        <priority value="debug" />
+    </category>
 
     <root>
         <priority value="debug" />
