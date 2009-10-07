@@ -69,6 +69,25 @@ public class ContextBuilder
                                                                   String aUsername, String aPassword )
                     throws JmsClientException
     {
+        try
+        {
+            return new InitialContext( createEnvHashTable( aCtxFactory,
+                                                           aBrokerUrl,
+                                                           aUsername,
+                                                           aPassword ) );
+        }
+        catch ( NamingException ne )
+        {
+            String err = "Failed to create initial context for " + aBrokerUrl;
+            LOG.error( err, ne );
+            throw new JmsClientException( err, ne );
+        }
+    }
+
+    static final Hashtable<String, String> createEnvHashTable( String aCtxFactory,
+                                                               String aBrokerUrl, String aUsername,
+                                                               String aPassword )
+    {
         Hashtable<String, String> env = new Hashtable<String, String>();
         env.put( Context.INITIAL_CONTEXT_FACTORY, aCtxFactory );
         env.put( Context.PROVIDER_URL, aBrokerUrl );
@@ -80,16 +99,6 @@ public class ContextBuilder
                 env.put( Context.SECURITY_CREDENTIALS, aPassword );
             }
         }
-
-        try
-        {
-            return new InitialContext( env );
-        }
-        catch ( NamingException ne )
-        {
-            String err = "Failed to create initial context for " + aBrokerUrl;
-            LOG.error( err, ne );
-            throw new JmsClientException( err, ne );
-        }
+        return env;
     }
 }
