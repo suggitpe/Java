@@ -41,7 +41,7 @@ public class OrcaReaderSpringInjectionUnitTest
     @BeforeClass
     public static void doBeforeClass()
     {
-        LOG.debug( "===================" + OrcaReaderSpringInjectionUnitTest.class.getSimpleName() );
+        LOG.debug( "=================== " + OrcaReaderSpringInjectionUnitTest.class.getSimpleName() );
     }
 
     @Before

@@ -26,7 +26,7 @@ public class AllIntegrationTests
     @BeforeClass
     public static void doBefore()
     {
-        LOG.debug( "================== STATE MACHINE LIBRARY INTEGRATION TESTS" );
+        LOG.debug( "=================== ORCA BRIDGE INTEGRATION TESTS" );
     }
 
 }

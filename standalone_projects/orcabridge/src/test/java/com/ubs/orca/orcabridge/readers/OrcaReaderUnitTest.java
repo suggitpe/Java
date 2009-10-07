@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ubs.orca.client.api.IOrcaClient;
@@ -33,6 +34,12 @@ public class OrcaReaderUnitTest
 
     private static String ORCA_TOKEN = "OrcaBridgeTestToken:1";
     private static String ORCA_URL = "tcp://localhost:7222";
+
+    @BeforeClass
+    public static void doBeforeClass()
+    {
+        LOG.debug( "=================== " + OrcaReaderUnitTest.class.getSimpleName() );
+    }
 
     /**
      * Test setup
