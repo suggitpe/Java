@@ -17,7 +17,6 @@ import org.junit.Test;
 
 import com.ubs.orca.common.bus.IOrcaMessage;
 import com.ubs.orca.orcabridge.IMessageFacade;
-import com.ubs.orca.orcabridge.readers.OrcaReaderUnitTest;
 
 /**
  * Test suite to test the message facade factory
@@ -33,7 +32,7 @@ public class MessageFacadeFactoryTest
     @BeforeClass
     public static void doBeforeClass()
     {
-        LOG.debug( "=================== " + OrcaReaderUnitTest.class.getSimpleName() );
+        LOG.debug( "=================== " + MessageFacadeFactoryTest.class.getSimpleName() );
     }
 
     /**

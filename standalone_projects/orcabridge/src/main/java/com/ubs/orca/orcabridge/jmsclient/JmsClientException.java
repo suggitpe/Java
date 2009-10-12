@@ -5,7 +5,7 @@
 package com.ubs.orca.orcabridge.jmsclient;
 
 /**
- * TODO Write javadoc for JmsClientException
+ * Jms Client exception, used from within the JMS client.
  * 
  * @author suggitpe
  * @version 1.0 29 Sep 2009

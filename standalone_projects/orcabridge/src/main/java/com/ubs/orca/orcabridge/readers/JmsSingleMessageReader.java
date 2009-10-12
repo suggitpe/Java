@@ -11,11 +11,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ubs.orca.orcabridge.OrcaBridgeException;
-import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
+import com.ubs.orca.orcabridge.jmsclient.IJmsReaderClient;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 import com.ubs.orca.orcabridge.jmsclient.impl.ContextBuilder;
-import com.ubs.orca.orcabridge.jmsclient.impl.JmsClientFactory;
+import com.ubs.orca.orcabridge.jmsclient.impl.JmsReaderClient;
 import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
 
 import org.springframework.util.Assert;
@@ -37,7 +37,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     private String mConnectionFactoryName_;
     private String mDestinationName_;
 
-    private IJmsClient mJmsClient_;
+    private IJmsReaderClient mJmsClient_;
 
     /**
      * Constructs a new instance.
@@ -76,9 +76,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         try
         {
             Context ctx = ContextBuilder.buildInitialContextToJndi( mContextFactory_, mBrokerUrl_ );
-            mJmsClient_ = JmsClientFactory.createSingleMessageClient( ctx,
-                                                                      mConnectionFactoryName_,
-                                                                      mDestinationName_ );
+            mJmsClient_ = new JmsReaderClient( ctx, mConnectionFactoryName_, mDestinationName_ );
         }
         catch ( JmsClientException je )
         {

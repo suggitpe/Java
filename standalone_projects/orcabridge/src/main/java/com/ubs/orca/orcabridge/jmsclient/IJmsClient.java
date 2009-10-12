@@ -4,8 +4,6 @@
  */
 package com.ubs.orca.orcabridge.jmsclient;
 
-import com.ubs.orca.orcabridge.IMessageFacade;
-
 /**
  * Top level interface for the JMS client interaction. The whole
  * purpose of this interface and the classes behind it are to decouple
@@ -17,17 +15,29 @@ import com.ubs.orca.orcabridge.IMessageFacade;
 public interface IJmsClient
 {
 
+    /**
+     * Connects to a JMS broker with no security credentials.
+     * 
+     * @throws JmsClientException
+     */
     void connect() throws JmsClientException;
 
+    /**
+     * Connects to a JMS broker with security credentials
+     * 
+     * @param aUsername
+     *            the username as on the JMS broker
+     * @param aPassword
+     *            the password as on the JMS broker
+     * @throws JmsClientException
+     */
     void connect( String aUsername, String aPassword ) throws JmsClientException;
 
+    /**
+     * Disconnects from the JMS broker.
+     * 
+     * @throws JmsClientException
+     */
     void disconnect() throws JmsClientException;
-
-    void sendMessageToDestination( IMessageFacade aMessageFacade ) throws JmsClientException;
-
-    void startDurableSubscription( IJmsClientSingleMsgCallback aCallback )
-                    throws JmsClientException;
-
-    void stopDurbleSubscription() throws JmsClientException;
 
 }

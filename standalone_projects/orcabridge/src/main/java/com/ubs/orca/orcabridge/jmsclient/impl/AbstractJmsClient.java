@@ -8,18 +8,13 @@ import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
-import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 
 /**
@@ -33,19 +28,20 @@ abstract class AbstractJmsClient implements IJmsClient
 
     private Context mInitialContext_;
     private String mConnectionFactoryName_;
-    private Object mSynchLock_ = new Object();
     private String mDestinationName_;
+
+    private Object mSynchLock_ = new Object();
 
     private Connection mConnection_;
     private Destination mDestination_;
 
     AbstractJmsClient( Context aInitialContext, String aConnectionFactoryName,
-                       String aDestinationName_ )
+                       String aDestinationName )
     {
         super();
         mInitialContext_ = aInitialContext;
         mConnectionFactoryName_ = aConnectionFactoryName;
-        mDestinationName_ = aDestinationName_;
+        mDestinationName_ = aDestinationName;
     }
 
     // ================ CONNECTION ================
@@ -71,6 +67,7 @@ abstract class AbstractJmsClient implements IJmsClient
         try
         {
             connectionFactory = (ConnectionFactory) mInitialContext_.lookup( mConnectionFactoryName_ );
+            mDestination_ = (Destination) mInitialContext_.lookup( mDestinationName_ );
         }
         catch ( NamingException ne )
         {
@@ -147,108 +144,55 @@ abstract class AbstractJmsClient implements IJmsClient
         }
     }
 
-    // ================ SEND PROCESS ================
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#sendMessageToDestination(com.ubs.orca.orcabridge.MessageFacade)
+     * Getter for the connection
+     * 
+     * @return the connection
      */
-    public void sendMessageToDestination( IMessageFacade aMessageFacade ) throws JmsClientException
+    protected Connection getConnection()
     {
-        Session session = null;
-        try
-        {
-            synchronized ( mSynchLock_ )
-            {
-                session = mConnection_.createSession( true, Session.CLIENT_ACKNOWLEDGE );
-                createProducerAndSend( aMessageFacade, session );
-                session.commit();
-            }
-        }
-        catch ( JMSException je )
-        {
-            throw new JmsClientException( "Failed to create JMS session", je );
-        }
-        finally
-        {
-            if ( session != null )
-            {
-                try
-                {
-                    session.close();
-                }
-                catch ( JMSException je )
-                {
-                    throw new JmsClientException( "Failed to close session", je );
-                }
-            }
-        }
+        return mConnection_;
     }
 
-    private void createProducerAndSend( IMessageFacade aMessageFacade, Session aSession )
-                    throws JmsClientException
+    /**
+     * Getter for the initial context
+     * 
+     * @return the initial context
+     * @throws JmsClientException
+     *             if the initial context has not been initialised
+     */
+    protected Context getInitialContext() throws JmsClientException
+    {
+        if ( mInitialContext_ == null )
+        {
+            throw new JmsClientException( "Initial context has not been initialised" );
+        }
+        return mInitialContext_;
+    }
+
+    /**
+     * Getter for the destination
+     * 
+     * @return the destination
+     * @throws JmsClientException
+     *             if the destination has not been initialised
+     */
+    protected Destination getDestination() throws JmsClientException
     {
         if ( mDestination_ == null )
         {
-            mDestination_ = createDestination( mInitialContext_ );
+            throw new JmsClientException( "Destination has not been initialised" );
         }
-
-        MessageProducer producer = null;
-        try
-        {
-            producer = aSession.createProducer( mDestination_ );
-            sendMessage( aMessageFacade, aSession, producer );
-        }
-        catch ( JMSException je )
-        {
-            throw new JmsClientException( "Failed to create message producer", je );
-        }
-        finally
-        {
-            if ( producer != null )
-            {
-                try
-                {
-                    producer.close();
-                }
-                catch ( JMSException je )
-                {
-                    throw new JmsClientException( "Failed to close out the message producer", je );
-                }
-            }
-        }
+        return mDestination_;
     }
 
-    private Destination createDestination( Context aInitialContext ) throws JmsClientException
+    /**
+     * Used by child classes to synchronise mutexes within the code.
+     * 
+     * @return the synch lock
+     */
+    protected Object getSynchLock()
     {
-        try
-        {
-            return (Destination) aInitialContext.lookup( mDestinationName_ );
-        }
-        catch ( NamingException ne )
-        {
-            throw new JmsClientException();
-        }
+        return mSynchLock_;
     }
-
-    private void sendMessage( IMessageFacade aMessageFacade, Session aSession,
-                              MessageProducer aMessageProducer ) throws JmsClientException
-    {
-        try
-        {
-            Message msg = aMessageFacade.buildJmsMessage( aSession );
-            aMessageProducer.send( msg );
-        }
-        catch ( JMSException je )
-        {
-            throw new JmsClientException( "Failed to create and send JMS message", je );
-        }
-    }
-
-    // ================ LISTENER PROCESS ================
-    public void startDurableSubscription( IJmsClientSingleMsgCallback aCallback )
-                    throws JmsClientException
-    {}
-
-    public void stopDurbleSubscription() throws JmsClientException
-
-    {}
 }
