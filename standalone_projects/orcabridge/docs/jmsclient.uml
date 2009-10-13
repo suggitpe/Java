@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_O42VILb5Ed64xai2SRjwRA" name="com.ubs.orca.orcabridge.jmsclient">
+  <elementImport xmi:id="_O6TGoLb5Ed64xai2SRjwRA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_O6es0Lb5Ed64xai2SRjwRA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_O6fT4Lb5Ed64xai2SRjwRA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_O6fT4bb5Ed64xai2SRjwRA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_Yy0q8Lb5Ed64xai2SRjwRA" name="IJmsClient" clientDependency="_vBIgMLb5Ed64xai2SRjwRA"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_arbLULb5Ed64xai2SRjwRA" name="IJmsSenderClient" clientDependency="_uS79cLb5Ed64xai2SRjwRA">
+    <generalization xmi:id="_gCBckLb5Ed64xai2SRjwRA" general="_Yy0q8Lb5Ed64xai2SRjwRA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_cufPQLb5Ed64xai2SRjwRA" name="IJmsReaderClient" clientDependency="_tlBHgLb5Ed64xai2SRjwRA">
+    <generalization xmi:id="_ghC64Lb5Ed64xai2SRjwRA" general="_Yy0q8Lb5Ed64xai2SRjwRA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_l4-o4Lb5Ed64xai2SRjwRA" name="AbstractJmsClient"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_nx4rQLb5Ed64xai2SRjwRA" name="JmsSenderClient">
+    <generalization xmi:id="_wtqTcLb5Ed64xai2SRjwRA" general="_l4-o4Lb5Ed64xai2SRjwRA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_rGMUoLb5Ed64xai2SRjwRA" name="JmsReaderClient">
+    <generalization xmi:id="_wPGIILb5Ed64xai2SRjwRA" general="_l4-o4Lb5Ed64xai2SRjwRA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_tlBHgLb5Ed64xai2SRjwRA" supplier="_rGMUoLb5Ed64xai2SRjwRA" client="_cufPQLb5Ed64xai2SRjwRA"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_uS79cLb5Ed64xai2SRjwRA" supplier="_nx4rQLb5Ed64xai2SRjwRA" client="_arbLULb5Ed64xai2SRjwRA"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_vBIgMLb5Ed64xai2SRjwRA" supplier="_l4-o4Lb5Ed64xai2SRjwRA" client="_Yy0q8Lb5Ed64xai2SRjwRA"/>
+</uml:Package>

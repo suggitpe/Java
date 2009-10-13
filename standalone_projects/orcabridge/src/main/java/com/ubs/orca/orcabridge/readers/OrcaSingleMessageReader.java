@@ -138,8 +138,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
             }
             catch ( OrcaException oe )
             {
-                String err = "Failed to stop Orca Client";
-                LOG.error( err, oe );
+                LOG.error( "Errors occurred when trying to stop the Orca client", oe );
             }
             finally
             {
@@ -222,7 +221,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
      * @author suggitpe
      * @version 1.0 23 Sep 2009
      */
-    private class OrcaReaderCallback implements IOrcaSinkSingleMsgCallback
+    class OrcaReaderCallback implements IOrcaSinkSingleMsgCallback
     {
 
         /**

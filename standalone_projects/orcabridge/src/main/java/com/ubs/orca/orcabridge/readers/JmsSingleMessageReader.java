@@ -10,6 +10,7 @@ import javax.naming.Context;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
 import com.ubs.orca.orcabridge.jmsclient.IJmsReaderClient;
@@ -38,6 +39,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     private String mDestinationName_;
 
     private IJmsReaderClient mJmsClient_;
+    public static final String DEFAULT_CONTEXT_FACTORY = "com.tibco.tibjms.naming.TibjmsInitialContextFactory";
 
     /**
      * Constructs a new instance.
@@ -47,9 +49,10 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         super();
     }
 
-    public JmsSingleMessageReader( String aContextFactory, String aBrokerUrl )
+    public JmsSingleMessageReader( String aContextFactory, String aBrokerUrl,
+                                   IMessageProcessor aMessageProcessor )
     {
-        super();
+        super( aMessageProcessor );
         mContextFactory_ = aContextFactory;
         mBrokerUrl_ = aBrokerUrl;
     }
@@ -72,6 +75,10 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      */
     public void init() throws OrcaBridgeException
     {
+        if ( mContextFactory_ == null )
+        {
+            mContextFactory_ = DEFAULT_CONTEXT_FACTORY;
+        }
 
         try
         {
@@ -121,11 +128,23 @@ public class JmsSingleMessageReader extends AbstractMessageReader
             try
             {
                 mJmsClient_.stopDurbleSubscription();
-                mJmsClient_.disconnect();
             }
             catch ( JmsClientException je )
             {
                 LOG.error( "Errors occured when trying to stop the JMS client", je );
+            }
+            finally
+            {
+                try
+                {
+                    mJmsClient_.disconnect();
+                }
+                catch ( JmsClientException jce )
+                {
+                    String err = "Errors occurred when trying to dicsonnect from the JMS client";
+                    LOG.error( err, jce );
+                    throw new OrcaBridgeException( err, jce );
+                }
             }
         }
     }
@@ -172,6 +191,18 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         mBrokerUrl_ = aBrokerUrl;
     }
 
+    /**
+     * Sets the jmsClient. This method is here to support replacing
+     * the jms client with mocks for unit tests.
+     * 
+     * @param aOrcaClient
+     *            the orca client
+     */
+    void setJmsClient( IJmsReaderClient aJmsClient )
+    {
+        mJmsClient_ = aJmsClient;
+    }
+
     // ===============================================
     /**
      * This is the callback class that will be passed into the
@@ -181,7 +212,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      * @author suggitpe
      * @version 1.0 30 Sep 2009
      */
-    private class JmsReaderCallback implements IJmsClientSingleMsgCallback
+    class JmsReaderCallback implements IJmsClientSingleMsgCallback
     {
 
         /**

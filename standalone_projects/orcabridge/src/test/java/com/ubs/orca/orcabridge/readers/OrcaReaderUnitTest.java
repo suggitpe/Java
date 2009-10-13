@@ -12,11 +12,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.ubs.orca.client.api.IAttributesConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
+import com.ubs.orca.client.api.ITextConversationMessage;
 import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.client.api.OrcaIdentity;
+import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
+import com.ubs.orca.orcabridge.readers.OrcaSingleMessageReader.OrcaReaderCallback;
 
 /**
  * Test suite for the orca reader.
@@ -157,6 +161,50 @@ public class OrcaReaderUnitTest
         Assert.fail( "The test should not have reached this part of the code" );
 
         EasyMock.verify( mMockOrcaClient_ );
+    }
+
+    /**
+     * Tests that the message callback is called and that it then
+     * delegates to the message processor.
+     * 
+     * @throws Throwable
+     */
+    @Test
+    public void testOrcaCallbackWithAttributesMessage() throws Throwable
+    {
+        OrcaReaderCallback callback = mOrcaReader_.new OrcaReaderCallback();
+        mMockMessageProcessor_.processMessage( EasyMock.isA( IMessageFacade.class ) );
+        EasyMock.expectLastCall().once();
+
+        IAttributesConversationMessage msg = EasyMock.createMock( IAttributesConversationMessage.class );
+
+        EasyMock.replay( mMockMessageProcessor_ );
+
+        callback.onReceived( msg );
+
+        EasyMock.verify( mMockMessageProcessor_ );
+    }
+
+    /**
+     * Tests that the message callback is called and that it then
+     * delegates to the message processor.
+     * 
+     * @throws Throwable
+     */
+    @Test
+    public void testOrcaCallbackWithTextMessage() throws Throwable
+    {
+        OrcaReaderCallback callback = mOrcaReader_.new OrcaReaderCallback();
+        mMockMessageProcessor_.processMessage( EasyMock.isA( IMessageFacade.class ) );
+        EasyMock.expectLastCall().once();
+
+        ITextConversationMessage msg = EasyMock.createMock( ITextConversationMessage.class );
+
+        EasyMock.replay( mMockMessageProcessor_ );
+
+        callback.onReceived( msg );
+
+        EasyMock.verify( mMockMessageProcessor_ );
     }
 
 }
