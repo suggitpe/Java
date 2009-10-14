@@ -17,31 +17,31 @@ import org.junit.runner.RunWith;
 
 import com.ubs.orca.orcabridge.IMessageReader;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
-import com.ubs.orca.orcabridge.support.OrcaClientTestStub;
+import com.ubs.orca.orcabridge.support.JmsReaderClientTestStub;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * Test suite to test the Orca Reader Spring Injection.
+ * Test suite to test the JMS Reader Spring Injection.
  * 
  * @author suggitpe
  * @version 1.0 25 Sep 2009
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:xml/it-orca-reader-spring-injection-test.xml" })
-public class OrcaReaderSpringInjectionUnitTest
+@ContextConfiguration(locations = { "classpath:xml/it-jms-reader-spring-injection-test.xml" })
+public class JmsReaderSpringInjectionUnitTest
 {
 
-    private static final Log LOG = LogFactory.getLog( OrcaReaderSpringInjectionUnitTest.class );
+    private static final Log LOG = LogFactory.getLog( JmsReaderSpringInjectionUnitTest.class );
 
-    @Resource(name = "orcaReader")
-    IMessageReader mOrcaReader_;
+    @Resource(name = "jmsReader")
+    IMessageReader mJmsReader_;
 
     @BeforeClass
     public static void doBeforeClass()
     {
-        LOG.debug( "=================== " + OrcaReaderSpringInjectionUnitTest.class.getSimpleName() );
+        LOG.debug( "=================== " + JmsReaderSpringInjectionUnitTest.class.getSimpleName() );
     }
 
     @Before
@@ -61,10 +61,10 @@ public class OrcaReaderSpringInjectionUnitTest
      * injection.
      */
     @Test
-    public void testSpringInjectedOrcaReader()
+    public void testSpringInjectedJmsReader()
     {
-        LOG.debug( "Testing that the Orca Reader has been injected correctly" );
-        Assert.assertNotNull( mOrcaReader_ );
+        LOG.debug( "Testing that the JMS Reader has been injected correctly" );
+        Assert.assertNotNull( mJmsReader_ );
     }
 
     /**
@@ -73,11 +73,11 @@ public class OrcaReaderSpringInjectionUnitTest
      * @throws OrcaBridgeException
      */
     @Test
-    public void testStartAndStopOrcaReader() throws OrcaBridgeException
+    public void testStartAndStopJmsReader() throws OrcaBridgeException
     {
-        OrcaSingleMessageReader reader = (OrcaSingleMessageReader) mOrcaReader_;
-        reader.setOrcaClient( new OrcaClientTestStub() );
-        mOrcaReader_.startReader();
-        mOrcaReader_.stopReader();
+        JmsSingleMessageReader reader = (JmsSingleMessageReader) mJmsReader_;
+        reader.setJmsClient( new JmsReaderClientTestStub() );
+        mJmsReader_.startReader();
+        mJmsReader_.stopReader();
     }
 }

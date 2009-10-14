@@ -63,8 +63,6 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     @Override
     protected void doAfterPropertiesSet() throws Exception
     {
-        Assert.notNull( mContextFactory_,
-                        "No Context factory has been set on the JmsSingleMessageReader" );
         Assert.notNull( mBrokerUrl_, "No Broker URL has been set on the JmsSingleMessageReader" );
     }
 
@@ -77,6 +75,11 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     {
         if ( mContextFactory_ == null )
         {
+            if ( LOG.isInfoEnabled() )
+            {
+                LOG.info( "No context factory defined so using default context factory of ["
+                          + DEFAULT_CONTEXT_FACTORY + "]" );
+            }
             mContextFactory_ = DEFAULT_CONTEXT_FACTORY;
         }
 
