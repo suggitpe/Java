@@ -4,8 +4,10 @@
  */
 package com.ubs.orca.orcabridge.jmsclient.impl;
 
+import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
+import javax.jms.JMSException;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
@@ -60,14 +62,18 @@ public class JmsConnectionTest
      * Tests that in the normal case, a connection is correctly made
      */
     @Test
-    public void testConnection() throws JmsClientException, NamingException
+    public void testConnection() throws JmsClientException, NamingException, JMSException
     {
-        EasyMock.expect( mMockContext_.lookup( EasyMock.matches( "text.conn*" ) ) )
+        Connection mockConn = mCtrl_.createMock( Connection.class );
+
+        EasyMock.expect( mMockContext_.lookup( CONNECTION_FACTORY_NAME ) )
             .andReturn( mMockConnectionFactory_ )
             .once();
-        EasyMock.expect( mMockContext_.lookup( EasyMock.matches( "text.dest*" ) ) )
+        EasyMock.expect( mMockContext_.lookup( EasyMock.matches( DESTINATION_NAME ) ) )
             .andReturn( mMockDestination_ )
             .once();
+
+        EasyMock.expect( mMockConnectionFactory_.createConnection() ).andStubReturn( mockConn );
 
         mCtrl_.replay();
 

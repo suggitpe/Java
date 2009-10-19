@@ -142,28 +142,23 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
             }
             finally
             {
-                try
-                {
-                    mOrcaClient_.disconnect();
-                }
-                catch ( OrcaException oe )
-                {
-                    String err = "Failed to disconnect from Orca Client";
-                    LOG.error( err, oe );
-                    throw new OrcaBridgeException( err, oe );
-                }
+                completeDisconnect();
             }
         }
     }
 
-    /**
-     * Returns the value of orcaConnectionUrl.
-     * 
-     * @return Returns the orcaConnectionUrl.
-     */
-    public String getOrcaConnectionUrl()
+    private void completeDisconnect() throws OrcaBridgeException
     {
-        return mOrcaConnectionUrl_;
+        try
+        {
+            mOrcaClient_.disconnect();
+        }
+        catch ( OrcaException oe )
+        {
+            String err = "Failed to disconnect from Orca Client";
+            LOG.error( err, oe );
+            throw new OrcaBridgeException( err, oe );
+        }
     }
 
     /**
@@ -175,16 +170,6 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     public void setOrcaConnectionUrl( String aOrcaConnectionUrl )
     {
         mOrcaConnectionUrl_ = aOrcaConnectionUrl;
-    }
-
-    /**
-     * Returns the value of orcaIdentity.
-     * 
-     * @return Returns the orcaIdentity.
-     */
-    public IOrcaIdentity getOrcaIdentity()
-    {
-        return mOrcaIdentity_;
     }
 
     /**

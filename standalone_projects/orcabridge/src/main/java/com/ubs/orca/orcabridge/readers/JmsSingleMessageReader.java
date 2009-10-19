@@ -82,7 +82,11 @@ public class JmsSingleMessageReader extends AbstractMessageReader
             }
             mContextFactory_ = DEFAULT_CONTEXT_FACTORY;
         }
+        buildJmsClient();
+    }
 
+    private void buildJmsClient() throws OrcaBridgeException
+    {
         try
         {
             Context ctx = ContextBuilder.buildInitialContextToJndi( mContextFactory_, mBrokerUrl_ );
@@ -138,28 +142,23 @@ public class JmsSingleMessageReader extends AbstractMessageReader
             }
             finally
             {
-                try
-                {
-                    mJmsClient_.disconnect();
-                }
-                catch ( JmsClientException jce )
-                {
-                    String err = "Errors occurred when trying to dicsonnect from the JMS client";
-                    LOG.error( err, jce );
-                    throw new OrcaBridgeException( err, jce );
-                }
+                completeDisconnect();
             }
         }
     }
 
-    /**
-     * Returns the value of contextFactory.
-     * 
-     * @return Returns the contextFactory.
-     */
-    public String getContextFactory()
+    private void completeDisconnect() throws OrcaBridgeException
     {
-        return mContextFactory_;
+        try
+        {
+            mJmsClient_.disconnect();
+        }
+        catch ( JmsClientException jce )
+        {
+            String err = "Errors occurred when trying to dicsonnect from the JMS client";
+            LOG.error( err, jce );
+            throw new OrcaBridgeException( err, jce );
+        }
     }
 
     /**
@@ -171,16 +170,6 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     public void setContextFactory( String aContextFactory )
     {
         mContextFactory_ = aContextFactory;
-    }
-
-    /**
-     * Returns the value of brokerUrl.
-     * 
-     * @return Returns the brokerUrl.
-     */
-    public String getBrokerUrl()
-    {
-        return mBrokerUrl_;
     }
 
     /**
@@ -233,7 +222,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
             {
                 getMessageProcessor().processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
             }
-            catch ( Throwable throwable )
+            catch ( OrcaBridgeException throwable )
             {
                 LOG.error( "Issue ocurred in the sending of a message", throwable );
                 throw new OrcaBridgeException( throwable );
