@@ -4,6 +4,8 @@
  */
 package com.ubs.orca.orcabridge.jmsclient.impl;
 
+import javax.jms.Connection;
+import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageProducer;
@@ -23,7 +25,7 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public class JmsSenderClient extends AbstractJmsClient implements IJmsSenderClient
+public class JmsSenderClient extends JmsClientBase implements IJmsSenderClient
 {
 
     private static final Log LOG = LogFactory.getLog( JmsSenderClient.class );
@@ -44,14 +46,23 @@ public class JmsSenderClient extends AbstractJmsClient implements IJmsSenderClie
         {
             synchronized ( getSynchLock() )
             {
+                LOG.info( "Creating sending transaction ..." );
+                Connection conn = getConnection();
+                if ( conn == null )
+                {
+                    throw new JmsClientException( "No active connection, you must connect before you send" );
+                }
                 session = getConnection().createSession( true, Session.CLIENT_ACKNOWLEDGE );
                 createProducerAndSend( aMessageFacade, session );
                 session.commit();
+                LOG.info( "Sending transaction commited" );
             }
         }
         catch ( JMSException je )
         {
-            throw new JmsClientException( "Failed to create JMS session", je );
+            String err = "Failed to create JMS session";
+            LOG.error( err );
+            throw new JmsClientException( err, je );
         }
         finally
         {
@@ -76,11 +87,18 @@ public class JmsSenderClient extends AbstractJmsClient implements IJmsSenderClie
         MessageProducer producer = null;
         try
         {
-            producer = aSession.createProducer( getDestination() );
+            Destination dest = getDestination();
+            producer = aSession.createProducer( dest );
+            if ( LOG.isDebugEnabled() )
+            {
+                LOG.debug( "Created producer for destination [" + dest + "]" );
+            }
             sendMessage( aMessageFacade, aSession, producer );
         }
         catch ( JMSException je )
         {
+            String err = "Failed to create message producer";
+            LOG.error( err );
             throw new JmsClientException( "Failed to create message producer", je );
         }
         finally
@@ -105,6 +123,10 @@ public class JmsSenderClient extends AbstractJmsClient implements IJmsSenderClie
         try
         {
             Message msg = aMessageFacade.buildJmsMessage( aSession );
+            if ( LOG.isInfoEnabled() )
+            {
+                LOG.info( "Sending message [" + msg + "]" );
+            }
             aMessageProducer.send( msg );
         }
         catch ( JMSException je )

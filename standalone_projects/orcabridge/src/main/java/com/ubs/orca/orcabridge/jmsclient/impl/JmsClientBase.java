@@ -21,10 +21,10 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  * @author suggitpe
  * @version 1.0 29 Sep 2009
  */
-abstract class AbstractJmsClient implements IJmsClient
+class JmsClientBase implements IJmsClient
 {
 
-    private static final Log LOG = LogFactory.getLog( AbstractJmsClient.class );
+    private static final Log LOG = LogFactory.getLog( JmsClientBase.class );
 
     private Context mInitialContext_;
     private String mConnectionFactoryName_;
@@ -35,8 +35,7 @@ abstract class AbstractJmsClient implements IJmsClient
     private Connection mConnection_;
     private Destination mDestination_;
 
-    AbstractJmsClient( Context aInitialContext, String aConnectionFactoryName,
-                       String aDestinationName )
+    JmsClientBase( Context aInitialContext, String aConnectionFactoryName, String aDestinationName )
     {
         super();
         mInitialContext_ = aInitialContext;
@@ -116,20 +115,16 @@ abstract class AbstractJmsClient implements IJmsClient
         }
     }
 
-    private void stopAndCloseConnection()
+    private void stopAndCloseConnection() throws JmsClientException
     {
-        /*
-         * don't try and throw exceptions from these catches, else you
-         * can be safe to use the finally clause (potentially ends up
-         * with two exceptions kicking around)
-         */
         try
         {
             mConnection_.stop();
         }
         catch ( JMSException stopException )
         {
-            LOG.error( "Error when attempting to stop the connection", stopException );
+            throw new JmsClientException( "Error when attempting to stop the connection",
+                                          stopException );
         }
         finally
         {
@@ -149,9 +144,19 @@ abstract class AbstractJmsClient implements IJmsClient
      * 
      * @return the connection
      */
-    protected Connection getConnection()
+    Connection getConnection()
     {
         return mConnection_;
+    }
+
+    /**
+     * This is only used for the unit tests, do not change the scope
+     * 
+     * @param aConnection
+     */
+    void setConnection( Connection aConnection )
+    {
+        mConnection_ = aConnection;
     }
 
     /**
@@ -184,6 +189,16 @@ abstract class AbstractJmsClient implements IJmsClient
             throw new JmsClientException( "Destination has not been initialised" );
         }
         return mDestination_;
+    }
+
+    /**
+     * This is here to support the unit tests only
+     * 
+     * @param aDestination
+     */
+    void setDestination( Destination aDestination )
+    {
+        mDestination_ = aDestination;
     }
 
     /**

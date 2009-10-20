@@ -15,6 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -55,11 +56,11 @@ public class JmsConnectionTest
         mMockContext_ = mCtrl_.createMock( Context.class );
         mMockConnectionFactory_ = mCtrl_.createMock( ConnectionFactory.class );
         mMockDestination_ = mCtrl_.createMock( Destination.class );
-        mJmsClient_ = new JmsSenderClient( mMockContext_, CONNECTION_FACTORY_NAME, DESTINATION_NAME );
+        mJmsClient_ = new JmsClientBase( mMockContext_, CONNECTION_FACTORY_NAME, DESTINATION_NAME );
     }
 
     /**
-     * Tests that in the normal case, a connection is correctly made
+     * Tests that in the normal case, a connection is correctly made.
      */
     @Test
     public void testConnection() throws JmsClientException, NamingException, JMSException
@@ -81,4 +82,142 @@ public class JmsConnectionTest
 
         mCtrl_.verify();
     }
+
+    /**
+     * Tests that when we fail to look a JMS object up from th
+     * context, that the correct type of exception is thrown.
+     * 
+     * @throws JmsClientException
+     * @throws NamingException
+     * @throws JMSException
+     */
+    @Test(expected = JmsClientException.class)
+    public void testBadConnectionFromContextLookup() throws JmsClientException, NamingException,
+                    JMSException
+    {
+
+        EasyMock.expect( mMockContext_.lookup( CONNECTION_FACTORY_NAME ) )
+            .andReturn( mMockConnectionFactory_ )
+            .once();
+        EasyMock.expect( mMockContext_.lookup( EasyMock.matches( DESTINATION_NAME ) ) )
+            .andThrow( new NamingException( "This is all part of the test" ) );
+
+        mCtrl_.replay();
+
+        mJmsClient_.connect( "username", "password" );
+        Assert.fail( "Test should not reach here ... exception should have ben thrown" );
+
+        mCtrl_.verify();
+    }
+
+    /**
+     * Tests that when we try to instantiate the JMS connection and we
+     * get an exception, that the system correctly handles itself.
+     * 
+     * @throws JmsClientException
+     * @throws NamingException
+     * @throws JMSException
+     */
+    @Test(expected = JmsClientException.class)
+    public void testBadConnectionFromConnectionFail() throws JmsClientException, NamingException,
+                    JMSException
+    {
+        EasyMock.expect( mMockContext_.lookup( CONNECTION_FACTORY_NAME ) )
+            .andReturn( mMockConnectionFactory_ )
+            .once();
+        EasyMock.expect( mMockContext_.lookup( EasyMock.matches( DESTINATION_NAME ) ) )
+            .andReturn( mMockDestination_ )
+            .once();
+
+        EasyMock.expect( mMockConnectionFactory_.createConnection( "foo", "bar" ) )
+            .andThrow( new JMSException( "This is all part of the test" ) );
+
+        mCtrl_.replay();
+
+        mJmsClient_.connect( "foo", "bar" );
+
+        Assert.fail( "You shoudl not reach here as an exception should have been thrown" );
+
+        mCtrl_.verify();
+
+    }
+
+    @Test
+    public void testDisconnection() throws JmsClientException, JMSException
+    {
+        Connection mockConn = mCtrl_.createMock( Connection.class );
+        ( (JmsClientBase) mJmsClient_ ).setConnection( mockConn );
+
+        mockConn.stop();
+        EasyMock.expectLastCall().once();
+
+        mockConn.close();
+        EasyMock.expectLastCall().once();
+
+        mCtrl_.replay();
+
+        mJmsClient_.disconnect();
+
+        mCtrl_.verify();
+    }
+
+    @Test(expected = JmsClientException.class)
+    public void testDisconnectionWithExceptionFromStop() throws JmsClientException, JMSException
+    {
+        Connection mockConn = mCtrl_.createMock( Connection.class );
+        ( (JmsClientBase) mJmsClient_ ).setConnection( mockConn );
+
+        mockConn.stop();
+        EasyMock.expectLastCall().andThrow( new JMSException( "This is all part of the test" ) );
+
+        mockConn.close();
+        EasyMock.expectLastCall().once();
+
+        mCtrl_.replay();
+
+        mJmsClient_.disconnect();
+
+        mCtrl_.verify();
+    }
+
+    @Test
+    public void testDisconnectionWithExceptionFromClose() throws JmsClientException, JMSException
+    {
+        Connection mockConn = mCtrl_.createMock( Connection.class );
+        ( (JmsClientBase) mJmsClient_ ).setConnection( mockConn );
+
+        mockConn.stop();
+        EasyMock.expectLastCall().once();
+
+        mockConn.close();
+        EasyMock.expectLastCall().andThrow( new JMSException( "This is all part of the test" ) );
+
+        mCtrl_.replay();
+
+        mJmsClient_.disconnect();
+
+        mCtrl_.verify();
+    }
+
+    @Test(expected = JmsClientException.class)
+    public void testDisconnectionWithExceptionsFromStopAndClose() throws JmsClientException,
+                    JMSException
+    {
+        Connection mockConn = mCtrl_.createMock( Connection.class );
+        ( (JmsClientBase) mJmsClient_ ).setConnection( mockConn );
+
+        mockConn.stop();
+        EasyMock.expectLastCall().andThrow( new JMSException( "This is all part of the test" ) );
+
+        mockConn.close();
+        EasyMock.expectLastCall()
+            .andThrow( new JMSException( "Again, this is a part of the test" ) );
+
+        mCtrl_.replay();
+
+        mJmsClient_.disconnect();
+
+        mCtrl_.verify();
+    }
+
 }

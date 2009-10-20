@@ -19,7 +19,7 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public class JmsReaderClient extends AbstractJmsClient implements IJmsReaderClient
+public class JmsReaderClient extends JmsClientBase implements IJmsReaderClient
 {
 
     private static final Log LOG = LogFactory.getLog( JmsReaderClient.class );
