@@ -1,16 +1,14 @@
 /*
- * IJmsClient.java created on 29 Sep 2009 07:05:29 by suggitpe for project Orca Bridge
+ * IJmsClientCore.java created on 21 Oct 2009 19:55:22 by suggitpe for project Orca Bridge
  * 
  */
 package com.ubs.orca.orcabridge.jmsclient;
 
 /**
- * Top level interface for the JMS client interaction. The whole
- * purpose of this interface and the classes behind it are to decouple
- * the bridge from any JMS code and encapsulate it in one place.
+ * Interface to represent the core JMS behaviour to expose to clients.
  * 
  * @author suggitpe
- * @version 1.0 29 Sep 2009
+ * @version 1.0 21 Oct 2009
  */
 public interface IJmsClient
 {
@@ -39,5 +37,16 @@ public interface IJmsClient
      * @throws JmsClientException
      */
     void disconnect() throws JmsClientException;
+
+    /**
+     * Perform the JMS specific processing as required within a
+     * specified connection.
+     * 
+     * @param aCallback
+     *            a callback that will implement the required
+     *            processing.
+     * @throws JmsClientException
+     */
+    void processInTransaction( IJmsProcessCallback aCallback ) throws JmsClientException;
 
 }

@@ -8,6 +8,7 @@ import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Session;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
@@ -15,16 +16,20 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
+import com.ubs.orca.orcabridge.jmsclient.IJmsProcessCallback;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 
 /**
+ * This class represents the core JMS processing logic for the JMS
+ * clients.
+ * 
  * @author suggitpe
  * @version 1.0 29 Sep 2009
  */
-class JmsClientBase implements IJmsClient
+class JmsClientCore implements IJmsClient
 {
 
-    private static final Log LOG = LogFactory.getLog( JmsClientBase.class );
+    private static final Log LOG = LogFactory.getLog( JmsClientCore.class );
 
     private Context mInitialContext_;
     private String mConnectionFactoryName_;
@@ -35,7 +40,7 @@ class JmsClientBase implements IJmsClient
     private Connection mConnection_;
     private Destination mDestination_;
 
-    JmsClientBase( Context aInitialContext, String aConnectionFactoryName, String aDestinationName )
+    JmsClientCore( Context aInitialContext, String aConnectionFactoryName, String aDestinationName )
     {
         super();
         mInitialContext_ = aInitialContext;
@@ -45,7 +50,7 @@ class JmsClientBase implements IJmsClient
 
     // ================ CONNECTION ================
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#connect()
+     * @see com.ubs.orca.orcabridge.jmsclient.old.IJmsClient#connect()
      */
     @Override
     public void connect() throws JmsClientException
@@ -54,7 +59,7 @@ class JmsClientBase implements IJmsClient
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#connect(java.lang.String,
+     * @see com.ubs.orca.orcabridge.jmsclient.old.IJmsClient#connect(java.lang.String,
      *      java.lang.String)
      */
     @Override
@@ -73,14 +78,11 @@ class JmsClientBase implements IJmsClient
             throw new JmsClientException( "Failed to perform JNDI lookup for JmsClient", ne );
         }
 
-        synchronized ( mSynchLock_ )
+        if ( mConnection_ != null )
         {
-            if ( mConnection_ != null )
-            {
-                stopAndCloseConnection();
-            }
-            mConnection_ = createConnection( connectionFactory, aUsername, aPassword );
+            stopAndCloseConnection();
         }
+        mConnection_ = createConnection( connectionFactory, aUsername, aPassword );
     }
 
     private static Connection createConnection( ConnectionFactory aFactory, String aUsername,
@@ -102,7 +104,7 @@ class JmsClientBase implements IJmsClient
 
     // ================ DISCONNECTION ================
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#disconnect()
+     * @see com.ubs.orca.orcabridge.jmsclient.old.IJmsClient#disconnect()
      */
     @Override
     public void disconnect() throws JmsClientException
@@ -137,6 +139,55 @@ class JmsClientBase implements IJmsClient
                 LOG.error( "Error when attempting to close the connection", closeException );
             }
         }
+    }
+
+    /**
+     * Perform the JMS specific processing as required
+     * 
+     * @param aCallback
+     *            a callback that will implement the required
+     *            processing.
+     * @throws JmsClientException
+     */
+    public void processInTransaction( IJmsProcessCallback aCallback ) throws JmsClientException
+    {
+        Session session = null;
+        try
+        {
+            LOG.info( "Creating transaction for processing ..." );
+            Connection conn = getConnection();
+            if ( conn == null )
+            {
+                throw new JmsClientException( "No active connection, you must connect before you send" );
+            }
+
+            session = getConnection().createSession( true, Session.CLIENT_ACKNOWLEDGE );
+
+            aCallback.processInTransaction( session, mDestination_ );
+
+            LOG.info( "JMS Client completed execution of processing" );
+        }
+        catch ( JMSException je )
+        {
+            String err = "Failed to create JMS session";
+            LOG.error( err );
+            throw new JmsClientException( err, je );
+        }
+        finally
+        {
+            if ( session != null )
+            {
+                try
+                {
+                    session.close();
+                }
+                catch ( JMSException je )
+                {
+                    LOG.error( "Failed to close session" );
+                }
+            }
+        }
+
     }
 
     /**
