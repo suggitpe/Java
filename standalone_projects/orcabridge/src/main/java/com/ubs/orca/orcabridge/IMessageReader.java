@@ -17,8 +17,18 @@ package com.ubs.orca.orcabridge;
 public interface IMessageReader
 {
 
+    /**
+     * Starts the reader process.
+     * 
+     * @throws OrcaBridgeException
+     */
     void startReader() throws OrcaBridgeException;
 
+    /**
+     * Stops the reader process.
+     * 
+     * @throws OrcaBridgeException
+     */
     void stopReader() throws OrcaBridgeException;
 
 }
