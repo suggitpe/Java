@@ -2,19 +2,16 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-    <bean id="jmsReader" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReader" init-method="init">
-        <property name="messageProcessor">
-            <bean class="com.ubs.orca.orcabridge.support.MessageProcessorTestStub"/>
-        </property>
-        <property name="brokerUrl" value="tcp://testhost:1234"/>
-    </bean>
-    
-    <bean id="otherJmsReader" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReader" init-method="init">
-        <property name="messageProcessor">
-            <bean class="com.ubs.orca.orcabridge.support.MessageProcessorTestStub"/>
-        </property>
-        <property name="brokerUrl" value="tcp://testhost:1234"/>
-        <property name="contextFactory" value="com.tibco.tibjms.naming.TibjmsInitialContextFactory"/>
-    </bean>
+	<bean id="jmsReader" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReader">
+		<property name="messageProcessor">
+			<bean class="com.ubs.orca.orcabridge.support.MessageProcessorTestStub" />
+		</property>
+		<property name="jmsClient">
+			<bean class="com.ubs.orca.orcabridge.support.JmsClientTestStub"/>
+		</property>
+		<property name="jmsAction">
+			<bean class="com.ubs.orca.orcabridge.support.JmsActionTestStub"/>
+		</property>
+	</bean>
 
 </beans>

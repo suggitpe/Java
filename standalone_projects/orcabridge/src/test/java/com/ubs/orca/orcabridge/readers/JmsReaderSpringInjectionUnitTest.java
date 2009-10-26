@@ -17,7 +17,6 @@ import org.junit.runner.RunWith;
 
 import com.ubs.orca.orcabridge.IMessageReader;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
-import com.ubs.orca.orcabridge.support.JmsReaderClientTestStub;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -38,18 +37,21 @@ public class JmsReaderSpringInjectionUnitTest
     @Resource(name = "jmsReader")
     IMessageReader mJmsReader_;
 
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
         LOG.debug( "=================== " + JmsReaderSpringInjectionUnitTest.class.getSimpleName() );
     }
 
+    /** */
     @Before
     public void doBefore()
     {
         LOG.debug( "------------------- " );
     }
 
+    /** */
     @After
     public void doAfter()
     {
@@ -75,8 +77,6 @@ public class JmsReaderSpringInjectionUnitTest
     @Test
     public void testStartAndStopJmsReader() throws OrcaBridgeException
     {
-        JmsSingleMessageReader reader = (JmsSingleMessageReader) mJmsReader_;
-        reader.setJmsClient( new JmsReaderClientTestStub() );
         mJmsReader_.startReader();
         mJmsReader_.stopReader();
     }
