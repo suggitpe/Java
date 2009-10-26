@@ -4,6 +4,8 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="src" path="src/itest/java"/>
+	<classpathentry kind="src" path="src/itest/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/build/etc/mavenBuild"/>
 	<classpathentry kind="lib" path="/Maven Repository/m2repository/com/ubs/orca/orca/2.3.2/orca-2.3.2.jar"/>
