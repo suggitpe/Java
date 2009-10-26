@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ubs.orca.orcabridge.IMessageFacade;
-import com.ubs.orca.orcabridge.jmsclient.IJmsProcessCallback;
+import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 
 /**
@@ -23,10 +23,10 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public class JmsSendingCallback implements IJmsProcessCallback
+public class JmsSenderAction implements IJmsAction
 {
 
-    private static final Log LOG = LogFactory.getLog( JmsSendingCallback.class );
+    private static final Log LOG = LogFactory.getLog( JmsSenderAction.class );
 
     private IMessageFacade mMessageFacade_;
 
@@ -36,19 +36,18 @@ public class JmsSendingCallback implements IJmsProcessCallback
      * @param aMessageFacade
      *            a message facade
      */
-    public JmsSendingCallback( IMessageFacade aMessageFacade )
+    public JmsSenderAction( IMessageFacade aMessageFacade )
     {
         super();
         mMessageFacade_ = aMessageFacade;
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsProcessCallback#processInTransaction(javax.jms.Session,
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsAction#action(javax.jms.Session,
      *      javax.jms.Destination)
      */
     @Override
-    public void processInTransaction( Session aSession, Destination aDestination )
-                    throws JmsClientException
+    public void action( Session aSession, Destination aDestination ) throws JmsClientException
     {
         createProducerAndSend( mMessageFacade_, aSession, aDestination );
         try

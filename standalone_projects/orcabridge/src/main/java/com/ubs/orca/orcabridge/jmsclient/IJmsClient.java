@@ -42,11 +42,11 @@ public interface IJmsClient
      * Perform the JMS specific processing as required within a
      * specified connection.
      * 
-     * @param aCallback
+     * @param aActionCallback
      *            a callback that will implement the required
      *            processing.
      * @throws JmsClientException
      */
-    void processInTransaction( IJmsProcessCallback aCallback ) throws JmsClientException;
+    void processInTransaction( IJmsAction aActionCallback ) throws JmsClientException;
 
 }

@@ -14,7 +14,7 @@ import javax.jms.Session;
  * @author suggitpe
  * @version 1.0 21 Oct 2009
  */
-public interface IJmsProcessCallback
+public interface IJmsAction
 {
 
     /**
@@ -22,15 +22,12 @@ public interface IJmsProcessCallback
      * connection.
      * 
      * @param aSession
-     *            the session so that a transaction can be managed (it
-     *            is expected that the implementor of this callback
-     *            will also manage the transaction explicitly).
+     *            the session from which to create the transaction
      * @param aDestination
      *            the destination that the processing should be
      *            performed against
      * @throws JmsClientException
      */
-    void processInTransaction( Session aSession, Destination aDestinstion )
-                    throws JmsClientException;
+    void action( Session aSession, Destination aDestination ) throws JmsClientException;
 
 }
