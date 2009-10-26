@@ -15,7 +15,6 @@ import com.ubs.orca.client.api.ITextConversationMessage;
 import com.ubs.orca.client.api.OrcaClientFactory;
 import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.common.bus.IOrcaMessage;
-import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
 
@@ -34,35 +33,9 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReader.class );
 
     private String mOrcaConnectionUrl_;
-
-    private IOrcaClient mOrcaClient_;
     private IOrcaIdentity mOrcaIdentity_;
 
-    /**
-     * Constructs a new instance.
-     */
-    public OrcaSingleMessageReader()
-    {
-        super();
-    }
-
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aOrcaIdentity
-     *            Orca token
-     * @param aOrcaConnectionUrl
-     *            URL to the Orca broker
-     * @param aMessageProcessor
-     *            the message Processor
-     */
-    public OrcaSingleMessageReader( IOrcaIdentity aOrcaIdentity, String aOrcaConnectionUrl,
-                                    IMessageProcessor aMessageProcessor )
-    {
-        super( aMessageProcessor );
-        mOrcaIdentity_ = aOrcaIdentity;
-        mOrcaConnectionUrl_ = aOrcaConnectionUrl;
-    }
+    private IOrcaClient mOrcaClient_;
 
     /**
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()

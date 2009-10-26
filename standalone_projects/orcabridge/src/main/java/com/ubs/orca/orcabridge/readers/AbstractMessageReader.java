@@ -30,27 +30,9 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     static final String STATE_RUNNING = "Running";
     static final String STATE_STOPPING = "Stopping";
     static final String STATE_STOPPED = "Stopped";
-    private IMessageProcessor mMessageProcessor_;
     private String mState_ = STATE_UNINITIALISED;
 
-    /**
-     * Constructs a new instance.
-     */
-    public AbstractMessageReader()
-    {
-        super();
-    }
-
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aMessageProcessor
-     *            the message processor
-     */
-    public AbstractMessageReader( IMessageProcessor aMessageProcessor )
-    {
-        mMessageProcessor_ = aMessageProcessor;
-    }
+    private IMessageProcessor mMessageProcessor_;
 
     /**
      * Verifies that the message processor has been set on the class

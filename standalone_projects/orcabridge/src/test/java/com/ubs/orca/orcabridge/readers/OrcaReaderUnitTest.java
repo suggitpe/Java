@@ -41,6 +41,7 @@ public class OrcaReaderUnitTest
     private static String ORCA_TOKEN = "OrcaBridgeTestToken:1";
     private static String ORCA_URL = "tcp://localhost:7222";
 
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
@@ -59,13 +60,21 @@ public class OrcaReaderUnitTest
         mCtrl_ = EasyMock.createControl();
         mMockOrcaClient_ = mCtrl_.createMock( IOrcaClient.class );
         mMockMessageProcessor_ = mCtrl_.createMock( IMessageProcessor.class );
-        mOrcaReader_ = new OrcaSingleMessageReader( new OrcaIdentity( ORCA_TOKEN ),
-                                                    ORCA_URL,
-                                                    mMockMessageProcessor_ );
+        mOrcaReader_ = new OrcaSingleMessageReader();
+        mOrcaReader_.setOrcaIdentity( new OrcaIdentity( ORCA_TOKEN ) );
+        mOrcaReader_.setOrcaConnectionUrl( ORCA_URL );
+        mOrcaReader_.setMessageProcessor( mMockMessageProcessor_ );
+        mOrcaReader_.afterPropertiesSet();
+        mOrcaReader_.init();
         mOrcaReader_.setOrcaClient( mMockOrcaClient_ );
-
     }
 
+    /**
+     * Test that the correct exception is thrown when there is no orca
+     * client set on the class.
+     * 
+     * @throws Exception
+     */
     @Test(expected = OrcaBridgeException.class)
     public void testOrcaReaderWithNullOrcaClient() throws Exception
     {
@@ -73,7 +82,6 @@ public class OrcaReaderUnitTest
 
         mCtrl_.replay();
 
-        mOrcaReader_.afterPropertiesSet();
         mOrcaReader_.startReader();
 
         mCtrl_.verify();
@@ -96,7 +104,6 @@ public class OrcaReaderUnitTest
 
         mCtrl_.replay();
 
-        mOrcaReader_.afterPropertiesSet();
         Assert.assertSame( "OrcaReader state is not correct:",
                            mOrcaReader_.getState(),
                            AbstractMessageReader.STATE_UNINITIALISED );
@@ -123,7 +130,6 @@ public class OrcaReaderUnitTest
 
         mCtrl_.replay();
 
-        mOrcaReader_.afterPropertiesSet();
         Assert.assertSame( "OrcaReader state is not correct:",
                            mOrcaReader_.getState(),
                            AbstractMessageReader.STATE_UNINITIALISED );
@@ -149,7 +155,6 @@ public class OrcaReaderUnitTest
 
         mCtrl_.replay();
 
-        mOrcaReader_.afterPropertiesSet();
         mOrcaReader_.stopReader();
 
         mCtrl_.verify();
@@ -172,7 +177,6 @@ public class OrcaReaderUnitTest
 
         mCtrl_.replay();
 
-        mOrcaReader_.afterPropertiesSet();
         mOrcaReader_.stopReader();
 
         Assert.fail( "The test should not have reached this part of the code" );
@@ -196,7 +200,6 @@ public class OrcaReaderUnitTest
 
         mCtrl_.replay();
 
-        mOrcaReader_.afterPropertiesSet();
         mOrcaReader_.stopReader();
 
         mCtrl_.verify();
@@ -246,6 +249,12 @@ public class OrcaReaderUnitTest
         mCtrl_.verify();
     }
 
+    /**
+     * Test that the correc texception pops out of teh top of the
+     * stack when there is an issue in teh message processor layer.
+     * 
+     * @throws Throwable
+     */
     @Test(expected = OrcaBridgeException.class)
     public void testOrcaCallbackWithProcessFailure() throws Throwable
     {

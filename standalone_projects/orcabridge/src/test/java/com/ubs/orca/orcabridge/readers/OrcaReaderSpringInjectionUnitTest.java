@@ -38,18 +38,21 @@ public class OrcaReaderSpringInjectionUnitTest
     @Resource(name = "orcaReader")
     IMessageReader mOrcaReader_;
 
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
         LOG.debug( "=================== " + OrcaReaderSpringInjectionUnitTest.class.getSimpleName() );
     }
 
+    /** */
     @Before
     public void doBefore()
     {
         LOG.debug( "------------------- " );
     }
 
+    /** */
     @After
     public void doAfter()
     {
