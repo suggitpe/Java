@@ -32,7 +32,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
  * @version 1.0 25 Sep 2009
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:xml/it-orca-reader-spring-injection-test.xml" })
+@ContextConfiguration(locations = { "classpath:xml/ut-orca-reader-spring-injection-test.xml" })
 public class OrcaReaderSpringInjectionUnitTest
 {
 

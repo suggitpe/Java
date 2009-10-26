@@ -31,7 +31,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
  * @version 1.0 25 Sep 2009
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:xml/it-jms-reader-spring-injection-test.xml" })
+@ContextConfiguration(locations = { "classpath:xml/ut-jms-reader-spring-injection-test.xml" })
 public class JmsReaderSpringInjectionUnitTest
 {
 
