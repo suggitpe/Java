@@ -15,6 +15,10 @@
         <priority value="debug" />
     </category>
 
+    <category name="org.springframework">
+        <priority value="info" />
+    </category>
+    
     <root>
         <priority value="debug" />
         <appender-ref ref="ConsoleAppender" />

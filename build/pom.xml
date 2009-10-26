@@ -86,8 +86,8 @@
                 <version>2.0</version>
                 <!-- best lock down version of the plugin too -->
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -153,11 +153,6 @@
             <scope>compile</scope>
         </dependency>
         <!-- site dependencies -->
-        <dependency>
-            <groupId>clover</groupId>
-            <artifactId>clover</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -240,11 +235,6 @@
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.12</version>
-            </dependency>
-            <dependency>
-                <groupId>clover</groupId>
-                <artifactId>clover</artifactId>
-                <version>1.3.6</version>
             </dependency>
             <dependency>
                 <groupId>javax.jms</groupId>
