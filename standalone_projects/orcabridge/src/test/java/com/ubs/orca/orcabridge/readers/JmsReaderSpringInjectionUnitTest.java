@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,6 +19,10 @@ import com.ubs.orca.orcabridge.OrcaBridgeException;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.junit.Assert.assertThat;
+
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 /**
  * Test suite to test the JMS Reader Spring Injection.
@@ -66,7 +69,7 @@ public class JmsReaderSpringInjectionUnitTest
     public void testSpringInjectedJmsReader()
     {
         LOG.debug( "Testing that the JMS Reader has been injected correctly" );
-        Assert.assertNotNull( mJmsReader_ );
+        assertThat( mJmsReader_, notNullValue() );
     }
 
     /**

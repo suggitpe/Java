@@ -13,6 +13,13 @@ package com.ubs.orca.orcabridge;
 public interface IMessageProcessor
 {
 
+    /**
+     * This is the core method on the Message Processor and its key
+     * reason for existence.
+     * 
+     * @param aMessageFacade
+     * @throws OrcaBridgeException
+     */
     void processMessage( IMessageFacade aMessageFacade ) throws OrcaBridgeException;
 
 }

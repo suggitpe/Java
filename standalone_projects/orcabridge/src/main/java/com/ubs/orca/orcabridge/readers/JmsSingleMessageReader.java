@@ -57,7 +57,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         catch ( JmsClientException je )
         {
             final String err = "Failed to start JMS Client";
-            LOG.error( err );
+            LOG.error( err, je );
             throw new OrcaBridgeException( err, je );
         }
     }

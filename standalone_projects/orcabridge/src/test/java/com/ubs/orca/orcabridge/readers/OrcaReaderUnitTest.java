@@ -8,7 +8,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,6 +21,11 @@ import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.readers.OrcaSingleMessageReader.OrcaReaderCallback;
+
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
+
+import static org.hamcrest.CoreMatchers.equalTo;
 
 /**
  * Test suite for the orca reader.
@@ -70,25 +74,6 @@ public class OrcaReaderUnitTest
     }
 
     /**
-     * Test that the correct exception is thrown when there is no orca
-     * client set on the class.
-     * 
-     * @throws Exception
-     */
-    @Test(expected = OrcaBridgeException.class)
-    public void testOrcaReaderWithNullOrcaClient() throws Exception
-    {
-        mOrcaReader_.setOrcaClient( null );
-
-        mCtrl_.replay();
-
-        mOrcaReader_.startReader();
-
-        mCtrl_.verify();
-
-    }
-
-    /**
      * Tests that when a client starts correctly, that no exceptions
      * are thrown etc
      * 
@@ -104,13 +89,9 @@ public class OrcaReaderUnitTest
 
         mCtrl_.replay();
 
-        Assert.assertSame( "OrcaReader state is not correct:",
-                           mOrcaReader_.getState(),
-                           AbstractMessageReader.STATE_UNINITIALISED );
+        assertThat( mOrcaReader_.getState(), equalTo( AbstractMessageReader.STATE_UNINITIALISED ) );
         mOrcaReader_.startReader();
-        Assert.assertSame( "OrcaReader state is not correct:",
-                           mOrcaReader_.getState(),
-                           AbstractMessageReader.STATE_RUNNING );
+        assertThat( mOrcaReader_.getState(), equalTo( AbstractMessageReader.STATE_RUNNING ) );
 
         mCtrl_.verify();
     }
@@ -130,11 +111,8 @@ public class OrcaReaderUnitTest
 
         mCtrl_.replay();
 
-        Assert.assertSame( "OrcaReader state is not correct:",
-                           mOrcaReader_.getState(),
-                           AbstractMessageReader.STATE_UNINITIALISED );
         mOrcaReader_.startReader();
-        Assert.fail( "Test should not have reached this part of the test" );
+        fail( "Test should not have reached this part of the test" );
 
         mCtrl_.verify();
     }
@@ -178,8 +156,7 @@ public class OrcaReaderUnitTest
         mCtrl_.replay();
 
         mOrcaReader_.stopReader();
-
-        Assert.fail( "The test should not have reached this part of the code" );
+        fail( "The test should not have reached this part of the code" );
 
         mCtrl_.verify();
     }
@@ -268,8 +245,7 @@ public class OrcaReaderUnitTest
         mCtrl_.replay();
 
         callback.onReceived( msg );
-
-        Assert.fail( "Test test should not have reached this far" );
+        fail( "Test test should not have reached this far" );
 
         mCtrl_.verify();
     }

@@ -10,7 +10,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,10 +17,15 @@ import org.junit.Test;
 import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
-import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
-import com.ubs.orca.orcabridge.jmsclient.IJmsReaderClient;
+import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
+import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
-import com.ubs.orca.orcabridge.readers.JmsSingleMessageReader.JmsReaderCallback;
+import com.ubs.orca.orcabridge.readers.JmsSingleMessageReader.JmsMessageProcessorCallback;
+
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
+
+import static org.hamcrest.CoreMatchers.equalTo;
 
 /**
  * Test suite for the JMS reader.
@@ -33,13 +37,14 @@ public class JmsReaderUnitTest
 {
 
     private static final Log LOG = LogFactory.getLog( JmsReaderUnitTest.class );
-    private IMocksControl mCtrl_ = EasyMock.createControl();
+
     private JmsSingleMessageReader mJmsReader_;
-    private IJmsReaderClient mMockJmsClient_;
-    private IMessageProcessor mMockMessageProcessor_;
+    private IMocksControl mCtrl_;
+    private IMessageProcessor mMockProcessor_;
+    private IJmsClient mMockJmsClient_;
+    private IJmsAction mMockJmsAction_;
 
-    private static String EMS_URL = "tcp://localhost:7222";
-
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
@@ -55,139 +60,117 @@ public class JmsReaderUnitTest
     public void doBefore() throws Exception
     {
         LOG.debug( "-----------------" );
-        mMockJmsClient_ = mCtrl_.createMock( IJmsReaderClient.class );
-        mMockMessageProcessor_ = mCtrl_.createMock( IMessageProcessor.class );
-        mJmsReader_ = new JmsSingleMessageReader( JmsSingleMessageReader.DEFAULT_CONTEXT_FACTORY,
-                                                  EMS_URL,
-                                                  mMockMessageProcessor_ );
+        mCtrl_ = EasyMock.createControl();
+        mMockProcessor_ = mCtrl_.createMock( IMessageProcessor.class );
+        mMockJmsClient_ = mCtrl_.createMock( IJmsClient.class );
+        mMockJmsAction_ = mCtrl_.createMock( IJmsAction.class );
+
+        mJmsReader_ = new JmsSingleMessageReader();
+        mJmsReader_.setMessageProcessor( mMockProcessor_ );
         mJmsReader_.setJmsClient( mMockJmsClient_ );
-
+        mJmsReader_.setJmsAction( mMockJmsAction_ );
+        mJmsReader_.afterPropertiesSet();
     }
 
     /**
-     * Tests that when a client starts correctly, that no exceptions
-     * are thrown etc
+     * Tests the normal execution of starting the reader
      * 
-     * @throws Exception
+     * @throws OrcaBridgeException
+     * @throws JmsClientException
      */
     @Test
-    public void testCleanStart() throws Exception
+    public void testStartReader() throws OrcaBridgeException, JmsClientException
     {
         mMockJmsClient_.connect();
         EasyMock.expectLastCall().once();
-
-        mMockJmsClient_.startDurableSubscription( EasyMock.isA( IJmsClientSingleMsgCallback.class ) );
+        mMockJmsClient_.processInTransaction( mMockJmsAction_ );
         EasyMock.expectLastCall().once();
 
         mCtrl_.replay();
 
-        mJmsReader_.afterPropertiesSet();
-        Assert.assertSame( "JmsReader state is not correct:",
-                           mJmsReader_.getState(),
-                           AbstractMessageReader.STATE_UNINITIALISED );
+        assertThat( mJmsReader_.getState(), equalTo( AbstractMessageReader.STATE_UNINITIALISED ) );
         mJmsReader_.startReader();
-        Assert.assertSame( "JmsReader state is not correct:",
-                           mJmsReader_.getState(),
-                           AbstractMessageReader.STATE_RUNNING );
+        assertThat( mJmsReader_.getState(), equalTo( AbstractMessageReader.STATE_RUNNING ) );
 
-        mCtrl_.verify();
-    }
-
-    @Test(expected = OrcaBridgeException.class)
-    public void testStartWithNoJmsClient() throws OrcaBridgeException
-    {
-        mJmsReader_.setJmsClient( null );
-        mCtrl_.replay();
-        mJmsReader_.startReader();
         mCtrl_.verify();
     }
 
     /**
-     * Tests that when the client starts badly, that the exceptions
-     * are handled correctly.
+     * Tests that the reader behaves correctly when faced with an
+     * exception when connecting to the JMS broker
      * 
-     * @throws Exception
+     * @throws OrcaBridgeException
+     * @throws JmsClientException
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testBadStartFromConnect() throws Exception
+    public void testStartReaderAndFailOnConnect() throws OrcaBridgeException, JmsClientException
     {
         mMockJmsClient_.connect();
         EasyMock.expectLastCall()
-            .andThrow( new JmsClientException( "This is an expected exception thrown from the OrcaBridge" ) );
+            .andThrow( new JmsClientException( "Connect failed: This is all part of the test" ) );
 
         mCtrl_.replay();
-
-        mJmsReader_.afterPropertiesSet();
-        Assert.assertSame( "JmsReader state is not correct:",
-                           mJmsReader_.getState(),
-                           AbstractMessageReader.STATE_UNINITIALISED );
         mJmsReader_.startReader();
-        Assert.fail( "Test should not have reached this part of the test" );
-
+        fail( "test should not have reached here" );
         mCtrl_.verify();
     }
 
     /**
-     * Tests that when the client stops cleanly that the application
-     * is deemed to be in a good running state
+     * Tests that the reader behaves correctly when faced with an
+     * exception with processing the action
      * 
-     * @throws Exception
-     */
-    @Test
-    public void testCleanStop() throws Exception
-    {
-        mMockJmsClient_.stopDurbleSubscription();
-        EasyMock.expectLastCall().once();
-        mMockJmsClient_.disconnect();
-        EasyMock.expectLastCall().once();
-
-        mCtrl_.replay();
-
-        mJmsReader_.afterPropertiesSet();
-        mJmsReader_.stopReader();
-
-        mCtrl_.verify();
-    }
-
-    @Test
-    public void testBadStopFromStopDurableButThenDisconnectOK() throws Exception
-    {
-        mMockJmsClient_.stopDurbleSubscription();
-        EasyMock.expectLastCall()
-            .andThrow( new JmsClientException( "This exception is all part of the test" ) );
-        mMockJmsClient_.disconnect();
-        EasyMock.expectLastCall().once();
-
-        mCtrl_.replay();
-
-        mJmsReader_.afterPropertiesSet();
-        mJmsReader_.stopReader();
-
-        mCtrl_.verify();
-    }
-
-    /**
-     * Tests that when the client stops badly, that all exceptions are
-     * handled correctly.
-     * 
-     * @throws Exception
+     * @throws OrcaBridgeException
+     * @throws JmsClientException
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testBadStopFromDisconnect() throws Exception
+    public void testStartReaderAndFailOnProcess() throws OrcaBridgeException, JmsClientException
     {
-        mMockJmsClient_.stopDurbleSubscription();
+        mMockJmsClient_.connect();
         EasyMock.expectLastCall().once();
-        mMockJmsClient_.disconnect();
+        mMockJmsClient_.processInTransaction( mMockJmsAction_ );
         EasyMock.expectLastCall()
-            .andThrow( new JmsClientException( "This is an expected exception to be thrown" ) );
+            .andThrow( new JmsClientException( "ProcessInTransaction failed: This is all part of the test" ) );
 
         mCtrl_.replay();
+        mJmsReader_.startReader();
+        fail( "Test should not have reached here" );
+        mCtrl_.verify();
+    }
 
-        mJmsReader_.afterPropertiesSet();
+    /**
+     * Tests the normal execution of stopping the reader
+     * 
+     * @throws OrcaBridgeException
+     * @throws JmsClientException
+     */
+    @Test
+    public void testStopReader() throws OrcaBridgeException, JmsClientException
+    {
+        mMockJmsClient_.disconnect();
+        EasyMock.expectLastCall().once();
+
+        mCtrl_.replay();
+        mJmsReader_.stopReader();
+        mCtrl_.verify();
+    }
+
+    /**
+     * Tests the normal execution of stopping the reader
+     * 
+     * @throws OrcaBridgeException
+     * @throws JmsClientException
+     */
+    @Test(expected = OrcaBridgeException.class)
+    public void testStopReaderAndFailOnDisconnect() throws OrcaBridgeException, JmsClientException
+    {
+        mMockJmsClient_.disconnect();
+        EasyMock.expectLastCall()
+            .andThrow( new JmsClientException( "Disconnect failed: This is all part of the test" ) );
+
+        mCtrl_.replay();
         mJmsReader_.stopReader();
 
-        Assert.fail( "The test should not have reached this part of the code" );
-
+        fail( "Test should not have reached here" );
         mCtrl_.verify();
     }
 
@@ -195,39 +178,41 @@ public class JmsReaderUnitTest
      * Tests that the message callback is called and that it then
      * delegates to the message processor.
      * 
-     * @throws Throwable
+     * @throws JmsClientException
+     * @throws OrcaBridgeException
      */
     @Test
-    public void testJmsCallback() throws Throwable
+    public void testJmsCallback() throws JmsClientException, OrcaBridgeException
     {
-        JmsReaderCallback callback = mJmsReader_.new JmsReaderCallback();
-        mMockMessageProcessor_.processMessage( EasyMock.isA( IMessageFacade.class ) );
+        JmsMessageProcessorCallback callback = mJmsReader_.new JmsMessageProcessorCallback();
+        mMockProcessor_.processMessage( EasyMock.isA( IMessageFacade.class ) );
         EasyMock.expectLastCall().once();
 
         Message msg = EasyMock.createMock( Message.class );
 
         mCtrl_.replay();
-
         callback.onReceived( msg );
-
         mCtrl_.verify();
     }
 
-    @Test(expected = OrcaBridgeException.class)
-    public void testJmsCallbackWithProcessFailure() throws Throwable
+    /**
+     * @throws JmsClientException
+     * @throws OrcaBridgeException
+     */
+    @Test(expected = JmsClientException.class)
+    public void testJmsCallbackWithProcessFailure() throws JmsClientException, OrcaBridgeException
     {
-        JmsReaderCallback callback = mJmsReader_.new JmsReaderCallback();
-        mMockMessageProcessor_.processMessage( EasyMock.isA( IMessageFacade.class ) );
+        JmsMessageProcessorCallback callback = mJmsReader_.new JmsMessageProcessorCallback();
+        mMockProcessor_.processMessage( EasyMock.isA( IMessageFacade.class ) );
         EasyMock.expectLastCall()
-            .andThrow( new OrcaBridgeException( "This is all part of the test" ) );
+            .andThrow( new OrcaBridgeException( "ProcessMessage failed: This is all part of the test" ) );
 
         Message msg = EasyMock.createMock( Message.class );
 
         mCtrl_.replay();
 
         callback.onReceived( msg );
-
-        Assert.fail( "Test test should not have reached this far" );
+        fail( "Test test should not have reached this far" );
 
         mCtrl_.verify();
     }

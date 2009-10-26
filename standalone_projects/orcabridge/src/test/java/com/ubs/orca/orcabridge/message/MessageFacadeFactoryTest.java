@@ -9,14 +9,16 @@ import javax.jms.Message;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.easymock.EasyMock;
-import org.hamcrest.core.IsInstanceOf;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ubs.orca.common.bus.IOrcaMessage;
 import com.ubs.orca.orcabridge.IMessageFacade;
+
+import static org.junit.Assert.assertThat;
+
+import static org.hamcrest.CoreMatchers.is;
 
 /**
  * Test suite to test the message facade factory
@@ -29,6 +31,7 @@ public class MessageFacadeFactoryTest
 
     private static final Log LOG = LogFactory.getLog( MessageFacadeFactoryTest.class );
 
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
@@ -55,7 +58,7 @@ public class MessageFacadeFactoryTest
     {
         Message msg = EasyMock.createMock( Message.class );
         IMessageFacade facade = MessageFacadeFactory.createMessageAdapter( msg );
-        Assert.assertThat( facade, new IsInstanceOf( JmsMessageFacade.class ) );
+        assertThat( facade, is( JmsMessageFacade.class ) );
     }
 
     /**
@@ -67,6 +70,6 @@ public class MessageFacadeFactoryTest
     {
         IOrcaMessage msg = EasyMock.createMock( IOrcaMessage.class );
         IMessageFacade facade = MessageFacadeFactory.createMessageAdapter( msg );
-        Assert.assertThat( facade, new IsInstanceOf( OrcaMessageFacade.class ) );
+        assertThat( facade, is( OrcaMessageFacade.class ) );
     }
 }

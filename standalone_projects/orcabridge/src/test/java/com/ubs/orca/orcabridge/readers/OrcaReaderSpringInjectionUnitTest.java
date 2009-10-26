@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,6 +20,10 @@ import com.ubs.orca.orcabridge.support.OrcaClientTestStub;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.junit.Assert.assertThat;
+
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 /**
  * Test suite to test the Orca Reader Spring Injection.
@@ -67,7 +70,7 @@ public class OrcaReaderSpringInjectionUnitTest
     public void testSpringInjectedOrcaReader()
     {
         LOG.debug( "Testing that the Orca Reader has been injected correctly" );
-        Assert.assertNotNull( mOrcaReader_ );
+        assertThat( mOrcaReader_, notNullValue() );
     }
 
     /**
