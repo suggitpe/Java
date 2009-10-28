@@ -8,7 +8,6 @@ import javax.jms.Message;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,9 +15,9 @@ import org.junit.Test;
 import com.ubs.orca.common.bus.IOrcaMessage;
 import com.ubs.orca.orcabridge.IMessageFacade;
 
-import static org.junit.Assert.assertThat;
-
+import static org.easymock.EasyMock.createMock;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test suite to test the message facade factory
@@ -56,7 +55,7 @@ public class MessageFacadeFactoryTest
     @Test
     public void testBuildJmsMessageFacade()
     {
-        Message msg = EasyMock.createMock( Message.class );
+        Message msg = createMock( Message.class );
         IMessageFacade facade = MessageFacadeFactory.createMessageAdapter( msg );
         assertThat( facade, is( JmsMessageFacade.class ) );
     }
@@ -68,7 +67,7 @@ public class MessageFacadeFactoryTest
     @Test
     public void testBuildOrcaMessageFacade()
     {
-        IOrcaMessage msg = EasyMock.createMock( IOrcaMessage.class );
+        IOrcaMessage msg = createMock( IOrcaMessage.class );
         IMessageFacade facade = MessageFacadeFactory.createMessageAdapter( msg );
         assertThat( facade, is( OrcaMessageFacade.class ) );
     }

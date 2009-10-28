@@ -21,9 +21,8 @@ import com.ubs.orca.orcabridge.support.OrcaClientTestStub;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertThat;
-
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test suite to test the Orca Reader Spring Injection.
@@ -39,7 +38,7 @@ public class OrcaReaderSpringInjectionUnitTest
     private static final Log LOG = LogFactory.getLog( OrcaReaderSpringInjectionUnitTest.class );
 
     @Resource(name = "orcaReader")
-    IMessageReader mOrcaReader_;
+    IMessageReader orcaReader_;
 
     /** */
     @BeforeClass
@@ -70,7 +69,7 @@ public class OrcaReaderSpringInjectionUnitTest
     public void testSpringInjectedOrcaReader()
     {
         LOG.debug( "Testing that the Orca Reader has been injected correctly" );
-        assertThat( mOrcaReader_, notNullValue() );
+        assertThat( orcaReader_, notNullValue() );
     }
 
     /**
@@ -81,9 +80,9 @@ public class OrcaReaderSpringInjectionUnitTest
     @Test
     public void testStartAndStopOrcaReader() throws OrcaBridgeException
     {
-        OrcaSingleMessageReader reader = (OrcaSingleMessageReader) mOrcaReader_;
+        OrcaSingleMessageReader reader = (OrcaSingleMessageReader) orcaReader_;
         reader.setOrcaClient( new OrcaClientTestStub() );
-        mOrcaReader_.startReader();
-        mOrcaReader_.stopReader();
+        orcaReader_.startReader();
+        orcaReader_.stopReader();
     }
 }

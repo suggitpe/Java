@@ -16,23 +16,28 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 14 Oct 2009
  */
-public class JmsReaderTest
+public class JmsDurableReaderActionTest
 {
 
-    private static final Log LOG = LogFactory.getLog( JmsReaderTest.class );
+    private static final Log LOG = LogFactory.getLog( JmsDurableReaderActionTest.class );
 
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
-        LOG.debug( "=================== " + JmsConnectionTest.class.getSimpleName() );
+        LOG.debug( "=================== " + JmsDurableReaderActionTest.class.getSimpleName() );
     }
 
+    /** */
     @Before
     public void doBefore()
     {
         LOG.debug( "-------------" );
     }
 
+    /**
+     * 
+     */
     @Test
     public void testMe()
     {}

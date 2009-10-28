@@ -18,8 +18,8 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { com.ubs.orca.orcabridge.readers.AllUnitTests.class,
-                      com.ubs.orca.orcabridge.jmsclient.AllUnitTests.class,
-                      com.ubs.orca.orcabridge.message.AllUnitTests.class })
+                      com.ubs.orca.orcabridge.message.AllUnitTests.class,
+                      com.ubs.orca.orcabridge.jmsclient.AllUnitTests.class })
 public class AllUnitTests
 {
 

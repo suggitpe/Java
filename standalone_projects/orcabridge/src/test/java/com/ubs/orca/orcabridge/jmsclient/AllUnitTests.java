@@ -7,10 +7,11 @@ package com.ubs.orca.orcabridge.jmsclient;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import com.ubs.orca.orcabridge.jmsclient.impl.ContextBuilderTest;
-import com.ubs.orca.orcabridge.jmsclient.impl.JmsConnectionTest;
-import com.ubs.orca.orcabridge.jmsclient.impl.JmsReaderTest;
-import com.ubs.orca.orcabridge.jmsclient.impl.JmsSenderTest;
+import com.ubs.orca.orcabridge.jmsclient.impl.JmsClientCoreSpringInjectionUnitTest;
+import com.ubs.orca.orcabridge.jmsclient.impl.JmsClientCoreTestConnection;
+import com.ubs.orca.orcabridge.jmsclient.impl.JmsClientCoreTestProcess;
+import com.ubs.orca.orcabridge.jmsclient.impl.JmsDurableReaderActionTest;
+import com.ubs.orca.orcabridge.jmsclient.impl.JmsSenderActionTest;
 
 /**
  * Test suite for the JMS client unit tests.
@@ -19,7 +20,8 @@ import com.ubs.orca.orcabridge.jmsclient.impl.JmsSenderTest;
  * @version 1.0 13 Oct 2009
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { ContextBuilderTest.class, JmsConnectionTest.class, JmsSenderTest.class,
-                      JmsReaderTest.class })
+@Suite.SuiteClasses( { JmsClientCoreTestConnection.class, JmsClientCoreTestProcess.class,
+                      JmsClientCoreSpringInjectionUnitTest.class, JmsSenderActionTest.class,
+                      JmsDurableReaderActionTest.class })
 public class AllUnitTests
 {}

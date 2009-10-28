@@ -25,15 +25,18 @@ class OrcaMessageFacade implements IMessageFacade
 
     private static final Log LOG = LogFactory.getLog( OrcaMessageFacade.class );
 
-    final IOrcaMessage mOrcaMessage_;
+    private final IOrcaMessage orcaMessage_;
 
     /**
      * Constructs a new instance.
+     * 
+     * @param aOrcaMessage
+     *            orca message to construct the facade
      */
-    public OrcaMessageFacade( IOrcaMessage aOrcaMessage )
+    OrcaMessageFacade( IOrcaMessage aOrcaMessage )
     {
         super();
-        mOrcaMessage_ = aOrcaMessage;
+        orcaMessage_ = aOrcaMessage;
     }
 
     /**

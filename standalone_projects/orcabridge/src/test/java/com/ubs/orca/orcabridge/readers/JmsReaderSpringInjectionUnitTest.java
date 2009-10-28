@@ -20,9 +20,8 @@ import com.ubs.orca.orcabridge.OrcaBridgeException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertThat;
-
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test suite to test the JMS Reader Spring Injection.
@@ -38,7 +37,7 @@ public class JmsReaderSpringInjectionUnitTest
     private static final Log LOG = LogFactory.getLog( JmsReaderSpringInjectionUnitTest.class );
 
     @Resource(name = "jmsReader")
-    IMessageReader mJmsReader_;
+    IMessageReader jmsReader_;
 
     /** */
     @BeforeClass
@@ -69,7 +68,7 @@ public class JmsReaderSpringInjectionUnitTest
     public void testSpringInjectedJmsReader()
     {
         LOG.debug( "Testing that the JMS Reader has been injected correctly" );
-        assertThat( mJmsReader_, notNullValue() );
+        assertThat( jmsReader_, notNullValue() );
     }
 
     /**
@@ -80,7 +79,7 @@ public class JmsReaderSpringInjectionUnitTest
     @Test
     public void testStartAndStopJmsReader() throws OrcaBridgeException
     {
-        mJmsReader_.startReader();
-        mJmsReader_.stopReader();
+        jmsReader_.startReader();
+        jmsReader_.stopReader();
     }
 }

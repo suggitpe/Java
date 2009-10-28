@@ -24,12 +24,17 @@ class JmsMessageFacade implements IMessageFacade
 {
 
     private static final Log LOG = LogFactory.getLog( JmsMessageFacade.class );
-    private final Message mJmsMessage_;
+    private final Message jmsMessage_;
 
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aJmsMessage
+     */
     JmsMessageFacade( Message aJmsMessage )
     {
         super();
-        mJmsMessage_ = aJmsMessage;
+        jmsMessage_ = aJmsMessage;
     }
 
     /**

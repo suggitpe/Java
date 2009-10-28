@@ -32,7 +32,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
 
     private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReader.class );
 
-    private String mOrcaConnectionUrl_;
+    private String orcaConnectionUrl_;
     private IOrcaIdentity mOrcaIdentity_;
 
     private IOrcaClient mOrcaClient_;
@@ -43,7 +43,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     @Override
     public void doAfterPropertiesSet() throws Exception
     {
-        Assert.notNull( mOrcaConnectionUrl_,
+        Assert.notNull( orcaConnectionUrl_,
                         "No Orca connection URL has been set in the OrcaSingleMessageReader" );
         Assert.notNull( mOrcaIdentity_,
                         "No Orca Identity has been set in the OrcaSingleMessageReader" );
@@ -61,7 +61,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
         try
         {
             mOrcaClient_ = OrcaClientFactory.createOrcaClient( mOrcaIdentity_,
-                                                               mOrcaConnectionUrl_,
+                                                               orcaConnectionUrl_,
                                                                true,
                                                                new OrcaReaderCallback() );
         }
@@ -142,7 +142,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
      */
     public void setOrcaConnectionUrl( String aOrcaConnectionUrl )
     {
-        mOrcaConnectionUrl_ = aOrcaConnectionUrl;
+        orcaConnectionUrl_ = aOrcaConnectionUrl;
     }
 
     /**

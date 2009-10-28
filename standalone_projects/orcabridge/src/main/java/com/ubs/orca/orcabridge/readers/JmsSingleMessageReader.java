@@ -30,8 +30,8 @@ public class JmsSingleMessageReader extends AbstractMessageReader
 
     private static final Log LOG = LogFactory.getLog( JmsSingleMessageReader.class );
 
-    private IJmsAction mJmsAction_;
-    private IJmsClient mJmsClient_;
+    private IJmsAction jmsAction_;
+    private IJmsClient jmsClient_;
 
     /**
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
@@ -39,8 +39,8 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     @Override
     protected void doAfterPropertiesSet() throws Exception
     {
-        Assert.notNull( mJmsClient_, "No JMS client has been set on the JMS reader" );
-        Assert.notNull( mJmsAction_, "No JMS action has been set on the JMS reader" );
+        Assert.notNull( jmsClient_, "No JMS client has been set on the JMS reader" );
+        Assert.notNull( jmsAction_, "No JMS action has been set on the JMS reader" );
     }
 
     /**
@@ -51,8 +51,8 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     {
         try
         {
-            mJmsClient_.connect();
-            mJmsClient_.processInTransaction( mJmsAction_ );
+            jmsClient_.connect();
+            jmsClient_.processInTransaction( jmsAction_ );
         }
         catch ( JmsClientException je )
         {
@@ -70,7 +70,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     {
         try
         {
-            mJmsClient_.disconnect();
+            jmsClient_.disconnect();
         }
         catch ( JmsClientException je )
         {
@@ -89,7 +89,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      */
     public void setJmsClient( IJmsClient aJmsClient )
     {
-        mJmsClient_ = aJmsClient;
+        jmsClient_ = aJmsClient;
     }
 
     /**
@@ -101,7 +101,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      */
     public void setJmsAction( IJmsAction aJmsAction )
     {
-        mJmsAction_ = aJmsAction;
+        jmsAction_ = aJmsAction;
     }
 
     // ===============================================

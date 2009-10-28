@@ -28,9 +28,9 @@ public class JmsDurableReaderAction implements IJmsAction
 {
 
     private static final Log LOG = LogFactory.getLog( JmsDurableReaderAction.class );
-    private IJmsClientSingleMsgCallback mClientCallback_;
-    private String mDurableName_;
-    private String mDurableMessageSelector_;
+    private IJmsClientSingleMsgCallback clientCallback_;
+    private String durableName_;
+    private String durableMessageSelector_;
 
     /**
      * Constructs a new instance.
@@ -54,9 +54,9 @@ public class JmsDurableReaderAction implements IJmsAction
                                    String aDurableName, String aDurableMessageSelector )
     {
         super();
-        mClientCallback_ = aProcessingCallback;
-        mDurableName_ = aDurableName;
-        mDurableMessageSelector_ = aDurableMessageSelector;
+        clientCallback_ = aProcessingCallback;
+        durableName_ = aDurableName;
+        durableMessageSelector_ = aDurableMessageSelector;
     }
 
     /**
@@ -92,8 +92,8 @@ public class JmsDurableReaderAction implements IJmsAction
         try
         {
             subscriber = aSession.createDurableSubscriber( topic,
-                                                           mDurableName_,
-                                                           mDurableMessageSelector_,
+                                                           durableName_,
+                                                           durableMessageSelector_,
                                                            true );
             retriveAndProcessMessages( aSession, subscriber );
 
@@ -131,7 +131,7 @@ public class JmsDurableReaderAction implements IJmsAction
             // has been received
             while ( ( message = aSubscriber.receive() ) != null )
             {
-                mClientCallback_.onReceived( message );
+                clientCallback_.onReceived( message );
                 aSession.commit();
             }
         }
@@ -150,7 +150,7 @@ public class JmsDurableReaderAction implements IJmsAction
      */
     public void setCallback( IJmsClientSingleMsgCallback aCallback )
     {
-        mClientCallback_ = aCallback;
+        clientCallback_ = aCallback;
     }
 
     /**
@@ -161,7 +161,7 @@ public class JmsDurableReaderAction implements IJmsAction
      */
     public void setDurableName( String aDurableName )
     {
-        mDurableName_ = aDurableName;
+        durableName_ = aDurableName;
     }
 
     /**
@@ -172,7 +172,7 @@ public class JmsDurableReaderAction implements IJmsAction
      */
     public void setDurableMessageSelector( String aDurableMessageSelector )
     {
-        mDurableMessageSelector_ = aDurableMessageSelector;
+        durableMessageSelector_ = aDurableMessageSelector;
     }
 
 }

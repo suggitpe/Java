@@ -30,9 +30,9 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     static final String STATE_RUNNING = "Running";
     static final String STATE_STOPPING = "Stopping";
     static final String STATE_STOPPED = "Stopped";
-    private String mState_ = STATE_UNINITIALISED;
 
-    private IMessageProcessor mMessageProcessor_;
+    private String state_ = STATE_UNINITIALISED;
+    private IMessageProcessor messageProcessor_;
 
     /**
      * Verifies that the message processor has been set on the class
@@ -42,7 +42,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( mMessageProcessor_, "Must set the Message Processor on the Message Reader" );
+        Assert.notNull( messageProcessor_, "Must set the Message Processor on the Message Reader" );
         doAfterPropertiesSet();
     }
 
@@ -62,9 +62,9 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     public synchronized void startReader() throws OrcaBridgeException
     {
         LOG.debug( "Starting Orca Bridge." );
-        mState_ = STATE_STARTING;
+        state_ = STATE_STARTING;
         doStartReader();
-        mState_ = STATE_RUNNING;
+        state_ = STATE_RUNNING;
     }
 
     /**
@@ -81,10 +81,10 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     @Override
     public synchronized void stopReader() throws OrcaBridgeException
     {
-        mState_ = STATE_STOPPING;
+        state_ = STATE_STOPPING;
         LOG.debug( "Stopping Orca Bridge." );
         doStopReader();
-        mState_ = STATE_STOPPED;
+        state_ = STATE_STOPPED;
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      */
     protected IMessageProcessor getMessageProcessor()
     {
-        return mMessageProcessor_;
+        return messageProcessor_;
     }
 
     /**
@@ -115,7 +115,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      */
     public void setMessageProcessor( IMessageProcessor aProcessor )
     {
-        mMessageProcessor_ = aProcessor;
+        messageProcessor_ = aProcessor;
     }
 
     /**
@@ -125,6 +125,6 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      */
     public String getState()
     {
-        return mState_;
+        return state_;
     }
 }

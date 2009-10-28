@@ -6,7 +6,6 @@ package com.ubs.orca.orcabridge.readers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -22,10 +21,12 @@ import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.readers.OrcaSingleMessageReader.OrcaReaderCallback;
 
+import static org.easymock.EasyMock.createControl;
+import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.isA;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-
-import static org.hamcrest.CoreMatchers.equalTo;
 
 /**
  * Test suite for the orca reader.
@@ -37,10 +38,10 @@ public class OrcaReaderUnitTest
 {
 
     private static final Log LOG = LogFactory.getLog( OrcaReaderUnitTest.class );
-    private IMocksControl mCtrl_;
-    private OrcaSingleMessageReader mOrcaReader_;
-    private IOrcaClient mMockOrcaClient_;
-    private IMessageProcessor mMockMessageProcessor_;
+    private IMocksControl ctrl_;
+    private OrcaSingleMessageReader orcaReader_;
+    private IOrcaClient mockOrcaClient_;
+    private IMessageProcessor mockMessageProcessor_;
 
     private static String ORCA_TOKEN = "OrcaBridgeTestToken:1";
     private static String ORCA_URL = "tcp://localhost:7222";
@@ -61,16 +62,16 @@ public class OrcaReaderUnitTest
     public void doBefore() throws Exception
     {
         LOG.debug( "-----------------" );
-        mCtrl_ = EasyMock.createControl();
-        mMockOrcaClient_ = mCtrl_.createMock( IOrcaClient.class );
-        mMockMessageProcessor_ = mCtrl_.createMock( IMessageProcessor.class );
-        mOrcaReader_ = new OrcaSingleMessageReader();
-        mOrcaReader_.setOrcaIdentity( new OrcaIdentity( ORCA_TOKEN ) );
-        mOrcaReader_.setOrcaConnectionUrl( ORCA_URL );
-        mOrcaReader_.setMessageProcessor( mMockMessageProcessor_ );
-        mOrcaReader_.afterPropertiesSet();
-        mOrcaReader_.init();
-        mOrcaReader_.setOrcaClient( mMockOrcaClient_ );
+        ctrl_ = createControl();
+        mockOrcaClient_ = ctrl_.createMock( IOrcaClient.class );
+        mockMessageProcessor_ = ctrl_.createMock( IMessageProcessor.class );
+        orcaReader_ = new OrcaSingleMessageReader();
+        orcaReader_.setOrcaIdentity( new OrcaIdentity( ORCA_TOKEN ) );
+        orcaReader_.setOrcaConnectionUrl( ORCA_URL );
+        orcaReader_.setMessageProcessor( mockMessageProcessor_ );
+        orcaReader_.afterPropertiesSet();
+        orcaReader_.init();
+        orcaReader_.setOrcaClient( mockOrcaClient_ );
     }
 
     /**
@@ -82,18 +83,18 @@ public class OrcaReaderUnitTest
     @Test
     public void testCleanStart() throws Exception
     {
-        mMockOrcaClient_.connect();
-        EasyMock.expectLastCall().once();
-        mMockOrcaClient_.start();
-        EasyMock.expectLastCall().once();
+        mockOrcaClient_.connect();
+        expectLastCall().once();
+        mockOrcaClient_.start();
+        expectLastCall().once();
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
-        assertThat( mOrcaReader_.getState(), equalTo( AbstractMessageReader.STATE_UNINITIALISED ) );
-        mOrcaReader_.startReader();
-        assertThat( mOrcaReader_.getState(), equalTo( AbstractMessageReader.STATE_RUNNING ) );
+        assertThat( orcaReader_.getState(), equalTo( AbstractMessageReader.STATE_UNINITIALISED ) );
+        orcaReader_.startReader();
+        assertThat( orcaReader_.getState(), equalTo( AbstractMessageReader.STATE_RUNNING ) );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -105,16 +106,15 @@ public class OrcaReaderUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testBadStart() throws Exception
     {
-        mMockOrcaClient_.connect();
-        EasyMock.expectLastCall()
-            .andThrow( new OrcaException( "This is an expected exception thrown from the OrcaBridge" ) );
+        mockOrcaClient_.connect();
+        expectLastCall().andThrow( new OrcaException( "This is an expected exception thrown from the OrcaBridge" ) );
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
-        mOrcaReader_.startReader();
+        orcaReader_.startReader();
         fail( "Test should not have reached this part of the test" );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -126,16 +126,16 @@ public class OrcaReaderUnitTest
     @Test
     public void testCleanStop() throws Exception
     {
-        mMockOrcaClient_.stop();
-        EasyMock.expectLastCall().once();
-        mMockOrcaClient_.disconnect();
-        EasyMock.expectLastCall().once();
+        mockOrcaClient_.stop();
+        expectLastCall().once();
+        mockOrcaClient_.disconnect();
+        expectLastCall().once();
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
-        mOrcaReader_.stopReader();
+        orcaReader_.stopReader();
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -147,18 +147,17 @@ public class OrcaReaderUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testBadStopFromOrcaDisconnect() throws Exception
     {
-        mMockOrcaClient_.stop();
-        EasyMock.expectLastCall().once();
-        mMockOrcaClient_.disconnect();
-        EasyMock.expectLastCall()
-            .andThrow( new OrcaException( "This is an expected exception to be thrown" ) );
+        mockOrcaClient_.stop();
+        expectLastCall().once();
+        mockOrcaClient_.disconnect();
+        expectLastCall().andThrow( new OrcaException( "This is an expected exception to be thrown" ) );
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
-        mOrcaReader_.stopReader();
+        orcaReader_.stopReader();
         fail( "The test should not have reached this part of the code" );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -170,16 +169,16 @@ public class OrcaReaderUnitTest
     @Test
     public void testBadStopFromOrcaStop() throws Exception
     {
-        mMockOrcaClient_.stop();
-        EasyMock.expectLastCall().andThrow( new OrcaException( "This is all part of the tests" ) );
-        mMockOrcaClient_.disconnect();
-        EasyMock.expectLastCall().once();
+        mockOrcaClient_.stop();
+        expectLastCall().andThrow( new OrcaException( "This is all part of the tests" ) );
+        mockOrcaClient_.disconnect();
+        expectLastCall().once();
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
-        mOrcaReader_.stopReader();
+        orcaReader_.stopReader();
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -191,17 +190,17 @@ public class OrcaReaderUnitTest
     @Test
     public void testOrcaCallbackWithAttributesMessage() throws Throwable
     {
-        OrcaReaderCallback callback = mOrcaReader_.new OrcaReaderCallback();
-        mMockMessageProcessor_.processMessage( EasyMock.isA( IMessageFacade.class ) );
-        EasyMock.expectLastCall().once();
+        OrcaReaderCallback callback = orcaReader_.new OrcaReaderCallback();
+        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
+        expectLastCall().once();
 
-        IAttributesConversationMessage msg = mCtrl_.createMock( IAttributesConversationMessage.class );
+        IAttributesConversationMessage msg = ctrl_.createMock( IAttributesConversationMessage.class );
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
         callback.onReceived( msg );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -213,17 +212,17 @@ public class OrcaReaderUnitTest
     @Test
     public void testOrcaCallbackWithTextMessage() throws Throwable
     {
-        OrcaReaderCallback callback = mOrcaReader_.new OrcaReaderCallback();
-        mMockMessageProcessor_.processMessage( EasyMock.isA( IMessageFacade.class ) );
-        EasyMock.expectLastCall().once();
+        OrcaReaderCallback callback = orcaReader_.new OrcaReaderCallback();
+        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
+        expectLastCall().once();
 
-        ITextConversationMessage msg = mCtrl_.createMock( ITextConversationMessage.class );
+        ITextConversationMessage msg = ctrl_.createMock( ITextConversationMessage.class );
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
         callback.onReceived( msg );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -235,18 +234,17 @@ public class OrcaReaderUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testOrcaCallbackWithProcessFailure() throws Throwable
     {
-        OrcaReaderCallback callback = mOrcaReader_.new OrcaReaderCallback();
-        mMockMessageProcessor_.processMessage( EasyMock.isA( IMessageFacade.class ) );
-        EasyMock.expectLastCall()
-            .andThrow( new OrcaBridgeException( "This is all part of the test" ) );
+        OrcaReaderCallback callback = orcaReader_.new OrcaReaderCallback();
+        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
+        expectLastCall().andThrow( new OrcaBridgeException( "This is all part of the test" ) );
 
-        IAttributesConversationMessage msg = EasyMock.createMock( IAttributesConversationMessage.class );
+        IAttributesConversationMessage msg = ctrl_.createMock( IAttributesConversationMessage.class );
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
         callback.onReceived( msg );
         fail( "Test test should not have reached this far" );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 }
