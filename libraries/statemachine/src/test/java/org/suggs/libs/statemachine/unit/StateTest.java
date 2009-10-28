@@ -13,11 +13,17 @@ import org.suggs.libs.statemachine.impl.StateTransitionManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.easymock.EasyMock;
-import org.junit.Assert;
+import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import static org.easymock.EasyMock.createControl;
+import static org.easymock.EasyMock.expect;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test suite for the state implementation.
@@ -29,18 +35,22 @@ public class StateTest
 {
 
     private static final Log LOG = LogFactory.getLog( StateTest.class );
+    private IMocksControl mCtrl_;
 
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
         LOG.debug( "===================" + StateTest.class.getSimpleName() );
     }
 
+    /** */
     @Before
     public void doBefore()
     {
         LOG.debug( "------------------- " );
         StateTransitionManager.instance().clearTransitionsFromTransitionManager();
+        mCtrl_ = createControl();
     }
 
     /**
@@ -53,7 +63,7 @@ public class StateTest
         final String STATE_NAME = "TestStateForTest";
         IState state = new StateImpl( STATE_NAME );
 
-        Assert.assertEquals( state.getStateName(), STATE_NAME );
+        assertThat( state.getStateName(), equalTo( STATE_NAME ) );
         LOG.debug( "Successfully created state[" + state + "]" );
     }
 
@@ -61,6 +71,7 @@ public class StateTest
      * Tests the that the equals, hashcode and toString methods work
      * correctly
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testEqualsHashcodeAndToString()
     {
@@ -69,22 +80,23 @@ public class StateTest
         StateImpl state2 = new StateImpl( "state2" );
 
         // check equals method
-        Assert.assertNotSame( state1a, state1b );
-        Assert.assertNotSame( state1a, state2 );
-        Assert.assertEquals( state1a, state1b );
-        Assert.assertFalse( state1a.equals( state2 ) );
+        assertThat( state1a, not( ( sameInstance( state1b ) ) ) );
+        assertThat( state1a, not( ( sameInstance( state2 ) ) ) );
+        assertThat( state1a, equalTo( state1b ) );
+        assertThat( state1a, not( equalTo( state2 ) ) );
 
         // check hashcode
-        Assert.assertEquals( state1a.hashCode(), state1b.hashCode() );
-        Assert.assertFalse( state1a.hashCode() == state2.hashCode() );
+        assertThat( state1a.hashCode(), equalTo( state1b.hashCode() ) );
+        assertThat( state1a.hashCode(), not( equalTo( state2.hashCode() ) ) );
 
         LOG.debug( "State1a: " + state1a );
         LOG.debug( "State2: " + state2 );
     }
 
-    /*
-     * * Tests that when there are valid transitions set up, step will
+    /**
+     * Tests that when there are valid transitions set up, step will
      * return the correct new end state.
+     * 
      * @throws StateMachineException
      */
     @SuppressWarnings("boxing")
@@ -95,39 +107,31 @@ public class StateTest
         IState endState = new StateImpl( "TestEndState" );
 
         // set up mocks
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
-        IStateTransition trans1 = EasyMock.createMock( IStateTransition.class );
-        IStateTransition trans2 = EasyMock.createMock( IStateTransition.class );
+        IStateMachineContext context = mCtrl_.createMock( IStateMachineContext.class );
+        IStateTransition trans1 = mCtrl_.createMock( IStateTransition.class );
+        IStateTransition trans2 = mCtrl_.createMock( IStateTransition.class );
 
-        EasyMock.expect( trans1.getStartingState() ).andReturn( state ).anyTimes();
-        EasyMock.expect( trans1.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
-        EasyMock.expect( trans2.getStartingState() ).andReturn( state ).anyTimes();
-        EasyMock.expect( trans2.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
-        EasyMock.expect( trans2.getEndingState() ).andReturn( endState ).anyTimes();
+        expect( trans1.getStartingState() ).andReturn( state ).anyTimes();
+        expect( trans1.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
+        expect( trans2.getStartingState() ).andReturn( state ).anyTimes();
+        expect( trans2.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
+        expect( trans2.getEndingState() ).andReturn( endState ).anyTimes();
 
-        EasyMock.expect( trans1.evaluateTransitionValidity( context ) ).andReturn( false );
-        EasyMock.expect( trans2.evaluateTransitionValidity( context ) ).andReturn( true );
+        expect( trans1.evaluateTransitionValidity( context ) ).andReturn( false );
+        expect( trans2.evaluateTransitionValidity( context ) ).andReturn( true );
 
-        // replay mocks
-        EasyMock.replay( context );
-        EasyMock.replay( trans1 );
-        EasyMock.replay( trans2 );
+        mCtrl_.replay();
 
-        // load transmanager
         StateTransitionManager.instance().addTransitionToManager( trans1 );
         StateTransitionManager.instance().addTransitionToManager( trans2 );
 
-        // test exec
         IState newState = state.step( context );
 
-        Assert.assertNotSame( state, newState );
-        Assert.assertSame( endState, newState );
+        assertThat( state, not( equalTo( newState ) ) );
+        assertThat( endState, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns a different state when there are valid transitions setup" );
 
-        // verify mocks
-        EasyMock.verify( context );
-        EasyMock.verify( trans1 );
-        EasyMock.verify( trans2 );
+        mCtrl_.verify();
     }
 
     /**
@@ -144,37 +148,29 @@ public class StateTest
         IState endState = new StateImpl( "TestEndState" );
 
         // set up mocks
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
-        IStateTransition trans1 = EasyMock.createMock( IStateTransition.class );
-        IStateTransition trans2 = EasyMock.createMock( IStateTransition.class );
+        IStateMachineContext context = mCtrl_.createMock( IStateMachineContext.class );
+        IStateTransition trans1 = mCtrl_.createMock( IStateTransition.class );
+        IStateTransition trans2 = mCtrl_.createMock( IStateTransition.class );
 
-        EasyMock.expect( trans1.getStartingState() ).andReturn( state ).anyTimes();
-        EasyMock.expect( trans1.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
-        EasyMock.expect( trans2.getStartingState() ).andReturn( state ).anyTimes();
-        EasyMock.expect( trans2.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
-        EasyMock.expect( trans2.getEndingState() ).andReturn( endState ).anyTimes();
+        expect( trans1.getStartingState() ).andReturn( state ).anyTimes();
+        expect( trans1.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
+        expect( trans2.getStartingState() ).andReturn( state ).anyTimes();
+        expect( trans2.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
+        expect( trans2.getEndingState() ).andReturn( endState ).anyTimes();
 
-        EasyMock.expect( trans1.evaluateTransitionValidity( context ) ).andReturn( true );
-        EasyMock.expect( trans2.evaluateTransitionValidity( context ) ).andReturn( true );
+        expect( trans1.evaluateTransitionValidity( context ) ).andReturn( true );
+        expect( trans2.evaluateTransitionValidity( context ) ).andReturn( true );
 
-        // replay mocks
-        EasyMock.replay( context );
-        EasyMock.replay( trans1 );
-        EasyMock.replay( trans2 );
+        mCtrl_.replay();
 
-        // load transmanager
         StateTransitionManager.instance().addTransitionToManager( trans1 );
         StateTransitionManager.instance().addTransitionToManager( trans2 );
 
-        // test exec
         IState newState = state.step( context );
         LOG.error( "If the code managed to reach here then the test has failed to perform it's role.  Somehow we have managed to let step create  anew state of ["
                    + newState + "]" );
 
-        // verify mocks
-        EasyMock.verify( context );
-        EasyMock.verify( trans1 );
-        EasyMock.verify( trans2 );
+        mCtrl_.verify();
     }
 
     /**
@@ -191,37 +187,29 @@ public class StateTest
         IState state = new StateImpl( "TestState" );
 
         // set up mocks
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
-        IStateTransition trans1 = EasyMock.createMock( IStateTransition.class );
-        IStateTransition trans2 = EasyMock.createMock( IStateTransition.class );
+        IStateMachineContext context = mCtrl_.createMock( IStateMachineContext.class );
+        IStateTransition trans1 = mCtrl_.createMock( IStateTransition.class );
+        IStateTransition trans2 = mCtrl_.createMock( IStateTransition.class );
 
-        EasyMock.expect( trans1.getStartingState() ).andReturn( state ).anyTimes();
-        EasyMock.expect( trans1.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
-        EasyMock.expect( trans2.getStartingState() ).andReturn( state ).anyTimes();
-        EasyMock.expect( trans2.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
+        expect( trans1.getStartingState() ).andReturn( state ).anyTimes();
+        expect( trans1.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
+        expect( trans2.getStartingState() ).andReturn( state ).anyTimes();
+        expect( trans2.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
 
-        EasyMock.expect( trans1.evaluateTransitionValidity( context ) ).andReturn( false );
-        EasyMock.expect( trans2.evaluateTransitionValidity( context ) ).andReturn( false );
+        expect( trans1.evaluateTransitionValidity( context ) ).andReturn( false );
+        expect( trans2.evaluateTransitionValidity( context ) ).andReturn( false );
 
-        // replay mocks
-        EasyMock.replay( context );
-        EasyMock.replay( trans1 );
-        EasyMock.replay( trans2 );
+        mCtrl_.replay();
 
-        // load transmanager
         StateTransitionManager.instance().addTransitionToManager( trans1 );
         StateTransitionManager.instance().addTransitionToManager( trans2 );
 
-        // test exec
         IState newState = state.step( context );
 
-        Assert.assertSame( state, newState );
+        assertThat( state, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns the same state when there are no valid transitions setup" );
 
-        // verify mocks
-        EasyMock.verify( context );
-        EasyMock.verify( trans1 );
-        EasyMock.verify( trans2 );
+        mCtrl_.verify();
     }
 
     /**
@@ -234,20 +222,16 @@ public class StateTest
     @Test
     public void testStepWithNoTransitionsSetUpReturnsSelf() throws StateMachineException
     {
-        // set up mocks
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
+        IStateMachineContext context = mCtrl_.createMock( IStateMachineContext.class );
 
-        // replay mocks
-        EasyMock.replay( context );
+        mCtrl_.replay();
 
-        // test exec
         IState state = new StateImpl( "TestState" );
         IState newState = state.step( context );
 
-        Assert.assertSame( state, newState );
+        assertThat( state, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns the same state when there are no transitions setup" );
 
-        // verify mocks
-        EasyMock.verify( context );
+        mCtrl_.verify();
     }
 }

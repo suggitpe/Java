@@ -12,11 +12,15 @@ import org.suggs.libs.statemachine.impl.StateMachineImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.easymock.EasyMock;
-import org.junit.Assert;
+import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import static org.easymock.EasyMock.createControl;
+import static org.easymock.EasyMock.expect;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test suite for the state machine implementation.
@@ -29,16 +33,21 @@ public class StateMachineTest
 
     private static final Log LOG = LogFactory.getLog( StateMachineTest.class );
 
+    private IMocksControl mCtrl_;
+
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
         LOG.debug( "===================" + StateMachineTest.class.getSimpleName() );
     }
 
+    /** */
     @Before
     public void doBefore()
     {
         LOG.debug( "------------------- " );
+        mCtrl_ = createControl();
     }
 
     /**
@@ -48,23 +57,19 @@ public class StateMachineTest
     @Test
     public void testStateMachineInitiation()
     {
-        // create mocks
-        IState initialStateMock = EasyMock.createMock( IState.class );
-        EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
+        IState initialStateMock = mCtrl_.createMock( IState.class );
+        expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
 
-        // replay
-        EasyMock.replay( initialStateMock );
+        mCtrl_.replay();
 
-        // exec tests
         IStateMachine stateMachine = new StateMachineImpl( initialStateMock );
         IState curState = stateMachine.getCurrentState();
         LOG.debug( "Current state of the state machine is [" + curState.getStateName() + "]" );
 
-        Assert.assertEquals( initialStateMock, curState );
+        assertThat( initialStateMock, equalTo( curState ) );
         LOG.debug( "Singleton and initialisation state are the same" );
 
-        // verify mocks
-        EasyMock.verify( initialStateMock );
+        mCtrl_.verify();
     }
 
     /**
@@ -78,33 +83,27 @@ public class StateMachineTest
     public void testStepResultsInNewCurrentState() throws StateMachineException
     {
         // create mocks
-        IStateMachineContext contextMock = EasyMock.createMock( IStateMachineContext.class );
-        IState newStateMock = EasyMock.createMock( IState.class );
-        IState initialStateMock = EasyMock.createMock( IState.class );
+        IStateMachineContext contextMock = mCtrl_.createMock( IStateMachineContext.class );
+        IState newStateMock = mCtrl_.createMock( IState.class );
+        IState initialStateMock = mCtrl_.createMock( IState.class );
 
-        EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
-        EasyMock.expect( initialStateMock.step( contextMock ) ).andReturn( newStateMock );
-        EasyMock.expect( newStateMock.getStateName() ).andReturn( "NewState" ).anyTimes();
-        EasyMock.expect( newStateMock.step( contextMock ) ).andReturn( newStateMock );
+        expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
+        expect( initialStateMock.step( contextMock ) ).andReturn( newStateMock );
+        expect( newStateMock.getStateName() ).andReturn( "NewState" ).anyTimes();
+        expect( newStateMock.step( contextMock ) ).andReturn( newStateMock );
 
         // replay
-        EasyMock.replay( initialStateMock );
-        EasyMock.replay( newStateMock );
-        EasyMock.replay( contextMock );
+        mCtrl_.replay();
 
-        // exec tests
         IStateMachine stateMachine = new StateMachineImpl( initialStateMock );
         LOG.debug( "Starting test in state=[" + stateMachine.getCurrentState().getStateName() + "]" );
         stateMachine.step( contextMock );
         LOG.debug( "Ending up test in state=[" + stateMachine.getCurrentState().getStateName()
                    + "]" );
 
-        Assert.assertEquals( stateMachine.getCurrentState(), newStateMock );
+        assertThat( stateMachine.getCurrentState(), equalTo( newStateMock ) );
 
-        // verify mocks
-        EasyMock.verify( initialStateMock );
-        EasyMock.verify( newStateMock );
-        EasyMock.verify( contextMock );
+        mCtrl_.verify();
     }
 
     /**
@@ -117,28 +116,23 @@ public class StateMachineTest
     public void testNoStepResultsInSameCurrentState() throws StateMachineException
     {
         // create mocks
-        IState initialStateMock = EasyMock.createMock( IState.class );
-        IStateMachineContext contextMock = EasyMock.createMock( IStateMachineContext.class );
+        IState initialStateMock = mCtrl_.createMock( IState.class );
+        IStateMachineContext contextMock = mCtrl_.createMock( IStateMachineContext.class );
 
-        EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
-        EasyMock.expect( initialStateMock.step( contextMock ) ).andReturn( initialStateMock );
+        expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
+        expect( initialStateMock.step( contextMock ) ).andReturn( initialStateMock );
 
-        // replay
-        EasyMock.replay( initialStateMock );
-        EasyMock.replay( contextMock );
+        mCtrl_.replay();
 
-        // exec tests
         IStateMachine stateMachine = new StateMachineImpl( initialStateMock );
         LOG.debug( "Starting test in state=[" + stateMachine.getCurrentState().getStateName() + "]" );
         stateMachine.step( contextMock );
         LOG.debug( "Ending up test in state=[" + stateMachine.getCurrentState().getStateName()
                    + "]" );
 
-        Assert.assertEquals( stateMachine.getCurrentState(), initialStateMock );
+        assertThat( stateMachine.getCurrentState(), equalTo( initialStateMock ) );
 
-        // verify mocks
-        EasyMock.verify( initialStateMock );
-        EasyMock.verify( contextMock );
+        mCtrl_.verify();
     }
 
     /**
@@ -152,15 +146,14 @@ public class StateMachineTest
     public void testNullStepResultsInSameCurrentState() throws StateMachineException
     {
         // create mocks
-        IState initialStateMock = EasyMock.createMock( IState.class );
-        IStateMachineContext contextMock = EasyMock.createMock( IStateMachineContext.class );
+        IState initialStateMock = mCtrl_.createMock( IState.class );
+        IStateMachineContext contextMock = mCtrl_.createMock( IStateMachineContext.class );
 
-        EasyMock.expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
-        EasyMock.expect( initialStateMock.step( contextMock ) ).andReturn( null );
+        expect( initialStateMock.getStateName() ).andReturn( "InitialState" ).anyTimes();
+        expect( initialStateMock.step( contextMock ) ).andReturn( null );
 
         // replay
-        EasyMock.replay( initialStateMock );
-        EasyMock.replay( contextMock );
+        mCtrl_.replay();
 
         // exec tests
         IStateMachine stateMachine = new StateMachineImpl( initialStateMock );
@@ -168,9 +161,9 @@ public class StateMachineTest
         stateMachine.step( contextMock );
         LOG.debug( "Ending up test in state=[" + stateMachine.getCurrentState().getStateName()
                    + "]" );
+        assertThat( stateMachine.getCurrentState(), equalTo( initialStateMock ) );
 
         // verify mocks
-        EasyMock.verify( initialStateMock );
-        EasyMock.verify( contextMock );
+        mCtrl_.verify();
     }
 }

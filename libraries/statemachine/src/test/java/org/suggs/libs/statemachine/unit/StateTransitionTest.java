@@ -17,11 +17,20 @@ import org.suggs.libs.statemachine.stub.TrueGuardStub;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.easymock.EasyMock;
+import org.easymock.IMocksControl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import static org.easymock.EasyMock.createControl;
+import static org.easymock.EasyMock.expect;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  * Test suite for the state transition implementation.
@@ -34,16 +43,28 @@ public class StateTransitionTest
 
     private static final Log LOG = LogFactory.getLog( StateTransitionTest.class );
 
+    private IMocksControl mCtrl_;
+
+    private IState mStartState_;
+    private IState mEndState_;
+    private IStateMachineContext mContext_;
+
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
         LOG.debug( "===================" + StateTransitionTest.class.getSimpleName() );
     }
 
+    /** */
     @Before
     public void doBefore()
     {
         LOG.debug( "------------------- " );
+        mCtrl_ = createControl();
+        mStartState_ = mCtrl_.createMock( IState.class );
+        mEndState_ = mCtrl_.createMock( IState.class );
+        mContext_ = mCtrl_.createMock( IStateMachineContext.class );
     }
 
     /**
@@ -58,9 +79,9 @@ public class StateTransitionTest
         IState endState = new StateImpl( "TestEndState" );
         IStateTransition transition = new StateTransitionImpl( transName, startState, endState );
 
-        Assert.assertSame( startState, transition.getStartingState() );
-        Assert.assertSame( endState, transition.getEndingState() );
-        Assert.assertEquals( transName, transition.getTransitionName() );
+        assertThat( startState, equalTo( transition.getStartingState() ) );
+        assertThat( endState, equalTo( transition.getEndingState() ) );
+        assertThat( transName, equalTo( transition.getTransitionName() ) );
 
         LOG.debug( "Verified that the objects set at construction are correctly persisted into the object" );
     }
@@ -69,6 +90,7 @@ public class StateTransitionTest
      * Tests the that the equals, hashcode and toString methods work
      * correctly
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testEqualsHashcodeAndToString()
     {
@@ -89,14 +111,14 @@ public class StateTransitionTest
         StateTransitionImpl trans2 = new StateTransitionImpl( "stateTransition2", state2, endState2 );
 
         // check equals method
-        Assert.assertNotSame( trans1a, trans1b );
-        Assert.assertNotSame( trans1a, trans2 );
-        Assert.assertEquals( trans1a, trans1b );
-        Assert.assertFalse( trans1a.equals( trans2 ) );
+        assertThat( trans1a, not( sameInstance( trans1b ) ) );
+        assertThat( trans1a, not( sameInstance( trans2 ) ) );
+        assertThat( trans1a, equalTo( trans1b ) );
+        assertThat( trans1a, not( equalTo( trans2 ) ) );
 
         // check hashcode
-        Assert.assertEquals( trans1a.hashCode(), trans1b.hashCode() );
-        Assert.assertFalse( trans1a.hashCode() == trans2.hashCode() );
+        assertThat( trans1a.hashCode(), equalTo( trans1b.hashCode() ) );
+        assertThat( trans1a.hashCode(), not( equalTo( trans2.hashCode() ) ) );
 
         LOG.debug( "StateTransition1a: " + trans1a );
         LOG.debug( "StateTransition2: " + trans2 );
@@ -114,20 +136,18 @@ public class StateTransitionTest
     @Test(expected = StateMachineException.class)
     public void testTransitionEvaluationForNullContext() throws StateMachineException
     {
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
 
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
+        mCtrl_.replay();
 
-        IStateTransition target = new StateTransitionImpl( "testTransition", startState, endState );
+        IStateTransition target = new StateTransitionImpl( "testTransition",
+                                                           mStartState_,
+                                                           mEndState_ );
         LOG.debug( "Calling evaluate on the transition to endure that it throws an exception" );
         target.evaluateTransitionValidity( null );
 
-        Assert.fail( "The test should have thrown an execption so this should not be seen" );
+        fail( "The test should have thrown an execption so this should not be seen" );
 
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
+        mCtrl_.verify();
     }
 
     /**
@@ -138,36 +158,27 @@ public class StateTransitionTest
      * @throws StateMachineException
      *             this should not happen for this test
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testTranitionEventEvaluationForValidEvent() throws StateMachineException
     {
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
-
-        EasyMock.expect( context.getStateTransitionEvent() )
-            .andReturn( new StateTransitionEventImpl( "testEvent" ) )
+        expect( mContext_.getStateTransitionEvent() ).andReturn( new StateTransitionEventImpl( "testEvent" ) )
             .anyTimes();
 
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
-        EasyMock.replay( context );
+        mCtrl_.replay();
 
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
-                                                              startState,
-                                                              endState );
+                                                              mStartState_,
+                                                              mEndState_ );
         IStateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
         target.addTransitionEvent( evt );
 
-        boolean result = target.evaluateTransitionValidity( context );
+        boolean result = target.evaluateTransitionValidity( mContext_ );
         LOG.debug( "For the valid event [" + evt + "] we are expecting true and we got [" + result
                    + "]" );
-        Assert.assertTrue( result );
+        assertThat( result, is( true ) );
 
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
-        EasyMock.verify( context );
-
+        mCtrl_.verify();
     }
 
     /**
@@ -177,33 +188,24 @@ public class StateTransitionTest
      * @throws StateMachineException
      *             this should not happen for this test
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testTransitionEventEvaluationForNoEvents() throws StateMachineException
     {
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
-
         IStateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
-        EasyMock.expect( context.getStateTransitionEvent() ).andReturn( evt ).anyTimes();
+        expect( mContext_.getStateTransitionEvent() ).andReturn( evt ).anyTimes();
 
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
-        EasyMock.replay( context );
+        mCtrl_.replay();
 
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
-                                                              startState,
-                                                              endState );
+                                                              mStartState_,
+                                                              mEndState_ );
         // no events set on the transition
-
-        boolean result = target.evaluateTransitionValidity( context );
+        boolean result = target.evaluateTransitionValidity( mContext_ );
         LOG.debug( "For no set transition events we are expecting true and we got [" + result + "]" );
-        Assert.assertTrue( result );
+        assertThat( result, is( true ) );
 
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
-        EasyMock.verify( context );
-
+        mCtrl_.verify();
     }
 
     /**
@@ -213,36 +215,28 @@ public class StateTransitionTest
      * @throws StateMachineException
      *             this should not happen for this test
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testTransitionEventEvaluationForNoValidEvents() throws StateMachineException
     {
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
-
-        EasyMock.expect( context.getStateTransitionEvent() )
-            .andReturn( new StateTransitionEventImpl( "notMatchingEvent" ) )
+        expect( mContext_.getStateTransitionEvent() ).andReturn( new StateTransitionEventImpl( "notMatchingEvent" ) )
             .anyTimes();
 
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
-        EasyMock.replay( context );
+        mCtrl_.replay();
 
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
-                                                              startState,
-                                                              endState );
+                                                              mStartState_,
+                                                              mEndState_ );
         IStateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
         target.addTransitionEvent( evt );
 
-        boolean result = target.evaluateTransitionValidity( context );
+        boolean result = target.evaluateTransitionValidity( mContext_ );
         LOG.debug( "For the invalid event [" + evt + "] we are expecting false and we got ["
                    + result + "]" );
-        Assert.assertFalse( result );
 
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
-        EasyMock.verify( context );
+        assertThat( result, is( false ) );
 
+        mCtrl_.verify();
     }
 
     /**
@@ -252,34 +246,26 @@ public class StateTransitionTest
      * @throws StateMachineException
      *             this should not happen for this test
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testTransitionEventEvaluationForNullEvents() throws StateMachineException
     {
 
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
-
-        EasyMock.expect( context.getStateTransitionEvent() )
-            .andReturn( new StateTransitionEventImpl( "notMatchingEvent" ) )
+        expect( mContext_.getStateTransitionEvent() ).andReturn( new StateTransitionEventImpl( "notMatchingEvent" ) )
             .anyTimes();
 
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
-        EasyMock.replay( context );
+        mCtrl_.replay();
 
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
-                                                              startState,
-                                                              endState );
+                                                              mStartState_,
+                                                              mEndState_ );
         target.setTransitionEvents( null );
 
-        boolean result = target.evaluateTransitionValidity( context );
+        boolean result = target.evaluateTransitionValidity( mContext_ );
         LOG.debug( "For transition events we are expecting true and we got [" + result + "]" );
-        Assert.assertTrue( result );
+        assertThat( result, is( true ) );
 
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
-        EasyMock.verify( context );
+        mCtrl_.verify();
     }
 
     /**
@@ -288,33 +274,22 @@ public class StateTransitionTest
      * 
      * @throws StateMachineException
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testTranitionEventEvaluationForValidGuard() throws StateMachineException
     {
-        // set up mocks
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
+        mCtrl_.replay();
 
-        // replay mocks
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
-        EasyMock.replay( context );
-
-        // test exec
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
-                                                              startState,
-                                                              endState );
+                                                              mStartState_,
+                                                              mEndState_ );
         target.addTransitionGuard( new TrueGuardStub() );
 
-        boolean result = target.evaluateTransitionValidity( context );
+        boolean result = target.evaluateTransitionValidity( mContext_ );
         LOG.debug( "For transition guards we are expecting true and we got [" + result + "]" );
-        Assert.assertTrue( result );
+        assertThat( result, is( true ) );
 
-        // verify mocks
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
-        EasyMock.verify( context );
+        mCtrl_.verify();
     }
 
     /**
@@ -323,36 +298,24 @@ public class StateTransitionTest
      * 
      * @throws StateMachineException
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testTranitionEventEvaluationForValidGuardAndInvalidGuard()
                     throws StateMachineException
     {
-        // set up mocks
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
+        mCtrl_.replay();
 
-        // replay mocks
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
-        EasyMock.replay( context );
-
-        // test exec
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
-                                                              startState,
-                                                              endState );
+                                                              mStartState_,
+                                                              mEndState_ );
         target.addTransitionGuard( new FalseGuardStub() );
         target.addTransitionGuard( new TrueGuardStub() );
 
-        boolean result = target.evaluateTransitionValidity( context );
+        boolean result = target.evaluateTransitionValidity( mContext_ );
         LOG.debug( "For transition guards we are expecting false and we got [" + result + "]" );
-        Assert.assertFalse( result );
+        assertThat( result, is( false ) );
 
-        // verify mocks
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
-        EasyMock.verify( context );
-
+        mCtrl_.verify();
     }
 
     /**
@@ -361,33 +324,21 @@ public class StateTransitionTest
      * 
      * @throws StateMachineException
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testTransitionEventEvaluationForNoGuards() throws StateMachineException
     {
-        // set up mocks
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
+        mCtrl_.replay();
 
-        // replay mocks
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
-        EasyMock.replay( context );
-
-        // test exec
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
-                                                              startState,
-                                                              endState );
+                                                              mStartState_,
+                                                              mEndState_ );
 
-        boolean result = target.evaluateTransitionValidity( context );
+        boolean result = target.evaluateTransitionValidity( mContext_ );
         LOG.debug( "For no transition guards we are expecting true and we got [" + result + "]" );
-        Assert.assertTrue( result );
+        assertThat( result, is( true ) );
 
-        // verify mocks
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
-        EasyMock.verify( context );
-
+        mCtrl_.verify();
     }
 
     /**
@@ -396,35 +347,23 @@ public class StateTransitionTest
      * 
      * @throws StateMachineException
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testTransitionEventEvaluationForNoValidGuards() throws StateMachineException
     {
-        // set up mocks
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
+        mCtrl_.replay();
 
-        // replay mocks
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
-        EasyMock.replay( context );
-
-        // test exec
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
-                                                              startState,
-                                                              endState );
+                                                              mStartState_,
+                                                              mEndState_ );
         target.addTransitionGuard( new FalseGuardStub() );
 
-        boolean result = target.evaluateTransitionValidity( context );
+        boolean result = target.evaluateTransitionValidity( mContext_ );
         LOG.debug( "For no valid transition guards we are expecting false and we got [" + result
                    + "]" );
-        Assert.assertFalse( result );
+        assertThat( result, is( false ) );
 
-        // verify mocks
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
-        EasyMock.verify( context );
-
+        mCtrl_.verify();
     }
 
     /**
@@ -436,31 +375,18 @@ public class StateTransitionTest
     @Test
     public void testTransitionEventEvaluationForNullGuards() throws StateMachineException
     {
-        // set up mocks
-        IState startState = EasyMock.createMock( IState.class );
-        IState endState = EasyMock.createMock( IState.class );
-        IStateMachineContext context = EasyMock.createMock( IStateMachineContext.class );
+        mCtrl_.replay();
 
-        // replay mocks
-        EasyMock.replay( startState );
-        EasyMock.replay( endState );
-        EasyMock.replay( context );
-
-        // test exec
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
-                                                              startState,
-                                                              endState );
+                                                              mStartState_,
+                                                              mEndState_ );
         target.setTransitionGuards( null );
 
-        boolean result = target.evaluateTransitionValidity( context );
+        boolean result = target.evaluateTransitionValidity( mContext_ );
         LOG.debug( "For null transition guards we are expecting true and we got [" + result + "]" );
         Assert.assertTrue( result );
 
-        // verify mocks
-        EasyMock.verify( startState );
-        EasyMock.verify( endState );
-        EasyMock.verify( context );
-
+        mCtrl_.verify();
     }
 
 }

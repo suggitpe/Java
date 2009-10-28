@@ -9,10 +9,14 @@ import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test suite for the state transition event implementation.
@@ -25,12 +29,14 @@ public class StateTransitionEventTest
 
     private static final Log LOG = LogFactory.getLog( StateTransitionEventTest.class );
 
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
         LOG.debug( "===================" + StateTransitionEventTest.class.getSimpleName() );
     }
 
+    /** */
     @Before
     public void doBefore()
     {
@@ -47,7 +53,7 @@ public class StateTransitionEventTest
         final String EVENT_NAME = "TestEvent";
         IStateTransitionEvent event = new StateTransitionEventImpl( EVENT_NAME );
 
-        Assert.assertEquals( event.getEventName(), EVENT_NAME );
+        assertThat( event.getEventName(), equalTo( EVENT_NAME ) );
         LOG.debug( "Successfully created stateTransitionEvent=[" + event + "]" );
     }
 
@@ -55,6 +61,7 @@ public class StateTransitionEventTest
      * Tests the that the equals, hashcode and toString methods work
      * correctly
      */
+    @SuppressWarnings("boxing")
     @Test
     public void testEqualsHashcodeAndToString()
     {
@@ -63,14 +70,14 @@ public class StateTransitionEventTest
         StateTransitionEventImpl event2 = new StateTransitionEventImpl( "event2" );
 
         // check equals method
-        Assert.assertNotSame( event1a, event1b );
-        Assert.assertNotSame( event1a, event2 );
-        Assert.assertEquals( event1a, event1b );
-        Assert.assertFalse( event1a.equals( event2 ) );
+        assertThat( event1a, not( sameInstance( event1b ) ) );
+        assertThat( event1a, not( sameInstance( event2 ) ) );
+        assertThat( event1a, equalTo( event1b ) );
+        assertThat( event1a, not( equalTo( event2 ) ) );
 
         // check hashcode
-        Assert.assertEquals( event1a.hashCode(), event1b.hashCode() );
-        Assert.assertFalse( event1a.hashCode() == event2.hashCode() );
+        assertThat( event1a.hashCode(), equalTo( event1b.hashCode() ) );
+        assertThat( event1a.hashCode(), not( equalTo( event2.hashCode() ) ) );
 
         LOG.debug( "StateTransitionEvent1a: " + event1a );
         LOG.debug( "StateTransitionEvent2: " + event2 );

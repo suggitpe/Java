@@ -16,7 +16,6 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,6 +23,9 @@ import org.junit.runner.RunWith;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 /**
  * Integration test that uses a spring injected state machine to
@@ -53,6 +55,7 @@ public class StateMachineConnectionIntegrationTest
     @Resource(name = "connectedState")
     IState mConnectedState_;
 
+    /** */
     @BeforeClass
     public static void doBeforeClass()
     {
@@ -60,12 +63,14 @@ public class StateMachineConnectionIntegrationTest
                    + StateMachineConnectionIntegrationTest.class.getSimpleName() );
     }
 
+    /** */
     @Before
     public void doBefore()
     {
         LOG.debug( "------------------- " );
     }
 
+    /** */
     @After
     public void doAfter()
     {
@@ -84,7 +89,7 @@ public class StateMachineConnectionIntegrationTest
         LOG.info( "Testing that we can initialise the state machine through Spring ... sanity check" );
         IState initial = mStateMachine_.getCurrentState();
         LOG.debug( "Injected state machine: " + mStateMachine_ );
-        Assert.assertEquals( initial, mInitialState_ );
+        assertThat( initial, equalTo( mInitialState_ ) );
     }
 
     /**
@@ -99,7 +104,7 @@ public class StateMachineConnectionIntegrationTest
     {
         LOG.info( "Checking that with any event we will transition from Initial to Disconnected" );
         IState initial = mStateMachine_.getCurrentState();
-        Assert.assertEquals( initial, mInitialState_ );
+        assertThat( initial, equalTo( mInitialState_ ) );
 
         mStateMachine_.step( new IStateMachineContext()
         {
@@ -112,7 +117,7 @@ public class StateMachineConnectionIntegrationTest
         } );
 
         IState newState = mStateMachine_.getCurrentState();
-        Assert.assertEquals( newState, mDisconnectedState_ );
+        assertThat( newState, equalTo( mDisconnectedState_ ) );
         LOG.debug( "Verified that the state machine has correctly transitioned to the Disconnected State" );
     }
 
@@ -127,7 +132,7 @@ public class StateMachineConnectionIntegrationTest
     public void testNoTransitionOccursFromIrrelevantEvent() throws StateMachineException
     {
         LOG.info( "Checking that we pass in a totally random event we stay in the same overall state" );
-        Assert.assertEquals( mStateMachine_.getCurrentState(), mDisconnectedState_ );
+        assertThat( mStateMachine_.getCurrentState(), equalTo( mDisconnectedState_ ) );
         mStateMachine_.step( new IStateMachineContext()
         {
 
@@ -137,7 +142,7 @@ public class StateMachineConnectionIntegrationTest
                 return new StateTransitionEventImpl( "notRelevantEvent" );
             }
         } );
-        Assert.assertEquals( mStateMachine_.getCurrentState(), mDisconnectedState_ );
+        assertThat( mStateMachine_.getCurrentState(), equalTo( mDisconnectedState_ ) );
     }
 
     /**
@@ -149,7 +154,7 @@ public class StateMachineConnectionIntegrationTest
     public void testTransitionFromDisconnectedToConnected() throws StateMachineException
     {
         LOG.info( "Checking that when we pass in a connect event that we transition through the connecting state and onto the connected state" );
-        Assert.assertEquals( mStateMachine_.getCurrentState(), mDisconnectedState_ );
+        assertThat( mStateMachine_.getCurrentState(), equalTo( mDisconnectedState_ ) );
         mStateMachine_.step( new IStateMachineContext()
         {
 
@@ -159,7 +164,7 @@ public class StateMachineConnectionIntegrationTest
                 return new StateTransitionEventImpl( "connect" );
             }
         } );
-        Assert.assertEquals( mStateMachine_.getCurrentState(), mConnectedState_ );
+        assertThat( mStateMachine_.getCurrentState(), equalTo( mConnectedState_ ) );
     }
 
     /**
@@ -173,7 +178,7 @@ public class StateMachineConnectionIntegrationTest
     public void testTransitionFromConnectedToDisconnected() throws StateMachineException
     {
         LOG.info( "Checking that when we pass in a disconnect event that we transition through the disconnecting state and onto the disconnected state" );
-        Assert.assertEquals( mStateMachine_.getCurrentState(), mConnectedState_ );
+        assertThat( mStateMachine_.getCurrentState(), equalTo( mConnectedState_ ) );
         mStateMachine_.step( new IStateMachineContext()
         {
 
@@ -183,6 +188,6 @@ public class StateMachineConnectionIntegrationTest
                 return new StateTransitionEventImpl( "disconnect" );
             }
         } );
-        Assert.assertEquals( mStateMachine_.getCurrentState(), mDisconnectedState_ );
+        assertThat( mStateMachine_.getCurrentState(), equalTo( mDisconnectedState_ ) );
     }
 }

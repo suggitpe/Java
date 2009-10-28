@@ -25,6 +25,7 @@ public class AllIntegrationTests
 
     private static final Log LOG = LogFactory.getLog( AllIntegrationTests.class );
 
+    /** */
     @BeforeClass
     public static void doBefore()
     {
