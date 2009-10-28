@@ -29,6 +29,11 @@ public class SimpleSubscriber
 
     private static final Log LOG = LogFactory.getLog( SimpleSubscriber.class );
 
+    /**
+     * @param aDestName
+     * @throws NamingException
+     * @throws JMSException
+     */
     public void subscribeToTopic( String aDestName ) throws NamingException, JMSException
     {
         InitialContext ctx = ContextHelper.createInitialContext();

@@ -19,6 +19,9 @@ public class TestPublishToTopic
 
     private static final Log LOG = LogFactory.getLog( TestPublishToTopic.class );
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void testSendTextMessageToTopic() throws Exception
     {

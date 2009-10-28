@@ -30,6 +30,12 @@ public class SimplePublisher
 
     private static final Log LOG = LogFactory.getLog( SimplePublisher.class );
 
+    /**
+     * @param destName
+     * @throws NamingException
+     * @throws NameNotFoundException
+     * @throws JMSException
+     */
     public void sendMessageToTopic( String destName ) throws NamingException,
                     NameNotFoundException, JMSException
     {

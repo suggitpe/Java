@@ -19,6 +19,9 @@ public class TestSubscribeToTopic
 
     private static final Log LOG = LogFactory.getLog( TestSubscribeToTopic.class );
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void testSubscribeToSingleMessage() throws Exception
     {

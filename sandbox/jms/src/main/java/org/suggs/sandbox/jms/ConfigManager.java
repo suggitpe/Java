@@ -23,12 +23,19 @@ public class ConfigManager
     private static final String PROP_FILE = "tibco_connection.properties";
 
     // here we pop all of the properties that we wish to manage
+    /** */
     public static final String CONTEXT_FACTORY = "context.factory";
+    /** */
     public static final String PROVIDER_URL = "provider.url";
+    /** */
     public static final String USERNAME = "tibco.username";
+    /** */
     public static final String PASSWORD = "tibco.password";
+    /** */
     public static final String TOPIC_CONN_FACT = "topic.connectionfactory";
+    /** */
     public static final String SUBSCR_MSG_SELECTOR = "subscriber.message.selector";
+    /** */
     public static final String SUBSCR_DURABLE = "subscriber.durable.name";
 
     private static ConfigManager mInstance_;
