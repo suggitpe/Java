@@ -63,10 +63,10 @@ public class BundleReleaseToolGui
     private IBundleReleaseToolContextCallback mCallback_;
     private BundleDataModel mModel_ = new BundleDataModel();
     private JTable mTable_ = new JTable();
-    public final ColumnData cols[] = { new ColumnData( "ID", 5, Label.LEFT ),
-                                      new ColumnData( "State", 10, Label.LEFT ),
-                                      new ColumnData( "Location", 150, Label.LEFT ),
-                                      new ColumnData( "Bundle Name", 150, Label.LEFT ) };
+    private final ColumnData cols[] = { new ColumnData( "ID", 5, Label.LEFT ),
+                                       new ColumnData( "State", 10, Label.LEFT ),
+                                       new ColumnData( "Location", 150, Label.LEFT ),
+                                       new ColumnData( "Bundle Name", 150, Label.LEFT ) };
 
     /**
      * Constructs a new instance (builds the frame and inserts a new
@@ -563,7 +563,7 @@ public class BundleReleaseToolGui
             }
 
             BundleData dataRow = mVector_.get( row );
-            return dataRow.id;
+            return dataRow.getId();
         }
 
         /**
@@ -581,13 +581,13 @@ public class BundleReleaseToolGui
             switch ( col )
             {
                 case 0:
-                    return dataRow.id;
+                    return dataRow.getId();
                 case 1:
-                    return dataRow.state;
+                    return dataRow.getState();
                 case 2:
-                    return dataRow.location;
+                    return dataRow.getLocation();
                 case 3:
-                    return dataRow.bundleName;
+                    return dataRow.getBundleName();
             }
             return "";
         }

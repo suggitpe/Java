@@ -13,11 +13,59 @@ package org.suggs.osgitools.bundlereleasetool;
 public class BundleData
 {
 
-    public Long id;
-    public String state;
-    public String location;
-    public String bundleName;
+    private Long id;
+    private String state;
+    private String location;
+    private String bundleName;
 
+    /**
+     * Returns the value of id.
+     * 
+     * @return Returns the id.
+     */
+    public Long getId()
+    {
+        return id;
+    }
+
+    /**
+     * Returns the value of state.
+     * 
+     * @return Returns the state.
+     */
+    public String getState()
+    {
+        return state;
+    }
+
+    /**
+     * Returns the value of location.
+     * 
+     * @return Returns the location.
+     */
+    public String getLocation()
+    {
+        return location;
+    }
+
+    /**
+     * Returns the value of bundleName.
+     * 
+     * @return Returns the bundleName.
+     */
+    public String getBundleName()
+    {
+        return bundleName;
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aId
+     * @param aState
+     * @param aLocation
+     * @param aBundleName
+     */
     public BundleData( long aId, String aState, String aLocation, String aBundleName )
     {
         id = new Long( aId );
