@@ -7,8 +7,8 @@ package com.ubs.orca.orcabridge;
 import javax.jms.Message;
 import javax.jms.Session;
 
+import com.ubs.orca.client.api.IConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
-import com.ubs.orca.common.bus.IOrcaMessage;
 
 /**
  * This interface encapsulates the fact that there are a number of
@@ -28,8 +28,9 @@ public interface IMessageFacade
      * @param aSession
      *            the session from which to create the message
      * @return a new JMS message
+     * @throws OrcaBridgeMessageConversionException
      */
-    public Message buildJmsMessage( Session aSession );
+    public Message buildJmsMessage( Session aSession ) throws OrcaBridgeMessageConversionException;
 
     /**
      * Build an Orca message using an Orca client
@@ -37,7 +38,9 @@ public interface IMessageFacade
      * @param aClient
      *            the client from which to build the Orca Message
      * @return a new Orca message
+     * @throws OrcaBridgeMessageConversionException
      */
-    public IOrcaMessage buildOrcaMesage( IOrcaClient aClient );
+    public IConversationMessage buildOrcaMesage( IOrcaClient aClient )
+                    throws OrcaBridgeMessageConversionException;
 
 }

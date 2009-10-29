@@ -10,8 +10,8 @@ import javax.jms.Session;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.ubs.orca.client.api.IConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
-import com.ubs.orca.common.bus.IOrcaMessage;
 import com.ubs.orca.orcabridge.IMessageFacade;
 
 /**
@@ -51,7 +51,7 @@ class JmsMessageFacade implements IMessageFacade
      * @see com.ubs.orca.orcabridge.IMessageFacade#buildOrcaMesage(com.ubs.orca.client.api.IOrcaClient)
      */
     @Override
-    public IOrcaMessage buildOrcaMesage( IOrcaClient aClient )
+    public IConversationMessage buildOrcaMesage( IOrcaClient aClient )
     {
         LOG.debug( "Building Orca message" );
         return null;

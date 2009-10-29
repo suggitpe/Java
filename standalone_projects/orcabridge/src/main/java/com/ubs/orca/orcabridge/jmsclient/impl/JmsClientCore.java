@@ -92,6 +92,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
             LOG.debug( "Creating connection to JMS Client using [" + connectionFactory + "]" );
         }
         connection_ = createConnection( connectionFactory, aUsername, aPassword );
+        LOG.info( "Connection established" );
     }
 
     private static Connection createConnection( ConnectionFactory aFactory, String aUsername,

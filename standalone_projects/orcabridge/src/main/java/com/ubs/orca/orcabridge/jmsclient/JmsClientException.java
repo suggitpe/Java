@@ -15,14 +15,6 @@ public class JmsClientException extends Exception
 
     /**
      * Constructs a new instance.
-     */
-    public JmsClientException()
-    {
-        super();
-    }
-
-    /**
-     * Constructs a new instance.
      * 
      * @param aMsg
      *            the exception message

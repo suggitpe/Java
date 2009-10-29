@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
  * @version 1.0 24 Aug 2009
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { JmsMessageSenderIntegrationTest.class })
+@Suite.SuiteClasses( { JmsClientCoreIntegrationTest.class, JmsMessageSenderIntegrationTest.class })
 public class AllIntegrationTests
 {
 

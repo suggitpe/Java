@@ -18,14 +18,6 @@ public class OrcaBridgeException extends Exception
 
     /**
      * Constructs a new instance.
-     */
-    public OrcaBridgeException()
-    {
-        super();
-    }
-
-    /**
-     * Constructs a new instance.
      * 
      * @param aMsg
      *            the exception message

@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ubs.orca.orcabridge.IMessageFacade;
+import com.ubs.orca.orcabridge.OrcaBridgeMessageConversionException;
 import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 
@@ -28,7 +29,7 @@ public class JmsSenderAction implements IJmsAction
 
     private static final Log LOG = LogFactory.getLog( JmsSenderAction.class );
 
-    private IMessageFacade messageFacade_;
+    private final IMessageFacade messageFacade_;
 
     /**
      * Constructs a new instance.
@@ -90,7 +91,7 @@ public class JmsSenderAction implements IJmsAction
                 }
                 catch ( JMSException je )
                 {
-                    LOG.error( "Failed to close the message producer" );
+                    LOG.error( "Failed to close the message producer", je );
                 }
             }
         }
@@ -111,6 +112,10 @@ public class JmsSenderAction implements IJmsAction
         catch ( JMSException je )
         {
             throw new JmsClientException( "Failed to create and send JMS message", je );
+        }
+        catch ( OrcaBridgeMessageConversionException obmce )
+        {
+            throw new JmsClientException( "Failed to convert JMS message", obmce );
         }
     }
 

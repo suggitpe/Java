@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	
+	<bean id="jmsClient" class="com.ubs.orca.orcabridge.jmsclient.impl.JmsClientCore">
+		<property name="initialContext">
+			<bean class="javax.naming.InitialContext">
+				<constructor-arg type="java.util.Hashtable" ref="contextHash"/>
+			</bean>
+		</property>
+		<property name="connectionFactoryName" value="TestConnectionFactory" />
+		<property name="destinationName" value="TestDestination" />
+	</bean>
+
+	<bean id="contextHash" class="java.util.Hashtable">
+		<constructor-arg type="java.util.Map">
+			<map>
+				<entry key="java.naming.factory.initial"
+					value="com.tibco.tibjms.naming.TibjmsInitialContextFactory" />
+				<entry key="java.naming.provider.url" value="tcp://localhost:7222" />
+				<entry key="java.naming.security.principal" value="" />
+				<entry key="java.naming.security.credentials" value="" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+</beans>
