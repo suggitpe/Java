@@ -24,4 +24,17 @@ public class OrcaBridgeMessageConversionException extends Exception
     {
         super( aMsg );
     }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aMsg
+     *            the message of the exception
+     * @param aException
+     *            a nested exception to embed in this exception
+     */
+    public OrcaBridgeMessageConversionException( String aMsg, Throwable aException )
+    {
+        super( aMsg, aException );
+    }
 }

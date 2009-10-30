@@ -38,7 +38,7 @@ public class JmsClientCoreIntegrationTest
     private static final Log LOG = LogFactory.getLog( JmsClientCoreIntegrationTest.class );
 
     @Resource(name = "jmsClient")
-    IJmsClient jmsClient_;
+    private IJmsClient jmsClient_;
 
     /** */
     @BeforeClass

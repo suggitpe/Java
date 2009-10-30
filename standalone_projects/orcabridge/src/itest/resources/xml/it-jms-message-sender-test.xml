@@ -2,9 +2,11 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-	<bean id="jmsMessageSender" class="com.ubs.orca.orcabridge.processors.JmsMessageSender"  init-method="init">
+	<bean id="jmsMessageSender" class="com.ubs.orca.orcabridge.processors.JmsMessageSender"  init-method="init" destroy-method="tearDown">
 		<property name="jmsClientCore" ref="localJmsClient"/>
 	</bean>
+	
+	<bean id="messageFacade" class="com.ubs.orca.orcabridge.support.MessageFacadeTestStub"/>
 	
 	
 	<bean id="localJmsClient" class="com.ubs.orca.orcabridge.jmsclient.impl.JmsClientCore">

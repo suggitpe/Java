@@ -21,7 +21,10 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 /**
- * TODO Write javadoc for JmsMessageSenderIntegrationTest
+ * Tests suite that will work exactly like the way we expect the JMS
+ * Message Sender to be used when fully deployed. Please see the
+ * spring configuration for details on how this should be configured
+ * in a non test based scenario.
  * 
  * @author suggitpe
  * @version 1.0 29 Oct 2009
@@ -34,7 +37,10 @@ public class JmsMessageSenderIntegrationTest
     private static final Log LOG = LogFactory.getLog( JmsMessageSenderIntegrationTest.class );
 
     @Resource(name = "jmsMessageSender")
-    IMessageProcessor jmsMessageSender_;
+    private IMessageProcessor jmsMessageSender_;
+
+    @Resource(name = "messageFacade")
+    private IMessageFacade messageFacade_;
 
     /** */
     @BeforeClass
@@ -57,10 +63,18 @@ public class JmsMessageSenderIntegrationTest
         LOG.debug( "------------------- " );
     }
 
+    /**
+     * Tests that we can indeed send a message to the JMS broker.
+     * 
+     * @throws OrcaBridgeException
+     */
     @Test
-    public void testSendMessageToJmsBroker()
+    public void testSendMessageToJmsBroker() throws OrcaBridgeException
     {
         LOG.debug( "Testing the send of a JMS message to the broker" );
         assertThat( jmsMessageSender_, notNullValue() );
+
+        LOG.debug( "Processing message ..." );
+        jmsMessageSender_.processMessage( messageFacade_ );
     }
 }

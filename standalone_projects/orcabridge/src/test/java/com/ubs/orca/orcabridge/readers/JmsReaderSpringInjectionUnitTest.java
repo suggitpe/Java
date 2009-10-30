@@ -37,7 +37,7 @@ public class JmsReaderSpringInjectionUnitTest
     private static final Log LOG = LogFactory.getLog( JmsReaderSpringInjectionUnitTest.class );
 
     @Resource(name = "jmsReader")
-    IMessageReader jmsReader_;
+    private IMessageReader jmsReader_;
 
     /** */
     @BeforeClass

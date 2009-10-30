@@ -53,6 +53,7 @@ public class JmsSenderAction implements IJmsAction
         createProducerAndSend( messageFacade_, aSession, aDestination );
         try
         {
+            LOG.info( "Committing transaction ..." );
             aSession.commit();
         }
         catch ( JMSException jmse )

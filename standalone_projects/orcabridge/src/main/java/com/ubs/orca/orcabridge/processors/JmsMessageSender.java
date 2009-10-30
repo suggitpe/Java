@@ -50,6 +50,12 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
         jmsClientCore_.connect();
     }
 
+    public void tearDown() throws JmsClientException
+    {
+        LOG.debug( "Tearing down the sender connection" );
+        jmsClientCore_.disconnect();
+    }
+
     /**
      * @see com.ubs.orca.orcabridge.IMessageProcessor#processMessage(com.ubs.orca.orcabridge.IMessageFacade)
      */

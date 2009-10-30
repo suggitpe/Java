@@ -37,7 +37,7 @@ public class JmsClientCoreSpringInjectionUnitTest
     private static final Log LOG = LogFactory.getLog( JmsClientCoreSpringInjectionUnitTest.class );
 
     @Resource(name = "jmsClientCore")
-    IJmsClient jmsClientCore_;
+    private IJmsClient jmsClientCore_;
 
     /** */
     @BeforeClass

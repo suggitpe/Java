@@ -38,7 +38,7 @@ public class OrcaReaderSpringInjectionUnitTest
     private static final Log LOG = LogFactory.getLog( OrcaReaderSpringInjectionUnitTest.class );
 
     @Resource(name = "orcaReader")
-    IMessageReader orcaReader_;
+    private IMessageReader orcaReader_;
 
     /** */
     @BeforeClass
