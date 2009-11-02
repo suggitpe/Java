@@ -93,14 +93,14 @@ public class JmsClientCoreTestProcess
         mockConnection_.start();
         expectLastCall().once();
 
-        mockAction_.action( mockSession_, mockDestination_ );
+        mockAction_.actionInTransaction( mockSession_, mockDestination_ );
         expectLastCall().once();
 
         mockSession_.close();
         expectLastCall().once();
 
         ctrl_.replay();
-        jmsClientCore_.processInTransaction( mockAction_ );
+        jmsClientCore_.processActionOnce( mockAction_ );
         ctrl_.verify();
     }
 
@@ -123,14 +123,14 @@ public class JmsClientCoreTestProcess
         mockConnection_.start();
         expectLastCall().once();
 
-        mockAction_.action( mockSession_, mockDestination_ );
+        mockAction_.actionInTransaction( mockSession_, mockDestination_ );
         expectLastCall().andThrow( new JmsClientException( "Action fail: this is all part of the test" ) );
 
         mockSession_.close();
         expectLastCall().once();
 
         ctrl_.replay();
-        jmsClientCore_.processInTransaction( mockAction_ );
+        jmsClientCore_.processActionOnce( mockAction_ );
         ctrl_.verify();
     }
 
@@ -145,7 +145,7 @@ public class JmsClientCoreTestProcess
     {
 
         ctrl_.replay();
-        jmsClientCore_.processInTransaction( mockAction_ );
+        jmsClientCore_.processActionOnce( mockAction_ );
         ctrl_.verify();
     }
 
@@ -167,7 +167,7 @@ public class JmsClientCoreTestProcess
         expect( mockConnection_.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andThrow( new JMSException( "Session create fail: this is all part of the test" ) );
 
         ctrl_.replay();
-        jmsClientCore_.processInTransaction( mockAction_ );
+        jmsClientCore_.processActionOnce( mockAction_ );
         ctrl_.verify();
     }
 
@@ -188,7 +188,7 @@ public class JmsClientCoreTestProcess
         mockConnection_.start();
         expectLastCall().once();
 
-        mockAction_.action( mockSession_, mockDestination_ );
+        mockAction_.actionInTransaction( mockSession_, mockDestination_ );
         expectLastCall().once();
 
         mockSession_.close();
@@ -198,7 +198,7 @@ public class JmsClientCoreTestProcess
         jmsClientCore_.setDestination( mockDestination_ );
 
         ctrl_.replay();
-        jmsClientCore_.processInTransaction( mockAction_ );
+        jmsClientCore_.processActionOnce( mockAction_ );
         ctrl_.verify();
     }
 

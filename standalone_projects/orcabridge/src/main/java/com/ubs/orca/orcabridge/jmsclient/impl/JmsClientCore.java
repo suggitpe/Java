@@ -40,6 +40,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
 
     private Connection connection_;
     private Destination destination_;
+    private boolean processAction_ = true;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -157,10 +158,32 @@ public class JmsClientCore implements IJmsClient, InitializingBean
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processInTransaction(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processActionUntilStopped(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
      */
     @Override
-    public void processInTransaction( IJmsAction aAction ) throws JmsClientException
+    public void processActionUntilStopped( IJmsAction aActionCallback ) throws JmsClientException
+    {
+        processAction_ = true;
+        while ( processAction_ == true )
+        {
+            processActionOnce( aActionCallback );
+        }
+    }
+
+    /**
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#stopProcessAction()
+     */
+    @Override
+    public void stopProcessAction()
+    {
+        processAction_ = false;
+    }
+
+    /**
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processActionOnce(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
+     */
+    @Override
+    public void processActionOnce( IJmsAction aAction ) throws JmsClientException
     {
         if ( connection_ == null )
         {
@@ -178,7 +201,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
             // in the flow. This starts the message flow from the
             // connection.
             connection_.start();
-            aAction.action( session, destination_ );
+            aAction.actionInTransaction( session, destination_ );
 
             LOG.info( "JMS Client completed execution of processing" );
         }

@@ -39,6 +39,9 @@ public class JmsReaderUnitTest
 
     private static final Log LOG = LogFactory.getLog( JmsReaderUnitTest.class );
 
+    private static final String DURABLE_NAME = "TestDurable";
+    private static final String MESSAGE_SELECTOR = "test selector";
+
     private JmsSingleMessageReader jmsReader_;
     private IMocksControl ctrl_;
     private IMessageProcessor mockProcessor_;
@@ -69,7 +72,9 @@ public class JmsReaderUnitTest
         jmsReader_ = new JmsSingleMessageReader();
         jmsReader_.setMessageProcessor( mockProcessor_ );
         jmsReader_.setJmsClient( mockJmsClient_ );
-        jmsReader_.setJmsAction( mockJmsAction_ );
+        jmsReader_.setDurableName( DURABLE_NAME );
+        jmsReader_.setMessageSelector( MESSAGE_SELECTOR );
+
         jmsReader_.afterPropertiesSet();
     }
 
@@ -84,7 +89,7 @@ public class JmsReaderUnitTest
     {
         mockJmsClient_.connect();
         expectLastCall().once();
-        mockJmsClient_.processInTransaction( mockJmsAction_ );
+        mockJmsClient_.processActionUntilStopped( isA( IJmsAction.class ) );
         expectLastCall().once();
 
         ctrl_.replay();
@@ -127,7 +132,7 @@ public class JmsReaderUnitTest
     {
         mockJmsClient_.connect();
         expectLastCall().once();
-        mockJmsClient_.processInTransaction( mockJmsAction_ );
+        mockJmsClient_.processActionUntilStopped( isA( IJmsAction.class ) );
         expectLastCall().andThrow( new JmsClientException( "ProcessInTransaction failed: This is all part of the test" ) );
 
         ctrl_.replay();

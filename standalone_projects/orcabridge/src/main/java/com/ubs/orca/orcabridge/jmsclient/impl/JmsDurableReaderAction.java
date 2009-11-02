@@ -46,7 +46,7 @@ public class JmsDurableReaderAction implements IJmsAction
      * @param aProcessingCallback
      *            the callback from which we can process the messages
      * @param aDurableName
-     *            the name of teh durable to connect to
+     *            the name of the durable to connect to
      * @param aDurableMessageSelector
      *            the message selector to use with the durable
      */
@@ -60,11 +60,12 @@ public class JmsDurableReaderAction implements IJmsAction
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsAction#action(javax.jms.Session,
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsAction#actionInTransaction(javax.jms.Session,
      *      javax.jms.Destination)
      */
     @Override
-    public void action( Session aSession, Destination aDestinstion ) throws JmsClientException
+    public void actionInTransaction( Session aSession, Destination aDestinstion )
+                    throws JmsClientException
     {
         createDurableSubscriptionAndProcess( aSession, aDestinstion );
         try
@@ -95,7 +96,7 @@ public class JmsDurableReaderAction implements IJmsAction
                                                            durableName_,
                                                            durableMessageSelector_,
                                                            true );
-            retriveAndProcessMessages( aSession, subscriber );
+            retriveAndProcessMessage( aSession, subscriber );
 
         }
         catch ( JMSException jmse )
@@ -120,16 +121,14 @@ public class JmsDurableReaderAction implements IJmsAction
         }
     }
 
-    private void retriveAndProcessMessages( Session aSession, TopicSubscriber aSubscriber )
+    private void retriveAndProcessMessage( Session aSession, TopicSubscriber aSubscriber )
                     throws JmsClientException
     {
         Message message = null;
         try
         {
-            // TODO: review this - all done in one transaction - think
-            // it might be better to return to signify that a message
-            // has been received
-            while ( ( message = aSubscriber.receive() ) != null )
+            message = aSubscriber.receive();
+            if ( message != null )
             {
                 clientCallback_.onReceived( message );
                 aSession.commit();

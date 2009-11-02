@@ -28,6 +28,6 @@ public interface IJmsAction
      *            performed against
      * @throws JmsClientException
      */
-    void action( Session aSession, Destination aDestination ) throws JmsClientException;
+    void actionInTransaction( Session aSession, Destination aDestination ) throws JmsClientException;
 
 }

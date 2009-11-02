@@ -21,11 +21,11 @@ public class JmsActionTestStub implements IJmsAction
     private static final Log LOG = LogFactory.getLog( JmsActionTestStub.class );
 
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsAction#action(javax.jms.Session,
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsAction#actionInTransaction(javax.jms.Session,
      *      javax.jms.Destination)
      */
     @Override
-    public void action( Session aSession, Destination aDestination ) throws JmsClientException
+    public void actionInTransaction( Session aSession, Destination aDestination ) throws JmsClientException
     {
         LOG.debug( "***** Stub JMS Action - Performing Action" );
     }

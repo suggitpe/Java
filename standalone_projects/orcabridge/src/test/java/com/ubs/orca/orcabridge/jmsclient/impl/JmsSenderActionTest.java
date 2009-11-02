@@ -94,7 +94,7 @@ public class JmsSenderActionTest
         expectLastCall().once();
 
         ctrl_.replay();
-        jmsSenderAction_.action( mockSession_, mockDestination_ );
+        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
         ctrl_.verify();
     }
 
@@ -111,7 +111,7 @@ public class JmsSenderActionTest
         expect( mockSession_.createProducer( mockDestination_ ) ).andThrow( new JMSException( "Producer create fail: this is all part of the test" ) );
 
         ctrl_.replay();
-        jmsSenderAction_.action( mockSession_, mockDestination_ );
+        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
         ctrl_.verify();
     }
 
@@ -135,7 +135,7 @@ public class JmsSenderActionTest
         expectLastCall().once();
 
         ctrl_.replay();
-        jmsSenderAction_.action( mockSession_, mockDestination_ );
+        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
         ctrl_.verify();
 
     }
@@ -164,7 +164,7 @@ public class JmsSenderActionTest
         expectLastCall().once();
 
         ctrl_.replay();
-        jmsSenderAction_.action( mockSession_, mockDestination_ );
+        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
         ctrl_.verify();
     }
 
@@ -197,7 +197,7 @@ public class JmsSenderActionTest
         expectLastCall().once();
 
         ctrl_.replay();
-        jmsSenderAction_.action( mockSession_, mockDestination_ );
+        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
         ctrl_.verify();
     }
 
@@ -229,7 +229,7 @@ public class JmsSenderActionTest
         expectLastCall().andThrow( new JMSException( "" ) );
 
         ctrl_.replay();
-        jmsSenderAction_.action( mockSession_, mockDestination_ );
+        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
         ctrl_.verify();
     }
 

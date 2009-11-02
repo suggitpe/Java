@@ -14,6 +14,7 @@ import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
+import com.ubs.orca.orcabridge.jmsclient.impl.JmsDurableReaderAction;
 import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
 
 import org.springframework.util.Assert;
@@ -30,8 +31,9 @@ public class JmsSingleMessageReader extends AbstractMessageReader
 
     private static final Log LOG = LogFactory.getLog( JmsSingleMessageReader.class );
 
-    private IJmsAction jmsAction_;
     private IJmsClient jmsClient_;
+    private String durableName_;
+    private String messageSelector_;
 
     /**
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
@@ -40,7 +42,8 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     protected void doAfterPropertiesSet() throws Exception
     {
         Assert.notNull( jmsClient_, "No JMS client has been set on the JMS reader" );
-        Assert.notNull( jmsAction_, "No JMS action has been set on the JMS reader" );
+        Assert.notNull( durableName_, "No durable name has been set on the JMS reader" );
+        Assert.notNull( messageSelector_, "No message selector has been set on the JMS reader" );
     }
 
     /**
@@ -49,10 +52,13 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     @Override
     protected void doStartReader() throws OrcaBridgeException
     {
+        IJmsAction action = new JmsDurableReaderAction( new JmsMessageProcessorCallback(),
+                                                        durableName_,
+                                                        messageSelector_ );
         try
         {
             jmsClient_.connect();
-            jmsClient_.processInTransaction( jmsAction_ );
+            jmsClient_.processActionUntilStopped( action );
         }
         catch ( JmsClientException je )
         {
@@ -93,15 +99,25 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     }
 
     /**
-     * Sets the jmsAction that will be passed into the jms client when
-     * required
+     * Sets the durableName field to the specified value.
      * 
-     * @param aJmsAction
-     *            the JMS action
+     * @param durableName
+     *            The durableName to set.
      */
-    public void setJmsAction( IJmsAction aJmsAction )
+    public void setDurableName( String durableName )
     {
-        jmsAction_ = aJmsAction;
+        durableName_ = durableName;
+    }
+
+    /**
+     * Sets the messageSelector field to the specified value.
+     * 
+     * @param messageSelector
+     *            The messageSelector to set.
+     */
+    public void setMessageSelector( String messageSelector )
+    {
+        messageSelector_ = messageSelector;
     }
 
     // ===============================================

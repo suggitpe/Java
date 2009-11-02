@@ -44,11 +44,11 @@ public class JmsSenderAction implements IJmsAction
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsAction#action(javax.jms.Session,
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsAction#actionInTransaction(javax.jms.Session,
      *      javax.jms.Destination)
      */
     @Override
-    public void action( Session aSession, Destination aDestination ) throws JmsClientException
+    public void actionInTransaction( Session aSession, Destination aDestination ) throws JmsClientException
     {
         createProducerAndSend( messageFacade_, aSession, aDestination );
         try

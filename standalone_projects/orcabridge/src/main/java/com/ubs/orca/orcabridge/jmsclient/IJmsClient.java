@@ -40,13 +40,28 @@ public interface IJmsClient
 
     /**
      * Perform the JMS specific processing as required within a
-     * specified connection.
+     * specified connection transaction.
      * 
      * @param aActionCallback
      *            a callback that will implement the required
      *            processing.
      * @throws JmsClientException
      */
-    void processInTransaction( IJmsAction aActionCallback ) throws JmsClientException;
+    void processActionOnce( IJmsAction aActionCallback ) throws JmsClientException;
 
+    /**
+     * Perform the JMS specific processing as required within a
+     * defined transaction and in a controllable loop.
+     * 
+     * @param aActionCallback
+     *            a callback that will implement the required
+     *            processing
+     * @throws JmsClientException
+     */
+    void processActionUntilStopped( IJmsAction aActionCallback ) throws JmsClientException;
+
+    /**
+     * Stops the processing of actions in a controlled manner.
+     */
+    void stopProcessAction();
 }

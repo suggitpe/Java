@@ -18,7 +18,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * TODO Write javadoc for JmsMessageSender
+ * Class to send messages to a JMS destination.
  * 
  * @author suggitpe
  * @version 1.0 29 Oct 2009
@@ -50,6 +50,11 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
         jmsClientCore_.connect();
     }
 
+    /**
+     * This method is called when spring destroys its bean factories
+     * 
+     * @throws JmsClientException
+     */
     public void tearDown() throws JmsClientException
     {
         LOG.debug( "Tearing down the sender connection" );
@@ -65,7 +70,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
         JmsSenderAction action = new JmsSenderAction( aMessageFacade );
         try
         {
-            jmsClientCore_.processInTransaction( action );
+            jmsClientCore_.processActionOnce( action );
         }
         catch ( JmsClientException jce )
         {
