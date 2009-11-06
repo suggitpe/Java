@@ -123,6 +123,11 @@
     <dependencies>
         <!-- main compile time dependencies -->
         <dependency>
+            <groupId>jmock</groupId>
+            <artifactId>jmock</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <scope>compile</scope>
@@ -176,6 +181,11 @@
     -->
     <dependencyManagement>
         <dependencies>
+        <dependency>
+            <groupId>jmock</groupId>
+            <artifactId>jmock</artifactId>
+                <version>1.2.0</version>
+        </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>

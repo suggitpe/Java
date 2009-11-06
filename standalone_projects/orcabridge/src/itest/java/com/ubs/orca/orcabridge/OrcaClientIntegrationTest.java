@@ -76,11 +76,6 @@ public class OrcaClientIntegrationTest
         // orcaClient_.connect();
     }
 
-    public static IOrcaSinkSingleMsgCallback createCallback()
-    {
-        return ( new OrcaClientIntegrationTest() ).new OrcaSingleMsgCallback();
-    }
-
     /**
      * Inner callback class for processing received orca messages
      * 
