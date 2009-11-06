@@ -48,7 +48,8 @@ public class JmsSenderAction implements IJmsAction
      *      javax.jms.Destination)
      */
     @Override
-    public void actionInTransaction( Session aSession, Destination aDestination ) throws JmsClientException
+    public void actionInTransaction( Session aSession, Destination aDestination )
+                    throws JmsClientException
     {
         createProducerAndSend( messageFacade_, aSession, aDestination );
         try
@@ -84,16 +85,21 @@ public class JmsSenderAction implements IJmsAction
         }
         finally
         {
-            if ( producer != null )
+            closeProducer( producer );
+        }
+    }
+
+    private void closeProducer( MessageProducer aProducer )
+    {
+        if ( aProducer != null )
+        {
+            try
             {
-                try
-                {
-                    producer.close();
-                }
-                catch ( JMSException je )
-                {
-                    LOG.error( "Failed to close the message producer", je );
-                }
+                aProducer.close();
+            }
+            catch ( JMSException je )
+            {
+                LOG.error( "Failed to close the message producer", je );
             }
         }
     }

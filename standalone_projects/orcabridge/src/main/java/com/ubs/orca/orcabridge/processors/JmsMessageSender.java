@@ -70,7 +70,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
         JmsSenderAction action = new JmsSenderAction( aMessageFacade );
         try
         {
-            jmsClientCore_.processActionOnce( action );
+            jmsClientCore_.processAction( action );
         }
         catch ( JmsClientException jce )
         {

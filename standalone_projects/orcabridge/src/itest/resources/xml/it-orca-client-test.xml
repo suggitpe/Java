@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="identity" class="com.ubs.orca.client.api.OrcaIdentity">
+		<constructor-arg type="java.lang.String" value="OrcaBridgeTestToken:1" />
+	</bean>
+
+
+	<bean id="orcaClient" class="com.ubs.orca.client.api.OrcaClientFactory"
+		factory-method="createOrcaClient">
+		<constructor-arg ref="identity" />
+		<constructor-arg type="java.lang.String" value="tcp://localhost:7222" />
+		<constructor-arg value="true" />
+		<constructor-arg ref="callback" />
+	</bean>
+
+	<bean id="callback" class="com.ubs.orca.orcabridge.OrcaClientIntegrationTest"
+		factory-method="createCallback" />
+
+
+</beans>

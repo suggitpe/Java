@@ -33,8 +33,9 @@ public class OrcaBridgeMessageConversionException extends Exception
      * @param aException
      *            a nested exception to embed in this exception
      */
-    public OrcaBridgeMessageConversionException( String aMsg, Throwable aException )
-    {
-        super( aMsg, aException );
-    }
+    // public OrcaBridgeMessageConversionException( String aMsg,
+    // Throwable aException )
+    // {
+    // super( aMsg, aException );
+    // }
 }

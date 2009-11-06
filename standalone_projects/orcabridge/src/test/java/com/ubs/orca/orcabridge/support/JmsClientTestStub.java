@@ -48,31 +48,13 @@ public class JmsClientTestStub implements IJmsClient
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processActionOnce(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processAction(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
      */
     @Override
-    public void processActionOnce( IJmsAction aActionCallback ) throws JmsClientException
+    public void processAction( IJmsAction aActionCallback ) throws JmsClientException
     {
         LOG.debug( "***** Stub JMS client - Performing processActionOnce with action=["
                    + aActionCallback + "]" );
     }
 
-    /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processActionUntilStopped(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
-     */
-    @Override
-    public void processActionUntilStopped( IJmsAction aActionCallback ) throws JmsClientException
-    {
-        LOG.debug( "***** Stub JMS client - Performing processActionUntilStopped with action=["
-                   + aActionCallback + "]" );
-    }
-
-    /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#stopProcessAction()
-     */
-    @Override
-    public void stopProcessAction()
-    {
-        LOG.debug( "***** Stub JMS client - Performing stopProcessAction" );
-    }
 }

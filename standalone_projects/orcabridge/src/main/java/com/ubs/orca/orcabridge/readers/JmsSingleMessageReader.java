@@ -58,7 +58,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         try
         {
             jmsClient_.connect();
-            jmsClient_.processActionUntilStopped( action );
+            jmsClient_.processAction( action );
         }
         catch ( JmsClientException je )
         {

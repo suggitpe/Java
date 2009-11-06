@@ -34,14 +34,6 @@ public class JmsDurableReaderAction implements IJmsAction
 
     /**
      * Constructs a new instance.
-     */
-    public JmsDurableReaderAction()
-    {
-        super();
-    }
-
-    /**
-     * Constructs a new instance.
      * 
      * @param aProcessingCallback
      *            the callback from which we can process the messages
@@ -64,21 +56,7 @@ public class JmsDurableReaderAction implements IJmsAction
      *      javax.jms.Destination)
      */
     @Override
-    public void actionInTransaction( Session aSession, Destination aDestinstion )
-                    throws JmsClientException
-    {
-        createDurableSubscriptionAndProcess( aSession, aDestinstion );
-        try
-        {
-            aSession.commit();
-        }
-        catch ( JMSException jmse )
-        {
-            throw new JmsClientException( "Failed to commit JMS transaction", jmse );
-        }
-    }
-
-    private void createDurableSubscriptionAndProcess( Session aSession, Destination aDestination )
+    public void actionInTransaction( Session aSession, Destination aDestination )
                     throws JmsClientException
     {
         if ( !( aDestination instanceof Topic ) )
@@ -107,16 +85,21 @@ public class JmsDurableReaderAction implements IJmsAction
         }
         finally
         {
-            if ( subscriber != null )
+            closeSubscriber( subscriber );
+        }
+    }
+
+    private void closeSubscriber( TopicSubscriber aSubscriber )
+    {
+        if ( aSubscriber != null )
+        {
+            try
             {
-                try
-                {
-                    subscriber.close();
-                }
-                catch ( JMSException jmse )
-                {
-                    LOG.error( "Failed to close subscriber" );
-                }
+                aSubscriber.close();
+            }
+            catch ( JMSException jmse )
+            {
+                LOG.error( "Failed to close subscriber", jmse );
             }
         }
     }
@@ -125,12 +108,25 @@ public class JmsDurableReaderAction implements IJmsAction
                     throws JmsClientException
     {
         Message message = null;
+        long start = 0;
+        long end = 0;
         try
         {
-            message = aSubscriber.receive();
-            if ( message != null )
+            while ( ( message = aSubscriber.receive() ) != null )
             {
+                if ( LOG.isInfoEnabled() )
+                {
+                    start = System.currentTimeMillis();
+                }
+
                 clientCallback_.onReceived( message );
+
+                if ( LOG.isInfoEnabled() )
+                {
+                    end = System.currentTimeMillis();
+                    LOG.info( "Time to process message was [" + Long.toString( end - start )
+                              + "] milliseconds" );
+                }
                 aSession.commit();
             }
         }
@@ -139,39 +135,6 @@ public class JmsDurableReaderAction implements IJmsAction
             throw new JmsClientException( "Error occured when receiving message from destination",
                                           jmse );
         }
-    }
-
-    /**
-     * Sets the callback field to the specified value.
-     * 
-     * @param aCallback
-     *            The callback to set.
-     */
-    public void setCallback( IJmsClientSingleMsgCallback aCallback )
-    {
-        clientCallback_ = aCallback;
-    }
-
-    /**
-     * Sets the durableName field to the specified value.
-     * 
-     * @param aDurableName
-     *            The durableName to set.
-     */
-    public void setDurableName( String aDurableName )
-    {
-        durableName_ = aDurableName;
-    }
-
-    /**
-     * Sets the durableMessageSelector field to the specified value.
-     * 
-     * @param aDurableMessageSelector
-     *            The durableMessageSelector to set.
-     */
-    public void setDurableMessageSelector( String aDurableMessageSelector )
-    {
-        durableMessageSelector_ = aDurableMessageSelector;
     }
 
 }

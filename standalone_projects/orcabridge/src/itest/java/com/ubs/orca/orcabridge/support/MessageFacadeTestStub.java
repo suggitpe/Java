@@ -49,8 +49,7 @@ public class MessageFacadeTestStub implements IMessageFacade
         catch ( JMSException jmse )
         {
             LOG.error( "Failed to create the test message" );
-            throw new OrcaBridgeMessageConversionException( "Failed to create the test JMS message",
-                                                            jmse );
+            throw new OrcaBridgeMessageConversionException( "Failed to create the test JMS message" );
         }
     }
 
@@ -73,8 +72,7 @@ public class MessageFacadeTestStub implements IMessageFacade
         }
         catch ( OrcaException oe )
         {
-            throw new OrcaBridgeMessageConversionException( "Failed to create the test O`rca message",
-                                                            oe );
+            throw new OrcaBridgeMessageConversionException( "Failed to create the test Orca message" );
         }
     }
 }

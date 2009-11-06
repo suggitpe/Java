@@ -40,7 +40,6 @@ public class JmsClientCore implements IJmsClient, InitializingBean
 
     private Connection connection_;
     private Destination destination_;
-    private boolean processAction_ = true;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -70,6 +69,11 @@ public class JmsClientCore implements IJmsClient, InitializingBean
     @Override
     public void connect( String aUsername, String aPassword ) throws JmsClientException
     {
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "Connecting to JMS client with username=["
+                       + ( aUsername == null ? "no credentials" : aUsername ) + "]" );
+        }
         if ( connection_ != null )
         {
             stopAndCloseConnection();
@@ -158,38 +162,20 @@ public class JmsClientCore implements IJmsClient, InitializingBean
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processActionUntilStopped(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processAction(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
      */
     @Override
-    public void processActionUntilStopped( IJmsAction aActionCallback ) throws JmsClientException
-    {
-        processAction_ = true;
-        while ( processAction_ == true )
-        {
-            processActionOnce( aActionCallback );
-        }
-    }
-
-    /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#stopProcessAction()
-     */
-    @Override
-    public void stopProcessAction()
-    {
-        processAction_ = false;
-    }
-
-    /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processActionOnce(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
-     */
-    @Override
-    public void processActionOnce( IJmsAction aAction ) throws JmsClientException
+    public void processAction( IJmsAction aAction ) throws JmsClientException
     {
         if ( connection_ == null )
         {
             throw new JmsClientException( "No active connection, you must connect before you send" );
         }
 
+        // here is where we could optimise by caching the session in
+        // the object and then reusing the existing one rather than
+        // creating a new one. This will allow for any actions that
+        // are single process actions
         Session session = null;
         try
         {

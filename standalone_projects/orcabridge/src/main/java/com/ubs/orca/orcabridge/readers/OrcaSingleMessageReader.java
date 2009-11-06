@@ -33,9 +33,9 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReader.class );
 
     private String orcaConnectionUrl_;
-    private IOrcaIdentity mOrcaIdentity_;
+    private IOrcaIdentity orcaIdentity_;
 
-    private IOrcaClient mOrcaClient_;
+    private IOrcaClient orcaClient_;
 
     /**
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
@@ -45,7 +45,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     {
         Assert.notNull( orcaConnectionUrl_,
                         "No Orca connection URL has been set in the OrcaSingleMessageReader" );
-        Assert.notNull( mOrcaIdentity_,
+        Assert.notNull( orcaIdentity_,
                         "No Orca Identity has been set in the OrcaSingleMessageReader" );
     }
 
@@ -60,10 +60,10 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
 
         try
         {
-            mOrcaClient_ = OrcaClientFactory.createOrcaClient( mOrcaIdentity_,
-                                                               orcaConnectionUrl_,
-                                                               true,
-                                                               new OrcaReaderCallback() );
+            orcaClient_ = OrcaClientFactory.createOrcaClient( orcaIdentity_,
+                                                              orcaConnectionUrl_,
+                                                              true,
+                                                              new OrcaReaderCallback() );
         }
         catch ( OrcaException oe )
         {
@@ -79,15 +79,15 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     @Override
     public void doStartReader() throws OrcaBridgeException
     {
-        if ( mOrcaClient_ == null )
+        if ( orcaClient_ == null )
         {
             throw new OrcaBridgeException( "Must initialise the OrcaBridge prior to test execution" );
         }
 
         try
         {
-            mOrcaClient_.connect();
-            mOrcaClient_.start();
+            orcaClient_.connect();
+            orcaClient_.start();
         }
         catch ( OrcaException oe )
         {
@@ -103,11 +103,11 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     @Override
     protected void doStopReader() throws OrcaBridgeException
     {
-        if ( mOrcaClient_ != null )
+        if ( orcaClient_ != null )
         {
             try
             {
-                mOrcaClient_.stop();
+                orcaClient_.stop();
             }
             catch ( OrcaException oe )
             {
@@ -124,7 +124,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     {
         try
         {
-            mOrcaClient_.disconnect();
+            orcaClient_.disconnect();
         }
         catch ( OrcaException oe )
         {
@@ -153,7 +153,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
      */
     public void setOrcaIdentity( IOrcaIdentity aOrcaIdentity )
     {
-        mOrcaIdentity_ = aOrcaIdentity;
+        orcaIdentity_ = aOrcaIdentity;
     }
 
     /**
@@ -165,7 +165,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
      */
     void setOrcaClient( IOrcaClient aOrcaClient )
     {
-        mOrcaClient_ = aOrcaClient;
+        orcaClient_ = aOrcaClient;
     }
 
     /**
@@ -179,7 +179,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
      * @author suggitpe
      * @version 1.0 23 Sep 2009
      */
-    class OrcaReaderCallback implements IOrcaSinkSingleMsgCallback
+    public class OrcaReaderCallback implements IOrcaSinkSingleMsgCallback
     {
 
         /**

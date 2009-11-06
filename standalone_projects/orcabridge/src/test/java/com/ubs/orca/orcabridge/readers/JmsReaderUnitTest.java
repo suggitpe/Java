@@ -46,7 +46,6 @@ public class JmsReaderUnitTest
     private IMocksControl ctrl_;
     private IMessageProcessor mockProcessor_;
     private IJmsClient mockJmsClient_;
-    private IJmsAction mockJmsAction_;
 
     /** */
     @BeforeClass
@@ -67,7 +66,6 @@ public class JmsReaderUnitTest
         ctrl_ = createControl();
         mockProcessor_ = ctrl_.createMock( IMessageProcessor.class );
         mockJmsClient_ = ctrl_.createMock( IJmsClient.class );
-        mockJmsAction_ = ctrl_.createMock( IJmsAction.class );
 
         jmsReader_ = new JmsSingleMessageReader();
         jmsReader_.setMessageProcessor( mockProcessor_ );
@@ -89,7 +87,7 @@ public class JmsReaderUnitTest
     {
         mockJmsClient_.connect();
         expectLastCall().once();
-        mockJmsClient_.processActionUntilStopped( isA( IJmsAction.class ) );
+        mockJmsClient_.processAction( isA( IJmsAction.class ) );
         expectLastCall().once();
 
         ctrl_.replay();
@@ -132,7 +130,7 @@ public class JmsReaderUnitTest
     {
         mockJmsClient_.connect();
         expectLastCall().once();
-        mockJmsClient_.processActionUntilStopped( isA( IJmsAction.class ) );
+        mockJmsClient_.processAction( isA( IJmsAction.class ) );
         expectLastCall().andThrow( new JmsClientException( "ProcessInTransaction failed: This is all part of the test" ) );
 
         ctrl_.replay();

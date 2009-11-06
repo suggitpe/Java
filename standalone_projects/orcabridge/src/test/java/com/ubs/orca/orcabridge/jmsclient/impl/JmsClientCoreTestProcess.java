@@ -100,7 +100,7 @@ public class JmsClientCoreTestProcess
         expectLastCall().once();
 
         ctrl_.replay();
-        jmsClientCore_.processActionOnce( mockAction_ );
+        jmsClientCore_.processAction( mockAction_ );
         ctrl_.verify();
     }
 
@@ -130,7 +130,7 @@ public class JmsClientCoreTestProcess
         expectLastCall().once();
 
         ctrl_.replay();
-        jmsClientCore_.processActionOnce( mockAction_ );
+        jmsClientCore_.processAction( mockAction_ );
         ctrl_.verify();
     }
 
@@ -145,7 +145,7 @@ public class JmsClientCoreTestProcess
     {
 
         ctrl_.replay();
-        jmsClientCore_.processActionOnce( mockAction_ );
+        jmsClientCore_.processAction( mockAction_ );
         ctrl_.verify();
     }
 
@@ -167,7 +167,7 @@ public class JmsClientCoreTestProcess
         expect( mockConnection_.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andThrow( new JMSException( "Session create fail: this is all part of the test" ) );
 
         ctrl_.replay();
-        jmsClientCore_.processActionOnce( mockAction_ );
+        jmsClientCore_.processAction( mockAction_ );
         ctrl_.verify();
     }
 
@@ -198,7 +198,7 @@ public class JmsClientCoreTestProcess
         jmsClientCore_.setDestination( mockDestination_ );
 
         ctrl_.replay();
-        jmsClientCore_.processActionOnce( mockAction_ );
+        jmsClientCore_.processAction( mockAction_ );
         ctrl_.verify();
     }
 
