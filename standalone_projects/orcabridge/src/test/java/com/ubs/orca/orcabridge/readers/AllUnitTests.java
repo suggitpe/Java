@@ -14,7 +14,8 @@ import org.junit.runners.Suite;
  * @version 1.0 13 Oct 2009
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { JmsReaderUnitTest.class, OrcaReaderUnitTest.class,
+@Suite.SuiteClasses( { JmsReaderUnitTest.class, JmsReaderCallbackUnitTest.class,
+                      OrcaReaderUnitTest.class, OrcaReaderCallbackUnitTest.class,
                       JmsReaderSpringInjectionUnitTest.class,
                       OrcaReaderSpringInjectionUnitTest.class })
 public class AllUnitTests

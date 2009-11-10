@@ -11,19 +11,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ubs.orca.client.api.IAttributesConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
-import com.ubs.orca.client.api.ITextConversationMessage;
+import com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback;
 import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.client.api.OrcaIdentity;
-import com.ubs.orca.orcabridge.IMessageFacade;
-import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
-import com.ubs.orca.orcabridge.readers.OrcaSingleMessageReader.OrcaReaderCallback;
 
 import static org.easymock.EasyMock.createControl;
 import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.isA;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -41,7 +36,7 @@ public class OrcaReaderUnitTest
     private IMocksControl ctrl_;
     private OrcaSingleMessageReader orcaReader_;
     private IOrcaClient mockOrcaClient_;
-    private IMessageProcessor mockMessageProcessor_;
+    private IOrcaSinkSingleMsgCallback mockOrcaCallback_;
 
     private static String ORCA_TOKEN = "OrcaBridgeTestToken:1";
     private static String ORCA_URL = "tcp://localhost:7222";
@@ -64,11 +59,13 @@ public class OrcaReaderUnitTest
         LOG.debug( "-----------------" );
         ctrl_ = createControl();
         mockOrcaClient_ = ctrl_.createMock( IOrcaClient.class );
-        mockMessageProcessor_ = ctrl_.createMock( IMessageProcessor.class );
+        mockOrcaCallback_ = ctrl_.createMock( IOrcaSinkSingleMsgCallback.class );
+
         orcaReader_ = new OrcaSingleMessageReader();
         orcaReader_.setOrcaIdentity( new OrcaIdentity( ORCA_TOKEN ) );
         orcaReader_.setOrcaConnectionUrl( ORCA_URL );
-        orcaReader_.setMessageProcessor( mockMessageProcessor_ );
+        orcaReader_.setOrcaCallback( mockOrcaCallback_ );
+
         orcaReader_.afterPropertiesSet();
         orcaReader_.init();
         orcaReader_.setOrcaClient( mockOrcaClient_ );
@@ -181,70 +178,4 @@ public class OrcaReaderUnitTest
         ctrl_.verify();
     }
 
-    /**
-     * Tests that the message callback is called and that it then
-     * delegates to the message processor.
-     * 
-     * @throws Throwable
-     */
-    @Test
-    public void testOrcaCallbackWithAttributesMessage() throws Throwable
-    {
-        OrcaReaderCallback callback = orcaReader_.new OrcaReaderCallback();
-        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
-        expectLastCall().once();
-
-        IAttributesConversationMessage msg = ctrl_.createMock( IAttributesConversationMessage.class );
-
-        ctrl_.replay();
-
-        callback.onReceived( msg );
-
-        ctrl_.verify();
-    }
-
-    /**
-     * Tests that the message callback is called and that it then
-     * delegates to the message processor.
-     * 
-     * @throws Throwable
-     */
-    @Test
-    public void testOrcaCallbackWithTextMessage() throws Throwable
-    {
-        OrcaReaderCallback callback = orcaReader_.new OrcaReaderCallback();
-        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
-        expectLastCall().once();
-
-        ITextConversationMessage msg = ctrl_.createMock( ITextConversationMessage.class );
-
-        ctrl_.replay();
-
-        callback.onReceived( msg );
-
-        ctrl_.verify();
-    }
-
-    /**
-     * Test that the correc texception pops out of teh top of the
-     * stack when there is an issue in teh message processor layer.
-     * 
-     * @throws Throwable
-     */
-    @Test(expected = OrcaBridgeException.class)
-    public void testOrcaCallbackWithProcessFailure() throws Throwable
-    {
-        OrcaReaderCallback callback = orcaReader_.new OrcaReaderCallback();
-        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
-        expectLastCall().andThrow( new OrcaBridgeException( "This is all part of the test" ) );
-
-        IAttributesConversationMessage msg = ctrl_.createMock( IAttributesConversationMessage.class );
-
-        ctrl_.replay();
-
-        callback.onReceived( msg );
-        fail( "Test test should not have reached this far" );
-
-        ctrl_.verify();
-    }
 }

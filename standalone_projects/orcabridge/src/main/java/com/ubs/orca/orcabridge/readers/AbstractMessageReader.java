@@ -7,12 +7,10 @@ package com.ubs.orca.orcabridge.readers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.IMessageReader;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
 
 /**
  * Abstract class that will manage the message reader interaction with
@@ -32,7 +30,6 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     static final String STATE_STOPPED = "Stopped";
 
     private String state_ = STATE_UNINITIALISED;
-    private IMessageProcessor messageProcessor_;
 
     /**
      * Verifies that the message processor has been set on the class
@@ -42,7 +39,6 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( messageProcessor_, "Must set the Message Processor on the Message Reader" );
         doAfterPropertiesSet();
     }
 
@@ -94,29 +90,6 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      * @throws OrcaBridgeException
      */
     protected abstract void doStopReader() throws OrcaBridgeException;
-
-    /**
-     * Getter for the message processor. This is protected as we only
-     * want it exposed to the children of this class.
-     * 
-     * @return the message processor instance
-     */
-    protected IMessageProcessor getMessageProcessor()
-    {
-        return messageProcessor_;
-    }
-
-    /**
-     * Setter for the message processor. This is mostly used for
-     * spring injection.
-     * 
-     * @param aProcessor
-     *            the message processor to set.
-     */
-    public void setMessageProcessor( IMessageProcessor aProcessor )
-    {
-        messageProcessor_ = aProcessor;
-    }
 
     /**
      * Getter for the state of the reader.

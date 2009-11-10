@@ -4,8 +4,6 @@
  */
 package com.ubs.orca.orcabridge.readers;
 
-import javax.jms.Message;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -15,7 +13,6 @@ import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 import com.ubs.orca.orcabridge.jmsclient.impl.JmsDurableReaderAction;
-import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
 
 import org.springframework.util.Assert;
 
@@ -35,6 +32,8 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     private String durableName_;
     private String messageSelector_;
 
+    private IJmsClientSingleMsgCallback jmsCallback_;
+
     /**
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
      */
@@ -44,6 +43,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         Assert.notNull( jmsClient_, "No JMS client has been set on the JMS reader" );
         Assert.notNull( durableName_, "No durable name has been set on the JMS reader" );
         Assert.notNull( messageSelector_, "No message selector has been set on the JMS reader" );
+        Assert.notNull( jmsCallback_, "No JMS callback has been set on the JMS reader" );
     }
 
     /**
@@ -52,7 +52,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     @Override
     protected void doStartReader() throws OrcaBridgeException
     {
-        IJmsAction action = new JmsDurableReaderAction( new JmsMessageProcessorCallback(),
+        IJmsAction action = new JmsDurableReaderAction( jmsCallback_,
                                                         durableName_,
                                                         messageSelector_ );
         try
@@ -120,46 +120,15 @@ public class JmsSingleMessageReader extends AbstractMessageReader
         messageSelector_ = messageSelector;
     }
 
-    // ===============================================
     /**
-     * This is the callback class that will be passed into the
-     * JMSClient so that we can pass the message received back to the
-     * message processor.
+     * Sets the jmsCallback field to the specified value.
      * 
-     * @author suggitpe
-     * @version 1.0 30 Sep 2009
+     * @param jmsCallback
+     *            The jmsCallback to set.
      */
-    class JmsMessageProcessorCallback implements IJmsClientSingleMsgCallback
+    public void setJmsCallback( IJmsClientSingleMsgCallback jmsCallback )
     {
-
-        /**
-         * @see com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback#onReceived(javax.jms.Message)
-         */
-        @Override
-        public void onReceived( Message aMessage ) throws JmsClientException
-        {
-            if ( LOG.isInfoEnabled() )
-            {
-                LOG.info( "Passing received message [" + aMessage + "] to message Processor." );
-            }
-
-            try
-            {
-                getMessageProcessor().processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
-            }
-            catch ( OrcaBridgeException throwable )
-            {
-                LOG.error( "Issue ocurred in the sending of a message", throwable );
-                throw new JmsClientException( throwable );
-            }
-
-            if ( LOG.isInfoEnabled() )
-            {
-                LOG.info( "Message routing for message ["
-                          + aMessage
-                          + "] completed.  Allowing callback to complete so that JMS transaction can be committed." );
-            }
-        }
+        jmsCallback_ = jmsCallback;
     }
 
 }

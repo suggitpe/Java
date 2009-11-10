@@ -7,16 +7,12 @@ package com.ubs.orca.orcabridge.readers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ubs.orca.client.api.IAttributesConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
 import com.ubs.orca.client.api.IOrcaIdentity;
 import com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback;
-import com.ubs.orca.client.api.ITextConversationMessage;
 import com.ubs.orca.client.api.OrcaClientFactory;
 import com.ubs.orca.client.api.OrcaException;
-import com.ubs.orca.common.bus.IOrcaMessage;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
-import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
 
 import org.springframework.util.Assert;
 
@@ -34,6 +30,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
 
     private String orcaConnectionUrl_;
     private IOrcaIdentity orcaIdentity_;
+    private IOrcaSinkSingleMsgCallback orcaCallback_;
 
     private IOrcaClient orcaClient_;
 
@@ -47,6 +44,8 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
                         "No Orca connection URL has been set in the OrcaSingleMessageReader" );
         Assert.notNull( orcaIdentity_,
                         "No Orca Identity has been set in the OrcaSingleMessageReader" );
+        Assert.notNull( orcaCallback_,
+                        "No Orca callback has been set on the OrcaSingleMessageReader" );
     }
 
     /**
@@ -63,7 +62,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
             orcaClient_ = OrcaClientFactory.createOrcaClient( orcaIdentity_,
                                                               orcaConnectionUrl_,
                                                               true,
-                                                              new OrcaReaderCallback() );
+                                                              orcaCallback_ );
         }
         catch ( OrcaException oe )
         {
@@ -169,62 +168,14 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     }
 
     /**
-     * This is the core orca callback that we are passing to the
-     * OrcaClient. It is called each time a new message is received
-     * onto the sink client token.<br/>
-     * <b>We have to be careful with transactions in this callback.
-     * The completion of the Orca onReceived methods will end up with
-     * a rollback and ultimate failure on the Orca client itself.</b>
+     * Sets the orcaCallback field to the specified value.
      * 
-     * @author suggitpe
-     * @version 1.0 23 Sep 2009
+     * @param orcaCallback
+     *            The orcaCallback to set.
      */
-    public class OrcaReaderCallback implements IOrcaSinkSingleMsgCallback
+    public void setOrcaCallback( IOrcaSinkSingleMsgCallback orcaCallback )
     {
-
-        /**
-         * @see com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback#onReceived(com.ubs.orca.client.api.IAttributesConversationMessage)
-         */
-        @Override
-        public void onReceived( IAttributesConversationMessage aAttributesMesage ) throws Throwable
-        {
-            passOrcaMessageToTheMessageProcessor( aAttributesMesage );
-        }
-
-        /**
-         * @see com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback#onReceived(com.ubs.orca.client.api.ITextConversationMessage)
-         */
-        @Override
-        public void onReceived( ITextConversationMessage aTextConversationMessage )
-                        throws Throwable
-        {
-            passOrcaMessageToTheMessageProcessor( aTextConversationMessage );
-        }
-
-        private void passOrcaMessageToTheMessageProcessor( IOrcaMessage aMessage )
-                        throws OrcaBridgeException
-        {
-            if ( LOG.isInfoEnabled() )
-            {
-                LOG.info( "Passing received message [" + aMessage + "] to message Processor." );
-            }
-
-            try
-            {
-                getMessageProcessor().processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
-            }
-            catch ( Throwable throwable )
-            {
-                LOG.error( "Issue ocurred in the sending of a message", throwable );
-                throw new OrcaBridgeException( throwable );
-            }
-
-            if ( LOG.isInfoEnabled() )
-            {
-                LOG.info( "Message routing for message ["
-                          + aMessage
-                          + "] completed.  Allowing callback to complete so that Orca transaction can be committed." );
-            }
-        }
+        orcaCallback_ = orcaCallback;
     }
+
 }
