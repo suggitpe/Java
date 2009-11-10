@@ -8,9 +8,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ubs.orca.client.api.IOrcaClient;
-import com.ubs.orca.client.api.IOrcaIdentity;
-import com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback;
-import com.ubs.orca.client.api.OrcaClientFactory;
 import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 
@@ -28,10 +25,6 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
 
     private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReader.class );
 
-    private String orcaConnectionUrl_;
-    private IOrcaIdentity orcaIdentity_;
-    private IOrcaSinkSingleMsgCallback orcaCallback_;
-
     private IOrcaClient orcaClient_;
 
     /**
@@ -40,36 +33,8 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     @Override
     public void doAfterPropertiesSet() throws Exception
     {
-        Assert.notNull( orcaConnectionUrl_,
-                        "No Orca connection URL has been set in the OrcaSingleMessageReader" );
-        Assert.notNull( orcaIdentity_,
-                        "No Orca Identity has been set in the OrcaSingleMessageReader" );
-        Assert.notNull( orcaCallback_,
-                        "No Orca callback has been set on the OrcaSingleMessageReader" );
-    }
-
-    /**
-     * This init method is called once the class has been initialised.
-     * 
-     * @throws OrcaBridgeException
-     */
-    public void init() throws OrcaBridgeException
-    {
-        LOG.info( "Initialising OrcaMessageReader ... " );
-
-        try
-        {
-            orcaClient_ = OrcaClientFactory.createOrcaClient( orcaIdentity_,
-                                                              orcaConnectionUrl_,
-                                                              true,
-                                                              orcaCallback_ );
-        }
-        catch ( OrcaException oe )
-        {
-            String err = "Failed to create Orca Client from init method";
-            LOG.error( err, oe );
-            throw new OrcaBridgeException( err, oe );
-        }
+        Assert.notNull( orcaClient_,
+                        "No Orca client has been set on the Orca Single Message Reader" );
     }
 
     /**
@@ -78,11 +43,6 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     @Override
     public void doStartReader() throws OrcaBridgeException
     {
-        if ( orcaClient_ == null )
-        {
-            throw new OrcaBridgeException( "Must initialise the OrcaBridge prior to test execution" );
-        }
-
         try
         {
             orcaClient_.connect();
@@ -134,48 +94,15 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     }
 
     /**
-     * Sets the orcaConnectionUrl field to the specified value.
-     * 
-     * @param aOrcaConnectionUrl
-     *            The orcaConnectionUrl to set.
-     */
-    public void setOrcaConnectionUrl( String aOrcaConnectionUrl )
-    {
-        orcaConnectionUrl_ = aOrcaConnectionUrl;
-    }
-
-    /**
-     * Sets the orcaIdentity field to the specified value.
-     * 
-     * @param aOrcaIdentity
-     *            The orcaIdentity to set.
-     */
-    public void setOrcaIdentity( IOrcaIdentity aOrcaIdentity )
-    {
-        orcaIdentity_ = aOrcaIdentity;
-    }
-
-    /**
      * Sets the orcaClient. This method is here to support replacing
      * the orca client with mocks for unit tests.
      * 
      * @param aOrcaClient
      *            the orca client
      */
-    void setOrcaClient( IOrcaClient aOrcaClient )
+    public void setOrcaClient( IOrcaClient aOrcaClient )
     {
         orcaClient_ = aOrcaClient;
-    }
-
-    /**
-     * Sets the orcaCallback field to the specified value.
-     * 
-     * @param orcaCallback
-     *            The orcaCallback to set.
-     */
-    public void setOrcaCallback( IOrcaSinkSingleMsgCallback orcaCallback )
-    {
-        orcaCallback_ = orcaCallback;
     }
 
 }

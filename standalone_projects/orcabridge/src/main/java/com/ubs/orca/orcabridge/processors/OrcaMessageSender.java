@@ -9,8 +9,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.ubs.orca.client.api.IConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
-import com.ubs.orca.client.api.IOrcaIdentity;
-import com.ubs.orca.client.api.OrcaClientFactory;
 import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.IMessageProcessor;
@@ -31,9 +29,6 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
 
     private static final Log LOG = LogFactory.getLog( OrcaMessageSender.class );
 
-    private String orcaConnectionUrl_;
-    private IOrcaIdentity orcaIdentity_;
-
     private IOrcaClient orcaClient_;
 
     /**
@@ -42,10 +37,7 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( orcaConnectionUrl_,
-                        "No Orca connection URL has been set in the OrcaSingleMessageReader" );
-        Assert.notNull( orcaIdentity_,
-                        "No Orca Identity has been set in the OrcaSingleMessageReader" );
+        Assert.notNull( orcaClient_, "No Orca client has been set on the Orca Message Sender" );
     }
 
     /**
@@ -56,19 +48,6 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
     public void init() throws OrcaBridgeException
     {
         LOG.info( "Initialising the sender Orca connection" );
-
-        try
-        {
-            orcaClient_ = OrcaClientFactory.createOrcaClient( orcaIdentity_,
-                                                              orcaConnectionUrl_,
-                                                              true );
-        }
-        catch ( OrcaException oe )
-        {
-            String err = "Failed to create Orca Client from init method";
-            LOG.error( err, oe );
-            throw new OrcaBridgeException( err, oe );
-        }
 
         try
         {
@@ -104,35 +83,13 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
     }
 
     /**
-     * Sets the orcaConnectionUrl field to the specified value.
-     * 
-     * @param aOrcaConnectionUrl
-     *            The orcaConnectionUrl to set.
-     */
-    public void setOrcaConnectionUrl( String aOrcaConnectionUrl )
-    {
-        orcaConnectionUrl_ = aOrcaConnectionUrl;
-    }
-
-    /**
-     * Sets the orcaIdentity field to the specified value.
-     * 
-     * @param aOrcaIdentity
-     *            The orcaIdentity to set.
-     */
-    public void setOrcaIdentity( IOrcaIdentity aOrcaIdentity )
-    {
-        orcaIdentity_ = aOrcaIdentity;
-    }
-
-    /**
      * Sets the orcaClient. This method is here to support replacing
      * the orca client with mocks for unit tests.
      * 
      * @param aOrcaClient
      *            the orca client
      */
-    void setOrcaClient( IOrcaClient aOrcaClient )
+    public void setOrcaClient( IOrcaClient aOrcaClient )
     {
         orcaClient_ = aOrcaClient;
     }

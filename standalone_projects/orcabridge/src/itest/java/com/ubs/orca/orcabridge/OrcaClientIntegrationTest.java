@@ -14,10 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.ubs.orca.client.api.IAttributesConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
-import com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback;
-import com.ubs.orca.client.api.ITextConversationMessage;
 import com.ubs.orca.client.api.OrcaException;
 
 import org.springframework.test.context.ContextConfiguration;
@@ -70,47 +67,9 @@ public class OrcaClientIntegrationTest
      * @throws OrcaException
      */
     @Test
-    public void testSprintInjection() throws OrcaException
+    public void testSprintInjectionAndConnect() throws OrcaException
     {
         assertThat( orcaClient_, notNullValue() );
-        // orcaClient_.connect();
+        orcaClient_.connect();
     }
-
-    /**
-     * Inner callback class for processing received orca messages
-     * 
-     * @author suggitpe
-     * @version 1.0 5 Nov 2009
-     */
-    public class OrcaSingleMsgCallback implements IOrcaSinkSingleMsgCallback
-    {
-
-        /**
-         * Constructs a new instance.
-         */
-        public OrcaSingleMsgCallback()
-        {
-            super();
-        }
-
-        /**
-         * @see com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback#onReceived(com.ubs.orca.client.api.IAttributesConversationMessage)
-         */
-        @Override
-        public void onReceived( IAttributesConversationMessage aArg0 ) throws Throwable
-        {
-            LOG.debug( "onReceived for IAttributesConversationMessage" );
-        }
-
-        /**
-         * @see com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback#onReceived(com.ubs.orca.client.api.ITextConversationMessage)
-         */
-        @Override
-        public void onReceived( ITextConversationMessage aArg0 ) throws Throwable
-        {
-            LOG.debug( "onReceived for ITextConversationMessage" );
-        }
-
-    }
-
 }

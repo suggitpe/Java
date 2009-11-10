@@ -2,13 +2,10 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-	<bean id="orcaMessageSender" class="com.ubs.orca.orcabridge.processors.OrcaMessageSender">
-        <property name="orcaConnectionUrl" value="tcp://testhost:1234"/>
-                <property name="orcaIdentity">
-            <bean class="com.ubs.orca.client.api.OrcaIdentity">
-                <constructor-arg type="java.lang.String" value="OrcaBridgeTestToken:1"/>
-            </bean>
+    <bean id="orcaMessageSender" class="com.ubs.orca.orcabridge.processors.OrcaMessageSender"  init-method="init">
+        <property name="orcaClient">
+            <bean class="com.ubs.orca.orcabridge.support.OrcaClientTestStub"/>
         </property>
-	</bean>
-	
+    </bean>
+
 </beans>

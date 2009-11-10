@@ -12,9 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ubs.orca.client.api.IOrcaClient;
-import com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback;
 import com.ubs.orca.client.api.OrcaException;
-import com.ubs.orca.client.api.OrcaIdentity;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 
 import static org.easymock.EasyMock.createControl;
@@ -36,10 +34,6 @@ public class OrcaReaderUnitTest
     private IMocksControl ctrl_;
     private OrcaSingleMessageReader orcaReader_;
     private IOrcaClient mockOrcaClient_;
-    private IOrcaSinkSingleMsgCallback mockOrcaCallback_;
-
-    private static String ORCA_TOKEN = "OrcaBridgeTestToken:1";
-    private static String ORCA_URL = "tcp://localhost:7222";
 
     /** */
     @BeforeClass
@@ -59,16 +53,11 @@ public class OrcaReaderUnitTest
         LOG.debug( "-----------------" );
         ctrl_ = createControl();
         mockOrcaClient_ = ctrl_.createMock( IOrcaClient.class );
-        mockOrcaCallback_ = ctrl_.createMock( IOrcaSinkSingleMsgCallback.class );
 
         orcaReader_ = new OrcaSingleMessageReader();
-        orcaReader_.setOrcaIdentity( new OrcaIdentity( ORCA_TOKEN ) );
-        orcaReader_.setOrcaConnectionUrl( ORCA_URL );
-        orcaReader_.setOrcaCallback( mockOrcaCallback_ );
+        orcaReader_.setOrcaClient( mockOrcaClient_ );
 
         orcaReader_.afterPropertiesSet();
-        orcaReader_.init();
-        orcaReader_.setOrcaClient( mockOrcaClient_ );
     }
 
     /**
@@ -101,7 +90,7 @@ public class OrcaReaderUnitTest
      * @throws Exception
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testBadStart() throws Exception
+    public void testStartButFailOnConnect() throws Exception
     {
         mockOrcaClient_.connect();
         expectLastCall().andThrow( new OrcaException( "This is an expected exception thrown from the OrcaBridge" ) );
@@ -141,28 +130,6 @@ public class OrcaReaderUnitTest
      * 
      * @throws Exception
      */
-    @Test(expected = OrcaBridgeException.class)
-    public void testBadStopFromOrcaDisconnect() throws Exception
-    {
-        mockOrcaClient_.stop();
-        expectLastCall().once();
-        mockOrcaClient_.disconnect();
-        expectLastCall().andThrow( new OrcaException( "This is an expected exception to be thrown" ) );
-
-        ctrl_.replay();
-
-        orcaReader_.stopReader();
-        fail( "The test should not have reached this part of the code" );
-
-        ctrl_.verify();
-    }
-
-    /**
-     * Tests that when the client stops badly, that all exceptions are
-     * handled correctly.
-     * 
-     * @throws Exception
-     */
     @Test
     public void testBadStopFromOrcaStop() throws Exception
     {
@@ -174,6 +141,28 @@ public class OrcaReaderUnitTest
         ctrl_.replay();
 
         orcaReader_.stopReader();
+
+        ctrl_.verify();
+    }
+
+    /**
+     * Tests that when the client stops badly, that all exceptions are
+     * handled correctly.
+     * 
+     * @throws Exception
+     */
+    @Test(expected = OrcaBridgeException.class)
+    public void testStopButFailFromDisconnect() throws Exception
+    {
+        mockOrcaClient_.stop();
+        expectLastCall().once();
+        mockOrcaClient_.disconnect();
+        expectLastCall().andThrow( new OrcaException( "This is an expected exception to be thrown" ) );
+
+        ctrl_.replay();
+
+        orcaReader_.stopReader();
+        fail( "The test should not have reached this part of the code" );
 
         ctrl_.verify();
     }

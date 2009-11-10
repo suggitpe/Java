@@ -7,7 +7,6 @@ package com.ubs.orca.orcabridge.processors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.easymock.IMocksControl;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,7 +14,6 @@ import org.junit.Test;
 import com.ubs.orca.client.api.IConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
 import com.ubs.orca.client.api.OrcaException;
-import com.ubs.orca.client.api.OrcaIdentity;
 import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.OrcaBridgeMessageConversionException;
@@ -42,9 +40,6 @@ public class OrcaMessageSenderTest
     private IOrcaClient mockOrcaClient_;
     private IConversationMessage mockOrcaMessage_;
 
-    private static String ORCA_TOKEN = "OrcaBridgeTestToken:1";
-    private static String ORCA_URL = "tcp://localhost:7222";
-
     /** */
     @BeforeClass
     public static void doBeforeClass()
@@ -67,17 +62,9 @@ public class OrcaMessageSenderTest
         mockOrcaMessage_ = ctrl_.createMock( IConversationMessage.class );
 
         sender_ = new OrcaMessageSender();
-        sender_.setOrcaIdentity( new OrcaIdentity( ORCA_TOKEN ) );
-        sender_.setOrcaConnectionUrl( ORCA_URL );
         sender_.setOrcaClient( mockOrcaClient_ );
-
         sender_.afterPropertiesSet();
     }
-
-    /** */
-    @After
-    public void doAfter()
-    {}
 
     /**
      * Test the normal send process for an Orca message.
@@ -94,7 +81,39 @@ public class OrcaMessageSenderTest
 
         ctrl_.replay();
         sender_.processMessage( mockMessageFacade_ );
+        ctrl_.verify();
+    }
 
+    /**
+     * Tests that when we call init we call the connect method
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void testSuccessfulInit() throws Exception
+    {
+        mockOrcaClient_.connect();
+        expectLastCall().once();
+
+        ctrl_.replay();
+        sender_.init();
+        ctrl_.verify();
+    }
+
+    /**
+     * Tests that when we get a connection failure in the init process
+     * we get the right exception thrown up the stack.
+     * 
+     * @throws Exception
+     */
+    @Test(expected = OrcaBridgeException.class)
+    public void testFailOnInit() throws Exception
+    {
+        mockOrcaClient_.connect();
+        expectLastCall().andThrow( new OrcaException( "Failed on connect: this is all part of the test" ) );
+
+        ctrl_.replay();
+        sender_.init();
         ctrl_.verify();
     }
 
@@ -116,7 +135,6 @@ public class OrcaMessageSenderTest
 
         ctrl_.replay();
         sender_.processMessage( mockMessageFacade_ );
-
         ctrl_.verify();
     }
 
@@ -142,7 +160,6 @@ public class OrcaMessageSenderTest
 
         ctrl_.replay();
         sender_.processMessage( mockMessageFacade_ );
-
         ctrl_.verify();
     }
 
