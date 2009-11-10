@@ -2,7 +2,7 @@
  * OrcaClientIntegrationTest.java created on 4 Nov 2009 18:48:31 by suggitpe for project Orca Bridge
  * 
  */
-package com.ubs.orca.orcabridge;
+package com.ubs.orca.orcabridge.orca;
 
 import javax.annotation.Resource;
 

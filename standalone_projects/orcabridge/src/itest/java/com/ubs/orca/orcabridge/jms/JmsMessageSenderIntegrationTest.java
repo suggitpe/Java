@@ -2,7 +2,7 @@
  * JmsMessageSenderIntegrationTest.java created on 29 Oct 2009 07:16:16 by suggitpe for project Orca Bridge
  * 
  */
-package com.ubs.orca.orcabridge;
+package com.ubs.orca.orcabridge.jms;
 
 import javax.annotation.Resource;
 
@@ -13,6 +13,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.ubs.orca.orcabridge.IMessageFacade;
+import com.ubs.orca.orcabridge.IMessageProcessor;
+import com.ubs.orca.orcabridge.OrcaBridgeException;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

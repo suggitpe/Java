@@ -2,7 +2,7 @@
  * JmsMessageSenderIntegrationTest.java created on 29 Oct 2009 07:16:16 by suggitpe for project Orca Bridge
  * 
  */
-package com.ubs.orca.orcabridge;
+package com.ubs.orca.orcabridge.jms;
 
 import javax.annotation.Resource;
 
