@@ -2,10 +2,10 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-	<bean id="orcaReader" class="com.ubs.orca.orcabridge.readers.OrcaSingleMessageReader">
-		<property name="orcaClient">
-			<bean class="com.ubs.orca.orcabridge.support.OrcaClientTestStub"/>
-		</property>
+    <bean id="orcaReader" class="com.ubs.orca.orcabridge.readers.OrcaSingleMessageReader">
+        <property name="orcaClient">
+            <bean class="com.ubs.orca.orcabridge.support.OrcaClientTestStub" />
+        </property>
     </bean>
 
 </beans>

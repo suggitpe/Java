@@ -37,8 +37,11 @@ public class OrcaClientIntegrationTest
 
     private static final Log LOG = LogFactory.getLog( OrcaClientIntegrationTest.class );
 
-    @Resource(name = "orcaClient")
-    private IOrcaClient orcaClient_;
+    @Resource(name = "orcaReaderClient")
+    private IOrcaClient orcaReaderClient_;
+
+    @Resource(name = "orcaSenderClient")
+    private IOrcaClient orcaSenderClient_;
 
     /** */
     @BeforeClass
@@ -67,9 +70,21 @@ public class OrcaClientIntegrationTest
      * @throws OrcaException
      */
     @Test
-    public void testSprintInjectionAndConnect() throws OrcaException
+    public void testSprintInjectionOfOrcaClient() throws OrcaException
     {
-        assertThat( orcaClient_, notNullValue() );
-        orcaClient_.connect();
+        assertThat( orcaReaderClient_, notNullValue() );
+        assertThat( orcaSenderClient_, notNullValue() );
+    }
+
+    /**
+     * Tests that we can actually connect to the Orca client.
+     * 
+     * @throws OrcaException
+     */
+    @Test
+    public void testConnectToOrcaBroker() throws OrcaException
+    {
+        orcaReaderClient_.connect();
+        orcaSenderClient_.connect();
     }
 }

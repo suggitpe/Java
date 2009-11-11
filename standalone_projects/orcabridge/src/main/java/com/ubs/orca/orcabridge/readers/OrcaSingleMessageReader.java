@@ -62,20 +62,17 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     @Override
     protected void doStopReader() throws OrcaBridgeException
     {
-        if ( orcaClient_ != null )
+        try
         {
-            try
-            {
-                orcaClient_.stop();
-            }
-            catch ( OrcaException oe )
-            {
-                LOG.error( "Errors occurred when trying to stop the Orca client", oe );
-            }
-            finally
-            {
-                completeDisconnect();
-            }
+            orcaClient_.stop();
+        }
+        catch ( OrcaException oe )
+        {
+            LOG.error( "Errors occurred when trying to stop the Orca client", oe );
+        }
+        finally
+        {
+            completeDisconnect();
         }
     }
 

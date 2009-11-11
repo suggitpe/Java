@@ -2,21 +2,34 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-	<bean id="identity" class="com.ubs.orca.client.api.OrcaIdentity">
-		<constructor-arg type="java.lang.String" value="OrcaBridgeTestToken:1" />
-	</bean>
+    <bean id="callback" class="com.ubs.orca.orcabridge.readers.OrcaSingleMessageReaderCallback">
+        <property name="messageProcessor">
+            <bean class="com.ubs.orca.orcabridge.support.LogOnlyMessageProcessor" />
+        </property>
+    </bean>
 
 
-	<bean id="orcaClient" class="com.ubs.orca.client.api.OrcaClientFactory"
-		factory-method="createOrcaClient">
-		<constructor-arg ref="identity" />
-		<constructor-arg type="java.lang.String" value="tcp://localhost:7222" />
-		<constructor-arg value="true" />
-		<constructor-arg ref="callback" />
-	</bean>
+    <bean id="orcaReaderClient" class="com.ubs.orca.client.api.OrcaClientFactory" factory-method="createOrcaClient">
+        <constructor-arg>
+            <bean class="com.ubs.orca.client.api.OrcaIdentity">
+                <constructor-arg type="java.lang.String" value="OrcaBridgeTestReaderToken:1" />
+            </bean>
+        </constructor-arg>
+        <constructor-arg type="java.lang.String" value="tcp://localhost:7222" />
+        <constructor-arg value="true" />
+        <constructor-arg ref="callback" />
+    </bean>
 
-	<bean id="callback" class="com.ubs.orca.orcabridge.OrcaClientIntegrationTest"
-		factory-method="createCallback" />
+    <bean id="orcaSenderClient" class="com.ubs.orca.client.api.OrcaClientFactory" factory-method="createOrcaClient">
+        <constructor-arg>
+            <bean class="com.ubs.orca.client.api.OrcaIdentity">
+                <constructor-arg type="java.lang.String" value="OrcaBridgeTestSenderToken:1" />
+            </bean>
+        </constructor-arg>
+        <constructor-arg type="java.lang.String" value="tcp://localhost:7222" />
+        <constructor-arg value="true" />
+    </bean>
+
 
 
 </beans>

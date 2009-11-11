@@ -2,20 +2,19 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-	<bean id="jmsReader" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReader">
-		<property name="jmsClient">
-			<bean class="com.ubs.orca.orcabridge.support.JmsClientTestStub" />
-		</property>
-		<property name="durableName" value="testDurable" />
-		<property name="messageSelector" value="test selector" />
-		<property name="jmsCallback" ref="callback" />
-	</bean>
+    <bean id="jmsReader" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReader">
+        <property name="jmsClient">
+            <bean class="com.ubs.orca.orcabridge.support.JmsClientTestStub" />
+        </property>
+        <property name="durableName" value="testDurable" />
+        <property name="messageSelector" value="test selector" />
+        <property name="jmsCallback" ref="callback" />
+    </bean>
 
-	<bean id="callback"
-		class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReaderCallback">
-		<property name="messageProcessor">
-			<bean class="com.ubs.orca.orcabridge.support.MessageProcessorTestStub"/>
-		</property>
-	</bean>
+    <bean id="callback" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReaderCallback">
+        <property name="messageProcessor">
+            <bean class="com.ubs.orca.orcabridge.support.MessageProcessorTestStub" />
+        </property>
+    </bean>
 
 </beans>

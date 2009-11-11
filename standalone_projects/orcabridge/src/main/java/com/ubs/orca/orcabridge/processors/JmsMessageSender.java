@@ -79,14 +79,14 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
     }
 
     /**
-     * Sets the jmsclientCore field to the specified value.
+     * Sets the jmsClient field to the specified value.
      * 
-     * @param jmsclientCore
-     *            The jmsclientCore to set.
+     * @param aJmsClient
+     *            The jmsClient to set.
      */
-    public void setJmsClientCore( IJmsClient jmsclientCore )
+    public void setJmsClient( IJmsClient aJmsClient )
     {
-        jmsClientCore_ = jmsclientCore;
+        jmsClientCore_ = aJmsClient;
     }
 
 }

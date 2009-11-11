@@ -2,13 +2,19 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-    <bean id="jmsMessageSender" class="com.ubs.orca.orcabridge.processors.JmsMessageSender" init-method="init"
-        destroy-method="tearDown">
+    <bean id="jmsMessageReader" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReader">
         <property name="jmsClient" ref="localJmsClient" />
+        <property name="durableName" value="testDurable" />
+        <property name="messageSelector" value="" />
+        <property name="jmsCallback">
+            <bean class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReaderCallback">
+                <property name="messageProcessor">
+                    <bean class=""/>
+                </property>
+            </bean>
+        </property>
+
     </bean>
-
-    <bean id="messageFacade" class="com.ubs.orca.orcabridge.support.MessageFacadeTestStub" />
-
 
     <bean id="localJmsClient" class="com.ubs.orca.orcabridge.jmsclient.impl.JmsClientCore">
         <property name="initialContext">

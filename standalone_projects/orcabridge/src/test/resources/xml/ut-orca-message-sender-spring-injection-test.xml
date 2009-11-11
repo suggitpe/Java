@@ -2,9 +2,9 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-    <bean id="orcaMessageSender" class="com.ubs.orca.orcabridge.processors.OrcaMessageSender"  init-method="init">
+    <bean id="orcaMessageSender" class="com.ubs.orca.orcabridge.processors.OrcaMessageSender" init-method="init">
         <property name="orcaClient">
-            <bean class="com.ubs.orca.orcabridge.support.OrcaClientTestStub"/>
+            <bean class="com.ubs.orca.orcabridge.support.OrcaClientTestStub" />
         </property>
     </bean>
 
