@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-    <import resource="classpath:xml/it-state-machine-connection-test-transitions.xml"/>
+    <import resource="classpath:xml/it-state-machine-connection-test-transitions.xml" />
 
     <!-- =============================== -->
     <!-- STATE MACHINE -->

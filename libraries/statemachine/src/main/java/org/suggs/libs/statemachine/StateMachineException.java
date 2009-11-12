@@ -16,14 +16,6 @@ public class StateMachineException extends Exception
 
     /**
      * Constructs a new instance.
-     */
-    public StateMachineException()
-    {
-        super();
-    }
-
-    /**
-     * Constructs a new instance.
      * 
      * @param aMsg
      *            the exception message
@@ -33,27 +25,4 @@ public class StateMachineException extends Exception
         super( aMsg );
     }
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aException
-     *            an exception to nest
-     */
-    public StateMachineException( Throwable aException )
-    {
-        super( aException );
-    }
-
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aMsg
-     *            the message of the exception
-     * @param aException
-     *            a nested exception to embed in this exception
-     */
-    public StateMachineException( String aMsg, Throwable aException )
-    {
-        super( aMsg, aException );
-    }
 }

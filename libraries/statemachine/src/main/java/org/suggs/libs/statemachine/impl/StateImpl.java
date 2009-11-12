@@ -30,8 +30,8 @@ public class StateImpl implements IState
 
     private static final Log LOG = LogFactory.getLog( StateImpl.class );
 
-    private final String mStateName_;
-    private Collection<IStateTransition> mTransitions_ = new ArrayList<IStateTransition>();
+    private final String stateName_;
+    private Collection<IStateTransition> transitions_ = new ArrayList<IStateTransition>();
 
     /**
      * Constructs a new instance.
@@ -42,7 +42,7 @@ public class StateImpl implements IState
     public StateImpl( String aStateName )
     {
         super();
-        mStateName_ = aStateName;
+        stateName_ = aStateName;
     }
 
     /**
@@ -51,7 +51,7 @@ public class StateImpl implements IState
     @Override
     public String getStateName()
     {
-        return mStateName_;
+        return stateName_;
     }
 
     /**
@@ -68,7 +68,7 @@ public class StateImpl implements IState
     {
         if ( LOG.isDebugEnabled() )
         {
-            LOG.debug( "Step called from state=[" + mStateName_ + "]" );
+            LOG.debug( "Step called from state=[" + stateName_ + "]" );
         }
         loadTransitionsIntoState();
         return evaluateTransitionsToNewState( aContext );
@@ -76,9 +76,9 @@ public class StateImpl implements IState
 
     private void loadTransitionsIntoState()
     {
-        if ( mTransitions_ == null || mTransitions_.size() == 0 )
+        if ( transitions_ == null || transitions_.size() == 0 )
         {
-            mTransitions_ = StateTransitionManager.instance().getListOfTransitionsForState( this );
+            transitions_ = StateTransitionManager.instance().getListOfTransitionsForState( this );
         }
     }
 
@@ -86,7 +86,7 @@ public class StateImpl implements IState
                     throws StateMachineException
     {
         IStateTransition successfulTransition = null;
-        for ( IStateTransition transInLoop : mTransitions_ )
+        for ( IStateTransition transInLoop : transitions_ )
         {
             if ( transInLoop.evaluateTransitionValidity( aContext ) )
             {
@@ -131,25 +131,25 @@ public class StateImpl implements IState
             return false;
         }
         StateImpl other = (StateImpl) obj;
-        if ( mStateName_ == null )
+        if ( stateName_ == null )
         {
-            if ( other.mStateName_ != null )
+            if ( other.stateName_ != null )
             {
                 return false;
             }
         }
-        else if ( !mStateName_.equals( other.mStateName_ ) )
+        else if ( !stateName_.equals( other.stateName_ ) )
         {
             return false;
         }
-        if ( mTransitions_ == null )
+        if ( transitions_ == null )
         {
-            if ( other.mTransitions_ != null )
+            if ( other.transitions_ != null )
             {
                 return false;
             }
         }
-        else if ( !mTransitions_.equals( other.mTransitions_ ) )
+        else if ( !transitions_.equals( other.transitions_ ) )
         {
             return false;
         }
@@ -164,8 +164,8 @@ public class StateImpl implements IState
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ( ( mStateName_ == null ) ? 0 : mStateName_.hashCode() );
-        result = prime * result + ( ( mTransitions_ == null ) ? 0 : mTransitions_.hashCode() );
+        result = prime * result + ( ( stateName_ == null ) ? 0 : stateName_.hashCode() );
+        result = prime * result + ( ( transitions_ == null ) ? 0 : transitions_.hashCode() );
         return result;
     }
 
@@ -176,7 +176,7 @@ public class StateImpl implements IState
     public String toString()
     {
         StringBuilder buff = new StringBuilder( "StateImpl:" );
-        buff.append( " stateName=[" ).append( mStateName_ ).append( "]" );
+        buff.append( " stateName=[" ).append( stateName_ ).append( "]" );
         return buff.toString();
     }
 

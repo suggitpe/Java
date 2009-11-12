@@ -50,7 +50,7 @@
         <constructor-arg ref="connectedState" />
         <property name="transitionGuards">
             <list>
-                <bean class="org.suggs.libs.statemachine.stub.TrueGuardStub"/>
+                <bean class="org.suggs.libs.statemachine.support.TrueGuardStub"/>
             </list>
         </property>
     </bean>
@@ -61,7 +61,7 @@
         <constructor-arg ref="failedState" />
         <property name="transitionGuards">
             <list>
-                <bean class="org.suggs.libs.statemachine.stub.FalseGuardStub"/>
+                <bean class="org.suggs.libs.statemachine.support.FalseGuardStub"/>
             </list>
         </property>
     </bean>
@@ -92,7 +92,7 @@
         <constructor-arg ref="disconnectedState" />
         <property name="transitionGuards">
             <list>
-                <bean class="org.suggs.libs.statemachine.stub.TrueGuardStub"/>
+                <bean class="org.suggs.libs.statemachine.support.TrueGuardStub"/>
             </list>
         </property>
     </bean>

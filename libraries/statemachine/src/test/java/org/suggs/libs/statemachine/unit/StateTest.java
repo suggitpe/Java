@@ -35,7 +35,7 @@ public class StateTest
 {
 
     private static final Log LOG = LogFactory.getLog( StateTest.class );
-    private IMocksControl mCtrl_;
+    private IMocksControl ctrl_;
 
     /** */
     @BeforeClass
@@ -50,7 +50,7 @@ public class StateTest
     {
         LOG.debug( "------------------- " );
         StateTransitionManager.instance().clearTransitionsFromTransitionManager();
-        mCtrl_ = createControl();
+        ctrl_ = createControl();
     }
 
     /**
@@ -107,9 +107,9 @@ public class StateTest
         IState endState = new StateImpl( "TestEndState" );
 
         // set up mocks
-        IStateMachineContext context = mCtrl_.createMock( IStateMachineContext.class );
-        IStateTransition trans1 = mCtrl_.createMock( IStateTransition.class );
-        IStateTransition trans2 = mCtrl_.createMock( IStateTransition.class );
+        IStateMachineContext context = ctrl_.createMock( IStateMachineContext.class );
+        IStateTransition trans1 = ctrl_.createMock( IStateTransition.class );
+        IStateTransition trans2 = ctrl_.createMock( IStateTransition.class );
 
         expect( trans1.getStartingState() ).andReturn( state ).anyTimes();
         expect( trans1.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
@@ -120,7 +120,7 @@ public class StateTest
         expect( trans1.evaluateTransitionValidity( context ) ).andReturn( false );
         expect( trans2.evaluateTransitionValidity( context ) ).andReturn( true );
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
         StateTransitionManager.instance().addTransitionToManager( trans1 );
         StateTransitionManager.instance().addTransitionToManager( trans2 );
@@ -131,7 +131,7 @@ public class StateTest
         assertThat( endState, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns a different state when there are valid transitions setup" );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -148,9 +148,9 @@ public class StateTest
         IState endState = new StateImpl( "TestEndState" );
 
         // set up mocks
-        IStateMachineContext context = mCtrl_.createMock( IStateMachineContext.class );
-        IStateTransition trans1 = mCtrl_.createMock( IStateTransition.class );
-        IStateTransition trans2 = mCtrl_.createMock( IStateTransition.class );
+        IStateMachineContext context = ctrl_.createMock( IStateMachineContext.class );
+        IStateTransition trans1 = ctrl_.createMock( IStateTransition.class );
+        IStateTransition trans2 = ctrl_.createMock( IStateTransition.class );
 
         expect( trans1.getStartingState() ).andReturn( state ).anyTimes();
         expect( trans1.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
@@ -161,7 +161,7 @@ public class StateTest
         expect( trans1.evaluateTransitionValidity( context ) ).andReturn( true );
         expect( trans2.evaluateTransitionValidity( context ) ).andReturn( true );
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
         StateTransitionManager.instance().addTransitionToManager( trans1 );
         StateTransitionManager.instance().addTransitionToManager( trans2 );
@@ -170,7 +170,7 @@ public class StateTest
         LOG.error( "If the code managed to reach here then the test has failed to perform it's role.  Somehow we have managed to let step create  anew state of ["
                    + newState + "]" );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -187,9 +187,9 @@ public class StateTest
         IState state = new StateImpl( "TestState" );
 
         // set up mocks
-        IStateMachineContext context = mCtrl_.createMock( IStateMachineContext.class );
-        IStateTransition trans1 = mCtrl_.createMock( IStateTransition.class );
-        IStateTransition trans2 = mCtrl_.createMock( IStateTransition.class );
+        IStateMachineContext context = ctrl_.createMock( IStateMachineContext.class );
+        IStateTransition trans1 = ctrl_.createMock( IStateTransition.class );
+        IStateTransition trans2 = ctrl_.createMock( IStateTransition.class );
 
         expect( trans1.getStartingState() ).andReturn( state ).anyTimes();
         expect( trans1.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
@@ -199,7 +199,7 @@ public class StateTest
         expect( trans1.evaluateTransitionValidity( context ) ).andReturn( false );
         expect( trans2.evaluateTransitionValidity( context ) ).andReturn( false );
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
         StateTransitionManager.instance().addTransitionToManager( trans1 );
         StateTransitionManager.instance().addTransitionToManager( trans2 );
@@ -209,7 +209,7 @@ public class StateTest
         assertThat( state, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns the same state when there are no valid transitions setup" );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 
     /**
@@ -222,9 +222,9 @@ public class StateTest
     @Test
     public void testStepWithNoTransitionsSetUpReturnsSelf() throws StateMachineException
     {
-        IStateMachineContext context = mCtrl_.createMock( IStateMachineContext.class );
+        IStateMachineContext context = ctrl_.createMock( IStateMachineContext.class );
 
-        mCtrl_.replay();
+        ctrl_.replay();
 
         IState state = new StateImpl( "TestState" );
         IState newState = state.step( context );
@@ -232,6 +232,6 @@ public class StateTest
         assertThat( state, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns the same state when there are no transitions setup" );
 
-        mCtrl_.verify();
+        ctrl_.verify();
     }
 }

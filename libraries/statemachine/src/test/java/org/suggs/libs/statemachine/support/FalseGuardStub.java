@@ -2,7 +2,7 @@
  * TrueGuardStub.java created on 3 Sep 2009 19:50:26 by suggitpe for project Libraries - State Machine
  * 
  */
-package org.suggs.libs.statemachine.stub;
+package org.suggs.libs.statemachine.support;
 
 import org.suggs.libs.statemachine.IStateMachineContext;
 import org.suggs.libs.statemachine.IStateTransitionGuard;

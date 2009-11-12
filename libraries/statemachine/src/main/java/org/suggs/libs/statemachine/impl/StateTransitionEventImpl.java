@@ -15,7 +15,7 @@ import org.suggs.libs.statemachine.IStateTransitionEvent;
 public class StateTransitionEventImpl implements IStateTransitionEvent
 {
 
-    private final String mEventName_;
+    private final String eventName_;
 
     /**
      * Constructs a new instance.
@@ -26,7 +26,7 @@ public class StateTransitionEventImpl implements IStateTransitionEvent
     public StateTransitionEventImpl( String aEventName )
     {
         super();
-        mEventName_ = aEventName;
+        eventName_ = aEventName;
     }
 
     /**
@@ -35,7 +35,7 @@ public class StateTransitionEventImpl implements IStateTransitionEvent
     @Override
     public String getEventName()
     {
-        return mEventName_;
+        return eventName_;
     }
 
     /**
@@ -45,7 +45,7 @@ public class StateTransitionEventImpl implements IStateTransitionEvent
     public String toString()
     {
         StringBuilder buff = new StringBuilder( "StateTransitionEventImpl:" );
-        buff.append( " eventName=[" ).append( mEventName_ ).append( "]" );
+        buff.append( " eventName=[" ).append( eventName_ ).append( "]" );
         return buff.toString();
     }
 
@@ -68,14 +68,14 @@ public class StateTransitionEventImpl implements IStateTransitionEvent
             return false;
         }
         StateTransitionEventImpl other = (StateTransitionEventImpl) obj;
-        if ( mEventName_ == null )
+        if ( eventName_ == null )
         {
-            if ( other.mEventName_ != null )
+            if ( other.eventName_ != null )
             {
                 return false;
             }
         }
-        else if ( !mEventName_.equals( other.mEventName_ ) )
+        else if ( !eventName_.equals( other.eventName_ ) )
         {
             return false;
         }
@@ -90,7 +90,7 @@ public class StateTransitionEventImpl implements IStateTransitionEvent
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ( ( mEventName_ == null ) ? 0 : mEventName_.hashCode() );
+        result = prime * result + ( ( eventName_ == null ) ? 0 : eventName_.hashCode() );
         return result;
     }
 }
