@@ -23,6 +23,13 @@ public class MessageFacadeFactory
 
     private static final Log LOG = LogFactory.getLog( MessageFacadeFactory.class );
 
+    /*
+     * We have hideen this as we do not want people to create any
+     * instances of this class
+     */
+    private MessageFacadeFactory()
+    {}
+
     /**
      * Builds a message facade from a JMS message
      * 

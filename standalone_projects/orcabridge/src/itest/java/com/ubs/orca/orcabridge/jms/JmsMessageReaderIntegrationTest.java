@@ -14,10 +14,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.IMessageReader;
+import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
+import com.ubs.orca.orcabridge.jmsclient.impl.JmsSenderAction;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test to validate that the JMS Reader process works correctly. There
@@ -38,6 +44,12 @@ public class JmsMessageReaderIntegrationTest
     @Resource(name = "jmsMessageReader")
     private IMessageReader jmsMessageReader_;
 
+    @Resource(name = "jmsClient")
+    private IJmsClient jmsClient_;
+
+    @Resource(name = "messageFacade")
+    private IMessageFacade messageFacade_;
+
     /** */
     @BeforeClass
     public static void doBeforeClass()
@@ -45,11 +57,16 @@ public class JmsMessageReaderIntegrationTest
         LOG.debug( "=================== " + JmsMessageReaderIntegrationTest.class.getSimpleName() );
     }
 
-    /** */
+    /** @throws Exception */
     @Before
-    public void doBefore()
+    public void doBefore() throws Exception
     {
         LOG.debug( "------------------- " );
+        jmsClient_.connect();
+
+        jmsClient_.processAction( new JmsSenderAction( messageFacade_ ) );
+
+        jmsClient_.disconnect();
     }
 
     /** */
@@ -66,5 +83,19 @@ public class JmsMessageReaderIntegrationTest
      */
     @Test
     public void testSpringInjection() throws Exception
-    {}
+    {
+        assertThat( jmsMessageReader_, notNullValue() );
+    }
+
+    /**
+     * Tests that we can connect to the broker and retrieve all of the
+     * messages on tehe durable.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void testReadAllMessagesFromDurable() throws Exception
+    {
+        jmsMessageReader_.startReader();
+    }
 }

@@ -87,7 +87,7 @@ public class JmsDurableReaderActionTest
                                                       MSG_SELECTOR,
                                                       true ) ).andReturn( mockSubscriber_ );
 
-        expect( mockSubscriber_.receive() ).andReturn( mockMessage_ ).once();
+        expect( mockSubscriber_.receiveNoWait() ).andReturn( mockMessage_ ).once();
 
         mockCallback_.onReceived( mockMessage_ );
         expectLastCall().once();
@@ -95,7 +95,7 @@ public class JmsDurableReaderActionTest
         mockSession_.commit();
         expectLastCall().once();
 
-        expect( mockSubscriber_.receive() ).andReturn( null ).once();
+        expect( mockSubscriber_.receiveNoWait() ).andReturn( null ).once();
 
         mockSubscriber_.close();
         expectLastCall();
@@ -162,7 +162,7 @@ public class JmsDurableReaderActionTest
                                                       MSG_SELECTOR,
                                                       true ) ).andReturn( mockSubscriber_ );
 
-        expect( mockSubscriber_.receive() ).andReturn( mockMessage_ ).once();
+        expect( mockSubscriber_.receiveNoWait() ).andReturn( mockMessage_ ).once();
 
         mockCallback_.onReceived( mockMessage_ );
         expectLastCall().once();
@@ -170,7 +170,7 @@ public class JmsDurableReaderActionTest
         mockSession_.commit();
         expectLastCall().once();
 
-        expect( mockSubscriber_.receive() ).andReturn( null ).once();
+        expect( mockSubscriber_.receiveNoWait() ).andReturn( null ).once();
 
         mockSubscriber_.close();
         expectLastCall().andThrow( new JMSException( "Failed to close subscriber: this is all part of the test" ) );
@@ -197,7 +197,7 @@ public class JmsDurableReaderActionTest
                                                       MSG_SELECTOR,
                                                       true ) ).andReturn( mockSubscriber_ );
 
-        expect( mockSubscriber_.receive() ).andThrow( new JMSException( "Fail on receive: this is all part of the test" ) );
+        expect( mockSubscriber_.receiveNoWait() ).andThrow( new JMSException( "Fail on receive: this is all part of the test" ) );
 
         mockSubscriber_.close();
         expectLastCall().once();

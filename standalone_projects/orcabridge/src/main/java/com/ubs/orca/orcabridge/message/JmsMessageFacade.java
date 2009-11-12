@@ -24,6 +24,7 @@ class JmsMessageFacade implements IMessageFacade
 {
 
     private static final Log LOG = LogFactory.getLog( JmsMessageFacade.class );
+    @SuppressWarnings("unused")
     private final Message jmsMessage_;
 
     /**

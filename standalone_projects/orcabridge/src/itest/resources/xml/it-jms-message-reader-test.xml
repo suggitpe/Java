@@ -2,21 +2,22 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
+    <bean id="messageFacade" class="com.ubs.orca.orcabridge.support.MessageFacadeTestStub" />
+
     <bean id="jmsMessageReader" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReader">
-        <property name="jmsClient" ref="localJmsClient" />
+        <property name="jmsClient" ref="jmsClient" />
         <property name="durableName" value="testDurable" />
         <property name="messageSelector" value="" />
         <property name="jmsCallback">
             <bean class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReaderCallback">
                 <property name="messageProcessor">
-                    <bean class=""/>
+                    <bean class="com.ubs.orca.orcabridge.support.LogOnlyMessageProcessor" />
                 </property>
             </bean>
         </property>
-
     </bean>
 
-    <bean id="localJmsClient" class="com.ubs.orca.orcabridge.jmsclient.impl.JmsClientCore">
+    <bean id="jmsClient" class="com.ubs.orca.orcabridge.jmsclient.impl.JmsClientCore">
         <property name="initialContext">
             <bean class="javax.naming.InitialContext">
                 <constructor-arg type="java.util.Hashtable" ref="contextHash" />

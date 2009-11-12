@@ -52,19 +52,38 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     @Override
     protected void doStartReader() throws OrcaBridgeException
     {
+        connectToJmsClient();
+        startReaderAction();
+    }
+
+    private void connectToJmsClient() throws OrcaBridgeException
+    {
+        try
+        {
+            jmsClient_.connect();
+        }
+        catch ( JmsClientException je )
+        {
+            final String err = "Failed to connect to JMS client";
+            LOG.error( err );
+            throw new OrcaBridgeException( err, je );
+        }
+    }
+
+    private void startReaderAction() throws OrcaBridgeException
+    {
         IJmsAction action = new JmsDurableReaderAction( jmsCallback_,
                                                         durableName_,
                                                         messageSelector_ );
         try
         {
-            jmsClient_.connect();
             jmsClient_.processAction( action );
         }
-        catch ( JmsClientException je )
+        catch ( JmsClientException jce )
         {
-            final String err = "Failed to start JMS Client";
-            LOG.error( err, je );
-            throw new OrcaBridgeException( err, je );
+            final String err = "Failed to start reader against JMS client";
+            LOG.error( err );
+            throw new OrcaBridgeException( err, jce );
         }
     }
 

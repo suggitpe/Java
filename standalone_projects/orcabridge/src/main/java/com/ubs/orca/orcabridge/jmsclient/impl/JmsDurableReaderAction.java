@@ -79,7 +79,8 @@ public class JmsDurableReaderAction implements IJmsAction
         }
         catch ( JMSException jmse )
         {
-            String err = "Failed to create Subscriber for destination [" + aDestination + "]";
+            String err = "Failed to create Subscriber for destination [" + aDestination + "]: "
+                         + jmse.getMessage();
             LOG.error( err, jmse );
             throw new JmsClientException( err, jmse );
         }
@@ -112,7 +113,7 @@ public class JmsDurableReaderAction implements IJmsAction
         long end = 0;
         try
         {
-            while ( ( message = aSubscriber.receive() ) != null )
+            while ( ( message = aSubscriber.receiveNoWait() ) != null )
             {
                 if ( LOG.isInfoEnabled() )
                 {
