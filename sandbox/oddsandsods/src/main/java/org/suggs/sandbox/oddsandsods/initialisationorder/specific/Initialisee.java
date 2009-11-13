@@ -13,7 +13,7 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
 public class Initialisee
 {
 
-    public static Initialisee instance = new Initialisee( "Static member" );
+    static Initialisee instance = new Initialisee( "Static member" );
 
     /**
      * Singleton approach to construction

@@ -15,6 +15,9 @@ import org.junit.Test;
 public class StaticMethodTest
 {
 
+    /**
+     * 
+     */
     @Test
     public void testStaticMethod()
     {

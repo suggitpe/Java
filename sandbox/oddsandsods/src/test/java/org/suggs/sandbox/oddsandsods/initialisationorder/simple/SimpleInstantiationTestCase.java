@@ -27,6 +27,9 @@ import org.junit.Test;
 public class SimpleInstantiationTestCase
 {
 
+    /**
+     * 
+     */
     @Test
     public void testBuildTestClass()
     {

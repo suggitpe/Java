@@ -21,6 +21,9 @@ public class LoggerTest
 
     private static final Log LOG = LogFactory.getLog( LoggerTest.class );
 
+    /**
+     * 
+     */
     @Test
     public void testLoggingForExceptions()
     {
@@ -30,12 +33,18 @@ public class LoggerTest
                    new IllegalStateException( "test exception" ) );
     }
 
+    /**
+     * 
+     */
     @Test
     public void testLoggingForSimpleMessage()
     {
         LOG.debug( "This is a simple log message" );
     }
 
+    /**
+     * 
+     */
     @Test
     public void testLoggingForStrings()
     {
@@ -43,6 +52,9 @@ public class LoggerTest
         LOG.debug( "hello1 string=[%1s], string=[%2s]", "hello2", "hello3" );
     }
 
+    /**
+     * 
+     */
     @Test
     public void testLoggingForSimpleTypes()
     {
@@ -53,6 +65,9 @@ public class LoggerTest
                    new Boolean( false ) );
     }
 
+    /**
+     * 
+     */
     @Test
     public void testLoggingForDates()
     {
@@ -60,6 +75,9 @@ public class LoggerTest
                    Calendar.getInstance( TimeZone.getTimeZone( "GMT" ) ) );
     }
 
+    /**
+     * 
+     */
     @Test
     public void testClassWithToString()
     {
@@ -67,6 +85,9 @@ public class LoggerTest
         LOG.debug( "Message with class=[%1s]", toStringClass );
     }
 
+    /**
+     * 
+     */
     @Test
     public void testClassWithNoToString()
     {

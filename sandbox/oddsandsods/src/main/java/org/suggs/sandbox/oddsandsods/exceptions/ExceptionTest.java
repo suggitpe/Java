@@ -18,6 +18,9 @@ public class ExceptionTest
 
     private static final Log LOG = LogFactory.getLog( ExceptionTest.class );
 
+    /**
+     * @param args
+     */
     public static void main( String[] args )
     {
         try
@@ -31,6 +34,9 @@ public class ExceptionTest
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public static void testme() throws Exception
     {
         try

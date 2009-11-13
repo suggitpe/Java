@@ -15,6 +15,9 @@ import org.junit.Test;
 public class StaticMemberTest
 {
 
+    /**
+     * 
+     */
     @Test
     public void testStaticMember()
     {

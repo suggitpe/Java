@@ -15,6 +15,9 @@ import org.junit.Test;
 public class TestConstruction
 {
 
+    /**
+     * 
+     */
     @Test
     public void testConstruction()
     {

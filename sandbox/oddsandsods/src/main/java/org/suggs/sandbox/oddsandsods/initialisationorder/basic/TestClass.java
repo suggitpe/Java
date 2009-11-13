@@ -17,8 +17,8 @@ import java.util.List;
 public class TestClass
 {
 
-    public static final ReferenceClass REF = new ReferenceClass( "static member" );
-    public static final List<ReferenceClass> LIST = new ArrayList<ReferenceClass>();
+    static final ReferenceClass REF = new ReferenceClass( "static member" );
+    static final List<ReferenceClass> LIST = new ArrayList<ReferenceClass>();
 
     static
     {
@@ -31,6 +31,9 @@ public class TestClass
         LIST.add( new ReferenceClass( "ref class ctor'd in the non-static initialiser" ) );
     }
 
+    /**
+     * Constructs a new instance.
+     */
     public TestClass()
     {
         System.out.println( "In the TestClass constructor" );
