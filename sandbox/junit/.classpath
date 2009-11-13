@@ -7,5 +7,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/home/suggitpe/codebase/repository/m2repository/junit/junit/4.6/junit-4.6.jar"/>
 	<classpathentry kind="lib" path="/build/etc/suggitpe"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SuggsTestRunTime"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
