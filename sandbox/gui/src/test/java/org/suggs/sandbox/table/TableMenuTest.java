@@ -4,9 +4,8 @@
  */
 package org.suggs.sandbox.table;
 
-
 /**
- * TODO Write javadoc for TableMenuTest
+ * Manual test for the Table Menu
  * 
  * @author suggitpe
  * @version 1.0 15 Jul 2009

@@ -18,6 +18,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * Class to represent a Table Menu
+ * 
+ * @author suggitpe
+ * @version 1.0 16 Nov 2009
+ */
 public class TableMenu extends JFrame
 {
 
