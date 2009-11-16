@@ -11,7 +11,9 @@ import org.junit.Test;
 
 /**
  * Test suite to test the Logger classes. These tests should cover all
- * of the various types that can be used within a logger.
+ * of the various types that can be used within a logger. Plese note
+ * that this test class is more for documentation that it is for
+ * actually testing anything.
  * 
  * @author suggitpe
  * @version 1.0 18 Sep 2009

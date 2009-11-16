@@ -30,8 +30,8 @@ public class StaticMemberTest
 
         target = null;
 
+        Logger.log( "=====================================" );
         Logger.output();
         Logger.clearLogs();
-        Logger.log( "=====================================" );
     }
 }
