@@ -15,13 +15,36 @@ import java.util.Enumeration;
 public interface PropertyManagerMBean
 {
 
+    /**
+     * Getter for a string property
+     * 
+     * @param aName
+     *            the name of the property
+     * @return the string property with the name aName
+     */
     public String getProperty( String aName );
 
+    /**
+     * Setter for a property
+     * 
+     * @param aName
+     * @param aValue
+     */
     public void setProperty( String aName, String aValue );
 
-    @SuppressWarnings("unchecked")
-    public Enumeration keys();
+    /**
+     * Getter for the keys
+     * 
+     * @return an Enumeration of keys
+     */
+    public Enumeration<String> keys();
 
+    /**
+     * Setter for the source
+     * 
+     * @param aPath
+     *            the path of the source File
+     */
     public void setSource( String aPath );
 
 }

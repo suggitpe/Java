@@ -102,6 +102,9 @@ public class RmiMbeanDeployer
         }
     }
 
+    /**
+     * Deploys the logger
+     */
     public static void deployLogger()
     {
         LOG.debug( "Running the logger setup application" );

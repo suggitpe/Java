@@ -16,12 +16,24 @@ import java.sql.Connection;
 public interface DBSourceMBean
 {
 
+    /**
+     * @param name
+     */
     public void resetDataSource( String name );
 
+    /**
+     * @param commit
+     */
     public void setAutoCommit( boolean commit );
 
+    /**
+     * @return true if auto comit uis set
+     */
     public boolean getAutoCommit();
 
+    /**
+     * @return teh connection
+     */
     public Connection getConnection();
 
 }

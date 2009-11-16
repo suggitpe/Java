@@ -28,9 +28,9 @@ public class Logger implements LoggerMBean, MBeanRegistration
 {
 
     private static final Log LOG = LogFactory.getLog( Logger.class );
-    public static final int ALL = 3;
-    public static final int ERRORS = 2;
-    public static final int NONE = 1;
+    static final int ALL = 3;
+    static final int ERRORS = 2;
+    static final int NONE = 1;
 
     private PrintWriter mOut_;
     private int mLogLevel = Logger.ALL;
@@ -91,22 +91,19 @@ public class Logger implements LoggerMBean, MBeanRegistration
      * @see javax.management.MBeanRegistration#postDeregister()
      */
     public void postDeregister()
-    {
-    }
+    {}
 
     /**
      * @see javax.management.MBeanRegistration#postRegister(java.lang.Boolean)
      */
     public void postRegister( Boolean registrationDone )
-    {
-    }
+    {}
 
     /**
      * @see javax.management.MBeanRegistration#preDeregister()
      */
     public void preDeregister() throws Exception
-    {
-    }
+    {}
 
     /**
      * @see javax.management.MBeanRegistration#preRegister(javax.management.MBeanServer,

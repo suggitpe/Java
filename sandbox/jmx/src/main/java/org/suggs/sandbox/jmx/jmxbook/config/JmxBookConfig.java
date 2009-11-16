@@ -27,11 +27,15 @@ public class JmxBookConfig
 
     private Properties mProperties_;
 
-    // now the names of the configuration items
+    /** The HTTP port config name */
     public static final String HTTP_PORT = "agent.http.port";
+    /** the RMI port config name */
     public static final String RMI_PORT = "agent.rmi.port";
+    /** The RMI URL prefix config name */
     public static final String RMI_URL_PREFIX = "agent.rmi.url.prefix";
+    /** The RMI URL postfix name */
     public static final String RMI_URL_POSTFIX = "agent.rmi.url.postfix";
+    /** the MBEAN server name config name */
     public static final String MBEAN_SERVERNAME = "server.mbean.name";
 
     static

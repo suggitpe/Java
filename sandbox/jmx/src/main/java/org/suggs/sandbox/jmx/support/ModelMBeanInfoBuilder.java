@@ -39,8 +39,7 @@ public class ModelMBeanInfoBuilder
      * Constructs a new instance.
      */
     public ModelMBeanInfoBuilder()
-    {
-    }
+    {}
 
     /**
      * Adds a new method to the model MBean operations list. Initially
@@ -253,6 +252,16 @@ public class ModelMBeanInfoBuilder
         return ret;
     }
 
+    /**
+     * @param name
+     * @param displayName
+     * @param role
+     * @param targetObject
+     * @param targetType
+     * @param ownerClass
+     * @param currency
+     * @return a Descriptor
+     */
     public Descriptor buildOperationDescriptor( String name, String displayName, String role,
                                                 Object targetObject, Object targetType,
                                                 String ownerClass, String currency )
@@ -290,6 +299,17 @@ public class ModelMBeanInfoBuilder
         return desc;
     }
 
+    /**
+     * @param name
+     * @param displayName
+     * @param persistPolicy
+     * @param persistPeriod
+     * @param persistLocation
+     * @param persistName
+     * @param log
+     * @param logFile
+     * @return a Descriptor
+     */
     public Descriptor buildMBeanDescriptor( String name, String displayName, String persistPolicy,
                                             String persistPeriod, String persistLocation,
                                             String persistName, String log, String logFile )

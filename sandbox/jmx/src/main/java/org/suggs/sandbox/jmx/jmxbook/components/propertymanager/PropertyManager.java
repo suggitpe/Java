@@ -29,6 +29,11 @@ public class PropertyManager implements PropertyManagerMBean
         mProps_ = new Properties();
     }
 
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aPath
+     */
     public PropertyManager( String aPath )
     {
         LOG.debug( "Loading property file [" + aPath + "]" );
