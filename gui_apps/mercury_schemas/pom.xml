@@ -37,9 +37,7 @@
                     <bindingIncludes>
                         <include>*.xjb</include>
                     </bindingIncludes>
-                    <!--
                     <generateDirectory>src/main/java</generateDirectory>
-                    -->
                     <forceRegenerate>true</forceRegenerate>
                     <strict>true</strict>
                     <verbose>true</verbose> 
