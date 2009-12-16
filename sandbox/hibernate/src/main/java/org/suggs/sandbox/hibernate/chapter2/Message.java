@@ -33,9 +33,11 @@ public class Message
 
     @SuppressWarnings("unused")
     private Message()
-    {
-    }
+    {}
 
+    /**
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString()
     {
