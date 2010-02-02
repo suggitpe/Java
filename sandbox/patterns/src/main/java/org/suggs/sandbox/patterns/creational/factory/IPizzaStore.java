@@ -13,6 +13,12 @@ package org.suggs.sandbox.patterns.creational.factory;
 public interface IPizzaStore
 {
 
+    /**
+     * @param aType
+     *            type
+     * @return a pizza
+     * @throws PizzaStoreException
+     */
     IPizza orderPizza( String aType ) throws PizzaStoreException;
 
 }

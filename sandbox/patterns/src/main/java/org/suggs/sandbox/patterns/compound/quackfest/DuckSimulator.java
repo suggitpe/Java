@@ -60,6 +60,7 @@ public class DuckSimulator
         LOG.debug( "Total number of quacks was [" + QuackCounter.getQuacks() + "]" );
     }
 
+    /** @param aQuackable */
     public void simulate( IQuackable aQuackable )
     {
         aQuackable.quack();

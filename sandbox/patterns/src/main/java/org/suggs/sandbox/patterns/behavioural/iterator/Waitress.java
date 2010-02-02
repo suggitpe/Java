@@ -1,6 +1,5 @@
 /*
  * Waitress.java created on 6 Sep 2007 07:19:37 by suggitpe for project SandBox - Patterns
- * 
  */
 package org.suggs.sandbox.patterns.behavioural.iterator;
 
@@ -72,7 +71,7 @@ public class Waitress
         while ( aIter.hasNext() )
         {
             MenuItem m = (MenuItem) aIter.next();
-            System.out.println( m.getName() + ", £" + m.getPrice() + " -- " + m.getDescription() );
+            System.out.println( m.getName() + ", ï¿½" + m.getPrice() + " -- " + m.getDescription() );
         }
 
     }

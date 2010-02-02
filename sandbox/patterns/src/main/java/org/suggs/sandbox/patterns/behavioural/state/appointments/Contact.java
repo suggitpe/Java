@@ -15,7 +15,6 @@ import java.io.Serializable;
 public class Contact implements Serializable
 {
 
-    public static final String SPACE = " ";
     private String mFirstName_;
     private String mLastName_;
     private String mTitle_;

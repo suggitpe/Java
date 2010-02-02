@@ -31,31 +31,39 @@ public class Stereo
         mLocation_ = aLocation;
     }
 
+    /** */
     public void on()
     {
         LOG.debug( "Stereo (" + mLocation_ + ") on!" );
     }
 
+    /** */
     public void off()
     {
         LOG.debug( "Stereo (" + mLocation_ + ") off!" );
     }
 
+    /** */
     public void setCd()
     {
         LOG.debug( "CD!" );
     }
 
+    /** */
     public void setDvd()
     {
         LOG.debug( "DVD!" );
     }
 
+    /** */
     public void setRadio()
     {
         LOG.debug( "Radio!" );
     }
 
+    /**
+     * @param aVolume
+     */
     public void setVolume( int aVolume )
     {
         LOG.debug( "Volume to [" + aVolume + "]" );

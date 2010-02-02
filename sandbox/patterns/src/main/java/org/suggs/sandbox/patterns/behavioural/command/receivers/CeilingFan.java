@@ -32,30 +32,45 @@ public class CeilingFan
         mLocation_ = aLocation;
     }
 
+    /**
+     * 
+     */
     public void high()
     {
         LOG.debug( "Ceiling Fan (" + mLocation_ + ") high!" );
         mSpeed_ = "HIGH";
     }
 
+    /**
+     * 
+     */
     public void medium()
     {
         LOG.debug( "Ceiling Fan (" + mLocation_ + ") medium!" );
         mSpeed_ = "MEDIUM";
     }
 
+    /**
+     * 
+     */
     public void low()
     {
         LOG.debug( "Ceiling Fan (" + mLocation_ + ") low!" );
         mSpeed_ = "LOW";
     }
 
+    /**
+     * 
+     */
     public void off()
     {
         LOG.debug( "Ceiling Fan (" + mLocation_ + ") off!" );
         mSpeed_ = "OFF";
     }
 
+    /**
+     * @return speed
+     */
     public String getSpeed()
     {
         return mSpeed_;

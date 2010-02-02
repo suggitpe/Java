@@ -4,7 +4,6 @@
  */
 package org.suggs.sandbox.patterns.behavioural.iterator;
 
-
 /**
  * Interface for all menus
  * 
@@ -14,6 +13,9 @@ package org.suggs.sandbox.patterns.behavioural.iterator;
 public interface IMenu
 {
 
+    /**
+     * @return iterator
+     */
     IIterator createIterator();
 
 }

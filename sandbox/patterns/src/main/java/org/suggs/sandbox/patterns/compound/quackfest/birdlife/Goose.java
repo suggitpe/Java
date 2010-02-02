@@ -18,6 +18,7 @@ public class Goose
 
     private static final Log LOG = LogFactory.getLog( Goose.class );
 
+    /** */
     public void honk()
     {
         LOG.debug( "Honk" );

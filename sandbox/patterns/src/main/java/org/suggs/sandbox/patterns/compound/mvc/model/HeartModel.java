@@ -82,6 +82,9 @@ public class HeartModel implements IHeartModel, Runnable
         return 6000 / mTime_;
     }
 
+    /**
+     * 
+     */
     public void notifyBeatObservers()
     {
         for ( IBeatObserver b : mBeatObservers_ )
@@ -90,6 +93,9 @@ public class HeartModel implements IHeartModel, Runnable
         }
     }
 
+    /**
+     * 
+     */
     public void notifyBpmObservers()
     {
         for ( IBpmObserver b : mBpmObservers_ )

@@ -37,8 +37,21 @@ public class HomeTheatreFacade
     private TheatreLights mTheatreLights_;
     private Tuner mTuner_;
 
-    public HomeTheatreFacade( Amplifier aAmplifier, CdPlayer aCdPlayer, DvdPlayer aDvdPlayer, PopcornMachine aPopcornMachine,
-                              Projector aProjector, Screen aScreen, TheatreLights aTheatreLights, Tuner aTuner )
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aAmplifier
+     * @param aCdPlayer
+     * @param aDvdPlayer
+     * @param aPopcornMachine
+     * @param aProjector
+     * @param aScreen
+     * @param aTheatreLights
+     * @param aTuner
+     */
+    public HomeTheatreFacade( Amplifier aAmplifier, CdPlayer aCdPlayer, DvdPlayer aDvdPlayer,
+                              PopcornMachine aPopcornMachine, Projector aProjector, Screen aScreen,
+                              TheatreLights aTheatreLights, Tuner aTuner )
     {
         mAmplifier_ = aAmplifier;
         mCdPlayer_ = aCdPlayer;

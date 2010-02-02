@@ -13,6 +13,7 @@ package org.suggs.sandbox.patterns.compound.mvc;
 public interface IBeatObserver
 {
 
+    /** */
     void updateBeat();
 
 }
