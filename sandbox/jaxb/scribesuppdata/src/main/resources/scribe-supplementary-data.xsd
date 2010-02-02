@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Nick Reid (UBS, For the attention of Accounts Payable) -->
+<xs:schema xmlns="urn:Scribe:scribe-supplementary-data:2007-01-01" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Scribe:scribe-supplementary-data:2007-01-01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="SupplementaryData">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="staticData" type="StaticDataType"/>
+				<xs:element name="generationDetails" type="GenerationDetailsType"/>
+				<xs:element name="brsDetails" type="xs:anyType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="StaticDataType">
+		<xs:sequence>
+			<xs:element name="counterPartyDetails" type="CounterPartyDetailsType"/>
+			<xs:element name="instrument" type="InstrumentType" minOccurs="0"/>
+			<xs:element name="owner" maxOccurs="2">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ownerType">
+							<xs:attribute name="role" type="xs:string"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="secondLanguageData" type="SecondLanguageDataType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CounterPartyDetailsType">
+		<xs:sequence>
+			<xs:element name="masterAgreement" type="MasterAgreementType" minOccurs="0"/>
+			<xs:element name="settlementInstruction" type="SettlementInstruction" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="transmission" type="TransmissionData" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="counterparty" type="CounterPartyDataType" minOccurs="0"/>
+			<xs:element name="counterPartyOther" type="CounterPartyDataType" minOccurs="0" maxOccurs="4"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MasterAgreementType">
+		<xs:sequence>
+			<xs:element name="masterAgreementId" type="xs:string" nillable="true"/>
+			<xs:element name="rxmNumber" type="xs:string" nillable="true"/>
+			<xs:element name="rxmLocation" type="xs:string" nillable="true"/>
+			<xs:element name="legalEntity" type="xs:string" nillable="true"/>
+			<xs:element name="name" type="xs:string" nillable="true"/>
+			<xs:element name="agreementType" type="xs:string" nillable="true"/>
+			<xs:element name="version" type="xs:string" nillable="true"/>
+			<xs:element name="statusOfMaster" type="xs:string" nillable="true"/>
+			<xs:element name="agreementDate" type="xs:dateTime" nillable="true"/>
+			<xs:element name="branchCode" type="xs:string" nillable="true"/>
+			<xs:element name="governingLaw" type="xs:string" nillable="true"/>
+			<xs:element name="agreementText" type="xs:string" nillable="true"/>
+			<xs:element name="stateText" type="xs:string"/>
+			<xs:element name="signatories" type="SignatoriesType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SignatoriesType">
+		<xs:sequence>
+			<xs:annotation>
+				<xs:documentation>This contains master signatories data.</xs:documentation>
+			</xs:annotation>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="authority" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TransmissionData">
+		<xs:sequence>
+			<xs:element name="transmissionId" type="xs:string"/>
+			<xs:element name="address" type="xs:string" minOccurs="0"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="countryAccessCode" type="xs:string"/>
+					<xs:element name="fax" type="xs:string"/>
+				</xs:sequence>
+				<!-- For now, pts transmissions will not contain any data -->
+				<xs:element name="ptsData" type="xs:string" minOccurs="0"/>
+				<xs:sequence>
+					<xs:element name="cptyDtccId" type="xs:string"/>
+					<xs:element name="party1" type="CounterpartyIdDtccValue"/>
+					<xs:element name="party2" type="CounterpartyIdDtccValue"/>
+					<xs:element name="party3" type="CounterpartyIdDtccValue" minOccurs="0"/>
+					<xs:element name="party4" type="CounterpartyIdDtccValue" minOccurs="0"/>
+				</xs:sequence>
+				<xs:element name="swiftBicAddress" type="xs:string"/>
+			</xs:choice>
+			<xs:element name="contactName" type="xs:string"/>
+			<xs:element name="counterpartyId" type="xs:string"/>
+			<xs:element name="match" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CounterPartyDataType">
+		<xs:sequence>
+			<xs:element name="masterAgreement" type="MasterAgreementType" minOccurs="0"/>
+			<xs:element name="counterpartyId" type="xs:string"/>
+			<xs:element name="shortName" type="xs:string"/>
+			<xs:element name="sensitive" type="xs:boolean"/>
+			<xs:element name="legalName" type="xs:string"/>
+			<xs:element name="officeLocation" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>this is actually the city of the counterparty registered legal address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="address" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="supportedFeatures" type="xs:string" minOccurs="0"/>
+			<xs:element name="dtccId" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="role" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="InstrumentType">
+		<xs:sequence>
+			<xs:element name="instrumentId">
+				<xs:annotation>
+					<xs:documentation>
+						These are the alternate references for the
+						instrument (e.g. BLOOMBERG, ISIN, MICEX etc.)
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="type" type="xs:string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="alternateRef" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						These are the alternate references for the
+						instrument (e.g. BLOOMBERG, ISIN, MICEX etc.)
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="type" type="xs:string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="longName" type="xs:string"/>
+			<xs:element name="shortName" type="xs:string" minOccurs="0"/>
+			<xs:element name="type" type="xs:string"/>
+			<xs:element name="issuer" type="xs:string" minOccurs="0"/>
+			<xs:element name="maturityDate" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="couponRate" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="currency" type="xs:string"/>
+			<xs:element name="relatedExchange" type="xs:string" minOccurs="0"/>
+			<xs:element name="exchangeName" type="xs:string" minOccurs="0"/>
+			<xs:element name="country" type="xs:string" minOccurs="0"/>
+			<xs:element name="instrumentRegion" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+			<xs:element name="multipleExchangeIndicator" type="xs:boolean" minOccurs="0" maxOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ownerType">
+		<xs:sequence>
+			<xs:element name="ownerId" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="dtccId" type="xs:string" minOccurs="0"/>
+			<xs:element name="swiftBicAddress" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GenerationDetailsType">
+		<xs:sequence>
+			<xs:element name="generationData" type="GenerationDataType"/>
+			<xs:element name="clientReference" type="ClientReferenceMapping" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GenerationDataType">
+		<xs:sequence>
+			<xs:element name="isAmendment" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Essentially, whether we should put &quot;AMENDMENT TO&quot; language on the document</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="docLanguage" type="xs:string"/>
+			<xs:element name="channel" type="xs:string"/>
+			<xs:element name="docType" type="xs:string"/>
+			<xs:element name="supplementType" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Document supplement type e.g. long form, short fom. This is set to optional due to its business relevance only to CDS trades.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="stp" type="xs:boolean"/>
+			<xs:element name="confTradeRef" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This is the trade ref which should be put on the conf.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="confAssignedTradeRef" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="linguaMsgId" type="xs:string"/>
+			<xs:element name="previouslyConfirmed" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClientReferenceMapping">
+		<xs:annotation>
+			<xs:documentation>Container to map UBS ID to client ID for a trade</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ubsTradeId" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The UBS trade ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ubsTradeDomain" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The UBS trade domain for the ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="clientTradeRef" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The client ref for the same trade</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SecondLanguageDataType">
+		<xs:sequence>
+			<xs:element name="masterAgreement" type="MasterAgreementType" minOccurs="0"/>
+			<xs:element name="settlementInstruction" type="SettlementInstruction" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="instrument" type="InstrumentType" minOccurs="0"/>
+			<xs:element name="transmission" type="TransmissionData" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="counterparty" type="CounterPartyDataType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CounterpartyIdDtccValue">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="counterpartyRole" type="xs:string"/>
+				<xs:attribute name="linguaId" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SettlementInstruction">
+		<xs:annotation>
+			<xs:documentation>
+				This contains some information about settlement
+				instructions that may be required on a document. The
+				fields currently here are just placeholders until we
+				find out what the real requirements are.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="cashSI">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ReceiverCorrespondant" type="xs:string" nillable="true" minOccurs="0" maxOccurs="4"/>
+						<xs:element name="ReceivingBank" type="xs:string" nillable="true" minOccurs="0" maxOccurs="4"/>
+						<xs:element name="Intermediary" type="xs:string" nillable="true" minOccurs="0" maxOccurs="4"/>
+						<xs:element name="AccountWithInstitution" type="xs:string" nillable="true" minOccurs="0" maxOccurs="4"/>
+						<xs:element name="AccountWithInstitutionAc" type="xs:string" nillable="true" minOccurs="0"/>
+						<xs:element name="Beneficiary" type="xs:string" nillable="true" minOccurs="0" maxOccurs="4"/>
+						<xs:element name="BeneficiaryAc" type="xs:string" nillable="true" minOccurs="0"/>
+						<xs:element name="DetailsOfCharge" type="xs:string" nillable="true" minOccurs="0"/>
+						<xs:element name="DetailsOfPayment" type="xs:string" nillable="true" minOccurs="0" maxOccurs="4"/>
+						<xs:element name="SenderToReceiver" type="xs:string" nillable="true" minOccurs="0" maxOccurs="6"/>
+						<xs:element name="OpEntityBic" type="xs:string"/>
+						<xs:element name="NostroAgentBic" type="xs:string"/>
+						<xs:element name="NostroAgentName" type="xs:string"/>
+						<xs:element name="AgentAccNum" type="xs:string"/>
+						<xs:element name="InternalLedgerAccNum" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="securitySI">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="secDelMsgType" type="xs:string" minOccurs="0"/>
+						<xs:element name="secRecMsgType" type="xs:string" minOccurs="0"/>
+						<xs:element name="ourDepotInstitutionName" type="xs:string" minOccurs="0"/>
+						<xs:element name="ourDepotInstitutionAccount" type="xs:string" minOccurs="0"/>
+						<xs:element name="cptyDepotInstitutionName" type="xs:string" minOccurs="0"/>
+						<xs:element name="cptyDepotInstitutionAccount" type="xs:string" minOccurs="0"/>
+						<xs:element name="ourNostroInstitutionName" type="xs:string" minOccurs="0"/>
+						<xs:element name="ourNostroInstitutionAccount" type="xs:string" minOccurs="0"/>
+						<xs:element name="cptyNostroInstitutionName" type="xs:string" minOccurs="0"/>
+						<xs:element name="cptyNostroInstitutionAccount" type="xs:string" minOccurs="0"/>
+						<xs:element name="intermediaryDetails" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+</xs:schema>
