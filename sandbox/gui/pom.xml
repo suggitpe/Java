@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-gui</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox GUI</name>
+    <name>Sandbox - GUI</name>
 
     <dependencies>
     </dependencies>

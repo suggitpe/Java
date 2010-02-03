@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-jaxb-test-schemas</artifactId>
     <packaging>jar</packaging>
-    <name>JAXB Scribe Supplementary Data</name>
+    <name>Sandbox - JAXB Schemas</name>
 
     <build>
         <plugins>
