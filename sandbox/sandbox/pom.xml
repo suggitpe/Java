@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-sandbox</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox Sandbox</name>
+    <name>Sandbox - Sandbox</name>
 
     <build>
 		<plugins>

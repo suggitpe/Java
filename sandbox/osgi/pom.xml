@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-osgi-osgitutorial</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox OSGI - OsgiTutorial</name>
+    <name>Sandbox - OSGI</name>
 
     <build>
 		<plugins>

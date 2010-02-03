@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-swt-lib</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox SWT</name>
+    <name>Sandbox - SWT</name>
 
     <build>
 		<plugins>

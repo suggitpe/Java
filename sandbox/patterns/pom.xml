@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-patterns-lib</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox Patterns</name>
+    <name>Sandbox - Patterns</name>
     
     <build>
         <plugins>

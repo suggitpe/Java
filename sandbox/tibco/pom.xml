@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-tibco-lib</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox Tibco</name>
+    <name>Sandbox - Tibco</name>
 
     <build>
 		<plugins>

@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-spring-lib</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox Spring</name>
+    <name>Sandbox - Spring</name>
 
     <build>
 		<plugins>
