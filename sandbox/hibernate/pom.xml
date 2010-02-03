@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sandbox-hibernate-lib</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox Hibernate</name>
+    <name>Sandbox - Hibernate</name>
 
     <build>
 		<plugins>
