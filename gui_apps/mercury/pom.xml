@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mercury</artifactId>
     <packaging>jar</packaging>
-    <name>Mercury Messaging Helper</name>
+    <name>Mercury - Messaging Application (SWT)</name>
 
     <dependencies>
         <dependency>

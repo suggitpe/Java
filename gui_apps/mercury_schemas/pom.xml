@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mercury-schemas</artifactId>
     <packaging>jar</packaging>
-    <name>Mercury Messaging Schemas</name>
+    <name>Mercury - Schemas</name>
 
     <build>
         <plugins>
