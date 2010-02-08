@@ -15,7 +15,7 @@
     <name>GUI Parent</name>
 
     <modules>
-        <!-- <module>mercury</module> -->
+        <module>mercury</module>
         <module>mercury_old</module>
         <module>mercury_schemas</module>
     </modules>
