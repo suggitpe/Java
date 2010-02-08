@@ -16,38 +16,14 @@
 
     <build>
         <plugins>
-
             <plugin>
-			    <groupId>org.jvnet.jaxb2.maven2</groupId>
-			    <artifactId>maven-jaxb2-plugin</artifactId>
-			    <executions>
-				    <execution>
-					    <goals>
-						    <goal>generate</goal>
-					    </goals>
-				    </execution>
-			    </executions>
-                <configuration>
-                    <schemaIncludes>
-                        <include>**/*.xsd</include>
-                    </schemaIncludes>
-                    <schemaExcludes>
-                        <exclude>test*.xsd</exclude>
-                    </schemaExcludes>
-                    <bindingDirectory>src/main/resources</bindingDirectory>
-                    <bindingIncludes>
-                        <include>*.xjb</include>
-                    </bindingIncludes>
-                    <generateDirectory>src/main/java</generateDirectory>
-                    <forceRegenerate>true</forceRegenerate>
-                    <strict>true</strict>
-                    <verbose>true</verbose> 
-                </configuration>
-		    </plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
     <dependencies>
     </dependencies>
-  
+
 </project>
