@@ -15,17 +15,6 @@
     <name>Sandbox - JAXB Parent</name>
 
     <build>
-        <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <configuration>
-                    <projectNameTemplate>${name}</projectNameTemplate>
-                </configuration>
-		    </plugin>
-
-        </plugins>
     </build>
 
     <modules>
