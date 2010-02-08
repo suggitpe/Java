@@ -11,7 +11,6 @@ import java.util.Map;
 
 import javax.naming.Context;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -33,7 +32,7 @@ public class MqConnectionAdapter implements IConnectionAdapter
     public Context createJmsContext( IConnectionDetails aConnDetails )
     {
         LOG.debug( "createJmsContext has not been implemented yet for the mq adapter" );
-        throw new NotImplementedException();
+        throw new IllegalStateException( "Method not implemented ..." );
     }
 
     /**
