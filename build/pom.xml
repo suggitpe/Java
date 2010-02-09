@@ -79,6 +79,7 @@
                 </includes>
             </testResource>
         </testResources>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -89,6 +90,7 @@
                         <target>1.6</target>
                     </configuration>
                 </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-eclipse-plugin</artifactId>
@@ -99,6 +101,7 @@
                         <downloadSources>false</downloadSources>
                     </configuration>
                 </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -111,6 +114,37 @@
                         </includes>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.jvnet.jaxb2.maven2</groupId>
+                    <artifactId>maven-jaxb2-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <schemaIncludes>
+                            <include>**/*.xsd</include>
+                        </schemaIncludes>
+                        <schemaExcludes>
+                            <exclude>test*.xsd</exclude>
+                        </schemaExcludes>
+                        <bindingDirectory>src/main/resources</bindingDirectory>
+                        <bindingIncludes>
+                            <include>*.xjb</include>
+                        </bindingIncludes>
+                        <!-- 
+                        <generateDirectory>src/main/java</generateDirectory>
+                        -->
+                        <forceRegenerate>true</forceRegenerate>
+                        <strict>true</strict>
+                        <verbose>false</verbose>
+                    </configuration>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
@@ -128,24 +162,24 @@
     <!-- this is where we define the additional report to run as the main build -->
     <reporting>
         <plugins>
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
-					<docletArtifact>
-						<groupId>gr.spinellis</groupId>
-						<artifactId>UmlGraph</artifactId>
-						<version>4.6</version>
-					</docletArtifact>
-					<additionalParam>
-						-inferrel -inferdep -hide java.* -collpackages
-						java.util.* -attributes -operations
-						-enumerations -enumconstants
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <docletArtifact>
+                        <groupId>gr.spinellis</groupId>
+                        <artifactId>UmlGraph</artifactId>
+                        <version>4.6</version>
+                    </docletArtifact>
+                    <additionalParam>
+                        -inferrel -inferdep -hide java.* -collpackages
+                        java.util.* -attributes -operations
+                        -enumerations -enumconstants
 				    </additionalParam>
-				</configuration>
-			</plugin>
-		</plugins>
+                </configuration>
+            </plugin>
+        </plugins>
     </reporting>
 
     <!-- this is where we define the high level Scribe dependencies 
@@ -184,14 +218,19 @@
                 <version>4.7</version>
             </dependency>
             <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>1.1</version>
+            </dependency>
+            <dependency>
                 <groupId>org.easymock</groupId>
                 <artifactId>easymock</artifactId>
-                <version>2.4</version>
+                <version>2.5.2</version>
             </dependency>
             <dependency>
                 <groupId>org.easymock</groupId>
                 <artifactId>easymockclassextension</artifactId>
-                <version>2.4</version>
+                <version>2.5.2</version>
             </dependency>
             <dependency>
                 <groupId>org.jmock</groupId>
@@ -201,7 +240,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
-                <version>1.8.0</version>
+                <version>1.8.2</version>
             </dependency>
 
             <!-- external jars -->
@@ -213,7 +252,7 @@
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
-                <version>2.1</version>
+                <version>2.4</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -299,17 +338,37 @@
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>swt</artifactId>
-                <version>3.3.0</version>
+                <version>3.5.1</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.swt.win32.win32</groupId>
                 <artifactId>x86</artifactId>
-                <version>3.3.0</version>
+                <version>3.5.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse</groupId>
+                <artifactId>swt.gtk.linux.x86</artifactId>
+                <version>3.5.1</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>jface</artifactId>
-                <version>3.3.0</version>
+                <version>3.5.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse</groupId>
+                <artifactId>core.commands</artifactId>
+                <version>3.5.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse</groupId>
+                <artifactId>core.runtime</artifactId>
+                <version>3.5.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse</groupId>
+                <artifactId>equinox.common</artifactId>
+                <version>3.5.1</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -319,7 +378,7 @@
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
-                <version>2.3</version>
+                <version>2.5</version>
             </dependency>
             <dependency>
                 <groupId>taglibs</groupId>
@@ -329,7 +388,7 @@
             <dependency>
                 <groupId>commons-digester</groupId>
                 <artifactId>commons-digester</artifactId>
-                <version>1.8</version>
+                <version>2.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-validator</groupId>
@@ -339,27 +398,27 @@
             <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
-                <version>3.1</version>
+                <version>3.2.1</version>
             </dependency>
             <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
-                <version>1.2</version>
+                <version>1.2.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tiles</groupId>
                 <artifactId>tiles-api</artifactId>
-                <version>2.0.5</version>
+                <version>2.2.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tiles</groupId>
                 <artifactId>tiles-core</artifactId>
-                <version>2.0.5</version>
+                <version>2.2.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tiles</groupId>
                 <artifactId>tiles-jsp</artifactId>
-                <version>2.0.5</version>
+                <version>2.2.1</version>
             </dependency>
             <dependency>
                 <groupId>oro</groupId>
@@ -379,7 +438,7 @@
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
-                <version>2.0</version>
+                <version>2.2</version>
             </dependency>
             <dependency>
                 <groupId>javax.xml</groupId>
@@ -394,27 +453,32 @@
             <dependency>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.framework</artifactId>
-                <version>1.4.1</version>
+                <version>2.0.2</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.main</artifactId>
-                <version>1.4.1</version>
+                <version>2.0.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>4.2.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.shell</artifactId>
-                <version>1.0.2</version>
+                <version>1.4.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.shell.tui</artifactId>
-                <version>1.0.2</version>
+                <version>1.4.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.bundlerepository</artifactId>
-                <version>1.2.1</version>
+                <version>1.4.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
