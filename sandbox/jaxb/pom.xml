@@ -18,6 +18,6 @@
     </build>
 
     <modules>
-        <module>scribesuppdata/</module>
+        <module>testschemas</module>
     </modules>
 </project>
