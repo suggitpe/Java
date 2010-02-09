@@ -10,22 +10,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-tibco-lib</artifactId>
+    <artifactId>sandbox-tibco</artifactId>
     <packaging>jar</packaging>
     <name>Sandbox - Tibco</name>
-
-    <build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<excludes> 
-					</excludes>
-				</configuration>
-			</plugin>
-        </plugins>
-    </build>
 
     <dependencies>
         <dependency>

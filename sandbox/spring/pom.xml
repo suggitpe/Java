@@ -10,20 +10,12 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-spring-lib</artifactId>
+    <artifactId>sandbox-spring</artifactId>
     <packaging>jar</packaging>
     <name>Sandbox - Spring</name>
 
     <build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<excludes> 
-					</excludes>
-				</configuration>
-			</plugin>
         </plugins>
     </build>
 

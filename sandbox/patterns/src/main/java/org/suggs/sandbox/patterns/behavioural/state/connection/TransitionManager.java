@@ -12,8 +12,6 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * Class to encapsulate the management of all of the transitions. This
  * could allow for externally altered transitions to be injected into
@@ -114,7 +112,7 @@ public class TransitionManager
      */
     public List<ITransition> getTransitionList()
     {
-        throw new NotImplementedException();
+        throw new IllegalStateException( "Method not implemented" );
     }
 
     /**
