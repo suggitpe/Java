@@ -10,7 +10,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-jmsb</artifactId>
+    <artifactId>sandbox-jms</artifactId>
     <packaging>jar</packaging>
     <name>Sandbox - JMS</name>
 
