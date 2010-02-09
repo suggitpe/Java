@@ -47,36 +47,23 @@
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>swt</artifactId>
-            <version>3.5.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>swt.gtk.linux.x86</artifactId>
-            <version>3.5.1</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>jface</artifactId>
-            <version>3.5.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>core.commands</artifactId>
-            <version>3.5.0</version>
             <scope>compile</scope>
         </dependency>
-
-        
-        <!--
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>jface</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        -->
     </dependencies>
   
 </project>

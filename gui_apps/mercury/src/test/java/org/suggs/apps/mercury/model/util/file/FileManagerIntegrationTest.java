@@ -30,7 +30,7 @@ public class FileManagerIntegrationTest
 
     private static final Log LOG = LogFactory.getLog( FileManagerIntegrationTest.class );
     private IFileManager mFileManager_;
-    private static final String TEST_ROOT = "c:";
+    private static final String TEST_ROOT = "/tmp";
     private static final String TEST_DIR = TEST_ROOT + "/test/filetest";
     private static final String TEST_FILE = "dummyFile.txt";
     private static final String DUMMY_CLOB = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
@@ -45,6 +45,7 @@ public class FileManagerIntegrationTest
     public void setUp() throws Exception
     {
         LOG.debug( "------------------- TestFileManager" );
+        LOG.debug( "Should be using: " + System.getProperty( "user.home" ) );
         mFileManager_ = new FileManager();
     }
 
@@ -102,7 +103,7 @@ public class FileManagerIntegrationTest
     public void testFileTooCloseToRoot() throws IOException
     {
         String err = "";
-        mFileManager_.persistClobToFile( DUMMY_CLOB, new File( TEST_ROOT + "/" + TEST_FILE ) );
+        mFileManager_.persistClobToFile( DUMMY_CLOB, new File( "/tmp/" + TEST_FILE ) );
         LOG.error( err );
         Assert.fail( err );
     }
