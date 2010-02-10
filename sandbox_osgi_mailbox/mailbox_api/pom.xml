@@ -15,17 +15,7 @@
     <name>Sandbox OSGI Mailbox - API</name>
 
     <build>
-		<plugins>
-            <!-- surefire test plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<excludes> 
-					</excludes>
-				</configuration>
-			</plugin>
-
+        <plugins>
             <!-- felix plugin for osgi bundles -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -35,18 +25,14 @@
                     <instructions>
                         <Export-Package>org.suggs.sandbox.osgi.mailbox.api</Export-Package>
                         <!--
-                        <Bundle-Activator></Bundle-Activator>
-                        <Bundle-SymbolicName></Bundle-SymbolicName>
-                        <Export-Package></Export-Package>
-                        <Private-Package></Private-Package>
-                        <Import-Package></Import-Package>
-                        <Include-Resource></Include-Resource>
-                        <Bundle-Version>${pom.version}</Bundle-Version>
-                        <Bundle-Name>${pom.name}</Bundle-Name>
-                        <Bundle-Description>${pom.description}</Bundle-Description>
-                        <Bundle-License>${pom.licenses}</Bundle-License>
-                        <Bundle-Vendor>${pom.organization.name}</Bundle-Vendor>
-                        <Bundle-DocURL>${pom.organization.url}</Bundle-DocURL>
+                            <Bundle-Activator></Bundle-Activator> <Bundle-SymbolicName></Bundle-SymbolicName>
+                            <Export-Package></Export-Package> <Private-Package></Private-Package>
+                            <Import-Package></Import-Package> <Include-Resource></Include-Resource>
+                            <Bundle-Version>${pom.version}</Bundle-Version> <Bundle-Name>${pom.name}</Bundle-Name>
+                            <Bundle-Description>${pom.description}</Bundle-Description>
+                            <Bundle-License>${pom.licenses}</Bundle-License>
+                            <Bundle-Vendor>${pom.organization.name}</Bundle-Vendor>
+                            <Bundle-DocURL>${pom.organization.url}</Bundle-DocURL>
                         -->
                     </instructions>
                 </configuration>
@@ -55,5 +41,10 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.framework</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
