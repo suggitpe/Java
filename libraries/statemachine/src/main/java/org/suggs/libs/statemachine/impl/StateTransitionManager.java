@@ -27,12 +27,12 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 24 Aug 2009
  */
-public class StateTransitionManager
+public final class StateTransitionManager
 {
 
     private static final Log LOG = LogFactory.getLog( StateTransitionManager.class );
     private static final StateTransitionManager INSTANCE = new StateTransitionManager();
-    private final Map<String, Map<String, IStateTransition>> transitionMap_ = new HashMap<String, Map<String, IStateTransition>>();
+    private final Map<String, Map<String, IStateTransition>> transitionMap = new HashMap<String, Map<String, IStateTransition>>();
 
     /**
      * Constructs a new instance.
@@ -73,9 +73,9 @@ public class StateTransitionManager
             LOG.debug( "Searching for all transitions for state=[" + aState + "]" );
         }
 
-        if ( transitionMap_.containsKey( aState.getStateName() ) )
+        if ( transitionMap.containsKey( aState.getStateName() ) )
         {
-            return transitionMap_.get( aState.getStateName() ).values();
+            return transitionMap.get( aState.getStateName() ).values();
         }
         return new HashMap<String, IStateTransition>().values();
     }
@@ -89,9 +89,9 @@ public class StateTransitionManager
     public Collection<IStateTransition> getAllTransitions()
     {
         List<IStateTransition> listOfTransitions = new ArrayList<IStateTransition>();
-        for ( String stateName : transitionMap_.keySet() )
+        for ( String stateName : transitionMap.keySet() )
         {
-            Map<String, IStateTransition> innerMapOfTransitions = transitionMap_.get( stateName );
+            Map<String, IStateTransition> innerMapOfTransitions = transitionMap.get( stateName );
             listOfTransitions.addAll( innerMapOfTransitions.values() );
         }
         return listOfTransitions;
@@ -113,7 +113,7 @@ public class StateTransitionManager
         String startStateName = aStateTransition.getStartingState().getStateName();
         buildInnerTransitionMapIfNeeded( startStateName );
 
-        Map<String, IStateTransition> innerMap = transitionMap_.get( startStateName );
+        Map<String, IStateTransition> innerMap = transitionMap.get( startStateName );
         if ( innerMap.containsKey( aStateTransition.getTransitionName() ) )
         {
             throw new IllegalStateException( "Cannot add more than one State Transition with the same name for the same state: State=["
@@ -133,9 +133,9 @@ public class StateTransitionManager
 
     private void buildInnerTransitionMapIfNeeded( String aStateName )
     {
-        if ( !transitionMap_.containsKey( aStateName ) )
+        if ( !transitionMap.containsKey( aStateName ) )
         {
-            transitionMap_.put( aStateName, new HashMap<String, IStateTransition>() );
+            transitionMap.put( aStateName, new HashMap<String, IStateTransition>() );
         }
     }
 
@@ -170,7 +170,7 @@ public class StateTransitionManager
         {
             LOG.info( "Clearing all transitions from the transition manager" );
         }
-        transitionMap_.clear();
+        transitionMap.clear();
     }
 
     /**
@@ -181,11 +181,11 @@ public class StateTransitionManager
     {
         StringBuilder ret = new StringBuilder( "TransitionManager: " );
         ret.append( "{" ).append( Integer.toHexString( super.hashCode() ) ).append( "} " );
-        ret.append( "numStates=[" ).append( transitionMap_.size() ).append( "]" );
-        for ( String startState : transitionMap_.keySet() )
+        ret.append( "numStates=[" ).append( transitionMap.size() ).append( "]" );
+        for ( String startState : transitionMap.keySet() )
         {
             ret.append( ": state[" ).append( startState ).append( "]" );
-            for ( String transitionName : transitionMap_.get( startState ).keySet() )
+            for ( String transitionName : transitionMap.get( startState ).keySet() )
             {
                 ret.append( ", transition[" ).append( transitionName ).append( "]" );
             }

@@ -32,11 +32,11 @@ public class StateTransitionImpl implements IStateTransition
 
     private static final Log LOG = LogFactory.getLog( StateTransitionImpl.class );
 
-    private final String stateTransitionName_;
-    private final IState startingState_;
-    private final IState endingState_;
-    private List<IStateTransitionEvent> transitionEvents_ = new ArrayList<IStateTransitionEvent>();
-    private List<IStateTransitionGuard> transitionGuards_ = new ArrayList<IStateTransitionGuard>();
+    private final String stateTransitionName;
+    private final IState startingState;
+    private final IState endingState;
+    private List<IStateTransitionEvent> transitionEvents = new ArrayList<IStateTransitionEvent>();
+    private List<IStateTransitionGuard> transitionGuards = new ArrayList<IStateTransitionGuard>();
 
     /**
      * Constructs a new instance.
@@ -52,9 +52,9 @@ public class StateTransitionImpl implements IStateTransition
                                 IState aEndingState )
     {
         super();
-        stateTransitionName_ = aStateTransitionName;
-        startingState_ = aStartingState;
-        endingState_ = aEndingState;
+        stateTransitionName = aStateTransitionName;
+        startingState = aStartingState;
+        endingState = aEndingState;
     }
 
     /**
@@ -67,7 +67,7 @@ public class StateTransitionImpl implements IStateTransition
         if ( aContext == null )
         {
             throw new StateMachineException( "Null context passed into the transition evaluation for transition["
-                                             + stateTransitionName_ + "]" );
+                                             + stateTransitionName + "]" );
         }
 
         return ( isTransitionEventValid( aContext ) && areAllTransitionGuardsValid( aContext ) );
@@ -85,7 +85,7 @@ public class StateTransitionImpl implements IStateTransition
 
     private boolean areTransitionEventsSet()
     {
-        if ( transitionEvents_ == null || transitionEvents_.size() == 0 )
+        if ( transitionEvents == null || transitionEvents.size() == 0 )
         {
             return false;
         }
@@ -94,7 +94,7 @@ public class StateTransitionImpl implements IStateTransition
 
     private boolean isOneContextEventValidForTransition( IStateMachineContext aContext )
     {
-        for ( IStateTransitionEvent event : transitionEvents_ )
+        for ( IStateTransitionEvent event : transitionEvents )
         {
             if ( aContext.getStateTransitionEvent().equals( event ) )
             {
@@ -125,7 +125,7 @@ public class StateTransitionImpl implements IStateTransition
 
     private boolean areTransitionGuardsSet()
     {
-        if ( transitionGuards_ == null || transitionGuards_.size() == 0 )
+        if ( transitionGuards == null || transitionGuards.size() == 0 )
         {
             return false;
         }
@@ -134,7 +134,7 @@ public class StateTransitionImpl implements IStateTransition
 
     private boolean areAllGuardsValidForTransition( IStateMachineContext aContext )
     {
-        for ( IStateTransitionGuard g : transitionGuards_ )
+        for ( IStateTransitionGuard g : transitionGuards )
         {
             if ( !g.evaluateGuard( aContext ) )
             {
@@ -150,7 +150,7 @@ public class StateTransitionImpl implements IStateTransition
     @Override
     public IState getStartingState()
     {
-        return startingState_;
+        return startingState;
     }
 
     /**
@@ -159,7 +159,7 @@ public class StateTransitionImpl implements IStateTransition
     @Override
     public IState getEndingState()
     {
-        return endingState_;
+        return endingState;
     }
 
     /**
@@ -168,7 +168,7 @@ public class StateTransitionImpl implements IStateTransition
     @Override
     public String getTransitionName()
     {
-        return stateTransitionName_;
+        return stateTransitionName;
     }
 
     /**
@@ -179,7 +179,7 @@ public class StateTransitionImpl implements IStateTransition
      */
     public void setTransitionEvents( List<IStateTransitionEvent> aListOfEvents )
     {
-        transitionEvents_ = aListOfEvents;
+        transitionEvents = aListOfEvents;
     }
 
     /**
@@ -190,7 +190,7 @@ public class StateTransitionImpl implements IStateTransition
      */
     public void addTransitionEvent( IStateTransitionEvent aEvent )
     {
-        transitionEvents_.add( aEvent );
+        transitionEvents.add( aEvent );
     }
 
     /**
@@ -201,7 +201,7 @@ public class StateTransitionImpl implements IStateTransition
      */
     public void setTransitionGuards( List<IStateTransitionGuard> aListOfGuards )
     {
-        transitionGuards_ = aListOfGuards;
+        transitionGuards = aListOfGuards;
     }
 
     /**
@@ -212,7 +212,7 @@ public class StateTransitionImpl implements IStateTransition
      */
     public void addTransitionGuard( IStateTransitionGuard aGuard )
     {
-        transitionGuards_.add( aGuard );
+        transitionGuards.add( aGuard );
     }
 
     /**
@@ -234,58 +234,58 @@ public class StateTransitionImpl implements IStateTransition
             return false;
         }
         StateTransitionImpl other = (StateTransitionImpl) obj;
-        if ( endingState_ == null )
+        if ( endingState == null )
         {
-            if ( other.endingState_ != null )
+            if ( other.endingState != null )
             {
                 return false;
             }
         }
-        else if ( !endingState_.equals( other.endingState_ ) )
+        else if ( !endingState.equals( other.endingState ) )
         {
             return false;
         }
-        if ( startingState_ == null )
+        if ( startingState == null )
         {
-            if ( other.startingState_ != null )
+            if ( other.startingState != null )
             {
                 return false;
             }
         }
-        else if ( !startingState_.equals( other.startingState_ ) )
+        else if ( !startingState.equals( other.startingState ) )
         {
             return false;
         }
-        if ( stateTransitionName_ == null )
+        if ( stateTransitionName == null )
         {
-            if ( other.stateTransitionName_ != null )
+            if ( other.stateTransitionName != null )
             {
                 return false;
             }
         }
-        else if ( !stateTransitionName_.equals( other.stateTransitionName_ ) )
+        else if ( !stateTransitionName.equals( other.stateTransitionName ) )
         {
             return false;
         }
-        if ( transitionEvents_ == null )
+        if ( transitionEvents == null )
         {
-            if ( other.transitionEvents_ != null )
+            if ( other.transitionEvents != null )
             {
                 return false;
             }
         }
-        else if ( !transitionEvents_.equals( other.transitionEvents_ ) )
+        else if ( !transitionEvents.equals( other.transitionEvents ) )
         {
             return false;
         }
-        if ( transitionGuards_ == null )
+        if ( transitionGuards == null )
         {
-            if ( other.transitionGuards_ != null )
+            if ( other.transitionGuards != null )
             {
                 return false;
             }
         }
-        else if ( !transitionGuards_.equals( other.transitionGuards_ ) )
+        else if ( !transitionGuards.equals( other.transitionGuards ) )
         {
             return false;
         }
@@ -300,14 +300,12 @@ public class StateTransitionImpl implements IStateTransition
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ( ( endingState_ == null ) ? 0 : endingState_.hashCode() );
-        result = prime * result + ( ( startingState_ == null ) ? 0 : startingState_.hashCode() );
+        result = prime * result + ( ( endingState == null ) ? 0 : endingState.hashCode() );
+        result = prime * result + ( ( startingState == null ) ? 0 : startingState.hashCode() );
         result = prime * result
-                 + ( ( stateTransitionName_ == null ) ? 0 : stateTransitionName_.hashCode() );
-        result = prime * result
-                 + ( ( transitionEvents_ == null ) ? 0 : transitionEvents_.hashCode() );
-        result = prime * result
-                 + ( ( transitionGuards_ == null ) ? 0 : transitionGuards_.hashCode() );
+                 + ( ( stateTransitionName == null ) ? 0 : stateTransitionName.hashCode() );
+        result = prime * result + ( ( transitionEvents == null ) ? 0 : transitionEvents.hashCode() );
+        result = prime * result + ( ( transitionGuards == null ) ? 0 : transitionGuards.hashCode() );
         return result;
     }
 
@@ -319,11 +317,11 @@ public class StateTransitionImpl implements IStateTransition
     {
         StringBuilder buff = new StringBuilder( "StateTransitionImpl:" );
         buff.append( " stateTransitionName=[" )
-            .append( stateTransitionName_ )
+            .append( stateTransitionName )
             .append( "], startingState=[" )
-            .append( startingState_ )
+            .append( startingState )
             .append( "], endingState=[" )
-            .append( endingState_ )
+            .append( endingState )
             .append( "]" );
         return buff.toString();
     }

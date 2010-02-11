@@ -35,11 +35,11 @@ public class StateTest
 {
 
     private static final Log LOG = LogFactory.getLog( StateTest.class );
-    private IMocksControl ctrl_;
+    private IMocksControl ctrl;
 
-    private IStateMachineContext mockContext_;
-    private IStateTransition mockTransitionOne_;
-    private IStateTransition mockTransitionTwo_;
+    private IStateMachineContext mockContext;
+    private IStateTransition mockTransitionOne;
+    private IStateTransition mockTransitionTwo;
 
     /** */
     @BeforeClass
@@ -54,10 +54,10 @@ public class StateTest
     {
         LOG.debug( "------------------- " );
         StateTransitionManager.instance().clearTransitionsFromTransitionManager();
-        ctrl_ = createControl();
-        mockContext_ = ctrl_.createMock( IStateMachineContext.class );
-        mockTransitionOne_ = ctrl_.createMock( IStateTransition.class );
-        mockTransitionTwo_ = ctrl_.createMock( IStateTransition.class );
+        ctrl = createControl();
+        mockContext = ctrl.createMock( IStateMachineContext.class );
+        mockTransitionOne = ctrl.createMock( IStateTransition.class );
+        mockTransitionTwo = ctrl.createMock( IStateTransition.class );
     }
 
     /**
@@ -87,28 +87,27 @@ public class StateTest
         IState state = new StateImpl( "TestState" );
         IState endState = new StateImpl( "TestEndState" );
 
-        expect( mockTransitionOne_.getStartingState() ).andReturn( state ).anyTimes();
-        expect( mockTransitionOne_.getTransitionName() ).andReturn( "invalidTransition" )
-            .anyTimes();
-        expect( mockTransitionTwo_.getStartingState() ).andReturn( state ).anyTimes();
-        expect( mockTransitionTwo_.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
-        expect( mockTransitionTwo_.getEndingState() ).andReturn( endState ).anyTimes();
+        expect( mockTransitionOne.getStartingState() ).andReturn( state ).anyTimes();
+        expect( mockTransitionOne.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
+        expect( mockTransitionTwo.getStartingState() ).andReturn( state ).anyTimes();
+        expect( mockTransitionTwo.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
+        expect( mockTransitionTwo.getEndingState() ).andReturn( endState ).anyTimes();
 
-        expect( mockTransitionOne_.evaluateTransitionValidity( mockContext_ ) ).andReturn( false );
-        expect( mockTransitionTwo_.evaluateTransitionValidity( mockContext_ ) ).andReturn( true );
+        expect( mockTransitionOne.evaluateTransitionValidity( mockContext ) ).andReturn( false );
+        expect( mockTransitionTwo.evaluateTransitionValidity( mockContext ) ).andReturn( true );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        StateTransitionManager.instance().addTransitionToManager( mockTransitionOne_ );
-        StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo_ );
+        StateTransitionManager.instance().addTransitionToManager( mockTransitionOne );
+        StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo );
 
-        IState newState = state.step( mockContext_ );
+        IState newState = state.step( mockContext );
 
         assertThat( state, not( equalTo( newState ) ) );
         assertThat( endState, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns a different state when there are valid transitions setup" );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -124,26 +123,25 @@ public class StateTest
         IState state = new StateImpl( "TestState" );
         IState endState = new StateImpl( "TestEndState" );
 
-        expect( mockTransitionOne_.getStartingState() ).andReturn( state ).anyTimes();
-        expect( mockTransitionOne_.getTransitionName() ).andReturn( "invalidTransition" )
-            .anyTimes();
-        expect( mockTransitionTwo_.getStartingState() ).andReturn( state ).anyTimes();
-        expect( mockTransitionTwo_.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
-        expect( mockTransitionTwo_.getEndingState() ).andReturn( endState ).anyTimes();
+        expect( mockTransitionOne.getStartingState() ).andReturn( state ).anyTimes();
+        expect( mockTransitionOne.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
+        expect( mockTransitionTwo.getStartingState() ).andReturn( state ).anyTimes();
+        expect( mockTransitionTwo.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
+        expect( mockTransitionTwo.getEndingState() ).andReturn( endState ).anyTimes();
 
-        expect( mockTransitionOne_.evaluateTransitionValidity( mockContext_ ) ).andReturn( true );
-        expect( mockTransitionTwo_.evaluateTransitionValidity( mockContext_ ) ).andReturn( true );
+        expect( mockTransitionOne.evaluateTransitionValidity( mockContext ) ).andReturn( true );
+        expect( mockTransitionTwo.evaluateTransitionValidity( mockContext ) ).andReturn( true );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        StateTransitionManager.instance().addTransitionToManager( mockTransitionOne_ );
-        StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo_ );
+        StateTransitionManager.instance().addTransitionToManager( mockTransitionOne );
+        StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo );
 
-        IState newState = state.step( mockContext_ );
+        IState newState = state.step( mockContext );
         LOG.error( "If the code managed to reach here then the test has failed to perform it's role.  Somehow we have managed to let step create  anew state of ["
                    + newState + "]" );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -159,26 +157,25 @@ public class StateTest
     {
         IState state = new StateImpl( "TestState" );
 
-        expect( mockTransitionOne_.getStartingState() ).andReturn( state ).anyTimes();
-        expect( mockTransitionOne_.getTransitionName() ).andReturn( "invalidTransition" )
-            .anyTimes();
-        expect( mockTransitionTwo_.getStartingState() ).andReturn( state ).anyTimes();
-        expect( mockTransitionTwo_.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
+        expect( mockTransitionOne.getStartingState() ).andReturn( state ).anyTimes();
+        expect( mockTransitionOne.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
+        expect( mockTransitionTwo.getStartingState() ).andReturn( state ).anyTimes();
+        expect( mockTransitionTwo.getTransitionName() ).andReturn( "badTransition" ).anyTimes();
 
-        expect( mockTransitionOne_.evaluateTransitionValidity( mockContext_ ) ).andReturn( false );
-        expect( mockTransitionTwo_.evaluateTransitionValidity( mockContext_ ) ).andReturn( false );
+        expect( mockTransitionOne.evaluateTransitionValidity( mockContext ) ).andReturn( false );
+        expect( mockTransitionTwo.evaluateTransitionValidity( mockContext ) ).andReturn( false );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        StateTransitionManager.instance().addTransitionToManager( mockTransitionOne_ );
-        StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo_ );
+        StateTransitionManager.instance().addTransitionToManager( mockTransitionOne );
+        StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo );
 
-        IState newState = state.step( mockContext_ );
+        IState newState = state.step( mockContext );
 
         assertThat( state, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns the same state when there are no valid transitions setup" );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -192,15 +189,15 @@ public class StateTest
     public void testStepWithNoTransitionsSetUpReturnsSelf() throws StateMachineException
     {
 
-        ctrl_.replay();
+        ctrl.replay();
 
         IState state = new StateImpl( "TestState" );
-        IState newState = state.step( mockContext_ );
+        IState newState = state.step( mockContext );
 
         assertThat( state, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns the same state when there are no transitions setup" );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**

@@ -26,7 +26,7 @@ public class StateMachineImpl implements IStateMachine
 
     private static final Log LOG = LogFactory.getLog( StateMachineImpl.class );
 
-    private IState currentState_;
+    private IState currentState;
 
     /**
      * Constructs a new instance.
@@ -37,7 +37,7 @@ public class StateMachineImpl implements IStateMachine
     public StateMachineImpl( IState aInitialState )
     {
         super();
-        currentState_ = aInitialState;
+        currentState = aInitialState;
     }
 
     /**
@@ -51,12 +51,12 @@ public class StateMachineImpl implements IStateMachine
     @Override
     public void step( IStateMachineContext aContext ) throws StateMachineException
     {
-        IState newState = currentState_.step( aContext );
-        if ( newState == null || currentState_.equals( newState ) )
+        IState newState = currentState.step( aContext );
+        if ( newState == null || currentState.equals( newState ) )
         {
             if ( LOG.isInfoEnabled() )
             {
-                LOG.info( "No valid transitions found from state=[" + currentState_
+                LOG.info( "No valid transitions found from state=[" + currentState
                           + "], state remain unchanged." );
             }
         }
@@ -66,7 +66,7 @@ public class StateMachineImpl implements IStateMachine
             {
                 LOG.info( "Transitioning state machine to new state=[" + newState + "]" );
             }
-            currentState_ = newState;
+            currentState = newState;
             // this may look odd: we need to call step again when we
             // reach a new state to allow for transitory states within
             // the overall state machine.
@@ -80,7 +80,7 @@ public class StateMachineImpl implements IStateMachine
     @Override
     public IState getCurrentState()
     {
-        return currentState_;
+        return currentState;
     }
 
     /**
@@ -91,7 +91,7 @@ public class StateMachineImpl implements IStateMachine
      */
     public void setCurrentState( IState aState )
     {
-        currentState_ = aState;
+        currentState = aState;
     }
 
     /**
@@ -101,7 +101,7 @@ public class StateMachineImpl implements IStateMachine
     public String toString()
     {
         StringBuilder buff = new StringBuilder( "StateMachineImpl:" );
-        buff.append( " currentState=[" ).append( currentState_ ).append( "]" );
+        buff.append( " currentState=[" ).append( currentState ).append( "]" );
         return buff.toString();
     }
 }
