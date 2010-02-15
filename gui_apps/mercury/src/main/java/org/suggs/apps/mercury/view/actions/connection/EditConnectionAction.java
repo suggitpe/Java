@@ -92,11 +92,6 @@ public class EditConnectionAction extends Action implements InitializingBean
                 return;
             }
         }
-
-        // here we check we have valid data
-        if ( mConnectionToEdit_ != null && mConnectionToEdit_.length() > 0 )
-        {
-        }
     }
 
     /**

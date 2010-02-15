@@ -95,28 +95,84 @@ public class ConnectionDetails
     }
 
     /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ( ( mConnectionData_ == null ) ? 0 : mConnectionData_.hashCode() );
+        result = prime * result + ( ( mHostName_ == null ) ? 0 : mHostName_.hashCode() );
+        result = prime * result + ( mIsSecurityEnabled_ ? 1231 : 1237 );
+        result = prime * result + ( ( mName_ == null ) ? 0 : mName_.hashCode() );
+        result = prime * result + ( ( mPassword_ == null ) ? 0 : mPassword_.hashCode() );
+        result = prime * result + mPort_;
+        result = prime * result + ( ( mType_ == null ) ? 0 : mType_.hashCode() );
+        result = prime * result + ( ( mUsername_ == null ) ? 0 : mUsername_.hashCode() );
+        return result;
+    }
+
+    /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object other )
+    public boolean equals( Object obj )
     {
-        if ( this == other )
-        {
+        if ( this == obj )
             return true;
-        }
-
-        if ( other != null && getClass() == other.getClass() )
+        if ( obj == null )
+            return false;
+        if ( getClass() != obj.getClass() )
+            return false;
+        ConnectionDetails other = (ConnectionDetails) obj;
+        if ( mConnectionData_ == null )
         {
-            boolean ret = true;
-            ConnectionDetails rhs = (ConnectionDetails) other;
-            if ( mName_.equals( rhs.mName_ ) && mType_.equals( rhs.mType_ )
-                 && mHostName_.equals( rhs.mHostName_ ) && mPort_ == rhs.mPort_ )
-            {
-                return ret;
-            }
+            if ( other.mConnectionData_ != null )
+                return false;
         }
-        return false;
-
+        else if ( !mConnectionData_.equals( other.mConnectionData_ ) )
+            return false;
+        if ( mHostName_ == null )
+        {
+            if ( other.mHostName_ != null )
+                return false;
+        }
+        else if ( !mHostName_.equals( other.mHostName_ ) )
+            return false;
+        if ( mIsSecurityEnabled_ != other.mIsSecurityEnabled_ )
+            return false;
+        if ( mName_ == null )
+        {
+            if ( other.mName_ != null )
+                return false;
+        }
+        else if ( !mName_.equals( other.mName_ ) )
+            return false;
+        if ( mPassword_ == null )
+        {
+            if ( other.mPassword_ != null )
+                return false;
+        }
+        else if ( !mPassword_.equals( other.mPassword_ ) )
+            return false;
+        if ( mPort_ != other.mPort_ )
+            return false;
+        if ( mType_ == null )
+        {
+            if ( other.mType_ != null )
+                return false;
+        }
+        else if ( !mType_.equals( other.mType_ ) )
+            return false;
+        if ( mUsername_ == null )
+        {
+            if ( other.mUsername_ != null )
+                return false;
+        }
+        else if ( !mUsername_.equals( other.mUsername_ ) )
+            return false;
+        return true;
     }
 
     /**

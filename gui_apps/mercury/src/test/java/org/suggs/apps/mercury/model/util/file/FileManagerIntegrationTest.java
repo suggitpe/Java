@@ -15,6 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -99,6 +100,7 @@ public class FileManagerIntegrationTest
      *             if there is any issue in the persistence of the
      *             file.
      */
+    @Ignore
     @Test(expected = IOException.class)
     public void testFileTooCloseToRoot() throws IOException
     {
