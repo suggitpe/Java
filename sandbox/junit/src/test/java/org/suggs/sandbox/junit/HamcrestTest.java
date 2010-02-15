@@ -7,14 +7,15 @@ package org.suggs.sandbox.junit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.collection.IsCollectionContaining;
 import org.hamcrest.collection.IsIn;
 import org.hamcrest.number.OrderingComparisons;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.collection.IsCollectionContaining.hasItem;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -81,7 +82,7 @@ public class HamcrestTest
         colors.add( "red" );
         colors.add( "green" );
         colors.add( "blue" );
-        assertThat( colors, IsCollectionContaining.hasItem( "red" ) );
+        assertThat( colors, hasItem( "red" ) );
     }
 
     @Test
@@ -91,8 +92,17 @@ public class HamcrestTest
         ages.add( Integer.valueOf( 20 ) );
         ages.add( Integer.valueOf( 30 ) );
         ages.add( Integer.valueOf( 40 ) );
-        assertThat( ages,
-                    not( IsCollectionContaining.hasItem( OrderingComparisons.lessThan( Integer.valueOf( 18 ) ) ) ) );
+        assertThat( ages, not( hasItem( OrderingComparisons.lessThan( Integer.valueOf( 18 ) ) ) ) );
+    }
+
+    @Test
+    public void testEqualTo()
+    {
+        String a1 = "a";
+        String a2 = "a";
+
+        assertThat( a1, equalTo( a2 ) );
+
     }
 
 }
