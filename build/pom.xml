@@ -37,6 +37,7 @@
 
     <!-- here we define our own organsation (entered into the jar/ear manifests) -->
     <organization>
+        <name>suggs.org</name>
     </organization>
 
     <!-- -->
@@ -45,14 +46,11 @@
 
     <!-- This links up the main pom to the module poms -->
     <modules>
-        <module>../gui_apps</module>
-        <module>../libraries</module>
-        <module>../sandbox</module>
-        <module>../sandbox_eclipse</module>
-        <module>../sandbox_ejb</module>
-        <module>../sandbox_osgi_mailbox</module>
-        <module>../sandbox_webapps</module>
-        <module>../web_apps</module>
+        <!--
+            <module>../gui_apps</module> <module>../libraries</module> <module>../sandbox</module>
+            <module>../sandbox_eclipse</module> <module>../sandbox_ejb</module> <module>../sandbox_osgi_mailbox</module>
+            <module>../sandbox_webapps</module> <module>../web_apps</module>
+        -->
     </modules>
 
     <build>
@@ -82,6 +80,7 @@
 
         <pluginManagement>
             <plugins>
+                <!-- COMPILER PLUGIN -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -91,6 +90,7 @@
                     </configuration>
                 </plugin>
 
+                <!-- ECLIPSE PLUGIN -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-eclipse-plugin</artifactId>
@@ -102,6 +102,7 @@
                     </configuration>
                 </plugin>
 
+                <!-- SUREFIRE PLUGIN -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -115,6 +116,13 @@
                     </configuration>
                 </plugin>
 
+                <!-- SONAR PLUGIN -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                </plugin>
+
+                <!-- JAXB PLUGIN -->
                 <plugin>
                     <groupId>org.jvnet.jaxb2.maven2</groupId>
                     <artifactId>maven-jaxb2-plugin</artifactId>
