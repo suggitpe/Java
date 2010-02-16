@@ -56,8 +56,10 @@
     <build>
         <testResources>
             <testResource>
-                <directory>${suggs.test.home}</directory>
+                <!-- 
                 <directory>${basedir}/etc/mavenBuild</directory>
+                -->
+                <directory>${suggs.test.home}</directory>
                 <filtering>false</filtering>
                 <includes>
                     <include>**/*</include>
