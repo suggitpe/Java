@@ -74,12 +74,14 @@ public class StateTransitionTest
     public void testTransitionNameExtraction()
     {
         final String transName = "TestStateTransition";
-        IState startState = new StateImpl( "TestStartState" );
-        IState endState = new StateImpl( "TestEndState" );
-        IStateTransition transition = new StateTransitionImpl( transName, startState, endState );
+        IState localStartState = new StateImpl( "TestStartState" );
+        IState localendState = new StateImpl( "TestEndState" );
+        IStateTransition transition = new StateTransitionImpl( transName,
+                                                               localStartState,
+                                                               localendState );
 
-        assertThat( startState, equalTo( transition.getStartingState() ) );
-        assertThat( endState, equalTo( transition.getEndingState() ) );
+        assertThat( localStartState, equalTo( transition.getStartingState() ) );
+        assertThat( localendState, equalTo( transition.getEndingState() ) );
         assertThat( transName, equalTo( transition.getTransitionName() ) );
 
         LOG.debug( "Verified that the objects set at construction are correctly persisted into the object" );

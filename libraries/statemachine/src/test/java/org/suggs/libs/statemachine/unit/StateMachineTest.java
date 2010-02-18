@@ -92,6 +92,8 @@ public class StateMachineTest
 
         ctrl.replay();
 
+        LOG.debug( "I don't care about this" );
+
         IStateMachine stateMachine = new StateMachineImpl( mockInitialState );
         stateMachine.step( mockContext );
 
