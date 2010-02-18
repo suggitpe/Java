@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,7 +48,7 @@ public final class StateTransitionManager
      * 
      * @return the singleton instance of the State Transition Manager
      */
-    public static final StateTransitionManager instance()
+    public static StateTransitionManager instance()
     {
         return INSTANCE;
     }
@@ -135,7 +136,11 @@ public final class StateTransitionManager
     {
         if ( !transitionMap.containsKey( aStateName ) )
         {
-            transitionMap.put( aStateName, new HashMap<String, IStateTransition>() );
+            // using a concurrent hashmap to ensure that when the
+            // values view is exposed there is some level of
+            // protection
+            // of the underlying map in a multi-threaded environment
+            transitionMap.put( aStateName, new ConcurrentHashMap<String, IStateTransition>() );
         }
     }
 
