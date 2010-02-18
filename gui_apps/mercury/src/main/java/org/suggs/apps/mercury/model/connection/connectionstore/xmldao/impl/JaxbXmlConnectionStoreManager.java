@@ -58,8 +58,6 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     {
         try
         {
-            // the reason this is done at the static level is that for
-            // this class we are only concerned with the one
             mJaxbContext_ = JAXBContext.newInstance( ConnectionStoreType.class.getPackage()
                 .getName() );
         }

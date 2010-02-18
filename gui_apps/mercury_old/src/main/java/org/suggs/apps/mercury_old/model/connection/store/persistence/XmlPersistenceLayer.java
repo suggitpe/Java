@@ -49,6 +49,7 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
  * @author suggitpe
  * @version 1.0 27 Jul 2007
  */
+@SuppressWarnings("restriction")
 public class XmlPersistenceLayer implements IPersistenceLayer
 {
 
@@ -345,8 +346,15 @@ public class XmlPersistenceLayer implements IPersistenceLayer
         {
             try
             {
-                chan.close();
-                out.close();
+                if ( chan != null )
+                {
+                    chan.close();
+                }
+
+                if ( out != null )
+                {
+                    out.close();
+                }
             }
             catch ( IOException ioe )
             {

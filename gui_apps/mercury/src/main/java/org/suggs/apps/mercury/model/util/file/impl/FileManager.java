@@ -57,8 +57,14 @@ public class FileManager implements IFileManager
         }
         finally
         {
-            chan.close();
-            fis.close();
+            if ( chan != null )
+            {
+                chan.close();
+            }
+            if ( fis != null )
+            {
+                fis.close();
+            }
         }
     }
 
@@ -86,7 +92,10 @@ public class FileManager implements IFileManager
         }
         finally
         {
-            is.close();
+            if ( is != null )
+            {
+                is.close();
+            }
             w.close();
         }
 
@@ -136,8 +145,15 @@ public class FileManager implements IFileManager
         {
             try
             {
-                chan.close();
-                out.close();
+                if ( chan != null )
+                {
+                    chan.close();
+                }
+
+                if ( out != null )
+                {
+                    out.close();
+                }
             }
             catch ( IOException ioe )
             {

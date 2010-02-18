@@ -106,6 +106,7 @@ public class DomParserUtil implements IDomParserUtil
             fact.setSchema( sf.newSchema( url ) );
 
             builder = fact.newDocumentBuilder();
+            builder.setErrorHandler( new MercuryDomErrorHandler() );
         }
         catch ( ParserConfigurationException pce )
         {
@@ -116,8 +117,6 @@ public class DomParserUtil implements IDomParserUtil
             LOG.error( "Sax exception", se );
             se.printStackTrace();
         }
-
-        builder.setErrorHandler( new MercuryDomErrorHandler() );
 
         synchronized ( lock )
         {
