@@ -4,6 +4,7 @@
  */
 package org.suggs.libs.statemachine.impl;
 
+import org.suggs.libs.statemachine.IAction;
 import org.suggs.libs.statemachine.IState;
 import org.suggs.libs.statemachine.IStateMachineContext;
 import org.suggs.libs.statemachine.IStateTransition;
@@ -31,6 +32,8 @@ public class StateImpl implements IState
     private static final Log LOG = LogFactory.getLog( StateImpl.class );
 
     private final String stateName;
+    private IAction entryAction;
+    private IAction exitAction;
     private Collection<IStateTransition> transitions = new ArrayList<IStateTransition>();
 
     /**
@@ -46,12 +49,46 @@ public class StateImpl implements IState
     }
 
     /**
+     * Constructs a new instance from another one.
+     * 
+     * @param aState
+     *            the state from which to build the new one.
+     */
+    public StateImpl( IState aState )
+    {
+        super();
+        stateName = aState.getStateName();
+    }
+
+    /**
      * @see org.suggs.libs.statemachine.IState#getStateName()
      */
     @Override
     public String getStateName()
     {
         return stateName;
+    }
+
+    /**
+     * Setter for the entry action
+     * 
+     * @param aAction
+     *            the entry action
+     */
+    public void setEntryAction( IAction aAction )
+    {
+        entryAction = aAction;
+    }
+
+    /**
+     * Setter for the Exit action
+     * 
+     * @param aAction
+     *            the exit action
+     */
+    public void setExitAction( IAction aAction )
+    {
+        exitAction = aAction;
     }
 
     /**
@@ -113,45 +150,63 @@ public class StateImpl implements IState
     }
 
     /**
+     * @see org.suggs.libs.statemachine.IState#executeEntryAction(org.suggs.libs.statemachine.IStateMachineContext)
+     */
+    @Override
+    public void executeEntryAction( IStateMachineContext aContext ) throws StateMachineException
+    {
+        if ( entryAction != null )
+        {
+            if ( LOG.isDebugEnabled() )
+            {
+                LOG.debug( "Executing entry action:" + entryAction );
+            }
+            entryAction.execute( aContext );
+        }
+    }
+
+    /**
+     * @see org.suggs.libs.statemachine.IState#executeExitAction(org.suggs.libs.statemachine.IStateMachineContext)
+     */
+    @Override
+    public void executeExitAction( IStateMachineContext aContext ) throws StateMachineException
+    {
+        if ( exitAction != null )
+        {
+            if ( LOG.isDebugEnabled() )
+            {
+                LOG.debug( "Executing exit action:" + exitAction );
+            }
+            exitAction.execute( aContext );
+        }
+    }
+
+    /**
+     * This impl ONLY uses the state name for equals comparisons.
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public boolean equals( Object obj )
     {
         if ( this == obj )
-        {
             return true;
-        }
         if ( obj == null )
-        {
             return false;
-        }
         if ( getClass() != obj.getClass() )
-        {
             return false;
-        }
         StateImpl other = (StateImpl) obj;
         if ( stateName == null )
         {
             if ( other.stateName != null )
-            {
                 return false;
-            }
         }
         else if ( !stateName.equals( other.stateName ) )
-        {
             return false;
-        }
         if ( transitions == null )
         {
             if ( other.transitions != null )
-            {
                 return false;
-            }
-        }
-        else if ( !transitions.equals( other.transitions ) )
-        {
-            return false;
         }
         return true;
     }
@@ -165,7 +220,6 @@ public class StateImpl implements IState
         final int prime = 31;
         int result = 1;
         result = prime * result + ( ( stateName == null ) ? 0 : stateName.hashCode() );
-        result = prime * result + ( ( transitions == null ) ? 0 : transitions.hashCode() );
         return result;
     }
 

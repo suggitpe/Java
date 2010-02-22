@@ -175,6 +175,28 @@ public class StateTransitionManagerTest
     }
 
     /**
+     * Tests that if we try and add a null transition into the manaer
+     * we get some level of hissy fit.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testExceptionThrownWhenNullTransitionAddedToManager()
+    {
+        LOG.debug( "Loading NULL transitions" );
+        StateTransitionManager.instance().addTransitionToManager( null );
+    }
+
+    /**
+     * Tests that if we try and add a null transition into the manaer
+     * we get some level of hissy fit.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testExceptionThrownWhenNullTransitionsSetOnManager()
+    {
+        LOG.debug( "Loading NULL transitions" );
+        StateTransitionManager.instance().setTransitions( null );
+    }
+
+    /**
      * Tests that for a number of state transitions loaded for a given
      * state that it will return multiple state transitions associated
      * with that state.

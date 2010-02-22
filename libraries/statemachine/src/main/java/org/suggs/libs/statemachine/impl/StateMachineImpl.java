@@ -66,7 +66,9 @@ public class StateMachineImpl implements IStateMachine
             {
                 LOG.info( "Transitioning state machine to new state=[" + newState + "]" );
             }
+            currentState.executeExitAction( aContext );
             currentState = newState;
+            currentState.executeEntryAction( aContext );
             // this may look odd: we need to call step again when we
             // reach a new state to allow for transitory states within
             // the overall state machine.

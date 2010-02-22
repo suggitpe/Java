@@ -150,7 +150,7 @@ public class StateTransitionImpl implements IStateTransition
     @Override
     public IState getStartingState()
     {
-        return startingState;
+        return new StateImpl( startingState );
     }
 
     /**
@@ -159,7 +159,7 @@ public class StateTransitionImpl implements IStateTransition
     @Override
     public IState getEndingState()
     {
-        return endingState;
+        return new StateImpl( endingState );
     }
 
     /**

@@ -28,7 +28,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -116,6 +118,10 @@ public class StateTransitionTest
         assertThat( trans1a, not( sameInstance( trans2 ) ) );
         assertThat( trans1a, equalTo( trans1b ) );
         assertThat( trans1a, not( equalTo( trans2 ) ) );
+
+        assertFalse( trans1a.equals( null ) );
+        assertFalse( trans1a.equals( new String() ) );
+        assertTrue( trans1a.equals( trans1a ) );
 
         // check hashcode
         assertThat( trans1a.hashCode(), equalTo( trans1b.hashCode() ) );

@@ -16,7 +16,9 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test suite for the state transition event implementation.
@@ -74,6 +76,10 @@ public class StateTransitionEventTest
         assertThat( event1a, not( sameInstance( event2 ) ) );
         assertThat( event1a, equalTo( event1b ) );
         assertThat( event1a, not( equalTo( event2 ) ) );
+
+        assertFalse( event1a.equals( null ) );
+        assertFalse( event1a.equals( new String() ) );
+        assertTrue( event1a.equals( event1a ) );
 
         // check hashcode
         assertThat( event1a.hashCode(), equalTo( event1b.hashCode() ) );

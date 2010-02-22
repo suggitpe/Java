@@ -20,6 +20,7 @@ import org.junit.Test;
 import static org.easymock.EasyMock.createControl;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -57,6 +58,14 @@ public class StateMachineTest
         mockContext = ctrl.createMock( IStateMachineContext.class );
     }
 
+    @Test
+    public void testToString()
+    {
+        StateMachineImpl stateMachine = new StateMachineImpl( mockInitialState );
+        stateMachine.setCurrentState( mockNewState );
+        LOG.debug( stateMachine );
+    }
+
     /**
      * Tests that when we create a state machine with a state and then
      * call the getter for the state that the same one is returned.
@@ -89,6 +98,10 @@ public class StateMachineTest
     {
         expect( mockInitialState.step( mockContext ) ).andReturn( mockNewState );
         expect( mockNewState.step( mockContext ) ).andReturn( mockNewState );
+        mockInitialState.executeExitAction( mockContext );
+        expectLastCall().once();
+        mockNewState.executeEntryAction( mockContext );
+        expectLastCall().once();
 
         ctrl.replay();
 

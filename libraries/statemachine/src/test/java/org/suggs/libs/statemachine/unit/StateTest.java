@@ -4,6 +4,7 @@
  */
 package org.suggs.libs.statemachine.unit;
 
+import org.suggs.libs.statemachine.IAction;
 import org.suggs.libs.statemachine.IState;
 import org.suggs.libs.statemachine.IStateMachineContext;
 import org.suggs.libs.statemachine.IStateTransition;
@@ -20,9 +21,11 @@ import org.junit.Test;
 
 import static org.easymock.EasyMock.createControl;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -40,6 +43,7 @@ public class StateTest
     private IStateMachineContext mockContext;
     private IStateTransition mockTransitionOne;
     private IStateTransition mockTransitionTwo;
+    private IAction mockAction;
 
     /** */
     @BeforeClass
@@ -58,6 +62,7 @@ public class StateTest
         mockContext = ctrl.createMock( IStateMachineContext.class );
         mockTransitionOne = ctrl.createMock( IStateTransition.class );
         mockTransitionTwo = ctrl.createMock( IStateTransition.class );
+        mockAction = ctrl.createMock( IAction.class );
     }
 
     /**
@@ -188,14 +193,57 @@ public class StateTest
     @Test
     public void testStepWithNoTransitionsSetUpReturnsSelf() throws StateMachineException
     {
-
         ctrl.replay();
 
         IState state = new StateImpl( "TestState" );
         IState newState = state.step( mockContext );
 
-        assertThat( state, equalTo( newState ) );
+        assertThat( state, sameInstance( newState ) );
         LOG.debug( "Checked that the step call returns the same state when there are no transitions setup" );
+
+        ctrl.verify();
+    }
+
+    /**
+     * Tests that when we have set an entry action on a state and we
+     * call execute entry action on the state, that the call is
+     * propogated down to the execute on teh underlying action.
+     * 
+     * @throws StateMachineException
+     */
+    @Test
+    public void testExecutionOfEntryAction() throws StateMachineException
+    {
+        mockAction.execute( mockContext );
+        expectLastCall().once();
+
+        ctrl.replay();
+
+        StateImpl state = new StateImpl( "TestState" );
+        state.setEntryAction( mockAction );
+        state.executeEntryAction( mockContext );
+
+        ctrl.verify();
+    }
+
+    /**
+     * Tests that when we have set an entry action on a state and we
+     * call execute entry action on the state, that the call is
+     * propogated down to the execute on teh underlying action.
+     * 
+     * @throws StateMachineException
+     */
+    @Test
+    public void testExecutionOfExitAction() throws StateMachineException
+    {
+        mockAction.execute( mockContext );
+        expectLastCall().once();
+
+        ctrl.replay();
+
+        StateImpl state = new StateImpl( "TestState" );
+        state.setExitAction( mockAction );
+        state.executeExitAction( mockContext );
 
         ctrl.verify();
     }
@@ -218,6 +266,10 @@ public class StateTest
         assertThat( state1a, equalTo( state1b ) );
         assertThat( state1a, not( equalTo( state2 ) ) );
 
+        assertFalse( state1a.equals( new String() ) );
+        assertFalse( state1a.equals( null ) );
+        assertFalse( state1a.equals( state2 ) );
+
         // check hashcode
         assertThat( state1a.hashCode(), equalTo( state1b.hashCode() ) );
         assertThat( state1a.hashCode(), not( equalTo( state2.hashCode() ) ) );
@@ -225,5 +277,4 @@ public class StateTest
         LOG.debug( "State1a: " + state1a );
         LOG.debug( "State2: " + state2 );
     }
-
 }

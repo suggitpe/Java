@@ -42,4 +42,28 @@ public interface IState
      */
     IState step( IStateMachineContext aContext ) throws StateMachineException;
 
+    /**
+     * When a statemachine enters a new state, it calls this method on
+     * the new state.
+     * 
+     * @param aContext
+     *            a context object so that the executing action has
+     *            some level of contextual information from which to
+     *            perform the action execution relevant to this state.
+     * @throws StateMachineException
+     */
+    void executeEntryAction( IStateMachineContext aContext ) throws StateMachineException;
+
+    /**
+     * When a statemachine enters a new state, it calls this method on
+     * the old state.
+     * 
+     * @param aContext
+     *            a context object so that the executing action has
+     *            some level of contextual information from which to
+     *            perform the action execution relevant to this state.
+     * @throws StateMachineException
+     */
+    void executeExitAction( IStateMachineContext aContext ) throws StateMachineException;
+
 }
