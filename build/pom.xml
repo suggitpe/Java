@@ -17,6 +17,9 @@
     <!-- Mailing lists -->
     <mailingLists>
     </mailingLists>
+    
+    <scm>
+    </scm>
 
     <!-- team developers -->
     <developers>
@@ -55,16 +58,16 @@
 
     <build>
         <testResources>
+            <!-- 
             <testResource>
-                <!-- 
                 <directory>${basedir}/etc/mavenBuild</directory>
-                -->
                 <directory>${suggs.test.home}</directory>
                 <filtering>false</filtering>
                 <includes>
                     <include>**/*</include>
                 </includes>
             </testResource>
+            -->
             <testResource>
                 <directory>src/test/resources</directory>
                 <filtering>false</filtering>
@@ -144,9 +147,7 @@
                         <bindingIncludes>
                             <include>*.xjb</include>
                         </bindingIncludes>
-                        <!-- 
                         <generateDirectory>src/main/java</generateDirectory>
-                        -->
                         <forceRegenerate>true</forceRegenerate>
                         <strict>true</strict>
                         <verbose>false</verbose>
