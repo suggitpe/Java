@@ -33,7 +33,7 @@ public class DomParserUnitTest
 {
 
     private static final Log LOG = LogFactory.getLog( DomParserUnitTest.class );
-    private static final String TEST_ROOT = "c:";
+    private static final String TEST_ROOT = "/tmp";
     private static final String TEST_DIR = TEST_ROOT + "/test/xmltest";
     private static final String TEST_FILE = TEST_DIR + "/dummyXml.xml";
 
