@@ -50,7 +50,7 @@ public class StateTransitionEventTest
      * state construction
      */
     @Test
-    public void testStateNameExtraction()
+    public void stateNameExtraction()
     {
         final String EVENT_NAME = "TestEvent";
         IStateTransitionEvent event = new StateTransitionEventImpl( EVENT_NAME );
@@ -65,7 +65,7 @@ public class StateTransitionEventTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testEqualsHashcodeAndToString()
+    public void equalsHashcodeAndToString()
     {
         StateTransitionEventImpl event1a = new StateTransitionEventImpl( "event1" );
         StateTransitionEventImpl event1b = new StateTransitionEventImpl( "event1" );

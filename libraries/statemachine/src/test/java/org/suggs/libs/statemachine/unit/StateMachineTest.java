@@ -59,7 +59,7 @@ public class StateMachineTest
     }
 
     @Test
-    public void testToString()
+    public void toStringOutput()
     {
         StateMachineImpl stateMachine = new StateMachineImpl( mockInitialState );
         stateMachine.setCurrentState( mockNewState );
@@ -71,7 +71,7 @@ public class StateMachineTest
      * call the getter for the state that the same one is returned.
      */
     @Test
-    public void testStateMachineInitiation()
+    public void stateMachineInitiation()
     {
         expect( mockInitialState.getStateName() ).andReturn( "InitialState" ).anyTimes();
 
@@ -94,7 +94,7 @@ public class StateMachineTest
      * @throws StateMachineException
      */
     @Test
-    public void testStepResultsInNewCurrentState() throws StateMachineException
+    public void stepResultsInNewCurrentState() throws StateMachineException
     {
         expect( mockInitialState.step( mockContext ) ).andReturn( mockNewState );
         expect( mockNewState.step( mockContext ) ).andReturn( mockNewState );
@@ -123,7 +123,7 @@ public class StateMachineTest
      * @throws StateMachineException
      */
     @Test
-    public void testNoStepResultsInSameCurrentState() throws StateMachineException
+    public void noStepResultsInSameCurrentState() throws StateMachineException
     {
         expect( mockInitialState.step( mockContext ) ).andReturn( mockInitialState );
 
@@ -146,7 +146,7 @@ public class StateMachineTest
      *             from the call to step
      */
     @Test
-    public void testNullStepResultsInSameCurrentState() throws StateMachineException
+    public void nullStepResultsInSameCurrentState() throws StateMachineException
     {
         expect( mockInitialState.step( mockContext ) ).andReturn( null );
 

@@ -70,7 +70,7 @@ public class StateTest
      * state construction
      */
     @Test
-    public void testStateNameExtraction()
+    public void stateNameExtraction()
     {
         final String STATE_NAME = "TestStateForTest";
         IState state = new StateImpl( STATE_NAME );
@@ -87,7 +87,7 @@ public class StateTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testStepWithValidTransitionsToReturnNewState() throws StateMachineException
+    public void stepWithValidTransitionsToReturnNewState() throws StateMachineException
     {
         IState state = new StateImpl( "TestState" );
         IState endState = new StateImpl( "TestEndState" );
@@ -123,7 +123,7 @@ public class StateTest
      */
     @SuppressWarnings("boxing")
     @Test(expected = StateMachineException.class)
-    public void testStepWithTwoValidTransitionsCausesException() throws StateMachineException
+    public void stepWithTwoValidTransitionsCausesException() throws StateMachineException
     {
         IState state = new StateImpl( "TestState" );
         IState endState = new StateImpl( "TestEndState" );
@@ -158,7 +158,7 @@ public class StateTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testStepwithNonValidTransitionsToReturnSelf() throws StateMachineException
+    public void stepwithNonValidTransitionsToReturnSelf() throws StateMachineException
     {
         IState state = new StateImpl( "TestState" );
 
@@ -191,7 +191,7 @@ public class StateTest
      * @throws StateMachineException
      */
     @Test
-    public void testStepWithNoTransitionsSetUpReturnsSelf() throws StateMachineException
+    public void stepWithNoTransitionsSetUpReturnsSelf() throws StateMachineException
     {
         ctrl.replay();
 
@@ -212,7 +212,7 @@ public class StateTest
      * @throws StateMachineException
      */
     @Test
-    public void testExecutionOfEntryAction() throws StateMachineException
+    public void executionOfEntryAction() throws StateMachineException
     {
         mockAction.execute( mockContext );
         expectLastCall().once();
@@ -234,7 +234,7 @@ public class StateTest
      * @throws StateMachineException
      */
     @Test
-    public void testExecutionOfExitAction() throws StateMachineException
+    public void executionOfExitAction() throws StateMachineException
     {
         mockAction.execute( mockContext );
         expectLastCall().once();
@@ -254,7 +254,7 @@ public class StateTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testEqualsHashcodeAndToString()
+    public void equalsHashcodeAndToString()
     {
         StateImpl state1a = new StateImpl( "state1" );
         StateImpl state1b = new StateImpl( "state1" );

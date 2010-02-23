@@ -84,7 +84,7 @@ public class StateMachineConnectionIntegrationTest
      *             from the call to step
      */
     @Test
-    public void testInitialisationOfStateMachineThroughSpring() throws StateMachineException
+    public void initialisationOfStateMachineThroughSpring() throws StateMachineException
     {
         LOG.info( "Testing that we can initialise the state machine through Spring ... sanity check" );
         IState initial = stateMachine.getCurrentState();
@@ -100,7 +100,7 @@ public class StateMachineConnectionIntegrationTest
      *             from the call to step
      */
     @Test
-    public void testTransitionFromInitialToDisconnected() throws StateMachineException
+    public void transitionFromInitialToDisconnected() throws StateMachineException
     {
         LOG.info( "Checking that with any event we will transition from Initial to Disconnected" );
         IState initial = stateMachine.getCurrentState();
@@ -129,7 +129,7 @@ public class StateMachineConnectionIntegrationTest
      *             from the call to step
      */
     @Test
-    public void testNoTransitionOccursFromIrrelevantEvent() throws StateMachineException
+    public void noTransitionOccursFromIrrelevantEvent() throws StateMachineException
     {
         LOG.info( "Checking that we pass in a totally random event we stay in the same overall state" );
         assertThat( stateMachine.getCurrentState(), equalTo( disconnectedState ) );
@@ -151,7 +151,7 @@ public class StateMachineConnectionIntegrationTest
      * @throws StateMachineException
      */
     @Test
-    public void testTransitionFromDisconnectedToConnected() throws StateMachineException
+    public void transitionFromDisconnectedToConnected() throws StateMachineException
     {
         LOG.info( "Checking that when we pass in a connect event that we transition through the connecting state and onto the connected state" );
         assertThat( stateMachine.getCurrentState(), equalTo( disconnectedState ) );
@@ -175,7 +175,7 @@ public class StateMachineConnectionIntegrationTest
      *             from the call to step
      */
     @Test
-    public void testTransitionFromConnectedToDisconnected() throws StateMachineException
+    public void transitionFromConnectedToDisconnected() throws StateMachineException
     {
         LOG.info( "Checking that when we pass in a disconnect event that we transition through the disconnecting state and onto the disconnected state" );
         assertThat( stateMachine.getCurrentState(), equalTo( connectedState ) );

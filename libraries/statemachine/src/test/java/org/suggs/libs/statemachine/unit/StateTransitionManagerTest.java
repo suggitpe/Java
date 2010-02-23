@@ -89,7 +89,7 @@ public class StateTransitionManagerTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testAddAndRetrieveSameTransitionForState()
+    public void addAndRetrieveSameTransitionForState()
     {
         expect( mockStateOne.getStateName() ).andReturn( "testState" ).anyTimes();
 
@@ -122,7 +122,7 @@ public class StateTransitionManagerTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testRetrieveNoTransition()
+    public void retrieveNoTransition()
     {
         expect( mockStateOne.getStateName() ).andReturn( "testState" ).anyTimes();
 
@@ -144,7 +144,7 @@ public class StateTransitionManagerTest
      * state, we get a decent exception
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testRetrieveTransitionForNullState()
+    public void retrieveTransitionForNullState()
     {
         LOG.debug( "Calling StateTransitionManager with null argument so expecting exception" );
         StateTransitionManager.instance().getListOfTransitionsForState( null );
@@ -155,7 +155,7 @@ public class StateTransitionManagerTest
      * for the same state that an exception is thrown.
      */
     @Test(expected = IllegalStateException.class)
-    public void testExceptionThrownWhenTwoTransitionsForSameStateLoaded()
+    public void exceptionThrownWhenTwoTransitionsForSameStateLoaded()
     {
         expect( mockTransitionOne.getStartingState() ).andReturn( mockStateOne ).anyTimes();
         expect( mockStateOne.getStateName() ).andReturn( "testState" ).anyTimes();
@@ -179,7 +179,7 @@ public class StateTransitionManagerTest
      * we get some level of hissy fit.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testExceptionThrownWhenNullTransitionAddedToManager()
+    public void exceptionThrownWhenNullTransitionAddedToManager()
     {
         LOG.debug( "Loading NULL transitions" );
         StateTransitionManager.instance().addTransitionToManager( null );
@@ -190,7 +190,7 @@ public class StateTransitionManagerTest
      * we get some level of hissy fit.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testExceptionThrownWhenNullTransitionsSetOnManager()
+    public void exceptionThrownWhenNullTransitionsSetOnManager()
     {
         LOG.debug( "Loading NULL transitions" );
         StateTransitionManager.instance().setTransitions( null );
@@ -203,7 +203,7 @@ public class StateTransitionManagerTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testAddAndRetrieveMultipleTransitionForState()
+    public void addAndRetrieveMultipleTransitionForState()
     {
         expect( mockTransitionOne.getStartingState() ).andReturn( mockStateOne ).anyTimes();
         expect( mockStateOne.getStateName() ).andReturn( "testState1" ).anyTimes();

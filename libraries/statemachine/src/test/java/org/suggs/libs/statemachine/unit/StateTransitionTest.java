@@ -73,7 +73,7 @@ public class StateTransitionTest
      * time of the construction are correctly kept throughout.
      */
     @Test
-    public void testTransitionNameExtraction()
+    public void transitionNameExtraction()
     {
         final String transName = "TestStateTransition";
         IState localStartState = new StateImpl( "TestStartState" );
@@ -95,7 +95,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testEqualsHashcodeAndToString()
+    public void equalsHashcodeAndToString()
     {
         StateImpl state1a = new StateImpl( "startState1" );
         StateImpl state1b = new StateImpl( "startState1" );
@@ -141,7 +141,7 @@ public class StateTransitionTest
      *             test.
      */
     @Test(expected = StateMachineException.class)
-    public void testTransitionEvaluationForNullContext() throws StateMachineException
+    public void transitionEvaluationForNullContext() throws StateMachineException
     {
         IStateTransition target = new StateTransitionImpl( "testTransition", startState, endState );
 
@@ -161,7 +161,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testTranitionEventEvaluationForValidEvent() throws StateMachineException
+    public void tranitionEventEvaluationForValidEvent() throws StateMachineException
     {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
                                                               startState,
@@ -191,7 +191,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testTransitionEventEvaluationForNoEvents() throws StateMachineException
+    public void transitionEventEvaluationForNoEvents() throws StateMachineException
     {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
                                                               startState,
@@ -219,7 +219,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testTransitionEventEvaluationForNoValidEvents() throws StateMachineException
+    public void transitionEventEvaluationForNoValidEvents() throws StateMachineException
     {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
                                                               startState,
@@ -250,7 +250,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testTransitionEventEvaluationForNullEvents() throws StateMachineException
+    public void transitionEventEvaluationForNullEvents() throws StateMachineException
     {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
                                                               startState,
@@ -277,7 +277,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testTranitionEventEvaluationForValidGuard() throws StateMachineException
+    public void tranitionEventEvaluationForValidGuard() throws StateMachineException
     {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
                                                               startState,
@@ -301,8 +301,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testTranitionEventEvaluationForValidGuardAndInvalidGuard()
-                    throws StateMachineException
+    public void tranitionEventEvaluationForValidGuardAndInvalidGuard() throws StateMachineException
     {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
                                                               startState,
@@ -327,7 +326,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testTransitionEventEvaluationForNoGuards() throws StateMachineException
+    public void transitionEventEvaluationForNoGuards() throws StateMachineException
     {
         ctrl.replay();
 
@@ -350,7 +349,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testTransitionEventEvaluationForNoValidGuards() throws StateMachineException
+    public void transitionEventEvaluationForNoValidGuards() throws StateMachineException
     {
 
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
@@ -375,7 +374,7 @@ public class StateTransitionTest
      */
     @SuppressWarnings("boxing")
     @Test
-    public void testTransitionEventEvaluationForNullGuards() throws StateMachineException
+    public void transitionEventEvaluationForNullGuards() throws StateMachineException
     {
 
         StateTransitionImpl target = new StateTransitionImpl( "testTransition",
