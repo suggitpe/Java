@@ -37,7 +37,7 @@ public class JmsMessageSenderSprintInjectionTest
     private static final Log LOG = LogFactory.getLog( JmsMessageSenderSprintInjectionTest.class );
 
     @Resource(name = "jmsMessageSender")
-    private IMessageProcessor jmsMessageSender_;
+    private IMessageProcessor jmsMessageSender;
 
     /** */
     @BeforeClass
@@ -67,6 +67,6 @@ public class JmsMessageSenderSprintInjectionTest
     @Test
     public void testSpringInjectionJmsMessageSender()
     {
-        assertThat( jmsMessageSender_, notNullValue() );
+        assertThat( jmsMessageSender, notNullValue() );
     }
 }

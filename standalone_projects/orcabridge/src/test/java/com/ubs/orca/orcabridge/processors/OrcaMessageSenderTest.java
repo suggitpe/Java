@@ -33,12 +33,12 @@ public class OrcaMessageSenderTest
 
     private static final Log LOG = LogFactory.getLog( OrcaMessageSenderTest.class );
 
-    private IMocksControl ctrl_;
-    private OrcaMessageSender sender_;
+    private IMocksControl ctrl;
+    private OrcaMessageSender sender;
 
-    private IMessageFacade mockMessageFacade_;
-    private IOrcaClient mockOrcaClient_;
-    private IConversationMessage mockOrcaMessage_;
+    private IMessageFacade mockMessageFacade;
+    private IOrcaClient mockOrcaClient;
+    private IConversationMessage mockOrcaMessage;
 
     /** */
     @BeforeClass
@@ -56,14 +56,14 @@ public class OrcaMessageSenderTest
     public void doBefore() throws Exception
     {
         LOG.debug( "-----------------" );
-        ctrl_ = createControl();
-        mockMessageFacade_ = ctrl_.createMock( IMessageFacade.class );
-        mockOrcaClient_ = ctrl_.createMock( IOrcaClient.class );
-        mockOrcaMessage_ = ctrl_.createMock( IConversationMessage.class );
+        ctrl = createControl();
+        mockMessageFacade = ctrl.createMock( IMessageFacade.class );
+        mockOrcaClient = ctrl.createMock( IOrcaClient.class );
+        mockOrcaMessage = ctrl.createMock( IConversationMessage.class );
 
-        sender_ = new OrcaMessageSender();
-        sender_.setOrcaClient( mockOrcaClient_ );
-        sender_.afterPropertiesSet();
+        sender = new OrcaMessageSender();
+        sender.setOrcaClient( mockOrcaClient );
+        sender.afterPropertiesSet();
     }
 
     /**
@@ -74,14 +74,14 @@ public class OrcaMessageSenderTest
     @Test
     public void testNormalSend() throws Exception
     {
-        expect( mockMessageFacade_.buildOrcaMesage( mockOrcaClient_ ) ).andReturn( mockOrcaMessage_ )
+        expect( mockMessageFacade.buildOrcaMesage( mockOrcaClient ) ).andReturn( mockOrcaMessage )
             .once();
 
-        expect( mockOrcaClient_.send( mockOrcaMessage_ ) ).andReturn( "test rubbish" );
+        expect( mockOrcaClient.send( mockOrcaMessage ) ).andReturn( "test rubbish" );
 
-        ctrl_.replay();
-        sender_.processMessage( mockMessageFacade_ );
-        ctrl_.verify();
+        ctrl.replay();
+        sender.processMessage( mockMessageFacade );
+        ctrl.verify();
     }
 
     /**
@@ -92,12 +92,12 @@ public class OrcaMessageSenderTest
     @Test
     public void testSuccessfulInit() throws Exception
     {
-        mockOrcaClient_.connect();
+        mockOrcaClient.connect();
         expectLastCall().once();
 
-        ctrl_.replay();
-        sender_.init();
-        ctrl_.verify();
+        ctrl.replay();
+        sender.init();
+        ctrl.verify();
     }
 
     /**
@@ -109,12 +109,12 @@ public class OrcaMessageSenderTest
     @Test(expected = OrcaBridgeException.class)
     public void testFailOnInit() throws Exception
     {
-        mockOrcaClient_.connect();
+        mockOrcaClient.connect();
         expectLastCall().andThrow( new OrcaException( "Failed on connect: this is all part of the test" ) );
 
-        ctrl_.replay();
-        sender_.init();
-        ctrl_.verify();
+        ctrl.replay();
+        sender.init();
+        ctrl.verify();
     }
 
     /**
@@ -128,14 +128,14 @@ public class OrcaMessageSenderTest
     public void testSendButFailOnMessageCreation() throws OrcaBridgeException,
                     OrcaBridgeMessageConversionException, OrcaException
     {
-        mockOrcaClient_.connect();
+        mockOrcaClient.connect();
         expectLastCall().once();
 
-        expect( mockMessageFacade_.buildOrcaMesage( mockOrcaClient_ ) ).andThrow( new OrcaBridgeMessageConversionException( "Failed on msg creation: this is all part of the test" ) );
+        expect( mockMessageFacade.buildOrcaMesage( mockOrcaClient ) ).andThrow( new OrcaBridgeMessageConversionException( "Failed on msg creation: this is all part of the test" ) );
 
-        ctrl_.replay();
-        sender_.processMessage( mockMessageFacade_ );
-        ctrl_.verify();
+        ctrl.replay();
+        sender.processMessage( mockMessageFacade );
+        ctrl.verify();
     }
 
     /**
@@ -150,17 +150,17 @@ public class OrcaMessageSenderTest
     public void testSendButFailOnSend() throws OrcaBridgeException,
                     OrcaBridgeMessageConversionException, OrcaException
     {
-        mockOrcaClient_.connect();
+        mockOrcaClient.connect();
         expectLastCall().once();
 
-        expect( mockMessageFacade_.buildOrcaMesage( mockOrcaClient_ ) ).andReturn( mockOrcaMessage_ )
+        expect( mockMessageFacade.buildOrcaMesage( mockOrcaClient ) ).andReturn( mockOrcaMessage )
             .once();
 
-        expect( mockOrcaClient_.send( mockOrcaMessage_ ) ).andThrow( new OrcaException( "Failed on send: this is all part of the test" ) );
+        expect( mockOrcaClient.send( mockOrcaMessage ) ).andThrow( new OrcaException( "Failed on send: this is all part of the test" ) );
 
-        ctrl_.replay();
-        sender_.processMessage( mockMessageFacade_ );
-        ctrl_.verify();
+        ctrl.replay();
+        sender.processMessage( mockMessageFacade );
+        ctrl.verify();
     }
 
 }

@@ -36,13 +36,13 @@ public class JmsClientCoreTestProcess
 
     private static final Log LOG = LogFactory.getLog( JmsClientCoreTestProcess.class );
 
-    private IMocksControl ctrl_;
-    private JmsClientCore jmsClientCore_;
-    private Context mockInitialContext_;
-    private Connection mockConnection_;
-    private Session mockSession_;
-    private IJmsAction mockAction_;
-    private Destination mockDestination_;
+    private IMocksControl ctrl;
+    private JmsClientCore jmsClientCore;
+    private Context mockInitialContext;
+    private Connection mockConnection;
+    private Session mockSession;
+    private IJmsAction mockAction;
+    private Destination mockDestination;
 
     private static final String DEST_NAME = "TestDestination";
     private static final String CONNFACT_NAME = "TestConnectionFactory";
@@ -61,18 +61,18 @@ public class JmsClientCoreTestProcess
     public void doBefore() throws Exception
     {
         LOG.debug( "-------------" );
-        ctrl_ = createControl();
-        mockInitialContext_ = ctrl_.createMock( Context.class );
-        mockConnection_ = ctrl_.createMock( Connection.class );
-        mockSession_ = ctrl_.createMock( Session.class );
-        mockAction_ = ctrl_.createMock( IJmsAction.class );
-        mockDestination_ = ctrl_.createMock( Destination.class );
+        ctrl = createControl();
+        mockInitialContext = ctrl.createMock( Context.class );
+        mockConnection = ctrl.createMock( Connection.class );
+        mockSession = ctrl.createMock( Session.class );
+        mockAction = ctrl.createMock( IJmsAction.class );
+        mockDestination = ctrl.createMock( Destination.class );
 
-        jmsClientCore_ = new JmsClientCore();
-        jmsClientCore_.setInitialContext( mockInitialContext_ );
-        jmsClientCore_.setDestinationName( DEST_NAME );
-        jmsClientCore_.setConnectionFactoryName( CONNFACT_NAME );
-        jmsClientCore_.afterPropertiesSet();
+        jmsClientCore = new JmsClientCore();
+        jmsClientCore.setInitialContext( mockInitialContext );
+        jmsClientCore.setDestinationName( DEST_NAME );
+        jmsClientCore.setConnectionFactoryName( CONNFACT_NAME );
+        jmsClientCore.afterPropertiesSet();
     }
 
     /**
@@ -85,23 +85,23 @@ public class JmsClientCoreTestProcess
     @Test
     public void testProcessInTransaction() throws JmsClientException, JMSException
     {
-        jmsClientCore_.setConnection( mockConnection_ );
-        jmsClientCore_.setDestination( mockDestination_ );
+        jmsClientCore.setConnection( mockConnection );
+        jmsClientCore.setDestination( mockDestination );
 
-        expect( mockConnection_.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andReturn( mockSession_ )
+        expect( mockConnection.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andReturn( mockSession )
             .once();
-        mockConnection_.start();
+        mockConnection.start();
         expectLastCall().once();
 
-        mockAction_.actionInTransaction( mockSession_, mockDestination_ );
+        mockAction.actionInTransaction( mockSession, mockDestination );
         expectLastCall().once();
 
-        mockSession_.close();
+        mockSession.close();
         expectLastCall().once();
 
-        ctrl_.replay();
-        jmsClientCore_.processAction( mockAction_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsClientCore.processAction( mockAction );
+        ctrl.verify();
     }
 
     /**
@@ -115,23 +115,23 @@ public class JmsClientCoreTestProcess
     @Test(expected = JmsClientException.class)
     public void testProcessInTransactionWithFailInAction() throws JmsClientException, JMSException
     {
-        jmsClientCore_.setConnection( mockConnection_ );
-        jmsClientCore_.setDestination( mockDestination_ );
+        jmsClientCore.setConnection( mockConnection );
+        jmsClientCore.setDestination( mockDestination );
 
-        expect( mockConnection_.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andReturn( mockSession_ )
+        expect( mockConnection.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andReturn( mockSession )
             .once();
-        mockConnection_.start();
+        mockConnection.start();
         expectLastCall().once();
 
-        mockAction_.actionInTransaction( mockSession_, mockDestination_ );
+        mockAction.actionInTransaction( mockSession, mockDestination );
         expectLastCall().andThrow( new JmsClientException( "Action fail: this is all part of the test" ) );
 
-        mockSession_.close();
+        mockSession.close();
         expectLastCall().once();
 
-        ctrl_.replay();
-        jmsClientCore_.processAction( mockAction_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsClientCore.processAction( mockAction );
+        ctrl.verify();
     }
 
     /**
@@ -144,9 +144,9 @@ public class JmsClientCoreTestProcess
     public void testProcessInTransactionWithNoActiveConnection() throws JmsClientException
     {
 
-        ctrl_.replay();
-        jmsClientCore_.processAction( mockAction_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsClientCore.processAction( mockAction );
+        ctrl.verify();
     }
 
     /**
@@ -161,14 +161,14 @@ public class JmsClientCoreTestProcess
     public void testProcessInTransactionWithFailedSessionCreate() throws JmsClientException,
                     JMSException
     {
-        jmsClientCore_.setConnection( mockConnection_ );
-        jmsClientCore_.setDestination( mockDestination_ );
+        jmsClientCore.setConnection( mockConnection );
+        jmsClientCore.setDestination( mockDestination );
 
-        expect( mockConnection_.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andThrow( new JMSException( "Session create fail: this is all part of the test" ) );
+        expect( mockConnection.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andThrow( new JMSException( "Session create fail: this is all part of the test" ) );
 
-        ctrl_.replay();
-        jmsClientCore_.processAction( mockAction_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsClientCore.processAction( mockAction );
+        ctrl.verify();
     }
 
     /**
@@ -183,23 +183,23 @@ public class JmsClientCoreTestProcess
     public void testProcessInTransactionWithFailedSessionClose() throws JmsClientException,
                     JMSException
     {
-        expect( mockConnection_.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andReturn( mockSession_ )
+        expect( mockConnection.createSession( true, Session.CLIENT_ACKNOWLEDGE ) ).andReturn( mockSession )
             .once();
-        mockConnection_.start();
+        mockConnection.start();
         expectLastCall().once();
 
-        mockAction_.actionInTransaction( mockSession_, mockDestination_ );
+        mockAction.actionInTransaction( mockSession, mockDestination );
         expectLastCall().once();
 
-        mockSession_.close();
+        mockSession.close();
         expectLastCall().andThrow( new JMSException( "Session close fail: this is all part of the test" ) );
 
-        jmsClientCore_.setConnection( mockConnection_ );
-        jmsClientCore_.setDestination( mockDestination_ );
+        jmsClientCore.setConnection( mockConnection );
+        jmsClientCore.setDestination( mockDestination );
 
-        ctrl_.replay();
-        jmsClientCore_.processAction( mockAction_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsClientCore.processAction( mockAction );
+        ctrl.verify();
     }
 
 }

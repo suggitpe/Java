@@ -32,7 +32,7 @@ public class JmsSingleMessageReaderCallback
 
     private static final Log LOG = LogFactory.getLog( JmsSingleMessageReaderCallback.class );
 
-    private IMessageProcessor messageProcessor_;
+    private IMessageProcessor messageProcessor;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -40,7 +40,7 @@ public class JmsSingleMessageReaderCallback
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( messageProcessor_,
+        Assert.notNull( messageProcessor,
                         "No message processor has been set on the JmsSingleMessageReaderCallback" );
     }
 
@@ -57,7 +57,7 @@ public class JmsSingleMessageReaderCallback
 
         try
         {
-            messageProcessor_.processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
+            messageProcessor.processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
         }
         catch ( OrcaBridgeException throwable )
         {
@@ -76,12 +76,12 @@ public class JmsSingleMessageReaderCallback
     /**
      * Sets the messageProcessor field to the specified value.
      * 
-     * @param messageProcessor
+     * @param aMessageProcessor
      *            The messageProcessor to set.
      */
-    public void setMessageProcessor( IMessageProcessor messageProcessor )
+    public void setMessageProcessor( IMessageProcessor aMessageProcessor )
     {
-        messageProcessor_ = messageProcessor;
+        messageProcessor = aMessageProcessor;
     }
 
 }

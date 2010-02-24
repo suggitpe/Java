@@ -18,7 +18,7 @@ import com.ubs.orca.orcabridge.IMessageFacade;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public class MessageFacadeFactory
+public final class MessageFacadeFactory
 {
 
     private static final Log LOG = LogFactory.getLog( MessageFacadeFactory.class );

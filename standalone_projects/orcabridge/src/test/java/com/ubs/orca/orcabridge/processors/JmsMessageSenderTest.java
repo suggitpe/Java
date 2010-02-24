@@ -33,11 +33,11 @@ public class JmsMessageSenderTest
 
     private static final Log LOG = LogFactory.getLog( JmsMessageSenderTest.class );
 
-    private IMocksControl ctrl_;
-    private JmsMessageSender sender_;
+    private IMocksControl ctrl;
+    private JmsMessageSender sender;
 
-    private IJmsClient mockJmsClient_;
-    private IMessageFacade mockMessageFacade_;
+    private IJmsClient mockJmsClient;
+    private IMessageFacade mockMessageFacade;
 
     /** */
     @BeforeClass
@@ -55,14 +55,14 @@ public class JmsMessageSenderTest
     public void doBefore() throws Exception
     {
         LOG.debug( "-----------------" );
-        ctrl_ = createControl();
-        mockJmsClient_ = ctrl_.createMock( IJmsClient.class );
-        mockMessageFacade_ = ctrl_.createMock( IMessageFacade.class );
+        ctrl = createControl();
+        mockJmsClient = ctrl.createMock( IJmsClient.class );
+        mockMessageFacade = ctrl.createMock( IMessageFacade.class );
 
-        sender_ = new JmsMessageSender();
-        sender_.setJmsClient( mockJmsClient_ );
+        sender = new JmsMessageSender();
+        sender.setJmsClient( mockJmsClient );
 
-        sender_.afterPropertiesSet();
+        sender.afterPropertiesSet();
     }
 
     /**
@@ -73,8 +73,8 @@ public class JmsMessageSenderTest
     @After
     public void doAfter() throws Exception
     {
-        sender_.tearDown();
-        ctrl_.verify();
+        sender.tearDown();
+        ctrl.verify();
     }
 
     /**
@@ -85,19 +85,19 @@ public class JmsMessageSenderTest
     @Test
     public void testNormalSend() throws Exception
     {
-        mockJmsClient_.connect();
+        mockJmsClient.connect();
         expectLastCall().once();
 
-        mockJmsClient_.processAction( isA( IJmsAction.class ) );
+        mockJmsClient.processAction( isA( IJmsAction.class ) );
         expectLastCall().once();
 
-        mockJmsClient_.disconnect();
+        mockJmsClient.disconnect();
         expectLastCall().once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        sender_.init();
-        sender_.processMessage( mockMessageFacade_ );
+        sender.init();
+        sender.processMessage( mockMessageFacade );
 
     }
 
@@ -110,19 +110,19 @@ public class JmsMessageSenderTest
     @Test(expected = OrcaBridgeException.class)
     public void testFailedSend() throws Exception
     {
-        mockJmsClient_.connect();
+        mockJmsClient.connect();
         expectLastCall().once();
 
-        mockJmsClient_.processAction( isA( IJmsAction.class ) );
+        mockJmsClient.processAction( isA( IJmsAction.class ) );
         expectLastCall().andThrow( new JmsClientException( "Failed to process send action: this is all part of the test" ) );
 
-        mockJmsClient_.disconnect();
+        mockJmsClient.disconnect();
         expectLastCall().once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        sender_.init();
-        sender_.processMessage( mockMessageFacade_ );
+        sender.init();
+        sender.processMessage( mockMessageFacade );
     }
 
 }

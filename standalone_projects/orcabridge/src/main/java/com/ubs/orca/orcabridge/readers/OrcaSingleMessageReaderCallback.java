@@ -33,7 +33,7 @@ public class OrcaSingleMessageReaderCallback
     implements IOrcaSinkSingleMsgCallback, InitializingBean
 {
 
-    private IMessageProcessor messageProcessor_;
+    private IMessageProcessor messageProcessor;
 
     private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReaderCallback.class );
 
@@ -43,7 +43,7 @@ public class OrcaSingleMessageReaderCallback
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( messageProcessor_,
+        Assert.notNull( messageProcessor,
                         "No message processor has been set on the OrcaSingleMessageReaderCallback." );
     }
 
@@ -75,7 +75,7 @@ public class OrcaSingleMessageReaderCallback
 
         try
         {
-            messageProcessor_.processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
+            messageProcessor.processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
         }
         catch ( Throwable throwable )
         {
@@ -94,12 +94,12 @@ public class OrcaSingleMessageReaderCallback
     /**
      * Sets the messageProcessor field to the specified value.
      * 
-     * @param messageProcessor
+     * @param aMessageProcessor
      *            The messageProcessor to set.
      */
-    public void setMessageProcessor( IMessageProcessor messageProcessor )
+    public void setMessageProcessor( IMessageProcessor aMessageProcessor )
     {
-        messageProcessor_ = messageProcessor;
+        messageProcessor = aMessageProcessor;
     }
 
 }

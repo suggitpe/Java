@@ -37,13 +37,13 @@ public class JmsSenderActionTest
 
     private static final Log LOG = LogFactory.getLog( JmsSenderActionTest.class );
 
-    private IMocksControl ctrl_;
-    private IJmsAction jmsSenderAction_;
-    private IMessageFacade mockMessageFacade_;
-    private Destination mockDestination_;
-    private Session mockSession_;
-    private MessageProducer mockMessageProducer_;
-    private Message mockJmsMessage_;
+    private IMocksControl ctrl;
+    private IJmsAction jmsSenderAction;
+    private IMessageFacade mockMessageFacade;
+    private Destination mockDestination;
+    private Session mockSession;
+    private MessageProducer mockMessageProducer;
+    private Message mockJmsMessage;
 
     /** */
     @BeforeClass
@@ -57,14 +57,14 @@ public class JmsSenderActionTest
     public void doBefore()
     {
         LOG.debug( "-------------" );
-        ctrl_ = EasyMock.createControl();
-        mockMessageFacade_ = ctrl_.createMock( IMessageFacade.class );
-        mockDestination_ = ctrl_.createMock( Destination.class );
-        mockSession_ = ctrl_.createMock( Session.class );
-        mockJmsMessage_ = ctrl_.createMock( Message.class );
-        mockMessageProducer_ = ctrl_.createMock( MessageProducer.class );
+        ctrl = EasyMock.createControl();
+        mockMessageFacade = ctrl.createMock( IMessageFacade.class );
+        mockDestination = ctrl.createMock( Destination.class );
+        mockSession = ctrl.createMock( Session.class );
+        mockJmsMessage = ctrl.createMock( Message.class );
+        mockMessageProducer = ctrl.createMock( MessageProducer.class );
 
-        jmsSenderAction_ = new JmsSenderAction( mockMessageFacade_ );
+        jmsSenderAction = new JmsSenderAction( mockMessageFacade );
     }
 
     /**
@@ -79,23 +79,23 @@ public class JmsSenderActionTest
     public void testNormalSend() throws JmsClientException, JMSException,
                     OrcaBridgeMessageConversionException
     {
-        expect( mockSession_.createProducer( mockDestination_ ) ).andReturn( mockMessageProducer_ )
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
             .once();
-        expect( mockMessageFacade_.buildJmsMessage( mockSession_ ) ).andReturn( mockJmsMessage_ )
+        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage )
             .once();
 
-        mockMessageProducer_.send( mockJmsMessage_ );
+        mockMessageProducer.send( mockJmsMessage );
         expectLastCall().once();
 
-        mockMessageProducer_.close();
+        mockMessageProducer.close();
         expectLastCall().once();
 
-        mockSession_.commit();
+        mockSession.commit();
         expectLastCall().once();
 
-        ctrl_.replay();
-        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsSenderAction.actionInTransaction( mockSession, mockDestination );
+        ctrl.verify();
     }
 
     /**
@@ -108,11 +108,11 @@ public class JmsSenderActionTest
     @Test(expected = JmsClientException.class)
     public void testSendWithFailInProducerCreate() throws JmsClientException, JMSException
     {
-        expect( mockSession_.createProducer( mockDestination_ ) ).andThrow( new JMSException( "Producer create fail: this is all part of the test" ) );
+        expect( mockSession.createProducer( mockDestination ) ).andThrow( new JMSException( "Producer create fail: this is all part of the test" ) );
 
-        ctrl_.replay();
-        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsSenderAction.actionInTransaction( mockSession, mockDestination );
+        ctrl.verify();
     }
 
     /**
@@ -127,16 +127,16 @@ public class JmsSenderActionTest
     public void testSendWithFailInJmsMessageBuild() throws JmsClientException, JMSException,
                     OrcaBridgeMessageConversionException
     {
-        expect( mockSession_.createProducer( mockDestination_ ) ).andReturn( mockMessageProducer_ )
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
             .once();
-        expect( mockMessageFacade_.buildJmsMessage( mockSession_ ) ).andThrow( new OrcaBridgeMessageConversionException( "JMS Message build fail: this is all part of the test" ) );
+        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andThrow( new OrcaBridgeMessageConversionException( "JMS Message build fail: this is all part of the test" ) );
 
-        mockMessageProducer_.close();
+        mockMessageProducer.close();
         expectLastCall().once();
 
-        ctrl_.replay();
-        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsSenderAction.actionInTransaction( mockSession, mockDestination );
+        ctrl.verify();
 
     }
 
@@ -152,20 +152,20 @@ public class JmsSenderActionTest
     public void testSendWithFailInSend() throws JmsClientException, JMSException,
                     OrcaBridgeMessageConversionException
     {
-        expect( mockSession_.createProducer( mockDestination_ ) ).andReturn( mockMessageProducer_ )
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
             .once();
-        expect( mockMessageFacade_.buildJmsMessage( mockSession_ ) ).andReturn( mockJmsMessage_ )
+        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage )
             .once();
 
-        mockMessageProducer_.send( mockJmsMessage_ );
+        mockMessageProducer.send( mockJmsMessage );
         expectLastCall().andThrow( new JMSException( "Fail in JMS send: this is all part of the test" ) );
 
-        mockMessageProducer_.close();
+        mockMessageProducer.close();
         expectLastCall().once();
 
-        ctrl_.replay();
-        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsSenderAction.actionInTransaction( mockSession, mockDestination );
+        ctrl.verify();
     }
 
     /**
@@ -181,24 +181,24 @@ public class JmsSenderActionTest
                     OrcaBridgeMessageConversionException
     {
 
-        expect( mockSession_.createProducer( mockDestination_ ) ).andReturn( mockMessageProducer_ )
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
             .once();
-        expect( mockMessageFacade_.buildJmsMessage( mockSession_ ) ).andReturn( mockJmsMessage_ )
+        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage )
             .once();
 
-        mockMessageProducer_.send( mockJmsMessage_ );
+        mockMessageProducer.send( mockJmsMessage );
         expectLastCall();
 
-        mockMessageProducer_.close();
+        mockMessageProducer.close();
         expectLastCall().andThrow( new JMSException( "Producer Close fail: this is all part of the:w"
                                                      + " test" ) );
 
-        mockSession_.commit();
+        mockSession.commit();
         expectLastCall().once();
 
-        ctrl_.replay();
-        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsSenderAction.actionInTransaction( mockSession, mockDestination );
+        ctrl.verify();
     }
 
     /**
@@ -214,23 +214,23 @@ public class JmsSenderActionTest
                     OrcaBridgeMessageConversionException
     {
 
-        expect( mockSession_.createProducer( mockDestination_ ) ).andReturn( mockMessageProducer_ )
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
             .once();
-        expect( mockMessageFacade_.buildJmsMessage( mockSession_ ) ).andReturn( mockJmsMessage_ )
+        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage )
             .once();
 
-        mockMessageProducer_.send( mockJmsMessage_ );
+        mockMessageProducer.send( mockJmsMessage );
         expectLastCall();
 
-        mockMessageProducer_.close();
+        mockMessageProducer.close();
         expectLastCall().once();
 
-        mockSession_.commit();
+        mockSession.commit();
         expectLastCall().andThrow( new JMSException( "" ) );
 
-        ctrl_.replay();
-        jmsSenderAction_.actionInTransaction( mockSession_, mockDestination_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsSenderAction.actionInTransaction( mockSession, mockDestination );
+        ctrl.verify();
     }
 
 }

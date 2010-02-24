@@ -29,7 +29,7 @@ public class JmsSenderAction implements IJmsAction
 
     private static final Log LOG = LogFactory.getLog( JmsSenderAction.class );
 
-    private final IMessageFacade messageFacade_;
+    private final IMessageFacade messageFacade;
 
     /**
      * Constructs a new instance.
@@ -40,7 +40,7 @@ public class JmsSenderAction implements IJmsAction
     public JmsSenderAction( IMessageFacade aMessageFacade )
     {
         super();
-        messageFacade_ = aMessageFacade;
+        messageFacade = aMessageFacade;
     }
 
     /**
@@ -51,7 +51,7 @@ public class JmsSenderAction implements IJmsAction
     public void actionInTransaction( Session aSession, Destination aDestination )
                     throws JmsClientException
     {
-        createProducerAndSend( messageFacade_, aSession, aDestination );
+        createProducerAndSend( messageFacade, aSession, aDestination );
         try
         {
             LOG.info( "Committing transaction ..." );

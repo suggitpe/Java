@@ -31,9 +31,9 @@ public class OrcaReaderUnitTest
 {
 
     private static final Log LOG = LogFactory.getLog( OrcaReaderUnitTest.class );
-    private IMocksControl ctrl_;
-    private OrcaSingleMessageReader orcaReader_;
-    private IOrcaClient mockOrcaClient_;
+    private IMocksControl ctrl;
+    private OrcaSingleMessageReader orcaReader;
+    private IOrcaClient mockOrcaClient;
 
     /** */
     @BeforeClass
@@ -51,13 +51,13 @@ public class OrcaReaderUnitTest
     public void doBefore() throws Exception
     {
         LOG.debug( "-----------------" );
-        ctrl_ = createControl();
-        mockOrcaClient_ = ctrl_.createMock( IOrcaClient.class );
+        ctrl = createControl();
+        mockOrcaClient = ctrl.createMock( IOrcaClient.class );
 
-        orcaReader_ = new OrcaSingleMessageReader();
-        orcaReader_.setOrcaClient( mockOrcaClient_ );
+        orcaReader = new OrcaSingleMessageReader();
+        orcaReader.setOrcaClient( mockOrcaClient );
 
-        orcaReader_.afterPropertiesSet();
+        orcaReader.afterPropertiesSet();
     }
 
     /**
@@ -69,18 +69,18 @@ public class OrcaReaderUnitTest
     @Test
     public void testCleanStart() throws Exception
     {
-        mockOrcaClient_.connect();
+        mockOrcaClient.connect();
         expectLastCall().once();
-        mockOrcaClient_.start();
+        mockOrcaClient.start();
         expectLastCall().once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        assertThat( orcaReader_.getState(), equalTo( AbstractMessageReader.STATE_UNINITIALISED ) );
-        orcaReader_.startReader();
-        assertThat( orcaReader_.getState(), equalTo( AbstractMessageReader.STATE_RUNNING ) );
+        assertThat( orcaReader.getState(), equalTo( AbstractMessageReader.STATE_UNINITIALISED ) );
+        orcaReader.startReader();
+        assertThat( orcaReader.getState(), equalTo( AbstractMessageReader.STATE_RUNNING ) );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -92,15 +92,15 @@ public class OrcaReaderUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testStartButFailOnConnect() throws Exception
     {
-        mockOrcaClient_.connect();
+        mockOrcaClient.connect();
         expectLastCall().andThrow( new OrcaException( "This is an expected exception thrown from the OrcaBridge" ) );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        orcaReader_.startReader();
+        orcaReader.startReader();
         fail( "Test should not have reached this part of the test" );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -112,16 +112,16 @@ public class OrcaReaderUnitTest
     @Test
     public void testCleanStop() throws Exception
     {
-        mockOrcaClient_.stop();
+        mockOrcaClient.stop();
         expectLastCall().once();
-        mockOrcaClient_.disconnect();
+        mockOrcaClient.disconnect();
         expectLastCall().once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        orcaReader_.stopReader();
+        orcaReader.stopReader();
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -133,16 +133,16 @@ public class OrcaReaderUnitTest
     @Test
     public void testBadStopFromOrcaStop() throws Exception
     {
-        mockOrcaClient_.stop();
+        mockOrcaClient.stop();
         expectLastCall().andThrow( new OrcaException( "This is all part of the tests" ) );
-        mockOrcaClient_.disconnect();
+        mockOrcaClient.disconnect();
         expectLastCall().once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        orcaReader_.stopReader();
+        orcaReader.stopReader();
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -154,17 +154,17 @@ public class OrcaReaderUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testStopButFailFromDisconnect() throws Exception
     {
-        mockOrcaClient_.stop();
+        mockOrcaClient.stop();
         expectLastCall().once();
-        mockOrcaClient_.disconnect();
+        mockOrcaClient.disconnect();
         expectLastCall().andThrow( new OrcaException( "This is an expected exception to be thrown" ) );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        orcaReader_.stopReader();
+        orcaReader.stopReader();
         fail( "The test should not have reached this part of the code" );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
 }

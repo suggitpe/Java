@@ -33,9 +33,9 @@ public class OrcaReaderCallbackUnitTest
 
     private static final Log LOG = LogFactory.getLog( OrcaReaderCallbackUnitTest.class );
 
-    private OrcaSingleMessageReaderCallback orcaCallback_;
-    private IMocksControl ctrl_ = createControl();
-    private IMessageProcessor mockMessageProcessor_;
+    private OrcaSingleMessageReaderCallback orcaCallback;
+    private IMocksControl ctrl;
+    private IMessageProcessor mockMessageProcessor;
 
     /** */
     @BeforeClass
@@ -53,13 +53,13 @@ public class OrcaReaderCallbackUnitTest
     public void doBefore() throws Exception
     {
         LOG.debug( "-----------------" );
-        ctrl_ = createControl();
-        mockMessageProcessor_ = ctrl_.createMock( IMessageProcessor.class );
+        ctrl = createControl();
+        mockMessageProcessor = ctrl.createMock( IMessageProcessor.class );
 
-        orcaCallback_ = new OrcaSingleMessageReaderCallback();
-        orcaCallback_.setMessageProcessor( mockMessageProcessor_ );
+        orcaCallback = new OrcaSingleMessageReaderCallback();
+        orcaCallback.setMessageProcessor( mockMessageProcessor );
 
-        orcaCallback_.afterPropertiesSet();
+        orcaCallback.afterPropertiesSet();
 
     }
 
@@ -72,16 +72,16 @@ public class OrcaReaderCallbackUnitTest
     @Test
     public void testOrcaCallbackWithAttributesMessage() throws Throwable
     {
-        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
+        mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().once();
 
-        IAttributesConversationMessage msg = ctrl_.createMock( IAttributesConversationMessage.class );
+        IAttributesConversationMessage msg = ctrl.createMock( IAttributesConversationMessage.class );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        orcaCallback_.onReceived( msg );
+        orcaCallback.onReceived( msg );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -93,16 +93,16 @@ public class OrcaReaderCallbackUnitTest
     @Test
     public void testOrcaCallbackWithTextMessage() throws Throwable
     {
-        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
+        mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().once();
 
-        ITextConversationMessage msg = ctrl_.createMock( ITextConversationMessage.class );
+        ITextConversationMessage msg = ctrl.createMock( ITextConversationMessage.class );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        orcaCallback_.onReceived( msg );
+        orcaCallback.onReceived( msg );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -114,16 +114,16 @@ public class OrcaReaderCallbackUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testOrcaCallbackWithProcessFailure() throws Throwable
     {
-        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
+        mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().andThrow( new OrcaBridgeException( "This is all part of the test" ) );
 
-        IAttributesConversationMessage msg = ctrl_.createMock( IAttributesConversationMessage.class );
+        IAttributesConversationMessage msg = ctrl.createMock( IAttributesConversationMessage.class );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        orcaCallback_.onReceived( msg );
+        orcaCallback.onReceived( msg );
         fail( "Test test should not have reached this far" );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 }

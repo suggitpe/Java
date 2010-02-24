@@ -38,7 +38,7 @@ public class OrcaReaderSpringInjectionUnitTest
     private static final Log LOG = LogFactory.getLog( OrcaReaderSpringInjectionUnitTest.class );
 
     @Resource(name = "orcaReader")
-    private IMessageReader orcaReader_;
+    private IMessageReader orcaReader;
 
     /** */
     @BeforeClass
@@ -69,7 +69,7 @@ public class OrcaReaderSpringInjectionUnitTest
     public void testSpringInjectedOrcaReader()
     {
         LOG.debug( "Testing that the Orca Reader has been injected correctly" );
-        assertThat( orcaReader_, notNullValue() );
+        assertThat( orcaReader, notNullValue() );
     }
 
     /**
@@ -80,9 +80,9 @@ public class OrcaReaderSpringInjectionUnitTest
     @Test
     public void testStartAndStopOrcaReader() throws OrcaBridgeException
     {
-        OrcaSingleMessageReader reader = (OrcaSingleMessageReader) orcaReader_;
+        OrcaSingleMessageReader reader = (OrcaSingleMessageReader) orcaReader;
         reader.setOrcaClient( new OrcaClientTestStub() );
-        orcaReader_.startReader();
-        orcaReader_.stopReader();
+        orcaReader.startReader();
+        orcaReader.stopReader();
     }
 }

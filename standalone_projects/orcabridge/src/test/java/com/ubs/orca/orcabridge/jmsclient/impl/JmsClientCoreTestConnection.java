@@ -31,12 +31,12 @@ public class JmsClientCoreTestConnection
 
     private static final Log LOG = LogFactory.getLog( JmsClientCoreTestConnection.class );
 
-    private IMocksControl ctrl_;
-    private JmsClientCore jmsClientCore_;
-    private Context mockInitialContext_;
-    private ConnectionFactory mockConnectionFactory_;
-    private Destination mockDestination_;
-    private Connection mockConnection_;
+    private IMocksControl ctrl;
+    private JmsClientCore jmsClientCore;
+    private Context mockInitialContext;
+    private ConnectionFactory mockConnectionFactory;
+    private Destination mockDestination;
+    private Connection mockConnection;
 
     private static final String DEST_NAME = "TestDestination";
     private static final String CONNFACT_NAME = "TestConnectionFactory";
@@ -55,17 +55,17 @@ public class JmsClientCoreTestConnection
     public void doBefore() throws Exception
     {
         LOG.debug( "-------------" );
-        ctrl_ = createControl();
-        mockInitialContext_ = ctrl_.createMock( Context.class );
-        mockConnectionFactory_ = ctrl_.createMock( ConnectionFactory.class );
-        mockDestination_ = ctrl_.createMock( Destination.class );
-        mockConnection_ = ctrl_.createMock( Connection.class );
+        ctrl = createControl();
+        mockInitialContext = ctrl.createMock( Context.class );
+        mockConnectionFactory = ctrl.createMock( ConnectionFactory.class );
+        mockDestination = ctrl.createMock( Destination.class );
+        mockConnection = ctrl.createMock( Connection.class );
 
-        jmsClientCore_ = new JmsClientCore();
-        jmsClientCore_.setInitialContext( mockInitialContext_ );
-        jmsClientCore_.setDestinationName( DEST_NAME );
-        jmsClientCore_.setConnectionFactoryName( CONNFACT_NAME );
-        jmsClientCore_.afterPropertiesSet();
+        jmsClientCore = new JmsClientCore();
+        jmsClientCore.setInitialContext( mockInitialContext );
+        jmsClientCore.setDestinationName( DEST_NAME );
+        jmsClientCore.setConnectionFactoryName( CONNFACT_NAME );
+        jmsClientCore.afterPropertiesSet();
     }
 
     /**
@@ -80,17 +80,17 @@ public class JmsClientCoreTestConnection
     public void testConnectionWithNoCredentials() throws JmsClientException, NamingException,
                     JMSException
     {
-        expect( mockInitialContext_.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory_ )
+        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory )
             .once();
-        expect( mockInitialContext_.lookup( DEST_NAME ) ).andReturn( mockDestination_ ).once();
+        expect( mockInitialContext.lookup( DEST_NAME ) ).andReturn( mockDestination ).once();
 
-        expect( mockConnectionFactory_.createConnection() ).andReturn( mockConnection_ ).once();
+        expect( mockConnectionFactory.createConnection() ).andReturn( mockConnection ).once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsClientCore_.connect();
+        jmsClientCore.connect();
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -107,18 +107,18 @@ public class JmsClientCoreTestConnection
     {
         String user = "testUser";
         String pass = "testPassword";
-        expect( mockInitialContext_.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory_ )
+        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory )
             .once();
-        expect( mockInitialContext_.lookup( DEST_NAME ) ).andReturn( mockDestination_ ).once();
+        expect( mockInitialContext.lookup( DEST_NAME ) ).andReturn( mockDestination ).once();
 
-        expect( mockConnectionFactory_.createConnection( user, pass ) ).andReturn( mockConnection_ )
+        expect( mockConnectionFactory.createConnection( user, pass ) ).andReturn( mockConnection )
             .once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsClientCore_.connect( user, pass );
+        jmsClientCore.connect( user, pass );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -132,13 +132,13 @@ public class JmsClientCoreTestConnection
     @Test(expected = JmsClientException.class)
     public void testConnectionFailureFromJndiLookup() throws JmsClientException, NamingException
     {
-        expect( mockInitialContext_.lookup( CONNFACT_NAME ) ).andThrow( new NamingException( "This is all part of the test" ) )
+        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andThrow( new NamingException( "This is all part of the test" ) )
             .once();
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsClientCore_.connect();
+        jmsClientCore.connect();
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -150,16 +150,16 @@ public class JmsClientCoreTestConnection
     public void testConnectionFailureFromConnectionFactory() throws JmsClientException,
                     NamingException, JMSException
     {
-        expect( mockInitialContext_.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory_ )
+        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory )
             .once();
-        expect( mockInitialContext_.lookup( DEST_NAME ) ).andReturn( mockDestination_ ).once();
-        expect( mockConnectionFactory_.createConnection() ).andThrow( new JMSException( "This is all part of the test" ) );
+        expect( mockInitialContext.lookup( DEST_NAME ) ).andReturn( mockDestination ).once();
+        expect( mockConnectionFactory.createConnection() ).andThrow( new JMSException( "This is all part of the test" ) );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsClientCore_.connect();
+        jmsClientCore.connect();
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -175,23 +175,23 @@ public class JmsClientCoreTestConnection
     public void testConnectionWhenOneAlreadyExists() throws JmsClientException, NamingException,
                     JMSException
     {
-        jmsClientCore_.setConnection( mockConnection_ );
+        jmsClientCore.setConnection( mockConnection );
 
-        expect( mockInitialContext_.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory_ )
+        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory )
             .once();
-        expect( mockInitialContext_.lookup( DEST_NAME ) ).andReturn( mockDestination_ ).once();
-        mockConnection_.stop();
+        expect( mockInitialContext.lookup( DEST_NAME ) ).andReturn( mockDestination ).once();
+        mockConnection.stop();
         expectLastCall().once();
-        mockConnection_.close();
+        mockConnection.close();
         expectLastCall().once();
 
-        expect( mockConnectionFactory_.createConnection() ).andReturn( mockConnection_ ).once();
+        expect( mockConnectionFactory.createConnection() ).andReturn( mockConnection ).once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsClientCore_.connect();
+        jmsClientCore.connect();
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -204,18 +204,18 @@ public class JmsClientCoreTestConnection
     @Test
     public void testNormalDisconnect() throws JmsClientException, JMSException
     {
-        jmsClientCore_.setConnection( mockConnection_ );
+        jmsClientCore.setConnection( mockConnection );
 
-        mockConnection_.stop();
+        mockConnection.stop();
         expectLastCall().once();
-        mockConnection_.close();
+        mockConnection.close();
         expectLastCall().once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsClientCore_.disconnect();
+        jmsClientCore.disconnect();
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -228,18 +228,18 @@ public class JmsClientCoreTestConnection
     @Test(expected = JmsClientException.class)
     public void testDisconnectWithFailOnStop() throws JmsClientException, JMSException
     {
-        jmsClientCore_.setConnection( mockConnection_ );
+        jmsClientCore.setConnection( mockConnection );
 
-        mockConnection_.stop();
+        mockConnection.stop();
         expectLastCall().andThrow( new JMSException( "Fail from stop: this is all part of the test" ) );
-        mockConnection_.close();
+        mockConnection.close();
         expectLastCall().once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsClientCore_.disconnect();
+        jmsClientCore.disconnect();
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -252,18 +252,18 @@ public class JmsClientCoreTestConnection
     @Test
     public void testDisconnectWithFailOnClose() throws JmsClientException, JMSException
     {
-        jmsClientCore_.setConnection( mockConnection_ );
+        jmsClientCore.setConnection( mockConnection );
 
-        mockConnection_.stop();
+        mockConnection.stop();
         expectLastCall().once();
-        mockConnection_.close();
+        mockConnection.close();
         expectLastCall().andThrow( new JMSException( "Fail from close: this is all part of the test" ) );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsClientCore_.disconnect();
+        jmsClientCore.disconnect();
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -275,19 +275,19 @@ public class JmsClientCoreTestConnection
     @Test(expected = JmsClientException.class)
     public void testDisconnectWithFailOnStopAndClose() throws JmsClientException, JMSException
     {
-        jmsClientCore_.setConnection( mockConnection_ );
+        jmsClientCore.setConnection( mockConnection );
 
-        mockConnection_.stop();
+        mockConnection.stop();
         expectLastCall().andThrow( new JMSException( "fail on stop: this is all part of the test" ) );
         ;
-        mockConnection_.close();
+        mockConnection.close();
         expectLastCall().andThrow( new JMSException( "Fail from close: this is all part of the test" ) );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsClientCore_.disconnect();
+        jmsClientCore.disconnect();
 
-        ctrl_.verify();
+        ctrl.verify();
 
     }
 

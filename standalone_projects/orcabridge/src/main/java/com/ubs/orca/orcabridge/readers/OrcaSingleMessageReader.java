@@ -25,7 +25,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
 
     private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReader.class );
 
-    private IOrcaClient orcaClient_;
+    private IOrcaClient orcaClient;
 
     /**
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
@@ -33,8 +33,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     @Override
     public void doAfterPropertiesSet() throws Exception
     {
-        Assert.notNull( orcaClient_,
-                        "No Orca client has been set on the Orca Single Message Reader" );
+        Assert.notNull( orcaClient, "No Orca client has been set on the Orca Single Message Reader" );
     }
 
     /**
@@ -45,8 +44,8 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     {
         try
         {
-            orcaClient_.connect();
-            orcaClient_.start();
+            orcaClient.connect();
+            orcaClient.start();
         }
         catch ( OrcaException oe )
         {
@@ -64,7 +63,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     {
         try
         {
-            orcaClient_.stop();
+            orcaClient.stop();
         }
         catch ( OrcaException oe )
         {
@@ -80,7 +79,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
     {
         try
         {
-            orcaClient_.disconnect();
+            orcaClient.disconnect();
         }
         catch ( OrcaException oe )
         {
@@ -99,7 +98,7 @@ public class OrcaSingleMessageReader extends AbstractMessageReader
      */
     public void setOrcaClient( IOrcaClient aOrcaClient )
     {
-        orcaClient_ = aOrcaClient;
+        orcaClient = aOrcaClient;
     }
 
 }

@@ -28,11 +28,11 @@ public class JmsSingleMessageReader extends AbstractMessageReader
 
     private static final Log LOG = LogFactory.getLog( JmsSingleMessageReader.class );
 
-    private IJmsClient jmsClient_;
-    private String durableName_;
-    private String messageSelector_;
+    private IJmsClient jmsClient;
+    private String durableName;
+    private String messageSelector;
 
-    private IJmsClientSingleMsgCallback jmsCallback_;
+    private IJmsClientSingleMsgCallback jmsCallback;
 
     /**
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
@@ -40,10 +40,10 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     @Override
     protected void doAfterPropertiesSet() throws Exception
     {
-        Assert.notNull( jmsClient_, "No JMS client has been set on the JMS reader" );
-        Assert.notNull( durableName_, "No durable name has been set on the JMS reader" );
-        Assert.notNull( messageSelector_, "No message selector has been set on the JMS reader" );
-        Assert.notNull( jmsCallback_, "No JMS callback has been set on the JMS reader" );
+        Assert.notNull( jmsClient, "No JMS client has been set on the JMS reader" );
+        Assert.notNull( durableName, "No durable name has been set on the JMS reader" );
+        Assert.notNull( messageSelector, "No message selector has been set on the JMS reader" );
+        Assert.notNull( jmsCallback, "No JMS callback has been set on the JMS reader" );
     }
 
     /**
@@ -60,7 +60,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     {
         try
         {
-            jmsClient_.connect();
+            jmsClient.connect();
         }
         catch ( JmsClientException je )
         {
@@ -72,12 +72,10 @@ public class JmsSingleMessageReader extends AbstractMessageReader
 
     private void startReaderAction() throws OrcaBridgeException
     {
-        IJmsAction action = new JmsDurableReaderAction( jmsCallback_,
-                                                        durableName_,
-                                                        messageSelector_ );
+        IJmsAction action = new JmsDurableReaderAction( jmsCallback, durableName, messageSelector );
         try
         {
-            jmsClient_.processAction( action );
+            jmsClient.processAction( action );
         }
         catch ( JmsClientException jce )
         {
@@ -95,7 +93,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     {
         try
         {
-            jmsClient_.disconnect();
+            jmsClient.disconnect();
         }
         catch ( JmsClientException je )
         {
@@ -114,40 +112,40 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      */
     public void setJmsClient( IJmsClient aJmsClient )
     {
-        jmsClient_ = aJmsClient;
+        jmsClient = aJmsClient;
     }
 
     /**
      * Sets the durableName field to the specified value.
      * 
-     * @param durableName
+     * @param aDurableName
      *            The durableName to set.
      */
-    public void setDurableName( String durableName )
+    public void setDurableName( String aDurableName )
     {
-        durableName_ = durableName;
+        durableName = aDurableName;
     }
 
     /**
      * Sets the messageSelector field to the specified value.
      * 
-     * @param messageSelector
+     * @param aMessageSelector
      *            The messageSelector to set.
      */
-    public void setMessageSelector( String messageSelector )
+    public void setMessageSelector( String aMessageSelector )
     {
-        messageSelector_ = messageSelector;
+        messageSelector = aMessageSelector;
     }
 
     /**
      * Sets the jmsCallback field to the specified value.
      * 
-     * @param jmsCallback
+     * @param aJmsCallback
      *            The jmsCallback to set.
      */
-    public void setJmsCallback( IJmsClientSingleMsgCallback jmsCallback )
+    public void setJmsCallback( IJmsClientSingleMsgCallback aJmsCallback )
     {
-        jmsCallback_ = jmsCallback;
+        jmsCallback = aJmsCallback;
     }
 
 }

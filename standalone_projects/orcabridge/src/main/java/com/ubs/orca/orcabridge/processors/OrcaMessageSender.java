@@ -29,7 +29,7 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
 
     private static final Log LOG = LogFactory.getLog( OrcaMessageSender.class );
 
-    private IOrcaClient orcaClient_;
+    private IOrcaClient orcaClient;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -37,7 +37,7 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( orcaClient_, "No Orca client has been set on the Orca Message Sender" );
+        Assert.notNull( orcaClient, "No Orca client has been set on the Orca Message Sender" );
     }
 
     /**
@@ -51,7 +51,7 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
 
         try
         {
-            orcaClient_.connect();
+            orcaClient.connect();
         }
         catch ( OrcaException oe )
         {
@@ -67,8 +67,8 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
     {
         try
         {
-            IConversationMessage orcaMessage = aMessageFacade.buildOrcaMesage( orcaClient_ );
-            orcaClient_.send( orcaMessage );
+            IConversationMessage orcaMessage = aMessageFacade.buildOrcaMesage( orcaClient );
+            orcaClient.send( orcaMessage );
         }
         catch ( OrcaException oe )
         {
@@ -91,7 +91,7 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
      */
     public void setOrcaClient( IOrcaClient aOrcaClient )
     {
-        orcaClient_ = aOrcaClient;
+        orcaClient = aOrcaClient;
     }
 
 }

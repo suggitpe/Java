@@ -37,13 +37,13 @@ public class JmsDurableReaderActionTest
 
     private static final Log LOG = LogFactory.getLog( JmsDurableReaderActionTest.class );
 
-    private IMocksControl ctrl_;
-    private IJmsAction jmsReceiverAction_;
-    private IJmsClientSingleMsgCallback mockCallback_;
-    private Session mockSession_;
-    private Topic mockDestination_;
-    private TopicSubscriber mockSubscriber_;
-    private Message mockMessage_;
+    private IMocksControl ctrl;
+    private IJmsAction jmsReceiverAction;
+    private IJmsClientSingleMsgCallback mockCallback;
+    private Session mockSession;
+    private Topic mockDestination;
+    private TopicSubscriber mockSubscriber;
+    private Message mockMessage;
 
     private static final String DURABLE_NAME = "## Durable Name ##";
     private static final String MSG_SELECTOR = "## Message selector ##";
@@ -60,14 +60,14 @@ public class JmsDurableReaderActionTest
     public void doBefore()
     {
         LOG.debug( "-------------" );
-        ctrl_ = createControl();
-        mockCallback_ = ctrl_.createMock( IJmsClientSingleMsgCallback.class );
-        mockSession_ = ctrl_.createMock( Session.class );
-        mockDestination_ = ctrl_.createMock( Topic.class );
-        mockSubscriber_ = ctrl_.createMock( TopicSubscriber.class );
-        mockMessage_ = ctrl_.createMock( Message.class );
+        ctrl = createControl();
+        mockCallback = ctrl.createMock( IJmsClientSingleMsgCallback.class );
+        mockSession = ctrl.createMock( Session.class );
+        mockDestination = ctrl.createMock( Topic.class );
+        mockSubscriber = ctrl.createMock( TopicSubscriber.class );
+        mockMessage = ctrl.createMock( Message.class );
 
-        jmsReceiverAction_ = new JmsDurableReaderAction( mockCallback_, DURABLE_NAME, MSG_SELECTOR );
+        jmsReceiverAction = new JmsDurableReaderAction( mockCallback, DURABLE_NAME, MSG_SELECTOR );
     }
 
     /**
@@ -82,29 +82,29 @@ public class JmsDurableReaderActionTest
     {
         // dropping a strict control in here so that we can do a loop
         // and come out again
-        expect( mockSession_.createDurableSubscriber( mockDestination_,
-                                                      DURABLE_NAME,
-                                                      MSG_SELECTOR,
-                                                      true ) ).andReturn( mockSubscriber_ );
+        expect( mockSession.createDurableSubscriber( mockDestination,
+                                                     DURABLE_NAME,
+                                                     MSG_SELECTOR,
+                                                     true ) ).andReturn( mockSubscriber );
 
-        expect( mockSubscriber_.receiveNoWait() ).andReturn( mockMessage_ ).once();
+        expect( mockSubscriber.receiveNoWait() ).andReturn( mockMessage ).once();
 
-        mockCallback_.onReceived( mockMessage_ );
+        mockCallback.onReceived( mockMessage );
         expectLastCall().once();
 
-        mockSession_.commit();
+        mockSession.commit();
         expectLastCall().once();
 
-        expect( mockSubscriber_.receiveNoWait() ).andReturn( null ).once();
+        expect( mockSubscriber.receiveNoWait() ).andReturn( null ).once();
 
-        mockSubscriber_.close();
+        mockSubscriber.close();
         expectLastCall();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsReceiverAction_.actionInTransaction( mockSession_, mockDestination_ );
+        jmsReceiverAction.actionInTransaction( mockSession, mockDestination );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -116,11 +116,11 @@ public class JmsDurableReaderActionTest
     @Test(expected = JmsClientException.class)
     public void testRecieveAgainstNonTopicDestination() throws JmsClientException
     {
-        Queue mockQueue = ctrl_.createMock( Queue.class );
+        Queue mockQueue = ctrl.createMock( Queue.class );
 
-        ctrl_.replay();
-        jmsReceiverAction_.actionInTransaction( mockSession_, mockQueue );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsReceiverAction.actionInTransaction( mockSession, mockQueue );
+        ctrl.verify();
     }
 
     /**
@@ -134,14 +134,14 @@ public class JmsDurableReaderActionTest
     @Test(expected = JmsClientException.class)
     public void testReceiveButFailCreateSubscription() throws JmsClientException, JMSException
     {
-        expect( mockSession_.createDurableSubscriber( mockDestination_,
-                                                      DURABLE_NAME,
-                                                      MSG_SELECTOR,
-                                                      true ) ).andThrow( new JMSException( "Failed to create subscriber: this is all a part of the test" ) );
+        expect( mockSession.createDurableSubscriber( mockDestination,
+                                                     DURABLE_NAME,
+                                                     MSG_SELECTOR,
+                                                     true ) ).andThrow( new JMSException( "Failed to create subscriber: this is all a part of the test" ) );
 
-        ctrl_.replay();
-        jmsReceiverAction_.actionInTransaction( mockSession_, mockDestination_ );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsReceiverAction.actionInTransaction( mockSession, mockDestination );
+        ctrl.verify();
     }
 
     /**
@@ -157,29 +157,29 @@ public class JmsDurableReaderActionTest
     @Test
     public void testReceiveButFailOnSubscriberClose() throws JmsClientException, JMSException
     {
-        expect( mockSession_.createDurableSubscriber( mockDestination_,
-                                                      DURABLE_NAME,
-                                                      MSG_SELECTOR,
-                                                      true ) ).andReturn( mockSubscriber_ );
+        expect( mockSession.createDurableSubscriber( mockDestination,
+                                                     DURABLE_NAME,
+                                                     MSG_SELECTOR,
+                                                     true ) ).andReturn( mockSubscriber );
 
-        expect( mockSubscriber_.receiveNoWait() ).andReturn( mockMessage_ ).once();
+        expect( mockSubscriber.receiveNoWait() ).andReturn( mockMessage ).once();
 
-        mockCallback_.onReceived( mockMessage_ );
+        mockCallback.onReceived( mockMessage );
         expectLastCall().once();
 
-        mockSession_.commit();
+        mockSession.commit();
         expectLastCall().once();
 
-        expect( mockSubscriber_.receiveNoWait() ).andReturn( null ).once();
+        expect( mockSubscriber.receiveNoWait() ).andReturn( null ).once();
 
-        mockSubscriber_.close();
+        mockSubscriber.close();
         expectLastCall().andThrow( new JMSException( "Failed to close subscriber: this is all part of the test" ) );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsReceiverAction_.actionInTransaction( mockSession_, mockDestination_ );
+        jmsReceiverAction.actionInTransaction( mockSession, mockDestination );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -192,21 +192,21 @@ public class JmsDurableReaderActionTest
     @Test(expected = JmsClientException.class)
     public void testReceiveButFailOnReceive() throws JmsClientException, JMSException
     {
-        expect( mockSession_.createDurableSubscriber( mockDestination_,
-                                                      DURABLE_NAME,
-                                                      MSG_SELECTOR,
-                                                      true ) ).andReturn( mockSubscriber_ );
+        expect( mockSession.createDurableSubscriber( mockDestination,
+                                                     DURABLE_NAME,
+                                                     MSG_SELECTOR,
+                                                     true ) ).andReturn( mockSubscriber );
 
-        expect( mockSubscriber_.receiveNoWait() ).andThrow( new JMSException( "Fail on receive: this is all part of the test" ) );
+        expect( mockSubscriber.receiveNoWait() ).andThrow( new JMSException( "Fail on receive: this is all part of the test" ) );
 
-        mockSubscriber_.close();
+        mockSubscriber.close();
         expectLastCall().once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsReceiverAction_.actionInTransaction( mockSession_, mockDestination_ );
+        jmsReceiverAction.actionInTransaction( mockSession, mockDestination );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
 }

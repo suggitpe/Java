@@ -36,7 +36,7 @@ public class OrcaMessageSenderSpringInjectionTest
     private static final Log LOG = LogFactory.getLog( OrcaMessageSenderSpringInjectionTest.class );
 
     @Resource(name = "orcaMessageSender")
-    private IMessageProcessor orcaMessageSender_;
+    private IMessageProcessor orcaMessageSender;
 
     /** */
     @BeforeClass
@@ -66,7 +66,7 @@ public class OrcaMessageSenderSpringInjectionTest
     @Test
     public void testSpringInjectionOrcaMessageSender()
     {
-        assertThat( orcaMessageSender_, notNullValue() );
+        assertThat( orcaMessageSender, notNullValue() );
     }
 
 }

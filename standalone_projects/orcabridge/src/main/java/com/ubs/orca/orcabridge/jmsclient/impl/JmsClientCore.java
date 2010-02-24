@@ -34,12 +34,12 @@ public class JmsClientCore implements IJmsClient, InitializingBean
 
     private static final Log LOG = LogFactory.getLog( JmsClientCore.class );
 
-    private Context initialContext_;
-    private String connectionFactoryName_;
-    private String destinationName_;
+    private Context initialContext;
+    private String connectionFactoryName;
+    private String destinationName;
 
-    private Connection connection_;
-    private Destination destination_;
+    private Connection connection;
+    private Destination destination;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -47,10 +47,10 @@ public class JmsClientCore implements IJmsClient, InitializingBean
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( initialContext_, "Must set the initial context on the JMS client core" );
-        Assert.notNull( connectionFactoryName_,
+        Assert.notNull( initialContext, "Must set the initial context on the JMS client core" );
+        Assert.notNull( connectionFactoryName,
                         "Must set the connection factory name on the JMS client core" );
-        Assert.notNull( destinationName_, "Must set the destination name on the JMS client core" );
+        Assert.notNull( destinationName, "Must set the destination name on the JMS client core" );
     }
 
     /**
@@ -74,7 +74,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
             LOG.debug( "Connecting to JMS client with username=["
                        + ( aUsername == null ? "no credentials" : aUsername ) + "]" );
         }
-        if ( connection_ != null )
+        if ( connection != null )
         {
             stopAndCloseConnection();
         }
@@ -84,8 +84,8 @@ public class JmsClientCore implements IJmsClient, InitializingBean
 
         try
         {
-            connectionFactory = (ConnectionFactory) initialContext_.lookup( connectionFactoryName_ );
-            destination_ = (Destination) initialContext_.lookup( destinationName_ );
+            connectionFactory = (ConnectionFactory) initialContext.lookup( connectionFactoryName );
+            destination = (Destination) initialContext.lookup( destinationName );
         }
         catch ( NamingException ne )
         {
@@ -96,7 +96,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
         {
             LOG.debug( "Creating connection to JMS Client using [" + connectionFactory + "]" );
         }
-        connection_ = createConnection( connectionFactory, aUsername, aPassword );
+        connection = createConnection( connectionFactory, aUsername, aPassword );
         LOG.info( "Connection established" );
     }
 
@@ -105,7 +105,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
     {
         try
         {
-            if ( aUsername != null && aUsername != "" )
+            if ( aUsername != null && !aUsername.equals( "" ) )
             {
                 return aFactory.createConnection( aUsername, aPassword );
             }
@@ -132,7 +132,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
             // we always want to remove the connection when we call
             // disconnect, even if we get an exception coming up the
             // stack
-            connection_ = null;
+            connection = null;
         }
     }
 
@@ -141,7 +141,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
         LOG.debug( "Stopping JMS Client" );
         try
         {
-            connection_.stop();
+            connection.stop();
         }
         catch ( JMSException stopException )
         {
@@ -152,7 +152,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
         {
             try
             {
-                connection_.close();
+                connection.close();
             }
             catch ( JMSException closeException )
             {
@@ -167,7 +167,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
     @Override
     public void processAction( IJmsAction aAction ) throws JmsClientException
     {
-        if ( connection_ == null )
+        if ( connection == null )
         {
             throw new JmsClientException( "No active connection, you must connect before you send" );
         }
@@ -181,13 +181,13 @@ public class JmsClientCore implements IJmsClient, InitializingBean
         {
             LOG.info( "Creating transaction for processing ..." );
 
-            session = connection_.createSession( true, Session.CLIENT_ACKNOWLEDGE );
+            session = connection.createSession( true, Session.CLIENT_ACKNOWLEDGE );
 
             // watch out for this one ... ideally this is done later
             // in the flow. This starts the message flow from the
             // connection.
-            connection_.start();
-            aAction.actionInTransaction( session, destination_ );
+            connection.start();
+            aAction.actionInTransaction( session, destination );
 
             LOG.info( "JMS Client completed execution of processing" );
         }
@@ -227,7 +227,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
      */
     public void setInitialContext( Context aInitialContext )
     {
-        initialContext_ = aInitialContext;
+        initialContext = aInitialContext;
     }
 
     /**
@@ -238,7 +238,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
      */
     public void setConnectionFactoryName( String aConnectionFactoryName )
     {
-        connectionFactoryName_ = aConnectionFactoryName;
+        connectionFactoryName = aConnectionFactoryName;
     }
 
     /**
@@ -249,7 +249,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
      */
     public void setDestinationName( String aDestinationName )
     {
-        destinationName_ = aDestinationName;
+        destinationName = aDestinationName;
     }
 
     /**
@@ -259,7 +259,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
      */
     protected void setConnection( Connection aConnection )
     {
-        connection_ = aConnection;
+        connection = aConnection;
     }
 
     /**
@@ -269,7 +269,7 @@ public class JmsClientCore implements IJmsClient, InitializingBean
      */
     protected void setDestination( Destination aDestination )
     {
-        destination_ = aDestination;
+        destination = aDestination;
     }
 
 }

@@ -37,7 +37,7 @@ public class JmsReaderSpringInjectionUnitTest
     private static final Log LOG = LogFactory.getLog( JmsReaderSpringInjectionUnitTest.class );
 
     @Resource(name = "jmsReader")
-    private IMessageReader jmsReader_;
+    private IMessageReader jmsReader;
 
     /** */
     @BeforeClass
@@ -68,7 +68,7 @@ public class JmsReaderSpringInjectionUnitTest
     public void testSpringInjectedJmsReader()
     {
         LOG.debug( "Testing that the JMS Reader has been injected correctly" );
-        assertThat( jmsReader_, notNullValue() );
+        assertThat( jmsReader, notNullValue() );
     }
 
     /**
@@ -79,7 +79,7 @@ public class JmsReaderSpringInjectionUnitTest
     @Test
     public void testStartAndStopJmsReader() throws OrcaBridgeException
     {
-        jmsReader_.startReader();
-        jmsReader_.stopReader();
+        jmsReader.startReader();
+        jmsReader.stopReader();
     }
 }

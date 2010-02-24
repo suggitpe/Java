@@ -25,7 +25,7 @@ class JmsMessageFacade implements IMessageFacade
 
     private static final Log LOG = LogFactory.getLog( JmsMessageFacade.class );
     @SuppressWarnings("unused")
-    private final Message jmsMessage_;
+    private final Message jmsMessage;
 
     /**
      * Constructs a new instance.
@@ -35,7 +35,7 @@ class JmsMessageFacade implements IMessageFacade
     JmsMessageFacade( Message aJmsMessage )
     {
         super();
-        jmsMessage_ = aJmsMessage;
+        jmsMessage = aJmsMessage;
     }
 
     /**

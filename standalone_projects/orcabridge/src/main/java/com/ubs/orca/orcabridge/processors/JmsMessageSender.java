@@ -28,7 +28,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
 
     private static final Log LOG = LogFactory.getLog( JmsMessageSender.class );
 
-    private IJmsClient jmsClientCore_;
+    private IJmsClient jmsClientCore;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -36,7 +36,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Assert.notNull( jmsClientCore_, "Must set the client core on the JMS message sender" );
+        Assert.notNull( jmsClientCore, "Must set the client core on the JMS message sender" );
     }
 
     /**
@@ -47,7 +47,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
     public void init() throws JmsClientException
     {
         LOG.debug( "Initialising the sender connection" );
-        jmsClientCore_.connect();
+        jmsClientCore.connect();
     }
 
     /**
@@ -58,7 +58,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
     public void tearDown() throws JmsClientException
     {
         LOG.debug( "Tearing down the sender connection" );
-        jmsClientCore_.disconnect();
+        jmsClientCore.disconnect();
     }
 
     /**
@@ -70,7 +70,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
         JmsSenderAction action = new JmsSenderAction( aMessageFacade );
         try
         {
-            jmsClientCore_.processAction( action );
+            jmsClientCore.processAction( action );
         }
         catch ( JmsClientException jce )
         {
@@ -86,7 +86,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
      */
     public void setJmsClient( IJmsClient aJmsClient )
     {
-        jmsClientCore_ = aJmsClient;
+        jmsClientCore = aJmsClient;
     }
 
 }

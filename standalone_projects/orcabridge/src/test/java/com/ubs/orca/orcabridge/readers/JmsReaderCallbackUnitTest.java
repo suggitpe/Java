@@ -34,9 +34,9 @@ public class JmsReaderCallbackUnitTest
 
     private static final Log LOG = LogFactory.getLog( JmsReaderCallbackUnitTest.class );
 
-    private IMocksControl ctrl_;
-    private JmsSingleMessageReaderCallback jmsCallback_;
-    private IMessageProcessor mockMessageProcessor_;
+    private IMocksControl ctrl;
+    private JmsSingleMessageReaderCallback jmsCallback;
+    private IMessageProcessor mockMessageProcessor;
 
     /** */
     @BeforeClass
@@ -54,13 +54,13 @@ public class JmsReaderCallbackUnitTest
     public void doBefore() throws Exception
     {
         LOG.debug( "-----------------" );
-        ctrl_ = createControl();
-        mockMessageProcessor_ = ctrl_.createMock( IMessageProcessor.class );
+        ctrl = createControl();
+        mockMessageProcessor = ctrl.createMock( IMessageProcessor.class );
 
-        jmsCallback_ = new JmsSingleMessageReaderCallback();
-        jmsCallback_.setMessageProcessor( mockMessageProcessor_ );
+        jmsCallback = new JmsSingleMessageReaderCallback();
+        jmsCallback.setMessageProcessor( mockMessageProcessor );
 
-        jmsCallback_.afterPropertiesSet();
+        jmsCallback.afterPropertiesSet();
     }
 
     /**
@@ -73,14 +73,14 @@ public class JmsReaderCallbackUnitTest
     @Test
     public void testJmsCallback() throws JmsClientException, OrcaBridgeException
     {
-        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
+        mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().once();
 
-        Message msg = ctrl_.createMock( Message.class );
+        Message msg = ctrl.createMock( Message.class );
 
-        ctrl_.replay();
-        jmsCallback_.onReceived( msg );
-        ctrl_.verify();
+        ctrl.replay();
+        jmsCallback.onReceived( msg );
+        ctrl.verify();
     }
 
     /**
@@ -90,16 +90,16 @@ public class JmsReaderCallbackUnitTest
     @Test(expected = JmsClientException.class)
     public void testJmsCallbackWithProcessFailure() throws JmsClientException, OrcaBridgeException
     {
-        mockMessageProcessor_.processMessage( isA( IMessageFacade.class ) );
+        mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().andThrow( new OrcaBridgeException( "ProcessMessage failed: This is all part of the test" ) );
 
-        Message msg = ctrl_.createMock( Message.class );
+        Message msg = ctrl.createMock( Message.class );
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        jmsCallback_.onReceived( msg );
+        jmsCallback.onReceived( msg );
         fail( "Test test should not have reached this far" );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 }

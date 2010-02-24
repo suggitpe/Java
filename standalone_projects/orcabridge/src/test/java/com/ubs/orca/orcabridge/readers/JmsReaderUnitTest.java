@@ -38,10 +38,10 @@ public class JmsReaderUnitTest
     private static final String DURABLE_NAME = "TestDurable";
     private static final String MESSAGE_SELECTOR = "test selector";
 
-    private JmsSingleMessageReader jmsReader_;
-    private IMocksControl ctrl_;
-    private IJmsClient mockJmsClient_;
-    private IJmsClientSingleMsgCallback mockJmsCallback_;
+    private JmsSingleMessageReader jmsReader;
+    private IMocksControl ctrl;
+    private IJmsClient mockJmsClient;
+    private IJmsClientSingleMsgCallback mockJmsCallback;
 
     /** */
     @BeforeClass
@@ -59,17 +59,17 @@ public class JmsReaderUnitTest
     public void doBefore() throws Exception
     {
         LOG.debug( "-----------------" );
-        ctrl_ = createControl();
-        mockJmsClient_ = ctrl_.createMock( IJmsClient.class );
-        mockJmsCallback_ = ctrl_.createMock( IJmsClientSingleMsgCallback.class );
+        ctrl = createControl();
+        mockJmsClient = ctrl.createMock( IJmsClient.class );
+        mockJmsCallback = ctrl.createMock( IJmsClientSingleMsgCallback.class );
 
-        jmsReader_ = new JmsSingleMessageReader();
-        jmsReader_.setJmsClient( mockJmsClient_ );
-        jmsReader_.setDurableName( DURABLE_NAME );
-        jmsReader_.setMessageSelector( MESSAGE_SELECTOR );
-        jmsReader_.setJmsCallback( mockJmsCallback_ );
+        jmsReader = new JmsSingleMessageReader();
+        jmsReader.setJmsClient( mockJmsClient );
+        jmsReader.setDurableName( DURABLE_NAME );
+        jmsReader.setMessageSelector( MESSAGE_SELECTOR );
+        jmsReader.setJmsCallback( mockJmsCallback );
 
-        jmsReader_.afterPropertiesSet();
+        jmsReader.afterPropertiesSet();
     }
 
     /**
@@ -81,18 +81,18 @@ public class JmsReaderUnitTest
     @Test
     public void testStartReader() throws OrcaBridgeException, JmsClientException
     {
-        mockJmsClient_.connect();
+        mockJmsClient.connect();
         expectLastCall().once();
-        mockJmsClient_.processAction( isA( IJmsAction.class ) );
+        mockJmsClient.processAction( isA( IJmsAction.class ) );
         expectLastCall().once();
 
-        ctrl_.replay();
+        ctrl.replay();
 
-        assertThat( jmsReader_.getState(), equalTo( AbstractMessageReader.STATE_UNINITIALISED ) );
-        jmsReader_.startReader();
-        assertThat( jmsReader_.getState(), equalTo( AbstractMessageReader.STATE_RUNNING ) );
+        assertThat( jmsReader.getState(), equalTo( AbstractMessageReader.STATE_UNINITIALISED ) );
+        jmsReader.startReader();
+        assertThat( jmsReader.getState(), equalTo( AbstractMessageReader.STATE_RUNNING ) );
 
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -105,13 +105,13 @@ public class JmsReaderUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testStartReaderAndFailOnConnect() throws OrcaBridgeException, JmsClientException
     {
-        mockJmsClient_.connect();
+        mockJmsClient.connect();
         expectLastCall().andThrow( new JmsClientException( "Connect failed: This is all part of the test" ) );
 
-        ctrl_.replay();
-        jmsReader_.startReader();
+        ctrl.replay();
+        jmsReader.startReader();
         fail( "test should not have reached here" );
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -124,15 +124,15 @@ public class JmsReaderUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testStartReaderAndFailOnProcess() throws OrcaBridgeException, JmsClientException
     {
-        mockJmsClient_.connect();
+        mockJmsClient.connect();
         expectLastCall().once();
-        mockJmsClient_.processAction( isA( IJmsAction.class ) );
+        mockJmsClient.processAction( isA( IJmsAction.class ) );
         expectLastCall().andThrow( new JmsClientException( "ProcessInTransaction failed: This is all part of the test" ) );
 
-        ctrl_.replay();
-        jmsReader_.startReader();
+        ctrl.replay();
+        jmsReader.startReader();
         fail( "Test should not have reached here" );
-        ctrl_.verify();
+        ctrl.verify();
     }
 
     /**
@@ -144,12 +144,12 @@ public class JmsReaderUnitTest
     @Test
     public void testStopReader() throws OrcaBridgeException, JmsClientException
     {
-        mockJmsClient_.disconnect();
+        mockJmsClient.disconnect();
         expectLastCall().once();
 
-        ctrl_.replay();
-        jmsReader_.stopReader();
-        ctrl_.verify();
+        ctrl.replay();
+        jmsReader.stopReader();
+        ctrl.verify();
     }
 
     /**
@@ -161,14 +161,14 @@ public class JmsReaderUnitTest
     @Test(expected = OrcaBridgeException.class)
     public void testStopReaderAndFailOnDisconnect() throws OrcaBridgeException, JmsClientException
     {
-        mockJmsClient_.disconnect();
+        mockJmsClient.disconnect();
         expectLastCall().andThrow( new JmsClientException( "Disconnect failed: This is all part of the test" ) );
 
-        ctrl_.replay();
-        jmsReader_.stopReader();
+        ctrl.replay();
+        jmsReader.stopReader();
 
         fail( "Test should not have reached here" );
-        ctrl_.verify();
+        ctrl.verify();
     }
 
 }

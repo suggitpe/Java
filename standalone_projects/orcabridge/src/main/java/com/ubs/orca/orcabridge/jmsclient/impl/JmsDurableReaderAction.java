@@ -28,9 +28,9 @@ public class JmsDurableReaderAction implements IJmsAction
 {
 
     private static final Log LOG = LogFactory.getLog( JmsDurableReaderAction.class );
-    private IJmsClientSingleMsgCallback clientCallback_;
-    private String durableName_;
-    private String durableMessageSelector_;
+    private IJmsClientSingleMsgCallback clientCallback;
+    private String durableName;
+    private String durableMessageSelector;
 
     /**
      * Constructs a new instance.
@@ -46,9 +46,9 @@ public class JmsDurableReaderAction implements IJmsAction
                                    String aDurableName, String aDurableMessageSelector )
     {
         super();
-        clientCallback_ = aProcessingCallback;
-        durableName_ = aDurableName;
-        durableMessageSelector_ = aDurableMessageSelector;
+        clientCallback = aProcessingCallback;
+        durableName = aDurableName;
+        durableMessageSelector = aDurableMessageSelector;
     }
 
     /**
@@ -71,8 +71,8 @@ public class JmsDurableReaderAction implements IJmsAction
         try
         {
             subscriber = aSession.createDurableSubscriber( topic,
-                                                           durableName_,
-                                                           durableMessageSelector_,
+                                                           durableName,
+                                                           durableMessageSelector,
                                                            true );
             retriveAndProcessMessage( aSession, subscriber );
 
@@ -120,7 +120,7 @@ public class JmsDurableReaderAction implements IJmsAction
                     start = System.currentTimeMillis();
                 }
 
-                clientCallback_.onReceived( message );
+                clientCallback.onReceived( message );
 
                 if ( LOG.isInfoEnabled() )
                 {
