@@ -51,7 +51,8 @@ public class OrcaSingleMessageReaderCallback
      * @see com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback#onReceived(com.ubs.orca.client.api.IAttributesConversationMessage)
      */
     @Override
-    public void onReceived( IAttributesConversationMessage aAttributesMesage ) throws Throwable
+    public void onReceived( IAttributesConversationMessage aAttributesMesage )
+                    throws OrcaBridgeException
     {
         passOrcaMessageToTheMessageProcessor( aAttributesMesage );
     }
@@ -60,7 +61,8 @@ public class OrcaSingleMessageReaderCallback
      * @see com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback#onReceived(com.ubs.orca.client.api.ITextConversationMessage)
      */
     @Override
-    public void onReceived( ITextConversationMessage aTextConversationMessage ) throws Throwable
+    public void onReceived( ITextConversationMessage aTextConversationMessage )
+                    throws OrcaBridgeException
     {
         passOrcaMessageToTheMessageProcessor( aTextConversationMessage );
     }
@@ -73,15 +75,7 @@ public class OrcaSingleMessageReaderCallback
             LOG.info( "Passing received message [" + aMessage + "] to message Processor." );
         }
 
-        try
-        {
-            messageProcessor.processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
-        }
-        catch ( Throwable throwable )
-        {
-            LOG.error( "Issue ocurred in the sending of a message", throwable );
-            throw new OrcaBridgeException( throwable );
-        }
+        messageProcessor.processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
 
         if ( LOG.isInfoEnabled() )
         {

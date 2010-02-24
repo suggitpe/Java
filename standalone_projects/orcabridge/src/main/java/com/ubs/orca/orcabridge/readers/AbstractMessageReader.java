@@ -29,7 +29,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     static final String STATE_STOPPING = "Stopping";
     static final String STATE_STOPPED = "Stopped";
 
-    private String state_ = STATE_UNINITIALISED;
+    private String state = STATE_UNINITIALISED;
 
     /**
      * Verifies that the message processor has been set on the class
@@ -58,9 +58,9 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     public synchronized void startReader() throws OrcaBridgeException
     {
         LOG.debug( "Starting Orca Bridge." );
-        state_ = STATE_STARTING;
+        state = STATE_STARTING;
         doStartReader();
-        state_ = STATE_RUNNING;
+        state = STATE_RUNNING;
     }
 
     /**
@@ -77,10 +77,10 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     @Override
     public synchronized void stopReader() throws OrcaBridgeException
     {
-        state_ = STATE_STOPPING;
+        state = STATE_STOPPING;
         LOG.debug( "Stopping Orca Bridge." );
         doStopReader();
-        state_ = STATE_STOPPED;
+        state = STATE_STOPPED;
     }
 
     /**
@@ -96,8 +96,8 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      * 
      * @return the state of the reader
      */
-    public String getState()
+    public synchronized String getState()
     {
-        return state_;
+        return state;
     }
 }

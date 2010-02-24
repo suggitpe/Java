@@ -24,7 +24,7 @@ class JmsMessageFacade implements IMessageFacade
 {
 
     private static final Log LOG = LogFactory.getLog( JmsMessageFacade.class );
-    @SuppressWarnings("unused")
+
     private final Message jmsMessage;
 
     /**
@@ -44,7 +44,7 @@ class JmsMessageFacade implements IMessageFacade
     @Override
     public Message buildJmsMessage( Session aSession )
     {
-        LOG.debug( "Building JMS message" );
+        LOG.debug( "Building JMS message from: " + jmsMessage );
         return null;
     }
 
@@ -54,7 +54,7 @@ class JmsMessageFacade implements IMessageFacade
     @Override
     public IConversationMessage buildOrcaMesage( IOrcaClient aClient )
     {
-        LOG.debug( "Building Orca message" );
+        LOG.debug( "Building Orca message from: " + jmsMessage );
         return null;
     }
 }

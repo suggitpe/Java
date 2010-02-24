@@ -30,7 +30,7 @@ public interface IMessageFacade
      * @return a new JMS message
      * @throws OrcaBridgeMessageConversionException
      */
-    public Message buildJmsMessage( Session aSession ) throws OrcaBridgeMessageConversionException;
+    Message buildJmsMessage( Session aSession ) throws OrcaBridgeMessageConversionException;
 
     /**
      * Build an Orca message using an Orca client
@@ -40,7 +40,7 @@ public interface IMessageFacade
      * @return a new Orca message
      * @throws OrcaBridgeMessageConversionException
      */
-    public IConversationMessage buildOrcaMesage( IOrcaClient aClient )
+    IConversationMessage buildOrcaMesage( IOrcaClient aClient )
                     throws OrcaBridgeMessageConversionException;
 
 }

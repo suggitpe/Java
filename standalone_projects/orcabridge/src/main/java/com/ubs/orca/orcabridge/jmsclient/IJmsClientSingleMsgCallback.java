@@ -24,6 +24,6 @@ public interface IJmsClientSingleMsgCallback
      *            the message that was received by the JMSClient
      * @throws JmsClientException
      */
-    public void onReceived( Message aJmsMessage ) throws JmsClientException;
+    void onReceived( Message aJmsMessage ) throws JmsClientException;
 
 }
