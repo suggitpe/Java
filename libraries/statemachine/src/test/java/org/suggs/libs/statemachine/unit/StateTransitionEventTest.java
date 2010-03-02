@@ -15,10 +15,8 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Test suite for the state transition event implementation.
@@ -59,34 +57,43 @@ public class StateTransitionEventTest
         LOG.debug( "Successfully created stateTransitionEvent=[" + event + "]" );
     }
 
-    /**
-     * Tests the that the equals, hashcode and toString methods work
-     * correctly
-     */
+    @Test
+    public void equalsFalseForNullAndDifferentObject()
+    {
+        StateTransitionEventImpl eventA = new StateTransitionEventImpl( "event A" );
+        assertFalse( eventA.equals( null ) );
+        assertFalse( eventA.equals( new String( "Boom!" ) ) );
+    }
+
     @SuppressWarnings("boxing")
     @Test
-    public void equalsHashcodeAndToString()
+    public void hashcodeAndEqualsMatchForSameObject()
     {
-        StateTransitionEventImpl event1a = new StateTransitionEventImpl( "event1" );
-        StateTransitionEventImpl event1b = new StateTransitionEventImpl( "event1" );
-        StateTransitionEventImpl event2 = new StateTransitionEventImpl( "event2" );
+        StateTransitionEventImpl eventA = new StateTransitionEventImpl( "event A" );
+        StateTransitionEventImpl eventB = new StateTransitionEventImpl( "event A" );
+        assertThat( eventA, equalTo( eventA ) );
+        assertThat( eventA, equalTo( eventB ) );
+        assertThat( eventA.hashCode(), equalTo( eventB.hashCode() ) );
+    }
 
-        // check equals method
-        assertThat( event1a, not( sameInstance( event1b ) ) );
-        assertThat( event1a, not( sameInstance( event2 ) ) );
-        assertThat( event1a, equalTo( event1b ) );
-        assertThat( event1a, not( equalTo( event2 ) ) );
+    @SuppressWarnings("boxing")
+    @Test
+    public void hashcodeAndEqualsMisMatchForDifferentObjects()
+    {
+        StateTransitionEventImpl eventA = new StateTransitionEventImpl( "event A" );
+        StateTransitionEventImpl eventB = new StateTransitionEventImpl( "event B" );
+        assertThat( eventA, not( equalTo( eventB ) ) );
+        assertThat( eventA.hashCode(), not( equalTo( eventB.hashCode() ) ) );
+    }
 
-        assertFalse( event1a.equals( null ) );
-        assertFalse( event1a.equals( new String() ) );
-        assertTrue( event1a.equals( event1a ) );
-
-        // check hashcode
-        assertThat( event1a.hashCode(), equalTo( event1b.hashCode() ) );
-        assertThat( event1a.hashCode(), not( equalTo( event2.hashCode() ) ) );
-
-        LOG.debug( "StateTransitionEvent1a: " + event1a );
-        LOG.debug( "StateTransitionEvent2: " + event2 );
+    @SuppressWarnings("boxing")
+    @Test
+    public void hashcodeAndEqualsMismatchForNull()
+    {
+        StateTransitionEventImpl eventA = new StateTransitionEventImpl( "event A" );
+        StateTransitionEventImpl eventB = new StateTransitionEventImpl( null );
+        assertThat( eventA, not( equalTo( eventB ) ) );
+        assertThat( eventA.hashCode(), not( equalTo( eventB.hashCode() ) ) );
     }
 
 }

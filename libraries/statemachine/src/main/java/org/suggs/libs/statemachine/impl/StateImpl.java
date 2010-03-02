@@ -190,24 +190,43 @@ public class StateImpl implements IState
     public boolean equals( Object obj )
     {
         if ( this == obj )
-            return true;
-        if ( obj == null )
-            return false;
-        if ( getClass() != obj.getClass() )
-            return false;
-        StateImpl other = (StateImpl) obj;
-        if ( stateName == null )
         {
-            if ( other.stateName != null )
-                return false;
+            return true;
+        }
+        if ( obj == null )
+        {
+            return false;
+        }
+        if ( getClass() != obj.getClass() )
+        {
+            return false;
+        }
+
+        StateImpl other = (StateImpl) obj;
+        if ( stateName == null && other.stateName != null )
+        {
+            return false;
         }
         else if ( !stateName.equals( other.stateName ) )
-            return false;
-        if ( transitions == null )
         {
-            if ( other.transitions != null )
-                return false;
+            return false;
         }
+
+        if ( entryAction == null && other.entryAction != null )
+        {
+            return false;
+        }
+
+        if ( exitAction == null && other.exitAction != null )
+        {
+            return false;
+        }
+
+        if ( transitions == null && other.transitions != null )
+        {
+            return false;
+        }
+
         return true;
     }
 

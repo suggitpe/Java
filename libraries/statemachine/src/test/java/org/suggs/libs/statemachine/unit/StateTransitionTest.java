@@ -73,7 +73,7 @@ public class StateTransitionTest
      * time of the construction are correctly kept throughout.
      */
     @Test
-    public void transitionNameExtraction()
+    public void transitionDataSetisSameWhenGetLater()
     {
         final String transName = "TestStateTransition";
         IState localStartState = new StateImpl( "TestStartState" );
@@ -89,13 +89,60 @@ public class StateTransitionTest
         LOG.debug( "Verified that the objects set at construction are correctly persisted into the object" );
     }
 
+    @SuppressWarnings("boxing")
+    @Test
+    public void hashcodeWorksForSameObjectContents()
+    {
+        StateTransitionImpl trans1a = new StateTransitionImpl( "stateTransition1",
+                                                               new StateImpl( "testStartState" ),
+                                                               new StateImpl( "testEndState" ) );
+        StateTransitionImpl trans1b = new StateTransitionImpl( "stateTransition1",
+                                                               new StateImpl( "testStartState" ),
+                                                               new StateImpl( "testEndState" ) );
+        assertThat( trans1a.hashCode(), equalTo( trans1b.hashCode() ) );
+    }
+
+    @SuppressWarnings("boxing")
+    @Test
+    public void hashcodeFailsForifferentObjectContents()
+    {
+        StateTransitionImpl trans1a = new StateTransitionImpl( "stateTransition1",
+                                                               new StateImpl( "testStartState" ),
+                                                               new StateImpl( "testEndState" ) );
+        StateTransitionImpl trans1b = new StateTransitionImpl( "stateTransition2",
+                                                               new StateImpl( "testStartState" ),
+                                                               new StateImpl( "testEndState" ) );
+        StateTransitionImpl trans1c = new StateTransitionImpl( "stateTransition1",
+                                                               new StateImpl( "testStartState1" ),
+                                                               new StateImpl( "testEndState" ) );
+        StateTransitionImpl trans1d = new StateTransitionImpl( "stateTransition1",
+                                                               new StateImpl( "testStartState" ),
+                                                               new StateImpl( "testEndState1" ) );
+        StateTransitionImpl trans1e = new StateTransitionImpl( null,
+                                                               new StateImpl( "testStartState" ),
+                                                               new StateImpl( "testEndState" ) );
+        StateTransitionImpl trans1f = new StateTransitionImpl( "stateTransition1",
+                                                               null,
+                                                               new StateImpl( "testEndState" ) );
+        StateTransitionImpl trans1g = new StateTransitionImpl( "stateTransition1",
+                                                               new StateImpl( "testStartState" ),
+                                                               null );
+        trans1g.setTransitionEvents( null );
+        trans1g.setTransitionGuards( null );
+        assertThat( trans1b.hashCode(), not( equalTo( trans1a.hashCode() ) ) );
+        assertThat( trans1c.hashCode(), not( equalTo( trans1a.hashCode() ) ) );
+        assertThat( trans1d.hashCode(), not( equalTo( trans1a.hashCode() ) ) );
+        assertThat( trans1e.hashCode(), not( equalTo( trans1a.hashCode() ) ) );
+        assertThat( trans1f.hashCode(), not( equalTo( trans1a.hashCode() ) ) );
+        assertThat( trans1g.hashCode(), not( equalTo( trans1a.hashCode() ) ) );
+    }
+
     /**
      * Tests the that the equals, hashcode and toString methods work
      * correctly
      */
-    @SuppressWarnings("boxing")
     @Test
-    public void equalsHashcodeAndToString()
+    public void equalsWorksWithDefaultValues()
     {
         StateImpl state1a = new StateImpl( "startState1" );
         StateImpl state1b = new StateImpl( "startState1" );
@@ -123,12 +170,52 @@ public class StateTransitionTest
         assertFalse( trans1a.equals( new String() ) );
         assertTrue( trans1a.equals( trans1a ) );
 
-        // check hashcode
-        assertThat( trans1a.hashCode(), equalTo( trans1b.hashCode() ) );
-        assertThat( trans1a.hashCode(), not( equalTo( trans2.hashCode() ) ) );
-
         LOG.debug( "StateTransition1a: " + trans1a );
         LOG.debug( "StateTransition2: " + trans2 );
+    }
+
+    @Test
+    public void equalsIsFalseUnderNullFieldsFromOneSide()
+    {
+        StateImpl state1 = new StateImpl( "startState1" );
+        StateImpl state2 = new StateImpl( "startState2" );
+
+        assertThat( new StateTransitionImpl( "test1", state1, state2 ),
+                    equalTo( new StateTransitionImpl( "test1", state1, state2 ) ) );
+
+        // test equals for null
+        assertThat( new StateTransitionImpl( "test1", state1, state2 ),
+                    not( equalTo( new StateTransitionImpl( "test1", state1, null ) ) ) );
+        assertThat( new StateTransitionImpl( "test1", state1, state2 ),
+                    not( equalTo( new StateTransitionImpl( "test1", null, state2 ) ) ) );
+        assertThat( new StateTransitionImpl( "test1", state1, state2 ),
+                    not( equalTo( new StateTransitionImpl( null, state1, state2 ) ) ) );
+    }
+
+    @Test
+    public void equalsFailsUnderDifferentValues()
+    {
+        StateImpl state1 = new StateImpl( "startState1" );
+        StateImpl state2 = new StateImpl( "startState2" );
+
+        // test equals for diff states
+        assertThat( new StateTransitionImpl( "test1", state1, state2 ),
+                    not( equalTo( new StateTransitionImpl( "test1", state2, state2 ) ) ) );
+        assertThat( new StateTransitionImpl( "test2", state1, state2 ),
+                    not( equalTo( new StateTransitionImpl( "test1", state2, state2 ) ) ) );
+
+        assertThat( new StateTransitionImpl( "test2", state1, state2 ),
+                    not( equalTo( new StateTransitionImpl( "test1", state1, state2 ) ) ) );
+
+        StateTransitionImpl test = new StateTransitionImpl( "test1", state1, state2 );
+        test.setTransitionEvents( null );
+        assertThat( test, not( equalTo( new StateTransitionImpl( "test1", state1, state2 ) ) ) );
+        assertThat( new StateTransitionImpl( "test1", state1, state2 ), not( equalTo( test ) ) );
+
+        test = new StateTransitionImpl( "test1", state1, state2 );
+        test.setTransitionGuards( null );
+        assertThat( test, not( equalTo( new StateTransitionImpl( "test1", state1, state2 ) ) ) );
+        assertThat( new StateTransitionImpl( "test1", state1, state2 ), not( equalTo( test ) ) );
     }
 
     /**

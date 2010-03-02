@@ -252,29 +252,61 @@ public class StateTest
      * Tests the that the equals, hashcode and toString methods work
      * correctly
      */
+    @Test
+    public void equalsIsTrueWithSameObject()
+    {
+        StateImpl state = new StateImpl( "helllo" );
+        assertThat( state, equalTo( state ) );
+    }
+
+    @Test
+    public void equalsIsTrueWithSameDataObjects()
+    {
+        StateImpl stateA = new StateImpl( "state1" );
+        StateImpl stateB = new StateImpl( stateA );
+        assertThat( stateA, equalTo( stateB ) );
+    }
+
+    @Test
+    public void equalsIsFalseAgainstNullObject()
+    {
+        StateImpl state = new StateImpl( "helllo" );
+        assertFalse( state.equals( null ) );
+    }
+
+    @Test
+    public void equalsFailsWithDataMismatch()
+    {
+        StateImpl stateA = new StateImpl( "State A" );
+        StateImpl stateNull = new StateImpl( (String) null );
+        StateImpl stateB = new StateImpl( "State B" );
+
+        assertFalse( stateA.equals( new String( "boom!" ) ) );
+        assertThat( stateA, not( equalTo( stateB ) ) );
+        assertThat( stateA, not( equalTo( stateNull ) ) );
+
+    }
+
     @SuppressWarnings("boxing")
     @Test
-    public void equalsHashcodeAndToString()
+    public void hashcodeProducesMatchWithSameValues()
     {
         StateImpl state1a = new StateImpl( "state1" );
-        StateImpl state1b = new StateImpl( "state1" );
+        StateImpl state1b = new StateImpl( state1a );
         StateImpl state2 = new StateImpl( "state2" );
 
-        // check equals method
-        assertThat( state1a, not( ( sameInstance( state1b ) ) ) );
-        assertThat( state1a, not( ( sameInstance( state2 ) ) ) );
-        assertThat( state1a, equalTo( state1b ) );
-        assertThat( state1a, not( equalTo( state2 ) ) );
-
-        assertFalse( state1a.equals( new String() ) );
-        assertFalse( state1a.equals( null ) );
-        assertFalse( state1a.equals( state2 ) );
-
-        // check hashcode
         assertThat( state1a.hashCode(), equalTo( state1b.hashCode() ) );
         assertThat( state1a.hashCode(), not( equalTo( state2.hashCode() ) ) );
+    }
 
-        LOG.debug( "State1a: " + state1a );
-        LOG.debug( "State2: " + state2 );
+    @SuppressWarnings("boxing")
+    @Test
+    public void hascodeProducesDifferentResultWithDiffereingValues()
+    {
+        StateImpl state1a = new StateImpl( "state1" );
+        StateImpl state1b = new StateImpl( (String) null );
+
+        assertThat( state1a.hashCode(), not( equalTo( state1b.hashCode() ) ) );
+
     }
 }
