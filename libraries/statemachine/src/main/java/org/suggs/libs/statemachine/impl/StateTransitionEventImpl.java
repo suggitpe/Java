@@ -68,9 +68,12 @@ public class StateTransitionEventImpl implements IStateTransitionEvent
             return false;
         }
         StateTransitionEventImpl other = (StateTransitionEventImpl) obj;
-        if ( eventName == null && other.eventName != null )
+        if ( eventName == null )
         {
-            return false;
+            if ( other.eventName != null )
+            {
+                return false;
+            }
         }
         else if ( !eventName.equals( other.eventName ) )
         {

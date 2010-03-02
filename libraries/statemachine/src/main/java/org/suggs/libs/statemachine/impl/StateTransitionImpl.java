@@ -233,47 +233,68 @@ public class StateTransitionImpl implements IStateTransition
         {
             return false;
         }
+
         StateTransitionImpl other = (StateTransitionImpl) obj;
-        if ( endingState == null && other.endingState != null )
+        if ( endingState == null )
         {
-            return false;
+            if ( other.endingState != null )
+            {
+                return false;
+            }
         }
         else if ( !endingState.equals( other.endingState ) )
         {
             return false;
         }
-        if ( startingState == null && other.startingState != null )
+
+        if ( startingState == null )
         {
-            return false;
+            if ( other.startingState != null )
+            {
+                return false;
+            }
         }
         else if ( !startingState.equals( other.startingState ) )
         {
             return false;
         }
-        if ( stateTransitionName == null && other.stateTransitionName != null )
+
+        if ( stateTransitionName == null )
         {
-            return false;
+            if ( other.stateTransitionName != null )
+            {
+                return false;
+            }
         }
         else if ( !stateTransitionName.equals( other.stateTransitionName ) )
         {
             return false;
         }
-        if ( transitionEvents == null && other.transitionEvents != null )
+
+        if ( transitionEvents == null )
         {
-            return false;
+            if ( other.transitionEvents != null )
+            {
+                return false;
+            }
         }
         else if ( !transitionEvents.equals( other.transitionEvents ) )
         {
             return false;
         }
-        if ( transitionGuards == null && other.transitionGuards != null )
+
+        if ( transitionGuards == null )
         {
-            return false;
+            if ( other.transitionGuards != null )
+            {
+                return false;
+            }
         }
         else if ( !transitionGuards.equals( other.transitionGuards ) )
         {
             return false;
         }
+
         return true;
     }
 

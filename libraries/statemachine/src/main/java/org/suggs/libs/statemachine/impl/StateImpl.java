@@ -203,9 +203,12 @@ public class StateImpl implements IState
         }
 
         StateImpl other = (StateImpl) obj;
-        if ( stateName == null && other.stateName != null )
+        if ( stateName == null )
         {
-            return false;
+            if ( other.stateName != null )
+            {
+                return false;
+            }
         }
         else if ( !stateName.equals( other.stateName ) )
         {
