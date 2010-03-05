@@ -15,8 +15,8 @@
 	</xs:element>
 	<xs:complexType name="StaticDataType">
 		<xs:sequence>
-			<xs:element name="counterPartyDetails" type="CounterPartyDetailsType"/>
-			<xs:element name="instrument" type="InstrumentType" minOccurs="0"/>
+			<xs:element name="counterPartyDetails" type="xs:string"/>
+			<xs:element name="instrument" type="xs:string" minOccurs="0"/>
 			<xs:element name="owner" maxOccurs="2">
 				<xs:complexType>
 					<xs:complexContent>
@@ -26,16 +26,7 @@
 					</xs:complexContent>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="secondLanguageData" type="SecondLanguageDataType" minOccurs="0"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="CounterPartyDetailsType">
-		<xs:sequence>
-			<xs:element name="masterAgreement" type="MasterAgreementType" minOccurs="0"/>
-			<xs:element name="settlementInstruction" type="SettlementInstruction" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="transmission" type="TransmissionData" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="counterparty" type="CounterPartyDataType" minOccurs="0"/>
-			<xs:element name="counterPartyOther" type="CounterPartyDataType" minOccurs="0" maxOccurs="4"/>
+			<xs:element name="secondLanguageData" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="MasterAgreementType">
@@ -108,52 +99,6 @@
 		</xs:sequence>
 		<xs:attribute name="role" type="xs:string"/>
 	</xs:complexType>
-	<xs:complexType name="InstrumentType">
-		<xs:sequence>
-			<xs:element name="instrumentId">
-				<xs:annotation>
-					<xs:documentation>
-						These are the alternate references for the
-						instrument (e.g. BLOOMBERG, ISIN, MICEX etc.)
-					</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:simpleContent>
-						<xs:extension base="xs:string">
-							<xs:attribute name="type" type="xs:string"/>
-						</xs:extension>
-					</xs:simpleContent>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="alternateRef" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>
-						These are the alternate references for the
-						instrument (e.g. BLOOMBERG, ISIN, MICEX etc.)
-					</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:simpleContent>
-						<xs:extension base="xs:string">
-							<xs:attribute name="type" type="xs:string"/>
-						</xs:extension>
-					</xs:simpleContent>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="longName" type="xs:string"/>
-			<xs:element name="shortName" type="xs:string" minOccurs="0"/>
-			<xs:element name="type" type="xs:string"/>
-			<xs:element name="issuer" type="xs:string" minOccurs="0"/>
-			<xs:element name="maturityDate" type="xs:dateTime" minOccurs="0"/>
-			<xs:element name="couponRate" type="xs:decimal" minOccurs="0"/>
-			<xs:element name="currency" type="xs:string"/>
-			<xs:element name="relatedExchange" type="xs:string" minOccurs="0"/>
-			<xs:element name="exchangeName" type="xs:string" minOccurs="0"/>
-			<xs:element name="country" type="xs:string" minOccurs="0"/>
-			<xs:element name="instrumentRegion" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
-			<xs:element name="multipleExchangeIndicator" type="xs:boolean" minOccurs="0" maxOccurs="1"></xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="ownerType">
 		<xs:sequence>
 			<xs:element name="ownerId" type="xs:string"/>
@@ -165,7 +110,7 @@
 	<xs:complexType name="GenerationDetailsType">
 		<xs:sequence>
 			<xs:element name="generationData" type="GenerationDataType"/>
-			<xs:element name="clientReference" type="ClientReferenceMapping" minOccurs="0"/>
+			<xs:element name="clientReference" type="ClientReferenceMappingType" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="GenerationDataType">
@@ -194,7 +139,7 @@
 			<xs:element name="previouslyConfirmed" type="xs:boolean"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="ClientReferenceMapping">
+	<xs:complexType name="ClientReferenceMappingType">
 		<xs:annotation>
 			<xs:documentation>Container to map UBS ID to client ID for a trade</xs:documentation>
 		</xs:annotation>
@@ -214,15 +159,6 @@
 					<xs:documentation>The client ref for the same trade</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="SecondLanguageDataType">
-		<xs:sequence>
-			<xs:element name="masterAgreement" type="MasterAgreementType" minOccurs="0"/>
-			<xs:element name="settlementInstruction" type="SettlementInstruction" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="instrument" type="InstrumentType" minOccurs="0"/>
-			<xs:element name="transmission" type="TransmissionData" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="counterparty" type="CounterPartyDataType" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CounterpartyIdDtccValue">
