@@ -149,6 +149,7 @@
                         </bindingIncludes>
                         <generateDirectory>src/main/java</generateDirectory>
                         <forceRegenerate>true</forceRegenerate>
+                        <removeOldOutput>true</removeOldOutput>
                         <strict>true</strict>
                         <verbose>false</verbose>
                     </configuration>
@@ -462,12 +463,12 @@
             <dependency>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.framework</artifactId>
-                <version>2.0.2</version>
+                <version>2.0.4</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.main</artifactId>
-                <version>2.0.2</version>
+                <version>2.0.4</version>
             </dependency>
             <dependency>
                 <groupId>org.osgi</groupId>

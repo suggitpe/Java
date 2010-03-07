@@ -14,7 +14,6 @@ import org.suggs.apps.mercury.model.util.file.IFileManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URL;
@@ -140,15 +139,6 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
             }
 
             uMrsh.setSchema( mSchemaCache_ );
-
-            // now we need to load the xml schema so we can validate
-            // the input xml
-            InputStream is = getClass().getClassLoader()
-                .getResourceAsStream( "connection-store.xsd" );
-            if ( is == null )
-            {
-                throw new ConnectionStoreException( "Unable to load connection store schema" );
-            }
 
             JAXBElement<ConnectionStoreType> elem = (JAXBElement<ConnectionStoreType>) uMrsh.unmarshal( new StringReader( xmlClob ) );
             connStr = elem.getValue();
