@@ -4,11 +4,15 @@
  */
 package org.suggs.sandbox.jaxb.util;
 
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 
 import org.apache.commons.logging.Log;
@@ -48,6 +52,55 @@ public final class JaxbContextUtility
     public static JaxbContextUtility instance()
     {
         return INSTANCE;
+    }
+
+    public <T> T unmarshalObject( String aXmlString, Class<?> aClazz )
+    {
+        try
+        {
+            Unmarshaller unmarshaller = createUnmarshaller( aClazz );
+            T returnableObject = (T) unmarshaller.unmarshal( new StringReader( aXmlString ) );
+            return returnableObject;
+        }
+        catch ( ClassCastException cce )
+        {
+            throw new IllegalArgumentException();
+        }
+        catch ( JAXBException jaxbe )
+        {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private Unmarshaller createUnmarshaller( Class<?> aClazz ) throws JAXBException
+    {
+        JAXBContext ctx = createJaxbContext( aClazz );
+        Unmarshaller unmarshaller = ctx.createUnmarshaller();
+        return unmarshaller;
+    }
+
+    public String marshalObject( Object aObject )
+    {
+        StringWriter writer = new StringWriter();
+        try
+        {
+            Marshaller marshaller = createMarshaller( aObject.getClass() );
+            marshaller.marshal( aObject, writer );
+        }
+        catch ( JAXBException jaxbe )
+        {
+            throw new IllegalArgumentException( "Object passed for marshalling is not marshallable.",
+                                                jaxbe );
+        }
+        return writer.toString();
+    }
+
+    private Marshaller createMarshaller( Class<?> aClazz ) throws JAXBException
+    {
+        JAXBContext ctx = createJaxbContext( aClazz );
+        Marshaller marshaller = ctx.createMarshaller();
+        marshaller.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
+        return marshaller;
     }
 
     private JAXBContext createJaxbContext( Class<?> aClazz )
