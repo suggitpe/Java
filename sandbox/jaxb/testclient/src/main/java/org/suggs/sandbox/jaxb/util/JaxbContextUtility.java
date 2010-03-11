@@ -67,9 +67,10 @@ public final class JaxbContextUtility
      *            the class type to return
      * @return an object of the same type as the passed in Class
      */
+    @SuppressWarnings("unchecked")
     public <T> T unmarshalObject( String aXmlString, Class<?> aClazz ) throws JAXBException
     {
-        return unmarshalObject( aXmlString, aClazz, null );
+        return (T) unmarshalObject( aXmlString, aClazz, null );
     }
 
     /**
