@@ -85,7 +85,7 @@ public class JaxbContextUtilityTest
     {
         JaxbContextUtility.instance().unmarshalObject( SIMPLE_XML_OBJECT,
                                                        DummyData.class,
-                                                       "xsd/unparsable.xsd" );
+                                                       "xsd/test-unparsable.xsd" );
     }
 
     @Test(expected = IllegalArgumentException.class)
