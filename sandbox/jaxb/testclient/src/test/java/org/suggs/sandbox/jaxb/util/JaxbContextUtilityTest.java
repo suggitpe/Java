@@ -12,6 +12,8 @@ import javax.xml.bind.JAXBException;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
@@ -70,6 +72,31 @@ public class JaxbContextUtilityTest
         assertThat( dummyData.isSetName(), equalTo( Boolean.FALSE ) );
         assertThat( dummyData.isSetAddress(), equalTo( Boolean.FALSE ) );
         assertThat( dummyData.isSetAttributes(), equalTo( Boolean.FALSE ) );
+    }
+
+    @Test
+    public void unmarshallerCorrectlyValidatesXml() throws JAXBException
+    {
+        String xml = createValidDummyDataXml();
+        DummyData data = JaxbContextUtility.instance().unmarshalObject( xml,
+                                                                        DummyData.class,
+                                                                        "xsd/dummy-data.xsd" );
+        assertThat( data, not( nullValue() ) );
+    }
+
+    private String createValidDummyDataXml()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append( "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" );
+        builder.append( "<ns2:DummyData xmlns:ns2=\"urn:suggs:dummy-data:2010-01-01\">" );
+        builder.append( "<name>" );
+        builder.append( "<firstName>Jonny</firstName>" );
+        builder.append( "<lastName>Morris</lastName>" );
+        builder.append( "</name>" );
+        builder.append( "<address/>" );
+        builder.append( "<attributes/>" );
+        builder.append( "</ns2:DummyData>" );
+        return builder.toString();
     }
 
     @Test(expected = JAXBException.class)
