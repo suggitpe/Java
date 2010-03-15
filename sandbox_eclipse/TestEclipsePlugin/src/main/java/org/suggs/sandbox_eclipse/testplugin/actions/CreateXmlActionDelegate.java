@@ -34,9 +34,7 @@ public class CreateXmlActionDelegate
      * The constructor.
      */
     public CreateXmlActionDelegate()
-    {
-        super();
-    }
+    {}
 
     /**
      * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
@@ -80,8 +78,7 @@ public class CreateXmlActionDelegate
      * @see IWorkbenchWindowActionDelegate#dispose
      */
     public void dispose()
-    {
-    }
+    {}
 
     /**
      * We will cache window object in order to be able to provide
@@ -99,8 +96,7 @@ public class CreateXmlActionDelegate
      *      IWorkbenchPart)
      */
     public void setActivePart( IAction action, IWorkbenchPart targetPart )
-    {
-    }
+    {}
 
     /**
      * Simple one for debugging the selected items

@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Peter Suggitt
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
