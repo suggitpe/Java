@@ -19,8 +19,7 @@
 	</extension>
 
 	<extension point="org.eclipse.ui.actionSets">
-		<actionSet id="Scribbler.actionSet" label="Scribbler Actions"
-			visible="true">
+		<actionSet id="Scribbler.actionSet" label="Scribbler Actions" visible="true">
 			<menu id="scribblerMenu" label="Scribbler">
 				<separator name="scribblerGroup"></separator>
 			</menu>
