@@ -4,15 +4,15 @@
 
 	
 	<extension point="org.eclipse.ui.actionSets">
-		<actionSet  label="Scribbler Actions" visible="true" id="Scribbler.actionSet">
+		<actionSet  label="Scribbler Actions" visible="true" id="SandboxTestEclipsePlugin.actionSet">
 			<menu id="scribblerMenu" label="Scribbler">
 				<separator name="scribblerGroup"></separator>
 			</menu>
 			<action
 				class="org.suggs.sandbox_eclipse.testplugin.actions.CreateXmlActionDelegate"
 				icon="icons/scribe_icon_sm.gif"
-				id="org.suggs.sandbox_eclipse.sandboxtesteclipseplugin.actions.HelloWorldAction"
-				label="Generate Spring XML"
+				id="SandboxTestEclipsePlugin.CreateXmlActionDelegate"
+				label="Generate FSM Spring XML"
 				menubarPath="scribblerMenu/scribblerGroup"
 				toolbarPath="scribblerGroup" 
 				tooltip="Generate Spring XML from model item">
@@ -29,8 +29,8 @@
             </menu>
             <action
                 class="org.suggs.sandbox_eclipse.testplugin.actions.CreateXmlActionDelegate"
-                enablesFor="1" id="SandboxTestEclipsePlugin.newAction"
-                label="Generate Spring XML"
+                enablesFor="1" id="SandboxTestEclipsePlugin.CreateXmlActionDelegate"
+                label="Generate FSM Spring XML"
                 menubarPath="SandboxTestEclipsePlugin.menu1/group1">
             </action>
         </objectContribution>
