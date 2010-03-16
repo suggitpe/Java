@@ -16,7 +16,7 @@
     
     <!-- Properties -->
     <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:suggs.properties" />
+        <property name="location" value="classpath:db.properties" />
     </bean>
     
     <!-- hibernate session details .. including mappings -->

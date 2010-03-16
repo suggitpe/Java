@@ -4,8 +4,6 @@
  */
 package org.suggs.sandbox.hibernate.schemaCreator;
 
-import org.suggs.sandbox.hibernate.schemaCreator.SchemaCreator;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -18,7 +16,6 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 import org.hibernate.cfg.Configuration;
 
 /**
- * 
  * Test object
  * 
  * @author suggitpe
@@ -41,11 +38,12 @@ public abstract class AbstractSchemaCreatorTest extends AbstractDependencyInject
     public void testCreateSchema()
     {
         LOG.debug( "Creating dirs" );
-        ClassPathResource destRes = new ClassPathResource( "sql/auto" );
+        ClassPathResource destRes = new ClassPathResource( "sql" );
         File sqlDir = null;
         try
         {
             sqlDir = destRes.getFile();
+            LOG.debug( "Created directory [" + sqlDir.getAbsolutePath() + "]" );
         }
         catch ( IOException ioe )
         {
