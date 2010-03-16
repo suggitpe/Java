@@ -4,10 +4,11 @@
  */
 package org.suggs.eclipse.jardiff.actions;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
@@ -16,7 +17,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
 /**
- * This class will po
+ * This class provides the link between the UI and the underlying
+ * action to perform the jar diff'ing process.
  * 
  * @author suggitpe
  * @version 1.0 15 Mar 2010
@@ -25,18 +27,44 @@ public class DiffJarsActionDelegate
     implements IWorkbenchWindowActionDelegate, IObjectActionDelegate
 {
 
-    private IWorkbenchWindow window;
+    private static final List<String> LIST_OF_DIFFABLE_FILE_TYPES = new ArrayList<String>();
     private IStructuredSelection selection;
 
+    static
+    {
+        LIST_OF_DIFFABLE_FILE_TYPES.add( "jar" );
+    }
+
     /**
+     * Run call will verify what the user selection is and will try
+     * and use it if it is a valid jar file. If no jar file selected
+     * then it will just run the plugin in the default mode.
+     * 
      * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
      */
     @Override
     public void run( IAction aAction )
     {
-        MessageDialog.openInformation( window.getShell(),
-                                       "JardiffPlugin",
-                                       "Hello, Eclipse world gggg" );
+        DiffJarsAction diffAction = null;
+        if ( selection != null && !selection.isEmpty() )
+        {
+            Object element = selection.getFirstElement();
+            if ( element instanceof IFile )
+            {
+                IFile file = (IFile) element;
+                if ( LIST_OF_DIFFABLE_FILE_TYPES.contains( file.getFileExtension() ) )
+                {
+                    diffAction = new DiffJarsAction( file );
+                }
+            }
+        }
+
+        if ( diffAction == null )
+        {
+            diffAction = new DiffJarsAction();
+        }
+
+        diffAction.run();
     }
 
     /**
@@ -51,11 +79,11 @@ public class DiffJarsActionDelegate
      */
     @Override
     public void init( IWorkbenchWindow aWorkbenchWindow )
-    {
-        window = aWorkbenchWindow;
-    }
+    {}
 
     /**
+     * Provides access to the underlying selection from the UI.
+     * 
      * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction,
      *      org.eclipse.jface.viewers.ISelection)
      */
@@ -72,16 +100,4 @@ public class DiffJarsActionDelegate
     @Override
     public void setActivePart( IAction aAction, IWorkbenchPart aWorkbenchpart )
     {}
-
-    /**
-     * Simple one for debugging the selected items
-     */
-    @SuppressWarnings("unchecked")
-    void debug()
-    {
-        System.out.println( "======================================" );
-        System.out.println( "Selection: " + selection.getClass().getName() );
-        Iterator iter = selection.iterator();
-        System.out.println( "selection contents: " + iter.next().getClass().getName() );
-    }
 }
