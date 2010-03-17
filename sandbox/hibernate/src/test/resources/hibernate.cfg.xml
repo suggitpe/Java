@@ -6,7 +6,7 @@
         <!-- connection details -->
         <!--
         <property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
-        <property name="connection.url">jdbc:oracle:thin:@SUGGS-LAPTOP:1521:XE</property>
+        <property name="connection.url">jdbc:oracle:thin:@suggs-thinkpad:1521:XE</property>
         <property name="connection.username">suggitpe</property>
         <property name="connection.password">782103</property>
         -->
@@ -15,7 +15,7 @@
         <property name="connection.pool_size">1</property>
         
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>
+        <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
         
         <!-- show sql debug -->
         <!-- -->
