@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.hibernate.chapter2;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MESSAGES")
 @SequenceGenerator(name = "MSG_SEQ_STR", sequenceName = "MESSAGE_SEQ")
-public class Message
+public class Message implements Serializable
 {
 
     private Long id;

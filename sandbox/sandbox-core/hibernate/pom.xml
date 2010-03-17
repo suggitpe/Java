@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <artifactId>sandbox-parent</artifactId>
+        <artifactId>sandbox-core-parent</artifactId>
         <groupId>org.suggs</groupId>
         <relativePath>..</relativePath>
         <version>1.0-SNAPSHOT</version>
@@ -68,6 +68,11 @@
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc14</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
