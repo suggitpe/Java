@@ -16,7 +16,7 @@
 
     <modules>
         <module>mercury</module>
-        <module>mercury_old</module>
-        <module>mercury_schemas</module>
+        <module>mercury-old</module>
+        <module>mercury-schemas</module>
     </modules>
 </project>
