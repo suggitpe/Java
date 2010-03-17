@@ -15,7 +15,7 @@
     <name>OSGi Tools Parent</name>
 
     <modules>
-        <module>bundle_release_gui</module>
+        <module>bundle-release-gui</module>
     </modules>
 
     <dependencies> 
