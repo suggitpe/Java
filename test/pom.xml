@@ -15,7 +15,7 @@
     <name>Test Parent</name>
 
     <modules>
-        <module>felix_runtime</module>
+        <module>felix-runtime</module>
     </modules>
 
     <dependencies> 
