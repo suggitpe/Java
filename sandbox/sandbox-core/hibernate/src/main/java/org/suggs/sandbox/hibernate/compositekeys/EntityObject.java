@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @version 1.0 18 Mar 2010
  */
 @Entity
-@Table(name = "MESSAGES")
+@Table(name = "ENTITY_OBJECT")
 public class EntityObject implements Serializable
 {
 
