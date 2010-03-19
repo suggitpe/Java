@@ -15,18 +15,10 @@
     <name>Sandbox Parent</name>
 
     <modules>
-        <module>gui</module>
-        <module>hibernate</module>
-        <module>jaxb</module>
-        <module>jms</module>
-        <module>jmx</module>
-        <module>junit</module>
-        <module>oddsandsods</module>
-        <module>osgi</module>
-        <module>patterns</module>
-        <module>sandbox</module>
-        <module>spring</module>
-        <module>swt</module>
-        <module>tibco</module>
+        <module>sandbox-core</module>
+        <module>sandbox-eclipse</module>
+        <module>sandbox-ejb</module>
+        <module>sandbox-osgi-mailbox</module>
+        <module>sandbox-webapps</module>
     </modules>
 </project>
