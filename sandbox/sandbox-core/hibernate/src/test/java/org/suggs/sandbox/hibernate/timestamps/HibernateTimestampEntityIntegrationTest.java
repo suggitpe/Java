@@ -6,9 +6,11 @@ package org.suggs.sandbox.hibernate.timestamps;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.springframework.test.context.ContextConfiguration;
@@ -37,6 +39,14 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
         aSession.createQuery( "delete from TimestampedEntity" ).executeUpdate();
     }
 
-    @Test
-    public void runem() {}
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityList()
+     */
+    @Override
+    protected List<Class<?>> getEntityList() {
+        List<Class<?>> entityClassses = new ArrayList<Class<?>>();
+        entityClassses.add( TimestampedEntity.class );
+        return entityClassses;
+    }
+
 }

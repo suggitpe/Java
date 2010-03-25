@@ -4,15 +4,20 @@
  */
 package org.suggs.sandbox.hibernate.support;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
+import org.junit.Test;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 /**
  * TODO Write javadoc for AbstractSimpleHibernateIntegrationTest
@@ -39,6 +44,25 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
     }
 
     protected abstract void cleanUpData( Session aSession );
+
+    /**
+     * Test to create the schema for the entities under test. This is
+     * a helper method to make life easier all round.
+     */
+    @Test
+    public void createSchema() {
+        LOG.debug( "Creating schema for compositekeys" );
+        AnnotationConfiguration cfg = new AnnotationConfiguration();
+        cfg.configure( "hibernate.cfg.xml" );
+        for ( Class<?> clazz : getEntityList() ) {
+            cfg.addAnnotatedClass( clazz );
+        }
+        SchemaExport export = new SchemaExport( cfg );
+        export.setDelimiter( ";" );
+        export.create( true, false );
+    }
+
+    protected abstract List<Class<?>> getEntityList();
 
     private void executeInTransaction( TransactionExecutable executable ) {
         Session session = sessionfactory.openSession();
