@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    
+    <!-- import all of the common bean refs -->
+    <import resource="ut-common.xml"/>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+        parent="abstractSessionFactoryBean">
+        <property name="annotatedClasses">
+            <list>
+                <value>org.suggs.sandbox.hibernate.timestamps.TimestampedEntity</value>
+            </list>
+        </property>
+    </bean>
+    
+</beans>

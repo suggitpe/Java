@@ -4,11 +4,8 @@
  */
 package org.suggs.sandbox.hibernate.compositekeys;
 
-import javax.annotation.Resource;
+import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -18,8 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
@@ -38,52 +33,31 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-compositekeys.xml" })
-public class HibernateCompositeKeyPersistenceTest
-{
+public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernateIntegrationTest {
 
-    private static final Log LOG = LogFactory.getLog( HibernateCompositeKeyPersistenceTest.class );
-
-    @Resource(name = "sessionFactory")
-    private SessionFactory sessionfactory;
-
-    @Before
-    public void setUp()
-    {
-        executeInTransaction( new TransactionExecutable()
-        {
-
-            @Override
-            public void execute( Session aSession )
-            {
-                sessionfactory.openSession();
-                aSession.createQuery( "delete from EntityObject" ).executeUpdate();
-            }
-        } );
+    @Override
+    protected void cleanUpData( Session aSession ) {
+        aSession.createQuery( "delete from EntityObject" ).executeUpdate();
     }
 
     @Test
-    public void createEntityObjectInTable()
-    {
+    public void createEntityObjectInTable() {
 
-        runGenericTest( new HibernateTestCallback()
-        {
+        runGenericTest( new HibernateTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
 
             @Override
-            public void beforeTest( Session aSession )
-            {}
+            public void beforeTest( Session aSession ) {}
 
             @Override
-            public void executeTest( Session aSession )
-            {
+            public void executeTest( Session aSession ) {
                 aSession.save( object );
             }
 
             @Override
-            public void verifyTest( Session aSession )
-            {
+            public void verifyTest( Session aSession ) {
                 Long count = (Long) aSession.createQuery( "select count(key.keyOne) from EntityObject o where key.keyOne = '"
                                                           + key.getKeyOne() + "'" )
                     .uniqueResult();
@@ -93,28 +67,23 @@ public class HibernateCompositeKeyPersistenceTest
     }
 
     @Test
-    public void createEntityWithNullDataInTable()
-    {
-        runGenericTest( new HibernateTestCallback()
-        {
+    public void createEntityWithNullDataInTable() {
+        runGenericTest( new HibernateTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
 
             @Override
-            public void beforeTest( Session aSession )
-            {}
+            public void beforeTest( Session aSession ) {}
 
             @Override
-            public void executeTest( Session aSession )
-            {
+            public void executeTest( Session aSession ) {
                 object.setDataTwo( null );
                 aSession.save( object );
             }
 
             @Override
-            public void verifyTest( Session aSession )
-            {
+            public void verifyTest( Session aSession ) {
                 Long count = (Long) aSession.createQuery( "select count(key.keyOne) from EntityObject o where key.keyOne = '"
                                                           + key.getKeyOne() + "'" )
                     .uniqueResult();
@@ -124,28 +93,23 @@ public class HibernateCompositeKeyPersistenceTest
     }
 
     @Test
-    public void createEntityWithNullKeyInTable()
-    {
-        runGenericTest( new HibernateTestCallback()
-        {
+    public void createEntityWithNullKeyInTable() {
+        runGenericTest( new HibernateTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
 
             @Override
-            public void beforeTest( Session aSession )
-            {}
+            public void beforeTest( Session aSession ) {}
 
             @Override
-            public void executeTest( Session aSession )
-            {
+            public void executeTest( Session aSession ) {
                 key.setKeyThree( null );
                 aSession.save( object );
             }
 
             @Override
-            public void verifyTest( Session aSession )
-            {
+            public void verifyTest( Session aSession ) {
                 Long count = (Long) aSession.createQuery( "select count(key.keyOne) from EntityObject o where key.keyOne = '"
                                                           + key.getKeyOne() + "'" )
                     .uniqueResult();
@@ -155,61 +119,51 @@ public class HibernateCompositeKeyPersistenceTest
     }
 
     @Test
-    public void retrieveEntityFromTableWithGet()
-    {
-        runGenericTest( new HibernateTestCallback()
-        {
+    public void retrieveEntityFromTableWithGet() {
+        runGenericTest( new HibernateTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
             EntityObject result;
 
             @Override
-            public void beforeTest( Session aSession )
-            {
+            public void beforeTest( Session aSession ) {
                 aSession.save( object );
             }
 
             @Override
-            public void executeTest( Session aSession )
-            {
+            public void executeTest( Session aSession ) {
                 result = (EntityObject) aSession.get( EntityObject.class, key );
             }
 
             @Override
-            public void verifyTest( Session aSession )
-            {
+            public void verifyTest( Session aSession ) {
                 verifyResult( object, result );
             }
         } );
     }
 
     @Test
-    public void retrieveEntityWithNullDataFromTableWithGet()
-    {
-        runGenericTest( new HibernateTestCallback()
-        {
+    public void retrieveEntityWithNullDataFromTableWithGet() {
+        runGenericTest( new HibernateTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
             EntityObject result;
 
             @Override
-            public void beforeTest( Session aSession )
-            {
+            public void beforeTest( Session aSession ) {
                 object.setDataTwo( null );
                 aSession.save( object );
             }
 
             @Override
-            public void executeTest( Session aSession )
-            {
+            public void executeTest( Session aSession ) {
                 result = (EntityObject) aSession.get( EntityObject.class, key );
             }
 
             @Override
-            public void verifyTest( Session aSession )
-            {
+            public void verifyTest( Session aSession ) {
                 verifyResult( object, result );
             }
         } );
@@ -222,31 +176,26 @@ public class HibernateCompositeKeyPersistenceTest
      * keys.
      */
     @Test
-    public void retrieveEntityWithNullKeyFromTableWithGetReturnsNull_HibernateIssue()
-    {
-        runGenericTest( new HibernateTestCallback()
-        {
+    public void retrieveEntityWithNullKeyFromTableWithGetReturnsNull_HibernateIssue() {
+        runGenericTest( new HibernateTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
             EntityObject result;
 
             @Override
-            public void beforeTest( Session aSession )
-            {
+            public void beforeTest( Session aSession ) {
                 key.setKeyThree( null );
                 aSession.save( object );
             }
 
             @Override
-            public void executeTest( Session aSession )
-            {
+            public void executeTest( Session aSession ) {
                 result = (EntityObject) aSession.get( EntityObject.class, key );
             }
 
             @Override
-            public void verifyTest( Session aSession )
-            {
+            public void verifyTest( Session aSession ) {
                 // DON'T BLINDLY CHANGE THIS - READ JAVADOC
                 assertThat( result, nullValue() );
             }
@@ -260,25 +209,21 @@ public class HibernateCompositeKeyPersistenceTest
      * keys.
      */
     @Test
-    public void retrieveEntityWithNullKeyFromTableWithCriteriaReturnsNull_HibernateIssue()
-    {
-        runGenericTest( new HibernateTestCallback()
-        {
+    public void retrieveEntityWithNullKeyFromTableWithCriteriaReturnsNull_HibernateIssue() {
+        runGenericTest( new HibernateTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
             EntityObject result;
 
             @Override
-            public void beforeTest( Session aSession )
-            {
+            public void beforeTest( Session aSession ) {
                 key.setKeyThree( null );
                 aSession.save( object );
             }
 
             @Override
-            public void executeTest( Session aSession )
-            {
+            public void executeTest( Session aSession ) {
                 Criteria criteria = aSession.createCriteria( EntityObject.class );
                 criteria.add( Restrictions.eq( "key.keyOne", key.getKeyOne() ) );
                 criteria.add( Restrictions.eq( "key.keyTwo", key.getKeyTwo() ) );
@@ -287,8 +232,7 @@ public class HibernateCompositeKeyPersistenceTest
             }
 
             @Override
-            public void verifyTest( Session aSession )
-            {
+            public void verifyTest( Session aSession ) {
                 // DON'T BLINDLY CHANGE THIS - READ JAVADOC
                 assertThat( result, nullValue() );
             }
@@ -302,25 +246,21 @@ public class HibernateCompositeKeyPersistenceTest
      * keys.
      */
     @Test
-    public void retrieveEntityWithNullKeyFromTableWithQbeReturnsNull_HibernateIssue()
-    {
-        runGenericTest( new HibernateTestCallback()
-        {
+    public void retrieveEntityWithNullKeyFromTableWithQbeReturnsNull_HibernateIssue() {
+        runGenericTest( new HibernateTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
             EntityObject result;
 
             @Override
-            public void beforeTest( Session aSession )
-            {
+            public void beforeTest( Session aSession ) {
                 key.setKeyThree( null );
                 aSession.save( object );
             }
 
             @Override
-            public void executeTest( Session aSession )
-            {
+            public void executeTest( Session aSession ) {
                 EntityObject example = new EntityObject();
                 example.setKey( key );
                 Criteria criteria = aSession.createCriteria( EntityObject.class );
@@ -329,8 +269,7 @@ public class HibernateCompositeKeyPersistenceTest
             }
 
             @Override
-            public void verifyTest( Session aSession )
-            {
+            public void verifyTest( Session aSession ) {
                 // DON'T BLINDLY CHANGE THIS - READ JAVADOC
                 assertThat( result, nullValue() );
             }
@@ -344,25 +283,21 @@ public class HibernateCompositeKeyPersistenceTest
      * keys.
      */
     @Test
-    public void retrieveEntityWithNullKeyFromTableWithHqlReturnsNull_HibernateIssue()
-    {
-        runGenericTest( new HibernateTestCallback()
-        {
+    public void retrieveEntityWithNullKeyFromTableWithHqlReturnsNull_HibernateIssue() {
+        runGenericTest( new HibernateTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
             EntityObject result;
 
             @Override
-            public void beforeTest( Session aSession )
-            {
+            public void beforeTest( Session aSession ) {
                 key.setKeyThree( null );
                 aSession.save( object );
             }
 
             @Override
-            public void executeTest( Session aSession )
-            {
+            public void executeTest( Session aSession ) {
                 StringBuffer buff = new StringBuffer( "from EntityObject where " );
                 buff.append( "key.keyOne = '" ).append( key.getKeyOne() ).append( "' " );
                 buff.append( "and key.keyTwo = '" ).append( key.getKeyTwo() ).append( "' " );
@@ -372,57 +307,21 @@ public class HibernateCompositeKeyPersistenceTest
             }
 
             @Override
-            public void verifyTest( Session aSession )
-            {
+            public void verifyTest( Session aSession ) {
                 // DON'T BLINDLY CHANGE THIS - READ JAVADOC
                 assertThat( result, nullValue() );
             }
         } );
     }
 
-    public void verifyResult( EntityObject expected, EntityObject result )
-    {
+    public void verifyResult( EntityObject expected, EntityObject result ) {
         assertThat( result, not( nullValue() ) );
         assertThat( result, not( sameInstance( expected ) ) );
         assertThat( result, equalTo( expected ) );
 
     }
 
-    private void runGenericTest( HibernateTestCallback aCallback )
-    {
-        LOG.debug( "----------------------------------" );
-        Session session = sessionfactory.openSession();
-
-        Transaction trans = session.beginTransaction();
-        aCallback.beforeTest( session );
-        trans.commit();
-
-        session.clear();
-
-        trans.begin();
-        aCallback.executeTest( session );
-        trans.commit();
-
-        session.clear();
-
-        trans.begin();
-        aCallback.verifyTest( session );
-        trans.commit();
-
-        session.close();
-        LOG.debug( "----------------------------------" );
-    }
-
-    private void executeInTransaction( TransactionExecutable executable )
-    {
-        Session session = sessionfactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        executable.execute( session );
-        transaction.commit();
-    }
-
-    private EntityObject buildEntityObject( EntityKey aKey )
-    {
+    private EntityObject buildEntityObject( EntityKey aKey ) {
         EntityObject object = new EntityObject();
         object.setKey( aKey );
         object.setDataOne( "data1 1-1" );
@@ -430,29 +329,12 @@ public class HibernateCompositeKeyPersistenceTest
         return object;
     }
 
-    private EntityKey buildEntityKey()
-    {
+    private EntityKey buildEntityKey() {
         EntityKey key = new EntityKey();
         key.setKeyOne( "key 1-1" );
         key.setKeyTwo( "key 2-1" );
         key.setKeyThree( "key 3-1" );
         return key;
-    }
-
-    protected interface HibernateTestCallback
-    {
-
-        void beforeTest( Session aSession );
-
-        void executeTest( Session aSession );
-
-        void verifyTest( Session aSession );
-    }
-
-    protected interface TransactionExecutable
-    {
-
-        void execute( Session aSession );
     }
 
 }
