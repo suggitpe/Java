@@ -8,9 +8,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,12 +21,16 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TIMESTAMPED_ENTITY")
-@SequenceGenerator(name = "TIMESTAMP_ENTITY_SEQ_STR", sequenceName = "TIMESTAMP_ENTITY_SEQ")
-public class TimestampedEntity {
+@SequenceGenerator(name = "ENTITY_SEQ_STR", sequenceName = "TIMESTAMP_ENTITY_SEQ")
+public class TimestampedEntity extends EntityBase {
 
-    private Long id;
+    @Column(name = "STRING_DATA", nullable = false, length = 16)
     private String someString;
+
+    @Column(name = "DATE_DATA", nullable = false)
     private Date someDate;
+
+    @Column(name = "INTEGER_DATA", nullable = true)
     private Integer someInteger;
 
     /**
@@ -54,33 +55,10 @@ public class TimestampedEntity {
     }
 
     /**
-     * Returns the value of id.
-     * 
-     * @return Returns the id.
-     */
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TIMESTAMP_ENTITY_SEQ_STR")
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Sets the id field to the specified value.
-     * 
-     * @param aId
-     *            The id to set.
-     */
-    public void setId( Long aId ) {
-        id = aId;
-    }
-
-    /**
      * Returns the value of someString.
      * 
      * @return Returns the someString.
      */
-    @Column(name = "STRING_DATA", nullable = false, length = 16)
     public String getSomeString() {
         return someString;
     }
@@ -100,7 +78,6 @@ public class TimestampedEntity {
      * 
      * @return Returns the someDate.
      */
-    @Column(name = "DATE_DATA", nullable = false)
     public Date getSomeDate() {
         return someDate;
     }
@@ -120,7 +97,6 @@ public class TimestampedEntity {
      * 
      * @return Returns the someInteger.
      */
-    @Column(name = "INTEGER_DATA", nullable = true)
     public Integer getSomeInteger() {
         return someInteger;
     }
@@ -140,7 +116,7 @@ public class TimestampedEntity {
      */
     @Override
     public String toString() {
-        return "TimestampedEntity [id=" + id + ", someDate=" + someDate + ", someInteger="
+        return super.toString() + " TimestampedEntity [someDate=" + someDate + ", someInteger="
                + someInteger + ", someString=" + someString + "]";
     }
 
@@ -150,8 +126,7 @@ public class TimestampedEntity {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = 1;
-        result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
+        int result = super.hashCode();
         result = prime * result + ( ( someDate == null ) ? 0 : someDate.hashCode() );
         result = prime * result + ( ( someInteger == null ) ? 0 : someInteger.hashCode() );
         result = prime * result + ( ( someString == null ) ? 0 : someString.hashCode() );
@@ -165,17 +140,11 @@ public class TimestampedEntity {
     public boolean equals( Object obj ) {
         if ( this == obj )
             return true;
-        if ( obj == null )
+        if ( !super.equals( obj ) )
             return false;
         if ( getClass() != obj.getClass() )
             return false;
         TimestampedEntity other = (TimestampedEntity) obj;
-        if ( id == null ) {
-            if ( other.id != null )
-                return false;
-        }
-        else if ( !id.equals( other.id ) )
-            return false;
         if ( someDate == null ) {
             if ( other.someDate != null )
                 return false;

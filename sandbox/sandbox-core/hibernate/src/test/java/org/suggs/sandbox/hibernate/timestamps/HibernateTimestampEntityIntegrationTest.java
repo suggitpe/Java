@@ -76,7 +76,9 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
 
             @Override
             public void executeTest( Session aSession ) {
+                LOG.debug( entity );
                 aSession.save( entity );
+                LOG.debug( entity );
             }
 
             @Override
@@ -137,6 +139,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
 
             @Override
             public void executeTest( Session aSession ) {
+                debugTimestampedEntities( aSession );
                 readEntity = (TimestampedEntity) aSession.get( TimestampedEntity.class, theId );
             }
 
@@ -165,6 +168,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
             public void beforeTest( Session aSession ) {
                 aSession.save( entity );
                 verifyEntityCount( aSession, 1L );
+                debugTimestampedEntities( aSession );
             }
 
             @Override
@@ -177,6 +181,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
             @Override
             public void verifyTest( Session aSession ) {
                 // refresh entity from db
+                debugTimestampedEntities( aSession );
                 entity = (TimestampedEntity) aSession.createQuery( TEST_HQL ).uniqueResult();
                 assertThat( entity, not( nullValue() ) );
                 assertThat( entity, not( sameInstance( clone ) ) );
