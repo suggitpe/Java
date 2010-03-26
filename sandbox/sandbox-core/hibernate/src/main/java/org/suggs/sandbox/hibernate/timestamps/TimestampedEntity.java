@@ -33,6 +33,27 @@ public class TimestampedEntity {
     private Integer someInteger;
 
     /**
+     * Constructs a new instance.
+     */
+    public TimestampedEntity() {}
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param aString
+     *            a string
+     * @param aDate
+     *            a data
+     * @param aInteger
+     *            an integer
+     */
+    public TimestampedEntity( String aString, Date aDate, Integer aInteger ) {
+        someString = aString;
+        someDate = aDate;
+        someInteger = aInteger;
+    }
+
+    /**
      * Returns the value of id.
      * 
      * @return Returns the id.
@@ -112,6 +133,68 @@ public class TimestampedEntity {
      */
     public void setSomeInteger( Integer aSomeInteger ) {
         someInteger = aSomeInteger;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "TimestampedEntity [id=" + id + ", someDate=" + someDate + ", someInteger="
+               + someInteger + ", someString=" + someString + "]";
+    }
+
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
+        result = prime * result + ( ( someDate == null ) ? 0 : someDate.hashCode() );
+        result = prime * result + ( ( someInteger == null ) ? 0 : someInteger.hashCode() );
+        result = prime * result + ( ( someString == null ) ? 0 : someString.hashCode() );
+        return result;
+    }
+
+    /**
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals( Object obj ) {
+        if ( this == obj )
+            return true;
+        if ( obj == null )
+            return false;
+        if ( getClass() != obj.getClass() )
+            return false;
+        TimestampedEntity other = (TimestampedEntity) obj;
+        if ( id == null ) {
+            if ( other.id != null )
+                return false;
+        }
+        else if ( !id.equals( other.id ) )
+            return false;
+        if ( someDate == null ) {
+            if ( other.someDate != null )
+                return false;
+        }
+        else if ( !someDate.equals( other.someDate ) )
+            return false;
+        if ( someInteger == null ) {
+            if ( other.someInteger != null )
+                return false;
+        }
+        else if ( !someInteger.equals( other.someInteger ) )
+            return false;
+        if ( someString == null ) {
+            if ( other.someString != null )
+                return false;
+        }
+        else if ( !someString.equals( other.someString ) )
+            return false;
+        return true;
     }
 
 }

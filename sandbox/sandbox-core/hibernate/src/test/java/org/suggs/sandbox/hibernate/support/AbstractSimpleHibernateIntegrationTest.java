@@ -32,8 +32,12 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
     @Resource(name = "sessionFactory")
     private SessionFactory sessionfactory;
 
+    /**
+     * Runs prior to test execution.
+     */
     @Before
     public void setUp() {
+        LOG.debug( "----------------------------------" );
         executeInTransaction( new TransactionExecutable() {
 
             @Override
@@ -43,6 +47,13 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
         } );
     }
 
+    /**
+     * Perform a collection of cleanup operations within a dedicated
+     * transaction prior to any tests being run.
+     * 
+     * @param aSession
+     *            to access the hibernate layer.
+     */
     protected abstract void cleanUpData( Session aSession );
 
     /**
@@ -62,8 +73,51 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
         export.create( true, false );
     }
 
+    /**
+     * Builds a collection of classes to create the schema for.
+     * 
+     * @return all classes to create a schema from.
+     */
     protected abstract List<Class<?>> getEntityList();
 
+    @Test
+    public void basicCreateOperationCreatesCorrectObject() {
+        LOG.debug( "basicCreateOperationCreatesCorrectObject" );
+        runGenericTest( createBasicCreateTest() );
+    }
+
+    protected abstract IHibernateIntegrationTestCallback createBasicCreateTest();
+
+    @Test
+    public void basicReadOperationsInstantiatesCorrectObject() {
+        LOG.debug( "basicReadOperationsInstantiatesCorrectObject" );
+        runGenericTest( createBasicReadTest() );
+    }
+
+    protected abstract IHibernateIntegrationTestCallback createBasicReadTest();
+
+    @Test
+    public void basicUpdateOperationsUpdatesCorrectObject() {
+        LOG.debug( "basicUpdateOperationsUpdatesCorrectObject" );
+        runGenericTest( createBasicUpdateTest() );
+    }
+
+    protected abstract IHibernateIntegrationTestCallback createBasicUpdateTest();
+
+    @Test
+    public void basicDeleteOperationsDeletesCorrectObject() {
+        LOG.debug( "basicDeleteOperationsUpdatesCorrectObject" );
+        runGenericTest( createBasicUpdateTest() );
+    }
+
+    protected abstract IHibernateIntegrationTestCallback createBasicDeleteTest();
+
+    /**
+     * Executes the called back around a transaction.
+     * 
+     * @param executable
+     *            the callback that wraps up the execution.
+     */
     private void executeInTransaction( TransactionExecutable executable ) {
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -71,58 +125,54 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
         transaction.commit();
     }
 
-    protected void runGenericTest( HibernateTestCallback aCallback ) {
-        LOG.debug( "----------------------------------" );
+    /**
+     * Provides a basic framework for running a Hibernate integration
+     * test against a database.
+     * 
+     * @param aCallback
+     */
+    protected void runGenericTest( IHibernateIntegrationTestCallback aCallback ) {
         Session session = sessionfactory.openSession();
 
         Transaction trans = session.beginTransaction();
-        aCallback.beforeTest( session );
-        trans.commit();
+        try {
+            aCallback.beforeTest( session );
+            trans.commit();
+        }
+        catch ( Exception e ) {
+            trans.rollback();
+            throw new IllegalStateException( "Exception caught in 'beforeTest' execution, transaction rolled back",
+                                             e );
+        }
 
         session.clear();
 
-        trans.begin();
-        aCallback.executeTest( session );
-        trans.commit();
+        try {
+            trans.begin();
+            aCallback.executeTest( session );
+            trans.commit();
+        }
+        catch ( Exception e ) {
+            trans.rollback();
+            throw new IllegalStateException( "Exception caught in 'executeTest' execution, transaction rolled back",
+                                             e );
+        }
 
         session.clear();
 
-        trans.begin();
-        aCallback.verifyTest( session );
-        trans.commit();
+        try {
+            trans.begin();
+            aCallback.verifyTest( session );
+            trans.commit();
+        }
+        catch ( Exception e ) {
+            trans.rollback();
+            throw new IllegalStateException( "Exception caught in 'verifyTest' execution, transaction rolled back",
+                                             e );
+        }
 
         session.close();
         LOG.debug( "----------------------------------" );
-    }
-
-    /**
-     * Interface for a callback to be used for testing Hibernate
-     * objects with segregated transactional boundaries. the really
-     * neat thing about this is that it allows you to pass the impl of
-     * the tests around and manage the actual execution a little
-     * later.
-     * 
-     * @author suggitpe
-     * @version 1.0 25 Mar 2010
-     */
-    protected interface HibernateTestCallback {
-
-        /**
-         * Run before the test exceution.
-         */
-        void beforeTest( Session aSession );
-
-        /**
-         * Execute the actual test.
-         */
-        void executeTest( Session aSession );
-
-        /**
-         * Verify the test results.
-         * 
-         * @param aSession
-         */
-        void verifyTest( Session aSession );
     }
 
     /**
