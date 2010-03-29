@@ -62,7 +62,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
      */
     @Test
     public void createSchema() {
-        LOG.debug( "Creating schema for compositekeys" );
+        LOG.debug( "Creating schema for class under test" );
         AnnotationConfiguration cfg = new AnnotationConfiguration();
         cfg.configure( "hibernate.cfg.xml" );
         for ( Class<?> clazz : getEntityList() ) {

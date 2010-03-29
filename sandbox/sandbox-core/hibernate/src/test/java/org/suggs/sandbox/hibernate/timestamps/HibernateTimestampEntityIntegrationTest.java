@@ -39,7 +39,6 @@ import static org.junit.Assert.assertThat;
 public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest {
 
     private static final Log LOG = LogFactory.getLog( HibernateTimestampEntityIntegrationTest.class );
-    private static final Long ID_REF = Long.valueOf( 1234L );
     private static final String TEST_HQL = "from TimestampedEntity where someString in ('deleteMe', 'altered')";
 
     /**
@@ -103,6 +102,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
                 verifyEntityCount( aSession, 1L );
             }
 
+            @SuppressWarnings("boxing")
             @Override
             public void executeTest( Session aSession ) {
                 debugTimestampedEntities( aSession );
@@ -129,6 +129,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
             TimestampedEntity entity = buildTimeStampedEntityTemplate();
             TimestampedEntity readEntity = null;
 
+            @SuppressWarnings("boxing")
             @Override
             public void beforeTest( Session aSession ) {
                 aSession.save( entity );
