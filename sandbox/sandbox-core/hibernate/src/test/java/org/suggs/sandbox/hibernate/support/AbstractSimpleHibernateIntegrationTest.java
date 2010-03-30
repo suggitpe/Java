@@ -12,6 +12,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,11 +23,13 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 /**
- * TODO Write javadoc for AbstractSimpleHibernateIntegrationTest
+ * Abstract test to be used in conjuction with any hibernate entity
+ * test.
  * 
  * @author suggitpe
  * @version 1.0 25 Mar 2010
  */
+@RunWith(SpringJUnit4ClassRunner.class)
 public abstract class AbstractSimpleHibernateIntegrationTest {
 
     private static final Log LOG = LogFactory.getLog( AbstractSimpleHibernateIntegrationTest.class );
@@ -65,7 +70,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
         LOG.debug( "Creating schema for class under test" );
         AnnotationConfiguration cfg = new AnnotationConfiguration();
         cfg.configure( "hibernate.cfg.xml" );
-        for ( Class<?> clazz : getEntityList() ) {
+        for ( Class<?> clazz : getEntityListForSchemaCreation() ) {
             cfg.addAnnotatedClass( clazz );
         }
         SchemaExport export = new SchemaExport( cfg );
@@ -78,7 +83,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
      * 
      * @return all classes to create a schema from.
      */
-    protected abstract List<Class<?>> getEntityList();
+    protected abstract List<Class<?>> getEntityListForSchemaCreation();
 
     @Test
     public void basicCreateOperationCreatesCorrectObject() {

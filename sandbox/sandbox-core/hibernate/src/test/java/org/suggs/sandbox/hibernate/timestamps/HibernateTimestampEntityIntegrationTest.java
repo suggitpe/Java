@@ -13,10 +13,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.runner.RunWith;
 
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -34,7 +32,6 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 25 Mar 2010
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-timestamps.xml" })
 public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest {
 
@@ -53,7 +50,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityList()
      */
     @Override
-    protected List<Class<?>> getEntityList() {
+    protected List<Class<?>> getEntityListForSchemaCreation() {
         List<Class<?>> entityClassses = new ArrayList<Class<?>>();
         entityClassses.add( TimestampedEntity.class );
         return entityClassses;
