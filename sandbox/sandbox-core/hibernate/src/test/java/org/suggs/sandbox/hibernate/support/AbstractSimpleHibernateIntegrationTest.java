@@ -128,6 +128,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
         Transaction transaction = session.beginTransaction();
         executable.execute( session );
         transaction.commit();
+        session.close();
     }
 
     /**
