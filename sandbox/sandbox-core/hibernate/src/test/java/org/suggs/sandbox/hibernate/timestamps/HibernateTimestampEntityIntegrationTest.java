@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 import org.springframework.test.context.ContextConfiguration;
 
@@ -190,6 +191,69 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
                 debugTimestampedEntities( aSession );
             }
         };
+    }
+
+    @Test
+    public void creationOfNewObjectPopulatesCreateAndUpdateDatesAndThatTheyAreSameValue() {
+        runGenericTest( new IHibernateIntegrationTestCallback() {
+
+            TimestampedEntity entity = buildTimeStampedEntityTemplate();
+
+            @Override
+            public void beforeTest( Session aSession ) {
+                verifyEntityCount( aSession, 0L );
+            }
+
+            @Override
+            public void executeTest( Session aSession ) {
+                aSession.save( entity );
+            }
+
+            @Override
+            public void verifyTest( Session aSession ) {
+                TimestampedEntity result = (TimestampedEntity) aSession.createQuery( TEST_HQL )
+                    .uniqueResult();
+                assertThat( entity.getTimestampAuditInfo().getCreateDate(),
+                            not( equalTo( result.getTimestampAuditInfo().getCreateDate() ) ) );
+                assertThat( entity.getTimestampAuditInfo().getUpdateDate(),
+                            not( equalTo( result.getTimestampAuditInfo().getUpdateDate() ) ) );
+                assertThat( result.getTimestampAuditInfo().getCreateDate(),
+                            equalTo( result.getTimestampAuditInfo().getUpdateDate() ) );
+
+                verifyEntityCount( aSession, 1L );
+            }
+        } );
+    }
+
+    @Test
+    public void updateOfExistingObjectPopulatesUpdateDateAndThatCreateDateDiffers() {
+        runGenericTest( new IHibernateIntegrationTestCallback() {
+
+            TimestampedEntity entity = buildTimeStampedEntityTemplate();
+
+            @Override
+            public void beforeTest( Session aSession ) {
+                aSession.save( entity );
+                verifyEntityCount( aSession, 1L );
+            }
+
+            @Override
+            public void executeTest( Session aSession ) {
+                TimestampedEntity toUpdate = (TimestampedEntity) aSession.createQuery( TEST_HQL )
+                    .uniqueResult();
+                toUpdate.setSomeInteger( Integer.valueOf( 23 ) );
+                aSession.save( toUpdate );
+            }
+
+            @Override
+            public void verifyTest( Session aSession ) {
+                TimestampedEntity result = (TimestampedEntity) aSession.createQuery( TEST_HQL )
+                    .uniqueResult();
+                assertThat( result, not( nullValue() ) );
+                assertThat( result.getTimestampAuditInfo().getCreateDate(),
+                            not( equalTo( result.getTimestampAuditInfo().getUpdateDate() ) ) );
+            }
+        } );
     }
 
     private TimestampedEntity buildTimeStampedEntityTemplate() {
