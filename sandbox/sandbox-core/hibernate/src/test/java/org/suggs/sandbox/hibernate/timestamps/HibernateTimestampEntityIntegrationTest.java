@@ -68,13 +68,12 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
             @Override
             public void beforeTest( Session aSession ) {
                 verifyEntityCount( aSession, 0L );
+                debugTimestampedEntities( aSession );
             }
 
             @Override
             public void executeTest( Session aSession ) {
-                LOG.debug( entity );
                 aSession.save( entity );
-                LOG.debug( entity );
             }
 
             @Override
@@ -97,12 +96,12 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
             public void beforeTest( Session aSession ) {
                 aSession.save( buildTimeStampedEntityTemplate() );
                 verifyEntityCount( aSession, 1L );
+                debugTimestampedEntities( aSession );
             }
 
             @SuppressWarnings("boxing")
             @Override
             public void executeTest( Session aSession ) {
-                debugTimestampedEntities( aSession );
                 TimestampedEntity entity = (TimestampedEntity) aSession.createQuery( TEST_HQL )
                     .uniqueResult();
                 aSession.delete( entity.getId() );
@@ -111,6 +110,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
             @Override
             public void verifyTest( Session aSession ) {
                 verifyEntityCount( aSession, 0L );
+                debugTimestampedEntities( aSession );
             }
         };
     }
@@ -133,11 +133,11 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
                 entity = (TimestampedEntity) aSession.createQuery( TEST_HQL ).uniqueResult();
                 theId = entity.getId();
                 verifyEntityCount( aSession, 1L );
+                debugTimestampedEntities( aSession );
             }
 
             @Override
             public void executeTest( Session aSession ) {
-                debugTimestampedEntities( aSession );
                 readEntity = (TimestampedEntity) aSession.get( TimestampedEntity.class, theId );
             }
 
@@ -146,6 +146,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
                 assertThat( readEntity, not( nullValue() ) );
                 assertThat( readEntity, not( sameInstance( entity ) ) );
                 assertThat( readEntity, equalTo( entity ) );
+                debugTimestampedEntities( aSession );
             }
         };
     }
@@ -179,7 +180,6 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
             @Override
             public void verifyTest( Session aSession ) {
                 // refresh entity from db
-                debugTimestampedEntities( aSession );
                 entity = (TimestampedEntity) aSession.createQuery( TEST_HQL ).uniqueResult();
                 assertThat( entity, not( nullValue() ) );
                 assertThat( entity, not( sameInstance( clone ) ) );
@@ -187,6 +187,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
                 assertThat( entity.getSomeInteger(), equalTo( clone.getSomeInteger() ) );
                 assertThat( entity.getSomeDate(), equalTo( clone.getSomeDate() ) );
                 assertThat( entity.getSomeString(), not( equalTo( clone.getSomeString() ) ) );
+                debugTimestampedEntities( aSession );
             }
         };
     }
@@ -206,9 +207,11 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     private void debugTimestampedEntities( Session aSession ) {
         Criteria criteria = aSession.createCriteria( TimestampedEntity.class );
         List<TimestampedEntity> entityList = criteria.list();
+        LOG.debug( "****** Entity debug" );
         for ( TimestampedEntity tse : entityList ) {
             LOG.debug( tse );
         }
+        LOG.debug( "******" );
 
     }
 }

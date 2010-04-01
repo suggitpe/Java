@@ -4,9 +4,9 @@
  */
 package org.suggs.sandbox.hibernate.timestamps;
 
-import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -20,7 +20,7 @@ import javax.persistence.Version;
  * @version 1.0 26 Mar 2010
  */
 @MappedSuperclass
-public class EntityBase {
+public class EntityBase implements TimestampAuditable {
 
     @Id
     @Column(name = "ID")
@@ -31,9 +31,8 @@ public class EntityBase {
     @Column(name = "VERSION", nullable = false)
     private long version;
 
-    private Date createDate;
-
-    private Date updateDate;
+    @Embedded
+    private TimestampAuditInfo timestampAuditInfo = new TimestampAuditInfo();
 
     /**
      * Returns the value of id.
@@ -74,41 +73,20 @@ public class EntityBase {
     }
 
     /**
-     * Returns the value of createDate.
-     * 
-     * @return Returns the createDate.
+     * @see org.suggs.sandbox.hibernate.timestamps.TimestampAuditable#getTimestampAuditInfo()
      */
-    public Date getCreateDate() {
-        return createDate;
+    public TimestampAuditInfo getTimestampAuditInfo() {
+        return timestampAuditInfo;
     }
 
     /**
-     * Sets the createDate field to the specified value.
+     * Sets the timestampAuditInfo field to the specified value.
      * 
-     * @param aCreateDate
-     *            The createDate to set.
+     * @param aTimestampAuditInfo
+     *            The timestampAuditInfo to set.
      */
-    public void setCreateDate( Date aCreateDate ) {
-        createDate = aCreateDate;
-    }
-
-    /**
-     * Returns the value of updateDate.
-     * 
-     * @return Returns the updateDate.
-     */
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    /**
-     * Sets the updateDate field to the specified value.
-     * 
-     * @param aUpdateDate
-     *            The updateDate to set.
-     */
-    public void setUpdateDate( Date aUpdateDate ) {
-        updateDate = aUpdateDate;
+    public void setTimestampAuditInfo( TimestampAuditInfo aTimestampAuditInfo ) {
+        timestampAuditInfo = aTimestampAuditInfo;
     }
 
     /**
@@ -116,8 +94,8 @@ public class EntityBase {
      */
     @Override
     public String toString() {
-        return "EntityBase [id=" + Long.valueOf( id ).toString() + " , version=" + version
-               + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+        return "EntityBase [id=" + id + ", version=" + version + ", timestampAuditInfo="
+               + timestampAuditInfo + "]";
     }
 
     /**
