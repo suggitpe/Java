@@ -142,6 +142,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
 
         Transaction trans = session.beginTransaction();
         try {
+            LOG.debug( "--> Before Test" );
             aCallback.beforeTest( session );
             trans.commit();
         }
@@ -155,6 +156,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
 
         try {
             trans.begin();
+            LOG.debug( "--> Execute Test" );
             aCallback.executeTest( session );
             trans.commit();
         }
@@ -168,6 +170,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
 
         try {
             trans.begin();
+            LOG.debug( "--> Verify Test" );
             aCallback.verifyTest( session );
             trans.commit();
         }

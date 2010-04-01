@@ -10,8 +10,6 @@ import org.suggs.sandbox.hibernate.support.IHibernateIntegrationTestCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 import org.springframework.test.context.ContextConfiguration;
@@ -37,8 +35,6 @@ import static org.junit.Assert.assertThat;
  */
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-compositekeys.xml" })
 public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernateIntegrationTest {
-
-    private static final Log LOG = LogFactory.getLog( HibernateCompositeKeyPersistenceTest.class );
 
     @Override
     protected void cleanUpData( Session aSession ) {
@@ -80,8 +76,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
                 EntityObject result = (EntityObject) aSession.createCriteria( EntityObject.class )
                     .uniqueResult();
                 verifyEntityCount( aSession, 1L );
-                assertThat( result, not( nullValue() ) );
-                assertThat( result, equalTo( obj ) );
+                verifyResult( obj, result );
             }
         };
 
@@ -105,10 +100,14 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
             }
 
             @Override
-            public void executeTest( Session aSession ) {}
+            public void executeTest( Session aSession ) {
+                aSession.delete( obj );
+            }
 
             @Override
-            public void verifyTest( Session aSession ) {}
+            public void verifyTest( Session aSession ) {
+                verifyEntityCount( aSession, 0L );
+            }
         };
     }
 
@@ -121,15 +120,25 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
 
             EntityKey key = buildEntityKey();
             EntityObject obj = buildEntityObject( key );
+            EntityObject read;
 
             @Override
-            public void beforeTest( Session aSession ) {}
+            public void beforeTest( Session aSession ) {
+                verifyEntityCount( aSession, 0L );
+                aSession.save( obj );
+                verifyEntityCount( aSession, 1L );
+            }
 
             @Override
-            public void executeTest( Session aSession ) {}
+            public void executeTest( Session aSession ) {
+                read = (EntityObject) aSession.get( EntityObject.class, key );
+            }
 
             @Override
-            public void verifyTest( Session aSession ) {}
+            public void verifyTest( Session aSession ) {
+                verifyEntityCount( aSession, 1L );
+                verifyResult( obj, read );
+            }
         };
     }
 
@@ -142,15 +151,29 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
 
             EntityKey key = buildEntityKey();
             EntityObject obj = buildEntityObject( key );
+            EntityObject clone = buildEntityObject( key );
 
             @Override
-            public void beforeTest( Session aSession ) {}
+            public void beforeTest( Session aSession ) {
+                verifyEntityCount( aSession, 0L );
+                aSession.save( obj );
+                verifyEntityCount( aSession, 1L );
+            }
 
             @Override
-            public void executeTest( Session aSession ) {}
+            public void executeTest( Session aSession ) {
+                obj = (EntityObject) aSession.createQuery( "from EntityObject" ).uniqueResult();
+                obj.setDataTwo( "Updated this field" );
+                aSession.save( obj );
+            }
 
             @Override
-            public void verifyTest( Session aSession ) {}
+            public void verifyTest( Session aSession ) {
+                obj = (EntityObject) aSession.createQuery( "from EntityObject" ).uniqueResult();
+                assertThat( obj, not( nullValue() ) );
+                assertThat( obj, not( sameInstance( clone ) ) );
+                assertThat( obj, not( equalTo( clone ) ) );
+            }
         };
     }
 
@@ -198,10 +221,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
 
             @Override
             public void verifyTest( Session aSession ) {
-                Long count = (Long) aSession.createQuery( "select count(key.keyOne) from EntityObject o where key.keyOne = '"
-                                                          + key.getKeyOne() + "'" )
-                    .uniqueResult();
-                assertThat( Long.valueOf( 1 ), equalTo( count ) );
+                verifyEntityCount( aSession, 1L );
             }
         } );
     }
@@ -224,10 +244,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
 
             @Override
             public void verifyTest( Session aSession ) {
-                Long count = (Long) aSession.createQuery( "select count(key.keyOne) from EntityObject o where key.keyOne = '"
-                                                          + key.getKeyOne() + "'" )
-                    .uniqueResult();
-                assertThat( Long.valueOf( 1 ), equalTo( count ) );
+                verifyEntityCount( aSession, 1L );
             }
         } );
     }
@@ -455,16 +472,6 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
         Long count = (Long) aSession.createQuery( "select count(*) from EntityObject" )
             .uniqueResult();
         assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
-    }
-
-    @SuppressWarnings("unchecked")
-    private void debugEntities( Session aSession ) {
-        Criteria criteria = aSession.createCriteria( EntityObject.class );
-        List<EntityObject> entityList = criteria.list();
-        for ( EntityObject ent : entityList ) {
-            LOG.debug( ent );
-        }
-
     }
 
 }
