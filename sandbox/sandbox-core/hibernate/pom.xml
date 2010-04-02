@@ -23,7 +23,6 @@
                     <excludes>
                         <exclude>**/Hbm*Test.java</exclude>
                         <exclude>**/Annotatation*Test.java</exclude>
-                        <exclude>**/MessageHiber*Test.java</exclude>
                         <exclude>**/CaveatEmptor*Test.java</exclude>
                         <exclude>**/AnnotationSchemaCreatorTest.java</exclude>
                     </excludes>

@@ -21,8 +21,7 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class SchemaCreator
-{
+public class SchemaCreator {
 
     private static final Log LOG = LogFactory.getLog( SchemaCreator.class );
 
@@ -31,8 +30,7 @@ public class SchemaCreator
     /**
      * Constructs a new instance.
      */
-    public SchemaCreator()
-    {
+    public SchemaCreator() {
         super();
     }
 
@@ -45,12 +43,12 @@ public class SchemaCreator
      * @param aCfg
      *            the configuration
      */
-    public void createDDL( File aDestDir, Configuration aCfg )
-    {
+    public void createDDL( File aDestDir, Configuration aCfg ) {
         // search for all opf the hbm files from a passed in dir
         Assert.notNull( aDestDir, "invalid dest dir for sql files" );
 
-        Assert.isTrue( ( aDestDir.exists() && aDestDir.isDirectory() ), "The dest directory is invalid" );
+        Assert.isTrue( ( aDestDir.exists() && aDestDir.isDirectory() ),
+                       "The dest directory is invalid" );
 
         createSql( createNewSqlFile( aDestDir ), aCfg );
     }
@@ -63,11 +61,9 @@ public class SchemaCreator
      *            the directory for the new file
      * @return the name of the new file
      */
-    private String createNewSqlFile( File aDestDir )
-    {
+    private String createNewSqlFile( File aDestDir ) {
         File dest = new File( aDestDir.getAbsolutePath() + "/" + FILE + ".sql" );
-        if ( dest.exists() )
-        {
+        if ( dest.exists() ) {
             LOG.error( "Overwriting previous sql file with [" + dest.getAbsolutePath() + "]" );
         }
         return dest.getAbsolutePath();
@@ -83,12 +79,11 @@ public class SchemaCreator
      *            Configuartion obejct used by the schemaexport
      *            process
      */
-    private void createSql( String aDestFilename, Configuration aCfg )
-    {
+    private void createSql( String aDestFilename, Configuration aCfg ) {
         SchemaExport export = new SchemaExport( aCfg );
         // export.setHaltOnError( true );
         export.setDelimiter( ";" );
         export.setOutputFile( aDestFilename );
-        export.create( false, false );
+        export.create( true, false );
     }
 }
