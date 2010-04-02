@@ -2,7 +2,7 @@
  * ScemaCreator.java created on 23 Apr 2007 18:35:39 by suggitpe for project SandBox - Hibernate
  * 
  */
-package org.suggs.sandbox.hibernate.schemaCreator;
+package org.suggs.sandbox.hibernate.support;
 
 import java.io.File;
 

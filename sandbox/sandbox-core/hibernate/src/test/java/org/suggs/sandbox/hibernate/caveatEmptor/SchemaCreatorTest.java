@@ -2,7 +2,7 @@
  * SchemaCreatorTest.java created on 24 Apr 2007 18:21:26 by suggitpe for project SandBox - Hibernate
  * 
  */
-package org.suggs.sandbox.hibernate.schemaCreator;
+package org.suggs.sandbox.hibernate.caveatEmptor;
 
 import org.suggs.sandbox.hibernate.caveatEmptor.Address;
 import org.suggs.sandbox.hibernate.caveatEmptor.BankAccount;
@@ -15,6 +15,7 @@ import org.suggs.sandbox.hibernate.caveatEmptor.Item;
 import org.suggs.sandbox.hibernate.caveatEmptor.User;
 import org.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
 import org.suggs.sandbox.hibernate.chapter2.Message;
+import org.suggs.sandbox.hibernate.support.SchemaCreator;
 
 import java.io.File;
 import java.io.IOException;
