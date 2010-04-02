@@ -91,7 +91,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
         runGenericTest( createBasicCreateTest() );
     }
 
-    protected abstract IHibernateIntegrationTestCallback createBasicCreateTest();
+    protected abstract HibernateIntegrationTestCallback createBasicCreateTest();
 
     @Test
     public void basicReadOperationsInstantiatesCorrectObject() {
@@ -99,7 +99,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
         runGenericTest( createBasicReadTest() );
     }
 
-    protected abstract IHibernateIntegrationTestCallback createBasicReadTest();
+    protected abstract HibernateIntegrationTestCallback createBasicReadTest();
 
     @Test
     public void basicUpdateOperationsUpdatesCorrectObject() {
@@ -107,7 +107,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
         runGenericTest( createBasicUpdateTest() );
     }
 
-    protected abstract IHibernateIntegrationTestCallback createBasicUpdateTest();
+    protected abstract HibernateIntegrationTestCallback createBasicUpdateTest();
 
     @Test
     public void basicDeleteOperationsDeletesCorrectObject() {
@@ -115,7 +115,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
         runGenericTest( createBasicUpdateTest() );
     }
 
-    protected abstract IHibernateIntegrationTestCallback createBasicDeleteTest();
+    protected abstract HibernateIntegrationTestCallback createBasicDeleteTest();
 
     /**
      * Executes the called back around a transaction.
@@ -137,7 +137,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
      * 
      * @param aCallback
      */
-    protected void runGenericTest( IHibernateIntegrationTestCallback aCallback ) {
+    protected void runGenericTest( HibernateIntegrationTestCallback aCallback ) {
         Session session = sessionfactory.openSession();
 
         Transaction trans = session.beginTransaction();

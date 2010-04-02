@@ -5,7 +5,7 @@
 package org.suggs.sandbox.hibernate.timestamps;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
-import org.suggs.sandbox.hibernate.support.IHibernateIntegrationTestCallback;
+import org.suggs.sandbox.hibernate.support.HibernateIntegrationTestCallback;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,8 +61,8 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicCreateTest()
      */
     @Override
-    protected IHibernateIntegrationTestCallback createBasicCreateTest() {
-        return new IHibernateIntegrationTestCallback() {
+    protected HibernateIntegrationTestCallback createBasicCreateTest() {
+        return new HibernateIntegrationTestCallback() {
 
             TimestampedEntity entity = buildTimeStampedEntityTemplate();
 
@@ -90,8 +90,8 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicDeleteTest()
      */
     @Override
-    protected IHibernateIntegrationTestCallback createBasicDeleteTest() {
-        return new IHibernateIntegrationTestCallback() {
+    protected HibernateIntegrationTestCallback createBasicDeleteTest() {
+        return new HibernateIntegrationTestCallback() {
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -120,8 +120,8 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicReadTest()
      */
     @Override
-    protected IHibernateIntegrationTestCallback createBasicReadTest() {
-        return new IHibernateIntegrationTestCallback() {
+    protected HibernateIntegrationTestCallback createBasicReadTest() {
+        return new HibernateIntegrationTestCallback() {
 
             private Long theId = Long.valueOf( 0L );
             TimestampedEntity entity = buildTimeStampedEntityTemplate();
@@ -156,8 +156,8 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicUpdateTest()
      */
     @Override
-    protected IHibernateIntegrationTestCallback createBasicUpdateTest() {
-        return new IHibernateIntegrationTestCallback() {
+    protected HibernateIntegrationTestCallback createBasicUpdateTest() {
+        return new HibernateIntegrationTestCallback() {
 
             TimestampedEntity entity = buildTimeStampedEntityTemplate();
             TimestampedEntity clone = new TimestampedEntity( entity.getSomeString(),
@@ -195,7 +195,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
 
     @Test
     public void creationOfNewObjectPopulatesCreateAndUpdateDatesAndThatTheyAreSameValue() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             TimestampedEntity entity = buildTimeStampedEntityTemplate();
 
@@ -227,7 +227,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
 
     @Test
     public void updateOfExistingObjectPopulatesUpdateDateAndThatCreateDateDiffers() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             TimestampedEntity entity = buildTimeStampedEntityTemplate();
 

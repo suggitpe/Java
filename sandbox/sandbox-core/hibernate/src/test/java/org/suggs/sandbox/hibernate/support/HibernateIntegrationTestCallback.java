@@ -1,5 +1,5 @@
 /*
- * IHibernateIntegrationTestCallback.java created on 25 Mar 2010 16:41:13 by suggitpe for project sandbox-hibernate
+ * HibernateIntegrationTestCallback.java created on 25 Mar 2010 16:41:13 by suggitpe for project sandbox-hibernate
  * 
  */
 package org.suggs.sandbox.hibernate.support;
@@ -15,7 +15,7 @@ import org.hibernate.Session;
  * @author suggitpe
  * @version 1.0 25 Mar 2010
  */
-public interface IHibernateIntegrationTestCallback {
+public interface HibernateIntegrationTestCallback {
 
     /**
      * Run before the test execution.

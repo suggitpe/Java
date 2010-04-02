@@ -1,11 +1,11 @@
 /*
- * HibernateCompositeKeyPersistenceTest.java created on 18 Mar 2010 20:32:32 by suggitpe for project sandbox-hibernate
+ * HibernateCompositeKeyPersistenceIntegrationTest.java created on 18 Mar 2010 20:32:32 by suggitpe for project sandbox-hibernate
  * 
  */
 package org.suggs.sandbox.hibernate.compositekeys;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
-import org.suggs.sandbox.hibernate.support.IHibernateIntegrationTestCallback;
+import org.suggs.sandbox.hibernate.support.HibernateIntegrationTestCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
  * @version 1.0 18 Mar 2010
  */
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-compositekeys.xml" })
-public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernateIntegrationTest {
+public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSimpleHibernateIntegrationTest {
 
     @Override
     protected void cleanUpData( Session aSession ) {
@@ -55,8 +55,8 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicCreateTest()
      */
     @Override
-    protected IHibernateIntegrationTestCallback createBasicCreateTest() {
-        return new IHibernateIntegrationTestCallback() {
+    protected HibernateIntegrationTestCallback createBasicCreateTest() {
+        return new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject obj = buildEntityObject( key );
@@ -86,8 +86,8 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicDeleteTest()
      */
     @Override
-    protected IHibernateIntegrationTestCallback createBasicDeleteTest() {
-        return new IHibernateIntegrationTestCallback() {
+    protected HibernateIntegrationTestCallback createBasicDeleteTest() {
+        return new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject obj = buildEntityObject( key );
@@ -115,8 +115,8 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicReadTest()
      */
     @Override
-    protected IHibernateIntegrationTestCallback createBasicReadTest() {
-        return new IHibernateIntegrationTestCallback() {
+    protected HibernateIntegrationTestCallback createBasicReadTest() {
+        return new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject obj = buildEntityObject( key );
@@ -146,8 +146,8 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicUpdateTest()
      */
     @Override
-    protected IHibernateIntegrationTestCallback createBasicUpdateTest() {
-        return new IHibernateIntegrationTestCallback() {
+    protected HibernateIntegrationTestCallback createBasicUpdateTest() {
+        return new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject obj = buildEntityObject( key );
@@ -180,7 +180,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
     @Test
     public void createEntityObjectInTable() {
 
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
@@ -205,7 +205,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
 
     @Test
     public void createEntityWithNullDataInTable() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
@@ -228,7 +228,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
 
     @Test
     public void createEntityWithNullKeyInTable() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
@@ -251,7 +251,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
 
     @Test
     public void retrieveEntityFromTableWithGet() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
@@ -276,7 +276,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
 
     @Test
     public void retrieveEntityWithNullDataFromTableWithGet() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
@@ -308,7 +308,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
      */
     @Test
     public void retrieveEntityWithNullKeyFromTableWithGetReturnsNull_HibernateIssue() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
@@ -341,7 +341,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
      */
     @Test
     public void retrieveEntityWithNullKeyFromTableWithCriteriaReturnsNull_HibernateIssue() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
@@ -378,7 +378,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
      */
     @Test
     public void retrieveEntityWithNullKeyFromTableWithQbeReturnsNull_HibernateIssue() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
@@ -415,7 +415,7 @@ public class HibernateCompositeKeyPersistenceTest extends AbstractSimpleHibernat
      */
     @Test
     public void retrieveEntityWithNullKeyFromTableWithHqlReturnsNull_HibernateIssue() {
-        runGenericTest( new IHibernateIntegrationTestCallback() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
 
             EntityKey key = buildEntityKey();
             EntityObject object = buildEntityObject( key );
