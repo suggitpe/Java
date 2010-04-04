@@ -4,12 +4,12 @@
  */
 package org.suggs.sandbox.hibernate;
 
+import org.suggs.sandbox.hibernate.basicentity.MessageHibernateAnnotationDaoTest;
+import org.suggs.sandbox.hibernate.basicentity.MessageHibernateHbmDaoTest;
 import org.suggs.sandbox.hibernate.caveatEmptor.CaveatEmptorAnnotationObjectTest;
 import org.suggs.sandbox.hibernate.caveatEmptor.CaveatEmptorAnnotationRelationshipTest;
 import org.suggs.sandbox.hibernate.caveatEmptor.CaveatEmptorHbmObjectTest;
 import org.suggs.sandbox.hibernate.caveatEmptor.CaveatEmptorHbmRelationshipTest;
-import org.suggs.sandbox.hibernate.chapter2.MessageHibernateAnnotationDaoTest;
-import org.suggs.sandbox.hibernate.chapter2.MessageHibernateHbmDaoTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -25,5 +25,4 @@ import org.junit.runners.Suite;
                       CaveatEmptorHbmObjectTest.class, CaveatEmptorHbmRelationshipTest.class,
                       CaveatEmptorAnnotationObjectTest.class,
                       CaveatEmptorAnnotationRelationshipTest.class })
-public class AllTests
-{}
+public class AllTests {}

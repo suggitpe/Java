@@ -4,17 +4,8 @@
  */
 package org.suggs.sandbox.hibernate.caveatEmptor;
 
-import org.suggs.sandbox.hibernate.caveatEmptor.Address;
-import org.suggs.sandbox.hibernate.caveatEmptor.BankAccount;
-import org.suggs.sandbox.hibernate.caveatEmptor.Bid;
-import org.suggs.sandbox.hibernate.caveatEmptor.BillingDetails;
-import org.suggs.sandbox.hibernate.caveatEmptor.Category;
-import org.suggs.sandbox.hibernate.caveatEmptor.Comment;
-import org.suggs.sandbox.hibernate.caveatEmptor.CreditCard;
-import org.suggs.sandbox.hibernate.caveatEmptor.Item;
-import org.suggs.sandbox.hibernate.caveatEmptor.User;
+import org.suggs.sandbox.hibernate.basicentity.Message;
 import org.suggs.sandbox.hibernate.caveatEmptor.support.AbstractPersistentBaseClass;
-import org.suggs.sandbox.hibernate.chapter2.Message;
 import org.suggs.sandbox.hibernate.support.SchemaCreator;
 
 import java.io.File;

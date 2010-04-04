@@ -2,7 +2,7 @@
  * AbstractMessageHibernateDaoTest.java created on 21 May 2007 18:47:27 by suggitpe for project SandBox - Hibernate
  * 
  */
-package org.suggs.sandbox.hibernate.chapter2;
+package org.suggs.sandbox.hibernate.basicentity;
 
 import org.suggs.sandbox.hibernate.support.AbstractHibernateSpringTest;
 
@@ -28,16 +28,14 @@ import org.hibernate.criterion.Restrictions;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateSpringTest
-{
+public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateSpringTest {
 
     private static final Log LOG = LogFactory.getLog( AbstractMessageHibernateDaoTest.class );
 
     /**
      * Constructs a new instance.
      */
-    public AbstractMessageHibernateDaoTest()
-    {
+    public AbstractMessageHibernateDaoTest() {
         super();
     }
 
@@ -45,16 +43,14 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
      * @see org.suggs.sandbox.hibernate.common.AbstractHibernateSpringTest#doCleanUpOldData()
      */
     @SuppressWarnings("unchecked")
-    protected void doCleanUpOldData()
-    {
+    protected void doCleanUpOldData() {
         Session s = getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
 
         Criteria c = s.createCriteria( Message.class );
         List res = c.list();
 
-        for ( Iterator i = res.iterator(); i.hasNext(); )
-        {
+        for ( Iterator i = res.iterator(); i.hasNext(); ) {
             Message m = (Message) i.next();
             LOG.debug( "deleting message [" + m.getId() + "]" );
             s.delete( m );
@@ -68,8 +64,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
      * Test to create a new Message object but not to save it to the
      * datbase.
      */
-    public void testMessage()
-    {
+    public void testMessage() {
         LOG.info( "----------------------------------- testMessage start" );
         LOG.debug( "Testing message creation" );
         Message m = new Message( "This is a test" );
@@ -81,29 +76,22 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
      * Test to create a new object and the associate it with the
      * peristant context.
      */
-    public void testNewObject()
-    {
+    public void testNewObject() {
 
-        runTest( new TestCallback()
-        {
+        runTest( new TestCallback() {
 
             @SuppressWarnings("unchecked")
-            public Class[] getClassesForCleaning()
-            {
+            public Class[] getClassesForCleaning() {
                 return new Class[] { Message.class };
             }
 
-            public String getTestName()
-            {
+            public String getTestName() {
                 return "testNewObject";
             }
 
-            public void preTestSetup( Session aSession )
-            {
-            }
+            public void preTestSetup( Session aSession ) {}
 
-            public void runTest( Session aSession )
-            {
+            public void runTest( Session aSession ) {
                 Message msg = new Message( "Hello world" );
                 aSession.save( msg );
                 LOG.debug( "New object created [" + msg.toString() + "]" );
@@ -116,31 +104,25 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
      * Test to update an existing object in the database and then save
      * down the resultant state to the database.
      */
-    public void testUpdatingObject()
-    {
-        runTest( new TestCallback()
-        {
+    public void testUpdatingObject() {
+        runTest( new TestCallback() {
 
             @SuppressWarnings("unchecked")
-            public Class[] getClassesForCleaning()
-            {
+            public Class[] getClassesForCleaning() {
                 return new Class[] { Message.class };
             }
 
-            public String getTestName()
-            {
+            public String getTestName() {
                 return "testUpdatingObject";
             }
 
-            public void preTestSetup( Session aSession )
-            {
+            public void preTestSetup( Session aSession ) {
                 Message m = new Message( "This is a message to be updated" );
                 aSession.save( m );
             }
 
             @SuppressWarnings("unchecked")
-            public void runTest( Session aSession )
-            {
+            public void runTest( Session aSession ) {
                 Criteria c = aSession.createCriteria( Message.class );
                 c.add( Restrictions.like( "text", "This is a message%" ) );
                 List l = c.list();
@@ -165,30 +147,24 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
     /**
      * Test the extraction and iteraton of a table is objects
      */
-    public void testGettingDatabaseObjects()
-    {
-        runTest( new TestCallback()
-        {
+    public void testGettingDatabaseObjects() {
+        runTest( new TestCallback() {
 
             @SuppressWarnings("unchecked")
-            public Class[] getClassesForCleaning()
-            {
+            public Class[] getClassesForCleaning() {
                 return new Class[] { Message.class };
             }
 
-            public String getTestName()
-            {
+            public String getTestName() {
                 return "testGettingDatabaseObjects";
             }
 
-            public void preTestSetup( Session aSession )
-            {
+            public void preTestSetup( Session aSession ) {
                 addTestMessages( aSession );
             }
 
             @SuppressWarnings("unchecked")
-            public void runTest( Session aSession )
-            {
+            public void runTest( Session aSession ) {
                 // use a query
                 LOG.debug( "Testing query approach" );
                 Query q = aSession.createQuery( "from Message" );
@@ -209,30 +185,24 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
      * 
      *
      */
-    public void testHqlQuery()
-    {
-        runTest( new TestCallback()
-        {
+    public void testHqlQuery() {
+        runTest( new TestCallback() {
 
             @SuppressWarnings("unchecked")
-            public Class[] getClassesForCleaning()
-            {
+            public Class[] getClassesForCleaning() {
                 return new Class[] { Message.class };
             }
 
-            public String getTestName()
-            {
+            public String getTestName() {
                 return "testHqlQuery";
             }
 
-            public void preTestSetup( Session aSession )
-            {
+            public void preTestSetup( Session aSession ) {
                 addTestMessages( aSession );
             }
 
             @SuppressWarnings("unchecked")
-            public void runTest( Session aSession )
-            {
+            public void runTest( Session aSession ) {
                 LOG.debug( "Test getting unique result with a HQl" );
                 Collection<String> col = new ArrayList<String>();
                 col.add( "Test message [1]" );
@@ -240,10 +210,8 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
 
                 StringBuffer query = new StringBuffer( "from Message as msg where msg.text in (" );
                 Object[] params = col.toArray();
-                for ( int i = 0; i < params.length; ++i )
-                {
-                    if ( i != 0 )
-                    {
+                for ( int i = 0; i < params.length; ++i ) {
+                    if ( i != 0 ) {
                         query.append( "," );
                     }
                     query.append( ":colParam" ).append( i );
@@ -252,8 +220,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
 
                 LOG.debug( "query: " + query.toString() );
                 Query h = aSession.createQuery( query.toString() );
-                for ( int i = 0; i < params.length; ++i )
-                {
+                for ( int i = 0; i < params.length; ++i ) {
                     h.setParameter( "colParam" + i, params[i] );
                 }
 
@@ -269,15 +236,12 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
      * 
      * @param aSession
      */
-    private void addTestMessages( Session aSession )
-    {
+    private void addTestMessages( Session aSession ) {
         int numMsgs = 4;
         Message last = null;
-        for ( int i = 0; i < numMsgs; ++i )
-        {
+        for ( int i = 0; i < numMsgs; ++i ) {
             Message m = new Message( "Test message [" + i + "]" );
-            if ( i != 0 )
-            {
+            if ( i != 0 ) {
                 m.setNextMessage( last );
             }
             last = m;
@@ -292,10 +256,8 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
      *            The list from which to do the dump.
      */
     @SuppressWarnings("unchecked")
-    private void dumpListContents( List aList )
-    {
-        for ( Iterator i = aList.iterator(); i.hasNext(); )
-        {
+    private void dumpListContents( List aList ) {
+        for ( Iterator i = aList.iterator(); i.hasNext(); ) {
             Message m = (Message) i.next();
             LOG.debug( m.toString() );
         }
