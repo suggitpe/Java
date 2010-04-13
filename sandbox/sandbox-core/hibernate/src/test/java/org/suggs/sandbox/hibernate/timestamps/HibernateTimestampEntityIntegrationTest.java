@@ -63,7 +63,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     protected HibernateIntegrationTestCallback createBasicCreateTest() {
         return new HibernateIntegrationTestCallback() {
 
-            TimestampedEntity entity = buildTimeStampedEntityTemplate();
+            TimestampedEntity entity = buildEntityTemplate();
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -94,7 +94,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
 
             @Override
             public void beforeTest( Session aSession ) {
-                aSession.save( buildTimeStampedEntityTemplate() );
+                aSession.save( buildEntityTemplate() );
                 verifyEntityCount( aSession, 1L );
                 debugTimestampedEntities( aSession );
             }
@@ -123,7 +123,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
         return new HibernateIntegrationTestCallback() {
 
             private Long theId = Long.valueOf( 0L );
-            TimestampedEntity entity = buildTimeStampedEntityTemplate();
+            TimestampedEntity entity = buildEntityTemplate();
             TimestampedEntity readEntity = null;
 
             @SuppressWarnings("boxing")
@@ -158,7 +158,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     protected HibernateIntegrationTestCallback createBasicUpdateTest() {
         return new HibernateIntegrationTestCallback() {
 
-            TimestampedEntity entity = buildTimeStampedEntityTemplate();
+            TimestampedEntity entity = buildEntityTemplate();
             TimestampedEntity clone = new TimestampedEntity( entity.getSomeString(),
                                                              entity.getSomeDate(),
                                                              entity.getSomeInteger() );
@@ -196,7 +196,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     public void creationOfNewObjectPopulatesCreateAndUpdateDatesAndThatTheyAreSameValue() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            TimestampedEntity entity = buildTimeStampedEntityTemplate();
+            TimestampedEntity entity = buildEntityTemplate();
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -228,7 +228,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     public void updateOfExistingObjectPopulatesUpdateDateAndThatCreateDateDiffers() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            TimestampedEntity entity = buildTimeStampedEntityTemplate();
+            TimestampedEntity entity = buildEntityTemplate();
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -255,7 +255,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
         } );
     }
 
-    private TimestampedEntity buildTimeStampedEntityTemplate() {
+    private TimestampedEntity buildEntityTemplate() {
         return new TimestampedEntity( "deleteMe", Calendar.getInstance().getTime(), Integer.valueOf( 9876 ) );
     }
 
