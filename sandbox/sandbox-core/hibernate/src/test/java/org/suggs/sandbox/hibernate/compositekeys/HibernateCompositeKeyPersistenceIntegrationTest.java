@@ -27,8 +27,7 @@ import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
 /**
- * Test to verify how Hibernate operates when using composite keys
- * with persistence and retrieval.
+ * Test to verify how Hibernate operates when using composite keys with persistence and retrieval.
  * 
  * @author suggitpe
  * @version 1.0 18 Mar 2010
@@ -301,10 +300,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     }
 
     /**
-     * This test highlights and issue with the way that Hibernate
-     * deals with null values in keys. If this test ever fails it
-     * means that now Hibernate deals with null values in composite
-     * keys.
+     * This test highlights and issue with the way that Hibernate deals with null values in keys. If this test
+     * ever fails it means that now Hibernate deals with null values in composite keys.
      */
     @Test
     public void retrieveEntityWithNullKeyFromTableWithGetReturnsNull_HibernateIssue() {
@@ -334,10 +331,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     }
 
     /**
-     * This test highlights and issue with the way that Hibernate
-     * deals with null values in keys. If this test ever fails it
-     * means that now Hibernate deals with null values in composite
-     * keys.
+     * This test highlights and issue with the way that Hibernate deals with null values in keys. If this test
+     * ever fails it means that now Hibernate deals with null values in composite keys.
      */
     @Test
     public void retrieveEntityWithNullKeyFromTableWithCriteriaReturnsNull_HibernateIssue() {
@@ -371,10 +366,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     }
 
     /**
-     * This test highlights and issue with the way that Hibernate
-     * deals with null values in keys. If this test ever fails it
-     * means that now Hibernate deals with null values in composite
-     * keys.
+     * This test highlights and issue with the way that Hibernate deals with null values in keys. If this test
+     * ever fails it means that now Hibernate deals with null values in composite keys.
      */
     @Test
     public void retrieveEntityWithNullKeyFromTableWithQbeReturnsNull_HibernateIssue() {
@@ -408,10 +401,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     }
 
     /**
-     * This test highlights and issue with the way that Hibernate
-     * deals with null values in keys. If this test ever fails it
-     * means that now Hibernate deals with null values in composite
-     * keys.
+     * This test highlights and issue with the way that Hibernate deals with null values in keys. If this test
+     * ever fails it means that now Hibernate deals with null values in composite keys.
      */
     @Test
     public void retrieveEntityWithNullKeyFromTableWithHqlReturnsNull_HibernateIssue() {
@@ -469,8 +460,7 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     }
 
     private void verifyEntityCount( Session aSession, long aCountOfEntities ) {
-        Long count = (Long) aSession.createQuery( "select count(*) from EntityObject" )
-            .uniqueResult();
+        Long count = (Long) aSession.createQuery( "select count(*) from EntityObject" ).uniqueResult();
         assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
     }
 

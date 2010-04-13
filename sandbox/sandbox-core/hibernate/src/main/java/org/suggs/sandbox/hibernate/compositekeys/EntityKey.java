@@ -15,8 +15,7 @@ import javax.persistence.Embeddable;
  * @version 1.0 18 Mar 2010
  */
 @Embeddable
-public class EntityKey implements Serializable
-{
+public class EntityKey implements Serializable {
 
     String keyOne;
     String keyTwo;
@@ -27,8 +26,7 @@ public class EntityKey implements Serializable
      * 
      * @return Returns the keyOne.
      */
-    public String getKeyOne()
-    {
+    public String getKeyOne() {
         return keyOne;
     }
 
@@ -38,8 +36,7 @@ public class EntityKey implements Serializable
      * @param aKeyOne
      *            The keyOne to set.
      */
-    public void setKeyOne( String aKeyOne )
-    {
+    public void setKeyOne( String aKeyOne ) {
         keyOne = aKeyOne;
     }
 
@@ -48,8 +45,7 @@ public class EntityKey implements Serializable
      * 
      * @return Returns the keyTwo.
      */
-    public String getKeyTwo()
-    {
+    public String getKeyTwo() {
         return keyTwo;
     }
 
@@ -59,8 +55,7 @@ public class EntityKey implements Serializable
      * @param aKeyTwo
      *            The keyTwo to set.
      */
-    public void setKeyTwo( String aKeyTwo )
-    {
+    public void setKeyTwo( String aKeyTwo ) {
         keyTwo = aKeyTwo;
     }
 
@@ -69,8 +64,7 @@ public class EntityKey implements Serializable
      * 
      * @return Returns the keyThree.
      */
-    public String getKeyThree()
-    {
+    public String getKeyThree() {
         return keyThree;
     }
 
@@ -80,8 +74,7 @@ public class EntityKey implements Serializable
      * @param aKeyThree
      *            The keyThree to set.
      */
-    public void setKeyThree( String aKeyThree )
-    {
+    public void setKeyThree( String aKeyThree ) {
         keyThree = aKeyThree;
     }
 
@@ -89,8 +82,7 @@ public class EntityKey implements Serializable
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ( ( keyOne == null ) ? 0 : keyOne.hashCode() );
@@ -103,8 +95,7 @@ public class EntityKey implements Serializable
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object obj )
-    {
+    public boolean equals( Object obj ) {
         if ( this == obj )
             return true;
         if ( obj == null )
@@ -112,22 +103,19 @@ public class EntityKey implements Serializable
         if ( getClass() != obj.getClass() )
             return false;
         EntityKey other = (EntityKey) obj;
-        if ( keyOne == null )
-        {
+        if ( keyOne == null ) {
             if ( other.keyOne != null )
                 return false;
         }
         else if ( !keyOne.equals( other.keyOne ) )
             return false;
-        if ( keyThree == null )
-        {
+        if ( keyThree == null ) {
             if ( other.keyThree != null )
                 return false;
         }
         else if ( !keyThree.equals( other.keyThree ) )
             return false;
-        if ( keyTwo == null )
-        {
+        if ( keyTwo == null ) {
             if ( other.keyTwo != null )
                 return false;
         }

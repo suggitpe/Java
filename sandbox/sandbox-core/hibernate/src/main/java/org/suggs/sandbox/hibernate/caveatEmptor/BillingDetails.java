@@ -28,8 +28,7 @@ import javax.persistence.Table;
 @Table(name = "CE_BILLING_DETAILS")
 @Inheritance(strategy = InheritanceType.JOINED)
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_BILLING_DETAILS_SEQ")
-public abstract class BillingDetails extends AbstractPersistentBaseClass
-{
+public abstract class BillingDetails extends AbstractPersistentBaseClass {
 
     private String mOwner_;
     private String mNumber_;
@@ -39,8 +38,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
     /**
      * Constructs a new instance.
      */
-    public BillingDetails()
-    {
+    public BillingDetails() {
         super();
     }
 
@@ -52,8 +50,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * @param aCreatDate
      * @param aUser
      */
-    public BillingDetails( String aOwner, String aNumber, Date aCreatDate, User aUser )
-    {
+    public BillingDetails( String aOwner, String aNumber, Date aCreatDate, User aUser ) {
         super();
 
         mOwner_ = aOwner;
@@ -68,8 +65,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * @return the created timestamp
      */
     @Column(name = "BILLING_CREATED", nullable = false, updatable = false)
-    public Date getCreated()
-    {
+    public Date getCreated() {
         return mCreated_;
     }
 
@@ -79,8 +75,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * @param created
      *            the timestamp that the object was created
      */
-    public void setCreated( Date created )
-    {
+    public void setCreated( Date created ) {
         mCreated_ = created;
     }
 
@@ -90,8 +85,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * @return the number
      */
     @Column(name = "BILLING_NUMBER", nullable = false, length = 32)
-    public String getNumber()
-    {
+    public String getNumber() {
         return mNumber_;
     }
 
@@ -101,8 +95,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * @param number
      *            the number to set
      */
-    public void setNumber( String number )
-    {
+    public void setNumber( String number ) {
         mNumber_ = number;
     }
 
@@ -112,8 +105,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * @return the owner
      */
     @Column(name = "BILLING_OWNER", nullable = false, length = 128)
-    public String getOwner()
-    {
+    public String getOwner() {
         return mOwner_;
     }
 
@@ -123,8 +115,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * @param owner
      *            the owner to set
      */
-    public void setOwner( String owner )
-    {
+    public void setOwner( String owner ) {
         mOwner_ = owner;
     }
 
@@ -135,8 +126,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BILLING_USER_ID")
-    public User getUser()
-    {
+    public User getUser() {
         return mUser_;
     }
 
@@ -146,8 +136,7 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass
      * @param aUser
      *            the user to set
      */
-    public void setUser( User aUser )
-    {
+    public void setUser( User aUser ) {
         mUser_ = aUser;
     }
 }

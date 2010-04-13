@@ -14,16 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Class to represent a data object, using EntityKey as it's composite
- * key.
+ * Class to represent a data object, using EntityKey as it's composite key.
  * 
  * @author suggitpe
  * @version 1.0 18 Mar 2010
  */
 @Entity
 @Table(name = "ENTITY_OBJECT")
-public class EntityObject implements Serializable
-{
+public class EntityObject implements Serializable {
 
     EntityKey key;
     String dataOne;
@@ -35,12 +33,10 @@ public class EntityObject implements Serializable
      * @return Returns the key.
      */
     @Id
-    @AttributeOverrides( {
-                          @AttributeOverride(name = "keyOne", column = @Column(name = "KEY_ONE")),
+    @AttributeOverrides( { @AttributeOverride(name = "keyOne", column = @Column(name = "KEY_ONE")),
                           @AttributeOverride(name = "keyTwo", column = @Column(name = "KEY_TWO")),
                           @AttributeOverride(name = "keyThree", column = @Column(name = "KET_THREE")) })
-    public EntityKey getKey()
-    {
+    public EntityKey getKey() {
         return key;
     }
 
@@ -50,8 +46,7 @@ public class EntityObject implements Serializable
      * @param aKey
      *            The key to set.
      */
-    public void setKey( EntityKey aKey )
-    {
+    public void setKey( EntityKey aKey ) {
         key = aKey;
     }
 
@@ -61,8 +56,7 @@ public class EntityObject implements Serializable
      * @return Returns the dataOne.
      */
     @Column(name = "DATA_ONE", nullable = true, length = 64)
-    public String getDataOne()
-    {
+    public String getDataOne() {
         return dataOne;
     }
 
@@ -72,8 +66,7 @@ public class EntityObject implements Serializable
      * @param aDataOne
      *            The dataOne to set.
      */
-    public void setDataOne( String aDataOne )
-    {
+    public void setDataOne( String aDataOne ) {
         dataOne = aDataOne;
     }
 
@@ -83,8 +76,7 @@ public class EntityObject implements Serializable
      * @return Returns the dataTwo.
      */
     @Column(name = "DATA_TWO", nullable = true, length = 64)
-    public String getDataTwo()
-    {
+    public String getDataTwo() {
         return dataTwo;
     }
 
@@ -94,8 +86,7 @@ public class EntityObject implements Serializable
      * @param aDataTwo
      *            The dataTwo to set.
      */
-    public void setDataTwo( String aDataTwo )
-    {
+    public void setDataTwo( String aDataTwo ) {
         dataTwo = aDataTwo;
     }
 
@@ -103,8 +94,7 @@ public class EntityObject implements Serializable
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ( ( dataOne == null ) ? 0 : dataOne.hashCode() );
@@ -117,8 +107,7 @@ public class EntityObject implements Serializable
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object obj )
-    {
+    public boolean equals( Object obj ) {
         if ( this == obj )
             return true;
         if ( obj == null )
@@ -126,22 +115,19 @@ public class EntityObject implements Serializable
         if ( getClass() != obj.getClass() )
             return false;
         EntityObject other = (EntityObject) obj;
-        if ( dataOne == null )
-        {
+        if ( dataOne == null ) {
             if ( other.dataOne != null )
                 return false;
         }
         else if ( !dataOne.equals( other.dataOne ) )
             return false;
-        if ( dataTwo == null )
-        {
+        if ( dataTwo == null ) {
             if ( other.dataTwo != null )
                 return false;
         }
         else if ( !dataTwo.equals( other.dataTwo ) )
             return false;
-        if ( key == null )
-        {
+        if ( key == null ) {
             if ( other.key != null )
                 return false;
         }

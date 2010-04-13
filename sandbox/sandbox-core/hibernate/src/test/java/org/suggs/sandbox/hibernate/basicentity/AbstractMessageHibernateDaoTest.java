@@ -61,8 +61,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
     }
 
     /**
-     * Test to create a new Message object but not to save it to the
-     * datbase.
+     * Test to create a new Message object but not to save it to the datbase.
      */
     public void testMessage() {
         LOG.info( "----------------------------------- testMessage start" );
@@ -73,8 +72,7 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
     }
 
     /**
-     * Test to create a new object and the associate it with the
-     * peristant context.
+     * Test to create a new object and the associate it with the peristant context.
      */
     public void testNewObject() {
 
@@ -101,8 +99,8 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
     }
 
     /**
-     * Test to update an existing object in the database and then save
-     * down the resultant state to the database.
+     * Test to update an existing object in the database and then save down the resultant state to the
+     * database.
      */
     public void testUpdatingObject() {
         runTest( new TestCallback() {
@@ -127,9 +125,8 @@ public abstract class AbstractMessageHibernateDaoTest extends AbstractHibernateS
                 c.add( Restrictions.like( "text", "This is a message%" ) );
                 List l = c.list();
 
-                Assert.isTrue( l.size() == 1,
-                               "Expecting 1 object in the database but we actually got ["
-                                               + l.size() + "]" );
+                Assert.isTrue( l.size() == 1, "Expecting 1 object in the database but we actually got ["
+                                              + l.size() + "]" );
                 Message m = (Message) l.get( 0 );
                 LOG.debug( "current text = [" + m.getText() + "]" );
                 m.setText( "This is the changed text for message obj" );

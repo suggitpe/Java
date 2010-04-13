@@ -4,7 +4,6 @@
  */
 package org.suggs.sandbox.hibernate.timestamps;
 
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
@@ -13,8 +12,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 /**
- * Abstract base class for IDs, optimistic locking version and
- * create/update dates.
+ * Abstract base class for IDs, optimistic locking version and create/update dates.
  * 
  * @author suggitpe
  * @version 1.0 26 Mar 2010
@@ -94,8 +92,8 @@ public class EntityBase implements TimestampAuditable {
      */
     @Override
     public String toString() {
-        return "EntityBase [id=" + id + ", version=" + version + ", timestampAuditInfo="
-               + timestampAuditInfo + "]";
+        return "EntityBase [id=" + id + ", version=" + version + ", timestampAuditInfo=" + timestampAuditInfo
+               + "]";
     }
 
     /**

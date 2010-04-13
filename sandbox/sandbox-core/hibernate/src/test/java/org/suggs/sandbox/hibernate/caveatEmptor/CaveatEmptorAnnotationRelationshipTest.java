@@ -10,14 +10,12 @@ package org.suggs.sandbox.hibernate.caveatEmptor;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class CaveatEmptorAnnotationRelationshipTest extends AbstractCaveatEmptorRelationshipTest
-{
+public class CaveatEmptorAnnotationRelationshipTest extends AbstractCaveatEmptorRelationshipTest {
 
     /**
      * Constructs a new instance.
      */
-    public CaveatEmptorAnnotationRelationshipTest()
-    {
+    public CaveatEmptorAnnotationRelationshipTest() {
         super();
     }
 
@@ -25,8 +23,7 @@ public class CaveatEmptorAnnotationRelationshipTest extends AbstractCaveatEmptor
      * @see org.springframework.test.AbstractSingleSpringContextTests#getConfigLocations()
      */
     @Override
-    protected String[] getConfigLocations()
-    {
+    protected String[] getConfigLocations() {
         return new String[] { "xml/ut-annotation-caveatemptor-relationships.xml" };
     }
 

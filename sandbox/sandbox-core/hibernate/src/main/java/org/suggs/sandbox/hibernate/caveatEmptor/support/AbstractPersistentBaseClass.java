@@ -12,15 +12,14 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 /**
- * Abstract base class for all persistent hibernate objecs to use.
- * This class enforces the use of the correct database identity logic.
+ * Abstract base class for all persistent hibernate objecs to use. This class enforces the use of the correct
+ * database identity logic.
  * 
  * @author suggitpe
  * @version 1.0 12 Apr 2007
  */
 @MappedSuperclass
-public abstract class AbstractPersistentBaseClass
-{
+public abstract class AbstractPersistentBaseClass {
 
     private long mId_;
     private long mVer_;
@@ -28,9 +27,7 @@ public abstract class AbstractPersistentBaseClass
     /**
      * Constructs a new instance.
      */
-    public AbstractPersistentBaseClass()
-    {
-    }
+    public AbstractPersistentBaseClass() {}
 
     /**
      * @return the id
@@ -38,26 +35,22 @@ public abstract class AbstractPersistentBaseClass
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CE_SEQ_STR")
-    public long getId()
-    {
+    public long getId() {
         return mId_;
     }
 
-    protected void setId( long aId )
-    {
+    protected void setId( long aId ) {
         mId_ = aId;
     }
 
     /**
      * Getter for the version
      * 
-     * @return the version of the object (database version for
-     *         locking)
+     * @return the version of the object (database version for locking)
      */
     @Version
     @Column(name = "OPT_LOCK_VER")
-    public long getVersion()
-    {
+    public long getVersion() {
         return mVer_;
     }
 
@@ -67,8 +60,7 @@ public abstract class AbstractPersistentBaseClass
      * @param aVersion
      *            teh version to set
      */
-    protected void setVersion( long aVersion )
-    {
+    protected void setVersion( long aVersion ) {
         mVer_ = aVersion;
     }
 

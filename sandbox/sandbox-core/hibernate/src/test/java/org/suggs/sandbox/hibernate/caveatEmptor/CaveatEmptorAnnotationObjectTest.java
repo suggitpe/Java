@@ -5,20 +5,17 @@
 package org.suggs.sandbox.hibernate.caveatEmptor;
 
 /**
- * 
  * Test object
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class CaveatEmptorAnnotationObjectTest extends AbstractCaveatEmptorObjectTest
-{
+public class CaveatEmptorAnnotationObjectTest extends AbstractCaveatEmptorObjectTest {
 
     /**
      * Constructs a new instance.
      */
-    public CaveatEmptorAnnotationObjectTest()
-    {
+    public CaveatEmptorAnnotationObjectTest() {
         super();
     }
 
@@ -26,8 +23,7 @@ public class CaveatEmptorAnnotationObjectTest extends AbstractCaveatEmptorObject
      * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#getConfigLocations()
      */
     @Override
-    protected String[] getConfigLocations()
-    {
+    protected String[] getConfigLocations() {
         return new String[] { "xml/ut-annotation-caveatemptor-objects.xml" };
     }
 

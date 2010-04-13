@@ -20,8 +20,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTest
-{
+public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTest {
 
     private static final Log LOG = LogFactory.getLog( AbstractCaveatEmptorTest.class );
 
@@ -33,38 +32,28 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
      * @return the string dumped version of the obejct
      */
     @SuppressWarnings("unchecked")
-    protected static String getObjectAsString( Object aObject )
-    {
+    protected static String getObjectAsString( Object aObject ) {
         StringBuffer buff = new StringBuffer();
         buff.append( aObject.getClass().getSimpleName() + ":" );
         Method[] meths = aObject.getClass().getMethods();
-        for ( Method m : meths )
-        {
-            if ( m.getName().startsWith( "get" ) )
-            {
+        for ( Method m : meths ) {
+            if ( m.getName().startsWith( "get" ) ) {
                 buff.append( m.getName() ).append( "[" );
                 Class c = m.getReturnType();
                 if ( c.equals( String.class ) || c.equals( Integer.class ) || c.equals( Date.class )
-                     || c.equals( Long.class ) )
-                {
-                    try
-                    {
+                     || c.equals( Long.class ) ) {
+                    try {
                         buff.append( m.invoke( aObject, new Object[] {} ) );
                     }
-                    catch ( IllegalAccessException iae )
-                    {
-                        throw new IllegalStateException( "no access to method [" + m.getName()
-                                                         + "]", iae );
+                    catch ( IllegalAccessException iae ) {
+                        throw new IllegalStateException( "no access to method [" + m.getName() + "]", iae );
 
                     }
-                    catch ( InvocationTargetException ita )
-                    {
-                        throw new IllegalStateException( "no target for method [" + m.getName()
-                                                         + "]", ita );
+                    catch ( InvocationTargetException ita ) {
+                        throw new IllegalStateException( "no target for method [" + m.getName() + "]", ita );
                     }
                 }
-                else
-                {
+                else {
                     buff.append( "???" + "{" + c.getName() + "}" );
                 }
                 buff.append( "] " );
@@ -79,8 +68,7 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
      * 
      * @return a new User
      */
-    protected User createTestUser( String aFirst, String aLast )
-    {
+    protected User createTestUser( String aFirst, String aLast ) {
         LOG.debug( "Creating a test user" );
         Address home = new Address( "dummyHomeStreet", "dummyHomeCity", "dummyHomeZip" );
         Address billing = new Address( "dummyStreet", "dummyCity", "dummyZip" );
@@ -101,14 +89,9 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
      *            the name of the catgeory
      * @return the new category
      */
-    protected Item createTestItem( String aName )
-    {
-        return new Item( aName,
-                         "dummyDesc",
-                         new Double( 1.0 ),
-                         new Double( 3.0 ),
-                         Calendar.getInstance().getTime(),
-                         Calendar.getInstance().getTime() );
+    protected Item createTestItem( String aName ) {
+        return new Item( aName, "dummyDesc", new Double( 1.0 ), new Double( 3.0 ), Calendar.getInstance()
+            .getTime(), Calendar.getInstance().getTime() );
     }
 
     /**
@@ -118,8 +101,7 @@ public abstract class AbstractCaveatEmptorTest extends AbstractHibernateSpringTe
      *            the name of the category
      * @return the new test category
      */
-    protected Category createTestCategory( String aName )
-    {
+    protected Category createTestCategory( String aName ) {
         return new Category( aName );
     }
 }

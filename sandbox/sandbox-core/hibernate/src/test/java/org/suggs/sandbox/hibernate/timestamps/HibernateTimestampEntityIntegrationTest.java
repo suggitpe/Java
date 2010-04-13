@@ -27,8 +27,7 @@ import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
 /**
- * Integration test to demonstrate how to use timestamps in a
- * Hibernate entity.
+ * Integration test to demonstrate how to use timestamps in a Hibernate entity.
  * 
  * @author suggitpe
  * @version 1.0 25 Mar 2010
@@ -257,9 +256,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     }
 
     private TimestampedEntity buildTimeStampedEntityTemplate() {
-        return new TimestampedEntity( "deleteMe",
-                                      Calendar.getInstance().getTime(),
-                                      Integer.valueOf( 9876 ) );
+        return new TimestampedEntity( "deleteMe", Calendar.getInstance().getTime(), Integer.valueOf( 9876 ) );
     }
 
     private void verifyEntityCount( Session aSession, long aCountOfEntities ) {

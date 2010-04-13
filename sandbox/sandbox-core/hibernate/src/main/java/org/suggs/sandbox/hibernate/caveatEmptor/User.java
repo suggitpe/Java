@@ -37,8 +37,7 @@ import org.springframework.util.Assert;
 @Entity
 @Table(name = "CE_USER")
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_USER_SEQ")
-public class User extends AbstractPersistentBaseClass
-{
+public class User extends AbstractPersistentBaseClass {
 
     private static final Log LOG = LogFactory.getLog( User.class );
 
@@ -59,8 +58,7 @@ public class User extends AbstractPersistentBaseClass
     /**
      * Def ctor
      */
-    public User()
-    {
+    public User() {
         super();
         mCreated_ = Calendar.getInstance().getTime();
     }
@@ -83,9 +81,8 @@ public class User extends AbstractPersistentBaseClass
      * @param aBillingAddress
      *            the users billing address
      */
-    public User( String aFirstName, String aLastName, String aUserName, String aPassword,
-                 String aEmail, Address aHomeAddress, Address aBillingAddress )
-    {
+    public User( String aFirstName, String aLastName, String aUserName, String aPassword, String aEmail,
+                 Address aHomeAddress, Address aBillingAddress ) {
         super();
         mFirstName_ = aFirstName;
         mLastName_ = aLastName;
@@ -98,13 +95,11 @@ public class User extends AbstractPersistentBaseClass
         mCreated_ = Calendar.getInstance().getTime();
         Assert.notNull( aHomeAddress, "Must set the home adress" );
         mHomeAddress_ = aHomeAddress;
-        if ( aBillingAddress == null )
-        {
+        if ( aBillingAddress == null ) {
             LOG.info( "Using home address as billing address as default" );
             mBillingAddress_ = aHomeAddress;
         }
-        else
-        {
+        else {
             mBillingAddress_ = aBillingAddress;
         }
 
@@ -116,8 +111,7 @@ public class User extends AbstractPersistentBaseClass
      * @return the set of billing details
      */
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    public Set<BillingDetails> getBillingDetails()
-    {
+    public Set<BillingDetails> getBillingDetails() {
         return mBillingDetails_;
     }
 
@@ -127,8 +121,7 @@ public class User extends AbstractPersistentBaseClass
      * @param billingDetails
      *            the billing details set
      */
-    public void setBillingDetails( Set<BillingDetails> billingDetails )
-    {
+    public void setBillingDetails( Set<BillingDetails> billingDetails ) {
         mBillingDetails_ = billingDetails;
     }
 
@@ -138,10 +131,8 @@ public class User extends AbstractPersistentBaseClass
      * @param aBillingDetails
      *            the single billing details to add
      */
-    public void addBillingDetails( BillingDetails aBillingDetails )
-    {
-        if ( aBillingDetails == null )
-        {
+    public void addBillingDetails( BillingDetails aBillingDetails ) {
+        if ( aBillingDetails == null ) {
             throw new IllegalArgumentException( "aBillingDetails is null" );
         }
         mBillingDetails_.add( aBillingDetails );
@@ -151,26 +142,22 @@ public class User extends AbstractPersistentBaseClass
      * @return items for sale
      */
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
-    public Set<Item> getItemsForSale()
-    {
+    public Set<Item> getItemsForSale() {
         return mItemsForSale_;
     }
 
     /**
      * @param aItems
      */
-    public void setItemsForSale( Set<Item> aItems )
-    {
+    public void setItemsForSale( Set<Item> aItems ) {
         mItemsForSale_ = aItems;
     }
 
     /**
      * @param aItem
      */
-    public void addItemForSale( Item aItem )
-    {
-        if ( aItem == null )
-        {
+    public void addItemForSale( Item aItem ) {
+        if ( aItem == null ) {
             throw new IllegalArgumentException( "aItem is null" );
         }
         aItem.setSeller( this );
@@ -181,26 +168,22 @@ public class User extends AbstractPersistentBaseClass
      * @return comments
      */
     @OneToMany(mappedBy = "fromUser", fetch = FetchType.LAZY)
-    public Set<Comment> getComments()
-    {
+    public Set<Comment> getComments() {
         return mComments_;
     }
 
     /**
      * @param aComments
      */
-    public void setComments( Set<Comment> aComments )
-    {
+    public void setComments( Set<Comment> aComments ) {
         mComments_ = aComments;
     }
 
     /**
      * @param aComment
      */
-    public void addComment( Comment aComment )
-    {
-        if ( aComment == null )
-        {
+    public void addComment( Comment aComment ) {
+        if ( aComment == null ) {
             throw new IllegalArgumentException( "aComment is null" );
         }
         aComment.setFromUser( this );
@@ -213,8 +196,7 @@ public class User extends AbstractPersistentBaseClass
      * @return the collection of bids that the user has made
      */
     @OneToMany(mappedBy = "bidder", fetch = FetchType.LAZY)
-    public Set<Bid> getBids()
-    {
+    public Set<Bid> getBids() {
         return mBids_;
     }
 
@@ -224,22 +206,18 @@ public class User extends AbstractPersistentBaseClass
      * @param aBids
      *            the collection of bids that the user has made
      */
-    public void setBids( Set<Bid> aBids )
-    {
+    public void setBids( Set<Bid> aBids ) {
         mBids_ = aBids;
     }
 
     /**
-     * Accessor method allowing us to add a singke bid to the
-     * collection of bids that this user has made
+     * Accessor method allowing us to add a singke bid to the collection of bids that this user has made
      * 
      * @param aBid
      *            the bid to make
      */
-    public void addBid( Bid aBid )
-    {
-        if ( aBid == null )
-        {
+    public void addBid( Bid aBid ) {
+        if ( aBid == null ) {
             throw new IllegalArgumentException( "aBid is null" );
         }
         aBid.setBidder( this );
@@ -252,8 +230,7 @@ public class User extends AbstractPersistentBaseClass
      * @return the given name
      */
     @Column(name = "USER_FIRST_NAME", nullable = false, length = 64)
-    public String getFirstName()
-    {
+    public String getFirstName() {
         return mFirstName_;
     }
 
@@ -263,8 +240,7 @@ public class User extends AbstractPersistentBaseClass
      * @param aName
      *            the given name
      */
-    public void setFirstName( String aName )
-    {
+    public void setFirstName( String aName ) {
         mFirstName_ = aName;
     }
 
@@ -274,8 +250,7 @@ public class User extends AbstractPersistentBaseClass
      * @return the last name
      */
     @Column(name = "USER_LAST_NAME", nullable = false, length = 64)
-    public String getLastName()
-    {
+    public String getLastName() {
         return mLastName_;
     }
 
@@ -285,8 +260,7 @@ public class User extends AbstractPersistentBaseClass
      * @param aName
      *            the family name
      */
-    public void setLastName( String aName )
-    {
+    public void setLastName( String aName ) {
         mLastName_ = aName;
     }
 
@@ -294,16 +268,14 @@ public class User extends AbstractPersistentBaseClass
      * @return name
      */
     @Transient
-    public String getName()
-    {
+    public String getName() {
         return mFirstName_ + " " + mLastName_;
     }
 
     /**
      * @param aName
      */
-    public void setName( String aName )
-    {
+    public void setName( String aName ) {
         StringTokenizer t = new StringTokenizer( aName );
         mFirstName_ = t.nextToken();
         mLastName_ = t.nextToken();
@@ -315,8 +287,7 @@ public class User extends AbstractPersistentBaseClass
      * @return the user name
      */
     @Column(name = "USER_USERNAME", length = 10, nullable = false, updatable = false, unique = true)
-    public String getUsername()
-    {
+    public String getUsername() {
         return mUsername_;
     }
 
@@ -326,8 +297,7 @@ public class User extends AbstractPersistentBaseClass
      * @param aName
      *            the username
      */
-    public void setUsername( String aName )
-    {
+    public void setUsername( String aName ) {
         mUsername_ = aName;
     }
 
@@ -337,12 +307,10 @@ public class User extends AbstractPersistentBaseClass
      * @return the home address
      */
     @Embedded
-    @AttributeOverrides( {
-                          @AttributeOverride(name = "street", column = @Column(name = "USER_HOME_STREET")),
+    @AttributeOverrides( { @AttributeOverride(name = "street", column = @Column(name = "USER_HOME_STREET")),
                           @AttributeOverride(name = "city", column = @Column(name = "USER_HOME_CITY")),
                           @AttributeOverride(name = "zipCode", column = @Column(name = "USER_HOME_ZIPCODE")) })
-    public Address getHomeAddress()
-    {
+    public Address getHomeAddress() {
         return mHomeAddress_;
     }
 
@@ -352,8 +320,7 @@ public class User extends AbstractPersistentBaseClass
      * @param aAddress
      *            the address to set
      */
-    public void setHomeAddress( Address aAddress )
-    {
+    public void setHomeAddress( Address aAddress ) {
         mHomeAddress_ = aAddress;
     }
 
@@ -367,8 +334,7 @@ public class User extends AbstractPersistentBaseClass
                           @AttributeOverride(name = "street", column = @Column(name = "USER_BILLING_STREET")),
                           @AttributeOverride(name = "city", column = @Column(name = "USER_BILLING_CITY")),
                           @AttributeOverride(name = "zipCode", column = @Column(name = "USER_BILLING_ZIPCODE")) })
-    public Address getBillingAddress()
-    {
+    public Address getBillingAddress() {
         return mBillingAddress_;
     }
 
@@ -378,8 +344,7 @@ public class User extends AbstractPersistentBaseClass
      * @param aAddress
      *            the address to set
      */
-    public void setBillingAddress( Address aAddress )
-    {
+    public void setBillingAddress( Address aAddress ) {
         mBillingAddress_ = aAddress;
     }
 
@@ -389,8 +354,7 @@ public class User extends AbstractPersistentBaseClass
      * @return the date that the user was created
      */
     @Column(name = "USER_CREATED", nullable = false, updatable = false)
-    public Date getCreated()
-    {
+    public Date getCreated() {
         return mCreated_;
     }
 
@@ -400,8 +364,7 @@ public class User extends AbstractPersistentBaseClass
      * @param created
      *            the date that the user was created
      */
-    protected void setCreated( Date created )
-    {
+    protected void setCreated( Date created ) {
         mCreated_ = created;
     }
 
@@ -411,8 +374,7 @@ public class User extends AbstractPersistentBaseClass
      * @return the user email address
      */
     @Column(name = "USER_EMAIL", nullable = false, length = 64)
-    public String getEmail()
-    {
+    public String getEmail() {
         return mEmail_;
     }
 
@@ -422,8 +384,7 @@ public class User extends AbstractPersistentBaseClass
      * @param email
      *            the email to set
      */
-    public void setEmail( String email )
-    {
+    public void setEmail( String email ) {
         mEmail_ = email;
     }
 
@@ -433,8 +394,7 @@ public class User extends AbstractPersistentBaseClass
      * @return the user password
      */
     @Column(name = "USER_PASSWORD", nullable = false, length = 16)
-    public String getPassword()
-    {
+    public String getPassword() {
         return mPassword_;
     }
 
@@ -444,8 +404,7 @@ public class User extends AbstractPersistentBaseClass
      * @param password
      *            the user password
      */
-    public void setPassword( String password )
-    {
+    public void setPassword( String password ) {
         mPassword_ = password;
     }
 
@@ -455,8 +414,7 @@ public class User extends AbstractPersistentBaseClass
      * @return the user rank
      */
     @Column(name = "USER_RANKING")
-    public Integer getRanking()
-    {
+    public Integer getRanking() {
         return mRanking_;
     }
 
@@ -466,8 +424,7 @@ public class User extends AbstractPersistentBaseClass
      * @param ranking
      *            the rank to set
      */
-    public void setRanking( Integer ranking )
-    {
+    public void setRanking( Integer ranking ) {
         mRanking_ = ranking;
     }
 }

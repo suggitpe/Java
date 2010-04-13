@@ -22,8 +22,7 @@ import org.hibernate.type.StringType;
 import org.hibernate.type.Type;
 
 /**
- * Test class that will test any method with a default set of
- * parameters for the Restrictions class.
+ * Test class that will test any method with a default set of parameters for the Restrictions class.
  * 
  * @author suggitpe
  * @version 1.0 24 Mar 2010
@@ -95,8 +94,7 @@ public class RestrictionsMethodExecutionComparitor {
             return (Criterion) aMethodToInvoke.invoke( null, params.toArray( new Object[0] ) );
         }
         catch ( Exception e ) {
-            throw new IllegalStateException( "failed to invoke method ["
-                                             + aMethodToInvoke.getName() + "]", e );
+            throw new IllegalStateException( "failed to invoke method [" + aMethodToInvoke.getName() + "]", e );
         }
     }
 }

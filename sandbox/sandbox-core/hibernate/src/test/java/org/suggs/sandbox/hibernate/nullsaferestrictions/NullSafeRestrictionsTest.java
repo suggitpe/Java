@@ -20,14 +20,11 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
- * Test fpor the nullsafe restrictions class. The core aim of this
- * class is to check that the methods implemented by this class are
- * execatly the same as that of the core Hibernate restrictions class.
- * This will ensure that as any upgrade occur, all the interface is
- * also implemented in this class. <br/>
+ * Test fpor the nullsafe restrictions class. The core aim of this class is to check that the methods
+ * implemented by this class are execatly the same as that of the core Hibernate restrictions class. This will
+ * ensure that as any upgrade occur, all the interface is also implemented in this class. <br/>
  * <br/>
- * <b>This implementation could really do with some refactoring around
- * the method execution piece.</b>
+ * <b>This implementation could really do with some refactoring around the method execution piece.</b>
  * 
  * @author suggitpe
  * @version 1.0 22 Mar 2010
@@ -85,11 +82,12 @@ public class NullSafeRestrictionsTest {
         }
     }
 
-    private boolean doBothMethodReturnSameResult( Method aMethodInRestrictions,
-                                                  Method aNullSafeMethod ) throws Exception {
+    private boolean doBothMethodReturnSameResult( Method aMethodInRestrictions, Method aNullSafeMethod )
+                    throws Exception {
 
         LOG.debug( "Testing execution of [" + aMethodInRestrictions.getName() + "]" );
-        RestrictionsMethodExecutionComparitor tester = new RestrictionsMethodExecutionComparitor( aMethodInRestrictions, aNullSafeMethod );
+        RestrictionsMethodExecutionComparitor tester = new RestrictionsMethodExecutionComparitor( aMethodInRestrictions,
+                                                                                                  aNullSafeMethod );
         return tester.compareMethods();
     }
 

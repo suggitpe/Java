@@ -15,9 +15,8 @@ import org.hibernate.EmptyInterceptor;
 import org.hibernate.type.Type;
 
 /**
- * Class to intercept all object persists and updates them with a
- * create_date/update_date time stamps just before the actual
- * persistence process.
+ * Class to intercept all object persists and updates them with a create_date/update_date time stamps just
+ * before the actual persistence process.
  * 
  * @author suggitpe
  * @version 1.0 31 Mar 2010
@@ -25,6 +24,12 @@ import org.hibernate.type.Type;
 public class TimestampAuditingInterceptor extends EmptyInterceptor {
 
     private static final Log LOG = LogFactory.getLog( TimestampAuditingInterceptor.class );
+
+    private static final String AUDIT_PROPERTY_NAME = "timestampAuditInfo";
+
+    private enum AUDIT_TYPE {
+        CREATED_ON, UPDATED_ON
+    };
 
     /**
      * Constructs a new instance.
@@ -34,49 +39,51 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
     }
 
     /**
-     * @see org.hibernate.EmptyInterceptor#onFlushDirty(java.lang.Object,
-     *      java.io.Serializable, java.lang.Object[],
-     *      java.lang.Object[], java.lang.String[],
-     *      org.hibernate.type.Type[])
+     * @see org.hibernate.EmptyInterceptor#onFlushDirty(java.lang.Object, java.io.Serializable,
+     *      java.lang.Object[], java.lang.Object[], java.lang.String[], org.hibernate.type.Type[])
      */
     @Override
-    public boolean onFlushDirty( Object entity, Serializable id, Object[] currentState,
-                                 Object[] previousState, String[] propertyNames, Type[] types ) {
-        if ( isEntityNotAuditable( entity ) ) {
+    public boolean onFlushDirty( Object aEntity, Serializable aId, Object[] aCurrentState,
+                                 Object[] aPreviousState, String[] aPropertyNames, Type[] aTypes ) {
+        if ( isNotEntityAuditable( aEntity ) ) {
             return false;
         }
         Date date = getDateTimeNow();
-        TimestampAuditInfo auditInfo = ( (TimestampAuditable) entity ).getTimestampAuditInfo();
+        TimestampAuditInfo auditInfo = ( (TimestampAuditable) aEntity ).getTimestampAuditInfo();
 
         if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Auditing existing entity with update date of [" + date + "]" );
         }
+        updateDateProperty( aCurrentState, aPropertyNames, AUDIT_TYPE.UPDATED_ON, date );
         auditInfo.setUpdateDate( date );
         return true;
     }
 
     /**
-     * @see org.hibernate.EmptyInterceptor#onSave(java.lang.Object,
-     *      java.io.Serializable, java.lang.Object[],
+     * @see org.hibernate.EmptyInterceptor#onSave(java.lang.Object, java.io.Serializable, java.lang.Object[],
      *      java.lang.String[], org.hibernate.type.Type[])
      */
     @Override
-    public boolean onSave( Object entity, Serializable id, Object[] state, String[] propertyNames,
-                           Type[] types ) {
-        if ( isEntityNotAuditable( entity ) ) {
+    public boolean onSave( Object aEntity, Serializable aId, Object[] aCurrentState, String[] aPropertyNames,
+                           Type[] aTypes ) {
+        if ( isNotEntityAuditable( aEntity ) ) {
             return false;
         }
         Date date = getDateTimeNow();
-        TimestampAuditInfo auditInfo = ( (TimestampAuditable) entity ).getTimestampAuditInfo();
+        TimestampAuditInfo auditInfo = ( (TimestampAuditable) aEntity ).getTimestampAuditInfo();
         if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Auditing new entity with create date and update date of [" + date + "]" );
         }
+
         auditInfo.setCreateDate( date );
+        updateDateProperty( aCurrentState, aPropertyNames, AUDIT_TYPE.CREATED_ON, date );
+
         auditInfo.setUpdateDate( date );
+        updateDateProperty( aCurrentState, aPropertyNames, AUDIT_TYPE.UPDATED_ON, date );
         return true;
     }
 
-    private boolean isEntityNotAuditable( Object aEntity ) {
+    private boolean isNotEntityAuditable( Object aEntity ) {
         return !( aEntity instanceof TimestampAuditable );
     }
 
@@ -84,4 +91,19 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
         return Calendar.getInstance().getTime();
     }
 
+    private void updateDateProperty( Object[] aCurrentState, String[] aPropertyNames, AUDIT_TYPE type,
+                                     Date aValue ) {
+        for ( int i = 0; i < aPropertyNames.length; ++i ) {
+            if ( AUDIT_PROPERTY_NAME.equals( aPropertyNames[i] ) ) {
+                TimestampAuditInfo info = (TimestampAuditInfo) aCurrentState[i];
+                if ( type == AUDIT_TYPE.CREATED_ON ) {
+                    info.setCreateDate( aValue );
+                }
+                else if ( type == AUDIT_TYPE.UPDATED_ON ) {
+                    info.setUpdateDate( aValue );
+                }
+                return;
+            }
+        }
+    }
 }

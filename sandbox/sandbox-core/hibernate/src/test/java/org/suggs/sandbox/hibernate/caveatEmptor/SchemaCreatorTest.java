@@ -64,8 +64,8 @@ public class SchemaCreatorTest {
     }
 
     /**
-     * Allows delegation classes to define the manner in which they
-     * construction the hibernate configuratikon object
+     * Allows delegation classes to define the manner in which they construction the hibernate configuratikon
+     * object
      * 
      * @return a Configuration object
      */

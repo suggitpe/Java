@@ -25,8 +25,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CE_COMMENT")
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_COMMENT_SEQ")
-public class Comment extends AbstractPersistentBaseClass
-{
+public class Comment extends AbstractPersistentBaseClass {
 
     private Integer mRating_;
     private String mText_;
@@ -37,8 +36,7 @@ public class Comment extends AbstractPersistentBaseClass
     /**
      * Constructs a new instance.
      */
-    public Comment()
-    {
+    public Comment() {
         super();
     }
 
@@ -48,8 +46,7 @@ public class Comment extends AbstractPersistentBaseClass
      * @return the creation timestamp
      */
     @Column(name = "CMNT_CREATED", nullable = false, updatable = false)
-    public Date getCreated()
-    {
+    public Date getCreated() {
         return mCreated_;
     }
 
@@ -59,8 +56,7 @@ public class Comment extends AbstractPersistentBaseClass
      * @param created
      *            the timestamp
      */
-    public void setCreated( Date created )
-    {
+    public void setCreated( Date created ) {
         mCreated_ = created;
     }
 
@@ -70,8 +66,7 @@ public class Comment extends AbstractPersistentBaseClass
      * @return the rating of the comment
      */
     @Column(name = "CMNT_RATING")
-    public Integer getRating()
-    {
+    public Integer getRating() {
         return mRating_;
     }
 
@@ -81,8 +76,7 @@ public class Comment extends AbstractPersistentBaseClass
      * @param rating
      *            the rating
      */
-    public void setRating( Integer rating )
-    {
+    public void setRating( Integer rating ) {
         mRating_ = rating;
     }
 
@@ -92,8 +86,7 @@ public class Comment extends AbstractPersistentBaseClass
      * @return the comment text
      */
     @Column(name = "CMNT_TEXT", length = 255)
-    public String getText()
-    {
+    public String getText() {
         return mText_;
     }
 
@@ -103,8 +96,7 @@ public class Comment extends AbstractPersistentBaseClass
      * @param text
      *            the text to set on the comment
      */
-    public void setText( String text )
-    {
+    public void setText( String text ) {
         mText_ = text;
     }
 
@@ -115,8 +107,7 @@ public class Comment extends AbstractPersistentBaseClass
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CMNT_ABOUT_ITEM_ID")
-    public Item getAboutItem()
-    {
+    public Item getAboutItem() {
         return mAboutItem_;
     }
 
@@ -126,8 +117,7 @@ public class Comment extends AbstractPersistentBaseClass
      * @param aboutItem
      *            the item that this comment refers to
      */
-    public void setAboutItem( Item aboutItem )
-    {
+    public void setAboutItem( Item aboutItem ) {
         mAboutItem_ = aboutItem;
     }
 
@@ -138,8 +128,7 @@ public class Comment extends AbstractPersistentBaseClass
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CMNT_FROM_USER_ID")
-    public User getFromUser()
-    {
+    public User getFromUser() {
         return mFromUser_;
     }
 
@@ -149,8 +138,7 @@ public class Comment extends AbstractPersistentBaseClass
      * @param fromUser
      *            the user that made the comment
      */
-    public void setFromUser( User fromUser )
-    {
+    public void setFromUser( User fromUser ) {
         mFromUser_ = fromUser;
     }
 }

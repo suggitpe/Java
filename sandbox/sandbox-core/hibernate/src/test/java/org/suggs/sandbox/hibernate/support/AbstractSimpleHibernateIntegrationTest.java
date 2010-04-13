@@ -23,8 +23,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 /**
- * Abstract test to be used in conjuction with any hibernate entity
- * test.
+ * Abstract test to be used in conjuction with any hibernate entity test.
  * 
  * @author suggitpe
  * @version 1.0 25 Mar 2010
@@ -53,8 +52,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
     }
 
     /**
-     * Perform a collection of cleanup operations within a dedicated
-     * transaction prior to any tests being run.
+     * Perform a collection of cleanup operations within a dedicated transaction prior to any tests being run.
      * 
      * @param aSession
      *            to access the hibernate layer.
@@ -62,8 +60,8 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
     protected abstract void cleanUpData( Session aSession );
 
     /**
-     * Test to create the schema for the entities under test. This is
-     * a helper method to make life easier all round.
+     * Test to create the schema for the entities under test. This is a helper method to make life easier all
+     * round.
      */
     @Test
     public void createSchema() {
@@ -132,8 +130,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
     }
 
     /**
-     * Provides a basic framework for running a Hibernate integration
-     * test against a database.
+     * Provides a basic framework for running a Hibernate integration test against a database.
      * 
      * @param aCallback
      */
@@ -185,8 +182,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
     }
 
     /**
-     * Template to allow us to execute something within the context of
-     * a transaction.
+     * Template to allow us to execute something within the context of a transaction.
      * 
      * @author suggitpe
      * @version 1.0 25 Mar 2010

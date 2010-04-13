@@ -18,11 +18,10 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.Type;
 
 /**
- * Static class to call out to the Restrictions class after assessing
- * whether the passed in attributes are actually NULL, it is
- * implemented as a proxy/decorator to the original Restrictions
- * class. If they are null it will make the relevant checks to ensure
- * that a search for null is done rather than the normal SQL operand.
+ * Static class to call out to the Restrictions class after assessing whether the passed in attributes are
+ * actually NULL, it is implemented as a proxy/decorator to the original Restrictions class. If they are null
+ * it will make the relevant checks to ensure that a search for null is done rather than the normal SQL
+ * operand.
  * 
  * @author suggitpe
  * @version 1.0 22 Mar 2010

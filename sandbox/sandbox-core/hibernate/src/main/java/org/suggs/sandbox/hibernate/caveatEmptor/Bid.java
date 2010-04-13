@@ -15,8 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 /**
- * 
  * Class to represent a Bid
  * 
  * @author suggitpe
@@ -25,8 +25,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CE_BID")
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_BID_SEQ")
-public class Bid extends AbstractPersistentBaseClass
-{
+public class Bid extends AbstractPersistentBaseClass {
 
     private Double mAmount_;
     private Date mCreated_;
@@ -36,8 +35,7 @@ public class Bid extends AbstractPersistentBaseClass
     /**
      * Constructs a new instance.
      */
-    public Bid()
-    {
+    public Bid() {
         super();
         mCreated_ = Calendar.getInstance().getTime();
     }
@@ -49,8 +47,7 @@ public class Bid extends AbstractPersistentBaseClass
      * @param aItem
      * @param aBidder
      */
-    public Bid( Double aAmount, Item aItem, User aBidder )
-    {
+    public Bid( Double aAmount, Item aItem, User aBidder ) {
         super();
         mCreated_ = Calendar.getInstance().getTime();
         mAmount_ = aAmount;
@@ -64,8 +61,7 @@ public class Bid extends AbstractPersistentBaseClass
      * @return the bid amount
      */
     @Column(name = "BID_AMOUNT", nullable = false, updatable = false)
-    public Double getAmount()
-    {
+    public Double getAmount() {
         return mAmount_;
     }
 
@@ -75,8 +71,7 @@ public class Bid extends AbstractPersistentBaseClass
      * @param amount
      *            the amount of the bid
      */
-    public void setAmount( Double amount )
-    {
+    public void setAmount( Double amount ) {
         mAmount_ = amount;
     }
 
@@ -86,8 +81,7 @@ public class Bid extends AbstractPersistentBaseClass
      * @return the created timestamp
      */
     @Column(name = "BID_CREATED", nullable = false, updatable = false)
-    public Date getCreated()
-    {
+    public Date getCreated() {
         return mCreated_;
     }
 
@@ -97,8 +91,7 @@ public class Bid extends AbstractPersistentBaseClass
      * @param created
      *            the timestamp that the bid was created
      */
-    public void setCreated( Date created )
-    {
+    public void setCreated( Date created ) {
         mCreated_ = created;
     }
 
@@ -109,8 +102,7 @@ public class Bid extends AbstractPersistentBaseClass
      */
     @ManyToOne
     @JoinColumn(name = "BID_ITEM_ID", nullable = false, updatable = false)
-    public Item getItem()
-    {
+    public Item getItem() {
         return mItem_;
     }
 
@@ -120,8 +112,7 @@ public class Bid extends AbstractPersistentBaseClass
      * @param item
      *            the item to set
      */
-    public void setItem( Item item )
-    {
+    public void setItem( Item item ) {
         mItem_ = item;
     }
 
@@ -132,8 +123,7 @@ public class Bid extends AbstractPersistentBaseClass
      */
     @ManyToOne
     @JoinColumn(name = "BID_USER_ID", nullable = false, updatable = false)
-    public User getBidder()
-    {
+    public User getBidder() {
         return mBidder_;
     }
 
@@ -143,8 +133,7 @@ public class Bid extends AbstractPersistentBaseClass
      * @param bidder
      *            the bidder to set
      */
-    public void setBidder( User bidder )
-    {
+    public void setBidder( User bidder ) {
         mBidder_ = bidder;
     }
 }

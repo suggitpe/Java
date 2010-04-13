@@ -33,11 +33,9 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_ITEM_SEQ")
-@Table(name = "CE_ITEM", uniqueConstraints = {
-                                              @UniqueConstraint(columnNames = { "SUCCESSFUL_BID_ID" }),
+@Table(name = "CE_ITEM", uniqueConstraints = { @UniqueConstraint(columnNames = { "SUCCESSFUL_BID_ID" }),
                                               @UniqueConstraint(columnNames = "SELLER_USER_ID") })
-public class Item extends AbstractPersistentBaseClass
-{
+public class Item extends AbstractPersistentBaseClass {
 
     private String mName_;
     private String mDescription_;
@@ -55,8 +53,7 @@ public class Item extends AbstractPersistentBaseClass
     /**
      * Constructs a new instance.
      */
-    public Item()
-    {
+    public Item() {
         super();
         mCreated_ = Calendar.getInstance().getTime();
     }
@@ -72,8 +69,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param aEndDate
      */
     public Item( String aName, String aDescription, Double aInitialPrice, Double aReservePrice,
-                 Date aStartDate, Date aEndDate )
-    {
+                 Date aStartDate, Date aEndDate ) {
         super();
         mName_ = aName;
         mDescription_ = aDescription;
@@ -90,8 +86,7 @@ public class Item extends AbstractPersistentBaseClass
      * @return name
      */
     @Column(name = "ITEM_NAME", nullable = false, length = 64)
-    public String getName()
-    {
+    public String getName() {
         return mName_;
 
     }
@@ -102,8 +97,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param aName
      *            the name of the item
      */
-    public void setName( String aName )
-    {
+    public void setName( String aName ) {
         mName_ = aName;
     }
 
@@ -113,8 +107,7 @@ public class Item extends AbstractPersistentBaseClass
      * @return the description of the item
      */
     @Column(name = "ITEM_DESCRIPTION", nullable = false, length = 255)
-    public String getDescription()
-    {
+    public String getDescription() {
         return mDescription_;
     }
 
@@ -124,8 +117,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param description
      *            the description to set
      */
-    public void setDescription( String description )
-    {
+    public void setDescription( String description ) {
         mDescription_ = description;
     }
 
@@ -138,8 +130,7 @@ public class Item extends AbstractPersistentBaseClass
                                                                                                                            CascadeType.PERSIST,
                                                                                                                            CascadeType.MERGE })
     @JoinTable(name = "CE_ITM_CAT_BRDG", joinColumns = { @JoinColumn(name = "ITMCAT_ITEMS_ID") }, inverseJoinColumns = { @JoinColumn(name = "ITMCAT_CATEGORIES_ID") })
-    public Set<Category> getCategories()
-    {
+    public Set<Category> getCategories() {
         return mCategories_;
     }
 
@@ -149,22 +140,18 @@ public class Item extends AbstractPersistentBaseClass
      * @param aCategories
      *            the st of categories that this item belongs to
      */
-    public void setCategories( Set<Category> aCategories )
-    {
+    public void setCategories( Set<Category> aCategories ) {
         mCategories_ = aCategories;
     }
 
     /**
-     * Accessor helper method to add a category to the list of
-     * categories
+     * Accessor helper method to add a category to the list of categories
      * 
      * @param aCatagory
      *            the category to add
      */
-    public void addCategory( Category aCatagory )
-    {
-        if ( aCatagory == null )
-        {
+    public void addCategory( Category aCatagory ) {
+        if ( aCatagory == null ) {
             throw new IllegalArgumentException( "aCategory is null" );
         }
 
@@ -178,8 +165,7 @@ public class Item extends AbstractPersistentBaseClass
      * @return all the bids made on this item
      */
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
-    public Set<Bid> getBids()
-    {
+    public Set<Bid> getBids() {
         return mBids_;
     }
 
@@ -189,8 +175,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param aBids
      *            the bids made againt this item
      */
-    public void setBids( Set<Bid> aBids )
-    {
+    public void setBids( Set<Bid> aBids ) {
         mBids_ = aBids;
     }
 
@@ -198,13 +183,10 @@ public class Item extends AbstractPersistentBaseClass
      * Accessor to add a new bid to the lit of bids for this item
      * 
      * @param aBid
-     *            a bid to add to the current set of bids for this
-     *            item
+     *            a bid to add to the current set of bids for this item
      */
-    public void addBid( Bid aBid )
-    {
-        if ( aBid == null )
-        {
+    public void addBid( Bid aBid ) {
+        if ( aBid == null ) {
             throw new IllegalArgumentException( "aBid is null" );
         }
         // this ensurs that we do not get a bid that has been created
@@ -219,8 +201,7 @@ public class Item extends AbstractPersistentBaseClass
      * @return the set of comments made about this item
      */
     @OneToMany(mappedBy = "aboutItem", fetch = FetchType.LAZY)
-    public Set<Comment> getComments()
-    {
+    public Set<Comment> getComments() {
         return mComments_;
     }
 
@@ -230,8 +211,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param aComments
      *            the comments set to add
      */
-    public void setComments( Set<Comment> aComments )
-    {
+    public void setComments( Set<Comment> aComments ) {
         mComments_ = aComments;
     }
 
@@ -241,10 +221,8 @@ public class Item extends AbstractPersistentBaseClass
      * @param aComment
      *            the comment to add to the existing set
      */
-    public void addComment( Comment aComment )
-    {
-        if ( aComment == null )
-        {
+    public void addComment( Comment aComment ) {
+        if ( aComment == null ) {
             throw new IllegalArgumentException( "aComment is null" );
         }
         aComment.setAboutItem( this );
@@ -257,8 +235,7 @@ public class Item extends AbstractPersistentBaseClass
      * @return the time that the item was created
      */
     @Column(name = "ITEM_CREATED", nullable = false, updatable = false)
-    public Date getCreated()
-    {
+    public Date getCreated() {
         return mCreated_;
     }
 
@@ -268,8 +245,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param created
      *            the datetime the item was created
      */
-    public void setCreated( Date created )
-    {
+    public void setCreated( Date created ) {
         mCreated_ = created;
     }
 
@@ -279,8 +255,7 @@ public class Item extends AbstractPersistentBaseClass
      * @return the end date
      */
     @Column(name = "ITEM_END_DATE", nullable = false)
-    public Date getEndDate()
-    {
+    public Date getEndDate() {
         return mEndDate_;
     }
 
@@ -290,8 +265,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param endDate
      *            the end date
      */
-    public void setEndDate( Date endDate )
-    {
+    public void setEndDate( Date endDate ) {
         mEndDate_ = endDate;
     }
 
@@ -301,8 +275,7 @@ public class Item extends AbstractPersistentBaseClass
      * @return the initial price
      */
     @Column(name = "ITEM_INITIAL_PRICE", updatable = false)
-    public Double getInitialPrice()
-    {
+    public Double getInitialPrice() {
         return mInitialPrice_;
     }
 
@@ -312,8 +285,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param initialPrice
      *            the initial price
      */
-    public void setInitialPrice( Double initialPrice )
-    {
+    public void setInitialPrice( Double initialPrice ) {
         mInitialPrice_ = initialPrice;
     }
 
@@ -323,8 +295,7 @@ public class Item extends AbstractPersistentBaseClass
      * @return the reserve price
      */
     @Column(name = "ITEM_RESERVE_PRICE", nullable = false)
-    public Double getReservePrice()
-    {
+    public Double getReservePrice() {
         return mReservePrice_;
     }
 
@@ -334,8 +305,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param reservePrice
      *            the reserve price
      */
-    public void setReservePrice( Double reservePrice )
-    {
+    public void setReservePrice( Double reservePrice ) {
         mReservePrice_ = reservePrice;
     }
 
@@ -345,8 +315,7 @@ public class Item extends AbstractPersistentBaseClass
      * @return the date that the item starts
      */
     @Column(name = "ITEM_START_DATE", nullable = false, updatable = false)
-    public Date getStartDate()
-    {
+    public Date getStartDate() {
         return mStartDate_;
     }
 
@@ -356,8 +325,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param startDate
      *            the date that the item starts
      */
-    public void setStartDate( Date startDate )
-    {
+    public void setStartDate( Date startDate ) {
         mStartDate_ = startDate;
     }
 
@@ -368,8 +336,7 @@ public class Item extends AbstractPersistentBaseClass
      */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "SUCCESSFUL_BID_ID")
-    public Bid getSuccessfulBid()
-    {
+    public Bid getSuccessfulBid() {
         return mSuccessfulBid_;
     }
 
@@ -379,8 +346,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param successfulBid
      *            the successful bid to set
      */
-    public void setSuccessfulBid( Bid successfulBid )
-    {
+    public void setSuccessfulBid( Bid successfulBid ) {
         mSuccessfulBid_ = successfulBid;
     }
 
@@ -391,8 +357,7 @@ public class Item extends AbstractPersistentBaseClass
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SELLER_USER_ID")
-    public User getSeller()
-    {
+    public User getSeller() {
         return mSeller_;
     }
 
@@ -402,8 +367,7 @@ public class Item extends AbstractPersistentBaseClass
      * @param seller
      *            the seller
      */
-    public void setSeller( User seller )
-    {
+    public void setSeller( User seller ) {
         mSeller_ = seller;
     }
 

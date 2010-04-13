@@ -18,8 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CE_BANK_ACCOUNT")
-public class BankAccount extends BillingDetails
-{
+public class BankAccount extends BillingDetails {
 
     private String mBankName_;
     private String mBankSwift_;
@@ -27,8 +26,7 @@ public class BankAccount extends BillingDetails
     /**
      * Constructs a new instance.
      */
-    public BankAccount()
-    {
+    public BankAccount() {
         super();
     }
 
@@ -48,8 +46,8 @@ public class BankAccount extends BillingDetails
      * @param aBankSwift
      *            the dswift address of the bank
      */
-    public BankAccount( String aOwner, String aNumber, Date aCreateDate, User aUser, String aBankName, String aBankSwift )
-    {
+    public BankAccount( String aOwner, String aNumber, Date aCreateDate, User aUser, String aBankName,
+                        String aBankSwift ) {
         super( aOwner, aNumber, aCreateDate, aUser );
         mBankName_ = aBankName;
         mBankSwift_ = aBankSwift;
@@ -62,8 +60,7 @@ public class BankAccount extends BillingDetails
      * @return the bank name
      */
     @Column(name = "BANK_NAME", nullable = false, length = 128)
-    public String getBankName()
-    {
+    public String getBankName() {
         return mBankName_;
     }
 
@@ -73,8 +70,7 @@ public class BankAccount extends BillingDetails
      * @param bankName
      *            the bank name to set
      */
-    public void setBankName( String bankName )
-    {
+    public void setBankName( String bankName ) {
         mBankName_ = bankName;
     }
 
@@ -84,8 +80,7 @@ public class BankAccount extends BillingDetails
      * @return the swift address
      */
     @Column(name = "BANK_SWIFT", nullable = false, length = 12)
-    public String getBankSwift()
-    {
+    public String getBankSwift() {
         return mBankSwift_;
     }
 
@@ -95,8 +90,7 @@ public class BankAccount extends BillingDetails
      * @param bankSwift
      *            the swift address
      */
-    public void setBankSwift( String bankSwift )
-    {
+    public void setBankSwift( String bankSwift ) {
         mBankSwift_ = bankSwift;
     }
 }

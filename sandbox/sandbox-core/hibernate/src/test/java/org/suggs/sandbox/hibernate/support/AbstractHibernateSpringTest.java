@@ -23,8 +23,7 @@ import org.hibernate.Transaction;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public abstract class AbstractHibernateSpringTest extends AbstractDependencyInjectionSpringContextTests
-{
+public abstract class AbstractHibernateSpringTest extends AbstractDependencyInjectionSpringContextTests {
 
     private static final Log LOG = LogFactory.getLog( AbstractHibernateSpringTest.class );
     private SessionFactory sessionFactory_;
@@ -33,15 +32,12 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
      * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#onSetUp()
      */
     @Override
-    protected void onSetUp() throws Exception
-    {
-    }
+    protected void onSetUp() throws Exception {}
 
     /**
      * Constructs a new instance.
      */
-    public AbstractHibernateSpringTest()
-    {
+    public AbstractHibernateSpringTest() {
         super();
     }
 
@@ -51,17 +47,14 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
      * @param aClassList
      */
     @SuppressWarnings("unchecked")
-    private void cleanTestTables( Class[] aClassList )
-    {
+    private void cleanTestTables( Class[] aClassList ) {
         Session s = getSessionFactory().openSession();
         Transaction t = s.beginTransaction();
-        for ( Class c : aClassList )
-        {
+        for ( Class c : aClassList ) {
             LOG.debug( "Cleaning table [" + c.getSimpleName() + "]" );
             Criteria cr = s.createCriteria( c );
             List l = cr.list();
-            for ( Iterator iter = l.iterator(); iter.hasNext(); )
-            {
+            for ( Iterator iter = l.iterator(); iter.hasNext(); ) {
                 s.delete( iter.next() );
             }
         }
@@ -71,15 +64,13 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     }
 
     /**
-     * This is the core test impl that will allow us to wrap up the
-     * session and transaction to a single impl
+     * This is the core test impl that will allow us to wrap up the session and transaction to a single impl
      * 
      * @param testMetaData
-     *            the test metadata impl including the name and core
-     *            test impl that will be called by this method.
+     *            the test metadata impl including the name and core test impl that will be called by this
+     *            method.
      */
-    protected void runTest( TestCallback testMetaData )
-    {
+    protected void runTest( TestCallback testMetaData ) {
 
         String testName = testMetaData.getTestName();
         LOG.debug( "---------- " + testName + " cleaning class tables for tests" );
@@ -103,18 +94,16 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
     }
 
     /**
-     * This is a simple interface to allow you to drop in a test to a
-     * defined hibernate transaction.
+     * This is a simple interface to allow you to drop in a test to a defined hibernate transaction.
      * 
      * @author suggitpe
      * @version 1.0 19 Apr 2007
      */
-    protected interface TestCallback
-    {
+    protected interface TestCallback {
 
         /**
-         * This method is used to get a collection of classes so that
-         * we can clean down any tables used in the test.
+         * This method is used to get a collection of classes so that we can clean down any tables used in the
+         * test.
          * 
          * @return an array of classes
          */
@@ -122,9 +111,8 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
         Class[] getClassesForCleaning();
 
         /**
-         * This is called by a test execution so that they can set up
-         * any pre test activities such as persisting an object to the
-         * database
+         * This is called by a test execution so that they can set up any pre test activities such as
+         * persisting an object to the database
          * 
          * @param aSession
          *            a session to the database
@@ -132,16 +120,15 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
         void preTestSetup( Session aSession );
 
         /**
-         * This is used by the defining impl to allow the test name to
-         * be shown
+         * This is used by the defining impl to allow the test name to be shown
          * 
          * @return the test name
          */
         String getTestName();
 
         /**
-         * This is the core test interface. Here we pass in a session
-         * object so that we can get access to the persistent layer.
+         * This is the core test interface. Here we pass in a session object so that we can get access to the
+         * persistent layer.
          * 
          * @param aSession
          */
@@ -154,8 +141,7 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
      * 
      * @return the session factory
      */
-    public SessionFactory getSessionFactory()
-    {
+    public SessionFactory getSessionFactory() {
         return sessionFactory_;
     }
 
@@ -165,8 +151,7 @@ public abstract class AbstractHibernateSpringTest extends AbstractDependencyInje
      * @param aFactory
      *            the factor to set
      */
-    public void setSessionFactory( SessionFactory aFactory )
-    {
+    public void setSessionFactory( SessionFactory aFactory ) {
         sessionFactory_ = aFactory;
     }
 

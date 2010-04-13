@@ -10,8 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
- * Embeddable audit bean that holds all of the timestamp audit
- * information.
+ * Embeddable audit bean that holds all of the timestamp audit information.
  * 
  * @author suggitpe
  * @version 1.0 31 Mar 2010

@@ -12,9 +12,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * Simple entity that will show how to use timestamps in a Hibernate
- * entity. This entity has a surrogate key built from a sequence and a
- * set of basic data values.
+ * Simple entity that will show how to use timestamps in a Hibernate entity. This entity has a surrogate key
+ * built from a sequence and a set of basic data values.
  * 
  * @author suggitpe
  * @version 1.0 25 Mar 2010
@@ -116,8 +115,8 @@ public class TimestampedEntity extends EntityBase {
      */
     @Override
     public String toString() {
-        return super.toString() + " TimestampedEntity [someDate=" + someDate + ", someInteger="
-               + someInteger + ", someString=" + someString + "]";
+        return super.toString() + " TimestampedEntity [someDate=" + someDate + ", someInteger=" + someInteger
+               + ", someString=" + someString + "]";
     }
 
     /**
