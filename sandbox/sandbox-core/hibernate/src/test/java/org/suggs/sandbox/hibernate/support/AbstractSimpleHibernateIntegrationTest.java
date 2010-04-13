@@ -29,7 +29,7 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
  * @version 1.0 25 Mar 2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public abstract class AbstractSimpleHibernateIntegrationTest {
+public abstract class AbstractSimpleHibernateIntegrationTest<K, E> {
 
     private static final Log LOG = LogFactory.getLog( AbstractSimpleHibernateIntegrationTest.class );
 
@@ -90,6 +90,10 @@ public abstract class AbstractSimpleHibernateIntegrationTest {
     }
 
     protected abstract HibernateIntegrationTestCallback createBasicCreateTest();
+
+    protected abstract K createKeyTemplate();
+
+    protected abstract E createEntityTemplate( K aKey );
 
     @Test
     public void basicReadOperationsInstantiatesCorrectObject() {

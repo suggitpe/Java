@@ -33,7 +33,7 @@ import static org.junit.Assert.assertThat;
  * @version 1.0 25 Mar 2010
  */
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-timestamps.xml" })
-public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest {
+public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, TimestampedEntity> {
 
     private static final Log LOG = LogFactory.getLog( HibernateTimestampEntityIntegrationTest.class );
     private static final String TEST_HQL = "from TimestampedEntity where someString in ('deleteMe', 'altered')";
@@ -57,13 +57,30 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     }
 
     /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createKeyTemplate()
+     */
+    @Override
+    protected Long createKeyTemplate() {
+        // this is actually not needed for this entity.
+        return null;
+    }
+
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntityTemplate(java.lang.Object)
+     */
+    @Override
+    protected TimestampedEntity createEntityTemplate( Long aKey ) {
+        return new TimestampedEntity( "deleteMe", Calendar.getInstance().getTime(), Integer.valueOf( 9876 ) );
+    }
+
+    /**
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicCreateTest()
      */
     @Override
     protected HibernateIntegrationTestCallback createBasicCreateTest() {
         return new HibernateIntegrationTestCallback() {
 
-            TimestampedEntity entity = buildEntityTemplate();
+            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -92,9 +109,11 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     protected HibernateIntegrationTestCallback createBasicDeleteTest() {
         return new HibernateIntegrationTestCallback() {
 
+            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
+
             @Override
             public void beforeTest( Session aSession ) {
-                aSession.save( buildEntityTemplate() );
+                aSession.save( entity );
                 verifyEntityCount( aSession, 1L );
                 debugTimestampedEntities( aSession );
             }
@@ -102,9 +121,9 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
             @SuppressWarnings("boxing")
             @Override
             public void executeTest( Session aSession ) {
-                TimestampedEntity entity = (TimestampedEntity) aSession.createQuery( TEST_HQL )
+                TimestampedEntity result = (TimestampedEntity) aSession.createQuery( TEST_HQL )
                     .uniqueResult();
-                aSession.delete( entity.getId() );
+                aSession.delete( result.getId() );
             }
 
             @Override
@@ -123,7 +142,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
         return new HibernateIntegrationTestCallback() {
 
             private Long theId = Long.valueOf( 0L );
-            TimestampedEntity entity = buildEntityTemplate();
+            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
             TimestampedEntity readEntity = null;
 
             @SuppressWarnings("boxing")
@@ -158,7 +177,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     protected HibernateIntegrationTestCallback createBasicUpdateTest() {
         return new HibernateIntegrationTestCallback() {
 
-            TimestampedEntity entity = buildEntityTemplate();
+            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
             TimestampedEntity clone = new TimestampedEntity( entity.getSomeString(),
                                                              entity.getSomeDate(),
                                                              entity.getSomeInteger() );
@@ -196,7 +215,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     public void creationOfNewObjectPopulatesCreateAndUpdateDatesAndThatTheyAreSameValue() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            TimestampedEntity entity = buildEntityTemplate();
+            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -228,7 +247,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     public void updateOfExistingObjectPopulatesUpdateDateAndThatCreateDateDiffers() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            TimestampedEntity entity = buildEntityTemplate();
+            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -255,10 +274,6 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
         } );
     }
 
-    private TimestampedEntity buildEntityTemplate() {
-        return new TimestampedEntity( "deleteMe", Calendar.getInstance().getTime(), Integer.valueOf( 9876 ) );
-    }
-
     private void verifyEntityCount( Session aSession, long aCountOfEntities ) {
         Long count = (Long) aSession.createQuery( "select count(*) " + TEST_HQL ).uniqueResult();
         assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
@@ -275,4 +290,5 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
         LOG.debug( "******" );
 
     }
+
 }

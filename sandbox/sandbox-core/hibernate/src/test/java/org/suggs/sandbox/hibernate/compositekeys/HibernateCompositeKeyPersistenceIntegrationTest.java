@@ -33,7 +33,7 @@ import static org.junit.Assert.assertThat;
  * @version 1.0 18 Mar 2010
  */
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-compositekeys.xml" })
-public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSimpleHibernateIntegrationTest {
+public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSimpleHibernateIntegrationTest<EntityKey, EntityObject> {
 
     @Override
     protected void cleanUpData( Session aSession ) {
@@ -51,14 +51,38 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     }
 
     /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createKeyTemplate()
+     */
+    @Override
+    protected EntityKey createKeyTemplate() {
+        EntityKey key = new EntityKey();
+        key.setKeyOne( "key 1-1" );
+        key.setKeyTwo( "key 2-1" );
+        key.setKeyThree( "key 3-1" );
+        return key;
+    }
+
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntityTemplate(java.lang.Object)
+     */
+    @Override
+    protected EntityObject createEntityTemplate( EntityKey aKey ) {
+        EntityObject object = new EntityObject();
+        object.setKey( aKey );
+        object.setDataOne( "data1 1-1" );
+        object.setDataTwo( "data1 2-1" );
+        return object;
+    }
+
+    /**
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicCreateTest()
      */
     @Override
     protected HibernateIntegrationTestCallback createBasicCreateTest() {
         return new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject obj = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject obj = createEntityTemplate( key );
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -88,8 +112,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     protected HibernateIntegrationTestCallback createBasicDeleteTest() {
         return new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject obj = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject obj = createEntityTemplate( key );
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -117,8 +141,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     protected HibernateIntegrationTestCallback createBasicReadTest() {
         return new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject obj = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject obj = createEntityTemplate( key );
             EntityObject read;
 
             @Override
@@ -148,9 +172,9 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     protected HibernateIntegrationTestCallback createBasicUpdateTest() {
         return new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject obj = buildEntityTemplate( key );
-            EntityObject clone = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject obj = createEntityTemplate( key );
+            EntityObject clone = createEntityTemplate( key );
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -181,8 +205,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
 
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject object = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject object = createEntityTemplate( key );
 
             @Override
             public void beforeTest( Session aSession ) {}
@@ -206,8 +230,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     public void createEntityWithNullDataInTable() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject object = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject object = createEntityTemplate( key );
 
             @Override
             public void beforeTest( Session aSession ) {}
@@ -229,8 +253,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     public void createEntityWithNullKeyInTable() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject object = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject object = createEntityTemplate( key );
 
             @Override
             public void beforeTest( Session aSession ) {}
@@ -252,8 +276,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     public void retrieveEntityFromTableWithGet() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject object = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject object = createEntityTemplate( key );
             EntityObject result;
 
             @Override
@@ -277,8 +301,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     public void retrieveEntityWithNullDataFromTableWithGet() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject object = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject object = createEntityTemplate( key );
             EntityObject result;
 
             @Override
@@ -307,8 +331,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     public void retrieveEntityWithNullKeyFromTableWithGetReturnsNull_HibernateIssue() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject object = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject object = createEntityTemplate( key );
             EntityObject result;
 
             @Override
@@ -338,8 +362,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     public void retrieveEntityWithNullKeyFromTableWithCriteriaReturnsNull_HibernateIssue() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject object = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject object = createEntityTemplate( key );
             EntityObject result;
 
             @Override
@@ -373,8 +397,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     public void retrieveEntityWithNullKeyFromTableWithQbeReturnsNull_HibernateIssue() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject object = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject object = createEntityTemplate( key );
             EntityObject result;
 
             @Override
@@ -408,8 +432,8 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     public void retrieveEntityWithNullKeyFromTableWithHqlReturnsNull_HibernateIssue() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            EntityKey key = buildKeyTemplate();
-            EntityObject object = buildEntityTemplate( key );
+            EntityKey key = createKeyTemplate();
+            EntityObject object = createEntityTemplate( key );
             EntityObject result;
 
             @Override
@@ -441,22 +465,6 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
         assertThat( result, not( sameInstance( expected ) ) );
         assertThat( result, equalTo( expected ) );
 
-    }
-
-    private EntityObject buildEntityTemplate( EntityKey aKey ) {
-        EntityObject object = new EntityObject();
-        object.setKey( aKey );
-        object.setDataOne( "data1 1-1" );
-        object.setDataTwo( "data1 2-1" );
-        return object;
-    }
-
-    private EntityKey buildKeyTemplate() {
-        EntityKey key = new EntityKey();
-        key.setKeyOne( "key 1-1" );
-        key.setKeyTwo( "key 2-1" );
-        key.setKeyThree( "key 3-1" );
-        return key;
     }
 
     private void verifyEntityCount( Session aSession, long aCountOfEntities ) {
