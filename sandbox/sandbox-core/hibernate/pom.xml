@@ -21,10 +21,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>**/Hbm*Test.java</exclude>
-                        <exclude>**/Annotatation*Test.java</exclude>
-                        <exclude>**/CaveatEmptor*Test.java</exclude>
-                        <exclude>**/AnnotationSchemaCreatorTest.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
