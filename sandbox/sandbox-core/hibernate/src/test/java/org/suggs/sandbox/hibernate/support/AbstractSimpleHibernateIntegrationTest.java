@@ -22,6 +22,12 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertThat;
+
 /**
  * Abstract test to be used in conjuction with any hibernate entity test.
  * 
@@ -83,26 +89,69 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K, E> {
      */
     protected abstract List<Class<?>> getEntityListForSchemaCreation();
 
+    /**
+     * Create a template key object for the tests.
+     * 
+     * @return a Key that relates to the entity
+     */
+    protected abstract K createKeyTemplate();
+
+    /**
+     * Create a peristent entity for the tests.
+     * 
+     * @param aKey
+     *            the key for the entity.
+     * @return a persistent entity
+     */
+    protected abstract E createEntityTemplate( K aKey );
+
+    /**
+     * Creates the HQL string for retrieval of the persisted entities.
+     * 
+     * @return the HQL string that will retrieve the entities for the test verification.
+     */
+    protected abstract String createEntitySearchHql();
+
+    // -----------------
     @Test
     public void basicCreateOperationCreatesCorrectObject() {
         LOG.debug( "basicCreateOperationCreatesCorrectObject" );
-        runGenericTest( createBasicCreateTest() );
+        runGenericTest( new HibernateIntegrationTestCallback() {
+
+            K key = createKeyTemplate();
+            E entity = createEntityTemplate( key );
+
+            @Override
+            public void beforeTest( Session aSession ) {
+                verifyEntityCount( aSession, 0L );
+            }
+
+            @Override
+            public void executeTest( Session aSession ) {
+                aSession.save( entity );
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public void verifyTest( Session aSession ) {
+                verifyEntityCount( aSession, 1L );
+                E result = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                verifyResult( entity, result );
+            }
+        } );
     }
 
-    protected abstract HibernateIntegrationTestCallback createBasicCreateTest();
+    // protected abstract HibernateIntegrationTestCallback createBasicCreateTest();
 
-    protected abstract K createKeyTemplate();
-
-    protected abstract E createEntityTemplate( K aKey );
-
+    // -----------------
     @Test
     public void basicReadOperationsInstantiatesCorrectObject() {
-        LOG.debug( "basicReadOperationsInstantiatesCorrectObject" );
         runGenericTest( createBasicReadTest() );
     }
 
     protected abstract HibernateIntegrationTestCallback createBasicReadTest();
 
+    // -----------------
     @Test
     public void basicUpdateOperationsUpdatesCorrectObject() {
         LOG.debug( "basicUpdateOperationsUpdatesCorrectObject" );
@@ -111,13 +160,52 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K, E> {
 
     protected abstract HibernateIntegrationTestCallback createBasicUpdateTest();
 
+    // -----------------
     @Test
     public void basicDeleteOperationsDeletesCorrectObject() {
         LOG.debug( "basicDeleteOperationsUpdatesCorrectObject" );
-        runGenericTest( createBasicUpdateTest() );
+        runGenericTest( new HibernateIntegrationTestCallback() {
+
+            K key = createKeyTemplate();
+            E entity = createEntityTemplate( key );
+
+            @Override
+            public void beforeTest( Session aSession ) {
+                verifyEntityCount( aSession, 0L );
+                aSession.save( entity );
+                verifyEntityCount( aSession, 1L );
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public void executeTest( Session aSession ) {
+                E entityToDelete = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                aSession.delete( entityToDelete );
+            }
+
+            @Override
+            public void verifyTest( Session aSession ) {
+                verifyEntityCount( aSession, 0L );
+            }
+        } );
     }
 
-    protected abstract HibernateIntegrationTestCallback createBasicDeleteTest();
+    // protected abstract HibernateIntegrationTestCallback createBasicDeleteTest();
+
+    private void verifyEntityCount( Session aSession, long aCountOfEntities ) {
+        Long count = (Long) aSession.createQuery( "select count(*) " + createEntitySearchHql() )
+            .uniqueResult();
+        assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
+    }
+
+    public void verifyResult( E expected, E result ) {
+        assertThat( result, not( nullValue() ) );
+        assertThat( result, not( sameInstance( expected ) ) );
+        assertThat( result, equalTo( expected ) );
+
+    }
+
+    // =====================================
 
     /**
      * Executes the called back around a transaction.

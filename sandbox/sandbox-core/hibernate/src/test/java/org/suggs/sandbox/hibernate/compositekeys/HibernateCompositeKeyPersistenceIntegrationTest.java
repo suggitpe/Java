@@ -35,6 +35,8 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-compositekeys.xml" })
 public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSimpleHibernateIntegrationTest<EntityKey, EntityObject> {
 
+    private static final String TEST_HQL = "from EntityObject";
+
     @Override
     protected void cleanUpData( Session aSession ) {
         aSession.createQuery( "delete from EntityObject" ).executeUpdate();
@@ -75,63 +77,11 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     }
 
     /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicCreateTest()
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntitySearchHql()
      */
     @Override
-    protected HibernateIntegrationTestCallback createBasicCreateTest() {
-        return new HibernateIntegrationTestCallback() {
-
-            EntityKey key = createKeyTemplate();
-            EntityObject obj = createEntityTemplate( key );
-
-            @Override
-            public void beforeTest( Session aSession ) {
-                verifyEntityCount( aSession, 0L );
-            }
-
-            @Override
-            public void executeTest( Session aSession ) {
-                aSession.save( obj );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                EntityObject result = (EntityObject) aSession.createCriteria( EntityObject.class )
-                    .uniqueResult();
-                verifyEntityCount( aSession, 1L );
-                verifyResult( obj, result );
-            }
-        };
-
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicDeleteTest()
-     */
-    @Override
-    protected HibernateIntegrationTestCallback createBasicDeleteTest() {
-        return new HibernateIntegrationTestCallback() {
-
-            EntityKey key = createKeyTemplate();
-            EntityObject obj = createEntityTemplate( key );
-
-            @Override
-            public void beforeTest( Session aSession ) {
-                verifyEntityCount( aSession, 0L );
-                aSession.save( obj );
-                verifyEntityCount( aSession, 1L );
-            }
-
-            @Override
-            public void executeTest( Session aSession ) {
-                aSession.delete( obj );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                verifyEntityCount( aSession, 0L );
-            }
-        };
+    protected String createEntitySearchHql() {
+        return TEST_HQL;
     }
 
     /**
@@ -458,13 +408,6 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
                 assertThat( result, nullValue() );
             }
         } );
-    }
-
-    public void verifyResult( EntityObject expected, EntityObject result ) {
-        assertThat( result, not( nullValue() ) );
-        assertThat( result, not( sameInstance( expected ) ) );
-        assertThat( result, equalTo( expected ) );
-
     }
 
     private void verifyEntityCount( Session aSession, long aCountOfEntities ) {

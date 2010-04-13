@@ -74,64 +74,11 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     }
 
     /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicCreateTest()
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntitySearchHql()
      */
     @Override
-    protected HibernateIntegrationTestCallback createBasicCreateTest() {
-        return new HibernateIntegrationTestCallback() {
-
-            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
-
-            @Override
-            public void beforeTest( Session aSession ) {
-                verifyEntityCount( aSession, 0L );
-                debugTimestampedEntities( aSession );
-            }
-
-            @Override
-            public void executeTest( Session aSession ) {
-                aSession.save( entity );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                verifyEntityCount( aSession, 1L );
-                debugTimestampedEntities( aSession );
-            }
-
-        };
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicDeleteTest()
-     */
-    @Override
-    protected HibernateIntegrationTestCallback createBasicDeleteTest() {
-        return new HibernateIntegrationTestCallback() {
-
-            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
-
-            @Override
-            public void beforeTest( Session aSession ) {
-                aSession.save( entity );
-                verifyEntityCount( aSession, 1L );
-                debugTimestampedEntities( aSession );
-            }
-
-            @SuppressWarnings("boxing")
-            @Override
-            public void executeTest( Session aSession ) {
-                TimestampedEntity result = (TimestampedEntity) aSession.createQuery( TEST_HQL )
-                    .uniqueResult();
-                aSession.delete( result.getId() );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                verifyEntityCount( aSession, 0L );
-                debugTimestampedEntities( aSession );
-            }
-        };
+    protected String createEntitySearchHql() {
+        return TEST_HQL;
     }
 
     /**
