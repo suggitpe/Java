@@ -29,7 +29,7 @@ public class EntityBase implements TimestampAuditable, Serializable {
 
     @Version
     @Column(name = "VERSION", nullable = false)
-    private long version;
+    private Integer version;
 
     @Embedded
     private TimestampAuditInfo timestampAuditInfo = new TimestampAuditInfo();
@@ -58,7 +58,7 @@ public class EntityBase implements TimestampAuditable, Serializable {
      * 
      * @return Returns the version.
      */
-    public long getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
@@ -68,7 +68,7 @@ public class EntityBase implements TimestampAuditable, Serializable {
      * @param aVersion
      *            The version to set.
      */
-    public void setVersion( long aVersion ) {
+    public void setVersion( Integer aVersion ) {
         version = aVersion;
     }
 
@@ -107,7 +107,7 @@ public class EntityBase implements TimestampAuditable, Serializable {
         int result = 1;
         result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
         result = prime * result + ( ( timestampAuditInfo == null ) ? 0 : timestampAuditInfo.hashCode() );
-        result = prime * result + (int) ( version ^ ( version >>> 32 ) );
+        result = prime * result + ( ( version == null ) ? 0 : version.hashCode() );
         return result;
     }
 
@@ -135,7 +135,11 @@ public class EntityBase implements TimestampAuditable, Serializable {
         }
         else if ( !timestampAuditInfo.equals( other.timestampAuditInfo ) )
             return false;
-        if ( version != other.version )
+        if ( version == null ) {
+            if ( other.version != null )
+                return false;
+        }
+        else if ( !version.equals( other.version ) )
             return false;
         return true;
     }

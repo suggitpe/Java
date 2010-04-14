@@ -9,7 +9,7 @@
         parent="abstractSessionFactoryBean">
         <property name="mappingResources">
             <list>
-                <value>hbm/manual/message.hbm.xml</value>
+                <value>hbm/message.hbm.xml</value>
             </list>
         </property>
     </bean>

@@ -4,14 +4,21 @@
 	
 	<class name="org.suggs.sandbox.hibernate.basicentity.Message" table="MESSAGES">
 		<!-- -->
-		<id name="id" column="MESSAGE_ID">
+		<id name="id" column="ID">
             <generator class="sequence">
                 <param name="sequence">MESSAGE_SEQ</param>
             </generator>
 		</id>
-		<!-- -->
+        
+        <version name="version" column="VERSION"/>
+        
+        <component name="timestampAuditInfo" class="org.suggs.sandbox.hibernate.support.TimestampAuditInfo">
+            <property name="createDate" column="CREATE_DATE"/>
+            <property name="updateDate" column="UPDATE_DATE"/>
+        </component>
+        
 		<property name="text" column="MESSAGE_TEXT"/>
-		<!-- -->
+        
 		<many-to-one name="nextMessage" cascade="all" column="NEXT_MESSAGE_ID"/>
 	</class>
 	
