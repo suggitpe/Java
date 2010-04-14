@@ -4,6 +4,7 @@
  */
 package org.suggs.sandbox.hibernate.support;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -35,7 +36,7 @@ import static org.junit.Assert.assertThat;
  * @version 1.0 25 Mar 2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public abstract class AbstractSimpleHibernateIntegrationTest<K, E> {
+public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializable, E> {
 
     private static final Log LOG = LogFactory.getLog( AbstractSimpleHibernateIntegrationTest.class );
 
@@ -106,13 +107,18 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K, E> {
     protected abstract E createEntityTemplate( K aKey );
 
     /**
+     * This is needed so that we can delegate down to the implementing test to perform the underlying update
+     * to the persisted entity. This is used in the update test (CRUD).
+     */
+    protected abstract void updateEntityForUpdateTest( E aEntity );
+
+    /**
      * Creates the HQL string for retrieval of the persisted entities.
      * 
      * @return the HQL string that will retrieve the entities for the test verification.
      */
     protected abstract String createEntitySearchHql();
 
-    // -----------------
     @Test
     public void basicCreateOperationCreatesCorrectObject() {
         LOG.debug( "basicCreateOperationCreatesCorrectObject" );
@@ -141,26 +147,75 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K, E> {
         } );
     }
 
-    // protected abstract HibernateIntegrationTestCallback createBasicCreateTest();
-
-    // -----------------
     @Test
     public void basicReadOperationsInstantiatesCorrectObject() {
-        runGenericTest( createBasicReadTest() );
+        runGenericTest( new HibernateIntegrationTestCallback() {
+
+            K key = createKeyTemplate();
+            E entity = createEntityTemplate( key );
+            E readEntity = null;
+
+            @Override
+            public void beforeTest( Session aSession ) {
+                verifyEntityCount( aSession, 0L );
+                aSession.save( entity );
+                verifyEntityCount( aSession, 1L );
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public void executeTest( Session aSession ) {
+                if ( key != null ) {
+                    readEntity = (E) aSession.get( entity.getClass(), key );
+                }
+            }
+
+            @Override
+            public void verifyTest( Session aSession ) {
+                if ( key != null ) {
+                    verifyEntityCount( aSession, 1L );
+                    verifyResult( entity, readEntity );
+                }
+            }
+
+        } );
     }
 
-    protected abstract HibernateIntegrationTestCallback createBasicReadTest();
-
-    // -----------------
     @Test
     public void basicUpdateOperationsUpdatesCorrectObject() {
         LOG.debug( "basicUpdateOperationsUpdatesCorrectObject" );
-        runGenericTest( createBasicUpdateTest() );
+        runGenericTest( new HibernateIntegrationTestCallback() {
+
+            K key = createKeyTemplate();
+            E entity = createEntityTemplate( key );
+            E clone = createEntityTemplate( key );
+
+            @Override
+            public void beforeTest( Session aSession ) {
+                verifyEntityCount( aSession, 0L );
+                aSession.save( entity );
+                verifyEntityCount( aSession, 1L );
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public void executeTest( Session aSession ) {
+                entity = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                updateEntityForUpdateTest( entity );
+                aSession.save( entity );
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public void verifyTest( Session aSession ) {
+                entity = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                assertThat( entity, not( nullValue() ) );
+                assertThat( entity, not( sameInstance( clone ) ) );
+                assertThat( entity, not( equalTo( clone ) ) );
+            }
+        } );
     }
 
-    protected abstract HibernateIntegrationTestCallback createBasicUpdateTest();
-
-    // -----------------
     @Test
     public void basicDeleteOperationsDeletesCorrectObject() {
         LOG.debug( "basicDeleteOperationsUpdatesCorrectObject" );
@@ -190,15 +245,13 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K, E> {
         } );
     }
 
-    // protected abstract HibernateIntegrationTestCallback createBasicDeleteTest();
-
-    private void verifyEntityCount( Session aSession, long aCountOfEntities ) {
+    protected void verifyEntityCount( Session aSession, long aCountOfEntities ) {
         Long count = (Long) aSession.createQuery( "select count(*) " + createEntitySearchHql() )
             .uniqueResult();
         assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
     }
 
-    public void verifyResult( E expected, E result ) {
+    protected void verifyResult( E expected, E result ) {
         assertThat( result, not( nullValue() ) );
         assertThat( result, not( sameInstance( expected ) ) );
         assertThat( result, equalTo( expected ) );

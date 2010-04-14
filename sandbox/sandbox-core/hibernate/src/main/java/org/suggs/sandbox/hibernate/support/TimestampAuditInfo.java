@@ -2,7 +2,7 @@
  * TimestampAuditInfo.java created on 31 Mar 2010 07:29:17 by suggitpe for project sandbox-hibernate
  * 
  */
-package org.suggs.sandbox.hibernate.timestamps;
+package org.suggs.sandbox.hibernate.support;
 
 import java.util.Date;
 

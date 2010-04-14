@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.hibernate.timestamps;
 
+import org.suggs.sandbox.hibernate.support.EntityBase;
+
 import java.util.Date;
 
 import javax.persistence.Column;

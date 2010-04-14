@@ -21,9 +21,7 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -85,69 +83,11 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     }
 
     /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicReadTest()
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
      */
     @Override
-    protected HibernateIntegrationTestCallback createBasicReadTest() {
-        return new HibernateIntegrationTestCallback() {
-
-            EntityKey key = createKeyTemplate();
-            EntityObject obj = createEntityTemplate( key );
-            EntityObject read;
-
-            @Override
-            public void beforeTest( Session aSession ) {
-                verifyEntityCount( aSession, 0L );
-                aSession.save( obj );
-                verifyEntityCount( aSession, 1L );
-            }
-
-            @Override
-            public void executeTest( Session aSession ) {
-                read = (EntityObject) aSession.get( EntityObject.class, key );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                verifyEntityCount( aSession, 1L );
-                verifyResult( obj, read );
-            }
-        };
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicUpdateTest()
-     */
-    @Override
-    protected HibernateIntegrationTestCallback createBasicUpdateTest() {
-        return new HibernateIntegrationTestCallback() {
-
-            EntityKey key = createKeyTemplate();
-            EntityObject obj = createEntityTemplate( key );
-            EntityObject clone = createEntityTemplate( key );
-
-            @Override
-            public void beforeTest( Session aSession ) {
-                verifyEntityCount( aSession, 0L );
-                aSession.save( obj );
-                verifyEntityCount( aSession, 1L );
-            }
-
-            @Override
-            public void executeTest( Session aSession ) {
-                obj = (EntityObject) aSession.createQuery( "from EntityObject" ).uniqueResult();
-                obj.setDataTwo( "Updated this field" );
-                aSession.save( obj );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                obj = (EntityObject) aSession.createQuery( "from EntityObject" ).uniqueResult();
-                assertThat( obj, not( nullValue() ) );
-                assertThat( obj, not( sameInstance( clone ) ) );
-                assertThat( obj, not( equalTo( clone ) ) );
-            }
-        };
+    protected void updateEntityForUpdateTest( EntityObject aEntity ) {
+        aEntity.setDataTwo( "Updated this field" );
     }
 
     @Test
@@ -408,11 +348,6 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
                 assertThat( result, nullValue() );
             }
         } );
-    }
-
-    private void verifyEntityCount( Session aSession, long aCountOfEntities ) {
-        Long count = (Long) aSession.createQuery( "select count(*) from EntityObject" ).uniqueResult();
-        assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
     }
 
 }

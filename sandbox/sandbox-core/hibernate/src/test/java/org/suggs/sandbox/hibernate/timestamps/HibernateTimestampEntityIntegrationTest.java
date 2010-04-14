@@ -11,19 +11,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 import org.springframework.test.context.ContextConfiguration;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -35,7 +31,6 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-timestamps.xml" })
 public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, TimestampedEntity> {
 
-    private static final Log LOG = LogFactory.getLog( HibernateTimestampEntityIntegrationTest.class );
     private static final String TEST_HQL = "from TimestampedEntity where someString in ('deleteMe', 'altered')";
 
     /**
@@ -82,80 +77,11 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     }
 
     /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicReadTest()
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
      */
     @Override
-    protected HibernateIntegrationTestCallback createBasicReadTest() {
-        return new HibernateIntegrationTestCallback() {
-
-            private Long theId = Long.valueOf( 0L );
-            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
-            TimestampedEntity readEntity = null;
-
-            @SuppressWarnings("boxing")
-            @Override
-            public void beforeTest( Session aSession ) {
-                aSession.save( entity );
-                entity = (TimestampedEntity) aSession.createQuery( TEST_HQL ).uniqueResult();
-                theId = entity.getId();
-                verifyEntityCount( aSession, 1L );
-                debugTimestampedEntities( aSession );
-            }
-
-            @Override
-            public void executeTest( Session aSession ) {
-                readEntity = (TimestampedEntity) aSession.get( TimestampedEntity.class, theId );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                assertThat( readEntity, not( nullValue() ) );
-                assertThat( readEntity, not( sameInstance( entity ) ) );
-                assertThat( readEntity, equalTo( entity ) );
-                debugTimestampedEntities( aSession );
-            }
-        };
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createBasicUpdateTest()
-     */
-    @Override
-    protected HibernateIntegrationTestCallback createBasicUpdateTest() {
-        return new HibernateIntegrationTestCallback() {
-
-            TimestampedEntity entity = createEntityTemplate( createKeyTemplate() );
-            TimestampedEntity clone = new TimestampedEntity( entity.getSomeString(),
-                                                             entity.getSomeDate(),
-                                                             entity.getSomeInteger() );
-
-            @Override
-            public void beforeTest( Session aSession ) {
-                aSession.save( entity );
-                verifyEntityCount( aSession, 1L );
-                debugTimestampedEntities( aSession );
-            }
-
-            @Override
-            public void executeTest( Session aSession ) {
-                entity = (TimestampedEntity) aSession.createQuery( TEST_HQL ).uniqueResult();
-                entity.setSomeString( "altered" );
-                aSession.save( entity );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                // refresh entity from db
-                entity = (TimestampedEntity) aSession.createQuery( TEST_HQL ).uniqueResult();
-                assertThat( entity, not( nullValue() ) );
-                assertThat( entity, not( sameInstance( clone ) ) );
-                assertThat( entity, not( equalTo( clone ) ) );
-                assertThat( entity.getSomeInteger(), equalTo( clone.getSomeInteger() ) );
-                assertThat( entity.getSomeDate(), equalTo( clone.getSomeDate() ) );
-                assertThat( entity.getSomeString(), not( equalTo( clone.getSomeString() ) ) );
-                debugTimestampedEntities( aSession );
-            }
-        };
+    protected void updateEntityForUpdateTest( TimestampedEntity aEntity ) {
+        aEntity.setSomeString( "altered" );
     }
 
     @Test
@@ -219,23 +145,6 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
                             not( equalTo( result.getTimestampAuditInfo().getUpdateDate() ) ) );
             }
         } );
-    }
-
-    private void verifyEntityCount( Session aSession, long aCountOfEntities ) {
-        Long count = (Long) aSession.createQuery( "select count(*) " + TEST_HQL ).uniqueResult();
-        assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
-    }
-
-    @SuppressWarnings("unchecked")
-    private void debugTimestampedEntities( Session aSession ) {
-        Criteria criteria = aSession.createCriteria( TimestampedEntity.class );
-        List<TimestampedEntity> entityList = criteria.list();
-        LOG.debug( "****** Entity debug" );
-        for ( TimestampedEntity tse : entityList ) {
-            LOG.debug( tse );
-        }
-        LOG.debug( "******" );
-
     }
 
 }

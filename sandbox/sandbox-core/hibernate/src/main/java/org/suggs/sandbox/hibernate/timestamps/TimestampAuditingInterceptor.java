@@ -4,6 +4,9 @@
  */
 package org.suggs.sandbox.hibernate.timestamps;
 
+import org.suggs.sandbox.hibernate.support.TimestampAuditInfo;
+import org.suggs.sandbox.hibernate.support.TimestampAuditable;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
