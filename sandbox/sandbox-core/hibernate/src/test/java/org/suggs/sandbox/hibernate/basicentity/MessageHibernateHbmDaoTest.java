@@ -4,27 +4,13 @@
  */
 package org.suggs.sandbox.hibernate.basicentity;
 
+import org.springframework.test.context.ContextConfiguration;
+
 /**
- * Test object
+ * Message test impl that will use HBM driven testing.
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class MessageHibernateHbmDaoTest extends AbstractMessageHibernateDaoTest {
-
-    /**
-     * Constructs a new instance.
-     */
-    public MessageHibernateHbmDaoTest() {
-        super();
-    }
-
-    /**
-     * @see org.springframework.test.AbstractDependencyInjectionSpringContextTests#getConfigLocations()
-     */
-    @Override
-    protected String[] getConfigLocations() {
-        return new String[] { "xml/ut-hbm-messagetest.xml" };
-    }
-
-}
+@ContextConfiguration(locations = { "classpath:xml/ut-hbm-messagetest.xml" })
+public class MessageHibernateHbmDaoTest extends AbstractHibernateMessageIntegrationTest {}

@@ -2,10 +2,8 @@
  * TimestampAuditingInterceptor.java created on 31 Mar 2010 07:20:00 by suggitpe for project sandbox-hibernate
  * 
  */
-package org.suggs.sandbox.hibernate.timestamps;
+package org.suggs.sandbox.hibernate.support;
 
-import org.suggs.sandbox.hibernate.support.TimestampAuditInfo;
-import org.suggs.sandbox.hibernate.support.TimestampAuditable;
 
 import java.io.Serializable;
 import java.util.Calendar;

@@ -10,7 +10,7 @@
                 <property name="jdbcUrl" value="${suggs.jdbc.url}" />
                 <property name="user" value="${suggs.jdbc.username}" />
                 <property name="password" value="${suggs.jdbc.password}" />
-                <property name="initialPoolSize" value="2" />
+                <property name="initialPoolSize" value="1" />
                 <property name="minPoolSize" value="1" />
                 <property name="maxPoolSize" value="5" />
                 <property name="maxIdleTime" value="5" />
@@ -24,9 +24,11 @@
         <property name="location" value="classpath:db.properties" />
     </bean>
     
+    <bean id="timestampInterceptor" class="org.suggs.sandbox.hibernate.support.TimestampAuditingInterceptor"/>
+    
     <!-- hibernate session details .. including mappings -->
     <!-- class="org.springframework.orm.hibernate3.LocalSessionFactoryBen" -->
-    <bean id="abstractSessionFactoryBean" abstract="true" destroy-method="close">
+    <bean id="abstractSessionFactoryBean" abstract="true" >
         <property name="dataSource" ref="dataSource" />
         <property name="useTransactionAwareDataSource" value="true" />
         <property name="hibernateProperties">
@@ -38,6 +40,7 @@
                 <prop key="hibernate.show_sql">false</prop>
             </props>
         </property>
+        <property name="entityInterceptor" ref="timestampInterceptor"/>
     </bean>
 
 </beans>

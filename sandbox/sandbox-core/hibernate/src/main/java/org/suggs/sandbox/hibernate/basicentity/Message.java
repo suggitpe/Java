@@ -4,14 +4,11 @@
  */
 package org.suggs.sandbox.hibernate.basicentity;
 
-import java.io.Serializable;
+import org.suggs.sandbox.hibernate.support.EntityBase;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -25,28 +22,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "MESSAGES")
-@SequenceGenerator(name = "MSG_SEQ_STR", sequenceName = "MESSAGE_SEQ")
-public class Message implements Serializable {
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "MESSAGE_SEQ")
+public class Message extends EntityBase {
 
-    private Long id;
-    private String text_;
-    private Message nextMessage_;
+    @Column(name = "MESSAGE_TEXT", nullable = false, length = 255)
+    private String text;
+
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinColumn(name = "NEXT_MESSAGE_ID", nullable = true)
+    private Message nextMessage;
 
     @SuppressWarnings("unused")
     private Message() {}
-
-    /**
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuffer buff = new StringBuffer();
-
-        buff.append( "ID:[" ).append( getId() );
-        buff.append( "] TEXT:[" ).append( getText() );
-        buff.append( "] next_id:[" ).append( getNextMessage() ).append( "]" );
-        return buff.toString();
-    }
 
     /**
      * Constructs a new instance.
@@ -54,57 +41,92 @@ public class Message implements Serializable {
      * @param aText
      */
     public Message( String aText ) {
-        text_ = aText;
+        text = aText;
     }
 
     /**
-     * Getter for the ID
+     * Returns the value of text.
      * 
-     * @return the id of the object
+     * @return Returns the text.
      */
-    @Id
-    @Column(name = "MESSAGE_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MSG_SEQ_STR")
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param aId
-     */
-    public void setId( Long aId ) {
-        id = aId;
-    }
-
-    /**
-     * @return text
-     */
-    @Column(name = "MESSAGE_TEXT", nullable = false, length = 255)
     public String getText() {
-        return text_;
+        return text;
     }
 
     /**
+     * Sets the text field to the specified value.
+     * 
      * @param aText
+     *            The text to set.
      */
     public void setText( String aText ) {
-        text_ = aText;
+        text = aText;
     }
 
     /**
-     * @return nest message
+     * Returns the value of nextMessage.
+     * 
+     * @return Returns the nextMessage.
      */
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinColumn(name = "NEXT_MESSAGE_ID", nullable = true)
     public Message getNextMessage() {
-        return nextMessage_;
+        return nextMessage;
     }
 
     /**
-     * @param aMsg
+     * Sets the nextMessage field to the specified value.
+     * 
+     * @param aNextMessage
+     *            The nextMessage to set.
      */
-    public void setNextMessage( Message aMsg ) {
-        nextMessage_ = aMsg;
+    public void setNextMessage( Message aNextMessage ) {
+        nextMessage = aNextMessage;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return super.toString() + " Message [nextMessage=" + nextMessage + ", text=" + text + "]";
+    }
+
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ( ( nextMessage == null ) ? 0 : nextMessage.hashCode() );
+        result = prime * result + ( ( text == null ) ? 0 : text.hashCode() );
+        return result;
+    }
+
+    /**
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals( Object obj ) {
+        if ( this == obj )
+            return true;
+        if ( !super.equals( obj ) )
+            return false;
+        if ( getClass() != obj.getClass() )
+            return false;
+        Message other = (Message) obj;
+        if ( nextMessage == null ) {
+            if ( other.nextMessage != null )
+                return false;
+        }
+        else if ( !nextMessage.equals( other.nextMessage ) )
+            return false;
+        if ( text == null ) {
+            if ( other.text != null )
+                return false;
+        }
+        else if ( !text.equals( other.text ) )
+            return false;
+        return true;
     }
 
 }

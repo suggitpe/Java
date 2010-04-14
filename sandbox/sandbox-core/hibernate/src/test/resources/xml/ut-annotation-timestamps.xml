@@ -5,8 +5,6 @@
     <!-- import all of the common bean refs -->
     <import resource="ut-common.xml"/>
     
-    <bean id="timestampInterceptor" class="org.suggs.sandbox.hibernate.timestamps.TimestampAuditingInterceptor"/>
-    
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
         parent="abstractSessionFactoryBean">
         <property name="annotatedClasses">
@@ -14,7 +12,6 @@
                 <value>org.suggs.sandbox.hibernate.timestamps.TimestampedEntity</value>
             </list>
         </property>
-        <property name="entityInterceptor" ref="timestampInterceptor"/>
     </bean>
     
 </beans>

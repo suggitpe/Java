@@ -4,26 +4,13 @@
  */
 package org.suggs.sandbox.hibernate.basicentity;
 
+import org.springframework.test.context.ContextConfiguration;
+
 /**
- * Test object
+ * Message test impl that will use annotation driven testing.
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class MessageHibernateAnnotationDaoTest extends AbstractMessageHibernateDaoTest {
-
-    /**
-     * Constructs a new instance.
-     */
-    public MessageHibernateAnnotationDaoTest() {
-        super();
-    }
-
-    /**
-     * @see org.springframework.test.AbstractSingleSpringContextTests#getConfigLocations()
-     */
-    @Override
-    protected String[] getConfigLocations() {
-        return new String[] { "xml/ut-annotation-messagetest.xml" };
-    }
-}
+@ContextConfiguration(locations = { "classpath:xml/ut-annotation-messagetest.xml" })
+public class MessageHibernateAnnotationDaoTest extends AbstractHibernateMessageIntegrationTest {}

@@ -6,8 +6,10 @@ package org.suggs.sandbox.hibernate.basicentity;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Session;
 
 /**
  * Standard test for the Message entity.
@@ -17,5 +19,57 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class AbstractHibernateMessageIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, Message> {
 
-    private static final Log LOG = LogFactory.getLog( AbstractHibernateMessageIntegrationTest.class );
+    // private static final Log LOG = LogFactory.getLog( AbstractHibernateMessageIntegrationTest.class );
+
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)
+     */
+    @Override
+    protected void cleanUpData( Session aSession ) {
+        aSession.createQuery( "delete from Message" ).executeUpdate();
+    }
+
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntitySearchHql()
+     */
+    @Override
+    protected String createEntitySearchHql() {
+        return "from Message";
+    }
+
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntityTemplate(java.io.Serializable)
+     */
+    @Override
+    protected Message createEntityTemplate( Long aKey ) {
+        return new Message( "This is a test message" );
+    }
+
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createKeyTemplate()
+     */
+    @Override
+    protected Long createKeyTemplate() {
+        // leaving as null means that we are using sequences. Realy this could b e done better as it is
+        // confusing.
+        return null;
+    }
+
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityListForSchemaCreation()
+     */
+    @Override
+    protected List<Class<?>> getEntityListForSchemaCreation() {
+        List<Class<?>> entityClassses = new ArrayList<Class<?>>();
+        entityClassses.add( Message.class );
+        return entityClassses;
+    }
+
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
+     */
+    @Override
+    protected void updateEntityForUpdateTest( Message aEntity ) {
+        aEntity.setText( "I have been updated" );
+    }
 }

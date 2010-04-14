@@ -4,6 +4,7 @@
  */
 package org.suggs.sandbox.hibernate.support;
 
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -19,11 +20,11 @@ import javax.persistence.Version;
  * @version 1.0 26 Mar 2010
  */
 @MappedSuperclass
-public class EntityBase implements TimestampAuditable {
+public class EntityBase implements TimestampAuditable, Serializable {
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(generator = "ENTITY_SEQ_STR")
+    @GeneratedValue(generator = "ENTITYBASE_SEQ_STR")
     private Long id;
 
     @Version

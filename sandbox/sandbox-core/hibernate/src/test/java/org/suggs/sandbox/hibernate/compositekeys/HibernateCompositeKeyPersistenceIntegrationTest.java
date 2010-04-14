@@ -20,7 +20,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
@@ -91,32 +90,6 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     }
 
     @Test
-    public void createEntityObjectInTable() {
-
-        runGenericTest( new HibernateIntegrationTestCallback() {
-
-            EntityKey key = createKeyTemplate();
-            EntityObject object = createEntityTemplate( key );
-
-            @Override
-            public void beforeTest( Session aSession ) {}
-
-            @Override
-            public void executeTest( Session aSession ) {
-                aSession.save( object );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                Long count = (Long) aSession.createQuery( "select count(key.keyOne) from EntityObject o where key.keyOne = '"
-                                                          + key.getKeyOne() + "'" )
-                    .uniqueResult();
-                assertThat( Long.valueOf( 1 ), equalTo( count ) );
-            }
-        } );
-    }
-
-    @Test
     public void createEntityWithNullDataInTable() {
         runGenericTest( new HibernateIntegrationTestCallback() {
 
@@ -158,31 +131,6 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
             @Override
             public void verifyTest( Session aSession ) {
                 verifyEntityCount( aSession, 1L );
-            }
-        } );
-    }
-
-    @Test
-    public void retrieveEntityFromTableWithGet() {
-        runGenericTest( new HibernateIntegrationTestCallback() {
-
-            EntityKey key = createKeyTemplate();
-            EntityObject object = createEntityTemplate( key );
-            EntityObject result;
-
-            @Override
-            public void beforeTest( Session aSession ) {
-                aSession.save( object );
-            }
-
-            @Override
-            public void executeTest( Session aSession ) {
-                result = (EntityObject) aSession.get( EntityObject.class, key );
-            }
-
-            @Override
-            public void verifyTest( Session aSession ) {
-                verifyResult( object, result );
             }
         } );
     }

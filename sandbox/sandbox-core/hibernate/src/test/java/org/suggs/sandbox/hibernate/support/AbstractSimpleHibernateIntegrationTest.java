@@ -255,7 +255,6 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         assertThat( result, not( nullValue() ) );
         assertThat( result, not( sameInstance( expected ) ) );
         assertThat( result, equalTo( expected ) );
-
     }
 
     // =====================================
