@@ -7,9 +7,14 @@ package org.suggs.sandbox.hibernate.timestamps;
 import org.suggs.sandbox.hibernate.support.EntityBase;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -33,6 +38,9 @@ public class TimestampedEntity extends EntityBase {
 
     @Column(name = "INTEGER_DATA", nullable = true)
     private Integer someInteger;
+
+    @OneToMany(cascade = { CascadeType.ALL }, mappedBy = "parent", fetch = FetchType.LAZY)
+    private Set<TimestampedChildEntity> children = new HashSet<TimestampedChildEntity>();
 
     /**
      * Constructs a new instance.
@@ -113,12 +121,42 @@ public class TimestampedEntity extends EntityBase {
     }
 
     /**
+     * Returns the value of children.
+     * 
+     * @return Returns the children.
+     */
+    public Set<TimestampedChildEntity> getChildren() {
+        return children;
+    }
+
+    /**
+     * Sets the children field to the specified value.
+     * 
+     * @param aChildren
+     *            The children to set.
+     */
+    public void setChildren( Set<TimestampedChildEntity> aChildren ) {
+        children = aChildren;
+    }
+
+    /**
+     * Adds a child to the existing children.
+     * 
+     * @param aChild
+     *            the child to add.
+     */
+    public void addChild( TimestampedChildEntity aChild ) {
+        aChild.setParent( this );
+        children.add( aChild );
+    }
+
+    /**
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return super.toString() + " TimestampedEntity [someDate=" + someDate + ", someInteger=" + someInteger
-               + ", someString=" + someString + "]";
+        return super.toString() + " TimestampedEntity [children=" + children + ", someDate=" + someDate
+               + ", someInteger=" + someInteger + ", someString=" + someString + "]";
     }
 
     /**
@@ -128,6 +166,7 @@ public class TimestampedEntity extends EntityBase {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
+        result = prime * result + ( ( children == null ) ? 0 : children.hashCode() );
         result = prime * result + ( ( someDate == null ) ? 0 : someDate.hashCode() );
         result = prime * result + ( ( someInteger == null ) ? 0 : someInteger.hashCode() );
         result = prime * result + ( ( someString == null ) ? 0 : someString.hashCode() );
@@ -146,6 +185,12 @@ public class TimestampedEntity extends EntityBase {
         if ( getClass() != obj.getClass() )
             return false;
         TimestampedEntity other = (TimestampedEntity) obj;
+        if ( children == null ) {
+            if ( other.children != null )
+                return false;
+        }
+        else if ( !children.equals( other.children ) )
+            return false;
         if ( someDate == null ) {
             if ( other.someDate != null )
                 return false;

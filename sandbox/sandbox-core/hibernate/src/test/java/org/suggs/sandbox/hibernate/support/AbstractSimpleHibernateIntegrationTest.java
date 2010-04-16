@@ -121,7 +121,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
 
     @Test
     public void basicCreateOperationCreatesCorrectObject() {
-        LOG.debug( "basicCreateOperationCreatesCorrectObject" );
+        LOG.info( "Testing the create CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
 
             K key = createKeyTemplate();
@@ -134,7 +134,9 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
 
             @Override
             public void executeTest( Session aSession ) {
+                LOG.debug( "Persiting: " + entity );
                 aSession.save( entity );
+                LOG.debug( "Entity now saved into the db ... good" );
             }
 
             @SuppressWarnings("unchecked")
@@ -149,6 +151,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
 
     @Test
     public void basicReadOperationsInstantiatesCorrectObject() {
+        LOG.info( "Testing the read CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
 
             K key = createKeyTemplate();
@@ -183,7 +186,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
 
     @Test
     public void basicUpdateOperationsUpdatesCorrectObject() {
-        LOG.debug( "basicUpdateOperationsUpdatesCorrectObject" );
+        LOG.info( "Testing the update CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
 
             K key = createKeyTemplate();
@@ -218,7 +221,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
 
     @Test
     public void basicDeleteOperationsDeletesCorrectObject() {
-        LOG.debug( "basicDeleteOperationsUpdatesCorrectObject" );
+        LOG.info( "Testing the delete CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
 
             K key = createKeyTemplate();
@@ -249,12 +252,14 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         Long count = (Long) aSession.createQuery( "select count(*) " + createEntitySearchHql() )
             .uniqueResult();
         assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
+        LOG.debug( aCountOfEntities + " rows in the database ... good" );
     }
 
     protected void verifyResult( E expected, E result ) {
         assertThat( result, not( nullValue() ) );
         assertThat( result, not( sameInstance( expected ) ) );
         assertThat( result, equalTo( expected ) );
+        LOG.debug( "Objects match up ... good" );
     }
 
     // =====================================
@@ -268,9 +273,18 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
     private void executeInTransaction( TransactionExecutable executable ) {
         Session session = sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();
-        executable.execute( session );
-        transaction.commit();
-        session.close();
+        try {
+            executable.execute( session );
+            transaction.commit();
+        }
+        catch ( Exception e ) {
+            LOG.warn( "Exception: " + e.getMessage() );
+            transaction.rollback();
+            throw new IllegalStateException( e );
+        }
+        finally {
+            session.close();
+        }
     }
 
     /**

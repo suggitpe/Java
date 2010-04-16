@@ -10,6 +10,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>org.suggs.sandbox.hibernate.timestamps.TimestampedEntity</value>
+                <value>org.suggs.sandbox.hibernate.timestamps.TimestampedChildEntity</value>
             </list>
         </property>
     </bean>

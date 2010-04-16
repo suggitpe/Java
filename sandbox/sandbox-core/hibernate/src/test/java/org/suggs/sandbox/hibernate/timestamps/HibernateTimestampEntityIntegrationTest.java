@@ -48,6 +48,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
     protected List<Class<?>> getEntityListForSchemaCreation() {
         List<Class<?>> entityClassses = new ArrayList<Class<?>>();
         entityClassses.add( TimestampedEntity.class );
+        entityClassses.add( TimestampedChildEntity.class );
         return entityClassses;
     }
 
@@ -65,7 +66,10 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
      */
     @Override
     protected TimestampedEntity createEntityTemplate( Long aKey ) {
-        return new TimestampedEntity( "deleteMe", Calendar.getInstance().getTime(), Integer.valueOf( 9876 ) );
+        TimestampedEntity entity = new TimestampedEntity( "deleteMe",
+                                                          Calendar.getInstance().getTime(),
+                                                          Integer.valueOf( 9876 ) );
+        return entity;
     }
 
     /**
