@@ -326,8 +326,28 @@
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-c3p0</artifactId>
+                <version>3.3.2.GA</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-annotations</artifactId>
                 <version>3.4.0.GA</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jolbox</groupId>
+                <artifactId>bonecp</artifactId>
+                <version>0.6.4</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jolbox</groupId>
+                <artifactId>bonecp-provider</artifactId>
+                <version>0.6.4</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jolbox</groupId>
+                <artifactId>bonecp-spring</artifactId>
+                <version>0.6.4</version>
             </dependency>
             <dependency>
                 <groupId>javassist</groupId>
