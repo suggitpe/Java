@@ -98,7 +98,7 @@ public class TimestampedChildEntity extends EntityBase {
     @Override
     public String toString() {
         return super.toString() + " TimestampedChildEntity [childInteger=" + childInteger + ", childString="
-               + childString + ", parent=" + parent + "]";
+               + childString + "]";
     }
 
     /**

@@ -31,14 +31,21 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-timestamps.xml" })
 public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, TimestampedEntity> {
 
-    private static final String TEST_HQL = "from TimestampedEntity where someString in ('deleteMe', 'altered')";
+    private static final String WHERE_CLAUSE = "someString in ('deleteMe', 'altered')";
+    private static final String TEST_HQL = "from TimestampedEntity where " + WHERE_CLAUSE;
 
     /**
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)
      */
     @Override
     protected void cleanUpData( Session aSession ) {
-        aSession.createQuery( "delete " + TEST_HQL ).executeUpdate();
+
+        String childDelete = " delete from TimestampedChildEntity c where exists (select 1 from TimestampedEntity e where c.parent.id = e.id and e."
+                             + WHERE_CLAUSE + " )";
+        String parentDelete = "delete " + TEST_HQL;
+
+        aSession.createQuery( childDelete ).executeUpdate();
+        aSession.createQuery( parentDelete ).executeUpdate();
     }
 
     /**
@@ -69,6 +76,10 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
         TimestampedEntity entity = new TimestampedEntity( "deleteMe",
                                                           Calendar.getInstance().getTime(),
                                                           Integer.valueOf( 9876 ) );
+        TimestampedChildEntity child = new TimestampedChildEntity();
+        child.setChildInteger( Integer.valueOf( 9999 ) );
+        child.setChildString( "This is a child string" );
+        entity.addChild( child );
         return entity;
     }
 
