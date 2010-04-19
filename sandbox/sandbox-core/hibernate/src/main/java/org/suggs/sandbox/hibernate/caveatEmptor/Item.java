@@ -37,25 +37,53 @@ import javax.persistence.UniqueConstraint;
                                               @UniqueConstraint(columnNames = "SELLER_USER_ID") })
 public class Item extends AbstractPersistentBaseClass {
 
-    private String mName_;
-    private String mDescription_;
-    private Set<Category> mCategories_ = new HashSet<Category>();
-    private Set<Bid> mBids_ = new HashSet<Bid>();
-    private Set<Comment> mComments_;
-    private Double mInitialPrice_;
-    private Double mReservePrice_;
-    private Date mStartDate_;
-    private Date mEndDate_;
-    private Date mCreated_;
-    private Bid mSuccessfulBid_;
-    private User mSeller_;
+    @Column(name = "ITEM_NAME", nullable = false, length = 64)
+    private String name;
+
+    @Column(name = "ITEM_DESCRIPTION", nullable = false, length = 255)
+    private String description;
+
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = org.suggs.sandbox.hibernate.caveatEmptor.Category.class, cascade = {
+                                                                                                                           CascadeType.PERSIST,
+                                                                                                                           CascadeType.MERGE })
+    @JoinTable(name = "CE_ITM_CAT_BRDG", joinColumns = { @JoinColumn(name = "ITMCAT_ITEMS_ID") }, inverseJoinColumns = { @JoinColumn(name = "ITMCAT_CATEGORIES_ID") })
+    private Set<Category> categories = new HashSet<Category>();
+
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
+    private Set<Bid> bids = new HashSet<Bid>();
+
+    @OneToMany(mappedBy = "aboutItem", fetch = FetchType.LAZY)
+    private Set<Comment> comments;
+
+    @Column(name = "ITEM_INITIAL_PRICE", updatable = false)
+    private Double initialPrice;
+
+    @Column(name = "ITEM_RESERVE_PRICE", nullable = false)
+    private Double reservePrice;
+
+    @Column(name = "ITEM_START_DATE", nullable = false, updatable = false)
+    private Date startDate;
+
+    @Column(name = "ITEM_END_DATE", nullable = false)
+    private Date endDate;
+
+    @Column(name = "ITEM_CREATED", nullable = false, updatable = false)
+    private Date created;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "SUCCESSFUL_BID_ID")
+    private Bid successfulBid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SELLER_USER_ID")
+    private User seller;
 
     /**
      * Constructs a new instance.
      */
     public Item() {
         super();
-        mCreated_ = Calendar.getInstance().getTime();
+        created = Calendar.getInstance().getTime();
     }
 
     /**
@@ -71,13 +99,13 @@ public class Item extends AbstractPersistentBaseClass {
     public Item( String aName, String aDescription, Double aInitialPrice, Double aReservePrice,
                  Date aStartDate, Date aEndDate ) {
         super();
-        mName_ = aName;
-        mDescription_ = aDescription;
-        mInitialPrice_ = aInitialPrice;
-        mReservePrice_ = aReservePrice;
-        mStartDate_ = aStartDate;
-        mEndDate_ = aEndDate;
-        mCreated_ = Calendar.getInstance().getTime();
+        name = aName;
+        description = aDescription;
+        initialPrice = aInitialPrice;
+        reservePrice = aReservePrice;
+        startDate = aStartDate;
+        endDate = aEndDate;
+        created = Calendar.getInstance().getTime();
     }
 
     /**
@@ -85,9 +113,8 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return name
      */
-    @Column(name = "ITEM_NAME", nullable = false, length = 64)
     public String getName() {
-        return mName_;
+        return name;
 
     }
 
@@ -98,7 +125,7 @@ public class Item extends AbstractPersistentBaseClass {
      *            the name of the item
      */
     public void setName( String aName ) {
-        mName_ = aName;
+        name = aName;
     }
 
     /**
@@ -106,19 +133,18 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the description of the item
      */
-    @Column(name = "ITEM_DESCRIPTION", nullable = false, length = 255)
     public String getDescription() {
-        return mDescription_;
+        return description;
     }
 
     /**
      * setter for the description
      * 
-     * @param description
+     * @param aDescription
      *            the description to set
      */
-    public void setDescription( String description ) {
-        mDescription_ = description;
+    public void setDescription( String aDescription ) {
+        description = aDescription;
     }
 
     /**
@@ -126,12 +152,8 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the set of categories tht this item relates to
      */
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = org.suggs.sandbox.hibernate.caveatEmptor.Category.class, cascade = {
-                                                                                                                           CascadeType.PERSIST,
-                                                                                                                           CascadeType.MERGE })
-    @JoinTable(name = "CE_ITM_CAT_BRDG", joinColumns = { @JoinColumn(name = "ITMCAT_ITEMS_ID") }, inverseJoinColumns = { @JoinColumn(name = "ITMCAT_CATEGORIES_ID") })
     public Set<Category> getCategories() {
-        return mCategories_;
+        return categories;
     }
 
     /**
@@ -141,7 +163,7 @@ public class Item extends AbstractPersistentBaseClass {
      *            the st of categories that this item belongs to
      */
     public void setCategories( Set<Category> aCategories ) {
-        mCategories_ = aCategories;
+        categories = aCategories;
     }
 
     /**
@@ -156,7 +178,7 @@ public class Item extends AbstractPersistentBaseClass {
         }
 
         aCatagory.getItems().add( this );
-        mCategories_.add( aCatagory );
+        categories.add( aCatagory );
     }
 
     /**
@@ -164,9 +186,8 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return all the bids made on this item
      */
-    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     public Set<Bid> getBids() {
-        return mBids_;
+        return bids;
     }
 
     /**
@@ -176,7 +197,7 @@ public class Item extends AbstractPersistentBaseClass {
      *            the bids made againt this item
      */
     public void setBids( Set<Bid> aBids ) {
-        mBids_ = aBids;
+        bids = aBids;
     }
 
     /**
@@ -192,7 +213,7 @@ public class Item extends AbstractPersistentBaseClass {
         // this ensurs that we do not get a bid that has been created
         // against another item being incorrectly associated
         aBid.setItem( this );
-        mBids_.add( aBid );
+        bids.add( aBid );
     }
 
     /**
@@ -200,9 +221,8 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the set of comments made about this item
      */
-    @OneToMany(mappedBy = "aboutItem", fetch = FetchType.LAZY)
     public Set<Comment> getComments() {
-        return mComments_;
+        return comments;
     }
 
     /**
@@ -212,7 +232,7 @@ public class Item extends AbstractPersistentBaseClass {
      *            the comments set to add
      */
     public void setComments( Set<Comment> aComments ) {
-        mComments_ = aComments;
+        comments = aComments;
     }
 
     /**
@@ -226,7 +246,7 @@ public class Item extends AbstractPersistentBaseClass {
             throw new IllegalArgumentException( "aComment is null" );
         }
         aComment.setAboutItem( this );
-        mComments_.add( aComment );
+        comments.add( aComment );
     }
 
     /**
@@ -234,19 +254,18 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the time that the item was created
      */
-    @Column(name = "ITEM_CREATED", nullable = false, updatable = false)
     public Date getCreated() {
-        return mCreated_;
+        return created;
     }
 
     /**
      * setter for the created timestamp
      * 
-     * @param created
+     * @param aCreated
      *            the datetime the item was created
      */
-    public void setCreated( Date created ) {
-        mCreated_ = created;
+    public void setCreated( Date aCreated ) {
+        created = aCreated;
     }
 
     /**
@@ -254,19 +273,18 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the end date
      */
-    @Column(name = "ITEM_END_DATE", nullable = false)
     public Date getEndDate() {
-        return mEndDate_;
+        return endDate;
     }
 
     /**
      * setter for the end date
      * 
-     * @param endDate
+     * @param aEndDate
      *            the end date
      */
-    public void setEndDate( Date endDate ) {
-        mEndDate_ = endDate;
+    public void setEndDate( Date aEndDate ) {
+        endDate = aEndDate;
     }
 
     /**
@@ -274,19 +292,18 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the initial price
      */
-    @Column(name = "ITEM_INITIAL_PRICE", updatable = false)
     public Double getInitialPrice() {
-        return mInitialPrice_;
+        return initialPrice;
     }
 
     /**
      * setter for the initial price
      * 
-     * @param initialPrice
+     * @param aInitialPrice
      *            the initial price
      */
-    public void setInitialPrice( Double initialPrice ) {
-        mInitialPrice_ = initialPrice;
+    public void setInitialPrice( Double aInitialPrice ) {
+        initialPrice = aInitialPrice;
     }
 
     /**
@@ -294,19 +311,18 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the reserve price
      */
-    @Column(name = "ITEM_RESERVE_PRICE", nullable = false)
     public Double getReservePrice() {
-        return mReservePrice_;
+        return reservePrice;
     }
 
     /**
      * setter for the reserve price
      * 
-     * @param reservePrice
+     * @param aReservePrice
      *            the reserve price
      */
-    public void setReservePrice( Double reservePrice ) {
-        mReservePrice_ = reservePrice;
+    public void setReservePrice( Double aReservePrice ) {
+        reservePrice = aReservePrice;
     }
 
     /**
@@ -314,19 +330,18 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the date that the item starts
      */
-    @Column(name = "ITEM_START_DATE", nullable = false, updatable = false)
     public Date getStartDate() {
-        return mStartDate_;
+        return startDate;
     }
 
     /**
      * setter for the start date
      * 
-     * @param startDate
+     * @param aStartDate
      *            the date that the item starts
      */
-    public void setStartDate( Date startDate ) {
-        mStartDate_ = startDate;
+    public void setStartDate( Date aStartDate ) {
+        startDate = aStartDate;
     }
 
     /**
@@ -334,20 +349,18 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the successful bid
      */
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "SUCCESSFUL_BID_ID")
     public Bid getSuccessfulBid() {
-        return mSuccessfulBid_;
+        return successfulBid;
     }
 
     /**
-     * seter for the successfull bid
+     * Setter for the successful bid
      * 
-     * @param successfulBid
+     * @param aSuccessfulBid
      *            the successful bid to set
      */
-    public void setSuccessfulBid( Bid successfulBid ) {
-        mSuccessfulBid_ = successfulBid;
+    public void setSuccessfulBid( Bid aSuccessfulBid ) {
+        successfulBid = aSuccessfulBid;
     }
 
     /**
@@ -355,20 +368,18 @@ public class Item extends AbstractPersistentBaseClass {
      * 
      * @return the seller
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SELLER_USER_ID")
     public User getSeller() {
-        return mSeller_;
+        return seller;
     }
 
     /**
      * setter for the seller of the item
      * 
-     * @param seller
+     * @param aSeller
      *            the seller
      */
-    public void setSeller( User seller ) {
-        mSeller_ = seller;
+    public void setSeller( User aSeller ) {
+        seller = aSeller;
     }
 
 }

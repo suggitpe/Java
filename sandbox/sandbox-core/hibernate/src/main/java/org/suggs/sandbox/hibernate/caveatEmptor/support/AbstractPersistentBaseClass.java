@@ -21,8 +21,14 @@ import javax.persistence.Version;
 @MappedSuperclass
 public abstract class AbstractPersistentBaseClass {
 
-    private long mId_;
-    private long mVer_;
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CE_SEQ_STR")
+    private long id_;
+
+    @Version
+    @Column(name = "OPT_LOCK_VER")
+    private long version;
 
     /**
      * Constructs a new instance.
@@ -32,15 +38,12 @@ public abstract class AbstractPersistentBaseClass {
     /**
      * @return the id
      */
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CE_SEQ_STR")
     public long getId() {
-        return mId_;
+        return id_;
     }
 
     protected void setId( long aId ) {
-        mId_ = aId;
+        id_ = aId;
     }
 
     /**
@@ -48,10 +51,8 @@ public abstract class AbstractPersistentBaseClass {
      * 
      * @return the version of the object (database version for locking)
      */
-    @Version
-    @Column(name = "OPT_LOCK_VER")
     public long getVersion() {
-        return mVer_;
+        return version;
     }
 
     /**
@@ -61,7 +62,7 @@ public abstract class AbstractPersistentBaseClass {
      *            teh version to set
      */
     protected void setVersion( long aVersion ) {
-        mVer_ = aVersion;
+        version = aVersion;
     }
 
 }

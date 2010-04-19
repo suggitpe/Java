@@ -17,9 +17,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class EntityKey implements Serializable {
 
-    String keyOne;
-    String keyTwo;
-    String keyThree;
+    private String keyOne;
+
+    private String keyTwo;
+
+    private String keyThree;
 
     /**
      * Returns the value of keyOne.

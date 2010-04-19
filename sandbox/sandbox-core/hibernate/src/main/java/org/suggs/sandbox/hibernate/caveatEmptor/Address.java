@@ -16,9 +16,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 
-    private String mStreet_;
-    private String mCity_;
-    private String mZipCode_;
+    @Column(length = 64, nullable = false)
+    private String street;
+
+    @Column(length = 64, nullable = false)
+    private String city;
+
+    @Column(length = 25, nullable = false)
+    private String zipCode;
 
     /**
      * Constructs a new instance.
@@ -36,53 +41,50 @@ public class Address {
      */
     public Address( String aStreet, String aCity, String aZip ) {
         super();
-        mStreet_ = aStreet;
-        mCity_ = aCity;
-        mZipCode_ = aZip;
+        street = aStreet;
+        city = aCity;
+        zipCode = aZip;
     }
 
     /**
      * @return city
      */
-    @Column(length = 64, nullable = false)
     public String getCity() {
-        return mCity_;
+        return city;
     }
 
     /**
-     * @param city
+     * @param aCity
      */
-    public void setCity( String city ) {
-        mCity_ = city;
+    public void setCity( String aCity ) {
+        city = aCity;
     }
 
     /**
      * @return street
      */
-    @Column(length = 64, nullable = false)
     public String getStreet() {
-        return mStreet_;
+        return street;
     }
 
     /**
-     * @param street
+     * @param aStreet
      */
-    public void setStreet( String street ) {
-        mStreet_ = street;
+    public void setStreet( String aStreet ) {
+        street = aStreet;
     }
 
     /**
      * @return zip code`
      */
-    @Column(length = 25, nullable = false)
     public String getZipCode() {
-        return mZipCode_;
+        return zipCode;
     }
 
     /**
-     * @param zipCode
+     * @param aZipCode
      */
-    public void setZipCode( String zipCode ) {
-        mZipCode_ = zipCode;
+    public void setZipCode( String aZipCode ) {
+        zipCode = aZipCode;
     }
 }

@@ -27,17 +27,26 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_BID_SEQ")
 public class Bid extends AbstractPersistentBaseClass {
 
-    private Double mAmount_;
-    private Date mCreated_;
-    private Item mItem_;
-    private User mBidder_;
+    @Column(name = "BID_AMOUNT", nullable = false, updatable = false)
+    private Double amount;
+
+    @Column(name = "BID_CREATED", nullable = false, updatable = false)
+    private Date created;
+
+    @ManyToOne
+    @JoinColumn(name = "BID_ITEM_ID", nullable = false, updatable = false)
+    private Item item;
+
+    @ManyToOne
+    @JoinColumn(name = "BID_USER_ID", nullable = false, updatable = false)
+    private User bidder;
 
     /**
      * Constructs a new instance.
      */
     public Bid() {
         super();
-        mCreated_ = Calendar.getInstance().getTime();
+        created = Calendar.getInstance().getTime();
     }
 
     /**
@@ -49,10 +58,10 @@ public class Bid extends AbstractPersistentBaseClass {
      */
     public Bid( Double aAmount, Item aItem, User aBidder ) {
         super();
-        mCreated_ = Calendar.getInstance().getTime();
-        mAmount_ = aAmount;
-        mItem_ = aItem;
-        mBidder_ = aBidder;
+        created = Calendar.getInstance().getTime();
+        amount = aAmount;
+        item = aItem;
+        bidder = aBidder;
     }
 
     /**
@@ -60,19 +69,18 @@ public class Bid extends AbstractPersistentBaseClass {
      * 
      * @return the bid amount
      */
-    @Column(name = "BID_AMOUNT", nullable = false, updatable = false)
     public Double getAmount() {
-        return mAmount_;
+        return amount;
     }
 
     /**
      * setter for the bid amount
      * 
-     * @param amount
+     * @param aAmount
      *            the amount of the bid
      */
-    public void setAmount( Double amount ) {
-        mAmount_ = amount;
+    public void setAmount( Double aAmount ) {
+        amount = aAmount;
     }
 
     /**
@@ -80,19 +88,18 @@ public class Bid extends AbstractPersistentBaseClass {
      * 
      * @return the created timestamp
      */
-    @Column(name = "BID_CREATED", nullable = false, updatable = false)
     public Date getCreated() {
-        return mCreated_;
+        return created;
     }
 
     /**
      * setter for the created timestamp
      * 
-     * @param created
+     * @param aCreated
      *            the timestamp that the bid was created
      */
-    public void setCreated( Date created ) {
-        mCreated_ = created;
+    public void setCreated( Date aCreated ) {
+        created = aCreated;
     }
 
     /**
@@ -100,20 +107,18 @@ public class Bid extends AbstractPersistentBaseClass {
      * 
      * @return the bid that this item relates to
      */
-    @ManyToOne
-    @JoinColumn(name = "BID_ITEM_ID", nullable = false, updatable = false)
     public Item getItem() {
-        return mItem_;
+        return item;
     }
 
     /**
      * setter for the item
      * 
-     * @param item
+     * @param aItem
      *            the item to set
      */
-    public void setItem( Item item ) {
-        mItem_ = item;
+    public void setItem( Item aItem ) {
+        item = aItem;
     }
 
     /**
@@ -121,19 +126,17 @@ public class Bid extends AbstractPersistentBaseClass {
      * 
      * @return the bidder user details
      */
-    @ManyToOne
-    @JoinColumn(name = "BID_USER_ID", nullable = false, updatable = false)
     public User getBidder() {
-        return mBidder_;
+        return bidder;
     }
 
     /**
      * setter for the bidder
      * 
-     * @param bidder
+     * @param aBidder
      *            the bidder to set
      */
-    public void setBidder( User bidder ) {
-        mBidder_ = bidder;
+    public void setBidder( User aBidder ) {
+        bidder = aBidder;
     }
 }

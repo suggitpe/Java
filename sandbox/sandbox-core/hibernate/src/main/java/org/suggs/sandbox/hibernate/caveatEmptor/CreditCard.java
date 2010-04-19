@@ -20,9 +20,14 @@ import javax.persistence.Table;
 @Table(name = "CE_CREDIT_CARD")
 public class CreditCard extends BillingDetails {
 
-    private Integer mType_;
-    private String mExpMonth_;
-    private String mExpYear_;
+    @Column(name = "CC_TYPE", nullable = false, updatable = false)
+    private Integer type;
+
+    @Column(name = "CC_EXP_MONTH", nullable = false, length = 2)
+    private String expMonth;
+
+    @Column(name = "CC_EXP_YEAR", nullable = false, length = 4)
+    private String expYear;
 
     /**
      * Constructs a new instance.
@@ -45,9 +50,9 @@ public class CreditCard extends BillingDetails {
     public CreditCard( String aOwner, String aNumber, Date aCreateDate, User aUser, Integer aType,
                        String aExpMonth, String aExpYear ) {
         super( aOwner, aNumber, aCreateDate, aUser );
-        mType_ = aType;
-        mExpMonth_ = aExpMonth;
-        mExpYear_ = aExpYear;
+        type = aType;
+        expMonth = aExpMonth;
+        expYear = aExpYear;
     }
 
     /**
@@ -55,19 +60,18 @@ public class CreditCard extends BillingDetails {
      * 
      * @return the expiry month
      */
-    @Column(name = "CC_EXP_MONTH", nullable = false, length = 2)
     public String getExpMonth() {
-        return mExpMonth_;
+        return expMonth;
     }
 
     /**
      * setter for the expiry month
      * 
-     * @param expMonth
+     * @param aExpMonth
      *            the month to set
      */
-    public void setExpMonth( String expMonth ) {
-        mExpMonth_ = expMonth;
+    public void setExpMonth( String aExpMonth ) {
+        expMonth = aExpMonth;
     }
 
     /**
@@ -75,19 +79,18 @@ public class CreditCard extends BillingDetails {
      * 
      * @return the year of expiry
      */
-    @Column(name = "CC_EXP_YEAR", nullable = false, length = 4)
     public String getExpYear() {
-        return mExpYear_;
+        return expYear;
     }
 
     /**
      * setter for the year of expiry
      * 
-     * @param expYear
+     * @param aExpYear
      *            the year that the card expires
      */
-    public void setExpYear( String expYear ) {
-        mExpYear_ = expYear;
+    public void setExpYear( String aExpYear ) {
+        expYear = aExpYear;
     }
 
     /**
@@ -95,18 +98,17 @@ public class CreditCard extends BillingDetails {
      * 
      * @return the type of card
      */
-    @Column(name = "CC_TYPE", nullable = false, updatable = false)
     public Integer getType() {
-        return mType_;
+        return type;
     }
 
     /**
      * setter for the type of card
      * 
-     * @param type
+     * @param aType
      *            the type to set
      */
-    public void setType( Integer type ) {
-        mType_ = type;
+    public void setType( Integer aType ) {
+        type = aType;
     }
 }

@@ -31,10 +31,18 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_CATEGORY_SEQ")
 public class Category extends AbstractPersistentBaseClass {
 
-    private String mName_;
-    private Category mParentCat_;
-    private Set<Category> mChildCats_ = new HashSet<Category>();
-    private Set<Item> mItems_ = new HashSet<Item>();
+    @Column(name = "CATEGORY_NAME", nullable = false, length = 64)
+    private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_PARENT")
+    private Category parentCat;
+
+    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY)
+    private Set<Category> childCats = new HashSet<Category>();
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories", targetEntity = org.suggs.sandbox.hibernate.caveatEmptor.Item.class, fetch = FetchType.LAZY)
+    private Set<Item> items = new HashSet<Item>();
 
     /**
      * Constructs a new instance.
@@ -50,7 +58,7 @@ public class Category extends AbstractPersistentBaseClass {
      */
     public Category( String aName ) {
         super();
-        mName_ = aName;
+        name = aName;
     }
 
     /**
@@ -58,9 +66,8 @@ public class Category extends AbstractPersistentBaseClass {
      * 
      * @return the category name
      */
-    @Column(name = "CATEGORY_NAME", nullable = false, length = 64)
     public String getName() {
-        return mName_;
+        return name;
     }
 
     /**
@@ -70,7 +77,7 @@ public class Category extends AbstractPersistentBaseClass {
      *            the name to set
      */
     public void setName( String aName ) {
-        mName_ = aName;
+        name = aName;
     }
 
     /**
@@ -78,9 +85,8 @@ public class Category extends AbstractPersistentBaseClass {
      * 
      * @return all items in this category
      */
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories", targetEntity = org.suggs.sandbox.hibernate.caveatEmptor.Item.class, fetch = FetchType.LAZY)
     public Set<Item> getItems() {
-        return mItems_;
+        return items;
     }
 
     /**
@@ -90,7 +96,7 @@ public class Category extends AbstractPersistentBaseClass {
      *            the set of items that are in this category
      */
     public void setItems( Set<Item> aItems ) {
-        mItems_ = aItems;
+        items = aItems;
     }
 
     /**
@@ -98,9 +104,8 @@ public class Category extends AbstractPersistentBaseClass {
      * 
      * @return all child categories of this category
      */
-    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY)
     public Set<Category> getChildCategories() {
-        return mChildCats_;
+        return childCats;
     }
 
     /**
@@ -110,7 +115,7 @@ public class Category extends AbstractPersistentBaseClass {
      *            the set of child categories
      */
     public void setChildCategories( Set<Category> aCategories ) {
-        mChildCats_ = aCategories;
+        childCats = aCategories;
     }
 
     /**
@@ -128,7 +133,7 @@ public class Category extends AbstractPersistentBaseClass {
         }
 
         aCategory.setParentCategory( this );
-        mChildCats_.add( aCategory );
+        childCats.add( aCategory );
     }
 
     /**
@@ -136,10 +141,8 @@ public class Category extends AbstractPersistentBaseClass {
      * 
      * @return the parent category
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_PARENT")
     public Category getParentCategory() {
-        return mParentCat_;
+        return parentCat;
     }
 
     /**
@@ -149,7 +152,7 @@ public class Category extends AbstractPersistentBaseClass {
      *            the parent category
      */
     public void setParentCategory( Category aCategory ) {
-        mParentCat_ = aCategory;
+        parentCat = aCategory;
     }
 
 }

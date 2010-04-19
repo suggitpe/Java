@@ -30,10 +30,18 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_BILLING_DETAILS_SEQ")
 public abstract class BillingDetails extends AbstractPersistentBaseClass {
 
-    private String mOwner_;
-    private String mNumber_;
-    private Date mCreated_;
-    private User mUser_;
+    @Column(name = "BILLING_OWNER", nullable = false, length = 128)
+    private String owner;
+
+    @Column(name = "BILLING_NUMBER", nullable = false, length = 32)
+    private String number;
+
+    @Column(name = "BILLING_CREATED", nullable = false, updatable = false)
+    private Date created;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BILLING_USER_ID")
+    private User user;
 
     /**
      * Constructs a new instance.
@@ -53,10 +61,10 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass {
     public BillingDetails( String aOwner, String aNumber, Date aCreatDate, User aUser ) {
         super();
 
-        mOwner_ = aOwner;
-        mNumber_ = aNumber;
-        mCreated_ = aCreatDate;
-        mUser_ = aUser;
+        owner = aOwner;
+        number = aNumber;
+        created = aCreatDate;
+        user = aUser;
     }
 
     /**
@@ -64,19 +72,18 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass {
      * 
      * @return the created timestamp
      */
-    @Column(name = "BILLING_CREATED", nullable = false, updatable = false)
     public Date getCreated() {
-        return mCreated_;
+        return created;
     }
 
     /**
      * Setter for the created timestamp
      * 
-     * @param created
+     * @param aCreated
      *            the timestamp that the object was created
      */
-    public void setCreated( Date created ) {
-        mCreated_ = created;
+    public void setCreated( Date aCreated ) {
+        created = aCreated;
     }
 
     /**
@@ -84,19 +91,18 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass {
      * 
      * @return the number
      */
-    @Column(name = "BILLING_NUMBER", nullable = false, length = 32)
     public String getNumber() {
-        return mNumber_;
+        return number;
     }
 
     /**
      * setter for the number
      * 
-     * @param number
+     * @param aNumber
      *            the number to set
      */
-    public void setNumber( String number ) {
-        mNumber_ = number;
+    public void setNumber( String aNumber ) {
+        number = aNumber;
     }
 
     /**
@@ -104,19 +110,18 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass {
      * 
      * @return the owner
      */
-    @Column(name = "BILLING_OWNER", nullable = false, length = 128)
     public String getOwner() {
-        return mOwner_;
+        return owner;
     }
 
     /**
      * setter for owner
      * 
-     * @param owner
+     * @param aOwner
      *            the owner to set
      */
-    public void setOwner( String owner ) {
-        mOwner_ = owner;
+    public void setOwner( String aOwner ) {
+        owner = aOwner;
     }
 
     /**
@@ -124,10 +129,8 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass {
      * 
      * @return the user
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BILLING_USER_ID")
     public User getUser() {
-        return mUser_;
+        return user;
     }
 
     /**
@@ -137,6 +140,6 @@ public abstract class BillingDetails extends AbstractPersistentBaseClass {
      *            the user to set
      */
     public void setUser( User aUser ) {
-        mUser_ = aUser;
+        user = aUser;
     }
 }

@@ -20,8 +20,11 @@ import javax.persistence.Table;
 @Table(name = "CE_BANK_ACCOUNT")
 public class BankAccount extends BillingDetails {
 
-    private String mBankName_;
-    private String mBankSwift_;
+    @Column(name = "BANK_NAME", nullable = false, length = 128)
+    private String bankName;
+
+    @Column(name = "BANK_SWIFT", nullable = false, length = 12)
+    private String bankSwift;
 
     /**
      * Constructs a new instance.
@@ -49,8 +52,8 @@ public class BankAccount extends BillingDetails {
     public BankAccount( String aOwner, String aNumber, Date aCreateDate, User aUser, String aBankName,
                         String aBankSwift ) {
         super( aOwner, aNumber, aCreateDate, aUser );
-        mBankName_ = aBankName;
-        mBankSwift_ = aBankSwift;
+        bankName = aBankName;
+        bankSwift = aBankSwift;
 
     }
 
@@ -59,19 +62,18 @@ public class BankAccount extends BillingDetails {
      * 
      * @return the bank name
      */
-    @Column(name = "BANK_NAME", nullable = false, length = 128)
     public String getBankName() {
-        return mBankName_;
+        return bankName;
     }
 
     /**
      * Setter for the bank name
      * 
-     * @param bankName
+     * @param aBankName
      *            the bank name to set
      */
-    public void setBankName( String bankName ) {
-        mBankName_ = bankName;
+    public void setBankName( String aBankName ) {
+        bankName = aBankName;
     }
 
     /**
@@ -79,18 +81,17 @@ public class BankAccount extends BillingDetails {
      * 
      * @return the swift address
      */
-    @Column(name = "BANK_SWIFT", nullable = false, length = 12)
     public String getBankSwift() {
-        return mBankSwift_;
+        return bankSwift;
     }
 
     /**
      * setter for the bank swift address
      * 
-     * @param bankSwift
+     * @param aBankSwift
      *            the swift address
      */
-    public void setBankSwift( String bankSwift ) {
-        mBankSwift_ = bankSwift;
+    public void setBankSwift( String aBankSwift ) {
+        bankSwift = aBankSwift;
     }
 }

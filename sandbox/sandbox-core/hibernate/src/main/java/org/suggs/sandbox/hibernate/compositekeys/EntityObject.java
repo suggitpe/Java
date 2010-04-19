@@ -23,19 +23,23 @@ import javax.persistence.Table;
 @Table(name = "ENTITY_OBJECT")
 public class EntityObject implements Serializable {
 
-    EntityKey key;
-    String dataOne;
-    String dataTwo;
+    @Id
+    @AttributeOverrides( { @AttributeOverride(name = "keyOne", column = @Column(name = "KEY_ONE")),
+                          @AttributeOverride(name = "keyTwo", column = @Column(name = "KEY_TWO")),
+                          @AttributeOverride(name = "keyThree", column = @Column(name = "KET_THREE")) })
+    private EntityKey key;
+
+    @Column(name = "DATA_ONE", nullable = true, length = 64)
+    private String dataOne;
+
+    @Column(name = "DATA_TWO", nullable = true, length = 64)
+    private String dataTwo;
 
     /**
      * Returns the value of key.
      * 
      * @return Returns the key.
      */
-    @Id
-    @AttributeOverrides( { @AttributeOverride(name = "keyOne", column = @Column(name = "KEY_ONE")),
-                          @AttributeOverride(name = "keyTwo", column = @Column(name = "KEY_TWO")),
-                          @AttributeOverride(name = "keyThree", column = @Column(name = "KET_THREE")) })
     public EntityKey getKey() {
         return key;
     }
@@ -55,7 +59,6 @@ public class EntityObject implements Serializable {
      * 
      * @return Returns the dataOne.
      */
-    @Column(name = "DATA_ONE", nullable = true, length = 64)
     public String getDataOne() {
         return dataOne;
     }
@@ -75,7 +78,6 @@ public class EntityObject implements Serializable {
      * 
      * @return Returns the dataTwo.
      */
-    @Column(name = "DATA_TWO", nullable = true, length = 64)
     public String getDataTwo() {
         return dataTwo;
     }
