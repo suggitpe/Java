@@ -12,5 +12,5 @@ import org.springframework.test.context.ContextConfiguration;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-@ContextConfiguration(locations = { "classpath:xml/ut-hbm-messagetest.xml" })
+@ContextConfiguration(locations = { "classpath:xml/ut-messagetest-hbm.xml" })
 public class MessageHibernateHbmDaoTest extends AbstractHibernateMessageIntegrationTest {}

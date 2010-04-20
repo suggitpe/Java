@@ -29,7 +29,7 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 18 Mar 2010
  */
-@ContextConfiguration(locations = { "classpath:xml/ut-annotation-compositekeys.xml" })
+@ContextConfiguration(locations = { "classpath:xml/ut-compositekeys.xml" })
 public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSimpleHibernateIntegrationTest<EntityKey, EntityObject> {
 
     private static final String TEST_HQL = "from EntityObject";

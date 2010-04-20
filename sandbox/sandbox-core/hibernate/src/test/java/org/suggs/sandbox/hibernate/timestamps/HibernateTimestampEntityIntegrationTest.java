@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 import org.springframework.test.context.ContextConfiguration;
@@ -28,8 +30,11 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 25 Mar 2010
  */
-@ContextConfiguration(locations = { "classpath:xml/ut-annotation-timestamps.xml" })
+@ContextConfiguration(locations = { "classpath:xml/ut-timestamps.xml" })
 public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, TimestampedEntity> {
+
+    @SuppressWarnings("unused")
+    private static Log LOG = LogFactory.getLog( HibernateTimestampEntityIntegrationTest.class );
 
     private static final String WHERE_CLAUSE = "someString in ('deleteMe', 'altered')";
     private static final String TEST_HQL = "from TimestampedEntity where " + WHERE_CLAUSE;
@@ -120,9 +125,9 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
                 TimestampedEntity result = (TimestampedEntity) aSession.createQuery( TEST_HQL )
                     .uniqueResult();
                 assertThat( entity.getTimestampAuditInfo().getCreateDate(),
-                            not( equalTo( result.getTimestampAuditInfo().getCreateDate() ) ) );
+                            equalTo( result.getTimestampAuditInfo().getCreateDate() ) );
                 assertThat( entity.getTimestampAuditInfo().getUpdateDate(),
-                            not( equalTo( result.getTimestampAuditInfo().getUpdateDate() ) ) );
+                            equalTo( result.getTimestampAuditInfo().getUpdateDate() ) );
                 assertThat( result.getTimestampAuditInfo().getCreateDate(),
                             equalTo( result.getTimestampAuditInfo().getUpdateDate() ) );
 
