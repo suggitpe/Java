@@ -22,7 +22,7 @@ import org.hibernate.Session;
 @ContextConfiguration(locations = { "classpath:xml/ut-annotation-relationships-onetoone.xml" })
 public class RelationshipsOneToOneTest extends AbstractSimpleHibernateIntegrationTest<Long, OneToOneEntity> {
 
-    private static final String WHERE_CLAUSE = "data in ('Some data', 'Other data')";
+    private static final String WHERE_CLAUSE = "data in ('Some data', 'Updated data')";
     private static final String TEST_HQL = "from OneToOneEntity where " + WHERE_CLAUSE;
 
     /**
