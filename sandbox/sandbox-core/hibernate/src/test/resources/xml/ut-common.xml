@@ -12,7 +12,7 @@
                 <property name="password" value="${suggs.jdbc.password}" />
                 <property name="initialPoolSize" value="1" />
                 <property name="minPoolSize" value="1" />
-                <property name="maxPoolSize" value="5" />
+                <property name="maxPoolSize" value="2" />
                 <property name="maxIdleTime" value="5" />
                 <property name="autoCommitOnClose" value="false" />
             </bean>
