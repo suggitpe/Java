@@ -4,10 +4,9 @@
  */
 package org.suggs.sandbox.hibernate.support;
 
-
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,7 +48,7 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
         if ( isNotEntityAuditable( aEntity ) ) {
             return false;
         }
-        Date date = getDateTimeNow();
+        Timestamp date = getDateTimeNow();
         TimestampAuditInfo auditInfo = ( (TimestampAuditable) aEntity ).getTimestampAuditInfo();
 
         if ( LOG.isDebugEnabled() ) {
@@ -70,7 +69,7 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
         if ( isNotEntityAuditable( aEntity ) ) {
             return false;
         }
-        Date date = getDateTimeNow();
+        Timestamp date = getDateTimeNow();
         TimestampAuditInfo auditInfo = ( (TimestampAuditable) aEntity ).getTimestampAuditInfo();
         if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Auditing new entity with create date and update date of [" + date + "]" );
@@ -88,12 +87,13 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
         return !( aEntity instanceof TimestampAuditable );
     }
 
-    private Date getDateTimeNow() {
-        return Calendar.getInstance().getTime();
+    private Timestamp getDateTimeNow() {
+
+        return new Timestamp( Calendar.getInstance().getTimeInMillis() );
     }
 
     private void updateDateProperty( Object[] aCurrentState, String[] aPropertyNames, AUDIT_TYPE type,
-                                     Date aValue ) {
+                                     Timestamp aValue ) {
         for ( int i = 0; i < aPropertyNames.length; ++i ) {
             if ( AUDIT_PROPERTY_NAME.equals( aPropertyNames[i] ) ) {
                 TimestampAuditInfo info = (TimestampAuditInfo) aCurrentState[i];

@@ -4,12 +4,10 @@
  */
 package org.suggs.sandbox.hibernate.support;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * Embeddable audit bean that holds all of the timestamp audit information.
@@ -20,20 +18,18 @@ import javax.persistence.TemporalType;
 @Embeddable
 public class TimestampAuditInfo {
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")
-    private Date createDate;
+    private Timestamp createDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_date")
-    private Date updateDate;
+    private Timestamp updateDate;
 
     /**
      * Returns the value of createDate.
      * 
      * @return Returns the createDate.
      */
-    public Date getCreateDate() {
+    public Timestamp getCreateDate() {
         return createDate;
     }
 
@@ -43,7 +39,7 @@ public class TimestampAuditInfo {
      * @param aCreateDate
      *            The createDate to set.
      */
-    public void setCreateDate( Date aCreateDate ) {
+    public void setCreateDate( Timestamp aCreateDate ) {
         createDate = aCreateDate;
     }
 
@@ -52,7 +48,7 @@ public class TimestampAuditInfo {
      * 
      * @return Returns the updateDate.
      */
-    public Date getUpdateDate() {
+    public Timestamp getUpdateDate() {
         return updateDate;
     }
 
@@ -62,7 +58,7 @@ public class TimestampAuditInfo {
      * @param aUpdateDate
      *            The updateDate to set.
      */
-    public void setUpdateDate( Date aUpdateDate ) {
+    public void setUpdateDate( Timestamp aUpdateDate ) {
         updateDate = aUpdateDate;
     }
 

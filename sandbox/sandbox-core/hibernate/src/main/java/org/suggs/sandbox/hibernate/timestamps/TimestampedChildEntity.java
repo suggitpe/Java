@@ -137,12 +137,6 @@ public class TimestampedChildEntity extends EntityBase {
         }
         else if ( !childString.equals( other.childString ) )
             return false;
-        if ( parent == null ) {
-            if ( other.parent != null )
-                return false;
-        }
-        else if ( !parent.equals( other.parent ) )
-            return false;
         return true;
     }
 
