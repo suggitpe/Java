@@ -8,6 +8,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Embeddable audit bean that holds all of the timestamp audit information.
@@ -18,9 +20,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TimestampAuditInfo {
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")
     private Date createDate;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_date")
     private Date updateDate;
 
