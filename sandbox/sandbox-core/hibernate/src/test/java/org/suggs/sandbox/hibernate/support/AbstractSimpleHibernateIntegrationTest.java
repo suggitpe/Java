@@ -91,6 +91,14 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
     protected abstract List<Class<?>> getEntityListForSchemaCreation();
 
     /**
+     * This method allows you to create additional dependent objects in the database
+     * 
+     * @param aSession
+     *            to actually create the objects.
+     */
+    protected void createDependentObjectsForTest( Session aSession ) {}
+
+    /**
      * Create a template key object for the tests.
      * 
      * @return a Key that relates to the entity
@@ -102,9 +110,11 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      * 
      * @param aKey
      *            the key for the entity.
+     * @param aSession
+     *            so that other depdendent objects can be looked up
      * @return a persistent entity
      */
-    protected abstract E createEntityTemplate( K aKey );
+    protected abstract E createEntityTemplate( K aKey, Session aSession );
 
     /**
      * This is needed so that we can delegate down to the implementing test to perform the underlying update
@@ -125,10 +135,12 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         runGenericTest( new HibernateIntegrationTestCallback() {
 
             K key = createKeyTemplate();
-            E entity = createEntityTemplate( key );
+            E entity = null;
 
             @Override
             public void beforeTest( Session aSession ) {
+                createDependentObjectsForTest( aSession );
+                entity = createEntityTemplate( key, aSession );
                 verifyEntityCount( aSession, 0L );
             }
 
@@ -155,12 +167,15 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         runGenericTest( new HibernateIntegrationTestCallback() {
 
             K key = createKeyTemplate();
-            E entity = createEntityTemplate( key );
+            E entity = null;
             E readEntity = null;
 
             @Override
             public void beforeTest( Session aSession ) {
+                createDependentObjectsForTest( aSession );
+                entity = createEntityTemplate( key, aSession );
                 verifyEntityCount( aSession, 0L );
+
                 aSession.save( entity );
                 verifyEntityCount( aSession, 1L );
             }
@@ -190,12 +205,16 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         runGenericTest( new HibernateIntegrationTestCallback() {
 
             K key = createKeyTemplate();
-            E entity = createEntityTemplate( key );
-            E clone = createEntityTemplate( key );
+            E entity = null;
+            E clone = null;
 
             @Override
             public void beforeTest( Session aSession ) {
+                createDependentObjectsForTest( aSession );
+                entity = createEntityTemplate( key, aSession );
+                clone = createEntityTemplate( key, aSession );
                 verifyEntityCount( aSession, 0L );
+
                 aSession.save( entity );
                 verifyEntityCount( aSession, 1L );
             }
@@ -225,11 +244,14 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         runGenericTest( new HibernateIntegrationTestCallback() {
 
             K key = createKeyTemplate();
-            E entity = createEntityTemplate( key );
+            E entity = null;
 
             @Override
             public void beforeTest( Session aSession ) {
+                createDependentObjectsForTest( aSession );
+                entity = createEntityTemplate( key, aSession );
                 verifyEntityCount( aSession, 0L );
+
                 aSession.save( entity );
                 verifyEntityCount( aSession, 1L );
             }
@@ -256,11 +278,14 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
     }
 
     protected void verifyResult( E expected, E result ) {
+        preVerify( expected, result );
         assertThat( result, not( nullValue() ) );
         assertThat( result, not( sameInstance( expected ) ) );
         assertThat( result, equalTo( expected ) );
         LOG.debug( "Objects match up ... good" );
     }
+
+    protected void preVerify( E expected, E result ) {}
 
     // =====================================
 

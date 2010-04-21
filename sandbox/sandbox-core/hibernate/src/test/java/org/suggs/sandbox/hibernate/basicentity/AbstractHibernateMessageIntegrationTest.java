@@ -41,7 +41,7 @@ public abstract class AbstractHibernateMessageIntegrationTest extends AbstractSi
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntityTemplate(java.io.Serializable)
      */
     @Override
-    protected Message createEntityTemplate( Long aKey ) {
+    protected Message createEntityTemplate( Long aKey, Session aSession ) {
         return new Message( "This is a test message" );
     }
 

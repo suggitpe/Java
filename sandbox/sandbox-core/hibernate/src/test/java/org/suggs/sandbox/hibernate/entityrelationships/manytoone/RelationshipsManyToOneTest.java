@@ -1,38 +1,43 @@
 /*
- * RelationshipsOneToOneTest.java created on 20 Apr 2010 08:08:08 by suggitpe for project sandbox-hibernate
+ * RelationshipsManyToOneTest.java created on 20 Apr 2010 19:20:46 by suggitpe for project sandbox-hibernate
  * 
  */
-package org.suggs.sandbox.hibernate.entityrelationships.onetoone;
+package org.suggs.sandbox.hibernate.entityrelationships.manytoone;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.springframework.test.context.ContextConfiguration;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
- * Test class for the one to one relationship example.
+ * Test class for the many to one example.
  * 
  * @author suggitpe
  * @version 1.0 20 Apr 2010
  */
-@ContextConfiguration(locations = { "classpath:xml/ut-relationships-onetoone.xml" })
-public class RelationshipsOneToOneTest extends AbstractSimpleHibernateIntegrationTest<Long, OneToOneEntity> {
+@ContextConfiguration(locations = { "classpath:xml/ut-relationships-manytoone.xml" })
+public class RelationshipsManyToOneTest extends AbstractSimpleHibernateIntegrationTest<Long, ManyToOneEntity> {
+
+    private static final Log LOG = LogFactory.getLog( RelationshipsManyToOneTest.class );
 
     private static final String WHERE_CLAUSE = "data in ('Some data', 'Updated data')";
-    private static final String TEST_HQL = "from OneToOneEntity where " + WHERE_CLAUSE;
+    private static final String TEST_HQL = "from ManyToOneEntity where " + WHERE_CLAUSE;
 
     /**
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)
      */
     @Override
     protected void cleanUpData( Session aSession ) {
-
-        String otherDelete = " delete from OneToOneOtherEntity o where exists (select 1 from OneToOneEntity e where o.id = e.otherEntity.id and e."
-                             + WHERE_CLAUSE + " )";
+        String otherDelete = " delete from ManyToOneOtherEntity where otherData = 'blah blah blah'";
         String parentDelete = "delete " + TEST_HQL;
 
         aSession.createQuery( parentDelete ).executeUpdate();
@@ -48,19 +53,31 @@ public class RelationshipsOneToOneTest extends AbstractSimpleHibernateIntegratio
     }
 
     /**
+     * Here we create the dependent ManToOneOtherEntity objects.
+     * 
+     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createDependentObjectsForTest(org.hibernate.Session)
+     */
+    @Override
+    protected void createDependentObjectsForTest( Session aSession ) {
+        LOG.debug( "Creating depdendent objects in the database" );
+        ManyToOneOtherEntity other = new ManyToOneOtherEntity();
+        other.setOtherData( "blah blah blah" );
+        aSession.save( other );
+    }
+
+    /**
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntityTemplate(java.io.Serializable,
      *      org.hibernate.Session)
      */
     @Override
-    protected OneToOneEntity createEntityTemplate( Long aKey, Session aSession ) {
+    protected ManyToOneEntity createEntityTemplate( Long aKey, Session aSession ) {
+        Criteria cr = aSession.createCriteria( ManyToOneOtherEntity.class );
+        cr.add( Restrictions.eq( "otherData", "blah, blah, blah" ) );
+        ManyToOneOtherEntity other = (ManyToOneOtherEntity) cr.uniqueResult();
 
-        OneToOneOtherEntity other = new OneToOneOtherEntity();
-        other.setOtherData( "Other data" );
-
-        OneToOneEntity entity = new OneToOneEntity();
+        ManyToOneEntity entity = new ManyToOneEntity();
         entity.setData( "Some data" );
         entity.setOtherEntity( other );
-
         return entity;
     }
 
@@ -79,8 +96,8 @@ public class RelationshipsOneToOneTest extends AbstractSimpleHibernateIntegratio
     @Override
     protected List<Class<?>> getEntityListForSchemaCreation() {
         List<Class<?>> entityClassses = new ArrayList<Class<?>>();
-        entityClassses.add( OneToOneEntity.class );
-        entityClassses.add( OneToOneOtherEntity.class );
+        entityClassses.add( ManyToOneEntity.class );
+        entityClassses.add( ManyToOneOtherEntity.class );
         return entityClassses;
     }
 
@@ -88,8 +105,7 @@ public class RelationshipsOneToOneTest extends AbstractSimpleHibernateIntegratio
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
      */
     @Override
-    protected void updateEntityForUpdateTest( OneToOneEntity aEntity ) {
+    protected void updateEntityForUpdateTest( ManyToOneEntity aEntity ) {
         aEntity.setData( "Updated data" );
     }
-
 }
