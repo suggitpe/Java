@@ -9,32 +9,28 @@ import org.suggs.sandbox.hibernate.support.EntityBase;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * Core entity for the one to many unidirectional example.
+ * Core entity for the one to many bidirectional example.
  * 
  * @author suggitpe
  * @version 1.0 20 Apr 2010
  */
 @Entity
-@Table(name = "ONETOMANY_UNI_ENTITY")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_UNI_ENTITY_SEQ")
-public class OneToManyUnidirectionalEntity extends EntityBase {
+@Table(name = "ONETOMANY_BI_ENTITY")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_BI_ENTITY_SEQ")
+public class OneToManyBidirectionalEntity extends EntityBase {
 
     @Column(name = "data", length = 64)
     private String data;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "PARENT_ID")
-    private Set<OneToManyUnidirectionalOtherEntity> children = new HashSet<OneToManyUnidirectionalOtherEntity>();
+    @OneToMany(mappedBy = "parent")
+    private Set<OneToManyBidirectionalOtherEntity> children = new HashSet<OneToManyBidirectionalOtherEntity>();
 
     /**
      * Returns the value of data.
@@ -60,7 +56,7 @@ public class OneToManyUnidirectionalEntity extends EntityBase {
      * 
      * @return Returns the children.
      */
-    public Set<OneToManyUnidirectionalOtherEntity> getChildren() {
+    public Set<OneToManyBidirectionalOtherEntity> getChildren() {
         return children;
     }
 
@@ -70,7 +66,7 @@ public class OneToManyUnidirectionalEntity extends EntityBase {
      * @param aChildren
      *            The children to set.
      */
-    public void setChildren( Set<OneToManyUnidirectionalOtherEntity> aChildren ) {
+    public void setChildren( Set<OneToManyBidirectionalOtherEntity> aChildren ) {
         children = aChildren;
     }
 
@@ -80,7 +76,7 @@ public class OneToManyUnidirectionalEntity extends EntityBase {
      * @param aChild
      *            the child to add.
      */
-    public void addChild( OneToManyUnidirectionalOtherEntity aChild ) {
+    public void addChild( OneToManyBidirectionalOtherEntity aChild ) {
         children.add( aChild );
     }
 
@@ -116,7 +112,7 @@ public class OneToManyUnidirectionalEntity extends EntityBase {
             return false;
         if ( getClass() != obj.getClass() )
             return false;
-        OneToManyUnidirectionalEntity other = (OneToManyUnidirectionalEntity) obj;
+        OneToManyBidirectionalEntity other = (OneToManyBidirectionalEntity) obj;
         if ( children == null ) {
             if ( other.children != null )
                 return false;

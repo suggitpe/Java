@@ -8,22 +8,28 @@ import org.suggs.sandbox.hibernate.support.EntityBase;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * Child entity for the one to many unidirectional example.
+ * Child entity for the one to many bidirectional example.
  * 
  * @author suggitpe
  * @version 1.0 20 Apr 2010
  */
 @Entity
-@Table(name = "ONETOMANY_UNI_OTHER_ENTITY")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_UNI_OTHER_ENTITY_SEQ")
-public class OneToManyUnidirectionalOtherEntity extends EntityBase {
+@Table(name = "ONETOMANY_BI_OTHER_ENTITY")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_BI_OTHER_ENTITY_SEQ")
+public class OneToManyBidirectionalOtherEntity extends EntityBase {
 
     @Column(name = "OTHER_DATA", length = 64)
     private String otherData;
+
+    @ManyToOne
+    @JoinColumn(name = "PARENT_ID")
+    private OneToManyBidirectionalOtherEntity parent;
 
     /**
      * Returns the value of otherData.
@@ -45,11 +51,31 @@ public class OneToManyUnidirectionalOtherEntity extends EntityBase {
     }
 
     /**
+     * Returns the value of parent.
+     * 
+     * @return Returns the parent.
+     */
+    public OneToManyBidirectionalOtherEntity getParent() {
+        return parent;
+    }
+
+    /**
+     * Sets the parent field to the specified value.
+     * 
+     * @param aParent
+     *            The parent to set.
+     */
+    public void setParent( OneToManyBidirectionalOtherEntity aParent ) {
+        parent = aParent;
+    }
+
+    /**
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return super.toString() + "OneToManyUnidirectionalOtherEntity [otherData=" + otherData + "]";
+        return super.toString() + "OneToManyBidirectionalOtherEntity [otherData=" + otherData + ", parent="
+               + parent + "]";
     }
 
     /**
@@ -60,6 +86,7 @@ public class OneToManyUnidirectionalOtherEntity extends EntityBase {
         final int prime = 31;
         int result = super.hashCode();
         result = prime * result + ( ( otherData == null ) ? 0 : otherData.hashCode() );
+        result = prime * result + ( ( parent == null ) ? 0 : parent.hashCode() );
         return result;
     }
 
@@ -74,12 +101,18 @@ public class OneToManyUnidirectionalOtherEntity extends EntityBase {
             return false;
         if ( getClass() != obj.getClass() )
             return false;
-        OneToManyUnidirectionalOtherEntity other = (OneToManyUnidirectionalOtherEntity) obj;
+        OneToManyBidirectionalOtherEntity other = (OneToManyBidirectionalOtherEntity) obj;
         if ( otherData == null ) {
             if ( other.otherData != null )
                 return false;
         }
         else if ( !otherData.equals( other.otherData ) )
+            return false;
+        if ( parent == null ) {
+            if ( other.parent != null )
+                return false;
+        }
+        else if ( !parent.equals( other.parent ) )
             return false;
         return true;
     }
