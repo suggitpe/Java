@@ -1,5 +1,5 @@
 /*
- * OneToManyEntity.java created on 20 Apr 2010 07:09:39 by suggitpe for project sandbox-hibernate
+ * OneToManyUnidirectionalEntity.java created on 20 Apr 2010 07:09:39 by suggitpe for project sandbox-hibernate
  * 
  */
 package org.suggs.sandbox.hibernate.entityrelationships.onetomany;
@@ -21,14 +21,14 @@ import javax.persistence.Table;
  * @version 1.0 20 Apr 2010
  */
 @Entity
-@Table(name = "ONETOMANY_ENTITY")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_ENTITY_SEQ")
-public class OneToManyEntity extends EntityBase {
+@Table(name = "ONETOMANY_UNI_ENTITY")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_UNI_ENTITY_SEQ")
+public class OneToManyUnidirectionalEntity extends EntityBase {
 
     @Column(name = "data", length = 64)
     private String data;
 
-    private Set<OneToManyChildEntity> children = new HashSet<OneToManyChildEntity>();
+    private Set<OneToManyUnidirectionalOtherEntity> children = new HashSet<OneToManyUnidirectionalOtherEntity>();
 
     /**
      * Returns the value of data.
@@ -54,7 +54,7 @@ public class OneToManyEntity extends EntityBase {
      * 
      * @return Returns the children.
      */
-    public Set<OneToManyChildEntity> getChildren() {
+    public Set<OneToManyUnidirectionalOtherEntity> getChildren() {
         return children;
     }
 
@@ -64,8 +64,18 @@ public class OneToManyEntity extends EntityBase {
      * @param aChildren
      *            The children to set.
      */
-    public void setChildren( Set<OneToManyChildEntity> aChildren ) {
+    public void setChildren( Set<OneToManyUnidirectionalOtherEntity> aChildren ) {
         children = aChildren;
+    }
+
+    /**
+     * Convenience method to add a new child element.
+     * 
+     * @param aChild
+     *            the child to add.
+     */
+    public void addChild( OneToManyUnidirectionalOtherEntity aChild ) {
+        children.add( aChild );
     }
 
     /**
@@ -73,7 +83,8 @@ public class OneToManyEntity extends EntityBase {
      */
     @Override
     public String toString() {
-        return "OneToManyEntity [children=" + children + ", data=" + data + "]";
+        return super.toString() + "OneToManyUnidirectionalEntity [children=" + children + ", data=" + data
+               + "]";
     }
 
     /**
@@ -99,7 +110,7 @@ public class OneToManyEntity extends EntityBase {
             return false;
         if ( getClass() != obj.getClass() )
             return false;
-        OneToManyEntity other = (OneToManyEntity) obj;
+        OneToManyUnidirectionalEntity other = (OneToManyUnidirectionalEntity) obj;
         if ( children == null ) {
             if ( other.children != null )
                 return false;
