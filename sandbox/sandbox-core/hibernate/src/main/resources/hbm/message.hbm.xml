@@ -6,7 +6,7 @@
 		<!-- -->
 		<id name="id" column="ID">
             <generator class="sequence">
-                <param name="sequence">MESSAGE_SEQ</param>
+                <param name="sequence">MESSAGE_SQ</param>
             </generator>
 		</id>
         

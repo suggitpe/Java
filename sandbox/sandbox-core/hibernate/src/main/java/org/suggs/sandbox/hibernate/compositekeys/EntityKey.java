@@ -6,6 +6,7 @@ package org.suggs.sandbox.hibernate.compositekeys;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -17,10 +18,13 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class EntityKey implements Serializable {
 
+    @Column(name = "KEY_ONE", length = 64, nullable = false)
     private String keyOne;
 
+    @Column(name = "KEY_TWO", length = 64, nullable = false)
     private String keyTwo;
 
+    @Column(name = "KEY_THREE", length = 64, nullable = false)
     private String keyThree;
 
     /**

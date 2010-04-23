@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -306,7 +307,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         catch ( Exception e ) {
             LOG.warn( "Exception: " + e.getMessage() );
             transaction.rollback();
-            throw new IllegalStateException( e );
+            Assert.fail( "Failed to execute in transaction" );
         }
         finally {
             session.close();
@@ -329,8 +330,8 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         }
         catch ( Exception e ) {
             trans.rollback();
-            throw new IllegalStateException( "Exception caught in 'beforeTest' execution, transaction rolled back",
-                                             e );
+            session.close();
+            Assert.fail( "Exception caught in 'beforeTest' execution, transaction rolled back" );
         }
 
         session.clear();
@@ -343,8 +344,8 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         }
         catch ( Exception e ) {
             trans.rollback();
-            throw new IllegalStateException( "Exception caught in 'executeTest' execution, transaction rolled back",
-                                             e );
+            session.close();
+            Assert.fail( "Exception caught in 'executeTest' execution, transaction rolled back" );
         }
 
         session.clear();
@@ -357,8 +358,8 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         }
         catch ( Exception e ) {
             trans.rollback();
-            throw new IllegalStateException( "Exception caught in 'verifyTest' execution, transaction rolled back",
-                                             e );
+            session.close();
+            Assert.fail( "Exception caught in 'verifyTest' execution, transaction rolled back" );
         }
 
         session.close();
