@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ONETOONE_OTHER_ENTITY")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOONE_OTHER_ENTITY_SEQ")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOONE_OTHER_ENTITY_SQ")
 public class OneToOneOtherEntity extends EntityBase {
 
     @Column(name = "OTHER_DATA", length = 64, nullable = false)

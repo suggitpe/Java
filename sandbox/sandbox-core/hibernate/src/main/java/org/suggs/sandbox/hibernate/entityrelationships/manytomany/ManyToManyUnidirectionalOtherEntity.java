@@ -1,8 +1,8 @@
 /*
- * OneToManyUnidirectionalOtherEntity.java created on 20 Apr 2010 07:09:57 by suggitpe for project sandbox-hibernate
+ * ManyToManyUnidirectionalOtherEntity.java created on 22 Apr 2010 19:06:52 by suggitpe for project sandbox-hibernate
  * 
  */
-package org.suggs.sandbox.hibernate.entityrelationships.onetomany;
+package org.suggs.sandbox.hibernate.entityrelationships.manytomany;
 
 import org.suggs.sandbox.hibernate.support.EntityBase;
 
@@ -11,16 +11,22 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Child entity for the one to many unidirectional example.
  * 
  * @author suggitpe
- * @version 1.0 20 Apr 2010
+ * @version 1.0 22 Apr 2010
  */
 @Entity
-@Table(name = "ONETOMANY_UNI_OTHER_ENTITY")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_UNI_OTHER_ENTITY_SQ")
-public class OneToManyUnidirectionalOtherEntity extends EntityBase {
+@Table(name = "MANYTOMANY_UNI_OTHER_ENTITY")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "MANYTOMANY_UNI_OTHER_ENTITY_SQ")
+public class ManyToManyUnidirectionalOtherEntity extends EntityBase {
+
+    @SuppressWarnings("unused")
+    private static final Log LOG = LogFactory.getLog( ManyToManyUnidirectionalOtherEntity.class );
 
     @Column(name = "OTHER_DATA", length = 64)
     private String otherData;
@@ -49,7 +55,7 @@ public class OneToManyUnidirectionalOtherEntity extends EntityBase {
      */
     @Override
     public String toString() {
-        return super.toString() + "OneToManyUnidirectionalOtherEntity [otherData=" + otherData + "]";
+        return super.toString() + "ManyToManyUnidirectionalOtherEntity [otherData=" + otherData + "]";
     }
 
     /**
@@ -58,7 +64,7 @@ public class OneToManyUnidirectionalOtherEntity extends EntityBase {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = super.hashCode();
+        int result = 1;
         result = prime * result + ( ( otherData == null ) ? 0 : otherData.hashCode() );
         return result;
     }
@@ -70,11 +76,11 @@ public class OneToManyUnidirectionalOtherEntity extends EntityBase {
     public boolean equals( Object obj ) {
         if ( this == obj )
             return true;
-        if ( !super.equals( obj ) )
+        if ( obj == null )
             return false;
         if ( getClass() != obj.getClass() )
             return false;
-        OneToManyUnidirectionalOtherEntity other = (OneToManyUnidirectionalOtherEntity) obj;
+        ManyToManyUnidirectionalOtherEntity other = (ManyToManyUnidirectionalOtherEntity) obj;
         if ( otherData == null ) {
             if ( other.otherData != null )
                 return false;

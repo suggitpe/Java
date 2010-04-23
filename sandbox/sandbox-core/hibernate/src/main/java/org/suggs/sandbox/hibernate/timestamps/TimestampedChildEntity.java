@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TIMESTAMPED_CHILD_ENTITY")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "TIMESTAMP_CHILD_ENTITY_SEQ")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "TIMESTAMP_CHILD_ENTITY_SQ")
 public class TimestampedChildEntity extends EntityBase {
 
     @Column(name = "CHILD_INTEGER", nullable = true)

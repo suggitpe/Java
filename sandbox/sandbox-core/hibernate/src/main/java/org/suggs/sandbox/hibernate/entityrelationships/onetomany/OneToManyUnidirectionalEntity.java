@@ -26,7 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ONETOMANY_UNI_ENTITY")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_UNI_ENTITY_SEQ")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_UNI_ENTITY_SQ")
 public class OneToManyUnidirectionalEntity extends EntityBase {
 
     @Column(name = "data", length = 64)

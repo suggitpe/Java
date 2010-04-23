@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ONETOONE_ENTITY")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOONE_ENTITY_SEQ")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOONE_ENTITY_SQ")
 public class OneToOneEntity extends EntityBase {
 
     @Column(name = "data", length = 64)

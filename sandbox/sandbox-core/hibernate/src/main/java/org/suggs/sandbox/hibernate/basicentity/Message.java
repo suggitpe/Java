@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "MESSAGES")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "MESSAGE_SEQ")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "MESSAGE_SQ")
 public class Message extends EntityBase {
 
     @Column(name = "MESSAGE_TEXT", nullable = false, length = 255)

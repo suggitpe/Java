@@ -282,7 +282,8 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         assertThat( result, not( nullValue() ) );
         assertThat( result, not( sameInstance( expected ) ) );
         assertThat( result, equalTo( expected ) );
-        LOG.debug( "Objects match up ... good" );
+        LOG.debug( "Objects of type [" + result.getClass().getSimpleName() + "] match up ... good" );
+        LOG.debug( "Object debug:" + result );
     }
 
     protected void preVerify( E expected, E result ) {}

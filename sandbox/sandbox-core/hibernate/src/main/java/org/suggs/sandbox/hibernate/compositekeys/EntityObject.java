@@ -26,7 +26,7 @@ public class EntityObject implements Serializable {
     @Id
     @AttributeOverrides( { @AttributeOverride(name = "keyOne", column = @Column(name = "KEY_ONE")),
                           @AttributeOverride(name = "keyTwo", column = @Column(name = "KEY_TWO")),
-                          @AttributeOverride(name = "keyThree", column = @Column(name = "KET_THREE")) })
+                          @AttributeOverride(name = "keyThree", column = @Column(name = "KEY_THREE")) })
     private EntityKey key;
 
     @Column(name = "DATA_ONE", nullable = true, length = 64)

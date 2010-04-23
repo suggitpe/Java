@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
  */
 @Entity
 @Table(name = "MANYTOONE_OTHER_ENTITY")
-@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "MANYTOONE_OTHER_ENTITY_SEQ")
+@SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "MANYTOONE_OTHER_ENTITY_SQ")
 public class ManyToOneOtherEntity extends EntityBase {
 
     @SuppressWarnings("unused")
