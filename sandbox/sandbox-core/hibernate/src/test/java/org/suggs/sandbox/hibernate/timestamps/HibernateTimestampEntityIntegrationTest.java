@@ -9,7 +9,6 @@ import org.suggs.sandbox.hibernate.support.HibernateIntegrationTestCallback;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -34,7 +33,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-timestamps.xml" })
 public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, TimestampedEntity> {
 
-    // @SuppressWarnings("unused")
+    @SuppressWarnings("unused")
     private static Log LOG = LogFactory.getLog( HibernateTimestampEntityIntegrationTest.class );
 
     private static final String WHERE_CLAUSE = "someString in ('deleteMe', 'altered')";
@@ -52,45 +51,6 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
 
         aSession.createQuery( childDelete ).executeUpdate();
         aSession.createQuery( parentDelete ).executeUpdate();
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#preVerify(java.lang.Object,
-     *      java.lang.Object)
-     */
-    @Override
-    protected void preVerify( TimestampedEntity aExpected, TimestampedEntity aResult ) {
-        LOG.debug( "===========================" );
-        LOG.debug( "expected=[" + aExpected.hashCode() + "] result=[" + aResult.hashCode() + "] match=["
-                   + ( aExpected.hashCode() == aResult.hashCode() ) + "]" );
-
-        LOG.debug( "expected=["
-                   + aExpected.getChildren().iterator().next().hashCode()
-                   + "] result=["
-                   + aResult.getChildren().iterator().next().hashCode()
-                   + "] match=["
-                   + ( aExpected.getChildren().iterator().next().hashCode() == aResult.getChildren()
-                       .iterator()
-                       .next()
-                       .hashCode() ) + "]" );
-
-        LOG.debug( "contains all=[" + aExpected.getChildren().containsAll( aResult.getChildren() ) + "]" );
-        LOG.debug( "contains all=[" + aResult.getChildren().containsAll( aExpected.getChildren() ) + "]" );
-
-        Iterator<?> e = aExpected.getChildren().iterator();
-        while ( e.hasNext() ) {
-            TimestampedChildEntity c = (TimestampedChildEntity) e.next();
-            LOG.debug( "contains self=[" + aExpected.getChildren().contains( c ) + "]" );
-            LOG.debug( "contains othr=[" + aResult.getChildren().contains( c ) + "]" );
-        }
-
-        e = aResult.getChildren().iterator();
-        while ( e.hasNext() ) {
-            TimestampedChildEntity c = (TimestampedChildEntity) e.next();
-            LOG.debug( "contains self=[" + aResult.getChildren().contains( c ) + "]" );
-            LOG.debug( "contains othr=[" + aExpected.getChildren().contains( c ) + "]" );
-        }
-        LOG.debug( "===========================" );
     }
 
     /**

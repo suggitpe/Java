@@ -130,6 +130,18 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      */
     protected abstract String createEntitySearchHql();
 
+    /**
+     * Over loadable method that allows us to perform per validation activities.
+     * 
+     * @param aSession
+     *            the session from which you can (if needed) get access to the database
+     * @param aExpected
+     *            the expected result
+     * @param aResult
+     *            the actualt result
+     */
+    protected void doInitialVerificationForCreateTest( Session aSession, E aExpected, E aResult ) {}
+
     @Test
     public void basicCreateOperationCreatesCorrectObject() {
         LOG.info( "Testing the create CRUD operation ..." );
@@ -157,10 +169,23 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             public void verifyTest( Session aSession ) {
                 verifyEntityCount( aSession, 1L );
                 E result = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                doInitialVerificationForCreateTest( aSession, entity, result );
                 verifyResult( entity, result );
             }
         } );
     }
+
+    /**
+     * Over loadable method that allows us to perform per validation activities.
+     * 
+     * @param aSession
+     *            the session from which you can (if needed) get access to the database
+     * @param aExpected
+     *            the expected result
+     * @param aResult
+     *            the actualt result
+     */
+    protected void doInitialVerificationForReadTest( Session aSession, E aExpected, E aResult ) {}
 
     @Test
     public void basicReadOperationsInstantiatesCorrectObject() {
@@ -193,12 +218,25 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             public void verifyTest( Session aSession ) {
                 if ( key != null ) {
                     verifyEntityCount( aSession, 1L );
+                    doInitialVerificationForReadTest( aSession, readEntity, entity );
                     verifyResult( entity, readEntity );
                 }
             }
 
         } );
     }
+
+    /**
+     * Over loadable method that allows us to perform per validation activities.
+     * 
+     * @param aSession
+     *            the session from which you can (if needed) get access to the database
+     * @param aExpected
+     *            the expected result
+     * @param aResult
+     *            the actualt result
+     */
+    protected void doInitialVerificationForUpdateTest( Session aSession, E aExpected, E aResult ) {}
 
     @Test
     public void basicUpdateOperationsUpdatesCorrectObject() {
@@ -232,12 +270,23 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             @Override
             public void verifyTest( Session aSession ) {
                 entity = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                doInitialVerificationForUpdateTest( aSession, clone, entity );
                 assertThat( entity, not( nullValue() ) );
                 assertThat( entity, not( sameInstance( clone ) ) );
                 assertThat( entity, not( equalTo( clone ) ) );
             }
         } );
     }
+
+    /**
+     * Over loadable method that allows us to perform per validation activities.
+     * 
+     * @param aSession
+     *            the session from which you can (if needed) get access to the database
+     * @param aDeleted
+     *            the actual deleted entity.
+     */
+    protected void doInitialVerificationForDeleteTest( Session aSession, E aDeleted ) {}
 
     @Test
     public void basicDeleteOperationsDeletesCorrectObject() {
@@ -266,6 +315,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
 
             @Override
             public void verifyTest( Session aSession ) {
+                doInitialVerificationForDeleteTest( aSession, entity );
                 verifyEntityCount( aSession, 0L );
             }
         } );
@@ -279,15 +329,12 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
     }
 
     protected void verifyResult( E expected, E result ) {
-        preVerify( expected, result );
         assertThat( result, not( nullValue() ) );
         assertThat( result, not( sameInstance( expected ) ) );
         assertThat( result, equalTo( expected ) );
         LOG.debug( "Objects of type [" + result.getClass().getSimpleName() + "] match up ... good" );
         LOG.debug( "Object debug:" + result );
     }
-
-    protected void preVerify( E expected, E result ) {}
 
     // =====================================
 
