@@ -16,14 +16,12 @@ import org.eclipse.swt.widgets.Display;
  * @author suggitpe
  * @version 1.0 15 Oct 2008
  */
-public class AboutAction extends Action
-{
+public class AboutAction extends Action {
 
     /**
      * Constructs a new instance.
      */
-    public AboutAction()
-    {
+    public AboutAction() {
         super( "&About" );
         setToolTipText( "Info about Mercury" );
         setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_MERCURY_SMALL ) );
@@ -33,8 +31,7 @@ public class AboutAction extends Action
      * @see org.eclipse.jface.action.Action#run()
      */
     @Override
-    public void run()
-    {
+    public void run() {
         HelpAboutDialog had = new HelpAboutDialog( Display.getCurrent().getActiveShell() );
         had.open();
     }

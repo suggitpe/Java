@@ -29,18 +29,16 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 15 Sep 2008
  */
-public class CreateConnectionAction extends Action implements InitializingBean
-{
+public class CreateConnectionAction extends Action implements InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( CreateConnectionAction.class );
 
-    private IConnectionStore mConnectionStore_;
+    private IConnectionStore connectionStore;
 
     /**
      * Constructs a new instance.
      */
-    public CreateConnectionAction()
-    {
+    public CreateConnectionAction() {
         super( "&Create ConnectionContext" );
         setToolTipText( "Create new connection" );
         setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONN_NEW_CONN ) );
@@ -49,26 +47,21 @@ public class CreateConnectionAction extends Action implements InitializingBean
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mConnectionStore_,
-                        "No connection store set on the create connection wizard" );
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( connectionStore, "No connection store set on the create connection wizard" );
     }
 
     /**
      * @see org.eclipse.jface.action.Action#run()
      */
     @Override
-    public void run()
-    {
+    public void run() {
         CreateConnectionWizard ccw = new CreateConnectionWizard();
         WizardDialog d = new WizardDialog( Display.getCurrent().getActiveShell(), ccw );
         int ret = d.open();
-        if ( Window.OK == ret )
-        {
+        if ( Window.OK == ret ) {
             ConnectionDetails dtls = ccw.getConnectionDetails();
-            if ( dtls == null )
-            {
+            if ( dtls == null ) {
                 MessageDialog.openError( Display.getCurrent().getActiveShell(),
                                          "Wizard Failed",
                                          "For some reason we have not been able to create a connection details from this wizard.  This is a system error." );
@@ -76,23 +69,17 @@ public class CreateConnectionAction extends Action implements InitializingBean
             }
 
             String name = dtls.getName();
-            if ( mConnectionStore_.doesConnectionExist( name ) )
-            {
-                final IInputValidator validator = new IInputValidator()
-                {
+            if ( connectionStore.doesConnectionExist( name ) ) {
+                final IInputValidator validator = new IInputValidator() {
 
-                    public String isValid( String txt )
-                    {
-                        if ( txt.length() < 5 )
-                        {
+                    public String isValid( String txt ) {
+                        if ( txt.length() < 5 ) {
                             return "You must enter at least 5 characters";
                         }
-                        else if ( txt.length() > 22 )
-                        {
+                        else if ( txt.length() > 22 ) {
                             return "You cannot enter more than 22 characters";
                         }
-                        else
-                        {
+                        else {
                             return null;
                         }
                     }
@@ -104,15 +91,12 @@ public class CreateConnectionAction extends Action implements InitializingBean
                                                   "newConnection_" + System.currentTimeMillis(),
                                                   validator );
 
-                while ( mConnectionStore_.doesConnectionExist( dtls.getName() ) )
-                {
+                while ( connectionStore.doesConnectionExist( dtls.getName() ) ) {
                     int i = id.open();
-                    if ( i == Window.OK )
-                    {
+                    if ( i == Window.OK ) {
                         dtls.setName( id.getValue() );
                     }
-                    else if ( i == Window.CANCEL )
-                    {
+                    else if ( i == Window.CANCEL ) {
                         LOG.info( "Cancelled connection save" );
                         return;
                     }
@@ -120,14 +104,12 @@ public class CreateConnectionAction extends Action implements InitializingBean
                 }
             }
 
-            try
-            {
-                mConnectionStore_.saveConnectionParameters( dtls.getName(), dtls );
+            try {
+                connectionStore.saveConnectionParameters( dtls.getName(), dtls );
                 LOG.info( "Created new connection [" + dtls.getName() + "] in connection store" );
                 return;
             }
-            catch ( ConnectionStoreException cse )
-            {
+            catch ( ConnectionStoreException cse ) {
                 MessageDialog.openWarning( Display.getCurrent().getActiveShell(),
                                            "ConnectionContext Store error",
                                            "Failed to store new connection:\n" + cse.getMessage() );
@@ -143,9 +125,8 @@ public class CreateConnectionAction extends Action implements InitializingBean
      * @param store
      *            the store to set
      */
-    public void setConnectionStore( IConnectionStore store )
-    {
-        mConnectionStore_ = store;
+    public void setConnectionStore( IConnectionStore store ) {
+        connectionStore = store;
     }
 
 }

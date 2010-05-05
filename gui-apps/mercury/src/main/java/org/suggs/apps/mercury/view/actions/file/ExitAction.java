@@ -17,16 +17,14 @@ import org.eclipse.swt.widgets.Display;
  * @author suggitpe
  * @version 1.0 20 Oct 2008
  */
-public class ExitAction extends Action
-{
+public class ExitAction extends Action {
 
     private static final Log LOG = LogFactory.getLog( ExitAction.class );
 
     /**
      * Constructs a new instance.
      */
-    public ExitAction()
-    {
+    public ExitAction() {
         super( "&Exit" );
         setToolTipText( "Exit Mercury application" );
         setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_EXIT ) );
@@ -36,8 +34,7 @@ public class ExitAction extends Action
      * @see org.eclipse.jface.action.Action#run()
      */
     @Override
-    public void run()
-    {
+    public void run() {
         LOG.debug( "Exiting Mercury" );
         Display.getCurrent().getActiveShell().close();
     }

@@ -17,17 +17,15 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * This action will allow you to update an existing connection within
- * the connection store.
+ * This action will allow you to update an existing connection within the connection store.
  * 
  * @author suggitpe
  * @version 1.0 16 Jan 2009
  */
-public class EditConnectionAction extends Action implements InitializingBean
-{
+public class EditConnectionAction extends Action implements InitializingBean {
 
-    private IConnectionStore mConnectionStore_;
-    private String mConnectionToEdit_;
+    private IConnectionStore connectionStore;
+    private String connectionToEdit;
 
     {
         setToolTipText( "Edit an existing connection" );
@@ -37,8 +35,7 @@ public class EditConnectionAction extends Action implements InitializingBean
     /**
      * Constructs a new instance.
      */
-    public EditConnectionAction()
-    {
+    public EditConnectionAction() {
         super();
         setText( "&Edit ConnectionContext" );
     }
@@ -50,45 +47,39 @@ public class EditConnectionAction extends Action implements InitializingBean
      * @param aConnectionToEdit
      *            the connecrtion to edit
      */
-    public EditConnectionAction( IConnectionStore aConnStr, String aConnectionToEdit )
-    {
+    public EditConnectionAction( IConnectionStore aConnStr, String aConnectionToEdit ) {
         super();
         setText( "&Edit " + aConnectionToEdit );
-        mConnectionStore_ = aConnStr;
-        mConnectionToEdit_ = aConnectionToEdit;
+        connectionStore = aConnStr;
+        connectionToEdit = aConnectionToEdit;
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet()
-    {
-        Assert.notNull( mConnectionStore_,
-                        "No connection store set on the create connection wizard" );
+    public void afterPropertiesSet() {
+        Assert.notNull( connectionStore, "No connection store set on the create connection wizard" );
     }
 
     /**
      * @see org.eclipse.jface.action.Action#run()
      */
     @Override
-    public void run()
-    {
+    public void run() {
         Shell s = Display.getCurrent().getActiveShell();
 
         // only get the connection if we need to, else we will proceed
         // with removal
-        if ( mConnectionToEdit_ == null || mConnectionToEdit_.length() == 0 )
-        {
+        if ( connectionToEdit == null || connectionToEdit.length() == 0 ) {
             SelectConnectionDialog rcd = new SelectConnectionDialog( s,
-                                                                     mConnectionStore_.getKnownConnections()
+                                                                     connectionStore.getKnownConnections()
                                                                          .keySet(),
                                                                      "Edit existing connection",
                                                                      "Select the connection that you wish to edit from the below list" );
             int ok = rcd.open();
-            mConnectionToEdit_ = rcd.getChoice();
+            connectionToEdit = rcd.getChoice();
 
-            if ( ok != Window.OK )
-            {
+            if ( ok != Window.OK ) {
                 return;
             }
         }
@@ -100,9 +91,8 @@ public class EditConnectionAction extends Action implements InitializingBean
      * @param store
      *            the store to set
      */
-    public void setConnectionStore( IConnectionStore store )
-    {
-        mConnectionStore_ = store;
+    public void setConnectionStore( IConnectionStore store ) {
+        connectionStore = store;
     }
 
 }

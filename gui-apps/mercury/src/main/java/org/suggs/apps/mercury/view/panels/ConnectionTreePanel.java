@@ -32,23 +32,21 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * In this panel we look at the connections from the connection store
- * as a tree that we can traverse
+ * In this panel we look at the connections from the connection store as a tree that we can traverse
  * 
  * @author suggitpe
  * @version 1.0 24 Nov 2008
  */
-public class ConnectionTreePanel extends Composite implements IConnectionManagerListener
-{
+public class ConnectionTreePanel extends Composite implements IConnectionManagerListener {
 
     private static final String XSLT = "xslt/connection-tree.xsl";
 
-    private TreeViewer mViewer_ = null;
-    private IXsltTransformerUtil mXsltUtil_;
+    private TreeViewer viewer;
+    private IXsltTransformerUtil xsltUtil;
 
     // initialiser
     {
-        mXsltUtil_ = (IXsltTransformerUtil) ContextProvider.instance().getBean( "xsltUtil" );
+        xsltUtil = (IXsltTransformerUtil) ContextProvider.instance().getBean( "xsltUtil" );
         ConnectionManager.instance().addConnectionManagerListener( this );
     }
 
@@ -57,8 +55,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
      * 
      * @param parent
      */
-    public ConnectionTreePanel( Composite parent )
-    {
+    public ConnectionTreePanel( Composite parent ) {
         super( parent, SWT.BORDER );
         populateCtrls();
     }
@@ -66,57 +63,49 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
     /**
      * Populates the tree and its contents.
      */
-    private void populateCtrls()
-    {
+    private void populateCtrls() {
         setLayout( new FillLayout() );
 
-        mViewer_ = new TreeViewer( this, SWT.BORDER );
-        mViewer_.getTree().setToolTipText( "Select a connection" );
-        mViewer_.setContentProvider( new ConnectionTreeContentProvider() );
-        mViewer_.setLabelProvider( new ConnectionTreeLabelProvider() );
+        viewer = new TreeViewer( this, SWT.BORDER );
+        viewer.getTree().setToolTipText( "Select a connection" );
+        viewer.setContentProvider( new ConnectionTreeContentProvider() );
+        viewer.setLabelProvider( new ConnectionTreeLabelProvider() );
 
         // now lets populate the table itself
-        mViewer_.setInput( createConnectionData() );
+        viewer.setInput( createConnectionData() );
 
-        mViewer_.getTree().setMenu( buildTreeMenu() );
-        mViewer_.expandAll();
+        viewer.getTree().setMenu( buildTreeMenu() );
+        viewer.expandAll();
     }
 
     /**
-     * Here we manage the creation of the input data for the tree
-     * viewer.
+     * Here we manage the creation of the input data for the tree viewer.
      * 
      * @return the node that will be used for the tree viewer data.
      */
-    private Node createConnectionData()
-    {
-        try
-        {
+    private Node createConnectionData() {
+        try {
             IConnectionManager connMgr = ConnectionManager.instance();
             String b = connMgr.getConnectionDump();
-            Node elem = mXsltUtil_.transformXmlToDom( b.getBytes(), XSLT );
+            Node elem = xsltUtil.transformXmlToDom( b.getBytes(), XSLT );
             return elem;
 
         }
-        catch ( ConnectionStoreException cse )
-        {
+        catch ( ConnectionStoreException cse ) {
             throw new IllegalStateException( "Failed to retrieve connection store details from the internal connection store",
                                              cse );
         }
-        catch ( MercuryUtilityException mue )
-        {
+        catch ( MercuryUtilityException mue ) {
             throw new IllegalStateException( "Failed to parse xml document for connections", mue );
         }
     }
 
     /**
-     * Build the menu that the tree will be associated with the
-     * underlying tree.
+     * Build the menu that the tree will be associated with the underlying tree.
      * 
      * @return a new popup menu to associate with the tree.
      */
-    private Menu buildTreeMenu()
-    {
+    private Menu buildTreeMenu() {
 
         final ActionManager mgr = (ActionManager) ContextProvider.instance()
             .getBean( ActionManager.BEAN_NAME );
@@ -125,48 +114,41 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
             .getBean( "connectionStoreManager" );
 
         MenuManager popupMenu = new MenuManager();
-        popupMenu.addMenuListener( new IMenuListener()
-        {
+        popupMenu.addMenuListener( new IMenuListener() {
 
-            public void menuAboutToShow( IMenuManager aMenuMgr )
-            {
+            public void menuAboutToShow( IMenuManager aMenuMgr ) {
                 aMenuMgr.removeAll();
                 aMenuMgr.add( mgr.getAction( "CREATE_CONNECTION" ) );
-                String nm = mViewer_.getTree().getSelection()[0].getText();
+                String nm = viewer.getTree().getSelection()[0].getText();
                 IConnectionManager connMgr = ConnectionManager.instance();
-                if ( mViewer_.getTree().getSelectionCount() == 1 && connMgr.containsConnection( nm ) )
-                {
+                if ( viewer.getTree().getSelectionCount() == 1 && connMgr.containsConnection( nm ) ) {
                     aMenuMgr.add( new EditConnectionAction( str, nm ) );
                     aMenuMgr.add( new RemoveConnectionAction( str, nm ) );
                 }
             }
         } );
 
-        return popupMenu.createContextMenu( mViewer_.getTree() );
+        return popupMenu.createContextMenu( viewer.getTree() );
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener#handleConnectionManagerChange(java.lang.String,
      *      org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener.ConnectionManagerEvent)
      */
-    public void handleConnectionManagerChange( String aConnectionName, ConnectionManagerEvent aEvent )
-    {
-        switch ( aEvent )
-        {
+    public void handleConnectionManagerChange( String aConnectionName, ConnectionManagerEvent aEvent ) {
+        switch ( aEvent ) {
             case CREATE:
-                mViewer_.setInput( createConnectionData() );
+            case REMOVE:
+                viewer.setInput( createConnectionData() );
                 break;
             case EDIT:
                 // no change to the tree
-                break;
-            case REMOVE:
-                mViewer_.setInput( createConnectionData() );
                 break;
             default:
                 throw new IllegalStateException( "Unknown ConnectionStoreEvent received ["
                                                  + aEvent.toString() + "]" );
         }
-        mViewer_.expandAll();
+        viewer.expandAll();
     }
 
     /**
@@ -178,18 +160,14 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
      *            the text to look for
      * @return the tree item that we are looking for
      */
-    TreeItem findTreeItem( TreeItem aStart, String aText )
-    {
-        if ( aStart.getText().equals( aText ) )
-        {
+    TreeItem findTreeItem( TreeItem aStart, String aText ) {
+        if ( aStart.getText().equals( aText ) ) {
             return aStart;
         }
 
-        for ( TreeItem t : aStart.getItems() )
-        {
+        for ( TreeItem t : aStart.getItems() ) {
             TreeItem tr = findTreeItem( t, aText );
-            if ( tr != null )
-            {
+            if ( tr != null ) {
                 return tr;
             }
         }
@@ -197,25 +175,21 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
     }
 
     /**
-     * This class is used to actually label the data that you are
-     * using within the tree. This is extending the default impl as
-     * the functionality we need to add is small
+     * This class is used to actually label the data that you are using within the tree. This is extending the
+     * default impl as the functionality we need to add is small
      * 
      * @author suggitpe
      * @version 1.0 26 Nov 2008
      */
-    class ConnectionTreeLabelProvider extends LabelProvider
-    {
+    class ConnectionTreeLabelProvider extends LabelProvider {
 
         /**
          * @see org.eclipse.jface.viewers.ILabelProvider#getText(java.lang.Object)
          */
         @Override
-        public String getText( Object node )
-        {
+        public String getText( Object node ) {
             Node n = (Node) node;
-            if ( n.getAttributes().getNamedItem( "name" ) != null )
-            {
+            if ( n.getAttributes().getNamedItem( "name" ) != null ) {
                 return n.getAttributes().getNamedItem( "name" ).getTextContent();
             }
             return null;
@@ -224,74 +198,63 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
     }
 
     /**
-     * Content provider that allows the viewer to process the data
-     * that is set on it in a manner that suits the data.
+     * Content provider that allows the viewer to process the data that is set on it in a manner that suits
+     * the data.
      * 
      * @author suggitpe
      * @version 1.0 26 Nov 2008
      */
-    class ConnectionTreeContentProvider implements ITreeContentProvider
-    {
+    class ConnectionTreeContentProvider implements ITreeContentProvider {
 
         /**
-         * This is called every time it needs the child elements of an
-         * object.
+         * This is called every time it needs the child elements of an object.
          * 
          * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
          */
-        public Object[] getChildren( Object parent )
-        {
+        public Object[] getChildren( Object parent ) {
             return toObjectArray( ( (Node) parent ).getChildNodes() );
         }
 
         /**
          * @see org.eclipse.jface.viewers.ITreeContentProvider#getParent(java.lang.Object)
          */
-        public Object getParent( Object node )
-        {
+        public Object getParent( Object node ) {
             return ( (Node) node ).getParentNode();
         }
 
         /**
-         * This is called by the tree viewer to enable it to
-         * understand whether a node in the tree ie expandable.
+         * This is called by the tree viewer to enable it to understand whether a node in the tree ie
+         * expandable.
          * 
          * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java.lang.Object)
          */
-        public boolean hasChildren( Object node )
-        {
+        public boolean hasChildren( Object node ) {
             return ( ( (Node) node ).getChildNodes().getLength() > 0 );
         }
 
         /**
-         * This is called by the tree viewer to get the initial set of
-         * elements for the input object. In the instance of this tree
-         * we want to ignore the top level element as this is no good
-         * and instead we want to get the layer beneath (ie the impl
-         * layer).
+         * This is called by the tree viewer to get the initial set of elements for the input object. In the
+         * instance of this tree we want to ignore the top level element as this is no good and instead we
+         * want to get the layer beneath (ie the impl layer).
          * 
          * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
          */
-        public Object[] getElements( Object node )
-        {
+        public Object[] getElements( Object node ) {
             return toObjectArray( ( (Node) node ).getChildNodes().item( 0 ).getChildNodes() );
         }
 
         /**
          * @see org.eclipse.jface.viewers.IContentProvider#dispose()
          */
-        public void dispose()
-        {
-            // nadda
+        public void dispose() {
+        // nadda
         }
 
         /**
          * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
          *      java.lang.Object, java.lang.Object)
          */
-        public void inputChanged( Viewer viewer, Object oldInput, Object newInput )
-        {
-        }
+        public void inputChanged( Viewer viewer, Object oldInput, Object newInput ) {}
 
         /**
          * Converts a nodelist into an object array
@@ -300,12 +263,10 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
          *            the nodelist from which to get the nodes
          * @return an objecyt array of the nodes
          */
-        private Object[] toObjectArray( NodeList list )
-        {
+        private Object[] toObjectArray( NodeList list ) {
             int len = list.getLength();
             Object[] ret = new Object[len];
-            for ( int i = 0; i < len; ++i )
-            {
+            for ( int i = 0; i < len; ++i ) {
                 ret[i] = list.item( i );
             }
             return ret;

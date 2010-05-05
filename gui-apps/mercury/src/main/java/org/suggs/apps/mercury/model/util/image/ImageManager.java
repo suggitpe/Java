@@ -14,7 +14,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
  * @author suggitpe
  * @version 1.0 20 Oct 2008
  */
-public class ImageManager {
+public final class ImageManager {
 
     public static final String IMAGE_MERCURY = "images/mercury.png";
     public static final String IMAGE_MERCURY_SMALL = "images/mercury-small.png";

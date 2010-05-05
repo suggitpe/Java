@@ -12,14 +12,12 @@ import org.eclipse.jface.action.Action;
  * @author suggitpe
  * @version 1.0 15 Oct 2008
  */
-public class DebugAction extends Action
-{
+public class DebugAction extends Action {
 
     /**
      * Constructs a new instance.
      */
-    public DebugAction()
-    {
+    public DebugAction() {
         super( "&Debug Connections" );
         setToolTipText( "This will debug the currently known connection set" );
     }
@@ -28,12 +26,11 @@ public class DebugAction extends Action
      * @see org.eclipse.jface.action.Action#run()
      */
     @Override
-    public void run()
-    {
-        // HelpConnectionDebugDialog d = new
-        // HelpConnectionDebugDialog( Display.getCurrent()
-        // .getActiveShell() );
-        // d.open();
+    public void run() {
+    // HelpConnectionDebugDialog d = new
+    // HelpConnectionDebugDialog( Display.getCurrent()
+    // .getActiveShell() );
+    // d.open();
     }
 
 }

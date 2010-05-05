@@ -19,18 +19,17 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * This action will manage the removal of a connection from the
- * connection store.
+ * This action will manage the removal of a connection from the connection store.
  * 
  * @author suggitpe
  * @version 1.0 14 Jan 2009
  */
-public class RemoveConnectionAction extends Action implements InitializingBean
-{
+public class RemoveConnectionAction extends Action implements InitializingBean {
 
-    private IConnectionStore mConnectionStore_;
-    private String mConnectionToRemove_;
+    private IConnectionStore connectionStore;
+    private String connectionToRemove;
 
+    // initialiser section
     {
         setToolTipText( "Remove an existing connection" );
         setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONN_REMOVE_CONN ) );
@@ -39,8 +38,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean
     /**
      * Constructs a new instance.
      */
-    public RemoveConnectionAction()
-    {
+    public RemoveConnectionAction() {
         super();
         setText( "&Remove ConnectionContext" );
     }
@@ -52,78 +50,66 @@ public class RemoveConnectionAction extends Action implements InitializingBean
      * @param aConnectionToRemove
      *            the name of the connection to remove
      */
-    public RemoveConnectionAction( IConnectionStore aConnStr, String aConnectionToRemove )
-    {
+    public RemoveConnectionAction( IConnectionStore aConnStr, String aConnectionToRemove ) {
         super();
-        mConnectionStore_ = aConnStr;
-        mConnectionToRemove_ = aConnectionToRemove;
+        connectionStore = aConnStr;
+        connectionToRemove = aConnectionToRemove;
         setText( "&Remove " + aConnectionToRemove );
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mConnectionStore_,
-                        "No connection store set on the create connection wizard" );
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( connectionStore, "No connection store set on the create connection wizard" );
     }
 
     /**
      * @see org.eclipse.jface.action.Action#run()
      */
     @Override
-    public void run()
-    {
+    public void run() {
         Shell s = Display.getCurrent().getActiveShell();
 
         // only get the connection if we need to, else we will proceed
         // with removal
-        if ( mConnectionToRemove_ == null || mConnectionToRemove_.length() == 0 )
-        {
+        if ( connectionToRemove == null || connectionToRemove.length() == 0 ) {
             SelectConnectionDialog rcd = new SelectConnectionDialog( s,
-                                                                     mConnectionStore_.getKnownConnections()
+                                                                     connectionStore.getKnownConnections()
                                                                          .keySet(),
                                                                      "Remove existing connection",
                                                                      "Select the connection that you wish to remove from the below list" );
             int ok = rcd.open();
-            mConnectionToRemove_ = rcd.getChoice();
+            connectionToRemove = rcd.getChoice();
 
-            if ( ok != Window.OK )
-            {
+            if ( ok != Window.OK ) {
                 return;
             }
         }
 
         // here we check we have valid data
-        if ( mConnectionToRemove_ != null && mConnectionToRemove_.length() > 0 )
-        {
+        if ( connectionToRemove != null && connectionToRemove.length() > 0 ) {
             // check they do actually want it removed
             if ( !MessageDialog.openConfirm( s,
                                              "Confirm connection removal",
                                              "Please confirm that you wish to remove connection ["
-                                                             + mConnectionToRemove_ + "]" ) )
-            {
+                                                             + connectionToRemove + "]" ) ) {
                 return;
             }
 
             // be bullet proof
-            if ( !mConnectionStore_.doesConnectionExist( mConnectionToRemove_ ) )
-            {
-                MessageDialog.openError( s,
-                                         "ConnectionContext removal error",
-                                         "The connection [" + mConnectionToRemove_
-                                                         + "] does not actually exist" );
+            if ( !connectionStore.doesConnectionExist( connectionToRemove ) ) {
+                MessageDialog.openError( s, "ConnectionContext removal error", "The connection ["
+                                                                               + connectionToRemove
+                                                                               + "] does not actually exist" );
                 return;
             }
 
             // now we actually remove the connection
-            try
-            {
-                mConnectionStore_.deleteNamedConnection( mConnectionToRemove_ );
+            try {
+                connectionStore.deleteNamedConnection( connectionToRemove );
             }
-            catch ( ConnectionStoreException e )
-            {
+            catch ( ConnectionStoreException e ) {
                 MessageDialog.openError( s,
                                          "ConnectionContext removal error",
                                          "Failed to remove connection [conn] because of the following error\n"
@@ -138,9 +124,8 @@ public class RemoveConnectionAction extends Action implements InitializingBean
      * @param store
      *            the store to set
      */
-    public void setConnectionStore( IConnectionStore store )
-    {
-        mConnectionStore_ = store;
+    public void setConnectionStore( IConnectionStore store ) {
+        connectionStore = store;
     }
 
 }

@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 9 Oct 2008
  */
-public class JaxbXmlConnectionStoreManagerHelper {
+public final class JaxbXmlConnectionStoreManagerHelper {
 
     private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManagerHelper.class );
 

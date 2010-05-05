@@ -46,14 +46,14 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManager.class );
 
     private IFileManager fileManager;
-    private static JAXBContext JAXB_CONTEXT;
+    private static JAXBContext jaxbContext;
     private Schema schemaCache;
     private String persistentFile;
     private String connectionDataCache;
 
     static {
         try {
-            JAXB_CONTEXT = JAXBContext.newInstance( ConnectionStoreType.class.getPackage().getName() );
+            jaxbContext = JAXBContext.newInstance( ConnectionStoreType.class.getPackage().getName() );
         }
         catch ( JAXBException je ) {
             throw new IllegalStateException( "Unable to create JAXB context in ConnectionContext Store Manager",
@@ -101,7 +101,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
 
         ConnectionStoreType connStr = null;
         try {
-            Unmarshaller uMrsh = JAXB_CONTEXT.createUnmarshaller();
+            Unmarshaller uMrsh = jaxbContext.createUnmarshaller();
 
             if ( schemaCache == null ) {
                 try {
@@ -147,7 +147,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
 
         String xmlClob = null;
         try {
-            Marshaller mshlr = JAXB_CONTEXT.createMarshaller();
+            Marshaller mshlr = jaxbContext.createMarshaller();
             ObjectFactory fact = new ObjectFactory();
 
             // create the main connection store

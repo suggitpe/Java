@@ -14,24 +14,21 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * This class is used to manage the configured actions that are
- * available for use by the Mercury application.
+ * This class is used to manage the configured actions that are available for use by the Mercury application.
  * 
  * @author suggitpe
  * @version 1.0 16 Sep 2008
  */
-public class ActionManager implements InitializingBean, IActionManager
-{
+public class ActionManager implements InitializingBean, IActionManager {
 
-    private HashMap<String, IAction> mActionMap_;
+    private HashMap<String, IAction> actionMap;
     public static final String BEAN_NAME = "actionManager";
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mActionMap_,
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( actionMap,
                         "Action Map has not been initialised in the ActionManager.  Please update Spring XML." );
     }
 
@@ -41,9 +38,8 @@ public class ActionManager implements InitializingBean, IActionManager
      * @param aMap
      *            the map of actions to set
      */
-    public void setActionMap( HashMap<String, IAction> aMap )
-    {
-        mActionMap_ = aMap;
+    public void setActionMap( HashMap<String, IAction> aMap ) {
+        actionMap = aMap;
     }
 
     /**
@@ -53,11 +49,9 @@ public class ActionManager implements InitializingBean, IActionManager
      *            the name of the action
      * @return the action that corresponds to that name
      */
-    public IAction getAction( String actionName )
-    {
-        IAction ret = mActionMap_.get( actionName );
-        if ( ret == null )
-        {
+    public IAction getAction( String actionName ) {
+        IAction ret = actionMap.get( actionName );
+        if ( ret == null ) {
             throw new IllegalStateException( "No action found for name " + actionName );
         }
         return ret;

@@ -28,11 +28,10 @@ import org.eclipse.jface.wizard.Wizard;
  * @author suggitpe
  * @version 1.0 17 Sep 2008
  */
-public class CreateConnectionWizard extends Wizard
-{
+public class CreateConnectionWizard extends Wizard {
 
     private static final Log LOG = LogFactory.getLog( CreateConnectionWizard.class );
-    private ConnectionDetails mConnDetails_;
+    private ConnectionDetails connDetails;
 
     public static final String CONN_NAME = "ConnectionContext Name";
     public static final String CONN_TYPE = "ConnectionContext Type";
@@ -46,8 +45,7 @@ public class CreateConnectionWizard extends Wizard
     /**
      * Constructs a new instance.
      */
-    public CreateConnectionWizard()
-    {
+    public CreateConnectionWizard() {
         super();
         setWindowTitle( "Create ConnectionContext Wizard" );
         setDefaultPageImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONN_CONNECTION ) );
@@ -57,8 +55,7 @@ public class CreateConnectionWizard extends Wizard
      * @see org.eclipse.jface.wizard.Wizard#addPages()
      */
     @Override
-    public void addPages()
-    {
+    public void addPages() {
         addPage( new WelcomePage() );
         addPage( new SelectConnectionTypePage() );
         addPage( new GenericConnectionDetailsPage() );
@@ -70,10 +67,8 @@ public class CreateConnectionWizard extends Wizard
      * @see org.eclipse.jface.wizard.Wizard#getNextPage(org.eclipse.jface.wizard.IWizardPage)
      */
     @Override
-    public IWizardPage getNextPage( IWizardPage page )
-    {
-        if ( page instanceof ConnectionDataSummaryPage )
-        {
+    public IWizardPage getNextPage( IWizardPage page ) {
+        if ( page instanceof ConnectionDataSummaryPage ) {
             ( (ConnectionDataSummaryPage) page ).updateTableContents();
         }
         return super.getNextPage( page );
@@ -83,20 +78,18 @@ public class CreateConnectionWizard extends Wizard
      * @see org.eclipse.jface.wizard.Wizard#performFinish()
      */
     @Override
-    public boolean performFinish()
-    {
+    public boolean performFinish() {
         // get the pages that have ben filled
         SelectConnectionTypePage selConnPg = (SelectConnectionTypePage) getPage( SelectConnectionTypePage.PAGE_NAME );
 
         // create the connection details
         ConnectionDetails dtls = new ConnectionDetails( selConnPg.getConnectionName() );
         dtls.setType( selConnPg.getConnectionType() );
-        if ( LOG.isDebugEnabled() )
-        {
+        if ( LOG.isDebugEnabled() ) {
             LOG.debug( "In finish with: " + dtls.toString() );
         }
 
-        mConnDetails_ = createConnectionDetails();
+        connDetails = createConnectionDetails();
 
         // now we can put them into the store and lt the store manage
         // the persistence for us
@@ -105,14 +98,11 @@ public class CreateConnectionWizard extends Wizard
     }
 
     /**
-     * This method will go through the pages and collect the
-     * connection data.
+     * This method will go through the pages and collect the connection data.
      * 
-     * @return a map of the connection data that has been entered in
-     *         the wizard.
+     * @return a map of the connection data that has been entered in the wizard.
      */
-    public Map<String, String> getConnectionData()
-    {
+    public Map<String, String> getConnectionData() {
         SelectConnectionTypePage selPg = (SelectConnectionTypePage) getPage( SelectConnectionTypePage.PAGE_NAME );
         GenericConnectionDetailsPage genConnPg = (GenericConnectionDetailsPage) getPage( GenericConnectionDetailsPage.PAGE_NAME );
         IbmMqConnectionDataPage ibmMqPg = (IbmMqConnectionDataPage) getPage( IbmMqConnectionDataPage.PAGE_NAME );
@@ -125,14 +115,12 @@ public class CreateConnectionWizard extends Wizard
         ret.put( CONN_HOST, genConnPg.getHostname() );
         ret.put( CONN_PORT, Integer.toString( genConnPg.getPort() ) );
 
-        if ( selPg.getConnectionType().equals( IbmMqAdapter.TYPE ) )
-        {
+        if ( selPg.getConnectionType().equals( IbmMqAdapter.TYPE.toString() ) ) {
             ret.put( CONN_CHANNEL, ibmMqPg.getChannelName() );
         }
 
         ret.put( CONN_SEC, Boolean.toString( genConnPg.isSecurityEnabled() ) );
-        if ( genConnPg.isSecurityEnabled() )
-        {
+        if ( genConnPg.isSecurityEnabled() ) {
             ret.put( CONN_USER, genConnPg.getUsername() );
             ret.put( CONN_PASS, genConnPg.getPassword() );
         }
@@ -145,18 +133,15 @@ public class CreateConnectionWizard extends Wizard
      * 
      * @return
      */
-    private ConnectionDetails createConnectionDetails()
-    {
+    private ConnectionDetails createConnectionDetails() {
         LOG.debug( "Building connection details from page data" );
         Map<String, String> map = getConnectionData();
 
         int port = 0;
-        try
-        {
+        try {
             port = Integer.parseInt( map.get( CONN_PORT ) );
         }
-        catch ( NumberFormatException nfe )
-        {
+        catch ( NumberFormatException nfe ) {
             // only warn as the gui should ensure that is a
             // valid integer
             LOG.warn( "Failed to parse integer for port number" );
@@ -167,22 +152,17 @@ public class CreateConnectionWizard extends Wizard
                                                         port );
 
         // add in the security
-        if ( Boolean.parseBoolean( map.get( CONN_SEC ) ) )
-        {
+        if ( Boolean.parseBoolean( map.get( CONN_SEC ) ) ) {
             dtls.setSecurityDetails( map.get( CONN_USER ), map.get( CONN_PASS ) );
         }
 
         // add in the additional metadata
-        if ( map.containsKey( CONN_CHANNEL ) )
-        {
-            try
-            {
+        if ( map.containsKey( CONN_CHANNEL ) ) {
+            try {
                 dtls.addConnectionDataItem( ConnectionDetails.META_CHANNEL, map.get( CONN_CHANNEL ) );
             }
-            catch ( ConnectionDataException cde )
-            {
-                LOG.warn( "Trying to add duplicate metadata item ["
-                          + ConnectionDetails.META_CHANNEL + "]" );
+            catch ( ConnectionDataException cde ) {
+                LOG.warn( "Trying to add duplicate metadata item [" + ConnectionDetails.META_CHANNEL + "]" );
             }
         }
         return dtls;
@@ -192,8 +172,7 @@ public class CreateConnectionWizard extends Wizard
      * @see org.eclipse.jface.wizard.Wizard#performCancel()
      */
     @Override
-    public boolean performCancel()
-    {
+    public boolean performCancel() {
         LOG.debug( "Cancelled from create connection wizard" );
         return true;
     }
@@ -203,9 +182,8 @@ public class CreateConnectionWizard extends Wizard
      * 
      * @return the connection details created in the wizard
      */
-    public ConnectionDetails getConnectionDetails()
-    {
-        return mConnDetails_;
+    public ConnectionDetails getConnectionDetails() {
+        return connDetails;
     }
 
 }

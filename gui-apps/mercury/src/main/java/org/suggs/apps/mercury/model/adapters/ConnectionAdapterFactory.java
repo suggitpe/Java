@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 4 Feb 2009
  */
-public class ConnectionAdapterFactory {
+public final class ConnectionAdapterFactory {
 
     private static final Log LOG = LogFactory.getLog( ConnectionAdapterFactory.class );
 

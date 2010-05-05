@@ -22,17 +22,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This is the main impl of the IConnectionManager code. The main aim
- * of this class is to provide the glue in teh application between the
- * connection store and the underlying connections. Any part of the
- * system that wants to have access to a connection should come
- * through this class.
+ * This is the main impl of the IConnectionManager code. The main aim of this class is to provide the glue in
+ * teh application between the connection store and the underlying connections. Any part of the system that
+ * wants to have access to a connection should come through this class.
  * 
  * @author suggitpe
  * @version 1.0 20 Jan 2009
  */
-public class ConnectionManager implements IConnectionManager, IConnectionStoreChangeListener
-{
+public final class ConnectionManager implements IConnectionManager, IConnectionStoreChangeListener {
 
     private static final Log LOG = LogFactory.getLog( ConnectionManager.class );
 
@@ -41,15 +38,13 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
     private Map<String, IConnection> mConnectionMap_ = new HashMap<String, IConnection>();
     private List<IConnectionManagerListener> mListsners = new Vector<IConnectionManagerListener>();
 
-    static
-    {
+    static {
         mInstance_ = new ConnectionManager();
     }
 
     // non static initialiser
     {
-        mConnStore_ = (IConnectionStore) ContextProvider.instance()
-            .getBean( "connectionStoreManager" );
+        mConnStore_ = (IConnectionStore) ContextProvider.instance().getBean( "connectionStoreManager" );
         // Map<String, ConnectionDetails> map =
         // mConnStore_.getKnownConnections();
         // for ( String s : map.keySet() )
@@ -63,9 +58,8 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
     /**
      * Constructs a new instance.
      */
-    private ConnectionManager()
-    {
-        // this is hidden
+    private ConnectionManager() {
+    // this is hidden
     }
 
     /**
@@ -73,8 +67,7 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
      * 
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#getConnectionDump()
      */
-    public String getConnectionDump() throws ConnectionStoreException
-    {
+    public String getConnectionDump() throws ConnectionStoreException {
         return mConnStore_.getConnectionStoreDumpAsXml();
     }
 
@@ -83,34 +76,28 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
      * 
      * @return the singleton instance of the class
      */
-    public static IConnectionManager instance()
-    {
+    public static IConnectionManager instance() {
         return mInstance_;
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#getConnection(java.lang.String)
      */
-    public IConnection getConnection( String aConnectionName )
-    {
+    public IConnection getConnection( String aConnectionName ) {
         return mConnectionMap_.get( aConnectionName );
     }
 
     /**
-     * This is the part where we have registered interest in any
-     * changes in the connection store so that we can correctly
-     * reflect these changes in the manager (and those that register
-     * interest in the connections).
+     * This is the part where we have registered interest in any changes in the connection store so that we
+     * can correctly reflect these changes in the manager (and those that register interest in the
+     * connections).
      * 
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener#handleConnectionStoreChange(java.lang.String,
      *      org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener.ConnectionStoreEvent)
      */
-    public void handleConnectionStoreChange(
-                                             String aConnectionName,
-                                             IConnectionStoreChangeListener.ConnectionStoreEvent aEvent )
-    {
-        switch ( aEvent )
-        {
+    public void handleConnectionStoreChange( String aConnectionName,
+                                             IConnectionStoreChangeListener.ConnectionStoreEvent aEvent ) {
+        switch ( aEvent ) {
             case CREATE:
                 LOG.debug( "Adding " + aConnectionName + " to conn mgr" );
                 // try
@@ -126,26 +113,21 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
                 // "Failed to load connection parameters from the connection store for connection ["
                 // + aConnectionName + "]" );
                 // }
-                notifyAllListeners( aConnectionName,
-                                    IConnectionManagerListener.ConnectionManagerEvent.CREATE );
+                notifyAllListeners( aConnectionName, IConnectionManagerListener.ConnectionManagerEvent.CREATE );
                 break;
             case EDIT:
-                notifyAllListeners( aConnectionName,
-                                    IConnectionManagerListener.ConnectionManagerEvent.EDIT );
+                notifyAllListeners( aConnectionName, IConnectionManagerListener.ConnectionManagerEvent.EDIT );
                 throw new NotImplementedException( "Need to implement logic for the edit case" );
                 // break;
             case REMOVE:
                 LOG.debug( "Removing " + aConnectionName + " from the conn mgr" );
-                if ( mConnectionMap_.containsKey( aConnectionName ) )
-                {
+                if ( mConnectionMap_.containsKey( aConnectionName ) ) {
                     mConnectionMap_.remove( aConnectionName );
                 }
-                notifyAllListeners( aConnectionName,
-                                    IConnectionManagerListener.ConnectionManagerEvent.REMOVE );
+                notifyAllListeners( aConnectionName, IConnectionManagerListener.ConnectionManagerEvent.REMOVE );
                 break;
             default:
-                throw new IllegalStateException( "Unknown ConnectionStoreEvent ["
-                                                 + aEvent.toString() + "]" );
+                throw new IllegalStateException( "Unknown ConnectionStoreEvent [" + aEvent.toString() + "]" );
         }
 
     }
@@ -153,16 +135,13 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#containsConnection(java.lang.String)
      */
-    public boolean containsConnection( String aConnectionName )
-    {
+    public boolean containsConnection( String aConnectionName ) {
         return mConnectionMap_.containsKey( aConnectionName );
     }
 
     private void notifyAllListeners( String aConnectionName,
-                                     IConnectionManagerListener.ConnectionManagerEvent aEvent )
-    {
-        for ( IConnectionManagerListener l : mListsners )
-        {
+                                     IConnectionManagerListener.ConnectionManagerEvent aEvent ) {
+        for ( IConnectionManagerListener l : mListsners ) {
             l.handleConnectionManagerChange( aConnectionName, aEvent );
         }
     }
@@ -170,16 +149,14 @@ public class ConnectionManager implements IConnectionManager, IConnectionStoreCh
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#addConnectionManagerListener(org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener)
      */
-    public void addConnectionManagerListener( IConnectionManagerListener aListener )
-    {
+    public void addConnectionManagerListener( IConnectionManagerListener aListener ) {
         mListsners.add( aListener );
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#removeConnectionManagerListener(org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener)
      */
-    public void removeConnectionManagerListener( IConnectionManagerListener aListener )
-    {
+    public void removeConnectionManagerListener( IConnectionManagerListener aListener ) {
         mListsners.remove( aListener );
     }
 

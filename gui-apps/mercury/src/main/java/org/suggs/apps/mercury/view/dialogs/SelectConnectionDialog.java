@@ -25,13 +25,12 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 14 Jan 2009
  */
-public class SelectConnectionDialog extends TitleAreaDialog
-{
+public class SelectConnectionDialog extends TitleAreaDialog {
 
-    String[] mConnectionNames_;
-    String mChoice_;
-    String mTitle_;
-    String mMessage_;
+    String[] connectionNames;
+    String choice;
+    String title;
+    String message;
 
     /**
      * Constructs a new instance.
@@ -42,13 +41,12 @@ public class SelectConnectionDialog extends TitleAreaDialog
      * @param aMessage
      */
     public SelectConnectionDialog( Shell aParentShell, Set<String> aConnectionNames, String aTitle,
-                                   String aMessage )
-    {
+                                   String aMessage ) {
         super( aParentShell );
-        mConnectionNames_ = aConnectionNames.toArray( new String[0] );
-        Arrays.sort( mConnectionNames_ );
-        mTitle_ = aTitle;
-        mMessage_ = aMessage;
+        connectionNames = aConnectionNames.toArray( new String[aConnectionNames.size()] );
+        Arrays.sort( connectionNames );
+        title = aTitle;
+        message = aMessage;
     }
 
     /**
@@ -57,11 +55,10 @@ public class SelectConnectionDialog extends TitleAreaDialog
      * @see org.eclipse.jface.dialogs.TitleAreaDialog#createContents(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createContents( Composite aParent )
-    {
+    protected Control createContents( Composite aParent ) {
         Control contents = super.createContents( aParent );
-        setTitle( mTitle_ );
-        setMessage( mMessage_ );
+        setTitle( title );
+        setMessage( message );
         return contents;
     }
 
@@ -71,12 +68,9 @@ public class SelectConnectionDialog extends TitleAreaDialog
      * @see org.eclipse.jface.dialogs.TitleAreaDialog#createDialogArea(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createDialogArea( Composite aParent )
-    {
+    protected Control createDialogArea( Composite aParent ) {
         Composite contents = (Composite) super.createDialogArea( aParent );
-
         createDialogContent( contents );
-
         return contents;
     }
 
@@ -85,8 +79,7 @@ public class SelectConnectionDialog extends TitleAreaDialog
      * 
      * @param contents
      */
-    private void createDialogContent( Composite contents )
-    {
+    private void createDialogContent( Composite contents ) {
         Composite comp = new Composite( contents, SWT.NONE );
         comp.setLayout( new GridLayout( 2, false ) );
         comp.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
@@ -94,31 +87,27 @@ public class SelectConnectionDialog extends TitleAreaDialog
         new Label( comp, SWT.NONE ).setText( "Connections:" );
 
         final Combo combo = new Combo( comp, SWT.DROP_DOWN );
-        combo.setItems( mConnectionNames_ );
-        combo.addSelectionListener( new SelectionAdapter()
-        {
+        combo.setItems( connectionNames );
+        combo.addSelectionListener( new SelectionAdapter() {
 
             /**
              * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
              */
             @Override
-            public void widgetSelected( SelectionEvent aE )
-            {
-                mChoice_ = combo.getText();
+            public void widgetSelected( SelectionEvent aE ) {
+                choice = combo.getText();
             }
         } );
         combo.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
     }
 
     /**
-     * Getter for the choice. This is set hen a choice is made in the
-     * combo box
+     * Getter for the choice. This is set hen a choice is made in the combo box
      * 
      * @return the string selected from the combo box
      */
-    public String getChoice()
-    {
-        return mChoice_;
+    public String getChoice() {
+        return choice;
     }
 
 }
