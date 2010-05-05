@@ -7,13 +7,12 @@ package org.suggs.apps.mercury.model.adapters.tibcoems;
 import org.suggs.apps.mercury.model.adapters.support.AbstractMercuryAdapter;
 
 /**
- * Main adapter class for the Tibco EMS middleware impl
+ * Main adapter class for the Tibco EMS middleware impl.
  * 
  * @author suggitpe
  * @version 1.0 10 Nov 2008
  */
-public class TibcoEmsAdapter extends AbstractMercuryAdapter
-{
+public class TibcoEmsAdapter extends AbstractMercuryAdapter {
 
     public static final CONNECTION_TYPE TYPE = CONNECTION_TYPE.TIBCO_EMS;
 
@@ -22,16 +21,14 @@ public class TibcoEmsAdapter extends AbstractMercuryAdapter
     /**
      * @see org.suggs.apps.mercury.model.adapters.IConnectionAdapter#getFriendlyName()
      */
-    public String getFriendlyName()
-    {
+    public final String getFriendlyName() {
         return FRIENDLY_NAME;
     }
 
     /**
      * @see org.suggs.apps.mercury.model.adapters.IConnectionAdapter#getType()
      */
-    public String getType()
-    {
+    public final String getType() {
         return TYPE.toString();
     }
 

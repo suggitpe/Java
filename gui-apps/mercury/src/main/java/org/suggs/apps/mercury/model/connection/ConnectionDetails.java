@@ -13,28 +13,26 @@ import java.util.Map;
  * @author suggitpe
  * @version 1.0 28 Jun 2007
  */
-public class ConnectionDetails
-{
+public class ConnectionDetails {
 
     public static final String META_CHANNEL = "ChannelName";
 
-    private String mName_;
-    private String mType_;
-    private String mHostName_;
-    private int mPort_ = 0;
-    private boolean mIsSecurityEnabled_;
-    private String mUsername_;
-    private String mPassword_;
-    private Map<String, String> mConnectionData_ = new HashMap<String, String>();
+    private String name;
+    private String type;
+    private String hostName;
+    private int port = 0;
+    private boolean isSecurityEnabled;
+    private String username;
+    private String password;
+    private Map<String, String> connectionData = new HashMap<String, String>();
 
     /**
      * Constructs a new instance.
      * 
      * @param aName
      */
-    public ConnectionDetails( String aName )
-    {
-        mName_ = aName;
+    public ConnectionDetails( String aName ) {
+        name = aName;
     }
 
     /**
@@ -45,10 +43,9 @@ public class ConnectionDetails
      * @param aType
      *            the type of the connection
      */
-    public ConnectionDetails( String aName, String aType )
-    {
-        mName_ = aName;
-        mType_ = aType;
+    public ConnectionDetails( String aName, String aType ) {
+        name = aName;
+        type = aType;
     }
 
     /**
@@ -63,12 +60,11 @@ public class ConnectionDetails
      * @param aPort
      *            the port number for the server
      */
-    public ConnectionDetails( String aName, String aType, String aHostname, int aPort )
-    {
-        mName_ = aName;
-        mType_ = aType;
-        mHostName_ = aHostname;
-        mPort_ = aPort;
+    public ConnectionDetails( String aName, String aType, String aHostname, int aPort ) {
+        name = aName;
+        type = aType;
+        hostName = aHostname;
+        port = aPort;
     }
 
     /**
@@ -85,31 +81,29 @@ public class ConnectionDetails
      * @param aConnData
      */
     public ConnectionDetails( String aName, String aType, String aHostname, int aPort,
-                              Map<String, String> aConnData )
-    {
-        mName_ = aName;
-        mType_ = aType;
-        mHostName_ = aHostname;
-        mPort_ = aPort;
-        mConnectionData_ = aConnData;
+                              Map<String, String> aConnData ) {
+        name = aName;
+        type = aType;
+        hostName = aHostname;
+        port = aPort;
+        connectionData = aConnData;
     }
 
     /**
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ( ( mConnectionData_ == null ) ? 0 : mConnectionData_.hashCode() );
-        result = prime * result + ( ( mHostName_ == null ) ? 0 : mHostName_.hashCode() );
-        result = prime * result + ( mIsSecurityEnabled_ ? 1231 : 1237 );
-        result = prime * result + ( ( mName_ == null ) ? 0 : mName_.hashCode() );
-        result = prime * result + ( ( mPassword_ == null ) ? 0 : mPassword_.hashCode() );
-        result = prime * result + mPort_;
-        result = prime * result + ( ( mType_ == null ) ? 0 : mType_.hashCode() );
-        result = prime * result + ( ( mUsername_ == null ) ? 0 : mUsername_.hashCode() );
+        result = prime * result + ( ( connectionData == null ) ? 0 : connectionData.hashCode() );
+        result = prime * result + ( ( hostName == null ) ? 0 : hostName.hashCode() );
+        result = prime * result + ( isSecurityEnabled ? 1231 : 1237 );
+        result = prime * result + ( ( name == null ) ? 0 : name.hashCode() );
+        result = prime * result + ( ( password == null ) ? 0 : password.hashCode() );
+        result = prime * result + port;
+        result = prime * result + ( ( type == null ) ? 0 : type.hashCode() );
+        result = prime * result + ( ( username == null ) ? 0 : username.hashCode() );
         return result;
     }
 
@@ -117,8 +111,7 @@ public class ConnectionDetails
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object obj )
-    {
+    public boolean equals( Object obj ) {
         if ( this == obj )
             return true;
         if ( obj == null )
@@ -126,51 +119,45 @@ public class ConnectionDetails
         if ( getClass() != obj.getClass() )
             return false;
         ConnectionDetails other = (ConnectionDetails) obj;
-        if ( mConnectionData_ == null )
-        {
-            if ( other.mConnectionData_ != null )
+        if ( connectionData == null ) {
+            if ( other.connectionData != null )
                 return false;
         }
-        else if ( !mConnectionData_.equals( other.mConnectionData_ ) )
+        else if ( !connectionData.equals( other.connectionData ) )
             return false;
-        if ( mHostName_ == null )
-        {
-            if ( other.mHostName_ != null )
+        if ( hostName == null ) {
+            if ( other.hostName != null )
                 return false;
         }
-        else if ( !mHostName_.equals( other.mHostName_ ) )
+        else if ( !hostName.equals( other.hostName ) )
             return false;
-        if ( mIsSecurityEnabled_ != other.mIsSecurityEnabled_ )
+        if ( isSecurityEnabled != other.isSecurityEnabled )
             return false;
-        if ( mName_ == null )
-        {
-            if ( other.mName_ != null )
+        if ( name == null ) {
+            if ( other.name != null )
                 return false;
         }
-        else if ( !mName_.equals( other.mName_ ) )
+        else if ( !name.equals( other.name ) )
             return false;
-        if ( mPassword_ == null )
-        {
-            if ( other.mPassword_ != null )
+        if ( password == null ) {
+            if ( other.password != null )
                 return false;
         }
-        else if ( !mPassword_.equals( other.mPassword_ ) )
+        else if ( !password.equals( other.password ) )
             return false;
-        if ( mPort_ != other.mPort_ )
+        if ( port != other.port )
             return false;
-        if ( mType_ == null )
-        {
-            if ( other.mType_ != null )
+        if ( type == null ) {
+            if ( other.type != null )
                 return false;
         }
-        else if ( !mType_.equals( other.mType_ ) )
+        else if ( !type.equals( other.type ) )
             return false;
-        if ( mUsername_ == null )
-        {
-            if ( other.mUsername_ != null )
+        if ( username == null ) {
+            if ( other.username != null )
                 return false;
         }
-        else if ( !mUsername_.equals( other.mUsername_ ) )
+        else if ( !username.equals( other.username ) )
             return false;
         return true;
     }
@@ -179,73 +166,62 @@ public class ConnectionDetails
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
-        StringBuffer buff = new StringBuffer( "JmsConnectionDetails: name=[" ).append( mName_ )
+    public String toString() {
+        StringBuffer buff = new StringBuffer( "JmsConnectionDetails: name=[" ).append( name )
             .append( "], type=[" )
-            .append( mType_ )
+            .append( type )
             .append( "], hostname=[" )
-            .append( mHostName_ )
+            .append( hostName )
             .append( "], port=[" )
-            .append( mPort_ );
-        for ( String s : mConnectionData_.keySet() )
-        {
-            buff.append( "], " ).append( s ).append( "=[" ).append( mConnectionData_.get( s ) );
+            .append( port );
+        for ( String s : connectionData.keySet() ) {
+            buff.append( "], " ).append( s ).append( "=[" ).append( connectionData.get( s ) );
         }
         buff.append( "]" );
 
-        buff.append( ", securityEnabled=[" ).append( mIsSecurityEnabled_ ).append( "]" );
+        buff.append( ", securityEnabled=[" ).append( isSecurityEnabled ).append( "]" );
 
-        if ( mIsSecurityEnabled_ )
-        {
-            buff.append( ", username=[" ).append( mUsername_ ).append( "], password=[*****]" );
+        if ( isSecurityEnabled ) {
+            buff.append( ", username=[" ).append( username ).append( "], password=[*****]" );
         }
 
         return buff.toString();
     }
 
     /**
-     * Self validation method. This method will look at the internal
-     * details and will self validate itself.
+     * Self validation method. This method will look at the internal details and will self validate itself.
      * 
-     * @return true if the contents are valid, else false;
+     * @return true if the contents are valid, else false.
      */
-    public boolean isConnectionDetailsValid()
-    {
+    public boolean isConnectionDetailsValid() {
         boolean ret = true;
-        if ( mName_ == null || mName_.length() < 1 )
-        {
+        if ( name == null || name.length() < 1 ) {
             ret = false;
         }
-        else if ( mType_ == null )
-        {
+        else if ( type == null ) {
             ret = false;
         }
-        else if ( mHostName_ == null || mHostName_.length() < 1 )
-        {
+        else if ( hostName == null || hostName.length() < 1 ) {
             ret = false;
         }
-        else if ( mPort_ == 0 )
-        {
+        else if ( port == 0 ) {
             ret = false;
         }
         return ret;
     }
 
     /**
-     * This is a convenience method that allows you to set up the
-     * security details in one fell swoop
+     * This is a convenience method that allows you to set up the security details in one fell swoop
      * 
-     * @param username
+     * @param aUsername
      *            the username to use
-     * @param password
+     * @param aPassword
      *            the password to use
      */
-    public void setSecurityDetails( String username, String password )
-    {
-        mIsSecurityEnabled_ = true;
-        mUsername_ = username;
-        mPassword_ = password;
+    public final void setSecurityDetails( String aUsername, String aPassword ) {
+        isSecurityEnabled = true;
+        username = aUsername;
+        password = aPassword;
     }
 
     /**
@@ -253,9 +229,8 @@ public class ConnectionDetails
      * 
      * @return the name of the connection
      */
-    public String getName()
-    {
-        return mName_;
+    public final String getName() {
+        return name;
     }
 
     /**
@@ -264,9 +239,8 @@ public class ConnectionDetails
      * @param aName
      *            the name to set
      */
-    public void setName( String aName )
-    {
-        mName_ = aName;
+    public final void setName( String aName ) {
+        name = aName;
     }
 
     /**
@@ -274,9 +248,8 @@ public class ConnectionDetails
      * 
      * @return the type of the connection
      */
-    public String getType()
-    {
-        return mType_;
+    public final String getType() {
+        return type;
     }
 
     /**
@@ -285,9 +258,8 @@ public class ConnectionDetails
      * @param aType
      *            the type to set
      */
-    public void setType( String aType )
-    {
-        mType_ = aType;
+    public final void setType( String aType ) {
+        type = aType;
     }
 
     /**
@@ -295,9 +267,8 @@ public class ConnectionDetails
      * 
      * @return the hostname
      */
-    public String getHostname()
-    {
-        return mHostName_;
+    public final String getHostname() {
+        return hostName;
     }
 
     /**
@@ -306,9 +277,8 @@ public class ConnectionDetails
      * @param aHost
      *            the host to set
      */
-    public void setHostname( String aHost )
-    {
-        mHostName_ = aHost;
+    public final void setHostname( String aHost ) {
+        hostName = aHost;
     }
 
     /**
@@ -316,9 +286,8 @@ public class ConnectionDetails
      * 
      * @return the port number
      */
-    public int getPort()
-    {
-        return mPort_;
+    public final int getPort() {
+        return port;
     }
 
     /**
@@ -327,9 +296,8 @@ public class ConnectionDetails
      * @param aPort
      *            the port number to set
      */
-    public void setPort( int aPort )
-    {
-        mPort_ = aPort;
+    public final void setPort( int aPort ) {
+        port = aPort;
     }
 
     /**
@@ -337,25 +305,22 @@ public class ConnectionDetails
      * 
      * @return true if the security is enabled, else false
      */
-    public boolean isSecurityEnabled()
-    {
-        return mIsSecurityEnabled_;
+    public final boolean isSecurityEnabled() {
+        return isSecurityEnabled;
     }
 
     /**
      * Sets the security enabled flag
      */
-    public void setSecurityEnabled()
-    {
-        mIsSecurityEnabled_ = true;
+    public final void setSecurityEnabled() {
+        isSecurityEnabled = true;
     }
 
     /**
      * Unsets the security enabled flag
      */
-    public void unsetSecurityEnabled()
-    {
-        mIsSecurityEnabled_ = false;
+    public final void unsetSecurityEnabled() {
+        isSecurityEnabled = false;
     }
 
     /**
@@ -363,9 +328,8 @@ public class ConnectionDetails
      * 
      * @return the username value
      */
-    public String getUsername()
-    {
-        return mUsername_;
+    public final String getUsername() {
+        return username;
     }
 
     /**
@@ -374,9 +338,8 @@ public class ConnectionDetails
      * @param aUsername
      *            the username to set
      */
-    public void setUsername( String aUsername )
-    {
-        mUsername_ = aUsername;
+    public final void setUsername( String aUsername ) {
+        username = aUsername;
     }
 
     /**
@@ -384,9 +347,8 @@ public class ConnectionDetails
      * 
      * @return the password value
      */
-    public String getPassword()
-    {
-        return mPassword_;
+    public final String getPassword() {
+        return password;
     }
 
     /**
@@ -395,9 +357,8 @@ public class ConnectionDetails
      * @param aPassword
      *            the password to set
      */
-    public void setPassword( String aPassword )
-    {
-        mPassword_ = aPassword;
+    public final void setPassword( String aPassword ) {
+        password = aPassword;
     }
 
     /**
@@ -405,9 +366,8 @@ public class ConnectionDetails
      * 
      * @return the metadata map
      */
-    public Map<String, String> getConnectionData()
-    {
-        return mConnectionData_;
+    public final Map<String, String> getConnectionData() {
+        return connectionData;
     }
 
     /**
@@ -416,9 +376,8 @@ public class ConnectionDetails
      * @param aMap
      *            the map of metadata to set
      */
-    public void setConnectionData( Map<String, String> aMap )
-    {
-        mConnectionData_ = aMap;
+    public final void setConnectionData( Map<String, String> aMap ) {
+        connectionData = aMap;
     }
 
     /**
@@ -431,14 +390,12 @@ public class ConnectionDetails
      * @throws ConnectionDataException
      *             if the key already exists
      */
-    public void addConnectionDataItem( String key, String value ) throws ConnectionDataException
-    {
-        if ( mConnectionData_.containsKey( key ) )
-        {
+    public final void addConnectionDataItem( String key, String value ) throws ConnectionDataException {
+        if ( connectionData.containsKey( key ) ) {
             throw new ConnectionDataException( "Key [" + key + "] already exists in meta data" );
         }
 
-        mConnectionData_.put( key, value );
+        connectionData.put( key, value );
     }
 
 }

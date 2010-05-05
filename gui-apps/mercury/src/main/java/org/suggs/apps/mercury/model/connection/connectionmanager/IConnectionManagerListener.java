@@ -5,14 +5,13 @@
 package org.suggs.apps.mercury.model.connection.connectionmanager;
 
 /**
- * This interface will allow a set of classes to become observers to
- * the connection manager for any changes to the state of the class.
+ * This interface will allow a set of classes to become observers to the connection manager for any changes to
+ * the state of the class.
  * 
  * @author suggitpe
  * @version 1.0 21 Jan 2009
  */
-public interface IConnectionManagerListener
-{
+public interface IConnectionManagerListener {
 
     enum ConnectionManagerEvent {
         CREATE, EDIT, REMOVE, CONNECT, DISCONNECT

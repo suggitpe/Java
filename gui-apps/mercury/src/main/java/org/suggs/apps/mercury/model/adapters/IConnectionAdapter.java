@@ -5,30 +5,28 @@
 package org.suggs.apps.mercury.model.adapters;
 
 /**
- * This is the highest level used by the adapter and describes the
- * basic behaviour that all Mercury adapters must adhere to.
+ * This is the highest level used by the adapter and describes the basic behaviour that all Mercury adapters
+ * must adhere to.
  * 
  * @author suggitpe
  * @version 1.0 10 Nov 2008
  */
-public interface IConnectionAdapter
-{
+public interface IConnectionAdapter {
 
     enum CONNECTION_TYPE {
         IBM_MQ, TIBCO_EMS
     };
 
     /**
-     * This method is used to return the unique adapater name
-     * corresponding to their underlying middleware implementation
+     * This method is used to return the unique adapater name corresponding to their underlying middleware
+     * implementation
      * 
-     * @return the type of adapter`
+     * @return the type of adapter
      */
     String getType();
 
     /**
-     * This method will return the friendly name of the adapter, this
-     * name is not necessarily unique
+     * This method will return the friendly name of the adapter, this name is not necessarily unique
      * 
      * @return the name of the adapter
      */

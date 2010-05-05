@@ -14,18 +14,15 @@ import org.w3c.dom.Document;
  * @author suggitpe
  * @version 1.0 9 Dec 2008
  */
-public interface IDomParserUtil
-{
+public interface IDomParserUtil {
 
     /**
      * @param aFilename
      * @param aSchemaLocation
      * @return a document created from the filname and a schema
      * @throws MercuryUtilityException
-     *             if there is an issue in parsing the file contents
-     *             into a document
+     *             if there is an issue in parsing the file contents into a document
      */
-    Document createDocFromXmlFile( String aFilename, String aSchemaLocation )
-                    throws MercuryUtilityException;
+    Document createDocFromXmlFile( String aFilename, String aSchemaLocation ) throws MercuryUtilityException;
 
 }

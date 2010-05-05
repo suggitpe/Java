@@ -24,16 +24,14 @@ import org.w3c.dom.ls.LSSerializer;
  * @author suggitpe
  * @version 1.0 11 Dec 2008
  */
-public class XmlSerialiser implements IXmlSerialiser
-{
+public class XmlSerialiser implements IXmlSerialiser {
 
     private static final Log LOG = LogFactory.getLog( XmlSerialiser.class );
 
     /**
      * @see org.suggs.apps.mercury.model.util.xml.IXmlSerialiser#serialiseXmlToString(org.w3c.dom.Node)
      */
-    public String serialiseXmlToString( Node document ) throws MercuryUtilityException
-    {
+    public final String serialiseXmlToString( Node document ) throws MercuryUtilityException {
         LOG.debug( "Serialising DOM Document" );
 
         // create the serialiser impl
@@ -55,39 +53,32 @@ public class XmlSerialiser implements IXmlSerialiser
     }
 
     /**
-     * This method is there to manage the construction of the
-     * serialiser
+     * This method is there to manage the construction of the serialiser
      * 
      * @return the serialiser implementation object
      * @throws MercuryUtilityException
      *             if there are any issues in creating the object
      */
-    private DOMImplementationLS createSerializerImpl() throws MercuryUtilityException
-    {
-        try
-        {
+    private DOMImplementationLS createSerializerImpl() throws MercuryUtilityException {
+        try {
             System.setProperty( DOMImplementationRegistry.PROPERTY,
                                 "com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl" );
             DOMImplementationRegistry reg = DOMImplementationRegistry.newInstance();
             DOMImplementation domImpl = reg.getDOMImplementation( "LS 3.0" );
-            if ( domImpl == null )
-            {
+            if ( domImpl == null ) {
                 throw new MercuryUtilityException( "Failed to get DOM Impl for [LS 3.0]" );
             }
 
             return (DOMImplementationLS) domImpl;
         }
-        catch ( InstantiationException ie )
-        {
+        catch ( InstantiationException ie ) {
             throw new MercuryUtilityException( "Failed to create new serialiser", ie );
         }
-        catch ( ClassNotFoundException cnf )
-        {
+        catch ( ClassNotFoundException cnf ) {
             throw new MercuryUtilityException( "Failed to create new serialiser due to the dom impl cfgbeing incorrect",
                                                cnf );
         }
-        catch ( IllegalAccessException iae )
-        {
+        catch ( IllegalAccessException iae ) {
             throw new MercuryUtilityException( "No access to create serialiser object", iae );
         }
 

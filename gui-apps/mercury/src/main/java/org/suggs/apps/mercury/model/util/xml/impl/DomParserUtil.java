@@ -27,22 +27,19 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- * This utility class will abstract all DOM based function away from
- * the rest of the application. This implementation will create a
- * thread safe parser member the first time one of the parsers are
- * required. This can then be reused by other threads that need to use
- * a parser.
+ * This utility class will abstract all DOM based function away from the rest of the application. This
+ * implementation will create a thread safe parser member the first time one of the parsers are required. This
+ * can then be reused by other threads that need to use a parser.
  * 
  * @author suggitpe
  * @version 1.0 27 Nov 2008
  */
-public class DomParserUtil implements IDomParserUtil
-{
+public class DomParserUtil implements IDomParserUtil {
 
     private static final Log LOG = LogFactory.getLog( DomParserUtil.class );
 
     private Object lock = new Object();
-    private Map<String, DocumentBuilder> mBuilderMap_ = new HashMap<String, DocumentBuilder>();
+    private Map<String, DocumentBuilder> builderMap = new HashMap<String, DocumentBuilder>();
 
     /**
      * Create an XML document from a file.
@@ -50,25 +47,20 @@ public class DomParserUtil implements IDomParserUtil
      * @param aFilename
      *            the filename of the document
      * @param aSchemaLocation
-     *            a valid URL pointing to the schema to validate the
-     *            XML file
+     *            a valid URL pointing to the schema to validate the XML file
      * @return the XML document object that was contained in the file
      */
-    public Document createDocFromXmlFile( String aFilename, String aSchemaLocation )
-                    throws MercuryUtilityException
-    {
+    public final Document createDocFromXmlFile( String aFilename, String aSchemaLocation )
+                    throws MercuryUtilityException {
         DocumentBuilder b = createDocumentBuilder( aSchemaLocation );
 
-        try
-        {
+        try {
             return b.parse( new File( aFilename ) );
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             throw new MercuryUtilityException( ioe );
         }
-        catch ( SAXException se )
-        {
+        catch ( SAXException se ) {
             throw new MercuryUtilityException( se );
         }
     }
@@ -78,51 +70,39 @@ public class DomParserUtil implements IDomParserUtil
      * 
      * @param aSchemaLocation
      *            the location of the schema for validation
-     * @return the document builder configured to validate the defined
-     *         schema
+     * @return the document builder configured to validate the defined schema
      */
-    private DocumentBuilder createDocumentBuilder( String aSchemaLocation )
-                    throws MercuryUtilityException
-    {
-        if ( mBuilderMap_.containsKey( aSchemaLocation ) )
-        {
-            return mBuilderMap_.get( aSchemaLocation );
+    private DocumentBuilder createDocumentBuilder( String aSchemaLocation ) throws MercuryUtilityException {
+        if ( builderMap.containsKey( aSchemaLocation ) ) {
+            return builderMap.get( aSchemaLocation );
         }
 
         DocumentBuilder builder = null;
-        try
-        {
+        try {
             DocumentBuilderFactory fact = DocumentBuilderFactory.newInstance();
             fact.setNamespaceAware( true );
             fact.setValidating( false );
 
             SchemaFactory sf = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );
             URL url = getClass().getClassLoader().getResource( aSchemaLocation );
-            if ( url == null )
-            {
-                throw new MercuryUtilityException( "Unable to locate resource [" + aSchemaLocation
-                                                   + "]" );
+            if ( url == null ) {
+                throw new MercuryUtilityException( "Unable to locate resource [" + aSchemaLocation + "]" );
             }
             fact.setSchema( sf.newSchema( url ) );
 
             builder = fact.newDocumentBuilder();
             builder.setErrorHandler( new MercuryDomErrorHandler() );
         }
-        catch ( ParserConfigurationException pce )
-        {
+        catch ( ParserConfigurationException pce ) {
             throw new IllegalStateException( "Failed to create parser, pce" );
         }
-        catch ( SAXException se )
-        {
+        catch ( SAXException se ) {
             LOG.error( "Sax exception", se );
-            se.printStackTrace();
         }
 
-        synchronized ( lock )
-        {
-            if ( !mBuilderMap_.containsKey( aSchemaLocation ) )
-            {
-                mBuilderMap_.put( aSchemaLocation, builder );
+        synchronized ( lock ) {
+            if ( !builderMap.containsKey( aSchemaLocation ) ) {
+                builderMap.put( aSchemaLocation, builder );
             }
         }
 
@@ -135,19 +115,16 @@ public class DomParserUtil implements IDomParserUtil
      * @author suggitpe
      * @version 1.0 27 Nov 2008
      */
-    class MercuryDomErrorHandler implements ErrorHandler
-    {
+    static class MercuryDomErrorHandler implements ErrorHandler {
 
-        boolean mFailFast_ = true;
+        private boolean failFast = true;
 
         /**
          * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
          */
-        public void error( SAXParseException exception ) throws SAXException
-        {
+        public void error( SAXParseException exception ) throws SAXException {
             LOG.error( "SAX Parse excepion caught: " + exception.getMessage() );
-            if ( mFailFast_ )
-            {
+            if ( failFast ) {
                 throw new IllegalStateException( "Exception thrown from xml parsing", exception );
             }
         }
@@ -155,11 +132,9 @@ public class DomParserUtil implements IDomParserUtil
         /**
          * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
          */
-        public void fatalError( SAXParseException exception ) throws SAXException
-        {
+        public void fatalError( SAXParseException exception ) throws SAXException {
             LOG.error( "FATAL: SAX Parse excepion caught: " + exception.getMessage() );
-            if ( mFailFast_ )
-            {
+            if ( failFast ) {
                 throw new IllegalStateException( "Exception thrown from xml parsing", exception );
             }
         }
@@ -167,8 +142,7 @@ public class DomParserUtil implements IDomParserUtil
         /**
          * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
          */
-        public void warning( SAXParseException exception ) throws SAXException
-        {
+        public void warning( SAXParseException exception ) throws SAXException {
             LOG.warn( "SAX Parse excepion caught: " + exception.getMessage() );
         }
     }

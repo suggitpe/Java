@@ -12,14 +12,12 @@ import org.suggs.apps.mercury.MercuryException;
  * @author suggitpe
  * @version 1.0 21 Jun 2007
  */
-public class MercuryUtilityException extends MercuryException
-{
+public class MercuryUtilityException extends MercuryException {
 
     /**
      * Constructs a new instance.
      */
-    public MercuryUtilityException()
-    {
+    public MercuryUtilityException() {
         super();
     }
 
@@ -28,8 +26,7 @@ public class MercuryUtilityException extends MercuryException
      * 
      * @param aMessage
      */
-    public MercuryUtilityException( String aMessage )
-    {
+    public MercuryUtilityException( String aMessage ) {
         super( aMessage );
     }
 
@@ -39,8 +36,7 @@ public class MercuryUtilityException extends MercuryException
      * @param aMessage
      * @param aError
      */
-    public MercuryUtilityException( String aMessage, Throwable aError )
-    {
+    public MercuryUtilityException( String aMessage, Throwable aError ) {
         super( aMessage, aError );
     }
 
@@ -49,8 +45,7 @@ public class MercuryUtilityException extends MercuryException
      * 
      * @param aError
      */
-    public MercuryUtilityException( Throwable aError )
-    {
+    public MercuryUtilityException( Throwable aError ) {
         super( aError );
     }
 }

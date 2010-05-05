@@ -26,14 +26,12 @@ import org.w3c.dom.Node;
 import org.springframework.util.xml.SimpleTransformErrorListener;
 
 /**
- * This class is there to help manage transformation of XML through
- * known xslt.
+ * This class is there to help manage transformation of XML through known xslt.
  * 
  * @author suggitpe
  * @version 1.0 8 Dec 2008
  */
-public class XsltTransformerUtil implements IXsltTransformerUtil
-{
+public class XsltTransformerUtil implements IXsltTransformerUtil {
 
     private static final Log LOG = LogFactory.getLog( XsltTransformerUtil.class );
 
@@ -41,22 +39,18 @@ public class XsltTransformerUtil implements IXsltTransformerUtil
      * @see org.suggs.apps.mercury.model.util.xml.IXsltTransformerUtil#transformXmlToDom(byte[],
      *      java.lang.String)
      */
-    public Node transformXmlToDom( byte[] aXmlToTransform, String aXsltName )
-                    throws MercuryUtilityException
-    {
-        if ( aXmlToTransform == null || aXmlToTransform.length == 0 )
-        {
+    public final Node transformXmlToDom( byte[] aXmlToTransform, String aXsltName )
+                    throws MercuryUtilityException {
+        if ( aXmlToTransform == null || aXmlToTransform.length == 0 ) {
             throw new MercuryUtilityException( "Trying to transform empty xml" );
         }
 
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "Transforming [" + aXmlToTransform.length + "] bytes of data with xslt ["
-                       + aXsltName + "]" );
+        if ( LOG.isDebugEnabled() ) {
+            LOG.debug( "Transforming [" + aXmlToTransform.length + "] bytes of data with xslt [" + aXsltName
+                       + "]" );
         }
 
-        try
-        {
+        try {
             Templates templ = getTemplates( aXsltName );
             Transformer trans = templ.newTransformer();
             DOMResult res = new DOMResult();
@@ -64,37 +58,31 @@ public class XsltTransformerUtil implements IXsltTransformerUtil
 
             return res.getNode();
         }
-        catch ( TransformerConfigurationException tce )
-        {
-            throw new MercuryUtilityException( "Failed to create transformer for XSLT ["
-                                               + aXsltName + "]", tce );
+        catch ( TransformerConfigurationException tce ) {
+            throw new MercuryUtilityException( "Failed to create transformer for XSLT [" + aXsltName + "]",
+                                               tce );
         }
-        catch ( TransformerException te )
-        {
+        catch ( TransformerException te ) {
             throw new MercuryUtilityException( "Failed to transform xml", te );
         }
     }
 
     /**
-     * This method will simply create the compiled XSLT into the
-     * templates object so that it can be used by anyone.
+     * This method will simply create the compiled XSLT into the templates object so that it can be used by
+     * anyone.
      * 
      * @param aXsltName
      *            the name of the xslt that you wish to compile
      * @return the compiled xslt object
      * @throws MercuryUtilityException
-     *             if there are any issues in reading the xslt or
-     *             creating the compiled version of the xslt.
+     *             if there are any issues in reading the xslt or creating the compiled version of the xslt.
      */
-    protected Templates getTemplates( String aXsltName ) throws MercuryUtilityException
-    {
-        if ( aXsltName == null || aXsltName.length() == 0 )
-        {
+    protected Templates getTemplates( String aXsltName ) throws MercuryUtilityException {
+        if ( aXsltName == null || aXsltName.length() == 0 ) {
             throw new MercuryUtilityException( "Trying to use XSLT from an empty filename" );
         }
 
-        if ( LOG.isDebugEnabled() )
-        {
+        if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Creating new Templates from XSLT [" + aXsltName + "]" );
         }
 
@@ -103,19 +91,15 @@ public class XsltTransformerUtil implements IXsltTransformerUtil
         // fact.setURIResolver( this );
 
         InputStream is = getClass().getClassLoader().getResourceAsStream( aXsltName );
-        if ( is == null )
-        {
+        if ( is == null ) {
             throw new MercuryUtilityException( "Could not find xslt file [" + aXsltName + "]" );
         }
         Source ss = new StreamSource( is );
 
-        try
-        {
+        try {
             return fact.newTemplates( ss );
         }
-        catch ( TransformerConfigurationException tce )
-        {
-            tce.printStackTrace();
+        catch ( TransformerConfigurationException tce ) {
             throw new MercuryUtilityException( "Failed to compile XSLT into templates", tce );
         }
     }

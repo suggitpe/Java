@@ -13,24 +13,31 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 4 Feb 2009
  */
-public class ConnectionAdapterFactory
-{
+public class ConnectionAdapterFactory {
 
     private static final Log LOG = LogFactory.getLog( ConnectionAdapterFactory.class );
 
-    public static IConnectionAdapter createAdapter( IConnectionAdapter.CONNECTION_TYPE aType )
-    {
-        LOG.info( "Creating adapter of type [STUB]" );
-        return new IConnectionAdapter()
-        {
+    /**
+     * Constructs a new instance.
+     */
+    private ConnectionAdapterFactory() {}
 
-            public String getFriendlyName()
-            {
+    /**
+     * factory method that will create the correct type of adapter for what is needed.
+     * 
+     * @param aType
+     *            the type of adapter to create.
+     * @return a connection adapter
+     */
+    public static IConnectionAdapter createAdapter( IConnectionAdapter.CONNECTION_TYPE aType ) {
+        LOG.info( "Creating adapter of type [STUB]" );
+        return new IConnectionAdapter() {
+
+            public String getFriendlyName() {
                 return null;
             }
 
-            public String getType()
-            {
+            public String getType() {
                 return null;
             }
         };

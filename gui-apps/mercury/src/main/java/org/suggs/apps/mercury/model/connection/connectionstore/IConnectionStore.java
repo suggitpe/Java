@@ -14,15 +14,13 @@ import java.util.Map;
  * @author suggitpe
  * @version 1.0 22 Sep 2008
  */
-public interface IConnectionStore
-{
+public interface IConnectionStore {
 
     /**
-     * This will go to the persistent connection store and retrieve a
-     * map of the available and known connections
+     * This will go to the persistent connection store and retrieve a map of the available and known
+     * connections
      * 
-     * @return a map of the names and connection details of the
-     *         connections
+     * @return a map of the names and connection details of the connections
      */
     Map<String, ConnectionDetails> getKnownConnections();
 
@@ -47,19 +45,16 @@ public interface IConnectionStore
     ConnectionDetails loadConnectionParameters( String aName ) throws ConnectionStoreException;
 
     /**
-     * Save a set of connection parameters to the local connection
-     * store
+     * Save a set of connection parameters to the local connection store
      * 
      * @param aDetails
      *            the connection parameters to store
      * @param aName
      *            the name of the connection
      * @throws ConnectionStoreException
-     *             when there is an issue in the saving of connection
-     *             details
+     *             when there is an issue in the saving of connection details
      */
-    void saveConnectionParameters( String aName, ConnectionDetails aDetails )
-                    throws ConnectionStoreException;
+    void saveConnectionParameters( String aName, ConnectionDetails aDetails ) throws ConnectionStoreException;
 
     /**
      * Allows the deletion of a known connection
@@ -72,11 +67,9 @@ public interface IConnectionStore
     void deleteNamedConnection( String aName ) throws ConnectionStoreException;
 
     /**
-     * This is the way to get a dump of the connection store data that
-     * is currently configured in the system.
+     * This is the way to get a dump of the connection store data that is currently configured in the system.
      * 
-     * @return serialised dump of the connection store data in XML
-     *         form
+     * @return serialised dump of the connection store data in XML form
      * @throws ConnectionStoreException
      *             if there are any issues in creating the dump
      */

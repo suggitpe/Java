@@ -7,14 +7,12 @@ package org.suggs.apps.mercury.model.connection.connection;
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 
 /**
- * This interface defines the behaviour of the connections within the
- * Mercury application.
+ * This interface defines the behaviour of the connections within the Mercury application.
  * 
  * @author suggitpe
  * @version 1.0 20 Jan 2009
  */
-public interface IConnection
-{
+public interface IConnection {
 
     /**
      * Getter for the connection details held in the connection.

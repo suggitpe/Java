@@ -7,20 +7,17 @@ package org.suggs.apps.mercury.model.connection;
 import org.suggs.apps.mercury.MercuryException;
 
 /**
- * Exception to be used when there is an issue regarding the jms
- * connection (manager and store)
+ * Exception to be used when there is an issue regarding the jms connection (manager and store)
  * 
  * @author suggitpe
  * @version 1.0 20 Jul 2007
  */
-public class ConnectionDataException extends MercuryException
-{
+public class ConnectionDataException extends MercuryException {
 
     /**
      * Constructs a new instance.
      */
-    public ConnectionDataException()
-    {
+    public ConnectionDataException() {
         super();
     }
 
@@ -29,8 +26,7 @@ public class ConnectionDataException extends MercuryException
      * 
      * @param aMessage
      */
-    public ConnectionDataException( String aMessage )
-    {
+    public ConnectionDataException( String aMessage ) {
         super( aMessage );
     }
 
@@ -40,8 +36,7 @@ public class ConnectionDataException extends MercuryException
      * @param aMessage
      * @param aError
      */
-    public ConnectionDataException( String aMessage, Throwable aError )
-    {
+    public ConnectionDataException( String aMessage, Throwable aError ) {
         super( aMessage, aError );
     }
 
@@ -50,8 +45,7 @@ public class ConnectionDataException extends MercuryException
      * 
      * @param aError
      */
-    public ConnectionDataException( Throwable aError )
-    {
+    public ConnectionDataException( Throwable aError ) {
         super( aError );
     }
 

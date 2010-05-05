@@ -7,13 +7,12 @@ package org.suggs.apps.mercury.model.adapters.ibmmq;
 import org.suggs.apps.mercury.model.adapters.support.AbstractMercuryAdapter;
 
 /**
- * Main adapter class for the IBM MQ middleware impl
+ * Main adapter class for the IBM MQ middleware impl.
  * 
  * @author suggitpe
  * @version 1.0 10 Nov 2008
  */
-public class IbmMqAdapter extends AbstractMercuryAdapter
-{
+public class IbmMqAdapter extends AbstractMercuryAdapter {
 
     public static final CONNECTION_TYPE TYPE = CONNECTION_TYPE.IBM_MQ;
 
@@ -22,16 +21,14 @@ public class IbmMqAdapter extends AbstractMercuryAdapter
     /**
      * @see org.suggs.apps.mercury.model.adapters.IConnectionAdapter#getFriendlyName()
      */
-    public String getFriendlyName()
-    {
+    public final String getFriendlyName() {
         return FRIENDLY_NAME;
     }
 
     /**
      * @see org.suggs.apps.mercury.model.adapters.IConnectionAdapter#getType()
      */
-    public String getType()
-    {
+    public final String getType() {
         return TYPE.toString();
     }
 

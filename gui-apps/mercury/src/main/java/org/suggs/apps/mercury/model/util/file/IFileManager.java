@@ -8,20 +8,17 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * This interface manages the persistence and retrieval of all files
- * to the underlying operating system. The interfaces here are at the
- * file level and have no concept of the use of these files.
+ * This interface manages the persistence and retrieval of all files to the underlying operating system. The
+ * interfaces here are at the file level and have no concept of the use of these files.
  * 
  * @author suggitpe
  * @version 1.0 3 Oct 2008
  */
-public interface IFileManager
-{
+public interface IFileManager {
 
     /**
-     * This method will allow any string to be persisted to a given
-     * file location. It will also verify that the persistence layer
-     * is correctly set up
+     * This method will allow any string to be persisted to a given file location. It will also verify that
+     * the persistence layer is correctly set up
      * 
      * @param aClob
      *            the string to create the file with
@@ -33,8 +30,8 @@ public interface IFileManager
     void persistClobToFile( String aClob, File aFile ) throws IOException;
 
     /**
-     * This method will retrieve a file from the persistence layer and
-     * return the data in the form of a String.
+     * This method will retrieve a file from the persistence layer and return the data in the form of a
+     * String.
      * 
      * @param aFile
      *            the file from which to read the data
@@ -45,8 +42,7 @@ public interface IFileManager
     String retrieveClobFromFile( File aFile ) throws IOException;
 
     /**
-     * This method will retrieve a file from a persistence layer on
-     * the classpath
+     * This method will retrieve a file from a persistence layer on the classpath
      * 
      * @param aResource
      *            the resource to retrieve

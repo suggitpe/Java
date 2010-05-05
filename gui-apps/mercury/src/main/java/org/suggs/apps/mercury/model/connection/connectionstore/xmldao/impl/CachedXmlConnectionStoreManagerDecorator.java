@@ -17,61 +17,53 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * This class decorates an existing implementation of an
- * IXmlConnectionStoreManager with a cache mechanism.
+ * This class decorates an existing implementation of an IXmlConnectionStoreManager with a cache mechanism.
  * 
  * @author suggitpe
  * @version 1.0 2 Oct 2008
  */
-public class CachedXmlConnectionStoreManagerDecorator
-    implements InitializingBean, IXmlConnectionStoreManager
-{
+public class CachedXmlConnectionStoreManagerDecorator implements InitializingBean, IXmlConnectionStoreManager {
 
     private static final Log LOG = LogFactory.getLog( CachedXmlConnectionStoreManagerDecorator.class );
 
-    private IXmlConnectionStoreManager mXmlConnectionStoreManager_;
-    private Map<String, ConnectionDetails> mCache_;
+    private IXmlConnectionStoreManager xmlConnectionStoreManager;
+    private Map<String, ConnectionDetails> cache;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mXmlConnectionStoreManager_,
+    public final void afterPropertiesSet() {
+        Assert.notNull( xmlConnectionStoreManager,
                         "Must set an xml connectionstore manager to cache the data with" );
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#readConnectionData()
      */
-    public Map<String, ConnectionDetails> readConnectionData() throws ConnectionStoreException
-    {
-        if ( mCache_ == null )
-        {
+    public final Map<String, ConnectionDetails> readConnectionData() throws ConnectionStoreException {
+        if ( cache == null ) {
             LOG.debug( "Loading data from persistent store" );
-            mCache_ = mXmlConnectionStoreManager_.readConnectionData();
+            cache = xmlConnectionStoreManager.readConnectionData();
         }
-        return mCache_;
+        return cache;
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#getRawXml()
      */
-    public String getRawXml() throws ConnectionStoreException
-    {
-        return mXmlConnectionStoreManager_.getRawXml();
+    public final String getRawXml() throws ConnectionStoreException {
+        return xmlConnectionStoreManager.getRawXml();
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#saveConnectionData(java.util.Map)
      */
-    public void saveConnectionData( Map<String, ConnectionDetails> map )
-                    throws ConnectionStoreException
-    {
+    public final void saveConnectionData( Map<String, ConnectionDetails> map )
+                    throws ConnectionStoreException {
         // refresh the cache
         LOG.debug( "Refreshing local cache" );
-        mCache_ = map;
-        mXmlConnectionStoreManager_.saveConnectionData( map );
+        cache = map;
+        xmlConnectionStoreManager.saveConnectionData( map );
     }
 
     /**
@@ -79,9 +71,8 @@ public class CachedXmlConnectionStoreManagerDecorator
      * 
      * @return the connection store manager
      */
-    public IXmlConnectionStoreManager getConnectionStoreManager()
-    {
-        return mXmlConnectionStoreManager_;
+    public final IXmlConnectionStoreManager getConnectionStoreManager() {
+        return xmlConnectionStoreManager;
     }
 
     /**
@@ -90,9 +81,8 @@ public class CachedXmlConnectionStoreManagerDecorator
      * @param connStrManager
      *            the connection store manager to set
      */
-    public void setConnectionStoreManager( IXmlConnectionStoreManager connStrManager )
-    {
-        mXmlConnectionStoreManager_ = connStrManager;
+    public final void setConnectionStoreManager( IXmlConnectionStoreManager connStrManager ) {
+        xmlConnectionStoreManager = connStrManager;
     }
 
 }

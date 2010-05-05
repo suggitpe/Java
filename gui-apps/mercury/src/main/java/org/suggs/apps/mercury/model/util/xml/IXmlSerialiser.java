@@ -9,15 +9,12 @@ import org.suggs.apps.mercury.model.util.MercuryUtilityException;
 import org.w3c.dom.Node;
 
 /**
- * This will provide the high level interface for the serialising XML
- * documents
+ * This will provide the high level interface for the serialising XML documents
  * 
  * @author suggitpe
  * @version 1.0 11 Dec 2008
  */
-public interface IXmlSerialiser
-{
+public interface IXmlSerialiser {
 
     String serialiseXmlToString( Node aDocument ) throws MercuryUtilityException;
-
 }

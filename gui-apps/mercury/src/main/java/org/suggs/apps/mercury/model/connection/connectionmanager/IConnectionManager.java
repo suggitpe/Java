@@ -8,24 +8,20 @@ import org.suggs.apps.mercury.model.connection.connection.IConnection;
 import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreException;
 
 /**
- * The connection manager is responsible for managing all of the
- * connections in the system. It will interface with the connection
- * store and the relevant adapters to fulfil this position.
+ * The connection manager is responsible for managing all of the connections in the system. It will interface
+ * with the connection store and the relevant adapters to fulfil this position.
  * 
  * @author suggitpe
  * @version 1.0 20 Jan 2009
  */
-public interface IConnectionManager
-{
+public interface IConnectionManager {
 
     /**
-     * Method to indicate whether the manager is managing a named
-     * connection
+     * Method to indicate whether the manager is managing a named connection
      * 
      * @param aConnectionName
      *            the name of the connection.
-     * @return true if the manager is managing a connection by that
-     *         name.
+     * @return true if the manager is managing a connection by that name.
      */
     boolean containsConnection( String aConnectionName );
 

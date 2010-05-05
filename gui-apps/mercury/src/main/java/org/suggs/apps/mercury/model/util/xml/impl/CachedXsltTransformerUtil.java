@@ -15,36 +15,32 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This class is an extension of the parent XSLT helper in that it
- * overrides the getTemplates method to implement a cache.
+ * This class is an extension of the parent XSLT helper in that it overrides the getTemplates method to
+ * implement a cache.
  * 
  * @author suggitpe
  * @version 1.0 8 Dec 2008
  */
-public class CachedXsltTransformerUtil extends XsltTransformerUtil
-{
+public class CachedXsltTransformerUtil extends XsltTransformerUtil {
 
     private static final Log LOG = LogFactory.getLog( CachedXsltTransformerUtil.class );
 
-    private Map<String, Templates> mTemplateCache_ = new HashMap<String, Templates>();
+    private Map<String, Templates> templateCache = new HashMap<String, Templates>();
 
     /**
      * @see org.suggs.apps.mercury.model.util.xml.impl.XsltTransformerUtil#getTemplates(java.lang.String)
      */
     @Override
-    protected Templates getTemplates( String aXsltName ) throws MercuryUtilityException
-    {
-        if ( !mTemplateCache_.containsKey( aXsltName ) )
-        {
-            if ( LOG.isDebugEnabled() )
-            {
+    protected final Templates getTemplates( String aXsltName ) throws MercuryUtilityException {
+        if ( !templateCache.containsKey( aXsltName ) ) {
+            if ( LOG.isDebugEnabled() ) {
                 LOG.debug( "XSLT [" + aXsltName
                            + "] does not exit in the template cache, creating new one from parent" );
             }
-            mTemplateCache_.put( aXsltName, super.getTemplates( aXsltName ) );
+            templateCache.put( aXsltName, super.getTemplates( aXsltName ) );
         }
 
-        return mTemplateCache_.get( aXsltName );
+        return templateCache.get( aXsltName );
     }
 
 }

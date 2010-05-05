@@ -22,33 +22,34 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This is a helper class used solely as a home for the builder
- * methods used by the connection store manager. In class you will
- * find all of the builder methods to create the XML content etc.
+ * This is a helper class used solely as a home for the builder methods used by the connection store manager.
+ * In class you will find all of the builder methods to create the XML content etc.
  * 
  * @author suggitpe
  * @version 1.0 9 Oct 2008
  */
-public class JaxbXmlConnectionStoreManagerHelper
-{
+public class JaxbXmlConnectionStoreManagerHelper {
 
     private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManagerHelper.class );
 
     /**
-     * Builder method used to create the correct domain objects from
-     * the jaxb objects returned from the underlying data.
+     * Hidden constructs a new instance.
+     */
+    private JaxbXmlConnectionStoreManagerHelper() {}
+
+    /**
+     * Builder method used to create the correct domain objects from the jaxb objects returned from the
+     * underlying data.
      * 
      * @param aConnStr
      *            the jaxb object from which to create our own data
      * @return the map of connection details
      */
-    static Map<String, ConnectionDetails> createDetailsFromConnection( ConnectionStoreType aConnStr )
-    {
+    static Map<String, ConnectionDetails> createDetailsFromConnection( ConnectionStoreType aConnStr ) {
         LOG.debug( "Building [" + aConnStr.getConnection().size()
                    + "] connection details from JAXB connection" );
         Map<String, ConnectionDetails> ret = new HashMap<String, ConnectionDetails>();
-        for ( ConnectionType c : aConnStr.getConnection() )
-        {
+        for ( ConnectionType c : aConnStr.getConnection() ) {
             ret.put( c.getName(), buildConnectionDetails( c ) );
         }
         return ret;
@@ -60,14 +61,12 @@ public class JaxbXmlConnectionStoreManagerHelper
      * @param connType
      * @return
      */
-    private static ConnectionDetails buildConnectionDetails( ConnectionType connType )
-    {
+    private static ConnectionDetails buildConnectionDetails( ConnectionType connType ) {
         ConnectionDetails ret = new ConnectionDetails( connType.getName(),
                                                        connType.getType(),
                                                        connType.getParameters().getHostname(),
                                                        connType.getParameters().getPort() );
-        if ( connType.getParameters().isSetSecurity() )
-        {
+        if ( connType.getParameters().isSetSecurity() ) {
             ret.setSecurityDetails( connType.getParameters().getSecurity().getUsername(),
                                     connType.getParameters().getSecurity().getPassword() );
         }
@@ -75,14 +74,11 @@ public class JaxbXmlConnectionStoreManagerHelper
         List<ConnectionDataItemType> cData = connType.getParameters()
             .getConnectiondataitems()
             .getConnectiondata();
-        for ( ConnectionDataItemType t : cData )
-        {
-            try
-            {
+        for ( ConnectionDataItemType t : cData ) {
+            try {
                 ret.addConnectionDataItem( t.getKey(), t.getValue() );
             }
-            catch ( ConnectionDataException cde )
-            {
+            catch ( ConnectionDataException cde ) {
                 LOG.warn( "Trying to add duplicate metadata item with key[" + t.getKey()
                           + "] to metadata list" );
             }
@@ -98,9 +94,7 @@ public class JaxbXmlConnectionStoreManagerHelper
      * @param connDtls
      * @return
      */
-    static ConnectionType createConnectionFromDetails( ObjectFactory factory,
-                                                       ConnectionDetails connDtls )
-    {
+    static ConnectionType createConnectionFromDetails( ObjectFactory factory, ConnectionDetails connDtls ) {
 
         ConnectionType ret = factory.createConnectionType();
 
@@ -110,8 +104,7 @@ public class JaxbXmlConnectionStoreManagerHelper
         params.setHostname( connDtls.getHostname() );
         params.setPort( connDtls.getPort() );
 
-        if ( connDtls.isSecurityEnabled() )
-        {
+        if ( connDtls.isSecurityEnabled() ) {
             ConnectionSecurityType t = factory.createConnectionSecurityType();
             t.setUsername( connDtls.getUsername() );
             t.setPassword( connDtls.getPassword() );
@@ -119,8 +112,7 @@ public class JaxbXmlConnectionStoreManagerHelper
         }
 
         ConnectionDataGroup mt = factory.createConnectionDataGroup();
-        for ( String key : connDtls.getConnectionData().keySet() )
-        {
+        for ( String key : connDtls.getConnectionData().keySet() ) {
             ConnectionDataItemType data = factory.createConnectionDataItemType();
             data.setKey( key );
             data.setValue( connDtls.getConnectionData().get( key ) );

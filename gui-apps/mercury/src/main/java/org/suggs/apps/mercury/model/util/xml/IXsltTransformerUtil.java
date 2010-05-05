@@ -9,15 +9,13 @@ import org.suggs.apps.mercury.model.util.MercuryUtilityException;
 import org.w3c.dom.Node;
 
 /**
- * This utility interface will manage high level XSLT requirements for
- * Mercury. The underlying classes should encapsulate the rest of the
- * XSLT transformation.
+ * This utility interface will manage high level XSLT requirements for Mercury. The underlying classes should
+ * encapsulate the rest of the XSLT transformation.
  * 
  * @author suggitpe
  * @version 1.0 9 Dec 2008
  */
-public interface IXsltTransformerUtil
-{
+public interface IXsltTransformerUtil {
 
     /**
      * This method will transform an xml document into a DOM node tree
@@ -30,7 +28,6 @@ public interface IXsltTransformerUtil
      * @throws MercuryUtilityException
      *             if there are any issues
      */
-    Node transformXmlToDom( byte[] aXmlToTransform, String aXsltName )
-                    throws MercuryUtilityException;
+    Node transformXmlToDom( byte[] aXmlToTransform, String aXsltName ) throws MercuryUtilityException;
 
 }
