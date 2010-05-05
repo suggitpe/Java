@@ -9,21 +9,19 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * TODO Write javadoc for ConnectionPanel
+ * Connection Panel.
  * 
  * @author suggitpe
  * @version 1.0 24 Nov 2008
  */
-public class ConnectionPanel extends Composite
-{
+public class ConnectionPanel extends Composite {
 
     /**
      * Constructs a new instance.
      * 
      * @param parent
      */
-    public ConnectionPanel( Composite parent )
-    {
+    public ConnectionPanel( Composite parent ) {
         super( parent, SWT.BORDER );
         setLayout( new RowLayout() );
     }

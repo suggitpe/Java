@@ -19,51 +19,42 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * Builder class that is responsible for the contruction of the
- * toolbars used in the application
+ * Builder class that is responsible for the contruction of the toolbars used in the application
  * 
  * @author suggitpe
  * @version 1.0 16 Sep 2008
  */
-public class ToolBarFactory implements IToolBarFactory, InitializingBean
-{
+public class ToolBarFactory implements IToolBarFactory, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( ToolBarFactory.class );
 
-    private IActionManager mActionManager_;
-    private boolean mShowToolbar_;
+    private IActionManager actionManager;
+    private boolean showToolbar;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mActionManager_,
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( actionManager,
                         "An action manager object must be injected into the ToolBarFactory object.  Please revise Spring XML" );
     }
 
     /**
-     * @see org.suggs.apps.mercury.view.IToolBarFactory#createToolbar(java.lang.String,
-     *      int)
+     * @see org.suggs.apps.mercury.view.IToolBarFactory#createToolbar(java.lang.String, int)
      */
-    public ToolBarManager createToolbar( String toolBarType, int style )
-    {
-        if ( LOG.isDebugEnabled() )
-        {
+    public ToolBarManager createToolbar( String toolBarType, int style ) {
+        if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Constructing toolbar manager for type [" + toolBarType + "]" );
         }
 
-        if ( !mShowToolbar_ )
-        {
+        if ( !showToolbar ) {
             return null;
         }
 
-        if ( toolBarType.equals( "MAIN" ) )
-        {
+        if ( toolBarType.equals( "MAIN" ) ) {
             return buildMainToolbar( style );
         }
-        throw new NotImplementedException( "No toolbar manager exists for type [" + toolBarType
-                                           + "]" );
+        throw new NotImplementedException( "No toolbar manager exists for type [" + toolBarType + "]" );
     }
 
     /**
@@ -73,13 +64,11 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
      *            the style of the toolbar
      * @return the toolbar manager
      */
-    private final ToolBarManager buildMainToolbar( int style )
-    {
+    private final ToolBarManager buildMainToolbar( int style ) {
         ToolBarManager main = new ToolBarManager( style );
 
         // get action manager factory
-        ActionManager mgr = (ActionManager) ContextProvider.instance()
-            .getBean( ActionManager.BEAN_NAME );
+        ActionManager mgr = (ActionManager) ContextProvider.instance().getBean( ActionManager.BEAN_NAME );
 
         main.add( mgr.getAction( "CREATE_CONNECTION" ) );
         main.add( mgr.getAction( "EDIT_CONNECTION" ) );
@@ -93,23 +82,21 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean
     /**
      * Setter for the action manager
      * 
-     * @param actionManager
+     * @param aActionManager
      *            the action manager
      */
-    public void setActionManager( IActionManager actionManager )
-    {
-        mActionManager_ = actionManager;
+    public final void setActionManager( IActionManager aActionManager ) {
+        actionManager = aActionManager;
     }
 
     /**
      * Setter for showing the toolbar
      * 
-     * @param showToolbar
+     * @param aShowToolbar
      *            flag to set the toolbar switch
      */
-    public void setShowToolbar( boolean showToolbar )
-    {
-        mShowToolbar_ = showToolbar;
+    public final void setShowToolbar( boolean aShowToolbar ) {
+        showToolbar = aShowToolbar;
     }
 
 }

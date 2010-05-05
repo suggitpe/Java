@@ -14,23 +14,20 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * This page is to be used as an optional page for when the underlying
- * middleware is an IBM MQ middleware.
+ * This page is to be used as an optional page for when the underlying middleware is an IBM MQ middleware.
  * 
  * @author suggitpe
  * @version 1.0 10 Nov 2008
  */
-public class IbmMqConnectionDataPage extends AbstractCreateConnectionPage
-{
+public class IbmMqConnectionDataPage extends AbstractCreateConnectionPage {
 
     public static final String PAGE_NAME = "IbmMqConnectionDataPage";
-    private String mChannelName_;
+    private String channelName;
 
     /**
      * Constructs a new instance.
      */
-    public IbmMqConnectionDataPage()
-    {
+    public IbmMqConnectionDataPage() {
         super( PAGE_NAME, "Populate additional MQ connection data" );
         setPageComplete( false );
         setDescription( "Please enter the additional connection details required for an IBM MQ connection" );
@@ -40,8 +37,7 @@ public class IbmMqConnectionDataPage extends AbstractCreateConnectionPage
      * @see org.suggs.apps.mercury.view.wizards.createconnection.pages.AbstractCreateConnectionPage#doBuildControls(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected void doBuildControls( Composite controlComposite )
-    {
+    protected void doBuildControls( Composite controlComposite ) {
         Composite c = new IbmConnectionDetailsComposite( controlComposite );
         c.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
     }
@@ -51,56 +47,46 @@ public class IbmMqConnectionDataPage extends AbstractCreateConnectionPage
      * 
      * @return the channel name field
      */
-    public String getChannelName()
-    {
-        return mChannelName_;
+    public final String getChannelName() {
+        return channelName;
     }
 
     /**
-     * Private method to check if the page has been completed
-     * successfully.
+     * Private method to check if the page has been completed successfully.
      */
-    private void checkIfPageComplete()
-    {
-        if ( mChannelName_ == null || mChannelName_.length() == 0 )
-        {
+    private void checkIfPageComplete() {
+        if ( channelName == null || channelName.length() == 0 ) {
             setPageComplete( false );
         }
-        else
-        {
+        else {
             setPageComplete( true );
         }
     }
 
     /**
-     * Private composite class that can be added to the main page
-     * class
+     * Private composite class that can be added to the main page class
      * 
      * @author suggitpe
      * @version 1.0 11 Nov 2008
      */
-    private class IbmConnectionDetailsComposite extends Composite
-    {
+    private class IbmConnectionDetailsComposite extends Composite {
 
         /**
          * Constructs a new instance.
          * 
          * @param comp
          */
-        public IbmConnectionDetailsComposite( Composite comp )
-        {
+        public IbmConnectionDetailsComposite( Composite comp ) {
             super( comp, SWT.NONE );
             setLayout( new GridLayout( 2, false ) );
 
             new Label( this, SWT.NONE ).setText( "Channel name:" );
             final Text channel = new Text( this, SWT.BORDER );
             channel.setLayoutData( TEXT_BOX_STYLE );
-            channel.addModifyListener( new ModifyListener()
-            {
+            channel.addModifyListener( new ModifyListener() {
 
-                public void modifyText( ModifyEvent e )
-                {
-                    mChannelName_ = channel.getText();
+                public void modifyText( ModifyEvent e ) {
+                    channelName = channel.getText();
                     checkIfPageComplete();
                 }
             } );

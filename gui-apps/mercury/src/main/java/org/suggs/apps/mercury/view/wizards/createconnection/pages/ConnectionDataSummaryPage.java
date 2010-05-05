@@ -32,26 +32,23 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 /**
- * This pupose of this page is to show to the user what they have
- * selected through the wizard and allow them to run a test connection
- * through to the underlying middleware.
+ * This pupose of this page is to show to the user what they have selected through the wizard and allow them
+ * to run a test connection through to the underlying middleware.
  * 
  * @author suggitpe
  * @version 1.0 10 Nov 2008
  */
-public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
-{
+public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
 
     private static final Log LOG = LogFactory.getLog( ConnectionDataSummaryPage.class );
     public static final String PAGE_NAME = "ConnectionDataSummaryPage";
 
-    private TableViewer mViewer_;
+    private TableViewer viewer;
 
     /**
      * Constructs a new instance.
      */
-    public ConnectionDataSummaryPage()
-    {
+    public ConnectionDataSummaryPage() {
         super( PAGE_NAME, "Create ConnectionContext Summary Page" );
         setPageComplete( true );
         setDescription( "Please review the connection data provided here before hitting finish." );
@@ -61,8 +58,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
      * @see org.suggs.apps.mercury.view.wizards.createconnection.pages.AbstractCreateConnectionPage#doBuildControls(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected void doBuildControls( Composite controlComposite )
-    {
+    protected void doBuildControls( Composite controlComposite ) {
         Composite c = new SummaryDataComposite( controlComposite );
         c.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
 
@@ -73,35 +69,31 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
     /**
      * Accessor method to enable us to update the table contents
      */
-    public void updateTableContents()
-    {
+    public void updateTableContents() {
         Map<String, String> map = ( (CreateConnectionWizard) getWizard() ).getConnectionData();
         EditableTableItem[] data = new EditableTableItem[map.size()];
 
         Set<String> keys = map.keySet();
 
         int i = 0;
-        for ( String s : keys )
-        {
+        for ( String s : keys ) {
             data[i++] = new EditableTableItem( s, map.get( s ) );
         }
 
-        mViewer_.setInput( data );
+        viewer.setInput( data );
     }
 
     // ##################################
     // ########## INNER CLASSES #########
     // ##################################
-    private class SummaryDataComposite extends Composite
-    {
+    private class SummaryDataComposite extends Composite {
 
         /**
          * Constructs a new instance.
          * 
          * @param comp
          */
-        public SummaryDataComposite( Composite comp )
-        {
+        public SummaryDataComposite( Composite comp ) {
             super( comp, SWT.NONE );
             setLayout( new GridLayout( 1, false ) );
 
@@ -125,11 +117,11 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
             table.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
 
             // build the table viewer
-            mViewer_ = new TableViewer( table );
+            viewer = new TableViewer( table );
 
             // hook in the table contents
-            mViewer_.setContentProvider( new SummaryTableContentProvider() );
-            mViewer_.setLabelProvider( new SummaryTableLabelProvider() );
+            viewer.setContentProvider( new SummaryTableContentProvider() );
+            viewer.setLabelProvider( new SummaryTableLabelProvider() );
             updateTableContents();
         }
     }
@@ -138,30 +130,26 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
      * @author suggitpe
      * @version 1.0 14 Nov 2008
      */
-    private class TestConnectionSummary extends Composite
-    {
+    private class TestConnectionSummary extends Composite {
 
         /**
          * Constructs a new instance.
          * 
          * @param comp
          */
-        public TestConnectionSummary( Composite comp )
-        {
+        public TestConnectionSummary( Composite comp ) {
             super( comp, SWT.NONE );
             setLayout( new GridLayout( 1, false ) );
 
             final Button test = new Button( this, SWT.PUSH );
             test.setText( "Test ConnectionContext" );
-            test.addSelectionListener( new SelectionAdapter()
-            {
+            test.addSelectionListener( new SelectionAdapter() {
 
                 /**
                  * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
                  */
                 @Override
-                public void widgetSelected( SelectionEvent e )
-                {
+                public void widgetSelected( SelectionEvent e ) {
                     ConnectionDetails dtls = ( (CreateConnectionWizard) getWizard() ).getConnectionDetails();
                     LOG.debug( "Testing connection with connection details [" + dtls + "]" );
                 }
@@ -176,33 +164,25 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
      * @author suggitpe
      * @version 1.0 12 Nov 2008
      */
-    private class SummaryTableContentProvider implements IStructuredContentProvider
-    {
+    private class SummaryTableContentProvider implements IStructuredContentProvider {
 
         /**
          * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
          */
-        public Object[] getElements( Object inputElement )
-        {
+        public Object[] getElements( Object inputElement ) {
             return (Object[]) inputElement;
         }
 
         /**
          * @see org.eclipse.jface.viewers.IContentProvider#dispose()
          */
-        public void dispose()
-        {
-            // nadda
-        }
+        public void dispose() {}
 
         /**
          * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
          *      java.lang.Object, java.lang.Object)
          */
-        public void inputChanged( Viewer viewer, Object oldInput, Object newInput )
-        {
-            // nadda
-        }
+        public void inputChanged( Viewer aViewer, Object oldInput, Object newInput ) {}
     }
 
     /**
@@ -211,28 +191,22 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
      * @author suggitpe
      * @version 1.0 12 Nov 2008
      */
-    private class SummaryTableLabelProvider implements ITableLabelProvider
-    {
+    private class SummaryTableLabelProvider implements ITableLabelProvider {
 
         /**
-         * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object,
-         *      int)
+         * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
          */
-        public Image getColumnImage( Object element, int columnIndex )
-        {
+        public Image getColumnImage( Object element, int columnIndex ) {
             // no thanks
             return null;
         }
 
         /**
-         * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object,
-         *      int)
+         * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
          */
-        public String getColumnText( Object element, int columnIndex )
-        {
+        public String getColumnText( Object element, int columnIndex ) {
             EditableTableItem tItem = (EditableTableItem) element;
-            switch ( columnIndex )
-            {
+            switch ( columnIndex ) {
                 case 0:
                     return tItem.getName();
                 case 1:
@@ -246,45 +220,38 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
         /**
          * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
          */
-        public void addListener( ILabelProviderListener listener )
-        {
-            // nadda
+        public void addListener( ILabelProviderListener listener ) {
+        // nadda
         }
 
         /**
          * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
          */
-        public void dispose()
-        {
-            // nadda
+        public void dispose() {
+        // nadda
         }
 
         /**
          * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object,
          *      java.lang.String)
          */
-        public boolean isLabelProperty( Object element, String property )
-        {
+        public boolean isLabelProperty( Object element, String property ) {
             return false;
         }
 
         /**
          * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
          */
-        public void removeListener( ILabelProviderListener listener )
-        {
-        }
+        public void removeListener( ILabelProviderListener listener ) {}
     }
 
     /**
-     * This class is used to encapsulate the data that will be sent to
-     * the table.
+     * This class is used to encapsulate the data that will be sent to the table.
      * 
      * @author suggitpe
      * @version 1.0 13 Nov 2008
      */
-    class EditableTableItem
-    {
+    class EditableTableItem {
 
         private String mName_;
         private String mValue_;
@@ -297,8 +264,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
          * @param value
          *            the value to set
          */
-        public EditableTableItem( String name, String value )
-        {
+        public EditableTableItem( String name, String value ) {
             mName_ = name;
             mValue_ = value;
         }
@@ -308,8 +274,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
          * 
          * @return Returns the Name.
          */
-        public String getName()
-        {
+        public String getName() {
             return mName_;
         }
 
@@ -319,8 +284,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
          * @param name
          *            The Name to set.
          */
-        public void setName( String name )
-        {
+        public void setName( String name ) {
             mName_ = name;
         }
 
@@ -329,8 +293,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
          * 
          * @return Returns the Value.
          */
-        public String getValue()
-        {
+        public String getValue() {
             return mValue_;
         }
 
@@ -340,8 +303,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage
          * @param value
          *            The Value to set.
          */
-        public void setValue( String value )
-        {
+        public void setValue( String value ) {
             mValue_ = value;
         }
 

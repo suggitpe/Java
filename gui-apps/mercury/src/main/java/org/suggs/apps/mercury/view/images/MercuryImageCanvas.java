@@ -18,15 +18,13 @@ import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * This class manages the encapsulation of the mercury image as a
- * canvas composite so that it can be added to any composite as an
- * image.
+ * This class manages the encapsulation of the mercury image as a canvas composite so that it can be added to
+ * any composite as an image.
  * 
  * @author suggitpe
  * @version 1.0 16 Oct 2008
  */
-public class MercuryImageCanvas extends Canvas
-{
+public class MercuryImageCanvas extends Canvas {
 
     private static final Log LOG = LogFactory.getLog( MercuryImageCanvas.class );
     private static final String IMG = "images/mercury.png";
@@ -36,18 +34,14 @@ public class MercuryImageCanvas extends Canvas
      * 
      * @param parent
      */
-    public MercuryImageCanvas( Composite parent )
-    {
+    public MercuryImageCanvas( Composite parent ) {
         super( parent, SWT.NONE );
 
-        addPaintListener( new PaintListener()
-        {
+        addPaintListener( new PaintListener() {
 
-            public void paintControl( PaintEvent pe )
-            {
+            public void paintControl( PaintEvent pe ) {
                 InputStream is = ImageManager.getImageStream( ImageManager.IMAGE_MERCURY );
-                if ( is == null )
-                {
+                if ( is == null ) {
                     LOG.warn( "Cannot find image [" + IMG + "]" );
                 }
                 Image img = new Image( pe.display, is );

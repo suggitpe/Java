@@ -17,16 +17,14 @@ import org.eclipse.swt.widgets.TabItem;
  * @author suggitpe
  * @version 1.0 24 Nov 2008
  */
-public class MainWindow extends Composite
-{
+public class MainWindow extends Composite {
 
     /**
      * Constructs a new instance.
      * 
      * @param parent
      */
-    public MainWindow( Composite parent )
-    {
+    public MainWindow( Composite parent ) {
         super( parent, SWT.BORDER );
         setLayout( new FillLayout() );
 
@@ -53,33 +51,28 @@ public class MainWindow extends Composite
  * @author suggitpe
  * @version 1.0 25 Nov 2008
  */
-class JmsTab extends Composite
-{
+class JmsTab extends Composite {
 
     /**
      * Constructs a new instance.
      */
-    JmsTab( Composite comp )
-    {
+    JmsTab( Composite comp ) {
         super( comp, SWT.NONE );
     }
 }
 
 /**
- * This class will represent the admin tab for the tab folder in the
- * main window.
+ * This class will represent the admin tab for the tab folder in the main window.
  * 
  * @author suggitpe
  * @version 1.0 25 Nov 2008
  */
-class AdminTab extends Composite
-{
+class AdminTab extends Composite {
 
     /**
      * Constructs a new instance.
      */
-    AdminTab( Composite comp )
-    {
+    AdminTab( Composite comp ) {
         super( comp, SWT.NONE );
         setLayout( new FillLayout() );
 

@@ -22,41 +22,34 @@ import org.xml.sax.SAXParseException;
  * @author suggitpe
  * @version 1.0 23 Jul 2007
  */
-final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler
-{
+final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler {
 
     private static final Log LOG = LogFactory.getLog( XmlPersistenceLayerHandler.class );
 
-    private boolean mFailOnError = true;
+    private boolean failOnError = true;
 
     /**
      * Constructs a new instance.
      */
-    public XmlPersistenceLayerHandler()
-    {
+    public XmlPersistenceLayerHandler() {
         super();
         String go = System.getProperty( "mercury.failonerror" );
-        if ( go != null && go.equals( "false" ) )
-        {
-            mFailOnError = false;
+        if ( go != null && go.equals( "false" ) ) {
+            failOnError = false;
             LOG.debug( "FailOnError =[false]" );
         }
     }
 
     /**
-     * @see org.xml.sax.EntityResolver#resolveEntity(java.lang.String,
-     *      java.lang.String)
+     * @see org.xml.sax.EntityResolver#resolveEntity(java.lang.String, java.lang.String)
      */
-    public InputSource resolveEntity( String publicId, String systemId ) throws java.io.IOException
-    {
+    public InputSource resolveEntity( String publicId, String systemId ) throws java.io.IOException {
         // now get the dtd filename from the systemId URL
         int separator = 0;
         int pos = 0;
-        while ( -1 != separator )
-        {
+        while ( -1 != separator ) {
             separator = systemId.indexOf( '/', separator );
-            if ( -1 != separator )
-            {
+            if ( -1 != separator ) {
                 pos = separator;
                 ++separator;
             }
@@ -66,8 +59,7 @@ final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler
 
         InputStream stream = XmlPersistenceLayerHandler.class.getClassLoader()
             .getResourceAsStream( dtdFileName );
-        if ( stream == null )
-        {
+        if ( stream == null ) {
             String err = "Unable to load dtd file [" + dtdFileName + "]";
             LOG.error( err );
             throw new IOException( err );
@@ -79,11 +71,9 @@ final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler
     /**
      * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
      */
-    public void error( SAXParseException e )
-    {
+    public void error( SAXParseException e ) {
         LOG.error( "Error picked up in the Connection Store Handler [" + e.getMessage() + "]" );
-        if ( mFailOnError )
-        {
+        if ( failOnError ) {
             throw new MercuryRuntimeException( e );
         }
     }
@@ -91,11 +81,9 @@ final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler
     /**
      * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
      */
-    public void warning( SAXParseException e )
-    {
+    public void warning( SAXParseException e ) {
         LOG.warn( "Warning picked up in the Connection Store Handler [" + e.getMessage() + "]" );
-        if ( mFailOnError )
-        {
+        if ( failOnError ) {
             throw new MercuryRuntimeException( e );
         }
     }
@@ -103,11 +91,9 @@ final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler
     /**
      * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
      */
-    public void fatalError( SAXParseException e )
-    {
+    public void fatalError( SAXParseException e ) {
         LOG.error( "Fatal error picked up in the Connection Store Handler [" + e.getMessage() + "]" );
-        if ( mFailOnError )
-        {
+        if ( failOnError ) {
             throw new MercuryRuntimeException( e );
         }
     }

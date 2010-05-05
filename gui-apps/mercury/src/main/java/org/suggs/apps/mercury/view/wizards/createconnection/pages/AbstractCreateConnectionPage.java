@@ -11,15 +11,13 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * This is the abstract class for all of the Create ConnectionContext
- * wizard pages and manages the majority of the boiler plate code that
- * is required.
+ * This is the abstract class for all of the Create ConnectionContext wizard pages and manages the majority of
+ * the boiler plate code that is required.
  * 
  * @author suggitpe
  * @version 1.0 30 Oct 2008
  */
-public abstract class AbstractCreateConnectionPage extends WizardPage
-{
+public abstract class AbstractCreateConnectionPage extends WizardPage {
 
     protected static final GridData TEXT_BOX_STYLE = new GridData( GridData.FILL_HORIZONTAL );
 
@@ -29,16 +27,14 @@ public abstract class AbstractCreateConnectionPage extends WizardPage
      * @param pageName
      * @param pageTitle
      */
-    public AbstractCreateConnectionPage( String pageName, String pageTitle )
-    {
+    public AbstractCreateConnectionPage( String pageName, String pageTitle ) {
         super( pageName, pageTitle, null );
     }
 
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
-    public void createControl( Composite parent )
-    {
+    public void createControl( Composite parent ) {
 
         Composite topLevel = new Composite( parent, SWT.NONE );
         topLevel.setLayout( new GridLayout( 1, false ) );

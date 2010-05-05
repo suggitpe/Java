@@ -7,15 +7,13 @@ package org.suggs.apps.mercury.view;
 import org.eclipse.jface.action.ToolBarManager;
 
 /**
- * The purpose of this intrface is to provide a way so that we can
- * decouple the construction of the toolbars away from the main GUI
- * logic.
+ * The purpose of this intrface is to provide a way so that we can decouple the construction of the toolbars
+ * away from the main GUI logic.
  * 
  * @author suggitpe
  * @version 1.0 17 Sep 2008
  */
-public interface IToolBarFactory
-{
+public interface IToolBarFactory {
 
     /**
      * Creates a tool bar manager for the given end destination

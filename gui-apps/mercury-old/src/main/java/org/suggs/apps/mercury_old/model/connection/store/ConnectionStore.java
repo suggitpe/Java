@@ -22,50 +22,42 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * Implementation of the IJmsConnectionStore. This implementation will
- * use an XML file stored in the users home directory (in a .jmshelper
- * dir), for the persistence of the connection details.
+ * Implementation of the IJmsConnectionStore. This implementation will use an XML file stored in the users
+ * home directory (in a .jmshelper dir), for the persistence of the connection details.
  * 
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class ConnectionStore extends Observable implements IConnectionStore, InitializingBean
-{
+public class ConnectionStore extends Observable implements IConnectionStore, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( ConnectionStore.class );
 
-    private String mStoreState_ = new String( "Unsaved" );
-    private Map<String, IConnectionDetails> mConnStore_ = new HashMap<String, IConnectionDetails>();
+    private String storeState = new String( "Unsaved" );
+    private Map<String, IConnectionDetails> connStore = new HashMap<String, IConnectionDetails>();
 
     private IPersistenceLayer mPersistenceLayer_;
 
     /**
      * Constructs a new instance.
      */
-    public ConnectionStore()
-    {
+    public ConnectionStore() {
         super();
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mPersistenceLayer_,
-                        "Must inject a persisztence layer into the connection store" );
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( mPersistenceLayer_, "Must inject a persisztence layer into the connection store" );
 
         mPersistenceLayer_.verifyPersistenceLayer();
-        try
-        {
+        try {
             Map<String, IConnectionDetails> cs = mPersistenceLayer_.readPersistenceLayer();
-            if ( cs != null )
-            {
-                mConnStore_ = cs;
+            if ( cs != null ) {
+                connStore = cs;
             }
         }
-        catch ( MercuryException jhe )
-        {
+        catch ( MercuryException jhe ) {
             LOG.warn( "Unable to read in connection store details [" + jhe.getMessage() + "]" );
         }
     }
@@ -73,12 +65,9 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#loadConnectionParameters(java.lang.String)
      */
-    public IConnectionDetails loadConnectionParameters( String aName )
-                    throws MercuryConnectionStoreException
-    {
-        IConnectionDetails ret = mConnStore_.get( aName );
-        if ( ret == null )
-        {
+    public IConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException {
+        IConnectionDetails ret = connStore.get( aName );
+        if ( ret == null ) {
             throw new MercuryConnectionStoreException( "Connection [" + aName
                                                        + "] does not exist in the connection store" );
         }
@@ -88,30 +77,27 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#getListOfKnownConnectionNames()
      */
-    public String[] getListOfKnownConnectionNames()
-    {
-        SortedSet<String> keys = new TreeSet<String>( mConnStore_.keySet() );
+    public String[] getListOfKnownConnectionNames() {
+        SortedSet<String> keys = new TreeSet<String>( connStore.keySet() );
         return keys.toArray( new String[keys.size()] );
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#doesConnectionExist(java.lang.String)
      */
-    public boolean doesConnectionExist( String aConnectionName )
-    {
-        return mConnStore_.containsKey( aConnectionName.toUpperCase() );
+    public boolean doesConnectionExist( String aConnectionName ) {
+        return connStore.containsKey( aConnectionName.toUpperCase() );
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#deleteNamedConnection(java.lang.String)
      */
-    public void deleteNamedConnection( String aName ) throws MercuryConnectionStoreException
-    {
+    public void deleteNamedConnection( String aName ) throws MercuryConnectionStoreException {
         LOG.debug( "Deleting connection with name [" + aName + "]" );
-        mConnStore_.remove( aName );
+        connStore.remove( aName );
 
-        mStoreState_ = "Connection removed";
-        mPersistenceLayer_.savePersistenceLayer( mConnStore_ );
+        storeState = "Connection removed";
+        mPersistenceLayer_.savePersistenceLayer( connStore );
         setChanged();
         notifyObservers();
     }
@@ -121,52 +107,43 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
      *      org.suggs.apps.mercury_old.model.connection.IConnectionDetails)
      */
     public void saveConnectionParameters( String aName, IConnectionDetails aDetails )
-                    throws MercuryConnectionStoreException
-    {
-        if ( aDetails == null )
-        {
+                    throws MercuryConnectionStoreException {
+        if ( aDetails == null ) {
             throw new MercuryConnectionStoreException( "Connection details null" );
         }
 
         aDetails.setName( aName.toUpperCase() );
 
-        if ( !( aDetails.isConnectionDetailsValid() ) )
-        {
+        if ( !( aDetails.isConnectionDetailsValid() ) ) {
             throw new MercuryConnectionStoreException( "Connection details are invalid, pls check data entry" );
         }
 
-        if ( connectionExists( aDetails ) )
-        {
-            mStoreState_ = "Overwritten existing";
+        if ( connectionExists( aDetails ) ) {
+            storeState = "Overwritten existing";
         }
-        else
-        {
-            mStoreState_ = "Saved";
+        else {
+            storeState = "Saved";
         }
-        mConnStore_.put( aDetails.getName(), aDetails );
-        mPersistenceLayer_.savePersistenceLayer( mConnStore_ );
+        connStore.put( aDetails.getName(), aDetails );
+        mPersistenceLayer_.savePersistenceLayer( connStore );
         setChanged();
         notifyObservers();
     }
 
     /**
-     * tests to see if the connection details actually exists in the
-     * conn store. TODO: need to finish off this impl
+     * tests to see if the connection details actually exists in the conn store. TODO: need to finish off this
+     * impl
      * 
      * @param aConnDtls
      *            the jms connection details to test for
-     * @return true if the jms connection store details exists, else
-     *         false
+     * @return true if the jms connection store details exists, else false
      */
-    private boolean connectionExists( IConnectionDetails aConnDtls )
-    {
-        if ( mConnStore_.containsKey( aConnDtls.getName() ) )
-        {
+    private boolean connectionExists( IConnectionDetails aConnDtls ) {
+        if ( connStore.containsKey( aConnDtls.getName() ) ) {
             return true;
         }
 
-        for ( String i : mConnStore_.keySet() )
-        {
+        for ( String i : connStore.keySet() ) {
             LOG.debug( "name  " + i );
         }
 
@@ -176,9 +153,8 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#getState()
      */
-    public String getState()
-    {
-        return mStoreState_;
+    public String getState() {
+        return storeState;
     }
 
     /**
@@ -187,9 +163,8 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
      * @param aState
      *            the state to set
      */
-    public void setState( String aState )
-    {
-        mStoreState_ = aState;
+    public void setState( String aState ) {
+        storeState = aState;
     }
 
     /**
@@ -197,8 +172,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
      * 
      * @return the persistence layer
      */
-    public IPersistenceLayer getPersistenceLayer()
-    {
+    public IPersistenceLayer getPersistenceLayer() {
         return mPersistenceLayer_;
     }
 
@@ -208,8 +182,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
      * @param aLayer
      *            the persistence layer to inject
      */
-    public void setPersistenceLayer( IPersistenceLayer aLayer )
-    {
+    public void setPersistenceLayer( IPersistenceLayer aLayer ) {
         mPersistenceLayer_ = aLayer;
 
     }

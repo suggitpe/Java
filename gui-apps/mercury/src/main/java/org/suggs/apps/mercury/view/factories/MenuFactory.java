@@ -18,40 +18,34 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * This class implements the IMenuFactory and will manage the
- * construction of menus. This implementation is really simple so as
- * to provide the high level interface for refactoring later on.
+ * This class implements the IMenuFactory and will manage the construction of menus. This implementation is
+ * really simple so as to provide the high level interface for refactoring later on.
  * 
  * @author suggitpe
  * @version 1.0 16 Sep 2008
  */
-public class MenuFactory implements IMenuFactory, InitializingBean
-{
+public class MenuFactory implements IMenuFactory, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( MenuFactory.class );
-    private IActionManager mActionManager_;
+    private IActionManager actionManager;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mActionManager_,
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( actionManager,
                         "An action manager object must be injected into the MenuFactory object.  Please revise Spring XML" );
     }
 
     /**
      * @see org.suggs.apps.mercury.view.IMenuFactory#createMenuManager(java.lang.String)
      */
-    public MenuManager createMenuManager( String menuType )
-    {
-        if ( LOG.isDebugEnabled() )
-        {
+    public MenuManager createMenuManager( String menuType ) {
+        if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Constructing menu manager for type [" + menuType + "]" );
         }
 
-        if ( menuType.equals( "MAIN" ) )
-        {
+        if ( menuType.equals( "MAIN" ) ) {
             return buildMainMenu();
         }
         throw new NotImplementedException( "No menu manager exists for type [" + menuType + "]" );
@@ -63,11 +57,9 @@ public class MenuFactory implements IMenuFactory, InitializingBean
      * 
      * @return the menu manager for the main screen
      */
-    private final MenuManager buildMainMenu()
-    {
+    private final MenuManager buildMainMenu() {
         // get action manager factory
-        ActionManager mgr = (ActionManager) ContextProvider.instance()
-            .getBean( ActionManager.BEAN_NAME );
+        ActionManager mgr = (ActionManager) ContextProvider.instance().getBean( ActionManager.BEAN_NAME );
 
         MenuManager main = new MenuManager( null );
 
@@ -97,12 +89,11 @@ public class MenuFactory implements IMenuFactory, InitializingBean
     /**
      * Setter for the action manager
      * 
-     * @param actionManager
+     * @param aActionManager
      *            the action manager to set
      */
-    public void setActionManager( IActionManager actionManager )
-    {
-        mActionManager_ = actionManager;
+    public final void setActionManager( IActionManager aActionManager ) {
+        actionManager = aActionManager;
     }
 
 }

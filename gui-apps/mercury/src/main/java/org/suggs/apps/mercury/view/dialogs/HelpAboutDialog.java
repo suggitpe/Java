@@ -19,23 +19,19 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * This dialog will detail some information about the GUI application
- * and will show this to the caller.
+ * This dialog will detail some information about the GUI application and will show this to the caller.
  * 
  * @author suggitpe
  * @version 1.0 15 Oct 2008
  */
-public class HelpAboutDialog extends Dialog
-{
+public class HelpAboutDialog extends Dialog {
 
     /**
      * Constructs a new instance.
      * 
      * @param parentShell
      */
-    public HelpAboutDialog( Shell parentShell )
-    {
-
+    public HelpAboutDialog( Shell parentShell ) {
         super( parentShell );
         parentShell.setText( "Mercury About" );
     }
@@ -46,8 +42,7 @@ public class HelpAboutDialog extends Dialog
      * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createDialogArea( Composite parent )
-    {
+    protected Control createDialogArea( Composite parent ) {
         Composite comp = (Composite) super.createDialogArea( parent );
 
         GridLayout layout = (GridLayout) comp.getLayout();
@@ -74,13 +69,11 @@ public class HelpAboutDialog extends Dialog
     }
 
     /**
-     * This method will manage the creation of the JVM dta that we
-     * present to the user.
+     * This method will manage the creation of the JVM dta that we present to the user.
      * 
      * @return
      */
-    private String createJvmText()
-    {
+    private String createJvmText() {
         return new StringBuffer( "JVM Version " ).append( System.getProperty( "java.version" ) )
             .append( "\n" )
             .append( System.getProperty( "java.vendor" ) )
@@ -93,8 +86,7 @@ public class HelpAboutDialog extends Dialog
      * @see org.eclipse.jface.dialogs.Dialog#createButtonsForButtonBar(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected void createButtonsForButtonBar( Composite parent )
-    {
+    protected void createButtonsForButtonBar( Composite parent ) {
         createButton( parent, IDialogConstants.OK_ID, "OK", true );
     }
 

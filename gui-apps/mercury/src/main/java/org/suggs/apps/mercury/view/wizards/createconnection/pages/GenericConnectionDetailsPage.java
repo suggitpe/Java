@@ -25,26 +25,22 @@ import org.eclipse.swt.widgets.Text;
  * @author suggitpe
  * @version 1.0 5 Nov 2008
  */
-public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
-{
+public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage {
 
     private static final String NFE_ERROR_TEXT = "The value that has been entered for the port number is not a number, please only user whole numbers for this field";
 
     public static final String PAGE_NAME = "GenericConnectionDetailsPage";
 
-    // private static final Log LOG = LogFactory.getLog(
-    // AbstractConnectionDetailsPage.class );
-    private String mHostname_;
-    private int mPort_;
-    private boolean mSecurityEnabled_;
-    private String mUsername_;
-    private String mPassword_;
+    private String hostname;
+    private int port;
+    private boolean securityEnabled;
+    private String username;
+    private String password;
 
     /**
      * Constructs a new instance.
      */
-    public GenericConnectionDetailsPage()
-    {
+    public GenericConnectionDetailsPage() {
         super( PAGE_NAME, "Enter generic connection details" );
         setDescription( "Enter details for the basic connection information for the broker that you wish to connect to" );
         setPageComplete( false );
@@ -54,8 +50,7 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
      * @see org.suggs.apps.mercury.view.wizards.createconnection.pages.AbstractCreateConnectionPage#doBuildControls(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    public void doBuildControls( Composite controlComposite )
-    {
+    public void doBuildControls( Composite controlComposite ) {
         Composite c = new ConnectionDetailsComposite( controlComposite );
         c.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
     }
@@ -64,11 +59,9 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
      * @see org.eclipse.jface.wizard.WizardPage#getNextPage()
      */
     @Override
-    public IWizardPage getNextPage()
-    {
+    public IWizardPage getNextPage() {
         SelectConnectionTypePage sp = (SelectConnectionTypePage) getWizard().getPage( SelectConnectionTypePage.PAGE_NAME );
-        if ( sp.getConnectionType().equals( "IBM_MQ" ) )
-        {
+        if ( sp.getConnectionType().equals( "IBM_MQ" ) ) {
             return getWizard().getPage( IbmMqConnectionDataPage.PAGE_NAME );
         }
         ( (WizardPage) getWizard().getPage( IbmMqConnectionDataPage.PAGE_NAME ) ).setPageComplete( true );
@@ -79,24 +72,18 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
     /**
      * Checking method to see if this page is complete
      */
-    protected void checkIfPageComplete()
-    {
-        if ( mHostname_ == null || mHostname_.length() == 0 || mPort_ == 0 )
-        {
+    protected void checkIfPageComplete() {
+        if ( hostname == null || hostname.length() == 0 || port == 0 ) {
             setPageComplete( false );
             return;
         }
 
-        if ( mSecurityEnabled_ )
-        {
-            if ( mUsername_ == null || mUsername_.length() == 0 )
-            {
+        if ( securityEnabled ) {
+            if ( username == null || username.length() == 0 ) {
                 setPageComplete( false );
                 return;
-
             }
         }
-
         setPageComplete( true );
     }
 
@@ -105,9 +92,8 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
      * 
      * @return the hostname field
      */
-    public String getHostname()
-    {
-        return mHostname_;
+    public final String getHostname() {
+        return hostname;
     }
 
     /**
@@ -115,9 +101,8 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
      * 
      * @return the port number
      */
-    public int getPort()
-    {
-        return mPort_;
+    public final int getPort() {
+        return port;
     }
 
     /**
@@ -125,9 +110,8 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
      * 
      * @return the security enabled flag
      */
-    public boolean isSecurityEnabled()
-    {
-        return mSecurityEnabled_;
+    public final boolean isSecurityEnabled() {
+        return securityEnabled;
     }
 
     /**
@@ -135,9 +119,8 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
      * 
      * @return the user name
      */
-    public String getUsername()
-    {
-        return mUsername_;
+    public final String getUsername() {
+        return username;
     }
 
     /**
@@ -145,9 +128,8 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
      * 
      * @return the password field
      */
-    public String getPassword()
-    {
-        return mPassword_;
+    public final String getPassword() {
+        return password;
     }
 
     // ##################################
@@ -159,61 +141,52 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
      * @author suggitpe
      * @version 1.0 5 Nov 2008
      */
-    private class ConnectionDetailsComposite extends Composite
-    {
+    private class ConnectionDetailsComposite extends Composite {
 
         /**
          * Constructs a new instance.
          * 
          * @param comp
          */
-        public ConnectionDetailsComposite( Composite comp )
-        {
+        public ConnectionDetailsComposite( Composite comp ) {
             super( comp, SWT.NONE );
             setLayout( new GridLayout( 2, false ) );
 
             // create hostname field
             new Label( this, SWT.NONE ).setText( "Hostname:" );
-            final Text hostname = new Text( this, SWT.BORDER );
-            hostname.setLayoutData( TEXT_BOX_STYLE );
-            hostname.addModifyListener( new ModifyListener()
-            {
+            final Text hostnameText = new Text( this, SWT.BORDER );
+            hostnameText.setLayoutData( TEXT_BOX_STYLE );
+            hostnameText.addModifyListener( new ModifyListener() {
 
-                public void modifyText( ModifyEvent e )
-                {
-                    mHostname_ = hostname.getText();
+                public void modifyText( ModifyEvent e ) {
+                    hostname = hostnameText.getText();
                     checkIfPageComplete();
                 }
             } );
 
             // port number
             new Label( this, SWT.NONE ).setText( "Port number:" );
-            final Text portNum = new Text( this, SWT.BORDER );
-            portNum.setLayoutData( TEXT_BOX_STYLE );
-            portNum.addModifyListener( new ModifyListener()
-            {
+            final Text portNumText = new Text( this, SWT.BORDER );
+            portNumText.setLayoutData( TEXT_BOX_STYLE );
+            portNumText.addModifyListener( new ModifyListener() {
 
-                public void modifyText( ModifyEvent e )
-                {
+                public void modifyText( ModifyEvent e ) {
 
-                    String p = portNum.getText();
-                    if ( p == null || p.equals( "" ) )
-                    {
-                        mPort_ = 0;
+                    String p = portNumText.getText();
+                    if ( p == null || p.equals( "" ) ) {
+                        port = 0;
                         return;
                     }
 
                     int ptNum = 0;
-                    try
-                    {
+                    try {
                         ptNum = Integer.parseInt( p );
-                        mPort_ = ptNum;
+                        port = ptNum;
                     }
-                    catch ( NumberFormatException nfe )
-                    {
-                        mPort_ = 0;
+                    catch ( NumberFormatException nfe ) {
+                        port = 0;
                         MessageDialog.openError( getShell(), "Number Format Error", NFE_ERROR_TEXT );
-                        portNum.setText( "" );
+                        portNumText.setText( "" );
                     }
                     checkIfPageComplete();
                 }
@@ -225,58 +198,50 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage
 
             // security username
             new Label( this, SWT.NONE ).setText( "Username:" );
-            final Text username = new Text( this, SWT.BORDER | SWT.READ_ONLY );
-            username.setLayoutData( TEXT_BOX_STYLE );
-            username.setEnabled( false );
-            username.addModifyListener( new ModifyListener()
-            {
+            final Text usernameText = new Text( this, SWT.BORDER | SWT.READ_ONLY );
+            usernameText.setLayoutData( TEXT_BOX_STYLE );
+            usernameText.setEnabled( false );
+            usernameText.addModifyListener( new ModifyListener() {
 
-                public void modifyText( ModifyEvent e )
-                {
-                    mUsername_ = username.getText();
+                public void modifyText( ModifyEvent e ) {
+                    username = usernameText.getText();
                     checkIfPageComplete();
                 }
             } );
 
             new Label( this, SWT.NONE ).setText( "Password:" );
-            final Text password = new Text( this, SWT.BORDER | SWT.READ_ONLY | SWT.PASSWORD );
-            password.setLayoutData( TEXT_BOX_STYLE );
-            password.setEnabled( false );
-            password.addModifyListener( new ModifyListener()
-            {
+            final Text passwordText = new Text( this, SWT.BORDER | SWT.READ_ONLY | SWT.PASSWORD );
+            passwordText.setLayoutData( TEXT_BOX_STYLE );
+            passwordText.setEnabled( false );
+            passwordText.addModifyListener( new ModifyListener() {
 
-                public void modifyText( ModifyEvent e )
-                {
-                    mPassword_ = password.getText();
+                public void modifyText( ModifyEvent e ) {
+                    password = passwordText.getText();
                 }
             } );
 
             // this is down here for obvious reasons
-            setSecurity.addSelectionListener( new SelectionAdapter()
-            {
+            setSecurity.addSelectionListener( new SelectionAdapter() {
 
                 /**
                  * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
                  */
                 @Override
-                public void widgetSelected( SelectionEvent e )
-                {
-                    mSecurityEnabled_ = setSecurity.getSelection();
-                    if ( mSecurityEnabled_ )
-                    {
-                        username.setEditable( true );
-                        username.setEnabled( true );
-                        password.setEditable( true );
-                        password.setEnabled( true );
+                public void widgetSelected( SelectionEvent e ) {
+                    securityEnabled = setSecurity.getSelection();
+                    if ( securityEnabled ) {
+                        usernameText.setEditable( true );
+                        usernameText.setEnabled( true );
+                        passwordText.setEditable( true );
+                        passwordText.setEnabled( true );
                     }
-                    else
-                    {
-                        username.setEditable( false );
-                        username.setEnabled( false );
-                        username.setText( "" );
-                        password.setEditable( false );
-                        password.setEnabled( false );
-                        password.setText( "" );
+                    else {
+                        usernameText.setEditable( false );
+                        usernameText.setEnabled( false );
+                        usernameText.setText( "" );
+                        passwordText.setEditable( false );
+                        passwordText.setEnabled( false );
+                        passwordText.setText( "" );
                     }
                     checkIfPageComplete();
                 }

@@ -43,19 +43,16 @@ import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 /**
- * Implementation of the persistence layer interface using an XML file
- * as its storage layer
+ * Implementation of the persistence layer interface using an XML file as its storage layer
  * 
  * @author suggitpe
  * @version 1.0 27 Jul 2007
  */
 @SuppressWarnings("restriction")
-public class XmlPersistenceLayer implements IPersistenceLayer
-{
+public class XmlPersistenceLayer implements IPersistenceLayer {
 
     private static final Log LOG = LogFactory.getLog( XmlPersistenceLayer.class );
-    private static final String MERCURY_HOME_DIR = System.getProperty( "user.home" )
-                                                   + "/.mercury_old";
+    private static final String MERCURY_HOME_DIR = System.getProperty( "user.home" ) + "/.mercury_old";
     private static final File MERCURY_FILE = new File( MERCURY_HOME_DIR + "/connectionStore.xml" );
 
     private static final String CONNECTION = "connection";
@@ -73,19 +70,15 @@ public class XmlPersistenceLayer implements IPersistenceLayer
     /**
      * @see org.suggs.apps.mercury_old.model.connection.store.IPersistenceLayer#readPersistenceLayer()
      */
-    public Map<String, IConnectionDetails> readPersistenceLayer()
-                    throws MercuryConnectionStoreException
-    {
-        // quicklly check that the file is not just an empty file
-        if ( MERCURY_FILE.length() == 0 )
-        {
+    public Map<String, IConnectionDetails> readPersistenceLayer() throws MercuryConnectionStoreException {
+        // quickly check that the file is not just an empty file
+        if ( MERCURY_FILE.length() == 0 ) {
             LOG.warn( "Mercury file is empty assuming worst case and ignoring it" );
             return null;
         }
 
         Map<String, IConnectionDetails> ret = new HashMap<String, IConnectionDetails>();
-        try
-        {
+        try {
             XmlPersistenceLayerHandler handler = new XmlPersistenceLayerHandler();
             DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
             builderFactory.setValidating( true );
@@ -98,8 +91,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
             Document d = builder.parse( MERCURY_FILE );
 
             NodeList list = d.getElementsByTagName( CONNECTION );
-            for ( int i = 0; i < list.getLength(); ++i )
-            {
+            for ( int i = 0; i < list.getLength(); ++i ) {
                 Node c = list.item( i );
                 NamedNodeMap atts = c.getAttributes();
                 String name = atts.getNamedItem( NAME ).getTextContent();
@@ -109,41 +101,31 @@ public class XmlPersistenceLayer implements IPersistenceLayer
 
                 ConnectionDetails connDtls = new ConnectionDetails( name, type );
 
-                for ( int j = 0; j < childList.getLength(); ++j )
-                {
+                for ( int j = 0; j < childList.getLength(); ++j ) {
                     Node n = childList.item( j );
-                    if ( n.getTextContent() != null )
-                    {
-                        if ( n.getNodeName().equals( HOSTNAME ) )
-                        {
+                    if ( n.getTextContent() != null ) {
+                        if ( n.getNodeName().equals( HOSTNAME ) ) {
                             connDtls.setHostname( n.getTextContent() );
                         }
-                        else if ( n.getNodeName().equals( PORT ) )
-                        {
+                        else if ( n.getNodeName().equals( PORT ) ) {
                             connDtls.setPort( n.getTextContent() );
                         }
-                        else if ( n.getNodeName().equals( METADATA ) )
-                        {
+                        else if ( n.getNodeName().equals( METADATA ) ) {
                             Map<String, String> metadata = new HashMap<String, String>();
                             NodeList meta = n.getChildNodes();
-                            for ( int k = 0; k < meta.getLength(); ++k )
-                            {
+                            for ( int k = 0; k < meta.getLength(); ++k ) {
                                 Node g = meta.item( k );
-                                metadata.put( g.getAttributes()
-                                    .getNamedItem( NAME )
-                                    .getTextContent(), g.getTextContent() );
+                                metadata.put( g.getAttributes().getNamedItem( NAME ).getTextContent(),
+                                              g.getTextContent() );
 
                             }
                             connDtls.setMetaData( metadata );
                         }
-                        else if ( n.getNodeName().equals( CONN_FACTS_NODE ) )
-                        {
+                        else if ( n.getNodeName().equals( CONN_FACTS_NODE ) ) {
                             NodeList factList = n.getChildNodes();
-                            if ( factList.getLength() > 0 )
-                            {
+                            if ( factList.getLength() > 0 ) {
                                 Map<String, Set<String>> factories = new HashMap<String, Set<String>>();
-                                for ( int f = 0; f < factList.getLength(); ++f )
-                                {
+                                for ( int f = 0; f < factList.getLength(); ++f ) {
                                     Node fact = factList.item( f );
                                     String factType = fact.getAttributes()
                                         .getNamedItem( TYPE )
@@ -151,8 +133,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
                                     // first make sure that we have a
                                     // map entry for this type of
                                     // factory
-                                    if ( !( factories.containsKey( factType ) ) )
-                                    {
+                                    if ( !( factories.containsKey( factType ) ) ) {
                                         factories.put( factType, new TreeSet<String>() );
                                     }
                                     // Then we put the destination in
@@ -162,14 +143,11 @@ public class XmlPersistenceLayer implements IPersistenceLayer
                                 connDtls.setConnectionFactories( factories );
                             }
                         }
-                        else if ( n.getNodeName().equals( DESTINATIONS_NODE ) )
-                        {
+                        else if ( n.getNodeName().equals( DESTINATIONS_NODE ) ) {
                             NodeList destList = n.getChildNodes();
-                            if ( destList.getLength() > 0 )
-                            {
+                            if ( destList.getLength() > 0 ) {
                                 Map<String, Set<String>> destinations = new HashMap<String, Set<String>>();
-                                for ( int z = 0; z < destList.getLength(); ++z )
-                                {
+                                for ( int z = 0; z < destList.getLength(); ++z ) {
                                     Node dest = destList.item( z );
                                     String destType = dest.getAttributes()
                                         .getNamedItem( TYPE )
@@ -177,8 +155,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
                                     // first make sure that we have a
                                     // map entry for this type of
                                     // destination
-                                    if ( !( destinations.containsKey( destType ) ) )
-                                    {
+                                    if ( !( destinations.containsKey( destType ) ) ) {
                                         destinations.put( destType, new TreeSet<String>() );
                                     }
                                     // Then we put the destination in
@@ -196,16 +173,13 @@ public class XmlPersistenceLayer implements IPersistenceLayer
 
             return ret;
         }
-        catch ( SAXException se )
-        {
+        catch ( SAXException se ) {
             throw new MercuryConnectionStoreException( se );
         }
-        catch ( ParserConfigurationException pce )
-        {
+        catch ( ParserConfigurationException pce ) {
             throw new MercuryConnectionStoreException( pce );
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             throw new MercuryConnectionStoreException( ioe );
         }
     }
@@ -214,8 +188,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
      * @see org.suggs.apps.mercury_old.model.connection.store.IPersistenceLayer#savePersistenceLayer(java.util.Map)
      */
     public void savePersistenceLayer( Map<String, IConnectionDetails> aMap )
-                    throws MercuryConnectionStoreException
-    {
+                    throws MercuryConnectionStoreException {
         LOG.info( "Saving prsistence layer" );
 
         DOMImplementation impl = DOMImplementationImpl.getDOMImplementation();
@@ -226,8 +199,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer
 
         // we do this to get a sorted set of key values
         SortedSet<String> keys = new TreeSet<String>( aMap.keySet() );
-        for ( String key : keys )
-        {
+        for ( String key : keys ) {
             LOG.debug( "Building key [" + key + "]" );
             IConnectionDetails dtls = aMap.get( key );
 
@@ -244,14 +216,12 @@ public class XmlPersistenceLayer implements IPersistenceLayer
             connElem.appendChild( portElem );
 
             Map<String, String> m = dtls.getMetaData();
-            if ( m.size() > 0 )
-            {
+            if ( m.size() > 0 ) {
                 Element metadataElem = newDoc.createElement( METADATA );
-                for ( String s : m.keySet() )
-                {
+                for ( Map.Entry<String, String> entry : m.entrySet() ) {
                     Element dataElem = newDoc.createElement( DATA );
-                    dataElem.setAttribute( NAME, s );
-                    dataElem.setTextContent( m.get( s ) );
+                    dataElem.setAttribute( NAME, entry.getKey() );
+                    dataElem.setTextContent( entry.getValue() );
                     metadataElem.appendChild( dataElem );
                 }
                 connElem.appendChild( metadataElem );
@@ -259,11 +229,9 @@ public class XmlPersistenceLayer implements IPersistenceLayer
 
             Map<String, Set<String>> factMap = dtls.getConnectionFactories();
             Element connFactsElem = newDoc.createElement( CONN_FACTS_NODE );
-            for ( String factType : factMap.keySet() )
-            {
+            for ( String factType : factMap.keySet() ) {
                 Set<String> facts = factMap.get( factType );
-                for ( String f : facts )
-                {
+                for ( String f : facts ) {
                     Element factoryElem = newDoc.createElement( CONN_FACT );
                     factoryElem.setAttribute( TYPE, factType );
                     factoryElem.setTextContent( f );
@@ -274,11 +242,9 @@ public class XmlPersistenceLayer implements IPersistenceLayer
 
             Map<String, Set<String>> destMap = dtls.getDestinations();
             Element destsElem = newDoc.createElement( DESTINATIONS_NODE );
-            for ( String destType : destMap.keySet() )
-            {
+            for ( String destType : destMap.keySet() ) {
                 Set<String> dests = destMap.get( destType );
-                for ( String d : dests )
-                {
+                for ( String d : dests ) {
                     Element destinationElem = newDoc.createElement( DESTINATION );
                     destinationElem.setAttribute( TYPE, destType );
                     destinationElem.setTextContent( d );
@@ -291,12 +257,10 @@ public class XmlPersistenceLayer implements IPersistenceLayer
         }
 
         String xml = null;
-        try
-        {
+        try {
             xml = serializeXmlDoc( newDoc );
         }
-        catch ( MercuryException me )
-        {
+        catch ( MercuryException me ) {
             throw new MercuryConnectionStoreException( "Failed to serialise xml doc", me );
         }
 
@@ -316,14 +280,11 @@ public class XmlPersistenceLayer implements IPersistenceLayer
      * @throws MercuryConnectionStoreException
      *             if there are any issues in the persistence
      */
-    public static final void persistClob( String aClob, File aFile )
-                    throws MercuryConnectionStoreException
-    {
+    public static final void persistClob( String aClob, File aFile ) throws MercuryConnectionStoreException {
         // now we persiste the new values to the persistent xml file
         FileOutputStream out = null;
         FileChannel chan = null;
-        try
-        {
+        try {
             LOG.debug( "Overwriting existing xml persistence layer with new file at ["
                        + aFile.getCanonicalPath() + "]" );
             out = new FileOutputStream( aFile );
@@ -338,26 +299,20 @@ public class XmlPersistenceLayer implements IPersistenceLayer
 
             chan.write( buff );
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             throw new MercuryConnectionStoreException( ioe );
         }
-        finally
-        {
-            try
-            {
-                if ( chan != null )
-                {
+        finally {
+            try {
+                if ( chan != null ) {
                     chan.close();
                 }
 
-                if ( out != null )
-                {
+                if ( out != null ) {
                     out.close();
                 }
             }
-            catch ( IOException ioe )
-            {
+            catch ( IOException ioe ) {
                 LOG.warn( "Caught IOException when closing file channel [" + ioe.getMessage() + "]" );
             }
         }
@@ -366,43 +321,34 @@ public class XmlPersistenceLayer implements IPersistenceLayer
     /**
      * @see org.suggs.apps.mercury_old.model.connection.store.IPersistenceLayer#verifyPersistenceLayer()
      */
-    public final void verifyPersistenceLayer()
-    {
+    public final void verifyPersistenceLayer() {
         // check that the persistence dir exists
         File dir = new File( MERCURY_HOME_DIR );
-        if ( !( dir.exists() ) )
-        {
+        if ( !( dir.exists() ) ) {
             LOG.warn( "Mercury home dir does not exist or is not writable ... assuming firt application execution" );
             LOG.info( "Creating MERCURY xml persistence store dir [" + dir.getAbsolutePath() + "]" );
-            if ( !( dir.mkdir() ) )
-            {
-                throw new IllegalStateException( "Failed to create persistence dir ["
-                                                 + MERCURY_HOME_DIR + "]" );
+            if ( !( dir.mkdir() ) ) {
+                throw new IllegalStateException( "Failed to create persistence dir [" + MERCURY_HOME_DIR
+                                                 + "]" );
             }
             createPersistenceFile();
         }
-        else
-        {
-            if ( !( dir.isDirectory() ) || !( dir.canWrite() ) )
-            {
-                String err = "Cannot write to the mercury persistence directory ["
-                             + MERCURY_HOME_DIR + "]";
+        else {
+            if ( !( dir.isDirectory() ) || !( dir.canWrite() ) ) {
+                String err = "Cannot write to the mercury persistence directory [" + MERCURY_HOME_DIR + "]";
                 LOG.error( err );
                 throw new IllegalStateException( err );
             }
         }
 
         // now check that the actual file exists
-        if ( !( MERCURY_FILE.exists() ) )
-        {
+        if ( !( MERCURY_FILE.exists() ) ) {
             createPersistenceFile();
         }
-        else
-        {
-            if ( !( MERCURY_FILE.isFile() ) || !( MERCURY_FILE.canWrite() ) )
-            {
-                String err = "Cannot write to mercury persistence layer ["
-                             + MERCURY_FILE.getAbsolutePath() + "]";
+        else {
+            if ( !( MERCURY_FILE.isFile() ) || !( MERCURY_FILE.canWrite() ) ) {
+                String err = "Cannot write to mercury persistence layer [" + MERCURY_FILE.getAbsolutePath()
+                             + "]";
                 LOG.error( err );
                 throw new IllegalStateException( err );
             }
@@ -418,19 +364,16 @@ public class XmlPersistenceLayer implements IPersistenceLayer
      *            the document to serialize
      * @return the xml document as a string
      */
-    private final String serializeXmlDoc( Document aDocument ) throws MercuryException
-    {
+    private final String serializeXmlDoc( Document aDocument ) throws MercuryException {
         ByteArrayOutputStream strm = new ByteArrayOutputStream();
         OutputFormat out = new OutputFormat( aDocument );
         out.setIndenting( true );
         XMLSerializer serializer = new XMLSerializer( strm, out );
 
-        try
-        {
+        try {
             serializer.serialize( aDocument );
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             throw new MercuryException( ioe );
         }
         return strm.toString();
@@ -439,19 +382,15 @@ public class XmlPersistenceLayer implements IPersistenceLayer
     /**
      * Create the underlying xml persistence file
      */
-    private static final void createPersistenceFile()
-    {
+    private static final void createPersistenceFile() {
         LOG.info( "Creating MERCURY xml persistence store [" + MERCURY_FILE.getAbsolutePath() + "]" );
-        try
-        {
-            if ( !( MERCURY_FILE.createNewFile() ) )
-            {
+        try {
+            if ( !( MERCURY_FILE.createNewFile() ) ) {
                 throw new IllegalStateException( "Failed to create the persistence xml file ["
                                                  + MERCURY_FILE.getAbsolutePath() + "]" );
             }
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             LOG.error( "Failed to create persistence file [" + ioe.getMessage() + "]" );
             throw new IllegalStateException( ioe );
         }
