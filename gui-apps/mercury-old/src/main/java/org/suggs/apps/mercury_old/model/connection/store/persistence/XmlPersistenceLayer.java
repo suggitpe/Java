@@ -241,11 +241,11 @@ public class XmlPersistenceLayer implements IPersistenceLayer {
 
             Map<String, Set<String>> destMap = dtls.getDestinations();
             Element destsElem = newDoc.createElement( DESTINATIONS_NODE );
-            for ( String destType : destMap.keySet() ) {
-                Set<String> dests = destMap.get( destType );
-                for ( String d : dests ) {
+            // for ( String destType : destMap.keySet() ) {
+            for ( Map.Entry<String, Set<String>> destEntry : destMap.entrySet() ) {
+                for ( String d : destEntry.getValue() ) {
                     Element destinationElem = newDoc.createElement( DESTINATION );
-                    destinationElem.setAttribute( TYPE, destType );
+                    destinationElem.setAttribute( TYPE, destEntry.getKey() );
                     destinationElem.setTextContent( d );
                     destsElem.appendChild( destinationElem );
                 }
