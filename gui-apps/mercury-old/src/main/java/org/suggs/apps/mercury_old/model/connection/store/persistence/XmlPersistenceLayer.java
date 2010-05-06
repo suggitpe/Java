@@ -229,11 +229,10 @@ public class XmlPersistenceLayer implements IPersistenceLayer {
 
             Map<String, Set<String>> factMap = dtls.getConnectionFactories();
             Element connFactsElem = newDoc.createElement( CONN_FACTS_NODE );
-            for ( String factType : factMap.keySet() ) {
-                Set<String> facts = factMap.get( factType );
-                for ( String f : facts ) {
+            for ( Map.Entry<String, Set<String>> factType : factMap.entrySet() ) {
+                for ( String f : factType.getValue() ) {
                     Element factoryElem = newDoc.createElement( CONN_FACT );
-                    factoryElem.setAttribute( TYPE, factType );
+                    factoryElem.setAttribute( TYPE, factType.getKey() );
                     factoryElem.setTextContent( f );
                     connFactsElem.appendChild( factoryElem );
                 }
