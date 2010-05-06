@@ -16,21 +16,19 @@ import java.util.Map;
  * @author suggitpe
  * @version 1.0 9 Aug 2007
  */
-public class ConnectionParameters implements IConnectionParameters
-{
+public class ConnectionParameters implements IConnectionParameters {
 
-    private EConnectionType mType_;
-    private String mHostName_;
-    private String mPort_;
-    private Map<String, String> mMetaData_ = new HashMap<String, String>();
-    private String mConnectionFactory_;
+    private EConnectionType type;
+    private String hostName;
+    private String port;
+    private Map<String, String> metaData = new HashMap<String, String>();
+    private String connectionFactory;
 
     /**
      * Constructs a new instance.
      */
     @SuppressWarnings("unused")
-    private ConnectionParameters()
-    {
+    private ConnectionParameters() {
         super();
     }
 
@@ -43,55 +41,49 @@ public class ConnectionParameters implements IConnectionParameters
      * @param aMetadata
      * @param aConnectionFactory
      */
-    public ConnectionParameters( EConnectionType aType, String aHostname, String aPort, Map<String, String> aMetadata,
-                                 String aConnectionFactory )
-    {
+    public ConnectionParameters( EConnectionType aType, String aHostname, String aPort,
+                                 Map<String, String> aMetadata, String aConnectionFactory ) {
         super();
-        mType_ = aType;
-        mHostName_ = aHostname;
-        mPort_ = aPort;
-        mMetaData_ = aMetadata;
-        mConnectionFactory_ = aConnectionFactory;
+        type = aType;
+        hostName = aHostname;
+        port = aPort;
+        metaData = aMetadata;
+        connectionFactory = aConnectionFactory;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getType()
      */
-    public EConnectionType getType()
-    {
-        return mType_;
+    public EConnectionType getType() {
+        return type;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getHostname()
      */
-    public String getHostname()
-    {
-        return mHostName_;
+    public String getHostname() {
+        return hostName;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getPort()
      */
-    public String getPort()
-    {
-        return mPort_;
+    public String getPort() {
+        return port;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getMetaData()
      */
-    public Map<String, String> getMetaData()
-    {
-        return mMetaData_;
+    public Map<String, String> getMetaData() {
+        return metaData;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getConnectionFactory()
      */
-    public String getConnectionFactory()
-    {
-        return mConnectionFactory_;
+    public String getConnectionFactory() {
+        return connectionFactory;
     }
 
 }

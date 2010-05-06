@@ -36,8 +36,7 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 9 Jul 2007
  */
-public class ConnectionStorePanel extends AbstractGridbagPanel implements InitializingBean, Observer
-{
+public class ConnectionStorePanel extends AbstractGridbagPanel implements InitializingBean, Observer {
 
     private static final Log LOG = LogFactory.getLog( ConnectionStorePanel.class );
     private ConnectionStore mConnectionStore_;
@@ -45,20 +44,19 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
     // private static final String[] TITLES = new String[] { "Name",
     // "Value" };
 
-    private final JTextField mStatus = new JTextField();
-    private final JTextField mName_ = new JTextField();
-    private final JComboBox mType_ = new JComboBox();
-    private final JTextField mServer_ = new JTextField();
-    private final JTextField mPort_ = new JTextField();
-    private final JTable mMetaData_ = new JTable();
-    private final JScrollPane mMetaDataPane_ = new JScrollPane( mMetaData_ );
+    private final JTextField statusText = new JTextField();
+    private final JTextField nameText = new JTextField();
+    private final JComboBox typeCombo = new JComboBox();
+    private final JTextField serverText = new JTextField();
+    private final JTextField portText = new JTextField();
+    private final JTable metaDataTable = new JTable();
+    private final JScrollPane metaDataPane = new JScrollPane( metaDataTable );
 
     /**
      * Constructs a new instance.
      */
     @SuppressWarnings("unused")
-    private ConnectionStorePanel()
-    {
+    private ConnectionStorePanel() {
         throw new IllegalStateException();
     }
 
@@ -66,11 +64,9 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
      * Constructs a new instance.
      * 
      * @param aConnectionStore
-     *            the connection store that this class will be
-     *            observing
+     *            the connection store that this class will be observing
      */
-    public ConnectionStorePanel( ConnectionStore aConnectionStore )
-    {
+    public ConnectionStorePanel( ConnectionStore aConnectionStore ) {
         super( "Connection Store" );
 
         // set up the observable
@@ -84,8 +80,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
      * @param aInitialStatus
      *            the initial status of the row
      */
-    public void initialise( String aInitialStatus )
-    {
+    public void initialise( String aInitialStatus ) {
         int row = 1;
         EmptyBorder eb = new EmptyBorder( 0, 0, 0, 10 );
 
@@ -94,10 +89,10 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
         lStatus.setBorder( eb );
         addComponent( lStatus, row, 1 );
 
-        mStatus.setText( aInitialStatus );
-        mStatus.setEditable( false );
-        mStatus.setPreferredSize( MEDIUM_FIELD );
-        addFilledComponent( mStatus, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
+        statusText.setText( aInitialStatus );
+        statusText.setEditable( false );
+        statusText.setPreferredSize( MEDIUM_FIELD );
+        addFilledComponent( statusText, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
 
         // add in the connection name
         final JLabel lName = new JLabel( "Name:" );
@@ -105,58 +100,56 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
 
         addComponent( lName, row, 1 );
 
-        mName_.setEditable( false );
-        mName_.setPreferredSize( LONG_FIELD );
-        addFilledComponent( mName_, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
+        nameText.setEditable( false );
+        nameText.setPreferredSize( LONG_FIELD );
+        addFilledComponent( nameText, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
 
         // add in the connection type
         final JLabel lType = new JLabel( "Type:" );
         lType.setBorder( eb );
         addComponent( lType, row, 1 );
 
-        mType_.setEditable( true );
-        mType_.addItem( null );
-        mType_.addItem( EConnectionType.EMS );
-        mType_.addItem( EConnectionType.MQ );
-        mType_.setPreferredSize( MEDIUM_FIELD );
-        addComponent( mType_, row++, 2 );
+        typeCombo.setEditable( true );
+        typeCombo.addItem( null );
+        typeCombo.addItem( EConnectionType.EMS );
+        typeCombo.addItem( EConnectionType.MQ );
+        typeCombo.setPreferredSize( MEDIUM_FIELD );
+        addComponent( typeCombo, row++, 2 );
 
         // add in the server
         final JLabel lServer = new JLabel( "Server:" );
         lServer.setBorder( eb );
         addComponent( lServer, row, 1 );
 
-        mServer_.setPreferredSize( LONG_FIELD );
-        addFilledComponent( mServer_, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
+        serverText.setPreferredSize( LONG_FIELD );
+        addFilledComponent( serverText, row++, 2, 3, 1, GridBagConstraints.HORIZONTAL );
 
         // add in the port
         final JLabel lPort = new JLabel( "Port:" );
         lServer.setBorder( eb );
         addComponent( lPort, row, 1 );
 
-        mPort_.setPreferredSize( MEDIUM_FIELD );
-        addFilledComponent( mPort_, row++, 2, 1, 1, GridBagConstraints.HORIZONTAL );
+        portText.setPreferredSize( MEDIUM_FIELD );
+        addFilledComponent( portText, row++, 2, 1, 1, GridBagConstraints.HORIZONTAL );
 
         final JLabel lMetaData = new JLabel( "MetaData:" );
         lMetaData.setBorder( eb );
         addComponent( lMetaData, row, 1 );
 
         buildMetaDataTable();
-        addFilledComponent( mMetaDataPane_, row++, 2, 1, 1, GridBagConstraints.HORIZONTAL );
+        addFilledComponent( metaDataPane, row++, 2, 1, 1, GridBagConstraints.HORIZONTAL );
     }
 
     /**
-     * Abstracted out the creation of the metadata table away from the
-     * main gui initialisation
+     * Abstracted out the creation of the metadata table away from the main gui initialisation
      */
-    private void buildMetaDataTable()
-    {
+    private void buildMetaDataTable() {
         // set up the scroll pane
-        mMetaDataPane_.doLayout();
+        metaDataPane.doLayout();
 
         // now set up the table
-        mMetaData_.setColumnSelectionAllowed( true );
-        mMetaData_.setCellSelectionEnabled( true );
+        metaDataTable.setColumnSelectionAllowed( true );
+        metaDataTable.setCellSelectionEnabled( true );
 
         // name column
         TableColumn name = new TableColumn();
@@ -166,8 +159,8 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
         TableColumn value = new TableColumn();
         value.setHeaderValue( "Value" );
 
-        mMetaData_.addColumn( name );
-        mMetaData_.addColumn( value );
+        metaDataTable.addColumn( name );
+        metaDataTable.addColumn( value );
     }
 
     /**
@@ -175,52 +168,47 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
      * 
      * @return a new JMS connection details object
      * @throws MercuryConnectionStoreException
-     *             if the data collected is not enough for a
-     *             connection
+     *             if the data collected is not enough for a connection
      */
-    public IConnectionDetails getConnectionDetails() throws MercuryConnectionStoreException
-    {
-        if ( mServer_.getText().length() == 0 || mPort_.getText().length() == 0 || mType_.getSelectedItem() == null )
-        {
+    public IConnectionDetails getConnectionDetails() throws MercuryConnectionStoreException {
+        if ( serverText.getText().length() == 0 || portText.getText().length() == 0
+             || typeCombo.getSelectedItem() == null ) {
             throw new MercuryConnectionStoreException( "Invalid data in the connection store fields" );
         }
 
-        return new ConnectionDetails( mName_.getText(), (EConnectionType) mType_.getSelectedItem(), mServer_.getText(), mPort_.getText() );
+        return new ConnectionDetails( nameText.getText(),
+                                      (EConnectionType) typeCombo.getSelectedItem(),
+                                      serverText.getText(),
+                                      portText.getText() );
     }
 
     /**
      * LOad the details into the panel (populates the text fields)
      * 
      * @param aDtls
-     *            the jms connection detaiols object from which we can
-     *            populate the panel components
+     *            the jms connection detaiols object from which we can populate the panel components
      */
-    public void loadValues( IConnectionDetails aDtls )
-    {
-        mName_.setText( aDtls.getName() );
-        mServer_.setText( aDtls.getHostname() );
-        mPort_.setText( aDtls.getPort() );
-        mType_.setSelectedItem( aDtls.getType() );
+    public void loadValues( IConnectionDetails aDtls ) {
+        nameText.setText( aDtls.getName() );
+        serverText.setText( aDtls.getHostname() );
+        portText.setText( aDtls.getPort() );
+        typeCombo.setSelectedItem( aDtls.getType() );
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
+    public void afterPropertiesSet() throws Exception {
         Assert.notNull( mConnectionStore_, "Must set the connection store into the connection manager panel" );
     }
 
     /**
-     * @see java.util.Observer#update(java.util.Observable,
-     *      java.lang.Object)
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
-    public void update( Observable aObserved, Object aObj )
-    {
+    public void update( Observable aObserved, Object aObj ) {
         LOG.info( "Observable has changed [" + aObserved.getClass().getName() + "]" );
-        if ( aObserved instanceof IConnectionStore )
-        {
-            mStatus.setText( ( (IConnectionStore) aObserved ).getState() );
+        if ( aObserved instanceof IConnectionStore ) {
+            statusText.setText( ( (IConnectionStore) aObserved ).getState() );
         }
     }
 
@@ -229,8 +217,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
      * 
      * @return the connection store
      */
-    public ConnectionStore getConnectionStore()
-    {
+    public ConnectionStore getConnectionStore() {
         return mConnectionStore_;
     }
 
@@ -240,8 +227,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
      * @param aConnStr
      *            the connection store to set
      */
-    public void setConnectionStore( ConnectionStore aConnStr )
-    {
+    public void setConnectionStore( ConnectionStore aConnStr ) {
         mConnectionStore_ = aConnStr;
     }
 }

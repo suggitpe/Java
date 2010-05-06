@@ -87,9 +87,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
         try {
             IConnectionManager connMgr = ConnectionManager.instance();
             String b = connMgr.getConnectionDump();
-            Node elem = xsltUtil.transformXmlToDom( b.getBytes(), XSLT );
-            return elem;
-
+            return xsltUtil.transformXmlToDom( b.getBytes(), XSLT );
         }
         catch ( ConnectionStoreException cse ) {
             throw new IllegalStateException( "Failed to retrieve connection store details from the internal connection store",
@@ -181,7 +179,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
      * @author suggitpe
      * @version 1.0 26 Nov 2008
      */
-    class ConnectionTreeLabelProvider extends LabelProvider {
+    static class ConnectionTreeLabelProvider extends LabelProvider {
 
         /**
          * @see org.eclipse.jface.viewers.ILabelProvider#getText(java.lang.Object)
@@ -204,7 +202,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
      * @author suggitpe
      * @version 1.0 26 Nov 2008
      */
-    class ConnectionTreeContentProvider implements ITreeContentProvider {
+    static class ConnectionTreeContentProvider implements ITreeContentProvider {
 
         /**
          * This is called every time it needs the child elements of an object.

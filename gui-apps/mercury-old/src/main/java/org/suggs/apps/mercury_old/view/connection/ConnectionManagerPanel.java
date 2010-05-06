@@ -28,36 +28,24 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * This class will manage the user interaction with the Connection
- * manager object.
+ * This class will manage the user interaction with the Connection manager object.
  * 
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public class ConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean, Observer
-{
+public class ConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean, Observer {
 
     private static final Log LOG = LogFactory.getLog( ConnectionManagerPanel.class );
 
-    private ConnectionManager mConnMgr_;
+    private ConnectionManager connMgr;
 
-    private final JTextField mStatus_ = new JTextField();
-    private final JComboBox mType_ = new JComboBox();
-    private final JComboBox mConnectionFactories_ = new JComboBox();
-    private final JComboBox mDestinations_ = new JComboBox();
+    private final JTextField status = new JTextField();
+    private final JComboBox type = new JComboBox();
+    private final JComboBox connectionFactories = new JComboBox();
+    private final JComboBox destinations = new JComboBox();
 
-    private Map<String, Set<String>> mAvailableConnFacts_;
-    private Map<String, Set<String>> mAvailableDests_;
-
-    /**
-     * Constructs a new instance. This is hidden as it is silly to
-     * have an observer with nothing to observe.
-     */
-    @SuppressWarnings("unused")
-    private ConnectionManagerPanel()
-    {
-        throw new IllegalStateException();
-    }
+    private Map<String, Set<String>> availableConnFacts;
+    private Map<String, Set<String>> availableDests;
 
     /**
      * Constructs a new instance.
@@ -65,11 +53,10 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
      * @param aConnectionManager
      *            The connection manager that we will be observing
      */
-    public ConnectionManagerPanel( ConnectionManager aConnectionManager )
-    {
+    public ConnectionManagerPanel( ConnectionManager aConnectionManager ) {
         super( "Connection Manager" );
-        mConnMgr_ = aConnectionManager;
-        mConnMgr_.addObserver( this );
+        connMgr = aConnectionManager;
+        connMgr.addObserver( this );
     }
 
     /**
@@ -78,8 +65,7 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
      * @param aInitialStatus
      *            the initial status for the panel to display
      */
-    public void initialise( String aInitialStatus )
-    {
+    public void initialise( String aInitialStatus ) {
         int i = 1;
         EmptyBorder eb = new EmptyBorder( 0, 0, 0, 10 );
 
@@ -88,34 +74,32 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
         lStatus.setBorder( eb );
         addComponent( lStatus, i, 1 );
 
-        mStatus_.setText( aInitialStatus );
-        mStatus_.setEditable( false );
-        mStatus_.setPreferredSize( LONG_FIELD );
-        addFilledComponent( mStatus_, i, 2, 3, 1, GridBagConstraints.HORIZONTAL );
+        status.setText( aInitialStatus );
+        status.setEditable( false );
+        status.setPreferredSize( LONG_FIELD );
+        addFilledComponent( status, i, 2, 3, 1, GridBagConstraints.HORIZONTAL );
 
         // connection type
         final JLabel lType = new JLabel( "Conn Type" );
         addFilledComponent( lType, ++i, 1 );
-        mType_.setPreferredSize( MEDIUM_FIELD );
-        addComponent( mType_, i, 2 );
+        type.setPreferredSize( MEDIUM_FIELD );
+        addComponent( type, i, 2 );
 
         // connection factories
         final JLabel lConnFact = new JLabel( "Conn Factories:" );
         addFilledComponent( lConnFact, ++i, 1 );
-        mConnectionFactories_.setPreferredSize( LONG_FIELD );
-        addComponent( mConnectionFactories_, i, 2 );
+        connectionFactories.setPreferredSize( LONG_FIELD );
+        addComponent( connectionFactories, i, 2 );
 
         // destinations
         final JLabel lDestinations = new JLabel( "Destinations:" );
         addFilledComponent( lDestinations, ++i, 1 );
-        mDestinations_.setPreferredSize( LONG_FIELD );
-        addComponent( mDestinations_, i, 2 );
+        destinations.setPreferredSize( LONG_FIELD );
+        addComponent( destinations, i, 2 );
 
-        mType_.addActionListener( new ActionListener()
-        {
+        type.addActionListener( new ActionListener() {
 
-            public void actionPerformed( ActionEvent e )
-            {
+            public void actionPerformed( ActionEvent e ) {
                 String choice = (String) ( (JComboBox) e.getSource() ).getSelectedItem();
                 LOG.debug( "Connection type =[" + choice + "]" );
                 loadConnectionValues( choice );
@@ -124,26 +108,22 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
     }
 
     /**
-     * @see java.util.Observer#update(java.util.Observable,
-     *      java.lang.Object)
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
-    public void update( Observable aObserved, Object arg1 )
-    {
-        mStatus_.setText( mConnMgr_.getConnectionState().name() );
+    public void update( Observable aObserved, Object arg1 ) {
+        status.setText( connMgr.getConnectionState().name() );
     }
 
     /**
      * Populate the combo boxes with the relevant data
      * 
      * @param aDetails
-     *            the details from which you can derive the required
-     *            data
+     *            the details from which you can derive the required data
      */
-    public void loadTypeValues( IConnectionDetails aDetails )
-    {
-        mAvailableConnFacts_ = aDetails.getConnectionFactories();
-        mAvailableDests_ = aDetails.getDestinations();
-        Set<String> s = mAvailableConnFacts_.keySet();
+    public void loadTypeValues( IConnectionDetails aDetails ) {
+        availableConnFacts = aDetails.getConnectionFactories();
+        availableDests = aDetails.getDestinations();
+        Set<String> s = availableConnFacts.keySet();
         updateType( s.toArray( new String[s.size()] ) );
     }
 
@@ -153,38 +133,32 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
      * @param aType
      *            the connection type
      */
-    public void loadConnectionValues( String aType )
-    {
-        if ( aType == null || aType.length() < 1 )
-        {
-            mConnectionFactories_.removeAllItems();
-            mConnectionFactories_.setEditable( false );
-            mDestinations_.removeAllItems();
-            mDestinations_.setEditable( false );
+    public void loadConnectionValues( String aType ) {
+        if ( aType == null || aType.length() < 1 ) {
+            connectionFactories.removeAllItems();
+            connectionFactories.setEditable( false );
+            destinations.removeAllItems();
+            destinations.setEditable( false );
         }
-        else
-        {
-            Set<String> conns = mAvailableConnFacts_.get( aType.toLowerCase() );
+        else {
+            Set<String> conns = availableConnFacts.get( aType.toLowerCase() );
             updateConnectionFactories( conns.toArray( new String[conns.size()] ) );
-            Set<String> dests = mAvailableDests_.get( aType.toLowerCase() );
-            if ( dests != null && dests.size() > 0 )
-            {
+            Set<String> dests = availableDests.get( aType.toLowerCase() );
+            if ( dests != null && dests.size() > 0 ) {
                 updateDestinations( dests.toArray( new String[dests.size()] ) );
             }
         }
     }
 
     /**
-     * Populate the connection details object with the rest of the
-     * connection parameters
+     * Populate the connection details object with the rest of the connection parameters
      * 
      * @param aDtls
      *            the details to populate
      */
-    public void populateConnectionDetails( IConnectionDetails aDtls )
-    {
-        aDtls.setConnectionFactories( mAvailableConnFacts_ );
-        aDtls.setDestinations( mAvailableDests_ );
+    public void populateConnectionDetails( IConnectionDetails aDtls ) {
+        aDtls.setConnectionFactories( availableConnFacts );
+        aDtls.setDestinations( availableDests );
     }
 
     /**
@@ -193,15 +167,13 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
      * @param aItems
      *            the values to add to the combo box
      */
-    public void updateType( String[] aItems )
-    {
-        mType_.removeAllItems();
-        mType_.addItem( null );
-        for ( String item : aItems )
-        {
-            mType_.addItem( item.toUpperCase() );
+    public void updateType( String[] aItems ) {
+        type.removeAllItems();
+        type.addItem( null );
+        for ( String item : aItems ) {
+            type.addItem( item.toUpperCase() );
         }
-        mType_.setEditable( true );
+        type.setEditable( true );
     }
 
     /**
@@ -210,14 +182,12 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
      * @param aItems
      *            the values to add to the combo box
      */
-    public void updateConnectionFactories( String[] aItems )
-    {
-        mConnectionFactories_.removeAllItems();
-        for ( String item : aItems )
-        {
-            mConnectionFactories_.addItem( item );
+    public void updateConnectionFactories( String[] aItems ) {
+        connectionFactories.removeAllItems();
+        for ( String item : aItems ) {
+            connectionFactories.addItem( item );
         }
-        mConnectionFactories_.setEditable( true );
+        connectionFactories.setEditable( true );
     }
 
     /**
@@ -226,22 +196,19 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
      * @param aItems
      *            the items to add to the destinations combo box
      */
-    public void updateDestinations( String[] aItems )
-    {
-        mDestinations_.removeAllItems();
-        for ( String item : aItems )
-        {
-            mDestinations_.addItem( item );
+    public void updateDestinations( String[] aItems ) {
+        destinations.removeAllItems();
+        for ( String item : aItems ) {
+            destinations.addItem( item );
         }
-        mDestinations_.setEditable( true );
+        destinations.setEditable( true );
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mConnMgr_, "Must set the connection manager into the connection manager panel" );
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( connMgr, "Must set the connection manager into the connection manager panel" );
     }
 
     // ============== GETTERS AND SETTERS ============
@@ -250,9 +217,8 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
      * 
      * @return the connection manager
      */
-    public ConnectionManager getConnectionManager()
-    {
-        return mConnMgr_;
+    public ConnectionManager getConnectionManager() {
+        return connMgr;
     }
 
     /**
@@ -261,9 +227,8 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
      * @param aConnMgr
      *            the connection manager to set
      */
-    public void setConnectionManager( ConnectionManager aConnMgr )
-    {
-        mConnMgr_ = aConnMgr;
+    public void setConnectionManager( ConnectionManager aConnMgr ) {
+        connMgr = aConnMgr;
     }
 
 }

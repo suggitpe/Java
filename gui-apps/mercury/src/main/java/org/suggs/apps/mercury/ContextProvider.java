@@ -17,10 +17,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public final class ContextProvider {
 
     private ApplicationContext context;
-    private static ContextProvider INSTANCE;
+    private static ContextProvider instance;
 
     static {
-        INSTANCE = new ContextProvider();
+        instance = new ContextProvider();
     }
 
     /**
@@ -37,7 +37,7 @@ public final class ContextProvider {
      * @return the singleton instance
      */
     public static ContextProvider instance() {
-        return INSTANCE;
+        return instance;
     }
 
     /**

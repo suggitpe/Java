@@ -14,14 +14,17 @@ import javax.swing.JFrame;
 import org.springframework.util.Assert;
 
 /**
- * This class is a utility class for building and managing the display
- * of a GUI
+ * This class is a utility class for building and managing the display of a GUI
  * 
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public class JmsHelperGuiBuilder
-{
+public class JmsHelperGuiBuilder {
+
+    /**
+     * Constructs a new instance.
+     */
+    private JmsHelperGuiBuilder() {}
 
     /**
      * Static method used to delegate the management of the
@@ -29,8 +32,7 @@ public class JmsHelperGuiBuilder
      * @param aFrame
      *            the frame to packake and show
      */
-    public static final void displayFrame( JFrame aFrame )
-    {
+    public static final void displayFrame( JFrame aFrame ) {
 
         Assert.notNull( aFrame, "Passed in a null JFrame object" );
 
@@ -45,8 +47,7 @@ public class JmsHelperGuiBuilder
         int x = c.x - w / 2;
         int y = c.y - h / 2;
         aFrame.setBounds( x, y, w, h );
-        if ( w == bounds.width && h == bounds.height )
-        {
+        if ( w == bounds.width && h == bounds.height ) {
             aFrame.setExtendedState( Frame.MAXIMIZED_BOTH );
         }
 

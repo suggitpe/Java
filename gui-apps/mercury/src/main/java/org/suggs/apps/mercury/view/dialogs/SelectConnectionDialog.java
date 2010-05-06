@@ -27,10 +27,10 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class SelectConnectionDialog extends TitleAreaDialog {
 
-    String[] connectionNames;
-    String choice;
-    String title;
-    String message;
+    private String[] connectionNames;
+    private String choice;
+    private String title;
+    private String message;
 
     /**
      * Constructs a new instance.

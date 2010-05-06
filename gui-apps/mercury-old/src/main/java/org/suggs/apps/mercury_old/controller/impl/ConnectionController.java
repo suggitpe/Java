@@ -32,29 +32,19 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 12 Jul 2007
  */
-public class ConnectionController implements InitializingBean, IConnectionController
-{
+public class ConnectionController implements InitializingBean, IConnectionController {
 
     private static final Log LOG = LogFactory.getLog( ConnectionController.class );
-    private static final ImageIcon IMG_ = new ImageIcon( "jms.gif" );
+    private static final ImageIcon IMG = new ImageIcon( "jms.gif" );
 
     // models
-    private IConnectionStore mConnStoreModel_;
-    private IConnectionManager mConnManagerModel_;
+    private IConnectionStore connStoreModel;
+    private IConnectionManager connManagerModel;
 
     // views
-    private ConnectionButtons mButtonsView_;
-    private ConnectionManagerPanel mConnManagerView_;
-    private ConnectionStorePanel mConnStoreView_;
-
-    /**
-     * Constructs a new instance.
-     */
-    @SuppressWarnings("unused")
-    private ConnectionController()
-    {
-        throw new IllegalStateException();
-    }
+    private ConnectionButtons buttonsView;
+    private ConnectionManagerPanel connManagerView;
+    private ConnectionStorePanel connStoreView;
 
     /**
      * Constructs a new instance.
@@ -71,46 +61,42 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      *            the onnection manager panel
      */
     public ConnectionController( IConnectionStore aStr, IConnectionManager aMgr, ConnectionButtons aButtons,
-                                 ConnectionStorePanel aStrPanel, ConnectionManagerPanel aMgrPanel )
-    {
+                                 ConnectionStorePanel aStrPanel, ConnectionManagerPanel aMgrPanel ) {
         super();
-        mConnStoreModel_ = aStr;
-        mConnManagerModel_ = aMgr;
-        mButtonsView_ = aButtons;
-        mConnStoreView_ = aStrPanel;
-        mConnManagerView_ = aMgrPanel;
+        connStoreModel = aStr;
+        connManagerModel = aMgr;
+        buttonsView = aButtons;
+        connStoreView = aStrPanel;
+        connManagerView = aMgrPanel;
 
         init();
     }
 
     /**
-     * Local method to initialise itself and all of the inter related
-     * objects
+     * Local method to initialise itself and all of the inter related objects
      */
-    private void init()
-    {
+    private void init() {
         LOG.debug( "Initialising the Connection Controller" );
-        mConnStoreView_.initialise( mConnStoreModel_.getState() );
-        mConnManagerView_.initialise( mConnManagerModel_.getConnectionState().name() );
+        connStoreView.initialise( connStoreModel.getState() );
+        connManagerView.initialise( connManagerModel.getConnectionState().name() );
 
-        mButtonsView_.addLoadActionListener( createLoadActionListener() );
-        mButtonsView_.addSaveActionListener( createSaveActionListener() );
-        mButtonsView_.addDeleteActionListener( createDeleteActionListener() );
-        mButtonsView_.addTestActionListener( createTestConnActionListener() );
-        mButtonsView_.addConnectActionListener( createConnectActionListener() );
-        mButtonsView_.addDisconnectActionListener( createDisconnectActionListener() );
+        buttonsView.addLoadActionListener( createLoadActionListener() );
+        buttonsView.addSaveActionListener( createSaveActionListener() );
+        buttonsView.addDeleteActionListener( createDeleteActionListener() );
+        buttonsView.addTestActionListener( createTestConnActionListener() );
+        buttonsView.addConnectActionListener( createConnectActionListener() );
+        buttonsView.addDisconnectActionListener( createDisconnectActionListener() );
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mConnStoreModel_, "Must set the connection store in the connection controller" );
-        Assert.notNull( mConnManagerModel_, "Must set the connection manager in the connection controller" );
-        Assert.notNull( mButtonsView_, "Must set the buttons view in the connection controller" );
-        Assert.notNull( mConnStoreView_, "Must set the connection store view in the connection controller" );
-        Assert.notNull( mConnManagerView_, "Must set the connection manager view in the connection controller" );
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( connStoreModel, "Must set the connection store in the connection controller" );
+        Assert.notNull( connManagerModel, "Must set the connection manager in the connection controller" );
+        Assert.notNull( buttonsView, "Must set the buttons view in the connection controller" );
+        Assert.notNull( connStoreView, "Must set the connection store view in the connection controller" );
+        Assert.notNull( connManagerView, "Must set the connection manager view in the connection controller" );
     }
 
     /**
@@ -118,18 +104,17 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return a new test connection action listener
      */
-    private ActionListener createTestConnActionListener()
-    {
-        return new ActionListener()
-        {
+    private ActionListener createTestConnActionListener() {
+        return new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
-                if ( !( mConnManagerModel_.testConnection( null ) ) )
-                {
+            public void actionPerformed( ActionEvent arg0 ) {
+                if ( !( connManagerModel.testConnection( null ) ) ) {
                     String err = "Test connection failed";
                     LOG.warn( err );
-                    JOptionPane.showMessageDialog( mConnManagerView_, err, "Connect failure", JOptionPane.ERROR_MESSAGE );
+                    JOptionPane.showMessageDialog( connManagerView,
+                                                   err,
+                                                   "Connect failure",
+                                                   JOptionPane.ERROR_MESSAGE );
                 }
             }
         };
@@ -140,22 +125,21 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return a new connect action listener
      */
-    private ActionListener createConnectActionListener()
-    {
-        return new ActionListener()
-        {
+    private ActionListener createConnectActionListener() {
+        return new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
-                try
-                {
-                    mConnManagerModel_.connect( null );
+            public void actionPerformed( ActionEvent arg0 ) {
+                try {
+                    connManagerModel.connect( null );
                 }
-                catch ( MercuryException jhe )
-                {
-                    String err = "Exception caught when trying to connect to connection:\n" + jhe.getMessage();
+                catch ( MercuryException jhe ) {
+                    String err = "Exception caught when trying to connect to connection:\n"
+                                 + jhe.getMessage();
                     LOG.warn( err );
-                    JOptionPane.showMessageDialog( mConnManagerView_, err, "Connect failure", JOptionPane.ERROR_MESSAGE );
+                    JOptionPane.showMessageDialog( connManagerView,
+                                                   err,
+                                                   "Connect failure",
+                                                   JOptionPane.ERROR_MESSAGE );
                 }
             }
         };
@@ -166,22 +150,21 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return a new disconnect action listener
      */
-    private ActionListener createDisconnectActionListener()
-    {
-        return new ActionListener()
-        {
+    private ActionListener createDisconnectActionListener() {
+        return new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
-                try
-                {
-                    mConnManagerModel_.disconnect();
+            public void actionPerformed( ActionEvent arg0 ) {
+                try {
+                    connManagerModel.disconnect();
                 }
-                catch ( MercuryException jhe )
-                {
-                    String err = "Exception caught when trying to disconnect from connection:\n" + jhe.getMessage();
+                catch ( MercuryException jhe ) {
+                    String err = "Exception caught when trying to disconnect from connection:\n"
+                                 + jhe.getMessage();
                     LOG.warn( err );
-                    JOptionPane.showMessageDialog( mConnManagerView_, err, "Disconnect failure", JOptionPane.ERROR_MESSAGE );
+                    JOptionPane.showMessageDialog( connManagerView,
+                                                   err,
+                                                   "Disconnect failure",
+                                                   JOptionPane.ERROR_MESSAGE );
                 }
             }
         };
@@ -192,59 +175,52 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return a new delete action listsner
      */
-    private ActionListener createDeleteActionListener()
-    {
-        return new ActionListener()
-        {
+    private ActionListener createDeleteActionListener() {
+        return new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
-                String[] conns = mConnStoreModel_.getListOfKnownConnectionNames();
-                String input = (String) JOptionPane.showInputDialog( mConnStoreView_,
+            public void actionPerformed( ActionEvent arg0 ) {
+                String[] conns = connStoreModel.getListOfKnownConnectionNames();
+                String input = (String) JOptionPane.showInputDialog( connStoreView,
                                                                      "Please select the connection to delete:",
                                                                      "Select connection for delete",
                                                                      JOptionPane.INFORMATION_MESSAGE,
-                                                                     IMG_,
+                                                                     IMG,
                                                                      conns,
                                                                      "..." );
 
-                if ( input != null )
-                {
-                    int choice = JOptionPane.showConfirmDialog( mConnStoreView_,
-                                                                "Are you sure that you want to delete the named connection[" + input + "]",
+                if ( input != null ) {
+                    int choice = JOptionPane.showConfirmDialog( connStoreView,
+                                                                "Are you sure that you want to delete the named connection["
+                                                                                + input + "]",
                                                                 "Delete Confirmation",
                                                                 JOptionPane.YES_NO_CANCEL_OPTION );
-                    if ( choice == JOptionPane.OK_OPTION )
-                    {
-                        int sure = JOptionPane.showConfirmDialog( mConnStoreView_,
-                                                                  "Are you sure?\n[" + input + "] could be useful",
+                    if ( choice == JOptionPane.OK_OPTION ) {
+                        int sure = JOptionPane.showConfirmDialog( connStoreView,
+                                                                  "Are you sure?\n[" + input
+                                                                                  + "] could be useful",
                                                                   "Delete Verify",
                                                                   JOptionPane.YES_NO_CANCEL_OPTION );
-                        if ( sure == JOptionPane.OK_OPTION )
-                        {
-                            try
-                            {
+                        if ( sure == JOptionPane.OK_OPTION ) {
+                            try {
                                 LOG.info( "Deleting named connection [" + input + "]" );
-                                mConnStoreModel_.deleteNamedConnection( input );
+                                connStoreModel.deleteNamedConnection( input );
                             }
-                            catch ( MercuryConnectionStoreException mcse )
-                            {
-                                JOptionPane.showMessageDialog( mConnStoreView_, "Delete failed", "Failed to delete connection [" + input
-                                                                                                 + "]", JOptionPane.ERROR_MESSAGE );
+                            catch ( MercuryConnectionStoreException mcse ) {
+                                JOptionPane.showMessageDialog( connStoreView,
+                                                               "Delete failed",
+                                                               "Failed to delete connection [" + input + "]",
+                                                               JOptionPane.ERROR_MESSAGE );
                             }
                         }
-                        else
-                        {
+                        else {
                             LOG.debug( "Delete cancelled at the last minute for [" + input + "]" );
                         }
                     }
-                    else
-                    {
+                    else {
                         LOG.debug( "Delete action for [" + input + "] canceled" );
                     }
                 }
-                else
-                {
+                else {
                     LOG.debug( "Delete ction cancelled" );
                 }
             }
@@ -252,43 +228,38 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     }
 
     /**
-     * Creates an action listener for the loading of connection
-     * pramters from a source
+     * Creates an action listener for the loading of connection pramters from a source
      * 
      * @returN
      */
-    private ActionListener createLoadActionListener()
-    {
-        return new ActionListener()
-        {
+    private ActionListener createLoadActionListener() {
+        return new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
-                String[] conns = mConnStoreModel_.getListOfKnownConnectionNames();
-                String input = (String) JOptionPane.showInputDialog( mConnStoreView_,
+            public void actionPerformed( ActionEvent arg0 ) {
+                String[] conns = connStoreModel.getListOfKnownConnectionNames();
+                String input = (String) JOptionPane.showInputDialog( connStoreView,
                                                                      "Please select the connection to load:",
                                                                      "Select connection",
                                                                      JOptionPane.INFORMATION_MESSAGE,
-                                                                     IMG_,
+                                                                     IMG,
                                                                      conns,
                                                                      "..." );
-                if ( input != null )
-                {
+                if ( input != null ) {
                     LOG.debug( "Loading connection [" + input + "]" );
-                    try
-                    {
-                        IConnectionDetails dtls = mConnStoreModel_.loadConnectionParameters( input );
-                        mConnStoreView_.loadValues( dtls );
-                        mConnManagerView_.loadTypeValues( dtls );
+                    try {
+                        IConnectionDetails dtls = connStoreModel.loadConnectionParameters( input );
+                        connStoreView.loadValues( dtls );
+                        connManagerView.loadTypeValues( dtls );
                     }
-                    catch ( MercuryConnectionStoreException mce )
-                    {
-                        JOptionPane.showMessageDialog( mConnStoreView_, "Failed to load named configuration [" + input + "]\n"
-                                                                        + mce.getMessage(), "Load failure", JOptionPane.ERROR_MESSAGE );
+                    catch ( MercuryConnectionStoreException mce ) {
+                        JOptionPane.showMessageDialog( connStoreView,
+                                                       "Failed to load named configuration [" + input + "]\n"
+                                                                       + mce.getMessage(),
+                                                       "Load failure",
+                                                       JOptionPane.ERROR_MESSAGE );
                     }
                 }
-                else
-                {
+                else {
                     LOG.debug( "Load action canceled" );
                 }
             }
@@ -296,65 +267,58 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     }
 
     /**
-     * Creates a new action listener for the saving of a set of
-     * connection parameters
+     * Creates a new action listener for the saving of a set of connection parameters
      * 
      * @return the action listener
      */
-    private ActionListener createSaveActionListener()
-    {
-        return new ActionListener()
-        {
+    private ActionListener createSaveActionListener() {
+        return new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
+            public void actionPerformed( ActionEvent arg0 ) {
                 // first we should make sure that the conn dedtails
                 // have been saved correctly
-                String input = (String) JOptionPane.showInputDialog( mConnStoreView_,
+                String input = (String) JOptionPane.showInputDialog( connStoreView,
                                                                      "Please enter a name for this conection",
                                                                      "Save connection",
                                                                      JOptionPane.INFORMATION_MESSAGE,
-                                                                     IMG_,
+                                                                     IMG,
                                                                      null,
                                                                      "..." );
 
-                if ( input != null )
-                {
+                if ( input != null ) {
                     LOG.debug( "Saving connection as [" + input + "]" );
 
-                    if ( mConnStoreModel_.doesConnectionExist( input ) )
-                    {
-                        int sure = JOptionPane.showConfirmDialog( mConnStoreView_,
+                    if ( connStoreModel.doesConnectionExist( input ) ) {
+                        int sure = JOptionPane.showConfirmDialog( connStoreView,
                                                                   "This will overwrite the exitsing connection\ncontinue?",
                                                                   "Overwrite existing",
                                                                   JOptionPane.YES_NO_CANCEL_OPTION );
-                        if ( sure != JOptionPane.OK_OPTION )
-                        {
+                        if ( sure != JOptionPane.OK_OPTION ) {
                             return;
                         }
                     }
 
-                    try
-                    {
-                        IConnectionDetails dtls = mConnStoreView_.getConnectionDetails();
-                        mConnManagerView_.populateConnectionDetails( dtls );
-                        mConnStoreModel_.saveConnectionParameters( input, dtls );
+                    try {
+                        IConnectionDetails dtls = connStoreView.getConnectionDetails();
+                        connManagerView.populateConnectionDetails( dtls );
+                        connStoreModel.saveConnectionParameters( input, dtls );
                     }
-                    catch ( MercuryConnectionStoreException mce )
-                    {
-                        JOptionPane.showMessageDialog( mConnStoreView_,
-                                                       "Failed to save named configuration [" + input + "]\n" + mce.getMessage(),
+                    catch ( MercuryConnectionStoreException mce ) {
+                        JOptionPane.showMessageDialog( connStoreView,
+                                                       "Failed to save named configuration [" + input + "]\n"
+                                                                       + mce.getMessage(),
                                                        "Internal save failure",
                                                        JOptionPane.ERROR_MESSAGE );
                     }
-                    catch ( Exception e )
-                    {
-                        JOptionPane.showMessageDialog( mConnStoreView_, "Failed to save named configuration [" + input + "]\n"
-                                                                        + e.getMessage(), "Save failure", JOptionPane.ERROR_MESSAGE );
+                    catch ( Exception e ) {
+                        JOptionPane.showMessageDialog( connStoreView,
+                                                       "Failed to save named configuration [" + input + "]\n"
+                                                                       + e.getMessage(),
+                                                       "Save failure",
+                                                       JOptionPane.ERROR_MESSAGE );
                     }
                 }
-                else
-                {
+                else {
                     LOG.debug( "Save action cancelled" );
                 }
             }
@@ -366,9 +330,8 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ConnectionManager.
      */
-    public IConnectionManager getConnectionManager()
-    {
-        return mConnManagerModel_;
+    public IConnectionManager getConnectionManager() {
+        return connManagerModel;
     }
 
     /**
@@ -376,9 +339,8 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ConnectionStore.
      */
-    public IConnectionStore getConnectionStore()
-    {
-        return mConnStoreModel_;
+    public IConnectionStore getConnectionStore() {
+        return connStoreModel;
     }
 
     /**
@@ -386,9 +348,8 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ButtonsView.
      */
-    public ConnectionButtons getButtonsView()
-    {
-        return mButtonsView_;
+    public ConnectionButtons getButtonsView() {
+        return buttonsView;
     }
 
     /**
@@ -396,9 +357,8 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ConnManagerView.
      */
-    public ConnectionManagerPanel getConnManagerView()
-    {
-        return mConnManagerView_;
+    public ConnectionManagerPanel getConnManagerView() {
+        return connManagerView;
     }
 
     /**
@@ -406,9 +366,8 @@ public class ConnectionController implements InitializingBean, IConnectionContro
      * 
      * @return Returns the ConnStoreView.
      */
-    public ConnectionStorePanel getConnStoreView()
-    {
-        return mConnStoreView_;
+    public ConnectionStorePanel getConnStoreView() {
+        return connStoreView;
     }
 
 }

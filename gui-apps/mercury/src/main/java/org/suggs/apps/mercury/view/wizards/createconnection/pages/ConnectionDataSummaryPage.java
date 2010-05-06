@@ -164,7 +164,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
      * @author suggitpe
      * @version 1.0 12 Nov 2008
      */
-    private class SummaryTableContentProvider implements IStructuredContentProvider {
+    private static class SummaryTableContentProvider implements IStructuredContentProvider {
 
         /**
          * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
@@ -191,7 +191,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
      * @author suggitpe
      * @version 1.0 12 Nov 2008
      */
-    private class SummaryTableLabelProvider implements ITableLabelProvider {
+    private static class SummaryTableLabelProvider implements ITableLabelProvider {
 
         /**
          * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
@@ -251,7 +251,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
      * @author suggitpe
      * @version 1.0 13 Nov 2008
      */
-    class EditableTableItem {
+    static class EditableTableItem {
 
         private String mName_;
         private String mValue_;

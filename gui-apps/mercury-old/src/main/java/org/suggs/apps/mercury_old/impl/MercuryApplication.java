@@ -30,58 +30,49 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * This class manages the construction of the main GUI itself along
- * with the placement of teh main panels
+ * This class manages the construction of the main GUI itself along with the placement of teh main panels
  * 
  * @author suggitpe
  * @version 1.0 21 Jun 2007
  */
-public class MercuryApplication implements IMercuryApp, InitializingBean
-{
+public class MercuryApplication implements IMercuryApp, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( MercuryApplication.class );
 
-    private JPanel mConnectionStorePanel_;
-    private JPanel mConnectionManagerPanel_;
-    private JPanel mConnectionButtons_;
-    private ConnectionController mConnectionController_;
+    private JPanel connectionStorePanel;
+    private JPanel connectionManagerPanel;
+    private JPanel connectionButtons;
+    private ConnectionController connectionController;
 
     /**
      * Constructs a new instance.
      */
-    public MercuryApplication()
-    {
+    public MercuryApplication() {
         super();
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mConnectionStorePanel_,
-                        "There must be a connection store panel set in the main gui" );
-        Assert.notNull( mConnectionButtons_,
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( connectionStorePanel, "There must be a connection store panel set in the main gui" );
+        Assert.notNull( connectionButtons,
                         "There must be a connection store buttons panel set in the main gui" );
-        Assert.notNull( mConnectionManagerPanel_,
+        Assert.notNull( connectionManagerPanel,
                         "There must be a connection manager panel set in the main gui" );
-        Assert.notNull( mConnectionController_,
-                        "There must be a connection controller set in the main gui" );
+        Assert.notNull( connectionController, "There must be a connection controller set in the main gui" );
     }
 
     /**
      * @see org.suggs.apps.mercury_old.IMercuryApp#buildGui()
      */
-    public void buildGui() throws MercuryException
-    {
+    public void buildGui() throws MercuryException {
 
         LOG.debug( "Building GUI" );
-        try
-        {
+        try {
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             throw new MercuryException( "Failed to set UI look and feel", e );
         }
 
@@ -106,8 +97,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      *            the container to build upon
      * @throws MercuryException
      */
-    private final void buildGuiPanels( Container aCntr )
-    {
+    private final void buildGuiPanels( Container aCntr ) {
         LOG.debug( "Building GUI Panels" );
 
         GridBagLayout mainLayout = new GridBagLayout();
@@ -120,21 +110,21 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
         gbc.gridx = 2;
         gbc.gridy = 1;
         gbc.gridheight = 2;
-        mainLayout.setConstraints( mConnectionButtons_, gbc );
-        aCntr.add( mConnectionButtons_ );
+        mainLayout.setConstraints( connectionButtons, gbc );
+        aCntr.add( connectionButtons );
 
         // add in the connection store panel
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridheight = 1;
-        mainLayout.setConstraints( mConnectionStorePanel_, gbc );
-        aCntr.add( mConnectionStorePanel_ );
+        mainLayout.setConstraints( connectionStorePanel, gbc );
+        aCntr.add( connectionStorePanel );
 
         // add in the connection manager store
         gbc.gridx = 1;
         gbc.gridy = 2;
-        mainLayout.setConstraints( mConnectionManagerPanel_, gbc );
-        aCntr.add( mConnectionManagerPanel_ );
+        mainLayout.setConstraints( connectionManagerPanel, gbc );
+        aCntr.add( connectionManagerPanel );
     }
 
     /**
@@ -143,8 +133,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      * @param aFrame
      *            the frame to add the menu to
      */
-    private final void buildMenuBar( final JFrame aFrame )
-    {
+    private final void buildMenuBar( final JFrame aFrame ) {
         LOG.debug( "Building menu bar" );
 
         final JMenuBar menu = new JMenuBar();
@@ -152,11 +141,9 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
         // buid the exit item
         JMenuItem exit = new JMenuItem( "Exit" );
         exit.setMnemonic( 'x' );
-        exit.addActionListener( new ActionListener()
-        {
+        exit.addActionListener( new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
+            public void actionPerformed( ActionEvent arg0 ) {
                 System.exit( 0 );
             }
         } );
@@ -164,11 +151,9 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
         // build the about item
         JMenuItem about = new JMenuItem( "About" );
         about.setMnemonic( 'a' );
-        about.addActionListener( new ActionListener()
-        {
+        about.addActionListener( new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
+            public void actionPerformed( ActionEvent arg0 ) {
                 AboutDialog aboutDialog = new AboutDialog( aFrame );
                 aboutDialog.setVisible( true );
             }
@@ -197,9 +182,8 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      * 
      * @return the connection manager panel
      */
-    public JPanel getConnectionManagerPanel()
-    {
-        return mConnectionManagerPanel_;
+    public JPanel getConnectionManagerPanel() {
+        return connectionManagerPanel;
     }
 
     /**
@@ -208,9 +192,8 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      * @param aPanel
      *            the panel to set as the connection manager panel
      */
-    public void setConnectionManagerPanel( JPanel aPanel )
-    {
-        mConnectionManagerPanel_ = aPanel;
+    public void setConnectionManagerPanel( JPanel aPanel ) {
+        connectionManagerPanel = aPanel;
     }
 
     /**
@@ -218,9 +201,8 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      * 
      * @return the connection buttons panel
      */
-    public JPanel getConnectionButtons()
-    {
-        return mConnectionButtons_;
+    public JPanel getConnectionButtons() {
+        return connectionButtons;
     }
 
     /**
@@ -229,9 +211,8 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      * @param aPanel
      *            the panel to set as the connection buttons panel
      */
-    public void setConnectionButtons( JPanel aPanel )
-    {
-        mConnectionButtons_ = aPanel;
+    public void setConnectionButtons( JPanel aPanel ) {
+        connectionButtons = aPanel;
     }
 
     /**
@@ -240,9 +221,8 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      * @param aPanel
      *            the panel to set as the connection store panel
      */
-    public void setConnectionStorePanel( JPanel aPanel )
-    {
-        mConnectionStorePanel_ = aPanel;
+    public void setConnectionStorePanel( JPanel aPanel ) {
+        connectionStorePanel = aPanel;
     }
 
     /**
@@ -250,24 +230,21 @@ public class MercuryApplication implements IMercuryApp, InitializingBean
      * 
      * @return the connection store panel
      */
-    public JPanel getConnectionStorePanel()
-    {
-        return mConnectionStorePanel_;
+    public JPanel getConnectionStorePanel() {
+        return connectionStorePanel;
     }
 
     /**
      * @return connection controller
      */
-    public ConnectionController getConnectionConroller()
-    {
-        return mConnectionController_;
+    public ConnectionController getConnectionConroller() {
+        return connectionController;
     }
 
     /**
      * @param aCtrl
      */
-    public void setConnectionController( ConnectionController aCtrl )
-    {
-        mConnectionController_ = aCtrl;
+    public void setConnectionController( ConnectionController aCtrl ) {
+        connectionController = aCtrl;
     }
 }

@@ -12,10 +12,10 @@ import org.suggs.apps.mercury.model.connection.connectionstore.ConnectionStoreEx
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.logging.Log;
@@ -33,34 +33,25 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
 
     private static final Log LOG = LogFactory.getLog( ConnectionManager.class );
 
-    private static IConnectionManager mInstance_;
-    private IConnectionStore mConnStore_;
-    private Map<String, IConnection> mConnectionMap_ = new HashMap<String, IConnection>();
-    private List<IConnectionManagerListener> mListsners = new Vector<IConnectionManagerListener>();
+    private static IConnectionManager instance;
+    private IConnectionStore connStore;
+    private Map<String, IConnection> connectionMap = new HashMap<String, IConnection>();
+    private List<IConnectionManagerListener> listsners = new ArrayList<IConnectionManagerListener>();
 
     static {
-        mInstance_ = new ConnectionManager();
+        instance = new ConnectionManager();
     }
 
     // non static initialiser
     {
-        mConnStore_ = (IConnectionStore) ContextProvider.instance().getBean( "connectionStoreManager" );
-        // Map<String, ConnectionDetails> map =
-        // mConnStore_.getKnownConnections();
-        // for ( String s : map.keySet() )
-        // {
-        // mConnectionMap_.put( s, new ConnectionContext( map.get(
-        // s ) ) );
-        // }
-        mConnStore_.addConnectionStoreChangeListener( this );
+        connStore = (IConnectionStore) ContextProvider.instance().getBean( "connectionStoreManager" );
+        connStore.addConnectionStoreChangeListener( this );
     }
 
     /**
      * Constructs a new instance.
      */
-    private ConnectionManager() {
-    // this is hidden
-    }
+    private ConnectionManager() {}
 
     /**
      * TODO: delete me
@@ -68,7 +59,7 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#getConnectionDump()
      */
     public String getConnectionDump() throws ConnectionStoreException {
-        return mConnStore_.getConnectionStoreDumpAsXml();
+        return connStore.getConnectionStoreDumpAsXml();
     }
 
     /**
@@ -77,14 +68,14 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
      * @return the singleton instance of the class
      */
     public static IConnectionManager instance() {
-        return mInstance_;
+        return instance;
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#getConnection(java.lang.String)
      */
     public IConnection getConnection( String aConnectionName ) {
-        return mConnectionMap_.get( aConnectionName );
+        return connectionMap.get( aConnectionName );
     }
 
     /**
@@ -100,19 +91,6 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
         switch ( aEvent ) {
             case CREATE:
                 LOG.debug( "Adding " + aConnectionName + " to conn mgr" );
-                // try
-                // {
-                // mConnectionMap_.put( aConnectionName,
-                // new ConnectionContext(
-                // mConnStore_.loadConnectionParameters(
-                // aConnectionName ) ) );
-                // }
-                // catch ( ConnectionStoreException cse )
-                // {
-                // LOG.warn(
-                // "Failed to load connection parameters from the connection store for connection ["
-                // + aConnectionName + "]" );
-                // }
                 notifyAllListeners( aConnectionName, IConnectionManagerListener.ConnectionManagerEvent.CREATE );
                 break;
             case EDIT:
@@ -121,8 +99,8 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
                 // break;
             case REMOVE:
                 LOG.debug( "Removing " + aConnectionName + " from the conn mgr" );
-                if ( mConnectionMap_.containsKey( aConnectionName ) ) {
-                    mConnectionMap_.remove( aConnectionName );
+                if ( connectionMap.containsKey( aConnectionName ) ) {
+                    connectionMap.remove( aConnectionName );
                 }
                 notifyAllListeners( aConnectionName, IConnectionManagerListener.ConnectionManagerEvent.REMOVE );
                 break;
@@ -136,12 +114,12 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#containsConnection(java.lang.String)
      */
     public boolean containsConnection( String aConnectionName ) {
-        return mConnectionMap_.containsKey( aConnectionName );
+        return connectionMap.containsKey( aConnectionName );
     }
 
     private void notifyAllListeners( String aConnectionName,
                                      IConnectionManagerListener.ConnectionManagerEvent aEvent ) {
-        for ( IConnectionManagerListener l : mListsners ) {
+        for ( IConnectionManagerListener l : listsners ) {
             l.handleConnectionManagerChange( aConnectionName, aEvent );
         }
     }
@@ -150,14 +128,14 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#addConnectionManagerListener(org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener)
      */
     public void addConnectionManagerListener( IConnectionManagerListener aListener ) {
-        mListsners.add( aListener );
+        listsners.add( aListener );
     }
 
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#removeConnectionManagerListener(org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener)
      */
     public void removeConnectionManagerListener( IConnectionManagerListener aListener ) {
-        mListsners.remove( aListener );
+        listsners.remove( aListener );
     }
 
 }
