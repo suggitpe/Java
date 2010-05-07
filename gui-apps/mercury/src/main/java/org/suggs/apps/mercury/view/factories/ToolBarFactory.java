@@ -34,7 +34,7 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean {
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( actionManager,
                         "An action manager object must be injected into the ToolBarFactory object.  Please revise Spring XML" );
     }
@@ -64,7 +64,7 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean {
      *            the style of the toolbar
      * @return the toolbar manager
      */
-    private final ToolBarManager buildMainToolbar( int style ) {
+    private ToolBarManager buildMainToolbar( int style ) {
         ToolBarManager main = new ToolBarManager( style );
 
         // get action manager factory

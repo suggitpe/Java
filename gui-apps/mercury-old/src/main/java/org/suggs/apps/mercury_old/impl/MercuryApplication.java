@@ -54,7 +54,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean {
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( connectionStorePanel, "There must be a connection store panel set in the main gui" );
         Assert.notNull( connectionButtons,
                         "There must be a connection store buttons panel set in the main gui" );
@@ -97,7 +97,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean {
      *            the container to build upon
      * @throws MercuryException
      */
-    private final void buildGuiPanels( Container aCntr ) {
+    private void buildGuiPanels( Container aCntr ) {
         LOG.debug( "Building GUI Panels" );
 
         GridBagLayout mainLayout = new GridBagLayout();
@@ -133,7 +133,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean {
      * @param aFrame
      *            the frame to add the menu to
      */
-    private final void buildMenuBar( final JFrame aFrame ) {
+    private void buildMenuBar( final JFrame aFrame ) {
         LOG.debug( "Building menu bar" );
 
         final JMenuBar menu = new JMenuBar();

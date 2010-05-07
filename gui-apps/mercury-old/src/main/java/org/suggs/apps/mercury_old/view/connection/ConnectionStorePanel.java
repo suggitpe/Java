@@ -198,7 +198,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( mConnectionStore_, "Must set the connection store into the connection manager panel" );
     }
 

@@ -32,7 +32,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
 
     private static final Log LOG = LogFactory.getLog( ConnectionStore.class );
 
-    private String storeState = new String( "Unsaved" );
+    private String storeState = "Unsaved";
     private Map<String, IConnectionDetails> connStore = new HashMap<String, IConnectionDetails>();
 
     private IPersistenceLayer mPersistenceLayer_;

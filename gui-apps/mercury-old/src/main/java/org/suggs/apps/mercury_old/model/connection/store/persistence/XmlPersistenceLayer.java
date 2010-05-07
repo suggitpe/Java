@@ -279,7 +279,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer {
      * @throws MercuryConnectionStoreException
      *             if there are any issues in the persistence
      */
-    public static final void persistClob( String aClob, File aFile ) throws MercuryConnectionStoreException {
+    public static void persistClob( String aClob, File aFile ) throws MercuryConnectionStoreException {
         // now we persiste the new values to the persistent xml file
         FileOutputStream out = null;
         FileChannel chan = null;
@@ -363,7 +363,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer {
      *            the document to serialize
      * @return the xml document as a string
      */
-    private final String serializeXmlDoc( Document aDocument ) throws MercuryException {
+    private String serializeXmlDoc( Document aDocument ) throws MercuryException {
         ByteArrayOutputStream strm = new ByteArrayOutputStream();
         OutputFormat out = new OutputFormat( aDocument );
         out.setIndenting( true );

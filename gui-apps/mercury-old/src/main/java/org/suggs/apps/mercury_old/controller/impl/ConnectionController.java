@@ -91,7 +91,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( connStoreModel, "Must set the connection store in the connection controller" );
         Assert.notNull( connManagerModel, "Must set the connection manager in the connection controller" );
         Assert.notNull( buttonsView, "Must set the buttons view in the connection controller" );

@@ -18,7 +18,7 @@ import org.springframework.core.io.ClassPathResource;
  * @author suggitpe
  * @version 1.0 21 Jun 2007
  */
-public class GuiLoader {
+public final class GuiLoader {
 
     private static final Log LOG = LogFactory.getLog( GuiLoader.class );
     private static final String DEFAULT_CFG_FILE = "xml/gui-loader.xml";

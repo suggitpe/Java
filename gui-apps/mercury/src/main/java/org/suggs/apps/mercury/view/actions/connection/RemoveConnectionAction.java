@@ -60,7 +60,7 @@ public class RemoveConnectionAction extends Action implements InitializingBean {
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( connectionStore, "No connection store set on the create connection wizard" );
     }
 

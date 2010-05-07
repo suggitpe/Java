@@ -47,7 +47,7 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( adapters, "Must inject a map of adapters into the connection manager" );
     }
 

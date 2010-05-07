@@ -24,6 +24,6 @@ public interface IActionManager {
      *            the name of the action.
      * @return the action that corresponds to that name.
      */
-    public IAction getAction( String actionName );
+    IAction getAction( String actionName );
 
 }

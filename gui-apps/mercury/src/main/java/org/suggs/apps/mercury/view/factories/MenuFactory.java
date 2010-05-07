@@ -32,7 +32,7 @@ public class MenuFactory implements IMenuFactory, InitializingBean {
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( actionManager,
                         "An action manager object must be injected into the MenuFactory object.  Please revise Spring XML" );
     }
@@ -57,7 +57,7 @@ public class MenuFactory implements IMenuFactory, InitializingBean {
      * 
      * @return the menu manager for the main screen
      */
-    private final MenuManager buildMainMenu() {
+    private MenuManager buildMainMenu() {
         // get action manager factory
         ActionManager mgr = (ActionManager) ContextProvider.instance().getBean( ActionManager.BEAN_NAME );
 

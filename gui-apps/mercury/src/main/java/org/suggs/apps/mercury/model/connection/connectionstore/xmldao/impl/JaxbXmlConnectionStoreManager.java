@@ -65,7 +65,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( fileManager, "The file manager cannot be null, this needs to be injected" );
         Assert.notNull( persistentFile, "The name of the persisten file cannot be null" );
     }

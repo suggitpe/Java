@@ -207,7 +207,7 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( connMgr, "Must set the connection manager into the connection manager panel" );
     }
 

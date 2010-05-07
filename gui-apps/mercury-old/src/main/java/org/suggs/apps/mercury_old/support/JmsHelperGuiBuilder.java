@@ -19,7 +19,7 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public class JmsHelperGuiBuilder {
+public final class JmsHelperGuiBuilder {
 
     /**
      * Constructs a new instance.

@@ -6,7 +6,7 @@ package org.suggs.apps.mercury.view.actions;
 
 import org.suggs.apps.mercury.view.IActionManager;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.jface.action.IAction;
 
@@ -21,13 +21,13 @@ import org.springframework.util.Assert;
  */
 public class ActionManager implements InitializingBean, IActionManager {
 
-    private HashMap<String, IAction> actionMap;
+    private Map<String, IAction> actionMap;
     public static final String BEAN_NAME = "actionManager";
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( actionMap,
                         "Action Map has not been initialised in the ActionManager.  Please update Spring XML." );
     }
@@ -38,7 +38,7 @@ public class ActionManager implements InitializingBean, IActionManager {
      * @param aMap
      *            the map of actions to set
      */
-    public void setActionMap( HashMap<String, IAction> aMap ) {
+    public void setActionMap( Map<String, IAction> aMap ) {
         actionMap = aMap;
     }
 

@@ -41,7 +41,7 @@ public final class ImageManager {
      *            the name of the image to load
      * @return an Image descriptor object for the passed in image name
      */
-    public static final ImageDescriptor getImageDescriptor( String imagename ) {
+    public static ImageDescriptor getImageDescriptor( String imagename ) {
         return ImageDescriptor.createFromURL( ImageManager.class.getClassLoader().getResource( imagename ) );
     }
 
@@ -53,7 +53,7 @@ public final class ImageManager {
      *            the name of the image to load
      * @return an input stream for the image from the classpath
      */
-    public static final InputStream getImageStream( String imagename ) {
+    public static InputStream getImageStream( String imagename ) {
         return ImageManager.class.getClassLoader().getResourceAsStream( imagename );
     }
 

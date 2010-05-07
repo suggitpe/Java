@@ -34,7 +34,7 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( initialontextFactory,
                         "Muct inject the initial context factory into the Ems Connection Adapter" );
     }
