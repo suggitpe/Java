@@ -10,8 +10,7 @@ package org.suggs.apps.mercury_old.model.connection;
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public interface IConnectionManager
-{
+public interface IConnectionManager {
 
     /**
      * Test the connection parameters (makes a connection)

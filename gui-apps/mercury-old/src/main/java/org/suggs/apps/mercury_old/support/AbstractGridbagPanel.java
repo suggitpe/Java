@@ -16,16 +16,14 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * Abstract Panel class used by deriving Panels to make the addition
- * of panel components much easier
+ * Abstract Panel class used by deriving Panels to make the addition of panel components much easier
  * 
  * @author suggitpe
  * @version 1.0 25 Jun 2007
  */
-public abstract class AbstractGridbagPanel extends JPanel
-{
+public abstract class AbstractGridbagPanel extends JPanel {
 
-    private GridBagConstraints mConstraints_;
+    private GridBagConstraints constraints;
 
     private static final int C_HORZ = GridBagConstraints.HORIZONTAL;
     private static final int C_NONE = GridBagConstraints.NONE;
@@ -41,8 +39,7 @@ public abstract class AbstractGridbagPanel extends JPanel
     /**
      * Constructs a new instance.
      */
-    public AbstractGridbagPanel()
-    {
+    public AbstractGridbagPanel() {
         this( "" );
     }
 
@@ -51,8 +48,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      * 
      * @param aBorderText
      */
-    public AbstractGridbagPanel( String aBorderText )
-    {
+    public AbstractGridbagPanel( String aBorderText ) {
         this( aBorderText, new Insets( 2, 2, 2, 2 ) );
     }
 
@@ -62,13 +58,12 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aBorderText
      * @param aInsets
      */
-    public AbstractGridbagPanel( String aBorderText, Insets aInsets )
-    {
+    public AbstractGridbagPanel( String aBorderText, Insets aInsets ) {
         super( new GridBagLayout() );
         this.setBorder( new TitledBorder( new EtchedBorder(), aBorderText ) );
-        mConstraints_ = new GridBagConstraints();
-        mConstraints_.anchor = GridBagConstraints.WEST;
-        mConstraints_.insets = aInsets;
+        constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = aInsets;
     }
 
     /**
@@ -79,8 +74,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aHeader
      *            the header of the dialog box
      */
-    protected void showErrorDialog( String aMessage, String aHeader )
-    {
+    protected void showErrorDialog( String aMessage, String aHeader ) {
         JOptionPane.showMessageDialog( this, aMessage, aHeader, JOptionPane.ERROR_MESSAGE );
     }
 
@@ -94,8 +88,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aColumn
      *            the column to add it to
      */
-    public void addComponent( JComponent aComp, int aRow, int aColumn )
-    {
+    public void addComponent( JComponent aComp, int aRow, int aColumn ) {
         addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, 1, 1, C_WEST, C_NONE );
     }
 
@@ -113,8 +106,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aHeight
      *            numof rows to span
      */
-    public void addComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight )
-    {
+    public void addComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight ) {
         addComponent( aComp, aRow, aColumn, aWidth, aHeight, 1, 1, C_WEST, C_NONE );
     }
 
@@ -130,8 +122,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aAnchor
      *            the anchor for the cell
      */
-    public void addAnchoredComponent( JComponent aComp, int aRow, int aColumn, int aAnchor )
-    {
+    public void addAnchoredComponent( JComponent aComp, int aRow, int aColumn, int aAnchor ) {
         addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, 1, 1, aAnchor, C_NONE );
     }
 
@@ -151,8 +142,8 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aAnchor
      *            the anchor for the component
      */
-    public void addAnchoredComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight, int aAnchor )
-    {
+    public void addAnchoredComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight,
+                                      int aAnchor ) {
         addComponent( aComp, aRow, aColumn, aWidth, aHeight, 1, 1, aAnchor, C_NONE );
     }
 
@@ -166,8 +157,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aColumn
      *            the column to add it to
      */
-    public void addFilledComponent( JComponent aComp, int aRow, int aColumn )
-    {
+    public void addFilledComponent( JComponent aComp, int aRow, int aColumn ) {
         addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, 1, 1, C_WEST, C_HORZ );
     }
 
@@ -183,8 +173,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aFill
      *            the filling to use
      */
-    public void addFilledComponent( JComponent aComp, int aRow, int aColumn, int aFill )
-    {
+    public void addFilledComponent( JComponent aComp, int aRow, int aColumn, int aFill ) {
         addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, 1, 1, C_WEST, aFill );
     }
 
@@ -204,8 +193,8 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aFill
      *            the filling to use
      */
-    public void addFilledComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight, int aFill )
-    {
+    public void addFilledComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight,
+                                    int aFill ) {
         addComponent( aComp, aRow, aColumn, aWidth, aHeight, 1, 1, C_WEST, aFill );
     }
 
@@ -223,8 +212,7 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aHeightPad
      *            the padding to use in the height
      */
-    public void addFilledComponent( JComponent aComp, int aRow, int aColumn, int aWidthPad, int aHeightPad )
-    {
+    public void addFilledComponent( JComponent aComp, int aRow, int aColumn, int aWidthPad, int aHeightPad ) {
         addComponent( aComp, aRow, aColumn, C_WIDTH, C_HEIGHT, aWidthPad, aHeightPad, C_WEST, C_HORZ );
     }
 
@@ -250,53 +238,49 @@ public abstract class AbstractGridbagPanel extends JPanel
      * @param aFill
      *            the filling to use
      */
-    public void addComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight, int aWidthPad, int aHeightPad, int aAnchor,
-                              int aFill )
-    {
-        mConstraints_.gridx = aColumn;
-        mConstraints_.gridy = aRow;
-        mConstraints_.gridwidth = aWidth;
-        mConstraints_.gridheight = aHeight;
-        mConstraints_.anchor = aAnchor;
-        mConstraints_.ipadx = aWidthPad;
-        mConstraints_.ipady = aHeightPad;
+    public void addComponent( JComponent aComp, int aRow, int aColumn, int aWidth, int aHeight,
+                              int aWidthPad, int aHeightPad, int aAnchor, int aFill ) {
+        constraints.gridx = aColumn;
+        constraints.gridy = aRow;
+        constraints.gridwidth = aWidth;
+        constraints.gridheight = aHeight;
+        constraints.anchor = aAnchor;
+        constraints.ipadx = aWidthPad;
+        constraints.ipady = aHeightPad;
         double weightx = 0.0;
         double weighty = 0.0;
 
-        if ( aWidth > 1 )
-        {
+        if ( aWidth > 1 ) {
             weightx = 1.0;
         }
 
-        if ( aHeight > 1 )
-        {
+        if ( aHeight > 1 ) {
             weighty = 1.0;
         }
 
-        switch ( aFill )
-        {
+        switch ( aFill ) {
             case GridBagConstraints.HORIZONTAL:
-                mConstraints_.weightx = weightx;
-                mConstraints_.weighty = 0.0;
+                constraints.weightx = weightx;
+                constraints.weighty = 0.0;
                 break;
             case GridBagConstraints.VERTICAL:
-                mConstraints_.weightx = 0.0;
-                mConstraints_.weighty = weighty;
+                constraints.weightx = 0.0;
+                constraints.weighty = weighty;
                 break;
             case GridBagConstraints.BOTH:
-                mConstraints_.weightx = weightx;
-                mConstraints_.weighty = weighty;
+                constraints.weightx = weightx;
+                constraints.weighty = weighty;
                 break;
             case GridBagConstraints.NONE:
-                mConstraints_.weightx = 0.0;
-                mConstraints_.weighty = 0.0;
+                constraints.weightx = 0.0;
+                constraints.weighty = 0.0;
                 break;
             default:
                 break;
         }
 
-        mConstraints_.fill = aFill;
+        constraints.fill = aFill;
 
-        add( aComp, mConstraints_ );
+        add( aComp, constraints );
     }
 }

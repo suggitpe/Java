@@ -33,15 +33,13 @@ import javax.swing.border.EmptyBorder;
  * @author suggitpe
  * @version 1.0 27 Jun 2007
  */
-public class AboutDialog extends JDialog
-{
+public class AboutDialog extends JDialog {
 
     /**
      * Hidden Constructs a new instance.
      */
     @SuppressWarnings("unused")
-    private AboutDialog()
-    {
+    private AboutDialog() {
         super();
     }
 
@@ -51,8 +49,7 @@ public class AboutDialog extends JDialog
      * @param aOwner
      *            the owning frame
      */
-    public AboutDialog( JFrame aOwner )
-    {
+    public AboutDialog( JFrame aOwner ) {
         super( aOwner, "About", true );
         Border b1 = new BevelBorder( BevelBorder.LOWERED );
         Border b2 = new EmptyBorder( 5, 5, 5, 5 );
@@ -94,11 +91,9 @@ public class AboutDialog extends JDialog
 
         // now create and add an OK button
         final JButton ok = new JButton( "OK" );
-        ActionListener l = new ActionListener()
-        {
+        ActionListener l = new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
+            public void actionPerformed( ActionEvent arg0 ) {
                 dispose();
             }
         };
@@ -107,15 +102,15 @@ public class AboutDialog extends JDialog
         panel = new JPanel();
         panel.add( ok );
         getRootPane().setDefaultButton( ok );
-        getRootPane().registerKeyboardAction( l, KeyStroke.getKeyStroke( KeyEvent.VK_ENTER, 0 ), JComponent.WHEN_IN_FOCUSED_WINDOW );
+        getRootPane().registerKeyboardAction( l,
+                                              KeyStroke.getKeyStroke( KeyEvent.VK_ENTER, 0 ),
+                                              JComponent.WHEN_IN_FOCUSED_WINDOW );
         getContentPane().add( panel, BorderLayout.SOUTH );
 
-        addWindowListener( new WindowAdapter()
-        {
+        addWindowListener( new WindowAdapter() {
 
             @Override
-            public void windowOpened( WindowEvent e )
-            {
+            public void windowOpened( WindowEvent e ) {
                 ok.requestFocus();
             }
         } );

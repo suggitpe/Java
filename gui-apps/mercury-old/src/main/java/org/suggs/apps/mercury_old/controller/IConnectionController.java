@@ -4,14 +4,10 @@
  */
 package org.suggs.apps.mercury_old.controller;
 
-
 /**
  * Interface for the connection controller
  * 
  * @author suggitpe
  * @version 1.0 17 Jul 2007
  */
-public interface IConnectionController
-{
-
-}
+public interface IConnectionController {}

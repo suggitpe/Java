@@ -11,18 +11,16 @@ import java.util.Map;
 import javax.naming.Context;
 
 /**
- * High level adapter interface to allow for the differences in
- * function for the various middleware implementations
+ * High level adapter interface to allow for the differences in function for the various middleware
+ * implementations
  * 
  * @author suggitpe
  * @version 1.0 3 Aug 2007
  */
-public interface IConnectionAdapter
-{
+public interface IConnectionAdapter {
 
     /**
-     * Creates the connection context from which we can locate
-     * factories and destinations
+     * Creates the connection context from which we can locate factories and destinations
      * 
      * @param aConnDetails
      *            the connection details required for the connection
@@ -31,8 +29,7 @@ public interface IConnectionAdapter
     Context createJmsContext( IConnectionDetails aConnDetails );
 
     /**
-     * Finds all objects on the messaging broker (queues, topics,
-     * connectionFactories)
+     * Finds all objects on the messaging broker (queues, topics, connectionFactories)
      * 
      * @return a map of the broker objects
      */

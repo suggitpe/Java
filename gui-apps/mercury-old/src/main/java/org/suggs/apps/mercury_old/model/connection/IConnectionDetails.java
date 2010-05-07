@@ -8,14 +8,13 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * An object to wrap up the connection details for a given connection,
- * including all available connection factories.
+ * An object to wrap up the connection details for a given connection, including all available connection
+ * factories.
  * 
  * @author suggitpe
  * @version 1.0 28 Jun 2007
  */
-public interface IConnectionDetails
-{
+public interface IConnectionDetails {
 
     /**
      * Get the name of the connection
@@ -91,9 +90,8 @@ public interface IConnectionDetails
     void setDestinations( Map<String, Set<String>> aMap );
 
     /**
-     * Internal verification method that will self certify that the
-     * current IJmsConnectionDetails object is fully populated for a
-     * connection (including a name)
+     * Internal verification method that will self certify that the current IJmsConnectionDetails object is
+     * fully populated for a connection (including a name)
      * 
      * @return true of the connection details are valid, else false
      */

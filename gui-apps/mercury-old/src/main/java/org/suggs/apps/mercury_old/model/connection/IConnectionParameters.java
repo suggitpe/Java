@@ -12,8 +12,7 @@ import java.util.Map;
  * @author suggitpe
  * @version 1.0 9 Aug 2007
  */
-public interface IConnectionParameters
-{
+public interface IConnectionParameters {
 
     /**
      * Get the connection type

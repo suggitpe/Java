@@ -26,38 +26,34 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 3 Aug 2007
  */
-public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBean
-{
+public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( EmsConnectionAdapter.class );
-    private String mInitialontextFactory_;
+    private String initialontextFactory;
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mInitialontextFactory_, "Muct inject the initial context factory into the Ems Connection Adapter" );
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( initialontextFactory,
+                        "Muct inject the initial context factory into the Ems Connection Adapter" );
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.manager.IConnectionAdapter#createJmsContext(org.suggs.apps.mercury_old.model.connection.IConnectionDetails)
      */
-    public Context createJmsContext( IConnectionDetails aConnDetails )
-    {
+    public Context createJmsContext( IConnectionDetails aConnDetails ) {
         String url = "tcp://" + aConnDetails.getHostname() + ":" + aConnDetails.getPort();
-        LOG.debug( "Creating EMS context with [" + mInitialontextFactory_ + "] and [" + url + "]" );
+        LOG.debug( "Creating EMS context with [" + initialontextFactory + "] and [" + url + "]" );
         Properties p = new Properties();
-        p.put( Context.INITIAL_CONTEXT_FACTORY, mInitialontextFactory_ );
+        p.put( Context.INITIAL_CONTEXT_FACTORY, initialontextFactory );
         p.put( Context.PROVIDER_URL, url );
 
         Context ret = null;
-        try
-        {
+        try {
             ret = new InitialContext( p );
         }
-        catch ( NamingException ne )
-        {
+        catch ( NamingException ne ) {
             LOG.warn( "Failed to create initial context" );
         }
 
@@ -67,8 +63,7 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
     /**
      * @see org.suggs.apps.mercury_old.model.connection.manager.IConnectionAdapter#findAllBrokerObjects()
      */
-    public Map<String, String> findAllBrokerObjects()
-    {
+    public Map<String, String> findAllBrokerObjects() {
         // TODO need to do the impl for all of the broker metadata
         // info
         return null;
@@ -79,9 +74,8 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
      * 
      * @return the name of the initial context factory
      */
-    public String getInitialContextFactory()
-    {
-        return mInitialontextFactory_;
+    public String getInitialContextFactory() {
+        return initialontextFactory;
     }
 
     /**
@@ -90,9 +84,8 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
      * @param aInitialContext
      *            the initial context factory
      */
-    public void setInitialContextFactory( String aInitialContext )
-    {
-        mInitialontextFactory_ = aInitialContext;
+    public void setInitialContextFactory( String aInitialContext ) {
+        initialontextFactory = aInitialContext;
     }
 
 }

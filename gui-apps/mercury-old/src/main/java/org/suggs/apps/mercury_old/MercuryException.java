@@ -10,14 +10,12 @@ package org.suggs.apps.mercury_old;
  * @author suggitpe
  * @version 1.0 21 Jun 2007
  */
-public class MercuryException extends Exception
-{
+public class MercuryException extends Exception {
 
     /**
      * Constructs a new instance.
      */
-    public MercuryException()
-    {
+    public MercuryException() {
         super();
     }
 
@@ -26,8 +24,7 @@ public class MercuryException extends Exception
      * 
      * @param aMessage
      */
-    public MercuryException( String aMessage )
-    {
+    public MercuryException( String aMessage ) {
         super( aMessage );
     }
 
@@ -37,8 +34,7 @@ public class MercuryException extends Exception
      * @param aMessage
      * @param aError
      */
-    public MercuryException( String aMessage, Throwable aError )
-    {
+    public MercuryException( String aMessage, Throwable aError ) {
         super( aMessage, aError );
     }
 
@@ -47,8 +43,7 @@ public class MercuryException extends Exception
      * 
      * @param aError
      */
-    public MercuryException( Throwable aError )
-    {
+    public MercuryException( Throwable aError ) {
         super( aError );
     }
 }

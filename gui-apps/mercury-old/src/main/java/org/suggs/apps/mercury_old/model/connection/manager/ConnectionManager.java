@@ -29,38 +29,33 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public class ConnectionManager extends Observable implements IConnectionManager, InitializingBean
-{
+public class ConnectionManager extends Observable implements IConnectionManager, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( ConnectionManager.class );
 
-    private EConnectionState mConnectionState_ = EConnectionState.INITIAL;
-
-    private Connection mConnection_;
-    private Map<String, IConnectionAdapter> mAdapters_;
+    private EConnectionState connectionState = EConnectionState.INITIAL;
+    private Connection connection;
+    private Map<String, IConnectionAdapter> adapters;
 
     /**
      * Constructs a new instance.
      */
-    public ConnectionManager()
-    {
+    public ConnectionManager() {
         super();
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mAdapters_, "Must inject a map of adapters into the connection manager" );
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( adapters, "Must inject a map of adapters into the connection manager" );
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionManager#getConnectionState()
      */
-    public EConnectionState getConnectionState()
-    {
-        return mConnectionState_;
+    public EConnectionState getConnectionState() {
+        return connectionState;
     }
 
     /**
@@ -69,35 +64,30 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     public void connect( IConnectionParameters aDetails ) throws MercuryConnectionException
 
     {
-        mConnectionState_ = EConnectionState.CONNECTED;
+        connectionState = EConnectionState.CONNECTED;
 
         setChanged();
         notifyObservers();
     }
 
     /**
-     * Get the connection metadata ... ie what is behind the
-     * connection
+     * Get the connection metadata ... ie what is behind the connection
      * 
      * @return the connection meta data
      * @throws MercuryConnectionException
      *             if there is no connection
      */
-    public Map<String, Set<String>> getConnectionData() throws MercuryConnectionException
-    {
-        if ( mConnection_ == null )
-        {
+    public Map<String, Set<String>> getConnectionData() throws MercuryConnectionException {
+        if ( connection == null ) {
             throw new MercuryConnectionException( "No connection has been created.  You must connect to the broker first." );
         }
 
         Map<String, Set<String>> ret = null;
-        try
-        {
-            ConnectionMetaData data = mConnection_.getMetaData();
+        try {
+            ConnectionMetaData data = connection.getMetaData();
             LOG.debug( "Meta data for connection is:\n" + data.toString() );
         }
-        catch ( JMSException je )
-        {
+        catch ( JMSException je ) {
             throw new MercuryConnectionException( "Failed to collect connection metadata", je );
         }
         return ret;
@@ -106,9 +96,8 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionManager#disconnect()
      */
-    public void disconnect() throws MercuryConnectionException
-    {
-        mConnectionState_ = EConnectionState.DISCONNECTED;
+    public void disconnect() throws MercuryConnectionException {
+        connectionState = EConnectionState.DISCONNECTED;
         setChanged();
         notifyObservers();
     }
@@ -116,9 +105,8 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionManager#testConnection(org.suggs.apps.mercury_old.model.connection.IConnectionParameters)
      */
-    public boolean testConnection( IConnectionParameters aDetails )
-    {
-        mConnectionState_ = EConnectionState.DISCONNECTED;
+    public boolean testConnection( IConnectionParameters aDetails ) {
+        connectionState = EConnectionState.DISCONNECTED;
         return false;
     }
 
@@ -127,9 +115,8 @@ public class ConnectionManager extends Observable implements IConnectionManager,
      * 
      * @return the map of adapters
      */
-    public Map<String, IConnectionAdapter> getAdapters()
-    {
-        return mAdapters_;
+    public Map<String, IConnectionAdapter> getAdapters() {
+        return adapters;
     }
 
     /**
@@ -138,9 +125,8 @@ public class ConnectionManager extends Observable implements IConnectionManager,
      * @param aMap
      *            the map of adapters to set
      */
-    public void setAdapters( Map<String, IConnectionAdapter> aMap )
-    {
-        mAdapters_ = aMap;
+    public void setAdapters( Map<String, IConnectionAdapter> aMap ) {
+        adapters = aMap;
     }
 
 }

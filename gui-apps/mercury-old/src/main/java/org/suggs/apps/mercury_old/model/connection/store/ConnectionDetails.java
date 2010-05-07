@@ -17,25 +17,23 @@ import java.util.Set;
  * @author suggitpe
  * @version 1.0 28 Jun 2007
  */
-public class ConnectionDetails implements IConnectionDetails
-{
+public class ConnectionDetails implements IConnectionDetails {
 
-    private String mName_;
-    private EConnectionType mType_;
-    private String mHostName_;
-    private String mPort_;
-    private Map<String, String> mMetaData_ = new HashMap<String, String>();
-    private Map<String, Set<String>> mConnectionFactories_ = new HashMap<String, Set<String>>();
-    private Map<String, Set<String>> mDestinations_ = new HashMap<String, Set<String>>();
+    private String name;
+    private EConnectionType type;
+    private String hostName;
+    private String port;
+    private Map<String, String> metaData = new HashMap<String, String>();
+    private Map<String, Set<String>> connectionFactories = new HashMap<String, Set<String>>();
+    private Map<String, Set<String>> destinations = new HashMap<String, Set<String>>();
 
     /**
      * Constructs a new instance.
      * 
      * @param aName
      */
-    public ConnectionDetails( String aName )
-    {
-        mName_ = aName;
+    public ConnectionDetails( String aName ) {
+        name = aName;
     }
 
     /**
@@ -46,10 +44,9 @@ public class ConnectionDetails implements IConnectionDetails
      * @param aType
      *            the type of the connection
      */
-    public ConnectionDetails( String aName, EConnectionType aType )
-    {
-        mName_ = aName;
-        mType_ = aType;
+    public ConnectionDetails( String aName, EConnectionType aType ) {
+        name = aName;
+        type = aType;
     }
 
     /**
@@ -64,12 +61,11 @@ public class ConnectionDetails implements IConnectionDetails
      * @param aPort
      *            the port number for the server
      */
-    public ConnectionDetails( String aName, EConnectionType aType, String aHostname, String aPort )
-    {
-        mName_ = aName;
-        mType_ = aType;
-        mHostName_ = aHostname;
-        mPort_ = aPort;
+    public ConnectionDetails( String aName, EConnectionType aType, String aHostname, String aPort ) {
+        name = aName;
+        type = aType;
+        hostName = aHostname;
+        port = aPort;
     }
 
     /**
@@ -86,31 +82,29 @@ public class ConnectionDetails implements IConnectionDetails
      * @param aMetaData
      *            additional connection metadata
      */
-    public ConnectionDetails( String aName, EConnectionType aType, String aHostname, String aPort, Map<String, String> aMetaData )
-    {
-        mName_ = aName;
-        mType_ = aType;
-        mHostName_ = aHostname;
-        mPort_ = aPort;
-        mMetaData_ = aMetaData;
+    public ConnectionDetails( String aName, EConnectionType aType, String aHostname, String aPort,
+                              Map<String, String> aMetaData ) {
+        name = aName;
+        type = aType;
+        hostName = aHostname;
+        port = aPort;
+        metaData = aMetaData;
     }
 
     /**
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
-        StringBuffer buff = new StringBuffer( "JmsConnectionDetails: name=[" ).append( mName_ )
+    public String toString() {
+        StringBuffer buff = new StringBuffer( "JmsConnectionDetails: name=[" ).append( name )
             .append( "], type=[" )
-            .append( mType_.name() )
+            .append( type.name() )
             .append( "], hostname=[" )
-            .append( mHostName_ )
+            .append( hostName )
             .append( "], port=[" )
-            .append( mPort_ );
-        for ( String s : mMetaData_.keySet() )
-        {
-            buff.append( "], " ).append( s ).append( "=[" ).append( mMetaData_.get( s ) );
+            .append( port );
+        for ( String s : metaData.keySet() ) {
+            buff.append( "], " ).append( s ).append( "=[" ).append( metaData.get( s ) );
         }
 
         buff.append( "]" );
@@ -120,23 +114,18 @@ public class ConnectionDetails implements IConnectionDetails
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#isConnectionDetailsValid()
      */
-    public boolean isConnectionDetailsValid()
-    {
+    public boolean isConnectionDetailsValid() {
         boolean ret = true;
-        if ( mName_ == null || mName_.length() < 1 )
-        {
+        if ( name == null || name.length() < 1 ) {
             ret = false;
         }
-        else if ( mType_ == null )
-        {
+        else if ( type == null ) {
             ret = false;
         }
-        else if ( mHostName_ == null || mHostName_.length() < 1 )
-        {
+        else if ( hostName == null || hostName.length() < 1 ) {
             ret = false;
         }
-        else if ( mPort_ == null || mPort_.length() < 1 )
-        {
+        else if ( port == null || port.length() < 1 ) {
             ret = false;
         }
         return ret;
@@ -145,33 +134,29 @@ public class ConnectionDetails implements IConnectionDetails
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getName()
      */
-    public String getName()
-    {
-        return mName_;
+    public String getName() {
+        return name;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#setName(java.lang.String)
      */
-    public void setName( String aName )
-    {
-        mName_ = aName;
+    public void setName( String aName ) {
+        name = aName;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getType()
      */
-    public EConnectionType getType()
-    {
-        return mType_;
+    public EConnectionType getType() {
+        return type;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getHostname()
      */
-    public String getHostname()
-    {
-        return mHostName_;
+    public String getHostname() {
+        return hostName;
     }
 
     /**
@@ -180,17 +165,15 @@ public class ConnectionDetails implements IConnectionDetails
      * @param aHost
      *            the host to set
      */
-    public void setHostname( String aHost )
-    {
-        mHostName_ = aHost;
+    public void setHostname( String aHost ) {
+        hostName = aHost;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getPort()
      */
-    public String getPort()
-    {
-        return mPort_;
+    public String getPort() {
+        return port;
     }
 
     /**
@@ -199,17 +182,15 @@ public class ConnectionDetails implements IConnectionDetails
      * @param aPort
      *            the port number to set
      */
-    public void setPort( String aPort )
-    {
-        mPort_ = aPort;
+    public void setPort( String aPort ) {
+        port = aPort;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getMetaData()
      */
-    public Map<String, String> getMetaData()
-    {
-        return mMetaData_;
+    public Map<String, String> getMetaData() {
+        return metaData;
     }
 
     /**
@@ -218,41 +199,36 @@ public class ConnectionDetails implements IConnectionDetails
      * @param aMap
      *            the map of metadata to set
      */
-    public void setMetaData( Map<String, String> aMap )
-    {
-        mMetaData_ = aMap;
+    public void setMetaData( Map<String, String> aMap ) {
+        metaData = aMap;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getConnectionFactories()
      */
-    public Map<String, Set<String>> getConnectionFactories()
-    {
-        return mConnectionFactories_;
+    public Map<String, Set<String>> getConnectionFactories() {
+        return connectionFactories;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#setConnectionFactories(java.util.Map)
      */
-    public void setConnectionFactories( Map<String, Set<String>> aMap )
-    {
-        mConnectionFactories_ = aMap;
+    public void setConnectionFactories( Map<String, Set<String>> aMap ) {
+        connectionFactories = aMap;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getDestinations()
      */
-    public Map<String, Set<String>> getDestinations()
-    {
-        return mDestinations_;
+    public Map<String, Set<String>> getDestinations() {
+        return destinations;
     }
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#setDestinations(java.util.Map)
      */
-    public void setDestinations( Map<String, Set<String>> aMap )
-    {
-        mDestinations_ = aMap;
+    public void setDestinations( Map<String, Set<String>> aMap ) {
+        destinations = aMap;
     }
 
 }

@@ -10,12 +10,11 @@ package org.suggs.apps.mercury_old.model.connection;
  * @author suggitpe
  * @version 1.0 28 Jun 2007
  */
-public interface IConnectionStore
-{
+public interface IConnectionStore {
 
     /**
-     * This will go to the persistent connection store and retrieve a
-     * list of the avialable and known connections
+     * This will go to the persistent connection store and retrieve a list of the avialable and known
+     * connections
      * 
      * @return an array of the names of the connections
      */
@@ -39,20 +38,17 @@ public interface IConnectionStore
      * @throws MercuryConnectionStoreException
      *             when there is an issue with the connection store
      */
-    IConnectionDetails loadConnectionParameters( String aName )
-                    throws MercuryConnectionStoreException;
+    IConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException;
 
     /**
-     * Save a set of connection parameters to the local connection
-     * store
+     * Save a set of connection parameters to the local connection store
      * 
      * @param aDetails
      *            the connection parameters to store
      * @param aName
      *            the name of the connection
      * @throws MercuryConnectionStoreException
-     *             when there is an issue in the saving of connection
-     *             details
+     *             when there is an issue in the saving of connection details
      */
     void saveConnectionParameters( String aName, IConnectionDetails aDetails )
                     throws MercuryConnectionStoreException;

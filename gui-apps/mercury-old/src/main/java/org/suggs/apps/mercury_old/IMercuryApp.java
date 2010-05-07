@@ -10,8 +10,7 @@ package org.suggs.apps.mercury_old;
  * @author suggitpe
  * @version 1.0 20 Jun 2007
  */
-public interface IMercuryApp
-{
+public interface IMercuryApp {
 
     /**
      * Build the GUI and displays it to the user
