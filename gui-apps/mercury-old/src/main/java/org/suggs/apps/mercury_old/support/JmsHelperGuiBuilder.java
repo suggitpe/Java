@@ -32,7 +32,7 @@ public final class JmsHelperGuiBuilder {
      * @param aFrame
      *            the frame to packake and show
      */
-    public static final void displayFrame( JFrame aFrame ) {
+    public static void displayFrame( JFrame aFrame ) {
 
         Assert.notNull( aFrame, "Passed in a null JFrame object" );
 

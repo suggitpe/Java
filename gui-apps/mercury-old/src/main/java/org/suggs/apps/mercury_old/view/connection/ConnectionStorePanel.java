@@ -39,10 +39,8 @@ import org.springframework.util.Assert;
 public class ConnectionStorePanel extends AbstractGridbagPanel implements InitializingBean, Observer {
 
     private static final Log LOG = LogFactory.getLog( ConnectionStorePanel.class );
-    private ConnectionStore mConnectionStore_;
 
-    // private static final String[] TITLES = new String[] { "Name",
-    // "Value" };
+    private ConnectionStore connectionStore;
 
     private final JTextField statusText = new JTextField();
     private final JTextField nameText = new JTextField();
@@ -70,8 +68,8 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
         super( "Connection Store" );
 
         // set up the observable
-        mConnectionStore_ = aConnectionStore;
-        mConnectionStore_.addObserver( this );
+        connectionStore = aConnectionStore;
+        connectionStore.addObserver( this );
     }
 
     /**
@@ -199,7 +197,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     public void afterPropertiesSet() {
-        Assert.notNull( mConnectionStore_, "Must set the connection store into the connection manager panel" );
+        Assert.notNull( connectionStore, "Must set the connection store into the connection manager panel" );
     }
 
     /**
@@ -218,7 +216,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
      * @return the connection store
      */
     public ConnectionStore getConnectionStore() {
-        return mConnectionStore_;
+        return connectionStore;
     }
 
     /**
@@ -228,6 +226,6 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
      *            the connection store to set
      */
     public void setConnectionStore( ConnectionStore aConnStr ) {
-        mConnectionStore_ = aConnStr;
+        connectionStore = aConnStr;
     }
 }

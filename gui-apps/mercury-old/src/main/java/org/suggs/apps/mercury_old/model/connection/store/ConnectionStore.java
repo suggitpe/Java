@@ -35,7 +35,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     private String storeState = "Unsaved";
     private Map<String, IConnectionDetails> connStore = new HashMap<String, IConnectionDetails>();
 
-    private IPersistenceLayer mPersistenceLayer_;
+    private IPersistenceLayer persistenceLayer;
 
     /**
      * Constructs a new instance.
@@ -47,12 +47,12 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
-    public void afterPropertiesSet() throws Exception {
-        Assert.notNull( mPersistenceLayer_, "Must inject a persisztence layer into the connection store" );
+    public void afterPropertiesSet() {
+        Assert.notNull( persistenceLayer, "Must inject a persisztence layer into the connection store" );
 
-        mPersistenceLayer_.verifyPersistenceLayer();
+        persistenceLayer.verifyPersistenceLayer();
         try {
-            Map<String, IConnectionDetails> cs = mPersistenceLayer_.readPersistenceLayer();
+            Map<String, IConnectionDetails> cs = persistenceLayer.readPersistenceLayer();
             if ( cs != null ) {
                 connStore = cs;
             }
@@ -97,7 +97,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
         connStore.remove( aName );
 
         storeState = "Connection removed";
-        mPersistenceLayer_.savePersistenceLayer( connStore );
+        persistenceLayer.savePersistenceLayer( connStore );
         setChanged();
         notifyObservers();
     }
@@ -125,7 +125,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
             storeState = "Saved";
         }
         connStore.put( aDetails.getName(), aDetails );
-        mPersistenceLayer_.savePersistenceLayer( connStore );
+        persistenceLayer.savePersistenceLayer( connStore );
         setChanged();
         notifyObservers();
     }
@@ -173,7 +173,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
      * @return the persistence layer
      */
     public IPersistenceLayer getPersistenceLayer() {
-        return mPersistenceLayer_;
+        return persistenceLayer;
     }
 
     /**
@@ -183,7 +183,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
      *            the persistence layer to inject
      */
     public void setPersistenceLayer( IPersistenceLayer aLayer ) {
-        mPersistenceLayer_ = aLayer;
+        persistenceLayer = aLayer;
 
     }
 

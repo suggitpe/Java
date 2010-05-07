@@ -253,20 +253,20 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
      */
     static class EditableTableItem {
 
-        private String mName_;
-        private String mValue_;
+        private String name;
+        private String value;
 
         /**
          * Constructs a new instance.
          * 
-         * @param name
+         * @param aName
          *            the name to set
-         * @param value
+         * @param aValue
          *            the value to set
          */
-        public EditableTableItem( String name, String value ) {
-            mName_ = name;
-            mValue_ = value;
+        public EditableTableItem( String aName, String aValue ) {
+            name = aName;
+            value = aValue;
         }
 
         /**
@@ -275,17 +275,17 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
          * @return Returns the Name.
          */
         public String getName() {
-            return mName_;
+            return name;
         }
 
         /**
          * Sets the mName_ field to the specified value.
          * 
-         * @param name
+         * @param aName
          *            The Name to set.
          */
-        public void setName( String name ) {
-            mName_ = name;
+        public void setName( String aName ) {
+            name = aName;
         }
 
         /**
@@ -294,17 +294,17 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
          * @return Returns the Value.
          */
         public String getValue() {
-            return mValue_;
+            return value;
         }
 
         /**
          * Sets the Value field to the specified value.
          * 
-         * @param value
+         * @param aValue
          *            The Value to set.
          */
-        public void setValue( String value ) {
-            mValue_ = value;
+        public void setValue( String aValue ) {
+            value = aValue;
         }
 
     }

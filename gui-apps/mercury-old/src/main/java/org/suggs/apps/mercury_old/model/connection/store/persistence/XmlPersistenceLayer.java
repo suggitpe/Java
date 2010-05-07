@@ -381,7 +381,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer {
     /**
      * Create the underlying xml persistence file
      */
-    private static final void createPersistenceFile() {
+    private static void createPersistenceFile() {
         LOG.info( "Creating MERCURY xml persistence store [" + MERCURY_FILE.getAbsolutePath() + "]" );
         try {
             if ( !( MERCURY_FILE.createNewFile() ) ) {

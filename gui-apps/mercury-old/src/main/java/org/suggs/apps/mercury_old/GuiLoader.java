@@ -70,8 +70,7 @@ public final class GuiLoader {
                     helper.buildGui();
                 }
                 catch ( MercuryException jhe ) {
-                    LOG.error( "Exception thrown when trying to build GUI app" );
-                    jhe.printStackTrace();
+                    LOG.error( "Exception thrown when trying to build GUI app", jhe );
                 }
                 LOG.debug( "GUI Run execution complete" );
             }
