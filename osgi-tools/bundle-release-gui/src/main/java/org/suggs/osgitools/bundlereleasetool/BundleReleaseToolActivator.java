@@ -9,7 +9,8 @@ import org.suggs.osgitools.bundlereleasetool.GUI.BundleReleaseToolGui;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.UIManager;
 
@@ -87,8 +88,8 @@ public class BundleReleaseToolActivator implements BundleActivator {
          * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#getBundleData()
          */
         @Override
-        public Vector<BundleData> getBundleData() {
-            Vector<BundleData> ret = new Vector<BundleData>();
+        public List<BundleData> getBundleData() {
+            List<BundleData> ret = new ArrayList<BundleData>();
 
             for ( Bundle bundle : context.getBundles() ) {
                 ret.add( new BundleData( bundle.getBundleId(),

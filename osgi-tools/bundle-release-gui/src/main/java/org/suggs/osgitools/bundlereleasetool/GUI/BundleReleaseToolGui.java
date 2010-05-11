@@ -22,8 +22,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Vector;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -95,8 +96,7 @@ public class BundleReleaseToolGui {
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
         }
         catch ( Exception e ) {
-            // ah well!!
-            LOG.warn( "Unable to set look and feel ... do not consider this something to worry about" );
+            LOG.warn( "Unable to set look and feel ... do not consider this something to worry about", e );
         }
 
         if ( exitOnClose ) {
@@ -461,17 +461,17 @@ public class BundleReleaseToolGui {
      */
     class BundleDataModel extends AbstractTableModel {
 
-        protected Vector<BundleData> mVector_ = new Vector<BundleData>();
+        protected List<BundleData> localList = new ArrayList<BundleData>();
 
         /**
          * Setter for the bundle data
          * 
-         * @param aVector
+         * @param aList
          */
-        public void setBundleData( Vector<BundleData> aVector ) {
-            mVector_.removeAllElements();
-            for ( BundleData d : aVector ) {
-                mVector_.add( d );
+        public void setBundleData( List<BundleData> aList ) {
+            localList.clear();
+            for ( BundleData d : aList ) {
+                localList.add( d );
             }
         }
 
@@ -488,7 +488,7 @@ public class BundleReleaseToolGui {
          */
         @Override
         public int getRowCount() {
-            return mVector_ == null ? 0 : mVector_.size();
+            return localList == null ? 0 : localList.size();
         }
 
         /**
@@ -503,7 +503,7 @@ public class BundleReleaseToolGui {
                 return null;
             }
 
-            BundleData dataRow = mVector_.get( row );
+            BundleData dataRow = localList.get( row );
             return dataRow.getId();
         }
 
@@ -516,7 +516,7 @@ public class BundleReleaseToolGui {
                 return "";
             }
 
-            BundleData dataRow = mVector_.get( row );
+            BundleData dataRow = localList.get( row );
             switch ( col ) {
                 case 0:
                     return dataRow.getId();

@@ -5,7 +5,7 @@
 package org.suggs.osgitools.bundlereleasetool;
 
 import java.awt.event.WindowListener;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Callback used by the GUI to encapsulate any of the
@@ -34,9 +34,9 @@ public interface IBundleReleaseToolContextCallback {
     /**
      * Extracts the bundle data from the bundle context
      * 
-     * @return a Vector of bundle metadata
+     * @return a List of bundle metadata
      */
-    Vector<BundleData> getBundleData();
+    List<BundleData> getBundleData();
 
     /**
      * Starts a bundle with a given ID

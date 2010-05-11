@@ -18,6 +18,21 @@ public class BundleData {
     private String bundleName;
 
     /**
+     * Constructs a new instance.
+     * 
+     * @param aId
+     * @param aState
+     * @param aLocation
+     * @param aBundleName
+     */
+    public BundleData( long aId, String aState, String aLocation, String aBundleName ) {
+        id = Long.valueOf( aId );
+        state = aState;
+        location = aLocation;
+        bundleName = aBundleName;
+    }
+
+    /**
      * Returns the value of id.
      * 
      * @return Returns the id.
@@ -53,18 +68,4 @@ public class BundleData {
         return bundleName;
     }
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aId
-     * @param aState
-     * @param aLocation
-     * @param aBundleName
-     */
-    public BundleData( long aId, String aState, String aLocation, String aBundleName ) {
-        id = Long.valueOf( aId );
-        state = aState;
-        location = aLocation;
-        bundleName = aBundleName;
-    }
 }
