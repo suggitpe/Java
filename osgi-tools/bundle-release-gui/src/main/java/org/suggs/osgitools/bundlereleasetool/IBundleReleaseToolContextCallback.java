@@ -13,12 +13,10 @@ import java.util.Vector;
  * @author suggitpe
  * @version 1.0 9 Jul 2009
  */
-public interface IBundleReleaseToolContextCallback
-{
+public interface IBundleReleaseToolContextCallback {
 
     /**
-     * Build a window listener so that we can do anything context
-     * related from the caller
+     * Build a window listener so that we can do anything context related from the caller
      * 
      * @return a WindowListener
      */

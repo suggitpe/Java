@@ -5,13 +5,12 @@
 package org.suggs.osgitools.bundlereleasetool;
 
 /**
- * Bean object for the bundle domain layer
+ * Bean object for the bundle domain layer.
  * 
  * @author suggitpe
  * @version 1.0 10 Jul 2009
  */
-public class BundleData
-{
+public class BundleData {
 
     private Long id;
     private String state;
@@ -23,8 +22,7 @@ public class BundleData
      * 
      * @return Returns the id.
      */
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
@@ -33,8 +31,7 @@ public class BundleData
      * 
      * @return Returns the state.
      */
-    public String getState()
-    {
+    public String getState() {
         return state;
     }
 
@@ -43,8 +40,7 @@ public class BundleData
      * 
      * @return Returns the location.
      */
-    public String getLocation()
-    {
+    public String getLocation() {
         return location;
     }
 
@@ -53,8 +49,7 @@ public class BundleData
      * 
      * @return Returns the bundleName.
      */
-    public String getBundleName()
-    {
+    public String getBundleName() {
         return bundleName;
     }
 
@@ -66,9 +61,8 @@ public class BundleData
      * @param aLocation
      * @param aBundleName
      */
-    public BundleData( long aId, String aState, String aLocation, String aBundleName )
-    {
-        id = new Long( aId );
+    public BundleData( long aId, String aState, String aLocation, String aBundleName ) {
+        id = Long.valueOf( aId );
         state = aState;
         location = aLocation;
         bundleName = aBundleName;

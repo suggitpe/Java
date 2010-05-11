@@ -13,31 +13,26 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This class will manage the choosing of a file and then making that
- * file available to the caller.
+ * This class will manage the choosing of a file and then making that file available to the caller.
  * 
  * @author suggitpe
  * @version 1.0 8 Jul 2009
  */
-public class ChooseBundleJarAction extends Thread
-{
+public class ChooseBundleJarAction extends Thread {
 
-    // static logger
     private static final Log LOG = LogFactory.getLog( ChooseBundleJarAction.class );
 
-    private String mBundleJar_;
+    private String bundleJar;
 
     /**
      * @see java.lang.Thread#run()
      */
     @Override
-    public void run()
-    {
+    public void run() {
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory( new File( System.getProperty( "user.home" ) ) );
         chooser.setDialogTitle( "Please select bundle jar file to release" );
-        chooser.setFileFilter( new FileFilter()
-        {
+        chooser.setFileFilter( new FileFilter() {
 
             /**
              * Filter criterion.
@@ -45,10 +40,8 @@ public class ChooseBundleJarAction extends Thread
              * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
              */
             @Override
-            public boolean accept( File aPathname )
-            {
-                if ( aPathname.isDirectory() || aPathname.getName().endsWith( ".jar" ) )
-                {
+            public boolean accept( File aPathname ) {
+                if ( aPathname.isDirectory() || aPathname.getName().endsWith( ".jar" ) ) {
                     return true;
                 }
                 return false;
@@ -60,34 +53,30 @@ public class ChooseBundleJarAction extends Thread
              * @see javax.swing.filechooser.FileFilter#getDescription()
              */
             @Override
-            public String getDescription()
-            {
+            public String getDescription() {
                 return "*.jar";
             }
         } );
 
         int result = chooser.showOpenDialog( null );
 
-        if ( result != JFileChooser.APPROVE_OPTION )
-        {
+        if ( result != JFileChooser.APPROVE_OPTION ) {
             LOG.debug( "Chooser cancelled" );
             return;
         }
 
         File jar = chooser.getSelectedFile();
-        mBundleJar_ = jar.toURI().toString();
+        bundleJar = jar.toURI().toString();
     }
 
     /**
-     * Getter for the bundle jar name. NB this will only work once you
-     * have called the run method and actually proceeded the chooser
-     * dialog.
+     * Getter for the bundle jar name. NB this will only work once you have called the run method and actually
+     * proceeded the chooser dialog.
      * 
      * @return the name of the bundle jar
      */
-    public String getBundleJarName()
-    {
-        return mBundleJar_;
+    public String getBundleJarName() {
+        return bundleJar;
     }
 
 }

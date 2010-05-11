@@ -21,32 +21,27 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 
 /**
- * Activator for the Bundle Release Tool GUI so that we can activate
- * it through the OSGi state change.
+ * Activator for the Bundle Release Tool GUI so that we can activate it through the OSGi state change.
  * 
  * @author suggitpe
  * @version 1.0 1 Jul 2009
  */
-public class BundleReleaseToolActivator implements BundleActivator
-{
+public class BundleReleaseToolActivator implements BundleActivator {
 
     private static final Log LOG = LogFactory.getLog( BundleReleaseToolActivator.class );
 
-    private BundleContext mCtx_;
+    private BundleContext context;
 
     // this is where we encapsulate all of the bundle related
     // activity
-    private IBundleReleaseToolContextCallback mCallback = new IBundleReleaseToolContextCallback()
-    {
+    private IBundleReleaseToolContextCallback callback = new IBundleReleaseToolContextCallback() {
 
         /**
          * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#buildWindowListener()
          */
         @Override
-        public WindowListener buildWindowListener()
-        {
-            return new WindowAdapter()
-            {
+        public WindowListener buildWindowListener() {
+            return new WindowAdapter() {
 
                 /**
                  * Stop the underlying bundle as the window closes.
@@ -54,18 +49,14 @@ public class BundleReleaseToolActivator implements BundleActivator
                  * @see java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)
                  */
                 @Override
-                public void windowClosing( WindowEvent we )
-                {
-                    try
-                    {
+                public void windowClosing( WindowEvent we ) {
+                    try {
                         LOG.debug( "Stopping bundle" );
-                        if ( mCtx_ != null )
-                        {
-                            mCtx_.getBundle().stop();
+                        if ( context != null ) {
+                            context.getBundle().stop();
                         }
                     }
-                    catch ( BundleException be )
-                    {
+                    catch ( BundleException be ) {
                         // nadda
                     }
                 }
@@ -78,15 +69,12 @@ public class BundleReleaseToolActivator implements BundleActivator
          * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#installBundle(java.lang.String)
          */
         @Override
-        public boolean installBundle( String uri )
-        {
-            try
-            {
-                mCtx_.installBundle( uri );
+        public boolean installBundle( String uri ) {
+            try {
+                context.installBundle( uri );
                 LOG.debug( "Installing bundle from [" + uri + "]" );
             }
-            catch ( BundleException be )
-            {
+            catch ( BundleException be ) {
                 LOG.error( "Failed to release bundle", be );
                 return false;
             }
@@ -94,18 +82,15 @@ public class BundleReleaseToolActivator implements BundleActivator
         }
 
         /**
-         * Interrogates the bundle context and retrieves the bundles
-         * that are of use to us
+         * Interrogates the bundle context and retrieves the bundles that are of use to us
          * 
          * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#getBundleData()
          */
         @Override
-        public Vector<BundleData> getBundleData()
-        {
+        public Vector<BundleData> getBundleData() {
             Vector<BundleData> ret = new Vector<BundleData>();
 
-            for ( Bundle bundle : mCtx_.getBundles() )
-            {
+            for ( Bundle bundle : context.getBundles() ) {
                 ret.add( new BundleData( bundle.getBundleId(),
                                          getBundleState( bundle.getState() ),
                                          bundle.getLocation(),
@@ -116,16 +101,13 @@ public class BundleReleaseToolActivator implements BundleActivator
         }
 
         /**
-         * Private method to get the correct state of the bundle from
-         * the state int
+         * Private method to get the correct state of the bundle from the state int
          * 
          * @param aState
          * @return
          */
-        private String getBundleState( int aState )
-        {
-            switch ( aState )
-            {
+        private String getBundleState( int aState ) {
+            switch ( aState ) {
                 case Bundle.UNINSTALLED:
                     return "Uninstalled";
                 case Bundle.INSTALLED:
@@ -147,20 +129,17 @@ public class BundleReleaseToolActivator implements BundleActivator
          * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#removeBundle(java.lang.Long)
          */
         @Override
-        public void removeBundle( Long bundleId ) throws BundleGuiException
-        {
-            Bundle b = mCtx_.getBundle( bundleId.longValue() );
+        public void removeBundle( Long bundleId ) throws BundleGuiException {
+            Bundle b = context.getBundle( bundleId.longValue() );
 
-            try
-            {
+            try {
                 b.uninstall();
             }
-            catch ( BundleException be )
-            {
+            catch ( BundleException be ) {
                 LOG.error( "Bundle Exception thrown when calling uninstall on Bundle with name ["
                            + b.getSymbolicName() + "]", be );
-                throw new BundleGuiException( "Failed to uninstall bundle with ID ["
-                                              + b.getBundleId() + "]", be );
+                throw new BundleGuiException( "Failed to uninstall bundle with ID [" + b.getBundleId() + "]",
+                                              be );
             }
         }
 
@@ -168,19 +147,15 @@ public class BundleReleaseToolActivator implements BundleActivator
          * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#startBundle(java.lang.Long)
          */
         @Override
-        public void startBundle( Long bundleId ) throws BundleGuiException
-        {
-            Bundle b = mCtx_.getBundle( bundleId.longValue() );
-            try
-            {
+        public void startBundle( Long bundleId ) throws BundleGuiException {
+            Bundle b = context.getBundle( bundleId.longValue() );
+            try {
                 b.start();
             }
-            catch ( BundleException be )
-            {
+            catch ( BundleException be ) {
                 LOG.error( "Bundle Exception thrown when calling start on Bundle with name ["
                            + b.getSymbolicName() + "]", be );
-                throw new BundleGuiException( "Failed to start bundle with ID [" + b.getBundleId()
-                                              + "]", be );
+                throw new BundleGuiException( "Failed to start bundle with ID [" + b.getBundleId() + "]", be );
             }
         }
 
@@ -188,19 +163,15 @@ public class BundleReleaseToolActivator implements BundleActivator
          * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#stopBundle(java.lang.Long)
          */
         @Override
-        public void stopBundle( Long bundleId ) throws BundleGuiException
-        {
-            Bundle b = mCtx_.getBundle( bundleId.longValue() );
-            try
-            {
+        public void stopBundle( Long bundleId ) throws BundleGuiException {
+            Bundle b = context.getBundle( bundleId.longValue() );
+            try {
                 b.stop();
             }
-            catch ( BundleException be )
-            {
+            catch ( BundleException be ) {
                 LOG.error( "Bundle Exception thrown when calling stop on Bundle with name ["
                            + b.getSymbolicName() + "]", be );
-                throw new BundleGuiException( "Failed to stop bundle with ID [" + b.getBundleId()
-                                              + "]", be );
+                throw new BundleGuiException( "Failed to stop bundle with ID [" + b.getBundleId() + "]", be );
             }
         }
 
@@ -208,19 +179,15 @@ public class BundleReleaseToolActivator implements BundleActivator
          * @see org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback#updateBundle(java.lang.Long)
          */
         @Override
-        public void updateBundle( Long bundleId ) throws BundleGuiException
-        {
-            Bundle b = mCtx_.getBundle( bundleId.longValue() );
-            try
-            {
+        public void updateBundle( Long bundleId ) throws BundleGuiException {
+            Bundle b = context.getBundle( bundleId.longValue() );
+            try {
                 b.update();
             }
-            catch ( BundleException be )
-            {
+            catch ( BundleException be ) {
                 LOG.error( "Bundle Exception thrown when calling update on Bundle with name ["
                            + b.getSymbolicName() + "]", be );
-                throw new BundleGuiException( "Failed to update bundle with ID [" + b.getBundleId()
-                                              + "]", be );
+                throw new BundleGuiException( "Failed to update bundle with ID [" + b.getBundleId() + "]", be );
             }
         }
 
@@ -232,14 +199,13 @@ public class BundleReleaseToolActivator implements BundleActivator
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
     @Override
-    public void start( final BundleContext aCtx ) throws Exception
-    {
+    public void start( final BundleContext aCtx ) throws Exception {
         LOG.debug( "Starting the Bundle Release Tool GUI" );
-        mCtx_ = aCtx;
+        context = aCtx;
         UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
         // bit confusing here as we are using the callback to pass in
         // all of the bundle related functionality
-        new BundleReleaseToolGui( mCallback );
+        new BundleReleaseToolGui( callback );
     }
 
     /**
@@ -248,10 +214,9 @@ public class BundleReleaseToolActivator implements BundleActivator
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
     @Override
-    public void stop( final BundleContext aCtx ) throws Exception
-    {
+    public void stop( final BundleContext aCtx ) throws Exception {
         LOG.debug( "Stopping the Bundle Release Tool GUI" );
-        mCtx_ = null;
+        context = null;
     }
 
 }

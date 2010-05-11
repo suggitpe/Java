@@ -4,21 +4,18 @@
  */
 package org.suggs.osgitools.bundlereleasetool;
 
-
 /**
- * TODO Write javadoc for BundleGuiException
+ * Exception class for the GUI.
  * 
  * @author suggitpe
  * @version 1.0 16 Jul 2009
  */
-public class BundleGuiException extends Exception
-{
+public class BundleGuiException extends Exception {
 
     /**
      * Constructs a new instance.
      */
-    public BundleGuiException()
-    {
+    public BundleGuiException() {
         super();
     }
 
@@ -27,8 +24,7 @@ public class BundleGuiException extends Exception
      * 
      * @param aMessage
      */
-    public BundleGuiException( String aMessage )
-    {
+    public BundleGuiException( String aMessage ) {
         super( aMessage );
     }
 
@@ -38,8 +34,7 @@ public class BundleGuiException extends Exception
      * @param aMessage
      * @param aError
      */
-    public BundleGuiException( String aMessage, Throwable aError )
-    {
+    public BundleGuiException( String aMessage, Throwable aError ) {
         super( aMessage, aError );
     }
 
@@ -48,8 +43,7 @@ public class BundleGuiException extends Exception
      * 
      * @param aError
      */
-    public BundleGuiException( Throwable aError )
-    {
+    public BundleGuiException( Throwable aError ) {
         super( aError );
     }
 }
