@@ -10,8 +10,7 @@ package com.ubs.orca.orcabridge.jmsclient;
  * @author suggitpe
  * @version 1.0 21 Oct 2009
  */
-public interface IJmsClient
-{
+public interface IJmsClient {
 
     /**
      * Connects to a JMS broker with no security credentials.
@@ -39,12 +38,10 @@ public interface IJmsClient
     void disconnect() throws JmsClientException;
 
     /**
-     * Perform the JMS specific processing as required within a
-     * specified connection transaction.
+     * Perform the JMS specific processing as required within a specified connection transaction.
      * 
      * @param aActionCallback
-     *            a callback that will implement the required
-     *            processing.
+     *            a callback that will implement the required processing.
      * @throws JmsClientException
      */
     void processAction( IJmsAction aActionCallback ) throws JmsClientException;

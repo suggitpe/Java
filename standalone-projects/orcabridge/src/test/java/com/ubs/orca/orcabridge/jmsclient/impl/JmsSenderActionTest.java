@@ -32,8 +32,7 @@ import static org.easymock.EasyMock.expectLastCall;
  * @author suggitpe
  * @version 1.0 14 Oct 2009
  */
-public class JmsSenderActionTest
-{
+public class JmsSenderActionTest {
 
     private static final Log LOG = LogFactory.getLog( JmsSenderActionTest.class );
 
@@ -47,15 +46,13 @@ public class JmsSenderActionTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + JmsSenderActionTest.class.getSimpleName() );
     }
 
     /** */
     @Before
-    public void doBefore()
-    {
+    public void doBefore() {
         LOG.debug( "-------------" );
         ctrl = EasyMock.createControl();
         mockMessageFacade = ctrl.createMock( IMessageFacade.class );
@@ -68,8 +65,7 @@ public class JmsSenderActionTest
     }
 
     /**
-     * Test that for the normal case, a message is sent correctly and
-     * no exceptions are raised
+     * Test that for the normal case, a message is sent correctly and no exceptions are raised
      * 
      * @throws JmsClientException
      * @throws JMSException
@@ -77,12 +73,9 @@ public class JmsSenderActionTest
      */
     @Test
     public void testNormalSend() throws JmsClientException, JMSException,
-                    OrcaBridgeMessageConversionException
-    {
-        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
-            .once();
-        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage )
-            .once();
+                    OrcaBridgeMessageConversionException {
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer ).once();
+        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage ).once();
 
         mockMessageProducer.send( mockJmsMessage );
         expectLastCall().once();
@@ -99,15 +92,13 @@ public class JmsSenderActionTest
     }
 
     /**
-     * Tests that when we fail to create a message producer we get an
-     * exception from the top of the stack
+     * Tests that when we fail to create a message producer we get an exception from the top of the stack
      * 
      * @throws JmsClientException
      * @throws JMSException
      */
     @Test(expected = JmsClientException.class)
-    public void testSendWithFailInProducerCreate() throws JmsClientException, JMSException
-    {
+    public void testSendWithFailInProducerCreate() throws JmsClientException, JMSException {
         expect( mockSession.createProducer( mockDestination ) ).andThrow( new JMSException( "Producer create fail: this is all part of the test" ) );
 
         ctrl.replay();
@@ -116,8 +107,8 @@ public class JmsSenderActionTest
     }
 
     /**
-     * Tests that when we have a message conversion issue that we
-     * correctly propogate the right type of exception up the stack
+     * Tests that when we have a message conversion issue that we correctly propogate the right type of
+     * exception up the stack
      * 
      * @throws JmsClientException
      * @throws JMSException
@@ -125,10 +116,8 @@ public class JmsSenderActionTest
      */
     @Test(expected = JmsClientException.class)
     public void testSendWithFailInJmsMessageBuild() throws JmsClientException, JMSException,
-                    OrcaBridgeMessageConversionException
-    {
-        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
-            .once();
+                    OrcaBridgeMessageConversionException {
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer ).once();
         expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andThrow( new OrcaBridgeMessageConversionException( "JMS Message build fail: this is all part of the test" ) );
 
         mockMessageProducer.close();
@@ -141,8 +130,8 @@ public class JmsSenderActionTest
     }
 
     /**
-     * Tests that when there is a failure in the send process, that
-     * the correct exception type is passed up the stack.
+     * Tests that when there is a failure in the send process, that the correct exception type is passed up
+     * the stack.
      * 
      * @throws JmsClientException
      * @throws JMSException
@@ -150,12 +139,9 @@ public class JmsSenderActionTest
      */
     @Test(expected = JmsClientException.class)
     public void testSendWithFailInSend() throws JmsClientException, JMSException,
-                    OrcaBridgeMessageConversionException
-    {
-        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
-            .once();
-        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage )
-            .once();
+                    OrcaBridgeMessageConversionException {
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer ).once();
+        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage ).once();
 
         mockMessageProducer.send( mockJmsMessage );
         expectLastCall().andThrow( new JMSException( "Fail in JMS send: this is all part of the test" ) );
@@ -169,8 +155,7 @@ public class JmsSenderActionTest
     }
 
     /**
-     * Tests that if there is a failure in the closing of the producer
-     * then no exceptions are thrown.
+     * Tests that if there is a failure in the closing of the producer then no exceptions are thrown.
      * 
      * @throws JmsClientException
      * @throws JMSException
@@ -178,13 +163,10 @@ public class JmsSenderActionTest
      */
     @Test
     public void testSendWithFailInProducerClose() throws JmsClientException, JMSException,
-                    OrcaBridgeMessageConversionException
-    {
+                    OrcaBridgeMessageConversionException {
 
-        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
-            .once();
-        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage )
-            .once();
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer ).once();
+        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage ).once();
 
         mockMessageProducer.send( mockJmsMessage );
         expectLastCall();
@@ -202,8 +184,8 @@ public class JmsSenderActionTest
     }
 
     /**
-     * Tests that if we get an exception during the commit phase, that
-     * the correct exception is raise up the stack.
+     * Tests that if we get an exception during the commit phase, that the correct exception is raise up the
+     * stack.
      * 
      * @throws JmsClientException
      * @throws JMSException
@@ -211,13 +193,10 @@ public class JmsSenderActionTest
      */
     @Test(expected = JmsClientException.class)
     public void testSendWithFailInCommit() throws JmsClientException, JMSException,
-                    OrcaBridgeMessageConversionException
-    {
+                    OrcaBridgeMessageConversionException {
 
-        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer )
-            .once();
-        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage )
-            .once();
+        expect( mockSession.createProducer( mockDestination ) ).andReturn( mockMessageProducer ).once();
+        expect( mockMessageFacade.buildJmsMessage( mockSession ) ).andReturn( mockJmsMessage ).once();
 
         mockMessageProducer.send( mockJmsMessage );
         expectLastCall();

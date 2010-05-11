@@ -19,19 +19,15 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * This is the core orca callback that we are passing to the
- * OrcaClient. It is called each time a new message is received onto
- * the sink client token.<br/>
- * <b>We have to be careful with transactions in this callback. The
- * completion of the Orca onReceived methods will end up with a
- * rollback and ultimate failure on the Orca client itself.</b>
+ * This is the core orca callback that we are passing to the OrcaClient. It is called each time a new message
+ * is received onto the sink client token.<br/>
+ * <b>We have to be careful with transactions in this callback. The completion of the Orca onReceived methods
+ * will end up with a rollback and ultimate failure on the Orca client itself.</b>
  * 
  * @author suggitpe
  * @version 1.0 9 Nov 2009
  */
-public class OrcaSingleMessageReaderCallback
-    implements IOrcaSinkSingleMsgCallback, InitializingBean
-{
+public class OrcaSingleMessageReaderCallback implements IOrcaSinkSingleMsgCallback, InitializingBean {
 
     private IMessageProcessor messageProcessor;
 
@@ -41,8 +37,7 @@ public class OrcaSingleMessageReaderCallback
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception
-    {
+    public void afterPropertiesSet() {
         Assert.notNull( messageProcessor,
                         "No message processor has been set on the OrcaSingleMessageReaderCallback." );
     }
@@ -51,9 +46,7 @@ public class OrcaSingleMessageReaderCallback
      * @see com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback#onReceived(com.ubs.orca.client.api.IAttributesConversationMessage)
      */
     @Override
-    public void onReceived( IAttributesConversationMessage aAttributesMesage )
-                    throws OrcaBridgeException
-    {
+    public void onReceived( IAttributesConversationMessage aAttributesMesage ) throws OrcaBridgeException {
         passOrcaMessageToTheMessageProcessor( aAttributesMesage );
     }
 
@@ -61,24 +54,18 @@ public class OrcaSingleMessageReaderCallback
      * @see com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback#onReceived(com.ubs.orca.client.api.ITextConversationMessage)
      */
     @Override
-    public void onReceived( ITextConversationMessage aTextConversationMessage )
-                    throws OrcaBridgeException
-    {
+    public void onReceived( ITextConversationMessage aTextConversationMessage ) throws OrcaBridgeException {
         passOrcaMessageToTheMessageProcessor( aTextConversationMessage );
     }
 
-    private void passOrcaMessageToTheMessageProcessor( IOrcaMessage aMessage )
-                    throws OrcaBridgeException
-    {
-        if ( LOG.isInfoEnabled() )
-        {
+    private void passOrcaMessageToTheMessageProcessor( IOrcaMessage aMessage ) throws OrcaBridgeException {
+        if ( LOG.isInfoEnabled() ) {
             LOG.info( "Passing received message [" + aMessage + "] to message Processor." );
         }
 
         messageProcessor.processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
 
-        if ( LOG.isInfoEnabled() )
-        {
+        if ( LOG.isInfoEnabled() ) {
             LOG.info( "Message routing for message ["
                       + aMessage
                       + "] completed.  Allowing callback to complete so that Orca transaction can be committed." );
@@ -91,8 +78,7 @@ public class OrcaSingleMessageReaderCallback
      * @param aMessageProcessor
      *            The messageProcessor to set.
      */
-    public void setMessageProcessor( IMessageProcessor aMessageProcessor )
-    {
+    public void setMessageProcessor( IMessageProcessor aMessageProcessor ) {
         messageProcessor = aMessageProcessor;
     }
 

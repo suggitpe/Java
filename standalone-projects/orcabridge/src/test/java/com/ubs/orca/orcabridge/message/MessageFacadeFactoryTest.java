@@ -25,15 +25,13 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public class MessageFacadeFactoryTest
-{
+public class MessageFacadeFactoryTest {
 
     private static final Log LOG = LogFactory.getLog( MessageFacadeFactoryTest.class );
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + MessageFacadeFactoryTest.class.getSimpleName() );
     }
 
@@ -43,30 +41,25 @@ public class MessageFacadeFactoryTest
      * @throws Exception
      */
     @Before
-    public void doBefore() throws Exception
-    {
+    public void doBefore() throws Exception {
         LOG.debug( "-----------------" );
     }
 
     /**
-     * Tests that the message facade factory creates the correct
-     * message facade type with a jms message.
+     * Tests that the message facade factory creates the correct message facade type with a jms message.
      */
     @Test
-    public void testBuildJmsMessageFacade()
-    {
+    public void testBuildJmsMessageFacade() {
         Message msg = createMock( Message.class );
         IMessageFacade facade = MessageFacadeFactory.createMessageAdapter( msg );
         assertThat( facade, is( JmsMessageFacade.class ) );
     }
 
     /**
-     * Tests that the message facade factory creates the correct
-     * facade type with an Orca message
+     * Tests that the message facade factory creates the correct facade type with an Orca message
      */
     @Test
-    public void testBuildOrcaMessageFacade()
-    {
+    public void testBuildOrcaMessageFacade() {
         IOrcaMessage msg = createMock( IOrcaMessage.class );
         IMessageFacade facade = MessageFacadeFactory.createMessageAdapter( msg );
         assertThat( facade, is( OrcaMessageFacade.class ) );

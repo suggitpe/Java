@@ -24,8 +24,7 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 29 Oct 2009
  */
-public class OrcaMessageSender implements IMessageProcessor, InitializingBean
-{
+public class OrcaMessageSender implements IMessageProcessor, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( OrcaMessageSender.class );
 
@@ -35,8 +34,7 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception
-    {
+    public void afterPropertiesSet() {
         Assert.notNull( orcaClient, "No Orca client has been set on the Orca Message Sender" );
     }
 
@@ -45,16 +43,13 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
      * 
      * @throws OrcaBridgeException
      */
-    public void init() throws OrcaBridgeException
-    {
+    public void init() throws OrcaBridgeException {
         LOG.info( "Initialising the sender Orca connection" );
 
-        try
-        {
+        try {
             orcaClient.connect();
         }
-        catch ( OrcaException oe )
-        {
+        catch ( OrcaException oe ) {
             throw new OrcaBridgeException( "Failed to initialise the Orca client", oe );
         }
     }
@@ -63,34 +58,28 @@ public class OrcaMessageSender implements IMessageProcessor, InitializingBean
      * @see com.ubs.orca.orcabridge.IMessageProcessor#processMessage(com.ubs.orca.orcabridge.IMessageFacade)
      */
     @Override
-    public void processMessage( IMessageFacade aMessageFacade ) throws OrcaBridgeException
-    {
-        try
-        {
+    public void processMessage( IMessageFacade aMessageFacade ) throws OrcaBridgeException {
+        try {
             IConversationMessage orcaMessage = aMessageFacade.buildOrcaMesage( orcaClient );
             orcaClient.send( orcaMessage );
         }
-        catch ( OrcaException oe )
-        {
+        catch ( OrcaException oe ) {
             throw new OrcaBridgeException( "Failed to send Orca message", oe );
         }
-        catch ( OrcaBridgeMessageConversionException obmce )
-        {
-            throw new OrcaBridgeException( "Failed to create Orca message from message facade",
-                                           obmce );
+        catch ( OrcaBridgeMessageConversionException obmce ) {
+            throw new OrcaBridgeException( "Failed to create Orca message from message facade", obmce );
         }
 
     }
 
     /**
-     * Sets the orcaClient. This method is here to support replacing
-     * the orca client with mocks for unit tests.
+     * Sets the orcaClient. This method is here to support replacing the orca client with mocks for unit
+     * tests.
      * 
      * @param aOrcaClient
      *            the orca client
      */
-    public void setOrcaClient( IOrcaClient aOrcaClient )
-    {
+    public void setOrcaClient( IOrcaClient aOrcaClient ) {
         orcaClient = aOrcaClient;
     }
 

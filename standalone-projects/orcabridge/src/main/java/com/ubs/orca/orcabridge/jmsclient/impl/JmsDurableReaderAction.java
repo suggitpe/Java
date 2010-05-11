@@ -24,8 +24,7 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public class JmsDurableReaderAction implements IJmsAction
-{
+public class JmsDurableReaderAction implements IJmsAction {
 
     private static final Log LOG = LogFactory.getLog( JmsDurableReaderAction.class );
     private IJmsClientSingleMsgCallback clientCallback;
@@ -42,9 +41,8 @@ public class JmsDurableReaderAction implements IJmsAction
      * @param aDurableMessageSelector
      *            the message selector to use with the durable
      */
-    public JmsDurableReaderAction( IJmsClientSingleMsgCallback aProcessingCallback,
-                                   String aDurableName, String aDurableMessageSelector )
-    {
+    public JmsDurableReaderAction( IJmsClientSingleMsgCallback aProcessingCallback, String aDurableName,
+                                   String aDurableMessageSelector ) {
         super();
         clientCallback = aProcessingCallback;
         durableName = aDurableName;
@@ -56,11 +54,8 @@ public class JmsDurableReaderAction implements IJmsAction
      *      javax.jms.Destination)
      */
     @Override
-    public void actionInTransaction( Session aSession, Destination aDestination )
-                    throws JmsClientException
-    {
-        if ( !( aDestination instanceof Topic ) )
-        {
+    public void actionInTransaction( Session aSession, Destination aDestination ) throws JmsClientException {
+        if ( !( aDestination instanceof Topic ) ) {
             throw new JmsClientException( "Trying to build a durable subscription from a ["
                                           + aDestination.getClass().getName()
                                           + "], destination should be a topic" );
@@ -68,62 +63,47 @@ public class JmsDurableReaderAction implements IJmsAction
 
         Topic topic = (Topic) aDestination;
         TopicSubscriber subscriber = null;
-        try
-        {
-            subscriber = aSession.createDurableSubscriber( topic,
-                                                           durableName,
-                                                           durableMessageSelector,
-                                                           true );
+        try {
+            subscriber = aSession.createDurableSubscriber( topic, durableName, durableMessageSelector, true );
             retriveAndProcessMessage( aSession, subscriber );
 
         }
-        catch ( JMSException jmse )
-        {
+        catch ( JMSException jmse ) {
             String err = "Failed to create Subscriber for destination [" + aDestination + "]: "
                          + jmse.getMessage();
             LOG.error( err, jmse );
             throw new JmsClientException( err, jmse );
         }
-        finally
-        {
+        finally {
             closeSubscriber( subscriber );
         }
     }
 
-    private void closeSubscriber( TopicSubscriber aSubscriber )
-    {
-        if ( aSubscriber != null )
-        {
-            try
-            {
+    private void closeSubscriber( TopicSubscriber aSubscriber ) {
+        if ( aSubscriber != null ) {
+            try {
                 aSubscriber.close();
             }
-            catch ( JMSException jmse )
-            {
+            catch ( JMSException jmse ) {
                 LOG.error( "Failed to close subscriber", jmse );
             }
         }
     }
 
     private void retriveAndProcessMessage( Session aSession, TopicSubscriber aSubscriber )
-                    throws JmsClientException
-    {
+                    throws JmsClientException {
         Message message = null;
         long start = 0;
         long end = 0;
-        try
-        {
-            while ( ( message = aSubscriber.receiveNoWait() ) != null )
-            {
-                if ( LOG.isInfoEnabled() )
-                {
+        try {
+            while ( ( message = aSubscriber.receiveNoWait() ) != null ) {
+                if ( LOG.isInfoEnabled() ) {
                     start = System.currentTimeMillis();
                 }
 
                 clientCallback.onReceived( message );
 
-                if ( LOG.isInfoEnabled() )
-                {
+                if ( LOG.isInfoEnabled() ) {
                     end = System.currentTimeMillis();
                     LOG.info( "Time to process message was [" + Long.toString( end - start )
                               + "] milliseconds" );
@@ -131,10 +111,8 @@ public class JmsDurableReaderAction implements IJmsAction
                 aSession.commit();
             }
         }
-        catch ( JMSException jmse )
-        {
-            throw new JmsClientException( "Error occured when receiving message from destination",
-                                          jmse );
+        catch ( JMSException jmse ) {
+            throw new JmsClientException( "Error occured when receiving message from destination", jmse );
         }
     }
 

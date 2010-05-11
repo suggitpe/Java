@@ -28,8 +28,7 @@ import static org.junit.Assert.fail;
  * @author suggitpe
  * @version 1.0 9 Nov 2009
  */
-public class OrcaReaderCallbackUnitTest
-{
+public class OrcaReaderCallbackUnitTest {
 
     private static final Log LOG = LogFactory.getLog( OrcaReaderCallbackUnitTest.class );
 
@@ -39,8 +38,7 @@ public class OrcaReaderCallbackUnitTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + JmsReaderCallbackUnitTest.class.getSimpleName() );
     }
 
@@ -50,8 +48,7 @@ public class OrcaReaderCallbackUnitTest
      * @throws Exception
      */
     @Before
-    public void doBefore() throws Exception
-    {
+    public void doBefore() throws Exception {
         LOG.debug( "-----------------" );
         ctrl = createControl();
         mockMessageProcessor = ctrl.createMock( IMessageProcessor.class );
@@ -64,14 +61,12 @@ public class OrcaReaderCallbackUnitTest
     }
 
     /**
-     * Tests that the message callback is called and that it then
-     * delegates to the message processor.
+     * Tests that the message callback is called and that it then delegates to the message processor.
      * 
      * @throws Throwable
      */
     @Test
-    public void testOrcaCallbackWithAttributesMessage() throws Throwable
-    {
+    public void testOrcaCallbackWithAttributesMessage() throws Throwable {
         mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().once();
 
@@ -85,14 +80,12 @@ public class OrcaReaderCallbackUnitTest
     }
 
     /**
-     * Tests that the message callback is called and that it then
-     * delegates to the message processor.
+     * Tests that the message callback is called and that it then delegates to the message processor.
      * 
      * @throws Throwable
      */
     @Test
-    public void testOrcaCallbackWithTextMessage() throws Throwable
-    {
+    public void testOrcaCallbackWithTextMessage() throws Throwable {
         mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().once();
 
@@ -106,14 +99,13 @@ public class OrcaReaderCallbackUnitTest
     }
 
     /**
-     * Test that the correc texception pops out of teh top of the
-     * stack when there is an issue in teh message processor layer.
+     * Test that the correc texception pops out of teh top of the stack when there is an issue in teh message
+     * processor layer.
      * 
      * @throws Throwable
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testOrcaCallbackWithProcessFailure() throws Throwable
-    {
+    public void testOrcaCallbackWithProcessFailure() throws Throwable {
         mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().andThrow( new OrcaBridgeException( "This is all part of the test" ) );
 

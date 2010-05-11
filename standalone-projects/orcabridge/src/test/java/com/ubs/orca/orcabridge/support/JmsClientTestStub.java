@@ -13,8 +13,7 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  * @author suggitpe
  * @version 1.0 26 Oct 2009
  */
-public class JmsClientTestStub implements IJmsClient
-{
+public class JmsClientTestStub implements IJmsClient {
 
     private static final Log LOG = LogFactory.getLog( JmsClientTestStub.class );
 
@@ -22,18 +21,15 @@ public class JmsClientTestStub implements IJmsClient
      * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#connect()
      */
     @Override
-    public void connect() throws JmsClientException
-    {
+    public void connect() throws JmsClientException {
         LOG.debug( "***** Stub JMS client - Performing Connect" );
     }
 
     /**
-     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#connect(java.lang.String,
-     *      java.lang.String)
+     * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#connect(java.lang.String, java.lang.String)
      */
     @Override
-    public void connect( String aUsername, String aPassword ) throws JmsClientException
-    {
+    public void connect( String aUsername, String aPassword ) throws JmsClientException {
         LOG.debug( "***** Stub JMS client - Performning Connect with username=[" + aUsername
                    + "] and password=[" + aPassword + "]" );
     }
@@ -42,8 +38,7 @@ public class JmsClientTestStub implements IJmsClient
      * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#disconnect()
      */
     @Override
-    public void disconnect() throws JmsClientException
-    {
+    public void disconnect() throws JmsClientException {
         LOG.debug( "***** Stub JMS client - Performing disconnect" );
     }
 
@@ -51,10 +46,9 @@ public class JmsClientTestStub implements IJmsClient
      * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#processAction(com.ubs.orca.orcabridge.jmsclient.IJmsAction)
      */
     @Override
-    public void processAction( IJmsAction aActionCallback ) throws JmsClientException
-    {
-        LOG.debug( "***** Stub JMS client - Performing processActionOnce with action=["
-                   + aActionCallback + "]" );
+    public void processAction( IJmsAction aActionCallback ) throws JmsClientException {
+        LOG.debug( "***** Stub JMS client - Performing processActionOnce with action=[" + aActionCallback
+                   + "]" );
     }
 
 }

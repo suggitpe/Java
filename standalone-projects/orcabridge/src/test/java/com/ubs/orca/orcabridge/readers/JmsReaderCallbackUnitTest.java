@@ -29,8 +29,7 @@ import static org.junit.Assert.fail;
  * @author suggitpe
  * @version 1.0 9 Nov 2009
  */
-public class JmsReaderCallbackUnitTest
-{
+public class JmsReaderCallbackUnitTest {
 
     private static final Log LOG = LogFactory.getLog( JmsReaderCallbackUnitTest.class );
 
@@ -40,8 +39,7 @@ public class JmsReaderCallbackUnitTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + JmsReaderCallbackUnitTest.class.getSimpleName() );
     }
 
@@ -51,8 +49,7 @@ public class JmsReaderCallbackUnitTest
      * @throws Exception
      */
     @Before
-    public void doBefore() throws Exception
-    {
+    public void doBefore() throws Exception {
         LOG.debug( "-----------------" );
         ctrl = createControl();
         mockMessageProcessor = ctrl.createMock( IMessageProcessor.class );
@@ -64,15 +61,13 @@ public class JmsReaderCallbackUnitTest
     }
 
     /**
-     * Tests that the message callback is called and that it then
-     * delegates to the message processor.
+     * Tests that the message callback is called and that it then delegates to the message processor.
      * 
      * @throws JmsClientException
      * @throws OrcaBridgeException
      */
     @Test
-    public void testJmsCallback() throws JmsClientException, OrcaBridgeException
-    {
+    public void testJmsCallback() throws JmsClientException, OrcaBridgeException {
         mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().once();
 
@@ -88,8 +83,7 @@ public class JmsReaderCallbackUnitTest
      * @throws OrcaBridgeException
      */
     @Test(expected = JmsClientException.class)
-    public void testJmsCallbackWithProcessFailure() throws JmsClientException, OrcaBridgeException
-    {
+    public void testJmsCallbackWithProcessFailure() throws JmsClientException, OrcaBridgeException {
         mockMessageProcessor.processMessage( isA( IMessageFacade.class ) );
         expectLastCall().andThrow( new OrcaBridgeException( "ProcessMessage failed: This is all part of the test" ) );
 

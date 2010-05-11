@@ -24,8 +24,7 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public class JmsSenderAction implements IJmsAction
-{
+public class JmsSenderAction implements IJmsAction {
 
     private static final Log LOG = LogFactory.getLog( JmsSenderAction.class );
 
@@ -37,8 +36,7 @@ public class JmsSenderAction implements IJmsAction
      * @param aMessageFacade
      *            a message facade
      */
-    public JmsSenderAction( IMessageFacade aMessageFacade )
-    {
+    public JmsSenderAction( IMessageFacade aMessageFacade ) {
         super();
         messageFacade = aMessageFacade;
     }
@@ -48,80 +46,62 @@ public class JmsSenderAction implements IJmsAction
      *      javax.jms.Destination)
      */
     @Override
-    public void actionInTransaction( Session aSession, Destination aDestination )
-                    throws JmsClientException
-    {
+    public void actionInTransaction( Session aSession, Destination aDestination ) throws JmsClientException {
         createProducerAndSend( messageFacade, aSession, aDestination );
-        try
-        {
+        try {
             LOG.info( "Committing transaction ..." );
             aSession.commit();
         }
-        catch ( JMSException jmse )
-        {
+        catch ( JMSException jmse ) {
             throw new JmsClientException( "Failed to commit JMS transaction", jmse );
         }
     }
 
     private void createProducerAndSend( IMessageFacade aMessageFacade, Session aSession,
-                                        Destination aDestination ) throws JmsClientException
-    {
+                                        Destination aDestination ) throws JmsClientException {
 
         MessageProducer producer = null;
-        try
-        {
+        try {
             producer = aSession.createProducer( aDestination );
-            if ( LOG.isDebugEnabled() )
-            {
+            if ( LOG.isDebugEnabled() ) {
                 LOG.debug( "Created producer for destination [" + aDestination + "]" );
             }
             sendMessage( aMessageFacade, aSession, producer );
         }
-        catch ( JMSException je )
-        {
+        catch ( JMSException je ) {
             String err = "Failed to create message producer";
             LOG.error( err );
             throw new JmsClientException( "Failed to create message producer", je );
         }
-        finally
-        {
+        finally {
             closeProducer( producer );
         }
     }
 
-    private void closeProducer( MessageProducer aProducer )
-    {
-        if ( aProducer != null )
-        {
-            try
-            {
+    private void closeProducer( MessageProducer aProducer ) {
+        if ( aProducer != null ) {
+            try {
                 aProducer.close();
             }
-            catch ( JMSException je )
-            {
+            catch ( JMSException je ) {
                 LOG.error( "Failed to close the message producer", je );
             }
         }
     }
 
     private void sendMessage( IMessageFacade aMessageFacade, Session aSession,
-                              MessageProducer aMessageProducer ) throws JmsClientException
-    {
-        try
-        {
+                              MessageProducer aMessageProducer ) throws JmsClientException {
+        try {
             Message msg = aMessageFacade.buildJmsMessage( aSession );
-            if ( LOG.isInfoEnabled() )
-            {
+            if ( LOG.isInfoEnabled() ) {
                 LOG.info( "Sending message [" + msg + "]" );
             }
             aMessageProducer.send( msg );
         }
-        catch ( JMSException je )
-        {
+        catch ( JMSException je ) {
             throw new JmsClientException( "Failed to create and send JMS message", je );
         }
-        catch ( OrcaBridgeMessageConversionException obmce )
-        {
+        catch ( OrcaBridgeMessageConversionException obmce ) {
             throw new JmsClientException( "Failed to convert JMS message", obmce );
         }
     }

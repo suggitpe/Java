@@ -26,8 +26,7 @@ import static org.easymock.EasyMock.expectLastCall;
  * @author suggitpe
  * @version 1.0 26 Oct 2009
  */
-public class JmsClientCoreTestConnection
-{
+public class JmsClientCoreTestConnection {
 
     private static final Log LOG = LogFactory.getLog( JmsClientCoreTestConnection.class );
 
@@ -43,8 +42,7 @@ public class JmsClientCoreTestConnection
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + JmsDurableReaderActionTest.class.getSimpleName() );
     }
 
@@ -52,8 +50,7 @@ public class JmsClientCoreTestConnection
      * @throws Exception
      */
     @Before
-    public void doBefore() throws Exception
-    {
+    public void doBefore() throws Exception {
         LOG.debug( "-------------" );
         ctrl = createControl();
         mockInitialContext = ctrl.createMock( Context.class );
@@ -69,19 +66,15 @@ public class JmsClientCoreTestConnection
     }
 
     /**
-     * Test that we can connect to the JMS client when there are no
-     * security credentials
+     * Test that we can connect to the JMS client when there are no security credentials
      * 
      * @throws JmsClientException
      * @throws NamingException
      * @throws JMSException
      */
     @Test
-    public void testConnectionWithNoCredentials() throws JmsClientException, NamingException,
-                    JMSException
-    {
-        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory )
-            .once();
+    public void testConnectionWithNoCredentials() throws JmsClientException, NamingException, JMSException {
+        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory ).once();
         expect( mockInitialContext.lookup( DEST_NAME ) ).andReturn( mockDestination ).once();
 
         expect( mockConnectionFactory.createConnection() ).andReturn( mockConnection ).once();
@@ -94,25 +87,20 @@ public class JmsClientCoreTestConnection
     }
 
     /**
-     * Test that we can connect to the JMS client when theer are
-     * security credentials
+     * Test that we can connect to the JMS client when theer are security credentials
      * 
      * @throws JmsClientException
      * @throws NamingException
      * @throws JMSException
      */
     @Test
-    public void testConnectionWithCredentials() throws JmsClientException, NamingException,
-                    JMSException
-    {
+    public void testConnectionWithCredentials() throws JmsClientException, NamingException, JMSException {
         String user = "testUser";
         String pass = "testPassword";
-        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory )
-            .once();
+        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory ).once();
         expect( mockInitialContext.lookup( DEST_NAME ) ).andReturn( mockDestination ).once();
 
-        expect( mockConnectionFactory.createConnection( user, pass ) ).andReturn( mockConnection )
-            .once();
+        expect( mockConnectionFactory.createConnection( user, pass ) ).andReturn( mockConnection ).once();
 
         ctrl.replay();
 
@@ -122,16 +110,14 @@ public class JmsClientCoreTestConnection
     }
 
     /**
-     * Test that when there is a naming exception from the initial
-     * context lookup, a local exception is propogated to the top of
-     * the stack
+     * Test that when there is a naming exception from the initial context lookup, a local exception is
+     * propogated to the top of the stack
      * 
      * @throws JmsClientException
      * @throws NamingException
      */
     @Test(expected = JmsClientException.class)
-    public void testConnectionFailureFromJndiLookup() throws JmsClientException, NamingException
-    {
+    public void testConnectionFailureFromJndiLookup() throws JmsClientException, NamingException {
         expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andThrow( new NamingException( "This is all part of the test" ) )
             .once();
         ctrl.replay();
@@ -147,11 +133,9 @@ public class JmsClientCoreTestConnection
      * @throws JMSException
      */
     @Test(expected = JmsClientException.class)
-    public void testConnectionFailureFromConnectionFactory() throws JmsClientException,
-                    NamingException, JMSException
-    {
-        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory )
-            .once();
+    public void testConnectionFailureFromConnectionFactory() throws JmsClientException, NamingException,
+                    JMSException {
+        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory ).once();
         expect( mockInitialContext.lookup( DEST_NAME ) ).andReturn( mockDestination ).once();
         expect( mockConnectionFactory.createConnection() ).andThrow( new JMSException( "This is all part of the test" ) );
 
@@ -163,22 +147,18 @@ public class JmsClientCoreTestConnection
     }
 
     /**
-     * Tests that if a connection already exists, that the existing
-     * connection is closed correctly before we create a new
-     * connection.
+     * Tests that if a connection already exists, that the existing connection is closed correctly before we
+     * create a new connection.
      * 
      * @throws JmsClientException
      * @throws NamingException
      * @throws JMSException
      */
     @Test
-    public void testConnectionWhenOneAlreadyExists() throws JmsClientException, NamingException,
-                    JMSException
-    {
+    public void testConnectionWhenOneAlreadyExists() throws JmsClientException, NamingException, JMSException {
         jmsClientCore.setConnection( mockConnection );
 
-        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory )
-            .once();
+        expect( mockInitialContext.lookup( CONNFACT_NAME ) ).andReturn( mockConnectionFactory ).once();
         expect( mockInitialContext.lookup( DEST_NAME ) ).andReturn( mockDestination ).once();
         mockConnection.stop();
         expectLastCall().once();
@@ -195,15 +175,13 @@ public class JmsClientCoreTestConnection
     }
 
     /**
-     * Test that we can disconnect from the JMS client in a normal
-     * fashion.
+     * Test that we can disconnect from the JMS client in a normal fashion.
      * 
      * @throws JmsClientException
      * @throws JMSException
      */
     @Test
-    public void testNormalDisconnect() throws JmsClientException, JMSException
-    {
+    public void testNormalDisconnect() throws JmsClientException, JMSException {
         jmsClientCore.setConnection( mockConnection );
 
         mockConnection.stop();
@@ -219,15 +197,14 @@ public class JmsClientCoreTestConnection
     }
 
     /**
-     * Test that if we call disconnect and we get an exception from
-     * the stop, that the close is still called on the connection.
+     * Test that if we call disconnect and we get an exception from the stop, that the close is still called
+     * on the connection.
      * 
      * @throws JmsClientException
      * @throws JMSException
      */
     @Test(expected = JmsClientException.class)
-    public void testDisconnectWithFailOnStop() throws JmsClientException, JMSException
-    {
+    public void testDisconnectWithFailOnStop() throws JmsClientException, JMSException {
         jmsClientCore.setConnection( mockConnection );
 
         mockConnection.stop();
@@ -243,15 +220,13 @@ public class JmsClientCoreTestConnection
     }
 
     /**
-     * Test that if we call disconnect and we get an issue in the JMS
-     * close, that we correctly report this.
+     * Test that if we call disconnect and we get an issue in the JMS close, that we correctly report this.
      * 
      * @throws JmsClientException
      * @throws JMSException
      */
     @Test
-    public void testDisconnectWithFailOnClose() throws JmsClientException, JMSException
-    {
+    public void testDisconnectWithFailOnClose() throws JmsClientException, JMSException {
         jmsClientCore.setConnection( mockConnection );
 
         mockConnection.stop();
@@ -273,8 +248,7 @@ public class JmsClientCoreTestConnection
      * @throws JMSException
      */
     @Test(expected = JmsClientException.class)
-    public void testDisconnectWithFailOnStopAndClose() throws JmsClientException, JMSException
-    {
+    public void testDisconnectWithFailOnStopAndClose() throws JmsClientException, JMSException {
         jmsClientCore.setConnection( mockConnection );
 
         mockConnection.stop();

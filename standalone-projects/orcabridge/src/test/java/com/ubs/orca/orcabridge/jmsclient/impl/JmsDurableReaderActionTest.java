@@ -32,8 +32,7 @@ import static org.easymock.EasyMock.expectLastCall;
  * @author suggitpe
  * @version 1.0 14 Oct 2009
  */
-public class JmsDurableReaderActionTest
-{
+public class JmsDurableReaderActionTest {
 
     private static final Log LOG = LogFactory.getLog( JmsDurableReaderActionTest.class );
 
@@ -50,15 +49,13 @@ public class JmsDurableReaderActionTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + JmsDurableReaderActionTest.class.getSimpleName() );
     }
 
     /** */
     @Before
-    public void doBefore()
-    {
+    public void doBefore() {
         LOG.debug( "-------------" );
         ctrl = createControl();
         mockCallback = ctrl.createMock( IJmsClientSingleMsgCallback.class );
@@ -71,21 +68,17 @@ public class JmsDurableReaderActionTest
     }
 
     /**
-     * Tests the normal flow of received messages into the durable
-     * reader and processes until it needs to stop.
+     * Tests the normal flow of received messages into the durable reader and processes until it needs to
+     * stop.
      * 
      * @throws JmsClientException
      * @throws JMSException
      */
     @Test
-    public void testNormalReceiveProcess() throws JmsClientException, JMSException
-    {
+    public void testNormalReceiveProcess() throws JmsClientException, JMSException {
         // dropping a strict control in here so that we can do a loop
         // and come out again
-        expect( mockSession.createDurableSubscriber( mockDestination,
-                                                     DURABLE_NAME,
-                                                     MSG_SELECTOR,
-                                                     true ) ).andReturn( mockSubscriber );
+        expect( mockSession.createDurableSubscriber( mockDestination, DURABLE_NAME, MSG_SELECTOR, true ) ).andReturn( mockSubscriber );
 
         expect( mockSubscriber.receiveNoWait() ).andReturn( mockMessage ).once();
 
@@ -108,14 +101,13 @@ public class JmsDurableReaderActionTest
     }
 
     /**
-     * Tests that if you try and create a durable on a none Topic
-     * object then it will create the correct type of exception
+     * Tests that if you try and create a durable on a none Topic object then it will create the correct type
+     * of exception
      * 
      * @throws JmsClientException
      */
     @Test(expected = JmsClientException.class)
-    public void testRecieveAgainstNonTopicDestination() throws JmsClientException
-    {
+    public void testRecieveAgainstNonTopicDestination() throws JmsClientException {
         Queue mockQueue = ctrl.createMock( Queue.class );
 
         ctrl.replay();
@@ -124,20 +116,15 @@ public class JmsDurableReaderActionTest
     }
 
     /**
-     * Tests that if we fail to create the durable subscriber, that
-     * the correct exception type is propagated to the top of the
-     * stack.
+     * Tests that if we fail to create the durable subscriber, that the correct exception type is propagated
+     * to the top of the stack.
      * 
      * @throws JmsClientException
      * @throws JMSException
      */
     @Test(expected = JmsClientException.class)
-    public void testReceiveButFailCreateSubscription() throws JmsClientException, JMSException
-    {
-        expect( mockSession.createDurableSubscriber( mockDestination,
-                                                     DURABLE_NAME,
-                                                     MSG_SELECTOR,
-                                                     true ) ).andThrow( new JMSException( "Failed to create subscriber: this is all a part of the test" ) );
+    public void testReceiveButFailCreateSubscription() throws JmsClientException, JMSException {
+        expect( mockSession.createDurableSubscriber( mockDestination, DURABLE_NAME, MSG_SELECTOR, true ) ).andThrow( new JMSException( "Failed to create subscriber: this is all a part of the test" ) );
 
         ctrl.replay();
         jmsReceiverAction.actionInTransaction( mockSession, mockDestination );
@@ -145,22 +132,16 @@ public class JmsDurableReaderActionTest
     }
 
     /**
-     * Tests that if there is a failure in the closing of the
-     * subscriber that nothing is impacted in terms of flow.
-     * Expectation in this case is that the close is not the big issue
-     * and that when we tray and reconnect, then will see the other
-     * issues.
+     * Tests that if there is a failure in the closing of the subscriber that nothing is impacted in terms of
+     * flow. Expectation in this case is that the close is not the big issue and that when we tray and
+     * reconnect, then will see the other issues.
      * 
      * @throws JmsClientException
      * @throws JMSException
      */
     @Test
-    public void testReceiveButFailOnSubscriberClose() throws JmsClientException, JMSException
-    {
-        expect( mockSession.createDurableSubscriber( mockDestination,
-                                                     DURABLE_NAME,
-                                                     MSG_SELECTOR,
-                                                     true ) ).andReturn( mockSubscriber );
+    public void testReceiveButFailOnSubscriberClose() throws JmsClientException, JMSException {
+        expect( mockSession.createDurableSubscriber( mockDestination, DURABLE_NAME, MSG_SELECTOR, true ) ).andReturn( mockSubscriber );
 
         expect( mockSubscriber.receiveNoWait() ).andReturn( mockMessage ).once();
 
@@ -183,19 +164,15 @@ public class JmsDurableReaderActionTest
     }
 
     /**
-     * Test that when we get an exception through the receive method,
-     * that it is correctly propagated up the stack
+     * Test that when we get an exception through the receive method, that it is correctly propagated up the
+     * stack
      * 
      * @throws JmsClientException
      * @throws JMSException
      */
     @Test(expected = JmsClientException.class)
-    public void testReceiveButFailOnReceive() throws JmsClientException, JMSException
-    {
-        expect( mockSession.createDurableSubscriber( mockDestination,
-                                                     DURABLE_NAME,
-                                                     MSG_SELECTOR,
-                                                     true ) ).andReturn( mockSubscriber );
+    public void testReceiveButFailOnReceive() throws JmsClientException, JMSException {
+        expect( mockSession.createDurableSubscriber( mockDestination, DURABLE_NAME, MSG_SELECTOR, true ) ).andReturn( mockSubscriber );
 
         expect( mockSubscriber.receiveNoWait() ).andThrow( new JMSException( "Fail on receive: this is all part of the test" ) );
 

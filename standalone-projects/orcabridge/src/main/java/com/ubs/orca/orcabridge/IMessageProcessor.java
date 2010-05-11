@@ -10,12 +10,10 @@ package com.ubs.orca.orcabridge;
  * @author suggitpe
  * @version 1.0 22 Sep 2009
  */
-public interface IMessageProcessor
-{
+public interface IMessageProcessor {
 
     /**
-     * This is the core method on the Message Processor and its key
-     * reason for existence.
+     * This is the core method on the Message Processor and its key reason for existence.
      * 
      * @param aMessageFacade
      * @throws OrcaBridgeException

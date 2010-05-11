@@ -11,16 +11,13 @@ import com.ubs.orca.client.api.IConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
 
 /**
- * This interface encapsulates the fact that there are a number of
- * differing message types that will be utiloised in the OrcaBridge
- * and for each message type we would like the system related
- * behaviour to differ.
+ * This interface encapsulates the fact that there are a number of differing message types that will be
+ * utiloised in the OrcaBridge and for each message type we would like the system related behaviour to differ.
  * 
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public interface IMessageFacade
-{
+public interface IMessageFacade {
 
     /**
      * Build a JMS Message using a JMS session.
@@ -40,7 +37,6 @@ public interface IMessageFacade
      * @return a new Orca message
      * @throws OrcaBridgeMessageConversionException
      */
-    IConversationMessage buildOrcaMesage( IOrcaClient aClient )
-                    throws OrcaBridgeMessageConversionException;
+    IConversationMessage buildOrcaMesage( IOrcaClient aClient ) throws OrcaBridgeMessageConversionException;
 
 }

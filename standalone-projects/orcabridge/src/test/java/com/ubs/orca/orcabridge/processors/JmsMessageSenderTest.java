@@ -28,8 +28,7 @@ import static org.easymock.EasyMock.isA;
  * @author suggitpe
  * @version 1.0 4 Nov 2009
  */
-public class JmsMessageSenderTest
-{
+public class JmsMessageSenderTest {
 
     private static final Log LOG = LogFactory.getLog( JmsMessageSenderTest.class );
 
@@ -41,8 +40,7 @@ public class JmsMessageSenderTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + JmsMessageSenderTest.class.getSimpleName() );
     }
 
@@ -52,8 +50,7 @@ public class JmsMessageSenderTest
      * @throws Exception
      */
     @Before
-    public void doBefore() throws Exception
-    {
+    public void doBefore() throws Exception {
         LOG.debug( "-----------------" );
         ctrl = createControl();
         mockJmsClient = ctrl.createMock( IJmsClient.class );
@@ -71,8 +68,7 @@ public class JmsMessageSenderTest
      * @throws Exception
      */
     @After
-    public void doAfter() throws Exception
-    {
+    public void doAfter() throws Exception {
         sender.tearDown();
         ctrl.verify();
     }
@@ -83,8 +79,7 @@ public class JmsMessageSenderTest
      * @throws Exception
      */
     @Test
-    public void testNormalSend() throws Exception
-    {
+    public void testNormalSend() throws Exception {
         mockJmsClient.connect();
         expectLastCall().once();
 
@@ -102,14 +97,12 @@ public class JmsMessageSenderTest
     }
 
     /**
-     * Tests that the correct exceptions are thrown when we have an
-     * issue in the sending process.
+     * Tests that the correct exceptions are thrown when we have an issue in the sending process.
      * 
      * @throws Exception
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testFailedSend() throws Exception
-    {
+    public void testFailedSend() throws Exception {
         mockJmsClient.connect();
         expectLastCall().once();
 

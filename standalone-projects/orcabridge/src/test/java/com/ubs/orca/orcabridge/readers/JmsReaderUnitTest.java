@@ -30,8 +30,7 @@ import static org.junit.Assert.fail;
  * @author suggitpe
  * @version 1.0 24 Sep 2009
  */
-public class JmsReaderUnitTest
-{
+public class JmsReaderUnitTest {
 
     private static final Log LOG = LogFactory.getLog( JmsReaderUnitTest.class );
 
@@ -45,8 +44,7 @@ public class JmsReaderUnitTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + JmsReaderUnitTest.class.getSimpleName() );
     }
 
@@ -56,8 +54,7 @@ public class JmsReaderUnitTest
      * @throws Exception
      */
     @Before
-    public void doBefore() throws Exception
-    {
+    public void doBefore() throws Exception {
         LOG.debug( "-----------------" );
         ctrl = createControl();
         mockJmsClient = ctrl.createMock( IJmsClient.class );
@@ -79,8 +76,7 @@ public class JmsReaderUnitTest
      * @throws JmsClientException
      */
     @Test
-    public void testStartReader() throws OrcaBridgeException, JmsClientException
-    {
+    public void testStartReader() throws OrcaBridgeException, JmsClientException {
         mockJmsClient.connect();
         expectLastCall().once();
         mockJmsClient.processAction( isA( IJmsAction.class ) );
@@ -96,15 +92,13 @@ public class JmsReaderUnitTest
     }
 
     /**
-     * Tests that the reader behaves correctly when faced with an
-     * exception when connecting to the JMS broker
+     * Tests that the reader behaves correctly when faced with an exception when connecting to the JMS broker
      * 
      * @throws OrcaBridgeException
      * @throws JmsClientException
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testStartReaderAndFailOnConnect() throws OrcaBridgeException, JmsClientException
-    {
+    public void testStartReaderAndFailOnConnect() throws OrcaBridgeException, JmsClientException {
         mockJmsClient.connect();
         expectLastCall().andThrow( new JmsClientException( "Connect failed: This is all part of the test" ) );
 
@@ -115,15 +109,13 @@ public class JmsReaderUnitTest
     }
 
     /**
-     * Tests that the reader behaves correctly when faced with an
-     * exception with processing the action
+     * Tests that the reader behaves correctly when faced with an exception with processing the action
      * 
      * @throws OrcaBridgeException
      * @throws JmsClientException
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testStartReaderAndFailOnProcess() throws OrcaBridgeException, JmsClientException
-    {
+    public void testStartReaderAndFailOnProcess() throws OrcaBridgeException, JmsClientException {
         mockJmsClient.connect();
         expectLastCall().once();
         mockJmsClient.processAction( isA( IJmsAction.class ) );
@@ -142,8 +134,7 @@ public class JmsReaderUnitTest
      * @throws JmsClientException
      */
     @Test
-    public void testStopReader() throws OrcaBridgeException, JmsClientException
-    {
+    public void testStopReader() throws OrcaBridgeException, JmsClientException {
         mockJmsClient.disconnect();
         expectLastCall().once();
 
@@ -159,8 +150,7 @@ public class JmsReaderUnitTest
      * @throws JmsClientException
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testStopReaderAndFailOnDisconnect() throws OrcaBridgeException, JmsClientException
-    {
+    public void testStopReaderAndFailOnDisconnect() throws OrcaBridgeException, JmsClientException {
         mockJmsClient.disconnect();
         expectLastCall().andThrow( new JmsClientException( "Disconnect failed: This is all part of the test" ) );
 

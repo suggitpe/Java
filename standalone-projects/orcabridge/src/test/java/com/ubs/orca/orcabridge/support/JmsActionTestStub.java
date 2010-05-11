@@ -15,8 +15,7 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  * @author suggitpe
  * @version 1.0 26 Oct 2009
  */
-public class JmsActionTestStub implements IJmsAction
-{
+public class JmsActionTestStub implements IJmsAction {
 
     private static final Log LOG = LogFactory.getLog( JmsActionTestStub.class );
 
@@ -25,8 +24,7 @@ public class JmsActionTestStub implements IJmsAction
      *      javax.jms.Destination)
      */
     @Override
-    public void actionInTransaction( Session aSession, Destination aDestination ) throws JmsClientException
-    {
+    public void actionInTransaction( Session aSession, Destination aDestination ) throws JmsClientException {
         LOG.debug( "***** Stub JMS Action - Performing Action" );
     }
 }

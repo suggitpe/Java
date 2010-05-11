@@ -5,16 +5,13 @@
 package com.ubs.orca.orcabridge;
 
 /**
- * Exception to be used within the context of the Orca Bridge. This is
- * a general exception class for use within the Orca Bridge. This
- * class may be extended for any specialisations that are deemed
- * needed.
+ * Exception to be used within the context of the Orca Bridge. This is a general exception class for use
+ * within the Orca Bridge. This class may be extended for any specialisations that are deemed needed.
  * 
  * @author suggitpe
  * @version 1.0 15 Sep 2009
  */
-public class OrcaBridgeException extends Exception
-{
+public class OrcaBridgeException extends Exception {
 
     /**
      * Constructs a new instance.
@@ -22,8 +19,7 @@ public class OrcaBridgeException extends Exception
      * @param aMsg
      *            the exception message
      */
-    public OrcaBridgeException( String aMsg )
-    {
+    public OrcaBridgeException( String aMsg ) {
         super( aMsg );
     }
 
@@ -33,8 +29,7 @@ public class OrcaBridgeException extends Exception
      * @param aException
      *            an exception to nest
      */
-    public OrcaBridgeException( Throwable aException )
-    {
+    public OrcaBridgeException( Throwable aException ) {
         super( aException );
     }
 
@@ -46,8 +41,7 @@ public class OrcaBridgeException extends Exception
      * @param aException
      *            a nested exception to embed in this exception
      */
-    public OrcaBridgeException( String aMsg, Throwable aException )
-    {
+    public OrcaBridgeException( String aMsg, Throwable aException ) {
         super( aMsg, aException );
     }
 }

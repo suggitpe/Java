@@ -32,8 +32,7 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-orca-reader-spring-injection-test.xml" })
-public class OrcaReaderSpringInjectionUnitTest
-{
+public class OrcaReaderSpringInjectionUnitTest {
 
     private static final Log LOG = LogFactory.getLog( OrcaReaderSpringInjectionUnitTest.class );
 
@@ -42,32 +41,27 @@ public class OrcaReaderSpringInjectionUnitTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + OrcaReaderSpringInjectionUnitTest.class.getSimpleName() );
     }
 
     /** */
     @Before
-    public void doBefore()
-    {
+    public void doBefore() {
         LOG.debug( "------------------- " );
     }
 
     /** */
     @After
-    public void doAfter()
-    {
+    public void doAfter() {
         LOG.debug( "------------------- " );
     }
 
     /**
-     * Tests that the Orca Reader will work correctly with Spring
-     * injection.
+     * Tests that the Orca Reader will work correctly with Spring injection.
      */
     @Test
-    public void testSpringInjectedOrcaReader()
-    {
+    public void testSpringInjectedOrcaReader() {
         LOG.debug( "Testing that the Orca Reader has been injected correctly" );
         assertThat( orcaReader, notNullValue() );
     }
@@ -78,8 +72,7 @@ public class OrcaReaderSpringInjectionUnitTest
      * @throws OrcaBridgeException
      */
     @Test
-    public void testStartAndStopOrcaReader() throws OrcaBridgeException
-    {
+    public void testStartAndStopOrcaReader() throws OrcaBridgeException {
         OrcaSingleMessageReader reader = (OrcaSingleMessageReader) orcaReader;
         reader.setOrcaClient( new OrcaClientTestStub() );
         orcaReader.startReader();

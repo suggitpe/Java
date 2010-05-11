@@ -27,8 +27,7 @@ import static org.junit.Assert.fail;
  * @author suggitpe
  * @version 1.0 24 Sep 2009
  */
-public class OrcaReaderUnitTest
-{
+public class OrcaReaderUnitTest {
 
     private static final Log LOG = LogFactory.getLog( OrcaReaderUnitTest.class );
     private IMocksControl ctrl;
@@ -37,8 +36,7 @@ public class OrcaReaderUnitTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + OrcaReaderUnitTest.class.getSimpleName() );
     }
 
@@ -48,8 +46,7 @@ public class OrcaReaderUnitTest
      * @throws Exception
      */
     @Before
-    public void doBefore() throws Exception
-    {
+    public void doBefore() throws Exception {
         LOG.debug( "-----------------" );
         ctrl = createControl();
         mockOrcaClient = ctrl.createMock( IOrcaClient.class );
@@ -61,14 +58,12 @@ public class OrcaReaderUnitTest
     }
 
     /**
-     * Tests that when a client starts correctly, that no exceptions
-     * are thrown etc
+     * Tests that when a client starts correctly, that no exceptions are thrown etc
      * 
      * @throws Exception
      */
     @Test
-    public void testCleanStart() throws Exception
-    {
+    public void testCleanStart() throws Exception {
         mockOrcaClient.connect();
         expectLastCall().once();
         mockOrcaClient.start();
@@ -84,14 +79,12 @@ public class OrcaReaderUnitTest
     }
 
     /**
-     * Tests that when the client starts badly, that the exceptions
-     * are handled correctly.
+     * Tests that when the client starts badly, that the exceptions are handled correctly.
      * 
      * @throws Exception
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testStartButFailOnConnect() throws Exception
-    {
+    public void testStartButFailOnConnect() throws Exception {
         mockOrcaClient.connect();
         expectLastCall().andThrow( new OrcaException( "This is an expected exception thrown from the OrcaBridge" ) );
 
@@ -104,14 +97,12 @@ public class OrcaReaderUnitTest
     }
 
     /**
-     * Tests that when the client stops cleanly that the application
-     * is deemed to be in a good running state
+     * Tests that when the client stops cleanly that the application is deemed to be in a good running state
      * 
      * @throws Exception
      */
     @Test
-    public void testCleanStop() throws Exception
-    {
+    public void testCleanStop() throws Exception {
         mockOrcaClient.stop();
         expectLastCall().once();
         mockOrcaClient.disconnect();
@@ -125,14 +116,12 @@ public class OrcaReaderUnitTest
     }
 
     /**
-     * Tests that when the client stops badly, that all exceptions are
-     * handled correctly.
+     * Tests that when the client stops badly, that all exceptions are handled correctly.
      * 
      * @throws Exception
      */
     @Test
-    public void testBadStopFromOrcaStop() throws Exception
-    {
+    public void testBadStopFromOrcaStop() throws Exception {
         mockOrcaClient.stop();
         expectLastCall().andThrow( new OrcaException( "This is all part of the tests" ) );
         mockOrcaClient.disconnect();
@@ -146,14 +135,12 @@ public class OrcaReaderUnitTest
     }
 
     /**
-     * Tests that when the client stops badly, that all exceptions are
-     * handled correctly.
+     * Tests that when the client stops badly, that all exceptions are handled correctly.
      * 
      * @throws Exception
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testStopButFailFromDisconnect() throws Exception
-    {
+    public void testStopButFailFromDisconnect() throws Exception {
         mockOrcaClient.stop();
         expectLastCall().once();
         mockOrcaClient.disconnect();

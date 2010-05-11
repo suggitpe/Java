@@ -30,8 +30,7 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-orca-message-sender-spring-injection-test.xml" })
-public class OrcaMessageSenderSpringInjectionTest
-{
+public class OrcaMessageSenderSpringInjectionTest {
 
     private static final Log LOG = LogFactory.getLog( OrcaMessageSenderSpringInjectionTest.class );
 
@@ -40,23 +39,19 @@ public class OrcaMessageSenderSpringInjectionTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
-        LOG.debug( "=================== "
-                   + OrcaMessageSenderSpringInjectionTest.class.getSimpleName() );
+    public static void doBeforeClass() {
+        LOG.debug( "=================== " + OrcaMessageSenderSpringInjectionTest.class.getSimpleName() );
     }
 
     /** */
     @Before
-    public void doBefore()
-    {
+    public void doBefore() {
         LOG.debug( "------------------- " );
     }
 
     /** */
     @After
-    public void doAfter()
-    {
+    public void doAfter() {
         LOG.debug( "------------------- " );
     }
 
@@ -64,8 +59,7 @@ public class OrcaMessageSenderSpringInjectionTest
      * Test that the spring injected Orca message sender works.
      */
     @Test
-    public void testSpringInjectionOrcaMessageSender()
-    {
+    public void testSpringInjectionOrcaMessageSender() {
         assertThat( orcaMessageSender, notNullValue() );
     }
 

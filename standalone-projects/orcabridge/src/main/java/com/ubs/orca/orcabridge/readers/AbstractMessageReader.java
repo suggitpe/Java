@@ -13,14 +13,12 @@ import com.ubs.orca.orcabridge.OrcaBridgeException;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * Abstract class that will manage the message reader interaction with
- * the message processors.
+ * Abstract class that will manage the message reader interaction with the message processors.
  * 
  * @author suggitpe
  * @version 1.0 22 Sep 2009
  */
-public abstract class AbstractMessageReader implements IMessageReader, InitializingBean
-{
+public abstract class AbstractMessageReader implements IMessageReader, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( AbstractMessageReader.class );
     static final String STATE_UNINITIALISED = "Uninintialised";
@@ -37,15 +35,13 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception
-    {
+    public void afterPropertiesSet() throws Exception {
         doAfterPropertiesSet();
     }
 
     /**
-     * This application is a spring enabled application. To enable us
-     * to verify injected properties down the hierarchy we have an
-     * abstract method to call down the stack.
+     * This application is a spring enabled application. To enable us to verify injected properties down the
+     * hierarchy we have an abstract method to call down the stack.
      * 
      * @throws Exception
      */
@@ -55,8 +51,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      * @see com.ubs.orca.orcabridge.IMessageReader#startReader()
      */
     @Override
-    public synchronized void startReader() throws OrcaBridgeException
-    {
+    public synchronized void startReader() throws OrcaBridgeException {
         LOG.debug( "Starting Orca Bridge." );
         state = STATE_STARTING;
         doStartReader();
@@ -64,8 +59,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     }
 
     /**
-     * Template delegation of the actual reader start process to the
-     * underlying specific middleware reader
+     * Template delegation of the actual reader start process to the underlying specific middleware reader
      * 
      * @throws OrcaBridgeException
      */
@@ -75,8 +69,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      * @see com.ubs.orca.orcabridge.IMessageReader#stopReader()
      */
     @Override
-    public synchronized void stopReader() throws OrcaBridgeException
-    {
+    public synchronized void stopReader() throws OrcaBridgeException {
         state = STATE_STOPPING;
         LOG.debug( "Stopping Orca Bridge." );
         doStopReader();
@@ -84,8 +77,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     }
 
     /**
-     * Template delegation of the actual reader stop process to the
-     * underlying specific middleware reader.
+     * Template delegation of the actual reader stop process to the underlying specific middleware reader.
      * 
      * @throws OrcaBridgeException
      */
@@ -96,8 +88,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      * 
      * @return the state of the reader
      */
-    public synchronized String getState()
-    {
+    public synchronized String getState() {
         return state;
     }
 }

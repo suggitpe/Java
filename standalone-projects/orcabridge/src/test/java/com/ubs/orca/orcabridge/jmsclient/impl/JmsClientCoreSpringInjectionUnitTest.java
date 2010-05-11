@@ -31,8 +31,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-jms-client-core-spring-injection-test.xml" })
-public class JmsClientCoreSpringInjectionUnitTest
-{
+public class JmsClientCoreSpringInjectionUnitTest {
 
     private static final Log LOG = LogFactory.getLog( JmsClientCoreSpringInjectionUnitTest.class );
 
@@ -41,33 +40,27 @@ public class JmsClientCoreSpringInjectionUnitTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
-        LOG.debug( "=================== "
-                   + JmsClientCoreSpringInjectionUnitTest.class.getSimpleName() );
+    public static void doBeforeClass() {
+        LOG.debug( "=================== " + JmsClientCoreSpringInjectionUnitTest.class.getSimpleName() );
     }
 
     /** */
     @Before
-    public void doBefore()
-    {
+    public void doBefore() {
         LOG.debug( "------------------- " );
     }
 
     /** */
     @After
-    public void doAfter()
-    {
+    public void doAfter() {
         LOG.debug( "------------------- " );
     }
 
     /**
-     * Tests that the JMS Client Core has been correctly built with
-     * spring injection.
+     * Tests that the JMS Client Core has been correctly built with spring injection.
      */
     @Test
-    public void testSpringInjectedJmsClientCore()
-    {
+    public void testSpringInjectedJmsClientCore() {
         LOG.debug( "Testing that the JMS Client Core has been injected correctly" );
         assertThat( jmsClientCore, notNullValue() );
     }

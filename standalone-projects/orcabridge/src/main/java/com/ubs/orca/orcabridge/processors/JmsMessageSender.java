@@ -1,5 +1,5 @@
 /*
- * JmsMessageSender.java created on 29 Oct 2009 07:09:34 by suggitpe for project Orca Bridge
+ * JmsMessageSender.java created on 29 Oct 2009 07:09:34 by suggitpe for project Orca Bridge 
  * 
  */
 package com.ubs.orca.orcabridge.processors;
@@ -23,8 +23,7 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 29 Oct 2009
  */
-public class JmsMessageSender implements IMessageProcessor, InitializingBean
-{
+public class JmsMessageSender implements IMessageProcessor, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( JmsMessageSender.class );
 
@@ -34,8 +33,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception
-    {
+    public void afterPropertiesSet() {
         Assert.notNull( jmsClientCore, "Must set the client core on the JMS message sender" );
     }
 
@@ -44,8 +42,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
      * 
      * @throws JmsClientException
      */
-    public void init() throws JmsClientException
-    {
+    public void init() throws JmsClientException {
         LOG.debug( "Initialising the sender connection" );
         jmsClientCore.connect();
     }
@@ -55,8 +52,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
      * 
      * @throws JmsClientException
      */
-    public void tearDown() throws JmsClientException
-    {
+    public void tearDown() throws JmsClientException {
         LOG.debug( "Tearing down the sender connection" );
         jmsClientCore.disconnect();
     }
@@ -65,15 +61,12 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
      * @see com.ubs.orca.orcabridge.IMessageProcessor#processMessage(com.ubs.orca.orcabridge.IMessageFacade)
      */
     @Override
-    public void processMessage( IMessageFacade aMessageFacade ) throws OrcaBridgeException
-    {
+    public void processMessage( IMessageFacade aMessageFacade ) throws OrcaBridgeException {
         JmsSenderAction action = new JmsSenderAction( aMessageFacade );
-        try
-        {
+        try {
             jmsClientCore.processAction( action );
         }
-        catch ( JmsClientException jce )
-        {
+        catch ( JmsClientException jce ) {
             throw new OrcaBridgeException( "Failed to send message to JMS destination", jce );
         }
     }
@@ -84,8 +77,7 @@ public class JmsMessageSender implements IMessageProcessor, InitializingBean
      * @param aJmsClient
      *            The jmsClient to set.
      */
-    public void setJmsClient( IJmsClient aJmsClient )
-    {
+    public void setJmsClient( IJmsClient aJmsClient ) {
         jmsClientCore = aJmsClient;
     }
 

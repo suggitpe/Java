@@ -17,14 +17,13 @@ import com.ubs.orca.orcabridge.jmsclient.impl.JmsDurableReaderAction;
 import org.springframework.util.Assert;
 
 /**
- * Message reader class that will read a single message from a JMS
- * source and pass it on to a message processor.
+ * Message reader class that will read a single message from a JMS source and pass it on to a message
+ * processor.
  * 
  * @author suggitpe
  * @version 1.0 29 Sep 2009
  */
-public class JmsSingleMessageReader extends AbstractMessageReader
-{
+public class JmsSingleMessageReader extends AbstractMessageReader {
 
     private static final Log LOG = LogFactory.getLog( JmsSingleMessageReader.class );
 
@@ -38,8 +37,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
      */
     @Override
-    protected void doAfterPropertiesSet() throws Exception
-    {
+    protected void doAfterPropertiesSet() {
         Assert.notNull( jmsClient, "No JMS client has been set on the JMS reader" );
         Assert.notNull( durableName, "No durable name has been set on the JMS reader" );
         Assert.notNull( messageSelector, "No message selector has been set on the JMS reader" );
@@ -50,35 +48,28 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doStartReader()
      */
     @Override
-    protected void doStartReader() throws OrcaBridgeException
-    {
+    protected void doStartReader() throws OrcaBridgeException {
         connectToJmsClient();
         startReaderAction();
     }
 
-    private void connectToJmsClient() throws OrcaBridgeException
-    {
-        try
-        {
+    private void connectToJmsClient() throws OrcaBridgeException {
+        try {
             jmsClient.connect();
         }
-        catch ( JmsClientException je )
-        {
+        catch ( JmsClientException je ) {
             final String err = "Failed to connect to JMS client";
             LOG.error( err );
             throw new OrcaBridgeException( err, je );
         }
     }
 
-    private void startReaderAction() throws OrcaBridgeException
-    {
+    private void startReaderAction() throws OrcaBridgeException {
         IJmsAction action = new JmsDurableReaderAction( jmsCallback, durableName, messageSelector );
-        try
-        {
+        try {
             jmsClient.processAction( action );
         }
-        catch ( JmsClientException jce )
-        {
+        catch ( JmsClientException jce ) {
             final String err = "Failed to start reader against JMS client";
             LOG.error( err );
             throw new OrcaBridgeException( err, jce );
@@ -89,14 +80,11 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doStopReader()
      */
     @Override
-    protected void doStopReader() throws OrcaBridgeException
-    {
-        try
-        {
+    protected void doStopReader() throws OrcaBridgeException {
+        try {
             jmsClient.disconnect();
         }
-        catch ( JmsClientException je )
-        {
+        catch ( JmsClientException je ) {
             String err = "Errors occured when trying to stop the JMS client";
             LOG.error( err, je );
             throw new OrcaBridgeException( err, je );
@@ -104,14 +92,12 @@ public class JmsSingleMessageReader extends AbstractMessageReader
     }
 
     /**
-     * Sets the jmsClient. This method is here to support replacing
-     * the jms client with mocks for unit tests.
+     * Sets the jmsClient. This method is here to support replacing the jms client with mocks for unit tests.
      * 
      * @param aJmsClient
      *            the JMS client
      */
-    public void setJmsClient( IJmsClient aJmsClient )
-    {
+    public void setJmsClient( IJmsClient aJmsClient ) {
         jmsClient = aJmsClient;
     }
 
@@ -121,8 +107,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      * @param aDurableName
      *            The durableName to set.
      */
-    public void setDurableName( String aDurableName )
-    {
+    public void setDurableName( String aDurableName ) {
         durableName = aDurableName;
     }
 
@@ -132,8 +117,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      * @param aMessageSelector
      *            The messageSelector to set.
      */
-    public void setMessageSelector( String aMessageSelector )
-    {
+    public void setMessageSelector( String aMessageSelector ) {
         messageSelector = aMessageSelector;
     }
 
@@ -143,8 +127,7 @@ public class JmsSingleMessageReader extends AbstractMessageReader
      * @param aJmsCallback
      *            The jmsCallback to set.
      */
-    public void setJmsCallback( IJmsClientSingleMsgCallback aJmsCallback )
-    {
+    public void setJmsCallback( IJmsClientSingleMsgCallback aJmsCallback ) {
         jmsCallback = aJmsCallback;
     }
 

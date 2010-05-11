@@ -10,8 +10,7 @@ package com.ubs.orca.orcabridge.jmsclient;
  * @author suggitpe
  * @version 1.0 29 Sep 2009
  */
-public class JmsClientException extends Exception
-{
+public class JmsClientException extends Exception {
 
     /**
      * Constructs a new instance.
@@ -19,8 +18,7 @@ public class JmsClientException extends Exception
      * @param aMsg
      *            the exception message
      */
-    public JmsClientException( String aMsg )
-    {
+    public JmsClientException( String aMsg ) {
         super( aMsg );
     }
 
@@ -30,8 +28,7 @@ public class JmsClientException extends Exception
      * @param aException
      *            an exception to nest
      */
-    public JmsClientException( Throwable aException )
-    {
+    public JmsClientException( Throwable aException ) {
         super( aException );
     }
 
@@ -43,8 +40,7 @@ public class JmsClientException extends Exception
      * @param aException
      *            a nested exception to embed in this exception
      */
-    public JmsClientException( String aMsg, Throwable aException )
-    {
+    public JmsClientException( String aMsg, Throwable aException ) {
         super( aMsg, aException );
     }
 }

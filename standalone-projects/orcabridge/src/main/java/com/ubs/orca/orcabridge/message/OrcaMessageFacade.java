@@ -21,8 +21,7 @@ import com.ubs.orca.orcabridge.IMessageFacade;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-class OrcaMessageFacade implements IMessageFacade
-{
+class OrcaMessageFacade implements IMessageFacade {
 
     private static final Log LOG = LogFactory.getLog( OrcaMessageFacade.class );
 
@@ -34,8 +33,7 @@ class OrcaMessageFacade implements IMessageFacade
      * @param aOrcaMessage
      *            orca message to construct the facade
      */
-    OrcaMessageFacade( IOrcaMessage aOrcaMessage )
-    {
+    OrcaMessageFacade( IOrcaMessage aOrcaMessage ) {
         super();
         orcaMessage = aOrcaMessage;
     }
@@ -44,8 +42,7 @@ class OrcaMessageFacade implements IMessageFacade
      * @see com.ubs.orca.orcabridge.IMessageFacade#buildJmsMessage(javax.jms.Session)
      */
     @Override
-    public Message buildJmsMessage( Session aSession )
-    {
+    public Message buildJmsMessage( Session aSession ) {
         LOG.debug( "Building a JMS message from: " + orcaMessage );
         return null;
     }
@@ -54,8 +51,7 @@ class OrcaMessageFacade implements IMessageFacade
      * @see com.ubs.orca.orcabridge.IMessageFacade#buildOrcaMesage(com.ubs.orca.client.api.IOrcaClient)
      */
     @Override
-    public IConversationMessage buildOrcaMesage( IOrcaClient aClient )
-    {
+    public IConversationMessage buildOrcaMesage( IOrcaClient aClient ) {
         LOG.debug( "Building an OrcaMessage from: " + orcaMessage );
         return null;
     }

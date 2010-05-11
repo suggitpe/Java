@@ -28,8 +28,7 @@ import static org.easymock.EasyMock.expectLastCall;
  * @author suggitpe
  * @version 1.0 4 Nov 2009
  */
-public class OrcaMessageSenderTest
-{
+public class OrcaMessageSenderTest {
 
     private static final Log LOG = LogFactory.getLog( OrcaMessageSenderTest.class );
 
@@ -42,8 +41,7 @@ public class OrcaMessageSenderTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "=================== " + OrcaMessageSenderTest.class.getSimpleName() );
     }
 
@@ -53,8 +51,7 @@ public class OrcaMessageSenderTest
      * @throws Exception
      */
     @Before
-    public void doBefore() throws Exception
-    {
+    public void doBefore() throws Exception {
         LOG.debug( "-----------------" );
         ctrl = createControl();
         mockMessageFacade = ctrl.createMock( IMessageFacade.class );
@@ -72,10 +69,8 @@ public class OrcaMessageSenderTest
      * @throws Exception
      */
     @Test
-    public void testNormalSend() throws Exception
-    {
-        expect( mockMessageFacade.buildOrcaMesage( mockOrcaClient ) ).andReturn( mockOrcaMessage )
-            .once();
+    public void testNormalSend() throws Exception {
+        expect( mockMessageFacade.buildOrcaMesage( mockOrcaClient ) ).andReturn( mockOrcaMessage ).once();
 
         expect( mockOrcaClient.send( mockOrcaMessage ) ).andReturn( "test rubbish" );
 
@@ -90,8 +85,7 @@ public class OrcaMessageSenderTest
      * @throws Exception
      */
     @Test
-    public void testSuccessfulInit() throws Exception
-    {
+    public void testSuccessfulInit() throws Exception {
         mockOrcaClient.connect();
         expectLastCall().once();
 
@@ -101,14 +95,13 @@ public class OrcaMessageSenderTest
     }
 
     /**
-     * Tests that when we get a connection failure in the init process
-     * we get the right exception thrown up the stack.
+     * Tests that when we get a connection failure in the init process we get the right exception thrown up
+     * the stack.
      * 
      * @throws Exception
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testFailOnInit() throws Exception
-    {
+    public void testFailOnInit() throws Exception {
         mockOrcaClient.connect();
         expectLastCall().andThrow( new OrcaException( "Failed on connect: this is all part of the test" ) );
 
@@ -126,8 +119,7 @@ public class OrcaMessageSenderTest
      */
     @Test(expected = OrcaBridgeException.class)
     public void testSendButFailOnMessageCreation() throws OrcaBridgeException,
-                    OrcaBridgeMessageConversionException, OrcaException
-    {
+                    OrcaBridgeMessageConversionException, OrcaException {
         mockOrcaClient.connect();
         expectLastCall().once();
 
@@ -139,22 +131,19 @@ public class OrcaMessageSenderTest
     }
 
     /**
-     * Test that if there is an error in the send process, that the
-     * correct exception is passed up the stack.
+     * Test that if there is an error in the send process, that the correct exception is passed up the stack.
      * 
      * @throws OrcaBridgeException
      * @throws OrcaBridgeMessageConversionException
      * @throws OrcaException
      */
     @Test(expected = OrcaBridgeException.class)
-    public void testSendButFailOnSend() throws OrcaBridgeException,
-                    OrcaBridgeMessageConversionException, OrcaException
-    {
+    public void testSendButFailOnSend() throws OrcaBridgeException, OrcaBridgeMessageConversionException,
+                    OrcaException {
         mockOrcaClient.connect();
         expectLastCall().once();
 
-        expect( mockMessageFacade.buildOrcaMesage( mockOrcaClient ) ).andReturn( mockOrcaMessage )
-            .once();
+        expect( mockMessageFacade.buildOrcaMesage( mockOrcaClient ) ).andReturn( mockOrcaMessage ).once();
 
         expect( mockOrcaClient.send( mockOrcaMessage ) ).andThrow( new OrcaException( "Failed on send: this is all part of the test" ) );
 

@@ -18,17 +18,14 @@ import com.ubs.orca.orcabridge.IMessageFacade;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public final class MessageFacadeFactory
-{
+public final class MessageFacadeFactory {
 
     private static final Log LOG = LogFactory.getLog( MessageFacadeFactory.class );
 
     /*
-     * We have hideen this as we do not want people to create any
-     * instances of this class
+     * We have hideen this as we do not want people to create any instances of this class
      */
-    private MessageFacadeFactory()
-    {}
+    private MessageFacadeFactory() {}
 
     /**
      * Builds a message facade from a JMS message
@@ -37,8 +34,7 @@ public final class MessageFacadeFactory
      *            the JMS message to build the facade
      * @return message facade that supports JMS messages
      */
-    public static IMessageFacade createMessageAdapter( Message aJmsMessage )
-    {
+    public static IMessageFacade createMessageAdapter( Message aJmsMessage ) {
         LOG.debug( "Building a JMS message facade" );
         return new JmsMessageFacade( aJmsMessage );
     }
@@ -50,8 +46,7 @@ public final class MessageFacadeFactory
      *            the Orca message to build the facade
      * @return message facade that supports Orca messages
      */
-    public static IMessageFacade createMessageAdapter( IOrcaMessage aOrcaMessage )
-    {
+    public static IMessageFacade createMessageAdapter( IOrcaMessage aOrcaMessage ) {
         LOG.debug( "Building an Orca message facade" );
         return new OrcaMessageFacade( aOrcaMessage );
     }

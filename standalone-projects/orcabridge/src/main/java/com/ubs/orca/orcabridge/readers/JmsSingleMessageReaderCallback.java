@@ -19,16 +19,13 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * This is the callback class that will be passed into the JMSClient
- * so that we can pass the message received back to the message
- * processor.
+ * This is the callback class that will be passed into the JMSClient so that we can pass the message received
+ * back to the message processor.
  * 
  * @author suggitpe
  * @version 1.0 9 Nov 2009
  */
-public class JmsSingleMessageReaderCallback
-    implements IJmsClientSingleMsgCallback, InitializingBean
-{
+public class JmsSingleMessageReaderCallback implements IJmsClientSingleMsgCallback, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( JmsSingleMessageReaderCallback.class );
 
@@ -38,8 +35,7 @@ public class JmsSingleMessageReaderCallback
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception
-    {
+    public void afterPropertiesSet() {
         Assert.notNull( messageProcessor,
                         "No message processor has been set on the JmsSingleMessageReaderCallback" );
     }
@@ -48,25 +44,20 @@ public class JmsSingleMessageReaderCallback
      * @see com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback#onReceived(javax.jms.Message)
      */
     @Override
-    public void onReceived( Message aMessage ) throws JmsClientException
-    {
-        if ( LOG.isInfoEnabled() )
-        {
+    public void onReceived( Message aMessage ) throws JmsClientException {
+        if ( LOG.isInfoEnabled() ) {
             LOG.info( "Passing received message [" + aMessage + "] to message Processor." );
         }
 
-        try
-        {
+        try {
             messageProcessor.processMessage( MessageFacadeFactory.createMessageAdapter( aMessage ) );
         }
-        catch ( OrcaBridgeException throwable )
-        {
+        catch ( OrcaBridgeException throwable ) {
             LOG.error( "Issue ocurred in the sending of a message", throwable );
             throw new JmsClientException( throwable );
         }
 
-        if ( LOG.isInfoEnabled() )
-        {
+        if ( LOG.isInfoEnabled() ) {
             LOG.info( "Message routing for message ["
                       + aMessage
                       + "] completed.  Allowing callback to complete so that JMS transaction can be committed." );
@@ -79,8 +70,7 @@ public class JmsSingleMessageReaderCallback
      * @param aMessageProcessor
      *            The messageProcessor to set.
      */
-    public void setMessageProcessor( IMessageProcessor aMessageProcessor )
-    {
+    public void setMessageProcessor( IMessageProcessor aMessageProcessor ) {
         messageProcessor = aMessageProcessor;
     }
 

@@ -23,16 +23,15 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 /**
- * Tests that the JMS sender spring injection works OK. This relies on
- * stub implementations of the key parts that are injected.
+ * Tests that the JMS sender spring injection works OK. This relies on stub implementations of the key parts
+ * that are injected.
  * 
  * @author suggitpe
  * @version 1.0 4 Nov 2009
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-jms-message-sender-spring-injection-test.xml" })
-public class JmsMessageSenderSprintInjectionTest
-{
+public class JmsMessageSenderSprintInjectionTest {
 
     private static final Log LOG = LogFactory.getLog( JmsMessageSenderSprintInjectionTest.class );
 
@@ -41,23 +40,19 @@ public class JmsMessageSenderSprintInjectionTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
-        LOG.debug( "=================== "
-                   + JmsMessageSenderSprintInjectionTest.class.getSimpleName() );
+    public static void doBeforeClass() {
+        LOG.debug( "=================== " + JmsMessageSenderSprintInjectionTest.class.getSimpleName() );
     }
 
     /** */
     @Before
-    public void doBefore()
-    {
+    public void doBefore() {
         LOG.debug( "------------------- " );
     }
 
     /** */
     @After
-    public void doAfter()
-    {
+    public void doAfter() {
         LOG.debug( "------------------- " );
     }
 
@@ -65,8 +60,7 @@ public class JmsMessageSenderSprintInjectionTest
      * Test that the spring injected JMS message sender works.
      */
     @Test
-    public void testSpringInjectionJmsMessageSender()
-    {
+    public void testSpringInjectionJmsMessageSender() {
         assertThat( jmsMessageSender, notNullValue() );
     }
 }
