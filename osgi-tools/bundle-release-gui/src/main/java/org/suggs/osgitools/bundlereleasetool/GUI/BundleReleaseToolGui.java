@@ -461,7 +461,7 @@ public class BundleReleaseToolGui {
      */
     class BundleDataModel extends AbstractTableModel {
 
-        protected List<BundleData> localList = new ArrayList<BundleData>();
+        private List<BundleData> localList = new ArrayList<BundleData>();
 
         /**
          * Setter for the bundle data
@@ -569,17 +569,75 @@ public class BundleReleaseToolGui {
      * @author suggitpe
      * @version 1.0 10 Jul 2009
      */
-    class ColumnData {
+    static class ColumnData {
 
-        public String title;
-        public int width;
-        public int align;
+        private String title;
+        private int width;
+        private int align;
 
         public ColumnData( String aTitle, int aWidth, int aAlign ) {
             title = aTitle;
             width = aWidth;
             align = aAlign;
         }
+
+        /**
+         * Returns the value of title.
+         * 
+         * @return Returns the title.
+         */
+        public String getTitle() {
+            return title;
+        }
+
+        /**
+         * Sets the title field to the specified value.
+         * 
+         * @param aTitle
+         *            The title to set.
+         */
+        public void setTitle( String aTitle ) {
+            title = aTitle;
+        }
+
+        /**
+         * Returns the value of width.
+         * 
+         * @return Returns the width.
+         */
+        public int getWidth() {
+            return width;
+        }
+
+        /**
+         * Sets the width field to the specified value.
+         * 
+         * @param aWidth
+         *            The width to set.
+         */
+        public void setWidth( int aWidth ) {
+            width = aWidth;
+        }
+
+        /**
+         * Returns the value of align.
+         * 
+         * @return Returns the align.
+         */
+        public int getAlign() {
+            return align;
+        }
+
+        /**
+         * Sets the align field to the specified value.
+         * 
+         * @param aAlign
+         *            The align to set.
+         */
+        public void setAlign( int aAlign ) {
+            align = aAlign;
+        }
+
     }
 
 }

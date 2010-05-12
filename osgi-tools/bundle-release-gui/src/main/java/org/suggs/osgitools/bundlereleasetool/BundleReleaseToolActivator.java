@@ -200,10 +200,15 @@ public class BundleReleaseToolActivator implements BundleActivator {
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
     @Override
-    public void start( final BundleContext aCtx ) throws Exception {
+    public void start( final BundleContext aCtx ) {
         LOG.debug( "Starting the Bundle Release Tool GUI" );
         context = aCtx;
-        UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
+        try {
+            UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
+        }
+        catch ( Exception e ) {
+            throw new IllegalStateException( e );
+        }
         // bit confusing here as we are using the callback to pass in
         // all of the bundle related functionality
         new BundleReleaseToolGui( callback );
@@ -215,7 +220,7 @@ public class BundleReleaseToolActivator implements BundleActivator {
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
     @Override
-    public void stop( final BundleContext aCtx ) throws Exception {
+    public void stop( final BundleContext aCtx ) {
         LOG.debug( "Stopping the Bundle Release Tool GUI" );
         context = null;
     }
