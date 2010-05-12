@@ -35,7 +35,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         doAfterPropertiesSet();
     }
 
@@ -45,7 +45,7 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
      * 
      * @throws Exception
      */
-    protected abstract void doAfterPropertiesSet() throws Exception;
+    protected abstract void doAfterPropertiesSet();
 
     /**
      * @see com.ubs.orca.orcabridge.IMessageReader#startReader()
