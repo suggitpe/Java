@@ -13,32 +13,19 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public class Projector
-{
+public class Projector {
 
     private static final Log LOG = LogFactory.getLog( Projector.class );
 
-    /**
-     * 
-     */
-    public void wideScreenMode()
-    {
+    public void wideScreenMode() {
         LOG.debug( "Projector in wide screen" );
     }
 
-    /**
-     * 
-     */
-    public void on()
-    {
+    public void on() {
         LOG.debug( "Projector on" );
     }
 
-    /**
-     * 
-     */
-    public void off()
-    {
+    public void off() {
         LOG.debug( "Projector off" );
     }
 

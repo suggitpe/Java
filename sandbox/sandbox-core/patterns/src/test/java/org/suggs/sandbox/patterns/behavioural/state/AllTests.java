@@ -15,5 +15,4 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { StateGumballTestCase.class, StateConnctionTestCase.class })
-public class AllTests
-{}
+public class AllTests {}

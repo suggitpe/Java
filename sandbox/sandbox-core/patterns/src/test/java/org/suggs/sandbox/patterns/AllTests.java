@@ -18,5 +18,4 @@ import org.junit.runners.Suite;
                       org.suggs.sandbox.patterns.compound.AllTests.class,
                       org.suggs.sandbox.patterns.creational.AllTests.class,
                       org.suggs.sandbox.patterns.structural.AllTests.class })
-public class AllTests
-{}
+public class AllTests {}

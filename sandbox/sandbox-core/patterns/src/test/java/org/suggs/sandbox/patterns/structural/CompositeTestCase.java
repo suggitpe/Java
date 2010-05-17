@@ -18,12 +18,10 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 7 Sep 2007
  */
-public class CompositeTestCase extends AbstractPatternTestCase
-{
+public class CompositeTestCase extends AbstractPatternTestCase {
 
     @Test
-    public void testCompositeWaitress()
-    {
+    public void testCompositeWaitress() {
         IMenuComponent allMenus = buildMenus();
         Waitress w = new Waitress( allMenus );
 
@@ -31,8 +29,7 @@ public class CompositeTestCase extends AbstractPatternTestCase
     }
 
     @Test
-    public void testCompositeIterator()
-    {
+    public void testCompositeIterator() {
         IMenuComponent allMenus = buildMenus();
         Waitress w = new Waitress( allMenus );
 
@@ -44,8 +41,7 @@ public class CompositeTestCase extends AbstractPatternTestCase
      * 
      * @return the complete menu composite class structure
      */
-    private IMenuComponent buildMenus()
-    {
+    private IMenuComponent buildMenus() {
         // build top level menu
         IMenuComponent allMenus = new MenuComponent( "ALL MENUS", "All the menus" );
 
@@ -53,8 +49,7 @@ public class CompositeTestCase extends AbstractPatternTestCase
         IMenuComponent pancakeHouseMenu = new MenuComponent( "PANCAKE HOUSE MENU", "Breakfast" );
         IMenuComponent dinerMenu = new MenuComponent( "DINER MENU", "Lunch" );
         IMenuComponent cafeMenu = new MenuComponent( "CAFE MENU", "Dinner" );
-        IMenuComponent dessertMenu = new MenuComponent( "DESSERT MENU",
-                                                        "Good old fashioned dessert" );
+        IMenuComponent dessertMenu = new MenuComponent( "DESSERT MENU", "Good old fashioned dessert" );
 
         allMenus.add( pancakeHouseMenu );
         allMenus.add( dinerMenu );
@@ -73,20 +68,14 @@ public class CompositeTestCase extends AbstractPatternTestCase
                                             "Pancakes made with fresh blueberries",
                                             true,
                                             3.49d ) );
-        pancakeHouseMenu.add( new MenuItem( "Waffles",
-                                            "Waffles with your choice of topping",
-                                            true,
-                                            3.59d ) );
+        pancakeHouseMenu.add( new MenuItem( "Waffles", "Waffles with your choice of topping", true, 3.59d ) );
 
         dinerMenu.add( new MenuItem( "Vegetarian BLT",
                                      "'Fakin' bacon with lettuce & tomato on whie bread",
                                      true,
                                      2.99d ) );
         dinerMenu.add( new MenuItem( "BLT", "Bacon lettuce and tomate on whole wheat", false, 2.99d ) );
-        dinerMenu.add( new MenuItem( "Soup of the day",
-                                     "soup of the day with a bread roll",
-                                     false,
-                                     3.29d ) );
+        dinerMenu.add( new MenuItem( "Soup of the day", "soup of the day with a bread roll", false, 3.29d ) );
         dinerMenu.add( new MenuItem( "Hot Dog", "A hot dog with all the trimmings", false, 3.05d ) );
 
         cafeMenu.add( new MenuItem( "Steak and Chips",
@@ -94,19 +83,13 @@ public class CompositeTestCase extends AbstractPatternTestCase
                                     false,
                                     13.99d ) );
         cafeMenu.add( new MenuItem( "Spaghetti Bologneise", "Like mama used to make", false, 8.99d ) );
-        cafeMenu.add( new MenuItem( "Fish and Chips",
-                                    "Cod in beer batter and potatoe wedges",
-                                    false,
-                                    6.49d ) );
+        cafeMenu.add( new MenuItem( "Fish and Chips", "Cod in beer batter and potatoe wedges", false, 6.49d ) );
         cafeMenu.add( new MenuItem( "Sausage 'n mash",
                                     "Apple and cider sausages with egg spaghetti",
                                     false,
                                     7.49d ) );
 
-        dessertMenu.add( new MenuItem( "Spotted Dick ",
-                                       "Sponge with currents and fruit zest",
-                                       true,
-                                       3.99d ) );
+        dessertMenu.add( new MenuItem( "Spotted Dick ", "Sponge with currents and fruit zest", true, 3.99d ) );
         dessertMenu.add( new MenuItem( "Fresh fruit",
                                        "A select of the freshest fruit known to man!",
                                        true,

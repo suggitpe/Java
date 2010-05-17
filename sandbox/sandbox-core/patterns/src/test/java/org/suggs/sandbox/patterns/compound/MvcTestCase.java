@@ -12,5 +12,4 @@ import org.suggs.sandbox.patterns.AbstractPatternTestCase;
  * @author suggitpe
  * @version 1.0 31 Aug 2007
  */
-public class MvcTestCase extends AbstractPatternTestCase
-{}
+public class MvcTestCase extends AbstractPatternTestCase {}

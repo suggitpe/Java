@@ -23,32 +23,27 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 23 Aug 2007
  */
-public class FactoryMethodTestCase extends AbstractPatternTestCase
-{
+public class FactoryMethodTestCase extends AbstractPatternTestCase {
 
     private static final Log LOG = LogFactory.getLog( FactoryMethodTestCase.class );
 
     @Test
-    public void testFooPizzaStore()
-    {
+    public void testFooPizzaStore() {
         runTest( new FooPizzaStore(), "ham", false );
     }
 
     @Test
-    public void testBarPizzaStore()
-    {
+    public void testBarPizzaStore() {
         runTest( new BarPizzaStore(), "cheese", false );
     }
 
     @Test
-    public void testFooPizzaStoreFailure()
-    {
+    public void testFooPizzaStoreFailure() {
         runTest( new FooPizzaStore(), "dog-poo", true );
     }
 
     @Test
-    public void testBarPizzaStoreFailure()
-    {
+    public void testBarPizzaStoreFailure() {
         runTest( new BarPizzaStore(), "cat-wee", true );
     }
 
@@ -62,31 +57,24 @@ public class FactoryMethodTestCase extends AbstractPatternTestCase
      * @param expectException
      *            whether we expect an exception to be thrown
      */
-    private void runTest( IPizzaStore aStore, String aType, boolean expectException )
-    {
+    private void runTest( IPizzaStore aStore, String aType, boolean expectException ) {
         LOG.debug( "Testing Pizza Store for a [" + aType + "] pizza" );
 
         IPizza pizza = null;
-        try
-        {
+        try {
             pizza = aStore.orderPizza( aType );
-            if ( expectException )
-            {
+            if ( expectException ) {
                 Assert.fail( "The test should have thrown an exception" );
             }
-            else
-            {
+            else {
                 LOG.debug( "Pizza delivered was a [" + pizza.getClass().getSimpleName() + "]" );
             }
         }
-        catch ( PizzaStoreException e )
-        {
-            if ( !expectException )
-            {
+        catch ( PizzaStoreException e ) {
+            if ( !expectException ) {
                 Assert.fail( "Caught exception in the pizza store [" + e.getMessage() + "]" );
             }
-            else
-            {
+            else {
                 LOG.debug( "Correctly threw exception from the Pizza Store" );
             }
         }

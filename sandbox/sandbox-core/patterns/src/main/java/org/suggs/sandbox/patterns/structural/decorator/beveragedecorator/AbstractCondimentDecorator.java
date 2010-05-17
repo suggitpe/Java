@@ -8,25 +8,20 @@ import org.suggs.sandbox.patterns.structural.decorator.AbstractBeverage;
 import org.suggs.sandbox.patterns.structural.decorator.IBeverage;
 
 /**
- * Abstract decorator class that forces us to re-implement the
- * getDescription method.
+ * Abstract decorator class that forces us to re-implement the getDescription method.
  * 
  * @author suggitpe
  * @version 1.0 28 Aug 2007
  */
-public abstract class AbstractCondimentDecorator extends AbstractBeverage
-{
+public abstract class AbstractCondimentDecorator extends AbstractBeverage {
 
-    private IBeverage mBeverage_;
+    private IBeverage beverage;
 
     /**
-     * Constructs a new instance. This is hidden from all other
-     * classes (no default construction).
+     * Constructs a new instance. This is hidden from all other classes (no default construction).
      */
     @SuppressWarnings("unused")
-    private AbstractCondimentDecorator()
-    {
-    }
+    private AbstractCondimentDecorator() {}
 
     /**
      * Constructs a new instance.
@@ -34,9 +29,8 @@ public abstract class AbstractCondimentDecorator extends AbstractBeverage
      * @param aBeverage
      *            the decorating object
      */
-    public AbstractCondimentDecorator( IBeverage aBeverage )
-    {
-        mBeverage_ = aBeverage;
+    public AbstractCondimentDecorator( IBeverage aBeverage ) {
+        beverage = aBeverage;
     }
 
     /**
@@ -50,8 +44,7 @@ public abstract class AbstractCondimentDecorator extends AbstractBeverage
      * 
      * @return the beverage to decorate
      */
-    protected IBeverage getBeverage()
-    {
-        return mBeverage_;
+    protected IBeverage getBeverage() {
+        return beverage;
     }
 }

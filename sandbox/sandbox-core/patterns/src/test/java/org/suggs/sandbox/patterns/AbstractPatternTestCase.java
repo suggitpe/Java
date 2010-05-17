@@ -10,26 +10,22 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 /**
- * Abstract test that will do all of the formatting for the pre and
- * post test exec
+ * Abstract test that will do all of the formatting for the pre and post test exec
  * 
  * @author suggitpe
  * @version 1.0 24 Aug 2007
  */
-public abstract class AbstractPatternTestCase
-{
+public abstract class AbstractPatternTestCase {
 
     private static final Log LOG = LogFactory.getLog( "Test Base" );
 
     @BeforeClass
-    public static void doubleLine()
-    {
+    public static void doubleLine() {
         LOG.info( "=================================" );
     }
 
     @Before
-    public void singleLine() throws Exception
-    {
+    public void singleLine() throws Exception {
         LOG.info( "---------------------------------" );
         LOG.info( "Executing: " + getClass().getSimpleName() );
         LOG.info( "---------------------------------" );

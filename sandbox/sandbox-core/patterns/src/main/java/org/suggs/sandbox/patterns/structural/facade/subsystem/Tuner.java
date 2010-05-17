@@ -13,18 +13,12 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public class Tuner
-{
+public class Tuner {
 
     private static final Log LOG = LogFactory.getLog( Tuner.class );
 
-    /**
-     * 
-     */
-    public void off()
-    {
+    public void off() {
         LOG.debug( "Tuner off" );
-
     }
 
 }

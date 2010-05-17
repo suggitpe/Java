@@ -20,14 +20,12 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 31 Aug 2007
  */
-public class AdapterTestCase extends AbstractPatternTestCase
-{
+public class AdapterTestCase extends AbstractPatternTestCase {
 
     private static final Log LOG = LogFactory.getLog( AdapterTestCase.class );
 
     @Test
-    public void testTurkeyAdapter()
-    {
+    public void testTurkeyAdapter() {
         IDuck mallard = new MallardDuck();
         WildTurkey turkey = new WildTurkey();
 
@@ -45,8 +43,7 @@ public class AdapterTestCase extends AbstractPatternTestCase
 
     }
 
-    private void testDuck( IDuck aDuck )
-    {
+    private void testDuck( IDuck aDuck ) {
         LOG.debug( "Testing a duck object [" + aDuck.getClass().getSimpleName() + "]" );
         aDuck.quack();
         aDuck.fly();

@@ -13,48 +13,27 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public class DvdPlayer
-{
+public class DvdPlayer {
 
     private static final Log LOG = LogFactory.getLog( DvdPlayer.class );
 
-    /**
-     * @param movie
-     */
-    public void play( String movie )
-    {
+    public void play( String movie ) {
         LOG.debug( "Dvd player playiny [" + movie + "]" );
     }
 
-    /**
-     * 
-     */
-    public void on()
-    {
+    public void on() {
         LOG.debug( "Dvd player on" );
     }
 
-    /**
-     * 
-     */
-    public void stop()
-    {
+    public void stop() {
         LOG.debug( "Dvd player stop" );
     }
 
-    /**
-     * 
-     */
-    public void eject()
-    {
+    public void eject() {
         LOG.debug( "Dvd player eject" );
     }
 
-    /**
-     * 
-     */
-    public void off()
-    {
+    public void off() {
         LOG.debug( "Dvd player off" );
     }
 

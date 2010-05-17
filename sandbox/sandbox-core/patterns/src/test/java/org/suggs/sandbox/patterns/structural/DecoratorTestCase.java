@@ -22,21 +22,18 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class DecoratorTestCase extends AbstractPatternTestCase
-{
+public class DecoratorTestCase extends AbstractPatternTestCase {
 
     private static final Log LOG = LogFactory.getLog( DecoratorTestCase.class );
 
     @Test
-    public void testNormalEspresso()
-    {
+    public void testNormalEspresso() {
         IBeverage e = new Espresso();
         LOG.debug( "Normal espresso - " + e );
     }
 
     @Test
-    public void testEspressoWithExtras()
-    {
+    public void testEspressoWithExtras() {
         IBeverage e = new Espresso();
         e = new Mocha( e );
         e = new Mocha( e );
@@ -45,15 +42,13 @@ public class DecoratorTestCase extends AbstractPatternTestCase
     }
 
     @Test
-    public void testHouseBlend()
-    {
+    public void testHouseBlend() {
         IBeverage h = new HouseBlend();
         LOG.debug( "Normal house blend - " + h );
     }
 
     @Test
-    public void testHouseBlendWithExtras()
-    {
+    public void testHouseBlendWithExtras() {
         IBeverage h = new HouseBlend();
         h = new SteamedMilk( h );
         LOG.debug( "House blend with extras - " + h );

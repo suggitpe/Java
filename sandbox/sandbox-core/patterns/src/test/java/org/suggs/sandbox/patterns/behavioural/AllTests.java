@@ -15,7 +15,5 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { CommandTestCase.class, IteratorTestCase.class, ObserverTestCase.class,
-                      TemplateTestCase.class,
-                      org.suggs.sandbox.patterns.behavioural.state.AllTests.class })
-public class AllTests
-{}
+                      TemplateTestCase.class, org.suggs.sandbox.patterns.behavioural.state.AllTests.class })
+public class AllTests {}

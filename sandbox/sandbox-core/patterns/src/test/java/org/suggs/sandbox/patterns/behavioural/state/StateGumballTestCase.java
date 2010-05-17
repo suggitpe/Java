@@ -17,8 +17,7 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class StateGumballTestCase extends AbstractPatternTestCase
-{
+public class StateGumballTestCase extends AbstractPatternTestCase {
 
     private static final Log LOG = LogFactory.getLog( StateGumballTestCase.class );
 
@@ -26,8 +25,7 @@ public class StateGumballTestCase extends AbstractPatternTestCase
      * Standard test to test the gumball state machine
      */
     @Test
-    public void testGumballMachine()
-    {
+    public void testGumballMachine() {
         GumballMachine gm = new GumballMachine( 5 );
 
         LOG.debug( gm );
@@ -70,8 +68,7 @@ public class StateGumballTestCase extends AbstractPatternTestCase
     }
 
     @Test
-    public void testBadCrankTurn()
-    {
+    public void testBadCrankTurn() {
         GumballMachine gm = new GumballMachine( 5 );
         gm.turnCrank();
     }

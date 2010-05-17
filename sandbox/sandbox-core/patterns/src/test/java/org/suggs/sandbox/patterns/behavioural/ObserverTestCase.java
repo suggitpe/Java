@@ -17,12 +17,10 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 28 Aug 2007
  */
-public class ObserverTestCase extends AbstractPatternTestCase
-{
+public class ObserverTestCase extends AbstractPatternTestCase {
 
     @Test
-    public void testWeatherStation()
-    {
+    public void testWeatherStation() {
         WeatherData data = new WeatherData();
 
         @SuppressWarnings("unused")

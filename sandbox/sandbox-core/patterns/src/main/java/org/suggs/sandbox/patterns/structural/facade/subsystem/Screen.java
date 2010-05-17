@@ -13,24 +13,15 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public class Screen
-{
+public class Screen {
 
     private static final Log LOG = LogFactory.getLog( Screen.class );
 
-    /**
-     * 
-     */
-    public void down()
-    {
+    public void down() {
         LOG.debug( "Screen down" );
     }
 
-    /**
-     * 
-     */
-    public void up()
-    {
+    public void up() {
         LOG.debug( "Screen up" );
     }
 

@@ -17,12 +17,10 @@ import org.junit.runner.notification.RunNotifier;
  * @author suggitpe
  * @version 1.0 20 Aug 2009
  */
-public class SandboxRunner extends Runner
-{
+public class SandboxRunner extends Runner {
 
     private static final Log LOG = LogFactory.getLog( SandboxRunner.class );
-
-    private final Runner mDelegate_;
+    private final Runner delegate;
 
     /**
      * Constructs a new instance.
@@ -30,10 +28,9 @@ public class SandboxRunner extends Runner
      * @param testClass
      * @throws Exception
      */
-    public SandboxRunner( Class<?> testClass ) throws Exception
-    {
+    public SandboxRunner( Class<?> testClass ) throws Exception {
         Request classRequest = Request.aClass( testClass );
-        mDelegate_ = classRequest.getRunner();
+        delegate = classRequest.getRunner();
         LOG.debug( "New runner created for " + testClass );
     }
 
@@ -41,19 +38,17 @@ public class SandboxRunner extends Runner
      * @see org.junit.runner.Runner#getDescription()
      */
     @Override
-    public Description getDescription()
-    {
-        return mDelegate_.getDescription();
+    public Description getDescription() {
+        return delegate.getDescription();
     }
 
     /**
      * @see org.junit.runner.Runner#run(org.junit.runner.notification.RunNotifier)
      */
     @Override
-    public void run( RunNotifier aParamRunNotifier )
-    {
+    public void run( RunNotifier aParamRunNotifier ) {
         LOG.debug( "-------------------- " + this.toString() );
-        mDelegate_.run( aParamRunNotifier );
+        delegate.run( aParamRunNotifier );
         LOG.debug( "--------------------" );
 
     }

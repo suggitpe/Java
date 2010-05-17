@@ -16,12 +16,10 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 31 Aug 2007
  */
-public class DuckFestTestCase extends AbstractPatternTestCase
-{
+public class DuckFestTestCase extends AbstractPatternTestCase {
 
     @Test
-    public void testDuckSimulator()
-    {
+    public void testDuckSimulator() {
         DuckSimulator sim = new DuckSimulator();
         sim.simulate( new CountingDuckFactory() );
     }

@@ -17,10 +17,9 @@ import java.util.Stack;
  * @version 1.0 10 Sep 2007
  */
 @SuppressWarnings("unchecked")
-public class CompositeIterator implements Iterator
-{
+public class CompositeIterator implements Iterator {
 
-    Stack<Iterator> mStack_ = new Stack<Iterator>();
+    Stack<Iterator> stack = new Stack<Iterator>();
 
     /**
      * Constructs a new instance.
@@ -28,24 +27,20 @@ public class CompositeIterator implements Iterator
      * @param aIter
      *            an iterator to use
      */
-    public CompositeIterator( Iterator aIter )
-    {
-        mStack_.push( aIter );
+    public CompositeIterator( Iterator aIter ) {
+        stack.push( aIter );
     }
 
     /**
      * @see java.util.Iterator#hasNext()
      */
-    public boolean hasNext()
-    {
-        if ( mStack_.empty() )
-        {
+    public boolean hasNext() {
+        if ( stack.empty() ) {
             return false;
         }
-        Iterator i = mStack_.peek();
-        if ( !i.hasNext() )
-        {
-            mStack_.pop();
+        Iterator i = stack.peek();
+        if ( !i.hasNext() ) {
+            stack.pop();
             return hasNext();
 
         }
@@ -55,15 +50,12 @@ public class CompositeIterator implements Iterator
     /**
      * @see java.util.Iterator#next()
      */
-    public Object next()
-    {
-        if ( hasNext() )
-        {
-            Iterator iter = mStack_.peek();
+    public Object next() {
+        if ( hasNext() ) {
+            Iterator iter = stack.peek();
             IMenuComponent comp = (IMenuComponent) iter.next();
-            if ( comp instanceof MenuComponent )
-            {
-                mStack_.push( comp.createIterator() );
+            if ( comp instanceof MenuComponent ) {
+                stack.push( comp.createIterator() );
             }
             return comp;
         }
@@ -73,8 +65,7 @@ public class CompositeIterator implements Iterator
     /**
      * @see java.util.Iterator#remove()
      */
-    public void remove()
-    {
+    public void remove() {
         throw new UnsupportedOperationException();
     }
 

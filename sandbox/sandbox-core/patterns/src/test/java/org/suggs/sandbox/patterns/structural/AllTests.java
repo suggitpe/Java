@@ -16,5 +16,4 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { AdapterTestCase.class, CompositeTestCase.class, DecoratorTestCase.class,
                       FacadeTestCase.class, ProxyTestCase.class })
-public class AllTests
-{}
+public class AllTests {}

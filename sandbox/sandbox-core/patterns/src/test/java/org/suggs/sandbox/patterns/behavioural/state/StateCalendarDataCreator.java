@@ -18,14 +18,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Test class to create a collection of sample data to be used by a
- * different test.
+ * Test class to create a collection of sample data to be used by a different test.
  * 
  * @author suggitpe
  * @version 1.0 4 Aug 2009
  */
-public class StateCalendarDataCreator
-{
+public class StateCalendarDataCreator {
 
     // static logger
     private static final Log LOG = LogFactory.getLog( StateCalendarDataCreator.class );
@@ -38,15 +36,12 @@ public class StateCalendarDataCreator
      * 
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         String fileName;
-        if ( args.length == 1 )
-        {
+        if ( args.length == 1 ) {
             fileName = args[0];
         }
-        else
-        {
+        else {
             fileName = DEFAULT_FILE;
         }
 
@@ -58,19 +53,16 @@ public class StateCalendarDataCreator
      * 
      * @param aFileName
      */
-    public static void serialize( String aFileName )
-    {
+    public static void serialize( String aFileName ) {
         FileLoader.storeData( new File( aFileName ), createData() );
     }
 
     /**
      * Creates the data for the tests
      * 
-     * @return a Serialized object that can be read by the Calendar
-     *         GUI.
+     * @return a Serialized object that can be read by the Calendar GUI.
      */
-    private static Serializable createData()
-    {
+    private static Serializable createData() {
         LOG.debug( "Creating test data" );
         ArrayList<Appointment> ret = new ArrayList<Appointment>();
         ArrayList<Contact> contacts = new ArrayList<Contact>();
@@ -122,8 +114,7 @@ public class StateCalendarDataCreator
      *            minute
      * @return Date object to represent the above values
      */
-    private static Date createDate( int year, int month, int day, int hour, int minute )
-    {
+    private static Date createDate( int year, int month, int day, int hour, int minute ) {
         dateCreator.set( year, month, day, hour, minute );
         return dateCreator.getTime();
     }

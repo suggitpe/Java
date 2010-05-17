@@ -16,12 +16,11 @@ import java.util.List;
  * @author suggitpe
  * @version 1.0 7 Sep 2007
  */
-public class MenuComponent extends AbstractMenuComponent
-{
+public class MenuComponent extends AbstractMenuComponent {
 
-    List<IMenuComponent> mMenuComps_ = new ArrayList<IMenuComponent>();
-    String mName_;
-    String mDescription_;
+    List<IMenuComponent> menuComps = new ArrayList<IMenuComponent>();
+    String name;
+    String description;
 
     /**
      * Constructs a new instance.
@@ -29,55 +28,49 @@ public class MenuComponent extends AbstractMenuComponent
      * @param aName
      * @param aDescripton
      */
-    public MenuComponent( String aName, String aDescripton )
-    {
-        mName_ = aName;
-        mDescription_ = aDescripton;
+    public MenuComponent( String aName, String aDescripton ) {
+        name = aName;
+        description = aDescripton;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#add(org.suggs.sandbox.patterns.structural.composite.IMenuComponent)
      */
     @Override
-    public void add( IMenuComponent component )
-    {
-        mMenuComps_.add( component );
+    public void add( IMenuComponent component ) {
+        menuComps.add( component );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#remove(org.suggs.sandbox.patterns.structural.composite.IMenuComponent)
      */
     @Override
-    public void remove( IMenuComponent component )
-    {
-        mMenuComps_.remove( component );
+    public void remove( IMenuComponent component ) {
+        menuComps.remove( component );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#getChild(int)
      */
     @Override
-    public IMenuComponent getChild( int childIndex )
-    {
-        return mMenuComps_.get( childIndex );
+    public IMenuComponent getChild( int childIndex ) {
+        return menuComps.get( childIndex );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#getDescription()
      */
     @Override
-    public String getDescription()
-    {
-        return mDescription_;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#getName()
      */
     @Override
-    public String getName()
-    {
-        return mName_;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -85,16 +78,14 @@ public class MenuComponent extends AbstractMenuComponent
      */
     @SuppressWarnings("unchecked")
     @Override
-    public void print()
-    {
+    public void print() {
         System.out.println( "\n" + getName() + ", " + getDescription() );
         System.out.println( "-----------------------" );
 
         // This is a small bit of recursion (if the object in the iter
         // is a MenuComponent rather that a MenuItem).
-        Iterator iter = mMenuComps_.iterator();
-        while ( iter.hasNext() )
-        {
+        Iterator iter = menuComps.iterator();
+        while ( iter.hasNext() ) {
             ( (IMenuComponent) iter.next() ).print();
         }
     }
@@ -103,9 +94,8 @@ public class MenuComponent extends AbstractMenuComponent
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#createIterator()
      */
     @SuppressWarnings("unchecked")
-    public Iterator createIterator()
-    {
-        return new CompositeIterator( mMenuComps_.iterator() );
+    public Iterator createIterator() {
+        return new CompositeIterator( menuComps.iterator() );
     }
 
 }

@@ -17,25 +17,23 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This is the facade class that will simplify the interface to the
- * home theatre subsystem.
+ * This is the facade class that will simplify the interface to the home theatre subsystem.
  * 
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public class HomeTheatreFacade
-{
+public class HomeTheatreFacade {
 
     private static final Log LOG = LogFactory.getLog( HomeTheatreFacade.class );
 
-    private Amplifier mAmplifier_;
-    private CdPlayer mCdPlayer_;
-    private DvdPlayer mDvdPlayer_;
-    private PopcornMachine mPopcornMachine_;
-    private Projector mProjector_;
-    private Screen mScreen_;
-    private TheatreLights mTheatreLights_;
-    private Tuner mTuner_;
+    private Amplifier amplifier;
+    private CdPlayer cdPlayer;
+    private DvdPlayer dvdPlayer;
+    private PopcornMachine popcornMachine;
+    private Projector projector;
+    private Screen screen;
+    private TheatreLights theatreLights;
+    private Tuner tuner;
 
     /**
      * Constructs a new instance.
@@ -51,61 +49,56 @@ public class HomeTheatreFacade
      */
     public HomeTheatreFacade( Amplifier aAmplifier, CdPlayer aCdPlayer, DvdPlayer aDvdPlayer,
                               PopcornMachine aPopcornMachine, Projector aProjector, Screen aScreen,
-                              TheatreLights aTheatreLights, Tuner aTuner )
-    {
-        mAmplifier_ = aAmplifier;
-        mCdPlayer_ = aCdPlayer;
-        mDvdPlayer_ = aDvdPlayer;
-        mPopcornMachine_ = aPopcornMachine;
-        mProjector_ = aProjector;
-        mScreen_ = aScreen;
-        mTheatreLights_ = aTheatreLights;
-        mTuner_ = aTuner;
+                              TheatreLights aTheatreLights, Tuner aTuner ) {
+        amplifier = aAmplifier;
+        cdPlayer = aCdPlayer;
+        dvdPlayer = aDvdPlayer;
+        popcornMachine = aPopcornMachine;
+        projector = aProjector;
+        screen = aScreen;
+        theatreLights = aTheatreLights;
+        tuner = aTuner;
     }
 
     /**
-     * Run through the entire subsystem setting everything up to watch
-     * a movie.
+     * Run through the entire subsystem setting everything up to watch a movie.
      * 
      * @param aMovie
      *            the movie to watch
      */
-    public void watchMovie( String aMovie )
-    {
+    public void watchMovie( String aMovie ) {
         LOG.debug( "Get ready to watch a movie ..." );
-        mPopcornMachine_.on();
-        mPopcornMachine_.pop();
-        mTheatreLights_.dim( 10 );
-        mScreen_.down();
-        mProjector_.on();
-        mProjector_.wideScreenMode();
-        mAmplifier_.on();
-        mAmplifier_.setDvd( aMovie );
-        mAmplifier_.setSurroundSound();
-        mAmplifier_.setVolume( 5 );
-        mDvdPlayer_.on();
-        mDvdPlayer_.play( aMovie );
+        popcornMachine.on();
+        popcornMachine.pop();
+        theatreLights.dim( 10 );
+        screen.down();
+        projector.on();
+        projector.wideScreenMode();
+        amplifier.on();
+        amplifier.setDvd( aMovie );
+        amplifier.setSurroundSound();
+        amplifier.setVolume( 5 );
+        dvdPlayer.on();
+        dvdPlayer.play( aMovie );
     }
 
     /**
-     * Run through all of the steps needed to turn off the entire
-     * subsystem
+     * Run through all of the steps needed to turn off the entire subsystem
      */
-    public void shutDownTheatre()
-    {
+    public void shutDownTheatre() {
         LOG.debug( "Shutting down move theatre" );
-        mPopcornMachine_.off();
-        mTheatreLights_.off();
-        mScreen_.up();
-        mProjector_.off();
-        mAmplifier_.off();
-        mDvdPlayer_.stop();
-        mDvdPlayer_.eject();
-        mDvdPlayer_.off();
-        mTuner_.off();
-        mCdPlayer_.stop();
-        mCdPlayer_.eject();
-        mCdPlayer_.off();
+        popcornMachine.off();
+        theatreLights.off();
+        screen.up();
+        projector.off();
+        amplifier.off();
+        dvdPlayer.stop();
+        dvdPlayer.eject();
+        dvdPlayer.off();
+        tuner.off();
+        cdPlayer.stop();
+        cdPlayer.eject();
+        cdPlayer.off();
     }
 
 }

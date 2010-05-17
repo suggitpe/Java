@@ -17,26 +17,24 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * State machine for a gumball machine object. This is a remote object
- * so that clients can interface with it.
+ * State machine for a gumball machine object. This is a remote object so that clients can interface with it.
  * 
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
-public class GumballMachine extends UnicastRemoteObject implements IGumballMachineRemote
-{
+public class GumballMachine extends UnicastRemoteObject implements IGumballMachineRemote {
 
     private static final Log LOG = LogFactory.getLog( GumballMachine.class );
 
-    private IState mSoldOutState_;
-    private IState mNoQuarterState_;
-    private IState mHasQuarterState_;
-    private IState mSoldState_;
-    private IState mWinnerState_;
+    private IState soldOutState;
+    private IState noQuarterState;
+    private IState hasQuarterState;
+    private IState soldState;
+    private IState winnerState;
 
-    private IState mState_ = mSoldOutState_;
-    int mCount_ = 0;
-    String mLocation_;
+    private IState state = soldOutState;
+    int count = 0;
+    String location;
 
     /**
      * Constructs a new instance.
@@ -48,56 +46,49 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
      * @throws RemoteException
      *             if there is a connection error
      */
-    public GumballMachine( String aLocation, int aCount ) throws RemoteException
-    {
-        mSoldOutState_ = new SoldOutState( this );
-        mNoQuarterState_ = new NoQuarterState( this );
-        mHasQuarterState_ = new HasQuarterState( this );
-        mSoldState_ = new SoldState( this );
-        mWinnerState_ = new WinnerState( this );
+    public GumballMachine( String aLocation, int aCount ) throws RemoteException {
+        soldOutState = new SoldOutState( this );
+        noQuarterState = new NoQuarterState( this );
+        hasQuarterState = new HasQuarterState( this );
+        soldState = new SoldState( this );
+        winnerState = new WinnerState( this );
 
-        mLocation_ = aLocation;
-        mCount_ = aCount;
-        if ( mCount_ > 0 )
-        {
-            mState_ = mNoQuarterState_;
+        location = aLocation;
+        count = aCount;
+        if ( count > 0 ) {
+            state = noQuarterState;
         }
     }
 
     /**
      * Insert the quarter
      */
-    public void insertQuarter()
-    {
-        mState_.insertQuarter();
+    public void insertQuarter() {
+        state.insertQuarter();
     }
 
     /**
      * Eject the quarter
      */
-    public void ejectQuarter()
-    {
-        mState_.ejectQuarter();
+    public void ejectQuarter() {
+        state.ejectQuarter();
     }
 
     /**
      * Turns the crank on the machine
      */
-    public void turnCrank()
-    {
-        mState_.turnCrank();
-        mState_.dispense();
+    public void turnCrank() {
+        state.turnCrank();
+        state.dispense();
     }
 
     /**
      * Releases a gum ball into the slot for the buyer to collect
      */
-    public void releaseBall()
-    {
+    public void releaseBall() {
         LOG.info( "A gumball comes rolling into the slot" );
-        if ( mCount_ != 0 )
-        {
-            --mCount_;
+        if ( count != 0 ) {
+            --count;
         }
     }
 
@@ -105,10 +96,9 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
-        return new StringBuffer( "Gumball Machine: gumball count=[" + mCount_ + "];  state=["
-                                 + mState_.getClass().getSimpleName() + "]" ).toString();
+    public String toString() {
+        return new StringBuffer( "Gumball Machine: gumball count=[" + count + "];  state=["
+                                 + state.getClass().getSimpleName() + "]" ).toString();
     }
 
     // =================
@@ -120,33 +110,29 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
      * @param aState
      *            the state to set
      */
-    public void setState( IState aState )
-    {
-        mState_ = aState;
+    public void setState( IState aState ) {
+        state = aState;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IGumballMachineRemote#getState()
      */
-    public IState getState()
-    {
-        return mState_;
+    public IState getState() {
+        return state;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IGumballMachineRemote#getCount()
      */
-    public int getCount()
-    {
-        return mCount_;
+    public int getCount() {
+        return count;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IGumballMachineRemote#getLocation()
      */
-    public String getLocation()
-    {
-        return mLocation_;
+    public String getLocation() {
+        return location;
     }
 
     /**
@@ -154,9 +140,8 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
      * 
      * @return the sold out state
      */
-    public IState getSoldOutState()
-    {
-        return mSoldOutState_;
+    public IState getSoldOutState() {
+        return soldOutState;
     }
 
     /**
@@ -164,9 +149,8 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
      * 
      * @return the no quarter state
      */
-    public IState getNoQuarterState()
-    {
-        return mNoQuarterState_;
+    public IState getNoQuarterState() {
+        return noQuarterState;
     }
 
     /**
@@ -174,9 +158,8 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
      * 
      * @return the has quarter state
      */
-    public IState getHasQuarterState()
-    {
-        return mHasQuarterState_;
+    public IState getHasQuarterState() {
+        return hasQuarterState;
     }
 
     /**
@@ -184,9 +167,8 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
      * 
      * @return the sold state
      */
-    public IState getSoldState()
-    {
-        return mSoldState_;
+    public IState getSoldState() {
+        return soldState;
     }
 
     /**
@@ -194,8 +176,7 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
      * 
      * @return the winner state
      */
-    public IState getWinnerState()
-    {
-        return mWinnerState_;
+    public IState getWinnerState() {
+        return winnerState;
     }
 }

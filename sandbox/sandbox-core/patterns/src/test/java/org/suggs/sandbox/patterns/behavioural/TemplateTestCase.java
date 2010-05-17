@@ -19,14 +19,12 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public class TemplateTestCase extends AbstractPatternTestCase
-{
+public class TemplateTestCase extends AbstractPatternTestCase {
 
     private static final Log LOG = LogFactory.getLog( TemplateTestCase.class );
 
     @Test
-    public void testNonTemplatized()
-    {
+    public void testNonTemplatized() {
         LOG.debug( "**** Calling prepareRecipe for coffee" );
 
         CaffeineBeverage coffee = new Coffee();
@@ -38,8 +36,7 @@ public class TemplateTestCase extends AbstractPatternTestCase
     }
 
     @Test
-    public void testTemplatized()
-    {
+    public void testTemplatized() {
         LOG.debug( "**** Calling prepareRecipe for coffee" );
         org.suggs.sandbox.patterns.behavioural.template.templatized.CaffeineBeverage coffee = new org.suggs.sandbox.patterns.behavioural.template.templatized.Coffee();
         coffee.prepareReceipe();

@@ -14,13 +14,12 @@ import java.util.Iterator;
  * @author suggitpe
  * @version 1.0 7 Sep 2007
  */
-public class MenuItem extends AbstractMenuComponent
-{
+public class MenuItem extends AbstractMenuComponent {
 
-    String mName_;
-    String mDescription_;
-    boolean mVegetarian_;
-    double mPrice_;
+    String name;
+    String description;
+    boolean vegetarian;
+    double price;
 
     /**
      * Constructs a new instance.
@@ -34,66 +33,59 @@ public class MenuItem extends AbstractMenuComponent
      * @param aPrice
      *            the price of the item
      */
-    public MenuItem( String aName, String aDescription, boolean isVegetarian, double aPrice )
-    {
-        mName_ = aName;
-        mDescription_ = aDescription;
-        mVegetarian_ = isVegetarian;
-        mPrice_ = aPrice;
+    public MenuItem( String aName, String aDescription, boolean isVegetarian, double aPrice ) {
+        name = aName;
+        description = aDescription;
+        vegetarian = isVegetarian;
+        price = aPrice;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.AbstractMenuComponent#getName()
      */
     @Override
-    public String getName()
-    {
-        return mName_;
+    public String getName() {
+        return name;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.AbstractMenuComponent#getDescription()
      */
     @Override
-    public String getDescription()
-    {
-        return mDescription_;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.AbstractMenuComponent#isVegetarian()
      */
     @Override
-    public boolean isVegetarian()
-    {
-        return mVegetarian_;
+    public boolean isVegetarian() {
+        return vegetarian;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.AbstractMenuComponent#getPrice()
      */
     @Override
-    public double getPrice()
-    {
-        return mPrice_;
+    public double getPrice() {
+        return price;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.AbstractMenuComponent#print()
      */
     @Override
-    public void print()
-    {
-        System.out.println( " " + getName() + ( isVegetarian() ? "(v), " : ", " ) + getPrice()
-                            + "\n\t -- " + getDescription() );
+    public void print() {
+        System.out.println( " " + getName() + ( isVegetarian() ? "(v), " : ", " ) + getPrice() + "\n\t -- "
+                            + getDescription() );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#createIterator()
      */
     @SuppressWarnings("unchecked")
-    public Iterator createIterator()
-    {
+    public Iterator createIterator() {
         return new NullIterator();
     }
 

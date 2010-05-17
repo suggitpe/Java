@@ -21,46 +21,38 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 12 Sep 2007
  */
-public class GumballMachineClient
-{
+public class GumballMachineClient {
 
     private static final Log LOG = LogFactory.getLog( GumballMachineClient.class );
 
     /**
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         String[] locations = { "//localhost:7234/gumballMachine" };
         GumballMonitor[] monitors = new GumballMonitor[locations.length];
 
-        for ( int i = 0; i < locations.length; ++i )
-        {
-            try
-            {
+        for ( int i = 0; i < locations.length; ++i ) {
+            try {
                 IGumballMachineRemote machine = (IGumballMachineRemote) Naming.lookup( locations[i] );
                 monitors[i] = new GumballMonitor( machine );
                 LOG.debug( monitors[i] );
             }
-            catch ( RemoteException re )
-            {
+            catch ( RemoteException re ) {
                 LOG.error( "REmote excption caught when trying to lookup [" + locations[i] + "]" );
                 re.printStackTrace();
             }
-            catch ( NotBoundException nbe )
-            {
+            catch ( NotBoundException nbe ) {
                 LOG.error( "Failed to bind to url with name [" + locations[i] + "]" );
                 nbe.printStackTrace();
             }
-            catch ( MalformedURLException mue )
-            {
+            catch ( MalformedURLException mue ) {
                 LOG.error( "URL [" + mue.getMessage() + "] is not valid form " );
                 mue.printStackTrace();
             }
         }
 
-        for ( GumballMonitor mon : monitors )
-        {
+        for ( GumballMonitor mon : monitors ) {
             mon.report();
         }
     }

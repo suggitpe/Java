@@ -12,22 +12,19 @@ import org.suggs.sandbox.patterns.structural.decorator.AbstractBeverage;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class DarkRoast extends AbstractBeverage
-{
+public class DarkRoast extends AbstractBeverage {
 
     /**
      * Constructs a new instance.
      */
-    public DarkRoast()
-    {
-        mDescription_ = "Dark Roast Coffee";
+    public DarkRoast() {
+        description = "Dark Roast Coffee";
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#cost()
      */
-    public double cost()
-    {
+    public double cost() {
         return 0.99;
     }
 

@@ -13,30 +13,26 @@ import java.util.Iterator;
  * @version 1.0 10 Sep 2007
  */
 @SuppressWarnings("unchecked")
-public class NullIterator implements Iterator
-{
+public class NullIterator implements Iterator {
 
     /**
      * @see java.util.Iterator#hasNext()
      */
-    public boolean hasNext()
-    {
+    public boolean hasNext() {
         return false;
     }
 
     /**
      * @see java.util.Iterator#next()
      */
-    public Object next()
-    {
+    public Object next() {
         return null;
     }
 
     /**
      * @see java.util.Iterator#remove()
      */
-    public void remove()
-    {
+    public void remove() {
         throw new UnsupportedOperationException();
     }
 

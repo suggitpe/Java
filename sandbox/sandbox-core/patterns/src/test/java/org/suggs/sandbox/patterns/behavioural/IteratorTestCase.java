@@ -17,19 +17,16 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 6 Sep 2007
  */
-public class IteratorTestCase extends AbstractPatternTestCase
-{
+public class IteratorTestCase extends AbstractPatternTestCase {
 
     @Test
-    public void testPrintMenu()
-    {
+    public void testPrintMenu() {
         Waitress waitress = new Waitress( new PancakeHouseMenu(), new DinerMenu() );
         waitress.printMenu();
     }
 
     @Test
-    public void testPrintLunchMenu()
-    {
+    public void testPrintLunchMenu() {
         Waitress waitress = new Waitress( new PancakeHouseMenu(), new DinerMenu() );
         waitress.printLunchMenu();
     }

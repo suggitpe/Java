@@ -15,12 +15,10 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 12 Sep 2007
  */
-public class GumballMonitor
-{
+public class GumballMonitor {
 
     private static final Log LOG = LogFactory.getLog( GumballMonitor.class );
-
-    IGumballMachineRemote mGumballMachine_;
+    IGumballMachineRemote gumballMachine;
 
     /**
      * Constructs a new instance.
@@ -28,24 +26,20 @@ public class GumballMonitor
      * @param aMachine
      *            the interface to the remote object
      */
-    public GumballMonitor( IGumballMachineRemote aMachine )
-    {
-        mGumballMachine_ = aMachine;
+    public GumballMonitor( IGumballMachineRemote aMachine ) {
+        gumballMachine = aMachine;
     }
 
     /**
      * Get the state of the remote object
      */
-    public void report()
-    {
-        try
-        {
-            LOG.debug( "Gumball machine: " + mGumballMachine_.getLocation() );
-            LOG.debug( "Current invetory: " + mGumballMachine_.getCount() );
-            LOG.debug( "Current state: " + mGumballMachine_.getState() );
+    public void report() {
+        try {
+            LOG.debug( "Gumball machine: " + gumballMachine.getLocation() );
+            LOG.debug( "Current invetory: " + gumballMachine.getCount() );
+            LOG.debug( "Current state: " + gumballMachine.getState() );
         }
-        catch ( RemoteException e )
-        {
+        catch ( RemoteException e ) {
             e.printStackTrace();
         }
     }

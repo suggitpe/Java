@@ -23,19 +23,16 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 31 Aug 2007
  */
-public class FacadeTestCase extends AbstractPatternTestCase
-{
+public class FacadeTestCase extends AbstractPatternTestCase {
 
     @Test
-    public void testWatchMovie()
-    {
+    public void testWatchMovie() {
         HomeTheatreFacade facade = createFacade();
         facade.watchMovie( "Rambo" );
     }
 
     @Test
-    public void testCloseDown()
-    {
+    public void testCloseDown() {
         HomeTheatreFacade facade = createFacade();
         facade.shutDownTheatre();
     }
@@ -45,8 +42,7 @@ public class FacadeTestCase extends AbstractPatternTestCase
      * 
      * @return
      */
-    private HomeTheatreFacade createFacade()
-    {
+    private HomeTheatreFacade createFacade() {
         return new HomeTheatreFacade( new Amplifier(),
                                       new CdPlayer(),
                                       new DvdPlayer(),

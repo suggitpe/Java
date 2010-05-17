@@ -13,24 +13,15 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public class TheatreLights
-{
+public class TheatreLights {
 
     private static final Log LOG = LogFactory.getLog( TheatreLights.class );
 
-    /**
-     * @param i
-     */
-    public void dim( int i )
-    {
+    public void dim( int i ) {
         LOG.debug( "Dimming lights to [" + i + "]" );
     }
 
-    /**
-     * 
-     */
-    public void off()
-    {
+    public void off() {
         LOG.debug( "Lights off" );
     }
 

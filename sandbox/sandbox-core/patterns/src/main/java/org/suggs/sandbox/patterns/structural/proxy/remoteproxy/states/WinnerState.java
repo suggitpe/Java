@@ -16,12 +16,10 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
-public class WinnerState implements IState
-{
+public class WinnerState implements IState {
 
     private static final Log LOG = LogFactory.getLog( WinnerState.class );
-
-    private transient GumballMachine mGumballMachine_;
+    private transient GumballMachine gumballMachine;
 
     /**
      * Constructs a new instance.
@@ -29,35 +27,29 @@ public class WinnerState implements IState
      * @param aMachine
      *            the gumball machine
      */
-    public WinnerState( GumballMachine aMachine )
-    {
-        mGumballMachine_ = aMachine;
+    public WinnerState( GumballMachine aMachine ) {
+        gumballMachine = aMachine;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
-    public void dispense()
-    {
+    public void dispense() {
         // this is where we get the good news
         LOG.info( "YOU'RE A WINNER! You get two gumballs for the price of one." );
-        mGumballMachine_.releaseBall();
-        if ( mGumballMachine_.getCount() == 0 )
-        {
+        gumballMachine.releaseBall();
+        if ( gumballMachine.getCount() == 0 ) {
             LOG.warn( "Actually we would love to give you an additional gumball however we have none left to give" );
-            mGumballMachine_.setState( mGumballMachine_.getSoldOutState() );
+            gumballMachine.setState( gumballMachine.getSoldOutState() );
         }
-        else
-        {
-            mGumballMachine_.releaseBall();
-            if ( mGumballMachine_.getCount() > 0 )
-            {
-                mGumballMachine_.setState( mGumballMachine_.getNoQuarterState() );
+        else {
+            gumballMachine.releaseBall();
+            if ( gumballMachine.getCount() > 0 ) {
+                gumballMachine.setState( gumballMachine.getNoQuarterState() );
             }
-            else
-            {
+            else {
                 LOG.warn( "Ooops we have no run out of gumballs" );
-                mGumballMachine_.setState( mGumballMachine_.getSoldOutState() );
+                gumballMachine.setState( gumballMachine.getSoldOutState() );
             }
         }
     }
@@ -65,24 +57,21 @@ public class WinnerState implements IState
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
-    public void ejectQuarter()
-    {
+    public void ejectQuarter() {
         LOG.warn( "WE are way beyond ejecting quarters now" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
-    public void insertQuarter()
-    {
+    public void insertQuarter() {
         LOG.warn( "In the middle of a vend at the moment" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
-    public void turnCrank()
-    {
+    public void turnCrank() {
         LOG.warn( "Crank has already been truned" );
     }
 

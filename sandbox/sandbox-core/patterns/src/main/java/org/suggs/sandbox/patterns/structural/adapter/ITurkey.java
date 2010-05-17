@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.structural.adapter;
  * @author suggitpe
  * @version 1.0 31 Aug 2007
  */
-public interface ITurkey
-{
+public interface ITurkey {
 
     /**
      * Make a sound

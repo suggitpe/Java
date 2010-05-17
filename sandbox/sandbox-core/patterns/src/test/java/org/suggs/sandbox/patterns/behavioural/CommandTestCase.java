@@ -32,14 +32,12 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class CommandTestCase extends AbstractPatternTestCase
-{
+public class CommandTestCase extends AbstractPatternTestCase {
 
     private static final Log LOG = LogFactory.getLog( CommandTestCase.class );
 
     @Test
-    public void testSimpleRemoteControl()
-    {
+    public void testSimpleRemoteControl() {
         SimpleRemoteControl ctrl = new SimpleRemoteControl();
 
         Light l = new Light( "Kitchen" );
@@ -58,15 +56,13 @@ public class CommandTestCase extends AbstractPatternTestCase
     }
 
     @Test
-    public void testRemoteControl()
-    {
+    public void testRemoteControl() {
         RemoteControl ctrl = buildRemoteControl();
         LOG.debug( ctrl );
     }
 
     @Test
-    public void testRemoteControlOnOff()
-    {
+    public void testRemoteControlOnOff() {
         RemoteControl ctrl = buildRemoteControl();
 
         ctrl.onButtonWasPushed( 0 );
@@ -82,8 +78,7 @@ public class CommandTestCase extends AbstractPatternTestCase
     }
 
     @Test
-    public void testRemoteControlUndo()
-    {
+    public void testRemoteControlUndo() {
         RemoteControl ctrl = buildRemoteControl();
 
         ctrl.undoButtonWasPressed();
@@ -98,8 +93,7 @@ public class CommandTestCase extends AbstractPatternTestCase
     }
 
     @Test
-    public void testMacro()
-    {
+    public void testMacro() {
         RemoteControl ctrl = buildRemoteControl();
 
         ctrl.onButtonWasPushed( 6 );
@@ -112,8 +106,7 @@ public class CommandTestCase extends AbstractPatternTestCase
      * 
      * @return a new Remote Control
      */
-    private RemoteControl buildRemoteControl()
-    {
+    private RemoteControl buildRemoteControl() {
         RemoteControl ctrl = new RemoteControl();
 
         // build receivers
@@ -139,10 +132,9 @@ public class CommandTestCase extends AbstractPatternTestCase
         StereoOnWithCdCommand stereoOn = new StereoOnWithCdCommand( stereo );
         StereoOffCommand stereoOff = new StereoOffCommand( stereo );
 
-        MacroCommand macroOn = new MacroCommand( new ICommand[] { livLightOn, kitLightOn, fanOn,
-                                                                 stereoOn } );
-        MacroCommand macroOff = new MacroCommand( new ICommand[] { livLightOff, kitLightOff,
-                                                                  fanOff, stereoOff } );
+        MacroCommand macroOn = new MacroCommand( new ICommand[] { livLightOn, kitLightOn, fanOn, stereoOn } );
+        MacroCommand macroOff = new MacroCommand( new ICommand[] { livLightOff, kitLightOff, fanOff,
+                                                                  stereoOff } );
 
         ctrl.setCommand( 0, livLightOn, livLightOff );
         ctrl.setCommand( 1, kitLightOn, kitLightOff );

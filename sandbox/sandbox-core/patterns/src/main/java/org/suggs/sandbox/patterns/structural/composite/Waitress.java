@@ -12,10 +12,9 @@ import java.util.Iterator;
  * @author suggitpe
  * @version 1.0 7 Sep 2007
  */
-public class Waitress
-{
+public class Waitress {
 
-    private IMenuComponent mAllMenus_;
+    private IMenuComponent allMenus;
 
     /**
      * Constructs a new instance.
@@ -23,39 +22,32 @@ public class Waitress
      * @param aComponent
      *            the menu component
      */
-    public Waitress( IMenuComponent aComponent )
-    {
-        mAllMenus_ = aComponent;
+    public Waitress( IMenuComponent aComponent ) {
+        allMenus = aComponent;
     }
 
     /**
      * Print the content of all the menus
      */
-    public void printMenu()
-    {
-        mAllMenus_.print();
+    public void printMenu() {
+        allMenus.print();
     }
 
     /**
      * Using the composite iterator, print out the vegetarian menu.
      */
     @SuppressWarnings("unchecked")
-    public void printVegetarianMenu()
-    {
-        Iterator iter = mAllMenus_.createIterator();
+    public void printVegetarianMenu() {
+        Iterator iter = allMenus.createIterator();
         System.out.println( "\nVEGETARIAN MENU\n-----------------" );
-        while ( iter.hasNext() )
-        {
+        while ( iter.hasNext() ) {
             IMenuComponent comp = (IMenuComponent) iter.next();
-            try
-            {
-                if ( comp.isVegetarian() )
-                {
+            try {
+                if ( comp.isVegetarian() ) {
                     comp.print();
                 }
             }
-            catch ( UnsupportedOperationException e )
-            {
+            catch ( UnsupportedOperationException e ) {
                 // nadda
             }
         }

@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.structural.proxy.dynamicproxy;
  * @author suggitpe
  * @version 1.0 14 Sep 2007
  */
-public interface IPerson
-{
+public interface IPerson {
 
     /**
      * Getter for the name

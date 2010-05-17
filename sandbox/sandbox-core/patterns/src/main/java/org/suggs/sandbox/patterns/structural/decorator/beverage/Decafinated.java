@@ -12,22 +12,19 @@ import org.suggs.sandbox.patterns.structural.decorator.AbstractBeverage;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class Decafinated extends AbstractBeverage
-{
+public class Decafinated extends AbstractBeverage {
 
     /**
      * Constructs a new instance.
      */
-    public Decafinated()
-    {
-        mDescription_ = "Decafinated";
+    public Decafinated() {
+        description = "Decafinated";
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#cost()
      */
-    public double cost()
-    {
+    public double cost() {
         return 1.05;
     }
 

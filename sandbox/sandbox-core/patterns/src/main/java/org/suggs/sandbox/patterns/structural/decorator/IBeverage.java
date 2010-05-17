@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.structural.decorator;
  * @author suggitpe
  * @version 1.0 28 Aug 2007
  */
-public interface IBeverage
-{
+public interface IBeverage {
 
     /**
      * Gets the description of the beverage

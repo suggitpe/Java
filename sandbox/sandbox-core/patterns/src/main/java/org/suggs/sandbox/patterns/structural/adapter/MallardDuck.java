@@ -13,24 +13,21 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 31 Aug 2007
  */
-public class MallardDuck implements IDuck
-{
+public class MallardDuck implements IDuck {
 
     private static final Log LOG = LogFactory.getLog( MallardDuck.class );
 
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.IDuck#fly()
      */
-    public void fly()
-    {
+    public void fly() {
         LOG.debug( "I'm flying" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.IDuck#quack()
      */
-    public void quack()
-    {
+    public void quack() {
         LOG.debug( "Quack!" );
     }
 

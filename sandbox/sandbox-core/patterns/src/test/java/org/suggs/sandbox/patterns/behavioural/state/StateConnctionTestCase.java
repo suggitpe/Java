@@ -25,20 +25,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-state-connection-test-case.xml" })
-public class StateConnctionTestCase extends AbstractPatternTestCase
-{
+public class StateConnctionTestCase extends AbstractPatternTestCase {
 
     // static logger
     private static final Log LOG = LogFactory.getLog( StateConnctionTestCase.class );
 
     @Resource(name = "stateMachine")
-    IStateMachine mStateMachine_;
+    IStateMachine stateMachine;
 
     @Test
-    public void testConnectionStateMachine()
-    {
+    public void testConnectionStateMachine() {
         LOG.debug( "Testing connection state machine" );
-        mStateMachine_.step( null );
+        stateMachine.step( null );
     }
 
 }

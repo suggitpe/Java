@@ -15,5 +15,4 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { DuckFestTestCase.class })
-public class AllTests
-{}
+public class AllTests {}

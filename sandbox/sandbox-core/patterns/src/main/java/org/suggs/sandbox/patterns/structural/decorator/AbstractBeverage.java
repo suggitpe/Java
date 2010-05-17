@@ -10,25 +10,22 @@ package org.suggs.sandbox.patterns.structural.decorator;
  * @author suggitpe
  * @version 1.0 28 Aug 2007
  */
-public abstract class AbstractBeverage implements IBeverage
-{
+public abstract class AbstractBeverage implements IBeverage {
 
-    protected String mDescription_;
+    protected String description;
 
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#getDescription()
      */
-    public String getDescription()
-    {
-        return mDescription_;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Beverage: description=[" + getDescription() + "], cost=[" + cost() + "]";
     }
 }

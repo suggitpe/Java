@@ -18,8 +18,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 5 Aug 2009
  */
-public class StateCalendarGuiTest
-{
+public class StateCalendarGuiTest {
 
     // static logger
     private static final Log LOG = LogFactory.getLog( StateCalendarGuiTest.class );
@@ -30,12 +29,10 @@ public class StateCalendarGuiTest
      * @param args
      *            cmd line arguments
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         LOG.debug( "Example of the state pattern" );
 
-        if ( !( new File( "appointments.ser" ).exists() ) )
-        {
+        if ( !( new File( "appointments.ser" ).exists() ) ) {
             StateCalendarDataCreator.serialize( "appointments.ser" );
         }
 

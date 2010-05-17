@@ -12,22 +12,19 @@ import org.suggs.sandbox.patterns.structural.decorator.AbstractBeverage;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class Espresso extends AbstractBeverage
-{
+public class Espresso extends AbstractBeverage {
 
     /**
      * Constructs a new instance.
      */
-    public Espresso()
-    {
-        mDescription_ = "Espresso";
+    public Espresso() {
+        description = "Espresso";
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#cost()
      */
-    public double cost()
-    {
+    public double cost() {
         return 1.99;
     }
 

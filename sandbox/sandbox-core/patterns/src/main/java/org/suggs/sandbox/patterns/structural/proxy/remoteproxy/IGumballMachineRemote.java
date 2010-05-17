@@ -13,8 +13,7 @@ import java.rmi.RemoteException;
  * @author suggitpe
  * @version 1.0 12 Sep 2007
  */
-public interface IGumballMachineRemote extends Remote
-{
+public interface IGumballMachineRemote extends Remote {
 
     /**
      * Getter for the gumball count

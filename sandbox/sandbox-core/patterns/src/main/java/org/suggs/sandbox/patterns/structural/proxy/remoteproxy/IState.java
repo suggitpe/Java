@@ -12,8 +12,7 @@ import java.io.Serializable;
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
-public interface IState extends Serializable
-{
+public interface IState extends Serializable {
 
     /**
      * Insert a quarter into the gumball machine

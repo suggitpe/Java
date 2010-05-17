@@ -7,14 +7,12 @@ package org.suggs.sandbox.patterns.structural.composite;
 import java.util.Iterator;
 
 /**
- * Interface for the composite and leaf nodes within the composite
- * tree.
+ * Interface for the composite and leaf nodes within the composite tree.
  * 
  * @author suggitpe
  * @version 1.0 7 Sep 2007
  */
-public interface IMenuComponent
-{
+public interface IMenuComponent {
 
     /**
      * Add a new child to this component
@@ -77,8 +75,7 @@ public interface IMenuComponent
     /**
      * Create an iterator for the composite object.
      * 
-     * @return an iterator that knows how to iterator over a composite
-     *         object tree
+     * @return an iterator that knows how to iterator over a composite object tree
      */
     @SuppressWarnings("unchecked")
     Iterator createIterator();

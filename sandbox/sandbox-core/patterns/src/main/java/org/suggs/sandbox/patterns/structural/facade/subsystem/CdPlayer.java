@@ -13,32 +13,19 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public class CdPlayer
-{
+public class CdPlayer {
 
     private static final Log LOG = LogFactory.getLog( CdPlayer.class );
 
-    /**
-     * 
-     */
-    public void off()
-    {
+    public void off() {
         LOG.debug( "CD player off" );
     }
 
-    /**
-     * 
-     */
-    public void eject()
-    {
+    public void eject() {
         LOG.debug( "CD player eject" );
     }
 
-    /**
-     * 
-     */
-    public void stop()
-    {
+    public void stop() {
         LOG.debug( "CD player stop" );
     }
 

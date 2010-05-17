@@ -12,8 +12,7 @@ import org.suggs.sandbox.patterns.structural.decorator.IBeverage;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class Mocha extends AbstractCondimentDecorator
-{
+public class Mocha extends AbstractCondimentDecorator {
 
     /**
      * Constructs a new instance.
@@ -21,8 +20,7 @@ public class Mocha extends AbstractCondimentDecorator
      * @param aBeverage
      *            the beverage top decorate
      */
-    public Mocha( IBeverage aBeverage )
-    {
+    public Mocha( IBeverage aBeverage ) {
         super( aBeverage );
     }
 
@@ -30,16 +28,14 @@ public class Mocha extends AbstractCondimentDecorator
      * @see org.suggs.sandbox.patterns.structural.decorator.beveragedecorator.AbstractCondimentDecorator#getDescription()
      */
     @Override
-    public String getDescription()
-    {
+    public String getDescription() {
         return getBeverage().getDescription() + ", Mocha";
     }
 
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#cost()
      */
-    public double cost()
-    {
+    public double cost() {
         return 0.2d + getBeverage().cost();
     }
 
