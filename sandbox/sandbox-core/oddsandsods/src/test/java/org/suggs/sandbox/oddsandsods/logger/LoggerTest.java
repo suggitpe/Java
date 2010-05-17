@@ -10,16 +10,14 @@ import java.util.TimeZone;
 import org.junit.Test;
 
 /**
- * Test suite to test the Logger classes. These tests should cover all
- * of the various types that can be used within a logger. Plese note
- * that this test class is more for documentation that it is for
- * actually testing anything.
+ * Test suite to test the Logger classes. These tests should cover all of the various types that can be used
+ * within a logger. Plese note that this test class is more for documentation that it is for actually testing
+ * anything.
  * 
  * @author suggitpe
  * @version 1.0 18 Sep 2009
  */
-public class LoggerTest
-{
+public class LoggerTest {
 
     private static final Log LOG = LogFactory.getLog( LoggerTest.class );
 
@@ -27,8 +25,7 @@ public class LoggerTest
      * 
      */
     @Test
-    public void testLoggingForExceptions()
-    {
+    public void testLoggingForExceptions() {
         LOG.debug( "check for exception %1s %2s [%3s]",
                    "args1",
                    "args2",
@@ -39,8 +36,7 @@ public class LoggerTest
      * 
      */
     @Test
-    public void testLoggingForSimpleMessage()
-    {
+    public void testLoggingForSimpleMessage() {
         LOG.debug( "This is a simple log message" );
     }
 
@@ -48,8 +44,7 @@ public class LoggerTest
      * 
      */
     @Test
-    public void testLoggingForStrings()
-    {
+    public void testLoggingForStrings() {
 
         LOG.debug( "hello1 string=[%1s], string=[%2s]", "hello2", "hello3" );
     }
@@ -58,8 +53,7 @@ public class LoggerTest
      * 
      */
     @Test
-    public void testLoggingForSimpleTypes()
-    {
+    public void testLoggingForSimpleTypes() {
         LOG.debug( "Message with int=[%1d], double=[%2f], float=[%3f],  boolean=[%4b]",
                    new Integer( 1 ),
                    new Double( 2.3 ),
@@ -71,8 +65,7 @@ public class LoggerTest
      * 
      */
     @Test
-    public void testLoggingForDates()
-    {
+    public void testLoggingForDates() {
         LOG.debug( "Message with date=[%1$tA %1$td/%1$tm/%1$ty %1$tH:%1$tM:%1$tS]",
                    Calendar.getInstance( TimeZone.getTimeZone( "GMT" ) ) );
     }
@@ -81,8 +74,7 @@ public class LoggerTest
      * 
      */
     @Test
-    public void testClassWithToString()
-    {
+    public void testClassWithToString() {
         SimpleToStringClass toStringClass = new SimpleToStringClass( "toStringClass", 7, false );
         LOG.debug( "Message with class=[%1s]", toStringClass );
     }
@@ -91,11 +83,8 @@ public class LoggerTest
      * 
      */
     @Test
-    public void testClassWithNoToString()
-    {
-        SimpleNoToStringClass toStringClass = new SimpleNoToStringClass( "noToStringClass",
-                                                                         7,
-                                                                         false );
+    public void testClassWithNoToString() {
+        SimpleNoToStringClass toStringClass = new SimpleNoToStringClass( "noToStringClass", 7, false );
         LOG.debug( "Message with class=[%1s]", toStringClass );
     }
 
@@ -105,8 +94,7 @@ public class LoggerTest
      * @author suggitpe
      * @version 1.0 22 Sep 2009
      */
-    private class SimpleToStringClass
-    {
+    private class SimpleToStringClass {
 
         private String mInnerString_;
         private int mInnerInt_;
@@ -119,8 +107,7 @@ public class LoggerTest
          * @param aInt
          * @param aFlag
          */
-        public SimpleToStringClass( String aString, int aInt, boolean aFlag )
-        {
+        public SimpleToStringClass( String aString, int aInt, boolean aFlag ) {
             super();
             mInnerString_ = aString;
             mInnerInt_ = aInt;
@@ -131,8 +118,7 @@ public class LoggerTest
          * @see java.lang.Object#toString()
          */
         @Override
-        public String toString()
-        {
+        public String toString() {
             StringBuilder builder = new StringBuilder( "SimpleClass: " );
             builder.append( "string=[" ).append( mInnerString_ ).append( "], " );
             builder.append( "int=[" ).append( mInnerInt_ ).append( "], " );
@@ -142,14 +128,12 @@ public class LoggerTest
     }
 
     /**
-     * Simple class with no toString method on it to test class based
-     * logging.
+     * Simple class with no toString method on it to test class based logging.
      * 
      * @author suggitpe
      * @version 1.0 22 Sep 2009
      */
-    private class SimpleNoToStringClass
-    {
+    private class SimpleNoToStringClass {
 
         @SuppressWarnings("unused")
         private String mInnerString_;
@@ -165,8 +149,7 @@ public class LoggerTest
          * @param aInt
          * @param aFlag
          */
-        public SimpleNoToStringClass( String aString, int aInt, boolean aFlag )
-        {
+        public SimpleNoToStringClass( String aString, int aInt, boolean aFlag ) {
             mInnerString_ = aString;
             mInnerInt_ = aInt;
             mInnerFlag_ = aFlag;

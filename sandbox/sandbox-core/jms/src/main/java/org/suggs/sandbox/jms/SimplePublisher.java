@@ -19,14 +19,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This is a very simple publisher class, that will send a text
- * message to a topic on a broker.
+ * This is a very simple publisher class, that will send a text message to a topic on a broker.
  * 
  * @author suggitpe
  * @version 1.0 15 Apr 2009
  */
-public class SimplePublisher
-{
+public class SimplePublisher {
 
     private static final Log LOG = LogFactory.getLog( SimplePublisher.class );
 
@@ -36,9 +34,8 @@ public class SimplePublisher
      * @throws NameNotFoundException
      * @throws JMSException
      */
-    public void sendMessageToTopic( String destName ) throws NamingException,
-                    NameNotFoundException, JMSException
-    {
+    public void sendMessageToTopic( String destName ) throws NamingException, NameNotFoundException,
+                    JMSException {
         InitialContext ctx = ContextHelper.createInitialContext();
         ConnectionFactory fact = (ConnectionFactory) ctx.lookup( ConfigManager.instance()
             .getProperty( ConfigManager.TOPIC_CONN_FACT ) );
@@ -50,34 +47,28 @@ public class SimplePublisher
 
         Connection conn = fact.createConnection( user, pass );
 
-        try
-        {
+        try {
             Session sess = conn.createSession( true, Session.CLIENT_ACKNOWLEDGE );
-            try
-            {
+            try {
                 MessageProducer msgProd = sess.createProducer( d );
-                try
-                {
+                try {
                     TextMessage msg = sess.createTextMessage( "This is a test message" );
                     msg.setStringProperty( "testHeader", "testValue" );
                     msgProd.send( msg );
                     sess.commit();
                 }
-                finally
-                {
+                finally {
                     LOG.debug( "Closing publisher" );
                     msgProd.close();
                 }
             }
-            finally
-            {
+            finally {
                 LOG.debug( "Closing session" );
                 sess.rollback();
                 sess.close();
             }
         }
-        finally
-        {
+        finally {
             LOG.debug( "Closing connection" );
             conn.close();
         }

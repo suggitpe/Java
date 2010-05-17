@@ -14,8 +14,7 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 15 Apr 2009
  */
-public class TestSubscribeToTopic
-{
+public class TestSubscribeToTopic {
 
     private static final Log LOG = LogFactory.getLog( TestSubscribeToTopic.class );
 
@@ -23,8 +22,7 @@ public class TestSubscribeToTopic
      * @throws Exception
      */
     @Test
-    public void testSubscribeToSingleMessage() throws Exception
-    {
+    public void testSubscribeToSingleMessage() throws Exception {
         SimpleSubscriber s = new SimpleSubscriber();
 
         LOG.debug( "Testing that we can subscribe to a Topic" );

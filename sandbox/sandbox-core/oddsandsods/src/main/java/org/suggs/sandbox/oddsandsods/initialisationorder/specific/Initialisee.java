@@ -10,8 +10,7 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public class Initialisee
-{
+public class Initialisee {
 
     static Initialisee instance = new Initialisee( "Static member" );
 
@@ -20,16 +19,14 @@ public class Initialisee
      * 
      * @return an initialisee
      */
-    public static Initialisee instance()
-    {
+    public static Initialisee instance() {
         return new Initialisee( "Static method" );
     }
 
     /**
      * Constructs a new instance.
      */
-    public Initialisee()
-    {
+    public Initialisee() {
         Logger.log( "Default constructor" );
     }
 
@@ -41,13 +38,11 @@ public class Initialisee
      * @param aType
      *            type of construction
      */
-    public Initialisee( String aType )
-    {
+    public Initialisee( String aType ) {
         Logger.log( aType + " Constructor" );
     }
 
-    static
-    {
+    static {
         Logger.log( "Static initialiser" );
     }
 
@@ -55,8 +50,7 @@ public class Initialisee
         Logger.log( "Non-static initialiser" );
     }
 
-    static
-    {
+    static {
         Logger.log( "Static initialiser 2" );
     }
 

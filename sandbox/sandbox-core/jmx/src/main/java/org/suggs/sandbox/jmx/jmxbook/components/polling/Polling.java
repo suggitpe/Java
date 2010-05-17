@@ -18,8 +18,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 27 Feb 2008
  */
-public class Polling extends NotificationBroadcasterSupport implements PollingMBean, Runnable
-{
+public class Polling extends NotificationBroadcasterSupport implements PollingMBean, Runnable {
 
     private static final Log LOG = LogFactory.getLog( Polling.class );
 
@@ -30,8 +29,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
     /**
      * Constructs a new instance.
      */
-    public Polling()
-    {
+    public Polling() {
         super();
     }
 
@@ -40,8 +38,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
      * 
      * @see org.suggs.sandbox.jmx.jmxbook.components.polling.PollingMBean#setInterval(long)
      */
-    public void setInterval( long time )
-    {
+    public void setInterval( long time ) {
         long tmp = interval;
         interval = time;
         sendNotification( new AttributeChangeNotification( this,
@@ -57,18 +54,15 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.polling.PollingMBean#getInterval()
      */
-    public long getInterval()
-    {
+    public long getInterval() {
         return interval;
     }
 
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.polling.PollingMBean#start()
      */
-    public void start()
-    {
-        if ( !stop )
-        {
+    public void start() {
+        if ( !stop ) {
             LOG.warn( "Already running" );
             return;
         }
@@ -82,8 +76,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.polling.PollingMBean#stop()
      */
-    public void stop()
-    {
+    public void stop() {
         LOG.debug( "Stopping polling ..." );
         stop = true;
     }
@@ -91,17 +84,13 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
     /**
      * @see java.lang.Runnable#run()
      */
-    public void run()
-    {
-        while ( !stop )
-        {
-            try
-            {
+    public void run() {
+        while ( !stop ) {
+            try {
                 LOG.debug( "    ..." );
                 Thread.sleep( interval );
             }
-            catch ( InterruptedException ie )
-            {
+            catch ( InterruptedException ie ) {
                 LOG.warn( "Exception caught during sleep [" + ie.getMessage() + "]" );
             }
             sendNotification( new Notification( "PollingBean.counter", this, ++index ) );
@@ -112,8 +101,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
      * @see javax.management.NotificationBroadcasterSupport#getNotificationInfo()
      */
     @Override
-    public MBeanNotificationInfo[] getNotificationInfo()
-    {
+    public MBeanNotificationInfo[] getNotificationInfo() {
         String[] type = { "PollingBean.counter" };
         String[] attChanges = { AttributeChangeNotification.ATTRIBUTE_CHANGE };
 

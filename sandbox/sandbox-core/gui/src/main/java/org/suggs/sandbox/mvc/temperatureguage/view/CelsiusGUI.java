@@ -10,16 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
-
-
 /**
  * Simple GUI for the celcius part of the temperature demo
  * 
  * @author suggitpe
  * @version 1.0 9 Jul 2007
  */
-public class CelsiusGUI extends AbstractTemperatureGUI
-{
+public class CelsiusGUI extends AbstractTemperatureGUI {
 
     /**
      * Constructs a new instance.
@@ -28,8 +25,7 @@ public class CelsiusGUI extends AbstractTemperatureGUI
      * @param h
      * @param v
      */
-    public CelsiusGUI( TemperatureModel aModel, int h, int v )
-    {
+    public CelsiusGUI( TemperatureModel aModel, int h, int v ) {
         super( "Celsius Temperature", aModel, h, v );
         setDisplay( "" + getModel().getC() );
         addUpListener( new UpListener() );
@@ -38,11 +34,9 @@ public class CelsiusGUI extends AbstractTemperatureGUI
     }
 
     /**
-     * @see java.util.Observer#update(java.util.Observable,
-     *      java.lang.Object)
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
-    public void update( Observable arg0, Object arg1 )
-    {
+    public void update( Observable arg0, Object arg1 ) {
         setDisplay( "" + getModel().getC() );
     }
 
@@ -52,14 +46,12 @@ public class CelsiusGUI extends AbstractTemperatureGUI
      * @author suggitpe
      * @version 1.0 9 Jul 2007
      */
-    class UpListener implements ActionListener
-    {
+    class UpListener implements ActionListener {
 
         /**
          * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
          */
-        public void actionPerformed( ActionEvent arg0 )
-        {
+        public void actionPerformed( ActionEvent arg0 ) {
             getModel().setC( getModel().getC() + 1.0 );
         }
     }
@@ -70,14 +62,12 @@ public class CelsiusGUI extends AbstractTemperatureGUI
      * @author suggitpe
      * @version 1.0 9 Jul 2007
      */
-    class DownListener implements ActionListener
-    {
+    class DownListener implements ActionListener {
 
         /**
          * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
          */
-        public void actionPerformed( ActionEvent arg0 )
-        {
+        public void actionPerformed( ActionEvent arg0 ) {
             getModel().setC( getModel().getC() - 1.0 );
         }
     }
@@ -88,14 +78,12 @@ public class CelsiusGUI extends AbstractTemperatureGUI
      * @author suggitpe
      * @version 1.0 9 Jul 2007
      */
-    class DisplayListener implements ActionListener
-    {
+    class DisplayListener implements ActionListener {
 
         /**
          * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
          */
-        public void actionPerformed( ActionEvent arg0 )
-        {
+        public void actionPerformed( ActionEvent arg0 ) {
             double val = getDisplay();
             getModel().setC( val );
         }

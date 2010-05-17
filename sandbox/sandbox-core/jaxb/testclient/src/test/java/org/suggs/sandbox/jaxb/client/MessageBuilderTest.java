@@ -14,50 +14,42 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 17 Feb 2010
  */
-public class MessageBuilderTest
-{
+public class MessageBuilderTest {
 
     private static final Log LOG = LogFactory.getLog( MessageBuilderTest.class );
 
     @Test
-    public void createBasicXmlMessage()
-    {
+    public void createBasicXmlMessage() {
         LOG.debug( "Creating test XML file" );
     }
 
     @Test
-    public void validateGoodXmlMessage()
-    {
+    public void validateGoodXmlMessage() {
         LOG.debug( "Validating good XML message" );
     }
 
     @Test
-    public void validateBadXmlMessage()
-    {
+    public void validateBadXmlMessage() {
         LOG.debug( "Validating bad XML message" );
     }
 
     @Test
-    public void serialiseValidXmlMessage()
-    {
+    public void serialiseValidXmlMessage() {
         LOG.debug( "Serialising valid XML message" );
     }
 
     @Test
-    public void serialiseInvalidXmlMessage()
-    {
+    public void serialiseInvalidXmlMessage() {
         LOG.debug( "Serialising invalid XML message" );
     }
 
     @Test
-    public void readGoodXmlFileIntoMemory()
-    {
+    public void readGoodXmlFileIntoMemory() {
         LOG.debug( "Reading XML file from disk" );
     }
 
     @Test
-    public void readBadXmlFileIntoMemory()
-    {
+    public void readBadXmlFileIntoMemory() {
         LOG.debug( "Reading XML file from disk" );
     }
 }

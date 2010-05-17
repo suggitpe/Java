@@ -14,8 +14,7 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 15 Apr 2009
  */
-public class TestPublishToTopic
-{
+public class TestPublishToTopic {
 
     private static final Log LOG = LogFactory.getLog( TestPublishToTopic.class );
 
@@ -23,8 +22,7 @@ public class TestPublishToTopic
      * @throws Exception
      */
     @Test
-    public void testSendTextMessageToTopic() throws Exception
-    {
+    public void testSendTextMessageToTopic() throws Exception {
         SimplePublisher p = new SimplePublisher();
 
         LOG.debug( "Testing that we can send to a Topic" );

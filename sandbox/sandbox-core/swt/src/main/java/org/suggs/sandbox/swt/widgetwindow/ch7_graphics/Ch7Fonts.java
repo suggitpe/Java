@@ -26,11 +26,10 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 2 Sep 2008
  */
-public class Ch7Fonts extends Canvas
-{
+public class Ch7Fonts extends Canvas {
 
     static Shell mMainShell_;
-    static Composite mComp_;
+    Composite mComp_;
     FontData mFontData_;
 
     /**
@@ -39,8 +38,7 @@ public class Ch7Fonts extends Canvas
      * @param parent
      *            a composite to associate this class with
      */
-    public Ch7Fonts( Composite parent )
-    {
+    public Ch7Fonts( Composite parent ) {
         super( parent, SWT.NONE );
         parent.setSize( 600, 200 );
         addPaintListener( dl );
@@ -49,15 +47,13 @@ public class Ch7Fonts extends Canvas
         Button fontChoice = new Button( this, SWT.CENTER );
         fontChoice.setBounds( 20, 20, 100, 20 );
         fontChoice.setText( "Choose font" );
-        fontChoice.addMouseListener( new MouseAdapter()
-        {
+        fontChoice.addMouseListener( new MouseAdapter() {
 
             /**
              * @see org.eclipse.swt.events.MouseAdapter#mouseDown(org.eclipse.swt.events.MouseEvent)
              */
             @Override
-            public void mouseDown( MouseEvent me )
-            {
+            public void mouseDown( MouseEvent me ) {
                 FontDialog fd = new FontDialog( mMainShell_ );
                 mFontData_ = fd.open();
                 mComp_.redraw();
@@ -67,29 +63,23 @@ public class Ch7Fonts extends Canvas
 
     }
 
-    PaintListener dl = new PaintListener()
-    {
+    PaintListener dl = new PaintListener() {
 
         /**
          * @see org.eclipse.swt.events.PaintListener#paintControl(org.eclipse.swt.events.PaintEvent)
          */
-        public void paintControl( PaintEvent pe )
-        {
+        public void paintControl( PaintEvent pe ) {
             Display d = pe.display;
             GC gc = pe.gc;
             gc.setBackground( d.getSystemColor( SWT.COLOR_DARK_GRAY ) );
-            if ( mFontData_ != null )
-            {
+            if ( mFontData_ != null ) {
                 Font f = new Font( d, mFontData_ );
                 gc.setFont( f );
                 FontMetrics fm = gc.getFontMetrics();
 
-                gc.drawText( "The average character width for this font is "
-                             + fm.getAverageCharWidth() + " pixels", 20, 60 );
-                gc.drawText( "The ascent for this font is " + fm.getAscent() + " pixels",
-                             20,
-                             100,
-                             true );
+                gc.drawText( "The average character width for this font is " + fm.getAverageCharWidth()
+                             + " pixels", 20, 60 );
+                gc.drawText( "The ascent for this font is " + fm.getAscent() + " pixels", 20, 100, true );
                 gc.drawText( "The descent for this font is " + fm.getDescent() + " pixels",
                              20,
                              140,

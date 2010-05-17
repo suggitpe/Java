@@ -19,30 +19,24 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 18 Feb 2008
  */
-public class JmxServer
-{
+public class JmxServer {
 
     private static final Log LOG = LogFactory.getLog( JmxServer.class );
 
     /**
      * Starts an rmi registry instance
      */
-    public static void startRmiRegistry()
-    {
+    public static void startRmiRegistry() {
         LOG.debug( "Starting the RMI registry" );
 
         String strPort = JmxBookConfig.getInstance().getCfgProperty( JmxBookConfig.RMI_PORT );
-        try
-        {
+        try {
             LocateRegistry.createRegistry( Integer.parseInt( strPort ) );
         }
-        catch ( NumberFormatException nfe )
-        {
-            throw new IllegalArgumentException( "Failed to cvonvert RMI port number to correct type",
-                                                nfe );
+        catch ( NumberFormatException nfe ) {
+            throw new IllegalArgumentException( "Failed to cvonvert RMI port number to correct type", nfe );
         }
-        catch ( RemoteException re )
-        {
+        catch ( RemoteException re ) {
             throw new IllegalStateException( "Failed to create RMI registry", re );
         }
     }
@@ -50,8 +44,7 @@ public class JmxServer
     /**
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         startRmiRegistry();
         LOG.debug( "Starting Agent ..." );
         new JmxBookAgent();

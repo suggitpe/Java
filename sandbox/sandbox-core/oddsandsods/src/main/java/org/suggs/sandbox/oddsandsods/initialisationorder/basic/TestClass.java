@@ -8,20 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class to show how all of the differing construction options take
- * order
+ * Class to show how all of the differing construction options take order
  * 
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public class TestClass
-{
+public class TestClass {
 
     static final ReferenceClass REF = new ReferenceClass( "static member" );
     static final List<ReferenceClass> LIST = new ArrayList<ReferenceClass>();
 
-    static
-    {
+    static {
         System.out.println( "Updating LIST in static initiliser" );
         LIST.add( new ReferenceClass( "ref class ctor'd in the static initialiser" ) );
     }
@@ -34,8 +31,7 @@ public class TestClass
     /**
      * Constructs a new instance.
      */
-    public TestClass()
-    {
+    public TestClass() {
         System.out.println( "In the TestClass constructor" );
     }
 

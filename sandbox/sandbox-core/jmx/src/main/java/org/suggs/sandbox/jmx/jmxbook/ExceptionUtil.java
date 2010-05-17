@@ -12,8 +12,7 @@ import javax.management.MBeanException;
  * @author suggitpe
  * @version 1.0 13 Feb 2008
  */
-public class ExceptionUtil
-{
+public class ExceptionUtil {
 
     /**
      * print exceptuion utility for exceptions caught
@@ -21,23 +20,19 @@ public class ExceptionUtil
      * @param e
      *            the exception to print
      */
-    public static final void printException( Exception e )
-    {
+    public static final void printException( Exception e ) {
         System.out.println( "============ [Exception] ==============" );
         e.printStackTrace();
-        if ( e instanceof MBeanException )
-        {
+        if ( e instanceof MBeanException ) {
             boolean hasEmbeddedException = true;
             Exception embeddedExc = e;
-            while ( hasEmbeddedException )
-            {
+            while ( hasEmbeddedException ) {
                 embeddedExc = ( (MBeanException) embeddedExc ).getTargetException();
                 System.out.println( "-------- [Embedded Exception] ---------" );
 
                 embeddedExc.printStackTrace();
 
-                if ( !( embeddedExc instanceof MBeanException ) )
-                {
+                if ( !( embeddedExc instanceof MBeanException ) ) {
                     hasEmbeddedException = false;
                 }
             }

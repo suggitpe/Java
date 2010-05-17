@@ -19,49 +19,37 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This class is a JMX notification listener. The core functionality
- * is to connect to the MBean server ad then register with a managed
- * object to receive notifications.The MBean server acts as a proxy
- * between the listener and the underlying object that is publishing
- * the notifications.
+ * This class is a JMX notification listener. The core functionality is to connect to the MBean server ad then
+ * register with a managed object to receive notifications.The MBean server acts as a proxy between the
+ * listener and the underlying object that is publishing the notifications.
  * 
  * @author suggitpe
  * @version 1.0 28 Feb 2008
  */
-public class PollingNotificationListener implements NotificationListener
-{
+public class PollingNotificationListener implements NotificationListener {
 
     private static final Log LOG = LogFactory.getLog( PollingNotificationListener.class );
 
     /**
      * Constructs a new instance.
      */
-    public PollingNotificationListener()
-    {
-        try
-        {
+    public PollingNotificationListener() {
+        try {
 
             // Register this as a listener through the MBean server
             // itself rather than directly at the object level.
             MBeanServerConnection conn = RmiClientFactory.getClient();
-            String svrName = JmxBookConfig.getInstance()
-                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+            String svrName = JmxBookConfig.getInstance().getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
 
-            conn.addNotificationListener( new ObjectName( svrName + ":name=polling" ),
-                                          this,
-                                          null,
-                                          null );
+            conn.addNotificationListener( new ObjectName( svrName + ":name=polling" ), this, null, null );
         }
-        catch ( IOException e )
-        {
+        catch ( IOException e ) {
             LOG.error( "Failed to connect to mbean server", e );
         }
-        catch ( MalformedObjectNameException mone )
-        {
+        catch ( MalformedObjectNameException mone ) {
             LOG.error( "Failed to create a proper object name", mone );
         }
-        catch ( InstanceNotFoundException infe )
-        {
+        catch ( InstanceNotFoundException infe ) {
             LOG.error( "Failed to find the object instance", infe );
         }
     }
@@ -70,8 +58,7 @@ public class PollingNotificationListener implements NotificationListener
      * @see javax.management.NotificationListener#handleNotification(javax.management.Notification,
      *      java.lang.Object)
      */
-    public void handleNotification( Notification notification, Object handback )
-    {
+    public void handleNotification( Notification notification, Object handback ) {
         String type = notification.getType();
         LOG.debug( "Notif of type " + type );
     }
@@ -81,18 +68,14 @@ public class PollingNotificationListener implements NotificationListener
      * 
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         LOG.debug( "Starting a new polling notification listener" );
         new PollingNotificationListener();
-        while ( true )
-        {
-            try
-            {
+        while ( true ) {
+            try {
                 Thread.sleep( 10000 );
             }
-            catch ( InterruptedException e )
-            {
+            catch ( InterruptedException e ) {
                 // nadda
             }
         }

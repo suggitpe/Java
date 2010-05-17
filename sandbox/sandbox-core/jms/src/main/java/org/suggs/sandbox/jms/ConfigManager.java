@@ -16,8 +16,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 15 Apr 2009
  */
-public class ConfigManager
-{
+public class ConfigManager {
 
     private static final Log LOG = LogFactory.getLog( ConfigManager.class );
     private static final String PROP_FILE = "tibco_connection.properties";
@@ -38,13 +37,12 @@ public class ConfigManager
     /** */
     public static final String SUBSCR_DURABLE = "subscriber.durable.name";
 
-    private static ConfigManager mInstance_;
-    private Properties mData_;
+    private static ConfigManager instance;
+    private Properties data;
 
     // load up the instance of the properties file
-    static
-    {
-        mInstance_ = new ConfigManager();
+    static {
+        instance = new ConfigManager();
     }
 
     /**
@@ -52,43 +50,36 @@ public class ConfigManager
      * 
      * @return the instance of the singleton
      */
-    public static ConfigManager instance()
-    {
-        return mInstance_;
+    public static ConfigManager instance() {
+        return instance;
     }
 
     /**
      * Constructs a new instance.
      */
-    private ConfigManager()
-    {
-        mData_ = new Properties();
-        try
-        {
-            mData_.load( getClass().getClassLoader().getResourceAsStream( PROP_FILE ) );
+    private ConfigManager() {
+        data = new Properties();
+        try {
+            data.load( getClass().getClassLoader().getResourceAsStream( PROP_FILE ) );
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             throw new IllegalStateException( "Failed to load properties file [" + PROP_FILE + "]" );
         }
 
-        if ( LOG.isDebugEnabled() )
-        {
+        if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Loaded properties from [" + PROP_FILE + "]" );
         }
     }
 
     /**
-     * Accessor method to the underlying properties, does not allow
-     * for null properties
+     * Accessor method to the underlying properties, does not allow for null properties
      * 
      * @param aPropName
      *            the name of the property to set
      * @return the configuration property that the name relates to
      */
-    public String getProperty( String aPropName )
-    {
-        String ret = mData_.getProperty( aPropName );
+    public String getProperty( String aPropName ) {
+        String ret = data.getProperty( aPropName );
         if ( ret == null )
             throw new IllegalStateException( "no configuration data found for " + aPropName );
         return ret;
@@ -101,9 +92,8 @@ public class ConfigManager
      *            the name of the property to set
      * @return the configuration property that the name relates to
      */
-    public String getNullableProperty( String aPropName )
-    {
-        return mData_.getProperty( aPropName );
+    public String getNullableProperty( String aPropName ) {
+        return data.getProperty( aPropName );
     }
 
 }

@@ -14,15 +14,13 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
 /**
- * Factory class to enable you to create RMI clients. This centralises
- * the process of discovery of the JMX Agent (and thus the MBEan
- * server).
+ * Factory class to enable you to create RMI clients. This centralises the process of discovery of the JMX
+ * Agent (and thus the MBEan server).
  * 
  * @author suggitpe
  * @version 1.0 14 Feb 2008
  */
-public class RmiClientFactory
-{
+public class RmiClientFactory {
 
     /**
      * Static method to return an instance of the JMXConnector
@@ -30,8 +28,7 @@ public class RmiClientFactory
      * @return the JMXConnector
      * @throws IOException
      */
-    public static final MBeanServerConnection getClient() throws IOException
-    {
+    public static final MBeanServerConnection getClient() throws IOException {
         String rmiUrl = JmxBookConfig.getInstance().getRmiUrl();
         JMXConnector c = JMXConnectorFactory.connect( new JMXServiceURL( rmiUrl ) );
         c.connect();

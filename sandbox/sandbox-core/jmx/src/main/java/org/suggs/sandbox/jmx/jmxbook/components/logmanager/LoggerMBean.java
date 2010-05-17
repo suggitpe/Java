@@ -10,8 +10,7 @@ package org.suggs.sandbox.jmx.jmxbook.components.logmanager;
  * @author suggitpe
  * @version 1.0 21 Feb 2008
  */
-public interface LoggerMBean
-{
+public interface LoggerMBean {
 
     /**
      * Setter for the log level

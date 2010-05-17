@@ -24,28 +24,24 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 21 Feb 2008
  */
-public class Logger implements LoggerMBean, MBeanRegistration
-{
+public class Logger implements LoggerMBean, MBeanRegistration {
 
     private static final Log LOG = LogFactory.getLog( Logger.class );
     static final int ALL = 3;
     static final int ERRORS = 2;
     static final int NONE = 1;
 
-    private PrintWriter mOut_;
-    private int mLogLevel = Logger.ALL;
+    private PrintWriter output;
+    private int logLevel = Logger.ALL;
 
     /**
      * Constructs a new instance.
      */
-    public Logger()
-    {
-        try
-        {
-            mOut_ = new PrintWriter( new FileOutputStream( "record.log" ) );
+    public Logger() {
+        try {
+            output = new PrintWriter( new FileOutputStream( "record.log" ) );
         }
-        catch ( FileNotFoundException fnf )
-        {
+        catch ( FileNotFoundException fnf ) {
             ExceptionUtil.printException( fnf );
         }
     }
@@ -53,16 +49,14 @@ public class Logger implements LoggerMBean, MBeanRegistration
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#getLogLevel()
      */
-    public int getLogLevel()
-    {
-        return mLogLevel;
+    public int getLogLevel() {
+        return logLevel;
     }
 
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#retrieveLog(int)
      */
-    public String retrieveLog( int linesBack )
-    {
+    public String retrieveLog( int linesBack ) {
         // must pop an impl in here at some point
         return null;
     }
@@ -70,64 +64,53 @@ public class Logger implements LoggerMBean, MBeanRegistration
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#setLogLevel(int)
      */
-    public void setLogLevel( int level )
-    {
-        mLogLevel = level;
+    public void setLogLevel( int level ) {
+        logLevel = level;
     }
 
     /**
-     * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#writeLog(java.lang.String,
-     *      int)
+     * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#writeLog(java.lang.String, int)
      */
-    public void writeLog( String message, int type )
-    {
-        if ( type <= mLogLevel )
-        {
-            mOut_.println( message );
+    public void writeLog( String message, int type ) {
+        if ( type <= logLevel ) {
+            output.println( message );
         }
     }
 
     /**
      * @see javax.management.MBeanRegistration#postDeregister()
      */
-    public void postDeregister()
-    {}
+    public void postDeregister() {}
 
     /**
      * @see javax.management.MBeanRegistration#postRegister(java.lang.Boolean)
      */
-    public void postRegister( Boolean registrationDone )
-    {}
+    public void postRegister( Boolean registrationDone ) {}
 
     /**
      * @see javax.management.MBeanRegistration#preDeregister()
      */
-    public void preDeregister() throws Exception
-    {}
+    public void preDeregister() throws Exception {}
 
     /**
      * @see javax.management.MBeanRegistration#preRegister(javax.management.MBeanServer,
      *      javax.management.ObjectName)
      */
-    public ObjectName preRegister( MBeanServer server, ObjectName name ) throws Exception
-    {
+    public ObjectName preRegister( MBeanServer server, ObjectName name ) throws Exception {
         LOG.debug( "Running the preRegister Logger impl" );
-        try
-        {
-            String svrName = JmxBookConfig.getInstance()
-                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+        try {
+            String svrName = JmxBookConfig.getInstance().getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
             ObjectName name1 = new ObjectName( svrName + ":name=propertyManager" );
             Object[] params = new Object[] { "loglevel" };
             String[] sig = new String[] { "java.lang.String" };
 
             String value = (String) server.invoke( name1, "getProperty", params, sig );
 
-            mLogLevel = Integer.parseInt( value );
+            logLevel = Integer.parseInt( value );
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             ExceptionUtil.printException( e );
-            mLogLevel = 0;
+            logLevel = 0;
         }
         return name;
     }

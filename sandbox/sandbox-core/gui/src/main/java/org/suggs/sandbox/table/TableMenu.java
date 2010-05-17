@@ -24,8 +24,7 @@ import javax.swing.table.AbstractTableModel;
  * @author suggitpe
  * @version 1.0 16 Nov 2009
  */
-public class TableMenu extends JFrame
-{
+public class TableMenu extends JFrame {
 
     private static final String PROP_CHANGE_QUANTITY = "CHANGE_QUANTITY";
     private JPanel jContentPane;
@@ -36,8 +35,7 @@ public class TableMenu extends JFrame
     /**
      * Constructs a new instance.
      */
-    public TableMenu()
-    {
+    public TableMenu() {
         super();
         initialize();
     }
@@ -47,19 +45,14 @@ public class TableMenu extends JFrame
      * 
      * @return
      */
-    private JTable getJTable()
-    {
-        if ( jTable == null )
-        {
+    private JTable getJTable() {
+        if ( jTable == null ) {
             jTable = new JTable();
             jTable.setModel( getTableModel() );
-            jTable.addMouseListener( new MouseAdapter()
-            {
+            jTable.addMouseListener( new MouseAdapter() {
 
-                private void maybeShowPopup( MouseEvent e )
-                {
-                    if ( e.isPopupTrigger() && jTable.isEnabled() )
-                    {
+                private void maybeShowPopup( MouseEvent e ) {
+                    if ( e.isPopupTrigger() && jTable.isEnabled() ) {
                         Point p = new Point( e.getX(), e.getY() );
                         int col = jTable.columnAtPoint( p );
                         int row = jTable.rowAtPoint( p );
@@ -67,16 +60,14 @@ public class TableMenu extends JFrame
                         // translate table index to model index
                         int mcol = jTable.getColumn( jTable.getColumnName( col ) ).getModelIndex();
 
-                        if ( row >= 0 && row < jTable.getRowCount() )
-                        {
+                        if ( row >= 0 && row < jTable.getRowCount() ) {
                             cancelCellEditing();
 
                             // create popup menu...
                             JPopupMenu contextMenu = createContextMenu( row, mcol );
 
                             // ... and show it
-                            if ( contextMenu != null && contextMenu.getComponentCount() > 0 )
-                            {
+                            if ( contextMenu != null && contextMenu.getComponentCount() > 0 ) {
                                 contextMenu.show( jTable, p.x, p.y );
                             }
                         }
@@ -84,14 +75,12 @@ public class TableMenu extends JFrame
                 }
 
                 @Override
-                public void mousePressed( MouseEvent e )
-                {
+                public void mousePressed( MouseEvent e ) {
                     maybeShowPopup( e );
                 }
 
                 @Override
-                public void mouseReleased( MouseEvent e )
-                {
+                public void mouseReleased( MouseEvent e ) {
                     maybeShowPopup( e );
                 }
             } );
@@ -99,26 +88,21 @@ public class TableMenu extends JFrame
         return jTable;
     }
 
-    private void cancelCellEditing()
-    {
+    private void cancelCellEditing() {
         CellEditor ce = getJTable().getCellEditor();
-        if ( ce != null )
-        {
+        if ( ce != null ) {
             ce.cancelCellEditing();
         }
     }
 
-    private JPopupMenu createContextMenu( final int rowIndex, final int columnIndex )
-    {
+    private JPopupMenu createContextMenu( final int rowIndex, final int columnIndex ) {
         JPopupMenu contextMenu = new JPopupMenu();
 
         JMenuItem copyMenu = new JMenuItem();
         copyMenu.setText( "Copy" );
-        copyMenu.addActionListener( new ActionListener()
-        {
+        copyMenu.addActionListener( new ActionListener() {
 
-            public void actionPerformed( ActionEvent e )
-            {
+            public void actionPerformed( ActionEvent e ) {
                 Object value = getTableModel().getValueAt( rowIndex, columnIndex );
                 ClipboardHelper.setClipboardContents( value == null ? "" : value.toString() );
             }
@@ -128,41 +112,33 @@ public class TableMenu extends JFrame
         JMenuItem pasteMenu = new JMenuItem();
         pasteMenu.setText( "Paste" );
         if ( ClipboardHelper.isClipboardContainingText( this )
-             && getTableModel().isCellEditable( rowIndex, columnIndex ) )
-        {
-            pasteMenu.addActionListener( new ActionListener()
-            {
+             && getTableModel().isCellEditable( rowIndex, columnIndex ) ) {
+            pasteMenu.addActionListener( new ActionListener() {
 
-                public void actionPerformed( ActionEvent e )
-                {
+                public void actionPerformed( ActionEvent e ) {
                     String value = ClipboardHelper.getClipboardContents( TableMenu.this );
                     getTableModel().setValueAt( value, rowIndex, columnIndex );
                 }
             } );
         }
-        else
-        {
+        else {
             pasteMenu.setEnabled( false );
         }
         contextMenu.add( pasteMenu );
 
-        switch ( columnIndex )
-        {
+        switch ( columnIndex ) {
             case ExampleTableModel.COLUMN_NAME:
                 break;
             case ExampleTableModel.COLUMN_PRICE:
                 break;
             case ExampleTableModel.COLUMN_QUANTITY:
                 contextMenu.addSeparator();
-                ActionListener changer = new ActionListener()
-                {
+                ActionListener changer = new ActionListener() {
 
-                    public void actionPerformed( ActionEvent e )
-                    {
+                    public void actionPerformed( ActionEvent e ) {
                         JMenuItem sourceItem = (JMenuItem) e.getSource();
                         Object value = sourceItem.getClientProperty( PROP_CHANGE_QUANTITY );
-                        if ( value instanceof Integer )
-                        {
+                        if ( value instanceof Integer ) {
                             Integer changeValue = (Integer) value;
                             Integer currentValue = (Integer) getTableModel().getValueAt( rowIndex,
                                                                                          columnIndex );
@@ -207,10 +183,8 @@ public class TableMenu extends JFrame
         return contextMenu;
     }
 
-    private JPanel getJContentPane()
-    {
-        if ( jContentPane == null )
-        {
+    private JPanel getJContentPane() {
+        if ( jContentPane == null ) {
             jContentPane = new JPanel();
             jContentPane.setLayout( new BorderLayout() );
             jContentPane.add( getJScrollPane(), java.awt.BorderLayout.CENTER );
@@ -218,27 +192,22 @@ public class TableMenu extends JFrame
         return jContentPane;
     }
 
-    private JScrollPane getJScrollPane()
-    {
-        if ( jScrollPane == null )
-        {
+    private JScrollPane getJScrollPane() {
+        if ( jScrollPane == null ) {
             jScrollPane = new JScrollPane();
             jScrollPane.setViewportView( getJTable() );
         }
         return jScrollPane;
     }
 
-    ExampleTableModel getTableModel()
-    {
-        if ( tableModel == null )
-        {
+    ExampleTableModel getTableModel() {
+        if ( tableModel == null ) {
             tableModel = new ExampleTableModel();
         }
         return tableModel;
     }
 
-    private void initialize()
-    {
+    private void initialize() {
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         this.setSize( 300, 200 );
         this.setContentPane( getJContentPane() );
@@ -247,11 +216,9 @@ public class TableMenu extends JFrame
 
 }
 
-class ExampleTableModel extends AbstractTableModel
-{
+class ExampleTableModel extends AbstractTableModel {
 
-    private static class Item
-    {
+    private static class Item {
 
         private String name;
 
@@ -259,15 +226,13 @@ class ExampleTableModel extends AbstractTableModel
 
         private int quantity;
 
-        public Item( String name, double price, int quantity )
-        {
+        public Item( String name, double price, int quantity ) {
             this.name = name;
             this.price = price;
             this.quantity = quantity;
         }
 
-        public double getAmount()
-        {
+        public double getAmount() {
             return quantity * price;
         }
     }
@@ -282,17 +247,14 @@ class ExampleTableModel extends AbstractTableModel
 
     private List<Item> items = new ArrayList<Item>();
 
-    public void addItem( String name, double price, int quantity )
-    {
+    public void addItem( String name, double price, int quantity ) {
         items.add( new Item( name, price, quantity ) );
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public Class getColumnClass( int columnIndex )
-    {
-        switch ( columnIndex )
-        {
+    public Class getColumnClass( int columnIndex ) {
+        switch ( columnIndex ) {
             case COLUMN_NAME:
                 return String.class;
             case COLUMN_PRICE:
@@ -305,16 +267,13 @@ class ExampleTableModel extends AbstractTableModel
         }
     }
 
-    public int getColumnCount()
-    {
+    public int getColumnCount() {
         return 4;
     }
 
     @Override
-    public String getColumnName( int columnIndex )
-    {
-        switch ( columnIndex )
-        {
+    public String getColumnName( int columnIndex ) {
+        switch ( columnIndex ) {
             case COLUMN_NAME:
                 return "Name";
             case COLUMN_PRICE:
@@ -329,16 +288,13 @@ class ExampleTableModel extends AbstractTableModel
         }
     }
 
-    public int getRowCount()
-    {
+    public int getRowCount() {
         return items.size();
     }
 
-    public Object getValueAt( int rowIndex, int columnIndex )
-    {
+    public Object getValueAt( int rowIndex, int columnIndex ) {
         Item item = items.get( rowIndex );
-        switch ( columnIndex )
-        {
+        switch ( columnIndex ) {
             case COLUMN_NAME:
                 return item.name;
             case COLUMN_PRICE:
@@ -353,10 +309,8 @@ class ExampleTableModel extends AbstractTableModel
     }
 
     @Override
-    public boolean isCellEditable( int rowIndex, int columnIndex )
-    {
-        switch ( columnIndex )
-        {
+    public boolean isCellEditable( int rowIndex, int columnIndex ) {
+        switch ( columnIndex ) {
             case COLUMN_NAME:
             case COLUMN_PRICE:
             case COLUMN_QUANTITY:
@@ -368,34 +322,28 @@ class ExampleTableModel extends AbstractTableModel
     }
 
     @Override
-    public void setValueAt( Object aValue, int rowIndex, int columnIndex )
-    {
+    public void setValueAt( Object aValue, int rowIndex, int columnIndex ) {
         Item item = items.get( rowIndex );
-        switch ( columnIndex )
-        {
+        switch ( columnIndex ) {
             case COLUMN_NAME:
                 item.name = aValue.toString();
                 fireTableCellUpdated( rowIndex, columnIndex );
                 break;
             case COLUMN_PRICE:
-                try
-                {
+                try {
                     item.price = Double.parseDouble( aValue.toString() );
                 }
-                catch ( NumberFormatException ex )
-                {
+                catch ( NumberFormatException ex ) {
                     ex.printStackTrace();
                 }
                 fireTableCellUpdated( rowIndex, columnIndex );
                 fireTableCellUpdated( rowIndex, COLUMN_AMOUNT );
                 break;
             case COLUMN_QUANTITY:
-                try
-                {
+                try {
                     item.quantity = Integer.parseInt( aValue.toString() );
                 }
-                catch ( NumberFormatException ex )
-                {
+                catch ( NumberFormatException ex ) {
                     ex.printStackTrace();
                 }
                 fireTableCellUpdated( rowIndex, columnIndex );

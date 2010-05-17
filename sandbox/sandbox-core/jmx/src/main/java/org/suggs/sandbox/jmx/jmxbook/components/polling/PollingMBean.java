@@ -10,8 +10,7 @@ package org.suggs.sandbox.jmx.jmxbook.components.polling;
  * @author suggitpe
  * @version 1.0 27 Feb 2008
  */
-public interface PollingMBean
-{
+public interface PollingMBean {
 
     /**
      * Start the poller

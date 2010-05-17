@@ -15,20 +15,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Abstract base class that adds in the functionality to persist
- * notifications before they are broadcasted.
+ * Abstract base class that adds in the functionality to persist notifications before they are broadcasted.
  * 
  * @author suggitpe
  * @version 1.0 29 Feb 2008
  */
-public abstract class AbstractNotificationBroadcasterPersister extends NotificationBroadcasterSupport
-{
+public abstract class AbstractNotificationBroadcasterPersister extends NotificationBroadcasterSupport {
 
     private static final Log LOG = LogFactory.getLog( AbstractNotificationBroadcasterPersister.class );
     private static final String NOTIF_INSERT_SQL = "insert into notifications (message, sequence_number, source, timestamp, type, user_data values (?,?,?,?,?,?)";
 
-    private Connection mConnection_;
-    private boolean mEnable = false;
+    private Connection connection;
+    private boolean enable = false;
 
     /**
      * Constructs a new instance.
@@ -36,9 +34,8 @@ public abstract class AbstractNotificationBroadcasterPersister extends Notificat
      * @param aConnection
      *            a database connection
      */
-    public AbstractNotificationBroadcasterPersister( Connection aConnection )
-    {
-        mConnection_ = aConnection;
+    public AbstractNotificationBroadcasterPersister( Connection aConnection ) {
+        connection = aConnection;
     }
 
     /**
@@ -47,55 +44,44 @@ public abstract class AbstractNotificationBroadcasterPersister extends Notificat
      * @param aEnable
      *            whether to enable the persistence or not
      */
-    public void setStorage( boolean aEnable )
-    {
-        mEnable = aEnable;
+    public void setStorage( boolean aEnable ) {
+        enable = aEnable;
     }
 
     /**
      * Accessor to the storage flag
      * 
-     * @return the enable attribute to denote whether to enable
-     *         storage or not.
+     * @return the enable attribute to denote whether to enable storage or not.
      */
-    public boolean getStorage()
-    {
-        return mEnable;
+    public boolean getStorage() {
+        return enable;
     }
 
     /**
-     * Really this should use an injected interface to a DAO and thus
-     * aggregate this away from this implementation.
+     * Really this should use an injected interface to a DAO and thus aggregate this away from this
+     * implementation.
      * 
      * @see javax.management.NotificationBroadcasterSupport#sendNotification(javax.management.Notification)
      */
     @Override
-    public void sendNotification( Notification aNotification )
-    {
-        try
-        {
+    public void sendNotification( Notification aNotification ) {
+        try {
             // prepare the insert statement
-            PreparedStatement stmt = mConnection_.prepareStatement( NOTIF_INSERT_SQL );
+            PreparedStatement stmt = connection.prepareStatement( NOTIF_INSERT_SQL );
             stmt.setString( 1, aNotification.getMessage() );
             stmt.setLong( 2, aNotification.getSequenceNumber() );
-            if ( aNotification.getSource() != null
-                 && aNotification.getSource() instanceof Serializable )
-            {
+            if ( aNotification.getSource() != null && aNotification.getSource() instanceof Serializable ) {
                 stmt.setObject( 3, aNotification.getSource() );
             }
-            else
-            {
+            else {
                 stmt.setObject( 3, "No source" );
             }
             stmt.setLong( 4, aNotification.getTimeStamp() );
             stmt.setString( 5, aNotification.getType() );
-            if ( aNotification.getUserData() != null
-                 && aNotification.getUserData() instanceof Serializable )
-            {
+            if ( aNotification.getUserData() != null && aNotification.getUserData() instanceof Serializable ) {
                 stmt.setObject( 6, aNotification.getUserData() );
             }
-            else
-            {
+            else {
                 stmt.setObject( 6, "No user data" );
             }
 
@@ -104,10 +90,9 @@ public abstract class AbstractNotificationBroadcasterPersister extends Notificat
 
             // this should really be managed by the transaction
             // manager and connections
-            mConnection_.commit();
+            connection.commit();
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             LOG.error( "Failed to persist notification", e );
         }
         super.sendNotification( aNotification );

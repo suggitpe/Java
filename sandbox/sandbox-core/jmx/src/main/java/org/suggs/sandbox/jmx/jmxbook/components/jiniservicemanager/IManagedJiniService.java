@@ -14,8 +14,7 @@ import java.util.Vector;
  * @author suggitpe
  * @version 1.0 25 Feb 2008
  */
-public interface IManagedJiniService extends Remote
-{
+public interface IManagedJiniService extends Remote {
 
     /**
      * @param aEntry

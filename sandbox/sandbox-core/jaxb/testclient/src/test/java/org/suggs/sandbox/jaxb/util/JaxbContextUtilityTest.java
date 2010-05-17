@@ -23,22 +23,19 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 7 Mar 2010
  */
-public class JaxbContextUtilityTest
-{
+public class JaxbContextUtilityTest {
 
     private static final String SIMPLE_XML_OBJECT = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ns2:DummyData xmlns:ns2=\"urn:suggs:dummy-data:2010-01-01\"/>\n";
 
     @Test
-    public void singletonProducesSameObjectInMemory()
-    {
+    public void singletonProducesSameObjectInMemory() {
         JaxbContextUtility util1 = JaxbContextUtility.instance();
         JaxbContextUtility util2 = JaxbContextUtility.instance();
         assertThat( util1, sameInstance( util2 ) );
     }
 
     @Test
-    public void marshallerProducesCorrectOutputForSimpleObject() throws JAXBException
-    {
+    public void marshallerProducesCorrectOutputForSimpleObject() throws JAXBException {
 
         ObjectFactory factory = new ObjectFactory();
         Object o = factory.createDummyData();
@@ -47,21 +44,18 @@ public class JaxbContextUtilityTest
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void marshallerThrowsExceptionWithNullObject() throws JAXBException
-    {
+    public void marshallerThrowsExceptionWithNullObject() throws JAXBException {
         JaxbContextUtility.instance().marshalObject( null );
     }
 
     @Test(expected = JAXBException.class)
-    public void marshallerThrowsExceptionWithInvalidObject() throws JAXBException
-    {
+    public void marshallerThrowsExceptionWithInvalidObject() throws JAXBException {
         JaxbContextUtility.instance().marshalObject( new String( "foo" ) );
     }
 
     @SuppressWarnings("boxing")
     @Test
-    public void unmarshallerCreatesCorrectObjectFromSimpleXml() throws JAXBException
-    {
+    public void unmarshallerCreatesCorrectObjectFromSimpleXml() throws JAXBException {
         ObjectFactory factory = new ObjectFactory();
         DummyData expectedResult = factory.createDummyData();
         DummyData dummyData = JaxbContextUtility.instance().unmarshalObject( SIMPLE_XML_OBJECT,
@@ -75,8 +69,7 @@ public class JaxbContextUtilityTest
     }
 
     @Test
-    public void unmarshallerCorrectlyValidatesXml() throws JAXBException
-    {
+    public void unmarshallerCorrectlyValidatesXml() throws JAXBException {
         String xml = createValidDummyDataXml();
         DummyData data = JaxbContextUtility.instance().unmarshalObject( xml,
                                                                         DummyData.class,
@@ -84,8 +77,7 @@ public class JaxbContextUtilityTest
         assertThat( data, not( nullValue() ) );
     }
 
-    private String createValidDummyDataXml()
-    {
+    private String createValidDummyDataXml() {
         StringBuilder builder = new StringBuilder();
         builder.append( "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" );
         builder.append( "<ns2:DummyData xmlns:ns2=\"urn:suggs:dummy-data:2010-01-01\">" );
@@ -100,51 +92,43 @@ public class JaxbContextUtilityTest
     }
 
     @Test(expected = JAXBException.class)
-    public void unmarshallerThrowsExceptionWhenNonCompliantXmlToSchema() throws JAXBException
-    {
+    public void unmarshallerThrowsExceptionWhenNonCompliantXmlToSchema() throws JAXBException {
         JaxbContextUtility.instance().unmarshalObject( SIMPLE_XML_OBJECT,
                                                        DummyData.class,
                                                        "xsd/dummy-data.xsd" );
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void unmarshallerThrowsExceptionWithUnreadableSchema() throws JAXBException
-    {
+    public void unmarshallerThrowsExceptionWithUnreadableSchema() throws JAXBException {
         JaxbContextUtility.instance().unmarshalObject( SIMPLE_XML_OBJECT,
                                                        DummyData.class,
                                                        "xsd/test-unparsable.xsd" );
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void unmarshallerThrowsExceptionFromMissingSchema() throws JAXBException
-    {
+    public void unmarshallerThrowsExceptionFromMissingSchema() throws JAXBException {
         JaxbContextUtility.instance().unmarshalObject( SIMPLE_XML_OBJECT,
                                                        DummyData.class,
                                                        "xsd/you-wont-find-me.xsd" );
     }
 
     @Test(expected = JAXBException.class)
-    public void unmarshallerThrowsExceptionWhenXmlAndClassMismatch() throws JAXBException
-    {
+    public void unmarshallerThrowsExceptionWhenXmlAndClassMismatch() throws JAXBException {
         JaxbContextUtility.instance().unmarshalObject( SIMPLE_XML_OBJECT, String.class );
     }
 
     @Test(expected = JAXBException.class)
-    public void unmarshallerThrowsExceptionWhithNonXmlString() throws JAXBException
-    {
-        JaxbContextUtility.instance().unmarshalObject( "yeah right this won't work!!",
-                                                       DummyData.class );
+    public void unmarshallerThrowsExceptionWhithNonXmlString() throws JAXBException {
+        JaxbContextUtility.instance().unmarshalObject( "yeah right this won't work!!", DummyData.class );
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void unmarshallerThrowsExceptionWhithNullXmlString() throws JAXBException
-    {
+    public void unmarshallerThrowsExceptionWhithNullXmlString() throws JAXBException {
         JaxbContextUtility.instance().unmarshalObject( null, DummyData.class );
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void unmarshallerThrowsExceptionWhithNullClass() throws JAXBException
-    {
+    public void unmarshallerThrowsExceptionWhithNullClass() throws JAXBException {
         JaxbContextUtility.instance().unmarshalObject( SIMPLE_XML_OBJECT, null );
     }
 

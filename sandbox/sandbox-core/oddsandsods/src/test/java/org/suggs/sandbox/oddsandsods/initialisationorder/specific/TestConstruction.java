@@ -12,15 +12,13 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public class TestConstruction
-{
+public class TestConstruction {
 
     /**
      * 
      */
     @Test
-    public void testConstruction()
-    {
+    public void testConstruction() {
         System.out.println( "=====================================" );
         Logger.log( "Test construction" );
         Logger.log( "-----------------" );

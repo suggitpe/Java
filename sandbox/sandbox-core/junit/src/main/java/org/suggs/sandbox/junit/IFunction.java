@@ -1,16 +1,14 @@
 package org.suggs.sandbox.junit;
 
 /**
- * Interface to define an executable function following the Command
- * pattern
+ * Interface to define an executable function following the Command pattern
  * 
  * @author suggitpe
  * @version 1.0 19 Nov 2009
  * @param <T>
  *            type information
  */
-public interface IFunction<T>
-{
+public interface IFunction<T> {
 
     /**
      * Command pattern execution

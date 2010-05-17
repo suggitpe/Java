@@ -31,35 +31,25 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 26 Feb 2008
  */
-public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
-{
+public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
 
     private static final Log LOG = LogFactory.getLog( AbstractDynamicMBeanSupport.class );
 
-    private Hashtable<String, MBeanAttributeInfo> mAttributes_ = new Hashtable<String, MBeanAttributeInfo>();
-    // private Hashtable<String, MBeanNotificationInfo>
-    // mNotifications_ = new Hashtable<String,
-    // MBeanNotificationInfo>();
+    private Hashtable<String, MBeanAttributeInfo> attributes = new Hashtable<String, MBeanAttributeInfo>();
     @SuppressWarnings("unchecked")
-    private Hashtable<Constructor, MBeanConstructorInfo> mConstructors_ = new Hashtable<Constructor, MBeanConstructorInfo>();
-    private Hashtable<String, MBeanOperationInfo> mOperations_ = new Hashtable<String, MBeanOperationInfo>();
+    private Hashtable<Constructor, MBeanConstructorInfo> constructors = new Hashtable<Constructor, MBeanConstructorInfo>();
+    private Hashtable<String, MBeanOperationInfo> operations = new Hashtable<String, MBeanOperationInfo>();
 
-    private String mDescription = "Description of the MBean";
+    private String description = "Description of the MBean";
 
     /**
      * Constructs a new instance.
      */
-    public AbstractDynamicMBeanSupport()
-    {
+    public AbstractDynamicMBeanSupport() {
         super();
 
         // add the desc attribute from this class
-        addMBeanAttribute( "description",
-                           "java.lang.String",
-                           true,
-                           true,
-                           false,
-                           "Description of the MBean" );
+        addMBeanAttribute( "description", "java.lang.String", true, true, false, "Description of the MBean" );
 
         // add the def ctor
         addMBeanConstructor( this.getClass().getConstructors()[0], "Default Constructor" );
@@ -68,16 +58,13 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
     /**
      * @see javax.management.DynamicMBean#getAttribute(java.lang.String)
      */
-    public Object getAttribute( String attribute ) throws AttributeNotFoundException,
-                    MBeanException, ReflectionException
-    {
-        try
-        {
+    public Object getAttribute( String attribute ) throws AttributeNotFoundException, MBeanException,
+                    ReflectionException {
+        try {
             Method m = this.getClass().getDeclaredMethod( "get" + attribute, (Class[]) null );
             return m.invoke( this, (Object) null );
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             LOG.error( "Failed to get attribute [" + attribute + "]", e );
         }
         return null;
@@ -86,17 +73,13 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
     /**
      * @see javax.management.DynamicMBean#getAttributes(java.lang.String[])
      */
-    public AttributeList getAttributes( String[] attributes )
-    {
+    public AttributeList getAttributes( String[] aAttributes ) {
         AttributeList list = new AttributeList();
-        for ( String s : attributes )
-        {
-            try
-            {
+        for ( String s : aAttributes ) {
+            try {
                 list.add( new Attribute( s, getAttribute( s ) ) );
             }
-            catch ( Exception e )
-            {
+            catch ( Exception e ) {
                 LOG.error( "Failed to get all attributes", e );
             }
         }
@@ -108,15 +91,12 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
      */
     @SuppressWarnings("unchecked")
     public void setAttribute( Attribute attribute ) throws AttributeNotFoundException,
-                    InvalidAttributeValueException, MBeanException, ReflectionException
-    {
+                    InvalidAttributeValueException, MBeanException, ReflectionException {
         String attName = attribute.getName();
         Object attValue = attribute.getValue();
-        try
-        {
+        try {
             String type = getType( attName, false, true );
-            if ( type == null )
-            {
+            if ( type == null ) {
                 throw new AttributeNotFoundException( attName );
             }
 
@@ -126,12 +106,10 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
             Object[] args = { attValue };
             m.invoke( this, args );
         }
-        catch ( AttributeNotFoundException anfe )
-        {
+        catch ( AttributeNotFoundException anfe ) {
             throw anfe;
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             LOG.error( "Unable to set attribute [" + attName + "]", e );
         }
     }
@@ -139,18 +117,14 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
     /**
      * @see javax.management.DynamicMBean#setAttributes(javax.management.AttributeList)
      */
-    public AttributeList setAttributes( AttributeList attributes )
-    {
-        Attribute[] atts = (Attribute[]) attributes.toArray();
-        for ( int i = 0; i < atts.length; ++i )
-        {
+    public AttributeList setAttributes( AttributeList attributes ) {
+        Attribute[] atts = attributes.toArray( new Attribute[attributes.size()] );
+        for ( int i = 0; i < atts.length; ++i ) {
             Attribute a = atts[i];
-            try
-            {
+            try {
                 this.setAttribute( a );
             }
-            catch ( Exception e )
-            {
+            catch ( Exception e ) {
                 LOG.error( "Failed to set attribute [" + a.getName() + "]", e );
             }
         }
@@ -158,25 +132,19 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
     }
 
     /**
-     * Generic invocation method that will look for the correct method
-     * signature on this class and invoke it.
+     * Generic invocation method that will look for the correct method signature on this class and invoke it.
      * 
-     * @see javax.management.DynamicMBean#invoke(java.lang.String,
-     *      java.lang.Object[], java.lang.String[])
+     * @see javax.management.DynamicMBean#invoke(java.lang.String, java.lang.Object[], java.lang.String[])
      */
     @SuppressWarnings("unchecked")
-    public Object invoke( String actionName, Object[] params, String[] signature )
-                    throws MBeanException, ReflectionException
-    {
-        try
-        {
+    public Object invoke( String actionName, Object[] params, String[] signature ) throws MBeanException,
+                    ReflectionException {
+        try {
             Class c = this.getClass();
             Class sig[] = null;
-            if ( signature != null )
-            {
+            if ( signature != null ) {
                 sig = new Class[signature.length];
-                for ( int i = 0; i < signature.length; ++i )
-                {
+                for ( int i = 0; i < signature.length; ++i ) {
                     sig[i] = Class.forName( signature[i] );
                 }
             }
@@ -184,8 +152,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
             Method m = c.getDeclaredMethod( actionName, sig );
             return m.invoke( this, params );
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             LOG.error( "Failed to invoke method [" + actionName + "]", e );
         }
         return null;
@@ -194,22 +161,18 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
     /**
      * @see javax.management.DynamicMBean#getMBeanInfo()
      */
-    public MBeanInfo getMBeanInfo()
-    {
-        try
-        {
+    public MBeanInfo getMBeanInfo() {
+        try {
             return buildDynamicMBeanInfo();
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             LOG.error( "Failed to construct a new MBeanInfo object", e );
         }
         return null;
     }
 
     /**
-     * Accessor to add an operation to the exposed list of operations
-     * of the class
+     * Accessor to add an operation to the exposed list of operations of the class
      * 
      * @param aName
      *            the name of the operation
@@ -218,8 +181,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
      * @param aParamNames
      *            the names array of the parameters of the operation
      * @param aParamDescs
-     *            the descriptions array of the parameters of the
-     *            operation
+     *            the descriptions array of the parameters of the operation
      * @param aDescription
      *            the description of the operation
      * @param rtype
@@ -228,24 +190,19 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
      *            the type of operation
      */
     protected void addMBeanOperation( String name, String[] paramTypes, String[] paramNames,
-                                      String[] paramDescs, String description, String rtype,
-                                      int type )
-    {
+                                      String[] paramDescs, String aDescription, String rtype, int type ) {
         MBeanParameterInfo[] params = null;
-        if ( paramTypes != null )
-        {
+        if ( paramTypes != null ) {
             params = new MBeanParameterInfo[paramTypes.length];
-            for ( int i = 0; i < paramTypes.length; ++i )
-            {
+            for ( int i = 0; i < paramTypes.length; ++i ) {
                 params[i] = new MBeanParameterInfo( paramNames[i], paramTypes[i], paramDescs[i] );
             }
         }
-        mOperations_.put( name, new MBeanOperationInfo( name, description, params, rtype, type ) );
+        operations.put( name, new MBeanOperationInfo( name, aDescription, params, rtype, type ) );
     }
 
     /**
-     * Accessor to add an attribute to the exposed list of attributes
-     * of the class.
+     * Accessor to add an attribute to the exposed list of attributes of the class.
      * 
      * @param name
      *            the name of the attribute
@@ -260,26 +217,23 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
      * @param description
      *            the description of the attribute
      */
-    protected void addMBeanAttribute( String name, String type, boolean read, boolean write,
-                                      boolean is, String description )
-    {
-        mAttributes_.put( name, new MBeanAttributeInfo( name, type, description, read, write, is ) );
+    protected void addMBeanAttribute( String name, String type, boolean read, boolean write, boolean is,
+                                      String aDescription ) {
+        attributes.put( name, new MBeanAttributeInfo( name, type, aDescription, read, write, is ) );
 
     }
 
     /**
-     * Accessor to add a constructor to the exposed list of
-     * constructors for the class.
+     * Accessor to add a constructor to the exposed list of constructors for the class.
      * 
      * @param cons
      *            the constructor
-     * @param description
+     * @param aDescription
      *            a description of the constructor
      */
     @SuppressWarnings("unchecked")
-    protected void addMBeanConstructor( Constructor cons, String description )
-    {
-        mConstructors_.put( cons, new MBeanConstructorInfo( description, cons ) );
+    protected void addMBeanConstructor( Constructor cons, String aDescription ) {
+        constructors.put( cons, new MBeanConstructorInfo( aDescription, cons ) );
     }
 
     /**
@@ -287,29 +241,27 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
      * 
      * @return a newly created mbean info object
      */
-    private MBeanInfo buildDynamicMBeanInfo()
-    {
+    private MBeanInfo buildDynamicMBeanInfo() {
         // operations
-        MBeanOperationInfo[] ops = new MBeanOperationInfo[mOperations_.size()];
-        Vector<MBeanOperationInfo> vo = new Vector<MBeanOperationInfo>( mOperations_.values() );
+        MBeanOperationInfo[] ops = new MBeanOperationInfo[operations.size()];
+        Vector<MBeanOperationInfo> vo = new Vector<MBeanOperationInfo>( operations.values() );
         vo.copyInto( ops );
 
         // attributes
-        MBeanAttributeInfo[] atts = new MBeanAttributeInfo[mAttributes_.size()];
-        Vector<MBeanAttributeInfo> va = new Vector<MBeanAttributeInfo>( mAttributes_.values() );
+        MBeanAttributeInfo[] atts = new MBeanAttributeInfo[attributes.size()];
+        Vector<MBeanAttributeInfo> va = new Vector<MBeanAttributeInfo>( attributes.values() );
         va.copyInto( atts );
 
         // constructors
-        MBeanConstructorInfo[] cons = new MBeanConstructorInfo[mConstructors_.size()];
-        Vector<MBeanConstructorInfo> vc = new Vector<MBeanConstructorInfo>( mConstructors_.values() );
+        MBeanConstructorInfo[] cons = new MBeanConstructorInfo[constructors.size()];
+        Vector<MBeanConstructorInfo> vc = new Vector<MBeanConstructorInfo>( constructors.values() );
         vc.copyInto( cons );
 
-        return new MBeanInfo( this.getClass().getName(), mDescription, atts, cons, ops, null );
+        return new MBeanInfo( this.getClass().getName(), description, atts, cons, ops, null );
     }
 
     /**
-     * Accessor method for an attribute, to get the correct type
-     * information about the attribute
+     * Accessor method for an attribute, to get the correct type information about the attribute
      * 
      * @param attName
      *            the name of the attribute
@@ -319,32 +271,25 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean
      *            states whether we have write access
      * @return the type of the attribute
      */
-    private String getType( String attName, boolean read, boolean write )
-    {
+    private String getType( String attName, boolean read, boolean write ) {
         boolean allowed = true;
 
-        if ( mAttributes_.containsKey( attName ) )
-        {
-            MBeanAttributeInfo attInfo = mAttributes_.get( attName );
+        if ( attributes.containsKey( attName ) ) {
+            MBeanAttributeInfo attInfo = attributes.get( attName );
 
-            if ( read )
-            {
-                if ( !attInfo.isReadable() )
-                {
+            if ( read ) {
+                if ( !attInfo.isReadable() ) {
                     allowed = false;
                 }
             }
 
-            if ( write )
-            {
-                if ( !attInfo.isWritable() )
-                {
+            if ( write ) {
+                if ( !attInfo.isWritable() ) {
                     allowed = false;
                 }
             }
 
-            if ( !allowed )
-            {
+            if ( !allowed ) {
                 return null;
             }
             return attInfo.getType();

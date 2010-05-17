@@ -25,29 +25,26 @@ import com.sun.jdmk.comm.HtmlAdaptorServer;
  * @author suggitpe
  * @version 1.0 11 Feb 2008
  */
-public class HelloAgent implements NotificationListener
-{
+public class HelloAgent implements NotificationListener {
 
     private static final Log LOG = LogFactory.getLog( HelloAgent.class );
     private static final int ADAPTER_PORT = 9092;
 
-    private MBeanServer mServer_;
+    private MBeanServer server;
 
     /**
      * Constructs a new instance.
      */
-    public HelloAgent()
-    {
+    public HelloAgent() {
         LOG.debug( "Creating the MBean server ..." );
         // create an instance of an MBean Server
-        mServer_ = MBeanServerFactory.createMBeanServer( "HelloAgent" );
+        server = MBeanServerFactory.createMBeanServer( "HelloAgent" );
     }
 
     /**
      * Method to run the underlying agent
      */
-    public void runAgent()
-    {
+    public void runAgent() {
 
         // create the HTML adapter
         LOG.debug( "Creating the HTML adapter ..." );
@@ -58,37 +55,32 @@ public class HelloAgent implements NotificationListener
 
         ObjectName adapterName;
         ObjectName helloWorldName;
-        try
-        {
+        try {
             LOG.debug( "Registering mbeans ..." );
 
             // register the hello world bean with a defined name
             helloWorldName = new ObjectName( "HelloAgent:name=helloWorld1" );
-            mServer_.registerMBean( hw, helloWorldName );
+            server.registerMBean( hw, helloWorldName );
 
             // register the html adapter with a defined name
             adapterName = new ObjectName( "HelloAgent:name=htmladapter,port=" + ADAPTER_PORT );
             adapter.setPort( ADAPTER_PORT );
-            mServer_.registerMBean( adapter, adapterName );
+            server.registerMBean( adapter, adapterName );
 
             adapter.start();
 
             hw.addNotificationListener( this, null, null );
         }
-        catch ( MalformedObjectNameException mo )
-        {
+        catch ( MalformedObjectNameException mo ) {
             mo.printStackTrace();
         }
-        catch ( InstanceAlreadyExistsException iae )
-        {
+        catch ( InstanceAlreadyExistsException iae ) {
             iae.printStackTrace();
         }
-        catch ( MBeanRegistrationException mre )
-        {
+        catch ( MBeanRegistrationException mre ) {
             mre.printStackTrace();
         }
-        catch ( NotCompliantMBeanException ncb )
-        {
+        catch ( NotCompliantMBeanException ncb ) {
             ncb.printStackTrace();
         }
     }
@@ -97,10 +89,8 @@ public class HelloAgent implements NotificationListener
      * @see javax.management.NotificationListener#handleNotification(javax.management.Notification,
      *      java.lang.Object)
      */
-    public void handleNotification( Notification notif, Object handback )
-    {
-        LOG.debug( "Receiving notification: [" + notif.getType() + "], [" + notif.getMessage()
-                   + "]" );
+    public void handleNotification( Notification notif, Object handback ) {
+        LOG.debug( "Receiving notification: [" + notif.getType() + "], [" + notif.getMessage() + "]" );
     }
 
     /**
@@ -109,8 +99,7 @@ public class HelloAgent implements NotificationListener
      * @param aArgs
      *            args
      */
-    public static void main( String[] aArgs )
-    {
+    public static void main( String[] aArgs ) {
         LOG.debug( "Creating a new Hello Agent" );
         HelloAgent agent = new HelloAgent();
         agent.runAgent();

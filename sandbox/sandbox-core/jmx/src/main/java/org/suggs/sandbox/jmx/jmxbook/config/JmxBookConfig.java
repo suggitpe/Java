@@ -12,20 +12,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Singleton class to encapsulate the properties for the JmxBook
- * application
+ * Singleton class to encapsulate the properties for the JmxBook application
  * 
  * @author suggitpe
  * @version 1.0 18 Feb 2008
  */
-public class JmxBookConfig
-{
+public class JmxBookConfig {
 
     private static final Log LOG = LogFactory.getLog( JmxBookConfig.class );
 
-    private static JmxBookConfig mInstance_;
+    private static JmxBookConfig instance;
 
-    private Properties mProperties_;
+    private Properties properties;
 
     /** The HTTP port config name */
     public static final String HTTP_PORT = "agent.http.port";
@@ -38,19 +36,17 @@ public class JmxBookConfig
     /** the MBEAN server name config name */
     public static final String MBEAN_SERVERNAME = "server.mbean.name";
 
-    static
-    {
-        mInstance_ = new JmxBookConfig();
-        mInstance_.loadConfig();
+    static {
+        instance = new JmxBookConfig();
+        instance.loadConfig();
     }
 
     /**
      * Hidden. Constructs a new instance.
      */
-    private JmxBookConfig()
-    {
+    private JmxBookConfig() {
         LOG.debug( "Creating new instance of the JMX Book Configuration helper" );
-        mProperties_ = new Properties();
+        properties = new Properties();
     }
 
     /**
@@ -58,38 +54,31 @@ public class JmxBookConfig
      * 
      * @return the instance variable
      */
-    public static JmxBookConfig getInstance()
-    {
-        return mInstance_;
+    public static JmxBookConfig getInstance() {
+        return instance;
     }
 
     /**
      * Method used to load the properties file from the command line
      */
-    private void loadConfig()
-    {
+    private void loadConfig() {
         String name = System.getProperty( "jmxbook.config.filename" );
-        if ( name == null || name.equals( "" ) )
-        {
+        if ( name == null || name.equals( "" ) ) {
             throw new IllegalArgumentException( "System requires system property [jmxbook.config.filename] set to the name of the configuration filename" );
         }
 
         LOG.debug( "Loading system properties from file [" + name + "]" );
         InputStream is = JmxBookConfig.class.getClassLoader().getResourceAsStream( name );
-        if ( is == null )
-        {
+        if ( is == null ) {
             throw new IllegalStateException( "Could not load configuration file [" + name + "]" );
         }
 
-        try
-        {
-            mProperties_.load( is );
+        try {
+            properties.load( is );
             is.close();
         }
-        catch ( IOException ioe )
-        {
-            throw new IllegalStateException( "Could not load configuration file [" + name + "]",
-                                             ioe );
+        catch ( IOException ioe ) {
+            throw new IllegalStateException( "Could not load configuration file [" + name + "]", ioe );
         }
     }
 
@@ -100,9 +89,8 @@ public class JmxBookConfig
      *            the name of the property
      * @return the String value from the properties file
      */
-    public String getCfgProperty( String aPropertyName )
-    {
-        return mProperties_.getProperty( aPropertyName );
+    public String getCfgProperty( String aPropertyName ) {
+        return properties.getProperty( aPropertyName );
     }
 
     /**
@@ -110,8 +98,7 @@ public class JmxBookConfig
      * 
      * @return the RMI url string
      */
-    public String getRmiUrl()
-    {
+    public String getRmiUrl() {
         return new StringBuffer( getCfgProperty( JmxBookConfig.RMI_URL_PREFIX ) ).append( getCfgProperty( JmxBookConfig.RMI_PORT ) )
             .append( getCfgProperty( JmxBookConfig.RMI_URL_POSTFIX ) )
             .toString();

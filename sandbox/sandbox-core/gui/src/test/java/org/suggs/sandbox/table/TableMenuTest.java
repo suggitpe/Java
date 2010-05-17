@@ -10,16 +10,14 @@ package org.suggs.sandbox.table;
  * @author suggitpe
  * @version 1.0 15 Jul 2009
  */
-public class TableMenuTest
-{
+public class TableMenuTest {
 
     /**
      * Starts the GUI and adds test data
      * 
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         TableMenu app = new TableMenu();
         app.getTableModel().addItem( "Apple", 1.39, 3 );
         app.getTableModel().addItem( "Pear", 2.19, 2 );

@@ -10,22 +10,19 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.simple;
  * @author suggitpe
  * @version 1.0 20 Sep 2007
  */
-public class SuperClass
-{
+public class SuperClass {
 
     /**
      * Constructs a new instance.
      */
-    public SuperClass()
-    {
+    public SuperClass() {
         printThree();
     }
 
     /**
      * 
      */
-    public void printThree()
-    {
+    public void printThree() {
         System.out.println( "three" );
     }
 

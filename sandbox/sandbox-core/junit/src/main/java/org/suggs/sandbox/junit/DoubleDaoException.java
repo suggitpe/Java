@@ -10,8 +10,7 @@ package org.suggs.sandbox.junit;
  * @author suggitpe
  * @version 1.0 20 Nov 2009
  */
-public class DoubleDaoException extends Exception
-{
+public class DoubleDaoException extends Exception {
 
     /**
      * Constructs a new instance.
@@ -19,8 +18,7 @@ public class DoubleDaoException extends Exception
      * @param aMsg
      *            the exception message
      */
-    public DoubleDaoException( String aMsg )
-    {
+    public DoubleDaoException( String aMsg ) {
         super( aMsg );
     }
 

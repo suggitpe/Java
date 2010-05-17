@@ -24,14 +24,12 @@ import javax.swing.SpringLayout;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class CommonLayouts extends JFrame
-{
+public class CommonLayouts extends JFrame {
 
     /**
      * Constructs a new instance.
      */
-    public CommonLayouts()
-    {
+    public CommonLayouts() {
         super( "Common Layout Managers" );
         setSize( 500, 460 );
         JDesktopPane desktop = new JDesktopPane();
@@ -125,8 +123,7 @@ public class CommonLayouts extends JFrame
      * 
      * @param argv
      */
-    public static void main( String argv[] )
-    {
+    public static void main( String argv[] ) {
         CommonLayouts frame = new CommonLayouts();
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         frame.setVisible( true );

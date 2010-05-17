@@ -13,22 +13,18 @@ import org.suggs.sandbox.oddsandsods.logger.LogFactory;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public class ExceptionTest
-{
+public class ExceptionTest {
 
     private static final Log LOG = LogFactory.getLog( ExceptionTest.class );
 
     /**
      * @param args
      */
-    public static void main( String[] args )
-    {
-        try
-        {
+    public static void main( String[] args ) {
+        try {
             testme();
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             // whatever!!!
             LOG.error( "This is from main", e );
         }
@@ -37,23 +33,18 @@ public class ExceptionTest
     /**
      * @throws Exception
      */
-    public static void testme() throws Exception
-    {
-        try
-        {
+    public static void testme() throws Exception {
+        try {
             LOG.debug( "In try" );
             throw new Exception( "This is the main exception in the try" );
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             LOG.debug( "In catch" );
             throw new Exception( "this is in the catch" );
         }
-        finally
-        {
+        finally {
             LOG.debug( "In finally)" );
-            if ( 1 == 1 )
-            {
+            if ( 1 == 1 ) {
                 throw new Exception( "this is in finally" );
             }
         }

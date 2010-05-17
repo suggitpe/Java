@@ -10,16 +10,14 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.basic;
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public final class ReferenceClass
-{
+public final class ReferenceClass {
 
     /**
      * Constructs a new instance.
      * 
      * @param aName
      */
-    public ReferenceClass( String aName )
-    {
+    public ReferenceClass( String aName ) {
         System.out.println( "Constructing Reference class [" + aName + "]" );
     }
 

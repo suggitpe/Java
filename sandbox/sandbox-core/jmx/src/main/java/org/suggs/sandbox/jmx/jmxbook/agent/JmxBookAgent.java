@@ -29,30 +29,25 @@ import com.sun.jdmk.comm.HtmlAdaptorServer;
  * @author suggitpe
  * @version 1.0 13 Feb 2008
  */
-public class JmxBookAgent
-{
+public class JmxBookAgent {
 
     private static final Log LOG = LogFactory.getLog( JmxBookAgent.class );
 
-    private MBeanServer mServer_;
+    private MBeanServer server;
 
     /**
      * Constructs a new instance.
      */
-    public JmxBookAgent()
-    {
+    public JmxBookAgent() {
         LOG.debug( "Creating MBean server " );
-        String svrName = JmxBookConfig.getInstance()
-            .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
-        mServer_ = MBeanServerFactory.createMBeanServer( svrName );
+        String svrName = JmxBookConfig.getInstance().getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+        server = MBeanServerFactory.createMBeanServer( svrName );
 
-        if ( !startHtmlAdapter() )
-        {
+        if ( !startHtmlAdapter() ) {
             System.exit( -1 );
         }
 
-        if ( !startRmiConnector() )
-        {
+        if ( !startRmiConnector() ) {
             System.exit( -1 );
         }
         LOG.info( "JMX Book started" );
@@ -61,16 +56,12 @@ public class JmxBookAgent
     /**
      * Instantiate and start an HTML adapter for this agent
      */
-    private boolean startHtmlAdapter()
-    {
+    private boolean startHtmlAdapter() {
         int httpPort;
-        try
-        {
-            httpPort = Integer.parseInt( JmxBookConfig.getInstance()
-                .getCfgProperty( JmxBookConfig.HTTP_PORT ) );
+        try {
+            httpPort = Integer.parseInt( JmxBookConfig.getInstance().getCfgProperty( JmxBookConfig.HTTP_PORT ) );
         }
-        catch ( NumberFormatException nfe )
-        {
+        catch ( NumberFormatException nfe ) {
             throw new IllegalStateException( "Failed to convert http port number", nfe );
         }
         LOG.debug( "Starting the HTML adapter on port [" + httpPort + "]" );
@@ -78,22 +69,18 @@ public class JmxBookAgent
         adapter.setPort( httpPort );
 
         ObjectName adapterName;
-        try
-        {
-            String svrName = JmxBookConfig.getInstance()
-                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+        try {
+            String svrName = JmxBookConfig.getInstance().getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
             adapterName = new ObjectName( svrName + ":name=html,port=" + httpPort );
-            mServer_.registerMBean( adapter, adapterName );
+            server.registerMBean( adapter, adapterName );
             adapter.start();
         }
-        catch ( MalformedObjectNameException mone )
-        {
+        catch ( MalformedObjectNameException mone ) {
             LOG.error( "Error creating object name: " + mone.getMessage() );
             ExceptionUtil.printException( mone );
             return false;
         }
-        catch ( JMException e )
-        {
+        catch ( JMException e ) {
             LOG.error( "Failed to register MBean: " + e.getMessage() );
             ExceptionUtil.printException( e );
             return false;
@@ -104,21 +91,18 @@ public class JmxBookAgent
     /**
      * Instantiate and start a RMI Connector for this agent
      */
-    private boolean startRmiConnector()
-    {
+    private boolean startRmiConnector() {
 
         String rmiUrl = JmxBookConfig.getInstance().getRmiUrl();
         // create the rmi connector server
         JMXConnectorServer conn;
         LOG.debug( "Starting the RMI connector on port [" + rmiUrl + "]" );
 
-        try
-        {
+        try {
             JMXServiceURL url = new JMXServiceURL( rmiUrl );
-            conn = JMXConnectorServerFactory.newJMXConnectorServer( url, null, mServer_ );
+            conn = JMXConnectorServerFactory.newJMXConnectorServer( url, null, server );
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             LOG.error( "Error creating RMI Connector: " + ioe.getMessage() );
             ExceptionUtil.printException( ioe );
             return false;
@@ -126,33 +110,27 @@ public class JmxBookAgent
 
         // now register the connector server with the MBean server
         ObjectName connectorName;
-        try
-        {
-            String svrName = JmxBookConfig.getInstance()
-                .getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
+        try {
+            String svrName = JmxBookConfig.getInstance().getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
             connectorName = new ObjectName( svrName + ":name=RMIConnector" );
-            mServer_.registerMBean( conn, connectorName );
+            server.registerMBean( conn, connectorName );
         }
-        catch ( MalformedObjectNameException mone )
-        {
+        catch ( MalformedObjectNameException mone ) {
             LOG.error( "Error creating object name: " + mone.getMessage() );
             ExceptionUtil.printException( mone );
             return false;
         }
-        catch ( JMException e )
-        {
+        catch ( JMException e ) {
             LOG.error( "Failed to register MBean: " + e.getMessage() );
             ExceptionUtil.printException( e );
             return false;
         }
 
         // now we start the rmi connector
-        try
-        {
+        try {
             conn.start();
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             LOG.error( "Failed to start the RMIConnectorServer: " + ioe.getMessage() );
             ExceptionUtil.printException( ioe );
             return false;

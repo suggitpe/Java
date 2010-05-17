@@ -10,17 +10,15 @@ import org.suggs.sandbox.junit.IFunction;
 import java.util.Date;
 
 /**
- * Function that will calculate the average price of two doubles
- * retrieved from a DAO.
+ * Function that will calculate the average price of two doubles retrieved from a DAO.
  * 
  * @author suggitpe
  * @version 1.0 20 Nov 2009
  */
-public class AveragePriceFunction implements IFunction<Double>
-{
+public class AveragePriceFunction implements IFunction<Double> {
 
-    private IDoubleDaoService doubleDaoService_;
-    private Date[] dates_;
+    private IDoubleDaoService doubleDaoService;
+    private Date[] dates;
 
     /**
      * Constructs a new instance.
@@ -28,23 +26,20 @@ public class AveragePriceFunction implements IFunction<Double>
      * @param aDoubleDaoService
      * @param aDates
      */
-    public AveragePriceFunction( IDoubleDaoService aDoubleDaoService, Date... aDates )
-    {
-        doubleDaoService_ = aDoubleDaoService;
-        dates_ = aDates;
+    public AveragePriceFunction( IDoubleDaoService aDoubleDaoService, Date... aDates ) {
+        doubleDaoService = aDoubleDaoService;
+        dates = aDates;
     }
 
     /**
      * @see org.suggs.sandbox.junit.IFunction#execute()
      */
     @Override
-    public Double execute() throws Exception
-    {
+    public Double execute() throws Exception {
         double total = 0.0d;
-        for ( Date date : dates_ )
-        {
-            total += doubleDaoService_.doubleForDate( date ).doubleValue();
+        for ( Date date : dates ) {
+            total += doubleDaoService.doubleForDate( date ).doubleValue();
         }
-        return Double.valueOf( total / dates_.length );
+        return Double.valueOf( total / dates.length );
     }
 }

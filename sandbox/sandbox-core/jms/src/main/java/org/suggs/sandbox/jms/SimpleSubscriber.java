@@ -18,14 +18,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Simple subscriber mechanism for creating a durable and then
- * retrieving messages from that durable.
+ * Simple subscriber mechanism for creating a durable and then retrieving messages from that durable.
  * 
  * @author suggitpe
  * @version 1.0 16 Apr 2009
  */
-public class SimpleSubscriber
-{
+public class SimpleSubscriber {
 
     private static final Log LOG = LogFactory.getLog( SimpleSubscriber.class );
 
@@ -34,8 +32,7 @@ public class SimpleSubscriber
      * @throws NamingException
      * @throws JMSException
      */
-    public void subscribeToTopic( String aDestName ) throws NamingException, JMSException
-    {
+    public void subscribeToTopic( String aDestName ) throws NamingException, JMSException {
         InitialContext ctx = ContextHelper.createInitialContext();
 
         ConnectionFactory fact = (ConnectionFactory) ctx.lookup( ConfigManager.instance()
@@ -47,52 +44,42 @@ public class SimpleSubscriber
 
         Connection conn = fact.createConnection( user, pass );
 
-        try
-        {
+        try {
             Session sess = conn.createSession( true, Session.CLIENT_ACKNOWLEDGE );
-            try
-            {
-                String durable = ConfigManager.instance()
-                    .getProperty( ConfigManager.SUBSCR_DURABLE );
+            try {
+                String durable = ConfigManager.instance().getProperty( ConfigManager.SUBSCR_DURABLE );
                 TopicSubscriber tSubScr = sess.createDurableSubscriber( d,
                                                                         "PeteDurable",
                                                                         ConfigManager.instance()
                                                                             .getNullableProperty( ConfigManager.SUBSCR_MSG_SELECTOR ),
                                                                         true );
 
-                try
-                {
+                try {
                     conn.start();
                     Message msg = null;
                     LOG.debug( "Pulling all of the messages from the [" + durable
-                               + "] durable using message selector ["
-                               + tSubScr.getMessageSelector() + "]" );
-                    while ( ( msg = tSubScr.receiveNoWait() ) != null )
-                    {
+                               + "] durable using message selector [" + tSubScr.getMessageSelector() + "]" );
+                    while ( ( msg = tSubScr.receiveNoWait() ) != null ) {
                         processMessages( msg );
                         sess.commit();
                     }
                     LOG.debug( "All messages consumed" );
                     conn.stop();
                 }
-                finally
-                {
+                finally {
                     tSubScr.close();
                 }
             }
-            finally
-            {
+            finally {
                 sess.close();
             }
         }
-        finally
-        {
+        finally {
             conn.close();
         }
     }
 
-    private void processMessages( Message msg ) throws JMSException
-    {
+    private void processMessages( Message msg ) throws JMSException {
         LOG.debug( "Processing message with ID [" + msg.getJMSMessageID() + "]" );
     }
 }

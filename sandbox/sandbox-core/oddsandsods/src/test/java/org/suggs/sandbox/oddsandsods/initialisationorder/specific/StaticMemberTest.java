@@ -12,15 +12,13 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public class StaticMemberTest
-{
+public class StaticMemberTest {
 
     /**
      * 
      */
     @Test
-    public void testStaticMember()
-    {
+    public void testStaticMember() {
         Logger.log( "=====================================" );
         Logger.log( "Test Static Member" );
         Logger.log( "------------------" );

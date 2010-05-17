@@ -16,19 +16,17 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 11 Feb 2008
  */
-public class HelloWorld extends NotificationBroadcasterSupport implements HelloWorldMBean
-{
+public class HelloWorld extends NotificationBroadcasterSupport implements HelloWorldMBean {
 
     private static final Log LOG = LogFactory.getLog( HelloWorld.class );
 
-    private String mGreeting_;
+    private String greeting;
 
     /**
      * Constructs a new instance.
      */
-    public HelloWorld()
-    {
-        mGreeting_ = "Hello I am a standard MBean impl";
+    public HelloWorld() {
+        greeting = "Hello I am a standard MBean impl";
     }
 
     /**
@@ -37,33 +35,29 @@ public class HelloWorld extends NotificationBroadcasterSupport implements HelloW
      * @param aGreeting
      *            the greeting to set
      */
-    public HelloWorld( String aGreeting )
-    {
-        mGreeting_ = aGreeting;
+    public HelloWorld( String aGreeting ) {
+        greeting = aGreeting;
     }
 
     /**
      * @see org.suggs.sandbox.jmx.helloworld.HelloWorldMBean#getGreeting()
      */
-    public String getGreeting()
-    {
-        return mGreeting_;
+    public String getGreeting() {
+        return greeting;
     }
 
     /**
      * @see org.suggs.sandbox.jmx.helloworld.HelloWorldMBean#printGreeting()
      */
-    public void printGreeting()
-    {
-        LOG.info( "Greeting on JMX managed object is [" + mGreeting_ + "]" );
+    public void printGreeting() {
+        LOG.info( "Greeting on JMX managed object is [" + greeting + "]" );
     }
 
     /**
      * @see org.suggs.sandbox.jmx.helloworld.HelloWorldMBean#setGreeting(java.lang.String)
      */
-    public void setGreeting( String greeting )
-    {
-        mGreeting_ = greeting;
+    public void setGreeting( String aGreeting ) {
+        greeting = aGreeting;
 
         Notification notif = new Notification( "org.suggs.helloworld.test.notif",
                                                this,

@@ -20,51 +20,48 @@ import javax.swing.JTextField;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * Abstract class for the temperature guage demol
  * 
  * @author suggitpe
  * @version 1.0 9 Jul 2007
  */
-public abstract class AbstractTemperatureGUI implements Observer
-{
+public abstract class AbstractTemperatureGUI implements Observer {
 
     private static final Log LOG = LogFactory.getLog( AbstractTemperatureGUI.class );
 
-    private String mLabel_;
-    private TemperatureModel mModel_;
-    private JFrame mTempFrame_;
-    private JTextField mDisplay_ = new JTextField();
-    private JButton mUpButton_ = new JButton( "Up" );;
-    private JButton mDownButton_ = new JButton( "Down" );
+    private String label;
+    private TemperatureModel model;
+    private JFrame tempFrame;
+    private JTextField display = new JTextField();
+    private JButton upButton = new JButton( "Up" );;
+    private JButton downButton = new JButton( "Down" );
 
     /**
      * Constructs a new instance.
      * 
-     * @param label
+     * @param aLabel
      *            the gui label
-     * @param model
+     * @param aModel
      *            the model to observe
      * @param h
      * @param v
      */
-    public AbstractTemperatureGUI( String label, TemperatureModel model, int h, int v )
-    {
-        mLabel_ = label;
-        mModel_ = model;
-        mTempFrame_ = new JFrame( mLabel_ );
-        mTempFrame_.add( "North", new JLabel( mLabel_ ) );
-        mTempFrame_.add( "Center", mDisplay_ );
+    public AbstractTemperatureGUI( String aLabel, TemperatureModel aModel, int h, int v ) {
+        label = aLabel;
+        model = aModel;
+        tempFrame = new JFrame( label );
+        tempFrame.add( "North", new JLabel( label ) );
+        tempFrame.add( "Center", display );
         JPanel buttons = new JPanel();
-        buttons.add( mUpButton_ );
-        buttons.add( mDownButton_ );
-        mTempFrame_.add( "South", buttons );
-        mTempFrame_.addWindowListener( new CloseListener() );
-        mModel_.addObserver( this );
-        mTempFrame_.setSize( 200, 100 );
-        mTempFrame_.setLocation( h, v );
-        mTempFrame_.setVisible( true );
+        buttons.add( upButton );
+        buttons.add( downButton );
+        tempFrame.add( "South", buttons );
+        tempFrame.addWindowListener( new CloseListener() );
+        model.addObserver( this );
+        tempFrame.setSize( 200, 100 );
+        tempFrame.setLocation( h, v );
+        tempFrame.setVisible( true );
     }
 
     /**
@@ -73,9 +70,8 @@ public abstract class AbstractTemperatureGUI implements Observer
      * @param s
      *            the string to display
      */
-    public void setDisplay( String s )
-    {
-        mDisplay_.setText( s );
+    public void setDisplay( String s ) {
+        display.setText( s );
     }
 
     /**
@@ -83,16 +79,13 @@ public abstract class AbstractTemperatureGUI implements Observer
      * 
      * @return the display converted to a double
      */
-    public double getDisplay()
-    {
+    public double getDisplay() {
         double ret = 0.0;
-        try
-        {
-            ret = Double.valueOf( mDisplay_.getText() ).doubleValue();
+        try {
+            ret = Double.valueOf( display.getText() ).doubleValue();
         }
-        catch ( NumberFormatException nfe )
-        {
-            LOG.warn( "Failed to convert text [" + mDisplay_.getText() + "] to a number (double)" );
+        catch ( NumberFormatException nfe ) {
+            LOG.warn( "Failed to convert text [" + display.getText() + "] to a number (double)" );
         }
 
         return ret;
@@ -104,9 +97,8 @@ public abstract class AbstractTemperatureGUI implements Observer
      * @param a
      *            the listsner to add
      */
-    public void addDisplayListener( ActionListener a )
-    {
-        mDisplay_.addActionListener( a );
+    public void addDisplayListener( ActionListener a ) {
+        display.addActionListener( a );
     }
 
     /**
@@ -115,9 +107,8 @@ public abstract class AbstractTemperatureGUI implements Observer
      * @param a
      *            the action listener to add
      */
-    public void addUpListener( ActionListener a )
-    {
-        mUpButton_.addActionListener( a );
+    public void addUpListener( ActionListener a ) {
+        upButton.addActionListener( a );
     }
 
     /**
@@ -126,9 +117,8 @@ public abstract class AbstractTemperatureGUI implements Observer
      * @param a
      *            the action listener to add
      */
-    public void addDownListsner( ActionListener a )
-    {
-        mDownButton_.addActionListener( a );
+    public void addDownListsner( ActionListener a ) {
+        downButton.addActionListener( a );
     }
 
     /**
@@ -136,9 +126,8 @@ public abstract class AbstractTemperatureGUI implements Observer
      * 
      * @return the model
      */
-    protected TemperatureModel getModel()
-    {
-        return mModel_;
+    protected TemperatureModel getModel() {
+        return model;
     }
 
     /**
@@ -147,15 +136,13 @@ public abstract class AbstractTemperatureGUI implements Observer
      * @author suggitpe
      * @version 1.0 9 Jul 2007
      */
-    public static class CloseListener extends WindowAdapter
-    {
+    public static class CloseListener extends WindowAdapter {
 
         /**
          * @see java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)
          */
         @Override
-        public void windowClosing( WindowEvent e )
-        {
+        public void windowClosing( WindowEvent e ) {
             e.getWindow().setVisible( false );
             System.exit( 0 );
 

@@ -30,16 +30,14 @@ import javax.swing.border.EmptyBorder;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class ComplaintsDialog extends JDialog
-{
+public class ComplaintsDialog extends JDialog {
 
     /**
      * Constructs a new instance.
      * 
      * @param frame
      */
-    public ComplaintsDialog( JFrame frame )
-    {
+    public ComplaintsDialog( JFrame frame ) {
         super( frame, true );
         setTitle( "Simple Complaints Dialog" );
         setSize( 500, 300 );
@@ -196,8 +194,7 @@ public class ComplaintsDialog extends JDialog
      * 
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         new ComplaintsDialog( new JFrame() );
     }
 }

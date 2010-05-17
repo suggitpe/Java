@@ -12,19 +12,17 @@ import java.util.Observable;
  * @author suggitpe
  * @version 1.0 9 Jul 2007
  */
-public class TemperatureModel extends Observable
-{
+public class TemperatureModel extends Observable {
 
-    private double mTempF_ = 32.0;
+    private double tempInFarenheight = 32.0;
 
     /**
      * Getter for the temperature in degrees F
      * 
      * @return the temp in F
      */
-    public double getF()
-    {
-        return mTempF_;
+    public double getF() {
+        return tempInFarenheight;
     }
 
     /**
@@ -32,20 +30,18 @@ public class TemperatureModel extends Observable
      * 
      * @return the temp in C
      */
-    public double getC()
-    {
-        return ( mTempF_ - 32.0 ) * 5.0 / 9.0;
+    public double getC() {
+        return ( tempInFarenheight - 32.0 ) * 5.0 / 9.0;
     }
 
     /**
      * Setter for the temperature in degrees F
      * 
-     * @param tempF
+     * @param aTempF
      *            the temp in F to set
      */
-    public void setF( double tempF )
-    {
-        mTempF_ = tempF;
+    public void setF( double aTempF ) {
+        tempInFarenheight = aTempF;
         setChanged();
         notifyObservers();
     }
@@ -56,9 +52,8 @@ public class TemperatureModel extends Observable
      * @param tempC
      *            the temp to set in degrees C
      */
-    public void setC( double tempC )
-    {
-        mTempF_ = tempC * 9.0 / 5.0 + 32.0;
+    public void setC( double tempC ) {
+        tempInFarenheight = tempC * 9.0 / 5.0 + 32.0;
         setChanged();
         notifyObservers();
     }

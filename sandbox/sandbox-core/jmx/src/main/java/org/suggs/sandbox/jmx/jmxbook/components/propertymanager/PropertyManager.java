@@ -18,15 +18,14 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 20 Feb 2008
  */
-public class PropertyManager implements PropertyManagerMBean
-{
+public class PropertyManager implements PropertyManagerMBean {
 
     private static final Log LOG = LogFactory.getLog( PropertyManager.class );
-    private Properties mProps_;
+    private Properties properties;
 
     // non static initialiser
     {
-        mProps_ = new Properties();
+        properties = new Properties();
     }
 
     /**
@@ -34,17 +33,14 @@ public class PropertyManager implements PropertyManagerMBean
      * 
      * @param aPath
      */
-    public PropertyManager( String aPath )
-    {
+    public PropertyManager( String aPath ) {
         LOG.debug( "Loading property file [" + aPath + "]" );
-        try
-        {
+        try {
             InputStream is = PropertyManager.class.getClassLoader().getResourceAsStream( aPath );
-            mProps_.load( is );
+            properties.load( is );
             is.close();
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             e.printStackTrace();
         }
     }
@@ -52,44 +48,38 @@ public class PropertyManager implements PropertyManagerMBean
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#getProperty(java.lang.String)
      */
-    public String getProperty( String name )
-    {
-        return mProps_.getProperty( name );
+    public String getProperty( String name ) {
+        return properties.getProperty( name );
     }
 
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#setProperty(java.lang.String,
      *      java.lang.String)
      */
-    public void setProperty( String name, String value )
-    {
-        mProps_.setProperty( name, value );
+    public void setProperty( String name, String value ) {
+        properties.setProperty( name, value );
     }
 
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#keys()
      */
     @SuppressWarnings("unchecked")
-    public Enumeration keys()
-    {
-        return mProps_.keys();
+    public Enumeration keys() {
+        return properties.keys();
     }
 
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#setSource(java.lang.String)
      */
-    public void setSource( String path )
-    {
+    public void setSource( String path ) {
         LOG.debug( "Reloading properies from file [" + path + "]" );
-        try
-        {
-            mProps_ = new Properties();
+        try {
+            properties = new Properties();
             FileInputStream fis = new FileInputStream( path );
-            mProps_.load( fis );
+            properties.load( fis );
             fis.close();
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             e.printStackTrace();
         }
     }

@@ -12,8 +12,7 @@ import java.util.Enumeration;
  * @author suggitpe
  * @version 1.0 20 Feb 2008
  */
-public interface PropertyManagerMBean
-{
+public interface PropertyManagerMBean {
 
     /**
      * Getter for a string property

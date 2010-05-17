@@ -24,12 +24,10 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 9 Feb 2010
  */
-public class HamcrestTest
-{
+public class HamcrestTest {
 
     @Test
-    public void testAssertThatIsForString()
-    {
+    public void testAssertThatIsForString() {
         String color = "red";
         assertThat( color, is( "red" ) );
     }
@@ -38,46 +36,40 @@ public class HamcrestTest
      * Watch out for boxing!
      */
     @Test
-    public void testAssertThatIsForDouble()
-    {
+    public void testAssertThatIsForDouble() {
         double expected = 100.0;
         double result = 10.0 * 10.0;
         assertThat( Double.valueOf( result ), is( Double.valueOf( expected ) ) );
     }
 
     @Test
-    public void testAssertThatIsIn()
-    {
+    public void testAssertThatIsIn() {
         String[] colors = { "red", "green", "blue" };
         String result = "blue";
         assertThat( result, IsIn.isIn( colors ) );
     }
 
     @Test
-    public void testAssertThatIsNotIn()
-    {
+    public void testAssertThatIsNotIn() {
         String[] colors = { "red", "green", "blue" };
         String result = "yellow";
         assertThat( result, not( IsIn.isIn( colors ) ) );
     }
 
     @Test
-    public void testAssertThatIsOneOfRedGreenBlue()
-    {
+    public void testAssertThatIsOneOfRedGreenBlue() {
         String color = "blue";
         assertThat( color, IsIn.isOneOf( "blue", "green", "red" ) );
     }
 
     @Test
-    public void testAssertThatIsNotNull()
-    {
+    public void testAssertThatIsNotNull() {
         String color = "blue";
         assertThat( color, notNullValue() );
     }
 
     @Test
-    public void testAssertThatHasItem()
-    {
+    public void testAssertThatHasItem() {
         List<String> colors = new ArrayList<String>();
         colors.add( "red" );
         colors.add( "green" );
@@ -86,8 +78,7 @@ public class HamcrestTest
     }
 
     @Test
-    public void testAssertThatNoneLessThan18()
-    {
+    public void testAssertThatNoneLessThan18() {
         List<Integer> ages = new ArrayList<Integer>();
         ages.add( Integer.valueOf( 20 ) );
         ages.add( Integer.valueOf( 30 ) );
@@ -96,8 +87,7 @@ public class HamcrestTest
     }
 
     @Test
-    public void testEqualTo()
-    {
+    public void testEqualTo() {
         String a1 = "a";
         String a2 = "a";
 

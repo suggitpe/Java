@@ -23,15 +23,13 @@ import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
 /**
- * Singleton class that encapsulates JAXB XML utilities, such as
- * marshalling and unmarshalling. This class is thread safe to its
- * internal state.
+ * Singleton class that encapsulates JAXB XML utilities, such as marshalling and unmarshalling. This class is
+ * thread safe to its internal state.
  * 
  * @author suggitpe
  * @version 1.0 7 Mar 2010
  */
-public final class JaxbContextUtility
-{
+public final class JaxbContextUtility {
 
     private static final Log LOG = LogFactory.getLog( JaxbContextUtility.class );
 
@@ -45,16 +43,14 @@ public final class JaxbContextUtility
     /**
      * Private to ensure singleton.
      */
-    private JaxbContextUtility()
-    {}
+    private JaxbContextUtility() {}
 
     /**
      * Singleton method.
      * 
      * @return the singleton instance of the JaxbContextUtility.
      */
-    public static JaxbContextUtility instance()
-    {
+    public static JaxbContextUtility instance() {
         return INSTANCE;
     }
 
@@ -68,8 +64,7 @@ public final class JaxbContextUtility
      * @return an object of the same type as the passed in Class
      */
     @SuppressWarnings("unchecked")
-    public <T> T unmarshalObject( String aXmlString, Class<?> aClazz ) throws JAXBException
-    {
+    public <T> T unmarshalObject( String aXmlString, Class<?> aClazz ) throws JAXBException {
         return (T) unmarshalObject( aXmlString, aClazz, null );
     }
 
@@ -81,26 +76,21 @@ public final class JaxbContextUtility
      * @param aClazz
      *            the class type to return
      * @param aSchemaLocation
-     *            the location of the schema to validate the XML
-     *            against (classpath location)
+     *            the location of the schema to validate the XML against (classpath location)
      * @return an object of the same type as the passed in Class
      */
     @SuppressWarnings("unchecked")
     public <T> T unmarshalObject( String aXmlString, Class<?> aClazz, String aSchemaLocation )
-                    throws JAXBException
-    {
-        if ( aXmlString == null )
-        {
+                    throws JAXBException {
+        if ( aXmlString == null ) {
             throw new IllegalArgumentException( "Cannot pass in a null xml string to unmarshaller" );
         }
-        if ( aClazz == null )
-        {
+        if ( aClazz == null ) {
             throw new IllegalArgumentException( "Cannot pass in a null class reference to unmarshaller" );
         }
 
         Unmarshaller unmarshaller = createUnmarshaller( aClazz );
-        if ( aSchemaLocation != null )
-        {
+        if ( aSchemaLocation != null ) {
             Schema schema = createSchemafromClasspathReference( aSchemaLocation );
             unmarshaller.setSchema( schema );
         }
@@ -113,37 +103,29 @@ public final class JaxbContextUtility
      * @param aSchemaLocation
      * @return
      */
-    private Schema createSchemafromClasspathReference( String aSchemaLocation )
-                    throws JAXBException
-    {
-        synchronized ( schemaCacheLock )
-        {
-            if ( !schemaCache.containsKey( aSchemaLocation ) )
-            {
+    private Schema createSchemafromClasspathReference( String aSchemaLocation ) throws JAXBException {
+        synchronized ( schemaCacheLock ) {
+            if ( !schemaCache.containsKey( aSchemaLocation ) ) {
                 SchemaFactory sf = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );
                 URL url = getClass().getClassLoader().getResource( aSchemaLocation );
-                if ( url == null )
-                {
+                if ( url == null ) {
                     throw new IllegalArgumentException( "Schema location [" + aSchemaLocation
                                                         + "] cannot be found on classpath" );
                 }
-                try
-                {
+                try {
                     Schema schema = sf.newSchema( url );
                     schemaCache.put( aSchemaLocation, schema );
                 }
-                catch ( SAXException saxe )
-                {
-                    throw new IllegalArgumentException( "Failed to parse XML schema at ["
-                                                        + aSchemaLocation + "]", saxe );
+                catch ( SAXException saxe ) {
+                    throw new IllegalArgumentException( "Failed to parse XML schema at [" + aSchemaLocation
+                                                        + "]", saxe );
                 }
             }
             return schemaCache.get( aSchemaLocation );
         }
     }
 
-    private Unmarshaller createUnmarshaller( Class<?> aClazz ) throws JAXBException
-    {
+    private Unmarshaller createUnmarshaller( Class<?> aClazz ) throws JAXBException {
         JAXBContext ctx = createJaxbContext( aClazz );
         Unmarshaller unmarshaller = ctx.createUnmarshaller();
         return unmarshaller;
@@ -158,10 +140,8 @@ public final class JaxbContextUtility
      * @throws JAXBException
      *             if the object is not a JAXB object
      */
-    public String marshalObject( Object aObject ) throws JAXBException
-    {
-        if ( aObject == null )
-        {
+    public String marshalObject( Object aObject ) throws JAXBException {
+        if ( aObject == null ) {
             throw new IllegalArgumentException( "Null object passed into marshaller, not allowed." );
         }
 
@@ -171,8 +151,7 @@ public final class JaxbContextUtility
         return writer.toString();
     }
 
-    private Marshaller createMarshaller( Class<?> aClazz ) throws JAXBException
-    {
+    private Marshaller createMarshaller( Class<?> aClazz ) throws JAXBException {
         JAXBContext ctx = createJaxbContext( aClazz );
         Marshaller marshaller = ctx.createMarshaller();
         marshaller.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
@@ -180,16 +159,11 @@ public final class JaxbContextUtility
         return marshaller;
     }
 
-    private JAXBContext createJaxbContext( Class<?> aClazz ) throws JAXBException
-    {
-        synchronized ( jaxCacheLock )
-        {
-            if ( !jaxbContextCache.containsKey( aClazz ) )
-            {
-                if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "Added JAXBContext for class [" + aClazz.getName()
-                               + "] to the internal cache" );
+    private JAXBContext createJaxbContext( Class<?> aClazz ) throws JAXBException {
+        synchronized ( jaxCacheLock ) {
+            if ( !jaxbContextCache.containsKey( aClazz ) ) {
+                if ( LOG.isDebugEnabled() ) {
+                    LOG.debug( "Added JAXBContext for class [" + aClazz.getName() + "] to the internal cache" );
                 }
                 jaxbContextCache.put( aClazz, JAXBContext.newInstance( aClazz ) );
             }

@@ -10,8 +10,7 @@ package org.suggs.sandbox.jmx.helloworld;
  * @author suggitpe
  * @version 1.0 11 Feb 2008
  */
-public interface HelloWorldMBean
-{
+public interface HelloWorldMBean {
 
     /**
      * Setter for the greeting
