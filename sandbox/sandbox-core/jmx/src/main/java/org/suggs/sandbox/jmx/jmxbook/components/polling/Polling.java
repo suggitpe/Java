@@ -48,7 +48,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
                                                            "interval",
                                                            "long",
                                                            new Long( tmp ),
-                                                           new Long( time ) ) );
+                                                           Long.valueOf( time ) ) );
     }
 
     /**

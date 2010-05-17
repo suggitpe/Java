@@ -37,8 +37,10 @@ public class Ch9TableEditorComposite extends Composite {
 
     // this would normally be read from a persistent store
     private static final Object[] CONTENT = new Object[] {
-                                                          new EditableTableItem( "Item 1", new Integer( 0 ) ),
-                                                          new EditableTableItem( "Item 2", new Integer( 1 ) ) };
+                                                          new EditableTableItem( "Item 1",
+                                                                                 Integer.valueOf( 0 ) ),
+                                                          new EditableTableItem( "Item 2",
+                                                                                 Integer.valueOf( 1 ) ) };
     private static final String[] VALUE_SET = new String[] { "xxxx", "yyyy", "zzzz" };
     private static final String NAME_PROP = "name";
     private static final String VALUE_PROP = "value";

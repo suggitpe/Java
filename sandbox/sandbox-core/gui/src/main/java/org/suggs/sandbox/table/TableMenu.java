@@ -142,8 +142,8 @@ public class TableMenu extends JFrame {
                             Integer changeValue = (Integer) value;
                             Integer currentValue = (Integer) getTableModel().getValueAt( rowIndex,
                                                                                          columnIndex );
-                            getTableModel().setValueAt( new Integer( currentValue.intValue()
-                                                                     + changeValue.intValue() ),
+                            getTableModel().setValueAt( Integer.valueOf( currentValue.intValue()
+                                                                         + changeValue.intValue() ),
                                                         rowIndex,
                                                         columnIndex );
                         }
@@ -151,13 +151,13 @@ public class TableMenu extends JFrame {
                 };
                 JMenuItem changeItem = new JMenuItem();
                 changeItem.setText( "+1" );
-                changeItem.putClientProperty( PROP_CHANGE_QUANTITY, new Integer( 1 ) );
+                changeItem.putClientProperty( PROP_CHANGE_QUANTITY, Integer.valueOf( 1 ) );
                 changeItem.addActionListener( changer );
                 contextMenu.add( changeItem );
 
                 changeItem = new JMenuItem();
                 changeItem.setText( "-1" );
-                changeItem.putClientProperty( PROP_CHANGE_QUANTITY, new Integer( -1 ) );
+                changeItem.putClientProperty( PROP_CHANGE_QUANTITY, Integer.valueOf( -1 ) );
                 changeItem.addActionListener( changer );
                 contextMenu.add( changeItem );
 

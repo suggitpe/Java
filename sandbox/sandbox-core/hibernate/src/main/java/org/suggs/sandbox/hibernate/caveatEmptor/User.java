@@ -123,7 +123,7 @@ public class User extends AbstractPersistentBaseClass {
         password = aPassword;
         Assert.notNull( aEmail, "Must set the email address" );
         email = aEmail;
-        ranking = new Integer( 0 );
+        ranking = Integer.valueOf( 0 );
         created = Calendar.getInstance().getTime();
         Assert.notNull( aHomeAddress, "Must set the home adress" );
         homeAddress = aHomeAddress;
