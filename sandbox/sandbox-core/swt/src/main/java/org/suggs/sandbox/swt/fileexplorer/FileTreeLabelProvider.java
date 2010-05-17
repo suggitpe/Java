@@ -15,15 +15,13 @@ import org.eclipse.swt.graphics.Image;
  * @author suggitpe
  * @version 1.0 22 Dec 2008
  */
-public class FileTreeLabelProvider extends LabelProvider
-{
+public class FileTreeLabelProvider extends LabelProvider {
 
     /**
      * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
      */
     @Override
-    public String getText( Object element )
-    {
+    public String getText( Object element ) {
         return ( (File) element ).getName();
     }
 
@@ -31,10 +29,8 @@ public class FileTreeLabelProvider extends LabelProvider
      * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
      */
     @Override
-    public Image getImage( Object element )
-    {
-        if ( ( (File) element ).isDirectory() )
-        {
+    public Image getImage( Object element ) {
+        if ( ( (File) element ).isDirectory() ) {
             return ImageUtil.getImageRegistry().get( "folder" );
         }
         return ImageUtil.getImageRegistry().get( "file" );

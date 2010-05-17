@@ -10,43 +10,37 @@ import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleListener;
 
 /**
- * Bundle that will count the number of active bundles in the OSGI
- * framework
+ * Bundle that will count the number of active bundles in the OSGI framework
  * 
  * @author suggitpe
  * @version 1.0 10 Mar 2009
  */
-public class BundleCounterActivator implements BundleActivator, BundleListener
-{
+public class BundleCounterActivator implements BundleActivator, BundleListener {
 
-    private BundleContext mContext_;
+    private BundleContext context;
 
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
-    public void start( BundleContext ctx ) throws Exception
-    {
-        mContext_ = ctx;
-        mContext_.addBundleListener( this );
+    public void start( BundleContext ctx ) throws Exception {
+        context = ctx;
+        context.addBundleListener( this );
         printBundleCount();
     }
 
     /**
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
-    public void stop( BundleContext ctx ) throws Exception
-    {
-        mContext_.removeBundleListener( this );
-        mContext_ = null;
+    public void stop( BundleContext ctx ) throws Exception {
+        context.removeBundleListener( this );
+        context = null;
     }
 
     /**
      * @see org.osgi.framework.BundleListener#bundleChanged(org.osgi.framework.BundleEvent)
      */
-    public void bundleChanged( BundleEvent evt )
-    {
-        switch ( evt.getType() )
-        {
+    public void bundleChanged( BundleEvent evt ) {
+        switch ( evt.getType() ) {
             case BundleEvent.INSTALLED:
                 System.out.println( "Bundle installed" );
                 printBundleCount();
@@ -60,12 +54,10 @@ public class BundleCounterActivator implements BundleActivator, BundleListener
     }
 
     /**
-     * Simple method that will print out the bundle count in the OSGI
-     * framework
+     * Simple method that will print out the bundle count in the OSGI framework
      */
-    private void printBundleCount()
-    {
-        System.out.println( "There are currently " + mContext_.getBundles().length + " bundles" );
+    private void printBundleCount() {
+        System.out.println( "There are currently " + context.getBundles().length + " bundles" );
     }
 
 }

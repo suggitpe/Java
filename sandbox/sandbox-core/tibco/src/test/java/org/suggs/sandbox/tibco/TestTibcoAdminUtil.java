@@ -16,27 +16,22 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 7 Aug 2008
  */
-public class TestTibcoAdminUtil
-{
+public class TestTibcoAdminUtil {
 
     private static final Log LOG = LogFactory.getLog( TestTibcoAdminUtil.class );
 
     @Test
-    public void testGetConectionFactories()
-    {
+    public void testGetConectionFactories() {
         List<String> facts = TibcoAdminUtil.getConnectionFactoryNames();
-        for ( String s : facts )
-        {
+        for ( String s : facts ) {
             LOG.debug( "Connection Factory [" + s + "] found" );
         }
     }
 
     @Test
-    public void testDurables()
-    {
+    public void testDurables() {
         List<String> durs = TibcoAdminUtil.getDurableNames();
-        for ( String s : durs )
-        {
+        for ( String s : durs ) {
             LOG.debug( "Durable name [" + s + "]" );
         }
     }

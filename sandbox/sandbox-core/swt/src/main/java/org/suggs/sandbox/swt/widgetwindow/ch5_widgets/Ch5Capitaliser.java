@@ -12,14 +12,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * Class to show how we can use keyboard events to alter a text
- * widget.
+ * Class to show how we can use keyboard events to alter a text widget.
  * 
  * @author suggitpe
  * @version 1.0 18 Aug 2008
  */
-public class Ch5Capitaliser extends Composite
-{
+public class Ch5Capitaliser extends Composite {
 
     /**
      * Constructs a new instance.
@@ -27,8 +25,7 @@ public class Ch5Capitaliser extends Composite
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch5Capitaliser( Composite parent )
-    {
+    public Ch5Capitaliser( Composite parent ) {
         super( parent, SWT.NONE );
         buildControls();
     }
@@ -36,24 +33,19 @@ public class Ch5Capitaliser extends Composite
     /**
      * Pvt method to set up the composite
      */
-    private void buildControls()
-    {
+    private void buildControls() {
         this.setLayout( new FillLayout() );
         // create a multi pline text box with a vertical scroll bar
         Text txt = new Text( this, SWT.MULTI | SWT.V_SCROLL );
-        txt.addVerifyListener( new VerifyListener()
-        {
+        txt.addVerifyListener( new VerifyListener() {
 
-            public void verifyText( VerifyEvent e )
-            {
+            public void verifyText( VerifyEvent e ) {
                 // just for shits and giggles we reject all entries
                 // with '1'
-                if ( e.text.startsWith( "1" ) )
-                {
+                if ( e.text.startsWith( "1" ) ) {
                     e.doit = false;
                 }
-                else
-                {
+                else {
                     e.text = e.text.toUpperCase();
                 }
 

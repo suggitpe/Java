@@ -29,14 +29,12 @@ import org.eclipse.swt.widgets.TabItem;
  * @author suggitpe
  * @version 1.0 11 Aug 2008
  */
-public class WidgetWindow extends ApplicationWindow
-{
+public class WidgetWindow extends ApplicationWindow {
 
     /**
      * Constructs a new instance.
      */
-    public WidgetWindow()
-    {
+    public WidgetWindow() {
         // let parent set up shell
         super( null );
     }
@@ -45,8 +43,7 @@ public class WidgetWindow extends ApplicationWindow
      * @see org.eclipse.jface.window.Window#createContents(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createContents( Composite parent )
-    {
+    protected Control createContents( Composite parent ) {
         TabFolder f = new TabFolder( parent, SWT.NONE );
 
         TabItem chap3b = new TabItem( f, SWT.NONE );
@@ -98,8 +95,7 @@ public class WidgetWindow extends ApplicationWindow
      * 
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         WidgetWindow wwin = new WidgetWindow();
         wwin.setBlockOnOpen( true );
         wwin.open();

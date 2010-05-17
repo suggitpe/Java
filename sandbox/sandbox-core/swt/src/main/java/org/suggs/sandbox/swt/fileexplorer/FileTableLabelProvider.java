@@ -16,21 +16,16 @@ import org.eclipse.swt.graphics.Image;
  * @author suggitpe
  * @version 1.0 22 Dec 2008
  */
-public class FileTableLabelProvider implements ITableLabelProvider
-{
+public class FileTableLabelProvider implements ITableLabelProvider {
 
     /**
-     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object,
-     *      int)
+     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
      */
-    public String getColumnText( Object obj, int idx )
-    {
-        if ( idx == 0 )
-        {
+    public String getColumnText( Object obj, int idx ) {
+        if ( idx == 0 ) {
             return ( (File) obj ).getName();
         }
-        else if ( idx == 1 )
-        {
+        else if ( idx == 1 ) {
             return "" + ( ( (File) obj ).length() / 1024 );
         }
         return "";
@@ -39,19 +34,15 @@ public class FileTableLabelProvider implements ITableLabelProvider
     /**
      * Use this to add an image for the entry in the table
      * 
-     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object,
-     *      int)
+     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
      */
-    public Image getColumnImage( Object element, int idx )
-    {
-        if ( idx != 0 )
-        {
+    public Image getColumnImage( Object element, int idx ) {
+        if ( idx != 0 ) {
             return null;
         }
         File f = (File) element;
 
-        if ( f.isDirectory() )
-        {
+        if ( f.isDirectory() ) {
             return ImageUtil.getImageRegistry().get( "folder" );
         }
         return ImageUtil.getImageRegistry().get( "file" );
@@ -60,31 +51,23 @@ public class FileTableLabelProvider implements ITableLabelProvider
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
      */
-    public void dispose()
-    {
-    }
+    public void dispose() {}
 
     /**
-     * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object,
-     *      java.lang.String)
+     * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object, java.lang.String)
      */
-    public boolean isLabelProperty( Object aArg0, String aArg1 )
-    {
+    public boolean isLabelProperty( Object aArg0, String aArg1 ) {
         return false;
     }
 
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
-    public void addListener( ILabelProviderListener aArg0 )
-    {
-    }
+    public void addListener( ILabelProviderListener aArg0 ) {}
 
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
-    public void removeListener( ILabelProviderListener aArg0 )
-    {
-    }
+    public void removeListener( ILabelProviderListener aArg0 ) {}
 
 }

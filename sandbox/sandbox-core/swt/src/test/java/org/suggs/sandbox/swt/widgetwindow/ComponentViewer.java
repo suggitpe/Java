@@ -17,14 +17,12 @@ import org.eclipse.swt.widgets.Display;
  * @author suggitpe
  * @version 1.0 12 Aug 2008
  */
-public class ComponentViewer extends ApplicationWindow
-{
+public class ComponentViewer extends ApplicationWindow {
 
     /**
      * Constructs a new instance.
      */
-    public ComponentViewer()
-    {
+    public ComponentViewer() {
         super( null );
     }
 
@@ -32,8 +30,7 @@ public class ComponentViewer extends ApplicationWindow
      * @see org.eclipse.jface.window.Window#createContents(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createContents( Composite parent )
-    {
+    protected Control createContents( Composite parent ) {
         // new Ch3Group( parent );
         // new Ch3SashForm( parent );
 
@@ -68,8 +65,7 @@ public class ComponentViewer extends ApplicationWindow
      * 
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         ComponentViewer v = new ComponentViewer();
         v.setBlockOnOpen( true );
         v.open();

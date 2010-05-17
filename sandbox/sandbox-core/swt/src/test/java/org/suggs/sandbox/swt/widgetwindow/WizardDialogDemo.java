@@ -15,14 +15,12 @@ import org.eclipse.jface.wizard.WizardDialog;
  * @author suggitpe
  * @version 1.0 11 Sep 2008
  */
-public class WizardDialogDemo
-{
+public class WizardDialogDemo {
 
     /**
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         ApplicationWindow w = new ApplicationWindow( null );
 
         w.setBlockOnOpen( false );

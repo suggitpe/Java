@@ -16,8 +16,7 @@ import org.eclipse.swt.widgets.Label;
  * @author suggitpe
  * @version 1.0 21 Oct 2008
  */
-public class WelcomePage extends WizardPage
-{
+public class WelcomePage extends WizardPage {
 
     public static final String PAGE_NAME = "welcomePage";
 
@@ -26,8 +25,7 @@ public class WelcomePage extends WizardPage
      * 
      * @param pageName
      */
-    protected WelcomePage()
-    {
+    protected WelcomePage() {
         super( PAGE_NAME, "Welcome", null );
         setDescription( "Welcome to the Address Book Entry Wizard" );
     }
@@ -35,8 +33,7 @@ public class WelcomePage extends WizardPage
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
-    public void createControl( Composite parent )
-    {
+    public void createControl( Composite parent ) {
         Composite comp = new Composite( parent, SWT.NONE );
         comp.setLayout( new FillLayout( SWT.VERTICAL ) );
 

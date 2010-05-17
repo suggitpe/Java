@@ -5,38 +5,34 @@
 package org.suggs.sandbox.swt.treesntables.tableviewer;
 
 /**
- * This is the player bean class to represent the data that will be
- * populated into the table.
+ * This is the player bean class to represent the data that will be populated into the table.
  * 
  * @author suggitpe
  * @version 1.0 2 Dec 2008
  */
-public class PlayerBean
-{
+public class PlayerBean {
 
-    private String firstname_;
-    private String lastname_;
-    private double pointsPerGame_;
-    private double reboundsPerGame_;
-    private double assistsPerGame_;
+    private String firstname;
+    private String lastname;
+    private double pointsPerGame;
+    private double reboundsPerGame;
+    private double assistsPerGame;
 
     /**
      * Constructs a new instance.
      * 
-     * @param firstname
-     * @param lastname
+     * @param aFirstname
+     * @param aLastname
      * @param points
      * @param rebounds
      * @param assists
      */
-    public PlayerBean( String firstname, String lastname, double points, double rebounds,
-                       double assists )
-    {
-        firstname_ = firstname;
-        lastname_ = lastname;
-        pointsPerGame_ = points;
-        reboundsPerGame_ = rebounds;
-        assistsPerGame_ = assists;
+    public PlayerBean( String aFirstname, String aLastname, double points, double rebounds, double assists ) {
+        firstname = aFirstname;
+        lastname = aLastname;
+        pointsPerGame = points;
+        reboundsPerGame = rebounds;
+        assistsPerGame = assists;
     }
 
     /**
@@ -44,9 +40,8 @@ public class PlayerBean
      * 
      * @return Returns the firstname.
      */
-    public String getFirstname()
-    {
-        return firstname_;
+    public String getFirstname() {
+        return firstname;
     }
 
     /**
@@ -55,9 +50,8 @@ public class PlayerBean
      * @param firstname
      *            The firstname to set.
      */
-    public void setFirstname( String firstname )
-    {
-        this.firstname_ = firstname;
+    public void setFirstname( String firstname ) {
+        this.firstname = firstname;
     }
 
     /**
@@ -65,9 +59,8 @@ public class PlayerBean
      * 
      * @return Returns the lastname.
      */
-    public String getLastname()
-    {
-        return lastname_;
+    public String getLastname() {
+        return lastname;
     }
 
     /**
@@ -76,9 +69,8 @@ public class PlayerBean
      * @param lastname
      *            The lastname to set.
      */
-    public void setLastname( String lastname )
-    {
-        this.lastname_ = lastname;
+    public void setLastname( String lastname ) {
+        this.lastname = lastname;
     }
 
     /**
@@ -86,9 +78,8 @@ public class PlayerBean
      * 
      * @return Returns the pointsPerGame.
      */
-    public double getPointsPerGame()
-    {
-        return pointsPerGame_;
+    public double getPointsPerGame() {
+        return pointsPerGame;
     }
 
     /**
@@ -97,9 +88,8 @@ public class PlayerBean
      * @param pointsPerGame
      *            The pointsPerGame to set.
      */
-    public void setPointsPerGame( double pointsPerGame )
-    {
-        this.pointsPerGame_ = pointsPerGame;
+    public void setPointsPerGame( double pointsPerGame ) {
+        this.pointsPerGame = pointsPerGame;
     }
 
     /**
@@ -107,9 +97,8 @@ public class PlayerBean
      * 
      * @return Returns the reboundsPerGame.
      */
-    public double getReboundsPerGame()
-    {
-        return reboundsPerGame_;
+    public double getReboundsPerGame() {
+        return reboundsPerGame;
     }
 
     /**
@@ -118,9 +107,8 @@ public class PlayerBean
      * @param reboundsPerGame
      *            The reboundsPerGame to set.
      */
-    public void setReboundsPerGame( double reboundsPerGame )
-    {
-        this.reboundsPerGame_ = reboundsPerGame;
+    public void setReboundsPerGame( double reboundsPerGame ) {
+        this.reboundsPerGame = reboundsPerGame;
     }
 
     /**
@@ -128,9 +116,8 @@ public class PlayerBean
      * 
      * @return Returns the assistsPerGame.
      */
-    public double getAssistsPerGame()
-    {
-        return assistsPerGame_;
+    public double getAssistsPerGame() {
+        return assistsPerGame;
     }
 
     /**
@@ -139,9 +126,8 @@ public class PlayerBean
      * @param assistsPerGame
      *            The assistsPerGame_ to set.
      */
-    public void setAssistsPerGame( double assistsPerGame )
-    {
-        this.assistsPerGame_ = assistsPerGame;
+    public void setAssistsPerGame( double assistsPerGame ) {
+        this.assistsPerGame = assistsPerGame;
     }
 
 }

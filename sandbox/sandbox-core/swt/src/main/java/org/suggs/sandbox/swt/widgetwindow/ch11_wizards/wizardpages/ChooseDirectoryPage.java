@@ -22,47 +22,40 @@ import org.eclipse.swt.widgets.Text;
  * @author suggitpe
  * @version 1.0 12 Sep 2008
  */
-public class ChooseDirectoryPage extends WizardPage
-{
+public class ChooseDirectoryPage extends WizardPage {
 
     public static final String PAGE_NAME = "Choose Directory";
-    private Text mText_;
+    private Text text;
 
     /**
      * Constructs a new instance.
      */
-    public ChooseDirectoryPage()
-    {
+    public ChooseDirectoryPage() {
         super( PAGE_NAME, "Choose Directory Page", null );
     }
 
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
-    public void createControl( Composite parent )
-    {
+    public void createControl( Composite parent ) {
         Composite top = new Composite( parent, SWT.NONE );
         top.setLayout( new GridLayout( 3, false ) );
 
         new Label( top, SWT.CENTER ).setText( "Enter the directory to use: " );
 
-        mText_ = new Text( top, SWT.SINGLE );
-        mText_.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
+        text = new Text( top, SWT.SINGLE );
+        text.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
 
         // add a button to get the dir from a dialog
         Button b = new Button( top, SWT.PUSH );
         b.setText( "..." );
-        b.addSelectionListener( new SelectionListener()
-        {
+        b.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent arg0 )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
-            public void widgetSelected( SelectionEvent arg0 )
-            {
+            public void widgetSelected( SelectionEvent arg0 ) {
                 DirectoryDialog d = new DirectoryDialog( getShell() );
-                mText_.setText( d.open() );
+                text.setText( d.open() );
             }
         } );
 
@@ -75,9 +68,8 @@ public class ChooseDirectoryPage extends WizardPage
      * 
      * @return the directory name
      */
-    public String getDirectory()
-    {
-        return mText_.getText();
+    public String getDirectory() {
+        return text.getText();
     }
 
 }

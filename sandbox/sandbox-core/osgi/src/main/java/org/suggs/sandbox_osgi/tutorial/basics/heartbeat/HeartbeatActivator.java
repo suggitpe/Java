@@ -9,27 +9,24 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 /**
- * Activator that will spawn a new thread to pump out a heartbeat (ie
- * logging)
+ * Activator that will spawn a new thread to pump out a heartbeat (ie logging)
  * 
  * @author suggitpe
  * @version 1.0 10 Mar 2009
  */
-public class HeartbeatActivator implements BundleActivator
-{
+public class HeartbeatActivator implements BundleActivator {
 
     private static final long SLEEP_TIME = 5000;
-    private Thread mThread_;
+    private Thread thread;
 
     /**
      * Start the thread
      * 
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
-    public void start( BundleContext ctx ) throws Exception
-    {
-        mThread_ = new Thread( new Heartbeat() );
-        mThread_.start();
+    public void start( BundleContext ctx ) throws Exception {
+        thread = new Thread( new Heartbeat() );
+        thread.start();
     }
 
     /**
@@ -37,9 +34,8 @@ public class HeartbeatActivator implements BundleActivator
      * 
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
-    public void stop( BundleContext ctx ) throws Exception
-    {
-        mThread_.interrupt();
+    public void stop( BundleContext ctx ) throws Exception {
+        thread.interrupt();
     }
 
     /**
@@ -48,21 +44,16 @@ public class HeartbeatActivator implements BundleActivator
      * @author suggitpe
      * @version 1.0 10 Mar 2009
      */
-    private class Heartbeat implements Runnable
-    {
+    private class Heartbeat implements Runnable {
 
-        public void run()
-        {
-            try
-            {
-                while ( !Thread.interrupted() )
-                {
+        public void run() {
+            try {
+                while ( !Thread.interrupted() ) {
                     Thread.sleep( SLEEP_TIME );
                     System.out.println( "... thread still running" );
                 }
             }
-            catch ( InterruptedException ie )
-            {
+            catch ( InterruptedException ie ) {
                 System.out.println( "Interrupt received .. stopping" );
             }
 

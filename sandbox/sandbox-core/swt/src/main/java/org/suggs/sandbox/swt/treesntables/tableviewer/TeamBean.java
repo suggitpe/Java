@@ -13,23 +13,21 @@ import java.util.List;
  * @author suggitpe
  * @version 1.0 3 Dec 2008
  */
-public class TeamBean
-{
+public class TeamBean {
 
-    private List<PlayerBean> players_ = new ArrayList<PlayerBean>();
-    private String name_;
-    private int year_;
+    private List<PlayerBean> players = new ArrayList<PlayerBean>();
+    private String name;
+    private int year;
 
     /**
      * Constructs a new instance.
      * 
-     * @param name
-     * @param year
+     * @param aName
+     * @param aYear
      */
-    public TeamBean( String name, int year )
-    {
-        name_ = name;
-        year_ = year;
+    public TeamBean( String aName, int aYear ) {
+        name = aName;
+        year = aYear;
     }
 
     /**
@@ -37,9 +35,8 @@ public class TeamBean
      * 
      * @return Returns the players.
      */
-    public List<PlayerBean> getPlayers()
-    {
-        return players_;
+    public List<PlayerBean> getPlayers() {
+        return players;
     }
 
     /**
@@ -48,9 +45,8 @@ public class TeamBean
      * @param players
      *            The players_ to set.
      */
-    public void setPlayers( List<PlayerBean> players )
-    {
-        this.players_ = players;
+    public void setPlayers( List<PlayerBean> players ) {
+        this.players = players;
     }
 
     /**
@@ -58,9 +54,8 @@ public class TeamBean
      * 
      * @param player
      */
-    public void addPlayer( PlayerBean player )
-    {
-        players_.add( player );
+    public void addPlayer( PlayerBean player ) {
+        players.add( player );
     }
 
     /**
@@ -68,9 +63,8 @@ public class TeamBean
      * 
      * @return Returns the name.
      */
-    public String getName()
-    {
-        return name_;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -79,9 +73,8 @@ public class TeamBean
      * @param name
      *            The name to set.
      */
-    public void setName( String name )
-    {
-        this.name_ = name;
+    public void setName( String name ) {
+        this.name = name;
     }
 
     /**
@@ -89,9 +82,8 @@ public class TeamBean
      * 
      * @return Returns the year.
      */
-    public int getYear()
-    {
-        return year_;
+    public int getYear() {
+        return year;
     }
 
     /**
@@ -100,9 +92,8 @@ public class TeamBean
      * @param year
      *            The year to set.
      */
-    public void setYear( int year )
-    {
-        this.year_ = year;
+    public void setYear( int year ) {
+        this.year = year;
     }
 
 }

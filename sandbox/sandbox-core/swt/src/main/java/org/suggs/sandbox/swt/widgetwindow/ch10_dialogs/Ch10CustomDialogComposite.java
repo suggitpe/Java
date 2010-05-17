@@ -28,8 +28,7 @@ import org.eclipse.swt.widgets.Label;
  * @author suggitpe
  * @version 1.0 10 Sep 2008
  */
-public class Ch10CustomDialogComposite extends Composite
-{
+public class Ch10CustomDialogComposite extends Composite {
 
     /**
      * Constructs a new instance.
@@ -37,8 +36,7 @@ public class Ch10CustomDialogComposite extends Composite
      * @param parent
      *            a composite to associate with
      */
-    public Ch10CustomDialogComposite( Composite parent )
-    {
+    public Ch10CustomDialogComposite( Composite parent ) {
         super( parent, SWT.NONE );
         buildControls();
     }
@@ -46,23 +44,18 @@ public class Ch10CustomDialogComposite extends Composite
     /**
      * Builds the composite controls
      */
-    private void buildControls()
-    {
+    private void buildControls() {
         GridLayout lay = new GridLayout( 4, false );
         setLayout( lay );
 
         new Label( this, SWT.RIGHT ).setText( "Username dialog" );
         Button dialogBtn = new Button( this, SWT.PUSH );
         dialogBtn.setText( "Password dialog ..." );
-        dialogBtn.addSelectionListener( new SelectionListener()
-        {
+        dialogBtn.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent arg0 )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
-            public void widgetSelected( SelectionEvent arg0 )
-            {
+            public void widgetSelected( SelectionEvent arg0 ) {
                 UsernamePasswordDialog diag = new UsernamePasswordDialog( getShell() );
                 diag.open();
                 // you would then interrogate the dialog for the data
@@ -72,15 +65,11 @@ public class Ch10CustomDialogComposite extends Composite
         new Label( this, SWT.RIGHT ).setText( "Colour dialog" );
         Button colBtn = new Button( this, SWT.PUSH );
         colBtn.setText( "Colour dialog ..." );
-        colBtn.addSelectionListener( new SelectionListener()
-        {
+        colBtn.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent arg0 )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
-            public void widgetSelected( SelectionEvent arg0 )
-            {
+            public void widgetSelected( SelectionEvent arg0 ) {
                 ColorDialog d = new ColorDialog( getShell() );
                 d.open();// returns RGB
             }
@@ -89,15 +78,11 @@ public class Ch10CustomDialogComposite extends Composite
         new Label( this, SWT.RIGHT ).setText( "Directory dialog" );
         Button dirBtn = new Button( this, SWT.PUSH );
         dirBtn.setText( "Directory dialog ..." );
-        dirBtn.addSelectionListener( new SelectionListener()
-        {
+        dirBtn.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent arg0 )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
-            public void widgetSelected( SelectionEvent arg0 )
-            {
+            public void widgetSelected( SelectionEvent arg0 ) {
                 DirectoryDialog d = new DirectoryDialog( getShell() );
                 d.setMessage( "Please selecvt a directory ..." );
                 d.open(); // returns string
@@ -110,15 +95,11 @@ public class Ch10CustomDialogComposite extends Composite
         new Label( this, SWT.RIGHT ).setText( "File dialog" );
         Button fileBtn = new Button( this, SWT.PUSH );
         fileBtn.setText( "File dialog ..." );
-        fileBtn.addSelectionListener( new SelectionListener()
-        {
+        fileBtn.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent arg0 )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
-            public void widgetSelected( SelectionEvent arg0 )
-            {
+            public void widgetSelected( SelectionEvent arg0 ) {
                 FileDialog d = new FileDialog( getShell(), SWT.MULTI );
                 d.setFilterExtensions( new String[] { ".txt" } );
                 d.open(); // this returns a string
@@ -131,22 +112,17 @@ public class Ch10CustomDialogComposite extends Composite
         new Label( this, SWT.RIGHT ).setText( "Message dialog" );
         Button msgBtn = new Button( this, SWT.PUSH );
         msgBtn.setText( "Message dialog ..." );
-        msgBtn.addSelectionListener( new SelectionListener()
-        {
+        msgBtn.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent arg0 )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
-            public void widgetSelected( SelectionEvent arg0 )
-            {
+            public void widgetSelected( SelectionEvent arg0 ) {
                 MessageDialog d = new MessageDialog( getShell(),
                                                      "Greeting dialog",
                                                      null,
                                                      "Hello how are you today?",
                                                      MessageDialog.QUESTION,
-                                                     new String[] { "Good", "been Better",
-                                                                   "Overly Excited" },
+                                                     new String[] { "Good", "been Better", "Overly Excited" },
                                                      0 );
                 d.open();
             }
@@ -155,15 +131,11 @@ public class Ch10CustomDialogComposite extends Composite
         new Label( this, SWT.RIGHT ).setText( "Error dialog" );
         Button errBtn = new Button( this, SWT.PUSH );
         errBtn.setText( "Error dialog ..." );
-        errBtn.addSelectionListener( new SelectionListener()
-        {
+        errBtn.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent arg0 )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
-            public void widgetSelected( SelectionEvent arg0 )
-            {
+            public void widgetSelected( SelectionEvent arg0 ) {
                 ErrorDialog d = new ErrorDialog( getShell(),
                                                  "Test Error Dialog",
                                                  "This is a test error dialog",
@@ -173,21 +145,16 @@ public class Ch10CustomDialogComposite extends Composite
             }
         } );
 
-        final IInputValidator validator = new IInputValidator()
-        {
+        final IInputValidator validator = new IInputValidator() {
 
-            public String isValid( String txt )
-            {
-                if ( txt.length() < 5 )
-                {
+            public String isValid( String txt ) {
+                if ( txt.length() < 5 ) {
                     return "You must enter at least 5 characters";
                 }
-                else if ( txt.length() > 22 )
-                {
+                else if ( txt.length() > 22 ) {
                     return "You cnnot enter more than 22 characters";
                 }
-                else
-                {
+                else {
                     return null;
                 }
             }
@@ -196,15 +163,11 @@ public class Ch10CustomDialogComposite extends Composite
         new Label( this, SWT.RIGHT ).setText( "Input dialog" );
         Button inBtn = new Button( this, SWT.PUSH );
         inBtn.setText( "Input dialog ..." );
-        inBtn.addSelectionListener( new SelectionListener()
-        {
+        inBtn.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent arg0 )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
-            public void widgetSelected( SelectionEvent arg0 )
-            {
+            public void widgetSelected( SelectionEvent arg0 ) {
                 InputDialog d = new InputDialog( getShell(),
                                                  "Please input a string",
                                                  "Enter a string",
@@ -217,8 +180,7 @@ public class Ch10CustomDialogComposite extends Composite
 
     }
 
-    private IStatus createStatus()
-    {
+    private IStatus createStatus() {
         final String dummyPlugin = "some dummy plugin";
         IStatus[] statuses = new IStatus[2];
 
@@ -228,11 +190,7 @@ public class Ch10CustomDialogComposite extends Composite
                                   "Oh no an exception occurred",
                                   new Exception() );
 
-        statuses[1] = new Status( IStatus.INFO,
-                                  dummyPlugin,
-                                  IStatus.OK,
-                                  "more errors",
-                                  new Exception() );
+        statuses[1] = new Status( IStatus.INFO, dummyPlugin, IStatus.OK, "more errors", new Exception() );
 
         MultiStatus ret = new MultiStatus( dummyPlugin,
                                            IStatus.OK,

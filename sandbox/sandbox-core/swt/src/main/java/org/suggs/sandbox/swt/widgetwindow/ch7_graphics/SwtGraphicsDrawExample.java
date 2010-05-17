@@ -16,14 +16,12 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 22 Aug 2008
  */
-public class SwtGraphicsDrawExample
-{
+public class SwtGraphicsDrawExample {
 
     /**
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         Display d = new Display();
         Shell s = new Shell( d );
         s.setText( "Drawing Example" );
@@ -43,10 +41,8 @@ public class SwtGraphicsDrawExample
         gc.drawPolyline( new int[] { 10, 120, 70, 100, 100, 130, 130, 75 } );
         gc.dispose();
 
-        while ( !s.isDisposed() )
-        {
-            if ( !d.readAndDispatch() )
-            {
+        while ( !s.isDisposed() ) {
+            if ( !d.readAndDispatch() ) {
                 d.sleep();
             }
         }

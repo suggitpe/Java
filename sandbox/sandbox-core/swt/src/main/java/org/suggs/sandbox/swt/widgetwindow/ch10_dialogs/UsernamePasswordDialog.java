@@ -16,19 +16,17 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * Dialog class that exemplifies how to build a dialog for user and
- * password entry
+ * Dialog class that exemplifies how to build a dialog for user and password entry
  * 
  * @author suggitpe
  * @version 1.0 10 Sep 2008
  */
-public class UsernamePasswordDialog extends Dialog
-{
+public class UsernamePasswordDialog extends Dialog {
 
     public static final int RESET_ID = IDialogConstants.NO_TO_ALL_ID + 1;
 
-    private Text mUsernameField_;
-    private Text mPasswordField_;
+    private Text usernameField;
+    private Text passwordField;
 
     /**
      * Constructs a new instance.
@@ -36,8 +34,7 @@ public class UsernamePasswordDialog extends Dialog
      * @param parentShell
      *            a composite to associate this class with
      */
-    public UsernamePasswordDialog( Shell parentShell )
-    {
+    public UsernamePasswordDialog( Shell parentShell ) {
         super( parentShell );
     }
 
@@ -45,21 +42,20 @@ public class UsernamePasswordDialog extends Dialog
      * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createDialogArea( Composite parent )
-    {
+    protected Control createDialogArea( Composite parent ) {
         Composite comp = (Composite) super.createDialogArea( parent );
         GridLayout layout = (GridLayout) comp.getLayout();
         layout.numColumns = 2;
 
         new Label( comp, SWT.RIGHT ).setText( "Username: " );
-        mUsernameField_ = new Text( comp, SWT.SINGLE );
+        usernameField = new Text( comp, SWT.SINGLE );
         GridData data = new GridData( GridData.FILL_HORIZONTAL );
-        mUsernameField_.setLayoutData( data );
+        usernameField.setLayoutData( data );
 
         new Label( comp, SWT.RIGHT ).setText( "Password: " );
-        mPasswordField_ = new Text( comp, SWT.SINGLE | SWT.PASSWORD );
+        passwordField = new Text( comp, SWT.SINGLE | SWT.PASSWORD );
         data = new GridData( GridData.FILL_HORIZONTAL );
-        mPasswordField_.setLayoutData( data );
+        passwordField.setLayoutData( data );
 
         return comp;
     }
@@ -68,8 +64,7 @@ public class UsernamePasswordDialog extends Dialog
      * @see org.eclipse.jface.dialogs.Dialog#createButtonsForButtonBar(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected void createButtonsForButtonBar( Composite parent )
-    {
+    protected void createButtonsForButtonBar( Composite parent ) {
         super.createButtonsForButtonBar( parent );
         createButton( parent, RESET_ID, "Reset All", false );
     }
@@ -78,15 +73,12 @@ public class UsernamePasswordDialog extends Dialog
      * @see org.eclipse.jface.dialogs.Dialog#buttonPressed(int)
      */
     @Override
-    protected void buttonPressed( int buttonId )
-    {
-        if ( buttonId == RESET_ID )
-        {
-            mUsernameField_.setText( "" );
-            mPasswordField_.setText( "" );
+    protected void buttonPressed( int buttonId ) {
+        if ( buttonId == RESET_ID ) {
+            usernameField.setText( "" );
+            passwordField.setText( "" );
         }
-        else
-        {
+        else {
             super.buttonPressed( buttonId );
         }
     }

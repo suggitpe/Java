@@ -19,20 +19,18 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
  * @author suggitpe
  * @version 1.0 6 Aug 2008
  */
-public class TibcoAdminConnectionProperties
-{
+public class TibcoAdminConnectionProperties {
 
     private static final Log LOG = LogFactory.getLog( TibcoAdminConnectionProperties.class );
     private static final String PROP_FILE = "tibco_connection.properties";
 
-    private static TibcoAdminConnectionProperties mInstance_;
-    private Properties mData_;
-    private TibjmsAdmin mAdmin_;
+    private static TibcoAdminConnectionProperties instance;
+    private Properties data;
+    private TibjmsAdmin admin;
 
     // load up the instance of the properties file
-    static
-    {
-        mInstance_ = new TibcoAdminConnectionProperties();
+    static {
+        instance = new TibcoAdminConnectionProperties();
     }
 
     /**
@@ -40,29 +38,24 @@ public class TibcoAdminConnectionProperties
      * 
      * @return the instance of the singleton
      */
-    public static TibcoAdminConnectionProperties instance()
-    {
-        return mInstance_;
+    public static TibcoAdminConnectionProperties instance() {
+        return instance;
     }
 
     /**
      * Constructs a new instance.
      */
-    private TibcoAdminConnectionProperties()
-    {
+    private TibcoAdminConnectionProperties() {
 
-        mData_ = new Properties();
-        try
-        {
-            mData_.load( this.getClass().getClassLoader().getResourceAsStream( PROP_FILE ) );
+        data = new Properties();
+        try {
+            data.load( this.getClass().getClassLoader().getResourceAsStream( PROP_FILE ) );
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             throw new IllegalStateException( "Failed to load properties file [" + PROP_FILE + "]" );
         }
 
-        if ( LOG.isDebugEnabled() )
-        {
+        if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Loaded properties from [" + PROP_FILE + "]" );
         }
     }
@@ -72,9 +65,8 @@ public class TibcoAdminConnectionProperties
      * 
      * @return the provider URL
      */
-    public String getProviderUrl()
-    {
-        return mData_.getProperty( "provider.url" );
+    public String getProviderUrl() {
+        return data.getProperty( "provider.url" );
     }
 
     /**
@@ -82,9 +74,8 @@ public class TibcoAdminConnectionProperties
      * 
      * @return the user name.
      */
-    public String getUsername()
-    {
-        return mData_.getProperty( "tibco.username" );
+    public String getUsername() {
+        return data.getProperty( "tibco.username" );
     }
 
     /**
@@ -92,9 +83,8 @@ public class TibcoAdminConnectionProperties
      * 
      * @return the password.
      */
-    public String getPassword()
-    {
-        return mData_.getProperty( "tibco.pasword" );
+    public String getPassword() {
+        return data.getProperty( "tibco.pasword" );
     }
 
     /**
@@ -102,24 +92,19 @@ public class TibcoAdminConnectionProperties
      * 
      * @return a tibco jms admin object
      */
-    public TibjmsAdmin getAdmin()
-    {
-        synchronized ( this )
-        {
-            if ( mAdmin_ == null )
-            {
-                try
-                {
-                    mAdmin_ = new TibjmsAdmin( getProviderUrl(), getUsername(), getPassword() );
+    public TibjmsAdmin getAdmin() {
+        synchronized ( this ) {
+            if ( admin == null ) {
+                try {
+                    admin = new TibjmsAdmin( getProviderUrl(), getUsername(), getPassword() );
                 }
-                catch ( TibjmsAdminException tjae )
-                {
+                catch ( TibjmsAdminException tjae ) {
                     tjae.printStackTrace();
                     throw new IllegalStateException( "Unable to connect to the Tibco EMS broker as admin" );
                 }
             }
         }
-        return mAdmin_;
+        return admin;
     }
 
 }

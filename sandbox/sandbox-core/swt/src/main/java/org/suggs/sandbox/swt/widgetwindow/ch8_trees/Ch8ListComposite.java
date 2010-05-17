@@ -23,8 +23,7 @@ import org.eclipse.swt.widgets.Composite;
  * @author suggitpe
  * @version 1.0 8 Sep 2008
  */
-public class Ch8ListComposite extends Composite
-{
+public class Ch8ListComposite extends Composite {
 
     private static final int[] STYLES = { SWT.SINGLE, SWT.MULTI };
 
@@ -34,125 +33,104 @@ public class Ch8ListComposite extends Composite
      * @param parent
      *            a composite to associate this class with
      */
-    public Ch8ListComposite( Composite parent )
-    {
+    public Ch8ListComposite( Composite parent ) {
         super( parent, SWT.NULL );
         populateControl();
     }
 
     /**
-     * Populates the control with a list viewer for each of the
-     * defined list viewer styles
+     * Populates the control with a list viewer for each of the defined list viewer styles
      */
-    private void populateControl()
-    {
+    private void populateControl() {
         setLayout( new FillLayout() );
 
-        for ( int i = 0; i < STYLES.length; ++i )
-        {
+        for ( int i = 0; i < STYLES.length; ++i ) {
             createListViewer( STYLES[i] );
         }
     }
 
-    private void createListViewer( int style )
-    {
+    private void createListViewer( int style ) {
         ListViewer viewer = new ListViewer( this, style );
-        viewer.setLabelProvider( new LabelProvider()
-        {
+        viewer.setLabelProvider( new LabelProvider() {
 
             /**
              * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
              */
             @Override
-            public String getText( Object elem )
-            {
+            public String getText( Object elem ) {
                 return ( (ListItem) elem ).mName_;
             }
 
         } );
 
         // add a filter
-        viewer.addFilter( new ViewerFilter()
-        {
+        viewer.addFilter( new ViewerFilter() {
 
             /**
              * @see org.eclipse.jface.viewers.ViewerFilter#select(org.eclipse.jface.viewers.Viewer,
              *      java.lang.Object, java.lang.Object)
              */
             @Override
-            public boolean select( @SuppressWarnings("hiding") Viewer viewer, Object parent,
-                                   Object element )
-            {
+            public boolean select( @SuppressWarnings("hiding") Viewer viewer, Object parent, Object element ) {
                 return ( (ListItem) element ).mValue_ % 2 == 0;
             }
         } );
 
         // add a sorter
-        viewer.setSorter( new ViewerSorter()
-        {
+        viewer.setSorter( new ViewerSorter() {
 
             /**
              * @see org.eclipse.jface.viewers.ViewerComparator#compare(org.eclipse.jface.viewers.Viewer,
              *      java.lang.Object, java.lang.Object)
              */
             @Override
-            public int compare( @SuppressWarnings("hiding") Viewer viewer, Object obj1, Object obj2 )
-            {
+            public int compare( @SuppressWarnings("hiding") Viewer viewer, Object obj1, Object obj2 ) {
                 return ( (ListItem) obj2 ).mValue_ - ( (ListItem) obj1 ).mValue_;
             }
         } );
 
-        viewer.setContentProvider( new IStructuredContentProvider()
-        {
+        viewer.setContentProvider( new IStructuredContentProvider() {
 
             /**
              * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
              */
             @SuppressWarnings("unchecked")
-            public Object[] getElements( Object inputElement )
-            {
+            public Object[] getElements( Object inputElement ) {
                 return ( (List) inputElement ).toArray();
             }
 
             /**
              * @see org.eclipse.jface.viewers.IContentProvider#dispose()
              */
-            public void dispose()
-            {
-            }
+            public void dispose() {}
 
             /**
              * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
              *      java.lang.Object, java.lang.Object)
              */
-            public void inputChanged( Viewer arg0, Object arg1, Object arg2 )
-            {
-            }
+            public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {}
         } );
 
         List<ListItem> input = new ArrayList<ListItem>();
-        for ( int i = 0; i < 20; ++i )
-        {
+        for ( int i = 0; i < 20; ++i ) {
             input.add( new ListItem( "Item" + i, i ) );
         }
         viewer.setInput( input );
     }
 
     /**
-     * Class to encapsulate an item to populate on a list (this is a
-     * random domain object for this example only)
+     * Class to encapsulate an item to populate on a list (this is a random domain object for this example
+     * only)
      * 
      * @author suggitpe
      * @version 1.0 8 Sep 2008
      */
-    class ListItem
-    {
+    class ListItem {
 
         public String mName_;
         public int mValue_;
 
-        public ListItem( String name, int value )
-        {
+        public ListItem( String name, int value ) {
             mName_ = name;
             mValue_ = value;
 

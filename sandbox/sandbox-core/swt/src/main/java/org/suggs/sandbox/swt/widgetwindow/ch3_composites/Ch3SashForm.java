@@ -15,8 +15,7 @@ import org.eclipse.swt.widgets.Composite;
  * @author suggitpe
  * @version 1.0 12 Aug 2008
  */
-public class Ch3SashForm extends Composite
-{
+public class Ch3SashForm extends Composite {
 
     /**
      * Constructs a new instance.
@@ -24,8 +23,7 @@ public class Ch3SashForm extends Composite
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch3SashForm( Composite parent )
-    {
+    public Ch3SashForm( Composite parent ) {
         super( parent, SWT.NONE );
 
         SashForm sf = new SashForm( this, SWT.VERTICAL );

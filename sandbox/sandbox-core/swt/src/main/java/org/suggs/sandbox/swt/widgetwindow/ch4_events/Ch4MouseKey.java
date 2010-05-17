@@ -19,10 +19,9 @@ import org.eclipse.swt.widgets.Listener;
  * @author suggitpe
  * @version 1.0 13 Aug 2008
  */
-public class Ch4MouseKey extends Composite
-{
+public class Ch4MouseKey extends Composite {
 
-    Label mOutput_;
+    Label output;
 
     /**
      * Constructs a new instance.
@@ -30,8 +29,7 @@ public class Ch4MouseKey extends Composite
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch4MouseKey( Composite parent )
-    {
+    public Ch4MouseKey( Composite parent ) {
         super( parent, SWT.NULL );
 
         Button typed = new Button( this, SWT.PUSH );
@@ -39,12 +37,10 @@ public class Ch4MouseKey extends Composite
         typed.setLocation( 2, 10 );
         typed.pack();
 
-        typed.addKeyListener( new KeyAdapter()
-        {
+        typed.addKeyListener( new KeyAdapter() {
 
             @Override
-            public void keyPressed( KeyEvent e )
-            {
+            public void keyPressed( KeyEvent e ) {
                 keyHandler();
             }
 
@@ -58,33 +54,29 @@ public class Ch4MouseKey extends Composite
         untyped.addListener( SWT.MouseEnter, UntypedListener );
         untyped.addListener( SWT.MouseExit, UntypedListener );
 
-        mOutput_ = new Label( this, SWT.SHADOW_ETCHED_OUT );
-        mOutput_.setBounds( 40, 70, 90, 40 );
-        mOutput_.setText( "No output" );
+        output = new Label( this, SWT.SHADOW_ETCHED_OUT );
+        output.setBounds( 40, 70, 90, 40 );
+        output.setText( "No output" );
 
         pack();
     }
 
-    Listener UntypedListener = new Listener()
-    {
+    Listener UntypedListener = new Listener() {
 
-        public void handleEvent( Event event )
-        {
-            switch ( event.type )
-            {
+        public void handleEvent( Event event ) {
+            switch ( event.type ) {
                 case SWT.MouseEnter:
-                    mOutput_.setText( "Mouse Enter" );
+                    output.setText( "Mouse Enter" );
                     break;
                 case SWT.MouseExit:
-                    mOutput_.setText( "Mouse Exit" );
+                    output.setText( "Mouse Exit" );
                     break;
             }
         }
     };
 
-    void keyHandler()
-    {
-        mOutput_.setText( "Key Event" );
+    void keyHandler() {
+        output.setText( "Key Event" );
     };
 
 }

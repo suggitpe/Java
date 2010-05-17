@@ -10,14 +10,12 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * Composite class used to show how the different combo box styles
- * work.
+ * Composite class used to show how the different combo box styles work.
  * 
  * @author suggitpe
  * @version 1.0 19 Aug 2008
  */
-public class Ch5ComboComposite extends Composite
-{
+public class Ch5ComboComposite extends Composite {
 
     /**
      * Constructs a new instance.
@@ -25,8 +23,7 @@ public class Ch5ComboComposite extends Composite
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch5ComboComposite( Composite parent )
-    {
+    public Ch5ComboComposite( Composite parent ) {
         super( parent, SWT.NONE );
         buildControls();
     }
@@ -34,13 +31,11 @@ public class Ch5ComboComposite extends Composite
     /**
      * Build the GUI colntrols
      */
-    private void buildControls()
-    {
+    private void buildControls() {
         setLayout( new RowLayout() );
         int[] comboStyles = { SWT.SIMPLE, SWT.DROP_DOWN, SWT.READ_ONLY };
 
-        for ( int i : comboStyles )
-        {
+        for ( int i : comboStyles ) {
             Combo c = new Combo( this, i );
             c.add( "Option #1" );
             c.add( "Option #2" );

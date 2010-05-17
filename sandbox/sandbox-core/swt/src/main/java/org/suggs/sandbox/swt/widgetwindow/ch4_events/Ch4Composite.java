@@ -11,29 +11,24 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * A composite class that shows mouse events in motion plus provides
- * access to a GUI full of event listeners.
+ * A composite class that shows mouse events in motion plus provides access to a GUI full of event listeners.
  * 
  * @author suggitpe
  * @version 1.0 18 Aug 2008
  */
-public class Ch4Composite extends Ch4MouseKey
-{
+public class Ch4Composite extends Ch4MouseKey {
 
-    public Ch4Composite( Composite parent )
-    {
+    public Ch4Composite( Composite parent ) {
         super( parent );
         Button launch = new Button( this, SWT.PUSH );
         launch.setText( "Launch" );
         launch.setLocation( 40, 120 );
         launch.pack();
 
-        launch.addMouseListener( new MouseAdapter()
-        {
+        launch.addMouseListener( new MouseAdapter() {
 
             @Override
-            public void mouseDown( MouseEvent e )
-            {
+            public void mouseDown( MouseEvent e ) {
                 Ch4Contribution sw = new Ch4Contribution();
                 sw.open();
             }

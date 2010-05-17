@@ -12,14 +12,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This class should be used only for doing on the fly tests where
- * necessary.
+ * This class should be used only for doing on the fly tests where necessary.
  * 
  * @author suggitpe
  * @version 1.0 4 Jun 2009
  */
-public class TestMain
-{
+public class TestMain {
 
     private static final Log LOG = LogFactory.getLog( TestMain.class );
 
@@ -29,22 +27,18 @@ public class TestMain
      * @param args
      *            the args from the command line
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         // testTokeniser();
 
-        try
-        {
+        try {
             testFiles();
         }
-        catch ( Exception e )
-        {
+        catch ( Exception e ) {
             LOG.error( "Boohoo your test failed", e );
         }
     }
 
-    private static void testFiles() throws IOException
-    {
+    private static void testFiles() throws IOException {
         LOG.debug( "Testing files" );
 
         File f = new File( "/home/suggitpe/deleteme.txt" );
@@ -56,8 +50,7 @@ public class TestMain
     }
 
     @SuppressWarnings("unused")
-    private static void testTokeniser()
-    {
+    private static void testTokeniser() {
         LOG.debug( "Testing tokeniser" );
         // System.out.println( System.getProperty(
         // "subversion.native.library" ) );
@@ -65,8 +58,7 @@ public class TestMain
 
         StringTokenizer t = new StringTokenizer( path, ":" );
         System.out.println( t.countTokens() );
-        while ( t.hasMoreTokens() )
-        {
+        while ( t.hasMoreTokens() ) {
             System.out.println( t.nextToken() );
         }
     }

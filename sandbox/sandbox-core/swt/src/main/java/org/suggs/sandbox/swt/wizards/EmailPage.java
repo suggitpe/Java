@@ -20,20 +20,18 @@ import org.eclipse.swt.widgets.Text;
  * @author suggitpe
  * @version 1.0 21 Oct 2008
  */
-public class EmailPage extends WizardPage
-{
+public class EmailPage extends WizardPage {
 
     public static final String PAGE_NAME = "emailPage";
 
-    private String emailAddress_ = "";
+    private String emailAddress = "";
 
     /**
      * Constructs a new instance.
      * 
      * @param pageName
      */
-    protected EmailPage()
-    {
+    protected EmailPage() {
         super( PAGE_NAME, "Email", null );
         setDescription( "Enter an email address" );
         setPageComplete( false );
@@ -42,8 +40,7 @@ public class EmailPage extends WizardPage
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
-    public void createControl( Composite parent )
-    {
+    public void createControl( Composite parent ) {
         Composite comp = new Composite( parent, SWT.NONE );
         comp.setLayout( new GridLayout( 2, false ) );
 
@@ -52,13 +49,11 @@ public class EmailPage extends WizardPage
         final Text txt = new Text( comp, SWT.BORDER );
         txt.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
 
-        txt.addModifyListener( new ModifyListener()
-        {
+        txt.addModifyListener( new ModifyListener() {
 
-            public void modifyText( ModifyEvent e )
-            {
-                emailAddress_ = txt.getText();
-                setPageComplete( emailAddress_.length() > 0 );
+            public void modifyText( ModifyEvent e ) {
+                emailAddress = txt.getText();
+                setPageComplete( emailAddress.length() > 0 );
             }
         } );
 
@@ -70,9 +65,8 @@ public class EmailPage extends WizardPage
      * 
      * @return email address
      */
-    public String getEmailAddress()
-    {
-        return emailAddress_;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
 }

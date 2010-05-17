@@ -20,20 +20,18 @@ import org.eclipse.swt.widgets.Text;
  * @author suggitpe
  * @version 1.0 21 Oct 2008
  */
-public class NamePage extends WizardPage
-{
+public class NamePage extends WizardPage {
 
     public static final String PAGE_NAME = "namePage";
-    private String firstName_ = "";
-    private String lastName_ = "";
+    private String firstName = "";
+    private String lastName = "";
 
     /**
      * Constructs a new instance.
      * 
      * @param pageName
      */
-    protected NamePage()
-    {
+    protected NamePage() {
         super( PAGE_NAME, "Name", null );
         setDescription( "Enter the first and last names" );
         setPageComplete( false );
@@ -42,8 +40,7 @@ public class NamePage extends WizardPage
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
-    public void createControl( Composite parent )
-    {
+    public void createControl( Composite parent ) {
         Composite comp = new Composite( parent, SWT.NONE );
         comp.setLayout( new GridLayout( 2, false ) );
 
@@ -58,23 +55,19 @@ public class NamePage extends WizardPage
         last.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
 
         // add a listener for the first name
-        first.addModifyListener( new ModifyListener()
-        {
+        first.addModifyListener( new ModifyListener() {
 
-            public void modifyText( ModifyEvent e )
-            {
-                firstName_ = first.getText();
+            public void modifyText( ModifyEvent e ) {
+                firstName = first.getText();
                 setPageComplete( isPageDone() );
             }
         } );
 
         // add a listener for the last namE
-        last.addModifyListener( new ModifyListener()
-        {
+        last.addModifyListener( new ModifyListener() {
 
-            public void modifyText( ModifyEvent e )
-            {
-                lastName_ = last.getText();
+            public void modifyText( ModifyEvent e ) {
+                lastName = last.getText();
                 setPageComplete( isPageDone() );
             }
         } );
@@ -84,9 +77,8 @@ public class NamePage extends WizardPage
     /**
      * @return
      */
-    private boolean isPageDone()
-    {
-        return ( firstName_.length() > 0 && lastName_.length() > 0 );
+    private boolean isPageDone() {
+        return ( firstName.length() > 0 && lastName.length() > 0 );
     }
 
     /**
@@ -94,9 +86,8 @@ public class NamePage extends WizardPage
      * 
      * @return the first name to return
      */
-    public String getFirstName()
-    {
-        return firstName_;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
@@ -104,9 +95,8 @@ public class NamePage extends WizardPage
      * 
      * @return last name
      */
-    public String getLastName()
-    {
-        return lastName_;
+    public String getLastName() {
+        return lastName;
     }
 
 }

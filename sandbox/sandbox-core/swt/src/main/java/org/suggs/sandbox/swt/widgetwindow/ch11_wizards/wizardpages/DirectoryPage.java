@@ -17,30 +17,27 @@ import org.eclipse.swt.widgets.Label;
  * @author suggitpe
  * @version 1.0 11 Sep 2008
  */
-public class DirectoryPage extends WizardPage
-{
+public class DirectoryPage extends WizardPage {
 
     public static final String PAGE_NAME = "Directory";
-    private Button mButton_;
+    private Button button;
 
     /**
      * Constructs a new instance.
      */
-    public DirectoryPage()
-    {
+    public DirectoryPage() {
         super( PAGE_NAME, "Directory Page", null );
     }
 
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
-    public void createControl( Composite parent )
-    {
+    public void createControl( Composite parent ) {
         Composite topLevel = new Composite( parent, SWT.NONE );
         topLevel.setLayout( new GridLayout( 2, false ) );
 
         new Label( topLevel, SWT.CENTER ).setText( "Use default directory?" );
-        mButton_ = new Button( topLevel, SWT.CHECK );
+        button = new Button( topLevel, SWT.CHECK );
 
         setControl( topLevel );
         setPageComplete( true );
@@ -51,8 +48,7 @@ public class DirectoryPage extends WizardPage
      * 
      * @return true of the check box has been selected, else false
      */
-    public boolean useDefaultDirectory()
-    {
-        return mButton_.getSelection();
+    public boolean useDefaultDirectory() {
+        return button.getSelection();
     }
 }

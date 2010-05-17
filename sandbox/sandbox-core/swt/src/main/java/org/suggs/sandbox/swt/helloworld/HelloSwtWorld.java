@@ -15,11 +15,9 @@ import org.eclipse.swt.widgets.Text;
  * @author suggitpe
  * @version 1.0 8 Aug 2008
  */
-public class HelloSwtWorld
-{
+public class HelloSwtWorld {
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         Display display = new Display();
         Shell shell = new Shell( display );
 
@@ -30,10 +28,8 @@ public class HelloSwtWorld
         shell.pack();
         shell.open();
 
-        while ( !shell.isDisposed() )
-        {
-            if ( !display.readAndDispatch() )
-            {
+        while ( !shell.isDisposed() ) {
+            if ( !display.readAndDispatch() ) {
                 display.sleep();
             }
         }

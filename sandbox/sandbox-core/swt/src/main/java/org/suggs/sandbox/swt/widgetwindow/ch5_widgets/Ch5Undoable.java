@@ -17,19 +17,17 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * Stylised text example for SWT showing a basic undo and redo
- * function.
+ * Stylised text example for SWT showing a basic undo and redo function.
  * 
  * @author suggitpe
  * @version 1.0 18 Aug 2008
  */
-public class Ch5Undoable extends Composite
-{
+public class Ch5Undoable extends Composite {
 
     private static final int MAX_STACK_SIZE = 25;
-    private List<String> mUndoStack = new LinkedList<String>();
-    private List<String> mRedoStack = new LinkedList<String>();
-    private StyledText mText = null;
+    private List<String> undoStack = new LinkedList<String>();
+    private List<String> redoStack = new LinkedList<String>();
+    private StyledText text = null;
 
     /**
      * Constructs a new instance.
@@ -37,8 +35,7 @@ public class Ch5Undoable extends Composite
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch5Undoable( Composite parent )
-    {
+    public Ch5Undoable( Composite parent ) {
         super( parent, SWT.NONE );
         buildControls();
     }
@@ -46,42 +43,33 @@ public class Ch5Undoable extends Composite
     /**
      * Builds the relevant controls for the composite
      */
-    private void buildControls()
-    {
+    private void buildControls() {
         setLayout( new FillLayout() );
-        mText = new StyledText( this, SWT.MULTI | SWT.V_SCROLL );
-        mText.addExtendedModifyListener( new ExtendedModifyListener()
-        {
+        text = new StyledText( this, SWT.MULTI | SWT.V_SCROLL );
+        text.addExtendedModifyListener( new ExtendedModifyListener() {
 
-            public void modifyText( ExtendedModifyEvent event )
-            {
-                String currTxt = mText.getText();
+            public void modifyText( ExtendedModifyEvent event ) {
+                String currTxt = text.getText();
                 String newTxt = currTxt.substring( event.start, event.start + event.length );
-                if ( newTxt != null && newTxt.length() > 0 )
-                {
-                    if ( mUndoStack.size() >= MAX_STACK_SIZE )
-                    {
-                        mUndoStack.remove( mUndoStack.size() - 1 );
+                if ( newTxt != null && newTxt.length() > 0 ) {
+                    if ( undoStack.size() >= MAX_STACK_SIZE ) {
+                        undoStack.remove( undoStack.size() - 1 );
                     }
-                    mUndoStack.add( 0, newTxt );
+                    undoStack.add( 0, newTxt );
                 }
             }
         } );
 
-        mText.addKeyListener( new KeyAdapter()
-        {
+        text.addKeyListener( new KeyAdapter() {
 
             /**
-             * Overrides the key pressed implementation with F! for
-             * undo and F2 for redo.
+             * Overrides the key pressed implementation with F! for undo and F2 for redo.
              * 
              * @see org.eclipse.swt.events.KeyAdapter#keyPressed(org.eclipse.swt.events.KeyEvent)
              */
             @Override
-            public void keyPressed( KeyEvent event )
-            {
-                switch ( event.keyCode )
-                {
+            public void keyPressed( KeyEvent event ) {
+                switch ( event.keyCode ) {
                     case SWT.F1:
                         undo();
                         break;
@@ -97,33 +85,29 @@ public class Ch5Undoable extends Composite
     }
 
     /**
-     * Implements the undo functionality by removing the existing text
-     * and replacing with the previous event text from the undo stack.
+     * Implements the undo functionality by removing the existing text and replacing with the previous event
+     * text from the undo stack.
      */
-    private void undo()
-    {
-        if ( mUndoStack.size() > 0 )
-        {
-            String lastEdit = mUndoStack.remove( 0 );
+    private void undo() {
+        if ( undoStack.size() > 0 ) {
+            String lastEdit = undoStack.remove( 0 );
             int editLength = lastEdit.length();
-            String currText = mText.getText();
+            String currText = text.getText();
             int replaceStart = currText.length() - editLength;
-            mText.replaceTextRange( replaceStart, editLength, "" );
-            mRedoStack.add( 0, lastEdit );
+            text.replaceTextRange( replaceStart, editLength, "" );
+            redoStack.add( 0, lastEdit );
         }
     }
 
     /**
-     * Implements the redo function by removing the last undo and
-     * replacing it with the previous text from the redo stack.
+     * Implements the redo function by removing the last undo and replacing it with the previous text from the
+     * redo stack.
      */
-    private void redo()
-    {
-        if ( mRedoStack.size() > 0 )
-        {
-            String txt = mRedoStack.remove( 0 );
+    private void redo() {
+        if ( redoStack.size() > 0 ) {
+            String txt = redoStack.remove( 0 );
             moveCursorToEnd();
-            mText.append( txt );
+            text.append( txt );
             moveCursorToEnd();
         }
     }
@@ -131,9 +115,8 @@ public class Ch5Undoable extends Composite
     /**
      * Moves the cursor to the end of the text block.
      */
-    private void moveCursorToEnd()
-    {
-        mText.setCaretOffset( mText.getText().length() );
+    private void moveCursorToEnd() {
+        text.setCaretOffset( text.getText().length() );
     }
 
 }

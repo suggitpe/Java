@@ -26,24 +26,21 @@ import org.eclipse.swt.widgets.TableColumn;
  * @author suggitpe
  * @version 1.0 2 Dec 2008
  */
-public class PlayerViewer extends ApplicationWindow
-{
+public class PlayerViewer extends ApplicationWindow {
 
     private static final Log LOG = LogFactory.getLog( PlayerViewer.class );
 
     /**
      * Constructs a new instance.
      */
-    public PlayerViewer()
-    {
+    public PlayerViewer() {
         super( null );
     }
 
     /**
      * Run the shell and GUI within
      */
-    public void run()
-    {
+    public void run() {
         setBlockOnOpen( true );
         open();
         LOG.debug( "finished" );
@@ -54,22 +51,19 @@ public class PlayerViewer extends ApplicationWindow
      * @see org.eclipse.jface.window.ApplicationWindow#configureShell(org.eclipse.swt.widgets.Shell)
      */
     @Override
-    protected void configureShell( Shell shell )
-    {
+    protected void configureShell( Shell shell ) {
         super.configureShell( shell );
         shell.setText( "Player Viewer" );
         shell.setSize( 400, 600 );
     }
 
     /**
-     * Here we just set up the table and set it to work with the rest
-     * of the GUI.
+     * Here we just set up the table and set it to work with the rest of the GUI.
      * 
      * @see org.eclipse.jface.window.Window#createContents(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createContents( Composite parent )
-    {
+    protected Control createContents( Composite parent ) {
         Composite comp = new Composite( parent, SWT.NONE );
         comp.setLayout( new GridLayout( 1, false ) );
 
@@ -107,8 +101,7 @@ public class PlayerViewer extends ApplicationWindow
      * 
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         new PlayerViewer().run();
     }
 

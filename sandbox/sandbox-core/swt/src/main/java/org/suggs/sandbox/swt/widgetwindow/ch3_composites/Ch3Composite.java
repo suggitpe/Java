@@ -13,8 +13,7 @@ import org.eclipse.swt.widgets.Composite;
  * @author suggitpe
  * @version 1.0 12 Aug 2008
  */
-public class Ch3Composite extends Composite
-{
+public class Ch3Composite extends Composite {
 
     /**
      * Constructs a new instance.
@@ -22,8 +21,7 @@ public class Ch3Composite extends Composite
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch3Composite( Composite parent )
-    {
+    public Ch3Composite( Composite parent ) {
         super( parent, SWT.NONE );
         parent.getShell().setText( "Chapter 3 Composite" );
 

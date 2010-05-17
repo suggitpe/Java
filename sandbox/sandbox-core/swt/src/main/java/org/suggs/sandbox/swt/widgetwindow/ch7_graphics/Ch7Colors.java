@@ -19,8 +19,7 @@ import org.eclipse.swt.widgets.Display;
  * @author suggitpe
  * @version 1.0 2 Sep 2008
  */
-public class Ch7Colors extends Canvas
-{
+public class Ch7Colors extends Canvas {
 
     /**
      * Constructs a new instance.
@@ -28,21 +27,18 @@ public class Ch7Colors extends Canvas
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch7Colors( Composite parent )
-    {
+    public Ch7Colors( Composite parent ) {
         super( parent, SWT.NONE );
         setBackground( this.getDisplay().getSystemColor( SWT.COLOR_DARK_GRAY ) );
         addPaintListener( dl );
     }
 
-    PaintListener dl = new PaintListener()
-    {
+    PaintListener dl = new PaintListener() {
 
         /**
          * @see org.eclipse.swt.events.PaintListener#paintControl(org.eclipse.swt.events.PaintEvent)
          */
-        public void paintControl( PaintEvent pe )
-        {
+        public void paintControl( PaintEvent pe ) {
             Display d = pe.display;
             Color light_grey = new Color( d, 0xE0, 0xE0, 0xE0 );
             GC gc = pe.gc;

@@ -33,20 +33,17 @@ import org.eclipse.swt.widgets.TableItem;
  * @author suggitpe
  * @version 1.0 9 Sep 2008
  */
-public class Ch9TableEditorComposite extends Composite
-{
+public class Ch9TableEditorComposite extends Composite {
 
     // this would normally be read from a persistent store
     private static final Object[] CONTENT = new Object[] {
-                                                          new EditableTableItem( "Item 1",
-                                                                                 new Integer( 0 ) ),
-                                                          new EditableTableItem( "Item 2",
-                                                                                 new Integer( 1 ) ) };
+                                                          new EditableTableItem( "Item 1", new Integer( 0 ) ),
+                                                          new EditableTableItem( "Item 2", new Integer( 1 ) ) };
     private static final String[] VALUE_SET = new String[] { "xxxx", "yyyy", "zzzz" };
     private static final String NAME_PROP = "name";
     private static final String VALUE_PROP = "value";
 
-    private TableViewer mViewer_;
+    private TableViewer viewer;
 
     /**
      * Constructs a new instance.
@@ -54,27 +51,23 @@ public class Ch9TableEditorComposite extends Composite
      * @param parent
      *            a composite to associate this class with
      */
-    public Ch9TableEditorComposite( Composite parent )
-    {
+    public Ch9TableEditorComposite( Composite parent ) {
         super( parent, SWT.NULL );
         buildControls();
     }
 
     /**
-     * This class encapsulates the concept of adding a new row to the
-     * table
+     * This class encapsulates the concept of adding a new row to the table
      * 
      * @author suggitpe
      * @version 1.0 10 Sep 2008
      */
-    private class NewRowAction extends Action
-    {
+    private class NewRowAction extends Action {
 
         /**
          * Constructs a new instance.
          */
-        public NewRowAction()
-        {
+        public NewRowAction() {
             super( "Insert New Row" );
         }
 
@@ -82,27 +75,25 @@ public class Ch9TableEditorComposite extends Composite
          * @see org.eclipse.jface.action.Action#run()
          */
         @Override
-        public void run()
-        {
+        public void run() {
             EditableTableItem newItem = new EditableTableItem( "new row", new Integer( 2 ) );
-            mViewer_.add( newItem );
+            viewer.add( newItem );
         }
     }
 
     /**
      * Build the composite controls
      */
-    protected void buildControls()
-    {
+    protected void buildControls() {
         setLayout( new FillLayout() );
 
         final Table table = new Table( this, SWT.FULL_SELECTION );
         table.setToolTipText( "Right click to add a new row" );
-        mViewer_ = buildAndLayoutTable( table );
+        viewer = buildAndLayoutTable( table );
 
-        attachContentProvider( mViewer_ );
-        attachLabelProvider( mViewer_ );
-        attachCellEditors( mViewer_, table );
+        attachContentProvider( viewer );
+        attachLabelProvider( viewer );
+        attachCellEditors( viewer, table );
 
         MenuManager popupMenu = new MenuManager();
         IAction newRowAction = new NewRowAction();
@@ -110,7 +101,7 @@ public class Ch9TableEditorComposite extends Composite
         Menu menu = popupMenu.createContextMenu( table );
         table.setMenu( menu );
 
-        mViewer_.setInput( CONTENT );
+        viewer.setInput( CONTENT );
     }
 
     /**
@@ -120,8 +111,7 @@ public class Ch9TableEditorComposite extends Composite
      *            the table to set up
      * @return a viewer that relates to the table
      */
-    private TableViewer buildAndLayoutTable( final Table table )
-    {
+    private TableViewer buildAndLayoutTable( final Table table ) {
         TableViewer ret = new TableViewer( table );
 
         TableLayout layout = new TableLayout();
@@ -144,23 +134,18 @@ public class Ch9TableEditorComposite extends Composite
     /**
      * ] Attaches the label provider to the table
      * 
-     * @param viewer
+     * @param aViewer
      *            the viewer to attach the label provider to
      */
-    private void attachLabelProvider( TableViewer viewer )
-    {
-        mViewer_.setLabelProvider( new ITableLabelProvider()
-        {
+    private void attachLabelProvider( TableViewer aViewer ) {
+        aViewer.setLabelProvider( new ITableLabelProvider() {
 
-            public Image getColumnImage( Object arg0, int arg1 )
-            {
+            public Image getColumnImage( Object arg0, int arg1 ) {
                 return null;
             }
 
-            public String getColumnText( Object element, int colIdx )
-            {
-                switch ( colIdx )
-                {
+            public String getColumnText( Object element, int colIdx ) {
+                switch ( colIdx ) {
                     case 0:
                         return ( (EditableTableItem) element ).getName();
                     case 1:
@@ -171,103 +156,83 @@ public class Ch9TableEditorComposite extends Composite
                 }
             }
 
-            public void addListener( ILabelProviderListener arg0 )
-            {
-            }
+            public void addListener( ILabelProviderListener arg0 ) {}
 
-            public void dispose()
-            {
-            }
+            public void dispose() {}
 
-            public boolean isLabelProperty( Object arg0, String arg1 )
-            {
+            public boolean isLabelProperty( Object arg0, String arg1 ) {
                 return false;
             }
 
-            public void removeListener( ILabelProviderListener arg0 )
-            {
-            }
+            public void removeListener( ILabelProviderListener arg0 ) {}
         } );
     }
 
     /**
      * Attach a content provider to the table viewer
      * 
-     * @param viewer
+     * @param aViewer
      *            the viewer to attach the content provider to
      */
-    private void attachContentProvider( TableViewer viewer )
-    {
-        viewer.setContentProvider( new IStructuredContentProvider()
-        {
+    private void attachContentProvider( TableViewer aViewer ) {
+        aViewer.setContentProvider( new IStructuredContentProvider() {
 
             /**
              * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
              */
-            public Object[] getElements( Object inputElem )
-            {
+            public Object[] getElements( Object inputElem ) {
                 return (Object[]) inputElem;
             }
 
             /**
              * @see org.eclipse.jface.viewers.IContentProvider#dispose()
              */
-            public void dispose()
-            {
-                // nada
+            public void dispose() {
+            // nada
             }
 
             /**
              * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
              *      java.lang.Object, java.lang.Object)
              */
-            public void inputChanged( Viewer arg0, Object arg1, Object arg2 )
-            {
-                // nada
+            public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {
+            // nada
             }
         } );
     }
 
-    private void attachCellEditors( final TableViewer viewer, Composite parent )
-    {
-        viewer.setCellModifier( new ICellModifier()
-        {
+    private void attachCellEditors( final TableViewer aViewer, Composite parent ) {
+        aViewer.setCellModifier( new ICellModifier() {
 
-            public boolean canModify( Object elem, String prop )
-            {
+            public boolean canModify( Object elem, String prop ) {
                 return true;
             }
 
-            public Object getValue( Object elem, String prop )
-            {
-                if ( NAME_PROP.equals( prop ) )
-                {
+            public Object getValue( Object elem, String prop ) {
+                if ( NAME_PROP.equals( prop ) ) {
                     return ( (EditableTableItem) elem ).getName();
                 }
                 return ( (EditableTableItem) elem ).getValue();
             }
 
-            public void modify( Object elem, String prop, Object value )
-            {
+            public void modify( Object elem, String prop, Object value ) {
 
                 TableItem tableItem = (TableItem) elem;
                 EditableTableItem data = (EditableTableItem) tableItem.getData();
-                if ( NAME_PROP.equals( prop ) )
-                {
+                if ( NAME_PROP.equals( prop ) ) {
                     data.setName( value.toString() );
                 }
-                else
-                {
+                else {
                     data.setValue( (Integer) value );
                 }
-                viewer.refresh( data );
+                aViewer.refresh( data );
             }
         } );
 
-        viewer.setCellEditors( new CellEditor[] { new TextCellEditor( parent ),
-                                                 new ComboBoxCellEditor( parent, VALUE_SET ) } );
+        aViewer.setCellEditors( new CellEditor[] { new TextCellEditor( parent ),
+                                                  new ComboBoxCellEditor( parent, VALUE_SET ) } );
 
-        viewer.setColumnProperties( new String[] { NAME_PROP, VALUE_PROP } );
+        aViewer.setColumnProperties( new String[] { NAME_PROP, VALUE_PROP } );
     }
 
 }
@@ -278,8 +243,7 @@ public class Ch9TableEditorComposite extends Composite
  * @author suggitpe
  * @version 1.0 9 Sep 2008
  */
-class EditableTableItem
-{
+class EditableTableItem {
 
     private String mName_;
     private Integer mValue_;
@@ -292,8 +256,7 @@ class EditableTableItem
      * @param value
      *            the value to set
      */
-    public EditableTableItem( String name, Integer value )
-    {
+    public EditableTableItem( String name, Integer value ) {
         mName_ = name;
         mValue_ = value;
     }
@@ -303,8 +266,7 @@ class EditableTableItem
      * 
      * @return Returns the Name.
      */
-    public String getName()
-    {
+    public String getName() {
         return mName_;
     }
 
@@ -314,8 +276,7 @@ class EditableTableItem
      * @param name
      *            The Name to set.
      */
-    public void setName( String name )
-    {
+    public void setName( String name ) {
         mName_ = name;
     }
 
@@ -324,8 +285,7 @@ class EditableTableItem
      * 
      * @return Returns the Value.
      */
-    public Integer getValue()
-    {
+    public Integer getValue() {
         return mValue_;
     }
 
@@ -335,8 +295,7 @@ class EditableTableItem
      * @param value
      *            The Value to set.
      */
-    public void setValue( Integer value )
-    {
+    public void setValue( Integer value ) {
         mValue_ = value;
     }
 

@@ -21,21 +21,19 @@ import org.eclipse.swt.program.Program;
  * @author suggitpe
  * @version 1.0 23 Dec 2008
  */
-public class OpenAction extends Action implements ISelectionChangedListener
-{
+public class OpenAction extends Action implements ISelectionChangedListener {
 
     private static final Log LOG = LogFactory.getLog( OpenAction.class );
 
-    Explorer expl_;
+    Explorer explorer;
 
     /**
      * Constructs a new instance.
      * 
      * @param exp
      */
-    public OpenAction( Explorer exp )
-    {
-        expl_ = exp;
+    public OpenAction( Explorer exp ) {
+        explorer = exp;
         setText( "Run" );
         setToolTipText( "Run the associated program on the file" );
         setImageDescriptor( ImageDescriptor.createFromURL( getClass().getClassLoader()
@@ -47,18 +45,15 @@ public class OpenAction extends Action implements ISelectionChangedListener
      * @see org.eclipse.jface.action.Action#run()
      */
     @Override
-    public void run()
-    {
-        IStructuredSelection sel = expl_.getTableSelection();
-        if ( sel.size() != 1 )
-        {
+    public void run() {
+        IStructuredSelection sel = explorer.getTableSelection();
+        if ( sel.size() != 1 ) {
             LOG.warn( "Have to have one (and only one) file selected" );
             return;
         }
 
         File selected = (File) sel.getFirstElement();
-        if ( selected.isFile() )
-        {
+        if ( selected.isFile() ) {
             LOG.debug( "Launching file [" + selected.getAbsolutePath() + "]" );
             Program.launch( selected.getAbsolutePath() );
         }
@@ -67,22 +62,19 @@ public class OpenAction extends Action implements ISelectionChangedListener
     /**
      * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
      */
-    public void selectionChanged( SelectionChangedEvent event )
-    {
+    public void selectionChanged( SelectionChangedEvent event ) {
         setText( "Run" );
         setToolTipText( "Run the associated program on a file" );
 
-        IStructuredSelection sel = expl_.getTableSelection();
-        if ( sel.size() != 1 )
-        {
+        IStructuredSelection sel = explorer.getTableSelection();
+        if ( sel.size() != 1 ) {
             setEnabled( false );
             setToolTipText( getToolTipText() + "(only enabled when exactly one file is sleected)" );
             return;
         }
 
         File file = (File) sel.getFirstElement();
-        if ( file.isFile() )
-        {
+        if ( file.isFile() ) {
             setEnabled( true );
             setText( "Run the associated program on " + file.getName() );
             setToolTipText( "Run the associated program with " + file.getName()

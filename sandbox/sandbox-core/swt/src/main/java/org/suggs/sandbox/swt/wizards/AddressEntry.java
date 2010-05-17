@@ -4,39 +4,34 @@
  */
 package org.suggs.sandbox.swt.wizards;
 
-
 /**
  * Address Entry bean object
  * 
  * @author suggitpe
  * @version 1.0 22 Oct 2008
  */
-public class AddressEntry
-{
+public class AddressEntry {
 
-    private String firstName_;
-    private String lastName_;
-    private String emailAddress_;
+    private String firstName;
+    private String lastName;
+    private String emailAddress;
 
     /**
      * Constructs a new instance.
      */
-    public AddressEntry()
-    {
-    }
+    public AddressEntry() {}
 
     /**
      * Constructs a new instance.
      * 
-     * @param firstName
-     * @param lastName
-     * @param emailAddress
+     * @param aFirstName
+     * @param aLastName
+     * @param aEmailAddress
      */
-    public AddressEntry( String firstName, String lastName, String emailAddress )
-    {
-        firstName_ = firstName;
-        lastName_ = lastName;
-        emailAddress_ = emailAddress;
+    public AddressEntry( String aFirstName, String aLastName, String aEmailAddress ) {
+        firstName = aFirstName;
+        lastName = aLastName;
+        emailAddress = aEmailAddress;
     }
 
     /**
@@ -44,20 +39,18 @@ public class AddressEntry
      * 
      * @return Returns the firstName.
      */
-    public String getFirstName()
-    {
-        return firstName_;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
      * Sets the firstName field to the specified value.
      * 
-     * @param firstName
+     * @param aFirstName
      *            The firstName to set.
      */
-    public void setFirstName( String firstName )
-    {
-        firstName_ = firstName;
+    public void setFirstName( String aFirstName ) {
+        firstName = aFirstName;
     }
 
     /**
@@ -65,20 +58,18 @@ public class AddressEntry
      * 
      * @return Returns the lastName.
      */
-    public String getLastName()
-    {
-        return lastName_;
+    public String getLastName() {
+        return lastName;
     }
 
     /**
      * Sets the lastName field to the specified value.
      * 
-     * @param lastName
+     * @param aLastName
      *            The lastName to set.
      */
-    public void setLastName( String lastName )
-    {
-        lastName_ = lastName;
+    public void setLastName( String aLastName ) {
+        lastName = aLastName;
     }
 
     /**
@@ -86,20 +77,18 @@ public class AddressEntry
      * 
      * @return Returns the emailAddress.
      */
-    public String getEmailAddress()
-    {
-        return emailAddress_;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     /**
      * Sets the emailAddress field to the specified value.
      * 
-     * @param emailAddress
+     * @param aEmailAddress
      *            The emailAddress to set.
      */
-    public void setEmailAddress( String emailAddress )
-    {
-        emailAddress_ = emailAddress;
+    public void setEmailAddress( String aEmailAddress ) {
+        emailAddress = aEmailAddress;
     }
 
 }

@@ -17,14 +17,12 @@ import org.eclipse.swt.widgets.Text;
  * @author suggitpe
  * @version 1.0 8 Aug 2008
  */
-public class HelloJfaceWorld extends ApplicationWindow
-{
+public class HelloJfaceWorld extends ApplicationWindow {
 
     /**
      * Constructs a new instance.
      */
-    public HelloJfaceWorld()
-    {
+    public HelloJfaceWorld() {
         super( null );
     }
 
@@ -32,8 +30,7 @@ public class HelloJfaceWorld extends ApplicationWindow
      * @see org.eclipse.jface.window.Window#createContents(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createContents( Composite parent )
-    {
+    protected Control createContents( Composite parent ) {
         Text hello = new Text( parent, SWT.CENTER );
         hello.setText( "Hellow SWT and JFace!" );
         parent.pack();
@@ -46,8 +43,7 @@ public class HelloJfaceWorld extends ApplicationWindow
      * @param args
      *            the args to pass to the GUI app
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         HelloJfaceWorld awin = new HelloJfaceWorld();
         awin.setBlockOnOpen( true );
         awin.open();

@@ -12,34 +12,28 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 
 /**
- * This layout class is used as an example to show how custom layouts
- * can be created.
+ * This layout class is used as an example to show how custom layouts can be created.
  * 
  * @author suggitpe
  * @version 1.0 22 Aug 2008
  */
-public class RadialLayout extends Layout
-{
+public class RadialLayout extends Layout {
 
     /**
      * Constructs a new instance.
      */
-    public RadialLayout()
-    {
+    public RadialLayout() {
         super();
     }
 
     /**
-     * This method calculated the required size of the composite based
-     * on what is being tried to display an also what the hinted at
-     * size of the display should be.
+     * This method calculated the required size of the composite based on what is being tried to display an
+     * also what the hinted at size of the display should be.
      * 
-     * @see org.eclipse.swt.widgets.Layout#computeSize(org.eclipse.swt.widgets.Composite,
-     *      int, int, boolean)
+     * @see org.eclipse.swt.widgets.Layout#computeSize(org.eclipse.swt.widgets.Composite, int, int, boolean)
      */
     @Override
-    protected Point computeSize( Composite composite, int wHint, int hHint, boolean flushCache )
-    {
+    protected Point computeSize( Composite composite, int wHint, int hHint, boolean flushCache ) {
         // first find out the max dimensions of the widgets to layout
         Point maxDim = calculateMaxDimensions( composite.getChildren() );
         // then find the number of widgets to place per hemisphere
@@ -58,18 +52,14 @@ public class RadialLayout extends Layout
 
         // if the preferred sizes are greater than the hinted as sizes
         // then we should be reducing back to the hinted sizes.
-        if ( wHint != SWT.DEFAULT )
-        {
-            if ( preferedSize.x > wHint )
-            {
+        if ( wHint != SWT.DEFAULT ) {
+            if ( preferedSize.x > wHint ) {
                 preferedSize.x = wHint;
             }
         }
 
-        if ( hHint != SWT.DEFAULT )
-        {
-            if ( preferedSize.y > hHint )
-            {
+        if ( hHint != SWT.DEFAULT ) {
+            if ( preferedSize.y > hHint ) {
                 preferedSize.y = hHint;
             }
         }
@@ -78,30 +68,25 @@ public class RadialLayout extends Layout
     }
 
     /**
-     * In this method we place all of the controls based on their
-     * preferred size and also the points from which to place them in
-     * the layout.
+     * In this method we place all of the controls based on their preferred size and also the points from
+     * which to place them in the layout.
      * 
-     * @see org.eclipse.swt.widgets.Layout#layout(org.eclipse.swt.widgets.Composite,
-     *      boolean)
+     * @see org.eclipse.swt.widgets.Layout#layout(org.eclipse.swt.widgets.Composite, boolean)
      */
     @Override
-    protected void layout( Composite composite, boolean fluchCache )
-    {
+    protected void layout( Composite composite, boolean fluchCache ) {
 
         Point[] pos = calculateControlPositions( composite );
         Control[] ctrl = composite.getChildren();
 
-        for ( int i = 0; i < ctrl.length; ++i )
-        {
+        for ( int i = 0; i < ctrl.length; ++i ) {
             Control c = ctrl[i];
             Point prefSize = c.computeSize( SWT.DEFAULT, SWT.DEFAULT );
             c.setBounds( pos[i].x, pos[i].y, prefSize.x, prefSize.y );
         }
     }
 
-    private Point[] calculateControlPositions( Composite composite )
-    {
+    private Point[] calculateControlPositions( Composite composite ) {
         // set up the basics
         int ctrlCnt = composite.getChildren().length;
         int stepsPerHemisphere = ( ctrlCnt / 2 ) - 1;
@@ -127,8 +112,7 @@ public class RadialLayout extends Layout
         int y;
         Control[] ctrl = composite.getChildren();
 
-        for ( int i = 0; i < ctrlCnt; ++i )
-        {
+        for ( int i = 0; i < ctrlCnt; ++i ) {
             Point currSize = ctrl[i].getSize();
             long xSqrd = x * x;
 
@@ -142,8 +126,7 @@ public class RadialLayout extends Layout
             x = x + ( signMultiplier * stepXDistance );
 
             // now for the lower hemisphere
-            if ( x >= radius )
-            {
+            if ( x >= radius ) {
                 x = radius - ( x - radius );
                 signMultiplier = -1;
             }
@@ -153,18 +136,16 @@ public class RadialLayout extends Layout
     }
 
     /**
-     * This method will take a collection of widgets and will work out
-     * from them all the maximum x and y values from them all.
+     * This method will take a collection of widgets and will work out from them all the maximum x and y
+     * values from them all.
      * 
      * @param controls
      *            the controls to measure
      * @return a Point representing the max x and y values
      */
-    private Point calculateMaxDimensions( Control[] controls )
-    {
+    private Point calculateMaxDimensions( Control[] controls ) {
         Point maxes = new Point( 0, 0 );
-        for ( Control c : controls )
-        {
+        for ( Control c : controls ) {
             Point conSz = c.computeSize( SWT.DEFAULT, SWT.DEFAULT );
             maxes.x = Math.max( maxes.x, conSz.x );
             maxes.y = Math.max( maxes.y, conSz.y );

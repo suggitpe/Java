@@ -19,13 +19,11 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 8 Apr 2008
  */
-public class SimpleRowDataExample
-{
+public class SimpleRowDataExample {
 
     private static final Log LOG = LogFactory.getLog( SimpleRowDataExample.class );
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         LOG.debug( "Building dialog" );
         Display d = new Display();
 
@@ -51,10 +49,8 @@ public class SimpleRowDataExample
         shell.open();
 
         LOG.debug( "Opening GUI" );
-        while ( !shell.isDisposed() )
-        {
-            if ( !d.readAndDispatch() )
-            {
+        while ( !shell.isDisposed() ) {
+            if ( !d.readAndDispatch() ) {
                 d.sleep();
             }
         }

@@ -11,38 +11,31 @@ import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.RGB;
 
 /**
- * Simple app that will create an animated GIF file to use by the
- * widget window composite
+ * Simple app that will create an animated GIF file to use by the widget window composite
  * 
  * @author suggitpe
  * @version 1.0 2 Sep 2008
  */
-public class Ch7Images
-{
+public class Ch7Images {
 
     public static final int ROWS = 6;
     public static final int COLS = 11;
     public static final int PIX = 20;
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         // initialise the colour palette to use in the image
         PaletteData pd = new PaletteData( new RGB[] { new RGB( 0x00, 0x00, 0x00 ),
-                                                     new RGB( 0x80, 0x80, 0x80 ),
-                                                     new RGB( 0xFF, 0xFF, 0xFF ) } );
+                                                     new RGB( 0x80, 0x80, 0x80 ), new RGB( 0xFF, 0xFF, 0xFF ) } );
 
         // create three image descriptions to allow for the animation
         // (these are
         // the image frames in the animation)
         ImageData[] flagArray = new ImageData[3];
-        for ( int f = 0; f < flagArray.length; ++f )
-        {
+        for ( int f = 0; f < flagArray.length; ++f ) {
             flagArray[f] = new ImageData( PIX * COLS, PIX * ROWS, 4, pd );
             flagArray[f].delayTime = 10;
-            for ( int x = 0; x < PIX * COLS; ++x )
-            {
-                for ( int y = 0; y < PIX * ROWS; ++y )
-                {
+            for ( int x = 0; x < PIX * COLS; ++x ) {
+                for ( int y = 0; y < PIX * ROWS; ++y ) {
                     // determine the id in the palette to use for the
                     // colour
                     int val = ( ( ( x / PIX ) % 3 ) + ( 3 - ( ( y / PIX ) % 3 ) ) + f ) % 3;

@@ -27,144 +27,132 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * This class aims to show a varying range of layouts and SWT widgets
- * that can be aranged on a GUI canvas
+ * This class aims to show a varying range of layouts and SWT widgets that can be aranged on a GUI canvas
  * 
  * @author suggitpe
  * @version 1.0 9 Apr 2008
  */
-public class ComplexGridLayoutExample
-{
+public class ComplexGridLayoutExample {
 
     private static final Log LOG = LogFactory.getLog( ComplexGridLayoutExample.class );
 
-    private static Display mDisplay_;
-    private static Shell mShell_;
-    private static Text mDogName_;
-    private static Combo mDogBreed_;
-    private static Canvas mDogPhoto_;
-    private static Image mDogImage_;
-    private static List mCategories_;
-    private static Text mOwnerName_;
-    private static Text mOwnerPhone_;
+    private static Display display;
+    private static Shell shell;
+    private static Text dogName;
+    private static Combo dogBreed;
+    private static Canvas dogPhoto;
+    private static Image dogImage;
+    private static List categories;
+    private static Text ownerName;
+    private static Text ownerPhone;
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
 
         LOG.debug( "Creating GUI" );
         // set up the shell
-        mDisplay_ = new Display();
-        mShell_ = new Shell( mDisplay_ );
-        mShell_.setText( "Dog Show Entry" );
+        display = new Display();
+        shell = new Shell( display );
+        shell.setText( "Dog Show Entry" );
 
         // now set up the high level layout
         GridLayout layout = new GridLayout();
         layout.numColumns = 3;
-        mShell_.setLayout( layout );
+        shell.setLayout( layout );
 
         // ------------------------------------
         // dog name
-        new Label( mShell_, SWT.NULL ).setText( "Dog's name:" );
-        mDogName_ = new Text( mShell_, SWT.SINGLE | SWT.BORDER );
+        new Label( shell, SWT.NULL ).setText( "Dog's name:" );
+        dogName = new Text( shell, SWT.SINGLE | SWT.BORDER );
         GridData data = new GridData( GridData.HORIZONTAL_ALIGN_FILL );
         data.horizontalSpan = 2;
-        mDogName_.setLayoutData( data );
+        dogName.setLayoutData( data );
 
         // breed combo box
-        new Label( mShell_, SWT.NULL ).setText( "Dog's breed:" );
-        mDogBreed_ = new Combo( mShell_, SWT.NULL );
-        mDogBreed_.setItems( new String[] { "Collie", "Pitbull", "Poodle", "Scottie" } );
-        mDogBreed_.setLayoutData( new GridData( GridData.HORIZONTAL_ALIGN_FILL ) );
+        new Label( shell, SWT.NULL ).setText( "Dog's breed:" );
+        dogBreed = new Combo( shell, SWT.NULL );
+        dogBreed.setItems( new String[] { "Collie", "Pitbull", "Poodle", "Scottie" } );
+        dogBreed.setLayoutData( new GridData( GridData.HORIZONTAL_ALIGN_FILL ) );
 
         // categories label
-        Label l = new Label( mShell_, SWT.NULL );
+        Label l = new Label( shell, SWT.NULL );
         l.setText( "Categories" );
         l.setLayoutData( new GridData( GridData.HORIZONTAL_ALIGN_FILL ) );
 
         // Photos
-        new Label( mShell_, SWT.NULL ).setText( "Photo:" );
-        mDogPhoto_ = new Canvas( mShell_, SWT.BORDER );
+        new Label( shell, SWT.NULL ).setText( "Photo:" );
+        dogPhoto = new Canvas( shell, SWT.BORDER );
         data = new GridData( GridData.FILL_BOTH );
         data.widthHint = 80;
         data.heightHint = 80;
         data.verticalSpan = 3;
-        mDogPhoto_.setLayoutData( data );
-        mDogPhoto_.addPaintListener( new PaintListener()
-        {
+        dogPhoto.setLayoutData( data );
+        dogPhoto.addPaintListener( new PaintListener() {
 
-            public void paintControl( PaintEvent aEvent )
-            {
-                if ( mDogImage_ != null )
-                {
-                    aEvent.gc.drawImage( mDogImage_, 0, 0 );
+            public void paintControl( PaintEvent aEvent ) {
+                if ( dogImage != null ) {
+                    aEvent.gc.drawImage( dogImage, 0, 0 );
                 }
             }
         } );
 
         // categories
-        mCategories_ = new List( mShell_, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL );
-        mCategories_.setItems( new String[] { "Best of breed", "Prettiest female",
-                                             "Handsomest male", "Best dressed", "Fluffiest ears",
-                                             "Most colours", "Best performer", "Loudest bark",
-                                             "Best behaved", "Prettiest eyes", "Most hair",
-                                             "Longest tail", "Cutest trick", "Most stupig grin" } );
+        categories = new List( shell, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL );
+        categories.setItems( new String[] { "Best of breed", "Prettiest female", "Handsomest male",
+                                           "Best dressed", "Fluffiest ears", "Most colours",
+                                           "Best performer", "Loudest bark", "Best behaved",
+                                           "Prettiest eyes", "Most hair", "Longest tail", "Cutest trick",
+                                           "Most stupig grin" } );
         data = new GridData( GridData.HORIZONTAL_ALIGN_FILL | GridData.VERTICAL_ALIGN_FILL );
         data.verticalSpan = 4;
-        int listHeight = mCategories_.getItemHeight() * 12;
-        Rectangle trim = mCategories_.computeTrim( 0, 0, 0, listHeight );
+        int listHeight = categories.getItemHeight() * 12;
+        Rectangle trim = categories.computeTrim( 0, 0, 0, listHeight );
         data.heightHint = trim.height;
-        mCategories_.setLayoutData( data );
+        categories.setLayoutData( data );
 
         // add a button to load the doggie picture
-        Button browse = new Button( mShell_, SWT.PUSH );
+        Button browse = new Button( shell, SWT.PUSH );
         browse.setText( "Browse..." );
         data = new GridData( GridData.HORIZONTAL_ALIGN_FILL );
         data.horizontalIndent = 5;
         browse.setLayoutData( data );
-        browse.addSelectionListener( new SelectionAdapter()
-        {
+        browse.addSelectionListener( new SelectionAdapter() {
 
             /**
              * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
              */
             @Override
-            public void widgetSelected( SelectionEvent event )
-            {
-                String filename = new FileDialog( mShell_ ).open();
-                if ( filename != null )
-                {
-                    mDogImage_ = new Image( mDisplay_, filename );
+            public void widgetSelected( SelectionEvent event ) {
+                String filename = new FileDialog( shell ).open();
+                if ( filename != null ) {
+                    dogImage = new Image( display, filename );
                 }
             }
 
         } );
 
         // add button to delete the doggie picture
-        Button del = new Button( mShell_, SWT.PUSH );
+        Button del = new Button( shell, SWT.PUSH );
         del.setText( "Delete" );
         data = new GridData( GridData.HORIZONTAL_ALIGN_FILL | GridData.VERTICAL_ALIGN_BEGINNING );
         data.horizontalIndent = 5;
         del.setLayoutData( data );
-        del.addSelectionListener( new SelectionAdapter()
-        {
+        del.addSelectionListener( new SelectionAdapter() {
 
             /**
              * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
              */
             @Override
-            public void widgetSelected( SelectionEvent event )
-            {
-                if ( mDogImage_ != null )
-                {
-                    mDogImage_.dispose();
-                    mDogImage_ = null;
-                    mDogPhoto_.redraw();
+            public void widgetSelected( SelectionEvent event ) {
+                if ( dogImage != null ) {
+                    dogImage.dispose();
+                    dogImage = null;
+                    dogPhoto.redraw();
                 }
             }
         } );
 
         // create a group for the owner layout
-        Group ownerInfo = new Group( mShell_, SWT.NULL );
+        Group ownerInfo = new Group( shell, SWT.NULL );
         ownerInfo.setText( "Owner Info" );
         layout = new GridLayout();
         layout.numColumns = 2;
@@ -175,37 +163,34 @@ public class ComplexGridLayoutExample
 
         // set up owner name
         new Label( ownerInfo, SWT.NULL ).setText( "Name:" );
-        mOwnerName_ = new Text( ownerInfo, SWT.SINGLE | SWT.BORDER );
-        mOwnerName_.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
+        ownerName = new Text( ownerInfo, SWT.SINGLE | SWT.BORDER );
+        ownerName.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
 
         // set up the owner phone
         new Label( ownerInfo, SWT.NULL ).setText( "Phone:" );
-        mOwnerPhone_ = new Text( ownerInfo, SWT.SINGLE | SWT.BORDER );
-        mOwnerPhone_.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
+        ownerPhone = new Text( ownerInfo, SWT.SINGLE | SWT.BORDER );
+        ownerPhone.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
 
         // complete with an enter button
-        Button enter = new Button( mShell_, SWT.PUSH );
+        Button enter = new Button( shell, SWT.PUSH );
         enter.setText( "Enter" );
         data = new GridData( GridData.HORIZONTAL_ALIGN_END );
         data.horizontalSpan = 3;
         enter.setLayoutData( data );
-        enter.addSelectionListener( new SelectionAdapter()
-        {
+        enter.addSelectionListener( new SelectionAdapter() {
 
             /**
              * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
              */
             @Override
-            public void widgetSelected( SelectionEvent event )
-            {
+            public void widgetSelected( SelectionEvent event ) {
                 StringBuffer buff = new StringBuffer();
-                buff.append( "\nDog Name:" ).append( mDogName_.getText() ).append( "\n" );
-                buff.append( "Dog Breed:" ).append( mDogBreed_.getText() ).append( "\n" );
-                buff.append( "Owner name:" ).append( mOwnerName_.getText() ).append( "\n" );
-                buff.append( "Owner phone:" ).append( mOwnerPhone_.getText() ).append( "\n" );
+                buff.append( "\nDog Name:" ).append( dogName.getText() ).append( "\n" );
+                buff.append( "Dog Breed:" ).append( dogBreed.getText() ).append( "\n" );
+                buff.append( "Owner name:" ).append( ownerName.getText() ).append( "\n" );
+                buff.append( "Owner phone:" ).append( ownerPhone.getText() ).append( "\n" );
                 buff.append( "Categories:\n" );
-                for ( String s : mCategories_.getSelection() )
-                {
+                for ( String s : categories.getSelection() ) {
                     buff.append( "\t" ).append( s ).append( "\n" );
                 }
 
@@ -216,13 +201,11 @@ public class ComplexGridLayoutExample
         // ------------------------------------
         LOG.debug( "Opening GUI" );
         // now get the dialog up and running
-        mShell_.pack();
-        mShell_.open();
-        while ( !mShell_.isDisposed() )
-        {
-            if ( !mDisplay_.readAndDispatch() )
-            {
-                mDisplay_.sleep();
+        shell.pack();
+        shell.open();
+        while ( !shell.isDisposed() ) {
+            if ( !display.readAndDispatch() ) {
+                display.sleep();
             }
         }
         LOG.debug( "All done" );

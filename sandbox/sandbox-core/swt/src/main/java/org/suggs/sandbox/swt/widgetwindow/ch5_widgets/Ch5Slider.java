@@ -15,8 +15,7 @@ import org.eclipse.swt.widgets.Slider;
  * @author suggitpe
  * @version 1.0 19 Aug 2008
  */
-public class Ch5Slider extends Composite
-{
+public class Ch5Slider extends Composite {
 
     /**
      * Constructs a new instance.
@@ -24,8 +23,7 @@ public class Ch5Slider extends Composite
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch5Slider( Composite parent )
-    {
+    public Ch5Slider( Composite parent ) {
         super( parent, SWT.NONE );
         setLayout( new FillLayout() );
         Slider s = new Slider( this, SWT.HORIZONTAL );

@@ -15,14 +15,12 @@ import org.eclipse.jface.viewers.Viewer;
  * @author suggitpe
  * @version 1.0 22 Dec 2008
  */
-public class FileTableContentProvider implements IStructuredContentProvider
-{
+public class FileTableContentProvider implements IStructuredContentProvider {
 
     /**
      * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
      */
-    public Object[] getElements( Object elem )
-    {
+    public Object[] getElements( Object elem ) {
         Object[] kids = null;
         kids = ( (File) elem ).listFiles();
         return kids == null ? new Object[0] : kids;
@@ -31,16 +29,12 @@ public class FileTableContentProvider implements IStructuredContentProvider
     /**
      * @see org.eclipse.jface.viewers.IContentProvider#dispose()
      */
-    public void dispose()
-    {
-    }
+    public void dispose() {}
 
     /**
      * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
      *      java.lang.Object, java.lang.Object)
      */
-    public void inputChanged( Viewer aArg0, Object aArg1, Object aArg2 )
-    {
-    }
+    public void inputChanged( Viewer aArg0, Object aArg1, Object aArg2 ) {}
 
 }

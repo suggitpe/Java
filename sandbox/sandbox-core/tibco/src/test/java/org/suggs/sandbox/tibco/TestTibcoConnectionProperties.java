@@ -21,8 +21,7 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
  * @author suggitpe
  * @version 1.0 6 Aug 2008
  */
-public class TestTibcoConnectionProperties
-{
+public class TestTibcoConnectionProperties {
 
     private static final Log LOG = LogFactory.getLog( TestTibcoConnectionProperties.class );
 
@@ -30,16 +29,13 @@ public class TestTibcoConnectionProperties
      * Tests the connection details class
      */
     @Test
-    public void testTibcoConnection()
-    {
+    public void testTibcoConnection() {
         LOG.debug( "Creating instance of Tibco Conection Details" );
         TibcoConnectionProperties conn = TibcoConnectionProperties.instance();
-        try
-        {
+        try {
             conn.getInitialContext();
         }
-        catch ( NamingException ne )
-        {
+        catch ( NamingException ne ) {
             ne.printStackTrace();
             Assert.fail( "Naming exception thrown from getter" );
         }
@@ -49,17 +45,14 @@ public class TestTibcoConnectionProperties
      * Tests that we can connect to the EMS broker as admin
      */
     @Test
-    public void testTibcoAdminConnection()
-    {
-        try
-        {
+    public void testTibcoAdminConnection() {
+        try {
             LOG.debug( "Creating instance of Tibco admin connection" );
             TibcoAdminConnectionProperties conn = TibcoAdminConnectionProperties.instance();
             TibjmsAdmin admin = conn.getAdmin();
             admin.close();
         }
-        catch ( TibjmsAdminException e )
-        {
+        catch ( TibjmsAdminException e ) {
             e.printStackTrace();
             Assert.fail( "Something bad happened" );
         }

@@ -28,9 +28,9 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class Ch7Fonts extends Canvas {
 
-    static Shell mMainShell_;
-    Composite mComp_;
-    FontData mFontData_;
+    static Shell mainShell;
+    Composite comp;
+    FontData fontData;
 
     /**
      * Constructs a new instance.
@@ -42,8 +42,8 @@ public class Ch7Fonts extends Canvas {
         super( parent, SWT.NONE );
         parent.setSize( 600, 200 );
         addPaintListener( dl );
-        mComp_ = this;
-        mMainShell_ = parent.getShell();
+        comp = this;
+        mainShell = parent.getShell();
         Button fontChoice = new Button( this, SWT.CENTER );
         fontChoice.setBounds( 20, 20, 100, 20 );
         fontChoice.setText( "Choose font" );
@@ -54,9 +54,9 @@ public class Ch7Fonts extends Canvas {
              */
             @Override
             public void mouseDown( MouseEvent me ) {
-                FontDialog fd = new FontDialog( mMainShell_ );
-                mFontData_ = fd.open();
-                mComp_.redraw();
+                FontDialog fd = new FontDialog( mainShell );
+                fontData = fd.open();
+                comp.redraw();
             }
 
         } );
@@ -72,8 +72,8 @@ public class Ch7Fonts extends Canvas {
             Display d = pe.display;
             GC gc = pe.gc;
             gc.setBackground( d.getSystemColor( SWT.COLOR_DARK_GRAY ) );
-            if ( mFontData_ != null ) {
-                Font f = new Font( d, mFontData_ );
+            if ( fontData != null ) {
+                Font f = new Font( d, fontData );
                 gc.setFont( f );
                 FontMetrics fm = gc.getFontMetrics();
 

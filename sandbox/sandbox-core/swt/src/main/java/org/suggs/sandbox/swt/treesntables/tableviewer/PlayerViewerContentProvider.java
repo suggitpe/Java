@@ -13,20 +13,16 @@ import org.eclipse.jface.viewers.Viewer;
  * @author suggitpe
  * @version 1.0 2 Dec 2008
  */
-public class PlayerViewerContentProvider implements IStructuredContentProvider
-{
+public class PlayerViewerContentProvider implements IStructuredContentProvider {
 
     /**
-     * This is where all of the rows for the table are derived from.
-     * This method will process a TeamBean and pull out all of the
-     * players into an array of player beans.
+     * This is where all of the rows for the table are derived from. This method will process a TeamBean and
+     * pull out all of the players into an array of player beans.
      * 
      * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
      */
-    public Object[] getElements( Object inElem )
-    {
-        if ( inElem instanceof TeamBean )
-        {
+    public Object[] getElements( Object inElem ) {
+        if ( inElem instanceof TeamBean ) {
             TeamBean team = (TeamBean) inElem;
             return team.getPlayers().toArray();
         }
@@ -36,18 +32,16 @@ public class PlayerViewerContentProvider implements IStructuredContentProvider
     /**
      * @see org.eclipse.jface.viewers.IContentProvider#dispose()
      */
-    public void dispose()
-    {
-        // nadda
+    public void dispose() {
+    // nadda
     }
 
     /**
      * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
      *      java.lang.Object, java.lang.Object)
      */
-    public void inputChanged( Viewer arg0, Object arg1, Object arg2 )
-    {
-        // nadda
+    public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {
+    // nadda
     }
 
 }

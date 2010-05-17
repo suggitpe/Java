@@ -17,31 +17,24 @@ import org.eclipse.swt.graphics.Image;
  * @author suggitpe
  * @version 1.0 2 Dec 2008
  */
-public class PlayerViewerLabelProvider implements ITableLabelProvider
-{
+public class PlayerViewerLabelProvider implements ITableLabelProvider {
 
-    List<ILabelProviderListener> mListeners_ = new ArrayList<ILabelProviderListener>();
+    List<ILabelProviderListener> listeners = new ArrayList<ILabelProviderListener>();
 
     /**
-     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object,
-     *      int)
+     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
      */
-    public Image getColumnImage( Object arg0, int arg1 )
-    {
+    public Image getColumnImage( Object arg0, int arg1 ) {
         return null;
     }
 
     /**
-     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object,
-     *      int)
+     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
      */
-    public String getColumnText( Object obj, int colIdx )
-    {
-        if ( obj instanceof PlayerBean )
-        {
+    public String getColumnText( Object obj, int colIdx ) {
+        if ( obj instanceof PlayerBean ) {
             PlayerBean p = (PlayerBean) obj;
-            switch ( colIdx )
-            {
+            switch ( colIdx ) {
                 case 0:
                     return p.getFirstname();
                 case 1:
@@ -62,36 +55,31 @@ public class PlayerViewerLabelProvider implements ITableLabelProvider
     }
 
     /**
-     * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object,
-     *      java.lang.String)
+     * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object, java.lang.String)
      */
-    public boolean isLabelProperty( Object arg0, String arg1 )
-    {
+    public boolean isLabelProperty( Object arg0, String arg1 ) {
         return false;
     }
 
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
      */
-    public void dispose()
-    {
-        // nadda
+    public void dispose() {
+    // nadda
     }
 
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
-    public void addListener( ILabelProviderListener arg0 )
-    {
-        mListeners_.add( arg0 );
+    public void addListener( ILabelProviderListener arg0 ) {
+        listeners.add( arg0 );
     }
 
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
-    public void removeListener( ILabelProviderListener arg0 )
-    {
-        mListeners_.remove( arg0 );
+    public void removeListener( ILabelProviderListener arg0 ) {
+        listeners.remove( arg0 );
     }
 
 }

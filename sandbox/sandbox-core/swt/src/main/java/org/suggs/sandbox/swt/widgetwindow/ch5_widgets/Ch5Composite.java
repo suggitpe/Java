@@ -16,8 +16,7 @@ import org.eclipse.swt.widgets.Label;
  * @author suggitpe
  * @version 1.0 19 Aug 2008
  */
-public class Ch5Composite extends Composite
-{
+public class Ch5Composite extends Composite {
 
     /**
      * Constructs a new instance.
@@ -25,8 +24,7 @@ public class Ch5Composite extends Composite
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch5Composite( Composite parent )
-    {
+    public Ch5Composite( Composite parent ) {
         super( parent, SWT.NONE );
         parent.getShell().setText( "Chapter 5 Composite" );
 

@@ -13,19 +13,16 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * This example show us a very simple way to create a grid layout
- * based dialog.
+ * This example show us a very simple way to create a grid layout based dialog.
  * 
  * @author suggitpe
  * @version 1.0 9 Apr 2008
  */
-public class SimpleGridLayoutExample
-{
+public class SimpleGridLayoutExample {
 
     private static final Log LOG = LogFactory.getLog( SimpleGridLayoutExample.class );
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         LOG.debug( "Creating GUI" );
         Display d = new Display();
         Shell shell = new Shell( d );
@@ -44,10 +41,8 @@ public class SimpleGridLayoutExample
         shell.pack();
         shell.open();
 
-        while ( !shell.isDisposed() )
-        {
-            if ( !d.readAndDispatch() )
-            {
+        while ( !shell.isDisposed() ) {
+            if ( !d.readAndDispatch() ) {
                 d.sleep();
             }
         }

@@ -21,8 +21,7 @@ import org.eclipse.swt.widgets.Display;
  * @author suggitpe
  * @version 1.0 2 Sep 2008
  */
-public class Ch7Composite extends Canvas
-{
+public class Ch7Composite extends Canvas {
 
     /**
      * Constructs a new instance.
@@ -30,8 +29,7 @@ public class Ch7Composite extends Canvas
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch7Composite( Composite parent )
-    {
+    public Ch7Composite( Composite parent ) {
         super( parent, SWT.BORDER );
 
         Ch7Colors drawing = new Ch7Colors( this );
@@ -40,19 +38,16 @@ public class Ch7Composite extends Canvas
         Ch7Fonts f = new Ch7Fonts( this );
         f.setBounds( 0, 150, 500, 200 );
 
-        addPaintListener( new PaintListener()
-        {
+        addPaintListener( new PaintListener() {
 
             /**
              * @see org.eclipse.swt.events.PaintListener#paintControl(org.eclipse.swt.events.PaintEvent)
              */
-            public void paintControl( PaintEvent pe )
-            {
+            public void paintControl( PaintEvent pe ) {
                 Display d = pe.display;
                 GC gc = pe.gc;
                 InputStream is = getClass().getClassLoader().getResourceAsStream( "FlagGIF.gif" );
-                if ( is == null )
-                {
+                if ( is == null ) {
                     throw new IllegalStateException( "No resource found" );
                 }
                 Image img = new Image( d, is );

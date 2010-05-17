@@ -5,17 +5,14 @@
 package org.suggs.sandbox.swt.treesntables.tableviewer;
 
 /**
- * This class acts as the model provider for the data that we will
- * use.
+ * This class acts as the model provider for the data that we will use.
  * 
  * @author suggitpe
  * @version 1.0 3 Dec 2008
  */
-public class PlayerTableModel
-{
+public class PlayerTableModel {
 
-    public static final TeamBean createTeam()
-    {
+    public static final TeamBean createTeam() {
         TeamBean ret = new TeamBean( "SuggsSpecials", 2009 );
 
         ret.addPlayer( new PlayerBean( "Peter", "Suggitt", 2.1, 3.3, 5.4 ) );

@@ -16,25 +16,22 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Singleton class that encapsulates the access to the configuration
- * file.
+ * Singleton class that encapsulates the access to the configuration file.
  * 
  * @author suggitpe
  * @version 1.0 5 Aug 2008
  */
-public class TibcoConnectionProperties
-{
+public class TibcoConnectionProperties {
 
     private static final Log LOG = LogFactory.getLog( TibcoConnectionProperties.class );
     private static final String PROP_FILE = "tibco_connection.properties";
 
-    private static TibcoConnectionProperties mInstance_;
-    private Properties mData_;
+    private static TibcoConnectionProperties instance;
+    private Properties data;
 
     // load up the instance of the properties file
-    static
-    {
-        mInstance_ = new TibcoConnectionProperties();
+    static {
+        instance = new TibcoConnectionProperties();
     }
 
     /**
@@ -42,28 +39,23 @@ public class TibcoConnectionProperties
      * 
      * @return the instance of the singleton
      */
-    public static TibcoConnectionProperties instance()
-    {
-        return mInstance_;
+    public static TibcoConnectionProperties instance() {
+        return instance;
     }
 
     /**
      * Constructs a new instance.
      */
-    private TibcoConnectionProperties()
-    {
-        mData_ = new Properties();
-        try
-        {
-            mData_.load( this.getClass().getClassLoader().getResourceAsStream( PROP_FILE ) );
+    private TibcoConnectionProperties() {
+        data = new Properties();
+        try {
+            data.load( this.getClass().getClassLoader().getResourceAsStream( PROP_FILE ) );
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             throw new IllegalStateException( "Failed to load properties file [" + PROP_FILE + "]" );
         }
 
-        if ( LOG.isDebugEnabled() )
-        {
+        if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Loaded properties from [" + PROP_FILE + "]" );
         }
     }
@@ -73,9 +65,8 @@ public class TibcoConnectionProperties
      * 
      * @return the context factory value
      */
-    public String getContextFactory()
-    {
-        return mData_.getProperty( "context.factory" );
+    public String getContextFactory() {
+        return data.getProperty( "context.factory" );
     }
 
     /**
@@ -83,9 +74,8 @@ public class TibcoConnectionProperties
      * 
      * @return the provider URL
      */
-    public String getProviderUrl()
-    {
-        return mData_.getProperty( "provider.url" );
+    public String getProviderUrl() {
+        return data.getProperty( "provider.url" );
     }
 
     /**
@@ -93,9 +83,8 @@ public class TibcoConnectionProperties
      * 
      * @return the user name.
      */
-    public String getUsername()
-    {
-        return mData_.getProperty( "tibco.username" );
+    public String getUsername() {
+        return data.getProperty( "tibco.username" );
     }
 
     /**
@@ -103,31 +92,25 @@ public class TibcoConnectionProperties
      * 
      * @return the password.
      */
-    public String getPassword()
-    {
-        return mData_.getProperty( "tibco.pasword" );
+    public String getPassword() {
+        return data.getProperty( "tibco.pasword" );
     }
 
     /**
-     * Helper method to put together the initial context environment
-     * together.
+     * Helper method to put together the initial context environment together.
      * 
-     * @return a hashtable of the relevant properties for the Tibco
-     *         Initial Context
+     * @return a hashtable of the relevant properties for the Tibco Initial Context
      * @throws NamingException
      */
-    public InitialContext getInitialContext() throws NamingException
-    {
+    public InitialContext getInitialContext() throws NamingException {
         Hashtable<String, String> env = new Hashtable<String, String>();
         env.put( Context.INITIAL_CONTEXT_FACTORY, getContextFactory() );
         env.put( Context.PROVIDER_URL, getProviderUrl() );
         String user = getUsername();
-        if ( user != null && !user.equals( "" ) )
-        {
+        if ( user != null && !user.equals( "" ) ) {
             env.put( Context.SECURITY_PRINCIPAL, user );
             String pass = getPassword();
-            if ( pass != null && !pass.equals( "" ) )
-            {
+            if ( pass != null && !pass.equals( "" ) ) {
                 env.put( Context.SECURITY_CREDENTIALS, pass );
             }
         }

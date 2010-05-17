@@ -16,31 +16,28 @@ import org.eclipse.swt.widgets.Label;
  * @author suggitpe
  * @version 1.0 12 Sep 2008
  */
-public class SummaryPage extends WizardPage
-{
+public class SummaryPage extends WizardPage {
 
     public static final String PAGE_NAME = "Summary";
 
-    private Label mLabel_;
+    private Label label;
 
     /**
      * Constructs a new instance.
      */
-    public SummaryPage()
-    {
+    public SummaryPage() {
         super( PAGE_NAME, "Summary Page", null );
     }
 
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
-    public void createControl( Composite parent )
-    {
+    public void createControl( Composite parent ) {
         Composite top = new Composite( parent, SWT.NONE );
         top.setLayout( new FillLayout() );
 
-        mLabel_ = new Label( top, SWT.CENTER );
-        mLabel_.setText( "" );
+        label = new Label( top, SWT.CENTER );
+        label.setText( "" );
 
         setControl( top );
         setPageComplete( true );
@@ -51,9 +48,8 @@ public class SummaryPage extends WizardPage
      * 
      * @param txt
      */
-    public void updateText( String txt )
-    {
-        mLabel_.setText( txt );
+    public void updateText( String txt ) {
+        label.setText( txt );
     }
 
 }

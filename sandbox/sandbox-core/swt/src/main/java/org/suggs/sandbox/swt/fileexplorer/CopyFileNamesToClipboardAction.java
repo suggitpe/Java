@@ -17,27 +17,24 @@ import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 
 /**
- * This action will copy all of the absolute paths of the selected
- * files into the clipboard
+ * This action will copy all of the absolute paths of the selected files into the clipboard
  * 
  * @author suggitpe
  * @version 1.0 23 Dec 2008
  */
-public class CopyFileNamesToClipboardAction extends Action
-{
+public class CopyFileNamesToClipboardAction extends Action {
 
     private static final Log LOG = LogFactory.getLog( CopyFileNamesToClipboardAction.class );
 
-    private Explorer window_;
+    private Explorer window;
 
     /**
      * Constructs a new instance.
      * 
      * @param expl
      */
-    public CopyFileNamesToClipboardAction( Explorer expl )
-    {
-        window_ = expl;
+    public CopyFileNamesToClipboardAction( Explorer expl ) {
+        window = expl;
         setText( "Copy File &Names@ctrl+shift+C" );
         setToolTipText( "Copy absolute filenames to the clipboard" );
         setImageDescriptor( ImageDescriptor.createFromURL( getClass().getClassLoader()
@@ -49,21 +46,18 @@ public class CopyFileNamesToClipboardAction extends Action
      */
     @SuppressWarnings("unchecked")
     @Override
-    public void run()
-    {
+    public void run() {
         Clipboard clip = ImageUtil.getClipboard();
         TextTransfer trans = TextTransfer.getInstance();
 
-        IStructuredSelection sel = window_.getTableSelection();
-        if ( sel.isEmpty() )
-        {
+        IStructuredSelection sel = window.getTableSelection();
+        if ( sel.isEmpty() ) {
             LOG.warn( "No files selected" );
             return;
         }
 
         StringBuffer buff = new StringBuffer();
-        for ( Iterator iter = sel.iterator(); iter.hasNext(); )
-        {
+        for ( Iterator iter = sel.iterator(); iter.hasNext(); ) {
             File f = (File) iter.next();
             buff.append( " " ).append( f.getAbsolutePath() );
         }

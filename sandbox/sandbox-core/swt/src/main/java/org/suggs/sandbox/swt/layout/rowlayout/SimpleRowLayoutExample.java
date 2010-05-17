@@ -18,16 +18,14 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 8 Apr 2008
  */
-public class SimpleRowLayoutExample
-{
+public class SimpleRowLayoutExample {
 
     private static final Log LOG = LogFactory.getLog( SimpleRowLayoutExample.class );
 
     /**
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         LOG.info( "Building dialog" );
         Display d = new Display();
         Shell shell = new Shell( d );
@@ -50,10 +48,8 @@ public class SimpleRowLayoutExample
         shell.pack();
         shell.open();
         LOG.debug( "Dialog opened" );
-        while ( !shell.isDisposed() )
-        {
-            if ( !d.readAndDispatch() )
-            {
+        while ( !shell.isDisposed() ) {
+            if ( !d.readAndDispatch() ) {
                 d.sleep();
             }
         }

@@ -16,16 +16,14 @@ import org.eclipse.swt.widgets.Label;
  * @author suggitpe
  * @version 1.0 11 Aug 2008
  */
-public class Ch3Group extends Composite
-{
+public class Ch3Group extends Composite {
 
     /**
      * Constructs a new instance.
      * 
      * @param parent
      */
-    public Ch3Group( Composite parent )
-    {
+    public Ch3Group( Composite parent ) {
         super( parent, SWT.NONE );
 
         Group grp = new Group( this, SWT.SHADOW_ETCHED_IN );

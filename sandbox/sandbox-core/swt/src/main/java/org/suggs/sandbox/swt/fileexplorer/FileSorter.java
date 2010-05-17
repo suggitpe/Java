@@ -14,15 +14,13 @@ import org.eclipse.jface.viewers.ViewerSorter;
  * @author suggitpe
  * @version 1.0 22 Dec 2008
  */
-public class FileSorter extends ViewerSorter
-{
+public class FileSorter extends ViewerSorter {
 
     /**
      * @see org.eclipse.jface.viewers.ViewerComparator#category(java.lang.Object)
      */
     @Override
-    public int category( Object element )
-    {
+    public int category( Object element ) {
         return ( (File) element ).isDirectory() ? 0 : 1;
     }
 

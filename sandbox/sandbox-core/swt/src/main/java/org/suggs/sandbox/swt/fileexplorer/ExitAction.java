@@ -16,23 +16,20 @@ import org.eclipse.jface.window.ApplicationWindow;
  * @author suggitpe
  * @version 1.0 23 Dec 2008
  */
-public class ExitAction extends Action
-{
+public class ExitAction extends Action {
 
     private static final Log LOG = LogFactory.getLog( ExitAction.class );
 
-    ApplicationWindow appWin_;
+    ApplicationWindow appWin;
 
     /**
      * Constructs a new instance.
      * 
      * @param w
-     *            the application window from which to execute the
-     *            action
+     *            the application window from which to execute the action
      */
-    public ExitAction( ApplicationWindow w )
-    {
-        appWin_ = w;
+    public ExitAction( ApplicationWindow w ) {
+        appWin = w;
         setText( "E&xit@Ctrl+w" );
         setToolTipText( "Exit the application" );
         setImageDescriptor( ImageDescriptor.createFromURL( ExitAction.class.getClassLoader()
@@ -43,10 +40,9 @@ public class ExitAction extends Action
      * @see org.eclipse.jface.action.Action#run()
      */
     @Override
-    public void run()
-    {
+    public void run() {
         LOG.debug( "Closing main application window" );
-        appWin_.close();
+        appWin.close();
     }
 
 }

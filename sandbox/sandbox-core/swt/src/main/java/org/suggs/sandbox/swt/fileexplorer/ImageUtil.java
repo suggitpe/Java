@@ -15,31 +15,28 @@ import org.eclipse.swt.widgets.Display;
  * @author suggitpe
  * @version 1.0 22 Dec 2008
  */
-public class ImageUtil
-{
+public class ImageUtil {
 
-    private static ImageRegistry images_;
-    private static Clipboard clipboard_;
+    private static ImageRegistry IMAGES;
+    private static Clipboard CLIPBOARD;
 
     /**
      * Singleton method for managing an image registry for
      * 
      * @return the image registry with all of the image items included
      */
-    public static ImageRegistry getImageRegistry()
-    {
-        if ( images_ == null )
-        {
-            images_ = new ImageRegistry();
-            images_.put( "folder", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
+    public static ImageRegistry getImageRegistry() {
+        if ( IMAGES == null ) {
+            IMAGES = new ImageRegistry();
+            IMAGES.put( "folder", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
                 .getResource( "folder.gif" ) ) );
-            images_.put( "file", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
+            IMAGES.put( "file", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
                 .getResource( "file.gif" ) ) );
-            images_.put( "exit", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
+            IMAGES.put( "exit", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
                 .getResource( "exit.gif" ) ) );
 
         }
-        return images_;
+        return IMAGES;
     }
 
     /**
@@ -47,12 +44,10 @@ public class ImageUtil
      * 
      * @return the clipboard
      */
-    public static Clipboard getClipboard()
-    {
-        if ( clipboard_ == null )
-        {
-            clipboard_ = new Clipboard( Display.getCurrent() );
+    public static Clipboard getClipboard() {
+        if ( CLIPBOARD == null ) {
+            CLIPBOARD = new Clipboard( Display.getCurrent() );
         }
-        return clipboard_;
+        return CLIPBOARD;
     }
 }

@@ -16,8 +16,7 @@ import org.eclipse.swt.widgets.Composite;
  * @author suggitpe
  * @version 1.0 21 Aug 2008
  */
-public class Ch6GridLayoutComposite extends Composite
-{
+public class Ch6GridLayoutComposite extends Composite {
 
     /**
      * Constructs a new instance.
@@ -25,15 +24,13 @@ public class Ch6GridLayoutComposite extends Composite
      * @param parent
      *            a composit to associate this class with
      */
-    public Ch6GridLayoutComposite( Composite parent )
-    {
+    public Ch6GridLayoutComposite( Composite parent ) {
         super( parent, SWT.NONE );
         parent.getShell().setText( "Grid Layout example" );
         // use 4 columns and use as little space as possible (make
         // columns equal width)
         setLayout( new GridLayout( 4, false ) );
-        for ( int i = 0; i < 16; ++i )
-        {
+        for ( int i = 0; i < 16; ++i ) {
             Button b = new Button( this, SWT.PUSH );
             b.setText( "Cell " + ( i + 1 ) );
         }

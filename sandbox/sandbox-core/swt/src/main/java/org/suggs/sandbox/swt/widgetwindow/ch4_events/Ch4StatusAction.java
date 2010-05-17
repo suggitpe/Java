@@ -14,21 +14,19 @@ import org.eclipse.jface.resource.ImageDescriptor;
  * @author suggitpe
  * @version 1.0 13 Aug 2008
  */
-public class Ch4StatusAction extends Action
-{
+public class Ch4StatusAction extends Action {
 
-    StatusLineManager mStatMan_;
-    short mTriggerCnt_;
+    StatusLineManager statMan;
+    short triggerCnt;
 
     /**
      * Constructs a new instance.
      * 
      * @param mgr
      */
-    public Ch4StatusAction( StatusLineManager mgr )
-    {
+    public Ch4StatusAction( StatusLineManager mgr ) {
         super( "&Trigger@Ctrl+T", AS_PUSH_BUTTON );
-        mStatMan_ = mgr;
+        statMan = mgr;
         setToolTipText( "Trigger the action" );
         // gets the image from the classpath
         setImageDescriptor( ImageDescriptor.createFromURL( this.getClass()
@@ -40,10 +38,9 @@ public class Ch4StatusAction extends Action
      * @see org.eclipse.jface.action.Action#run()
      */
     @Override
-    public void run()
-    {
-        ++mTriggerCnt_;
-        mStatMan_.setMessage( "The status action has fired [" + mTriggerCnt_ + "] times" );
+    public void run() {
+        ++triggerCnt;
+        statMan.setMessage( "The status action has fired [" + triggerCnt + "] times" );
     }
 
 }

@@ -17,16 +17,14 @@ import org.eclipse.jface.wizard.Wizard;
  * @author suggitpe
  * @version 1.0 11 Sep 2008
  */
-public class ProjectWizard extends Wizard
-{
+public class ProjectWizard extends Wizard {
 
     private static final Log LOG = LogFactory.getLog( ProjectWizard.class );
 
     /**
      * Constructs a new instance.
      */
-    public ProjectWizard()
-    {
+    public ProjectWizard() {
         super();
     }
 
@@ -34,29 +32,24 @@ public class ProjectWizard extends Wizard
      * @see org.eclipse.jface.wizard.Wizard#addPages()
      */
     @Override
-    public void addPages()
-    {
+    public void addPages() {
         addPage( new DirectoryPage() );
         addPage( new ChooseDirectoryPage() );
         addPage( new SummaryPage() );
     }
 
     /**
-     * This is the method where we take the data collected in the
-     * wizard pages and do something with it.
+     * This is the method where we take the data collected in the wizard pages and do something with it.
      * 
      * @see org.eclipse.jface.wizard.Wizard#performFinish()
      */
     @Override
-    public boolean performFinish()
-    {
+    public boolean performFinish() {
         DirectoryPage dPage = (DirectoryPage) getPage( DirectoryPage.PAGE_NAME );
-        if ( dPage.useDefaultDirectory() )
-        {
+        if ( dPage.useDefaultDirectory() ) {
             LOG.debug( "Using default directoy" );
         }
-        else
-        {
+        else {
             ChooseDirectoryPage cPage = (ChooseDirectoryPage) getPage( ChooseDirectoryPage.PAGE_NAME );
             LOG.debug( "Using directory " + cPage.getDirectory() );
         }
@@ -68,8 +61,7 @@ public class ProjectWizard extends Wizard
      * @see org.eclipse.jface.wizard.Wizard#performCancel()
      */
     @Override
-    public boolean performCancel()
-    {
+    public boolean performCancel() {
         LOG.debug( "Cancel called" );
         return true;
     }
@@ -78,13 +70,10 @@ public class ProjectWizard extends Wizard
      * @see org.eclipse.jface.wizard.Wizard#getNextPage(org.eclipse.jface.wizard.IWizardPage)
      */
     @Override
-    public IWizardPage getNextPage( IWizardPage page )
-    {
-        if ( page instanceof DirectoryPage )
-        {
+    public IWizardPage getNextPage( IWizardPage page ) {
+        if ( page instanceof DirectoryPage ) {
             DirectoryPage p = (DirectoryPage) page;
-            if ( p.useDefaultDirectory() )
-            {
+            if ( p.useDefaultDirectory() ) {
                 SummaryPage s = (SummaryPage) getPage( SummaryPage.PAGE_NAME );
                 s.updateText( "Using default directory" );
                 return s;
@@ -92,8 +81,7 @@ public class ProjectWizard extends Wizard
         }
 
         IWizardPage next = super.getNextPage( page );
-        if ( next instanceof SummaryPage )
-        {
+        if ( next instanceof SummaryPage ) {
             SummaryPage s = (SummaryPage) next;
             DirectoryPage d = (DirectoryPage) getPage( DirectoryPage.PAGE_NAME );
 
