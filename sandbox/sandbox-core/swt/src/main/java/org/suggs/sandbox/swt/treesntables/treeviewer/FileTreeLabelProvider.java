@@ -21,44 +21,36 @@ import org.eclipse.swt.graphics.Image;
  * @author suggitpe
  * @version 1.0 1 Dec 2008
  */
-public class FileTreeLabelProvider implements ILabelProvider
-{
+public class FileTreeLabelProvider implements ILabelProvider {
 
-    private boolean mPreserveCase_ = true;
-    private List<ILabelProviderListener> mListeners_ = new ArrayList<ILabelProviderListener>();
-
-    private Image mFileImage_;
-    private Image mDirImage_;
+    private boolean preserveCase = true;
+    private List<ILabelProviderListener> listeners = new ArrayList<ILabelProviderListener>();
+    private Image fileImage;
+    private Image dirImage;
 
     /**
      * Constructs a new instance.
      */
-    public FileTreeLabelProvider()
-    {
-        try
-        {
-            mFileImage_ = new Image( null, new FileInputStream( "images/file.gif" ) );
-            mDirImage_ = new Image( null, new FileInputStream( "images/dir.gif" ) );
+    public FileTreeLabelProvider() {
+        try {
+            fileImage = new Image( null, new FileInputStream( "images/file.gif" ) );
+            dirImage = new Image( null, new FileInputStream( "images/dir.gif" ) );
         }
-        catch ( FileNotFoundException fnfe )
-        {
+        catch ( FileNotFoundException fnfe ) {
             // nadda
         }
     }
 
     /**
-     * Update the local var to cover this and then update the
-     * listeners
+     * Update the local var to cover this and then update the listeners
      * 
      * @param pc
      *            th enew state of the preserve case flag
      */
-    public void setPreserveCase( boolean pc )
-    {
-        mPreserveCase_ = pc;
+    public void setPreserveCase( boolean pc ) {
+        preserveCase = pc;
         LabelProviderChangedEvent evt = new LabelProviderChangedEvent( this );
-        for ( ILabelProviderListener l : mListeners_ )
-        {
+        for ( ILabelProviderListener l : listeners ) {
             l.labelProviderChanged( evt );
         }
     }
@@ -66,64 +58,53 @@ public class FileTreeLabelProvider implements ILabelProvider
     /**
      * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
      */
-    public Image getImage( Object obj )
-    {
-        return ( (File) obj ).isDirectory() ? mDirImage_ : mFileImage_;
+    public Image getImage( Object obj ) {
+        return ( (File) obj ).isDirectory() ? dirImage : fileImage;
     }
 
     /**
      * @see org.eclipse.jface.viewers.ILabelProvider#getText(java.lang.Object)
      */
-    public String getText( Object obj )
-    {
+    public String getText( Object obj ) {
         String txt = ( (File) obj ).getName();
-        if ( txt.length() == 0 )
-        {
+        if ( txt.length() == 0 ) {
             txt = ( (File) obj ).getPath();
         }
 
-        return mPreserveCase_ ? txt : txt.toUpperCase();
+        return preserveCase ? txt : txt.toUpperCase();
     }
 
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
-    public void addListener( ILabelProviderListener list )
-    {
-        mListeners_.add( list );
+    public void addListener( ILabelProviderListener list ) {
+        listeners.add( list );
     }
 
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
      */
-    public void dispose()
-    {
-        if ( mDirImage_ != null )
-        {
-            mDirImage_.dispose();
+    public void dispose() {
+        if ( dirImage != null ) {
+            dirImage.dispose();
         }
 
-        if ( mFileImage_ != null )
-        {
-            mFileImage_.dispose();
+        if ( fileImage != null ) {
+            fileImage.dispose();
         }
     }
 
     /**
-     * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object,
-     *      java.lang.String)
+     * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object, java.lang.String)
      */
-    public boolean isLabelProperty( Object arg0, String arg1 )
-    {
+    public boolean isLabelProperty( Object arg0, String arg1 ) {
         return false;
     }
 
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
-    public void removeListener( ILabelProviderListener list )
-    {
-        mListeners_.remove( list );
+    public void removeListener( ILabelProviderListener list ) {
+        listeners.remove( list );
     }
-
 }

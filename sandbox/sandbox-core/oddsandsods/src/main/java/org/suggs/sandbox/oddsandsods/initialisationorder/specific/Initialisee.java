@@ -13,6 +13,7 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
 public class Initialisee {
 
     static Initialisee instance = new Initialisee( "Static member" );
+    protected String member;
 
     /**
      * Singleton approach to construction
@@ -29,8 +30,6 @@ public class Initialisee {
     public Initialisee() {
         Logger.log( "Default constructor" );
     }
-
-    protected String mMember_;
 
     /**
      * Constructs a new instance.

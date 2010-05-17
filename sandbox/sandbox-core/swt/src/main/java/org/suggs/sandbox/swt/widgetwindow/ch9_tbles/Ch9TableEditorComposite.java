@@ -247,20 +247,20 @@ public class Ch9TableEditorComposite extends Composite {
  */
 class EditableTableItem {
 
-    private String mName_;
-    private Integer mValue_;
+    private String name;
+    private Integer value;
 
     /**
      * Constructs a new instance.
      * 
-     * @param name
+     * @param aName
      *            the name to set
-     * @param value
+     * @param aValue
      *            the value to set
      */
-    public EditableTableItem( String name, Integer value ) {
-        mName_ = name;
-        mValue_ = value;
+    public EditableTableItem( String aName, Integer aValue ) {
+        name = aName;
+        value = aValue;
     }
 
     /**
@@ -269,17 +269,17 @@ class EditableTableItem {
      * @return Returns the Name.
      */
     public String getName() {
-        return mName_;
+        return name;
     }
 
     /**
      * Sets the mName_ field to the specified value.
      * 
-     * @param name
+     * @param aName
      *            The Name to set.
      */
-    public void setName( String name ) {
-        mName_ = name;
+    public void setName( String aName ) {
+        name = aName;
     }
 
     /**
@@ -288,17 +288,17 @@ class EditableTableItem {
      * @return Returns the Value.
      */
     public Integer getValue() {
-        return mValue_;
+        return value;
     }
 
     /**
      * Sets the Value field to the specified value.
      * 
-     * @param value
+     * @param aValue
      *            The Value to set.
      */
-    public void setValue( Integer value ) {
-        mValue_ = value;
+    public void setValue( Integer aValue ) {
+        value = aValue;
     }
 
 }

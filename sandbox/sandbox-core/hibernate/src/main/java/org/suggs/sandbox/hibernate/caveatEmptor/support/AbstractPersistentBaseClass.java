@@ -24,7 +24,7 @@ public abstract class AbstractPersistentBaseClass {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CE_SEQ_STR")
-    private long id_;
+    private long id;
 
     @Version
     @Column(name = "OPT_LOCK_VER")
@@ -39,11 +39,11 @@ public abstract class AbstractPersistentBaseClass {
      * @return the id
      */
     public long getId() {
-        return id_;
+        return id;
     }
 
     protected void setId( long aId ) {
-        id_ = aId;
+        id = aId;
     }
 
     /**

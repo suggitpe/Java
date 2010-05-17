@@ -58,7 +58,7 @@ public class Ch8ListComposite extends Composite {
              */
             @Override
             public String getText( Object elem ) {
-                return ( (ListItem) elem ).mName_;
+                return ( (ListItem) elem ).name;
             }
 
         } );
@@ -72,7 +72,7 @@ public class Ch8ListComposite extends Composite {
              */
             @Override
             public boolean select( @SuppressWarnings("hiding") Viewer viewer, Object parent, Object element ) {
-                return ( (ListItem) element ).mValue_ % 2 == 0;
+                return ( (ListItem) element ).value % 2 == 0;
             }
         } );
 
@@ -85,7 +85,7 @@ public class Ch8ListComposite extends Composite {
              */
             @Override
             public int compare( @SuppressWarnings("hiding") Viewer viewer, Object obj1, Object obj2 ) {
-                return ( (ListItem) obj2 ).mValue_ - ( (ListItem) obj1 ).mValue_;
+                return ( (ListItem) obj2 ).value - ( (ListItem) obj1 ).value;
             }
         } );
 
@@ -127,12 +127,12 @@ public class Ch8ListComposite extends Composite {
      */
     class ListItem {
 
-        public String mName_;
-        public int mValue_;
+        public String name;
+        public int value;
 
-        public ListItem( String name, int value ) {
-            mName_ = name;
-            mValue_ = value;
+        public ListItem( String aName, int aValue ) {
+            name = aName;
+            value = aValue;
 
         }
 

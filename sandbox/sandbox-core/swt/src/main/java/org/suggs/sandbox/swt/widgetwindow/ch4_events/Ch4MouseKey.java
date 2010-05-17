@@ -51,8 +51,8 @@ public class Ch4MouseKey extends Composite {
         untyped.setLocation( 80, 10 );
         untyped.pack();
 
-        untyped.addListener( SWT.MouseEnter, UntypedListener );
-        untyped.addListener( SWT.MouseExit, UntypedListener );
+        untyped.addListener( SWT.MouseEnter, untypedListener );
+        untyped.addListener( SWT.MouseExit, untypedListener );
 
         output = new Label( this, SWT.SHADOW_ETCHED_OUT );
         output.setBounds( 40, 70, 90, 40 );
@@ -61,7 +61,7 @@ public class Ch4MouseKey extends Composite {
         pack();
     }
 
-    Listener UntypedListener = new Listener() {
+    Listener untypedListener = new Listener() {
 
         public void handleEvent( Event event ) {
             switch ( event.type ) {

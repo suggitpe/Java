@@ -112,27 +112,27 @@ public class Ch8TreeComposite extends Composite {
      */
     class TreeNode {
 
-        private String mName_;
-        private List<TreeNode> mChildren_ = new ArrayList<TreeNode>();
-        private TreeNode mParent_;
+        private String name;
+        private List<TreeNode> children = new ArrayList<TreeNode>();
+        private TreeNode parent;
 
-        public TreeNode( String name ) {
-            mName_ = name;
+        public TreeNode( String aName ) {
+            name = aName;
         }
 
         protected Object getParent() {
-            return mParent_;
+            return parent;
         }
 
         public TreeNode addChild( TreeNode child ) {
-            mChildren_.add( child );
-            child.mParent_ = this;
+            children.add( child );
+            child.parent = this;
             return this;
         }
 
         @SuppressWarnings("unchecked")
         public List getChildren() {
-            return mChildren_;
+            return children;
         }
 
         /**
@@ -140,7 +140,7 @@ public class Ch8TreeComposite extends Composite {
          */
         @Override
         public String toString() {
-            return mName_;
+            return name;
         }
     }
 }
