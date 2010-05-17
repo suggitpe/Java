@@ -12,19 +12,17 @@ import java.io.Serializable;
  * @author suggitpe
  * @version 1.0 3 Aug 2009
  */
-public class Contact implements Serializable
-{
+public class Contact implements Serializable {
 
-    private String mFirstName_;
-    private String mLastName_;
-    private String mTitle_;
-    private String mOrganisation_;
+    private String firstName;
+    private String lastName;
+    private String title;
+    private String organisation;
 
     /**
      * Constructs a new instance.
      */
-    public Contact()
-    {
+    public Contact() {
         super();
     }
 
@@ -40,25 +38,23 @@ public class Contact implements Serializable
      * @param aOrganisation
      *            contact organisation
      */
-    public Contact( String aFirstName, String aLastName, String aTitle, String aOrganisation )
-    {
-        mFirstName_ = aFirstName;
-        mLastName_ = aLastName;
-        mTitle_ = aTitle;
-        mOrganisation_ = aOrganisation;
+    public Contact( String aFirstName, String aLastName, String aTitle, String aOrganisation ) {
+        firstName = aFirstName;
+        lastName = aLastName;
+        title = aTitle;
+        organisation = aOrganisation;
     }
 
     /**
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuffer ret = new StringBuffer( "Contact: " );
-        ret.append( "firstName=[" ).append( mFirstName_ ).append( "], " );
-        ret.append( "lastName=[" ).append( mLastName_ ).append( "], " );
-        ret.append( "title=[" ).append( mTitle_ ).append( "], " );
-        ret.append( "organisation=[" ).append( mOrganisation_ ).append( "]" );
+        ret.append( "firstName=[" ).append( firstName ).append( "], " );
+        ret.append( "lastName=[" ).append( lastName ).append( "], " );
+        ret.append( "title=[" ).append( title ).append( "], " );
+        ret.append( "organisation=[" ).append( organisation ).append( "]" );
         return ret.toString();
     }
 
@@ -67,9 +63,8 @@ public class Contact implements Serializable
      * 
      * @return first name
      */
-    public String getFirstName()
-    {
-        return mFirstName_;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
@@ -77,9 +72,8 @@ public class Contact implements Serializable
      * 
      * @return last name
      */
-    public String getLastName()
-    {
-        return mLastName_;
+    public String getLastName() {
+        return lastName;
     }
 
     /**
@@ -87,9 +81,8 @@ public class Contact implements Serializable
      * 
      * @return title
      */
-    public String getTitle()
-    {
-        return mTitle_;
+    public String getTitle() {
+        return title;
     }
 
     /**
@@ -97,9 +90,8 @@ public class Contact implements Serializable
      * 
      * @return organisation
      */
-    public String getOrganisation()
-    {
-        return mOrganisation_;
+    public String getOrganisation() {
+        return organisation;
     }
 
     /**
@@ -108,9 +100,8 @@ public class Contact implements Serializable
      * @param aName
      *            first name
      */
-    public void setFirstName( String aName )
-    {
-        mFirstName_ = aName;
+    public void setFirstName( String aName ) {
+        firstName = aName;
     }
 
     /**
@@ -119,9 +110,8 @@ public class Contact implements Serializable
      * @param aName
      *            last name
      */
-    public void setLastName( String aName )
-    {
-        mLastName_ = aName;
+    public void setLastName( String aName ) {
+        lastName = aName;
     }
 
     /**
@@ -130,9 +120,8 @@ public class Contact implements Serializable
      * @param aTitle
      *            title
      */
-    public void setTitle( String aTitle )
-    {
-        mTitle_ = aTitle;
+    public void setTitle( String aTitle ) {
+        title = aTitle;
     }
 
     /**
@@ -141,9 +130,8 @@ public class Contact implements Serializable
      * @param aOrg
      *            organisation
      */
-    public void setOrganisation( String aOrg )
-    {
-        mOrganisation_ = aOrg;
+    public void setOrganisation( String aOrg ) {
+        organisation = aOrg;
     }
 
 }

@@ -26,69 +26,62 @@ import javax.swing.table.AbstractTableModel;
  * @author suggitpe
  * @version 1.0 3 Aug 2009
  */
-public class StateGui implements ActionListener
-{
+public class StateGui implements ActionListener {
 
-    private JFrame mMainFrame_ = new JFrame( "State Pattern Example" );
-    private JPanel mEditPanel_ = new JPanel();
-    private JPanel mControlPanel_ = new JPanel();
-    private CalendarEditor mCalendar_ = null;
-    private JButton mSaveButton_ = new JButton( "Save" );
-    private JButton mExitButton_ = new JButton( "Exit" );
+    private JFrame mainFrame = new JFrame( "State Pattern Example" );
+    private JPanel editPanel = new JPanel();
+    private JPanel controlPanel = new JPanel();
+    private CalendarEditor calendar = null;
+    private JButton saveButton = new JButton( "Save" );
+    private JButton exitButton = new JButton( "Exit" );
 
     /**
      * Constructs a new instance.
      * 
      * @param aCalendar
-     *            a calendar editor to delegate save and edit actions
-     *            to
+     *            a calendar editor to delegate save and edit actions to
      */
-    public StateGui( CalendarEditor aCalendar )
-    {
-        mCalendar_ = aCalendar;
+    public StateGui( CalendarEditor aCalendar ) {
+        calendar = aCalendar;
     }
 
     /**
      * Creates the actual GUI
      */
-    public void createGui()
-    {
-        Container content = mMainFrame_.getContentPane();
+    public void createGui() {
+        Container content = mainFrame.getContentPane();
         content.setLayout( new BoxLayout( content, BoxLayout.Y_AXIS ) );
 
         // build and add the edit panel
-        mEditPanel_.setLayout( new BorderLayout() );
-        List<Appointment> apps = mCalendar_.getAppointments();
+        editPanel.setLayout( new BorderLayout() );
+        List<Appointment> apps = calendar.getAppointments();
         JTable table = new JTable( new StateTableModel( apps.toArray( new Appointment[apps.size()] ) ) );
-        mEditPanel_.add( new JScrollPane( table ) );
-        content.add( mEditPanel_ );
+        editPanel.add( new JScrollPane( table ) );
+        content.add( editPanel );
 
         // build and add the control panel
-        mControlPanel_.add( mSaveButton_ );
-        mControlPanel_.add( mExitButton_ );
-        content.add( mControlPanel_ );
+        controlPanel.add( saveButton );
+        controlPanel.add( exitButton );
+        content.add( controlPanel );
 
-        mSaveButton_.addActionListener( this );
-        mExitButton_.addActionListener( this );
+        saveButton.addActionListener( this );
+        exitButton.addActionListener( this );
 
-        mMainFrame_.addWindowListener( new WindowCloseManager() );
-        mMainFrame_.pack();
-        mMainFrame_.setVisible( true );
+        mainFrame.addWindowListener( new WindowCloseManager() );
+        mainFrame.pack();
+        mainFrame.setVisible( true );
     }
 
     /**
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
     @Override
-    public void actionPerformed( ActionEvent event )
-    {
+    public void actionPerformed( ActionEvent event ) {
         Object originator = event.getSource();
-        if ( originator == mSaveButton_ )
-        {
+        if ( originator == saveButton ) {
             saveAppointments();
         }
-        else if ( originator == mExitButton_ )
-        {
+        else if ( originator == exitButton ) {
             exitApplication();
         }
     }
@@ -96,35 +89,30 @@ public class StateGui implements ActionListener
     /**
      * Call save on the calendar editor
      */
-    private void saveAppointments()
-    {
-        mCalendar_.save();
+    private void saveAppointments() {
+        calendar.save();
     }
 
     /**
      * Process to close out the application GUI.
      */
-    private void exitApplication()
-    {
+    private void exitApplication() {
         System.exit( 0 );
     }
 
     /**
-     * Class to allow us to provide a different implementation for
-     * closing down
+     * Class to allow us to provide a different implementation for closing down
      * 
      * @author suggitpe
      * @version 1.0 3 Aug 2009
      */
-    private class WindowCloseManager extends WindowAdapter
-    {
+    private class WindowCloseManager extends WindowAdapter {
 
         /**
          * @see java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)
          */
         @Override
-        public void windowClosing( WindowEvent event )
-        {
+        public void windowClosing( WindowEvent event ) {
             exitApplication();
         }
     }
@@ -135,11 +123,10 @@ public class StateGui implements ActionListener
      * @author suggitpe
      * @version 1.0 3 Aug 2009
      */
-    private class StateTableModel extends AbstractTableModel
-    {
+    private class StateTableModel extends AbstractTableModel {
 
-        private final String[] mColumnNames = { "Appointment", "Contacts", "Location",
-                                               "Start Date", "End Date" };
+        private final String[] mColumnNames = { "Appointment", "Contacts", "Location", "Start Date",
+                                               "End Date" };
         private Appointment[] mData;
 
         /**
@@ -148,8 +135,7 @@ public class StateGui implements ActionListener
          * @param aData
          *            appointment data array
          */
-        public StateTableModel( Appointment[] aData )
-        {
+        public StateTableModel( Appointment[] aData ) {
             mData = aData;
         }
 
@@ -157,8 +143,7 @@ public class StateGui implements ActionListener
          * @see javax.swing.table.TableModel#getColumnCount()
          */
         @Override
-        public int getColumnCount()
-        {
+        public int getColumnCount() {
             return mColumnNames.length;
         }
 
@@ -166,8 +151,7 @@ public class StateGui implements ActionListener
          * @see javax.swing.table.TableModel#getRowCount()
          */
         @Override
-        public int getRowCount()
-        {
+        public int getRowCount() {
             return mData.length;
         }
 
@@ -175,8 +159,7 @@ public class StateGui implements ActionListener
          * @see javax.swing.table.AbstractTableModel#getColumnName(int)
          */
         @Override
-        public String getColumnName( int column )
-        {
+        public String getColumnName( int column ) {
             return mColumnNames[column];
         }
 
@@ -184,11 +167,9 @@ public class StateGui implements ActionListener
          * @see javax.swing.table.TableModel#getValueAt(int, int)
          */
         @Override
-        public Object getValueAt( int row, int col )
-        {
+        public Object getValueAt( int row, int col ) {
             Object ret = null;
-            switch ( col )
-            {
+            switch ( col ) {
                 case 0:
                     ret = mData[row].getReason();
                     break;
@@ -209,33 +190,28 @@ public class StateGui implements ActionListener
         }
 
         /**
-         * @see javax.swing.table.AbstractTableModel#isCellEditable(int,
-         *      int)
+         * @see javax.swing.table.AbstractTableModel#isCellEditable(int, int)
          */
         @Override
-        public boolean isCellEditable( int row, int col )
-        {
+        public boolean isCellEditable( int row, int col ) {
             return ( ( col == 0 || col == 2 ) ) ? true : false;
         }
 
         /**
-         * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object,
-         *      int, int)
+         * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int, int)
          */
         @Override
-        public void setValueAt( Object value, int row, int col )
-        {
-            switch ( col )
-            {
+        public void setValueAt( Object value, int row, int col ) {
+            switch ( col ) {
                 case 0:
                     mData[row].setReason( (String) value );
-                    mCalendar_.edit();
+                    calendar.edit();
                     break;
                 case 1:
                     break;
                 case 2:
                     mData[row].setLocation( (String) value );
-                    mCalendar_.edit();
+                    calendar.edit();
                     break;
                 case 3:
                     break;

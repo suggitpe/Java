@@ -14,14 +14,13 @@ import java.util.List;
  * @author suggitpe
  * @version 1.0 3 Aug 2009
  */
-public class Appointment implements Serializable
-{
+public class Appointment implements Serializable {
 
-    private String mReason_;
-    private List<Contact> mContacts_;
-    private String mLocation_;
-    private Date mStartDate_;
-    private Date mEndDate_;
+    private String reason;
+    private List<Contact> contacts;
+    private String location;
+    private Date startDate;
+    private Date endDate;
 
     /**
      * Constructs a new instance.
@@ -38,13 +37,12 @@ public class Appointment implements Serializable
      *            end date
      */
     public Appointment( String aReason, List<Contact> aContacts, String aLocation, Date aStartDate,
-                        Date aEndDate )
-    {
-        mReason_ = aReason;
-        mContacts_ = aContacts;
-        mLocation_ = aLocation;
-        mStartDate_ = aStartDate;
-        mEndDate_ = aEndDate;
+                        Date aEndDate ) {
+        reason = aReason;
+        contacts = aContacts;
+        location = aLocation;
+        startDate = aStartDate;
+        endDate = aEndDate;
     }
 
     /**
@@ -52,9 +50,8 @@ public class Appointment implements Serializable
      * 
      * @return reason
      */
-    public String getReason()
-    {
-        return mReason_;
+    public String getReason() {
+        return reason;
     }
 
     /**
@@ -62,9 +59,8 @@ public class Appointment implements Serializable
      * 
      * @return list of contacts
      */
-    public List<Contact> getContacts()
-    {
-        return mContacts_;
+    public List<Contact> getContacts() {
+        return contacts;
     }
 
     /**
@@ -72,9 +68,8 @@ public class Appointment implements Serializable
      * 
      * @return location
      */
-    public String getLocation()
-    {
-        return mLocation_;
+    public String getLocation() {
+        return location;
     }
 
     /**
@@ -82,9 +77,8 @@ public class Appointment implements Serializable
      * 
      * @return start date
      */
-    public Date getStartDate()
-    {
-        return mStartDate_;
+    public Date getStartDate() {
+        return startDate;
     }
 
     /**
@@ -92,9 +86,8 @@ public class Appointment implements Serializable
      * 
      * @return end date
      */
-    public Date getEndDate()
-    {
-        return mEndDate_;
+    public Date getEndDate() {
+        return endDate;
     }
 
     /**
@@ -103,9 +96,8 @@ public class Appointment implements Serializable
      * @param aReason
      *            reason
      */
-    public void setReason( String aReason )
-    {
-        mReason_ = aReason;
+    public void setReason( String aReason ) {
+        reason = aReason;
     }
 
     /**
@@ -114,9 +106,8 @@ public class Appointment implements Serializable
      * @param aContacts
      *            lit of contacts
      */
-    public void setContacts( List<Contact> aContacts )
-    {
-        mContacts_ = aContacts;
+    public void setContacts( List<Contact> aContacts ) {
+        contacts = aContacts;
     }
 
     /**
@@ -125,9 +116,8 @@ public class Appointment implements Serializable
      * @param aLocation
      *            location
      */
-    public void setLocation( String aLocation )
-    {
-        mLocation_ = aLocation;
+    public void setLocation( String aLocation ) {
+        location = aLocation;
     }
 
     /**
@@ -136,9 +126,8 @@ public class Appointment implements Serializable
      * @param aStartDate
      *            start date
      */
-    public void setStartDate( Date aStartDate )
-    {
-        mStartDate_ = aStartDate;
+    public void setStartDate( Date aStartDate ) {
+        startDate = aStartDate;
     }
 
     /**
@@ -147,23 +136,21 @@ public class Appointment implements Serializable
      * @param aEndDate
      *            end date
      */
-    public void setEndDate( Date aEndDate )
-    {
-        mEndDate_ = aEndDate;
+    public void setEndDate( Date aEndDate ) {
+        endDate = aEndDate;
     }
 
     /**
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuffer ret = new StringBuffer( "Appintment: " );
-        ret.append( "Reason=[" ).append( mReason_ ).append( "], " );
-        ret.append( "Contacts=[" ).append( mContacts_ ).append( "], " );
-        ret.append( "Location=[" ).append( mLocation_ ).append( "], " );
-        ret.append( "StartDate=[" ).append( mStartDate_ ).append( "], " );
-        ret.append( "EndDate=[" ).append( mEndDate_ ).append( "]." );
+        ret.append( "Reason=[" ).append( reason ).append( "], " );
+        ret.append( "Contacts=[" ).append( contacts ).append( "], " );
+        ret.append( "Location=[" ).append( location ).append( "], " );
+        ret.append( "StartDate=[" ).append( startDate ).append( "], " );
+        ret.append( "EndDate=[" ).append( endDate ).append( "]." );
         return ret.toString();
     }
 }

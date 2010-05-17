@@ -11,18 +11,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * State to represent the state where we are in the middle of the
- * transaction and are just waiting to dispense the gumball.
+ * State to represent the state where we are in the middle of the transaction and are just waiting to dispense
+ * the gumball.
  * 
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
-public class SoldState implements IState
-{
+public class SoldState implements IState {
 
     private static final Log LOG = LogFactory.getLog( SoldState.class );
-
-    private GumballMachine mGumballMachine_;
+    private GumballMachine gumballMachine;
 
     /**
      * Constructs a new instance.
@@ -30,49 +28,42 @@ public class SoldState implements IState
      * @param aMachine
      *            the gumball machine
      */
-    public SoldState( GumballMachine aMachine )
-    {
-        mGumballMachine_ = aMachine;
+    public SoldState( GumballMachine aMachine ) {
+        gumballMachine = aMachine;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
-    public void dispense()
-    {
-        mGumballMachine_.releaseBall();
-        if ( mGumballMachine_.getCount() > 0 )
-        {
-            mGumballMachine_.setState( mGumballMachine_.getNoQuarterState() );
+    public void dispense() {
+        gumballMachine.releaseBall();
+        if ( gumballMachine.getCount() > 0 ) {
+            gumballMachine.setState( gumballMachine.getNoQuarterState() );
         }
-        else
-        {
+        else {
             LOG.info( "Ooops no more gumballs" );
-            mGumballMachine_.setState( mGumballMachine_.getSoldOutState() );
+            gumballMachine.setState( gumballMachine.getSoldOutState() );
         }
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
-    public void ejectQuarter()
-    {
+    public void ejectQuarter() {
         LOG.warn( "Sorry but we have gone past that stage in the sale" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
-    public void insertQuarter()
-    {
+    public void insertQuarter() {
         LOG.warn( "Please wait we are already giving you a gumball" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
-    public void turnCrank()
-    {
+    public void turnCrank() {
         LOG.warn( "Turning twice will not get any more gumballs" );
     }
 

@@ -21,8 +21,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 4 Aug 2009
  */
-public class FileLoader
-{
+public class FileLoader {
 
     // static logger
     private static final Log LOG = LogFactory.getLog( FileLoader.class );
@@ -34,42 +33,31 @@ public class FileLoader
      *            the file from which to read the underlying data
      * @return an object representation of the contents of the file
      */
-    public static Object loadData( File aInputFile )
-    {
+    public static Object loadData( File aInputFile ) {
         Object ret = null;
-        try
-        {
-            if ( aInputFile.exists() )
-            {
-                if ( aInputFile.isFile() )
-                {
+        try {
+            if ( aInputFile.exists() ) {
+                if ( aInputFile.isFile() ) {
                     ObjectInputStream readIn = new ObjectInputStream( new FileInputStream( aInputFile ) );
-                    try
-                    {
+                    try {
                         ret = readIn.readObject();
                     }
-                    finally
-                    {
+                    finally {
                         readIn.close();
                     }
                 }
-                else
-                {
+                else {
                     LOG.error( "Input file [" + aInputFile + "] is a directory" );
                 }
             }
-            else
-            {
+            else {
                 LOG.error( "Input file [" + aInputFile + "] does not exist" );
             }
         }
-        catch ( ClassNotFoundException cnfe )
-        {
-            LOG.error( "Error converting file contents from [" + aInputFile + "] into an object",
-                       cnfe );
+        catch ( ClassNotFoundException cnfe ) {
+            LOG.error( "Error converting file contents from [" + aInputFile + "] into an object", cnfe );
         }
-        catch ( IOException ioe )
-        {
+        catch ( IOException ioe ) {
             LOG.error( "Error reading in data from file [" + aInputFile + "]", ioe );
         }
         return ret;
@@ -83,24 +71,18 @@ public class FileLoader
      * @param aData
      *            the data to write into the file
      */
-    public static void storeData( File aOutputFile, Serializable aData )
-    {
-        try
-        {
+    public static void storeData( File aOutputFile, Serializable aData ) {
+        try {
             ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream( aOutputFile ) );
-            try
-            {
+            try {
                 out.writeObject( aData );
             }
-            finally
-            {
+            finally {
                 out.close();
             }
         }
-        catch ( IOException ioe )
-        {
-            LOG.error( "Failed to write data to the file [" + aOutputFile.getAbsolutePath() + "]",
-                       ioe );
+        catch ( IOException ioe ) {
+            LOG.error( "Failed to write data to the file [" + aOutputFile.getAbsolutePath() + "]", ioe );
         }
     }
 }

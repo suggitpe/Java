@@ -5,6 +5,7 @@
 package org.suggs.sandbox.jmx.jmxbook.components.propertymanager;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -73,14 +74,24 @@ public class PropertyManager implements PropertyManagerMBean {
      */
     public void setSource( String path ) {
         LOG.debug( "Reloading properies from file [" + path + "]" );
+        FileInputStream fis = null;
         try {
             properties = new Properties();
-            FileInputStream fis = new FileInputStream( path );
+            fis = new FileInputStream( path );
             properties.load( fis );
-            fis.close();
         }
         catch ( Exception e ) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if ( fis != null ) {
+                    fis.close();
+                }
+            }
+            catch ( IOException ioe ) {
+                LOG.error( "Failed to close file input stream:", ioe );
+            }
         }
     }
 

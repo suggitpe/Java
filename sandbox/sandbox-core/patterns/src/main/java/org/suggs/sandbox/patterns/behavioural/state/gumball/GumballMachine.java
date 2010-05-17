@@ -19,19 +19,18 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
-public class GumballMachine
-{
+public class GumballMachine {
 
     private static final Log LOG = LogFactory.getLog( GumballMachine.class );
 
-    private IState mSoldOutState_;
-    private IState mNoQuarterState_;
-    private IState mHasQuarterState_;
-    private IState mSoldState_;
-    private IState mWinnerState_;
+    private IState soldOutState;
+    private IState noQuarterState;
+    private IState hasQuarterState;
+    private IState soldState;
+    private IState winnerState;
 
-    private IState mState_ = mSoldOutState_;
-    int mCount_ = 0;
+    private IState mState_ = soldOutState;
+    int count = 0;
 
     /**
      * Constructs a new instance.
@@ -39,42 +38,37 @@ public class GumballMachine
      * @param aCount
      *            the number of gumballs in the system
      */
-    public GumballMachine( int aCount )
-    {
-        mSoldOutState_ = new SoldOutState( this );
-        mNoQuarterState_ = new NoQuarterState( this );
-        mHasQuarterState_ = new HasQuarterState( this );
-        mSoldState_ = new SoldState( this );
-        mWinnerState_ = new WinnerState( this );
+    public GumballMachine( int aCount ) {
+        soldOutState = new SoldOutState( this );
+        noQuarterState = new NoQuarterState( this );
+        hasQuarterState = new HasQuarterState( this );
+        soldState = new SoldState( this );
+        winnerState = new WinnerState( this );
 
-        mCount_ = aCount;
-        if ( mCount_ > 0 )
-        {
-            mState_ = mNoQuarterState_;
+        count = aCount;
+        if ( count > 0 ) {
+            mState_ = noQuarterState;
         }
     }
 
     /**
      * Insert the quarter
      */
-    public void insertQuarter()
-    {
+    public void insertQuarter() {
         mState_.insertQuarter();
     }
 
     /**
      * Eject the quarter
      */
-    public void ejectQuarter()
-    {
+    public void ejectQuarter() {
         mState_.ejectQuarter();
     }
 
     /**
      * Turns the crank on the machine
      */
-    public void turnCrank()
-    {
+    public void turnCrank() {
         mState_.turnCrank();
         mState_.dispense();
     }
@@ -82,12 +76,10 @@ public class GumballMachine
     /**
      * Releases a gum ball into the slot for the buyer to collect
      */
-    public void releaseBall()
-    {
+    public void releaseBall() {
         LOG.info( "A gumball comes rolling into the slot" );
-        if ( mCount_ != 0 )
-        {
-            --mCount_;
+        if ( count != 0 ) {
+            --count;
         }
     }
 
@@ -95,9 +87,9 @@ public class GumballMachine
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
-        return new StringBuffer( "Gumball Machine: gumball count=[" + mCount_ + "];  state=[" + mState_.getClass().getSimpleName() + "]" ).toString();
+    public String toString() {
+        return new StringBuffer( "Gumball Machine: gumball count=[" + count + "];  state=["
+                                 + mState_.getClass().getSimpleName() + "]" ).toString();
     }
 
     // =================
@@ -109,8 +101,7 @@ public class GumballMachine
      * @param aState
      *            the state to set
      */
-    public void setState( IState aState )
-    {
+    public void setState( IState aState ) {
         mState_ = aState;
     }
 
@@ -119,9 +110,8 @@ public class GumballMachine
      * 
      * @return the number of gumballs left
      */
-    public int getCount()
-    {
-        return mCount_;
+    public int getCount() {
+        return count;
     }
 
     /**
@@ -129,9 +119,8 @@ public class GumballMachine
      * 
      * @return the sold out state
      */
-    public IState getSoldOutState()
-    {
-        return mSoldOutState_;
+    public IState getSoldOutState() {
+        return soldOutState;
     }
 
     /**
@@ -139,9 +128,8 @@ public class GumballMachine
      * 
      * @return the no quarter state
      */
-    public IState getNoQuarterState()
-    {
-        return mNoQuarterState_;
+    public IState getNoQuarterState() {
+        return noQuarterState;
     }
 
     /**
@@ -149,9 +137,8 @@ public class GumballMachine
      * 
      * @return the has quarter state
      */
-    public IState getHasQuarterState()
-    {
-        return mHasQuarterState_;
+    public IState getHasQuarterState() {
+        return hasQuarterState;
     }
 
     /**
@@ -159,9 +146,8 @@ public class GumballMachine
      * 
      * @return the sold state
      */
-    public IState getSoldState()
-    {
-        return mSoldState_;
+    public IState getSoldState() {
+        return soldState;
     }
 
     /**
@@ -169,9 +155,8 @@ public class GumballMachine
      * 
      * @return the winner state
      */
-    public IState getWinnerState()
-    {
-        return mWinnerState_;
+    public IState getWinnerState() {
+        return winnerState;
     }
 
 }

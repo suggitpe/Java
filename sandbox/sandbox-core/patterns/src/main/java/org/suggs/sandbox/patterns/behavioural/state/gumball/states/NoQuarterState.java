@@ -16,12 +16,10 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
-public class NoQuarterState implements IState
-{
+public class NoQuarterState implements IState {
 
     private static final Log LOG = LogFactory.getLog( NoQuarterState.class );
-
-    private GumballMachine mGumballMachine_;
+    private GumballMachine gumballMachine;
 
     /**
      * Constructs a new instance.
@@ -29,41 +27,36 @@ public class NoQuarterState implements IState
      * @param aMachine
      *            the gumball machine
      */
-    public NoQuarterState( GumballMachine aMachine )
-    {
-        mGumballMachine_ = aMachine;
+    public NoQuarterState( GumballMachine aMachine ) {
+        gumballMachine = aMachine;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
-    public void dispense()
-    {
+    public void dispense() {
         LOG.warn( "you need to pay first" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
-    public void ejectQuarter()
-    {
+    public void ejectQuarter() {
         LOG.warn( "No quarter in the machine" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
-    public void insertQuarter()
-    {
+    public void insertQuarter() {
         LOG.info( "You have inserted a quarter" );
-        mGumballMachine_.setState( mGumballMachine_.getHasQuarterState() );
+        gumballMachine.setState( gumballMachine.getHasQuarterState() );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
-    public void turnCrank()
-    {
+    public void turnCrank() {
         LOG.warn( "You have turned but there is no quarter in the machine" );
     }
 

@@ -5,15 +5,13 @@
 package org.suggs.sandbox.patterns.behavioural.state.connection;
 
 /**
- * Interface for the transitions within the state diagram. The
- * transition will be responsible for evaluating whether it can
- * transition given a set of logic implied upon itself.
+ * Interface for the transitions within the state diagram. The transition will be responsible for evaluating
+ * whether it can transition given a set of logic implied upon itself.
  * 
  * @author suggitpe
  * @version 1.0 10 Aug 2009
  */
-public interface ITransition
-{
+public interface ITransition {
 
     /**
      * Getter for the name of the transition
@@ -37,12 +35,10 @@ public interface ITransition
     IState getEndState();
 
     /**
-     * Evaluate a particular transition to determine whether it is
-     * eligible to transition
+     * Evaluate a particular transition to determine whether it is eligible to transition
      * 
      * @param aContext
-     *            the event context for evaluating the transition
-     *            validity
+     *            the event context for evaluating the transition validity
      * @param aState
      *            the state to evaluate the transition against
      * @return true if the transition is a valid one, else false

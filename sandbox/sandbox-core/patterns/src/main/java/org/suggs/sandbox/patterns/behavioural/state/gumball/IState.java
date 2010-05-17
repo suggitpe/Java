@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.behavioural.state.gumball;
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
-public interface IState
-{
+public interface IState {
 
     /**
      * Insert a quarter into the gumball machine

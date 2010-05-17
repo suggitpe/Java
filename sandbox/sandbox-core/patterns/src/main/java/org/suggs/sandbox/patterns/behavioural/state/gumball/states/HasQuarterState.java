@@ -18,14 +18,12 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 10 Sep 2007
  */
-public class HasQuarterState implements IState
-{
+public class HasQuarterState implements IState {
 
     private static final Log LOG = LogFactory.getLog( HasQuarterState.class );
 
-    private GumballMachine mGumballMachine_;
-
-    private Random mRandomWinner = new Random( System.currentTimeMillis() );
+    private GumballMachine gumballMachine;
+    private Random randomWinner = new Random( System.currentTimeMillis() );
 
     /**
      * Constructs a new instance.
@@ -33,50 +31,43 @@ public class HasQuarterState implements IState
      * @param aMachine
      *            the gumball machine
      */
-    public HasQuarterState( GumballMachine aMachine )
-    {
-        mGumballMachine_ = aMachine;
+    public HasQuarterState( GumballMachine aMachine ) {
+        gumballMachine = aMachine;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
-    public void dispense()
-    {
+    public void dispense() {
         LOG.warn( "No gumball dispensed" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
-    public void ejectQuarter()
-    {
+    public void ejectQuarter() {
         LOG.info( "Quarter returned" );
-        mGumballMachine_.setState( mGumballMachine_.getNoQuarterState() );
+        gumballMachine.setState( gumballMachine.getNoQuarterState() );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
-    public void insertQuarter()
-    {
+    public void insertQuarter() {
         LOG.warn( "You cannot insert another quarter" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
-    public void turnCrank()
-    {
+    public void turnCrank() {
         LOG.info( "You have turned the crank" );
-        int winner = mRandomWinner.nextInt( 10 );
-        if ( ( winner == 0 ) && mGumballMachine_.getCount() > 1 )
-        {
-            mGumballMachine_.setState( mGumballMachine_.getWinnerState() );
+        int winner = randomWinner.nextInt( 10 );
+        if ( ( winner == 0 ) && gumballMachine.getCount() > 1 ) {
+            gumballMachine.setState( gumballMachine.getWinnerState() );
         }
-        else
-        {
-            mGumballMachine_.setState( mGumballMachine_.getSoldState() );
+        else {
+            gumballMachine.setState( gumballMachine.getSoldState() );
         }
     }
 }

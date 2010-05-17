@@ -18,20 +18,18 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * Class used to encapsulate a the state of the context. It is used by
- * the state machine to derive meaning to the current state of a state
- * machine context.
+ * Class used to encapsulate a the state of the context. It is used by the state machine to derive meaning to
+ * the current state of a state machine context.
  * 
  * @author suggitpe
  * @version 1.0 10 Aug 2009
  */
-public class State implements IState, InitializingBean
-{
+public class State implements IState, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( State.class );
 
-    private String mStateName_;
-    private List<ITransition> mTransitions_;
+    private String stateName;
+    private List<ITransition> transitions;
 
     /**
      * Constructs a new instance.
@@ -39,36 +37,29 @@ public class State implements IState, InitializingBean
      * @param aStateName
      *            the name of the state
      */
-    public State( String aStateName )
-    {
+    public State( String aStateName ) {
         super();
-        mStateName_ = aStateName;
+        stateName = aStateName;
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception
-    {
-    }
+    public void afterPropertiesSet() throws Exception {}
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object aRhs )
-    {
-        if ( aRhs == null || this != aRhs )
-        {
+    public boolean equals( Object aRhs ) {
+        if ( aRhs == null || this != aRhs ) {
             return false;
         }
 
-        if ( aRhs instanceof State && getClass() == aRhs.getClass() && super.equals( aRhs ) )
-        {
+        if ( aRhs instanceof State && getClass() == aRhs.getClass() && super.equals( aRhs ) ) {
             State rhs = (State) aRhs;
-            if ( mStateName_.equals( rhs.mStateName_ ) )
-            {
+            if ( stateName.equals( rhs.stateName ) ) {
                 return true;
             }
         }
@@ -79,58 +70,47 @@ public class State implements IState, InitializingBean
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode()
-    {
-        return mStateName_.hashCode();
+    public int hashCode() {
+        return stateName.hashCode();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.connection.IState#step(org.suggs.sandbox.patterns.behavioural.state.connection.IStateMachineEventContext)
      */
-    public IState step( IStateMachineEventContext aContext )
-    {
+    public IState step( IStateMachineEventContext aContext ) {
         loadTransitionsIntoState();
-        try
-        {
+        try {
             return evaluateTransitionsToNewState( aContext );
         }
-        catch ( StateMachineException ex )
-        {
+        catch ( StateMachineException ex ) {
             LOG.warn( "Failed to evaluate the transitions due to [" + ex.getMessage() + "]" );
             return null;
         }
     }
 
-    private void loadTransitionsIntoState()
-    {
-        if ( mTransitions_ == null )
-        {
-            mTransitions_ = TransitionManager.getInstance().getTranitionsForStartState( this );
+    private void loadTransitionsIntoState() {
+        if ( transitions == null ) {
+            transitions = TransitionManager.getInstance().getTranitionsForStartState( this );
         }
     }
 
     private IState evaluateTransitionsToNewState( IStateMachineEventContext aContext )
-                    throws StateMachineException
-    {
-        LOG.debug( "Evaluating all of the [" + mTransitions_.size() + "] transitions for the ["
-                   + getName() + "] state" );
+                    throws StateMachineException {
+        LOG.debug( "Evaluating all of the [" + transitions.size() + "] transitions for the [" + getName()
+                   + "] state" );
 
         ITransition successfullTransition = null;
 
-        for ( ITransition transition : mTransitions_ )
-        {
-            if ( transition.evaluateStateAgainstEventsAndGuards( aContext, this ) )
-            {
+        for ( ITransition transition : transitions ) {
+            if ( transition.evaluateStateAgainstEventsAndGuards( aContext, this ) ) {
                 LOG.info( "Transition [" + transition.getName() + "] is valid" );
-                if ( successfullTransition != null )
-                {
+                if ( successfullTransition != null ) {
                     throw new StateMachineException( "Evaluated that more than one transition is valid" );
                 }
 
                 successfullTransition = transition;
             }
-            else
-            {
+            else {
                 LOG.info( "Transition [" + transition.getName() + "] is not valid" );
             }
         }
@@ -142,9 +122,8 @@ public class State implements IState, InitializingBean
      * @see org.suggs.sandbox.patterns.behavioural.state.connection.IState#getName()
      */
     @Override
-    public String getName()
-    {
-        return mStateName_;
+    public String getName() {
+        return stateName;
     }
 
 }

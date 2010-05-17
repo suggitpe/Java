@@ -10,14 +10,12 @@ package org.suggs.sandbox.patterns.behavioural.state.connection;
  * @author suggitpe
  * @version 1.0 18 Aug 2009
  */
-public class StateMachineException extends Exception
-{
+public class StateMachineException extends Exception {
 
     /**
      * Constructs a new instance.
      */
-    public StateMachineException()
-    {
+    public StateMachineException() {
         super();
     }
 
@@ -27,8 +25,7 @@ public class StateMachineException extends Exception
      * @param aMsg
      *            the exception message
      */
-    public StateMachineException( String aMsg )
-    {
+    public StateMachineException( String aMsg ) {
         super( aMsg );
     }
 
@@ -38,8 +35,7 @@ public class StateMachineException extends Exception
      * @param aException
      *            an exception to nest
      */
-    public StateMachineException( Throwable aException )
-    {
+    public StateMachineException( Throwable aException ) {
         super( aException );
     }
 
@@ -51,8 +47,7 @@ public class StateMachineException extends Exception
      * @param aException
      *            a nested exception to embed in this exception
      */
-    public StateMachineException( String aMsg, Throwable aException )
-    {
+    public StateMachineException( String aMsg, Throwable aException ) {
         super( aMsg, aException );
     }
 }

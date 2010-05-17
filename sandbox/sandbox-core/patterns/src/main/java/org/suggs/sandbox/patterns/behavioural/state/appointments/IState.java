@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.behavioural.state.appointments;
  * @author suggitpe
  * @version 1.0 23 Jul 2009
  */
-public interface IState
-{
+public interface IState {
 
     /**
      * Save an appointment

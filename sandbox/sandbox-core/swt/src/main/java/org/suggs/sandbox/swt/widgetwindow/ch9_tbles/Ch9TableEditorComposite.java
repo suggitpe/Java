@@ -78,7 +78,7 @@ public class Ch9TableEditorComposite extends Composite {
          */
         @Override
         public void run() {
-            EditableTableItem newItem = new EditableTableItem( "new row", new Integer( 2 ) );
+            EditableTableItem newItem = new EditableTableItem( "new row", Integer.valueOf( 2 ) );
             viewer.add( newItem );
         }
     }

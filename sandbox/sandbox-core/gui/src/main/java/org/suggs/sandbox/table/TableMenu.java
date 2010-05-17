@@ -163,13 +163,13 @@ public class TableMenu extends JFrame {
 
                 changeItem = new JMenuItem();
                 changeItem.setText( "+10" );
-                changeItem.putClientProperty( PROP_CHANGE_QUANTITY, new Integer( 10 ) );
+                changeItem.putClientProperty( PROP_CHANGE_QUANTITY, Integer.valueOf( 10 ) );
                 changeItem.addActionListener( changer );
                 contextMenu.add( changeItem );
 
                 changeItem = new JMenuItem();
                 changeItem.setText( "-10" );
-                changeItem.putClientProperty( PROP_CHANGE_QUANTITY, new Integer( -10 ) );
+                changeItem.putClientProperty( PROP_CHANGE_QUANTITY, Integer.valueOf( -10 ) );
                 changeItem.addActionListener( changer );
                 contextMenu.add( changeItem );
 
@@ -300,7 +300,7 @@ class ExampleTableModel extends AbstractTableModel {
             case COLUMN_PRICE:
                 return new Double( item.price );
             case COLUMN_QUANTITY:
-                return new Integer( item.quantity );
+                return Integer.valueOf( item.quantity );
             case COLUMN_AMOUNT:
                 return new Double( item.getAmount() );
             default:

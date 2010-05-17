@@ -28,7 +28,7 @@ public class TestMain {
      *            the args from the command line
      */
     public static void main( String[] args ) {
-        // testTokeniser();
+        testTokeniser();
 
         try {
             testFiles();
@@ -49,7 +49,6 @@ public class TestMain {
 
     }
 
-    @SuppressWarnings("unused")
     private static void testTokeniser() {
         LOG.debug( "Testing tokeniser" );
         // System.out.println( System.getProperty(

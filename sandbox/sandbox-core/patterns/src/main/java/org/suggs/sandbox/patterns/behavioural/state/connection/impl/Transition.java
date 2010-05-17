@@ -19,23 +19,21 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 /**
- * Class to encapsulate the transition route between two states. This
- * class is responsible for all evaluation of the transition
- * evaluation.
+ * Class to encapsulate the transition route between two states. This class is responsible for all evaluation
+ * of the transition evaluation.
  * 
  * @author suggitpe
  * @version 1.0 10 Aug 2009
  */
-public class Transition implements ITransition, InitializingBean
-{
+public class Transition implements ITransition, InitializingBean {
 
     private static final Log LOG = LogFactory.getLog( Transition.class );
 
-    private String mName_;
-    private IState mStartState_;
-    private IState mEndState_;
-    private List<ITransitionEvent> mTransitionEvents_;
-    private List<ITransitionGuard> mTransitionGuards_;
+    private String name;
+    private IState startState;
+    private IState endState;
+    private List<ITransitionEvent> transitionEvents;
+    private List<ITransitionGuard> transitionGuards;
 
     /**
      * Constructs a new instance.
@@ -47,23 +45,19 @@ public class Transition implements ITransition, InitializingBean
      * @param aEndState
      *            the end state for the transition
      */
-    public Transition( String aName, IState aStartState, IState aEndState )
-    {
-        mName_ = aName;
-        mStartState_ = aStartState;
-        mEndState_ = aEndState;
+    public Transition( String aName, IState aStartState, IState aEndState ) {
+        name = aName;
+        startState = aStartState;
+        endState = aEndState;
     }
 
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception
-    {
-        Assert.notNull( mTransitionEvents_,
-                        "Transition Events cannot be null on a Transition object" );
-        Assert.notNull( mTransitionGuards_,
-                        "Transition Guards cannot be null on a Transition object" );
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull( transitionEvents, "Transition Events cannot be null on a Transition object" );
+        Assert.notNull( transitionGuards, "Transition Guards cannot be null on a Transition object" );
     }
 
     /**
@@ -73,39 +67,30 @@ public class Transition implements ITransition, InitializingBean
      *            the event context
      * @return true if transition is valid for both events and guards
      */
-    public boolean evaluateStateAgainstEventsAndGuards( IStateMachineEventContext aContext,
-                                                        IState aState )
-    {
+    public boolean evaluateStateAgainstEventsAndGuards( IStateMachineEventContext aContext, IState aState ) {
         return ( isTransitionEventValid( aContext ) && areAllTransitionGuardsValid( aContext ) );
     }
 
-    private boolean isTransitionEventValid( IStateMachineEventContext aContext )
-    {
-        if ( !areTransitionEventsSet() )
-        {
+    private boolean isTransitionEventValid( IStateMachineEventContext aContext ) {
+        if ( !areTransitionEventsSet() ) {
             return true;
         }
 
         return isOneContextEventValidForTransition( aContext );
     }
 
-    private boolean areTransitionEventsSet()
-    {
-        if ( getTransitionEvents() == null || getTransitionEvents().size() == 0 )
-        {
+    private boolean areTransitionEventsSet() {
+        if ( getTransitionEvents() == null || getTransitionEvents().size() == 0 ) {
             return false;
         }
         return true;
     }
 
-    private boolean isOneContextEventValidForTransition( IStateMachineEventContext aContext )
-    {
-        for ( ITransitionEvent e : getTransitionEvents() )
-        {
-            if ( aContext.getEventName().equals( e.getTransitionEventName() ) )
-            {
-                LOG.debug( "Transition event [" + e.getTransitionEventName() + "] is found on ["
-                           + getName() + "]" );
+    private boolean isOneContextEventValidForTransition( IStateMachineEventContext aContext ) {
+        for ( ITransitionEvent e : getTransitionEvents() ) {
+            if ( aContext.getEventName().equals( e.getTransitionEventName() ) ) {
+                LOG.debug( "Transition event [" + e.getTransitionEventName() + "] is found on [" + getName()
+                           + "]" );
                 return true;
             }
         }
@@ -113,31 +98,24 @@ public class Transition implements ITransition, InitializingBean
         return false;
     }
 
-    private boolean areAllTransitionGuardsValid( IStateMachineEventContext aContext )
-    {
-        if ( !areTransitionGuardsSet() )
-        {
+    private boolean areAllTransitionGuardsValid( IStateMachineEventContext aContext ) {
+        if ( !areTransitionGuardsSet() ) {
             return true;
         }
 
         return ( areAllGuardsValidForTransition( aContext ) );
     }
 
-    private boolean areTransitionGuardsSet()
-    {
-        if ( getTransitionGuards() == null || getTransitionGuards().size() == 0 )
-        {
+    private boolean areTransitionGuardsSet() {
+        if ( getTransitionGuards() == null || getTransitionGuards().size() == 0 ) {
             return false;
         }
         return true;
     }
 
-    private boolean areAllGuardsValidForTransition( IStateMachineEventContext aContext )
-    {
-        for ( ITransitionGuard g : getTransitionGuards() )
-        {
-            if ( !g.evaluateGuard( aContext ) )
-            {
+    private boolean areAllGuardsValidForTransition( IStateMachineEventContext aContext ) {
+        for ( ITransitionGuard g : getTransitionGuards() ) {
+            if ( !g.evaluateGuard( aContext ) ) {
                 return false;
             }
         }
@@ -148,14 +126,12 @@ public class Transition implements ITransition, InitializingBean
      * @see org.suggs.sandbox.patterns.behavioural.state.connection.ITransition#getName()
      */
     @Override
-    public String getName()
-    {
-        return mName_;
+    public String getName() {
+        return name;
     }
 
-    List<ITransitionEvent> getTransitionEvents()
-    {
-        return mTransitionEvents_;
+    List<ITransitionEvent> getTransitionEvents() {
+        return transitionEvents;
     }
 
     /**
@@ -164,14 +140,12 @@ public class Transition implements ITransition, InitializingBean
      * @param aListOfTransitionEvents
      *            a list of transition events
      */
-    public void setTransitionEvents( List<ITransitionEvent> aListOfTransitionEvents )
-    {
-        mTransitionEvents_ = aListOfTransitionEvents;
+    public void setTransitionEvents( List<ITransitionEvent> aListOfTransitionEvents ) {
+        transitionEvents = aListOfTransitionEvents;
     }
 
-    List<ITransitionGuard> getTransitionGuards()
-    {
-        return mTransitionGuards_;
+    List<ITransitionGuard> getTransitionGuards() {
+        return transitionGuards;
     }
 
     /**
@@ -180,27 +154,24 @@ public class Transition implements ITransition, InitializingBean
      * @param aListOfTransitionGuards
      *            the list of transition guards
      */
-    public void setTransitionGuards( List<ITransitionGuard> aListOfTransitionGuards )
-    {
-        mTransitionGuards_ = aListOfTransitionGuards;
+    public void setTransitionGuards( List<ITransitionGuard> aListOfTransitionGuards ) {
+        transitionGuards = aListOfTransitionGuards;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.connection.ITransition#getStartState()
      */
     @Override
-    public IState getStartState()
-    {
-        return mStartState_;
+    public IState getStartState() {
+        return startState;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.connection.ITransition#getEndState()
      */
     @Override
-    public IState getEndState()
-    {
-        return mEndState_;
+    public IState getEndState() {
+        return endState;
     }
 
 }

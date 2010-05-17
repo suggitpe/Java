@@ -47,7 +47,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
                                                            "Attribute change for interval",
                                                            "interval",
                                                            "long",
-                                                           new Long( tmp ),
+                                                           Long.valueOf( tmp ),
                                                            Long.valueOf( time ) ) );
     }
 
