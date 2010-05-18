@@ -7,6 +7,9 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.basic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Class to show how all of the differing construction options take order
  * 
@@ -15,16 +18,17 @@ import java.util.List;
  */
 public class TestClass {
 
+    private static final Log LOG = LogFactory.getLog( TestClass.class );
     static final ReferenceClass REF = new ReferenceClass( "static member" );
     static final List<ReferenceClass> LIST = new ArrayList<ReferenceClass>();
 
     static {
-        System.out.println( "Updating LIST in static initiliser" );
+        LOG.debug( "Updating LIST in static initiliser" );
         LIST.add( new ReferenceClass( "ref class ctor'd in the static initialiser" ) );
     }
 
     {
-        System.out.println( "Updating LIST in non-static initiliser" );
+        LOG.debug( "Updating LIST in non-static initiliser" );
         LIST.add( new ReferenceClass( "ref class ctor'd in the non-static initialiser" ) );
     }
 
@@ -32,7 +36,7 @@ public class TestClass {
      * Constructs a new instance.
      */
     public TestClass() {
-        System.out.println( "In the TestClass constructor" );
+        LOG.debug( "In the TestClass constructor" );
     }
 
 }

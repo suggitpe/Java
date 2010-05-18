@@ -25,7 +25,7 @@ public class ImageUtil {
      * 
      * @return the image registry with all of the image items included
      */
-    public static ImageRegistry getImageRegistry() {
+    public static synchronized ImageRegistry getImageRegistry() {
         if ( IMAGES == null ) {
             IMAGES = new ImageRegistry();
             IMAGES.put( "folder", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
@@ -44,7 +44,7 @@ public class ImageUtil {
      * 
      * @return the clipboard
      */
-    public static Clipboard getClipboard() {
+    public static synchronized Clipboard getClipboard() {
         if ( CLIPBOARD == null ) {
             CLIPBOARD = new Clipboard( Display.getCurrent() );
         }

@@ -6,6 +6,9 @@ package org.suggs.sandbox.patterns.structural.composite;
 
 import java.util.Iterator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * The client in the relationship.
  * 
@@ -14,6 +17,7 @@ import java.util.Iterator;
  */
 public class Waitress {
 
+    private static final Log LOG = LogFactory.getLog( Waitress.class );
     private IMenuComponent allMenus;
 
     /**
@@ -39,7 +43,7 @@ public class Waitress {
     @SuppressWarnings("unchecked")
     public void printVegetarianMenu() {
         Iterator iter = allMenus.createIterator();
-        System.out.println( "\nVEGETARIAN MENU\n-----------------" );
+        LOG.debug( "\nVEGETARIAN MENU\n-----------------" );
         while ( iter.hasNext() ) {
             IMenuComponent comp = (IMenuComponent) iter.next();
             try {

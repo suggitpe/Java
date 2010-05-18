@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * The menu composite class.
  * 
@@ -18,9 +21,10 @@ import java.util.List;
  */
 public class MenuComponent extends AbstractMenuComponent {
 
-    List<IMenuComponent> menuComps = new ArrayList<IMenuComponent>();
-    String name;
-    String description;
+    private static final Log LOG = LogFactory.getLog( MenuComponent.class );
+    private List<IMenuComponent> menuComps = new ArrayList<IMenuComponent>();
+    private String name;
+    private String description;
 
     /**
      * Constructs a new instance.
@@ -79,8 +83,8 @@ public class MenuComponent extends AbstractMenuComponent {
     @SuppressWarnings("unchecked")
     @Override
     public void print() {
-        System.out.println( "\n" + getName() + ", " + getDescription() );
-        System.out.println( "-----------------------" );
+        LOG.debug( "\n" + getName() + ", " + getDescription() );
+        LOG.debug( "-----------------------" );
 
         // This is a small bit of recursion (if the object in the iter
         // is a MenuComponent rather that a MenuItem).

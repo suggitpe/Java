@@ -3,6 +3,9 @@
  */
 package org.suggs.sandbox.patterns.behavioural.iterator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Class to represent a waitress
  * 
@@ -10,6 +13,8 @@ package org.suggs.sandbox.patterns.behavioural.iterator;
  * @version 1.0 6 Sep 2007
  */
 public class Waitress {
+
+    private static final Log LOG = LogFactory.getLog( Waitress.class );
 
     private IMenu pancakeMenu;
     private IMenu dinerMenu;
@@ -31,29 +36,29 @@ public class Waitress {
      * Print every item on the menu
      */
     public void printMenu() {
-        System.out.println( "MENU\n--------\nBREAKFAST:" );
+        LOG.debug( "MENU\n--------\nBREAKFAST:" );
         printMenu( pancakeMenu.createIterator() );
-        System.out.println( "LUNCH:" );
+        LOG.debug( "LUNCH:" );
         printMenu( dinerMenu.createIterator() );
-        System.out.println( "--------" );
+        LOG.debug( "--------" );
     }
 
     /**
      * Print all items from the breakfast menu
      */
     public void printBreakfastMenu() {
-        System.out.println( "BREAKFAST MENU\n--------------\n" );
+        LOG.debug( "BREAKFAST MENU\n--------------\n" );
         printMenu( pancakeMenu.createIterator() );
-        System.out.println( "--------------" );
+        LOG.debug( "--------------" );
     }
 
     /**
      * Print all items from the lunch menu
      */
     public void printLunchMenu() {
-        System.out.println( "LUNCH MENU\n----------" );
+        LOG.debug( "LUNCH MENU\n----------" );
         printMenu( dinerMenu.createIterator() );
-        System.out.println( "----------" );
+        LOG.debug( "----------" );
     }
 
     /**
@@ -64,7 +69,7 @@ public class Waitress {
     private void printMenu( IIterator aIter ) {
         while ( aIter.hasNext() ) {
             MenuItem m = (MenuItem) aIter.next();
-            System.out.println( m.getName() + ", �" + m.getPrice() + " -- " + m.getDescription() );
+            LOG.debug( m.getName() + ", �" + m.getPrice() + " -- " + m.getDescription() );
         }
 
     }

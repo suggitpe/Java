@@ -6,6 +6,9 @@ package org.suggs.sandbox.jmx.jmxbook;
 
 import javax.management.MBeanException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Class to manage the printing of an exception stack
  * 
@@ -14,6 +17,8 @@ import javax.management.MBeanException;
  */
 public class ExceptionUtil {
 
+    private static final Log LOG = LogFactory.getLog( ExceptionUtil.class );
+
     /**
      * print exceptuion utility for exceptions caught
      * 
@@ -21,14 +26,14 @@ public class ExceptionUtil {
      *            the exception to print
      */
     public static final void printException( Exception e ) {
-        System.out.println( "============ [Exception] ==============" );
+        LOG.debug( "============ [Exception] ==============" );
         e.printStackTrace();
         if ( e instanceof MBeanException ) {
             boolean hasEmbeddedException = true;
             Exception embeddedExc = e;
             while ( hasEmbeddedException ) {
                 embeddedExc = ( (MBeanException) embeddedExc ).getTargetException();
-                System.out.println( "-------- [Embedded Exception] ---------" );
+                LOG.debug( "-------- [Embedded Exception] ---------" );
 
                 embeddedExc.printStackTrace();
 
@@ -37,6 +42,6 @@ public class ExceptionUtil {
                 }
             }
         }
-        System.out.println( "==========================" );
+        LOG.debug( "==========================" );
     }
 }

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -24,6 +26,7 @@ import org.osgi.framework.BundleException;
  */
 public class BundleManagerActivator implements BundleActivator {
 
+    private static final Log LOG = LogFactory.getLog( BundleManagerActivator.class );
     private static final long INTERVAL = 5000;
     private static final String BUND_LOC = "src/main/resources/";
 
@@ -116,7 +119,7 @@ public class BundleManagerActivator implements BundleActivator {
      */
     private List<String> getAvailableBundles( final File aDir ) {
         if ( aDir == null || !aDir.isDirectory() ) {
-            System.err.println( "Cannot find directory [" + BUND_LOC + "] from which to read bundles" );
+            LOG.error( "Cannot find directory [" + BUND_LOC + "] from which to read bundles" );
             return null;
         }
 
@@ -160,7 +163,7 @@ public class BundleManagerActivator implements BundleActivator {
                     for ( String s : getAvailableBundles( dir ) ) {
                         if ( !installedBundles.contains( s ) ) {
                             String url = "file:" + BUND_LOC + s + ".jar";
-                            System.out.println( s + " does not exist ... installing [" + url + "]" );
+                            LOG.debug( s + " does not exist ... installing [" + url + "]" );
                             context.installBundle( url );
                             installedBundles.add( s );
                         }
@@ -171,7 +174,7 @@ public class BundleManagerActivator implements BundleActivator {
                     List<String> filesNow = getAvailableBundles( dir );
                     for ( String s : installedBundles ) {
                         if ( !filesNow.contains( s ) ) {
-                            System.out.println( s + " no longer exists .. removing" );
+                            LOG.debug( s + " no longer exists .. removing" );
                             Bundle b = findBundleByName( s );
                             b.stop();
                             b.uninstall();
@@ -195,7 +198,7 @@ public class BundleManagerActivator implements BundleActivator {
                         long jarAge = f.lastModified();
                         // now check and update
                         if ( jarAge > installedAge ) {
-                            System.out.println( "Updating bundle [" + s + "]" );
+                            LOG.debug( "Updating bundle [" + s + "]" );
                             installed.update();
                         }
                     }
@@ -204,7 +207,7 @@ public class BundleManagerActivator implements BundleActivator {
                 }
             }
             catch ( InterruptedException ie ) {
-                System.out.println( "Thread interrupted, exiting" );
+                LOG.debug( "Thread interrupted, exiting" );
             }
             catch ( BundleException be ) {
                 System.err.println( "Error managing bundle" );

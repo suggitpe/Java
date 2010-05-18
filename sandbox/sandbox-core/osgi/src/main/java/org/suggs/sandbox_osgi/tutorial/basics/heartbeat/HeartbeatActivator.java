@@ -5,6 +5,8 @@ package org.suggs.sandbox_osgi.tutorial.basics.heartbeat;
  * 
  */
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -16,6 +18,7 @@ import org.osgi.framework.BundleContext;
  */
 public class HeartbeatActivator implements BundleActivator {
 
+    private static final Log LOG = LogFactory.getLog( HeartbeatActivator.class );
     private static final long SLEEP_TIME = 5000;
     private Thread thread;
 
@@ -50,11 +53,11 @@ public class HeartbeatActivator implements BundleActivator {
             try {
                 while ( !Thread.interrupted() ) {
                     Thread.sleep( SLEEP_TIME );
-                    System.out.println( "... thread still running" );
+                    LOG.debug( "... thread still running" );
                 }
             }
             catch ( InterruptedException ie ) {
-                System.out.println( "Interrupt received .. stopping" );
+                LOG.debug( "Interrupt received .. stopping" );
             }
 
         }

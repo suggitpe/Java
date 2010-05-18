@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox_osgi.tutorial.basics.bundlecounter;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
@@ -17,6 +19,7 @@ import org.osgi.framework.BundleListener;
  */
 public class BundleCounterActivator implements BundleActivator, BundleListener {
 
+    private static final Log LOG = LogFactory.getLog( BundleCounterActivator.class );
     private BundleContext context;
 
     /**
@@ -42,11 +45,11 @@ public class BundleCounterActivator implements BundleActivator, BundleListener {
     public void bundleChanged( BundleEvent evt ) {
         switch ( evt.getType() ) {
             case BundleEvent.INSTALLED:
-                System.out.println( "Bundle installed" );
+                LOG.debug( "Bundle installed" );
                 printBundleCount();
                 break;
             case BundleEvent.UNINSTALLED:
-                System.out.println( "Bundle uninstalled" );
+                LOG.debug( "Bundle uninstalled" );
                 printBundleCount();
                 break;
 
@@ -57,7 +60,7 @@ public class BundleCounterActivator implements BundleActivator, BundleListener {
      * Simple method that will print out the bundle count in the OSGI framework
      */
     private void printBundleCount() {
-        System.out.println( "There are currently " + context.getBundles().length + " bundles" );
+        LOG.debug( "There are currently " + context.getBundles().length + " bundles" );
     }
 
 }

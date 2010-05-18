@@ -16,10 +16,10 @@ import java.util.Iterator;
  */
 public class MenuItem extends AbstractMenuComponent {
 
-    String name;
-    String description;
-    boolean vegetarian;
-    double price;
+    private String name;
+    private String description;
+    private boolean vegetarian;
+    private double price;
 
     /**
      * Constructs a new instance.
