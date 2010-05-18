@@ -73,6 +73,7 @@ public class ManyToManyUnidirectionalOtherEntity extends EntityBase {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
+    @SuppressWarnings("PMD.IfStmtsMustUseBraces")
     public boolean equals( Object obj ) {
         if ( this == obj )
             return true;
