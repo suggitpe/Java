@@ -20,6 +20,7 @@ import org.apache.commons.logging.LogFactory;
 public class TestMain {
 
     private static final Log LOG = LogFactory.getLog( TestMain.class );
+    private static final String FILE_LOC = "/home/suggitpe/deleteme.txt";
 
     /**
      * Main method called through the underling main from init
@@ -41,7 +42,7 @@ public class TestMain {
     private static void testFiles() throws IOException {
         LOG.debug( "Testing files" );
 
-        File f = new File( "/home/suggitpe/deleteme.txt" );
+        File f = new File( FILE_LOC );
         LOG.debug( f.getAbsoluteFile() );
         LOG.debug( f.getCanonicalPath() );
         LOG.debug( f.getName() );
