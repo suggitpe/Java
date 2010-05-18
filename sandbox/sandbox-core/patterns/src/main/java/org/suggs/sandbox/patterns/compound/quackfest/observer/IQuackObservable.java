@@ -4,15 +4,13 @@
  */
 package org.suggs.sandbox.patterns.compound.quackfest.observer;
 
-
 /**
  * Observable interface so that the
  * 
  * @author suggitpe
  * @version 1.0 19 Sep 2007
  */
-public interface IQuackObservable
-{
+public interface IQuackObservable {
 
     /**
      * Registers an observer with the observable

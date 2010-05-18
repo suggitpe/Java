@@ -9,15 +9,13 @@ import org.suggs.sandbox.patterns.creational.factory.IPizzaStore;
 import org.suggs.sandbox.patterns.creational.factory.PizzaStoreException;
 
 /**
- * Abstract class to encapsulate the pizza process itself. This allows
- * the delegated concrete pizza stores to create their own menus of
- * pizza types in the createPizza method.
+ * Abstract class to encapsulate the pizza process itself. This allows the delegated concrete pizza stores to
+ * create their own menus of pizza types in the createPizza method.
  * 
  * @author suggitpe
  * @version 1.0 22 Aug 2007
  */
-public abstract class AbstractPizzaStore implements IPizzaStore
-{
+public abstract class AbstractPizzaStore implements IPizzaStore {
 
     /**
      * Create and prepare the pizza itself
@@ -26,8 +24,7 @@ public abstract class AbstractPizzaStore implements IPizzaStore
      *            the type of pizz to create
      * @return the pizza that has been created
      */
-    public IPizza orderPizza( String aType ) throws PizzaStoreException
-    {
+    public IPizza orderPizza( String aType ) throws PizzaStoreException {
         IPizza ret = createPizza( aType );
 
         ret.prepare();
@@ -39,11 +36,9 @@ public abstract class AbstractPizzaStore implements IPizzaStore
     }
 
     /**
-     * Create the correct type of pizza based on the passed in type.
-     * This is the key to the factory pattern, we have created an
-     * interface from which the implementing (concrete) stores can
-     * create their own pizza types. All concrete types will
-     * essentially implement their own factory methods.
+     * Create the correct type of pizza based on the passed in type. This is the key to the factory pattern,
+     * we have created an interface from which the implementing (concrete) stores can create their own pizza
+     * types. All concrete types will essentially implement their own factory methods.
      * 
      * @param aType
      *            the type of pizza to create

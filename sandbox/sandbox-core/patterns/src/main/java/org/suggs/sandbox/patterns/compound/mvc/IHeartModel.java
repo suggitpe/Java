@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.compound.mvc;
  * @author suggitpe
  * @version 1.0 25 Sep 2007
  */
-public interface IHeartModel
-{
+public interface IHeartModel {
 
     /**
      * Getter for a heart rate

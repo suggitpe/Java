@@ -20,8 +20,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 18 Sep 2007
  */
-public class DuckSimulator
-{
+public class DuckSimulator {
 
     private static final Log LOG = LogFactory.getLog( DuckSimulator.class );
 
@@ -30,8 +29,7 @@ public class DuckSimulator
      * 
      * @param aFact
      */
-    public void simulate( AbstractDuckFactory aFact )
-    {
+    public void simulate( AbstractDuckFactory aFact ) {
 
         Flock duckFlock = new Flock();
         duckFlock.add( aFact.createRedheadDuck() );
@@ -61,8 +59,7 @@ public class DuckSimulator
     }
 
     /** @param aQuackable */
-    public void simulate( IQuackable aQuackable )
-    {
+    public void simulate( IQuackable aQuackable ) {
         aQuackable.quack();
     }
 

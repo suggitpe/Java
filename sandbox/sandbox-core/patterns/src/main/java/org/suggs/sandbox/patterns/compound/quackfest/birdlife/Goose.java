@@ -13,14 +13,11 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 18 Sep 2007
  */
-public class Goose
-{
+public class Goose {
 
     private static final Log LOG = LogFactory.getLog( Goose.class );
 
-    /** */
-    public void honk()
-    {
+    public void honk() {
         LOG.debug( "Honk" );
     }
 

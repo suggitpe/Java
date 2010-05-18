@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.compound.mvc;
  * @author suggitpe
  * @version 1.0 19 Sep 2007
  */
-public interface IBeatModel
-{
+public interface IBeatModel {
 
     /**
      * Initialise the model

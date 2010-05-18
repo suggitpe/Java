@@ -15,46 +15,41 @@ import org.suggs.sandbox.patterns.compound.quackfest.observer.Observable;
  * @author suggitpe
  * @version 1.0 18 Sep 2007
  */
-public class GooseAdapter implements IQuackable
-{
+public class GooseAdapter implements IQuackable {
 
-    private Goose mGoose_;
-    private Observable mObservable_;
+    private Goose goose;
+    private Observable observable;
 
     /**
      * Constructs a new instance.
      * 
      * @param aGoose
      */
-    public GooseAdapter( Goose aGoose )
-    {
-        mGoose_ = aGoose;
-        mObservable_ = new Observable( this );
+    public GooseAdapter( Goose aGoose ) {
+        goose = aGoose;
+        observable = new Observable( this );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.IQuackable#quack()
      */
-    public void quack()
-    {
-        mGoose_.honk();
+    public void quack() {
+        goose.honk();
         notifyObservers();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
      */
-    public void notifyObservers()
-    {
-        mObservable_.notifyObservers();
+    public void notifyObservers() {
+        observable.notifyObservers();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
      */
-    public void registerObserver( IObserver observer )
-    {
-        mObservable_.registerObserver( observer );
+    public void registerObserver( IObserver observer ) {
+        observable.registerObserver( observer );
     }
 
 }

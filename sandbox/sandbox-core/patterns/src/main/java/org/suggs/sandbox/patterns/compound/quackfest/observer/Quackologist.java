@@ -13,16 +13,14 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 19 Sep 2007
  */
-public class Quackologist implements IObserver
-{
+public class Quackologist implements IObserver {
 
     private static final Log LOG = LogFactory.getLog( Quackologist.class );
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver#update(org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable)
      */
-    public void update( IQuackObservable quacker )
-    {
+    public void update( IQuackObservable quacker ) {
         LOG.debug( "Quackologist: [" + quacker.getClass().getSimpleName() + "] just quacked" );
     }
 

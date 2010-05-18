@@ -12,8 +12,7 @@ import org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable;
  * @author suggitpe
  * @version 1.0 18 Sep 2007
  */
-public interface IQuackable extends IQuackObservable
-{
+public interface IQuackable extends IQuackObservable {
 
     /**
      * Make a noise like a duck.

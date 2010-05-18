@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.compound.mvc;
  * @author suggitpe
  * @version 1.0 20 Sep 2007
  */
-public interface IBpmObserver
-{
+public interface IBpmObserver {
 
     /** */
     void updateBpm();

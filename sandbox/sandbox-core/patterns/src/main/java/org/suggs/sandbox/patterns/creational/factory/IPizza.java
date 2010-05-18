@@ -5,14 +5,12 @@
 package org.suggs.sandbox.patterns.creational.factory;
 
 /**
- * Interface to represent the Pizza itself, encapsulating the actions
- * that can be performed on the pizza
+ * Interface to represent the Pizza itself, encapsulating the actions that can be performed on the pizza
  * 
  * @author suggitpe
  * @version 1.0 22 Aug 2007
  */
-public interface IPizza
-{
+public interface IPizza {
 
     /**
      * Prepare the pizza

@@ -12,8 +12,7 @@ import org.suggs.sandbox.patterns.compound.quackfest.IQuackable;
  * @author suggitpe
  * @version 1.0 18 Sep 2007
  */
-public abstract class AbstractDuckFactory
-{
+public abstract class AbstractDuckFactory {
 
     /**
      * Create a mallard duck

@@ -10,14 +10,12 @@ package org.suggs.sandbox.patterns.creational.factory.pizza;
  * @author suggitpe
  * @version 1.0 22 Aug 2007
  */
-public class FooHamPizza extends AbstractPizza
-{
+public class FooHamPizza extends AbstractPizza {
 
     /**
      * Constructs a new instance.
      */
-    public FooHamPizza()
-    {
+    public FooHamPizza() {
         super( new String[] { "Cheese", "Tomato", "Ham" } );
     }
 
@@ -27,8 +25,7 @@ public class FooHamPizza extends AbstractPizza
      * @param aToppings
      *            the toppings to add
      */
-    public FooHamPizza( String[] aToppings )
-    {
+    public FooHamPizza( String[] aToppings ) {
         super( aToppings );
     }
 
@@ -36,8 +33,7 @@ public class FooHamPizza extends AbstractPizza
      * @see org.suggs.sandbox.patterns.creational.factory.pizza.AbstractPizza#getPizzaName()
      */
     @Override
-    protected String getPizzaName()
-    {
+    protected String getPizzaName() {
         return "Foo Ham Pizza";
     }
 

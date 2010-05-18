@@ -14,70 +14,63 @@ import org.suggs.sandbox.patterns.compound.mvc.view.DJView;
  * @author suggitpe
  * @version 1.0 25 Sep 2007
  */
-public class BeatController implements IController
-{
+public class BeatController implements IController {
 
-    IBeatModel mModel_;
-    DJView mView_;
+    IBeatModel model;
+    DJView view;
 
     /**
      * Constructs a new instance.
      * 
      * @param aModel
      */
-    public BeatController( IBeatModel aModel )
-    {
-        mModel_ = aModel;
-        mView_ = new DJView( this, mModel_ );
-        mView_.createView();
-        mView_.createControls();
-        mView_.enableStartMenuItem();
-        mView_.disableStopMenuItem();
-        mModel_.initialise();
+    public BeatController( IBeatModel aModel ) {
+        model = aModel;
+        view = new DJView( this, model );
+        view.createView();
+        view.createControls();
+        view.enableStartMenuItem();
+        view.disableStopMenuItem();
+        model.initialise();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#start()
      */
-    public void start()
-    {
-        mModel_.on();
-        mView_.disableStartMenuItem();
-        mView_.enableStopMenuItem();
+    public void start() {
+        model.on();
+        view.disableStartMenuItem();
+        view.enableStopMenuItem();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#stop()
      */
-    public void stop()
-    {
-        mModel_.off();
-        mView_.enableStartMenuItem();
-        mView_.disableStopMenuItem();
+    public void stop() {
+        model.off();
+        view.enableStartMenuItem();
+        view.disableStopMenuItem();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#increaseBpm()
      */
-    public void increaseBpm()
-    {
-        mModel_.setBPM( mModel_.getBpm() + 1 );
+    public void increaseBpm() {
+        model.setBPM( model.getBpm() + 1 );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#decreaseBpm()
      */
-    public void decreaseBpm()
-    {
-        mModel_.setBPM( mModel_.getBpm() + 1 );
+    public void decreaseBpm() {
+        model.setBPM( model.getBpm() + 1 );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#setBpm(int)
      */
-    public void setBpm( int bpm )
-    {
-        mModel_.setBPM( bpm );
+    public void setBpm( int bpm ) {
+        model.setBPM( bpm );
     }
 
 }

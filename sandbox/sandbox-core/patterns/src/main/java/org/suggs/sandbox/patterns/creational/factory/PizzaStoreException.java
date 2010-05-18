@@ -10,14 +10,12 @@ package org.suggs.sandbox.patterns.creational.factory;
  * @author suggitpe
  * @version 1.0 23 Aug 2007
  */
-public class PizzaStoreException extends Exception
-{
+public class PizzaStoreException extends Exception {
 
     /**
      * Constructs a new instance.
      */
-    public PizzaStoreException()
-    {
+    public PizzaStoreException() {
         super();
     }
 
@@ -26,8 +24,7 @@ public class PizzaStoreException extends Exception
      * 
      * @param aMessage
      */
-    public PizzaStoreException( String aMessage )
-    {
+    public PizzaStoreException( String aMessage ) {
         super( aMessage );
     }
 
@@ -37,8 +34,7 @@ public class PizzaStoreException extends Exception
      * @param aMessage
      * @param aError
      */
-    public PizzaStoreException( String aMessage, Throwable aError )
-    {
+    public PizzaStoreException( String aMessage, Throwable aError ) {
         super( aMessage, aError );
     }
 
@@ -47,8 +43,7 @@ public class PizzaStoreException extends Exception
      * 
      * @param aError
      */
-    public PizzaStoreException( Throwable aError )
-    {
+    public PizzaStoreException( Throwable aError ) {
         super( aError );
     }
 }

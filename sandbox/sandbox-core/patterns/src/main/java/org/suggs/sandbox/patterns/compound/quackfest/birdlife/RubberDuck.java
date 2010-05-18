@@ -17,26 +17,22 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 18 Sep 2007
  */
-public class RubberDuck implements IQuackable
-{
+public class RubberDuck implements IQuackable {
 
     private static final Log LOG = LogFactory.getLog( RubberDuck.class );
-
-    private Observable mObservable_;
+    private Observable observable;
 
     /**
      * Constructs a new instance.
      */
-    public RubberDuck()
-    {
-        mObservable_ = new Observable( this );
+    public RubberDuck() {
+        observable = new Observable( this );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.IQuackable#quack()
      */
-    public void quack()
-    {
+    public void quack() {
         LOG.debug( "Squeek" );
         notifyObservers();
     }
@@ -44,17 +40,15 @@ public class RubberDuck implements IQuackable
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
      */
-    public void notifyObservers()
-    {
-        mObservable_.notifyObservers();
+    public void notifyObservers() {
+        observable.notifyObservers();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
      */
-    public void registerObserver( IObserver observer )
-    {
-        mObservable_.registerObserver( observer );
+    public void registerObserver( IObserver observer ) {
+        observable.registerObserver( observer );
     }
 
 }

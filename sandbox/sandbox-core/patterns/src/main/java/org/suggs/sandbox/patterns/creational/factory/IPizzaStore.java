@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.creational.factory;
  * @author suggitpe
  * @version 1.0 23 Aug 2007
  */
-public interface IPizzaStore
-{
+public interface IPizzaStore {
 
     /**
      * @param aType

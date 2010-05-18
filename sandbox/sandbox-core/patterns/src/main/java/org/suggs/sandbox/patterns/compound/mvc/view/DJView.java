@@ -32,27 +32,26 @@ import javax.swing.SwingConstants;
  * @author suggitpe
  * @version 1.0 20 Sep 2007
  */
-public class DJView implements ActionListener, IBeatObserver, IBpmObserver
-{
+public class DJView implements ActionListener, IBeatObserver, IBpmObserver {
 
-    private IBeatModel mModel_;
-    private IController mController_;
-    JFrame mViewFrame_ = new JFrame( "View" );
-    JPanel mViewPanel_ = new JPanel( new GridLayout( 1, 2 ) );
-    // BeatBar mBeatBar_ = new BeatBar();
-    JLabel mBpmOutputLabel_ = new JLabel( "Off-line", SwingConstants.CENTER );
+    private IBeatModel model;
+    private IController controller;
+    JFrame viewFrame = new JFrame( "View" );
+    JPanel viewPanel = new JPanel( new GridLayout( 1, 2 ) );
+    // BeatBar beatBar = new BeatBar();
+    JLabel bpmOutputLabel = new JLabel( "Off-line", SwingConstants.CENTER );
 
-    JFrame mControlFrame_ = new JFrame( "Control" );
-    JPanel mControlPanel_ = new JPanel( new GridLayout( 1, 2 ) );
-    JLabel mBpmLabel_ = new JLabel( "Enter BPM:", SwingConstants.CENTER );
-    JTextField mBpmTextField_ = new JTextField( 2 );
-    JButton mSetBpmButton_ = new JButton( "Set" );
-    JButton mIncreaseBpmButton_ = new JButton( ">>" );
-    JButton mDecreaseBpmButton_ = new JButton( "<<" );
-    JMenuBar mMenuBar_ = new JMenuBar();
-    JMenu mMenu_ = new JMenu( "DJ Control" );
-    JMenuItem mStartMenuItem_ = new JMenuItem( "Start" );
-    JMenuItem mStopMenuItem_ = new JMenuItem( "Stop" );
+    JFrame controlFrame = new JFrame( "Control" );
+    JPanel controlPanel = new JPanel( new GridLayout( 1, 2 ) );
+    JLabel bpmLabel = new JLabel( "Enter BPM:", SwingConstants.CENTER );
+    JTextField bpmTextField = new JTextField( 2 );
+    JButton setBpmButton = new JButton( "Set" );
+    JButton increaseBpmButton = new JButton( ">>" );
+    JButton decreaseBpmButton = new JButton( "<<" );
+    JMenuBar menuBar = new JMenuBar();
+    JMenu menu = new JMenu( "DJ Control" );
+    JMenuItem startMenuItem = new JMenuItem( "Start" );
+    JMenuItem stopMenuItem = new JMenuItem( "Stop" );
 
     /**
      * Constructs a new instance.
@@ -62,156 +61,139 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver
      * @param aBeatModel
      *            a model
      */
-    public DJView( IController aController, IBeatModel aBeatModel )
-    {
-        mController_ = aController;
-        mModel_ = aBeatModel;
-        mModel_.registerObserver( (IBeatObserver) this );
-        mModel_.registerObserver( (IBpmObserver) this );
+    public DJView( IController aController, IBeatModel aBeatModel ) {
+        controller = aController;
+        model = aBeatModel;
+        model.registerObserver( (IBeatObserver) this );
+        model.registerObserver( (IBpmObserver) this );
     }
 
     /**
      * Create all of the swing components in this method
      */
-    public void createView()
-    {
-        mViewFrame_.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        mViewFrame_.setSize( new Dimension( 100, 80 ) );
+    public void createView() {
+        viewFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        viewFrame.setSize( new Dimension( 100, 80 ) );
         // mBeatBar_.setValue( 0 );
 
         JPanel bpmPanel = new JPanel( new GridLayout( 2, 1 ) );
         // bpmPanel.add( mBeatBar_ );
-        bpmPanel.add( mBpmOutputLabel_ );
-        mViewPanel_.add( bpmPanel );
+        bpmPanel.add( bpmOutputLabel );
+        viewPanel.add( bpmPanel );
 
-        mViewFrame_.getContentPane().add( mViewPanel_, BorderLayout.CENTER );
-        mViewFrame_.pack();
-        mViewFrame_.setVisible( true );
+        viewFrame.getContentPane().add( viewPanel, BorderLayout.CENTER );
+        viewFrame.pack();
+        viewFrame.setVisible( true );
     }
 
     /**
      * 
      */
-    public void createControls()
-    {
+    public void createControls() {
         JFrame.setDefaultLookAndFeelDecorated( true );
-        mControlFrame_.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        mControlFrame_.setSize( new Dimension( 100, 80 ) );
+        controlFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        controlFrame.setSize( new Dimension( 100, 80 ) );
 
-        mMenu_.add( mStartMenuItem_ );
-        mStartMenuItem_.addActionListener( new ActionListener()
-        {
+        menu.add( startMenuItem );
+        startMenuItem.addActionListener( new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
-                mController_.start();
+            public void actionPerformed( ActionEvent arg0 ) {
+                controller.start();
             }
         } );
 
-        mMenu_.add( mStopMenuItem_ );
-        mStopMenuItem_.addActionListener( new ActionListener()
-        {
+        menu.add( stopMenuItem );
+        stopMenuItem.addActionListener( new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
-                mController_.stop();
+            public void actionPerformed( ActionEvent arg0 ) {
+                controller.stop();
                 // mBpmOutputLabel_.setText( "Off-line" );
             }
         } );
 
         JMenuItem exit = new JMenuItem( "Exit" );
-        exit.addActionListener( new ActionListener()
-        {
+        exit.addActionListener( new ActionListener() {
 
-            public void actionPerformed( ActionEvent arg0 )
-            {
+            public void actionPerformed( ActionEvent arg0 ) {
                 System.exit( 0 );
             }
         } );
 
-        mMenu_.add( exit );
-        mMenuBar_.add( mMenu_ );
-        mControlFrame_.setJMenuBar( mMenuBar_ );
+        menu.add( exit );
+        menuBar.add( menu );
+        controlFrame.setJMenuBar( menuBar );
 
-        mSetBpmButton_.setSize( new Dimension( 10, 40 ) );
-        mSetBpmButton_.addActionListener( this );
-        mIncreaseBpmButton_.addActionListener( this );
-        mDecreaseBpmButton_.addActionListener( this );
+        setBpmButton.setSize( new Dimension( 10, 40 ) );
+        setBpmButton.addActionListener( this );
+        increaseBpmButton.addActionListener( this );
+        decreaseBpmButton.addActionListener( this );
 
         // build a panel for the buttons
         JPanel buttonPanel = new JPanel( new GridLayout( 1, 2 ) );
-        buttonPanel.add( mDecreaseBpmButton_ );
-        buttonPanel.add( mIncreaseBpmButton_ );
+        buttonPanel.add( decreaseBpmButton );
+        buttonPanel.add( increaseBpmButton );
 
         JPanel enterPanel = new JPanel( new GridLayout( 1, 2 ) );
-        enterPanel.add( mBpmLabel_ );
-        enterPanel.add( mBpmTextField_ );
+        enterPanel.add( bpmLabel );
+        enterPanel.add( bpmTextField );
 
         JPanel insideControlPanel = new JPanel( new GridLayout( 3, 1 ) );
         insideControlPanel.add( enterPanel );
-        insideControlPanel.add( mSetBpmButton_ );
+        insideControlPanel.add( setBpmButton );
         insideControlPanel.add( buttonPanel );
-        mControlPanel_.add( insideControlPanel );
+        controlPanel.add( insideControlPanel );
 
-        mBpmLabel_.setBorder( BorderFactory.createEmptyBorder( 5, 5, 5, 5 ) );
-        mBpmOutputLabel_.setBorder( BorderFactory.createEmptyBorder( 5, 5, 5, 5 ) );
+        bpmLabel.setBorder( BorderFactory.createEmptyBorder( 5, 5, 5, 5 ) );
+        bpmOutputLabel.setBorder( BorderFactory.createEmptyBorder( 5, 5, 5, 5 ) );
 
-        mControlFrame_.getRootPane().setDefaultButton( mSetBpmButton_ );
-        mControlFrame_.getContentPane().add( mControlPanel_, BorderLayout.CENTER );
+        controlFrame.getRootPane().setDefaultButton( setBpmButton );
+        controlFrame.getContentPane().add( controlPanel, BorderLayout.CENTER );
 
-        mControlFrame_.pack();
-        mControlFrame_.setVisible( true );
+        controlFrame.pack();
+        controlFrame.setVisible( true );
     }
 
     /**
      * Enables the stop menu item
      */
-    public void enableStopMenuItem()
-    {
-        mStopMenuItem_.setEnabled( true );
+    public void enableStopMenuItem() {
+        stopMenuItem.setEnabled( true );
     }
 
     /**
      * Disables the stop menu item
      */
-    public void disableStopMenuItem()
-    {
-        mStopMenuItem_.setEnabled( false );
+    public void disableStopMenuItem() {
+        stopMenuItem.setEnabled( false );
     }
 
     /**
      * Enables the start menu item
      */
-    public void enableStartMenuItem()
-    {
-        mStartMenuItem_.setEnabled( true );
+    public void enableStartMenuItem() {
+        startMenuItem.setEnabled( true );
     }
 
     /**
      * Disables the start menu item
      */
-    public void disableStartMenuItem()
-    {
-        mStartMenuItem_.setEnabled( false );
+    public void disableStartMenuItem() {
+        startMenuItem.setEnabled( false );
     }
 
     /**
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
-    public void actionPerformed( ActionEvent event )
-    {
-        if ( event.getSource() == mSetBpmButton_ )
-        {
-            int bpm = Integer.parseInt( mBpmTextField_.getText() );
-            mController_.setBpm( bpm );
+    public void actionPerformed( ActionEvent event ) {
+        if ( event.getSource() == setBpmButton ) {
+            int bpm = Integer.parseInt( bpmTextField.getText() );
+            controller.setBpm( bpm );
         }
-        else if ( event.getSource() == mIncreaseBpmButton_ )
-        {
-            mController_.increaseBpm();
+        else if ( event.getSource() == increaseBpmButton ) {
+            controller.increaseBpm();
         }
-        else if ( event.getSource() == mDecreaseBpmButton_ )
-        {
-            mController_.decreaseBpm();
+        else if ( event.getSource() == decreaseBpmButton ) {
+            controller.decreaseBpm();
         }
 
     }
@@ -219,25 +201,21 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBpmObserver#updateBpm()
      */
-    public void updateBpm()
-    {
-        int bpm = mModel_.getBpm();
-        if ( bpm == 0 )
-        {
-            mBpmOutputLabel_.setText( "Off-line" );
+    public void updateBpm() {
+        int bpm = model.getBpm();
+        if ( bpm == 0 ) {
+            bpmOutputLabel.setText( "Off-line" );
         }
-        else
-        {
-            mBpmOutputLabel_.setText( "Current BPM: " + bpm );
+        else {
+            bpmOutputLabel.setText( "Current BPM: " + bpm );
         }
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatObserver#updateBeat()
      */
-    public void updateBeat()
-    {
-        // mBeatBar_.setValue( 100 );
+    public void updateBeat() {
+    // mBeatBar_.setValue( 100 );
     }
 
 }

@@ -8,17 +8,15 @@ import org.suggs.sandbox.patterns.compound.quackfest.IQuackable;
 import org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver;
 
 /**
- * Decorator for IQuackable objects that will count the number of
- * quacks induced
+ * Decorator for IQuackable objects that will count the number of quacks induced
  * 
  * @author suggitpe
  * @version 1.0 18 Sep 2007
  */
-public class QuackCounter implements IQuackable
-{
+public class QuackCounter implements IQuackable {
 
-    private IQuackable mQuackable_;
-    private static int mNumQuacks_;
+    private IQuackable quackable;
+    private static int numQuacks;
 
     /**
      * Constructs a new instance.
@@ -26,18 +24,16 @@ public class QuackCounter implements IQuackable
      * @param aQuackable
      *            the quackable object to decorate
      */
-    public QuackCounter( IQuackable aQuackable )
-    {
-        mQuackable_ = aQuackable;
+    public QuackCounter( IQuackable aQuackable ) {
+        quackable = aQuackable;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.IQuackable#quack()
      */
-    public void quack()
-    {
-        mQuackable_.quack();
-        ++mNumQuacks_;
+    public void quack() {
+        quackable.quack();
+        ++numQuacks;
     }
 
     /**
@@ -45,25 +41,22 @@ public class QuackCounter implements IQuackable
      * 
      * @return the number of quacks
      */
-    public static int getQuacks()
-    {
-        return mNumQuacks_;
+    public static int getQuacks() {
+        return numQuacks;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
      */
-    public void notifyObservers()
-    {
-        mQuackable_.notifyObservers();
+    public void notifyObservers() {
+        quackable.notifyObservers();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
      */
-    public void registerObserver( IObserver observer )
-    {
-        mQuackable_.registerObserver( observer );
+    public void registerObserver( IObserver observer ) {
+        quackable.registerObserver( observer );
     }
 
 }

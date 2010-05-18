@@ -15,60 +15,48 @@ import org.suggs.sandbox.patterns.compound.mvc.view.DJView;
  * @author suggitpe
  * @version 1.0 26 Sep 2007
  */
-public class HeartController implements IController
-{
+public class HeartController implements IController {
 
-    IHeartModel mModel_;
-    DJView mView_;
+    IHeartModel model;
+    DJView view;
 
     /**
      * Constructs a new instance.
      * 
      * @param aModel
      */
-    public HeartController( IHeartModel aModel )
-    {
-        mModel_ = aModel;
-        mView_ = new DJView( this, new HeartAdapter( mModel_ ) );
+    public HeartController( IHeartModel aModel ) {
+        model = aModel;
+        view = new DJView( this, new HeartAdapter( model ) );
 
-        mView_.createView();
-        mView_.createControls();
-        mView_.disableStopMenuItem();
-        mView_.disableStartMenuItem();
+        view.createView();
+        view.createControls();
+        view.disableStopMenuItem();
+        view.disableStartMenuItem();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#decreaseBpm()
      */
-    public void decreaseBpm()
-    {
-    }
+    public void decreaseBpm() {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#increaseBpm()
      */
-    public void increaseBpm()
-    {
-    }
+    public void increaseBpm() {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#setBpm(int)
      */
-    public void setBpm( int bpm )
-    {
-    }
+    public void setBpm( int bpm ) {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#start()
      */
-    public void start()
-    {
-    }
+    public void start() {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#stop()
      */
-    public void stop()
-    {
-    }
+    public void stop() {}
 }

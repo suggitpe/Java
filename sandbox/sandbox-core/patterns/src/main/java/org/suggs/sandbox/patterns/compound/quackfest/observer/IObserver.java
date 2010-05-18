@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.compound.quackfest.observer;
  * @author suggitpe
  * @version 1.0 19 Sep 2007
  */
-public interface IObserver
-{
+public interface IObserver {
 
     /**
      * Update with the new state of the quackable

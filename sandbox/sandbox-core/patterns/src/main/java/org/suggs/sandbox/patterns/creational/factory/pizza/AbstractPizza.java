@@ -6,6 +6,8 @@ package org.suggs.sandbox.patterns.creational.factory.pizza;
 
 import org.suggs.sandbox.patterns.creational.factory.IPizza;
 
+import java.util.Arrays;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -15,19 +17,16 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 23 Aug 2007
  */
-public abstract class AbstractPizza implements IPizza
-{
+public abstract class AbstractPizza implements IPizza {
 
     private static final Log LOG = LogFactory.getLog( AbstractPizza.class );
 
-    private String[] mToppings;
+    private String[] toppings;
 
     /**
      * Constructs a new instance.
      */
-    protected AbstractPizza()
-    {
-    }
+    protected AbstractPizza() {}
 
     /**
      * Constructs a new instance.
@@ -35,9 +34,10 @@ public abstract class AbstractPizza implements IPizza
      * @param aToppings
      *            an array of toppings to add to the pizza
      */
-    protected AbstractPizza( String[] aToppings )
-    {
-        mToppings = aToppings;
+    protected AbstractPizza( String[] aToppings ) {
+        if ( aToppings != null ) {
+            toppings = Arrays.copyOf( aToppings, aToppings.length );
+        }
     }
 
     /**
@@ -50,38 +50,33 @@ public abstract class AbstractPizza implements IPizza
     /**
      * @see org.suggs.sandbox.patterns.creational.factory.IPizza#bake()
      */
-    public void bake()
-    {
+    public void bake() {
         LOG.debug( "Baking for 30 mins" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.creational.factory.IPizza#box()
      */
-    public void box()
-    {
+    public void box() {
         LOG.debug( "Boxing up the pizza" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.creational.factory.IPizza#cut()
      */
-    public void cut()
-    {
+    public void cut() {
         LOG.debug( "Cutting the pizza" );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.creational.factory.IPizza#prepare()
      */
-    public void prepare()
-    {
+    public void prepare() {
         LOG.debug( "Preparing " + getPizzaName() );
         LOG.debug( "\ttossing dough ..." );
         LOG.debug( "\tadding sauce ..." );
         StringBuffer buff = new StringBuffer();
-        for ( String s : mToppings )
-        {
+        for ( String s : toppings ) {
             buff.append( s ).append( " " );
 
         }
