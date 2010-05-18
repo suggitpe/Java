@@ -127,10 +127,6 @@ public class TableMenu extends JFrame {
         contextMenu.add( pasteMenu );
 
         switch ( columnIndex ) {
-            case ExampleTableModel.COLUMN_NAME:
-                break;
-            case ExampleTableModel.COLUMN_PRICE:
-                break;
             case ExampleTableModel.COLUMN_QUANTITY:
                 contextMenu.addSeparator();
                 ActionListener changer = new ActionListener() {
@@ -175,8 +171,9 @@ public class TableMenu extends JFrame {
 
                 changeItem = null;
                 break;
-            case ExampleTableModel.COLUMN_AMOUNT:
-                break;
+            // case ExampleTableModel.COLUMN_NAME:
+            // case ExampleTableModel.COLUMN_AMOUNT:
+            // case ExampleTableModel.COLUMN_PRICE:
             default:
                 break;
         }

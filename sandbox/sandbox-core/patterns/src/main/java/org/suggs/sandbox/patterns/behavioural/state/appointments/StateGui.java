@@ -210,15 +210,11 @@ public class StateGui implements ActionListener {
                     mData[row].setReason( (String) value );
                     calendar.edit();
                     break;
-                case 1:
-                    break;
                 case 2:
                     mData[row].setLocation( (String) value );
                     calendar.edit();
                     break;
-                case 3:
-                    break;
-                case 4:
+                default:
                     break;
             }
         }

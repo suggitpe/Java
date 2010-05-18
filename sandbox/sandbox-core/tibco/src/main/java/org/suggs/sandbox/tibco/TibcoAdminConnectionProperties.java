@@ -103,8 +103,8 @@ public class TibcoAdminConnectionProperties {
                     throw new IllegalStateException( "Unable to connect to the Tibco EMS broker as admin" );
                 }
             }
+            return admin;
         }
-        return admin;
     }
 
 }

@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.Display;
  */
 public class ImageUtil {
 
-    private static ImageRegistry IMAGES;
-    private static Clipboard CLIPBOARD;
+    private static volatile ImageRegistry IMAGES;
+    private static volatile Clipboard CLIPBOARD;
 
     /**
      * Singleton method for managing an image registry for

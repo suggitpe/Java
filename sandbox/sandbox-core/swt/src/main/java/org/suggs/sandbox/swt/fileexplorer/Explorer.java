@@ -29,6 +29,8 @@ import org.eclipse.swt.widgets.TableColumn;
  */
 public class Explorer extends ApplicationWindow {
 
+    private static final String FILE_LOC = "C:\\";
+
     private TableViewer table;
     private TreeViewer tree;
     private OpenAction open;
@@ -62,7 +64,7 @@ public class Explorer extends ApplicationWindow {
         tree = new TreeViewer( sf );
         tree.setContentProvider( new FileTreeContentProvider() );
         tree.setLabelProvider( new FileTreeLabelProvider() );
-        tree.setInput( new File( "C:\\" ) );
+        tree.setInput( new File( FILE_LOC ) );
         tree.addFilter( new AllowOnlyFoldersFilter() );
 
         // create the table viewer

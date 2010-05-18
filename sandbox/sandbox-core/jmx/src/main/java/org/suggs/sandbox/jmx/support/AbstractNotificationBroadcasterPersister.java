@@ -7,6 +7,7 @@ package org.suggs.sandbox.jmx.support;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
@@ -65,9 +66,10 @@ public abstract class AbstractNotificationBroadcasterPersister extends Notificat
      */
     @Override
     public void sendNotification( Notification aNotification ) {
+        PreparedStatement stmt = null;
         try {
             // prepare the insert statement
-            PreparedStatement stmt = connection.prepareStatement( NOTIF_INSERT_SQL );
+            stmt = connection.prepareStatement( NOTIF_INSERT_SQL );
             stmt.setString( 1, aNotification.getMessage() );
             stmt.setLong( 2, aNotification.getSequenceNumber() );
             if ( aNotification.getSource() != null && aNotification.getSource() instanceof Serializable ) {
@@ -94,6 +96,16 @@ public abstract class AbstractNotificationBroadcasterPersister extends Notificat
         }
         catch ( Exception e ) {
             LOG.error( "Failed to persist notification", e );
+        }
+        finally {
+            try {
+                if ( stmt != null ) {
+                    stmt.close();
+                }
+            }
+            catch ( SQLException sqle ) {
+                LOG.error( "failed to close statement", sqle );
+            }
         }
         super.sendNotification( aNotification );
     }

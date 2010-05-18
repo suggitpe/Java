@@ -18,7 +18,7 @@ import java.util.Random;
  * @author suggitpe
  * @version 1.0 25 Sep 2007
  */
-public class HeartModel implements IHeartModel, Runnable {
+public final class HeartModel implements IHeartModel, Runnable {
 
     List<IBeatObserver> beatObservers = new ArrayList<IBeatObserver>();
     List<IBpmObserver> bpmObservers = new ArrayList<IBpmObserver>();
