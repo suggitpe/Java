@@ -13,10 +13,9 @@ import org.suggs.sandbox.patterns.behavioural.command.receivers.GarageDoor;
  * @author suggitpe
  * @version 1.0 30 Aug 2007
  */
-public class GarageDoorCloseCommand implements ICommand
-{
+public class GarageDoorCloseCommand implements ICommand {
 
-    private GarageDoor mDoor_;
+    private GarageDoor door;
 
     /**
      * Constructs a new instance.
@@ -24,27 +23,24 @@ public class GarageDoorCloseCommand implements ICommand
      * @param aDoor
      *            the door to set
      */
-    public GarageDoorCloseCommand( GarageDoor aDoor )
-    {
-        mDoor_ = aDoor;
+    public GarageDoorCloseCommand( GarageDoor aDoor ) {
+        door = aDoor;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
-    public void execute()
-    {
-        mDoor_.lightOff();
-        mDoor_.down();
+    public void execute() {
+        door.lightOff();
+        door.down();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
-    public void undo()
-    {
-        mDoor_.up();
-        mDoor_.lightOn();
+    public void undo() {
+        door.up();
+        door.lightOn();
     }
 
 }

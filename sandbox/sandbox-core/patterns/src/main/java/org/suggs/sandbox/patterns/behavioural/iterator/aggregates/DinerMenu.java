@@ -18,20 +18,18 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 6 Sep 2007
  */
-public class DinerMenu implements IMenu
-{
+public class DinerMenu implements IMenu {
 
     private static final Log LOG = LogFactory.getLog( DinerMenu.class );
 
     private static final int MAX_ITEMS = 6;
-    private int mNumItems = 0;
-    private MenuItem[] mMenuItems = new MenuItem[MAX_ITEMS];
+    private int numItems = 0;
+    private MenuItem[] menuItems = new MenuItem[MAX_ITEMS];
 
     /**
      * Constructs a new instance.
      */
-    public DinerMenu()
-    {
+    public DinerMenu() {
         addItem( "Vegetarian BLT", "'Fakin' bacon with lettuce & tomato on whie bread", true, 2.99d );
         addItem( "BLT", "Bacon lettuce and tomate on whole wheat", false, 2.99d );
         addItem( "Soup of the day", "soup of the day with a bread roll", false, 3.29d );
@@ -50,24 +48,20 @@ public class DinerMenu implements IMenu
      * @param aPrice
      *            the price of the menu item
      */
-    private void addItem( String aName, String aDescription, boolean isVegetarian, double aPrice )
-    {
-        if ( mNumItems >= MAX_ITEMS )
-        {
+    private void addItem( String aName, String aDescription, boolean isVegetarian, double aPrice ) {
+        if ( numItems >= MAX_ITEMS ) {
             LOG.error( "No space left for any more menu items on this menu" );
         }
-        else
-        {
-            mMenuItems[mNumItems++] = new MenuItem( aName, aDescription, isVegetarian, aPrice );
+        else {
+            menuItems[numItems++] = new MenuItem( aName, aDescription, isVegetarian, aPrice );
         }
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IMenu#createIterator()
      */
-    public IIterator createIterator()
-    {
-        return new DinerMenuIterator( mMenuItems );
+    public IIterator createIterator() {
+        return new DinerMenuIterator( menuItems );
     }
 
 }

@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.behavioural.iterator;
  * @author suggitpe
  * @version 1.0 6 Sep 2007
  */
-public interface IIterator
-{
+public interface IIterator {
 
     /**
      * Test to see if there are any more items in the collection

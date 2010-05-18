@@ -13,37 +13,33 @@ import org.suggs.sandbox.patterns.behavioural.command.receivers.Stereo;
  * @author suggitpe
  * @version 1.0 30 Aug 2007
  */
-public class StereoOffCommand implements ICommand
-{
+public class StereoOffCommand implements ICommand {
 
-    private Stereo mStereo_;
+    private Stereo stereo;
 
     /**
      * Constructs a new instance.
      * 
      * @param aStereo
      */
-    public StereoOffCommand( Stereo aStereo )
-    {
-        mStereo_ = aStereo;
+    public StereoOffCommand( Stereo aStereo ) {
+        stereo = aStereo;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
-    public void execute()
-    {
-        mStereo_.off();
+    public void execute() {
+        stereo.off();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
-    public void undo()
-    {
-        mStereo_.on();
-        mStereo_.setCd();
-        mStereo_.setVolume( 5 );
+    public void undo() {
+        stereo.on();
+        stereo.setCd();
+        stereo.setVolume( 5 );
     }
 
 }

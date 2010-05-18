@@ -10,12 +10,10 @@ package org.suggs.sandbox.patterns.behavioural.observer;
  * @author suggitpe
  * @version 1.0 28 Aug 2007
  */
-public interface IObserver
-{
+public interface IObserver {
 
     /**
-     * Interface to allow a subject to advise the observers that a
-     * change has happened.
+     * Interface to allow a subject to advise the observers that a change has happened.
      * 
      * @param aTemp
      *            the temperature

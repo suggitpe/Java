@@ -13,8 +13,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public class Coffee extends CaffeineBeverage
-{
+public class Coffee extends CaffeineBeverage {
 
     private static final Log LOG = LogFactory.getLog( Coffee.class );
 
@@ -22,8 +21,7 @@ public class Coffee extends CaffeineBeverage
      * @see org.suggs.sandbox.patterns.behavioural.template.untemplatized.CaffeineBeverage#prepareReceipe()
      */
     @Override
-    public void prepareReceipe()
-    {
+    public void prepareReceipe() {
         boilWater();
         brewCoffeeGrinds();
         pourInCup();
@@ -33,16 +31,14 @@ public class Coffee extends CaffeineBeverage
     /**
      * Brew the coffee grinds
      */
-    private void brewCoffeeGrinds()
-    {
+    private void brewCoffeeGrinds() {
         LOG.debug( "Brewing coffee grinds" );
     }
 
     /**
      * Add in milk and sugar.
      */
-    private void addMilkAndSugar()
-    {
+    private void addMilkAndSugar() {
         LOG.debug( "Add in milk and sugar to the coffee" );
     }
 

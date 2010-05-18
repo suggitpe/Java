@@ -18,16 +18,14 @@ import java.util.List;
  * @author suggitpe
  * @version 1.0 6 Sep 2007
  */
-public class PancakeHouseMenu implements IMenu
-{
+public class PancakeHouseMenu implements IMenu {
 
-    private List<MenuItem> mMenuItems_ = new ArrayList<MenuItem>();
+    private List<MenuItem> menuItems = new ArrayList<MenuItem>();
 
     /**
      * Constructs a new instance.
      */
-    public PancakeHouseMenu()
-    {
+    public PancakeHouseMenu() {
         addItem( "K&B's pancake breakfast", "Pancakes with scrambled egss and toast", true, 2.99d );
         addItem( "Regular pancake breakfast", "Pancakes with fried eggs and sausage", false, 2.99d );
         addItem( "Blueberry pancakes", "Pancakes made with fresh blueberries", true, 3.49d );
@@ -42,18 +40,16 @@ public class PancakeHouseMenu implements IMenu
      * @param isVegetarian
      * @param aPrice
      */
-    private void addItem( String aName, String aDescription, boolean isVegetarian, double aPrice )
-    {
+    private void addItem( String aName, String aDescription, boolean isVegetarian, double aPrice ) {
         MenuItem item = new MenuItem( aName, aDescription, isVegetarian, aPrice );
-        mMenuItems_.add( item );
+        menuItems.add( item );
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IMenu#createIterator()
      */
-    public IIterator createIterator()
-    {
-        return new PancakeHouseMenuIterator( mMenuItems_ );
+    public IIterator createIterator() {
+        return new PancakeHouseMenuIterator( menuItems );
     }
 
     /**
@@ -62,9 +58,8 @@ public class PancakeHouseMenu implements IMenu
      * @return the list of menu items
      */
     @SuppressWarnings("unchecked")
-    public List getMenuItems()
-    {
-        return mMenuItems_;
+    public List getMenuItems() {
+        return menuItems;
     }
 
 }

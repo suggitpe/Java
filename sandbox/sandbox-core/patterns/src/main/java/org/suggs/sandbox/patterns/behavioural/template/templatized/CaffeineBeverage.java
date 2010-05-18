@@ -13,16 +13,14 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Sep 2007
  */
-public abstract class CaffeineBeverage
-{
+public abstract class CaffeineBeverage {
 
     private static final Log LOG = LogFactory.getLog( CaffeineBeverage.class );
 
     /**
      * Prepare a beverage.
      */
-    public final void prepareReceipe()
-    {
+    public final void prepareReceipe() {
         boilWater();
         brew();
         pourInCup();
@@ -32,16 +30,14 @@ public abstract class CaffeineBeverage
     /**
      * Boil some water
      */
-    private void boilWater()
-    {
+    private void boilWater() {
         LOG.debug( "Boiling water" );
     }
 
     /**
      * Pour water into the cup
      */
-    private void pourInCup()
-    {
+    private void pourInCup() {
         LOG.debug( "Pouring water into the cup" );
     }
 

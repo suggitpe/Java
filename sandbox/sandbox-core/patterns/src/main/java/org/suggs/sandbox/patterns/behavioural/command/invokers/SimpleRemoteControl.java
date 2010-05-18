@@ -15,19 +15,16 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class SimpleRemoteControl
-{
+public class SimpleRemoteControl {
 
     private static final Log LOG = LogFactory.getLog( SimpleRemoteControl.class );
 
-    private ICommand mSlot_;
+    private ICommand slot;
 
     /**
      * Constructs a new instance.
      */
-    public SimpleRemoteControl()
-    {
-    }
+    public SimpleRemoteControl() {}
 
     /**
      * Setter for the command
@@ -35,18 +32,16 @@ public class SimpleRemoteControl
      * @param aCommand
      *            the command to set
      */
-    public void setCommand( ICommand aCommand )
-    {
-        mSlot_ = aCommand;
+    public void setCommand( ICommand aCommand ) {
+        slot = aCommand;
     }
 
     /**
      * This method is called when the button is pressed
      */
-    public void buttonWasPressed()
-    {
+    public void buttonWasPressed() {
         LOG.debug( "Button pressed" );
-        mSlot_.execute();
+        slot.execute();
     }
 
 }

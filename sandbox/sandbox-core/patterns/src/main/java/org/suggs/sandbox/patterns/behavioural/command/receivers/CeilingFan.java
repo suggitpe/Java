@@ -13,13 +13,11 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 30 Aug 2007
  */
-public class CeilingFan
-{
+public class CeilingFan {
 
     private static final Log LOG = LogFactory.getLog( CeilingFan.class );
-
-    private String mSpeed_;
-    private String mLocation_;
+    private String speed;
+    private String location;
 
     /**
      * Constructs a new instance.
@@ -27,53 +25,47 @@ public class CeilingFan
      * @param aLocation
      *            the location of the ceiling fan
      */
-    public CeilingFan( String aLocation )
-    {
-        mLocation_ = aLocation;
+    public CeilingFan( String aLocation ) {
+        location = aLocation;
     }
 
     /**
      * 
      */
-    public void high()
-    {
-        LOG.debug( "Ceiling Fan (" + mLocation_ + ") high!" );
-        mSpeed_ = "HIGH";
+    public void high() {
+        LOG.debug( "Ceiling Fan (" + location + ") high!" );
+        speed = "HIGH";
     }
 
     /**
      * 
      */
-    public void medium()
-    {
-        LOG.debug( "Ceiling Fan (" + mLocation_ + ") medium!" );
-        mSpeed_ = "MEDIUM";
+    public void medium() {
+        LOG.debug( "Ceiling Fan (" + location + ") medium!" );
+        speed = "MEDIUM";
     }
 
     /**
      * 
      */
-    public void low()
-    {
-        LOG.debug( "Ceiling Fan (" + mLocation_ + ") low!" );
-        mSpeed_ = "LOW";
+    public void low() {
+        LOG.debug( "Ceiling Fan (" + location + ") low!" );
+        speed = "LOW";
     }
 
     /**
      * 
      */
-    public void off()
-    {
-        LOG.debug( "Ceiling Fan (" + mLocation_ + ") off!" );
-        mSpeed_ = "OFF";
+    public void off() {
+        LOG.debug( "Ceiling Fan (" + location + ") off!" );
+        speed = "OFF";
     }
 
     /**
      * @return speed
      */
-    public String getSpeed()
-    {
-        return mSpeed_;
+    public String getSpeed() {
+        return speed;
     }
 
 }

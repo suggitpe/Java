@@ -13,12 +13,10 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @verrsion 1.0 30 Aug 2007
  */
-public class GarageDoor
-{
+public class GarageDoor {
 
     private static final Log LOG = LogFactory.getLog( GarageDoor.class );
-
-    private String mLocation_;
+    private String location;
 
     /**
      * Constructs a new instance.
@@ -26,49 +24,43 @@ public class GarageDoor
      * @param aLocation
      *            the location of the garage door
      */
-    public GarageDoor( String aLocation )
-    {
-        mLocation_ = aLocation;
+    public GarageDoor( String aLocation ) {
+        location = aLocation;
     }
 
     /**
      * Move door up
      */
-    public void up()
-    {
+    public void up() {
         LOG.debug( "Garage door up!" );
     }
 
     /**
      * Move door down
      */
-    public void down()
-    {
+    public void down() {
         LOG.debug( "Garage door down!" );
     }
 
     /**
      * Stop the door movement
      */
-    public void stop()
-    {
+    public void stop() {
         LOG.debug( "Garge door stop!" );
     }
 
     /**
      * Turn light on
      */
-    public void lightOn()
-    {
-        LOG.debug( "Light (" + mLocation_ + ") on!" );
+    public void lightOn() {
+        LOG.debug( "Light (" + location + ") on!" );
     }
 
     /**
      * Turn light off
      */
-    public void lightOff()
-    {
-        LOG.debug( "Light (" + mLocation_ + ") off!" );
+    public void lightOff() {
+        LOG.debug( "Light (" + location + ") off!" );
     }
 
 }

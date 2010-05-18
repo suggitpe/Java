@@ -15,45 +15,38 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 30 Aug 2007
  */
-public class RemoteControl
-{
+public class RemoteControl {
 
     private static final Log LOG = LogFactory.getLog( RemoteControl.class );
 
     private static final int NUM_CMDS = 7;
 
-    private ICommand[] mOnCommands_ = new ICommand[NUM_CMDS];
-    private ICommand[] mOffCommands_ = new ICommand[NUM_CMDS];
-
-    private ICommand mUndoCommand_;
+    private ICommand[] onCommands = new ICommand[NUM_CMDS];
+    private ICommand[] offCommands = new ICommand[NUM_CMDS];
+    private ICommand undoCommand;
 
     /**
      * Constructs a new instance.
      */
-    public RemoteControl()
-    {
-        ICommand noCommand = new ICommand()
-        {
+    public RemoteControl() {
+        ICommand noCommand = new ICommand() {
 
-            public void execute()
-            {
+            public void execute() {
                 LOG.debug( "Command not implemented" );
             }
 
-            public void undo()
-            {
+            public void undo() {
                 LOG.debug( "Command not implemented" );
             }
 
         };
 
-        for ( int i = 0; i < NUM_CMDS; ++i )
-        {
-            mOnCommands_[i] = noCommand;
-            mOffCommands_[i] = noCommand;
+        for ( int i = 0; i < NUM_CMDS; ++i ) {
+            onCommands[i] = noCommand;
+            offCommands[i] = noCommand;
         }
 
-        mUndoCommand_ = noCommand;
+        undoCommand = noCommand;
     }
 
     /**
@@ -66,10 +59,9 @@ public class RemoteControl
      * @param aOffCommand
      *            the off command
      */
-    public void setCommand( int aSlot, ICommand aOnCommand, ICommand aOffCommand )
-    {
-        mOnCommands_[aSlot] = aOnCommand;
-        mOffCommands_[aSlot] = aOffCommand;
+    public void setCommand( int aSlot, ICommand aOnCommand, ICommand aOffCommand ) {
+        onCommands[aSlot] = aOnCommand;
+        offCommands[aSlot] = aOffCommand;
     }
 
     /**
@@ -78,10 +70,9 @@ public class RemoteControl
      * @param aSlot
      *            the slot that the button lives in
      */
-    public void onButtonWasPushed( int aSlot )
-    {
-        mOnCommands_[aSlot].execute();
-        mUndoCommand_ = mOnCommands_[aSlot];
+    public void onButtonWasPushed( int aSlot ) {
+        onCommands[aSlot].execute();
+        undoCommand = onCommands[aSlot];
     }
 
     /**
@@ -90,33 +81,29 @@ public class RemoteControl
      * @param aSlot
      *            the slot that the button belongs to
      */
-    public void offButtonWasPushed( int aSlot )
-    {
-        mOffCommands_[aSlot].execute();
-        mUndoCommand_ = mOffCommands_[aSlot];
+    public void offButtonWasPushed( int aSlot ) {
+        offCommands[aSlot].execute();
+        undoCommand = offCommands[aSlot];
     }
 
     /**
      * Initiator for the undo button being pressed
      */
-    public void undoButtonWasPressed()
-    {
-        mUndoCommand_.undo();
+    public void undoButtonWasPressed() {
+        undoCommand.undo();
     }
 
     /**
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuffer buff = new StringBuffer();
 
         buff.append( "\n-------- Remote Control --------\n" );
-        for ( int i = 0; i < NUM_CMDS; ++i )
-        {
-            buff.append( "[slot " + i + "] " + mOnCommands_[i].getClass().getSimpleName() + " "
-                         + mOffCommands_[i].getClass().getSimpleName() + "\n" );
+        for ( int i = 0; i < NUM_CMDS; ++i ) {
+            buff.append( "[slot " + i + "] " + onCommands[i].getClass().getSimpleName() + " "
+                         + offCommands[i].getClass().getSimpleName() + "\n" );
         }
         return buff.toString();
     }

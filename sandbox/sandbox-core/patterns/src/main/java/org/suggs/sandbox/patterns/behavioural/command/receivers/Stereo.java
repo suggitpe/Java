@@ -13,12 +13,10 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 30 Aug 2007
  */
-public class Stereo
-{
+public class Stereo {
 
     private static final Log LOG = LogFactory.getLog( Stereo.class );
-
-    private String mLocation_;
+    private String location;
 
     /**
      * Constructs a new instance.
@@ -26,46 +24,39 @@ public class Stereo
      * @param aLocation
      *            the location of the Steroa
      */
-    public Stereo( String aLocation )
-    {
-        mLocation_ = aLocation;
+    public Stereo( String aLocation ) {
+        location = aLocation;
     }
 
     /** */
-    public void on()
-    {
-        LOG.debug( "Stereo (" + mLocation_ + ") on!" );
+    public void on() {
+        LOG.debug( "Stereo (" + location + ") on!" );
     }
 
     /** */
-    public void off()
-    {
-        LOG.debug( "Stereo (" + mLocation_ + ") off!" );
+    public void off() {
+        LOG.debug( "Stereo (" + location + ") off!" );
     }
 
     /** */
-    public void setCd()
-    {
+    public void setCd() {
         LOG.debug( "CD!" );
     }
 
     /** */
-    public void setDvd()
-    {
+    public void setDvd() {
         LOG.debug( "DVD!" );
     }
 
     /** */
-    public void setRadio()
-    {
+    public void setRadio() {
         LOG.debug( "Radio!" );
     }
 
     /**
      * @param aVolume
      */
-    public void setVolume( int aVolume )
-    {
+    public void setVolume( int aVolume ) {
         LOG.debug( "Volume to [" + aVolume + "]" );
     }
 

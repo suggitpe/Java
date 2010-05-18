@@ -17,8 +17,8 @@ import java.util.Arrays;
  */
 public class DinerMenuIterator implements IIterator {
 
-    private MenuItem[] mItems_;
-    int mPos = 0;
+    private MenuItem[] items;
+    int position = 0;
 
     /**
      * Constructs a new instance.
@@ -27,7 +27,7 @@ public class DinerMenuIterator implements IIterator {
      */
     public DinerMenuIterator( MenuItem[] aItems ) {
         if ( aItems != null ) {
-            mItems_ = Arrays.copyOf( aItems, aItems.length );
+            items = Arrays.copyOf( aItems, aItems.length );
         }
     }
 
@@ -35,7 +35,7 @@ public class DinerMenuIterator implements IIterator {
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IIterator#hasNext()
      */
     public boolean hasNext() {
-        if ( mPos >= mItems_.length || mItems_[mPos] == null ) {
+        if ( position >= items.length || items[position] == null ) {
             return false;
         }
         return true;
@@ -45,7 +45,7 @@ public class DinerMenuIterator implements IIterator {
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IIterator#next()
      */
     public Object next() {
-        return mItems_[mPos++];
+        return items[position++];
     }
 
 }

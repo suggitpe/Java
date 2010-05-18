@@ -13,10 +13,9 @@ import org.suggs.sandbox.patterns.behavioural.command.receivers.CeilingFan;
  * @author suggitpe
  * @version 1.0 31 Aug 2007
  */
-public class CeilingFanOnCommmand implements ICommand
-{
+public class CeilingFanOnCommmand implements ICommand {
 
-    private CeilingFan mFan_;
+    private CeilingFan fan;
 
     /**
      * Constructs a new instance.
@@ -24,25 +23,22 @@ public class CeilingFanOnCommmand implements ICommand
      * @param aFan
      *            a ceiling fan
      */
-    public CeilingFanOnCommmand( CeilingFan aFan )
-    {
-        mFan_ = aFan;
+    public CeilingFanOnCommmand( CeilingFan aFan ) {
+        fan = aFan;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
-    public void execute()
-    {
-        mFan_.medium();
+    public void execute() {
+        fan.medium();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
-    public void undo()
-    {
-        mFan_.off();
+    public void undo() {
+        fan.off();
     }
 
 }

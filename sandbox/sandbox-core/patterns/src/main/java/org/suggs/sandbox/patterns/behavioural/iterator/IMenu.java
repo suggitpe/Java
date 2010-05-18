@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.behavioural.iterator;
  * @author suggitpe
  * @version 1.0 6 Sep 2007
  */
-public interface IMenu
-{
+public interface IMenu {
 
     /**
      * @return iterator

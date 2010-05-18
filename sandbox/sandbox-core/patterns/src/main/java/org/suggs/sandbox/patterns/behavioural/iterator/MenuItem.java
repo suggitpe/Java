@@ -5,19 +5,17 @@
 package org.suggs.sandbox.patterns.behavioural.iterator;
 
 /**
- * Class to encapsulate a menu item. This would be used in conjunction
- * with a menu.
+ * Class to encapsulate a menu item. This would be used in conjunction with a menu.
  * 
  * @author suggitpe
  * @version 1.0 6 Sep 2007
  */
-public class MenuItem
-{
+public class MenuItem {
 
-    String mName_;
-    String mDescription_;
-    boolean mVegetarian_;
-    double mPrice_;
+    String name;
+    String description;
+    boolean vegetarian;
+    double price;
 
     /**
      * Constructs a new instance.
@@ -31,12 +29,11 @@ public class MenuItem
      * @param aPrice
      *            the price of the item
      */
-    public MenuItem( String aName, String aDescription, boolean isVegetarian, double aPrice )
-    {
-        mName_ = aName;
-        mDescription_ = aDescription;
-        mVegetarian_ = isVegetarian;
-        mPrice_ = aPrice;
+    public MenuItem( String aName, String aDescription, boolean isVegetarian, double aPrice ) {
+        name = aName;
+        description = aDescription;
+        vegetarian = isVegetarian;
+        price = aPrice;
     }
 
     /**
@@ -44,9 +41,8 @@ public class MenuItem
      * 
      * @return Returns the Name.
      */
-    public String getName()
-    {
-        return mName_;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -54,9 +50,8 @@ public class MenuItem
      * 
      * @return Returns the Description.
      */
-    public String getDescription()
-    {
-        return mDescription_;
+    public String getDescription() {
+        return description;
     }
 
     /**
@@ -64,9 +59,8 @@ public class MenuItem
      * 
      * @return Returns the Vegetarian.
      */
-    public boolean isVegetarian()
-    {
-        return mVegetarian_;
+    public boolean isVegetarian() {
+        return vegetarian;
     }
 
     /**
@@ -74,9 +68,8 @@ public class MenuItem
      * 
      * @return Returns the Price.
      */
-    public double getPrice()
-    {
-        return mPrice_;
+    public double getPrice() {
+        return price;
     }
 
 }

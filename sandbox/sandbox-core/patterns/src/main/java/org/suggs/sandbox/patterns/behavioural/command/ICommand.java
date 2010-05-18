@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.behavioural.command;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public interface ICommand
-{
+public interface ICommand {
 
     /**
      * Common execute method to be called by an invoker

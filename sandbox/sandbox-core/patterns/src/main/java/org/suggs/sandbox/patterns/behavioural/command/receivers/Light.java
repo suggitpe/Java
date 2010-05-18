@@ -13,12 +13,10 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class Light
-{
+public class Light {
 
     private static final Log LOG = LogFactory.getLog( Light.class );
-
-    private String mLocation_;
+    private String location;
 
     /**
      * Constructs a new instance.
@@ -26,25 +24,22 @@ public class Light
      * @param aLocation
      *            the location of the Light
      */
-    public Light( String aLocation )
-    {
-        mLocation_ = aLocation;
+    public Light( String aLocation ) {
+        location = aLocation;
     }
 
     /**
      * Light on
      */
-    public void on()
-    {
-        LOG.debug( "Light (" + mLocation_ + ") on!" );
+    public void on() {
+        LOG.debug( "Light (" + location + ") on!" );
     }
 
     /**
      * Light off
      */
-    public void off()
-    {
-        LOG.debug( "Light (" + mLocation_ + ") off!" );
+    public void off() {
+        LOG.debug( "Light (" + location + ") off!" );
     }
 
 }

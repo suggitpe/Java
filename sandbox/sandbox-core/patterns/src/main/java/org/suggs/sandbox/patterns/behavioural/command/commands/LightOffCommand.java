@@ -13,10 +13,9 @@ import org.suggs.sandbox.patterns.behavioural.command.receivers.Light;
  * @author suggitpe
  * @version 1.0 29 Aug 2007
  */
-public class LightOffCommand implements ICommand
-{
+public class LightOffCommand implements ICommand {
 
-    private Light mLight_;
+    private Light light;
 
     /**
      * Constructs a new instance.
@@ -24,25 +23,22 @@ public class LightOffCommand implements ICommand
      * @param aLight
      *            the command receiver
      */
-    public LightOffCommand( Light aLight )
-    {
-        mLight_ = aLight;
+    public LightOffCommand( Light aLight ) {
+        light = aLight;
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
-    public void execute()
-    {
-        mLight_.off();
+    public void execute() {
+        light.off();
     }
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
-    public void undo()
-    {
-        mLight_.on();
+    public void undo() {
+        light.on();
     }
 
 }

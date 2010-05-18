@@ -9,11 +9,10 @@ package org.suggs.sandbox.patterns.behavioural.iterator;
  * @author suggitpe
  * @version 1.0 6 Sep 2007
  */
-public class Waitress
-{
+public class Waitress {
 
-    private IMenu mPancakeMenu_;
-    private IMenu mDinerMenu_;
+    private IMenu pancakeMenu;
+    private IMenu dinerMenu;
 
     /**
      * Constructs a new instance.
@@ -23,41 +22,37 @@ public class Waitress
      * @param aDinerMenu
      *            the diner menu
      */
-    public Waitress( IMenu aPancakeMenu, IMenu aDinerMenu )
-    {
-        mPancakeMenu_ = aPancakeMenu;
-        mDinerMenu_ = aDinerMenu;
+    public Waitress( IMenu aPancakeMenu, IMenu aDinerMenu ) {
+        pancakeMenu = aPancakeMenu;
+        dinerMenu = aDinerMenu;
     }
 
     /**
      * Print every item on the menu
      */
-    public void printMenu()
-    {
+    public void printMenu() {
         System.out.println( "MENU\n--------\nBREAKFAST:" );
-        printMenu( mPancakeMenu_.createIterator() );
+        printMenu( pancakeMenu.createIterator() );
         System.out.println( "LUNCH:" );
-        printMenu( mDinerMenu_.createIterator() );
+        printMenu( dinerMenu.createIterator() );
         System.out.println( "--------" );
     }
 
     /**
      * Print all items from the breakfast menu
      */
-    public void printBreakfastMenu()
-    {
+    public void printBreakfastMenu() {
         System.out.println( "BREAKFAST MENU\n--------------\n" );
-        printMenu( mPancakeMenu_.createIterator() );
+        printMenu( pancakeMenu.createIterator() );
         System.out.println( "--------------" );
     }
 
     /**
      * Print all items from the lunch menu
      */
-    public void printLunchMenu()
-    {
+    public void printLunchMenu() {
         System.out.println( "LUNCH MENU\n----------" );
-        printMenu( mDinerMenu_.createIterator() );
+        printMenu( dinerMenu.createIterator() );
         System.out.println( "----------" );
     }
 
@@ -66,10 +61,8 @@ public class Waitress
      * 
      * @param aIter
      */
-    private void printMenu( IIterator aIter )
-    {
-        while ( aIter.hasNext() )
-        {
+    private void printMenu( IIterator aIter ) {
+        while ( aIter.hasNext() ) {
             MenuItem m = (MenuItem) aIter.next();
             System.out.println( m.getName() + ", �" + m.getPrice() + " -- " + m.getDescription() );
         }
@@ -83,8 +76,7 @@ public class Waitress
      *            the name of the item
      * @return true if the item is a vagetarian item, else false
      */
-    public boolean isItemVegetarian( String aName )
-    {
+    public boolean isItemVegetarian( String aName ) {
         return true;
     }
 

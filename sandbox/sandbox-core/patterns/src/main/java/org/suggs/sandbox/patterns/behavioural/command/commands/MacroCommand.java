@@ -16,17 +16,17 @@ import java.util.Arrays;
  */
 public class MacroCommand implements ICommand {
 
-    ICommand[] mCommands_;
+    ICommand[] commands;
 
     /**
      * Constructs a new instance.
      * 
-     * @param aCmds
+     * @param aCommands
      *            an array of commands to execute
      */
-    public MacroCommand( ICommand[] aCmds ) {
-        if ( aCmds != null ) {
-            mCommands_ = Arrays.copyOf( aCmds, aCmds.length );
+    public MacroCommand( ICommand[] aCommands ) {
+        if ( aCommands != null ) {
+            commands = Arrays.copyOf( aCommands, aCommands.length );
         }
     }
 
@@ -34,7 +34,7 @@ public class MacroCommand implements ICommand {
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
     public void execute() {
-        for ( ICommand cmd : mCommands_ ) {
+        for ( ICommand cmd : commands ) {
             cmd.execute();
         }
     }
@@ -43,7 +43,7 @@ public class MacroCommand implements ICommand {
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
     public void undo() {
-        for ( ICommand cmd : mCommands_ ) {
+        for ( ICommand cmd : commands ) {
             cmd.undo();
         }
     }

@@ -10,8 +10,7 @@ package org.suggs.sandbox.patterns.behavioural.observer;
  * @author suggitpe
  * @version 1.0 28 Aug 2007
  */
-public interface IDisplayElement
-{
+public interface IDisplayElement {
 
     /**
      * Display the data contents.
