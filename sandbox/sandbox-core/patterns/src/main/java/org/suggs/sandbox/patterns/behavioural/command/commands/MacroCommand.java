@@ -16,7 +16,7 @@ import java.util.Arrays;
  */
 public class MacroCommand implements ICommand {
 
-    ICommand[] commands;
+    private ICommand[] commands;
 
     /**
      * Constructs a new instance.

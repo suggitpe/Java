@@ -16,8 +16,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
  */
 public class Ch4StatusAction extends Action {
 
-    StatusLineManager statMan;
-    short triggerCnt;
+    private StatusLineManager statMan;
+    private short triggerCnt;
 
     /**
      * Constructs a new instance.

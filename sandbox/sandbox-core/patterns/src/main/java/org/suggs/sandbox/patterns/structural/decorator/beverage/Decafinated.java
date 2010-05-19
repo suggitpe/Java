@@ -18,7 +18,7 @@ public class Decafinated extends AbstractBeverage {
      * Constructs a new instance.
      */
     public Decafinated() {
-        description = "Decafinated";
+        setDescription( "Decafinated" );
     }
 
     /**

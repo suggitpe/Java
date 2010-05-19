@@ -28,6 +28,8 @@ public class GumballMachineServer {
     private static final int DEF_INVENTORY = 10;
     private static final int RMI_REG_PORT = 7234;
 
+    private GumballMachineServer() {}
+
     /**
      * @param args
      */

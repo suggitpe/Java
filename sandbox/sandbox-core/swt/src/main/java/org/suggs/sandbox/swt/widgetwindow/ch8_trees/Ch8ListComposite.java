@@ -127,8 +127,8 @@ public class Ch8ListComposite extends Composite {
      */
     class ListItem {
 
-        public String name;
-        public int value;
+        private String name;
+        private int value;
 
         public ListItem( String aName, int aValue ) {
             name = aName;

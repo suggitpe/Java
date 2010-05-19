@@ -16,8 +16,8 @@ import org.suggs.sandbox.patterns.compound.mvc.view.DJView;
  */
 public class BeatController implements IController {
 
-    IBeatModel model;
-    DJView view;
+    private IBeatModel model;
+    private DJView view;
 
     /**
      * Constructs a new instance.

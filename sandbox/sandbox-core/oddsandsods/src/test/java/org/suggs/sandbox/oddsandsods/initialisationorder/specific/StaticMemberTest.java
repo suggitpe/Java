@@ -24,7 +24,7 @@ public class StaticMemberTest {
         Logger.log( "------------------" );
 
         @SuppressWarnings("unused")
-        Initialisee target = Initialisee.instance;
+        Initialisee target = Initialisee.instance();
 
         target = null;
 

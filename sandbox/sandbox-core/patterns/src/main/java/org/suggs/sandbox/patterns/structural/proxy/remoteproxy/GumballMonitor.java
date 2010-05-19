@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 public class GumballMonitor {
 
     private static final Log LOG = LogFactory.getLog( GumballMonitor.class );
-    IGumballMachineRemote gumballMachine;
+    private IGumballMachineRemote gumballMachine;
 
     /**
      * Constructs a new instance.

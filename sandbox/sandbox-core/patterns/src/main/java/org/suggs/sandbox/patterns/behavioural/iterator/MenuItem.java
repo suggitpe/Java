@@ -12,10 +12,10 @@ package org.suggs.sandbox.patterns.behavioural.iterator;
  */
 public class MenuItem {
 
-    String name;
-    String description;
-    boolean vegetarian;
-    double price;
+    private String name;
+    private String description;
+    private boolean vegetarian;
+    private double price;
 
     /**
      * Constructs a new instance.

@@ -33,7 +33,7 @@ public class Ch7Colors extends Canvas {
         addPaintListener( dl );
     }
 
-    PaintListener dl = new PaintListener() {
+    private PaintListener dl = new PaintListener() {
 
         /**
          * @see org.eclipse.swt.events.PaintListener#paintControl(org.eclipse.swt.events.PaintEvent)

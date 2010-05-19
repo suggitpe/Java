@@ -35,13 +35,13 @@ public class BeatModel implements IBeatModel, MetaEventListener {
 
     private static final Log LOG = LogFactory.getLog( BeatModel.class );
 
-    Sequencer sequencer;
-    List<IBeatObserver> beatObservers = new ArrayList<IBeatObserver>();
-    List<IBpmObserver> bpmObservers = new ArrayList<IBpmObserver>();
-    int bpm = 90;
+    private Sequencer sequencer;
+    private List<IBeatObserver> beatObservers = new ArrayList<IBeatObserver>();
+    private List<IBpmObserver> bpmObservers = new ArrayList<IBpmObserver>();
+    private int bpm = 90;
 
-    Sequence sequence;
-    Track track;
+    private Sequence sequence;
+    private Track track;
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#initialise()

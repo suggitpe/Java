@@ -18,7 +18,7 @@ public class Espresso extends AbstractBeverage {
      * Constructs a new instance.
      */
     public Espresso() {
-        description = "Espresso";
+        setDescription( "Espresso" );
     }
 
     /**

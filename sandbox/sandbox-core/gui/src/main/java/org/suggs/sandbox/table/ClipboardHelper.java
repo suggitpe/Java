@@ -20,6 +20,8 @@ import java.io.Reader;
  */
 public class ClipboardHelper {
 
+    private ClipboardHelper() {}
+
     /**
      * Gets the contents of the clipboard and returns it as a string
      * 

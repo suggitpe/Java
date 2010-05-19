@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class DinerMenuIterator implements IIterator {
 
     private MenuItem[] items;
-    int position = 0;
+    private int position = 0;
 
     /**
      * Constructs a new instance.

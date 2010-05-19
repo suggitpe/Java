@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Listener;
  */
 public class Ch4MouseKey extends Composite {
 
-    Label output;
+    private Label output;
 
     /**
      * Constructs a new instance.
@@ -61,7 +61,7 @@ public class Ch4MouseKey extends Composite {
         pack();
     }
 
-    Listener untypedListener = new Listener() {
+    private Listener untypedListener = new Listener() {
 
         public void handleEvent( Event event ) {
             switch ( event.type ) {

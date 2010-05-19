@@ -18,7 +18,7 @@ public class HouseBlend extends AbstractBeverage {
      * Constructs a new instance.
      */
     public HouseBlend() {
-        description = "House Blend Coffee";
+        setDescription( "House Blend Coffee" );
     }
 
     /**

@@ -19,7 +19,7 @@ import java.util.Stack;
 @SuppressWarnings("unchecked")
 public class CompositeIterator implements Iterator {
 
-    Stack<Iterator> stack = new Stack<Iterator>();
+    private Stack<Iterator> stack = new Stack<Iterator>();
 
     /**
      * Constructs a new instance.

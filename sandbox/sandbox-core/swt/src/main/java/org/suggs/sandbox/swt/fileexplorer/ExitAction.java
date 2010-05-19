@@ -20,7 +20,7 @@ public class ExitAction extends Action {
 
     private static final Log LOG = LogFactory.getLog( ExitAction.class );
 
-    ApplicationWindow appWin;
+    private ApplicationWindow appWin;
 
     /**
      * Constructs a new instance.

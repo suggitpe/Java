@@ -33,8 +33,8 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
     private IState winnerState;
 
     private IState state = soldOutState;
-    int count = 0;
-    String location;
+    private int count = 0;
+    private String location;
 
     /**
      * Constructs a new instance.

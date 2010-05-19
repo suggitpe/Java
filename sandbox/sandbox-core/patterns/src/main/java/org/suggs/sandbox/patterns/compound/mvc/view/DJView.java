@@ -36,22 +36,22 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver {
 
     private IBeatModel model;
     private IController controller;
-    JFrame viewFrame = new JFrame( "View" );
-    JPanel viewPanel = new JPanel( new GridLayout( 1, 2 ) );
+    private JFrame viewFrame = new JFrame( "View" );
+    private JPanel viewPanel = new JPanel( new GridLayout( 1, 2 ) );
     // BeatBar beatBar = new BeatBar();
-    JLabel bpmOutputLabel = new JLabel( "Off-line", SwingConstants.CENTER );
+    private JLabel bpmOutputLabel = new JLabel( "Off-line", SwingConstants.CENTER );
 
-    JFrame controlFrame = new JFrame( "Control" );
-    JPanel controlPanel = new JPanel( new GridLayout( 1, 2 ) );
-    JLabel bpmLabel = new JLabel( "Enter BPM:", SwingConstants.CENTER );
-    JTextField bpmTextField = new JTextField( 2 );
-    JButton setBpmButton = new JButton( "Set" );
-    JButton increaseBpmButton = new JButton( ">>" );
-    JButton decreaseBpmButton = new JButton( "<<" );
-    JMenuBar menuBar = new JMenuBar();
-    JMenu menu = new JMenu( "DJ Control" );
-    JMenuItem startMenuItem = new JMenuItem( "Start" );
-    JMenuItem stopMenuItem = new JMenuItem( "Stop" );
+    private JFrame controlFrame = new JFrame( "Control" );
+    private JPanel controlPanel = new JPanel( new GridLayout( 1, 2 ) );
+    private JLabel bpmLabel = new JLabel( "Enter BPM:", SwingConstants.CENTER );
+    private JTextField bpmTextField = new JTextField( 2 );
+    private JButton setBpmButton = new JButton( "Set" );
+    private JButton increaseBpmButton = new JButton( ">>" );
+    private JButton decreaseBpmButton = new JButton( "<<" );
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu menu = new JMenu( "DJ Control" );
+    private JMenuItem startMenuItem = new JMenuItem( "Start" );
+    private JMenuItem stopMenuItem = new JMenuItem( "Stop" );
 
     /**
      * Constructs a new instance.

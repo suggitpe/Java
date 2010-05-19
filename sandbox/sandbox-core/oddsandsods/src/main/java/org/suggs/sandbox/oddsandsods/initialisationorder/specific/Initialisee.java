@@ -12,8 +12,10 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
  */
 public class Initialisee {
 
-    static Initialisee instance = new Initialisee( "Static member" );
-    protected String member;
+    @SuppressWarnings("unused")
+    private static Initialisee instance = new Initialisee( "Static member" );
+    @SuppressWarnings("unused")
+    private String member;
 
     /**
      * Singleton approach to construction

@@ -12,7 +12,7 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.simple;
  */
 public class TestClass extends SuperClass {
 
-    int three = (int) Math.PI; // ie 3
+    private int three = (int) Math.PI; // ie 3
 
     /**
      * @see org.suggs.sandbox.oddsandsods.initialisationorder.simple.SuperClass#printThree()

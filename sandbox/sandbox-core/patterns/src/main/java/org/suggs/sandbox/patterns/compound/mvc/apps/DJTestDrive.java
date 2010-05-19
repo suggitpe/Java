@@ -16,6 +16,8 @@ import org.suggs.sandbox.patterns.compound.mvc.model.BeatModel;
  */
 public class DJTestDrive {
 
+    private DJTestDrive() {}
+
     /**
      * @param args
      */

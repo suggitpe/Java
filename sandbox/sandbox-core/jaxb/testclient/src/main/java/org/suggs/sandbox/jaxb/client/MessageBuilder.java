@@ -18,4 +18,6 @@ public class MessageBuilder {
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( MessageBuilder.class );
 
+    private MessageBuilder() {}
+
 }

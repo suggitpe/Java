@@ -25,7 +25,7 @@ public class OpenAction extends Action implements ISelectionChangedListener {
 
     private static final Log LOG = LogFactory.getLog( OpenAction.class );
 
-    Explorer explorer;
+    private Explorer explorer;
 
     /**
      * Constructs a new instance.

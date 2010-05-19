@@ -30,7 +30,7 @@ public class GumballMachine {
     private IState winnerState;
 
     private IState mState_ = soldOutState;
-    int count = 0;
+    private int count = 0;
 
     /**
      * Constructs a new instance.

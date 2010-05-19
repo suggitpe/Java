@@ -17,8 +17,8 @@ import org.suggs.sandbox.patterns.compound.mvc.view.DJView;
  */
 public class HeartController implements IController {
 
-    IHeartModel model;
-    DJView view;
+    private IHeartModel model;
+    private DJView view;
 
     /**
      * Constructs a new instance.

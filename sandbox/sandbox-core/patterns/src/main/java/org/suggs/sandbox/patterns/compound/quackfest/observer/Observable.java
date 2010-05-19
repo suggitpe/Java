@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class Observable implements IQuackObservable {
 
-    List<IObserver> observers = new ArrayList<IObserver>();
-    IQuackObservable duck;
+    private List<IObserver> observers = new ArrayList<IObserver>();
+    private IQuackObservable duck;
 
     /**
      * Constructs a new instance.

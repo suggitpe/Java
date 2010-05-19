@@ -18,7 +18,7 @@ public class DarkRoast extends AbstractBeverage {
      * Constructs a new instance.
      */
     public DarkRoast() {
-        description = "Dark Roast Coffee";
+        setDescription( "Dark Roast Coffee" );
     }
 
     /**

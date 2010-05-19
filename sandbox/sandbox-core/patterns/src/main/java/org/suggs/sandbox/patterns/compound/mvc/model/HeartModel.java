@@ -20,12 +20,12 @@ import java.util.Random;
  */
 public final class HeartModel implements IHeartModel, Runnable {
 
-    List<IBeatObserver> beatObservers = new ArrayList<IBeatObserver>();
-    List<IBpmObserver> bpmObservers = new ArrayList<IBpmObserver>();
-    int time = 1000;
-    int bpm = 90;
-    Random random = new Random( System.currentTimeMillis() );
-    Thread thread;
+    private List<IBeatObserver> beatObservers = new ArrayList<IBeatObserver>();
+    private List<IBpmObserver> bpmObservers = new ArrayList<IBpmObserver>();
+    private int time = 1000;
+    // private int bpm = 90;
+    private Random random = new Random( System.currentTimeMillis() );
+    private Thread thread;
 
     /**
      * Constructs a new instance.

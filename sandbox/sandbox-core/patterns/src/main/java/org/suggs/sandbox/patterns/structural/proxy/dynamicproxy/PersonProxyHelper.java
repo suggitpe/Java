@@ -17,6 +17,8 @@ import java.lang.reflect.Proxy;
  */
 public class PersonProxyHelper {
 
+    private PersonProxyHelper() {}
+
     /**
      * Creates a dynamic proxy for the IPerson interface using the Owner Invocation Hanler
      * 

@@ -18,7 +18,7 @@ import java.util.List;
 public class PancakeHouseMenuIterator implements IIterator {
 
     private List<MenuItem> items;
-    int position = 0;
+    private int position = 0;
 
     /**
      * Constructs a new instance.

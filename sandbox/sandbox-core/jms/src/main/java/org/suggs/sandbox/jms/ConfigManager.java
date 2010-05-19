@@ -80,8 +80,9 @@ public class ConfigManager {
      */
     public String getProperty( String aPropName ) {
         String ret = data.getProperty( aPropName );
-        if ( ret == null )
+        if ( ret == null ) {
             throw new IllegalStateException( "no configuration data found for " + aPropName );
+        }
         return ret;
     }
 

@@ -21,6 +21,8 @@ public class TemperatureGuage {
 
     private static final Log LOG = LogFactory.getLog( TemperatureGuage.class );
 
+    private TemperatureGuage() {}
+
     /**
      * @param args
      */

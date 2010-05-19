@@ -22,9 +22,9 @@ import org.eclipse.swt.widgets.Display;
  */
 public class Ch4Contribution extends ApplicationWindow {
 
-    StatusLineManager statLnMgr = new StatusLineManager();
-    Ch4StatusAction action = new Ch4StatusAction( statLnMgr );
-    ActionContributionItem aci = new ActionContributionItem( action );
+    private StatusLineManager statLnMgr = new StatusLineManager();
+    private Ch4StatusAction action = new Ch4StatusAction( statLnMgr );
+    private ActionContributionItem aci = new ActionContributionItem( action );
 
     /**
      * Constructs a new instance.

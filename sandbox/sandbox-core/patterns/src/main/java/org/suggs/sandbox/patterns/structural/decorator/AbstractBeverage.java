@@ -12,13 +12,20 @@ package org.suggs.sandbox.patterns.structural.decorator;
  */
 public abstract class AbstractBeverage implements IBeverage {
 
-    protected String description;
+    private String description;
 
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#getDescription()
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * @param aDescription
+     */
+    public void setDescription( String aDescription ) {
+        description = aDescription;
     }
 
     /**

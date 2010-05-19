@@ -28,9 +28,9 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class Ch7Fonts extends Canvas {
 
-    Shell mainShell;
-    Composite comp;
-    FontData fontData;
+    private Shell mainShell;
+    private Composite comp;
+    private FontData fontData;
 
     /**
      * Constructs a new instance.

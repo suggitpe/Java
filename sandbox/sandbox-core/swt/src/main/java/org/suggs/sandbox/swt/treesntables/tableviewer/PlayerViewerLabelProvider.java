@@ -19,7 +19,7 @@ import org.eclipse.swt.graphics.Image;
  */
 public class PlayerViewerLabelProvider implements ITableLabelProvider {
 
-    List<ILabelProviderListener> listeners = new ArrayList<ILabelProviderListener>();
+    private List<ILabelProviderListener> listeners = new ArrayList<ILabelProviderListener>();
 
     /**
      * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
