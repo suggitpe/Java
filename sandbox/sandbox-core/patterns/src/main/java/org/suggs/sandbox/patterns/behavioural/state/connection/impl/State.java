@@ -46,7 +46,7 @@ public class State implements IState, InitializingBean {
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception {}
+    public void afterPropertiesSet() {}
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)

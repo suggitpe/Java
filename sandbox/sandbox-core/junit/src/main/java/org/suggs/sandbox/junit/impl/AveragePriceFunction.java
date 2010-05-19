@@ -4,6 +4,7 @@
  */
 package org.suggs.sandbox.junit.impl;
 
+import org.suggs.sandbox.junit.DoubleDaoException;
 import org.suggs.sandbox.junit.IDoubleDaoService;
 import org.suggs.sandbox.junit.IFunction;
 
@@ -35,7 +36,7 @@ public class AveragePriceFunction implements IFunction<Double> {
      * @see org.suggs.sandbox.junit.IFunction#execute()
      */
     @Override
-    public Double execute() throws Exception {
+    public Double execute() throws DoubleDaoException {
         double total = 0.0d;
         for ( Date date : dates ) {
             total += doubleDaoService.doubleForDate( date ).doubleValue();

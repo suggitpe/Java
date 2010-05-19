@@ -27,7 +27,7 @@ public class HeartbeatActivator implements BundleActivator {
      * 
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
-    public void start( BundleContext ctx ) throws Exception {
+    public void start( BundleContext ctx ) {
         thread = new Thread( new Heartbeat() );
         thread.start();
     }
@@ -37,7 +37,7 @@ public class HeartbeatActivator implements BundleActivator {
      * 
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
-    public void stop( BundleContext ctx ) throws Exception {
+    public void stop( BundleContext ctx ) {
         thread.interrupt();
     }
 

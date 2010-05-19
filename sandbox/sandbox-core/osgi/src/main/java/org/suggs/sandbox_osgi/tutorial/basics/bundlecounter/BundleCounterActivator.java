@@ -25,7 +25,7 @@ public class BundleCounterActivator implements BundleActivator, BundleListener {
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
-    public void start( BundleContext ctx ) throws Exception {
+    public void start( BundleContext ctx ) {
         context = ctx;
         context.addBundleListener( this );
         printBundleCount();
@@ -34,7 +34,7 @@ public class BundleCounterActivator implements BundleActivator, BundleListener {
     /**
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
-    public void stop( BundleContext ctx ) throws Exception {
+    public void stop( BundleContext ctx ) {
         context.removeBundleListener( this );
         context = null;
     }

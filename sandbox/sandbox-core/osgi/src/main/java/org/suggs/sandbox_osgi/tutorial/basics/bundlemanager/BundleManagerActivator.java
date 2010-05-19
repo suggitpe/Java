@@ -38,7 +38,7 @@ public class BundleManagerActivator implements BundleActivator {
      * 
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
-    public void start( BundleContext ctx ) throws Exception {
+    public void start( BundleContext ctx ) {
         context = ctx;
         thread.start();
     }
@@ -48,7 +48,7 @@ public class BundleManagerActivator implements BundleActivator {
      * 
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
-    public void stop( BundleContext ctx ) throws Exception {
+    public void stop( BundleContext ctx ) {
         thread.interrupt();
         context = null;
     }

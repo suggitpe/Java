@@ -90,13 +90,13 @@ public class Logger implements LoggerMBean, MBeanRegistration {
     /**
      * @see javax.management.MBeanRegistration#preDeregister()
      */
-    public void preDeregister() throws Exception {}
+    public void preDeregister() {}
 
     /**
      * @see javax.management.MBeanRegistration#preRegister(javax.management.MBeanServer,
      *      javax.management.ObjectName)
      */
-    public ObjectName preRegister( MBeanServer server, ObjectName name ) throws Exception {
+    public ObjectName preRegister( MBeanServer server, ObjectName name ) {
         LOG.debug( "Running the preRegister Logger impl" );
         try {
             String svrName = JmxBookConfig.getInstance().getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );

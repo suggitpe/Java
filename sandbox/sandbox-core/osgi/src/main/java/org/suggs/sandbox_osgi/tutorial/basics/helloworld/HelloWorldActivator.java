@@ -22,14 +22,14 @@ public class HelloWorldActivator implements BundleActivator {
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
-    public void start( BundleContext aArg0 ) throws Exception {
+    public void start( BundleContext aArg0 ) {
         LOG.debug( "Hello world" );
     }
 
     /**
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
-    public void stop( BundleContext aArg0 ) throws Exception {
+    public void stop( BundleContext aArg0 ) {
         LOG.debug( "Good-bye world" );
     }
 

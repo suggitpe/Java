@@ -10,7 +10,7 @@ package org.suggs.sandbox.junit;
  * @author suggitpe
  * @version 1.0 20 Nov 2009
  */
-public class DoubleDaoException extends Exception {
+public class DoubleDaoException extends DaoException {
 
     /**
      * Constructs a new instance.

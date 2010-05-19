@@ -41,7 +41,7 @@ public class StateMachine implements IStateMachine, InitializingBean {
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( currentState, "Current state for the state manchine must be set upon construction" );
     }
 

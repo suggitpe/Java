@@ -14,7 +14,7 @@ public interface IFunction<T> {
      * Command pattern execution
      * 
      * @return type T for class
-     * @throws Exception
+     * @throws DaoException
      */
-    public T execute() throws Exception;
+    public T execute() throws DaoException;
 }

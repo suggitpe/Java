@@ -55,7 +55,7 @@ public class Transition implements ITransition, InitializingBean {
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull( transitionEvents, "Transition Events cannot be null on a Transition object" );
         Assert.notNull( transitionGuards, "Transition Guards cannot be null on a Transition object" );
     }
