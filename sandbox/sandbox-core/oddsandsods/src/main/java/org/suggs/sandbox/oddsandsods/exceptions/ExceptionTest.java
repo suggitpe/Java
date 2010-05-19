@@ -17,6 +17,8 @@ public class ExceptionTest {
 
     private static final Log LOG = LogFactory.getLog( ExceptionTest.class );
 
+    private ExceptionTest() {}
+
     /**
      * @param args
      */

@@ -46,6 +46,8 @@ public class ComplexGridLayoutExample {
     private static Text ownerName;
     private static Text ownerPhone;
 
+    private ComplexGridLayoutExample() {}
+
     public static void main( String[] args ) {
 
         LOG.debug( "Creating GUI" );

@@ -17,6 +17,8 @@ public class Logger {
 
     private static final List<String> LOGS = new Vector<String>( 10 );
 
+    private Logger() {}
+
     /**
      * Adds a message to the internal vector
      * 

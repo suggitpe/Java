@@ -17,6 +17,8 @@ import org.eclipse.swt.widgets.Text;
  */
 public class HelloSwtWorld {
 
+    private HelloSwtWorld() {}
+
     public static void main( String[] args ) {
         Display display = new Display();
         Shell shell = new Shell( display );

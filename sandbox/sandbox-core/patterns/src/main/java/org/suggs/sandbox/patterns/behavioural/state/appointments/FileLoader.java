@@ -26,6 +26,8 @@ public class FileLoader {
     // static logger
     private static final Log LOG = LogFactory.getLog( FileLoader.class );
 
+    private FileLoader() {}
+
     /**
      * Loads a file from a given place and returns it as an object.
      * 

@@ -18,6 +18,8 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class SwtGraphicsDrawExample {
 
+    private SwtGraphicsDrawExample() {}
+
     /**
      * @param args
      */

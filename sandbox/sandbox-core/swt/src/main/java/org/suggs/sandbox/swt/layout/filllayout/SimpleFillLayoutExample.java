@@ -22,6 +22,8 @@ public class SimpleFillLayoutExample {
 
     private static final Log LOG = LogFactory.getLog( SimpleFillLayoutExample.class );
 
+    private SimpleFillLayoutExample() {}
+
     /**
      * @param args
      */

@@ -25,6 +25,8 @@ public class GumballMachineClient {
 
     private static final Log LOG = LogFactory.getLog( GumballMachineClient.class );
 
+    private GumballMachineClient() {}
+
     /**
      * @param args
      */

@@ -23,6 +23,8 @@ public class SimpleRowDataExample {
 
     private static final Log LOG = LogFactory.getLog( SimpleRowDataExample.class );
 
+    private SimpleRowDataExample() {}
+
     public static void main( String[] args ) {
         LOG.debug( "Building dialog" );
         Display d = new Display();

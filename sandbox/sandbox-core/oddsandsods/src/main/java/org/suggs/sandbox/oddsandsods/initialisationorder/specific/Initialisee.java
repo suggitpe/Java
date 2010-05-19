@@ -29,9 +29,7 @@ public class Initialisee {
     /**
      * Constructs a new instance.
      */
-    public Initialisee() {
-        Logger.log( "Default constructor" );
-    }
+    public Initialisee() {}
 
     /**
      * Constructs a new instance.
@@ -39,7 +37,7 @@ public class Initialisee {
      * @param aType
      *            type of construction
      */
-    public Initialisee( String aType ) {
+    private Initialisee( String aType ) {
         Logger.log( aType + " Constructor" );
     }
 

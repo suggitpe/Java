@@ -24,6 +24,8 @@ public class ContextHelper {
 
     private static final Log LOG = LogFactory.getLog( ContextHelper.class );
 
+    private ContextHelper() {}
+
     /**
      * Helper to create an initial context based on the
      * 

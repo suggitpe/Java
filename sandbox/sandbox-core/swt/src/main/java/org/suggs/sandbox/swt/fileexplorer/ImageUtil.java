@@ -20,6 +20,8 @@ public class ImageUtil {
     private static volatile ImageRegistry IMAGES;
     private static volatile Clipboard CLIPBOARD;
 
+    private ImageUtil() {}
+
     /**
      * Singleton method for managing an image registry for
      * 

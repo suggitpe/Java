@@ -20,6 +20,8 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
  */
 public class TibcoAdminUtil {
 
+    private TibcoAdminUtil() {}
+
     public static List<String> getConnectionFactoryNames() {
         List<String> ret = new ArrayList<String>();
         TibjmsAdmin admin = TibcoAdminConnectionProperties.instance().getAdmin();

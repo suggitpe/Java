@@ -18,7 +18,7 @@ import java.io.Reader;
  * @author suggitpe
  * @version 1.0 15 Jul 2009
  */
-public class ClipboardHelper {
+public final class ClipboardHelper {
 
     private ClipboardHelper() {}
 

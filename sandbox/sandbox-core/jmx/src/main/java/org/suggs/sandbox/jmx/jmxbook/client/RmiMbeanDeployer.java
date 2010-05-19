@@ -27,6 +27,8 @@ public class RmiMbeanDeployer {
 
     private static final Log LOG = LogFactory.getLog( RmiMbeanDeployer.class );
 
+    private RmiMbeanDeployer() {}
+
     /**
      * deploys the hello wworld mbean to the mbean server
      */

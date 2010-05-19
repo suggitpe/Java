@@ -22,6 +22,8 @@ public class CompositeShellDemo {
 
     private static final Log LOG = LogFactory.getLog( CompositeShellDemo.class );
 
+    private CompositeShellDemo() {}
+
     // this needs to be finished
     private static void createInnerShell( Shell aShell ) {
         aShell.getLayout();

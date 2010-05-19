@@ -22,6 +22,8 @@ public class Ch7Images {
     public static final int COLS = 11;
     public static final int PIX = 20;
 
+    private Ch7Images() {}
+
     public static void main( String[] args ) {
         // initialise the colour palette to use in the image
         PaletteData pd = new PaletteData( new RGB[] { new RGB( 0x00, 0x00, 0x00 ),

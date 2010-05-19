@@ -22,6 +22,8 @@ public class SimpleGridLayoutExample {
 
     private static final Log LOG = LogFactory.getLog( SimpleGridLayoutExample.class );
 
+    private SimpleGridLayoutExample() {}
+
     public static void main( String[] args ) {
         LOG.debug( "Creating GUI" );
         Display d = new Display();

@@ -22,6 +22,8 @@ public class TestMain {
     private static final Log LOG = LogFactory.getLog( TestMain.class );
     private static final String FILE_LOC = "/home/suggitpe/deleteme.txt";
 
+    private TestMain() {}
+
     /**
      * Main method called through the underling main from init
      * 

@@ -23,6 +23,8 @@ public class JmxServer {
 
     private static final Log LOG = LogFactory.getLog( JmxServer.class );
 
+    private JmxServer() {}
+
     /**
      * Starts an rmi registry instance
      */

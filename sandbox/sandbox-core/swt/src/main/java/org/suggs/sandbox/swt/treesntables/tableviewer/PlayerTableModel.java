@@ -12,6 +12,8 @@ package org.suggs.sandbox.swt.treesntables.tableviewer;
  */
 public class PlayerTableModel {
 
+    private PlayerTableModel() {}
+
     public static final TeamBean createTeam() {
         TeamBean ret = new TeamBean( "SuggsSpecials", 2009 );
 

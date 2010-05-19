@@ -22,6 +22,8 @@ import javax.management.remote.JMXServiceURL;
  */
 public class RmiClientFactory {
 
+    private RmiClientFactory() {}
+
     /**
      * Static method to return an instance of the JMXConnector
      * 

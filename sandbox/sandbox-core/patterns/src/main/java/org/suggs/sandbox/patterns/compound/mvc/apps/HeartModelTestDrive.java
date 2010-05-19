@@ -16,6 +16,8 @@ import org.suggs.sandbox.patterns.compound.mvc.model.HeartModel;
  */
 public class HeartModelTestDrive {
 
+    private HeartModelTestDrive() {}
+
     /**
      * @param args
      */

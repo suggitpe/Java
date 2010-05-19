@@ -19,6 +19,8 @@ public class ExceptionUtil {
 
     private static final Log LOG = LogFactory.getLog( ExceptionUtil.class );
 
+    private ExceptionUtil() {}
+
     /**
      * print exceptuion utility for exceptions caught
      * 

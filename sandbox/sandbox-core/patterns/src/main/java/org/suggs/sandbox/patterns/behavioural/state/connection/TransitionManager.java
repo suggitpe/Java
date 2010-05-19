@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 12 Aug 2009
  */
-public class TransitionManager {
+public final class TransitionManager {
 
     private static final Log LOG = LogFactory.getLog( TransitionManager.class );
     private static final TransitionManager instance = new TransitionManager();

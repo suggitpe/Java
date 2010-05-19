@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 9 Jul 2007
  */
-public class TemperatureGuage {
+public final class TemperatureGuage {
 
     private static final Log LOG = LogFactory.getLog( TemperatureGuage.class );
 

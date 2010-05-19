@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 24 Aug 2007
  */
-public class SingletonImpl {
+public final class SingletonImpl {
 
     private static final Log LOG = LogFactory.getLog( SingletonImpl.class );
 
