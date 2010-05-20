@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 12 Sep 2007
  */
-public class GumballMachineServer {
+public final class GumballMachineServer {
 
     private static final Log LOG = LogFactory.getLog( GumballMachineServer.class );
 

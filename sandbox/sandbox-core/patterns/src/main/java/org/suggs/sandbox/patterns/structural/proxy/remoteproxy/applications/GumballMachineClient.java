@@ -7,10 +7,9 @@ package org.suggs.sandbox.patterns.structural.proxy.remoteproxy.applications;
 import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.GumballMonitor;
 import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IGumballMachineRemote;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 12 Sep 2007
  */
-public class GumballMachineClient {
+public final class GumballMachineClient {
 
     private static final Log LOG = LogFactory.getLog( GumballMachineClient.class );
 
@@ -40,17 +39,11 @@ public class GumballMachineClient {
                 monitors[i] = new GumballMonitor( machine );
                 LOG.debug( monitors[i] );
             }
-            catch ( RemoteException re ) {
-                LOG.error( "REmote excption caught when trying to lookup [" + locations[i] + "]" );
-                re.printStackTrace();
+            catch ( IOException ioe ) {
+                LOG.error( "REmote excption caught when trying to lookup [" + locations[i] + "]", ioe );
             }
             catch ( NotBoundException nbe ) {
-                LOG.error( "Failed to bind to url with name [" + locations[i] + "]" );
-                nbe.printStackTrace();
-            }
-            catch ( MalformedURLException mue ) {
-                LOG.error( "URL [" + mue.getMessage() + "] is not valid form " );
-                mue.printStackTrace();
+                LOG.error( "Failed to bind to url with name [" + locations[i] + "]", nbe );
             }
         }
 

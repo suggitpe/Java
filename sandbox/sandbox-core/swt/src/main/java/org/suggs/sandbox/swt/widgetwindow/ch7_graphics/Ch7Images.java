@@ -16,7 +16,7 @@ import org.eclipse.swt.graphics.RGB;
  * @author suggitpe
  * @version 1.0 2 Sep 2008
  */
-public class Ch7Images {
+public final class Ch7Images {
 
     public static final int ROWS = 6;
     public static final int COLS = 11;

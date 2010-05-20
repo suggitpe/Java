@@ -13,7 +13,7 @@ import org.suggs.sandbox.oddsandsods.logger.LogFactory;
  * @author suggitpe
  * @version 1.0 7 Oct 2009
  */
-public class ExceptionTest {
+public final class ExceptionTest {
 
     private static final Log LOG = LogFactory.getLog( ExceptionTest.class );
 

@@ -10,7 +10,7 @@ package org.suggs.sandbox.swt.treesntables.tableviewer;
  * @author suggitpe
  * @version 1.0 3 Dec 2008
  */
-public class PlayerTableModel {
+public final class PlayerTableModel {
 
     private PlayerTableModel() {}
 

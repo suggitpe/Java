@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Display;
  * @author suggitpe
  * @version 1.0 22 Dec 2008
  */
-public class ImageUtil {
+public final class ImageUtil {
 
     private static volatile ImageRegistry IMAGES;
     private static volatile Clipboard CLIPBOARD;

@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 16 Apr 2009
  */
-public class ContextHelper {
+public final class ContextHelper {
 
     private static final Log LOG = LogFactory.getLog( ContextHelper.class );
 

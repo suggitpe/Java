@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 4 Aug 2009
  */
-public class FileLoader {
+public final class FileLoader {
 
     // static logger
     private static final Log LOG = LogFactory.getLog( FileLoader.class );

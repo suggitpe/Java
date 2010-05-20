@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Text;
  * @author suggitpe
  * @version 1.0 8 Aug 2008
  */
-public class HelloSwtWorld {
+public final class HelloSwtWorld {
 
     private HelloSwtWorld() {}
 

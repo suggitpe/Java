@@ -19,7 +19,7 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
  * @author suggitpe
  * @version 1.0 6 Aug 2008
  */
-public class TibcoAdminConnectionProperties {
+public final class TibcoAdminConnectionProperties {
 
     private static final Log LOG = LogFactory.getLog( TibcoAdminConnectionProperties.class );
     private static final String PROP_FILE = "tibco_connection.properties";

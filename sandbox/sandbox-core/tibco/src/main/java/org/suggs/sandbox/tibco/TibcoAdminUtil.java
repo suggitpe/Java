@@ -18,7 +18,7 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
  * @author suggitpe
  * @version 1.0 7 Aug 2008
  */
-public class TibcoAdminUtil {
+public final class TibcoAdminUtil {
 
     private TibcoAdminUtil() {}
 

@@ -14,7 +14,7 @@ import org.suggs.sandbox.patterns.compound.mvc.model.HeartModel;
  * @author suggitpe
  * @version 1.0 26 Sep 2007
  */
-public class HeartModelTestDrive {
+public final class HeartModelTestDrive {
 
     private HeartModelTestDrive() {}
 

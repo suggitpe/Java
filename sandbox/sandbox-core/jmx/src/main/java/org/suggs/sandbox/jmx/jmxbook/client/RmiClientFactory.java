@@ -20,7 +20,7 @@ import javax.management.remote.JMXServiceURL;
  * @author suggitpe
  * @version 1.0 14 Feb 2008
  */
-public class RmiClientFactory {
+public final class RmiClientFactory {
 
     private RmiClientFactory() {}
 

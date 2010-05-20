@@ -18,6 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Class to represent a Table Menu
  * 
@@ -215,12 +218,12 @@ public class TableMenu extends JFrame {
 
 class ExampleTableModel extends AbstractTableModel {
 
+    private static final Log LOG = LogFactory.getLog( ExampleTableModel.class );
+
     private static class Item {
 
         private String name;
-
         private double price;
-
         private int quantity;
 
         public Item( String name, double price, int quantity ) {
@@ -331,7 +334,7 @@ class ExampleTableModel extends AbstractTableModel {
                     item.price = Double.parseDouble( aValue.toString() );
                 }
                 catch ( NumberFormatException ex ) {
-                    ex.printStackTrace();
+                    LOG.error( "Failed to conmvert Double from string", ex );
                 }
                 fireTableCellUpdated( rowIndex, columnIndex );
                 fireTableCellUpdated( rowIndex, COLUMN_AMOUNT );

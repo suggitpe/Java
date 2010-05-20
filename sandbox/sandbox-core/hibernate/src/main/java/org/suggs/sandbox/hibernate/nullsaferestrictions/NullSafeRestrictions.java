@@ -26,7 +26,7 @@ import org.hibernate.type.Type;
  * @author suggitpe
  * @version 1.0 22 Mar 2010
  */
-public class NullSafeRestrictions {
+public final class NullSafeRestrictions {
 
     /**
      * Cannot instantiate this class.

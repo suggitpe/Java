@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 15 Apr 2009
  */
-public class ConfigManager {
+public final class ConfigManager {
 
     private static final Log LOG = LogFactory.getLog( ConfigManager.class );
     private static final String PROP_FILE = "tibco_connection.properties";

@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 13 Feb 2008
  */
-public class ExceptionUtil {
+public final class ExceptionUtil {
 
     private static final Log LOG = LogFactory.getLog( ExceptionUtil.class );
 
@@ -29,7 +29,7 @@ public class ExceptionUtil {
      */
     public static final void printException( Exception e ) {
         LOG.debug( "============ [Exception] ==============" );
-        e.printStackTrace();
+        LOG.error( e );
         if ( e instanceof MBeanException ) {
             boolean hasEmbeddedException = true;
             Exception embeddedExc = e;
@@ -37,7 +37,7 @@ public class ExceptionUtil {
                 embeddedExc = ( (MBeanException) embeddedExc ).getTargetException();
                 LOG.debug( "-------- [Embedded Exception] ---------" );
 
-                embeddedExc.printStackTrace();
+                LOG.error( embeddedExc );
 
                 if ( !( embeddedExc instanceof MBeanException ) ) {
                     hasEmbeddedException = false;

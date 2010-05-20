@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 22 Aug 2008
  */
-public class SwtGraphicsDrawExample {
+public final class SwtGraphicsDrawExample {
 
     private SwtGraphicsDrawExample() {}
 

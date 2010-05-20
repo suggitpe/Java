@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 8 Aug 2008
  */
-public class CompositeShellDemo {
+public final class CompositeShellDemo {
 
     private static final Log LOG = LogFactory.getLog( CompositeShellDemo.class );
 

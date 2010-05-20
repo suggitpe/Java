@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Text;
  * @author suggitpe
  * @version 1.0 9 Apr 2008
  */
-public class ComplexGridLayoutExample {
+public final class ComplexGridLayoutExample {
 
     private static final Log LOG = LogFactory.getLog( ComplexGridLayoutExample.class );
 

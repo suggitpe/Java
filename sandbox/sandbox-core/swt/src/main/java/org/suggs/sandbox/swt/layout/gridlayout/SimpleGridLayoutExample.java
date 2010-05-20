@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 9 Apr 2008
  */
-public class SimpleGridLayoutExample {
+public final class SimpleGridLayoutExample {
 
     private static final Log LOG = LogFactory.getLog( SimpleGridLayoutExample.class );
 

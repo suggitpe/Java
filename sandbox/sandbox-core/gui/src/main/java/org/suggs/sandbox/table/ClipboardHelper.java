@@ -12,6 +12,9 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Reader;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Class to house a collection of clipboard manipulation methods - used in the Table sandlbox
  * 
@@ -19,6 +22,8 @@ import java.io.Reader;
  * @version 1.0 15 Jul 2009
  */
 public final class ClipboardHelper {
+
+    private static final Log LOG = LogFactory.getLog( ClipboardHelper.class );
 
     private ClipboardHelper() {}
 
@@ -45,10 +50,10 @@ public final class ClipboardHelper {
                     return ( buf.toString() );
                 }
                 catch ( IOException ex ) {
-                    ex.printStackTrace();
+                    LOG.error( "Failed to read/write clipboard", ex );
                 }
                 catch ( UnsupportedFlavorException ex ) {
-                    ex.printStackTrace();
+                    LOG.error( "Failed to read clipboard", ex );
                 }
             }
         }

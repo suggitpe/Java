@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 17 Feb 2010
  */
-public class MessageBuilder {
+public final class MessageBuilder {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( MessageBuilder.class );

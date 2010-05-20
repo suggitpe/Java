@@ -4,12 +4,9 @@
  */
 package org.suggs.sandbox.jmx.helloworld;
 
-import javax.management.InstanceAlreadyExistsException;
-import javax.management.MBeanRegistrationException;
+import javax.management.JMException;
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
-import javax.management.MalformedObjectNameException;
-import javax.management.NotCompliantMBeanException;
 import javax.management.Notification;
 import javax.management.NotificationListener;
 import javax.management.ObjectName;
@@ -71,17 +68,8 @@ public class HelloAgent implements NotificationListener {
 
             hw.addNotificationListener( this, null, null );
         }
-        catch ( MalformedObjectNameException mo ) {
-            mo.printStackTrace();
-        }
-        catch ( InstanceAlreadyExistsException iae ) {
-            iae.printStackTrace();
-        }
-        catch ( MBeanRegistrationException mre ) {
-            mre.printStackTrace();
-        }
-        catch ( NotCompliantMBeanException ncb ) {
-            ncb.printStackTrace();
+        catch ( JMException mo ) {
+            LOG.error( "Error registering mbeans with the server", mo );
         }
     }
 

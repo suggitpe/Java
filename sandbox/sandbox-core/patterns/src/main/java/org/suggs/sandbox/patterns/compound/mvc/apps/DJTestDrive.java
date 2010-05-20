@@ -14,7 +14,7 @@ import org.suggs.sandbox.patterns.compound.mvc.model.BeatModel;
  * @author suggitpe
  * @version 1.0 25 Sep 2007
  */
-public class DJTestDrive {
+public final class DJTestDrive {
 
     private DJTestDrive() {}
 

@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 5 Aug 2008
  */
-public class TibcoConnectionProperties {
+public final class TibcoConnectionProperties {
 
     private static final Log LOG = LogFactory.getLog( TibcoConnectionProperties.class );
     private static final String PROP_FILE = "tibco_connection.properties";

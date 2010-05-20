@@ -13,7 +13,7 @@ import java.util.Vector;
  * @author suggitpe
  * @version 1.0 20 Sep 2007
  */
-public class Logger {
+public final class Logger {
 
     private static final List<String> LOGS = new Vector<String>( 10 );
 

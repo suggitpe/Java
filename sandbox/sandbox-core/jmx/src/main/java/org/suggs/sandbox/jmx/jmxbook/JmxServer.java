@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 18 Feb 2008
  */
-public class JmxServer {
+public final class JmxServer {
 
     private static final Log LOG = LogFactory.getLog( JmxServer.class );
 

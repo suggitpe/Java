@@ -15,7 +15,7 @@ import java.lang.reflect.Proxy;
  * @author suggitpe
  * @version 1.0 18 Sep 2007
  */
-public class PersonProxyHelper {
+public final class PersonProxyHelper {
 
     private PersonProxyHelper() {}
 

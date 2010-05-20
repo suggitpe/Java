@@ -42,7 +42,7 @@ public class PropertyManager implements PropertyManagerMBean {
             is.close();
         }
         catch ( Exception e ) {
-            e.printStackTrace();
+            LOG.error( "Failed to load properties into propertymanager", e );
         }
     }
 
@@ -81,7 +81,7 @@ public class PropertyManager implements PropertyManagerMBean {
             properties.load( fis );
         }
         catch ( Exception e ) {
-            e.printStackTrace();
+            LOG.error( "Failed to reload properties into manager", e );
         }
         finally {
             try {

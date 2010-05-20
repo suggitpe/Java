@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 15 Feb 2008
  */
-public class RmiMbeanDeployer {
+public final class RmiMbeanDeployer {
 
     private static final Log LOG = LogFactory.getLog( RmiMbeanDeployer.class );
 

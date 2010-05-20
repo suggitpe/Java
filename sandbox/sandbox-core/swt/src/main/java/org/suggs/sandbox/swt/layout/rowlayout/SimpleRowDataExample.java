@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 8 Apr 2008
  */
-public class SimpleRowDataExample {
+public final class SimpleRowDataExample {
 
     private static final Log LOG = LogFactory.getLog( SimpleRowDataExample.class );
 

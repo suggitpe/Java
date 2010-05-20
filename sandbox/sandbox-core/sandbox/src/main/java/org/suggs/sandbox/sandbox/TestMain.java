@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 4 Jun 2009
  */
-public class TestMain {
+public final class TestMain {
 
     private static final Log LOG = LogFactory.getLog( TestMain.class );
     private static final String FILE_LOC = "/home/suggitpe/deleteme.txt";
