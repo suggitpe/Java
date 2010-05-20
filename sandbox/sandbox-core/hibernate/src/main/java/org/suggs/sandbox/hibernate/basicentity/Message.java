@@ -25,6 +25,8 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "MESSAGE_SQ")
 public class Message extends EntityBase {
 
+    private static final long serialVersionUID = 5569206986275168108L;
+
     @Column(name = "MESSAGE_TEXT", nullable = false, length = 255)
     private String text;
 

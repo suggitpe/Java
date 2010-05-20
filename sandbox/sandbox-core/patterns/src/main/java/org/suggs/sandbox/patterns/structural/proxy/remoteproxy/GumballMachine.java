@@ -24,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GumballMachine extends UnicastRemoteObject implements IGumballMachineRemote {
 
+    private static final long serialVersionUID = 4200893775209124128L;
     private static final Log LOG = LogFactory.getLog( GumballMachine.class );
 
     private IState soldOutState;

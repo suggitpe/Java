@@ -21,6 +21,8 @@ import javax.persistence.Table;
 @Table(name = "ENTITY_OBJECT")
 public class EntityObject implements Serializable {
 
+    private static final long serialVersionUID = 4390402943883172225L;
+
     @Id
     private EntityKey key;
 

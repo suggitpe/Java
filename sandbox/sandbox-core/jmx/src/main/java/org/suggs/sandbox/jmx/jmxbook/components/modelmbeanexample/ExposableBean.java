@@ -21,6 +21,7 @@ import javax.management.modelmbean.ModelMBeanInfo;
  */
 public class ExposableBean implements Serializable {
 
+    private static final long serialVersionUID = 4094088490297464163L;
     private String myAttribute;
 
     /**

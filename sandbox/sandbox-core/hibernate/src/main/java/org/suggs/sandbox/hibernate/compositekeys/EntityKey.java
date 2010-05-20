@@ -18,6 +18,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class EntityKey implements Serializable {
 
+    private static final long serialVersionUID = -7663697310519488607L;
+
     @Column(name = "KEY_ONE", length = 64, nullable = false)
     private String keyOne;
 

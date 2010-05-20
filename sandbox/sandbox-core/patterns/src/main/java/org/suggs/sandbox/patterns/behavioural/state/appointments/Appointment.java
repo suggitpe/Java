@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class Appointment implements Serializable {
 
+    private static final long serialVersionUID = 4712177304804473343L;
     private String reason;
     private List<Contact> contacts;
     private String location;

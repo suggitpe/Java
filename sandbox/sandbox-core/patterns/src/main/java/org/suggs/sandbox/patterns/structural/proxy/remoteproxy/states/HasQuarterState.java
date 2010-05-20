@@ -20,6 +20,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class HasQuarterState implements IState {
 
+    private static final long serialVersionUID = -3183850881728001111L;
     private static final Log LOG = LogFactory.getLog( HasQuarterState.class );
     private transient GumballMachine gumballMachine;
     private Random randomWinner = new Random( System.currentTimeMillis() );

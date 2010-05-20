@@ -28,6 +28,8 @@ import org.apache.commons.logging.LogFactory;
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "MANYTOONE_ENTITY_SQ")
 public class ManyToOneEntity extends EntityBase {
 
+    private static final long serialVersionUID = -9088262117318600146L;
+
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( ManyToOneEntity.class );
 

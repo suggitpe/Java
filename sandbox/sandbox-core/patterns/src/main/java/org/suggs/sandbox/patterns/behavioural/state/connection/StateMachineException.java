@@ -12,6 +12,8 @@ package org.suggs.sandbox.patterns.behavioural.state.connection;
  */
 public class StateMachineException extends Exception {
 
+    private static final long serialVersionUID = -4487527091340053649L;
+
     /**
      * Constructs a new instance.
      */

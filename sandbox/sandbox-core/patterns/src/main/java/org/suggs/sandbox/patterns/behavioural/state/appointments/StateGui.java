@@ -126,6 +126,7 @@ public class StateGui implements ActionListener {
      */
     private class StateTableModel extends AbstractTableModel {
 
+        private static final long serialVersionUID = -4557466123840066232L;
         private final String[] mColumnNames = { "Appointment", "Contacts", "Location", "Start Date",
                                                "End Date" };
         private Appointment[] mData;

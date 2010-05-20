@@ -25,6 +25,8 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "TIMESTAMP_CHILD_ENTITY_SQ")
 public class TimestampedChildEntity extends EntityBase {
 
+    private static final long serialVersionUID = 30140143038112595L;
+
     @Column(name = "CHILD_INTEGER", nullable = true)
     private Integer childInteger;
 

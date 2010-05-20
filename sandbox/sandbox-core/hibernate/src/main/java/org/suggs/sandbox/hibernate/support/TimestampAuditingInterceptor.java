@@ -23,8 +23,8 @@ import org.hibernate.type.Type;
  */
 public class TimestampAuditingInterceptor extends EmptyInterceptor {
 
+    private static final long serialVersionUID = 4974715372205680154L;
     private static final Log LOG = LogFactory.getLog( TimestampAuditingInterceptor.class );
-
     private static final String AUDIT_PROPERTY_NAME = "timestampAuditInfo";
 
     private enum AUDIT_TYPE {

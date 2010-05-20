@@ -26,6 +26,8 @@ import javax.swing.SpringLayout;
  */
 public class CommonLayouts extends JFrame {
 
+    private static final long serialVersionUID = 2303587558719184461L;
+
     /**
      * Constructs a new instance.
      */

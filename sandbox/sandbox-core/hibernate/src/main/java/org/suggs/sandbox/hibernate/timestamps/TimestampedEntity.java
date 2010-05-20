@@ -30,6 +30,8 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "TIMESTAMP_ENTITY_SQ")
 public class TimestampedEntity extends EntityBase {
 
+    private static final long serialVersionUID = 3086797041682462882L;
+
     @Column(name = "STRING_DATA", nullable = false, length = 16)
     private String someString;
 

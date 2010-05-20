@@ -32,6 +32,8 @@ import javax.swing.border.EmptyBorder;
  */
 public class ComplaintsDialog extends JDialog {
 
+    private static final long serialVersionUID = 3096618942565631253L;
+
     /**
      * Constructs a new instance.
      * 

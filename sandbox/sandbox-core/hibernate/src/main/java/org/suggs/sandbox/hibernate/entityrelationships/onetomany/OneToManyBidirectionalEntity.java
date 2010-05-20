@@ -26,6 +26,8 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "ONETOMANY_BI_ENTITY_SQ")
 public class OneToManyBidirectionalEntity extends EntityBase {
 
+    private static final long serialVersionUID = 7473160465608010893L;
+
     @Column(name = "data", length = 64)
     private String data;
 

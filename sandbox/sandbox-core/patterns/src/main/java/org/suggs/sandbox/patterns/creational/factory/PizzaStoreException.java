@@ -12,6 +12,8 @@ package org.suggs.sandbox.patterns.creational.factory;
  */
 public class PizzaStoreException extends Exception {
 
+    private static final long serialVersionUID = -7236519459564318461L;
+
     /**
      * Constructs a new instance.
      */

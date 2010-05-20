@@ -12,6 +12,8 @@ package org.suggs.sandbox.junit;
  */
 public class DaoException extends Exception {
 
+    private static final long serialVersionUID = 6819084697034950257L;
+
     /**
      * Constructs a new instance.
      * 

@@ -22,6 +22,8 @@ import javax.persistence.Version;
 @MappedSuperclass
 public class EntityBase implements TimestampAuditable, Serializable {
 
+    private static final long serialVersionUID = -3169530263675122564L;
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(generator = "ENTITYBASE_SEQ_STR")

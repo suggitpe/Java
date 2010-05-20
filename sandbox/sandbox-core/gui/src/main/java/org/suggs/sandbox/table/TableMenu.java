@@ -29,6 +29,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TableMenu extends JFrame {
 
+    private static final long serialVersionUID = 7672160185369606838L;
     private static final String PROP_CHANGE_QUANTITY = "CHANGE_QUANTITY";
     private JPanel jContentPane;
     private JScrollPane jScrollPane;
@@ -218,6 +219,7 @@ public class TableMenu extends JFrame {
 
 class ExampleTableModel extends AbstractTableModel {
 
+    private static final long serialVersionUID = -8613734897280274338L;
     private static final Log LOG = LogFactory.getLog( ExampleTableModel.class );
 
     private static class Item {

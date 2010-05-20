@@ -25,6 +25,8 @@ import org.apache.commons.logging.LogFactory;
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "MANYTOMANY_UNI_OTHER_ENTITY_SQ")
 public class ManyToManyUnidirectionalOtherEntity extends EntityBase {
 
+    private static final long serialVersionUID = 3433617405071711428L;
+
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( ManyToManyUnidirectionalOtherEntity.class );
 

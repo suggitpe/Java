@@ -18,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SoldOutState implements IState {
 
+    private static final long serialVersionUID = -6406267581898956016L;
     private static final Log LOG = LogFactory.getLog( SoldOutState.class );
 
     @SuppressWarnings("unused")
