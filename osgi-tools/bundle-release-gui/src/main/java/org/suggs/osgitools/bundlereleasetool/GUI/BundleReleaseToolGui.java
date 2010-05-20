@@ -53,7 +53,7 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 2 Jul 2009
  */
-public class BundleReleaseToolGui {
+public final class BundleReleaseToolGui {
 
     private static final Log LOG = LogFactory.getLog( BundleReleaseToolGui.class );
 
@@ -349,7 +349,7 @@ public class BundleReleaseToolGui {
             @Override
             public void actionPerformed( ActionEvent event ) {
                 ChooseBundleJarAction action = new ChooseBundleJarAction();
-                action.run();
+                action.start();
                 if ( action.getBundleJarName() != null && action.getBundleJarName().length() > 0 ) {
                     bundleName.setText( action.getBundleJarName() );
                 }
