@@ -6,6 +6,7 @@ package org.suggs.sandbox.jmx.support;
 
 import java.lang.reflect.Constructor;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.management.Descriptor;
@@ -27,11 +28,11 @@ import javax.management.modelmbean.ModelMBeanOperationInfo;
  */
 public class ModelMBeanInfoBuilder {
 
-    private Hashtable<String, ModelMBeanAttributeInfo> attributes = new Hashtable<String, ModelMBeanAttributeInfo>();
-    private Hashtable<String, ModelMBeanNotificationInfo> notifications = new Hashtable<String, ModelMBeanNotificationInfo>();
+    private Map<String, ModelMBeanAttributeInfo> attributes = new Hashtable<String, ModelMBeanAttributeInfo>();
+    private Map<String, ModelMBeanNotificationInfo> notifications = new Hashtable<String, ModelMBeanNotificationInfo>();
     @SuppressWarnings("unchecked")
-    private Hashtable<Constructor, ModelMBeanConstructorInfo> constructors = new Hashtable<Constructor, ModelMBeanConstructorInfo>();
-    private Hashtable<String, ModelMBeanOperationInfo> operations = new Hashtable<String, ModelMBeanOperationInfo>();
+    private Map<Constructor, ModelMBeanConstructorInfo> constructors = new Hashtable<Constructor, ModelMBeanConstructorInfo>();
+    private Map<String, ModelMBeanOperationInfo> operations = new Hashtable<String, ModelMBeanOperationInfo>();
 
     /**
      * Constructs a new instance.

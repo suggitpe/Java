@@ -22,7 +22,7 @@ public class SoldOutState implements IState {
     private static final Log LOG = LogFactory.getLog( SoldOutState.class );
 
     @SuppressWarnings("unused")
-    private transient GumballMachine gumballMachine;
+    private GumballMachine gumballMachine;
 
     /**
      * Constructs a new instance.

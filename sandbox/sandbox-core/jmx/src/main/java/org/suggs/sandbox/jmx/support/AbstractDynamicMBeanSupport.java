@@ -7,6 +7,7 @@ package org.suggs.sandbox.jmx.support;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.management.Attribute;
@@ -35,10 +36,10 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
 
     private static final Log LOG = LogFactory.getLog( AbstractDynamicMBeanSupport.class );
 
-    private Hashtable<String, MBeanAttributeInfo> attributes = new Hashtable<String, MBeanAttributeInfo>();
+    private Map<String, MBeanAttributeInfo> attributes = new Hashtable<String, MBeanAttributeInfo>();
     @SuppressWarnings("unchecked")
-    private Hashtable<Constructor, MBeanConstructorInfo> constructors = new Hashtable<Constructor, MBeanConstructorInfo>();
-    private Hashtable<String, MBeanOperationInfo> operations = new Hashtable<String, MBeanOperationInfo>();
+    private Map<Constructor, MBeanConstructorInfo> constructors = new Hashtable<Constructor, MBeanConstructorInfo>();
+    private Map<String, MBeanOperationInfo> operations = new Hashtable<String, MBeanOperationInfo>();
 
     private String description = "Description of the MBean";
 
@@ -217,8 +218,8 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
      * @param description
      *            the description of the attribute
      */
-    protected void addMBeanAttribute( String name, String type, boolean read, boolean write, boolean is,
-                                      String aDescription ) {
+    protected final void addMBeanAttribute( String name, String type, boolean read, boolean write,
+                                            boolean is, String aDescription ) {
         attributes.put( name, new MBeanAttributeInfo( name, type, aDescription, read, write, is ) );
 
     }
@@ -232,7 +233,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
      *            a description of the constructor
      */
     @SuppressWarnings("unchecked")
-    protected void addMBeanConstructor( Constructor cons, String aDescription ) {
+    protected final void addMBeanConstructor( Constructor cons, String aDescription ) {
         constructors.put( cons, new MBeanConstructorInfo( aDescription, cons ) );
     }
 

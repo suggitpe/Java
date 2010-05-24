@@ -43,7 +43,7 @@ public class Ch8TreeComposite extends Composite {
     /**
      * Builds the control. This is way over developed!
      */
-    protected void populateControl() {
+    protected final void populateControl() {
         setLayout( new FillLayout() );
 
         // this bit simple sets up the various styles of tree to use

@@ -209,8 +209,7 @@ public class BundleManagerActivator implements BundleActivator {
                 LOG.debug( "Thread interrupted, exiting" );
             }
             catch ( BundleException be ) {
-                LOG.debug( "Error managing bundle" );
-                be.printStackTrace();
+                LOG.error( "Error managing bundle", be );
             }
 
         }

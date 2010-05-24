@@ -20,7 +20,7 @@ public class NoQuarterState implements IState {
 
     private static final long serialVersionUID = 4949649418578126010L;
     private static final Log LOG = LogFactory.getLog( NoQuarterState.class );
-    private transient GumballMachine gumballMachine;
+    private GumballMachine gumballMachine;
 
     /**
      * Constructs a new instance.

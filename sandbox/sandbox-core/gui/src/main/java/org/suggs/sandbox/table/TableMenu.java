@@ -208,7 +208,7 @@ public class TableMenu extends JFrame {
         return tableModel;
     }
 
-    private void initialize() {
+    private final void initialize() {
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         this.setSize( 300, 200 );
         this.setContentPane( getJContentPane() );
@@ -346,7 +346,7 @@ class ExampleTableModel extends AbstractTableModel {
                     item.quantity = Integer.parseInt( aValue.toString() );
                 }
                 catch ( NumberFormatException ex ) {
-                    ex.printStackTrace();
+                    LOG.error( ex );
                 }
                 fireTableCellUpdated( rowIndex, columnIndex );
                 fireTableCellUpdated( rowIndex, COLUMN_AMOUNT );

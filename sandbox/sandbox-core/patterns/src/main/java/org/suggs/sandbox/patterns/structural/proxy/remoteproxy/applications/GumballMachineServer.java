@@ -72,9 +72,7 @@ public final class GumballMachineServer {
             Naming.rebind( url.toString(), remote );
         }
         catch ( RemoteException re ) {
-            LOG.error( "Remote exception caught [" + re.getMessage() + "]" );
-            re.printStackTrace();
-            System.exit( 1 );
+            LOG.error( "Remote exception caught [" + re.getMessage() + "]", re );
         }
         catch ( MalformedURLException mue ) {
             LOG.error( "Badly formed URL [" + mue.getMessage() + "]" );

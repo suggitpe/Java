@@ -79,10 +79,10 @@ public class StateGui implements ActionListener {
     @Override
     public void actionPerformed( ActionEvent event ) {
         Object originator = event.getSource();
-        if ( originator == saveButton ) {
+        if ( originator.equals( saveButton ) ) {
             saveAppointments();
         }
-        else if ( originator == exitButton ) {
+        else if ( originator.equals( exitButton ) ) {
             exitApplication();
         }
     }

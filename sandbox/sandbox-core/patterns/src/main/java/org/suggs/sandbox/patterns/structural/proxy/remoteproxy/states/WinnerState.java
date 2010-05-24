@@ -20,7 +20,7 @@ public class WinnerState implements IState {
 
     private static final long serialVersionUID = 1610977684883232090L;
     private static final Log LOG = LogFactory.getLog( WinnerState.class );
-    private transient GumballMachine gumballMachine;
+    private GumballMachine gumballMachine;
 
     /**
      * Constructs a new instance.

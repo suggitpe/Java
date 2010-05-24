@@ -59,7 +59,7 @@ public class StateMachine implements IStateMachine, InitializingBean {
     @Override
     public void step( IStateMachineEventContext aContext ) {
         IState newState = currentState.step( aContext );
-        if ( newState != null && newState != currentState ) {
+        if ( newState != null && !newState.equals( currentState ) ) {
             LOG.info( "Transitioning state machine to new state of [" + newState.getName() + "]" );
             currentState = newState;
             // this recursive call allows us to work through transient

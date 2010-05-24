@@ -41,14 +41,14 @@ public class DBSource implements DBSourceMBean {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#resetDataSource(java.lang.String)
      */
-    public void resetDataSource( String name ) {
+    public final void resetDataSource( String name ) {
         LOG.debug( "Setting the datasource with name [" + name + "]" );
         try {
             Context ctx = new InitialContext();
             dataSource = (DataSource) ctx.lookup( name );
         }
         catch ( Exception e ) {
-            e.printStackTrace();
+            LOG.error( e );
         }
     }
 

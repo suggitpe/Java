@@ -21,7 +21,7 @@ public class SoldState implements IState {
 
     private static final long serialVersionUID = 2491723550946691480L;
     private static final Log LOG = LogFactory.getLog( SoldState.class );
-    private transient GumballMachine gumballMachine;
+    private GumballMachine gumballMachine;
 
     /**
      * Constructs a new instance.

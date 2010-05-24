@@ -86,7 +86,7 @@ public class Ch9TableEditorComposite extends Composite {
     /**
      * Build the composite controls
      */
-    protected void buildControls() {
+    protected final void buildControls() {
         setLayout( new FillLayout() );
 
         final Table table = new Table( this, SWT.FULL_SELECTION );
