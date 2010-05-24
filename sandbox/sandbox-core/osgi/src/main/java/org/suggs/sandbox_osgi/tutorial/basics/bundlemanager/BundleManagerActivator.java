@@ -191,8 +191,7 @@ public class BundleManagerActivator implements BundleActivator {
                         long installedAge = installed.getLastModified();
                         File f = new File( BUND_LOC + s + ".jar" );
                         if ( !f.exists() ) {
-                            System.err.println( "Skipping updating of [" + s
-                                                + "] as cannot find the jar file" );
+                            LOG.debug( "Skipping updating of [" + s + "] as cannot find the jar file" );
                             continue;
                         }
                         long jarAge = f.lastModified();
@@ -210,7 +209,7 @@ public class BundleManagerActivator implements BundleActivator {
                 LOG.debug( "Thread interrupted, exiting" );
             }
             catch ( BundleException be ) {
-                System.err.println( "Error managing bundle" );
+                LOG.debug( "Error managing bundle" );
                 be.printStackTrace();
             }
 

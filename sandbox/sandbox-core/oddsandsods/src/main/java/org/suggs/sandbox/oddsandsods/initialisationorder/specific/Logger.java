@@ -7,6 +7,9 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.specific;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Static class to catch the output of the tests in the correct order
  * 
@@ -15,6 +18,7 @@ import java.util.Vector;
  */
 public final class Logger {
 
+    private static final Log LOG = LogFactory.getLog( Logger.class );
     private static final List<String> LOGS = new Vector<String>( 10 );
 
     private Logger() {}
@@ -34,7 +38,7 @@ public final class Logger {
      */
     public static synchronized void output() {
         for ( String s : LOGS ) {
-            System.out.println( s );
+            LOG.debug( s );
         }
     }
 

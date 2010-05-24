@@ -7,6 +7,8 @@ package org.suggs.sandbox.swt.widgetwindow.ch8_trees;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -23,6 +25,7 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class Ch8TreeComposite extends Composite {
 
+    private static final Log LOG = LogFactory.getLog( Ch8TreeComposite.class );
     private static final int[] SELECTION_STYLE = { SWT.SINGLE, SWT.MULTI };
     private static final int[] CHECK_STYLE = { SWT.NONE, SWT.CHECK };
 
@@ -47,7 +50,7 @@ public class Ch8TreeComposite extends Composite {
         // so we can show them all
         for ( int sel = 0; sel < SELECTION_STYLE.length; ++sel ) {
             for ( int check = 0; check < CHECK_STYLE.length; ++check ) {
-                System.out.println( "creating a tree" );
+                LOG.debug( "creating a tree" );
                 createTreeViewer( SELECTION_STYLE[sel] | CHECK_STYLE[check] );
             }
         }

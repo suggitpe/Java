@@ -52,6 +52,7 @@ public final class TestMain {
 
     }
 
+    @SuppressWarnings("boxing")
     private static void testTokeniser() {
         LOG.debug( "Testing tokeniser" );
         // System.out.println( System.getProperty(
@@ -59,9 +60,9 @@ public final class TestMain {
         String path = System.getProperty( "java.library.path" );
 
         StringTokenizer t = new StringTokenizer( path, ":" );
-        System.out.println( t.countTokens() );
+        LOG.debug( t.countTokens() );
         while ( t.hasMoreTokens() ) {
-            System.out.println( t.nextToken() );
+            LOG.debug( t.nextToken() );
         }
     }
 

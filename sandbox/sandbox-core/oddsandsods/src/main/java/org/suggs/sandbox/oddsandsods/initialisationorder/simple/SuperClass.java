@@ -4,6 +4,9 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder.simple;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Base class that will print a value (three) when instantiated.
  * 
@@ -11,6 +14,8 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.simple;
  * @version 1.0 20 Sep 2007
  */
 public class SuperClass {
+
+    private static final Log LOG = LogFactory.getLog( SuperClass.class );
 
     /**
      * Constructs a new instance.
@@ -23,7 +28,7 @@ public class SuperClass {
      * 
      */
     public void printThree() {
-        System.out.println( "three" );
+        LOG.debug( "three" );
     }
 
 }

@@ -12,6 +12,9 @@ import javax.management.Descriptor;
 import javax.management.MBeanOperationInfo;
 import javax.management.modelmbean.ModelMBeanInfo;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * This is a simple bean class that we will expose through a model mbean. This class also contains a static
  * method from whihc you can create the model mbean info object.
@@ -22,6 +25,7 @@ import javax.management.modelmbean.ModelMBeanInfo;
 public class ExposableBean implements Serializable {
 
     private static final long serialVersionUID = 4094088490297464163L;
+    private static final Log LOG = LogFactory.getLog( ExposableBean.class );
     private String myAttribute;
 
     /**
@@ -42,7 +46,7 @@ public class ExposableBean implements Serializable {
      * Prints the internal attribute to the stdout
      */
     public void printMyAttribute() {
-        System.out.println( myAttribute );
+        LOG.debug( myAttribute );
     }
 
     /**

@@ -4,6 +4,9 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder.simple;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Simple class that will extend the SuperClass with its own impl of the printThree method.
  * 
@@ -12,13 +15,15 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.simple;
  */
 public class TestClass extends SuperClass {
 
+    private static final Log LOG = LogFactory.getLog( TestClass.class );
     private int three = (int) Math.PI; // ie 3
 
     /**
      * @see org.suggs.sandbox.oddsandsods.initialisationorder.simple.SuperClass#printThree()
      */
+    @SuppressWarnings("boxing")
     @Override
     public void printThree() {
-        System.out.println( three );
+        LOG.debug( three );
     }
 }

@@ -8,6 +8,9 @@ import org.suggs.sandbox.patterns.structural.composite.iterators.NullIterator;
 
 import java.util.Iterator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Concrete implementation of a menu component.
  * 
@@ -16,6 +19,7 @@ import java.util.Iterator;
  */
 public class MenuItem extends AbstractMenuComponent {
 
+    private static final Log LOG = LogFactory.getLog( MenuItem.class );
     private String name;
     private String description;
     private boolean vegetarian;
@@ -77,8 +81,8 @@ public class MenuItem extends AbstractMenuComponent {
      */
     @Override
     public void print() {
-        System.out.println( " " + getName() + ( isVegetarian() ? "(v), " : ", " ) + getPrice() + "\n\t -- "
-                            + getDescription() );
+        LOG.debug( " " + getName() + ( isVegetarian() ? "(v), " : ", " ) + getPrice() + "\n\t -- "
+                   + getDescription() );
     }
 
     /**
