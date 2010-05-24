@@ -14,6 +14,8 @@ import org.suggs.apps.mercury.MercuryException;
  */
 public class ConnectionDataException extends MercuryException {
 
+    private static final long serialVersionUID = -579993736274958645L;
+
     /**
      * Constructs a new instance.
      */

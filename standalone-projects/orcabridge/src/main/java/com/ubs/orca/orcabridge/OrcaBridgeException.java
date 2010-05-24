@@ -13,6 +13,8 @@ package com.ubs.orca.orcabridge;
  */
 public class OrcaBridgeException extends Exception {
 
+    private static final long serialVersionUID = 4288254724476292991L;
+
     /**
      * Constructs a new instance.
      * 

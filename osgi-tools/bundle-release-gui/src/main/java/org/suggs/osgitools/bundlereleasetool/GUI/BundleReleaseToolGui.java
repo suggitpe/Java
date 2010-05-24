@@ -461,6 +461,7 @@ public final class BundleReleaseToolGui {
      */
     class BundleDataModel extends AbstractTableModel {
 
+        private static final long serialVersionUID = -7044925490369432924L;
         private List<BundleData> localList = new ArrayList<BundleData>();
 
         /**
@@ -547,6 +548,8 @@ public final class BundleReleaseToolGui {
      * @version 1.0 14 Jul 2009
      */
     class BundleTableColumnData extends DefaultTableColumnModel {
+
+        private static final long serialVersionUID = 8077821745334137497L;
 
         /**
          * Constructs a new instance.

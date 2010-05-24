@@ -21,6 +21,7 @@ import javax.swing.JSeparator;
  */
 public class ConnectionButtons extends AbstractGridbagPanel {
 
+    private static final long serialVersionUID = 1200607380709746562L;
     private JButton saveButton = new JButton( "Save" );
     private JButton loadButton = new JButton( "Load" );
     private JButton deleteButton = new JButton( "Delete" );

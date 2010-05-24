@@ -12,6 +12,8 @@ package org.suggs.osgitools.bundlereleasetool;
  */
 public class BundleGuiException extends Exception {
 
+    private static final long serialVersionUID = 8131067651200556740L;
+
     /**
      * Constructs a new instance.
      */

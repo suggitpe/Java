@@ -12,6 +12,8 @@ package com.ubs.orca.orcabridge.jmsclient;
  */
 public class JmsClientException extends Exception {
 
+    private static final long serialVersionUID = -8462948702209645899L;
+
     /**
      * Constructs a new instance.
      * 

@@ -23,6 +23,8 @@ import javax.swing.border.TitledBorder;
  */
 public abstract class AbstractGridbagPanel extends JPanel {
 
+    private static final long serialVersionUID = 2785057007986923888L;
+
     private GridBagConstraints constraints;
 
     private static final int C_HORZ = GridBagConstraints.HORIZONTAL;

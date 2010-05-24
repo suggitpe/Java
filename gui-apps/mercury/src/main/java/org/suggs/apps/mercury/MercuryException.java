@@ -12,6 +12,8 @@ package org.suggs.apps.mercury;
  */
 public class MercuryException extends Exception {
 
+    private static final long serialVersionUID = 5993836781035133794L;
+
     /**
      * Constructs a new instance.
      */

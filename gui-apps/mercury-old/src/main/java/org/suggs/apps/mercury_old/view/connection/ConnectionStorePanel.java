@@ -38,10 +38,9 @@ import org.springframework.util.Assert;
  */
 public class ConnectionStorePanel extends AbstractGridbagPanel implements InitializingBean, Observer {
 
+    private static final long serialVersionUID = -8438244491631849283L;
     private static final Log LOG = LogFactory.getLog( ConnectionStorePanel.class );
-
     private ConnectionStore connectionStore;
-
     private final JTextField statusText = new JTextField();
     private final JTextField nameText = new JTextField();
     private final JComboBox typeCombo = new JComboBox();

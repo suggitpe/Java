@@ -35,15 +35,13 @@ import org.springframework.util.Assert;
  */
 public class ConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean, Observer {
 
+    private static final long serialVersionUID = 4835953967437214080L;
     private static final Log LOG = LogFactory.getLog( ConnectionManagerPanel.class );
-
     private ConnectionManager connMgr;
-
     private final JTextField status = new JTextField();
     private final JComboBox type = new JComboBox();
     private final JComboBox connectionFactories = new JComboBox();
     private final JComboBox destinations = new JComboBox();
-
     private Map<String, Set<String>> availableConnFacts;
     private Map<String, Set<String>> availableDests;
 

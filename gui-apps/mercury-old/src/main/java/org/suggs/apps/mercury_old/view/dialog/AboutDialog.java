@@ -35,6 +35,8 @@ import javax.swing.border.EmptyBorder;
  */
 public class AboutDialog extends JDialog {
 
+    private static final long serialVersionUID = -1232620478444335142L;
+
     /**
      * Hidden Constructs a new instance.
      */
