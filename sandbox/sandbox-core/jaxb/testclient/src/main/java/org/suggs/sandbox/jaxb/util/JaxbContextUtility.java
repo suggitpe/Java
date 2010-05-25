@@ -95,8 +95,7 @@ public final class JaxbContextUtility {
             unmarshaller.setSchema( schema );
         }
 
-        T returnableObject = (T) unmarshaller.unmarshal( new StringReader( aXmlString ) );
-        return returnableObject;
+        return (T) unmarshaller.unmarshal( new StringReader( aXmlString ) );
     }
 
     /**
@@ -127,8 +126,7 @@ public final class JaxbContextUtility {
 
     private Unmarshaller createUnmarshaller( Class<?> aClazz ) throws JAXBException {
         JAXBContext ctx = createJaxbContext( aClazz );
-        Unmarshaller unmarshaller = ctx.createUnmarshaller();
-        return unmarshaller;
+        return ctx.createUnmarshaller();
     }
 
     /**

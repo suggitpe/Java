@@ -99,7 +99,7 @@ public final class TibcoAdminConnectionProperties {
                     admin = new TibjmsAdmin( getProviderUrl(), getUsername(), getPassword() );
                 }
                 catch ( TibjmsAdminException tjae ) {
-                    LOG.error( tjae );
+                    LOG.error( "Error when creating the Tib JMS admin object", tjae );
                     throw new IllegalStateException( "Unable to connect to the Tibco EMS broker as admin" );
                 }
             }

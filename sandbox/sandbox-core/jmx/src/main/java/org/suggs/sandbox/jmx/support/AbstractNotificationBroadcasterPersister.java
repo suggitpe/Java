@@ -72,7 +72,7 @@ public abstract class AbstractNotificationBroadcasterPersister extends Notificat
             stmt = connection.prepareStatement( NOTIF_INSERT_SQL );
             stmt.setString( 1, aNotification.getMessage() );
             stmt.setLong( 2, aNotification.getSequenceNumber() );
-            if ( aNotification.getSource() != null && aNotification.getSource() instanceof Serializable ) {
+            if ( aNotification.getSource() instanceof Serializable ) {
                 stmt.setObject( 3, aNotification.getSource() );
             }
             else {
@@ -80,7 +80,7 @@ public abstract class AbstractNotificationBroadcasterPersister extends Notificat
             }
             stmt.setLong( 4, aNotification.getTimeStamp() );
             stmt.setString( 5, aNotification.getType() );
-            if ( aNotification.getUserData() != null && aNotification.getUserData() instanceof Serializable ) {
+            if ( aNotification.getUserData() instanceof Serializable ) {
                 stmt.setObject( 6, aNotification.getUserData() );
             }
             else {

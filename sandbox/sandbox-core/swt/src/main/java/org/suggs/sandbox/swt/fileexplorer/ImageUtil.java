@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.Display;
  */
 public final class ImageUtil {
 
-    private static volatile ImageRegistry IMAGES;
-    private static volatile Clipboard CLIPBOARD;
+    private static volatile ImageRegistry images;
+    private static volatile Clipboard clipboard;
 
     private ImageUtil() {}
 
@@ -28,17 +28,17 @@ public final class ImageUtil {
      * @return the image registry with all of the image items included
      */
     public static synchronized ImageRegistry getImageRegistry() {
-        if ( IMAGES == null ) {
-            IMAGES = new ImageRegistry();
-            IMAGES.put( "folder", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
+        if ( images == null ) {
+            images = new ImageRegistry();
+            images.put( "folder", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
                 .getResource( "folder.gif" ) ) );
-            IMAGES.put( "file", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
+            images.put( "file", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
                 .getResource( "file.gif" ) ) );
-            IMAGES.put( "exit", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
+            images.put( "exit", ImageDescriptor.createFromURL( ImageUtil.class.getClassLoader()
                 .getResource( "exit.gif" ) ) );
 
         }
-        return IMAGES;
+        return images;
     }
 
     /**
@@ -47,9 +47,9 @@ public final class ImageUtil {
      * @return the clipboard
      */
     public static synchronized Clipboard getClipboard() {
-        if ( CLIPBOARD == null ) {
-            CLIPBOARD = new Clipboard( Display.getCurrent() );
+        if ( clipboard == null ) {
+            clipboard = new Clipboard( Display.getCurrent() );
         }
-        return CLIPBOARD;
+        return clipboard;
     }
 }

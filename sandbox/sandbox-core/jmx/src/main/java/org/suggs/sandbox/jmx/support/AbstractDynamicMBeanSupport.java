@@ -8,7 +8,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.management.Attribute;
 import javax.management.AttributeList;
@@ -244,19 +243,14 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
      */
     private MBeanInfo buildDynamicMBeanInfo() {
         // operations
-        MBeanOperationInfo[] ops = new MBeanOperationInfo[operations.size()];
-        Vector<MBeanOperationInfo> vo = new Vector<MBeanOperationInfo>( operations.values() );
-        vo.copyInto( ops );
+        MBeanOperationInfo[] ops = operations.values().toArray( new MBeanOperationInfo[operations.size()] );
 
         // attributes
-        MBeanAttributeInfo[] atts = new MBeanAttributeInfo[attributes.size()];
-        Vector<MBeanAttributeInfo> va = new Vector<MBeanAttributeInfo>( attributes.values() );
-        va.copyInto( atts );
+        MBeanAttributeInfo[] atts = attributes.values().toArray( new MBeanAttributeInfo[attributes.size()] );
 
         // constructors
-        MBeanConstructorInfo[] cons = new MBeanConstructorInfo[constructors.size()];
-        Vector<MBeanConstructorInfo> vc = new Vector<MBeanConstructorInfo>( constructors.values() );
-        vc.copyInto( cons );
+        MBeanConstructorInfo[] cons = constructors.values()
+            .toArray( new MBeanConstructorInfo[constructors.size()] );
 
         return new MBeanInfo( this.getClass().getName(), description, atts, cons, ops, null );
     }

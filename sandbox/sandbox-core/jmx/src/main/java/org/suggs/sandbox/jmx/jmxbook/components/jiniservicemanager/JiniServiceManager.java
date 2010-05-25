@@ -115,8 +115,7 @@ public class JiniServiceManager implements DynamicMBean {
             }
 
             Method m = serviceRef.getClass().getMethod( methName, types );
-            Object tmp = m.invoke( serviceRef, params );
-            return tmp;
+            return m.invoke( serviceRef, params );
         }
         catch ( Exception e ) {
             throw new MBeanException( e );
@@ -174,13 +173,12 @@ public class JiniServiceManager implements DynamicMBean {
 
         // #################
         // create MBean info
-        MBeanInfo ret = new MBeanInfo( this.getClass().getName(),
-                                       "Manages service: " + initialAttribute.toString(),
-                                       atts,
-                                       cons,
-                                       ops,
-                                       nots );
-        return ret;
+        return new MBeanInfo( this.getClass().getName(),
+                              "Manages service: " + initialAttribute.toString(),
+                              atts,
+                              cons,
+                              ops,
+                              nots );
     }
 
     /**

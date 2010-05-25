@@ -48,7 +48,7 @@ public class DBSource implements DBSourceMBean {
             dataSource = (DataSource) ctx.lookup( name );
         }
         catch ( Exception e ) {
-            LOG.error( e );
+            LOG.error( "exception caught when looking up the datasource [" + name + "]", e );
         }
     }
 

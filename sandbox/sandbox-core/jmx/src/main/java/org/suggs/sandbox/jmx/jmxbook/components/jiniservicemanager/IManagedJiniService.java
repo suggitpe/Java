@@ -6,7 +6,7 @@ package org.suggs.sandbox.jmx.jmxbook.components.jiniservicemanager;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * TODO Write javadoc for ManagedJiniService
@@ -21,7 +21,7 @@ public interface IManagedJiniService extends Remote {
      * @throws RemoteException
      */
     @SuppressWarnings("unchecked")
-    public void addEntries( Vector aEntry ) throws RemoteException;
+    public void addEntries( List aEntry ) throws RemoteException;
 
     /**
      * MOdifies an existing set of entries
@@ -31,6 +31,6 @@ public interface IManagedJiniService extends Remote {
      * @throws RemoteException
      */
     @SuppressWarnings("unchecked")
-    public void modifyEntries( Vector aOldEntries, Vector aNewEntries ) throws RemoteException;
+    public void modifyEntries( List aOldEntries, List aNewEntries ) throws RemoteException;
 
 }

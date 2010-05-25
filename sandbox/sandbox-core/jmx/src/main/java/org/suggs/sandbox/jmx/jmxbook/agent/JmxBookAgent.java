@@ -44,11 +44,11 @@ public class JmxBookAgent {
         server = MBeanServerFactory.createMBeanServer( svrName );
 
         if ( !startHtmlAdapter() ) {
-            System.exit( -1 );
+            throw new IllegalStateException( "failed to start html adapter" );
         }
 
         if ( !startRmiConnector() ) {
-            System.exit( -1 );
+            throw new IllegalStateException( "failed to start rmi connector" );
         }
         LOG.info( "JMX Book started" );
     }

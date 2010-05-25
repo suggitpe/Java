@@ -150,7 +150,7 @@ public class CalendarEditor {
      */
     private class CleanState implements IState {
 
-        private IState mNextState_ = new DirtyState( this );
+        private IState nextState = new DirtyState( this );
 
         /**
          * @see org.suggs.sandbox.patterns.behavioural.state.appointments.IState#edit()
@@ -158,7 +158,7 @@ public class CalendarEditor {
         @Override
         public void edit() {
             LOG.debug( "Edit called on CleanState" );
-            currentState = mNextState_;
+            currentState = nextState;
         }
 
         /**

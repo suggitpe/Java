@@ -7,7 +7,6 @@ package org.suggs.sandbox.jmx.support;
 import java.lang.reflect.Constructor;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.management.Descriptor;
 import javax.management.MBeanParameterInfo;
@@ -151,21 +150,17 @@ public class ModelMBeanInfoBuilder {
      * @return the model mbean info object
      */
     public ModelMBeanInfo buildModelMBeanInfo( Descriptor aDescriptor ) {
-        ModelMBeanOperationInfo[] ops = new ModelMBeanOperationInfo[operations.size()];
-        Vector<ModelMBeanOperationInfo> vo = new Vector<ModelMBeanOperationInfo>( operations.values() );
-        vo.copyInto( ops );
+        ModelMBeanOperationInfo[] ops = operations.values()
+            .toArray( new ModelMBeanOperationInfo[operations.size()] );
 
-        ModelMBeanAttributeInfo[] atts = new ModelMBeanAttributeInfo[attributes.size()];
-        Vector<ModelMBeanAttributeInfo> va = new Vector<ModelMBeanAttributeInfo>( attributes.values() );
-        va.copyInto( atts );
+        ModelMBeanAttributeInfo[] atts = attributes.values()
+            .toArray( new ModelMBeanAttributeInfo[attributes.size()] );
 
-        ModelMBeanConstructorInfo[] cons = new ModelMBeanConstructorInfo[constructors.size()];
-        Vector<ModelMBeanConstructorInfo> vc = new Vector<ModelMBeanConstructorInfo>( constructors.values() );
-        vc.copyInto( cons );
+        ModelMBeanConstructorInfo[] cons = constructors.values()
+            .toArray( new ModelMBeanConstructorInfo[constructors.size()] );
 
-        ModelMBeanNotificationInfo[] notifs = new ModelMBeanNotificationInfo[notifications.size()];
-        Vector<ModelMBeanNotificationInfo> vn = new Vector<ModelMBeanNotificationInfo>( notifications.values() );
-        vn.copyInto( notifs );
+        ModelMBeanNotificationInfo[] notifs = notifications.values()
+            .toArray( new ModelMBeanNotificationInfo[notifications.size()] );
 
         return new ModelMBeanInfoSupport( "javax.management.modelmbean.ModelMBeanInfo",
                                           "description",

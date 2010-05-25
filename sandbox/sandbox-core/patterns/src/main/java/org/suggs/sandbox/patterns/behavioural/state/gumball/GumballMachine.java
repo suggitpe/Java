@@ -29,7 +29,7 @@ public class GumballMachine {
     private IState soldState;
     private IState winnerState;
 
-    private IState mState_ = soldOutState;
+    private IState state = soldOutState;
     private int count = 0;
 
     /**
@@ -47,7 +47,7 @@ public class GumballMachine {
 
         count = aCount;
         if ( count > 0 ) {
-            mState_ = noQuarterState;
+            state = noQuarterState;
         }
     }
 
@@ -55,22 +55,22 @@ public class GumballMachine {
      * Insert the quarter
      */
     public void insertQuarter() {
-        mState_.insertQuarter();
+        state.insertQuarter();
     }
 
     /**
      * Eject the quarter
      */
     public void ejectQuarter() {
-        mState_.ejectQuarter();
+        state.ejectQuarter();
     }
 
     /**
      * Turns the crank on the machine
      */
     public void turnCrank() {
-        mState_.turnCrank();
-        mState_.dispense();
+        state.turnCrank();
+        state.dispense();
     }
 
     /**
@@ -89,7 +89,7 @@ public class GumballMachine {
     @Override
     public String toString() {
         return new StringBuffer( "Gumball Machine: gumball count=[" + count + "];  state=["
-                                 + mState_.getClass().getSimpleName() + "]" ).toString();
+                                 + state.getClass().getSimpleName() + "]" ).toString();
     }
 
     // =================
@@ -102,7 +102,7 @@ public class GumballMachine {
      *            the state to set
      */
     public void setState( IState aState ) {
-        mState_ = aState;
+        state = aState;
     }
 
     /**

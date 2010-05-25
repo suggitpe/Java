@@ -115,7 +115,8 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver {
         exit.addActionListener( new ActionListener() {
 
             public void actionPerformed( ActionEvent arg0 ) {
-                System.exit( 0 );
+                // THIS VERY WELL MAY FAIL
+                controlFrame.dispose();
             }
         } );
 

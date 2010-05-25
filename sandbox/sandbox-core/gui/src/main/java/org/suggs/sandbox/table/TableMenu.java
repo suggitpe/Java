@@ -346,7 +346,8 @@ class ExampleTableModel extends AbstractTableModel {
                     item.quantity = Integer.parseInt( aValue.toString() );
                 }
                 catch ( NumberFormatException ex ) {
-                    LOG.error( ex );
+                    LOG.error( "Caught a number format exception trying to convert [" + aValue.toString()
+                               + "]", ex );
                 }
                 fireTableCellUpdated( rowIndex, columnIndex );
                 fireTableCellUpdated( rowIndex, COLUMN_AMOUNT );

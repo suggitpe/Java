@@ -40,7 +40,7 @@ public class GumballMonitor {
             LOG.debug( "Current state: " + gumballMachine.getState() );
         }
         catch ( RemoteException e ) {
-            LOG.error( e );
+            LOG.error( "remote exception caught when calling against the gumball machine", e );
         }
     }
 }
