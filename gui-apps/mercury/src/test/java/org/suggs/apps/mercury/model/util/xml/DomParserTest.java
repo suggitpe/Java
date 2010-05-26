@@ -29,10 +29,10 @@ import org.w3c.dom.NodeList;
  * @author suggitpe
  * @version 1.0 9 Dec 2008
  */
-public class DomParserUnitTest
+public class DomParserTest
 {
 
-    private static final Log LOG = LogFactory.getLog( DomParserUnitTest.class );
+    private static final Log LOG = LogFactory.getLog( DomParserTest.class );
     private static final String TEST_ROOT = "/tmp";
     private static final String TEST_DIR = TEST_ROOT + "/test/xmltest";
     private static final String TEST_FILE = TEST_DIR + "/dummyXml.xml";
@@ -49,7 +49,7 @@ public class DomParserUnitTest
     @Before
     public void setUp() throws Exception
     {
-        LOG.debug( "------------------- DomParserUnitTest" );
+        LOG.debug( "------------------- DomParserTest" );
         mDomParser_ = new DomParserUtil();
         mFileManager_ = new FileManager();
     }

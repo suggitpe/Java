@@ -27,10 +27,10 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 24 Sep 2008
  */
-public class XmlConnectionStoreDaoUnitTest
+public class XmlConnectionStoreDaoTest
 {
 
-    private static final Log LOG = LogFactory.getLog( XmlConnectionStoreDaoUnitTest.class );
+    private static final Log LOG = LogFactory.getLog( XmlConnectionStoreDaoTest.class );
 
     private XmlConnectionStoreDao mDao_;
     private IXmlConnectionStoreManager mMock_;

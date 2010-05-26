@@ -28,10 +28,10 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 2 Oct 2008
  */
-public class JaxbXmlConnectionStoreManagerUnitTest
+public class JaxbXmlConnectionStoreManagerTest
 {
 
-    private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManagerUnitTest.class );
+    private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManagerTest.class );
     private JaxbXmlConnectionStoreManager mManager_;
     private IFileManager mFileManagerMock_;
 
