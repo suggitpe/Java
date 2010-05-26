@@ -4,9 +4,6 @@
  */
 package org.suggs.apps.mercury_old.model.connection;
 
-import org.suggs.apps.mercury_old.model.connection.EConnectionState;
-import org.suggs.apps.mercury_old.model.connection.IConnectionManager;
-import org.suggs.apps.mercury_old.model.connection.MercuryConnectionException;
 import org.suggs.apps.mercury_old.model.support.AbstractMercuryModelTest;
 
 import org.apache.commons.logging.Log;
@@ -18,21 +15,19 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 2 Aug 2007
  */
-public class JmsConnectionManagerTest extends AbstractMercuryModelTest
-{
+public class JmsConnectionManagerTest extends AbstractMercuryModelTest {
 
     private static final Log LOG = LogFactory.getLog( JmsConnectionManagerTest.class );
 
-    protected String mPortNum_;
-    protected String mServer_;
-    protected String mType_;
-    protected IConnectionManager mConnMgr_;
+    protected String portNum;
+    protected String server;
+    protected String type;
+    protected IConnectionManager connMgr;
 
     /**
      * Constructs a new instance.
      */
-    public JmsConnectionManagerTest()
-    {
+    public JmsConnectionManagerTest() {
         setName( "JmsConectionManagerTest" );
         setPopulateProtectedVariables( true );
     }
@@ -41,8 +36,7 @@ public class JmsConnectionManagerTest extends AbstractMercuryModelTest
      * @see org.springframework.test.AbstractSingleSpringContextTests#getConfigLocations()
      */
     @Override
-    protected String[] getConfigLocations()
-    {
+    protected String[] getConfigLocations() {
         return new String[] { "xml/ut-model-connection-JmsConnMgrTest.xml" };
     }
 
@@ -50,50 +44,41 @@ public class JmsConnectionManagerTest extends AbstractMercuryModelTest
      * 
      *
      */
-    public void testBasicConnection()
-    {
-        runMercuryTest( new IMercuryTestCallBack()
-        {
+    public void testBasicConnection() {
+        runMercuryTest( new IMercuryTestCallBack() {
 
-            public String getName()
-            {
+            public String getName() {
                 return "testBasicConnection";
             }
 
-            public void runTest()
-            {
+            public void runTest() {
                 // IConnectionDetails dtls = new ConnectionDetails(
                 // "TestConnection",
                 // EConnectionType.valueOf( "EMS" ),
                 // mServer_,
                 // mPortNum_ );
 
-                LOG.debug( "Initial state is [" + mConnMgr_.getConnectionState().name() + "]" );
+                LOG.debug( "Initial state is [" + connMgr.getConnectionState().name() + "]" );
                 /*
-                 * try { mConnMgr_.connect( dtls ); } catch (
-                 * MercuryConnectionException me ) { fail( "Exception
-                 * thrown when trying to connect: " + me.getMessage() ); }
+                 * try { mConnMgr_.connect( dtls ); } catch ( MercuryConnectionException me ) { fail(
+                 * "Exception thrown when trying to connect: " + me.getMessage() ); }
                  */
 
-                LOG.debug( "Connected state is [" + mConnMgr_.getConnectionState().name() + "]" );
-                if ( mConnMgr_.getConnectionState() != EConnectionState.CONNECTED )
-                {
+                LOG.debug( "Connected state is [" + connMgr.getConnectionState().name() + "]" );
+                if ( connMgr.getConnectionState() != EConnectionState.CONNECTED ) {
                     // fail( "Test should be in a connecvted state
                     // now" );
                 }
 
-                try
-                {
-                    mConnMgr_.disconnect();
+                try {
+                    connMgr.disconnect();
                 }
-                catch ( MercuryConnectionException me )
-                {
+                catch ( MercuryConnectionException me ) {
                     fail( "Exception thrown when trying to connect: " + me.getMessage() );
                 }
 
-                LOG.debug( "Disconnected state is [" + mConnMgr_.getConnectionState().name() + "]" );
-                if ( mConnMgr_.getConnectionState() != EConnectionState.DISCONNECTED )
-                {
+                LOG.debug( "Disconnected state is [" + connMgr.getConnectionState().name() + "]" );
+                if ( connMgr.getConnectionState() != EConnectionState.DISCONNECTED ) {
                     fail( "Test should now be in a disconnected state" );
                 }
             }
