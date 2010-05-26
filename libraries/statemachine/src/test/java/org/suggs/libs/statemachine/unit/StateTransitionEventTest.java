@@ -24,32 +24,27 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 2 Sep 2009
  */
-public class StateTransitionEventTest
-{
+public class StateTransitionEventTest {
 
     private static final Log LOG = LogFactory.getLog( StateTransitionEventTest.class );
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "===================" + StateTransitionEventTest.class.getSimpleName() );
     }
 
     /** */
     @Before
-    public void doBefore()
-    {
+    public void doBefore() {
         LOG.debug( "------------------- " );
     }
 
     /**
-     * Simply tests that the state name has been correctly set at
-     * state construction
+     * Simply tests that the state name has been correctly set at state construction
      */
     @Test
-    public void stateNameExtraction()
-    {
+    public void stateNameExtraction() {
         final String EVENT_NAME = "TestEvent";
         IStateTransitionEvent event = new StateTransitionEventImpl( EVENT_NAME );
 
@@ -58,8 +53,7 @@ public class StateTransitionEventTest
     }
 
     @Test
-    public void equalsFalseForNullAndDifferentObject()
-    {
+    public void equalsFalseForNullAndDifferentObject() {
         StateTransitionEventImpl eventA = new StateTransitionEventImpl( "event A" );
         assertFalse( eventA.equals( null ) );
         assertFalse( eventA.equals( new String( "Boom!" ) ) );
@@ -67,8 +61,7 @@ public class StateTransitionEventTest
 
     @SuppressWarnings("boxing")
     @Test
-    public void hashcodeAndEqualsMatchForSameObject()
-    {
+    public void hashcodeAndEqualsMatchForSameObject() {
         StateTransitionEventImpl eventA = new StateTransitionEventImpl( "event A" );
         StateTransitionEventImpl eventB = new StateTransitionEventImpl( "event A" );
         assertThat( eventA, equalTo( eventA ) );
@@ -78,8 +71,7 @@ public class StateTransitionEventTest
 
     @SuppressWarnings("boxing")
     @Test
-    public void hashcodeAndEqualsMisMatchForDifferentObjects()
-    {
+    public void hashcodeAndEqualsMisMatchForDifferentObjects() {
         StateTransitionEventImpl eventA = new StateTransitionEventImpl( "event A" );
         StateTransitionEventImpl eventB = new StateTransitionEventImpl( "event B" );
         assertThat( eventA, not( equalTo( eventB ) ) );
@@ -88,8 +80,7 @@ public class StateTransitionEventTest
 
     @SuppressWarnings("boxing")
     @Test
-    public void hashcodeAndEqualsMismatchForNull()
-    {
+    public void hashcodeAndEqualsMismatchForNull() {
         StateTransitionEventImpl eventA = new StateTransitionEventImpl( "event A" );
         StateTransitionEventImpl eventB = new StateTransitionEventImpl( null );
         assertThat( eventA, not( equalTo( eventB ) ) );

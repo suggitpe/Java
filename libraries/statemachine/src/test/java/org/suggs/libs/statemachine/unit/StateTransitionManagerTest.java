@@ -29,8 +29,7 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 24 Aug 2009
  */
-public class StateTransitionManagerTest
-{
+public class StateTransitionManagerTest {
 
     private static final Log LOG = LogFactory.getLog( StateTransitionManagerTest.class );
 
@@ -44,15 +43,13 @@ public class StateTransitionManagerTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "===================" + StateTransitionManagerTest.class.getSimpleName() );
     }
 
     /** */
     @Before
-    public void doBefore()
-    {
+    public void doBefore() {
         LOG.debug( "------------------- " );
         LOG.debug( "Clearing all transitions from manager" );
         StateTransitionManager.instance().clearTransitionsFromTransitionManager();
@@ -66,12 +63,10 @@ public class StateTransitionManagerTest
     }
 
     /**
-     * Verifies that the returns from two singleton requests are the
-     * same.
+     * Verifies that the returns from two singleton requests are the same.
      */
     @Test
-    public void checkStateTransitionManagerReturnsSameObjectFromSingleton()
-    {
+    public void checkStateTransitionManagerReturnsSameObjectFromSingleton() {
         LOG.debug( "Testing that the StateTransitionManager Singleton functions correctly" );
         StateTransitionManager transMgr1 = StateTransitionManager.instance();
         StateTransitionManager transMgr2 = StateTransitionManager.instance();
@@ -83,14 +78,12 @@ public class StateTransitionManagerTest
     }
 
     /**
-     * Tests that we can add a transition to a the transition manager
-     * and then retrieve the same transition through a separate call
-     * to the transition manager.
+     * Tests that we can add a transition to a the transition manager and then retrieve the same transition
+     * through a separate call to the transition manager.
      */
     @SuppressWarnings("boxing")
     @Test
-    public void addAndRetrieveSameTransitionForState()
-    {
+    public void addAndRetrieveSameTransitionForState() {
         expect( mockStateOne.getStateName() ).andReturn( "testState" ).anyTimes();
 
         expect( mockTransitionOne.getStartingState() ).andReturn( mockStateOne ).anyTimes();
@@ -117,13 +110,11 @@ public class StateTransitionManagerTest
     }
 
     /**
-     * Tests that if no transitions are loaded, no state transitions
-     * are returned.
+     * Tests that if no transitions are loaded, no state transitions are returned.
      */
     @SuppressWarnings("boxing")
     @Test
-    public void retrieveNoTransition()
-    {
+    public void retrieveNoTransition() {
         expect( mockStateOne.getStateName() ).andReturn( "testState" ).anyTimes();
 
         ctrl.replay();
@@ -140,23 +131,20 @@ public class StateTransitionManagerTest
     }
 
     /**
-     * Tests that when we try and retrieve a transition for a null
-     * state, we get a decent exception
+     * Tests that when we try and retrieve a transition for a null state, we get a decent exception
      */
     @Test(expected = IllegalArgumentException.class)
-    public void retrieveTransitionForNullState()
-    {
+    public void retrieveTransitionForNullState() {
         LOG.debug( "Calling StateTransitionManager with null argument so expecting exception" );
         StateTransitionManager.instance().getListOfTransitionsForState( null );
     }
 
     /**
-     * Tests that when two transitions with the same name are loaded
-     * for the same state that an exception is thrown.
+     * Tests that when two transitions with the same name are loaded for the same state that an exception is
+     * thrown.
      */
     @Test(expected = IllegalStateException.class)
-    public void exceptionThrownWhenTwoTransitionsForSameStateLoaded()
-    {
+    public void exceptionThrownWhenTwoTransitionsForSameStateLoaded() {
         expect( mockTransitionOne.getStartingState() ).andReturn( mockStateOne ).anyTimes();
         expect( mockStateOne.getStateName() ).andReturn( "testState" ).anyTimes();
         expect( mockTransitionOne.getTransitionName() ).andReturn( "testTransition" ).anyTimes();
@@ -175,36 +163,30 @@ public class StateTransitionManagerTest
     }
 
     /**
-     * Tests that if we try and add a null transition into the manaer
-     * we get some level of hissy fit.
+     * Tests that if we try and add a null transition into the manaer we get some level of hissy fit.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void exceptionThrownWhenNullTransitionAddedToManager()
-    {
+    public void exceptionThrownWhenNullTransitionAddedToManager() {
         LOG.debug( "Loading NULL transitions" );
         StateTransitionManager.instance().addTransitionToManager( null );
     }
 
     /**
-     * Tests that if we try and add a null transition into the manaer
-     * we get some level of hissy fit.
+     * Tests that if we try and add a null transition into the manaer we get some level of hissy fit.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void exceptionThrownWhenNullTransitionsSetOnManager()
-    {
+    public void exceptionThrownWhenNullTransitionsSetOnManager() {
         LOG.debug( "Loading NULL transitions" );
         StateTransitionManager.instance().setTransitions( null );
     }
 
     /**
-     * Tests that for a number of state transitions loaded for a given
-     * state that it will return multiple state transitions associated
-     * with that state.
+     * Tests that for a number of state transitions loaded for a given state that it will return multiple
+     * state transitions associated with that state.
      */
     @SuppressWarnings("boxing")
     @Test
-    public void addAndRetrieveMultipleTransitionForState()
-    {
+    public void addAndRetrieveMultipleTransitionForState() {
         expect( mockTransitionOne.getStartingState() ).andReturn( mockStateOne ).anyTimes();
         expect( mockStateOne.getStateName() ).andReturn( "testState1" ).anyTimes();
         expect( mockTransitionOne.getTransitionName() ).andReturn( "testTransition1" ).anyTimes();

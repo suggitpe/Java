@@ -5,15 +5,13 @@
 package org.suggs.libs.statemachine;
 
 /**
- * State Transition guard to allow for logical evaluation of a state
- * transition occurrance. Based on the execution of the assocated
- * guard logic, the transition would either pass or fail.
+ * State Transition guard to allow for logical evaluation of a state transition occurrance. Based on the
+ * execution of the assocated guard logic, the transition would either pass or fail.
  * 
  * @author suggitpe
  * @version 1.0 1 Sep 2009
  */
-public interface IStateTransitionGuard
-{
+public interface IStateTransitionGuard {
 
     /**
      * Execute the evaluation of the guard condition.

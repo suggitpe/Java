@@ -18,18 +18,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * This class is used to store all of the state transitions in a
- * single accessible place. Realistically it is a fancy collections
- * class that is accessed statically for all parties. <br/>
+ * This class is used to store all of the state transitions in a single accessible place. Realistically it is
+ * a fancy collections class that is accessed statically for all parties. <br/>
  * <br/>
- * <b>TODO: This needs to be made thread safe and also to ensure that
- * it can service more than one state machine at any one time.</b>
+ * <b>TODO: This needs to be made thread safe and also to ensure that it can service more than one state
+ * machine at any one time.</b>
  * 
  * @author suggitpe
  * @version 1.0 24 Aug 2009
  */
-public final class StateTransitionManager
-{
+public final class StateTransitionManager {
 
     private static final Log LOG = LogFactory.getLog( StateTransitionManager.class );
     private static final StateTransitionManager INSTANCE = new StateTransitionManager();
@@ -38,8 +36,7 @@ public final class StateTransitionManager
     /**
      * Constructs a new instance.
      */
-    private StateTransitionManager()
-    {
+    private StateTransitionManager() {
         super();
     }
 
@@ -48,34 +45,28 @@ public final class StateTransitionManager
      * 
      * @return the singleton instance of the State Transition Manager
      */
-    public static StateTransitionManager instance()
-    {
+    public static StateTransitionManager instance() {
         return INSTANCE;
     }
 
     /**
-     * Getter for a list of transitions relating to one starting
-     * state.
+     * Getter for a list of transitions relating to one starting state.
      * 
      * @param aState
      *            The state that the transitions work from
-     * @return a list of state specific transitions, if there are no
-     *         states that relate then an empty list will be returned.
+     * @return a list of state specific transitions, if there are no states that relate then an empty list
+     *         will be returned.
      */
-    public Collection<IStateTransition> getListOfTransitionsForState( IState aState )
-    {
-        if ( aState == null )
-        {
+    public Collection<IStateTransition> getListOfTransitionsForState( IState aState ) {
+        if ( aState == null ) {
             throw new IllegalArgumentException( "Cannot use null for State Transition lookup" );
         }
 
-        if ( LOG.isDebugEnabled() )
-        {
+        if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Searching for all transitions for state=[" + aState + "]" );
         }
 
-        if ( transitionMap.containsKey( aState.getStateName() ) )
-        {
+        if ( transitionMap.containsKey( aState.getStateName() ) ) {
             return transitionMap.get( aState.getStateName() ).values();
         }
         return new HashMap<String, IStateTransition>().values();
@@ -84,14 +75,12 @@ public final class StateTransitionManager
     /**
      * Accessor to the transitions held within the manager
      * 
-     * @return a list of transitions, if no transitions held in the
-     *         manager then this will return an empty (typed) list.
+     * @return a list of transitions, if no transitions held in the manager then this will return an empty
+     *         (typed) list.
      */
-    public Collection<IStateTransition> getAllTransitions()
-    {
+    public Collection<IStateTransition> getAllTransitions() {
         List<IStateTransition> listOfTransitions = new ArrayList<IStateTransition>();
-        for ( String stateName : transitionMap.keySet() )
-        {
+        for ( String stateName : transitionMap.keySet() ) {
             Map<String, IStateTransition> innerMapOfTransitions = transitionMap.get( stateName );
             listOfTransitions.addAll( innerMapOfTransitions.values() );
         }
@@ -104,10 +93,8 @@ public final class StateTransitionManager
      * @param aStateTransition
      *            the transition to add.
      */
-    public void addTransitionToManager( IStateTransition aStateTransition )
-    {
-        if ( aStateTransition == null )
-        {
+    public void addTransitionToManager( IStateTransition aStateTransition ) {
+        if ( aStateTransition == null ) {
             throw new IllegalArgumentException( "Cannot add a null transition to the transition manager" );
         }
 
@@ -115,27 +102,23 @@ public final class StateTransitionManager
         buildInnerTransitionMapIfNeeded( startStateName );
 
         Map<String, IStateTransition> innerMap = transitionMap.get( startStateName );
-        if ( innerMap.containsKey( aStateTransition.getTransitionName() ) )
-        {
+        if ( innerMap.containsKey( aStateTransition.getTransitionName() ) ) {
             throw new IllegalStateException( "Cannot add more than one State Transition with the same name for the same state: State=["
                                              + aStateTransition.getStartingState()
-                                             + "], Transition=[" + aStateTransition + "], " );
+                                             + "], Transition=["
+                                             + aStateTransition + "], " );
         }
 
         innerMap.put( aStateTransition.getTransitionName(), aStateTransition );
 
-        if ( LOG.isDebugEnabled() )
-        {
-            LOG.debug( "Successfully loaded transition: state=["
-                       + aStateTransition.getStartingState() + "], transition=[" + aStateTransition
-                       + "]" );
+        if ( LOG.isDebugEnabled() ) {
+            LOG.debug( "Successfully loaded transition: state=[" + aStateTransition.getStartingState()
+                       + "], transition=[" + aStateTransition + "]" );
         }
     }
 
-    private void buildInnerTransitionMapIfNeeded( String aStateName )
-    {
-        if ( !transitionMap.containsKey( aStateName ) )
-        {
+    private void buildInnerTransitionMapIfNeeded( String aStateName ) {
+        if ( !transitionMap.containsKey( aStateName ) ) {
             // using a concurrent hashmap to ensure that when the
             // values view is exposed there is some level of
             // protection
@@ -145,34 +128,28 @@ public final class StateTransitionManager
     }
 
     /**
-     * Setter for the transition list. This method is important if you
-     * are injecting the transitions through spring.
+     * Setter for the transition list. This method is important if you are injecting the transitions through
+     * spring.
      * 
      * @param aListOfTransitions
      *            the list of transitions
      */
-    public void setTransitions( List<IStateTransition> aListOfTransitions )
-    {
-        if ( aListOfTransitions == null )
-        {
+    public void setTransitions( List<IStateTransition> aListOfTransitions ) {
+        if ( aListOfTransitions == null ) {
             throw new IllegalArgumentException( "Cannot add a null list of transitions to the Transition Manager" );
         }
 
-        for ( IStateTransition transition : aListOfTransitions )
-        {
+        for ( IStateTransition transition : aListOfTransitions ) {
             this.addTransitionToManager( transition );
         }
     }
 
     /**
-     * Used to clear the transition manager of all of its transitions.
-     * It is envisaged that this will really only be used for its unit
-     * tests.
+     * Used to clear the transition manager of all of its transitions. It is envisaged that this will really
+     * only be used for its unit tests.
      */
-    public void clearTransitionsFromTransitionManager()
-    {
-        if ( LOG.isInfoEnabled() )
-        {
+    public void clearTransitionsFromTransitionManager() {
+        if ( LOG.isInfoEnabled() ) {
             LOG.info( "Clearing all transitions from the transition manager" );
         }
         transitionMap.clear();
@@ -182,16 +159,13 @@ public final class StateTransitionManager
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder ret = new StringBuilder( "TransitionManager: " );
         ret.append( "{" ).append( Integer.toHexString( super.hashCode() ) ).append( "} " );
         ret.append( "numStates=[" ).append( transitionMap.size() ).append( "]" );
-        for ( String startState : transitionMap.keySet() )
-        {
+        for ( String startState : transitionMap.keySet() ) {
             ret.append( ": state[" ).append( startState ).append( "]" );
-            for ( String transitionName : transitionMap.get( startState ).keySet() )
-            {
+            for ( String transitionName : transitionMap.get( startState ).keySet() ) {
                 ret.append( ", transition[" ).append( transitionName ).append( "]" );
             }
         }

@@ -10,8 +10,7 @@ package org.suggs.libs.statemachine;
  * @author suggitpe
  * @version 1.0 1 Sep 2009
  */
-public interface IStateTransitionEvent
-{
+public interface IStateTransitionEvent {
 
     /**
      * Accessor to the name of the event.

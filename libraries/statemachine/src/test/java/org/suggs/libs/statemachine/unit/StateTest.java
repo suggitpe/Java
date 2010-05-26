@@ -34,8 +34,7 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 28 Aug 2009
  */
-public class StateTest
-{
+public class StateTest {
 
     private static final Log LOG = LogFactory.getLog( StateTest.class );
     private IMocksControl ctrl;
@@ -47,15 +46,13 @@ public class StateTest
 
     /** */
     @BeforeClass
-    public static void doBeforeClass()
-    {
+    public static void doBeforeClass() {
         LOG.debug( "===================" + StateTest.class.getSimpleName() );
     }
 
     /** */
     @Before
-    public void doBefore()
-    {
+    public void doBefore() {
         LOG.debug( "------------------- " );
         StateTransitionManager.instance().clearTransitionsFromTransitionManager();
         ctrl = createControl();
@@ -66,12 +63,10 @@ public class StateTest
     }
 
     /**
-     * Simply tests that the state name has been correctly set at
-     * state construction
+     * Simply tests that the state name has been correctly set at state construction
      */
     @Test
-    public void stateNameExtraction()
-    {
+    public void stateNameExtraction() {
         final String STATE_NAME = "TestStateForTest";
         IState state = new StateImpl( STATE_NAME );
 
@@ -80,15 +75,13 @@ public class StateTest
     }
 
     /**
-     * Tests that when there are valid transitions set up, step will
-     * return the correct new end state.
+     * Tests that when there are valid transitions set up, step will return the correct new end state.
      * 
      * @throws StateMachineException
      */
     @SuppressWarnings("boxing")
     @Test
-    public void stepWithValidTransitionsToReturnNewState() throws StateMachineException
-    {
+    public void stepWithValidTransitionsToReturnNewState() throws StateMachineException {
         IState state = new StateImpl( "TestState" );
         IState endState = new StateImpl( "TestEndState" );
 
@@ -116,15 +109,14 @@ public class StateTest
     }
 
     /**
-     * Tests that when there are more than one valid transitions set
-     * up, step will give rise to an exception being thrown.
+     * Tests that when there are more than one valid transitions set up, step will give rise to an exception
+     * being thrown.
      * 
      * @throws StateMachineException
      */
     @SuppressWarnings("boxing")
     @Test(expected = StateMachineException.class)
-    public void stepWithTwoValidTransitionsCausesException() throws StateMachineException
-    {
+    public void stepWithTwoValidTransitionsCausesException() throws StateMachineException {
         IState state = new StateImpl( "TestState" );
         IState endState = new StateImpl( "TestEndState" );
 
@@ -150,16 +142,14 @@ public class StateTest
     }
 
     /**
-     * Tests that when there are transitions set up but that none of
-     * them are valid transitions, the same state is returned from the
-     * step call.
+     * Tests that when there are transitions set up but that none of them are valid transitions, the same
+     * state is returned from the step call.
      * 
      * @throws StateMachineException
      */
     @SuppressWarnings("boxing")
     @Test
-    public void stepwithNonValidTransitionsToReturnSelf() throws StateMachineException
-    {
+    public void stepwithNonValidTransitionsToReturnSelf() throws StateMachineException {
         IState state = new StateImpl( "TestState" );
 
         expect( mockTransitionOne.getStartingState() ).andReturn( state ).anyTimes();
@@ -184,15 +174,13 @@ public class StateTest
     }
 
     /**
-     * Tests that if there are no valid transitions set up for the
-     * state that the call to step will not give rise to exceptions
-     * and will simply return the same state.
+     * Tests that if there are no valid transitions set up for the state that the call to step will not give
+     * rise to exceptions and will simply return the same state.
      * 
      * @throws StateMachineException
      */
     @Test
-    public void stepWithNoTransitionsSetUpReturnsSelf() throws StateMachineException
-    {
+    public void stepWithNoTransitionsSetUpReturnsSelf() throws StateMachineException {
         ctrl.replay();
 
         IState state = new StateImpl( "TestState" );
@@ -205,15 +193,13 @@ public class StateTest
     }
 
     /**
-     * Tests that when we have set an entry action on a state and we
-     * call execute entry action on the state, that the call is
-     * propogated down to the execute on teh underlying action.
+     * Tests that when we have set an entry action on a state and we call execute entry action on the state,
+     * that the call is propogated down to the execute on teh underlying action.
      * 
      * @throws StateMachineException
      */
     @Test
-    public void executionOfEntryAction() throws StateMachineException
-    {
+    public void executionOfEntryAction() throws StateMachineException {
         mockAction.execute( mockContext );
         expectLastCall().once();
 
@@ -227,15 +213,13 @@ public class StateTest
     }
 
     /**
-     * Tests that when we have set an entry action on a state and we
-     * call execute entry action on the state, that the call is
-     * propogated down to the execute on teh underlying action.
+     * Tests that when we have set an entry action on a state and we call execute entry action on the state,
+     * that the call is propogated down to the execute on teh underlying action.
      * 
      * @throws StateMachineException
      */
     @Test
-    public void executionOfExitAction() throws StateMachineException
-    {
+    public void executionOfExitAction() throws StateMachineException {
         mockAction.execute( mockContext );
         expectLastCall().once();
 
@@ -249,34 +233,29 @@ public class StateTest
     }
 
     /**
-     * Tests the that the equals, hashcode and toString methods work
-     * correctly
+     * Tests the that the equals, hashcode and toString methods work correctly
      */
     @Test
-    public void equalsIsTrueWithSameObject()
-    {
+    public void equalsIsTrueWithSameObject() {
         StateImpl state = new StateImpl( "helllo" );
         assertThat( state, equalTo( state ) );
     }
 
     @Test
-    public void equalsIsTrueWithSameDataObjects()
-    {
+    public void equalsIsTrueWithSameDataObjects() {
         StateImpl stateA = new StateImpl( "state1" );
         StateImpl stateB = new StateImpl( stateA );
         assertThat( stateA, equalTo( stateB ) );
     }
 
     @Test
-    public void equalsIsFalseAgainstNullObject()
-    {
+    public void equalsIsFalseAgainstNullObject() {
         StateImpl state = new StateImpl( "helllo" );
         assertFalse( state.equals( null ) );
     }
 
     @Test
-    public void equalsFailsWithDataMismatch()
-    {
+    public void equalsFailsWithDataMismatch() {
         StateImpl stateA = new StateImpl( "State A" );
         StateImpl stateNull = new StateImpl( (String) null );
         StateImpl stateB = new StateImpl( "State B" );
@@ -289,8 +268,7 @@ public class StateTest
 
     @SuppressWarnings("boxing")
     @Test
-    public void hashcodeProducesMatchWithSameValues()
-    {
+    public void hashcodeProducesMatchWithSameValues() {
         StateImpl state1a = new StateImpl( "state1" );
         StateImpl state1b = new StateImpl( state1a );
         StateImpl state2 = new StateImpl( "state2" );
@@ -301,8 +279,7 @@ public class StateTest
 
     @SuppressWarnings("boxing")
     @Test
-    public void hascodeProducesDifferentResultWithDiffereingValues()
-    {
+    public void hascodeProducesDifferentResultWithDiffereingValues() {
         StateImpl state1a = new StateImpl( "state1" );
         StateImpl state1b = new StateImpl( (String) null );
 

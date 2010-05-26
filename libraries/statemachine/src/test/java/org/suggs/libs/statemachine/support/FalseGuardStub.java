@@ -11,14 +11,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Stub implementation of the state transition guard that always
- * returns false
+ * Stub implementation of the state transition guard that always returns false
  * 
  * @author suggitpe
  * @version 1.0 3 Sep 2009
  */
-public class FalseGuardStub implements IStateTransitionGuard
-{
+public class FalseGuardStub implements IStateTransitionGuard {
 
     private static final Log LOG = LogFactory.getLog( FalseGuardStub.class );
 
@@ -26,8 +24,7 @@ public class FalseGuardStub implements IStateTransitionGuard
      * @see org.suggs.libs.statemachine.IStateTransitionGuard#evaluateGuard(org.suggs.libs.statemachine.IStateMachineContext)
      */
     @Override
-    public boolean evaluateGuard( IStateMachineContext aContext )
-    {
+    public boolean evaluateGuard( IStateMachineContext aContext ) {
         LOG.debug( "Executing stub implementation of the evaluateGuard that always returns false" );
         return false;
     }

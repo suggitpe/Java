@@ -13,16 +13,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Implementation of the IStateMachine interface. This implementation
- * will delegate all transition evaluation to the underlying current
- * state. Thus the core responsibility of this class is to manage the
- * overall state of the state machine.
+ * Implementation of the IStateMachine interface. This implementation will delegate all transition evaluation
+ * to the underlying current state. Thus the core responsibility of this class is to manage the overall state
+ * of the state machine.
  * 
  * @author suggitpe
  * @version 1.0 24 Aug 2009
  */
-public class StateMachineImpl implements IStateMachine
-{
+public class StateMachineImpl implements IStateMachine {
 
     private static final Log LOG = LogFactory.getLog( StateMachineImpl.class );
 
@@ -34,36 +32,29 @@ public class StateMachineImpl implements IStateMachine
      * @param aInitialState
      *            an initial state for the state machine
      */
-    public StateMachineImpl( IState aInitialState )
-    {
+    public StateMachineImpl( IState aInitialState ) {
         super();
         currentState = aInitialState;
     }
 
     /**
-     * This method delegates down to the underlying current state to
-     * perform the state transition evaluation. If we get a new state
-     * back from that delegating call, then we update our internal
-     * state to reflect this.
+     * This method delegates down to the underlying current state to perform the state transition evaluation.
+     * If we get a new state back from that delegating call, then we update our internal state to reflect
+     * this.
      * 
      * @see org.suggs.libs.statemachine.IStateMachine#step(org.suggs.libs.statemachine.IStateMachineContext)
      */
     @Override
-    public void step( IStateMachineContext aContext ) throws StateMachineException
-    {
+    public void step( IStateMachineContext aContext ) throws StateMachineException {
         IState newState = currentState.step( aContext );
-        if ( newState == null || currentState.equals( newState ) )
-        {
-            if ( LOG.isInfoEnabled() )
-            {
+        if ( newState == null || currentState.equals( newState ) ) {
+            if ( LOG.isInfoEnabled() ) {
                 LOG.info( "No valid transitions found from state=[" + currentState
                           + "], state remain unchanged." );
             }
         }
-        else
-        {
-            if ( LOG.isInfoEnabled() )
-            {
+        else {
+            if ( LOG.isInfoEnabled() ) {
                 LOG.info( "Transitioning state machine to new state=[" + newState + "]" );
             }
             currentState.executeExitAction( aContext );
@@ -80,8 +71,7 @@ public class StateMachineImpl implements IStateMachine
      * @see org.suggs.libs.statemachine.IStateMachine#getCurrentState()
      */
     @Override
-    public IState getCurrentState()
-    {
+    public IState getCurrentState() {
         return currentState;
     }
 
@@ -91,8 +81,7 @@ public class StateMachineImpl implements IStateMachine
      * @param aState
      *            the state to set as the current state
      */
-    public void setCurrentState( IState aState )
-    {
+    public void setCurrentState( IState aState ) {
         currentState = aState;
     }
 
@@ -100,8 +89,7 @@ public class StateMachineImpl implements IStateMachine
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder buff = new StringBuilder( "StateMachineImpl:" );
         buff.append( " currentState=[" ).append( currentState ).append( "]" );
         return buff.toString();
