@@ -5,18 +5,18 @@
     
     <import resource="classpath:xml/mercury-connection.xml"/>
     
-    <alias name="connMgrBean" alias="mConnMgr_"/>
+    <alias name="connMgrBean" alias="connMg_"/>
     
     <!-- ======== USED FOR TESTS TO CONNECT TO SVR ======== -->
-    <bean id="mPortNum_" class="java.lang.String">
+    <bean id="portNum" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="7222"/>
     </bean>
     
-    <bean id="mServer_" class="java.lang.String">
+    <bean id="server" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="localhost"/>
     </bean>
     
-    <bean id="mType_" class="java.lang.String">
+    <bean id="type" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="ems"/>
     </bean>
     
