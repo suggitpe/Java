@@ -1,5 +1,5 @@
 /*
- * JmsClientCoreSpringInjectionUnitTest.java created on 26 Oct 2009 20:47:32 by suggitpe for project Orca Bridge
+ * JmsClientCoreSpringInjectionTest.java created on 26 Oct 2009 20:47:32 by suggitpe for project Orca Bridge
  * 
  */
 package com.ubs.orca.orcabridge.jmsclient.impl;
@@ -31,9 +31,9 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-jms-client-core-spring-injection-test.xml" })
-public class JmsClientCoreSpringInjectionUnitTest {
+public class JmsClientCoreSpringInjectionTest {
 
-    private static final Log LOG = LogFactory.getLog( JmsClientCoreSpringInjectionUnitTest.class );
+    private static final Log LOG = LogFactory.getLog( JmsClientCoreSpringInjectionTest.class );
 
     @Resource(name = "jmsClientCore")
     private IJmsClient jmsClientCore;
@@ -41,7 +41,7 @@ public class JmsClientCoreSpringInjectionUnitTest {
     /** */
     @BeforeClass
     public static void doBeforeClass() {
-        LOG.debug( "=================== " + JmsClientCoreSpringInjectionUnitTest.class.getSimpleName() );
+        LOG.debug( "=================== " + JmsClientCoreSpringInjectionTest.class.getSimpleName() );
     }
 
     /** */
