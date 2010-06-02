@@ -3,23 +3,21 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <artifactId>suggs-parent</artifactId>
+        <artifactId>sandbox-parent</artifactId>
         <groupId>org.suggs</groupId>
-        <relativePath>../build</relativePath>
+        <relativePath>..</relativePath>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-parent</artifactId>
+    <artifactId>sandbox-webservices-parent</artifactId>
     <packaging>pom</packaging>
-    <name>Sandbox Parent</name>
+    <name>Sandbox Webservices Parent</name>
 
     <modules>
-        <module>sandbox-core</module>
-        <module>sandbox-eclipse</module>
-        <module>sandbox-ejb</module>
-        <module>sandbox-osgi-mailbox</module>
-        <module>sandbox-webapps</module>
-        <module>sandbox-webservices</module>
+        <!--
+        <module>tibco</module>
+        -->
     </modules>
+
 </project>
