@@ -115,6 +115,23 @@
                         <useSystemClassLoader>true</useSystemClassLoader>
                         <trimStackTrace>false</trimStackTrace>
                         <argLine>${test.jvm.args}</argLine>
+                        <includes>
+                            <include>**/*Test.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+                
+                <!-- SUREFIRE PLUGIN ALTERNATE APPROACH -->
+                <!-- This configuration is the John Smart (Wakaleo) approach of separation 
+                    of the integration tests and unit tests -->
+                <!--  
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <useSystemClassLoader>true</useSystemClassLoader>
+                        <trimStackTrace>false</trimStackTrace>
+                        <argLine>${test.jvm.args}</argLine>
                         <skip>true</skip>
                     </configuration>
                     <executions>
@@ -146,6 +163,7 @@
                         </execution>
                     </executions>
                 </plugin>
+                -->
 
                 <!-- SONAR PLUGIN -->
                 <plugin>
@@ -200,6 +218,7 @@
                     </configuration>
                 </plugin>
 
+                <!-- JETTY PLUGIN -->
                 <plugin>
                     <groupId>org.mortbay.jetty</groupId>
                     <artifactId>maven-jetty-plugin</artifactId>
@@ -212,6 +231,13 @@
                             </connector>
                         </connectors>
                     </configuration>
+                </plugin>
+
+                <!-- JAX-WS PLUGIN -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>jaxws-maven-plugin</artifactId>
+                    <version>1.12</version>
                 </plugin>
                 
             </plugins>
