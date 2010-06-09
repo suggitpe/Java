@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    id="WebApp_ID" version="2.5">
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- <icon></icon> -->
+    <display-name>JAX-WS Simple Example</display-name>
+    <description>This is a really simple web-service to say Hello World.</description>
+
+    <!-- <distributable></distributable> -->
+
+    <!--
+        =========================================== ========= INITIAL CONTEXT FOR APP =========
+        ===========================================
+    -->
+    <context-param>
+        <param-name>AdminEmail</param-name>
+        <param-value>me@suggs.org.uk</param-value>
+    </context-param>
+
+    <!--  <context-param></context-param> -->
+    <!-- <filter></filter> -->
+    <!-- <filter-mapping></filter-mapping> -->
+
+    <!--
+        =========================================== ================= LISTENERS ===============
+        ===========================================
+    -->
+    <listener>
+        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+    </listener>
+
+    <!--
+        =========================================== ================= SERVLETS ================
+        ===========================================
+    -->
+    <servlet>
+        <servlet-name>jaxws</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+    </servlet>
+
+    <!--
+        =========================================== ============= SERVLET MAPPING =============
+        ===========================================
+    -->
+    <servlet-mapping>
+        <servlet-name>jaxws</servlet-name>
+        <url-pattern>/helloService</url-pattern>
+    </servlet-mapping>
+
+    <!-- <session-config></session-config> -->
+    <!-- <mime-mapping></mime-mapping> -->
+    <!-- <welcome-file-list></welcome-file-list> -->
+    <!-- <error-page></error-page> -->
+    <!-- <jsp-config></jsp-config> -->
+    <!-- <resource-env-ref></resource-env-ref> -->
+    <!-- <resource-ref></resource-ref> -->
+    <!-- <security-constraint></security-constraint> -->
+    <!-- <login-config></login-config> -->
+    <!-- <security-role></security-role> -->
+    <!-- <env-entry></env-entry> -->
+    <!-- <ejb-ref></ejb-ref> -->
+    <!-- <ejb-local-ref></ejb-local-ref> -->
+    <!-- <service-ref></service-ref> -->
+    <!-- <message-destination-ref></message-destination-ref> -->
+    <!-- <message-destination></message-destination> -->
+    <!-- <local-encoding-mapping-list></local-encoding-mapping-list> -->
+
+
+
+
+</web-app>
