@@ -2,7 +2,7 @@
  * HelloWorld.java created on 8 Jun 2010 07:03:15 by suggitpe for project sandbox-webservices-jax-ws-simple-service
  * 
  */
-package org.suggs.sandbox.jaxws.simple;
+package org.suggs.sandbox.jaxws.simple.service;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
