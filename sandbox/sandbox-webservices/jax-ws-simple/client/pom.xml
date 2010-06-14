@@ -33,6 +33,7 @@
                         <wsdlUrl>http://sandboxhost:9091/jax-ws-simple/helloService?wsdl</wsdlUrl>
                     </wsdlUrls>
                     <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
+                    <wsdlDirectory>${basedir}/src/main/resources/wdsl</wsdlDirectory>
                 </configuration>
             </plugin>
         </plugins>
