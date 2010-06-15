@@ -38,10 +38,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <verbose>true</verbose>
                     <sei>org.suggs.sandbox.jaxws.simple.service.HelloWorld</sei>
-                    <genWsdl>true</genWsdl>
-                    <resourceDestDir>${basedir}/src/main/resources/wsdl</resourceDestDir>
                 </configuration>
             </plugin>
         </plugins>

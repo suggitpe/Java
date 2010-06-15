@@ -27,13 +27,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <verbose>true</verbose>
                     <packageName>org.suggs.sandbox.jaxws.simple.client.bindings</packageName>
-                    <wsdlUrls>
-                        <wsdlUrl>http://sandboxhost:9091/jax-ws-simple/helloService?wsdl</wsdlUrl>
-                    </wsdlUrls>
-                    <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
-                    <wsdlDirectory>${basedir}/src/main/resources/wdsl</wsdlDirectory>
                 </configuration>
             </plugin>
         </plugins>
@@ -44,7 +38,6 @@
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
             <scope>compile</scope>
-            <version>2.2</version>
         </dependency>
     </dependencies>
 

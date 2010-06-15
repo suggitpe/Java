@@ -18,8 +18,12 @@ public final class ServiceMain {
     private static final Log LOG = LogFactory.getLog( ServiceMain.class );
 
     public static void main( String[] aArgs ) {
-        LOG.debug( "Calling webservice HelloService" );
+        LOG.debug( "Calling webservice HelloService ..." );
 
+        HelloWorldClient client = new HelloWorldClient();
+        client.callWebService();
+
+        LOG.debug( "Webservice call complete" );
     }
 
 }
