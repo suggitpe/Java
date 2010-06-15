@@ -21,9 +21,11 @@ public final class ServiceMain {
         LOG.debug( "Calling webservice HelloService ..." );
 
         HelloWorldClient client = new HelloWorldClient();
+        long start = System.currentTimeMillis();
         client.callWebService();
+        long end = System.currentTimeMillis();
 
-        LOG.debug( "Webservice call complete" );
+        LOG.debug( "Webservice call complete in [" + ( end - start ) + "] millis" );
     }
 
 }
