@@ -1,5 +1,5 @@
 /*
- * HelloWorldClient.java created on 10 Jun 2010 19:10:22 by suggitpe for project sandbox-webservices-jax-ws-simple-client
+ * HelloWorldSeiClient.java created on 10 Jun 2010 19:10:22 by suggitpe for project sandbox-webservices-jax-ws-simple-client
  * 
  */
 package org.suggs.sandbox.jaxws.simple.client;
@@ -22,13 +22,13 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 10 Jun 2010
  */
-public final class HelloWorldClient {
+public final class HelloWorldSeiClient {
 
-    private static final Log LOG = LogFactory.getLog( HelloWorldClient.class );
-    private static final String WS_URL = "http://sandboxhost:9091/jax-ws-simple/helloService";
+    private static final Log LOG = LogFactory.getLog( HelloWorldSeiClient.class );
+    private WebServiceClient webServiceClient = HelloWorldService.class.getAnnotation( WebServiceClient.class );
 
     public void callWebService() {
-        LOG.debug( "Calling webservice" );
+        LOG.debug( "Calling webservice with client [" + webServiceClient + "]" );
 
         HelloWorld service = createWebService();
         String serviceResponse = service.sayHello( "Pete" );
@@ -38,14 +38,14 @@ public final class HelloWorldClient {
 
     private HelloWorld createWebService() {
         try {
-            WebServiceClient client = HelloWorldService.class.getAnnotation( WebServiceClient.class );
-            HelloWorldService service = new HelloWorldService( new URL( WS_URL ),
-                                                               new QName( client.targetNamespace(),
-                                                                          client.name() ) );
+            HelloWorldService service = new HelloWorldService( new URL( HelloWorldBindings.WS_URL ),
+                                                               new QName( webServiceClient.targetNamespace(),
+                                                                          webServiceClient.name() ) );
             return service.getHelloWorldPort();
         }
         catch ( MalformedURLException mue ) {
             throw new IllegalArgumentException( "URL to webservice does not exist", mue );
         }
     }
+
 }
