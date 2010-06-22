@@ -45,19 +45,10 @@ public class HelloWorldDispatchSourceClient {
 
             Source request = new StreamSource( createSoapRequestReader() );
             Source response = dispatch.invoke( request );
-            Transformer copier = TransformerFactory.newInstance().newTransformer();
-            Writer stringWriter = new StringWriter();
-            copier.transform( response, new StreamResult( stringWriter ) );
-            LOG.debug( "Response =[" + stringWriter.toString() + "]" );
+            debugResponse( response );
         }
         catch ( MalformedURLException mue ) {
             throw new IllegalArgumentException( "URL to webservice does not exist", mue );
-        }
-        catch ( TransformerConfigurationException tce ) {
-            throw new IllegalArgumentException( "Failed to build and configure the transformer", tce );
-        }
-        catch ( TransformerException te ) {
-            throw new IllegalArgumentException( "Failed to transform", te );
         }
     }
 
@@ -67,6 +58,22 @@ public class HelloWorldDispatchSourceClient {
         builder.append( "<aName>wonderful</aName>" );
         builder.append( "</ns1:sayHello>" );
         return new StringReader( builder.toString() );
+    }
+
+    private void debugResponse( Source aResponse ) {
+        try {
+            Transformer copier = TransformerFactory.newInstance().newTransformer();
+            Writer stringWriter = new StringWriter();
+            copier.transform( aResponse, new StreamResult( stringWriter ) );
+            LOG.debug( "Response =[" + stringWriter.toString() + "]" );
+        }
+        catch ( TransformerConfigurationException tce ) {
+            throw new IllegalArgumentException( "Failed to build and configure the transformer", tce );
+        }
+        catch ( TransformerException te ) {
+            throw new IllegalArgumentException( "Failed to transform", te );
+        }
+
     }
 
 }
