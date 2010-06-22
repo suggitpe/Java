@@ -15,6 +15,6 @@ final class HelloWorldBindings {
     public static final String WS_URL = "http://sandboxhost:9091/jax-ws-simple/helloService";
     public static final String WS_TARGET_NS = "http://test.suggs.org.uk";
     public static final String WS_NAME = "HelloWorldService";
-    public static final String WS_PORT = "HelloPort";
+    public static final String WS_PORT = "HelloWorldPort";
 
 }
