@@ -16,7 +16,7 @@ import javax.jws.WebService;
 @WebService(targetNamespace = "http://test.suggs.org.uk")
 public class HelloWorld {
 
-    public String sayHello( @WebParam(name = "aName") String aName ) {
+    public String sayHello( @WebParam(name = "name") String aName ) {
         return "Hello " + aName + "!";
     }
 
