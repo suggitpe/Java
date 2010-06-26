@@ -218,6 +218,9 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <warSourceDirectory>${basedir}/src/main/resources/webapp</warSourceDirectory>
+                    </configuration>
                 </plugin>
                 
             </plugins>
