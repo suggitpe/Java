@@ -30,9 +30,17 @@
 
     <dependencies>
         <dependency>
+            <!-- This is needed for the webservices war files so needs to be packages in the war-->
 	        <groupId>com.sun.xml.ws</groupId>
 	        <artifactId>jaxws-tools</artifactId>
 	        <version>2.2.0.2</version>
+        </dependency>
+        <!-- This to get around an issue found at
+        http://forums.java.net/jive/message.jspa?messageID=396482 -->
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>policy</artifactId>
+            <version>2.2.1</version>
         </dependency>
     </dependencies>
 

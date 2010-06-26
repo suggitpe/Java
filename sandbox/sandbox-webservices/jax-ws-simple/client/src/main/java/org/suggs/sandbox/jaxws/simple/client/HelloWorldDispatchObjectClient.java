@@ -4,12 +4,17 @@
  */
 package org.suggs.sandbox.jaxws.simple.client;
 
+import org.suggs.sandbox.jaxws.simple.client.bindings.ObjectFactory;
+import org.suggs.sandbox.jaxws.simple.client.bindings.SayHello;
+
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -17,7 +22,6 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.ws.Dispatch;
 import javax.xml.ws.Service;
 
@@ -30,32 +34,37 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 21 Jun 2010
  */
-public class HelloWorldDispatchSourceClient {
+public class HelloWorldDispatchObjectClient {
 
-    private static final Log LOG = LogFactory.getLog( HelloWorldDispatchSourceClient.class );
+    private static final Log LOG = LogFactory.getLog( HelloWorldDispatchObjectClient.class );
 
-    public void callWebServiceWithDispatchSource() {
+    public void callWebServiceWithDispatchObject() {
         QName serviceQName = new QName( HelloWorldBindings.WS_TARGET_NS, HelloWorldBindings.WS_NAME );
         QName portQName = new QName( HelloWorldBindings.WS_TARGET_NS, HelloWorldBindings.WS_PORT );
 
         try {
             Service service = Service.create( new URL( HelloWorldBindings.WS_URL ), serviceQName );
             // INTERESTING: using payload or message denotes whether message will include the soap envelope.
-            Dispatch<Source> dispatch = service.createDispatch( portQName, Source.class, Service.Mode.PAYLOAD );
 
-            Source request = new StreamSource( createSoapRequestReader() );
-            Source response = dispatch.invoke( request );
-            debugResponse( response );
+            JAXBContext jaxbContext = JAXBContext.newInstance( "org.suggs.sandbox.jaxws.simple.client.bindings" );
+            Dispatch<Source> dispatch = service.createDispatch( portQName, Source.class, Service.Mode.PAYLOAD );
+            ObjectFactory factory = new ObjectFactory();
+
+            SayHello hello = factory.createSayHello();
+
         }
         catch ( MalformedURLException mue ) {
             throw new IllegalArgumentException( "URL to webservice does not exist", mue );
+        }
+        catch ( JAXBException je ) {
+            throw new IllegalArgumentException( "Issues in the JAXB layer", je );
         }
     }
 
     private StringReader createSoapRequestReader() {
         StringBuilder builder = new StringBuilder();
         builder.append( "<ns1:sayHello xmlns:ns1=\"http://test.suggs.org.uk\">" );
-        builder.append( "<name>wonderful</name>" );
+        builder.append( "<aName>wonderful</aName>" );
         builder.append( "</ns1:sayHello>" );
         return new StringReader( builder.toString() );
     }

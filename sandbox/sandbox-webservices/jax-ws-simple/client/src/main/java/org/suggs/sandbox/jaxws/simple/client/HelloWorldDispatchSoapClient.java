@@ -57,7 +57,7 @@ public class HelloWorldDispatchSoapClient {
             SOAPEnvelope soapEnvelope = soapRequest.getSOAPPart().getEnvelope();
             SOAPBody soapBody = soapRequest.getSOAPBody();
             soapBody.addBodyElement( soapEnvelope.createName( "sayHello", "ns1", "http://test.suggs.org.uk" ) )
-                .addChildElement( soapEnvelope.createName( "aName" ) )
+                .addChildElement( soapEnvelope.createName( "name" ) )
                 .addTextNode( "buddy" );
             return soapRequest;
         }
