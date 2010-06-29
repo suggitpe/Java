@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.jaxws.simple.client;
 
+import org.suggs.sandbox.jaxws.simple.client.impl.HelloWorldDispatchObjectClient;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -25,10 +27,10 @@ public class WebserviceClientDispatchObjectTest extends AbstractWebserviceClient
         return new ClientCallback() {
 
             @Override
-            public void callClient() {
+            public String callClient( String aName ) {
                 LOG.debug( "Calling Dispatch Object Webservice ..." );
                 HelloWorldDispatchObjectClient client = new HelloWorldDispatchObjectClient();
-                client.callWebServiceWithDispatchObject();
+                return client.callWebService( aName );
 
             }
         };

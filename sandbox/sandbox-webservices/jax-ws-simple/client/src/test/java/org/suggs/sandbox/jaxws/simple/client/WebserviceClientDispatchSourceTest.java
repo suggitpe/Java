@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.jaxws.simple.client;
 
+import org.suggs.sandbox.jaxws.simple.client.impl.HelloWorldDispatchSourceClient;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -25,11 +27,10 @@ public class WebserviceClientDispatchSourceTest extends AbstractWebserviceClient
         return new ClientCallback() {
 
             @Override
-            public void callClient() {
+            public String callClient( String aName ) {
                 LOG.debug( "Calling Dispatch Source Webservice ..." );
                 HelloWorldDispatchSourceClient client = new HelloWorldDispatchSourceClient();
-                client.callWebServiceWithDispatchSource();
-
+                return client.callWebService( aName );
             }
         };
     }

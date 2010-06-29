@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.jaxws.simple.client;
 
+import org.suggs.sandbox.jaxws.simple.client.impl.HelloWorldSeiClient;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -25,10 +27,10 @@ public class WebserviceClientSeiTest extends AbstractWebserviceClientTest {
         return new ClientCallback() {
 
             @Override
-            public void callClient() {
+            public String callClient( String aName ) {
                 LOG.debug( "Calling SEI Webservice ..." );
                 HelloWorldSeiClient client = new HelloWorldSeiClient();
-                client.callWebService();
+                return client.callWebService( aName );
             }
         };
     }

@@ -2,7 +2,7 @@
  * HelloWorldBindings.java created on 21 Jun 2010 19:18:00 by suggitpe for project sandbox-webservices-jax-ws-simple-client
  * 
  */
-package org.suggs.sandbox.jaxws.simple.client;
+package org.suggs.sandbox.jaxws.simple.client.impl;
 
 /**
  * Static class to house all of the static bindings for the generated webservice.

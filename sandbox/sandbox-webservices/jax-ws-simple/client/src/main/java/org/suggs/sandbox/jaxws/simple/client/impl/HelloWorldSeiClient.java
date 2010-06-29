@@ -2,7 +2,7 @@
  * HelloWorldSeiClient.java created on 10 Jun 2010 19:10:22 by suggitpe for project sandbox-webservices-jax-ws-simple-client
  * 
  */
-package org.suggs.sandbox.jaxws.simple.client;
+package org.suggs.sandbox.jaxws.simple.client.impl;
 
 import org.suggs.sandbox.jaxws.simple.client.bindings.HelloWorld;
 import org.suggs.sandbox.jaxws.simple.client.bindings.HelloWorldService;
@@ -27,13 +27,12 @@ public final class HelloWorldSeiClient {
     private static final Log LOG = LogFactory.getLog( HelloWorldSeiClient.class );
     private WebServiceClient webServiceClient = HelloWorldService.class.getAnnotation( WebServiceClient.class );
 
-    public void callWebService() {
+    public String callWebService( String aName ) {
         LOG.debug( "Calling webservice with client [" + webServiceClient + "]" );
 
         HelloWorld service = createWebService();
-        String serviceResponse = service.sayHello( "Pete" );
-
-        LOG.debug( "WeService response is [" + serviceResponse + "]" );
+        String serviceResponse = service.sayHello( aName );
+        return serviceResponse;
     }
 
     private HelloWorld createWebService() {

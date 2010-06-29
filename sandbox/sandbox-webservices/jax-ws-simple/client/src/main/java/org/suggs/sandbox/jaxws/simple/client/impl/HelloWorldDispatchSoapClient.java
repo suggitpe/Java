@@ -2,7 +2,9 @@
  * HelloWorldDispatchSourceClient.java created on 21 Jun 2010 19:17:35 by suggitpe for project sandbox-webservices-jax-ws-simple-client
  * 
  */
-package org.suggs.sandbox.jaxws.simple.client;
+package org.suggs.sandbox.jaxws.simple.client.impl;
+
+import org.suggs.sandbox.jaxws.simple.client.WebServiceClient;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,20 +18,15 @@ import javax.xml.soap.SOAPMessage;
 import javax.xml.ws.Dispatch;
 import javax.xml.ws.Service;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * TODO Write javadoc for HelloWorldDispatchSourceClient
  * 
  * @author suggitpe
  * @version 1.0 21 Jun 2010
  */
-public class HelloWorldDispatchSoapClient {
+public class HelloWorldDispatchSoapClient implements WebServiceClient {
 
-    private static final Log LOG = LogFactory.getLog( HelloWorldDispatchSoapClient.class );
-
-    public void callWebServiceWithDispatchSoap() {
+    public String callWebService( String aName ) {
         QName serviceQName = new QName( HelloWorldBindings.WS_TARGET_NS, HelloWorldBindings.WS_NAME );
         QName portQName = new QName( HelloWorldBindings.WS_TARGET_NS, HelloWorldBindings.WS_PORT );
 
@@ -40,16 +37,16 @@ public class HelloWorldDispatchSoapClient {
                                                                      SOAPMessage.class,
                                                                      Service.Mode.MESSAGE );
 
-            SOAPMessage soapRequest = createSoapRequest();
+            SOAPMessage soapRequest = createSoapRequest( aName );
             SOAPMessage soapResponse = dispatch.invoke( soapRequest );
-            debugSoapMessage( soapResponse );
+            return debugSoapMessage( soapResponse );
         }
         catch ( MalformedURLException mue ) {
             throw new IllegalArgumentException( "URL to webservice does not exist", mue );
         }
     }
 
-    private SOAPMessage createSoapRequest() {
+    private SOAPMessage createSoapRequest( String aName ) {
         try {
             MessageFactory soapMessageFactory = MessageFactory.newInstance();
 
@@ -58,7 +55,7 @@ public class HelloWorldDispatchSoapClient {
             SOAPBody soapBody = soapRequest.getSOAPBody();
             soapBody.addBodyElement( soapEnvelope.createName( "sayHello", "ns1", "http://test.suggs.org.uk" ) )
                 .addChildElement( soapEnvelope.createName( "name" ) )
-                .addTextNode( "buddy" );
+                .addTextNode( aName );
             return soapRequest;
         }
         catch ( SOAPException se ) {
@@ -67,13 +64,14 @@ public class HelloWorldDispatchSoapClient {
 
     }
 
-    private void debugSoapMessage( SOAPMessage aSoapMessage ) {
+    private String debugSoapMessage( SOAPMessage aSoapMessage ) {
         try {
-            LOG.debug( aSoapMessage.getSOAPBody()
+            String response = aSoapMessage.getSOAPBody()
                 .getElementsByTagName( "return" )
                 .item( 0 )
                 .getFirstChild()
-                .getNodeValue() );
+                .getNodeValue();
+            return response;
         }
         catch ( SOAPException se ) {
             throw new IllegalStateException( "Failed to process soap response message", se );
