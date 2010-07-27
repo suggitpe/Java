@@ -253,7 +253,7 @@ public class JmsClientCoreTestConnection {
 
         mockConnection.stop();
         expectLastCall().andThrow( new JMSException( "fail on stop: this is all part of the test" ) );
-        ;
+
         mockConnection.close();
         expectLastCall().andThrow( new JMSException( "Fail from close: this is all part of the test" ) );
 

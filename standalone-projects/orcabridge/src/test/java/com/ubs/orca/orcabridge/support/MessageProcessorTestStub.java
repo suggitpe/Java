@@ -9,7 +9,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.IMessageProcessor;
-import com.ubs.orca.orcabridge.OrcaBridgeException;
 
 /**
  * Test stub class for Message Senders
@@ -25,7 +24,7 @@ public class MessageProcessorTestStub implements IMessageProcessor {
      * @see com.ubs.orca.orcabridge.IMessageProcessor#processMessage(com.ubs.orca.orcabridge.IMessageFacade)
      */
     @Override
-    public void processMessage( IMessageFacade aMessageFacade ) throws OrcaBridgeException {
+    public void processMessage( IMessageFacade aMessageFacade ) {
         LOG.debug( "Test sending a message on the Test Stub Message Sender" );
     }
 }

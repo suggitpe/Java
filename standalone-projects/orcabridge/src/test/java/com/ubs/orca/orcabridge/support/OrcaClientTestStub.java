@@ -16,13 +16,11 @@ import com.ubs.orca.client.api.IDestination;
 import com.ubs.orca.client.api.IDestinationListener;
 import com.ubs.orca.client.api.IOrcaClient;
 import com.ubs.orca.client.api.IStartParameters;
-import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.client.operations.IOperationsManager;
 import com.ubs.orca.common.bus.MessageType;
 import com.ubs.orca.common.primitive.IAttribute;
 import com.ubs.orca.common.xml.Element;
 import com.ubs.orca.destinationfinder.IDestinationFinder;
-import com.ubs.orca.destinationfinder.RoutingException;
 
 /**
  * Test stub class for the Orca Client
@@ -38,7 +36,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#connect()
      */
     @Override
-    public void connect() throws OrcaException {
+    public void connect() {
         LOG.debug( "***** Stub Orca Client - Performing connect" );
     }
 
@@ -46,7 +44,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#disconnect()
      */
     @Override
-    public void disconnect() throws OrcaException {
+    public void disconnect() {
         LOG.debug( "***** Stub Orca Client - Performing disconnect" );
     }
 
@@ -54,7 +52,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#doNotSendMessagesIfAlreadyPublished(boolean)
      */
     @Override
-    public void doNotSendMessagesIfAlreadyPublished( boolean aParamBoolean ) throws OrcaException {
+    public void doNotSendMessagesIfAlreadyPublished( boolean aParamBoolean ) {
         LOG.debug( "***** Stub Orca Client - Performing doNotSendMessagesIfAlreadyPublished" );
     }
 
@@ -62,7 +60,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#getApplicationConfiguration()
      */
     @Override
-    public Element getApplicationConfiguration() throws OrcaException {
+    public Element getApplicationConfiguration() {
         LOG.debug( "***** Stub Orca Client - Performing getApplicationConfiguration" );
         return null;
     }
@@ -71,7 +69,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#getDestinationFinder()
      */
     @Override
-    public IDestinationFinder getDestinationFinder() throws RoutingException {
+    public IDestinationFinder getDestinationFinder() {
         LOG.debug( "***** Stub Orca Client - Performing getDestinationFinder" );
         return null;
     }
@@ -98,7 +96,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#send(com.ubs.orca.client.api.IConversationMessage)
      */
     @Override
-    public String send( IConversationMessage aParamIConversationMessage ) throws OrcaException {
+    public String send( IConversationMessage aParamIConversationMessage ) {
         LOG.debug( "***** Stub Orca Client - Performing send" );
         return null;
     }
@@ -107,8 +105,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#setDestinationListener(com.ubs.orca.client.api.IDestinationListener)
      */
     @Override
-    public IDestination[] setDestinationListener( IDestinationListener aParamIDestinationListener )
-                    throws OrcaException {
+    public IDestination[] setDestinationListener( IDestinationListener aParamIDestinationListener ) {
         LOG.debug( "***** Stub Orca Client - Performing setDestinationListener" );
         return null;
     }
@@ -117,7 +114,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#setInstanceLoad(int)
      */
     @Override
-    public void setInstanceLoad( int aParamInt ) throws OrcaException {
+    public void setInstanceLoad( int aParamInt ) {
         LOG.debug( "***** Stub Orca Client - Performing setInstanceLoad" );
     }
 
@@ -125,7 +122,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#start()
      */
     @Override
-    public void start() throws OrcaException {
+    public void start() {
         LOG.debug( "***** Stub Orca Client - Performing start" );
     }
 
@@ -133,7 +130,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#start(com.ubs.orca.client.api.IStartParameters)
      */
     @Override
-    public void start( IStartParameters aParamIStartParameters ) throws OrcaException {
+    public void start( IStartParameters aParamIStartParameters ) {
         LOG.debug( "***** Stub Orca Client - Performing start" );
     }
 
@@ -141,7 +138,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IOrcaClient#stop()
      */
     @Override
-    public void stop() throws OrcaException {
+    public void stop() {
         LOG.debug( "***** Stub Orca Client - Performing stop" );
     }
 
@@ -200,7 +197,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IConversationRepository#createConversation(java.lang.String)
      */
     @Override
-    public IConversation createConversation( String aParamString ) throws OrcaException {
+    public IConversation createConversation( String aParamString ) {
         LOG.debug( "***** Stub Orca Client - Performing createConversation" );
         return null;
     }
@@ -210,8 +207,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      *      java.lang.String)
      */
     @Override
-    public IConversation createConversation( String aParamString1, String aParamString2 )
-                    throws OrcaException {
+    public IConversation createConversation( String aParamString1, String aParamString2 ) {
         LOG.debug( "***** Stub Orca Client - Performing createConversation" );
         return null;
     }
@@ -221,8 +217,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      *      com.ubs.orca.common.primitive.IAttribute[])
      */
     @Override
-    public IConversation createConversation( String aParamString, IAttribute[] aParamArrayOfIAttribute )
-                    throws OrcaException {
+    public IConversation createConversation( String aParamString, IAttribute[] aParamArrayOfIAttribute ) {
         LOG.debug( "***** Stub Orca Client - Performing createConversation" );
         return null;
     }
@@ -233,7 +228,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      */
     @Override
     public IConversation createConversation( String aParamString1, String aParamString2,
-                                             IAttribute[] aParamArrayOfIAttribute ) throws OrcaException {
+                                             IAttribute[] aParamArrayOfIAttribute ) {
         LOG.debug( "***** Stub Orca Client - Performing createConversation" );
         return null;
     }
@@ -242,7 +237,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IConversationRepository#getConversation(java.lang.String)
      */
     @Override
-    public IConversation getConversation( String aParamString ) throws OrcaException {
+    public IConversation getConversation( String aParamString ) {
         LOG.debug( "***** Stub Orca Client - Performing getConversation" );
         return null;
     }
@@ -250,9 +245,8 @@ public class OrcaClientTestStub implements IOrcaClient {
     /**
      * @see com.ubs.orca.client.api.IPublishedIdManager#getAllLastPublishedIds()
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public Map getAllLastPublishedIds() throws OrcaException {
+    public Map<?, ?> getAllLastPublishedIds() {
         LOG.debug( "***** Stub Orca Client - Performing getAllLastPublishedIds" );
         return null;
     }
@@ -261,7 +255,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.client.api.IPublishedIdManager#getLastPublishedId(java.lang.String)
      */
     @Override
-    public String getLastPublishedId( String aParamString ) throws OrcaException {
+    public String getLastPublishedId( String aParamString ) {
         LOG.debug( "***** Stub Orca Client - Performing getLastPublishedId" );
         return null;
     }
@@ -271,7 +265,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      *      java.lang.String)
      */
     @Override
-    public void resetLastPublishedId( String aParamString1, String aParamString2 ) throws OrcaException {
+    public void resetLastPublishedId( String aParamString1, String aParamString2 ) {
         LOG.debug( "***** Stub Orca Client - Performing resetLastPublishedId" );
     }
 
@@ -279,7 +273,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.common.bus.IReceivedIdManager#getLastReceivedId()
      */
     @Override
-    public long getLastReceivedId() throws OrcaException {
+    public long getLastReceivedId() {
         LOG.debug( "***** Stub Orca Client - Performing getLastReceivedId" );
         return 0;
     }
@@ -288,7 +282,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.common.bus.IReceivedIdManager#resetLastReceivedId(long)
      */
     @Override
-    public void resetLastReceivedId( long aParamLong ) throws OrcaException {
+    public void resetLastReceivedId( long aParamLong ) {
         LOG.debug( "***** Stub Orca Client - Performing resetLastReceivedId" );
     }
 
@@ -296,7 +290,7 @@ public class OrcaClientTestStub implements IOrcaClient {
      * @see com.ubs.orca.common.bus.IReceivedIdManager#resetReceivedId(long, long)
      */
     @Override
-    public void resetReceivedId( long aParamLong1, long aParamLong2 ) throws OrcaException {
+    public void resetReceivedId( long aParamLong1, long aParamLong2 ) {
         LOG.debug( "***** Stub Orca Client - Performing resetReceivedId" );
     }
 

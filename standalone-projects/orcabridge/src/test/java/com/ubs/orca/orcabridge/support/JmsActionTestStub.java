@@ -7,7 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
-import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 
 /**
  * Stub class for the IJmsAction interface
@@ -24,7 +23,7 @@ public class JmsActionTestStub implements IJmsAction {
      *      javax.jms.Destination)
      */
     @Override
-    public void actionInTransaction( Session aSession, Destination aDestination ) throws JmsClientException {
+    public void actionInTransaction( Session aSession, Destination aDestination ) {
         LOG.debug( "***** Stub JMS Action - Performing Action" );
     }
 }
