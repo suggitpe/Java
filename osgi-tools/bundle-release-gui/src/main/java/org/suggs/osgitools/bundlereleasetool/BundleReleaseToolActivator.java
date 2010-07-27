@@ -138,7 +138,8 @@ public class BundleReleaseToolActivator implements BundleActivator {
             }
             catch ( BundleException be ) {
                 LOG.error( "Bundle Exception thrown when calling uninstall on Bundle with name ["
-                           + b.getSymbolicName() + "]", be );
+                                           + b.getSymbolicName() + "]",
+                           be );
                 throw new BundleGuiException( "Failed to uninstall bundle with ID [" + b.getBundleId() + "]",
                                               be );
             }
@@ -155,7 +156,8 @@ public class BundleReleaseToolActivator implements BundleActivator {
             }
             catch ( BundleException be ) {
                 LOG.error( "Bundle Exception thrown when calling start on Bundle with name ["
-                           + b.getSymbolicName() + "]", be );
+                                           + b.getSymbolicName() + "]",
+                           be );
                 throw new BundleGuiException( "Failed to start bundle with ID [" + b.getBundleId() + "]", be );
             }
         }
@@ -171,7 +173,8 @@ public class BundleReleaseToolActivator implements BundleActivator {
             }
             catch ( BundleException be ) {
                 LOG.error( "Bundle Exception thrown when calling stop on Bundle with name ["
-                           + b.getSymbolicName() + "]", be );
+                                           + b.getSymbolicName() + "]",
+                           be );
                 throw new BundleGuiException( "Failed to stop bundle with ID [" + b.getBundleId() + "]", be );
             }
         }
@@ -187,7 +190,8 @@ public class BundleReleaseToolActivator implements BundleActivator {
             }
             catch ( BundleException be ) {
                 LOG.error( "Bundle Exception thrown when calling update on Bundle with name ["
-                           + b.getSymbolicName() + "]", be );
+                                           + b.getSymbolicName() + "]",
+                           be );
                 throw new BundleGuiException( "Failed to update bundle with ID [" + b.getBundleId() + "]", be );
             }
         }
@@ -211,7 +215,8 @@ public class BundleReleaseToolActivator implements BundleActivator {
         }
         // bit confusing here as we are using the callback to pass in
         // all of the bundle related functionality
-        new BundleReleaseToolGui( callback );
+        @SuppressWarnings("unused")
+        BundleReleaseToolGui gui = new BundleReleaseToolGui( callback );
     }
 
     /**

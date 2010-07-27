@@ -5,7 +5,6 @@
 package org.suggs.osgitools.bundlereleasetool.gui;
 
 import org.suggs.osgitools.bundlereleasetool.BundleData;
-import org.suggs.osgitools.bundlereleasetool.BundleGuiException;
 import org.suggs.osgitools.bundlereleasetool.IBundleReleaseToolContextCallback;
 import org.suggs.osgitools.bundlereleasetool.GUI.BundleReleaseToolGui;
 
@@ -37,10 +36,12 @@ public class BundleReleaseToolGuiTest {
 
         javax.swing.SwingUtilities.invokeLater( new Runnable() {
 
+            @Override
             public void run() {
                 LOG.debug( "Executing Run to build GUI" );
 
-                new BundleReleaseToolGui( buildBundleCallback(), true );
+                @SuppressWarnings("unused")
+                BundleReleaseToolGui gui = new BundleReleaseToolGui( buildBundleCallback(), true );
 
                 LOG.debug( "GUI Run execution complete" );
             }
@@ -127,7 +128,7 @@ public class BundleReleaseToolGuiTest {
             }
 
             @Override
-            public void stopBundle( Long bundleId ) throws BundleGuiException {
+            public void stopBundle( Long bundleId ) {
                 LOG.debug( "Pretending to stop a bundle with ID [" + bundleId + "]" );
             }
 
