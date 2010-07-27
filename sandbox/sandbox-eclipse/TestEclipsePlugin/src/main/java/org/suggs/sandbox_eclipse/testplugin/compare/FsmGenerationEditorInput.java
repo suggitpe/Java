@@ -4,8 +4,6 @@
  */
 package org.suggs.sandbox_eclipse.testplugin.compare;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.compare.CompareEditorInput;
 import org.eclipse.compare.ITypedElement;
@@ -20,11 +18,10 @@ import org.eclipse.core.runtime.SubProgressMonitor;
  * @author suggitpe
  * @version 1.0 14 Apr 2008
  */
-public class FsmGenerationEditorInput extends CompareEditorInput
-{
+public class FsmGenerationEditorInput extends CompareEditorInput {
 
-    private ITypedElement mLhs_;
-    private ITypedElement mRhs_;
+    private ITypedElement lhs;
+    private ITypedElement rhs;
 
     private boolean mCancelled_ = false;
 
@@ -34,28 +31,23 @@ public class FsmGenerationEditorInput extends CompareEditorInput
      * @param aLhs
      * @param aRhs
      */
-    public FsmGenerationEditorInput( ITypedElement aLhs, ITypedElement aRhs )
-    {
+    public FsmGenerationEditorInput( ITypedElement aLhs, ITypedElement aRhs ) {
         super( new CompareConfiguration() );
-        mLhs_ = aLhs;
-        mRhs_ = aRhs;
+        lhs = aLhs;
+        rhs = aRhs;
     }
 
     /**
      * @see org.eclipse.compare.CompareEditorInput#prepareInput(org.eclipse.core.runtime.IProgressMonitor)
      */
     @Override
-    protected Object prepareInput( IProgressMonitor monitor ) throws InvocationTargetException,
-                    InterruptedException
-    {
-        if ( mLhs_ == null || mRhs_ == null )
-        {
+    protected Object prepareInput( IProgressMonitor monitor ) {
+        if ( lhs == null || rhs == null ) {
             return null;
         }
         Object obj = null;
 
-        try
-        {
+        try {
             // set up the labels
             initLabels();
 
@@ -63,23 +55,15 @@ public class FsmGenerationEditorInput extends CompareEditorInput
             monitor.beginTask( "FsmGenerationEdittorInput.compare", 30 );
 
             IProgressMonitor sub = new SubProgressMonitor( monitor, 10 );
-            try
-            {
+            try {
                 sub.beginTask( "Finding differences", 50 );
-                obj = diff.findDifferences( false,
-                                            new NullProgressMonitor(),
-                                            null,
-                                            null,
-                                            mLhs_,
-                                            mRhs_ );
+                obj = diff.findDifferences( false, new NullProgressMonitor(), null, null, lhs, rhs );
             }
-            finally
-            {
+            finally {
                 sub.done();
             }
         }
-        finally
-        {
+        finally {
             monitor.done();
         }
 
@@ -93,8 +77,7 @@ public class FsmGenerationEditorInput extends CompareEditorInput
      * @see org.eclipse.compare.CompareEditorInput#cancelPressed()
      */
     @Override
-    public void cancelPressed()
-    {
+    public void cancelPressed() {
         mCancelled_ = true;
     }
 
@@ -103,19 +86,17 @@ public class FsmGenerationEditorInput extends CompareEditorInput
      * 
      * @return whether the dialog wa cancelled.
      */
-    public boolean wasCancelPressed()
-    {
+    public boolean wasCancelPressed() {
         return mCancelled_;
     }
 
     /**
      * This will set up the labels on the compare viewer.
      */
-    private void initLabels()
-    {
+    private void initLabels() {
         CompareConfiguration cc = getCompareConfiguration();
-        cc.setLeftLabel( mLhs_.getName() );
-        cc.setRightLabel( mRhs_.getName() );
+        cc.setLeftLabel( lhs.getName() );
+        cc.setRightLabel( rhs.getName() );
 
         setTitle( "FSM Spring XML configuration compare" );
     }

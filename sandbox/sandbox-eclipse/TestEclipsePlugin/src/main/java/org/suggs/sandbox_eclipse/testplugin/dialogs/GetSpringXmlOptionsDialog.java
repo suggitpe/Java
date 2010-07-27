@@ -28,30 +28,28 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog;
 
 /**
- * This class is a dialog class that allows us to collect data from
- * the users as to the settings to use when creating the Spring XML.
- * This class extends the Dialog class so that it can implement its on
- * version of the Dialog box.
+ * This class is a dialog class that allows us to collect data from the users as to the settings to use when
+ * creating the Spring XML. This class extends the Dialog class so that it can implement its on version of the
+ * Dialog box.
  * 
  * @author suggitpe
  * @version 1.0 11 Mar 2008
  */
-public class GetSpringXmlOptionsDialog extends Dialog
-{
+public class GetSpringXmlOptionsDialog extends Dialog {
 
-    private GridData mD2;
-    private GridData mD3;
+    private GridData d2;
+    private GridData d3;
 
     {
-        mD2 = new GridData( GridData.HORIZONTAL_ALIGN_FILL );
-        mD2.horizontalSpan = 2;
-        mD3 = new GridData( GridData.HORIZONTAL_ALIGN_FILL );
-        mD3.horizontalSpan = 3;
+        d2 = new GridData( GridData.HORIZONTAL_ALIGN_FILL );
+        d2.horizontalSpan = 2;
+        d3 = new GridData( GridData.HORIZONTAL_ALIGN_FILL );
+        d3.horizontalSpan = 3;
     }
 
-    private String mDestinationValue_;
-    private String mKeyValue_;
-    private String mFileNameValue_;
+    private String destinationValue;
+    private String keyValue;
+    private String fileNameValue;
 
     public static final String DEST_POPUP = "POPUP";
     public static final String DEST_FILE = "FILE";
@@ -60,21 +58,20 @@ public class GetSpringXmlOptionsDialog extends Dialog
     public static final String KEY_CONFS = "CONFS";
     public static final String KEY_ADVCS = "ADVICES";
 
-    private Button mPopupRadio_;
-    private Button mFileRadio_;
-    private Text mFileName_;
+    private Button popupRadio;
+    private Button fileRadio;
+    private Text fileName;
 
-    private Button mNoneRadio_;
-    private Button mConfsRadio_;
-    private Button mAdvicesRadio_;
+    private Button noneRadio;
+    private Button confsRadio;
+    private Button advicesRadio;
 
     /**
      * Constructs a new instance.
      * 
      * @param parentShell
      */
-    public GetSpringXmlOptionsDialog( Shell parentShell )
-    {
+    public GetSpringXmlOptionsDialog( Shell parentShell ) {
         super( parentShell );
     }
 
@@ -82,26 +79,23 @@ public class GetSpringXmlOptionsDialog extends Dialog
      * @see org.eclipse.jface.dialogs.Dialog#close()
      */
     @Override
-    public boolean close()
-    {
+    public boolean close() {
         // here we need to get the data out of the dialog widgets
         // before we close the dialog
-        mFileNameValue_ = mFileName_.getText();
-        mDestinationValue_ = mPopupRadio_.getSelection() ? DEST_POPUP : DEST_FILE;
-        mKeyValue_ = mNoneRadio_.getSelection() ? KEY_NONE : mConfsRadio_.getSelection()
-                        ? KEY_CONFS : KEY_ADVCS;
+        fileNameValue = fileName.getText();
+        destinationValue = popupRadio.getSelection() ? DEST_POPUP : DEST_FILE;
+        keyValue = noneRadio.getSelection() ? KEY_NONE : confsRadio.getSelection() ? KEY_CONFS : KEY_ADVCS;
         return super.close();
     }
 
     /**
-     * Getter for the required destination. This should be replaced
-     * with an enumeration when we are fully Java 5 compatible.
+     * Getter for the required destination. This should be replaced with an enumeration when we are fully Java
+     * 5 compatible.
      * 
      * @return the int representing the destination.
      */
-    public String getDestination()
-    {
-        return mDestinationValue_;
+    public String getDestination() {
+        return destinationValue;
     }
 
     /**
@@ -109,32 +103,27 @@ public class GetSpringXmlOptionsDialog extends Dialog
      * 
      * @return the contents of the file text box
      */
-    public String getFileName()
-    {
-        return mFileNameValue_;
+    public String getFileName() {
+        return fileNameValue;
     }
 
     /**
-     * Getter for the required FSM key selected. This should be
-     * replaced with an enumeration when we are fully Java 5
-     * compatible.
+     * Getter for the required FSM key selected. This should be replaced with an enumeration when we are fully
+     * Java 5 compatible.
      * 
      * @return the int representing the FSM key selection.
      */
-    public String getFsmKeySelection()
-    {
-        return mKeyValue_;
+    public String getFsmKeySelection() {
+        return keyValue;
     }
 
     /**
-     * This is overridden so we can create the internal Dialog
-     * controls
+     * This is overridden so we can create the internal Dialog controls
      * 
      * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createDialogArea( Composite parent )
-    {
+    protected Control createDialogArea( Composite parent ) {
         Composite ret = (Composite) super.createDialogArea( parent );
         createKeySelection( ret );
         createDestinationSection( ret );
@@ -143,20 +132,16 @@ public class GetSpringXmlOptionsDialog extends Dialog
     }
 
     /**
-     * This method is overriden so that we can add in some validation
-     * logic around the passed in filenames.
+     * This method is overriden so that we can add in some validation logic around the passed in filenames.
      * 
      * @see org.eclipse.jface.dialogs.Dialog#okPressed()
      */
     @Override
-    protected void okPressed()
-    {
+    protected void okPressed() {
         // now we do the validation
-        if ( mFileRadio_.getSelection() )
-        {
-            String name = mFileName_.getText();
-            if ( name == null || name.equals( "" ) )
-            {
+        if ( fileRadio.getSelection() ) {
+            String name = fileName.getText();
+            if ( name == null || name.equals( "" ) ) {
                 MessageDialog.openError( Display.getCurrent().getActiveShell(),
                                          "Incomplete input",
                                          "If you select the file destination, then "
@@ -165,8 +150,7 @@ public class GetSpringXmlOptionsDialog extends Dialog
             }
 
             File dest = new File( name );
-            if ( !dest.exists() )
-            {
+            if ( !dest.exists() ) {
                 MessageDialog.openError( Display.getCurrent().getActiveShell(),
                                          "Bad data",
                                          "The filename entered ["
@@ -185,8 +169,7 @@ public class GetSpringXmlOptionsDialog extends Dialog
      * @param aComp
      *            the base shell
      */
-    private void createKeySelection( final Composite aComp )
-    {
+    private void createKeySelection( final Composite aComp ) {
         // -------------------
         // create the group to use including any text
         Group group1 = new Group( aComp, SWT.None );
@@ -197,15 +180,15 @@ public class GetSpringXmlOptionsDialog extends Dialog
         group1.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
         group1.setLayout( new GridLayout( 3, false ) );
 
-        mNoneRadio_ = new Button( group1, SWT.RADIO );
-        mNoneRadio_.setSelection( true );
-        mNoneRadio_.setText( "None" );
+        noneRadio = new Button( group1, SWT.RADIO );
+        noneRadio.setSelection( true );
+        noneRadio.setText( "None" );
 
-        mAdvicesRadio_ = new Button( group1, SWT.RADIO );
-        mAdvicesRadio_.setText( "Advices" );
+        advicesRadio = new Button( group1, SWT.RADIO );
+        advicesRadio.setText( "Advices" );
 
-        mConfsRadio_ = new Button( group1, SWT.RADIO );
-        mConfsRadio_.setText( "Confirmations" );
+        confsRadio = new Button( group1, SWT.RADIO );
+        confsRadio.setText( "Confirmations" );
     }
 
     /**
@@ -214,8 +197,7 @@ public class GetSpringXmlOptionsDialog extends Dialog
      * @param aComp
      *            the base shell
      */
-    private void createDestinationSection( final Composite aComp )
-    {
+    private void createDestinationSection( final Composite aComp ) {
 
         // -------------------
         Group group2 = new Group( aComp, SWT.None );
@@ -226,26 +208,26 @@ public class GetSpringXmlOptionsDialog extends Dialog
         group2.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
         group2.setLayout( new GridLayout( 3, false ) );
 
-        mPopupRadio_ = new Button( group2, SWT.RADIO );
-        mPopupRadio_.setSelection( true );
-        mPopupRadio_.setText( "Popup" );
-        mPopupRadio_.setToolTipText( "Selecting this option means that the end result will end up in a little popup window to copy and paste" );
+        popupRadio = new Button( group2, SWT.RADIO );
+        popupRadio.setSelection( true );
+        popupRadio.setText( "Popup" );
+        popupRadio.setToolTipText( "Selecting this option means that the end result will end up in a little popup window to copy and paste" );
 
-        mFileRadio_ = new Button( group2, SWT.RADIO );
-        mFileRadio_.setText( "File" );
-        mFileRadio_.setLayoutData( mD2 );
-        mFileRadio_.setToolTipText( "Selecting this option means that the end result will be written to a file" );
+        fileRadio = new Button( group2, SWT.RADIO );
+        fileRadio.setText( "File" );
+        fileRadio.setLayoutData( d2 );
+        fileRadio.setToolTipText( "Selecting this option means that the end result will be written to a file" );
 
         // now we should create the file selection
         final Label fileLabel = new Label( group2, SWT.None );
         fileLabel.setText( "File:" );
         fileLabel.setEnabled( false );
 
-        mFileName_ = new Text( group2, SWT.BORDER );
-        mFileName_.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
+        fileName = new Text( group2, SWT.BORDER );
+        fileName.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
         // mFileName_.setEditable( false );
-        mFileName_.setEnabled( false );
-        mFileName_.selectAll();
+        fileName.setEnabled( false );
+        fileName.selectAll();
 
         // set the button
         final Button file = new Button( group2, SWT.None );
@@ -254,15 +236,11 @@ public class GetSpringXmlOptionsDialog extends Dialog
 
         // ------------------
         // set up the selection listeners
-        file.addSelectionListener( new SelectionListener()
-        {
+        file.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent e )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent e ) {}
 
-            public void widgetSelected( SelectionEvent e )
-            {
+            public void widgetSelected( SelectionEvent e ) {
                 FilteredResourcesSelectionDialog fd = new FilteredResourcesSelectionDialog( Display.getCurrent()
                                                                                                 .getActiveShell(),
                                                                                             false,
@@ -271,37 +249,29 @@ public class GetSpringXmlOptionsDialog extends Dialog
                                                                                             IResource.FILE );
                 fd.setInitialPattern( "*.xml" );
 
-                if ( fd.open() == Window.OK )
-                {
+                if ( fd.open() == Window.OK ) {
                     IFile selectedFile = (IFile) fd.getFirstResult();
-                    if ( selectedFile != null )
-                    {
-                        mFileName_.setText( selectedFile.getLocation().toFile().getAbsolutePath() );
+                    if ( selectedFile != null ) {
+                        fileName.setText( selectedFile.getLocation().toFile().getAbsolutePath() );
                     }
                 }
             }
         } );
 
-        mFileRadio_.addSelectionListener( new SelectionListener()
-        {
+        fileRadio.addSelectionListener( new SelectionListener() {
 
-            public void widgetDefaultSelected( SelectionEvent e )
-            {
-            }
+            public void widgetDefaultSelected( SelectionEvent e ) {}
 
-            public void widgetSelected( SelectionEvent e )
-            {
-                if ( mFileRadio_.getSelection() )
-                {
+            public void widgetSelected( SelectionEvent e ) {
+                if ( fileRadio.getSelection() ) {
                     fileLabel.setEnabled( true );
-                    mFileName_.setEnabled( true );
+                    fileName.setEnabled( true );
                     file.setEnabled( true );
                     // mFileName_.setEditable( false );
                 }
-                else
-                {
+                else {
                     fileLabel.setEnabled( false );
-                    mFileName_.setEnabled( false );
+                    fileName.setEnabled( false );
                     file.setEnabled( false );
                 }
             }
@@ -312,8 +282,7 @@ public class GetSpringXmlOptionsDialog extends Dialog
      * @see org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets.Shell)
      */
     @Override
-    protected void configureShell( Shell newShell )
-    {
+    protected void configureShell( Shell newShell ) {
         super.configureShell( newShell );
         newShell.setText( "FSM Generation Options" );
     }

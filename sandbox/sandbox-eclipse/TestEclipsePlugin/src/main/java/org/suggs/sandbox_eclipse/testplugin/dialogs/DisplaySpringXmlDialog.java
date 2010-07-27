@@ -20,10 +20,9 @@ import org.eclipse.swt.widgets.Text;
  * @author suggitpe
  * @version 1.0 3 Apr 2008
  */
-public class DisplaySpringXmlDialog extends Dialog
-{
+public class DisplaySpringXmlDialog extends Dialog {
 
-    String mXml_;
+    String xml;
 
     /**
      * Constructs a new instance.
@@ -31,18 +30,16 @@ public class DisplaySpringXmlDialog extends Dialog
      * @param aParentShell
      * @param aXml
      */
-    public DisplaySpringXmlDialog( Shell aParentShell, String aXml )
-    {
+    public DisplaySpringXmlDialog( Shell aParentShell, String aXml ) {
         super( aParentShell );
-        mXml_ = aXml;
+        xml = aXml;
     }
 
     /**
      * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createDialogArea( Composite parent )
-    {
+    protected Control createDialogArea( Composite parent ) {
         Composite ret = (Composite) super.createDialogArea( parent );
 
         // set the group
@@ -54,9 +51,8 @@ public class DisplaySpringXmlDialog extends Dialog
         grp.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
 
         // now we can build the internal widgets
-        Text res = new Text( grp, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL
-                                  | SWT.READ_ONLY );
-        res.setText( mXml_ );
+        Text res = new Text( grp, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.READ_ONLY );
+        res.setText( xml );
         // res.selectAll();
 
         // now we want to set up the layout data for the text area
@@ -74,8 +70,7 @@ public class DisplaySpringXmlDialog extends Dialog
      * @see org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets.Shell)
      */
     @Override
-    protected void configureShell( Shell newShell )
-    {
+    protected void configureShell( Shell newShell ) {
         super.configureShell( newShell );
         newShell.setText( "FSM Spring XML Results" );
     }

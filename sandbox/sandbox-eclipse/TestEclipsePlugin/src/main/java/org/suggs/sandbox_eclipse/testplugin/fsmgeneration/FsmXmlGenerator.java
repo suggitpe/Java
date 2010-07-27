@@ -12,19 +12,17 @@ import org.eclipse.core.resources.IFile;
  * @author suggitpe
  * @version 1.0 3 Apr 2008
  */
-public class FsmXmlGenerator
-{
+public class FsmXmlGenerator {
 
-    private IFile mModel_;
+    private IFile model;
 
     /**
      * Constructs a new instance.
      * 
      * @param aModel
      */
-    public FsmXmlGenerator( IFile aModel )
-    {
-        mModel_ = aModel;
+    public FsmXmlGenerator( IFile aModel ) {
+        model = aModel;
     }
 
     /**
@@ -34,9 +32,8 @@ public class FsmXmlGenerator
      *            the key from which to generate the XML
      * @return the FSM Spring XML
      */
-    public String generateXml( String aKey )
-    {
-        mModel_.getClass();
+    public String generateXml( String aKey ) {
+        model.getClass();
         StringBuffer buff = new StringBuffer( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" ).append( "<beans>\n" )
             .append( "\t<bean id=\"duffBean\" class=\"org.suggs.sandbox.scribbler.duffBeanClass\">\n" )
             .append( "\t\t<property name=\"sampleProperty1\" value=\"sampleName\">\n" )

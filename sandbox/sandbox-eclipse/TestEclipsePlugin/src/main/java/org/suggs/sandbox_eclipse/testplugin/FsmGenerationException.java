@@ -10,14 +10,17 @@ package org.suggs.sandbox_eclipse.testplugin;
  * @author suggitpe
  * @version 1.0 15 Apr 2008
  */
-public class FsmGenerationException extends Exception
-{
+public class FsmGenerationException extends Exception {
+
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 593244495837017029L;
 
     /**
      * Constructs a new instance.
      */
-    public FsmGenerationException()
-    {
+    public FsmGenerationException() {
         super();
     }
 
@@ -26,8 +29,7 @@ public class FsmGenerationException extends Exception
      * 
      * @param aMessage
      */
-    public FsmGenerationException( String aMessage )
-    {
+    public FsmGenerationException( String aMessage ) {
         super( aMessage );
     }
 
@@ -37,8 +39,7 @@ public class FsmGenerationException extends Exception
      * @param aMessage
      * @param aError
      */
-    public FsmGenerationException( String aMessage, Throwable aError )
-    {
+    public FsmGenerationException( String aMessage, Throwable aError ) {
         super( aMessage, aError );
     }
 
@@ -47,8 +48,7 @@ public class FsmGenerationException extends Exception
      * 
      * @param aError
      */
-    public FsmGenerationException( Throwable aError )
-    {
+    public FsmGenerationException( Throwable aError ) {
         super( aError );
     }
 }

@@ -9,7 +9,6 @@ import java.io.InputStream;
 
 import org.eclipse.compare.IStreamContentAccessor;
 import org.eclipse.compare.ITypedElement;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -18,11 +17,10 @@ import org.eclipse.swt.graphics.Image;
  * @author suggitpe
  * @version 1.0 14 Apr 2008
  */
-public class FsmGenDataInput implements ITypedElement, IStreamContentAccessor
-{
+public class FsmGenDataInput implements ITypedElement, IStreamContentAccessor {
 
-    private String mString_;
-    private String mName_;
+    private String string;
+    private String name;
 
     /**
      * Constructs a new instance.
@@ -30,42 +28,37 @@ public class FsmGenDataInput implements ITypedElement, IStreamContentAccessor
      * @param aString
      * @param aName
      */
-    public FsmGenDataInput( String aString, String aName )
-    {
-        mString_ = aString;
-        mName_ = aName;
+    public FsmGenDataInput( String aString, String aName ) {
+        string = aString;
+        name = aName;
     }
 
     /**
      * @see org.eclipse.compare.ITypedElement#getImage()
      */
-    public Image getImage()
-    {
+    public Image getImage() {
         return null;
     }
 
     /**
      * @see org.eclipse.compare.ITypedElement#getName()
      */
-    public String getName()
-    {
-        return mName_;
+    public String getName() {
+        return name;
     }
 
     /**
      * @see org.eclipse.compare.ITypedElement#getType()
      */
-    public String getType()
-    {
+    public String getType() {
         return "String";
     }
 
     /**
      * @see org.eclipse.compare.IStreamContentAccessor#getContents()
      */
-    public InputStream getContents() throws CoreException
-    {
-        return new ByteArrayInputStream( mString_.getBytes() );
+    public InputStream getContents() {
+        return new ByteArrayInputStream( string.getBytes() );
     }
 
 }
