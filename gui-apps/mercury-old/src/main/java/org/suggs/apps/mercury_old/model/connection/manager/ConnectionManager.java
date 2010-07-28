@@ -47,6 +47,7 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( adapters, "Must inject a map of adapters into the connection manager" );
     }
@@ -54,6 +55,7 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionManager#getConnectionState()
      */
+    @Override
     public EConnectionState getConnectionState() {
         return connectionState;
     }
@@ -61,9 +63,8 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionManager#connect(org.suggs.apps.mercury_old.model.connection.IConnectionParameters)
      */
-    public void connect( IConnectionParameters aDetails ) throws MercuryConnectionException
-
-    {
+    @Override
+    public void connect( IConnectionParameters aDetails ) {
         connectionState = EConnectionState.CONNECTED;
 
         setChanged();
@@ -96,7 +97,8 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionManager#disconnect()
      */
-    public void disconnect() throws MercuryConnectionException {
+    @Override
+    public void disconnect() {
         connectionState = EConnectionState.DISCONNECTED;
         setChanged();
         notifyObservers();
@@ -105,6 +107,7 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionManager#testConnection(org.suggs.apps.mercury_old.model.connection.IConnectionParameters)
      */
+    @Override
     public boolean testConnection( IConnectionParameters aDetails ) {
         connectionState = EConnectionState.DISCONNECTED;
         return false;

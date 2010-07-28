@@ -41,6 +41,7 @@ public class DBSource implements DBSourceMBean {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#resetDataSource(java.lang.String)
      */
+    @Override
     public final void resetDataSource( String name ) {
         LOG.debug( "Setting the datasource with name [" + name + "]" );
         try {
@@ -55,6 +56,7 @@ public class DBSource implements DBSourceMBean {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#getConnection()
      */
+    @Override
     public Connection getConnection() {
         Connection ret;
 
@@ -72,6 +74,7 @@ public class DBSource implements DBSourceMBean {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#getAutoCommit()
      */
+    @Override
     public boolean getAutoCommit() {
         return commit;
     }
@@ -79,6 +82,7 @@ public class DBSource implements DBSourceMBean {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#setAutoCommit(boolean)
      */
+    @Override
     public void setAutoCommit( boolean aCommit ) {
         commit = aCommit;
     }

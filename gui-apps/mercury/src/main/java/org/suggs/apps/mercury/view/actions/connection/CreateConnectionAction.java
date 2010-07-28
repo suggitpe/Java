@@ -47,6 +47,7 @@ public class CreateConnectionAction extends Action implements InitializingBean {
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( connectionStore, "No connection store set on the create connection wizard" );
     }
@@ -72,6 +73,7 @@ public class CreateConnectionAction extends Action implements InitializingBean {
             if ( connectionStore.doesConnectionExist( name ) ) {
                 final IInputValidator validator = new IInputValidator() {
 
+                    @Override
                     public String isValid( String txt ) {
                         if ( txt.length() < 5 ) {
                             return "You must enter at least 5 characters";

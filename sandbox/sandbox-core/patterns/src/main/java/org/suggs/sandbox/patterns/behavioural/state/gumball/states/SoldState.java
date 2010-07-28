@@ -35,6 +35,7 @@ public class SoldState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
+    @Override
     public void dispense() {
         gumballMachine.releaseBall();
         if ( gumballMachine.getCount() > 0 ) {
@@ -49,6 +50,7 @@ public class SoldState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
+    @Override
     public void ejectQuarter() {
         LOG.warn( "Sorry but we have gone past that stage in the sale" );
     }
@@ -56,6 +58,7 @@ public class SoldState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
+    @Override
     public void insertQuarter() {
         LOG.warn( "Please wait we are already giving you a gumball" );
     }
@@ -63,6 +66,7 @@ public class SoldState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
+    @Override
     public void turnCrank() {
         LOG.warn( "Turning twice will not get any more gumballs" );
     }

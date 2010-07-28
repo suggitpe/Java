@@ -37,6 +37,7 @@ public class SoldOutState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
+    @Override
     public void dispense() {
         LOG.warn( "Nothing to dispense" );
     }
@@ -44,6 +45,7 @@ public class SoldOutState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
+    @Override
     public void ejectQuarter() {
         LOG.warn( "No quarter in the machine to eject" );
     }
@@ -51,6 +53,7 @@ public class SoldOutState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
+    @Override
     public void insertQuarter() {
         LOG.warn( "No allowing you toi insert a quarter as the machine is empty" );
     }
@@ -58,6 +61,7 @@ public class SoldOutState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
+    @Override
     public void turnCrank() {
         LOG.warn( "Sorry the machine is empty and so we cannot turn the crank" );
     }

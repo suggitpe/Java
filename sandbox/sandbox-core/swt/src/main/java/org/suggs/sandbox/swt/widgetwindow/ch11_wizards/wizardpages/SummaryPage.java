@@ -32,6 +32,7 @@ public class SummaryPage extends WizardPage {
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
+    @Override
     public void createControl( Composite parent ) {
         Composite top = new Composite( parent, SWT.NONE );
         top.setLayout( new FillLayout() );

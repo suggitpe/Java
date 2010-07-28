@@ -20,6 +20,7 @@ public class WildTurkey implements ITurkey {
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.ITurkey#fly()
      */
+    @Override
     public void fly() {
         LOG.debug( "I'm flying a short distance" );
     }
@@ -27,6 +28,7 @@ public class WildTurkey implements ITurkey {
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.ITurkey#gobble()
      */
+    @Override
     public void gobble() {
         LOG.debug( "Gobble gobble" );
     }

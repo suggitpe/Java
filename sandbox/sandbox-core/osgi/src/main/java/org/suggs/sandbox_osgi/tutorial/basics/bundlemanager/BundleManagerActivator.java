@@ -38,6 +38,7 @@ public class BundleManagerActivator implements BundleActivator {
      * 
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
+    @Override
     public void start( BundleContext ctx ) {
         context = ctx;
         thread.start();
@@ -48,6 +49,7 @@ public class BundleManagerActivator implements BundleActivator {
      * 
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
+    @Override
     public void stop( BundleContext ctx ) {
         thread.interrupt();
         context = null;
@@ -98,6 +100,7 @@ public class BundleManagerActivator implements BundleActivator {
 
         return aDir.listFiles( new FileFilter() {
 
+            @Override
             public boolean accept( File aPathname ) {
                 if ( aPathname.getName().endsWith( ".jar" )
                      && !aPathname.getName().endsWith( "bundlemanager.jar" ) ) {
@@ -144,6 +147,7 @@ public class BundleManagerActivator implements BundleActivator {
         /**
          * @see java.lang.Runnable#run()
          */
+        @Override
         public void run() {
             try {
                 File dir = new File( BUND_LOC );

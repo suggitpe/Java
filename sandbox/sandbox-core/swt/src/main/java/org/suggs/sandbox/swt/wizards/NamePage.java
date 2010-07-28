@@ -40,6 +40,7 @@ public class NamePage extends WizardPage {
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
+    @Override
     public void createControl( Composite parent ) {
         Composite comp = new Composite( parent, SWT.NONE );
         comp.setLayout( new GridLayout( 2, false ) );
@@ -57,6 +58,7 @@ public class NamePage extends WizardPage {
         // add a listener for the first name
         first.addModifyListener( new ModifyListener() {
 
+            @Override
             public void modifyText( ModifyEvent e ) {
                 firstName = first.getText();
                 setPageComplete( isPageDone() );
@@ -66,6 +68,7 @@ public class NamePage extends WizardPage {
         // add a listener for the last namE
         last.addModifyListener( new ModifyListener() {
 
+            @Override
             public void modifyText( ModifyEvent e ) {
                 lastName = last.getText();
                 setPageComplete( isPageDone() );

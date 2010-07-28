@@ -29,6 +29,7 @@ public class StereoOnWithCdCommand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
+    @Override
     public void execute() {
         stereo.on();
         stereo.setCd();
@@ -38,6 +39,7 @@ public class StereoOnWithCdCommand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
+    @Override
     public void undo() {
         stereo.off();
     }

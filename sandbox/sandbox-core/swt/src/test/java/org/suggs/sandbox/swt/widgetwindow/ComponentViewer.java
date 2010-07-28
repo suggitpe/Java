@@ -29,6 +29,7 @@ public class ComponentViewer extends ApplicationWindow {
     /**
      * @see org.eclipse.jface.window.Window#createContents(org.eclipse.swt.widgets.Composite)
      */
+    @SuppressWarnings("unused")
     @Override
     protected Control createContents( Composite parent ) {
         // new Ch3Group( parent );

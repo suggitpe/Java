@@ -33,6 +33,7 @@ public class WeatherData implements ISubject {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.observer.ISubject#notifyObservers()
      */
+    @Override
     public void notifyObservers() {
         for ( IObserver o : observers ) {
             o.update( temperature, humidity, pressure );
@@ -42,6 +43,7 @@ public class WeatherData implements ISubject {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.observer.ISubject#registerObserver(org.suggs.sandbox.patterns.behavioural.observer.IObserver)
      */
+    @Override
     public void registerObserver( IObserver aObserver ) {
         LOG.debug( "Adding observer" );
         observers.add( aObserver );
@@ -50,6 +52,7 @@ public class WeatherData implements ISubject {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.observer.ISubject#removeObserver(org.suggs.sandbox.patterns.behavioural.observer.IObserver)
      */
+    @Override
     public void removeObserver( IObserver aObserver ) {
         LOG.debug( "Removing observer" );
         observers.remove( aObserver );

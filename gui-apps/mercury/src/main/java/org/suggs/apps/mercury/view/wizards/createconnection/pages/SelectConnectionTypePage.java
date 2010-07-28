@@ -42,9 +42,10 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage {
         super( PAGE_NAME, "ConnectionContext Type Selection" );
         setDescription( "Select the middleware implementation from the list below" );
 
-        HashMap map = (HashMap) ContextProvider.instance().getBean( "adapterList" );
+        HashMap<String, String> map = (HashMap<String, String>) ContextProvider.instance()
+            .getBean( "adapterList" );
         Set<String> keySet = map.keySet();
-        options = (String[]) keySet.toArray( new String[keySet.size()] );
+        options = keySet.toArray( new String[keySet.size()] );
 
         setPageComplete( false );
     }
@@ -111,6 +112,7 @@ public class SelectConnectionTypePage extends AbstractCreateConnectionPage {
             name.setLayoutData( TEXT_BOX_STYLE );
             name.addModifyListener( new ModifyListener() {
 
+                @Override
                 public void modifyText( ModifyEvent e ) {
                     connName = name.getText();
                     checkIfPageComplete();

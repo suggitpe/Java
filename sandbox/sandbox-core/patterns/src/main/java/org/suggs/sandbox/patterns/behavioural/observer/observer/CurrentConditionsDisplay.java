@@ -38,6 +38,7 @@ public class CurrentConditionsDisplay implements IObserver, IDisplayElement {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.observer.IObserver#update(float, float, float)
      */
+    @Override
     public void update( float aTemperature, float aHumidity, float pressure ) {
         temperature = aTemperature;
         humidity = aHumidity;
@@ -48,6 +49,7 @@ public class CurrentConditionsDisplay implements IObserver, IDisplayElement {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.observer.IDisplayElement#display()
      */
+    @Override
     public void display() {
         LOG.info( "Current conditions: " + temperature + "C and " + humidity + "% humidity" );
     }

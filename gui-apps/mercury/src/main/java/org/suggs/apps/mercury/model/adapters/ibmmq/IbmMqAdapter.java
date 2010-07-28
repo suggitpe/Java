@@ -21,6 +21,7 @@ public class IbmMqAdapter extends AbstractMercuryAdapter {
     /**
      * @see org.suggs.apps.mercury.model.adapters.IConnectionAdapter#getFriendlyName()
      */
+    @Override
     public final String getFriendlyName() {
         return FRIENDLY_NAME;
     }
@@ -28,6 +29,7 @@ public class IbmMqAdapter extends AbstractMercuryAdapter {
     /**
      * @see org.suggs.apps.mercury.model.adapters.IConnectionAdapter#getType()
      */
+    @Override
     public final String getType() {
         return TYPE.toString();
     }

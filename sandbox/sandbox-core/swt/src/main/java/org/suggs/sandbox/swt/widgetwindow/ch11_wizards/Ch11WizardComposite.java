@@ -39,8 +39,10 @@ public class Ch11WizardComposite extends Composite {
         dBut.setText( "Wizard dialog ..." );
         dBut.addSelectionListener( new SelectionListener() {
 
+            @Override
             public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
+            @Override
             public void widgetSelected( SelectionEvent arg0 ) {
                 WizardDialog d = new WizardDialog( parent.getShell(), new ProjectWizard() );
                 d.open();

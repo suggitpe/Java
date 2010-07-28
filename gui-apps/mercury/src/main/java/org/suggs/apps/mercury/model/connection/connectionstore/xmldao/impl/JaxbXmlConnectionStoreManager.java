@@ -65,6 +65,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( fileManager, "The file manager cannot be null, this needs to be injected" );
         Assert.notNull( persistentFile, "The name of the persisten file cannot be null" );
@@ -73,6 +74,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#getRawXml()
      */
+    @Override
     public String getRawXml() throws ConnectionStoreException {
         if ( connectionDataCache == null || connectionDataCache.length() == 0 ) {
             try {
@@ -91,7 +93,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#readConnectionData()
      */
-    @SuppressWarnings("unchecked")
+    @Override
     public Map<String, ConnectionDetails> readConnectionData() throws ConnectionStoreException {
         String xmlClob = getRawXml();
 
@@ -121,6 +123,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
 
             uMrsh.setSchema( schemaCache );
 
+            @SuppressWarnings("unchecked")
             JAXBElement<ConnectionStoreType> elem = (JAXBElement<ConnectionStoreType>) uMrsh.unmarshal( new StringReader( xmlClob ) );
             connStr = elem.getValue();
         }
@@ -140,6 +143,7 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#saveConnectionData(java.util.Map)
      */
+    @Override
     public void saveConnectionData( Map<String, ConnectionDetails> map ) throws ConnectionStoreException {
         if ( map == null ) {
             throw new ConnectionStoreException( "Trying to save down a null connection data map" );

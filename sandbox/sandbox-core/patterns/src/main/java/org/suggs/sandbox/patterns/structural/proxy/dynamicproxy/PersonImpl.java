@@ -21,6 +21,7 @@ public class PersonImpl implements IPerson {
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.IPerson#getGender()
      */
+    @Override
     public String getGender() {
         return gender;
     }
@@ -28,6 +29,7 @@ public class PersonImpl implements IPerson {
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.IPerson#getHotOrNotRating()
      */
+    @Override
     public int getHotOrNotRating() {
         if ( ratingCount == 0 ) {
             return 0;
@@ -38,6 +40,7 @@ public class PersonImpl implements IPerson {
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.IPerson#getInterests()
      */
+    @Override
     public String getInterests() {
         return interests;
     }
@@ -45,6 +48,7 @@ public class PersonImpl implements IPerson {
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.IPerson#getName()
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -52,6 +56,7 @@ public class PersonImpl implements IPerson {
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.IPerson#setGender(java.lang.String)
      */
+    @Override
     public void setGender( String aGender ) {
         gender = aGender;
     }
@@ -59,6 +64,7 @@ public class PersonImpl implements IPerson {
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.IPerson#setHotOrNotRating(int)
      */
+    @Override
     public void setHotOrNotRating( int hotOrNot ) {
         rating += hotOrNot;
         ++ratingCount;
@@ -67,6 +73,7 @@ public class PersonImpl implements IPerson {
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.IPerson#setInterests(java.lang.String)
      */
+    @Override
     public void setInterests( String aInterests ) {
         interests = aInterests;
     }
@@ -74,6 +81,7 @@ public class PersonImpl implements IPerson {
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.IPerson#setName(java.lang.String)
      */
+    @Override
     public void setName( String aName ) {
         name = aName;
     }

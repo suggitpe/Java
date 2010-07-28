@@ -22,6 +22,7 @@ public class HelloWorldActivator implements BundleActivator {
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
+    @Override
     public void start( BundleContext aArg0 ) {
         LOG.debug( "Hello world" );
     }
@@ -29,6 +30,7 @@ public class HelloWorldActivator implements BundleActivator {
     /**
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
+    @Override
     public void stop( BundleContext aArg0 ) {
         LOG.debug( "Good-bye world" );
     }

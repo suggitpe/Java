@@ -27,7 +27,7 @@ import javax.xml.ws.Service;
  */
 public class HelloWorldDispatchObjectClient implements WebServiceClient {
 
-    @SuppressWarnings("unchecked")
+    @Override
     public String callWebService( String aName ) {
         QName serviceQName = new QName( HelloWorldBindings.WS_TARGET_NS, HelloWorldBindings.WS_NAME );
         QName portQName = new QName( HelloWorldBindings.WS_TARGET_NS, HelloWorldBindings.WS_PORT );
@@ -40,6 +40,7 @@ public class HelloWorldDispatchObjectClient implements WebServiceClient {
             Dispatch<Object> dispatch = service.createDispatch( portQName, jaxbContext, Service.Mode.PAYLOAD );
 
             JAXBElement<SayHello> request = createJaxbRequest( aName );
+            @SuppressWarnings("unchecked")
             JAXBElement<SayHelloResponse> response = (JAXBElement<SayHelloResponse>) dispatch.invoke( request );
             return debugResponse( response );
 

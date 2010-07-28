@@ -44,7 +44,6 @@ public class CopyFileNamesToClipboardAction extends Action {
     /**
      * @see org.eclipse.jface.action.Action#run()
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void run() {
         Clipboard clip = ImageUtil.getClipboard();
@@ -57,7 +56,7 @@ public class CopyFileNamesToClipboardAction extends Action {
         }
 
         StringBuffer buff = new StringBuffer();
-        for ( Iterator iter = sel.iterator(); iter.hasNext(); ) {
+        for ( Iterator<?> iter = sel.iterator(); iter.hasNext(); ) {
             File f = (File) iter.next();
             buff.append( " " ).append( f.getAbsolutePath() );
         }

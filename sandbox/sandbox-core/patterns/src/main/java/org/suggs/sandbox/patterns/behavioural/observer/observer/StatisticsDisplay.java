@@ -44,6 +44,7 @@ public class StatisticsDisplay implements IObserver, IDisplayElement {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.observer.IObserver#update(float, float, float)
      */
+    @Override
     public void update( float temp, float humidity, float pressure ) {
         oldTemp = newTemp;
         newTemp = temp;
@@ -60,6 +61,7 @@ public class StatisticsDisplay implements IObserver, IDisplayElement {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.observer.IDisplayElement#display()
      */
+    @Override
     public void display() {
 
         LOG.debug( "STATS: temp [" + calcChange( oldTemp, newTemp ) + "%] change, humidity ["

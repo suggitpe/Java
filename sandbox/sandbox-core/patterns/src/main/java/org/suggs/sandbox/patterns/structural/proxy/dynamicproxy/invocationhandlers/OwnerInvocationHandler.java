@@ -39,6 +39,7 @@ public class OwnerInvocationHandler implements InvocationHandler {
      * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method,
      *      java.lang.Object[])
      */
+    @Override
     public Object invoke( Object aObject, Method aMethod, Object[] aArgs ) throws Throwable {
         try {
             if ( aMethod.getName().startsWith( "get" ) ) {

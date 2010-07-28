@@ -33,6 +33,7 @@ public class PancakeHouseMenuIterator implements IIterator {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IIterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         if ( position >= items.size() || items.get( position ) == null ) {
             return false;
@@ -43,6 +44,7 @@ public class PancakeHouseMenuIterator implements IIterator {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IIterator#next()
      */
+    @Override
     public Object next() {
         return items.get( position++ );
     }

@@ -77,6 +77,7 @@ public class State implements IState, InitializingBean {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.connection.IState#step(org.suggs.sandbox.patterns.behavioural.state.connection.IStateMachineEventContext)
      */
+    @Override
     public IState step( IStateMachineEventContext aContext ) {
         loadTransitionsIntoState();
         try {

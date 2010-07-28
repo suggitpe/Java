@@ -58,6 +58,7 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
      * 
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#getConnectionDump()
      */
+    @Override
     public String getConnectionDump() throws ConnectionStoreException {
         return connStore.getConnectionStoreDumpAsXml();
     }
@@ -74,6 +75,7 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#getConnection(java.lang.String)
      */
+    @Override
     public IConnection getConnection( String aConnectionName ) {
         return connectionMap.get( aConnectionName );
     }
@@ -86,6 +88,7 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener#handleConnectionStoreChange(java.lang.String,
      *      org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener.ConnectionStoreEvent)
      */
+    @Override
     public void handleConnectionStoreChange( String aConnectionName,
                                              IConnectionStoreChangeListener.ConnectionStoreEvent aEvent ) {
         switch ( aEvent ) {
@@ -113,6 +116,7 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#containsConnection(java.lang.String)
      */
+    @Override
     public boolean containsConnection( String aConnectionName ) {
         return connectionMap.containsKey( aConnectionName );
     }
@@ -127,6 +131,7 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#addConnectionManagerListener(org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener)
      */
+    @Override
     public void addConnectionManagerListener( IConnectionManagerListener aListener ) {
         listsners.add( aListener );
     }
@@ -134,6 +139,7 @@ public final class ConnectionManager implements IConnectionManager, IConnectionS
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManager#removeConnectionManagerListener(org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener)
      */
+    @Override
     public void removeConnectionManagerListener( IConnectionManagerListener aListener ) {
         listsners.remove( aListener );
     }

@@ -34,6 +34,7 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean {
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( actionManager,
                         "An action manager object must be injected into the ToolBarFactory object.  Please revise Spring XML" );
@@ -42,6 +43,7 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean {
     /**
      * @see org.suggs.apps.mercury.view.IToolBarFactory#createToolbar(java.lang.String, int)
      */
+    @Override
     public ToolBarManager createToolbar( String toolBarType, int style ) {
         if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Constructing toolbar manager for type [" + toolBarType + "]" );

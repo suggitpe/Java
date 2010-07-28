@@ -33,10 +33,12 @@ public final class ConnectionAdapterFactory {
         LOG.info( "Creating adapter of type [STUB]" );
         return new IConnectionAdapter() {
 
+            @Override
             public String getFriendlyName() {
                 return null;
             }
 
+            @Override
             public String getType() {
                 return null;
             }

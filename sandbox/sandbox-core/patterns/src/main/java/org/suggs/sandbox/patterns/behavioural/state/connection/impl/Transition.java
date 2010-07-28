@@ -67,6 +67,7 @@ public class Transition implements ITransition, InitializingBean {
      *            the event context
      * @return true if transition is valid for both events and guards
      */
+    @Override
     public boolean evaluateStateAgainstEventsAndGuards( IStateMachineEventContext aContext, IState aState ) {
         return ( isTransitionEventValid( aContext ) && areAllTransitionGuardsValid( aContext ) );
     }

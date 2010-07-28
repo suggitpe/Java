@@ -63,6 +63,7 @@ public class Ch4MouseKey extends Composite {
 
     private Listener untypedListener = new Listener() {
 
+        @Override
         public void handleEvent( Event event ) {
             switch ( event.type ) {
                 case SWT.MouseEnter:
@@ -77,6 +78,6 @@ public class Ch4MouseKey extends Composite {
 
     void keyHandler() {
         output.setText( "Key Event" );
-    };
+    }
 
 }

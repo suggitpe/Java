@@ -118,6 +118,7 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IGumballMachineRemote#getState()
      */
+    @Override
     public IState getState() {
         return state;
     }
@@ -125,6 +126,7 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IGumballMachineRemote#getCount()
      */
+    @Override
     public int getCount() {
         return count;
     }
@@ -132,6 +134,7 @@ public class GumballMachine extends UnicastRemoteObject implements IGumballMachi
     /**
      * @see org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IGumballMachineRemote#getLocation()
      */
+    @Override
     public String getLocation() {
         return location;
     }

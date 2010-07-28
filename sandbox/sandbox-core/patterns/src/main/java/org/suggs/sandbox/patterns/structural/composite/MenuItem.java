@@ -88,8 +88,8 @@ public class MenuItem extends AbstractMenuComponent {
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#createIterator()
      */
-    @SuppressWarnings("unchecked")
-    public Iterator createIterator() {
+    @Override
+    public Iterator<?> createIterator() {
         return new NullIterator();
     }
 

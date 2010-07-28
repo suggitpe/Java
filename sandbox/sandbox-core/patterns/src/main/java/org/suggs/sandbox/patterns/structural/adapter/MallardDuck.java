@@ -20,6 +20,7 @@ public class MallardDuck implements IDuck {
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.IDuck#fly()
      */
+    @Override
     public void fly() {
         LOG.debug( "I'm flying" );
     }
@@ -27,6 +28,7 @@ public class MallardDuck implements IDuck {
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.IDuck#quack()
      */
+    @Override
     public void quack() {
         LOG.debug( "Quack!" );
     }

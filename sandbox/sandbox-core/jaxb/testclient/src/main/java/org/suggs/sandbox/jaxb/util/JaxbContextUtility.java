@@ -102,7 +102,7 @@ public final class JaxbContextUtility {
      * @param aSchemaLocation
      * @return
      */
-    private Schema createSchemafromClasspathReference( String aSchemaLocation ) throws JAXBException {
+    private Schema createSchemafromClasspathReference( String aSchemaLocation ) {
         synchronized ( schemaCacheLock ) {
             if ( !schemaCache.containsKey( aSchemaLocation ) ) {
                 SchemaFactory sf = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );

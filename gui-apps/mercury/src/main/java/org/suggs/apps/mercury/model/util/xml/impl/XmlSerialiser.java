@@ -31,6 +31,7 @@ public class XmlSerialiser implements IXmlSerialiser {
     /**
      * @see org.suggs.apps.mercury.model.util.xml.IXmlSerialiser#serialiseXmlToString(org.w3c.dom.Node)
      */
+    @Override
     public final String serialiseXmlToString( Node document ) throws MercuryUtilityException {
         LOG.debug( "Serialising DOM Document" );
 

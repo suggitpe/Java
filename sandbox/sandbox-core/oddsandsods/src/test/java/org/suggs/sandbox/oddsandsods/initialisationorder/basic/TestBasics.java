@@ -20,7 +20,7 @@ public class TestBasics {
      */
     @Test
     public void testBasics() {
-        new TestClass();
+        @SuppressWarnings("unused")
+        TestClass clazz = new TestClass();
     }
-
 }

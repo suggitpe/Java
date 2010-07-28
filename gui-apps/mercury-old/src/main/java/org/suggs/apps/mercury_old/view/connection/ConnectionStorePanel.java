@@ -195,6 +195,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( connectionStore, "Must set the connection store into the connection manager panel" );
     }
@@ -202,6 +203,7 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
     /**
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
+    @Override
     public void update( Observable aObserved, Object aObj ) {
         LOG.info( "Observable has changed [" + aObserved.getClass().getName() + "]" );
         if ( aObserved instanceof IConnectionStore ) {

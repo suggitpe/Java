@@ -30,6 +30,7 @@ public class CeilingFanOnCommmand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
+    @Override
     public void execute() {
         fan.medium();
     }
@@ -37,6 +38,7 @@ public class CeilingFanOnCommmand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
+    @Override
     public void undo() {
         fan.off();
     }

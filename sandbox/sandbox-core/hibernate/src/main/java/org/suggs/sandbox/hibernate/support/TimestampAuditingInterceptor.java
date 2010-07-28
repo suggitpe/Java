@@ -29,7 +29,7 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
 
     private enum AUDIT_TYPE {
         CREATED_ON, UPDATED_ON
-    };
+    }
 
     /**
      * Constructs a new instance.

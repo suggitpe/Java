@@ -40,6 +40,7 @@ public class EmailPage extends WizardPage {
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
+    @Override
     public void createControl( Composite parent ) {
         Composite comp = new Composite( parent, SWT.NONE );
         comp.setLayout( new GridLayout( 2, false ) );
@@ -51,6 +52,7 @@ public class EmailPage extends WizardPage {
 
         txt.addModifyListener( new ModifyListener() {
 
+            @Override
             public void modifyText( ModifyEvent e ) {
                 emailAddress = txt.getText();
                 setPageComplete( emailAddress.length() > 0 );

@@ -33,6 +33,7 @@ public class Flock implements IQuackable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.IQuackable#quack()
      */
+    @Override
     public void quack() {
         for ( IQuackable q : flock ) {
             q.quack();
@@ -42,6 +43,7 @@ public class Flock implements IQuackable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
      */
+    @Override
     public void notifyObservers() {
         for ( IQuackable q : flock ) {
             q.notifyObservers();
@@ -51,6 +53,7 @@ public class Flock implements IQuackable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
      */
+    @Override
     public void registerObserver( IObserver observer ) {
         for ( IQuackable q : flock ) {
             q.registerObserver( observer );

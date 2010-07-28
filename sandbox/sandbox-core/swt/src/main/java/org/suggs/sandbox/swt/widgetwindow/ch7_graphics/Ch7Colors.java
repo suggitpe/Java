@@ -38,6 +38,7 @@ public class Ch7Colors extends Canvas {
         /**
          * @see org.eclipse.swt.events.PaintListener#paintControl(org.eclipse.swt.events.PaintEvent)
          */
+        @Override
         public void paintControl( PaintEvent pe ) {
             Display d = pe.display;
             Color light_grey = new Color( d, 0xE0, 0xE0, 0xE0 );

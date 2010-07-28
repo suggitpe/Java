@@ -77,7 +77,6 @@ public interface IMenuComponent {
      * 
      * @return an iterator that knows how to iterator over a composite object tree
      */
-    @SuppressWarnings("unchecked")
-    Iterator createIterator();
+    Iterator<?> createIterator();
 
 }

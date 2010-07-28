@@ -37,6 +37,7 @@ public class BeatController implements IController {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#start()
      */
+    @Override
     public void start() {
         model.on();
         view.disableStartMenuItem();
@@ -46,6 +47,7 @@ public class BeatController implements IController {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#stop()
      */
+    @Override
     public void stop() {
         model.off();
         view.enableStartMenuItem();
@@ -55,6 +57,7 @@ public class BeatController implements IController {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#increaseBpm()
      */
+    @Override
     public void increaseBpm() {
         model.setBPM( model.getBpm() + 1 );
     }
@@ -62,6 +65,7 @@ public class BeatController implements IController {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#decreaseBpm()
      */
+    @Override
     public void decreaseBpm() {
         model.setBPM( model.getBpm() + 1 );
     }
@@ -69,6 +73,7 @@ public class BeatController implements IController {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#setBpm(int)
      */
+    @Override
     public void setBpm( int bpm ) {
         model.setBPM( bpm );
     }

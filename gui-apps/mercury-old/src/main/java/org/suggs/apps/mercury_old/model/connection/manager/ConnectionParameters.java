@@ -54,6 +54,7 @@ public class ConnectionParameters implements IConnectionParameters {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getType()
      */
+    @Override
     public EConnectionType getType() {
         return type;
     }
@@ -61,6 +62,7 @@ public class ConnectionParameters implements IConnectionParameters {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getHostname()
      */
+    @Override
     public String getHostname() {
         return hostName;
     }
@@ -68,6 +70,7 @@ public class ConnectionParameters implements IConnectionParameters {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getPort()
      */
+    @Override
     public String getPort() {
         return port;
     }
@@ -75,6 +78,7 @@ public class ConnectionParameters implements IConnectionParameters {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getMetaData()
      */
+    @Override
     public Map<String, String> getMetaData() {
         return metaData;
     }
@@ -82,6 +86,7 @@ public class ConnectionParameters implements IConnectionParameters {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionParameters#getConnectionFactory()
      */
+    @Override
     public String getConnectionFactory() {
         return connectionFactory;
     }

@@ -43,6 +43,7 @@ final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler {
     /**
      * @see org.xml.sax.EntityResolver#resolveEntity(java.lang.String, java.lang.String)
      */
+    @Override
     public InputSource resolveEntity( String publicId, String systemId ) throws java.io.IOException {
         // now get the dtd filename from the systemId URL
         int separator = 0;
@@ -71,6 +72,7 @@ final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler {
     /**
      * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
      */
+    @Override
     public void error( SAXParseException e ) {
         LOG.error( "Error picked up in the Connection Store Handler [" + e.getMessage() + "]" );
         if ( failOnError ) {
@@ -81,6 +83,7 @@ final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler {
     /**
      * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
      */
+    @Override
     public void warning( SAXParseException e ) {
         LOG.warn( "Warning picked up in the Connection Store Handler [" + e.getMessage() + "]" );
         if ( failOnError ) {
@@ -91,6 +94,7 @@ final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler {
     /**
      * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
      */
+    @Override
     public void fatalError( SAXParseException e ) {
         LOG.error( "Fatal error picked up in the Connection Store Handler [" + e.getMessage() + "]" );
         if ( failOnError ) {

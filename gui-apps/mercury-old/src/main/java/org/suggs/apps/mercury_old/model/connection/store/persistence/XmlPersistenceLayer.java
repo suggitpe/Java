@@ -70,6 +70,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.store.IPersistenceLayer#readPersistenceLayer()
      */
+    @Override
     public Map<String, IConnectionDetails> readPersistenceLayer() throws MercuryConnectionStoreException {
         // quickly check that the file is not just an empty file
         if ( MERCURY_FILE.length() == 0 ) {
@@ -187,6 +188,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.store.IPersistenceLayer#savePersistenceLayer(java.util.Map)
      */
+    @Override
     public void savePersistenceLayer( Map<String, IConnectionDetails> aMap )
                     throws MercuryConnectionStoreException {
         LOG.info( "Saving prsistence layer" );
@@ -320,6 +322,7 @@ public class XmlPersistenceLayer implements IPersistenceLayer {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.store.IPersistenceLayer#verifyPersistenceLayer()
      */
+    @Override
     public final void verifyPersistenceLayer() {
         // check that the persistence dir exists
         File dir = new File( MERCURY_HOME_DIR );

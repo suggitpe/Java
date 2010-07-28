@@ -85,6 +85,7 @@ public class IbmMqConnectionDataPage extends AbstractCreateConnectionPage {
             channel.setLayoutData( TEXT_BOX_STYLE );
             channel.addModifyListener( new ModifyListener() {
 
+                @Override
                 public void modifyText( ModifyEvent e ) {
                     channelName = channel.getText();
                     checkIfPageComplete();

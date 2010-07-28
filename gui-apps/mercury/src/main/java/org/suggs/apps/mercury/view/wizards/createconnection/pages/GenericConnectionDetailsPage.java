@@ -158,6 +158,7 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage {
             hostnameText.setLayoutData( TEXT_BOX_STYLE );
             hostnameText.addModifyListener( new ModifyListener() {
 
+                @Override
                 public void modifyText( ModifyEvent e ) {
                     hostname = hostnameText.getText();
                     checkIfPageComplete();
@@ -170,6 +171,7 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage {
             portNumText.setLayoutData( TEXT_BOX_STYLE );
             portNumText.addModifyListener( new ModifyListener() {
 
+                @Override
                 public void modifyText( ModifyEvent e ) {
 
                     String p = portNumText.getText();
@@ -203,6 +205,7 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage {
             usernameText.setEnabled( false );
             usernameText.addModifyListener( new ModifyListener() {
 
+                @Override
                 public void modifyText( ModifyEvent e ) {
                     username = usernameText.getText();
                     checkIfPageComplete();
@@ -215,6 +218,7 @@ public class GenericConnectionDetailsPage extends AbstractCreateConnectionPage {
             passwordText.setEnabled( false );
             passwordText.addModifyListener( new ModifyListener() {
 
+                @Override
                 public void modifyText( ModifyEvent e ) {
                     password = passwordText.getText();
                 }

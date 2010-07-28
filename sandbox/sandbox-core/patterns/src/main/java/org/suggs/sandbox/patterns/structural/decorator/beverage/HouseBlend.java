@@ -24,6 +24,7 @@ public class HouseBlend extends AbstractBeverage {
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#cost()
      */
+    @Override
     public double cost() {
         return 0.89;
     }

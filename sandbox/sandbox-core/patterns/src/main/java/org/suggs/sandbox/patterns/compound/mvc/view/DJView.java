@@ -97,6 +97,7 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver {
         menu.add( startMenuItem );
         startMenuItem.addActionListener( new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 controller.start();
             }
@@ -105,6 +106,7 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver {
         menu.add( stopMenuItem );
         stopMenuItem.addActionListener( new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 controller.stop();
                 // mBpmOutputLabel_.setText( "Off-line" );
@@ -114,6 +116,7 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver {
         JMenuItem exit = new JMenuItem( "Exit" );
         exit.addActionListener( new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 // THIS VERY WELL MAY FAIL
                 controlFrame.dispose();
@@ -185,6 +188,7 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver {
     /**
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
+    @Override
     public void actionPerformed( ActionEvent event ) {
         if ( event.getSource() == setBpmButton ) {
             int bpm = Integer.parseInt( bpmTextField.getText() );
@@ -202,6 +206,7 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBpmObserver#updateBpm()
      */
+    @Override
     public void updateBpm() {
         int bpm = model.getBpm();
         if ( bpm == 0 ) {
@@ -215,8 +220,7 @@ public class DJView implements ActionListener, IBeatObserver, IBpmObserver {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatObserver#updateBeat()
      */
-    public void updateBeat() {
-    // mBeatBar_.setValue( 100 );
-    }
+    @Override
+    public void updateBeat() {}
 
 }

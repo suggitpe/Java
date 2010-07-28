@@ -114,6 +114,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#isConnectionDetailsValid()
      */
+    @Override
     public boolean isConnectionDetailsValid() {
         boolean ret = true;
         if ( name == null || name.length() < 1 ) {
@@ -134,6 +135,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getName()
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -141,6 +143,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#setName(java.lang.String)
      */
+    @Override
     public void setName( String aName ) {
         name = aName;
     }
@@ -148,6 +151,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getType()
      */
+    @Override
     public EConnectionType getType() {
         return type;
     }
@@ -155,6 +159,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getHostname()
      */
+    @Override
     public String getHostname() {
         return hostName;
     }
@@ -172,6 +177,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getPort()
      */
+    @Override
     public String getPort() {
         return port;
     }
@@ -189,6 +195,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getMetaData()
      */
+    @Override
     public Map<String, String> getMetaData() {
         return metaData;
     }
@@ -206,6 +213,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getConnectionFactories()
      */
+    @Override
     public Map<String, Set<String>> getConnectionFactories() {
         return connectionFactories;
     }
@@ -213,6 +221,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#setConnectionFactories(java.util.Map)
      */
+    @Override
     public void setConnectionFactories( Map<String, Set<String>> aMap ) {
         connectionFactories = aMap;
     }
@@ -220,6 +229,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#getDestinations()
      */
+    @Override
     public Map<String, Set<String>> getDestinations() {
         return destinations;
     }
@@ -227,6 +237,7 @@ public class ConnectionDetails implements IConnectionDetails {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionDetails#setDestinations(java.util.Map)
      */
+    @Override
     public void setDestinations( Map<String, Set<String>> aMap ) {
         destinations = aMap;
     }

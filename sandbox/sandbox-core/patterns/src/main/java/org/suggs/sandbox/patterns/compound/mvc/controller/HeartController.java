@@ -38,25 +38,30 @@ public class HeartController implements IController {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#decreaseBpm()
      */
+    @Override
     public void decreaseBpm() {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#increaseBpm()
      */
+    @Override
     public void increaseBpm() {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#setBpm(int)
      */
+    @Override
     public void setBpm( int bpm ) {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#start()
      */
+    @Override
     public void start() {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IController#stop()
      */
+    @Override
     public void stop() {}
 }

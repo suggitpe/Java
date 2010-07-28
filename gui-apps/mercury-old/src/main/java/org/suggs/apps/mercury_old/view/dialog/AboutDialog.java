@@ -95,6 +95,7 @@ public class AboutDialog extends JDialog {
         final JButton ok = new JButton( "OK" );
         ActionListener l = new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 dispose();
             }

@@ -17,13 +17,11 @@ import net.jini.core.lookup.ServiceTemplate;
 
 import java.lang.reflect.Method;
 import java.rmi.MarshalledObject;
-import java.rmi.RemoteException;
 
 import javax.management.Attribute;
 import javax.management.AttributeList;
 import javax.management.AttributeNotFoundException;
 import javax.management.DynamicMBean;
-import javax.management.InvalidAttributeValueException;
 import javax.management.MBeanAttributeInfo;
 import javax.management.MBeanConstructorInfo;
 import javax.management.MBeanException;
@@ -31,7 +29,6 @@ import javax.management.MBeanInfo;
 import javax.management.MBeanNotificationInfo;
 import javax.management.MBeanOperationInfo;
 import javax.management.MBeanParameterInfo;
-import javax.management.ReflectionException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,8 +63,8 @@ public class JiniServiceManager implements DynamicMBean {
      * 
      * @see javax.management.DynamicMBean#getAttribute(java.lang.String)
      */
-    public Object getAttribute( String attribute ) throws AttributeNotFoundException, MBeanException,
-                    ReflectionException {
+    @Override
+    public Object getAttribute( String attribute ) throws AttributeNotFoundException {
         throw new AttributeNotFoundException( attribute );
     }
 
@@ -76,6 +73,7 @@ public class JiniServiceManager implements DynamicMBean {
      * 
      * @see javax.management.DynamicMBean#getAttributes(java.lang.String[])
      */
+    @Override
     public AttributeList getAttributes( String[] attributes ) {
         return new AttributeList();
     }
@@ -85,8 +83,8 @@ public class JiniServiceManager implements DynamicMBean {
      * 
      * @see javax.management.DynamicMBean#setAttribute(javax.management.Attribute)
      */
-    public void setAttribute( Attribute attribute ) throws AttributeNotFoundException,
-                    InvalidAttributeValueException, MBeanException, ReflectionException {
+    @Override
+    public void setAttribute( Attribute attribute ) throws AttributeNotFoundException {
         throw new AttributeNotFoundException( "No attributes can be set" );
     }
 
@@ -95,6 +93,7 @@ public class JiniServiceManager implements DynamicMBean {
      * 
      * @see javax.management.DynamicMBean#setAttributes(javax.management.AttributeList)
      */
+    @Override
     public AttributeList setAttributes( AttributeList attributes ) {
         return new AttributeList();
     }
@@ -104,12 +103,11 @@ public class JiniServiceManager implements DynamicMBean {
      * 
      * @see javax.management.DynamicMBean#invoke(java.lang.String, java.lang.Object[], java.lang.String[])
      */
-    @SuppressWarnings("unchecked")
-    public Object invoke( String actionName, Object[] params, String[] signature ) throws MBeanException,
-                    ReflectionException {
+    @Override
+    public Object invoke( String actionName, Object[] params, String[] signature ) throws MBeanException {
         try {
             String methName = actionName;
-            Class[] types = new Class[signature.length];
+            Class<?>[] types = new Class[signature.length];
             for ( int i = 0; i < types.length; ++i ) {
                 types[i] = Class.forName( signature[i] );
             }
@@ -129,7 +127,7 @@ public class JiniServiceManager implements DynamicMBean {
      * 
      * @see javax.management.DynamicMBean#getMBeanInfo()
      */
-    @SuppressWarnings("unchecked")
+    @Override
     public MBeanInfo getMBeanInfo() {
         MBeanConstructorInfo[] cons = new MBeanConstructorInfo[1];
         MBeanNotificationInfo[] nots = null;
@@ -139,8 +137,8 @@ public class JiniServiceManager implements DynamicMBean {
         // ############
         // constructors
         try {
-            Class connArgs[] = { Class.forName( "java.lang.String" ),
-                                Class.forName( "net.jini.core.entry.Entry" ) };
+            Class<?> connArgs[] = { Class.forName( "java.lang.String" ),
+                                   Class.forName( "net.jini.core.entry.Entry" ) };
             MBeanConstructorInfo cinfo = new MBeanConstructorInfo( "Main constructor", this.getClass()
                 .getConstructor( connArgs ) );
             cons[0] = cinfo;
@@ -187,10 +185,9 @@ public class JiniServiceManager implements DynamicMBean {
      * 
      * @return
      */
-    @SuppressWarnings("unchecked")
     private Object lookupService() {
         try {
-            Class[] interfaces = { Class.forName( JINI_INTERFACE_NAME ) };
+            Class<?>[] interfaces = { Class.forName( JINI_INTERFACE_NAME ) };
 
             Entry[] ents = new Entry[1];
             ents[0] = initialAttribute;
@@ -201,23 +198,22 @@ public class JiniServiceManager implements DynamicMBean {
             ServiceRegistrar reg = new ServiceRegistrar() {
 
                 @Override
-                public Class[] getEntryClasses( ServiceTemplate arg0 ) throws RemoteException {
+                public Class<?>[] getEntryClasses( ServiceTemplate arg0 ) {
                     return null;
                 }
 
                 @Override
-                public Object[] getFieldValues( ServiceTemplate arg0, int arg1, String arg2 )
-                                throws NoSuchFieldException, RemoteException {
+                public Object[] getFieldValues( ServiceTemplate arg0, int arg1, String arg2 ) {
                     return null;
                 }
 
                 @Override
-                public String[] getGroups() throws RemoteException {
+                public String[] getGroups() {
                     return null;
                 }
 
                 @Override
-                public LookupLocator getLocator() throws RemoteException {
+                public LookupLocator getLocator() {
                     return null;
                 }
 
@@ -227,28 +223,29 @@ public class JiniServiceManager implements DynamicMBean {
                 }
 
                 @Override
-                public Class[] getServiceTypes( ServiceTemplate arg0, String arg1 ) throws RemoteException {
+                public Class<?>[] getServiceTypes( ServiceTemplate arg0, String arg1 ) {
                     return null;
                 }
 
                 @Override
-                public Object lookup( ServiceTemplate arg0 ) throws RemoteException {
+                public Object lookup( ServiceTemplate arg0 ) {
                     return null;
                 }
 
                 @Override
-                public ServiceMatches lookup( ServiceTemplate arg0, int arg1 ) throws RemoteException {
+                public ServiceMatches lookup( ServiceTemplate arg0, int arg1 ) {
                     return null;
                 }
 
+                @SuppressWarnings("rawtypes")
                 @Override
                 public EventRegistration notify( ServiceTemplate arg0, int arg1, RemoteEventListener arg2,
-                                                 MarshalledObject arg3, long arg4 ) throws RemoteException {
+                                                 MarshalledObject arg3, long arg4 ) {
                     return null;
                 }
 
                 @Override
-                public ServiceRegistration register( ServiceItem arg0, long arg1 ) throws RemoteException {
+                public ServiceRegistration register( ServiceItem arg0, long arg1 ) {
                     return null;
                 }
             };

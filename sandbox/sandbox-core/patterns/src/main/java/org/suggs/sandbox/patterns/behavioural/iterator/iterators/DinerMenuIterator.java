@@ -34,6 +34,7 @@ public class DinerMenuIterator implements IIterator {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IIterator#hasNext()
      */
+    @Override
     public boolean hasNext() {
         if ( position >= items.length || items[position] == null ) {
             return false;
@@ -44,6 +45,7 @@ public class DinerMenuIterator implements IIterator {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IIterator#next()
      */
+    @Override
     public Object next() {
         return items[position++];
     }

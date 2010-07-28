@@ -66,29 +66,31 @@ public class Ch8TreeComposite extends Composite {
         TreeViewer viewer = new TreeViewer( this, style );
         viewer.setContentProvider( new ITreeContentProvider() {
 
+            @Override
             public Object[] getChildren( Object parentElem ) {
                 return ( (TreeNode) parentElem ).getChildren().toArray();
             }
 
+            @Override
             public Object getParent( Object elem ) {
                 return ( (TreeNode) elem ).getParent();
             }
 
+            @Override
             public boolean hasChildren( Object elem ) {
                 return ( (TreeNode) elem ).getChildren().size() > 0;
             }
 
+            @Override
             public Object[] getElements( Object elem ) {
                 return ( (TreeNode) elem ).getChildren().toArray();
             }
 
-            public void dispose() {
-            // nadda
-            }
+            @Override
+            public void dispose() {}
 
-            public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {
-            // nadda
-            }
+            @Override
+            public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {}
         } );
 
         viewer.setInput( getRootNode() );
@@ -133,8 +135,7 @@ public class Ch8TreeComposite extends Composite {
             return this;
         }
 
-        @SuppressWarnings("unchecked")
-        public List getChildren() {
+        public List<TreeNode> getChildren() {
             return children;
         }
 

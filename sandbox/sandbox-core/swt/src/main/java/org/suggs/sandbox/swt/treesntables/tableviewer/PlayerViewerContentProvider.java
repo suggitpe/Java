@@ -21,6 +21,7 @@ public class PlayerViewerContentProvider implements IStructuredContentProvider {
      * 
      * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
      */
+    @Override
     public Object[] getElements( Object inElem ) {
         if ( inElem instanceof TeamBean ) {
             TeamBean team = (TeamBean) inElem;
@@ -32,16 +33,14 @@ public class PlayerViewerContentProvider implements IStructuredContentProvider {
     /**
      * @see org.eclipse.jface.viewers.IContentProvider#dispose()
      */
-    public void dispose() {
-    // nadda
-    }
+    @Override
+    public void dispose() {}
 
     /**
      * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
      *      java.lang.Object, java.lang.Object)
      */
-    public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {
-    // nadda
-    }
+    @Override
+    public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {}
 
 }

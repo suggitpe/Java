@@ -33,6 +33,7 @@ public class MacroCommand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
+    @Override
     public void execute() {
         for ( ICommand cmd : commands ) {
             cmd.execute();
@@ -42,6 +43,7 @@ public class MacroCommand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
+    @Override
     public void undo() {
         for ( ICommand cmd : commands ) {
             cmd.undo();

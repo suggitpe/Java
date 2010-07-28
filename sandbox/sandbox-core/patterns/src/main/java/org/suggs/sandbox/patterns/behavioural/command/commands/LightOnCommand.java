@@ -30,6 +30,7 @@ public class LightOnCommand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
+    @Override
     public void execute() {
         light.on();
     }
@@ -37,6 +38,7 @@ public class LightOnCommand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
+    @Override
     public void undo() {
         light.off();
     }

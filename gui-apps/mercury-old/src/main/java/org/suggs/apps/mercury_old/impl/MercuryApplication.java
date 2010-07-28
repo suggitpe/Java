@@ -54,6 +54,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean {
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( connectionStorePanel, "There must be a connection store panel set in the main gui" );
         Assert.notNull( connectionButtons,
@@ -66,6 +67,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean {
     /**
      * @see org.suggs.apps.mercury_old.IMercuryApp#buildGui()
      */
+    @Override
     public void buildGui() throws MercuryException {
 
         LOG.debug( "Building GUI" );
@@ -143,6 +145,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean {
         exit.setMnemonic( 'x' );
         exit.addActionListener( new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 System.exit( 0 );
             }
@@ -153,6 +156,7 @@ public class MercuryApplication implements IMercuryApp, InitializingBean {
         about.setMnemonic( 'a' );
         about.addActionListener( new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 AboutDialog aboutDialog = new AboutDialog( aFrame );
                 aboutDialog.setVisible( true );

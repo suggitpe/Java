@@ -30,6 +30,7 @@ public class DiffJarsAction extends Action {
 
     @Override
     public void run() {
+
         GetJarInformationDialog dialog = new GetJarInformationDialog( Display.getDefault().getActiveShell() );
         dialog.open();
 
@@ -40,8 +41,6 @@ public class DiffJarsAction extends Action {
         String toJar = dialog.getToJarName();
         String fromJar = dialog.getFromJarName();
         String output = dialog.getDiffOutput();
-
-        // LOG.debug( "ToJar=[" + toJar + "], FromJar=[" + fromJar + "], OutputMechanism=[" + output + "]" );
     }
 
 }

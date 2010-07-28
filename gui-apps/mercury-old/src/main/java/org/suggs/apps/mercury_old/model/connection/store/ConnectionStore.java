@@ -47,6 +47,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( persistenceLayer, "Must inject a persisztence layer into the connection store" );
 
@@ -65,6 +66,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#loadConnectionParameters(java.lang.String)
      */
+    @Override
     public IConnectionDetails loadConnectionParameters( String aName ) throws MercuryConnectionStoreException {
         IConnectionDetails ret = connStore.get( aName );
         if ( ret == null ) {
@@ -77,6 +79,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#getListOfKnownConnectionNames()
      */
+    @Override
     public String[] getListOfKnownConnectionNames() {
         SortedSet<String> keys = new TreeSet<String>( connStore.keySet() );
         return keys.toArray( new String[keys.size()] );
@@ -85,6 +88,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#doesConnectionExist(java.lang.String)
      */
+    @Override
     public boolean doesConnectionExist( String aConnectionName ) {
         return connStore.containsKey( aConnectionName.toUpperCase() );
     }
@@ -92,6 +96,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#deleteNamedConnection(java.lang.String)
      */
+    @Override
     public void deleteNamedConnection( String aName ) throws MercuryConnectionStoreException {
         LOG.debug( "Deleting connection with name [" + aName + "]" );
         connStore.remove( aName );
@@ -106,6 +111,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#saveConnectionParameters(java.lang.String,
      *      org.suggs.apps.mercury_old.model.connection.IConnectionDetails)
      */
+    @Override
     public void saveConnectionParameters( String aName, IConnectionDetails aDetails )
                     throws MercuryConnectionStoreException {
         if ( aDetails == null ) {
@@ -153,6 +159,7 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * @see org.suggs.apps.mercury_old.model.connection.IConnectionStore#getState()
      */
+    @Override
     public String getState() {
         return storeState;
     }

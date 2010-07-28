@@ -48,6 +48,7 @@ public class Ch5Undoable extends Composite {
         text = new StyledText( this, SWT.MULTI | SWT.V_SCROLL );
         text.addExtendedModifyListener( new ExtendedModifyListener() {
 
+            @Override
             public void modifyText( ExtendedModifyEvent event ) {
                 String currTxt = text.getText();
                 String newTxt = currTxt.substring( event.start, event.start + event.length );

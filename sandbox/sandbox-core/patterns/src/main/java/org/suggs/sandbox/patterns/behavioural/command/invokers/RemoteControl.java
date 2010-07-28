@@ -31,10 +31,12 @@ public class RemoteControl {
     public RemoteControl() {
         ICommand noCommand = new ICommand() {
 
+            @Override
             public void execute() {
                 LOG.debug( "Command not implemented" );
             }
 
+            @Override
             public void undo() {
                 LOG.debug( "Command not implemented" );
             }

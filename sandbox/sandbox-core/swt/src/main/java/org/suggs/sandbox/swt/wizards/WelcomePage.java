@@ -33,6 +33,7 @@ public class WelcomePage extends WizardPage {
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
+    @Override
     public void createControl( Composite parent ) {
         Composite comp = new Composite( parent, SWT.NONE );
         comp.setLayout( new FillLayout( SWT.VERTICAL ) );

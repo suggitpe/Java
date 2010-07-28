@@ -94,20 +94,22 @@ public class Ch8ListComposite extends Composite {
             /**
              * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
              */
-            @SuppressWarnings("unchecked")
+            @Override
             public Object[] getElements( Object inputElement ) {
-                return ( (List) inputElement ).toArray();
+                return ( (List<?>) inputElement ).toArray();
             }
 
             /**
              * @see org.eclipse.jface.viewers.IContentProvider#dispose()
              */
+            @Override
             public void dispose() {}
 
             /**
              * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
              *      java.lang.Object, java.lang.Object)
              */
+            @Override
             public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {}
         } );
 

@@ -17,6 +17,7 @@ public abstract class AbstractBeverage implements IBeverage {
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#getDescription()
      */
+    @Override
     public String getDescription() {
         return description;
     }

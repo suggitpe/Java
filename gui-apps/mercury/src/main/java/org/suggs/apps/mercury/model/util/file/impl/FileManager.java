@@ -32,6 +32,7 @@ public class FileManager implements IFileManager {
     /**
      * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClobFromFile(java.io.File)
      */
+    @Override
     public final String retrieveClobFromFile( File file ) throws IOException {
         byte[] data = retrieveBytesFromFile( file );
         return new String( data, CHARSET );
@@ -40,6 +41,7 @@ public class FileManager implements IFileManager {
     /**
      * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveBytesFromFile(java.io.File)
      */
+    @Override
     public final byte[] retrieveBytesFromFile( File file ) throws IOException {
         FileInputStream fis = null;
         FileChannel chan = null;
@@ -63,6 +65,7 @@ public class FileManager implements IFileManager {
     /**
      * @see org.suggs.apps.mercury.model.util.file.IFileManager#retrieveClobFromResource(java.lang.String)
      */
+    @Override
     public final String retrieveClobFromResource( String resource ) throws IOException {
         InputStream is = null;
         StringWriter w = new StringWriter();
@@ -98,6 +101,7 @@ public class FileManager implements IFileManager {
      * @throws IOException
      *             if there are any issues in the persistence
      */
+    @Override
     public final void persistClobToFile( String aClob, File aFile ) throws IOException {
         // first ensure that the persistence layer is OK to use
         verifyPersistenceLayer( aFile );

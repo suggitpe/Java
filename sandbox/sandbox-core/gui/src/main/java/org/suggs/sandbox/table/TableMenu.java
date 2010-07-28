@@ -106,6 +106,7 @@ public class TableMenu extends JFrame {
         copyMenu.setText( "Copy" );
         copyMenu.addActionListener( new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent e ) {
                 Object value = getTableModel().getValueAt( rowIndex, columnIndex );
                 ClipboardHelper.setClipboardContents( value == null ? "" : value.toString() );
@@ -119,6 +120,7 @@ public class TableMenu extends JFrame {
              && getTableModel().isCellEditable( rowIndex, columnIndex ) ) {
             pasteMenu.addActionListener( new ActionListener() {
 
+                @Override
                 public void actionPerformed( ActionEvent e ) {
                     String value = ClipboardHelper.getClipboardContents( TableMenu.this );
                     getTableModel().setValueAt( value, rowIndex, columnIndex );
@@ -135,6 +137,7 @@ public class TableMenu extends JFrame {
                 contextMenu.addSeparator();
                 ActionListener changer = new ActionListener() {
 
+                    @Override
                     public void actionPerformed( ActionEvent e ) {
                         JMenuItem sourceItem = (JMenuItem) e.getSource();
                         Object value = sourceItem.getClientProperty( PROP_CHANGE_QUANTITY );
@@ -253,9 +256,8 @@ class ExampleTableModel extends AbstractTableModel {
         items.add( new Item( name, price, quantity ) );
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public Class getColumnClass( int columnIndex ) {
+    public Class<?> getColumnClass( int columnIndex ) {
         switch ( columnIndex ) {
             case COLUMN_NAME:
                 return String.class;
@@ -269,6 +271,7 @@ class ExampleTableModel extends AbstractTableModel {
         }
     }
 
+    @Override
     public int getColumnCount() {
         return 4;
     }
@@ -290,10 +293,12 @@ class ExampleTableModel extends AbstractTableModel {
         }
     }
 
+    @Override
     public int getRowCount() {
         return items.size();
     }
 
+    @Override
     public Object getValueAt( int rowIndex, int columnIndex ) {
         Item item = items.get( rowIndex );
         switch ( columnIndex ) {

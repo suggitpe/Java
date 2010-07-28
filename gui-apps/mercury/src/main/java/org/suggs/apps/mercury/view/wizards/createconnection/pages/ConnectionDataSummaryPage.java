@@ -169,6 +169,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
         /**
          * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
          */
+        @Override
         public Object[] getElements( Object inputElement ) {
             return (Object[]) inputElement;
         }
@@ -176,12 +177,14 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
         /**
          * @see org.eclipse.jface.viewers.IContentProvider#dispose()
          */
+        @Override
         public void dispose() {}
 
         /**
          * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
          *      java.lang.Object, java.lang.Object)
          */
+        @Override
         public void inputChanged( Viewer aViewer, Object oldInput, Object newInput ) {}
     }
 
@@ -196,6 +199,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
         /**
          * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
          */
+        @Override
         public Image getColumnImage( Object element, int columnIndex ) {
             // no thanks
             return null;
@@ -204,6 +208,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
         /**
          * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
          */
+        @Override
         public String getColumnText( Object element, int columnIndex ) {
             EditableTableItem tItem = (EditableTableItem) element;
             switch ( columnIndex ) {
@@ -220,21 +225,20 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
         /**
          * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
          */
-        public void addListener( ILabelProviderListener listener ) {
-        // nadda
-        }
+        @Override
+        public void addListener( ILabelProviderListener listener ) {}
 
         /**
          * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
          */
-        public void dispose() {
-        // nadda
-        }
+        @Override
+        public void dispose() {}
 
         /**
          * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object,
          *      java.lang.String)
          */
+        @Override
         public boolean isLabelProperty( Object element, String property ) {
             return false;
         }
@@ -242,6 +246,7 @@ public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
         /**
          * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
          */
+        @Override
         public void removeListener( ILabelProviderListener listener ) {}
     }
 

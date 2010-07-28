@@ -46,6 +46,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#initialise()
      */
+    @Override
     public void initialise() {
         setupMidi();
         buildTrackAndStart();
@@ -54,6 +55,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#on()
      */
+    @Override
     public void on() {
         sequencer.start();
         setBPM( 90 );
@@ -62,6 +64,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#off()
      */
+    @Override
     public void off() {
         setBPM( 0 );
         sequencer.stop();
@@ -70,6 +73,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#getBpm()
      */
+    @Override
     public int getBpm() {
         return bpm;
     }
@@ -77,6 +81,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#setBPM(int)
      */
+    @Override
     public void setBPM( int aBpm ) {
         bpm = aBpm;
         sequencer.setTempoInBPM( aBpm );
@@ -86,6 +91,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see javax.sound.midi.MetaEventListener#meta(javax.sound.midi.MetaMessage)
      */
+    @Override
     public void meta( MetaMessage message ) {
         if ( message.getType() == 47 ) {
             beatEvent();
@@ -105,6 +111,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#registerObserver(org.suggs.sandbox.patterns.compound.mvc.IBeatObserver)
      */
+    @Override
     public void registerObserver( IBeatObserver observer ) {
         beatObservers.add( observer );
     }
@@ -112,6 +119,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#removeObserver(org.suggs.sandbox.patterns.compound.mvc.IBeatObserver)
      */
+    @Override
     public void removeObserver( IBeatObserver observer ) {
         beatObservers.remove( observer );
     }
@@ -128,6 +136,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#registerObserver(org.suggs.sandbox.patterns.compound.mvc.IBpmObserver)
      */
+    @Override
     public void registerObserver( IBpmObserver observer ) {
         bpmObservers.add( observer );
     }
@@ -135,6 +144,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#removeObserver(org.suggs.sandbox.patterns.compound.mvc.IBpmObserver)
      */
+    @Override
     public void removeObserver( IBpmObserver observer ) {
         bpmObservers.remove( observer );
     }

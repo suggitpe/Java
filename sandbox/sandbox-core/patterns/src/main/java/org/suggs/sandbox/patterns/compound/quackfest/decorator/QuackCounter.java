@@ -31,6 +31,7 @@ public class QuackCounter implements IQuackable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.IQuackable#quack()
      */
+    @Override
     public void quack() {
         quackable.quack();
         ++numQuacks;
@@ -48,6 +49,7 @@ public class QuackCounter implements IQuackable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
      */
+    @Override
     public void notifyObservers() {
         quackable.notifyObservers();
     }
@@ -55,6 +57,7 @@ public class QuackCounter implements IQuackable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
      */
+    @Override
     public void registerObserver( IObserver observer ) {
         quackable.registerObserver( observer );
     }

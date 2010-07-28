@@ -87,6 +87,7 @@ public class Explorer extends ApplicationWindow {
         // to the table view
         tree.addSelectionChangedListener( new ISelectionChangedListener() {
 
+            @Override
             public void selectionChanged( SelectionChangedEvent event ) {
                 IStructuredSelection sel = (IStructuredSelection) event.getSelection();
                 Object selectedFile = sel.getFirstElement();
@@ -96,6 +97,7 @@ public class Explorer extends ApplicationWindow {
 
         table.addSelectionChangedListener( new ISelectionChangedListener() {
 
+            @Override
             public void selectionChanged( SelectionChangedEvent event ) {
                 IStructuredSelection sel = (IStructuredSelection) event.getSelection();
                 setStatus( "Number of rows selected is " + sel.size() );

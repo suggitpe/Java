@@ -80,7 +80,6 @@ public class MenuComponent extends AbstractMenuComponent {
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#print()
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void print() {
         LOG.debug( "\n" + getName() + ", " + getDescription() );
@@ -88,7 +87,7 @@ public class MenuComponent extends AbstractMenuComponent {
 
         // This is a small bit of recursion (if the object in the iter
         // is a MenuComponent rather that a MenuItem).
-        Iterator iter = menuComps.iterator();
+        Iterator<?> iter = menuComps.iterator();
         while ( iter.hasNext() ) {
             ( (IMenuComponent) iter.next() ).print();
         }
@@ -97,8 +96,8 @@ public class MenuComponent extends AbstractMenuComponent {
     /**
      * @see org.suggs.sandbox.patterns.structural.composite.IMenuComponent#createIterator()
      */
-    @SuppressWarnings("unchecked")
-    public Iterator createIterator() {
+    @Override
+    public Iterator<?> createIterator() {
         return new CompositeIterator( menuComps.iterator() );
     }
 

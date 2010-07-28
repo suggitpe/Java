@@ -29,8 +29,10 @@ public final class TemperatureGuage {
     public static void main( String[] args ) {
         LOG.debug( "Starting GUI" );
         TemperatureModel model = new TemperatureModel();
-        new FarenheightGUI( model, 100, 100 );
-        new CelsiusGUI( model, 100, 250 );
+        @SuppressWarnings("unused")
+        FarenheightGUI fGui = new FarenheightGUI( model, 100, 100 );
+        @SuppressWarnings("unused")
+        CelsiusGUI cGui = new CelsiusGUI( model, 100, 250 );
     }
 
 }

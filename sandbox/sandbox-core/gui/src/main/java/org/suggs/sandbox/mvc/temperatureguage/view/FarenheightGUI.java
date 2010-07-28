@@ -36,6 +36,7 @@ public class FarenheightGUI extends AbstractTemperatureGUI {
     /**
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
+    @Override
     public void update( Observable arg0, Object arg1 ) {
         setDisplay( "" + getModel().getF() );
     }
@@ -51,6 +52,7 @@ public class FarenheightGUI extends AbstractTemperatureGUI {
         /**
          * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
          */
+        @Override
         public void actionPerformed( ActionEvent arg0 ) {
             getModel().setF( getModel().getF() + 1.0 );
         }
@@ -67,6 +69,7 @@ public class FarenheightGUI extends AbstractTemperatureGUI {
         /**
          * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
          */
+        @Override
         public void actionPerformed( ActionEvent arg0 ) {
             getModel().setF( getModel().getF() - 1.0 );
         }
@@ -83,6 +86,7 @@ public class FarenheightGUI extends AbstractTemperatureGUI {
         /**
          * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
          */
+        @Override
         public void actionPerformed( ActionEvent arg0 ) {
             double val = getDisplay();
             getModel().setF( val );

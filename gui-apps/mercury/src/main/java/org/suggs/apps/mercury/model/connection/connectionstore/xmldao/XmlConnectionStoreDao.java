@@ -37,6 +37,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public final void afterPropertiesSet() {
         Assert.notNull( xmlStore, "Must set the xml store on the xml connection store dao" );
     }
@@ -44,6 +45,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#deleteNamedConnection(java.lang.String)
      */
+    @Override
     public final void deleteNamedConnection( String name ) throws ConnectionStoreException {
         LOG.info( "Deleting named connection [" + name + "]" );
         if ( name == null || name.equals( "" ) ) {
@@ -68,6 +70,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#doesConnectionExist(java.lang.String)
      */
+    @Override
     public final boolean doesConnectionExist( String connectionName ) {
         try {
             Map<String, ConnectionDetails> conns = xmlStore.readConnectionData();
@@ -89,6 +92,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#getKnownConnections()
      */
+    @Override
     public final Map<String, ConnectionDetails> getKnownConnections() {
         try {
             return xmlStore.readConnectionData();
@@ -103,6 +107,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#loadConnectionParameters(java.lang.String)
      */
+    @Override
     public final ConnectionDetails loadConnectionParameters( String name ) throws ConnectionStoreException {
         LOG.debug( "Loading connection details with name [" + name + "]" );
         Map<String, ConnectionDetails> conns = xmlStore.readConnectionData();
@@ -116,6 +121,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#saveConnectionParameters(java.lang.String,
      *      org.suggs.apps.mercury.model.connection.ConnectionDetails)
      */
+    @Override
     public final void saveConnectionParameters( String name, ConnectionDetails details )
                     throws ConnectionStoreException {
         Map<String, ConnectionDetails> conns = xmlStore.readConnectionData();
@@ -132,6 +138,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#addConnectionStoreChangeListener(org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener)
      */
+    @Override
     public final void addConnectionStoreChangeListener( IConnectionStoreChangeListener aListener ) {
         listeners.add( aListener );
     }
@@ -139,6 +146,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#removeConnectionStoreChangeListener(org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener)
      */
+    @Override
     public final void removeConnectionStoreChangeListener( IConnectionStoreChangeListener aListener ) {
         listeners.remove( aListener );
     }
@@ -157,6 +165,7 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore#getConnectionStoreDumpAsXml()
      */
+    @Override
     public final String getConnectionStoreDumpAsXml() throws ConnectionStoreException {
         return xmlStore.getRawXml();
     }

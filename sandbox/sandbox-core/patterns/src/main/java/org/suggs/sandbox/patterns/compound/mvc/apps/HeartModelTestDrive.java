@@ -24,7 +24,8 @@ public final class HeartModelTestDrive {
     public static void main( String[] args ) {
         IHeartModel model = new HeartModel();
 
-        new HeartController( model );
+        @SuppressWarnings("unused")
+        HeartController heart = new HeartController( model );
     }
 
 }

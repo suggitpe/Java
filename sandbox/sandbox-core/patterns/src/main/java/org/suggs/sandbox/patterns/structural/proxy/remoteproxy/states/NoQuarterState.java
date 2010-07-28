@@ -35,6 +35,7 @@ public class NoQuarterState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
+    @Override
     public void dispense() {
         LOG.warn( "you need to pay first" );
     }
@@ -42,6 +43,7 @@ public class NoQuarterState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
+    @Override
     public void ejectQuarter() {
         LOG.warn( "No quarter in the machine" );
     }
@@ -49,6 +51,7 @@ public class NoQuarterState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
+    @Override
     public void insertQuarter() {
         LOG.info( "You have inserted a quarter" );
         gumballMachine.setState( gumballMachine.getHasQuarterState() );
@@ -57,6 +60,7 @@ public class NoQuarterState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
+    @Override
     public void turnCrank() {
         LOG.warn( "You have turned but there is no quarter in the machine" );
     }

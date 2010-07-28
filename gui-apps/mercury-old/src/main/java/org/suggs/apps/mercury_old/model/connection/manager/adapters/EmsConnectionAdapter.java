@@ -34,6 +34,7 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( initialontextFactory,
                         "Muct inject the initial context factory into the Ems Connection Adapter" );
@@ -42,6 +43,7 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
     /**
      * @see org.suggs.apps.mercury_old.model.connection.manager.IConnectionAdapter#createJmsContext(org.suggs.apps.mercury_old.model.connection.IConnectionDetails)
      */
+    @Override
     public Context createJmsContext( IConnectionDetails aConnDetails ) {
         String url = "tcp://" + aConnDetails.getHostname() + ":" + aConnDetails.getPort();
         LOG.debug( "Creating EMS context with [" + initialontextFactory + "] and [" + url + "]" );
@@ -63,6 +65,7 @@ public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBea
     /**
      * @see org.suggs.apps.mercury_old.model.connection.manager.IConnectionAdapter#findAllBrokerObjects()
      */
+    @Override
     public Map<String, String> findAllBrokerObjects() {
         // TODO need to do the impl for all of the broker metadata
         // info

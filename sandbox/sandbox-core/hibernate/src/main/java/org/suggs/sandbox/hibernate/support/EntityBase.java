@@ -77,6 +77,7 @@ public class EntityBase implements TimestampAuditable, Serializable {
     /**
      * @see org.suggs.sandbox.hibernate.support.TimestampAuditable#getTimestampAuditInfo()
      */
+    @Override
     public TimestampAuditInfo getTimestampAuditInfo() {
         return timestampAuditInfo;
     }

@@ -30,6 +30,7 @@ public class TurkeyAdapter implements IDuck {
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.IDuck#fly()
      */
+    @Override
     public void fly() {
         LOG.debug( "Adapting the turkey fly" );
         for ( int i = 0; i < 5; ++i ) {
@@ -40,6 +41,7 @@ public class TurkeyAdapter implements IDuck {
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.IDuck#quack()
      */
+    @Override
     public void quack() {
         LOG.debug( "Adapting the turkey gobble in quack" );
         turkey.gobble();

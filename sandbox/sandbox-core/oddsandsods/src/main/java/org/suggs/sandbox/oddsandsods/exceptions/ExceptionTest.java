@@ -46,7 +46,7 @@ public final class ExceptionTest {
         }
         finally {
             LOG.debug( "In finally)" );
-            if ( 1 == 1 ) {
+            if ( true ) {
                 throw new Exception( "this is in finally" );
             }
         }

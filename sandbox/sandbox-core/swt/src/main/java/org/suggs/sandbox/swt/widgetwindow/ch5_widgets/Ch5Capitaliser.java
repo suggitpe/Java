@@ -39,6 +39,7 @@ public class Ch5Capitaliser extends Composite {
         Text txt = new Text( this, SWT.MULTI | SWT.V_SCROLL );
         txt.addVerifyListener( new VerifyListener() {
 
+            @Override
             public void verifyText( VerifyEvent e ) {
                 // just for shits and giggles we reject all entries
                 // with '1'

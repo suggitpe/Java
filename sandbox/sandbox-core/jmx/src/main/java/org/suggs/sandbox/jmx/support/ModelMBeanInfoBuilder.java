@@ -29,8 +29,7 @@ public class ModelMBeanInfoBuilder {
 
     private Map<String, ModelMBeanAttributeInfo> attributes = new Hashtable<String, ModelMBeanAttributeInfo>();
     private Map<String, ModelMBeanNotificationInfo> notifications = new Hashtable<String, ModelMBeanNotificationInfo>();
-    @SuppressWarnings("unchecked")
-    private Map<Constructor, ModelMBeanConstructorInfo> constructors = new Hashtable<Constructor, ModelMBeanConstructorInfo>();
+    private Map<Constructor<?>, ModelMBeanConstructorInfo> constructors = new Hashtable<Constructor<?>, ModelMBeanConstructorInfo>();
     private Map<String, ModelMBeanOperationInfo> operations = new Hashtable<String, ModelMBeanOperationInfo>();
 
     /**
@@ -136,8 +135,7 @@ public class ModelMBeanInfoBuilder {
      * @param aDescriptor
      *            the descriptor of the constructor
      */
-    @SuppressWarnings("unchecked")
-    public void addModelMBeanConstructor( Constructor aCtor, String aDescription, Descriptor aDescriptor ) {
+    public void addModelMBeanConstructor( Constructor<?> aCtor, String aDescription, Descriptor aDescriptor ) {
         constructors.put( aCtor, new ModelMBeanConstructorInfo( aDescription, aCtor, aDescriptor ) );
     }
 

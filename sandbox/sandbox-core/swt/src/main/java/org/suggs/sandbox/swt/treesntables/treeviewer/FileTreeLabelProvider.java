@@ -58,6 +58,7 @@ public class FileTreeLabelProvider implements ILabelProvider {
     /**
      * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
      */
+    @Override
     public Image getImage( Object obj ) {
         return ( (File) obj ).isDirectory() ? dirImage : fileImage;
     }
@@ -65,6 +66,7 @@ public class FileTreeLabelProvider implements ILabelProvider {
     /**
      * @see org.eclipse.jface.viewers.ILabelProvider#getText(java.lang.Object)
      */
+    @Override
     public String getText( Object obj ) {
         String txt = ( (File) obj ).getName();
         if ( txt.length() == 0 ) {
@@ -77,6 +79,7 @@ public class FileTreeLabelProvider implements ILabelProvider {
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
+    @Override
     public void addListener( ILabelProviderListener list ) {
         listeners.add( list );
     }
@@ -84,6 +87,7 @@ public class FileTreeLabelProvider implements ILabelProvider {
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
      */
+    @Override
     public void dispose() {
         if ( dirImage != null ) {
             dirImage.dispose();
@@ -97,6 +101,7 @@ public class FileTreeLabelProvider implements ILabelProvider {
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object, java.lang.String)
      */
+    @Override
     public boolean isLabelProperty( Object arg0, String arg1 ) {
         return false;
     }
@@ -104,6 +109,7 @@ public class FileTreeLabelProvider implements ILabelProvider {
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
+    @Override
     public void removeListener( ILabelProviderListener list ) {
         listeners.remove( list );
     }

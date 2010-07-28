@@ -35,6 +35,7 @@ public class SoyaMilk extends AbstractCondimentDecorator {
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#cost()
      */
+    @Override
     public double cost() {
         return 0.15d + getBeverage().cost();
     }

@@ -62,6 +62,7 @@ public class OpenAction extends Action implements ISelectionChangedListener {
     /**
      * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
      */
+    @Override
     public void selectionChanged( SelectionChangedEvent event ) {
         setText( "Run" );
         setToolTipText( "Run the associated program on a file" );

@@ -32,6 +32,7 @@ public class DirectoryPage extends WizardPage {
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
+    @Override
     public void createControl( Composite parent ) {
         Composite topLevel = new Composite( parent, SWT.NONE );
         topLevel.setLayout( new GridLayout( 2, false ) );

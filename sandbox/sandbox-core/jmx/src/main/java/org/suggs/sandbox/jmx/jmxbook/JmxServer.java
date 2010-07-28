@@ -49,7 +49,8 @@ public final class JmxServer {
     public static void main( String[] args ) {
         startRmiRegistry();
         LOG.debug( "Starting Agent ..." );
-        new JmxBookAgent();
+        @SuppressWarnings("unused")
+        JmxBookAgent agent = new JmxBookAgent();
     }
 
 }

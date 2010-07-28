@@ -38,6 +38,7 @@ public final class HeartModel implements IHeartModel, Runnable {
     /**
      * @see java.lang.Runnable#run()
      */
+    @Override
     public void run() {
         int lastrate = -1;
         for ( ;; ) {
@@ -68,6 +69,7 @@ public final class HeartModel implements IHeartModel, Runnable {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IHeartModel#getHeartRate()
      */
+    @Override
     public int getHeartRate() {
         return 6000 / time;
     }
@@ -93,6 +95,7 @@ public final class HeartModel implements IHeartModel, Runnable {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IHeartModel#registerObserver(org.suggs.sandbox.patterns.compound.mvc.IBeatObserver)
      */
+    @Override
     public void registerObserver( IBeatObserver observer ) {
         beatObservers.add( observer );
     }
@@ -100,6 +103,7 @@ public final class HeartModel implements IHeartModel, Runnable {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IHeartModel#registerObserver(org.suggs.sandbox.patterns.compound.mvc.IBpmObserver)
      */
+    @Override
     public void registerObserver( IBpmObserver observer ) {
         bpmObservers.add( observer );
     }
@@ -107,6 +111,7 @@ public final class HeartModel implements IHeartModel, Runnable {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IHeartModel#removeObserver(org.suggs.sandbox.patterns.compound.mvc.IBeatObserver)
      */
+    @Override
     public void removeObserver( IBeatObserver observer ) {
         int i = beatObservers.indexOf( observer );
         if ( i >= 0 ) {
@@ -117,6 +122,7 @@ public final class HeartModel implements IHeartModel, Runnable {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IHeartModel#removeObserver(org.suggs.sandbox.patterns.compound.mvc.IBpmObserver)
      */
+    @Override
     public void removeObserver( IBpmObserver observer ) {
         int i = bpmObservers.indexOf( observer );
         if ( i >= 0 ) {

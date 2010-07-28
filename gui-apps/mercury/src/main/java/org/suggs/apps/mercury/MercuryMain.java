@@ -65,7 +65,8 @@ public class MercuryMain extends ApplicationWindow {
         getShell().setImage( new Image( getShell().getDisplay(),
                                         ImageManager.getImageStream( ImageManager.IMAGE_MERCURY ) ) );
 
-        new MainWindow( parent );
+        @SuppressWarnings("unused")
+        MainWindow mainWindow = new MainWindow( parent );
 
         // remove this
         return parent;

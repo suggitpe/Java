@@ -32,6 +32,7 @@ public class CachedXmlConnectionStoreManagerDecorator implements InitializingBea
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public final void afterPropertiesSet() {
         Assert.notNull( xmlConnectionStoreManager,
                         "Must set an xml connectionstore manager to cache the data with" );
@@ -40,6 +41,7 @@ public class CachedXmlConnectionStoreManagerDecorator implements InitializingBea
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#readConnectionData()
      */
+    @Override
     public final Map<String, ConnectionDetails> readConnectionData() throws ConnectionStoreException {
         if ( cache == null ) {
             LOG.debug( "Loading data from persistent store" );
@@ -51,6 +53,7 @@ public class CachedXmlConnectionStoreManagerDecorator implements InitializingBea
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#getRawXml()
      */
+    @Override
     public final String getRawXml() throws ConnectionStoreException {
         return xmlConnectionStoreManager.getRawXml();
     }
@@ -58,9 +61,9 @@ public class CachedXmlConnectionStoreManagerDecorator implements InitializingBea
     /**
      * @see org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager#saveConnectionData(java.util.Map)
      */
+    @Override
     public final void saveConnectionData( Map<String, ConnectionDetails> map )
                     throws ConnectionStoreException {
-        // refresh the cache
         LOG.debug( "Refreshing local cache" );
         cache = map;
         xmlConnectionStoreManager.saveConnectionData( map );

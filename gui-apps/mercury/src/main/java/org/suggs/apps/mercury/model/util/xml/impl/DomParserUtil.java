@@ -50,6 +50,7 @@ public class DomParserUtil implements IDomParserUtil {
      *            a valid URL pointing to the schema to validate the XML file
      * @return the XML document object that was contained in the file
      */
+    @Override
     public final Document createDocFromXmlFile( String aFilename, String aSchemaLocation )
                     throws MercuryUtilityException {
         DocumentBuilder b = createDocumentBuilder( aSchemaLocation );
@@ -122,7 +123,8 @@ public class DomParserUtil implements IDomParserUtil {
         /**
          * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
          */
-        public void error( SAXParseException exception ) throws SAXException {
+        @Override
+        public void error( SAXParseException exception ) {
             LOG.error( "SAX Parse excepion caught: " + exception.getMessage() );
             if ( failFast ) {
                 throw new IllegalStateException( "Exception thrown from xml parsing", exception );
@@ -132,7 +134,8 @@ public class DomParserUtil implements IDomParserUtil {
         /**
          * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
          */
-        public void fatalError( SAXParseException exception ) throws SAXException {
+        @Override
+        public void fatalError( SAXParseException exception ) {
             LOG.error( "FATAL: SAX Parse excepion caught: " + exception.getMessage() );
             if ( failFast ) {
                 throw new IllegalStateException( "Exception thrown from xml parsing", exception );
@@ -142,7 +145,8 @@ public class DomParserUtil implements IDomParserUtil {
         /**
          * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
          */
-        public void warning( SAXParseException exception ) throws SAXException {
+        @Override
+        public void warning( SAXParseException exception ) {
             LOG.warn( "SAX Parse excepion caught: " + exception.getMessage() );
         }
     }

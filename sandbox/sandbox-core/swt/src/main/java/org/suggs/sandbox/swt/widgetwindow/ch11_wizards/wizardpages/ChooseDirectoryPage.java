@@ -37,6 +37,7 @@ public class ChooseDirectoryPage extends WizardPage {
     /**
      * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
      */
+    @Override
     public void createControl( Composite parent ) {
         Composite top = new Composite( parent, SWT.NONE );
         top.setLayout( new GridLayout( 3, false ) );
@@ -51,8 +52,10 @@ public class ChooseDirectoryPage extends WizardPage {
         b.setText( "..." );
         b.addSelectionListener( new SelectionListener() {
 
+            @Override
             public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
+            @Override
             public void widgetSelected( SelectionEvent arg0 ) {
                 DirectoryDialog d = new DirectoryDialog( getShell() );
                 text.setText( d.open() );

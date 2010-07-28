@@ -40,9 +40,8 @@ public class Waitress {
     /**
      * Using the composite iterator, print out the vegetarian menu.
      */
-    @SuppressWarnings("unchecked")
     public void printVegetarianMenu() {
-        Iterator iter = allMenus.createIterator();
+        Iterator<?> iter = allMenus.createIterator();
         LOG.debug( "\nVEGETARIAN MENU\n-----------------" );
         while ( iter.hasNext() ) {
             IMenuComponent comp = (IMenuComponent) iter.next();
@@ -51,9 +50,7 @@ public class Waitress {
                     comp.print();
                 }
             }
-            catch ( UnsupportedOperationException e ) {
-                // nadda
-            }
+            catch ( UnsupportedOperationException e ) {}
         }
 
     }

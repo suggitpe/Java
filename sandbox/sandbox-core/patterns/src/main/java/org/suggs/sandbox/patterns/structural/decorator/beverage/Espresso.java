@@ -24,6 +24,7 @@ public class Espresso extends AbstractBeverage {
     /**
      * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#cost()
      */
+    @Override
     public double cost() {
         return 1.99;
     }

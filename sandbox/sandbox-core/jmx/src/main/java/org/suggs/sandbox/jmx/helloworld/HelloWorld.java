@@ -42,6 +42,7 @@ public class HelloWorld extends NotificationBroadcasterSupport implements HelloW
     /**
      * @see org.suggs.sandbox.jmx.helloworld.HelloWorldMBean#getGreeting()
      */
+    @Override
     public String getGreeting() {
         return greeting;
     }
@@ -49,6 +50,7 @@ public class HelloWorld extends NotificationBroadcasterSupport implements HelloW
     /**
      * @see org.suggs.sandbox.jmx.helloworld.HelloWorldMBean#printGreeting()
      */
+    @Override
     public void printGreeting() {
         LOG.info( "Greeting on JMX managed object is [" + greeting + "]" );
     }
@@ -56,6 +58,7 @@ public class HelloWorld extends NotificationBroadcasterSupport implements HelloW
     /**
      * @see org.suggs.sandbox.jmx.helloworld.HelloWorldMBean#setGreeting(java.lang.String)
      */
+    @Override
     public void setGreeting( String aGreeting ) {
         greeting = aGreeting;
 

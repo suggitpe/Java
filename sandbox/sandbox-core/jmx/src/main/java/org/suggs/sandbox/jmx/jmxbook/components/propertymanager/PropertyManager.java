@@ -49,6 +49,7 @@ public class PropertyManager implements PropertyManagerMBean {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#getProperty(java.lang.String)
      */
+    @Override
     public String getProperty( String name ) {
         return properties.getProperty( name );
     }
@@ -57,6 +58,7 @@ public class PropertyManager implements PropertyManagerMBean {
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#setProperty(java.lang.String,
      *      java.lang.String)
      */
+    @Override
     public void setProperty( String name, String value ) {
         properties.setProperty( name, value );
     }
@@ -64,7 +66,8 @@ public class PropertyManager implements PropertyManagerMBean {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#keys()
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
     public Enumeration keys() {
         return properties.keys();
     }
@@ -72,6 +75,7 @@ public class PropertyManager implements PropertyManagerMBean {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#setSource(java.lang.String)
      */
+    @Override
     public void setSource( String path ) {
         LOG.debug( "Reloading properies from file [" + path + "]" );
         FileInputStream fis = null;

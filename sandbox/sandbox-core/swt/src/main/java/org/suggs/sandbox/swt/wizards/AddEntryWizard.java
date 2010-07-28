@@ -39,7 +39,10 @@ public class AddEntryWizard extends Wizard {
      */
     @Override
     public boolean performFinish() {
-        new AddressEntry( namePage.getFirstName(), namePage.getLastName(), emailPage.getEmailAddress() );
+        @SuppressWarnings("unused")
+        AddressEntry entry = new AddressEntry( namePage.getFirstName(),
+                                               namePage.getLastName(),
+                                               emailPage.getEmailAddress() );
 
         MessageDialog.openInformation( getShell(),
                                        "Demo Complete",

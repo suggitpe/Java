@@ -23,15 +23,13 @@ import org.eclipse.swt.widgets.Shell;
  * @author suggitpe
  * @version 1.0 2 Dec 2008
  */
-public class CheckedFileTree extends FileTree
-{
+public class CheckedFileTree extends FileTree {
 
     /**
      * @see org.suggs.sandbox.swt.treesntables.treeviewer.FileTree#configureShell(org.eclipse.swt.widgets.Shell)
      */
     @Override
-    protected void configureShell( Shell shell )
-    {
+    protected void configureShell( Shell shell ) {
         super.configureShell( shell );
         shell.setText( "Check File Tree" );
     }
@@ -40,8 +38,7 @@ public class CheckedFileTree extends FileTree
      * @see org.suggs.sandbox.swt.treesntables.treeviewer.FileTree#createContents(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    protected Control createContents( Composite parent )
-    {
+    protected Control createContents( Composite parent ) {
         Composite comp = new Composite( parent, SWT.NONE );
         comp.setLayout( new GridLayout( 1, false ) );
 
@@ -56,15 +53,13 @@ public class CheckedFileTree extends FileTree
         tv.setInput( "root" );
 
         // now add the listener
-        preserveCase.addSelectionListener( new SelectionAdapter()
-        {
+        preserveCase.addSelectionListener( new SelectionAdapter() {
 
             /**
              * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
              */
             @Override
-            public void widgetSelected( SelectionEvent event )
-            {
+            public void widgetSelected( SelectionEvent event ) {
                 boolean pc = ( (Button) event.widget ).getSelection();
                 FileTreeLabelProvider ftlp = (FileTreeLabelProvider) tv.getLabelProvider();
                 ftlp.setPreserveCase( pc );
@@ -72,16 +67,14 @@ public class CheckedFileTree extends FileTree
 
         } );
 
-        tv.addCheckStateListener( new ICheckStateListener()
-        {
+        tv.addCheckStateListener( new ICheckStateListener() {
 
             /**
              * @see org.eclipse.jface.viewers.ICheckStateListener#checkStateChanged(org.eclipse.jface.viewers.CheckStateChangedEvent)
              */
-            public void checkStateChanged( CheckStateChangedEvent event )
-            {
-                if ( event.getChecked() )
-                {
+            @Override
+            public void checkStateChanged( CheckStateChangedEvent event ) {
+                if ( event.getChecked() ) {
                     tv.setSubtreeChecked( event.getElement(), true );
                 }
             }
@@ -95,8 +88,7 @@ public class CheckedFileTree extends FileTree
      * 
      * @param args
      */
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         new CheckedFileTree().run();
     }
 }

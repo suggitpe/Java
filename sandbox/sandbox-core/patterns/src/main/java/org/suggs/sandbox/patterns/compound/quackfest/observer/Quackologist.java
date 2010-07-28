@@ -20,6 +20,7 @@ public class Quackologist implements IObserver {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver#update(org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable)
      */
+    @Override
     public void update( IQuackObservable quacker ) {
         LOG.debug( "Quackologist: [" + quacker.getClass().getSimpleName() + "] just quacked" );
     }

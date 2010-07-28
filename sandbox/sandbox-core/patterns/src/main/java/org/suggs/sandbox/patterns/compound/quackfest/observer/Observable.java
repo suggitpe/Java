@@ -32,6 +32,7 @@ public class Observable implements IQuackObservable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
      */
+    @Override
     public void notifyObservers() {
         for ( IObserver o : observers ) {
             o.update( duck );
@@ -41,6 +42,7 @@ public class Observable implements IQuackObservable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
      */
+    @Override
     public void registerObserver( IObserver observer ) {
         observers.add( observer );
     }

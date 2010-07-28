@@ -97,6 +97,7 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
 
         type.addActionListener( new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent e ) {
                 String choice = (String) ( (JComboBox) e.getSource() ).getSelectedItem();
                 LOG.debug( "Connection type =[" + choice + "]" );
@@ -108,6 +109,7 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
     /**
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
+    @Override
     public void update( Observable aObserved, Object arg1 ) {
         status.setText( connMgr.getConnectionState().name() );
     }
@@ -205,6 +207,7 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( connMgr, "Must set the connection manager into the connection manager panel" );
     }

@@ -20,8 +20,7 @@ public interface IManagedJiniService extends Remote {
      * @param aEntry
      * @throws RemoteException
      */
-    @SuppressWarnings("unchecked")
-    public void addEntries( List aEntry ) throws RemoteException;
+    public void addEntries( List<?> aEntry ) throws RemoteException;
 
     /**
      * MOdifies an existing set of entries
@@ -30,7 +29,6 @@ public interface IManagedJiniService extends Remote {
      * @param aNewEntries
      * @throws RemoteException
      */
-    @SuppressWarnings("unchecked")
-    public void modifyEntries( List aOldEntries, List aNewEntries ) throws RemoteException;
+    public void modifyEntries( List<?> aOldEntries, List<?> aNewEntries ) throws RemoteException;
 
 }

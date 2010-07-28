@@ -27,6 +27,7 @@ public class MqConnectionAdapter implements IConnectionAdapter {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.manager.IConnectionAdapter#createJmsContext(org.suggs.apps.mercury_old.model.connection.IConnectionDetails)
      */
+    @Override
     public Context createJmsContext( IConnectionDetails aConnDetails ) {
         LOG.debug( "createJmsContext has not been implemented yet for the mq adapter" );
         throw new IllegalStateException( "Method not implemented ..." );
@@ -35,6 +36,7 @@ public class MqConnectionAdapter implements IConnectionAdapter {
     /**
      * @see org.suggs.apps.mercury_old.model.connection.manager.IConnectionAdapter#findAllBrokerObjects()
      */
+    @Override
     public Map<String, String> findAllBrokerObjects() {
         return null;
     }

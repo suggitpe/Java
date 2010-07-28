@@ -68,6 +68,7 @@ public class Ch7Fonts extends Canvas {
         /**
          * @see org.eclipse.swt.events.PaintListener#paintControl(org.eclipse.swt.events.PaintEvent)
          */
+        @Override
         public void paintControl( PaintEvent pe ) {
             Display d = pe.display;
             GC gc = pe.gc;

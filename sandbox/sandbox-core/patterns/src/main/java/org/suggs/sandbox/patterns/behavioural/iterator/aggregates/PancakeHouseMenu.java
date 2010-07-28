@@ -48,6 +48,7 @@ public class PancakeHouseMenu implements IMenu {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IMenu#createIterator()
      */
+    @Override
     public IIterator createIterator() {
         return new PancakeHouseMenuIterator( menuItems );
     }
@@ -57,8 +58,7 @@ public class PancakeHouseMenu implements IMenu {
      * 
      * @return the list of menu items
      */
-    @SuppressWarnings("unchecked")
-    public List getMenuItems() {
+    public List<?> getMenuItems() {
         return menuItems;
     }
 

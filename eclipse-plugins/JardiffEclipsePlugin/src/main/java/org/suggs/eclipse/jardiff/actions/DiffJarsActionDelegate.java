@@ -37,7 +37,6 @@ public class DiffJarsActionDelegate implements IWorkbenchWindowActionDelegate, I
      * 
      * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
      */
-    @Override
     public void run( IAction aAction ) {
         DiffJarsAction diffAction = null;
         if ( selection != null && !selection.isEmpty() ) {
@@ -60,13 +59,11 @@ public class DiffJarsActionDelegate implements IWorkbenchWindowActionDelegate, I
     /**
      * @see org.eclipse.ui.IWorkbenchWindowActionDelegate#dispose()
      */
-    @Override
     public void dispose() {}
 
     /**
      * @see org.eclipse.ui.IWorkbenchWindowActionDelegate#init(org.eclipse.ui.IWorkbenchWindow)
      */
-    @Override
     public void init( IWorkbenchWindow aWorkbenchWindow ) {}
 
     /**
@@ -75,7 +72,6 @@ public class DiffJarsActionDelegate implements IWorkbenchWindowActionDelegate, I
      * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction,
      *      org.eclipse.jface.viewers.ISelection)
      */
-    @Override
     public void selectionChanged( IAction aAction, ISelection aSelection ) {
         selection = (IStructuredSelection) aSelection;
     }
@@ -84,6 +80,5 @@ public class DiffJarsActionDelegate implements IWorkbenchWindowActionDelegate, I
      * @see org.eclipse.ui.IObjectActionDelegate#setActivePart(org.eclipse.jface.action.IAction,
      *      org.eclipse.ui.IWorkbenchPart)
      */
-    @Override
     public void setActivePart( IAction aAction, IWorkbenchPart aWorkbenchpart ) {}
 }

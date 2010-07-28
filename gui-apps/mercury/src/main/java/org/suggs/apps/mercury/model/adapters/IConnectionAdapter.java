@@ -15,7 +15,7 @@ public interface IConnectionAdapter {
 
     enum CONNECTION_TYPE {
         IBM_MQ, TIBCO_EMS
-    };
+    }
 
     /**
      * This method is used to return the unique adapater name corresponding to their underlying middleware

@@ -142,10 +142,12 @@ public class Ch9TableEditorComposite extends Composite {
     private void attachLabelProvider( TableViewer aViewer ) {
         aViewer.setLabelProvider( new ITableLabelProvider() {
 
+            @Override
             public Image getColumnImage( Object arg0, int arg1 ) {
                 return null;
             }
 
+            @Override
             public String getColumnText( Object element, int colIdx ) {
                 switch ( colIdx ) {
                     case 0:
@@ -158,14 +160,18 @@ public class Ch9TableEditorComposite extends Composite {
                 }
             }
 
+            @Override
             public void addListener( ILabelProviderListener arg0 ) {}
 
+            @Override
             public void dispose() {}
 
+            @Override
             public boolean isLabelProperty( Object arg0, String arg1 ) {
                 return false;
             }
 
+            @Override
             public void removeListener( ILabelProviderListener arg0 ) {}
         } );
     }
@@ -174,7 +180,7 @@ public class Ch9TableEditorComposite extends Composite {
      * Attach a content provider to the table viewer
      * 
      * @param aViewer
-     *            the viewer to attach the content provider to
+     *            the viewer to attach the content provider
      */
     private void attachContentProvider( TableViewer aViewer ) {
         aViewer.setContentProvider( new IStructuredContentProvider() {
@@ -182,6 +188,7 @@ public class Ch9TableEditorComposite extends Composite {
             /**
              * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
              */
+            @Override
             public Object[] getElements( Object inputElem ) {
                 return (Object[]) inputElem;
             }
@@ -189,27 +196,27 @@ public class Ch9TableEditorComposite extends Composite {
             /**
              * @see org.eclipse.jface.viewers.IContentProvider#dispose()
              */
-            public void dispose() {
-            // nada
-            }
+            @Override
+            public void dispose() {}
 
             /**
              * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
              *      java.lang.Object, java.lang.Object)
              */
-            public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {
-            // nada
-            }
+            @Override
+            public void inputChanged( Viewer arg0, Object arg1, Object arg2 ) {}
         } );
     }
 
     private void attachCellEditors( final TableViewer aViewer, Composite parent ) {
         aViewer.setCellModifier( new ICellModifier() {
 
+            @Override
             public boolean canModify( Object elem, String prop ) {
                 return true;
             }
 
+            @Override
             public Object getValue( Object elem, String prop ) {
                 if ( NAME_PROP.equals( prop ) ) {
                     return ( (EditableTableItem) elem ).getName();
@@ -217,6 +224,7 @@ public class Ch9TableEditorComposite extends Composite {
                 return ( (EditableTableItem) elem ).getValue();
             }
 
+            @Override
             public void modify( Object elem, String prop, Object value ) {
 
                 TableItem tableItem = (TableItem) elem;

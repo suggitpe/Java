@@ -90,6 +90,7 @@ public final class ComplexGridLayoutExample {
         dogPhoto.setLayoutData( data );
         dogPhoto.addPaintListener( new PaintListener() {
 
+            @Override
             public void paintControl( PaintEvent aEvent ) {
                 if ( dogImage != null ) {
                     aEvent.gc.drawImage( dogImage, 0, 0 );

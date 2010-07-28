@@ -53,8 +53,10 @@ public class Ch10CustomDialogComposite extends Composite {
         dialogBtn.setText( "Password dialog ..." );
         dialogBtn.addSelectionListener( new SelectionListener() {
 
+            @Override
             public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
+            @Override
             public void widgetSelected( SelectionEvent arg0 ) {
                 UsernamePasswordDialog diag = new UsernamePasswordDialog( getShell() );
                 diag.open();
@@ -67,8 +69,10 @@ public class Ch10CustomDialogComposite extends Composite {
         colBtn.setText( "Colour dialog ..." );
         colBtn.addSelectionListener( new SelectionListener() {
 
+            @Override
             public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
+            @Override
             public void widgetSelected( SelectionEvent arg0 ) {
                 ColorDialog d = new ColorDialog( getShell() );
                 d.open();// returns RGB
@@ -80,8 +84,10 @@ public class Ch10CustomDialogComposite extends Composite {
         dirBtn.setText( "Directory dialog ..." );
         dirBtn.addSelectionListener( new SelectionListener() {
 
+            @Override
             public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
+            @Override
             public void widgetSelected( SelectionEvent arg0 ) {
                 DirectoryDialog d = new DirectoryDialog( getShell() );
                 d.setMessage( "Please selecvt a directory ..." );
@@ -97,8 +103,10 @@ public class Ch10CustomDialogComposite extends Composite {
         fileBtn.setText( "File dialog ..." );
         fileBtn.addSelectionListener( new SelectionListener() {
 
+            @Override
             public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
+            @Override
             public void widgetSelected( SelectionEvent arg0 ) {
                 FileDialog d = new FileDialog( getShell(), SWT.MULTI );
                 d.setFilterExtensions( new String[] { ".txt" } );
@@ -114,8 +122,10 @@ public class Ch10CustomDialogComposite extends Composite {
         msgBtn.setText( "Message dialog ..." );
         msgBtn.addSelectionListener( new SelectionListener() {
 
+            @Override
             public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
+            @Override
             public void widgetSelected( SelectionEvent arg0 ) {
                 MessageDialog d = new MessageDialog( getShell(),
                                                      "Greeting dialog",
@@ -133,8 +143,10 @@ public class Ch10CustomDialogComposite extends Composite {
         errBtn.setText( "Error dialog ..." );
         errBtn.addSelectionListener( new SelectionListener() {
 
+            @Override
             public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
+            @Override
             public void widgetSelected( SelectionEvent arg0 ) {
                 ErrorDialog d = new ErrorDialog( getShell(),
                                                  "Test Error Dialog",
@@ -147,6 +159,7 @@ public class Ch10CustomDialogComposite extends Composite {
 
         final IInputValidator validator = new IInputValidator() {
 
+            @Override
             public String isValid( String txt ) {
                 if ( txt.length() < 5 ) {
                     return "You must enter at least 5 characters";
@@ -165,8 +178,10 @@ public class Ch10CustomDialogComposite extends Composite {
         inBtn.setText( "Input dialog ..." );
         inBtn.addSelectionListener( new SelectionListener() {
 
+            @Override
             public void widgetDefaultSelected( SelectionEvent arg0 ) {}
 
+            @Override
             public void widgetSelected( SelectionEvent arg0 ) {
                 InputDialog d = new InputDialog( getShell(),
                                                  "Please input a string",

@@ -49,6 +49,7 @@ public class Logger implements LoggerMBean, MBeanRegistration {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#getLogLevel()
      */
+    @Override
     public int getLogLevel() {
         return logLevel;
     }
@@ -56,6 +57,7 @@ public class Logger implements LoggerMBean, MBeanRegistration {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#retrieveLog(int)
      */
+    @Override
     public String retrieveLog( int linesBack ) {
         // must pop an impl in here at some point
         return null;
@@ -64,6 +66,7 @@ public class Logger implements LoggerMBean, MBeanRegistration {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#setLogLevel(int)
      */
+    @Override
     public void setLogLevel( int level ) {
         logLevel = level;
     }
@@ -71,6 +74,7 @@ public class Logger implements LoggerMBean, MBeanRegistration {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.logmanager.LoggerMBean#writeLog(java.lang.String, int)
      */
+    @Override
     public void writeLog( String message, int type ) {
         if ( type <= logLevel ) {
             output.println( message );
@@ -80,22 +84,26 @@ public class Logger implements LoggerMBean, MBeanRegistration {
     /**
      * @see javax.management.MBeanRegistration#postDeregister()
      */
+    @Override
     public void postDeregister() {}
 
     /**
      * @see javax.management.MBeanRegistration#postRegister(java.lang.Boolean)
      */
+    @Override
     public void postRegister( Boolean registrationDone ) {}
 
     /**
      * @see javax.management.MBeanRegistration#preDeregister()
      */
+    @Override
     public void preDeregister() {}
 
     /**
      * @see javax.management.MBeanRegistration#preRegister(javax.management.MBeanServer,
      *      javax.management.ObjectName)
      */
+    @Override
     public ObjectName preRegister( MBeanServer server, ObjectName name ) {
         LOG.debug( "Running the preRegister Logger impl" );
         try {

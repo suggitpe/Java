@@ -32,6 +32,7 @@ public class MenuFactory implements IMenuFactory, InitializingBean {
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( actionManager,
                         "An action manager object must be injected into the MenuFactory object.  Please revise Spring XML" );
@@ -40,6 +41,7 @@ public class MenuFactory implements IMenuFactory, InitializingBean {
     /**
      * @see org.suggs.apps.mercury.view.IMenuFactory#createMenuManager(java.lang.String)
      */
+    @Override
     public MenuManager createMenuManager( String menuType ) {
         if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Constructing menu manager for type [" + menuType + "]" );

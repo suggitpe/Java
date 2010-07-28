@@ -24,6 +24,7 @@ public class PlayerViewerLabelProvider implements ITableLabelProvider {
     /**
      * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
      */
+    @Override
     public Image getColumnImage( Object arg0, int arg1 ) {
         return null;
     }
@@ -31,6 +32,7 @@ public class PlayerViewerLabelProvider implements ITableLabelProvider {
     /**
      * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
      */
+    @Override
     public String getColumnText( Object obj, int colIdx ) {
         if ( obj instanceof PlayerBean ) {
             PlayerBean p = (PlayerBean) obj;
@@ -57,6 +59,7 @@ public class PlayerViewerLabelProvider implements ITableLabelProvider {
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object, java.lang.String)
      */
+    @Override
     public boolean isLabelProperty( Object arg0, String arg1 ) {
         return false;
     }
@@ -64,13 +67,13 @@ public class PlayerViewerLabelProvider implements ITableLabelProvider {
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
      */
-    public void dispose() {
-    // nadda
-    }
+    @Override
+    public void dispose() {}
 
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
+    @Override
     public void addListener( ILabelProviderListener arg0 ) {
         listeners.add( arg0 );
     }
@@ -78,6 +81,7 @@ public class PlayerViewerLabelProvider implements ITableLabelProvider {
     /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
+    @Override
     public void removeListener( ILabelProviderListener arg0 ) {
         listeners.remove( arg0 );
     }

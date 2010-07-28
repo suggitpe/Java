@@ -27,6 +27,7 @@ public class ActionManager implements InitializingBean, IActionManager {
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( actionMap,
                         "Action Map has not been initialised in the ActionManager.  Please update Spring XML." );
@@ -49,6 +50,7 @@ public class ActionManager implements InitializingBean, IActionManager {
      *            the name of the action
      * @return the action that corresponds to that name
      */
+    @Override
     public IAction getAction( String actionName ) {
         IAction ret = actionMap.get( actionName );
         if ( ret == null ) {

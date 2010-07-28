@@ -77,6 +77,7 @@ public class HelloAgent implements NotificationListener {
      * @see javax.management.NotificationListener#handleNotification(javax.management.Notification,
      *      java.lang.Object)
      */
+    @Override
     public void handleNotification( Notification notif, Object handback ) {
         LOG.debug( "Receiving notification: [" + notif.getType() + "], [" + notif.getMessage() + "]" );
     }

@@ -35,6 +35,7 @@ public class WinnerState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
      */
+    @Override
     public void dispense() {
         // this is where we get the good news
         LOG.info( "YOU'RE A WINNER! You get two gumballs for the price of one." );
@@ -58,6 +59,7 @@ public class WinnerState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
      */
+    @Override
     public void ejectQuarter() {
         LOG.warn( "WE are way beyond ejecting quarters now" );
     }
@@ -65,6 +67,7 @@ public class WinnerState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
      */
+    @Override
     public void insertQuarter() {
         LOG.warn( "In the middle of a vend at the moment" );
     }
@@ -72,6 +75,7 @@ public class WinnerState implements IState {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
      */
+    @Override
     public void turnCrank() {
         LOG.warn( "Crank has already been truned" );
     }

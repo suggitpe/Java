@@ -24,7 +24,8 @@ public final class DJTestDrive {
     public static void main( String[] args ) {
         IBeatModel model = new BeatModel();
 
-        new BeatController( model );
+        @SuppressWarnings("unused")
+        BeatController ctrl = new BeatController( model );
     }
 
 }

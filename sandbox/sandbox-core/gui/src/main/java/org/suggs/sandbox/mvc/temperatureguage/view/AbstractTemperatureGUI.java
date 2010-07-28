@@ -34,7 +34,7 @@ public abstract class AbstractTemperatureGUI implements Observer {
     private TemperatureModel model;
     private JFrame tempFrame;
     private JTextField display = new JTextField();
-    private JButton upButton = new JButton( "Up" );;
+    private JButton upButton = new JButton( "Up" );
     private JButton downButton = new JButton( "Down" );
 
     /**

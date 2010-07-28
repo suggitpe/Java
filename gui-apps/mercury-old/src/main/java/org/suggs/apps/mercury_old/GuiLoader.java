@@ -64,6 +64,7 @@ public final class GuiLoader {
 
         javax.swing.SwingUtilities.invokeLater( new Runnable() {
 
+            @Override
             public void run() {
                 LOG.debug( "Executing Run to build GUI" );
                 try {

@@ -33,6 +33,7 @@ public class GooseAdapter implements IQuackable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.IQuackable#quack()
      */
+    @Override
     public void quack() {
         goose.honk();
         notifyObservers();
@@ -41,6 +42,7 @@ public class GooseAdapter implements IQuackable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
      */
+    @Override
     public void notifyObservers() {
         observable.notifyObservers();
     }
@@ -48,6 +50,7 @@ public class GooseAdapter implements IQuackable {
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
      */
+    @Override
     public void registerObserver( IObserver observer ) {
         observable.registerObserver( observer );
     }

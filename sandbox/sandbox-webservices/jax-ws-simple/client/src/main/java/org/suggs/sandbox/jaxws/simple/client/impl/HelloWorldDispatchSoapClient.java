@@ -26,6 +26,7 @@ import javax.xml.ws.Service;
  */
 public class HelloWorldDispatchSoapClient implements WebServiceClient {
 
+    @Override
     public String callWebService( String aName ) {
         QName serviceQName = new QName( HelloWorldBindings.WS_TARGET_NS, HelloWorldBindings.WS_NAME );
         QName portQName = new QName( HelloWorldBindings.WS_TARGET_NS, HelloWorldBindings.WS_PORT );

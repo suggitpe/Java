@@ -24,6 +24,7 @@ public abstract class AbstractPizzaStore implements IPizzaStore {
      *            the type of pizz to create
      * @return the pizza that has been created
      */
+    @Override
     public IPizza orderPizza( String aType ) throws PizzaStoreException {
         IPizza ret = createPizza( aType );
 

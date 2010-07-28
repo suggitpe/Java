@@ -60,6 +60,7 @@ public class DinerMenu implements IMenu {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.iterator.IMenu#createIterator()
      */
+    @Override
     public IIterator createIterator() {
         return new DinerMenuIterator( menuItems );
     }

@@ -84,6 +84,7 @@ public class ConnectionButtons extends AbstractGridbagPanel {
     private ActionListener createDefaultActionListener() {
         return new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent e ) {
                 JOptionPane.showMessageDialog( ConnectionButtons.this,
                                                "This button has not been implemented",

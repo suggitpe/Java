@@ -39,6 +39,7 @@ public class MercuryImageCanvas extends Canvas {
 
         addPaintListener( new PaintListener() {
 
+            @Override
             public void paintControl( PaintEvent pe ) {
                 InputStream is = ImageManager.getImageStream( ImageManager.IMAGE_MERCURY );
                 if ( is == null ) {

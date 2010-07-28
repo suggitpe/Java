@@ -38,6 +38,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
      * 
      * @see org.suggs.sandbox.jmx.jmxbook.components.polling.PollingMBean#setInterval(long)
      */
+    @Override
     public void setInterval( long time ) {
         long tmp = interval;
         interval = time;
@@ -54,6 +55,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.polling.PollingMBean#getInterval()
      */
+    @Override
     public long getInterval() {
         return interval;
     }
@@ -61,6 +63,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.polling.PollingMBean#start()
      */
+    @Override
     public void start() {
         if ( !stop ) {
             LOG.warn( "Already running" );
@@ -76,6 +79,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.polling.PollingMBean#stop()
      */
+    @Override
     public void stop() {
         LOG.debug( "Stopping polling ..." );
         stop = true;
@@ -84,6 +88,7 @@ public class Polling extends NotificationBroadcasterSupport implements PollingMB
     /**
      * @see java.lang.Runnable#run()
      */
+    @Override
     public void run() {
         while ( !stop ) {
             try {

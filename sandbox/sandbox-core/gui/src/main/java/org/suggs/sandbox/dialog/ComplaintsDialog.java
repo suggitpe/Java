@@ -77,7 +77,7 @@ public class ComplaintsDialog extends JDialog {
         c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 1;
-        ;
+
         c.weightx = 0.0; // Do not use any extra horizontal space
         panel.add( lbl2, c );
         JTextArea area1 = new JTextArea();
@@ -197,6 +197,7 @@ public class ComplaintsDialog extends JDialog {
      * @param args
      */
     public static void main( String[] args ) {
-        new ComplaintsDialog( new JFrame() );
+        @SuppressWarnings("unused")
+        ComplaintsDialog dialog = new ComplaintsDialog( new JFrame() );
     }
 }

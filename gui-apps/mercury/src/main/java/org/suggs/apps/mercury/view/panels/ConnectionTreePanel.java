@@ -114,6 +114,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
         MenuManager popupMenu = new MenuManager();
         popupMenu.addMenuListener( new IMenuListener() {
 
+            @Override
             public void menuAboutToShow( IMenuManager aMenuMgr ) {
                 aMenuMgr.removeAll();
                 aMenuMgr.add( mgr.getAction( "CREATE_CONNECTION" ) );
@@ -133,6 +134,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
      * @see org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener#handleConnectionManagerChange(java.lang.String,
      *      org.suggs.apps.mercury.model.connection.connectionmanager.IConnectionManagerListener.ConnectionManagerEvent)
      */
+    @Override
     public void handleConnectionManagerChange( String aConnectionName, ConnectionManagerEvent aEvent ) {
         switch ( aEvent ) {
             case CREATE:
@@ -209,6 +211,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
          * 
          * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
          */
+        @Override
         public Object[] getChildren( Object parent ) {
             return toObjectArray( ( (Node) parent ).getChildNodes() );
         }
@@ -216,6 +219,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
         /**
          * @see org.eclipse.jface.viewers.ITreeContentProvider#getParent(java.lang.Object)
          */
+        @Override
         public Object getParent( Object node ) {
             return ( (Node) node ).getParentNode();
         }
@@ -226,6 +230,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
          * 
          * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java.lang.Object)
          */
+        @Override
         public boolean hasChildren( Object node ) {
             return ( ( (Node) node ).getChildNodes().getLength() > 0 );
         }
@@ -237,6 +242,7 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
          * 
          * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
          */
+        @Override
         public Object[] getElements( Object node ) {
             return toObjectArray( ( (Node) node ).getChildNodes().item( 0 ).getChildNodes() );
         }
@@ -244,14 +250,14 @@ public class ConnectionTreePanel extends Composite implements IConnectionManager
         /**
          * @see org.eclipse.jface.viewers.IContentProvider#dispose()
          */
-        public void dispose() {
-        // nadda
-        }
+        @Override
+        public void dispose() {}
 
         /**
          * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
          *      java.lang.Object, java.lang.Object)
          */
+        @Override
         public void inputChanged( Viewer aViewer, Object oldInput, Object newInput ) {}
 
         /**

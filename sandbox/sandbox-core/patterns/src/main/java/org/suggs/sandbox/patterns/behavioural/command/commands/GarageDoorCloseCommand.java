@@ -30,6 +30,7 @@ public class GarageDoorCloseCommand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#execute()
      */
+    @Override
     public void execute() {
         door.lightOff();
         door.down();
@@ -38,6 +39,7 @@ public class GarageDoorCloseCommand implements ICommand {
     /**
      * @see org.suggs.sandbox.patterns.behavioural.command.ICommand#undo()
      */
+    @Override
     public void undo() {
         door.up();
         door.lightOn();

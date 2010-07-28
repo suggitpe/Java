@@ -23,7 +23,7 @@ public final class TransitionManager {
 
     private static final Log LOG = LogFactory.getLog( TransitionManager.class );
     private static final TransitionManager instance = new TransitionManager();
-    private Map<String, Map<String, ITransition>> transitionMap = new HashMap<String, Map<String, ITransition>>();;
+    private Map<String, Map<String, ITransition>> transitionMap = new HashMap<String, Map<String, ITransition>>();
 
     /**
      * Constructs a new instance (private for singleton pattern).

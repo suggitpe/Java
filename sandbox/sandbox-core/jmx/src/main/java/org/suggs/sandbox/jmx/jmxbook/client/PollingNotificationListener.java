@@ -58,6 +58,7 @@ public class PollingNotificationListener implements NotificationListener {
      * @see javax.management.NotificationListener#handleNotification(javax.management.Notification,
      *      java.lang.Object)
      */
+    @Override
     public void handleNotification( Notification notification, Object handback ) {
         String type = notification.getType();
         LOG.debug( "Notif of type " + type );
@@ -70,14 +71,13 @@ public class PollingNotificationListener implements NotificationListener {
      */
     public static void main( String[] args ) {
         LOG.debug( "Starting a new polling notification listener" );
-        new PollingNotificationListener();
+        @SuppressWarnings("unused")
+        PollingNotificationListener listener = new PollingNotificationListener();
         while ( true ) {
             try {
                 Thread.sleep( 10000 );
             }
-            catch ( InterruptedException e ) {
-                // nadda
-            }
+            catch ( InterruptedException e ) {}
         }
     }
 

@@ -15,7 +15,7 @@ public interface IConnectionManagerListener {
 
     enum ConnectionManagerEvent {
         CREATE, EDIT, REMOVE, CONNECT, DISCONNECT
-    };
+    }
 
     /**
      * This is the impl method that the observers of the

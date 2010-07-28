@@ -31,6 +31,7 @@ public class HeartAdapter implements IBeatModel {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#getBpm()
      */
+    @Override
     public int getBpm() {
         return model.getHeartRate();
     }
@@ -38,24 +39,25 @@ public class HeartAdapter implements IBeatModel {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#initialise()
      */
+    @Override
     public void initialise() {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#on()
      */
-    public void on() {
-    // TODO Auto-generated method stub
-
-    }
+    @Override
+    public void on() {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#off()
      */
+    @Override
     public void off() {}
 
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#registerObserver(org.suggs.sandbox.patterns.compound.mvc.IBeatObserver)
      */
+    @Override
     public void registerObserver( IBeatObserver observer ) {
         model.registerObserver( observer );
     }
@@ -63,6 +65,7 @@ public class HeartAdapter implements IBeatModel {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#registerObserver(org.suggs.sandbox.patterns.compound.mvc.IBpmObserver)
      */
+    @Override
     public void registerObserver( IBpmObserver observer ) {
         model.registerObserver( observer );
     }
@@ -70,6 +73,7 @@ public class HeartAdapter implements IBeatModel {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#removeObserver(org.suggs.sandbox.patterns.compound.mvc.IBeatObserver)
      */
+    @Override
     public void removeObserver( IBeatObserver observer ) {
         model.removeObserver( observer );
     }
@@ -77,6 +81,7 @@ public class HeartAdapter implements IBeatModel {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#removeObserver(org.suggs.sandbox.patterns.compound.mvc.IBpmObserver)
      */
+    @Override
     public void removeObserver( IBpmObserver observer ) {
         model.removeObserver( observer );
     }
@@ -84,6 +89,7 @@ public class HeartAdapter implements IBeatModel {
     /**
      * @see org.suggs.sandbox.patterns.compound.mvc.IBeatModel#setBPM(int)
      */
+    @Override
     public void setBPM( int bpm ) {}
 
 }

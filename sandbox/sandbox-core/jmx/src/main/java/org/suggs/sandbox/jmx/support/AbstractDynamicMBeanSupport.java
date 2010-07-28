@@ -13,14 +13,11 @@ import javax.management.Attribute;
 import javax.management.AttributeList;
 import javax.management.AttributeNotFoundException;
 import javax.management.DynamicMBean;
-import javax.management.InvalidAttributeValueException;
 import javax.management.MBeanAttributeInfo;
 import javax.management.MBeanConstructorInfo;
-import javax.management.MBeanException;
 import javax.management.MBeanInfo;
 import javax.management.MBeanOperationInfo;
 import javax.management.MBeanParameterInfo;
-import javax.management.ReflectionException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,8 +33,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
     private static final Log LOG = LogFactory.getLog( AbstractDynamicMBeanSupport.class );
 
     private Map<String, MBeanAttributeInfo> attributes = new Hashtable<String, MBeanAttributeInfo>();
-    @SuppressWarnings("unchecked")
-    private Map<Constructor, MBeanConstructorInfo> constructors = new Hashtable<Constructor, MBeanConstructorInfo>();
+    private Map<Constructor<?>, MBeanConstructorInfo> constructors = new Hashtable<Constructor<?>, MBeanConstructorInfo>();
     private Map<String, MBeanOperationInfo> operations = new Hashtable<String, MBeanOperationInfo>();
 
     private String description = "Description of the MBean";
@@ -58,8 +54,8 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
     /**
      * @see javax.management.DynamicMBean#getAttribute(java.lang.String)
      */
-    public Object getAttribute( String attribute ) throws AttributeNotFoundException, MBeanException,
-                    ReflectionException {
+    @Override
+    public Object getAttribute( String attribute ) {
         try {
             Method m = this.getClass().getDeclaredMethod( "get" + attribute, (Class[]) null );
             return m.invoke( this, (Object) null );
@@ -73,6 +69,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
     /**
      * @see javax.management.DynamicMBean#getAttributes(java.lang.String[])
      */
+    @Override
     public AttributeList getAttributes( String[] aAttributes ) {
         AttributeList list = new AttributeList();
         for ( String s : aAttributes ) {
@@ -89,9 +86,8 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
     /**
      * @see javax.management.DynamicMBean#setAttribute(javax.management.Attribute)
      */
-    @SuppressWarnings("unchecked")
-    public void setAttribute( Attribute attribute ) throws AttributeNotFoundException,
-                    InvalidAttributeValueException, MBeanException, ReflectionException {
+    @Override
+    public void setAttribute( Attribute attribute ) throws AttributeNotFoundException {
         String attName = attribute.getName();
         Object attValue = attribute.getValue();
         try {
@@ -100,7 +96,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
                 throw new AttributeNotFoundException( attName );
             }
 
-            Class[] types = { Class.forName( type ) };
+            Class<?>[] types = { Class.forName( type ) };
             Method m = this.getClass().getDeclaredMethod( "set" + attName, types );
 
             Object[] args = { attValue };
@@ -117,6 +113,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
     /**
      * @see javax.management.DynamicMBean#setAttributes(javax.management.AttributeList)
      */
+    @Override
     public AttributeList setAttributes( AttributeList attributes ) {
         Attribute[] atts = attributes.toArray( new Attribute[attributes.size()] );
         for ( int i = 0; i < atts.length; ++i ) {
@@ -136,12 +133,11 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
      * 
      * @see javax.management.DynamicMBean#invoke(java.lang.String, java.lang.Object[], java.lang.String[])
      */
-    @SuppressWarnings("unchecked")
-    public Object invoke( String actionName, Object[] params, String[] signature ) throws MBeanException,
-                    ReflectionException {
+    @Override
+    public Object invoke( String actionName, Object[] params, String[] signature ) {
         try {
-            Class c = this.getClass();
-            Class sig[] = null;
+            Class<?> c = this.getClass();
+            Class<?> sig[] = null;
             if ( signature != null ) {
                 sig = new Class[signature.length];
                 for ( int i = 0; i < signature.length; ++i ) {
@@ -161,6 +157,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
     /**
      * @see javax.management.DynamicMBean#getMBeanInfo()
      */
+    @Override
     public MBeanInfo getMBeanInfo() {
         try {
             return buildDynamicMBeanInfo();
@@ -231,8 +228,7 @@ public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
      * @param aDescription
      *            a description of the constructor
      */
-    @SuppressWarnings("unchecked")
-    protected final void addMBeanConstructor( Constructor cons, String aDescription ) {
+    protected final void addMBeanConstructor( Constructor<?> cons, String aDescription ) {
         constructors.put( cons, new MBeanConstructorInfo( aDescription, cons ) );
     }
 

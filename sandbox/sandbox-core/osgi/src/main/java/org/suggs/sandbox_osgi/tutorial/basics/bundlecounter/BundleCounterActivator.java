@@ -25,6 +25,7 @@ public class BundleCounterActivator implements BundleActivator, BundleListener {
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
+    @Override
     public void start( BundleContext ctx ) {
         context = ctx;
         context.addBundleListener( this );
@@ -34,6 +35,7 @@ public class BundleCounterActivator implements BundleActivator, BundleListener {
     /**
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
+    @Override
     public void stop( BundleContext ctx ) {
         context.removeBundleListener( this );
         context = null;
@@ -42,6 +44,7 @@ public class BundleCounterActivator implements BundleActivator, BundleListener {
     /**
      * @see org.osgi.framework.BundleListener#bundleChanged(org.osgi.framework.BundleEvent)
      */
+    @Override
     public void bundleChanged( BundleEvent evt ) {
         switch ( evt.getType() ) {
             case BundleEvent.INSTALLED:

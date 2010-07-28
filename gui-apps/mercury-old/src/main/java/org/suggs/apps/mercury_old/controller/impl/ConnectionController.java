@@ -91,6 +91,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     /**
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
+    @Override
     public void afterPropertiesSet() {
         Assert.notNull( connStoreModel, "Must set the connection store in the connection controller" );
         Assert.notNull( connManagerModel, "Must set the connection manager in the connection controller" );
@@ -107,6 +108,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     private ActionListener createTestConnActionListener() {
         return new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 if ( !( connManagerModel.testConnection( null ) ) ) {
                     String err = "Test connection failed";
@@ -128,6 +130,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     private ActionListener createConnectActionListener() {
         return new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 try {
                     connManagerModel.connect( null );
@@ -153,6 +156,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     private ActionListener createDisconnectActionListener() {
         return new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 try {
                     connManagerModel.disconnect();
@@ -178,6 +182,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     private ActionListener createDeleteActionListener() {
         return new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 String[] conns = connStoreModel.getListOfKnownConnectionNames();
                 String input = (String) JOptionPane.showInputDialog( connStoreView,
@@ -235,6 +240,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     private ActionListener createLoadActionListener() {
         return new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 String[] conns = connStoreModel.getListOfKnownConnectionNames();
                 String input = (String) JOptionPane.showInputDialog( connStoreView,
@@ -274,6 +280,7 @@ public class ConnectionController implements InitializingBean, IConnectionContro
     private ActionListener createSaveActionListener() {
         return new ActionListener() {
 
+            @Override
             public void actionPerformed( ActionEvent arg0 ) {
                 // first we should make sure that the conn dedtails
                 // have been saved correctly
