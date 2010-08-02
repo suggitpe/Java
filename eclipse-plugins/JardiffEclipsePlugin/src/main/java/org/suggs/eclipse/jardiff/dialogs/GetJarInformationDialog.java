@@ -75,37 +75,32 @@ public class GetJarInformationDialog extends Dialog {
     @Override
     protected Control createDialogArea( Composite parent ) {
         Composite ret = (Composite) super.createDialogArea( parent );
-        createJarSelection( ret );
-        createOutputSelectionRowInGui( ret );
+        createJarSelectionInParentPanel( ret );
+        createOutputSelectionRowInParentPanel( ret );
         ret.pack();
         return ret;
     }
 
-    /**
-     * Creates the part of the dialog that contains the jar file selection.
-     * 
-     * @param aComposite
-     *            the composite to add the section to.
-     */
-    private void createJarSelection( Composite aComposite ) {
+    private void createJarSelectionInParentPanel( Composite aComposite ) {
         Group group = new Group( aComposite, SWT.None );
         group.setText( "Jar file selection" );
 
         group.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
         group.setLayout( new GridLayout( 3, false ) );
 
-        buildFromJarRowInGui( group );
-        buildToJarRowInGui( group );
-        buildFlipJarsRowInGui( group );
-
+        buildFromJarRowInPanel( group );
+        buildToJarRowInPanel( group );
+        buildFlipJarsRowInPanel( group );
     }
 
-    private void buildFromJarRowInGui( Composite aComposite ) {
-        // first row
+    private void buildFromJarRowInPanel( Composite aComposite ) {
         final Label fromJarLabel = new Label( aComposite, SWT.NONE );
         fromJarLabel.setText( "From Jar:" );
 
         fromJarTextField = new Text( aComposite, SWT.BORDER );
+        if ( fromJarName != null ) {
+            fromJarTextField.setText( fromJarName );
+        }
         GridData gridData = new GridData( GridData.FILL_HORIZONTAL );
         gridData.widthHint = 400;
         fromJarTextField.setLayoutData( gridData );
@@ -115,8 +110,7 @@ public class GetJarInformationDialog extends Dialog {
         fromButton.addSelectionListener( buildSelectionListenerFileDialogForTextField( fromJarTextField ) );
     }
 
-    private void buildToJarRowInGui( Composite aComposite ) {
-        // second row
+    private void buildToJarRowInPanel( Composite aComposite ) {
         final Label toJarLabel = new Label( aComposite, SWT.NONE );
         toJarLabel.setText( "To Jar:" );
 
@@ -130,7 +124,7 @@ public class GetJarInformationDialog extends Dialog {
         toButton.addSelectionListener( buildSelectionListenerFileDialogForTextField( toJarTextField ) );
     }
 
-    private void buildFlipJarsRowInGui( Composite aComposite ) {
+    private void buildFlipJarsRowInPanel( Composite aComposite ) {
         final Button flipToFromButton = new Button( aComposite, SWT.NONE );
         flipToFromButton.setText( "Flip to and from jars" );
         flipToFromButton.addSelectionListener( buildJarFlipSelectionListener() );
@@ -141,7 +135,7 @@ public class GetJarInformationDialog extends Dialog {
 
             @Override
             public void widgetSelected( SelectionEvent e ) {
-                FileDialog fileDialog = buildArchiveFileDialog();
+                FileDialog fileDialog = buildArchiveFileDialog( aTextField.getText() );
                 String fileLocation = fileDialog.open();
                 if ( fileLocation != null && !fileLocation.equals( "" ) ) {
                     aTextField.setText( fileLocation );
@@ -151,11 +145,14 @@ public class GetJarInformationDialog extends Dialog {
         };
     }
 
-    private final FileDialog buildArchiveFileDialog() {
+    private final FileDialog buildArchiveFileDialog( String fileDialogStartDirectory ) {
         FileDialog fileDialog = new FileDialog( Display.getCurrent().getActiveShell(), SWT.READ_ONLY );
         fileDialog.setFilterNames( new String[] { "Java Archives", "Web Archives",
                                                  "Enterprise Application Archives", "Resource Archives" } );
         fileDialog.setFilterExtensions( new String[] { "*.jar", "*.war", "*.ear", "*.rar" } );
+        if ( fileDialogStartDirectory != null && !fileDialogStartDirectory.isEmpty() ) {
+            fileDialog.setFilterPath( fileDialogStartDirectory );
+        }
         return fileDialog;
     }
 
@@ -164,16 +161,14 @@ public class GetJarInformationDialog extends Dialog {
 
             @Override
             public void widgetSelected( SelectionEvent e ) {
-                String fromText = fromJarTextField.getText();
-                fromJarTextField.setText( toJarTextField.getText() );
-                fromJarTextField.setToolTipText( toJarTextField.getText() );
-                toJarTextField.setText( fromText );
-                toJarTextField.setToolTipText( fromText );
+                String originalFromText = fromJarTextField.getText();
+                setFromJarNameText( toJarTextField.getText() );
+                setToJarNameText( originalFromText );
             }
         };
     }
 
-    private void createOutputSelectionRowInGui( Composite aComposite ) {
+    private void createOutputSelectionRowInParentPanel( Composite aComposite ) {
 
         Group group = new Group( aComposite, SWT.None );
         group.setText( "Output method selection" );
@@ -257,6 +252,15 @@ public class GetJarInformationDialog extends Dialog {
     }
 
     /**
+     * Setter for the from jar name field.
+     * 
+     * @param aJarName
+     */
+    public void setFromJarName( String aJarName ) {
+        fromJarName = aJarName;
+    }
+
+    /**
      * Getter for name of the To Jar
      * 
      * @return the to jar name
@@ -272,6 +276,16 @@ public class GetJarInformationDialog extends Dialog {
      */
     public String getDiffOutput() {
         return diffOutput;
+    }
+
+    private void setToJarNameText( String aJarName ) {
+        toJarTextField.setText( aJarName );
+        toJarTextField.setToolTipText( aJarName );
+    }
+
+    private void setFromJarNameText( String aJarName ) {
+        fromJarTextField.setText( aJarName );
+        fromJarTextField.setToolTipText( aJarName );
     }
 
 }

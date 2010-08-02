@@ -39,6 +39,7 @@ public class DiffJarsActionDelegate implements IWorkbenchWindowActionDelegate, I
      */
     public void run( IAction aAction ) {
         DiffJarsAction diffAction = null;
+
         if ( selection != null && !selection.isEmpty() ) {
             Object element = selection.getFirstElement();
             if ( element instanceof IFile ) {

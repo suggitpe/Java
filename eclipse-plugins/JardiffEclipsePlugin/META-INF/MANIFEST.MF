@@ -16,6 +16,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.suggs.eclipse.jardiff,
  org.suggs.eclipse.jardiff.actions,
  org.suggs.eclipse.jardiff.dialogs
-Bundle-ClassPath: lib/commons-logging-1.1.1.jar,
- lib/log4j-1.2.15.jar,
+Bundle-ClassPath: lib/,
  .

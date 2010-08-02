@@ -6,8 +6,6 @@ package org.suggs.eclipse.jardiff.actions;
 
 import org.suggs.eclipse.jardiff.dialogs.GetJarInformationDialog;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.window.Window;
@@ -19,19 +17,24 @@ import org.eclipse.swt.widgets.Display;
  */
 public class DiffJarsAction extends Action {
 
-    private static final Log LOG = LogFactory.getLog( DiffJarsAction.class );
+    private final String initialJarFilename;
 
     /**
      * Constructs a new instance.
      */
-    public DiffJarsAction() {}
+    public DiffJarsAction() {
+        initialJarFilename = null;
+    }
 
-    public DiffJarsAction( IFile aFile ) {}
+    public DiffJarsAction( IFile aFile ) {
+        initialJarFilename = aFile.getRawLocation().toString();
+    }
 
     @Override
     public void run() {
 
         GetJarInformationDialog dialog = new GetJarInformationDialog( Display.getDefault().getActiveShell() );
+        dialog.setFromJarName( initialJarFilename );
         dialog.open();
 
         if ( dialog.getReturnCode() == Window.CANCEL ) {
@@ -41,6 +44,8 @@ public class DiffJarsAction extends Action {
         String toJar = dialog.getToJarName();
         String fromJar = dialog.getFromJarName();
         String output = dialog.getDiffOutput();
+
+        System.out.println( "toJar=[" + toJar + "]\nfromJar=[" + fromJar + "]\noutput=[" + output + "]" );
     }
 
 }
