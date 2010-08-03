@@ -107,7 +107,8 @@ public class GetJarInformationDialog extends Dialog {
 
         final Button fromButton = new Button( aComposite, SWT.NONE );
         fromButton.setText( "..." );
-        fromButton.addSelectionListener( buildSelectionListenerFileDialogForTextField( fromJarTextField ) );
+        fromButton.addSelectionListener( buildSelectionListenerFileDialogForTextField( fromJarTextField,
+                                                                                       toJarTextField ) );
     }
 
     private void buildToJarRowInPanel( Composite aComposite ) {
@@ -121,7 +122,8 @@ public class GetJarInformationDialog extends Dialog {
 
         final Button toButton = new Button( aComposite, SWT.NONE );
         toButton.setText( "..." );
-        toButton.addSelectionListener( buildSelectionListenerFileDialogForTextField( toJarTextField ) );
+        toButton.addSelectionListener( buildSelectionListenerFileDialogForTextField( toJarTextField,
+                                                                                     fromJarTextField ) );
     }
 
     private void buildFlipJarsRowInPanel( Composite aComposite ) {
@@ -130,12 +132,21 @@ public class GetJarInformationDialog extends Dialog {
         flipToFromButton.addSelectionListener( buildJarFlipSelectionListener() );
     }
 
-    private SelectionListener buildSelectionListenerFileDialogForTextField( final Text aTextField ) {
+    private SelectionListener buildSelectionListenerFileDialogForTextField( final Text aTextField,
+                                                                            final Text aAlternateTextField ) {
         return new SelectionAdapter() {
 
             @Override
             public void widgetSelected( SelectionEvent e ) {
-                FileDialog fileDialog = buildArchiveFileDialog( aTextField.getText() );
+
+                String initialDirectory = null;
+                if ( aTextField.getText() != null && !aTextField.getText().isEmpty() ) {
+                    initialDirectory = extractParentDirectoryFromPathString( aTextField.getText() );
+                }
+                else if ( aAlternateTextField != null && !aAlternateTextField.getText().isEmpty() ) {
+                    initialDirectory = extractParentDirectoryFromPathString( aAlternateTextField.getText() );
+                }
+                FileDialog fileDialog = buildArchiveFileDialog( initialDirectory );
                 String fileLocation = fileDialog.open();
                 if ( fileLocation != null && !fileLocation.equals( "" ) ) {
                     aTextField.setText( fileLocation );
@@ -143,6 +154,26 @@ public class GetJarInformationDialog extends Dialog {
                 }
             }
         };
+    }
+
+    /**
+     * Static method that allows us to extract the parnt dir from a given file location
+     * 
+     * @param initialPath
+     *            the path from which to extract the parent dir
+     * @return the parent dir
+     */
+    static String extractParentDirectoryFromPathString( String initialPath ) {
+        if ( initialPath == null || initialPath.isEmpty() ) {
+            return null;
+        }
+
+        int locationOfLastSeparator = initialPath.lastIndexOf( File.separatorChar );
+        if ( locationOfLastSeparator == -1 ) {
+            return null;
+        }
+
+        return initialPath.substring( 0, locationOfLastSeparator );
     }
 
     private final FileDialog buildArchiveFileDialog( String fileDialogStartDirectory ) {
