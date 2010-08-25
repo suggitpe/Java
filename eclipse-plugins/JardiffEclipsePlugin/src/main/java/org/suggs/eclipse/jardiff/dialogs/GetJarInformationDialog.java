@@ -4,25 +4,21 @@
  */
 package org.suggs.eclipse.jardiff.dialogs;
 
+import org.suggs.eclipse.jardiff.dialogs.panels.JarSelectionPanel;
+
 import java.io.File;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 /**
  * Dialog to get the jar information for diffing.
@@ -40,12 +36,13 @@ public class GetJarInformationDialog extends Dialog {
     private String toJarName;
     private String diffOutput;
 
-    private Text fromJarTextField;
-    private Text toJarTextField;
-
     private Button htmlRadioButton;
     private Button xmlRadioButton;
     private Button textRadioButton;
+
+    private JarSelectionPanel jarSelectionPanel;
+
+    // private JarOutputPanel jarOutputPanel;
 
     /**
      * Constructs a new instance.
@@ -74,129 +71,12 @@ public class GetJarInformationDialog extends Dialog {
      */
     @Override
     protected Control createDialogArea( Composite parent ) {
-        Composite ret = (Composite) super.createDialogArea( parent );
-        createJarSelectionInParentPanel( ret );
-        createOutputSelectionRowInParentPanel( ret );
-        ret.pack();
-        return ret;
-    }
-
-    private void createJarSelectionInParentPanel( Composite aComposite ) {
-        Group group = new Group( aComposite, SWT.None );
-        group.setText( "Jar file selection" );
-
-        group.setLayoutData( new GridData( GridData.FILL_HORIZONTAL ) );
-        group.setLayout( new GridLayout( 3, false ) );
-
-        buildFromJarRowInPanel( group );
-        buildToJarRowInPanel( group );
-        buildFlipJarsRowInPanel( group );
-    }
-
-    private void buildFromJarRowInPanel( Composite aComposite ) {
-        final Label fromJarLabel = new Label( aComposite, SWT.NONE );
-        fromJarLabel.setText( "From Jar:" );
-
-        fromJarTextField = new Text( aComposite, SWT.BORDER );
-        if ( fromJarName != null ) {
-            fromJarTextField.setText( fromJarName );
-        }
-        GridData gridData = new GridData( GridData.FILL_HORIZONTAL );
-        gridData.widthHint = 400;
-        fromJarTextField.setLayoutData( gridData );
-
-        final Button fromButton = new Button( aComposite, SWT.NONE );
-        fromButton.setText( "..." );
-        fromButton.addSelectionListener( buildSelectionListenerFileDialogForTextField( fromJarTextField,
-                                                                                       toJarTextField ) );
-    }
-
-    private void buildToJarRowInPanel( Composite aComposite ) {
-        final Label toJarLabel = new Label( aComposite, SWT.NONE );
-        toJarLabel.setText( "To Jar:" );
-
-        toJarTextField = new Text( aComposite, SWT.BORDER );
-        GridData gridData = new GridData( GridData.FILL_HORIZONTAL );
-        gridData.widthHint = 400;
-        toJarTextField.setLayoutData( gridData );
-
-        final Button toButton = new Button( aComposite, SWT.NONE );
-        toButton.setText( "..." );
-        toButton.addSelectionListener( buildSelectionListenerFileDialogForTextField( toJarTextField,
-                                                                                     fromJarTextField ) );
-    }
-
-    private void buildFlipJarsRowInPanel( Composite aComposite ) {
-        final Button flipToFromButton = new Button( aComposite, SWT.NONE );
-        flipToFromButton.setText( "Flip to and from jars" );
-        flipToFromButton.addSelectionListener( buildJarFlipSelectionListener() );
-    }
-
-    private SelectionListener buildSelectionListenerFileDialogForTextField( final Text aTextField,
-                                                                            final Text aAlternateTextField ) {
-        return new SelectionAdapter() {
-
-            @Override
-            public void widgetSelected( SelectionEvent e ) {
-
-                String initialDirectory = null;
-                if ( aTextField.getText() != null && !aTextField.getText().isEmpty() ) {
-                    initialDirectory = extractParentDirectoryFromPathString( aTextField.getText() );
-                }
-                else if ( aAlternateTextField != null && !aAlternateTextField.getText().isEmpty() ) {
-                    initialDirectory = extractParentDirectoryFromPathString( aAlternateTextField.getText() );
-                }
-                FileDialog fileDialog = buildArchiveFileDialog( initialDirectory );
-                String fileLocation = fileDialog.open();
-                if ( fileLocation != null && !fileLocation.equals( "" ) ) {
-                    aTextField.setText( fileLocation );
-                    aTextField.setToolTipText( fileLocation );
-                }
-            }
-        };
-    }
-
-    /**
-     * Static method that allows us to extract the parnt dir from a given file location
-     * 
-     * @param initialPath
-     *            the path from which to extract the parent dir
-     * @return the parent dir
-     */
-    static String extractParentDirectoryFromPathString( String initialPath ) {
-        if ( initialPath == null || initialPath.isEmpty() ) {
-            return null;
-        }
-
-        int locationOfLastSeparator = initialPath.lastIndexOf( File.separatorChar );
-        if ( locationOfLastSeparator == -1 ) {
-            return null;
-        }
-
-        return initialPath.substring( 0, locationOfLastSeparator );
-    }
-
-    private final FileDialog buildArchiveFileDialog( String fileDialogStartDirectory ) {
-        FileDialog fileDialog = new FileDialog( Display.getCurrent().getActiveShell(), SWT.READ_ONLY );
-        fileDialog.setFilterNames( new String[] { "Java Archives", "Web Archives",
-                                                 "Enterprise Application Archives", "Resource Archives" } );
-        fileDialog.setFilterExtensions( new String[] { "*.jar", "*.war", "*.ear", "*.rar" } );
-        if ( fileDialogStartDirectory != null && !fileDialogStartDirectory.isEmpty() ) {
-            fileDialog.setFilterPath( fileDialogStartDirectory );
-        }
-        return fileDialog;
-    }
-
-    private SelectionListener buildJarFlipSelectionListener() {
-        return new SelectionAdapter() {
-
-            @Override
-            public void widgetSelected( SelectionEvent e ) {
-                String originalFromText = fromJarTextField.getText();
-                setFromJarNameText( toJarTextField.getText() );
-                setToJarNameText( originalFromText );
-            }
-        };
+        Composite dialogAreaComposite = (Composite) super.createDialogArea( parent );
+        jarSelectionPanel = new JarSelectionPanel( dialogAreaComposite );
+        // jarOutputPanel = new JarOutputPanel( dialogAreaComposite );
+        createOutputSelectionRowInParentPanel( dialogAreaComposite );
+        dialogAreaComposite.pack();
+        return dialogAreaComposite;
     }
 
     private void createOutputSelectionRowInParentPanel( Composite aComposite ) {
@@ -226,8 +106,8 @@ public class GetJarInformationDialog extends Dialog {
      */
     @Override
     public boolean close() {
-        fromJarName = fromJarTextField.getText();
-        toJarName = toJarTextField.getText();
+        fromJarName = jarSelectionPanel.getFromJarFileTextField().getText();
+        toJarName = jarSelectionPanel.getToJarFileTextField().getText();
         if ( xmlRadioButton.getSelection() ) {
             diffOutput = XML;
         }
@@ -252,8 +132,8 @@ public class GetJarInformationDialog extends Dialog {
     @Override
     protected void okPressed() {
         // now we do the validation
-        String fromName = fromJarTextField.getText();
-        String toName = toJarTextField.getText();
+        String fromName = jarSelectionPanel.getFromJarFileTextField().getText();
+        String toName = jarSelectionPanel.getToJarFileTextField().getText();
         if ( fromName == null || fromName.equals( "" ) || toName == null || toName.equals( "" ) ) {
             MessageDialog.openError( Display.getCurrent().getActiveShell(),
                                      "Incomplete input",
@@ -307,16 +187,6 @@ public class GetJarInformationDialog extends Dialog {
      */
     public String getDiffOutput() {
         return diffOutput;
-    }
-
-    private void setToJarNameText( String aJarName ) {
-        toJarTextField.setText( aJarName );
-        toJarTextField.setToolTipText( aJarName );
-    }
-
-    private void setFromJarNameText( String aJarName ) {
-        fromJarTextField.setText( aJarName );
-        fromJarTextField.setToolTipText( aJarName );
     }
 
 }

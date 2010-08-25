@@ -2,7 +2,9 @@
  * ExtractParentDirParameterizedTest.java created on 3 Aug 2010 07:27:42 by suggitpe for project JardiffPlugin
  * 
  */
-package org.suggs.eclipse.jardiff.dialogs;
+package org.suggs.eclipse.jardiff.dialogs.panels;
+
+import org.suggs.eclipse.jardiff.dialogs.panels.JarSelectionPanel;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -49,7 +51,7 @@ public class ExtractParentDirParameterizedTest {
 
     @Test
     public void extractsParentDirFromParameter() {
-        String actualExtracted = GetJarInformationDialog.extractParentDirectoryFromPathString( initialPath );
+        String actualExtracted = JarSelectionPanel.extractParentDirectoryFromPathString( initialPath );
         assertThat( actualExtracted, equalTo( extractedPath ) );
         LOG.debug( "Parent dir extractor has extracted [" + actualExtracted + "] from [" + initialPath + "]" );
     }
