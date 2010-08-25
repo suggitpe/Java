@@ -17,7 +17,7 @@
     <!-- Mailing lists -->
     <mailingLists>
     </mailingLists>
-    
+
     <scm>
     </scm>
 
@@ -49,25 +49,12 @@
 
     <!-- This links up the main pom to the module poms -->
     <modules>
-        <!--
-            <module>../gui_apps</module> <module>../libraries</module> <module>../sandbox</module>
-            <module>../sandbox_eclipse</module> <module>../sandbox_ejb</module> <module>../sandbox_osgi_mailbox</module>
-            <module>../sandbox_webapps</module> <module>../web_apps</module>
-        -->
+        <!-- <module>../gui_apps</module> <module>../libraries</module> <module>../sandbox</module> <module>../sandbox_eclipse</module> 
+            <module>../sandbox_ejb</module> <module>../sandbox_osgi_mailbox</module> <module>../sandbox_webapps</module> <module>../web_apps</module> -->
     </modules>
 
     <build>
         <testResources>
-            <!-- 
-            <testResource>
-                <directory>${basedir}/etc/mavenBuild</directory>
-                <directory>${suggs.test.home}</directory>
-                <filtering>false</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </testResource>
-            -->
             <testResource>
                 <directory>src/test/resources</directory>
                 <filtering>false</filtering>
@@ -93,21 +80,9 @@
                     </configuration>
                 </plugin>
 
-                <!-- ECLIPSE PLUGIN -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-eclipse-plugin</artifactId>
-                    <configuration>
-                        <projectNameTemplate>${project.name}</projectNameTemplate>
-                        <buildOutputDirectory>bin</buildOutputDirectory>
-                        <downloadJavadocs>false</downloadJavadocs>
-                        <downloadSources>false</downloadSources>
-                    </configuration>
-                </plugin>
-
                 <!-- SUREFIRE PLUGIN -->
-                <!-- This has been edited such that all standard tests are executed in the test
-                cycle, whereas Integration Tests are executed after the package phase. -->
+                <!-- This has been edited such that all standard tests are executed in the test cycle, whereas Integration 
+                    Tests are executed after the package phase. -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -120,17 +95,6 @@
                         </includes>
                     </configuration>
                 </plugin>
-                
-                <!-- SUREFIRE PLUGIN ALTERNATE APPROACH -->
-                <!-- This configuration is the John Smart (Wakaleo) approach of separation 
-                    of the integration tests and unit tests -->
-                <!--  <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> <configuration>
-                <useSystemClassLoader>true</useSystemClassLoader> <trimStackTrace>false</trimStackTrace> <argLine>${test.jvm.args}</argLine>
-                <skip>true</skip> </configuration> <executions> <execution> <id>unit-tests</id> <phase>test</phase> <goals> <goal>test</goal>
-                </goals> <configuration> <skip>false</skip> <excludes> <exclude>**/*IntegrationTest.java</exclude> </excludes> </configuration>
-                </execution> <execution> <id>integration-tests</id> <phase>integration-test</phase> <goals> <goal>test</goal> </goals>
-                <configuration> <skip>false</skip> <includes> <include>**/*IntegrationTest.java</include> </includes> </configuration>
-                </execution> </executions> </plugin> -->
 
                 <!-- SONAR PLUGIN -->
                 <plugin>
@@ -179,7 +143,7 @@
                                 <hostName>myServer</hostName>
                                 <port>8070</port>
                                 <pageName>mySuitePage</pageName>
-                            </fitnesse>            
+                            </fitnesse>
                         </fitnesses>
                     </configuration>
                 </plugin>
@@ -213,7 +177,7 @@
                         <resourceDestDir>${basedir}/src/main/resources/wsdl</resourceDestDir>
                     </configuration>
                 </plugin>
-                
+
                 <!-- WAR PLUGIN -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -222,11 +186,78 @@
                         <warSourceDirectory>${basedir}/src/main/resources/webapp</warSourceDirectory>
                     </configuration>
                 </plugin>
-                
+
+                <!-- GROOVY PLUGIN -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>groovy-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>generateStubs</goal>
+                                <goal>compile</goal>
+                                <goal>generateTestStubs</goal>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <debug>false</debug>
+                        <verbose>true</verbose>
+                        <stacktrace>true</stacktrace>
+                        <defaultScriptExtension>.groovy</defaultScriptExtension>
+                    </configuration>
+                </plugin>
+
+                <!-- EASYB PLUGIN -->
+                <plugin>
+                    <groupId>org.easyb</groupId>
+                    <artifactId>maven-easyb-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- JBEHAVE -->
+                <plugin>
+                    <groupId>org.jbehave</groupId>
+                    <artifactId>jbehave-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>run-scenarios-found</id>
+                            <phase>integration-test</phase>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <testSourceDirectory>src/test/jbehave</testSourceDirectory>
+                        <includes>
+                            <include>**/stories/*.java</include>
+                        </includes>
+                        <scope>test</scope>
+                        <ignoreFailureInStories>true</ignoreFailureInStories>
+                        <ignoreFailureInView>false</ignoreFailureInView>
+                    </configuration>
+                    <goals>
+                        <goal>run-stories-as-embeddables</goal>
+                    </goals>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.easyb</groupId>
+                <artifactId>maven-easyb-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
@@ -238,31 +269,12 @@
     </pluginRepositories>
 
     <!-- this is where we define the additional report to run as the main build -->
-    <!--     <reporting>
-        <plugins>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
-                    <docletArtifact>
-                        <groupId>gr.spinellis</groupId>
-                        <artifactId>UmlGraph</artifactId>
-                        <version>4.6</version>
-                    </docletArtifact>
-                    <additionalParam>
-                        -inferrel -inferdep -hide java.* -collpackages
-                        java.util.* -attributes -operations
-                        -enumerations -enumconstants
-				    </additionalParam>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
-    -->
+    <!-- <reporting> <plugins> <plugin> <artifactId>maven-javadoc-plugin</artifactId> <configuration> <source>1.6</source> 
+        <doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet> <docletArtifact> <groupId>gr.spinellis</groupId> <artifactId>UmlGraph</artifactId> 
+        <version>4.6</version> </docletArtifact> <additionalParam> -inferrel -inferdep -hide java.* -collpackages java.util.* -attributes 
+        -operations -enumerations -enumconstants </additionalParam> </configuration> </plugin> </plugins> </reporting> -->
 
-    <!-- this is where we define the high level Scribe dependencies 
-    (ie those that are not project specific) -->
+    <!-- this is where we define the high level Scribe dependencies (ie those that are not project specific) -->
     <dependencies>
         <!-- main compile time dependencies -->
         <dependency>
@@ -281,6 +293,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -292,10 +309,19 @@
         </dependency>
     </dependencies>
 
-    <!-- This is where we define all of the application 
-        dependencies version requirements -->
+    <!-- This is where we define all of the application dependencies version requirements -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>1.7.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-core</artifactId>
+                <version>3.0-rc3</version>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -328,6 +354,11 @@
             </dependency>
 
             <!-- external jars -->
+            <dependency>
+                <groupId>jardiff</groupId>
+                <artifactId>jardiff</artifactId>
+                <version>0.2</version>
+            </dependency>
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
@@ -452,37 +483,37 @@
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>swt</artifactId>
-                <version>3.5.1</version>
+                <version>3.6.0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.swt.win32.win32</groupId>
                 <artifactId>x86</artifactId>
-                <version>3.5.1</version>
+                <version>3.6.0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>swt.gtk.linux.x86</artifactId>
-                <version>3.5.1</version>
+                <version>3.6.0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>jface</artifactId>
-                <version>3.5.1</version>
+                <version>3.6.0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>core.commands</artifactId>
-                <version>3.5.0</version>
+                <version>3.6.0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>core.runtime</artifactId>
-                <version>3.5.0</version>
+                <version>3.6.0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>equinox.common</artifactId>
-                <version>3.5.1</version>
+                <version>3.6.0</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
