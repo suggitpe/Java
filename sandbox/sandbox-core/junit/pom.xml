@@ -15,6 +15,12 @@
     <name>Sandbox - JUnit</name>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
     <dependencies>
