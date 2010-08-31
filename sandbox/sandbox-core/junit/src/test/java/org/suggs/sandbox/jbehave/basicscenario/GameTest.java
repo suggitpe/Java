@@ -26,8 +26,8 @@ public class GameTest {
 
     @Before
     public void onSetup() {
-        toggleGame = new Game( 2, 2 );
         LOG.debug( "--------------------" );
+        toggleGame = new Game( 2, 2 );
     }
 
     @Test
