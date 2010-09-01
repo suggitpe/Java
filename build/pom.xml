@@ -244,8 +244,9 @@
                                     <include>**/stories/*.java</include>
                                 </includes>
                                 <scope>test</scope>
-                                <ignoreFailureInStories>true</ignoreFailureInStories>
+                                <ignoreFailureInStories>false</ignoreFailureInStories>
                                 <ignoreFailureInView>false</ignoreFailureInView>
+                                <generateViewAfterStories>true</generateViewAfterStories>
                             </configuration>
                             <goals>
                                 <goal>run-stories-as-embeddables</goal>
