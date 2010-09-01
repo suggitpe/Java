@@ -66,6 +66,13 @@
                     <include>**/*.properties</include>
                 </includes>
             </testResource>
+            <testResource>
+                <directory>src/test/java</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.story</include>
+                </includes>
+            </testResource>
         </testResources>
 
         <pluginManagement>
@@ -226,38 +233,37 @@
                 <plugin>
                     <groupId>org.jbehave</groupId>
                     <artifactId>jbehave-maven-plugin</artifactId>
+                    <version>3.0</version>
+                    <!-- <version>3.1-SNAPSHOT</version> -->
                     <executions>
                         <execution>
-                            <id>run-scenarios-found</id>
+                            <id>find-and-run-scenarios</id>
                             <phase>integration-test</phase>
+                            <configuration>
+                                <includes>
+                                    <include>**/stories/*.java</include>
+                                </includes>
+                                <scope>test</scope>
+                                <ignoreFailureInStories>true</ignoreFailureInStories>
+                                <ignoreFailureInView>false</ignoreFailureInView>
+                            </configuration>
+                            <goals>
+                                <goal>run-stories-as-embeddables</goal>
+                            </goals>
                         </execution>
                     </executions>
-                    <configuration>
-                        <testSourceDirectory>src/test/jbehave</testSourceDirectory>
-                        <includes>
-                            <include>**/stories/*.java</include>
-                        </includes>
-                        <scope>test</scope>
-                        <ignoreFailureInStories>true</ignoreFailureInStories>
-                        <ignoreFailureInView>false</ignoreFailureInView>
-                    </configuration>
-                    <goals>
-                        <goal>run-stories-as-embeddables</goal>
-                    </goals>
                 </plugin>
 
             </plugins>
         </pluginManagement>
 
         <plugins>
+            <!--
             <plugin>
                 <groupId>org.easyb</groupId>
                 <artifactId>maven-easyb-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.jbehave</groupId>
-                <artifactId>jbehave-maven-plugin</artifactId>
-            </plugin>
+            -->
         </plugins>
     </build>
 
@@ -320,7 +326,7 @@
             <dependency>
                 <groupId>org.jbehave</groupId>
                 <artifactId>jbehave-core</artifactId>
-                <version>3.0-rc3</version>
+                <version>3.0</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
