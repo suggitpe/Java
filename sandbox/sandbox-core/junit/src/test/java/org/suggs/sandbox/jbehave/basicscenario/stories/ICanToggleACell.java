@@ -5,6 +5,8 @@
 package org.suggs.sandbox.jbehave.basicscenario.stories;
 
 
+import org.suggs.sandbox.jbehave.basicscenario.steps.GridSteps;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.configuration.Configuration;
