@@ -67,6 +67,7 @@
                 </includes>
             </testResource>
             <testResource>
+                <!-- This is needed so that the stories can be used within the jbehave test exec -->
                 <directory>src/test/java</directory>
                 <filtering>false</filtering>
                 <includes>
@@ -279,6 +280,7 @@
                                     <artifactItem>
                                         <groupId>org.jbehave</groupId>
                                         <artifactId>jbehave-core</artifactId>
+                                        <version>3.0</version>
                                         <classifier>resources</classifier>
                                         <type>zip</type>
                                         <outputDirectory>${project.build.directory}/jbehave-reports/view</outputDirectory>
