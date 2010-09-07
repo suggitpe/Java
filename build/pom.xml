@@ -20,6 +20,10 @@
 
     <scm>
     </scm>
+    
+    <properties>
+        <jbehave.version>3.0</jbehave.version>
+    </properties>
 
     <!-- team developers -->
     <developers>
@@ -234,7 +238,7 @@
                 <plugin>
                     <groupId>org.jbehave</groupId>
                     <artifactId>jbehave-maven-plugin</artifactId>
-                    <version>3.0</version>
+                    <version>${jbehave.version}</version>
                     <!-- <version>3.1-SNAPSHOT</version> -->
                     <executions>
                         <execution>
@@ -256,6 +260,7 @@
                     </executions>
                 </plugin>
 
+                <!-- DEPENDENCY PLUGIN -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
@@ -273,14 +278,14 @@
                                     <artifactItem>
                                         <groupId>org.jbehave.site</groupId>
                                         <artifactId>jbehave-site-resources</artifactId>
-                                        <version>3.0</version>
+                                        <version>${jbehave.version}</version>
                                         <type>zip</type>
                                         <outputDirectory>${project.build.directory}/jbehave-reports/view</outputDirectory>
                                     </artifactItem>
                                     <artifactItem>
                                         <groupId>org.jbehave</groupId>
                                         <artifactId>jbehave-core</artifactId>
-                                        <version>3.0</version>
+                                        <version>${jbehave.version}</version>
                                         <classifier>resources</classifier>
                                         <type>zip</type>
                                         <outputDirectory>${project.build.directory}/jbehave-reports/view</outputDirectory>
@@ -358,7 +363,7 @@
             <dependency>
                 <groupId>org.jbehave</groupId>
                 <artifactId>jbehave-core</artifactId>
-                <version>3.0</version>
+                <version>${jbehave.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
