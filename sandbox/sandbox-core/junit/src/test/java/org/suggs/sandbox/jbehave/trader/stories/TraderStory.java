@@ -7,6 +7,7 @@ package org.suggs.sandbox.jbehave.trader.stories;
 import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Properties;
 
@@ -21,12 +22,17 @@ import org.jbehave.core.io.StoryPathResolver;
 import org.jbehave.core.io.UnderscoredCamelCaseResolver;
 import org.jbehave.core.junit.JUnitStory;
 import org.jbehave.core.parsers.RegexPrefixCapturingPatternParser;
+import org.jbehave.core.reporters.FilePrintStreamFactory;
 import org.jbehave.core.reporters.StoryReporterBuilder;
-import org.jbehave.core.reporters.StoryReporterBuilder.Format;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InstanceStepsFactory;
 import org.jbehave.core.steps.ParameterConverters;
 import org.jbehave.core.steps.SilentStepMonitor;
+
+import static org.jbehave.core.reporters.StoryReporterBuilder.Format.CONSOLE;
+import static org.jbehave.core.reporters.StoryReporterBuilder.Format.HTML;
+import static org.jbehave.core.reporters.StoryReporterBuilder.Format.TXT;
+import static org.jbehave.core.reporters.StoryReporterBuilder.Format.XML;
 
 /**
  * Abstract class to maintain the key facets of the story.
@@ -42,26 +48,22 @@ public abstract class TraderStory extends JUnitStory {
     /**
      * Constructs a new instance.
      */
-    public TraderStory() {
-        configuredEmbedder().embedderControls()
-            .doGenerateViewAfterStories( true )
-            .doIgnoreFailureInStories( false )
-            .doIgnoreFailureInView( false );
-    }
+    public TraderStory() {}
 
     @Override
     public List<CandidateSteps> candidateSteps() {
-        InstanceStepsFactory factory = new InstanceStepsFactory( createConfiguration(), new TraderSteps() );
+        InstanceStepsFactory factory = new InstanceStepsFactory( configuration(), new TraderSteps() );
         return factory.createCandidateSteps();
     }
 
-    private Configuration createConfiguration() {
+    @Override
+    public Configuration configuration() {
         Class<? extends Embeddable> embeddableClass = this.getClass();
-        StoryPathResolver storyPathResolver = new UnderscoredCamelCaseResolver( ".story" );
         Configuration config = new MostUsefulConfiguration();
-        config.useStoryLoader( new LoadFromClasspath( embeddableClass.getClassLoader() ) );
+        config.useStoryLoader( new LoadFromClasspath( embeddableClass ) );
         config.useStoryReporterBuilder( createStoryReporterBuilder( embeddableClass ) );
         config.useParameterConverters( createParamaterConverters() );
+        StoryPathResolver storyPathResolver = new UnderscoredCamelCaseResolver( ".story" );
         config.useStoryPathResolver( storyPathResolver );
         config.useStepMonitor( new SilentStepMonitor() );
         config.useStepPatternParser( new RegexPrefixCapturingPatternParser( "%" ) );
@@ -70,7 +72,7 @@ public abstract class TraderStory extends JUnitStory {
 
     private ParameterConverters createParamaterConverters() {
         ParameterConverters converters = new ParameterConverters();
-        // converters.addConverters( new DateConverter( new SimpleDateFormat( "yyyy-MM-dd" ) ) );
+        converters.addConverters( new ParameterConverters.DateConverter( new SimpleDateFormat( "yyyy-MM-dd" ) ) );
         return converters;
     }
 
@@ -81,7 +83,8 @@ public abstract class TraderStory extends JUnitStory {
         StoryReporterBuilder builder = new StoryReporterBuilder();
         builder.withCodeLocation( codeLocation );
         builder.withDefaultFormats();
-        builder.withFormats( Format.CONSOLE, Format.XML, Format.HTML, Format.TXT );
+        builder.withPathResolver( new FilePrintStreamFactory.ResolveToPackagedName() );
+        builder.withFormats( CONSOLE, TXT, HTML, XML );
         builder.withViewResources( rendering );
         builder.withFailureTrace( false );
         return builder;

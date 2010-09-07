@@ -55,8 +55,8 @@ public class Stock {
         else {
             status = STATUS.OFF;
         }
-        LOG.info( "Have evaluated that the threshold barrier for stock [" + stockName + "] is now ["
-                  + status.name() + "] based on the price [" + price + "]" );
+        LOG.debug( "Have evaluated that the threshold barrier for stock [" + stockName + "] is now ["
+                   + status.name() + "] based on the price [" + price + "]" );
     }
 
 }
