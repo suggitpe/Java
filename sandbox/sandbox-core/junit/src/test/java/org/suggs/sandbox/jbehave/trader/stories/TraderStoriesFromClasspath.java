@@ -1,13 +1,13 @@
 /*
- * TraderStory.java created on 2 Sep 2010 07:25:59 by suggitpe for project sandbox-junit
+ * TraderStoriesFromClasspath.java created on 7 Sep 2010 19:09:58 by suggitpe for project sandbox-junit
  * 
  */
 package org.suggs.sandbox.jbehave.trader.stories;
 
 import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
 
-import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -18,11 +18,9 @@ import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.CodeLocations;
 import org.jbehave.core.io.LoadFromClasspath;
-import org.jbehave.core.io.StoryPathResolver;
-import org.jbehave.core.io.UnderscoredCamelCaseResolver;
-import org.jbehave.core.junit.JUnitStory;
+import org.jbehave.core.io.StoryFinder;
+import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.parsers.RegexPrefixCapturingPatternParser;
-import org.jbehave.core.reporters.FilePrintStreamFactory;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InstanceStepsFactory;
@@ -35,25 +33,30 @@ import static org.jbehave.core.reporters.StoryReporterBuilder.Format.TXT;
 import static org.jbehave.core.reporters.StoryReporterBuilder.Format.XML;
 
 /**
- * Abstract class to maintain the key facets of the story. This will only allow us to run one story at a time.
+ * Allows us to run a collection of stories.
  * 
  * @author suggitpe
- * @version 1.0 2 Sep 2010
+ * @version 1.0 7 Sep 2010
  */
-public abstract class TraderStory extends JUnitStory {
+public class TraderStoriesFromClasspath extends JUnitStories {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TraderStory.class );
-
-    /**
-     * Constructs a new instance.
-     */
-    public TraderStory() {}
+    private static final Log LOG = LogFactory.getLog( TraderStoriesFromClasspath.class );
 
     @Override
     public List<CandidateSteps> candidateSteps() {
         InstanceStepsFactory factory = new InstanceStepsFactory( configuration(), new TraderSteps() );
         return factory.createCandidateSteps();
+    }
+
+    /**
+     * @see org.jbehave.core.junit.JUnitStories#storyPaths()
+     */
+    @Override
+    protected List<String> storyPaths() {
+        String codelocation = CodeLocations.codeLocationFromClass( this.getClass() ).getFile();
+        StoryFinder finder = new StoryFinder();
+        return finder.findPaths( codelocation, Arrays.asList( "**/trader*.story" ), null );
     }
 
     @Override
@@ -63,10 +66,8 @@ public abstract class TraderStory extends JUnitStory {
         config.useStoryLoader( new LoadFromClasspath( embeddableClass ) );
         config.useStoryReporterBuilder( createStoryReporterBuilder( embeddableClass ) );
         config.useParameterConverters( createParamaterConverters() );
-        StoryPathResolver storyPathResolver = new UnderscoredCamelCaseResolver( ".story" );
-        config.useStoryPathResolver( storyPathResolver );
-        config.useStepMonitor( new SilentStepMonitor() );
         config.useStepPatternParser( new RegexPrefixCapturingPatternParser( "%" ) );
+        config.useStepMonitor( new SilentStepMonitor() );
         return config;
     }
 
@@ -76,17 +77,15 @@ public abstract class TraderStory extends JUnitStory {
         return converters;
     }
 
-    private StoryReporterBuilder createStoryReporterBuilder( Class<? extends Embeddable> aClazz ) {
-        URL codeLocation = CodeLocations.codeLocationFromClass( aClazz );
-        Properties rendering = new Properties();
-        rendering.put( "decorateNonHtml", "true" );
+    private StoryReporterBuilder createStoryReporterBuilder( Class<? extends Embeddable> aEmbeddableClass ) {
+        Properties viewResources = new Properties();
+        viewResources.put( "decorateNonHtml", "true" );
         StoryReporterBuilder builder = new StoryReporterBuilder();
-        builder.withCodeLocation( codeLocation );
+        builder.withCodeLocation( CodeLocations.codeLocationFromClass( aEmbeddableClass ) );
         builder.withDefaultFormats();
-        builder.withPathResolver( new FilePrintStreamFactory.ResolveToPackagedName() );
+        builder.withViewResources( viewResources );
         builder.withFormats( CONSOLE, TXT, HTML, XML );
-        builder.withViewResources( rendering );
-        builder.withFailureTrace( false );
         return builder;
     }
+
 }
