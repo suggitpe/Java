@@ -11,6 +11,10 @@
                 value="%d{yyy-MM-dd'T'HH:mm:ss.SSS} | %-10.10t | %-20.20c{1} | %-6p - %m %n" />
         </layout>
     </appender>
+    
+    <category name="org.springframework">
+        <priority value="info" />
+    </category>
 
     <root>
         <priority value="debug" />
