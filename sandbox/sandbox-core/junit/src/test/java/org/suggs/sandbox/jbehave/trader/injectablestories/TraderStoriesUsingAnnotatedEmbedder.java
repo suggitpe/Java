@@ -2,12 +2,12 @@
  * TraderStoriesUsingAnnotatedEmbedder.java created on 7 Sep 2010 19:46:56 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.trader.annotatedembedder;
+package org.suggs.sandbox.jbehave.trader.injectablestories;
 
-import org.suggs.sandbox.jbehave.trader.annotatedembedder.TraderStoriesUsingAnnotatedEmbedder.MyDateConverter;
-import org.suggs.sandbox.jbehave.trader.annotatedembedder.TraderStoriesUsingAnnotatedEmbedder.MyRegexPrefixCapturingPatternParser;
-import org.suggs.sandbox.jbehave.trader.annotatedembedder.TraderStoriesUsingAnnotatedEmbedder.MyReportBuilder;
-import org.suggs.sandbox.jbehave.trader.annotatedembedder.TraderStoriesUsingAnnotatedEmbedder.MyStoryLoader;
+import org.suggs.sandbox.jbehave.trader.injectablestories.TraderStoriesUsingAnnotatedEmbedder.MyDateConverter;
+import org.suggs.sandbox.jbehave.trader.injectablestories.TraderStoriesUsingAnnotatedEmbedder.MyRegexPrefixCapturingPatternParser;
+import org.suggs.sandbox.jbehave.trader.injectablestories.TraderStoriesUsingAnnotatedEmbedder.MyReportBuilder;
+import org.suggs.sandbox.jbehave.trader.injectablestories.TraderStoriesUsingAnnotatedEmbedder.MyStoryLoader;
 import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
 
 import java.text.SimpleDateFormat;
