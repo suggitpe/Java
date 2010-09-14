@@ -22,7 +22,6 @@ import org.jbehave.core.io.StoryFinder;
  */
 public class TraderStoriesFromURL extends TraderStoriesFromClasspath {
 
-    @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TraderStoriesFromURL.class );
 
     @Override
@@ -34,12 +33,12 @@ public class TraderStoriesFromURL extends TraderStoriesFromClasspath {
 
     @Override
     public List<String> storyPaths() {
-        String codeLocation = CodeLocations.codeLocationFromClass( this.getClass() ).getFile();
         StoryFinder finder = new StoryFinder();
-        return finder.findPaths( codeLocation,
+        String storyLocation = CodeLocations.codeLocationFromPath( "src/test/resources" ).getFile();
+        LOG.debug( "Sourcing stories from [" + storyLocation + "]" );
+        return finder.findPaths( storyLocation,
                                  Arrays.asList( "**/trader*.story" ),
                                  Arrays.asList( "" ),
-                                 "file:" + codeLocation );
-
+                                 "file:" + storyLocation );
     }
 }
