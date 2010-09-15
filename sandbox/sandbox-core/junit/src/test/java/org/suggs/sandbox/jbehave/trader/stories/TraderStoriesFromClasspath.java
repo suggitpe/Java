@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.jbehave.trader.stories;
 
+import org.suggs.sandbox.jbehave.support.SuggsMostUsefulConfiguration;
 import org.suggs.sandbox.jbehave.support.SuggsParamterConverters;
-import org.suggs.sandbox.jbehave.support.SuggsStoryReporterBuilder;
 import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
 
 import java.util.Arrays;
@@ -15,15 +15,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
-import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.CodeLocations;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
-import org.jbehave.core.parsers.RegexPrefixCapturingPatternParser;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InstanceStepsFactory;
-import org.jbehave.core.steps.SilentStepMonitor;
 
 /**
  * Allows us to run a collection of stories.
@@ -55,12 +52,9 @@ public class TraderStoriesFromClasspath extends JUnitStories {
     @Override
     public Configuration configuration() {
         Class<? extends Embeddable> embeddableClass = this.getClass();
-        Configuration config = new MostUsefulConfiguration();
+        Configuration config = new SuggsMostUsefulConfiguration();
         config.useStoryLoader( new LoadFromClasspath( embeddableClass ) );
-        config.useStoryReporterBuilder( new SuggsStoryReporterBuilder() );
         config.useParameterConverters( new SuggsParamterConverters() );
-        config.useStepPatternParser( new RegexPrefixCapturingPatternParser( "%" ) );
-        config.useStepMonitor( new SilentStepMonitor() );
         return config;
     }
 }

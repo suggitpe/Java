@@ -61,7 +61,7 @@ public class TraderStoriesUsingAnnotatedEmbedder extends InjectableEmbedder {
     public static class MyRegexPrefixCapturingPatternParser extends RegexPrefixCapturingPatternParser {
 
         public MyRegexPrefixCapturingPatternParser() {
-            super( "%" );
+            super( "$" );
         }
     }
 

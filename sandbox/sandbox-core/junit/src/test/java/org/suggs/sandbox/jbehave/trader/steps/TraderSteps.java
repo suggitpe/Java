@@ -38,19 +38,19 @@ public class TraderSteps {
 
     private Stock stock;
 
-    @Given("a stock of symbol %symbol and a threshold of %threshold")
+    @Given("a stock of symbol $symbol and a threshold of $threshold")
     @Alias("a stock of <symbol> and a threshold <threshold>")
     public void aStockExists( @Named("symbol") String aSymbol, @Named("threshold") Double aThreshold ) {
         stock = new Stock( aSymbol, aThreshold );
     }
 
-    @When("the stock is traded at %price")
+    @When("the stock is traded at $price")
     @Alias("the stock is traded with <price>")
     public void theStockIsTradedAt( @Named("price") Double aPrice ) {
         stock.tradeAt( aPrice );
     }
 
-    @Then("the alert status should be %status")
+    @Then("the alert status should be $status")
     @Alias("the alert status will be <status>")
     public void theAlertStatusShouldBe( @Named("status") String aStatus ) {
         assertThat( stock.getStatus().name(), equalTo( aStatus ) );
