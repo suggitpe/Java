@@ -13,9 +13,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
+import org.jbehave.core.io.CasePreservingResolver;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.StoryPathResolver;
-import org.jbehave.core.io.UnderscoredCamelCaseResolver;
 import org.jbehave.core.junit.JUnitStory;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InstanceStepsFactory;
@@ -45,11 +45,13 @@ public abstract class TraderStory extends JUnitStory {
     @Override
     public Configuration configuration() {
         Class<? extends Embeddable> embeddableClass = this.getClass();
+        // here have chosen to use a case preserving story loader so that we can see how it loads the stories
+        // differently.
+        StoryPathResolver storyPathResolver = new CasePreservingResolver();
+
         Configuration config = new SuggsMostUsefulConfiguration();
         config.useStoryLoader( new LoadFromClasspath( embeddableClass ) );
-        StoryPathResolver storyPathResolver = new UnderscoredCamelCaseResolver( ".story" );
         config.useStoryPathResolver( storyPathResolver );
         return config;
     }
-
 }
