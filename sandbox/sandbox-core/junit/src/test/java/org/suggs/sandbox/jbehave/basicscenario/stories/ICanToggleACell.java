@@ -13,9 +13,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
+import org.jbehave.core.io.CasePreservingResolver;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.StoryPathResolver;
-import org.jbehave.core.io.UnderscoredCamelCaseResolver;
 import org.jbehave.core.junit.JUnitStory;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InstanceStepsFactory;
@@ -47,7 +47,7 @@ public class ICanToggleACell extends JUnitStory {
         Class<? extends Embeddable> embeddableClass = this.getClass();
         Configuration config = new SuggsMostUsefulConfiguration();
         config.useStoryLoader( new LoadFromClasspath( embeddableClass ) );
-        StoryPathResolver storyPathResolver = new UnderscoredCamelCaseResolver( ".story" );
+        StoryPathResolver storyPathResolver = new CasePreservingResolver();
         config.useStoryPathResolver( storyPathResolver );
         return config;
     }
