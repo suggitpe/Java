@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.jbehave.trader.stories;
 
+import org.suggs.sandbox.jbehave.support.TraderStory;
+
 /**
  * Concrete class to allow for the inclusion of the
  * 
