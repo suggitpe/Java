@@ -15,6 +15,10 @@
     <category name="org.springframework">
         <priority value="info" />
     </category>
+    
+    <category name="org.jbehave">
+        <priority value="debug" />
+    </category>
 
     <root>
         <priority value="debug" />

@@ -43,7 +43,6 @@
             <artifactId>spring</artifactId>
             <scope>test</scope>
         </dependency>
-        
         <dependency>
             <groupId>org.jbehave</groupId>
             <artifactId>jbehave-spring</artifactId>

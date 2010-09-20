@@ -7,18 +7,7 @@
         <constructor-arg value="%" />
     </bean>
 
-    <bean class="org.jbehave.core.io.LoadFromClasspath">
-        <constructor-arg>
-            <bean class="org.jbehave.core.embedder.EmbedderClassLoader">
-                <constructor-arg>
-                    <list>
-                        <value>target/classes</value>
-                    </list>
-                </constructor-arg>
-            </bean>
-        </constructor-arg>
-    </bean>
-
+    <bean class="org.jbehave.core.io.LoadFromURL" />
 
     <bean class="org.jbehave.core.steps.ParameterConverters$DateConverter">
         <constructor-arg>
@@ -28,7 +17,8 @@
         </constructor-arg>
     </bean>
 
-    <bean class="org.jbehave.core.configuration.spring.SpringStoryReporterBuilder" init-method="withDefaultFormats">
+
+    <bean class="org.suggs.sandbox.jbehave.support.SuggsSpringStoryReporterBuilder" init-method="withDefaultFormats">
         <property name="formats">
             <list>
                 <value>CONSOLE</value>
@@ -36,6 +26,15 @@
                 <value>HTML</value>
                 <value>XML</value>
             </list>
+        </property>
+        <property name="viewResources">
+            <props>
+                <prop key="decorateNonHtml">true</prop>
+            </props>
+        </property>
+        <property name="reportFailureTrace" value="false" />
+        <property name="pathResolver">
+            <bean class="org.jbehave.core.reporters.FilePrintStreamFactory$ResolveToSimpleName" />
         </property>
     </bean>
 
