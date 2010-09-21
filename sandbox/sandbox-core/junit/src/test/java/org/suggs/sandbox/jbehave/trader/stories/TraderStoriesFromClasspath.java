@@ -46,7 +46,8 @@ public class TraderStoriesFromClasspath extends JUnitStories {
     protected List<String> storyPaths() {
         String codelocation = CodeLocations.codeLocationFromClass( this.getClass() ).getFile();
         StoryFinder finder = new StoryFinder();
-        return finder.findPaths( codelocation, Arrays.asList( "**/trader*.story" ), null );
+        List<String> paths = finder.findPaths( codelocation, Arrays.asList( "**/Trader*.story" ), null );
+        return paths;
     }
 
     @Override
