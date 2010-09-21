@@ -4,11 +4,11 @@
  */
 package org.suggs.libs.statemachine.impl;
 
-import org.suggs.libs.statemachine.IState;
-import org.suggs.libs.statemachine.IStateMachineContext;
-import org.suggs.libs.statemachine.IStateTransition;
-import org.suggs.libs.statemachine.IStateTransitionEvent;
-import org.suggs.libs.statemachine.IStateTransitionGuard;
+import org.suggs.libs.statemachine.State;
+import org.suggs.libs.statemachine.StateMachineContext;
+import org.suggs.libs.statemachine.StateTransition;
+import org.suggs.libs.statemachine.StateTransitionEvent;
+import org.suggs.libs.statemachine.StateTransitionGuard;
 import org.suggs.libs.statemachine.StateMachineException;
 
 import java.util.ArrayList;
@@ -25,15 +25,15 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 1 Sep 2009
  */
-public class StateTransitionImpl implements IStateTransition {
+public class StateTransitionImpl implements StateTransition {
 
     private static final Log LOG = LogFactory.getLog( StateTransitionImpl.class );
 
     private final String stateTransitionName;
-    private final IState startingState;
-    private final IState endingState;
-    private List<IStateTransitionEvent> transitionEvents = new ArrayList<IStateTransitionEvent>();
-    private List<IStateTransitionGuard> transitionGuards = new ArrayList<IStateTransitionGuard>();
+    private final State startingState;
+    private final State endingState;
+    private List<StateTransitionEvent> transitionEvents = new ArrayList<StateTransitionEvent>();
+    private List<StateTransitionGuard> transitionGuards = new ArrayList<StateTransitionGuard>();
 
     /**
      * Constructs a new instance.
@@ -45,7 +45,7 @@ public class StateTransitionImpl implements IStateTransition {
      * @param aEndingState
      *            the state at the end of the transition
      */
-    public StateTransitionImpl( String aStateTransitionName, IState aStartingState, IState aEndingState ) {
+    public StateTransitionImpl( String aStateTransitionName, State aStartingState, State aEndingState ) {
         super();
         stateTransitionName = aStateTransitionName;
         startingState = aStartingState;
@@ -53,10 +53,10 @@ public class StateTransitionImpl implements IStateTransition {
     }
 
     /**
-     * @see org.suggs.libs.statemachine.IStateTransition#evaluateTransitionValidity(org.suggs.libs.statemachine.IStateMachineContext)
+     * @see org.suggs.libs.statemachine.StateTransition#evaluateTransitionValidity(org.suggs.libs.statemachine.StateMachineContext)
      */
     @Override
-    public boolean evaluateTransitionValidity( IStateMachineContext aContext ) throws StateMachineException {
+    public boolean evaluateTransitionValidity( StateMachineContext aContext ) throws StateMachineException {
         if ( aContext == null ) {
             throw new StateMachineException( "Null context passed into the transition evaluation for transition["
                                              + stateTransitionName + "]" );
@@ -65,7 +65,7 @@ public class StateTransitionImpl implements IStateTransition {
         return ( isTransitionEventValid( aContext ) && areAllTransitionGuardsValid( aContext ) );
     }
 
-    private boolean isTransitionEventValid( IStateMachineContext aContext ) {
+    private boolean isTransitionEventValid( StateMachineContext aContext ) {
         if ( !areTransitionEventsSet() ) {
             return true;
         }
@@ -80,8 +80,8 @@ public class StateTransitionImpl implements IStateTransition {
         return true;
     }
 
-    private boolean isOneContextEventValidForTransition( IStateMachineContext aContext ) {
-        for ( IStateTransitionEvent event : transitionEvents ) {
+    private boolean isOneContextEventValidForTransition( StateMachineContext aContext ) {
+        for ( StateTransitionEvent event : transitionEvents ) {
             if ( aContext.getStateTransitionEvent().equals( event ) ) {
                 if ( LOG.isDebugEnabled() ) {
                     LOG.debug( "Transition event [" + event + "] is found on [" + this + "]" );
@@ -96,7 +96,7 @@ public class StateTransitionImpl implements IStateTransition {
         return false;
     }
 
-    private boolean areAllTransitionGuardsValid( IStateMachineContext aContext ) {
+    private boolean areAllTransitionGuardsValid( StateMachineContext aContext ) {
         if ( !areTransitionGuardsSet() ) {
             return true;
         }
@@ -111,8 +111,8 @@ public class StateTransitionImpl implements IStateTransition {
         return true;
     }
 
-    private boolean areAllGuardsValidForTransition( IStateMachineContext aContext ) {
-        for ( IStateTransitionGuard g : transitionGuards ) {
+    private boolean areAllGuardsValidForTransition( StateMachineContext aContext ) {
+        for ( StateTransitionGuard g : transitionGuards ) {
             if ( !g.evaluateGuard( aContext ) ) {
                 return false;
             }
@@ -121,23 +121,23 @@ public class StateTransitionImpl implements IStateTransition {
     }
 
     /**
-     * @see org.suggs.libs.statemachine.IStateTransition#getStartingState()
+     * @see org.suggs.libs.statemachine.StateTransition#getStartingState()
      */
     @Override
-    public IState getStartingState() {
+    public State getStartingState() {
         return new StateImpl( startingState );
     }
 
     /**
-     * @see org.suggs.libs.statemachine.IStateTransition#getEndingState()
+     * @see org.suggs.libs.statemachine.StateTransition#getEndingState()
      */
     @Override
-    public IState getEndingState() {
+    public State getEndingState() {
         return new StateImpl( endingState );
     }
 
     /**
-     * @see org.suggs.libs.statemachine.IStateTransition#getTransitionName()
+     * @see org.suggs.libs.statemachine.StateTransition#getTransitionName()
      */
     @Override
     public String getTransitionName() {
@@ -150,7 +150,7 @@ public class StateTransitionImpl implements IStateTransition {
      * @param aListOfEvents
      *            the list of transition events
      */
-    public void setTransitionEvents( List<IStateTransitionEvent> aListOfEvents ) {
+    public void setTransitionEvents( List<StateTransitionEvent> aListOfEvents ) {
         transitionEvents = aListOfEvents;
     }
 
@@ -160,7 +160,7 @@ public class StateTransitionImpl implements IStateTransition {
      * @param aEvent
      *            the transition event to add to the transition
      */
-    public void addTransitionEvent( IStateTransitionEvent aEvent ) {
+    public void addTransitionEvent( StateTransitionEvent aEvent ) {
         transitionEvents.add( aEvent );
     }
 
@@ -170,7 +170,7 @@ public class StateTransitionImpl implements IStateTransition {
      * @param aListOfGuards
      *            the list of transition guards
      */
-    public void setTransitionGuards( List<IStateTransitionGuard> aListOfGuards ) {
+    public void setTransitionGuards( List<StateTransitionGuard> aListOfGuards ) {
         transitionGuards = aListOfGuards;
     }
 
@@ -180,7 +180,7 @@ public class StateTransitionImpl implements IStateTransition {
      * @param aGuard
      *            the transition guard to add to the transition
      */
-    public void addTransitionGuard( IStateTransitionGuard aGuard ) {
+    public void addTransitionGuard( StateTransitionGuard aGuard ) {
         transitionGuards.add( aGuard );
     }
 

@@ -4,8 +4,8 @@
  */
 package org.suggs.libs.statemachine.impl;
 
-import org.suggs.libs.statemachine.IState;
-import org.suggs.libs.statemachine.IStateTransition;
+import org.suggs.libs.statemachine.State;
+import org.suggs.libs.statemachine.StateTransition;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,7 +31,7 @@ public final class StateTransitionManager {
 
     private static final Log LOG = LogFactory.getLog( StateTransitionManager.class );
     private static final StateTransitionManager INSTANCE = new StateTransitionManager();
-    private final Map<String, Map<String, IStateTransition>> transitionMap = new HashMap<String, Map<String, IStateTransition>>();
+    private final Map<String, Map<String, StateTransition>> transitionMap = new HashMap<String, Map<String, StateTransition>>();
 
     /**
      * Constructs a new instance.
@@ -57,7 +57,7 @@ public final class StateTransitionManager {
      * @return a list of state specific transitions, if there are no states that relate then an empty list
      *         will be returned.
      */
-    public Collection<IStateTransition> getListOfTransitionsForState( IState aState ) {
+    public Collection<StateTransition> getListOfTransitionsForState( State aState ) {
         if ( aState == null ) {
             throw new IllegalArgumentException( "Cannot use null for State Transition lookup" );
         }
@@ -69,7 +69,7 @@ public final class StateTransitionManager {
         if ( transitionMap.containsKey( aState.getStateName() ) ) {
             return transitionMap.get( aState.getStateName() ).values();
         }
-        return new HashMap<String, IStateTransition>().values();
+        return new HashMap<String, StateTransition>().values();
     }
 
     /**
@@ -78,10 +78,10 @@ public final class StateTransitionManager {
      * @return a list of transitions, if no transitions held in the manager then this will return an empty
      *         (typed) list.
      */
-    public Collection<IStateTransition> getAllTransitions() {
-        List<IStateTransition> listOfTransitions = new ArrayList<IStateTransition>();
+    public Collection<StateTransition> getAllTransitions() {
+        List<StateTransition> listOfTransitions = new ArrayList<StateTransition>();
         for ( String stateName : transitionMap.keySet() ) {
-            Map<String, IStateTransition> innerMapOfTransitions = transitionMap.get( stateName );
+            Map<String, StateTransition> innerMapOfTransitions = transitionMap.get( stateName );
             listOfTransitions.addAll( innerMapOfTransitions.values() );
         }
         return listOfTransitions;
@@ -93,7 +93,7 @@ public final class StateTransitionManager {
      * @param aStateTransition
      *            the transition to add.
      */
-    public void addTransitionToManager( IStateTransition aStateTransition ) {
+    public void addTransitionToManager( StateTransition aStateTransition ) {
         if ( aStateTransition == null ) {
             throw new IllegalArgumentException( "Cannot add a null transition to the transition manager" );
         }
@@ -101,7 +101,7 @@ public final class StateTransitionManager {
         String startStateName = aStateTransition.getStartingState().getStateName();
         buildInnerTransitionMapIfNeeded( startStateName );
 
-        Map<String, IStateTransition> innerMap = transitionMap.get( startStateName );
+        Map<String, StateTransition> innerMap = transitionMap.get( startStateName );
         if ( innerMap.containsKey( aStateTransition.getTransitionName() ) ) {
             throw new IllegalStateException( "Cannot add more than one State Transition with the same name for the same state: State=["
                                              + aStateTransition.getStartingState()
@@ -123,7 +123,7 @@ public final class StateTransitionManager {
             // values view is exposed there is some level of
             // protection
             // of the underlying map in a multi-threaded environment
-            transitionMap.put( aStateName, new ConcurrentHashMap<String, IStateTransition>() );
+            transitionMap.put( aStateName, new ConcurrentHashMap<String, StateTransition>() );
         }
     }
 
@@ -134,12 +134,12 @@ public final class StateTransitionManager {
      * @param aListOfTransitions
      *            the list of transitions
      */
-    public void setTransitions( List<IStateTransition> aListOfTransitions ) {
+    public void setTransitions( List<StateTransition> aListOfTransitions ) {
         if ( aListOfTransitions == null ) {
             throw new IllegalArgumentException( "Cannot add a null list of transitions to the Transition Manager" );
         }
 
-        for ( IStateTransition transition : aListOfTransitions ) {
+        for ( StateTransition transition : aListOfTransitions ) {
             this.addTransitionToManager( transition );
         }
     }

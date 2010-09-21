@@ -4,10 +4,10 @@
  */
 package org.suggs.libs.statemachine.integration;
 
-import org.suggs.libs.statemachine.IState;
-import org.suggs.libs.statemachine.IStateMachine;
-import org.suggs.libs.statemachine.IStateMachineContext;
-import org.suggs.libs.statemachine.IStateTransitionEvent;
+import org.suggs.libs.statemachine.State;
+import org.suggs.libs.statemachine.StateMachine;
+import org.suggs.libs.statemachine.StateMachineContext;
+import org.suggs.libs.statemachine.StateTransitionEvent;
 import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
 
@@ -35,23 +35,23 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 3 Sep 2009
  */
-@RunWith(value = SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/it-state-machine-connection-test-statemachine.xml" })
 public class StateMachineConnectionIntegrationTest {
 
     private static final Log LOG = LogFactory.getLog( StateMachineConnectionIntegrationTest.class );
 
     @Resource(name = "stateMachine")
-    protected IStateMachine stateMachine;
+    protected StateMachine stateMachine;
 
     @Resource(name = "disconnectedState")
-    protected IState disconnectedState;
+    protected State disconnectedState;
 
     @Resource(name = "initialState")
-    protected IState initialState;
+    protected State initialState;
 
     @Resource(name = "connectedState")
-    protected IState connectedState;
+    protected State connectedState;
 
     /** */
     @BeforeClass
@@ -80,7 +80,7 @@ public class StateMachineConnectionIntegrationTest {
     @Test
     public void initialisationOfStateMachineThroughSpring() throws StateMachineException {
         LOG.info( "Testing that we can initialise the state machine through Spring ... sanity check" );
-        IState initial = stateMachine.getCurrentState();
+        State initial = stateMachine.getCurrentState();
         LOG.debug( "Injected state machine: " + stateMachine );
         assertThat( initial, equalTo( initialState ) );
     }
@@ -94,18 +94,18 @@ public class StateMachineConnectionIntegrationTest {
     @Test
     public void transitionFromInitialToDisconnected() throws StateMachineException {
         LOG.info( "Checking that with any event we will transition from Initial to Disconnected" );
-        IState initial = stateMachine.getCurrentState();
+        State initial = stateMachine.getCurrentState();
         assertThat( initial, equalTo( initialState ) );
 
-        stateMachine.step( new IStateMachineContext() {
+        stateMachine.step( new StateMachineContext() {
 
             @Override
-            public IStateTransitionEvent getStateTransitionEvent() {
+            public StateTransitionEvent getStateTransitionEvent() {
                 return new StateTransitionEventImpl( "DumyEvent for initial test" );
             }
         } );
 
-        IState newState = stateMachine.getCurrentState();
+        State newState = stateMachine.getCurrentState();
         assertThat( newState, equalTo( disconnectedState ) );
         LOG.debug( "Verified that the state machine has correctly transitioned to the Disconnected State" );
     }
@@ -120,10 +120,10 @@ public class StateMachineConnectionIntegrationTest {
     public void noTransitionOccursFromIrrelevantEvent() throws StateMachineException {
         LOG.info( "Checking that we pass in a totally random event we stay in the same overall state" );
         assertThat( stateMachine.getCurrentState(), equalTo( disconnectedState ) );
-        stateMachine.step( new IStateMachineContext() {
+        stateMachine.step( new StateMachineContext() {
 
             @Override
-            public IStateTransitionEvent getStateTransitionEvent() {
+            public StateTransitionEvent getStateTransitionEvent() {
                 return new StateTransitionEventImpl( "notRelevantEvent" );
             }
         } );
@@ -139,10 +139,10 @@ public class StateMachineConnectionIntegrationTest {
     public void transitionFromDisconnectedToConnected() throws StateMachineException {
         LOG.info( "Checking that when we pass in a connect event that we transition through the connecting state and onto the connected state" );
         assertThat( stateMachine.getCurrentState(), equalTo( disconnectedState ) );
-        stateMachine.step( new IStateMachineContext() {
+        stateMachine.step( new StateMachineContext() {
 
             @Override
-            public IStateTransitionEvent getStateTransitionEvent() {
+            public StateTransitionEvent getStateTransitionEvent() {
                 return new StateTransitionEventImpl( "connect" );
             }
         } );
@@ -159,10 +159,10 @@ public class StateMachineConnectionIntegrationTest {
     public void transitionFromConnectedToDisconnected() throws StateMachineException {
         LOG.info( "Checking that when we pass in a disconnect event that we transition through the disconnecting state and onto the disconnected state" );
         assertThat( stateMachine.getCurrentState(), equalTo( connectedState ) );
-        stateMachine.step( new IStateMachineContext() {
+        stateMachine.step( new StateMachineContext() {
 
             @Override
-            public IStateTransitionEvent getStateTransitionEvent() {
+            public StateTransitionEvent getStateTransitionEvent() {
                 return new StateTransitionEventImpl( "disconnect" );
             }
         } );

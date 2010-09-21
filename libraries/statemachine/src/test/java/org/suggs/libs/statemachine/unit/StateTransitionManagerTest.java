@@ -4,8 +4,8 @@
  */
 package org.suggs.libs.statemachine.unit;
 
-import org.suggs.libs.statemachine.IState;
-import org.suggs.libs.statemachine.IStateTransition;
+import org.suggs.libs.statemachine.State;
+import org.suggs.libs.statemachine.StateTransition;
 import org.suggs.libs.statemachine.impl.StateTransitionManager;
 
 import java.util.Collection;
@@ -34,12 +34,12 @@ public class StateTransitionManagerTest {
     private static final Log LOG = LogFactory.getLog( StateTransitionManagerTest.class );
 
     private IMocksControl ctrl;
-    private IState mockStateOne;
-    private IState mockStateTwo;
-    private IStateTransition mockTransitionOne;
-    private IStateTransition mockTransitionTwo;
-    private IStateTransition mockTransitionThree;
-    private IStateTransition mockTransitionFour;
+    private State mockStateOne;
+    private State mockStateTwo;
+    private StateTransition mockTransitionOne;
+    private StateTransition mockTransitionTwo;
+    private StateTransition mockTransitionThree;
+    private StateTransition mockTransitionFour;
 
     /** */
     @BeforeClass
@@ -54,12 +54,12 @@ public class StateTransitionManagerTest {
         LOG.debug( "Clearing all transitions from manager" );
         StateTransitionManager.instance().clearTransitionsFromTransitionManager();
         ctrl = createControl();
-        mockStateOne = ctrl.createMock( IState.class );
-        mockStateTwo = ctrl.createMock( IState.class );
-        mockTransitionOne = ctrl.createMock( IStateTransition.class );
-        mockTransitionTwo = ctrl.createMock( IStateTransition.class );
-        mockTransitionThree = ctrl.createMock( IStateTransition.class );
-        mockTransitionFour = ctrl.createMock( IStateTransition.class );
+        mockStateOne = ctrl.createMock( State.class );
+        mockStateTwo = ctrl.createMock( State.class );
+        mockTransitionOne = ctrl.createMock( StateTransition.class );
+        mockTransitionTwo = ctrl.createMock( StateTransition.class );
+        mockTransitionThree = ctrl.createMock( StateTransition.class );
+        mockTransitionFour = ctrl.createMock( StateTransition.class );
     }
 
     /**
@@ -91,7 +91,7 @@ public class StateTransitionManagerTest {
 
         ctrl.replay();
 
-        Collection<IStateTransition> collection = StateTransitionManager.instance()
+        Collection<StateTransition> collection = StateTransitionManager.instance()
             .getListOfTransitionsForState( mockStateOne );
         assertThat( 0, equalTo( collection.size() ) );
         LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state transition" );
@@ -121,7 +121,7 @@ public class StateTransitionManagerTest {
 
         LOG.debug( "Calling StateTransitionManager with state=[" + mockStateOne.getStateName()
                    + "] argument so expecting no transitions to be returned" );
-        Collection<IStateTransition> collection = StateTransitionManager.instance()
+        Collection<StateTransition> collection = StateTransitionManager.instance()
             .getListOfTransitionsForState( mockStateOne );
 
         assertThat( 0, equalTo( collection.size() ) );
@@ -210,7 +210,7 @@ public class StateTransitionManagerTest {
         StateTransitionManager.instance().addTransitionToManager( mockTransitionFour );
         LOG.debug( StateTransitionManager.instance() );
 
-        Collection<IStateTransition> collection = StateTransitionManager.instance()
+        Collection<StateTransition> collection = StateTransitionManager.instance()
             .getListOfTransitionsForState( mockStateOne );
         Assert.assertEquals( 3, collection.size() );
         LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state 1" );

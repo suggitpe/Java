@@ -4,7 +4,7 @@
  */
 package org.suggs.libs.statemachine.unit;
 
-import org.suggs.libs.statemachine.IStateTransitionEvent;
+import org.suggs.libs.statemachine.StateTransitionEvent;
 import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
 
 import org.apache.commons.logging.Log;
@@ -46,7 +46,7 @@ public class StateTransitionEventTest {
     @Test
     public void stateNameExtraction() {
         final String EVENT_NAME = "TestEvent";
-        IStateTransitionEvent event = new StateTransitionEventImpl( EVENT_NAME );
+        StateTransitionEvent event = new StateTransitionEventImpl( EVENT_NAME );
 
         assertThat( event.getEventName(), equalTo( EVENT_NAME ) );
         LOG.debug( "Successfully created stateTransitionEvent=[" + event + "]" );

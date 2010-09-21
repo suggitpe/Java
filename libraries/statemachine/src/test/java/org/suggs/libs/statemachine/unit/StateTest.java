@@ -4,10 +4,10 @@
  */
 package org.suggs.libs.statemachine.unit;
 
-import org.suggs.libs.statemachine.IAction;
-import org.suggs.libs.statemachine.IState;
-import org.suggs.libs.statemachine.IStateMachineContext;
-import org.suggs.libs.statemachine.IStateTransition;
+import org.suggs.libs.statemachine.Action;
+import org.suggs.libs.statemachine.State;
+import org.suggs.libs.statemachine.StateMachineContext;
+import org.suggs.libs.statemachine.StateTransition;
 import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.impl.StateImpl;
 import org.suggs.libs.statemachine.impl.StateTransitionManager;
@@ -39,10 +39,10 @@ public class StateTest {
     private static final Log LOG = LogFactory.getLog( StateTest.class );
     private IMocksControl ctrl;
 
-    private IStateMachineContext mockContext;
-    private IStateTransition mockTransitionOne;
-    private IStateTransition mockTransitionTwo;
-    private IAction mockAction;
+    private StateMachineContext mockContext;
+    private StateTransition mockTransitionOne;
+    private StateTransition mockTransitionTwo;
+    private Action mockAction;
 
     /** */
     @BeforeClass
@@ -56,10 +56,10 @@ public class StateTest {
         LOG.debug( "------------------- " );
         StateTransitionManager.instance().clearTransitionsFromTransitionManager();
         ctrl = createControl();
-        mockContext = ctrl.createMock( IStateMachineContext.class );
-        mockTransitionOne = ctrl.createMock( IStateTransition.class );
-        mockTransitionTwo = ctrl.createMock( IStateTransition.class );
-        mockAction = ctrl.createMock( IAction.class );
+        mockContext = ctrl.createMock( StateMachineContext.class );
+        mockTransitionOne = ctrl.createMock( StateTransition.class );
+        mockTransitionTwo = ctrl.createMock( StateTransition.class );
+        mockAction = ctrl.createMock( Action.class );
     }
 
     /**
@@ -68,7 +68,7 @@ public class StateTest {
     @Test
     public void stateNameExtraction() {
         final String STATE_NAME = "TestStateForTest";
-        IState state = new StateImpl( STATE_NAME );
+        State state = new StateImpl( STATE_NAME );
 
         assertThat( state.getStateName(), equalTo( STATE_NAME ) );
         LOG.debug( "Successfully created state[" + state + "]" );
@@ -82,8 +82,8 @@ public class StateTest {
     @SuppressWarnings("boxing")
     @Test
     public void stepWithValidTransitionsToReturnNewState() throws StateMachineException {
-        IState state = new StateImpl( "TestState" );
-        IState endState = new StateImpl( "TestEndState" );
+        State state = new StateImpl( "TestState" );
+        State endState = new StateImpl( "TestEndState" );
 
         expect( mockTransitionOne.getStartingState() ).andReturn( state ).anyTimes();
         expect( mockTransitionOne.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
@@ -99,7 +99,7 @@ public class StateTest {
         StateTransitionManager.instance().addTransitionToManager( mockTransitionOne );
         StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo );
 
-        IState newState = state.step( mockContext );
+        State newState = state.step( mockContext );
 
         assertThat( state, not( equalTo( newState ) ) );
         assertThat( endState, equalTo( newState ) );
@@ -117,8 +117,8 @@ public class StateTest {
     @SuppressWarnings("boxing")
     @Test(expected = StateMachineException.class)
     public void stepWithTwoValidTransitionsCausesException() throws StateMachineException {
-        IState state = new StateImpl( "TestState" );
-        IState endState = new StateImpl( "TestEndState" );
+        State state = new StateImpl( "TestState" );
+        State endState = new StateImpl( "TestEndState" );
 
         expect( mockTransitionOne.getStartingState() ).andReturn( state ).anyTimes();
         expect( mockTransitionOne.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
@@ -134,7 +134,7 @@ public class StateTest {
         StateTransitionManager.instance().addTransitionToManager( mockTransitionOne );
         StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo );
 
-        IState newState = state.step( mockContext );
+        State newState = state.step( mockContext );
         LOG.error( "If the code managed to reach here then the test has failed to perform it's role.  Somehow we have managed to let step create  anew state of ["
                    + newState + "]" );
 
@@ -150,7 +150,7 @@ public class StateTest {
     @SuppressWarnings("boxing")
     @Test
     public void stepwithNonValidTransitionsToReturnSelf() throws StateMachineException {
-        IState state = new StateImpl( "TestState" );
+        State state = new StateImpl( "TestState" );
 
         expect( mockTransitionOne.getStartingState() ).andReturn( state ).anyTimes();
         expect( mockTransitionOne.getTransitionName() ).andReturn( "invalidTransition" ).anyTimes();
@@ -165,7 +165,7 @@ public class StateTest {
         StateTransitionManager.instance().addTransitionToManager( mockTransitionOne );
         StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo );
 
-        IState newState = state.step( mockContext );
+        State newState = state.step( mockContext );
 
         assertThat( state, equalTo( newState ) );
         LOG.debug( "Checked that the step call returns the same state when there are no valid transitions setup" );
@@ -183,8 +183,8 @@ public class StateTest {
     public void stepWithNoTransitionsSetUpReturnsSelf() throws StateMachineException {
         ctrl.replay();
 
-        IState state = new StateImpl( "TestState" );
-        IState newState = state.step( mockContext );
+        State state = new StateImpl( "TestState" );
+        State newState = state.step( mockContext );
 
         assertThat( state, sameInstance( newState ) );
         LOG.debug( "Checked that the step call returns the same state when there are no transitions setup" );

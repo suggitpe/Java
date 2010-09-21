@@ -4,8 +4,8 @@
  */
 package org.suggs.libs.statemachine.support;
 
-import org.suggs.libs.statemachine.IStateMachineContext;
-import org.suggs.libs.statemachine.IStateTransitionGuard;
+import org.suggs.libs.statemachine.StateMachineContext;
+import org.suggs.libs.statemachine.StateTransitionGuard;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,15 +16,15 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 3 Sep 2009
  */
-public class TrueGuardStub implements IStateTransitionGuard {
+public class TrueGuardStub implements StateTransitionGuard {
 
     private static final Log LOG = LogFactory.getLog( TrueGuardStub.class );
 
     /**
-     * @see org.suggs.libs.statemachine.IStateTransitionGuard#evaluateGuard(org.suggs.libs.statemachine.IStateMachineContext)
+     * @see org.suggs.libs.statemachine.StateTransitionGuard#evaluateGuard(org.suggs.libs.statemachine.StateMachineContext)
      */
     @Override
-    public boolean evaluateGuard( IStateMachineContext aContext ) {
+    public boolean evaluateGuard( StateMachineContext aContext ) {
         LOG.debug( "Executing stub implementation of the evaluateGuard that always returns true" );
         return true;
     }

@@ -1,5 +1,5 @@
 /*
- * IStateMachineContext.java created on 25 Aug 2009 19:52:48 by suggitpe for project Libraries - State Machine
+ * StateMachineContext.java created on 25 Aug 2009 19:52:48 by suggitpe for project Libraries - State Machine
  * 
  */
 package org.suggs.libs.statemachine;
@@ -12,13 +12,13 @@ package org.suggs.libs.statemachine;
  * @author suggitpe
  * @version 1.0 25 Aug 2009
  */
-public interface IStateMachineContext {
+public interface StateMachineContext {
 
     /**
      * Getter for the state transition event
      * 
      * @return the state transition event
      */
-    IStateTransitionEvent getStateTransitionEvent();
+    StateTransitionEvent getStateTransitionEvent();
 
 }

@@ -1,5 +1,5 @@
 /*
- * IStateTransitionEvent.java created on 1 Sep 2009 19:01:44 by suggitpe for project Libraries - State Machine
+ * StateTransitionEvent.java created on 1 Sep 2009 19:01:44 by suggitpe for project Libraries - State Machine
  * 
  */
 package org.suggs.libs.statemachine;
@@ -10,7 +10,7 @@ package org.suggs.libs.statemachine;
  * @author suggitpe
  * @version 1.0 1 Sep 2009
  */
-public interface IStateTransitionEvent {
+public interface StateTransitionEvent {
 
     /**
      * Accessor to the name of the event.

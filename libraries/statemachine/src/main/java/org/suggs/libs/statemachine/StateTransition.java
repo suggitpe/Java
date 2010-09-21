@@ -12,7 +12,7 @@ package org.suggs.libs.statemachine;
  * @author suggitpe
  * @version 1.0 21 Aug 2009
  */
-public interface IStateTransition {
+public interface StateTransition {
 
     /**
      * Accessor to the name of the transition
@@ -26,14 +26,14 @@ public interface IStateTransition {
      * 
      * @return the starting state
      */
-    IState getStartingState();
+    State getStartingState();
 
     /**
      * Accessor to the state at the end of the transition
      * 
      * @return the ending state
      */
-    IState getEndingState();
+    State getEndingState();
 
     /**
      * This is the core delegation method on the transitions. It is here that a transition evaluates itself
@@ -45,6 +45,6 @@ public interface IStateTransition {
      * @throws StateMachineException
      *             when any issues are encountered in the evaluation of the state transition
      */
-    boolean evaluateTransitionValidity( IStateMachineContext aContext ) throws StateMachineException;
+    boolean evaluateTransitionValidity( StateMachineContext aContext ) throws StateMachineException;
 
 }

@@ -4,9 +4,9 @@
  */
 package org.suggs.libs.statemachine.unit;
 
-import org.suggs.libs.statemachine.IState;
-import org.suggs.libs.statemachine.IStateMachine;
-import org.suggs.libs.statemachine.IStateMachineContext;
+import org.suggs.libs.statemachine.State;
+import org.suggs.libs.statemachine.StateMachine;
+import org.suggs.libs.statemachine.StateMachineContext;
 import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.impl.StateMachineImpl;
 
@@ -35,9 +35,9 @@ public class StateMachineTest {
     private static final Log LOG = LogFactory.getLog( StateMachineTest.class );
 
     private IMocksControl ctrl;
-    private IState mockInitialState;
-    private IState mockNewState;
-    private IStateMachineContext mockContext;
+    private State mockInitialState;
+    private State mockNewState;
+    private StateMachineContext mockContext;
 
     /** */
     @BeforeClass
@@ -50,9 +50,9 @@ public class StateMachineTest {
     public void doBefore() {
         LOG.debug( "------------------- " );
         ctrl = createControl();
-        mockInitialState = ctrl.createMock( IState.class );
-        mockNewState = createMock( IState.class );
-        mockContext = ctrl.createMock( IStateMachineContext.class );
+        mockInitialState = ctrl.createMock( State.class );
+        mockNewState = createMock( State.class );
+        mockContext = ctrl.createMock( StateMachineContext.class );
     }
 
     @Test
@@ -72,8 +72,8 @@ public class StateMachineTest {
 
         ctrl.replay();
 
-        IStateMachine stateMachine = new StateMachineImpl( mockInitialState );
-        IState curState = stateMachine.getCurrentState();
+        StateMachine stateMachine = new StateMachineImpl( mockInitialState );
+        State curState = stateMachine.getCurrentState();
 
         LOG.debug( "Expecting that the state machine is in the correct initial state" );
         assertThat( mockInitialState, equalTo( curState ) );
@@ -100,7 +100,7 @@ public class StateMachineTest {
 
         LOG.debug( "I don't care about this" );
 
-        IStateMachine stateMachine = new StateMachineImpl( mockInitialState );
+        StateMachine stateMachine = new StateMachineImpl( mockInitialState );
         stateMachine.step( mockContext );
 
         LOG.debug( "Expecting that the state machine has transitioned to the new state due to new state returned." );
@@ -120,7 +120,7 @@ public class StateMachineTest {
 
         ctrl.replay();
 
-        IStateMachine stateMachine = new StateMachineImpl( mockInitialState );
+        StateMachine stateMachine = new StateMachineImpl( mockInitialState );
         stateMachine.step( mockContext );
 
         LOG.debug( "Expecting that the state machine has remained in the initial state due to same state returned" );
@@ -141,7 +141,7 @@ public class StateMachineTest {
 
         ctrl.replay();
 
-        IStateMachine stateMachine = new StateMachineImpl( mockInitialState );
+        StateMachine stateMachine = new StateMachineImpl( mockInitialState );
         stateMachine.step( mockContext );
 
         LOG.debug( "Expecting that the state machine remains in the initial state due to NULL step result" );

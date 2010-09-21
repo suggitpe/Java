@@ -4,10 +4,10 @@
  */
 package org.suggs.libs.statemachine.impl;
 
-import org.suggs.libs.statemachine.IAction;
-import org.suggs.libs.statemachine.IState;
-import org.suggs.libs.statemachine.IStateMachineContext;
-import org.suggs.libs.statemachine.IStateTransition;
+import org.suggs.libs.statemachine.Action;
+import org.suggs.libs.statemachine.State;
+import org.suggs.libs.statemachine.StateMachineContext;
+import org.suggs.libs.statemachine.StateTransition;
 import org.suggs.libs.statemachine.StateMachineException;
 
 import java.util.ArrayList;
@@ -24,14 +24,14 @@ import org.apache.commons.logging.LogFactory;
  * @author suggitpe
  * @version 1.0 28 Aug 2009
  */
-public class StateImpl implements IState {
+public class StateImpl implements State {
 
     private static final Log LOG = LogFactory.getLog( StateImpl.class );
 
     private final String stateName;
-    private IAction entryAction;
-    private IAction exitAction;
-    private Collection<IStateTransition> transitions = new ArrayList<IStateTransition>();
+    private Action entryAction;
+    private Action exitAction;
+    private Collection<StateTransition> transitions = new ArrayList<StateTransition>();
 
     /**
      * Constructs a new instance.
@@ -50,13 +50,13 @@ public class StateImpl implements IState {
      * @param aState
      *            the state from which to build the new one.
      */
-    public StateImpl( IState aState ) {
+    public StateImpl( State aState ) {
         super();
         stateName = aState.getStateName();
     }
 
     /**
-     * @see org.suggs.libs.statemachine.IState#getStateName()
+     * @see org.suggs.libs.statemachine.State#getStateName()
      */
     @Override
     public String getStateName() {
@@ -69,7 +69,7 @@ public class StateImpl implements IState {
      * @param aAction
      *            the entry action
      */
-    public void setEntryAction( IAction aAction ) {
+    public void setEntryAction( Action aAction ) {
         entryAction = aAction;
     }
 
@@ -79,7 +79,7 @@ public class StateImpl implements IState {
      * @param aAction
      *            the exit action
      */
-    public void setExitAction( IAction aAction ) {
+    public void setExitAction( Action aAction ) {
         exitAction = aAction;
     }
 
@@ -88,10 +88,10 @@ public class StateImpl implements IState {
      * all of them. If one (any only one) transition evaluation returns true, then we return the end state of
      * that transition, else we return the current state to denote that no stepping should occur.
      * 
-     * @see org.suggs.libs.statemachine.IState#step(org.suggs.libs.statemachine.IStateMachineContext)
+     * @see org.suggs.libs.statemachine.State#step(org.suggs.libs.statemachine.StateMachineContext)
      */
     @Override
-    public IState step( IStateMachineContext aContext ) throws StateMachineException {
+    public State step( StateMachineContext aContext ) throws StateMachineException {
         if ( LOG.isDebugEnabled() ) {
             LOG.debug( "Step called from state=[" + stateName + "]" );
         }
@@ -105,10 +105,10 @@ public class StateImpl implements IState {
         }
     }
 
-    private IState evaluateTransitionsToNewState( IStateMachineContext aContext )
+    private State evaluateTransitionsToNewState( StateMachineContext aContext )
                     throws StateMachineException {
-        IStateTransition successfulTransition = null;
-        for ( IStateTransition transInLoop : transitions ) {
+        StateTransition successfulTransition = null;
+        for ( StateTransition transInLoop : transitions ) {
             if ( transInLoop.evaluateTransitionValidity( aContext ) ) {
                 if ( LOG.isInfoEnabled() ) {
                     LOG.info( "State Transition [" + transInLoop + "] is valid" );
@@ -129,10 +129,10 @@ public class StateImpl implements IState {
     }
 
     /**
-     * @see org.suggs.libs.statemachine.IState#executeEntryAction(org.suggs.libs.statemachine.IStateMachineContext)
+     * @see org.suggs.libs.statemachine.State#executeEntryAction(org.suggs.libs.statemachine.StateMachineContext)
      */
     @Override
-    public void executeEntryAction( IStateMachineContext aContext ) throws StateMachineException {
+    public void executeEntryAction( StateMachineContext aContext ) throws StateMachineException {
         if ( entryAction != null ) {
             if ( LOG.isDebugEnabled() ) {
                 LOG.debug( "Executing entry action:" + entryAction );
@@ -142,10 +142,10 @@ public class StateImpl implements IState {
     }
 
     /**
-     * @see org.suggs.libs.statemachine.IState#executeExitAction(org.suggs.libs.statemachine.IStateMachineContext)
+     * @see org.suggs.libs.statemachine.State#executeExitAction(org.suggs.libs.statemachine.StateMachineContext)
      */
     @Override
-    public void executeExitAction( IStateMachineContext aContext ) throws StateMachineException {
+    public void executeExitAction( StateMachineContext aContext ) throws StateMachineException {
         if ( exitAction != null ) {
             if ( LOG.isDebugEnabled() ) {
                 LOG.debug( "Executing exit action:" + exitAction );

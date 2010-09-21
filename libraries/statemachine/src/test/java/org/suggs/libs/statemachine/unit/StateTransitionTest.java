@@ -4,10 +4,10 @@
  */
 package org.suggs.libs.statemachine.unit;
 
-import org.suggs.libs.statemachine.IState;
-import org.suggs.libs.statemachine.IStateMachineContext;
-import org.suggs.libs.statemachine.IStateTransition;
-import org.suggs.libs.statemachine.IStateTransitionEvent;
+import org.suggs.libs.statemachine.State;
+import org.suggs.libs.statemachine.StateMachineContext;
+import org.suggs.libs.statemachine.StateTransition;
+import org.suggs.libs.statemachine.StateTransitionEvent;
 import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.impl.StateImpl;
 import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
@@ -45,9 +45,9 @@ public class StateTransitionTest {
 
     private IMocksControl ctrl;
 
-    private IState startState;
-    private IState endState;
-    private IStateMachineContext context;
+    private State startState;
+    private State endState;
+    private StateMachineContext context;
 
     /** */
     @BeforeClass
@@ -60,9 +60,9 @@ public class StateTransitionTest {
     public void doBefore() {
         LOG.debug( "------------------- " );
         ctrl = createControl();
-        startState = ctrl.createMock( IState.class );
-        endState = ctrl.createMock( IState.class );
-        context = ctrl.createMock( IStateMachineContext.class );
+        startState = ctrl.createMock( State.class );
+        endState = ctrl.createMock( State.class );
+        context = ctrl.createMock( StateMachineContext.class );
     }
 
     /**
@@ -72,9 +72,9 @@ public class StateTransitionTest {
     @Test
     public void transitionDataSetisSameWhenGetLater() {
         final String transName = "TestStateTransition";
-        IState localStartState = new StateImpl( "TestStartState" );
-        IState localendState = new StateImpl( "TestEndState" );
-        IStateTransition transition = new StateTransitionImpl( transName, localStartState, localendState );
+        State localStartState = new StateImpl( "TestStartState" );
+        State localendState = new StateImpl( "TestEndState" );
+        StateTransition transition = new StateTransitionImpl( transName, localStartState, localendState );
 
         assertThat( localStartState, equalTo( transition.getStartingState() ) );
         assertThat( localendState, equalTo( transition.getEndingState() ) );
@@ -211,7 +211,7 @@ public class StateTransitionTest {
      */
     @Test(expected = StateMachineException.class)
     public void transitionEvaluationForNullContext() throws StateMachineException {
-        IStateTransition target = new StateTransitionImpl( "testTransition", startState, endState );
+        StateTransition target = new StateTransitionImpl( "testTransition", startState, endState );
 
         LOG.debug( "Calling evaluate on the transition to endure that it throws an exception" );
         target.evaluateTransitionValidity( null );
@@ -230,7 +230,7 @@ public class StateTransitionTest {
     @Test
     public void tranitionEventEvaluationForValidEvent() throws StateMachineException {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition", startState, endState );
-        IStateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
+        StateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
         target.addTransitionEvent( evt );
 
         expect( context.getStateTransitionEvent() ).andReturn( new StateTransitionEventImpl( "testEvent" ) )
@@ -256,7 +256,7 @@ public class StateTransitionTest {
     public void transitionEventEvaluationForNoEvents() throws StateMachineException {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition", startState, endState );
 
-        IStateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
+        StateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
 
         expect( context.getStateTransitionEvent() ).andReturn( evt ).anyTimes();
 
@@ -280,7 +280,7 @@ public class StateTransitionTest {
     @Test
     public void transitionEventEvaluationForNoValidEvents() throws StateMachineException {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition", startState, endState );
-        IStateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
+        StateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
         target.addTransitionEvent( evt );
 
         expect( context.getStateTransitionEvent() ).andReturn( new StateTransitionEventImpl( "notMatchingEvent" ) )

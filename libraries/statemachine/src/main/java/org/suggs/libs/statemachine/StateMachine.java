@@ -1,5 +1,5 @@
 /*
- * IStateMachine.java created on 21 Aug 2009 17:47:40 by suggitpe for project Libraries - State Machine
+ * StateMachine.java created on 21 Aug 2009 17:47:40 by suggitpe for project Libraries - State Machine
  * 
  */
 package org.suggs.libs.statemachine;
@@ -14,14 +14,14 @@ package org.suggs.libs.statemachine;
  * @author suggitpe
  * @version 1.0 21 Aug 2009
  */
-public interface IStateMachine {
+public interface StateMachine {
 
     /**
      * Accessor to the current internal state.
      * 
      * @return the current state of the state machine.
      */
-    IState getCurrentState();
+    State getCurrentState();
 
     /**
      * This method is the core way in which to transition through the state machine. By calling step with the
@@ -31,6 +31,6 @@ public interface IStateMachine {
      *            the event context from which the transition logic can be triggered.
      * @throws StateMachineException
      */
-    void step( IStateMachineContext aContext ) throws StateMachineException;
+    void step( StateMachineContext aContext ) throws StateMachineException;
 
 }

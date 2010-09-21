@@ -1,5 +1,5 @@
 /*
- * IStateTransitionGuard.java created on 1 Sep 2009 19:02:01 by suggitpe for project Libraries - State Machine
+ * StateTransitionGuard.java created on 1 Sep 2009 19:02:01 by suggitpe for project Libraries - State Machine
  * 
  */
 package org.suggs.libs.statemachine;
@@ -11,7 +11,7 @@ package org.suggs.libs.statemachine;
  * @author suggitpe
  * @version 1.0 1 Sep 2009
  */
-public interface IStateTransitionGuard {
+public interface StateTransitionGuard {
 
     /**
      * Execute the evaluation of the guard condition.
@@ -20,6 +20,6 @@ public interface IStateTransitionGuard {
      *            the context from which to evaluate guard
      * @return true if the guard is passed, else false
      */
-    boolean evaluateGuard( IStateMachineContext aContext );
+    boolean evaluateGuard( StateMachineContext aContext );
 
 }

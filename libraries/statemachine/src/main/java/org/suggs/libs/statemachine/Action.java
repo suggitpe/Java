@@ -1,5 +1,5 @@
 /*
- * IAction.java created on 18 Feb 2010 20:14:10 by suggitpe for project state-machine-lib
+ * Action.java created on 18 Feb 2010 20:14:10 by suggitpe for project state-machine-lib
  * 
  */
 package org.suggs.libs.statemachine;
@@ -10,7 +10,7 @@ package org.suggs.libs.statemachine;
  * @author suggitpe
  * @version 1.0 18 Feb 2010
  */
-public interface IAction {
+public interface Action {
 
     /**
      * This interface imposes a vague notion of the command/strategy pattern that can be called to perform
@@ -22,6 +22,6 @@ public interface IAction {
      * @throws StateMachineException
      *             when there is any kind of issue caused in the execution of the action.
      */
-    void execute( IStateMachineContext aContext ) throws StateMachineException;
+    void execute( StateMachineContext aContext ) throws StateMachineException;
 
 }

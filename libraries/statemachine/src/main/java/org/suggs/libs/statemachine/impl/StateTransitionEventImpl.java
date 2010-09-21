@@ -4,7 +4,7 @@
  */
 package org.suggs.libs.statemachine.impl;
 
-import org.suggs.libs.statemachine.IStateTransitionEvent;
+import org.suggs.libs.statemachine.StateTransitionEvent;
 
 /**
  * Simple class to encapsulate an event for a state transition.
@@ -12,7 +12,7 @@ import org.suggs.libs.statemachine.IStateTransitionEvent;
  * @author suggitpe
  * @version 1.0 1 Sep 2009
  */
-public class StateTransitionEventImpl implements IStateTransitionEvent {
+public class StateTransitionEventImpl implements StateTransitionEvent {
 
     private final String eventName;
 
@@ -28,7 +28,7 @@ public class StateTransitionEventImpl implements IStateTransitionEvent {
     }
 
     /**
-     * @see org.suggs.libs.statemachine.IStateTransitionEvent#getEventName()
+     * @see org.suggs.libs.statemachine.StateTransitionEvent#getEventName()
      */
     @Override
     public String getEventName() {
