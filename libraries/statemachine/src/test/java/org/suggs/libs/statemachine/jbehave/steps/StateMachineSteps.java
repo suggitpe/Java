@@ -4,12 +4,24 @@
  */
 package org.suggs.libs.statemachine.jbehave.steps;
 
+import org.suggs.libs.statemachine.State;
 import org.suggs.libs.statemachine.StateMachine;
+import org.suggs.libs.statemachine.StateMachineContext;
+import org.suggs.libs.statemachine.StateMachineException;
+import org.suggs.libs.statemachine.StateTransitionEvent;
+import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
+
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 /**
  * Steps implementation for the State Machine tests.
@@ -19,11 +31,45 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class StateMachineSteps {
 
-    @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( StateMachineSteps.class );
 
-    @Autowired
-    private StateMachine stateMachine;
+    protected StateMachine stateMachine;
+
+    private Map<String, State> stateMap;
+
+    @Given("an unused state machine")
+    public void aStateMachineExists() {
+        stateMachine.reset();
+    }
+
+    @When("no events are received")
+    public void noEventsReceived() {
+        LOG.debug( "Not sending any events at the state manager" );
+    }
+
+    @When("a $eventType event is received")
+    public void aEventIsReceived( @Named("eventType") String eventType ) throws StateMachineException {
+        LOG.debug( "Sending a [" + eventType + "] event to the state machine under test" );
+        stateMachine.step( createStateMachineContext( eventType ) );
+    }
+
+    @Then("the state should be $stateName")
+    public void theStateShouldBe( @Named("stateName") String aStateName ) {
+        LOG.debug( "Checking that the state is [" + aStateName + "]" );
+        assertThat( "In the transition we have ended up in the wrong state.",
+                    stateMachine.getCurrentState(),
+                    equalTo( stateMap.get( aStateName ) ) );
+    }
+
+    private StateMachineContext createStateMachineContext( final String aEventType ) {
+        return new StateMachineContext() {
+
+            @Override
+            public StateTransitionEvent getStateTransitionEvent() {
+                return new StateTransitionEventImpl( aEventType );
+            }
+        };
+    }
 
     /**
      * Sets the stateMachine field to the specified value.
@@ -43,4 +89,24 @@ public class StateMachineSteps {
     public StateMachine getStateMachine() {
         return stateMachine;
     }
+
+    /**
+     * Returns the value of stateMap.
+     * 
+     * @return Returns the stateMap.
+     */
+    public Map<String, State> getStateMap() {
+        return stateMap;
+    }
+
+    /**
+     * Sets the stateMap field to the specified value.
+     * 
+     * @param aStateMap
+     *            The stateMap to set.
+     */
+    public void setStateMap( Map<String, State> aStateMap ) {
+        stateMap = aStateMap;
+    }
+
 }

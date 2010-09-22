@@ -33,4 +33,9 @@ public interface StateMachine {
      */
     void step( StateMachineContext aContext ) throws StateMachineException;
 
+    /**
+     * Resets the state machine back to its default position (entry state).
+     */
+    void reset();
+
 }

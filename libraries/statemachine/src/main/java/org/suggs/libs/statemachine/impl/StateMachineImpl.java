@@ -24,6 +24,7 @@ public class StateMachineImpl implements StateMachine {
 
     private static final Log LOG = LogFactory.getLog( StateMachineImpl.class );
 
+    private State initialState;
     private State currentState;
 
     /**
@@ -34,6 +35,11 @@ public class StateMachineImpl implements StateMachine {
      */
     public StateMachineImpl( State aInitialState ) {
         super();
+        initialise( aInitialState );
+    }
+
+    private void initialise( State aInitialState ) {
+        initialState = aInitialState;
         currentState = aInitialState;
     }
 
@@ -93,5 +99,14 @@ public class StateMachineImpl implements StateMachine {
         StringBuilder buff = new StringBuilder( "StateMachineImpl:" );
         buff.append( " currentState=[" ).append( currentState ).append( "]" );
         return buff.toString();
+    }
+
+    /**
+     * @see org.suggs.libs.statemachine.StateMachine#reset()
+     */
+    @Override
+    public void reset() {
+        LOG.debug( "Resetting state machine" );
+        currentState = initialState;
     }
 }

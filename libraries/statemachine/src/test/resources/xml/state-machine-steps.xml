@@ -3,9 +3,17 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-    <import resource="classpath:xml/it-state-machine-connection-test-statemachine.xml"/>
+    <import resource="classpath:xml/it-state-machine-connection-test-statemachine.xml" />
 
     <bean id="stateMachineSteps" class="org.suggs.libs.statemachine.jbehave.steps.StateMachineSteps">
+        <property name="stateMachine" ref="stateMachine" />
+        <property name="stateMap">
+            <map>
+                <entry key="INITIAL" value-ref="initialState" />
+                <entry key="CONNECTED" value-ref="connectedState" />
+                <entry key="DISCONNECTED" value-ref="disconnectedState" />
+            </map>
+        </property>
     </bean>
 
 </beans>
