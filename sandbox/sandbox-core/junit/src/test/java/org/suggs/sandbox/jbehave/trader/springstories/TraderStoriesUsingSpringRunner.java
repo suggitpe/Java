@@ -33,6 +33,7 @@ import org.junit.runner.RunWith;
 @UsingSpring(resources = { "classpath:xml/trader/configuration.xml", "classpath:xml/trader/steps.xml" })
 public class TraderStoriesUsingSpringRunner extends InjectableEmbedder {
 
+    @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TraderStoriesUsingSpringRunner.class );
 
     /**
@@ -41,18 +42,15 @@ public class TraderStoriesUsingSpringRunner extends InjectableEmbedder {
     @Test
     @Override
     public void run() throws Throwable {
-        LOG.debug( "Running stories using [" + injectedEmbedder().getClass().getName() + "]" );
         injectedEmbedder().runStoriesAsPaths( createStoryPaths() );
     }
 
     private List<String> createStoryPaths() {
         String storyLocation = CodeLocations.codeLocationFromPath( "src/test/resources" ).getFile();
-        LOG.debug( "Running stories from [" + storyLocation + "]" );
         StoryFinder finder = new StoryFinder();
         return finder.findPaths( storyLocation,
                                  Arrays.asList( "**/trader*.story" ),
                                  Arrays.asList( "" ),
                                  "file:" + storyLocation );
-
     }
 }

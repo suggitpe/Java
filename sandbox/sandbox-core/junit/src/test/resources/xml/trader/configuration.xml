@@ -4,7 +4,7 @@
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <bean class="org.jbehave.core.parsers.RegexPrefixCapturingPatternParser">
-        <constructor-arg value="%" />
+        <constructor-arg value="$" />
     </bean>
 
     <bean class="org.jbehave.core.io.LoadFromURL" />
