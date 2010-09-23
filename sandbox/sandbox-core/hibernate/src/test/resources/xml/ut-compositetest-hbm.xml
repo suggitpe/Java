@@ -6,11 +6,11 @@
     <!-- import all of the common bean refS -->
     <import resource="ut-common.xml"/>
     
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
         parent="abstractSessionFactoryBean">
-        <property name="annotatedClasses">
+        <property name="mappingResources">
             <list>
-                <value>org.suggs.sandbox.hibernate.compositeentity.CoreEntity</value>
+                <value>hbm/composite-entity.hbm.xml</value>
             </list>
         </property>
     </bean>
