@@ -24,6 +24,9 @@
     <properties>
         <jbehave.version>3.0</jbehave.version>
         <log4j.version>1.2.12</log4j.version>
+        <jbehave.ignoreFailureInStories>false</jbehave.ignoreFailureInStories>
+        <jbehave.ignoreFailureInView>false</jbehave.ignoreFailureInView>
+        <jbehave.generateViewAfterStories>true</jbehave.generateViewAfterStories>
     </properties>
 
     <!-- team developers -->
@@ -251,9 +254,9 @@
                                 </includes>
                                 <skip>false</skip>
                                 <scope>test</scope>
-                                <ignoreFailureInStories>false</ignoreFailureInStories>
-                                <ignoreFailureInView>false</ignoreFailureInView>
-                                <generateViewAfterStories>true</generateViewAfterStories>
+                                <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
+                                <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
+                                <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
                             </configuration>
                             <goals>
                                 <goal>run-stories-as-embeddables</goal>
@@ -269,9 +272,9 @@
                                 <includes>
                                     <include>**/injectablestories/*.java</include>
                                 </includes>
-                                <ignoreFailureInStories>false</ignoreFailureInStories>
-                                <ignoreFailureInView>false</ignoreFailureInView>
-                                <generateViewAfterStories>true</generateViewAfterStories>
+                                <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
+                                <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
+                                <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
                             </configuration>
                             <goals>
                                 <goal>run-with-annotated-embedder</goal>
@@ -287,9 +290,9 @@
                                 <includes>
                                     <include>**/springstories/*.java</include>
                                 </includes>
-                                <ignoreFailureInStories>false</ignoreFailureInStories>
-                                <ignoreFailureInView>false</ignoreFailureInView>
-                                <generateViewAfterStories>true</generateViewAfterStories>
+                                <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
+                                <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
+                                <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
                             </configuration>
                             <goals>
                                 <goal>run-with-annotated-embedder</goal>
