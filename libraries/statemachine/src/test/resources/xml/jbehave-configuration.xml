@@ -18,7 +18,7 @@
     </bean>
 
 
-    <bean class="org.suggs.libs.statemachine.jbehave.support.SuggsSpringStoryReporterBuilder" init-method="withDefaultFormats">
+    <bean class="org.jbehave.core.configuration.spring.SpringStoryReporterBuilder" init-method="withDefaultFormats">
         <property name="formats">
             <list>
                 <value>CONSOLE</value>

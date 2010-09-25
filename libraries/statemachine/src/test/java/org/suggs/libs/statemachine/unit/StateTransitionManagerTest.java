@@ -13,6 +13,7 @@ import java.util.Collection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.easymock.IMocksControl;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -44,7 +45,12 @@ public class StateTransitionManagerTest {
     /** */
     @BeforeClass
     public static void doBeforeClass() {
-        LOG.debug( "===================" + StateTransitionManagerTest.class.getSimpleName() );
+        LOG.debug( "=================== Start: " + StateTransitionManagerTest.class.getSimpleName() );
+    }
+
+    @AfterClass
+    public static void doAfterClass() {
+        LOG.debug( "=================== End: " + StateTransitionManagerTest.class.getSimpleName() );
     }
 
     /** */

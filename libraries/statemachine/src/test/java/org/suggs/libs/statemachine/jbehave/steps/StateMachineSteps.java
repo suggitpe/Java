@@ -10,11 +10,14 @@ import org.suggs.libs.statemachine.StateMachineContext;
 import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.StateTransitionEvent;
 import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
+import org.suggs.libs.statemachine.jbehave.springstories.TraverseStateMachine;
 
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jbehave.core.annotations.AfterStories;
+import org.jbehave.core.annotations.BeforeStories;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -36,6 +39,16 @@ public class StateMachineSteps {
     protected StateMachine stateMachine;
 
     private Map<String, State> stateMap;
+
+    @BeforeStories
+    public void doBeforeStories() {
+        LOG.debug( "=================== Start: " + TraverseStateMachine.class.getSimpleName() );
+    }
+
+    @AfterStories
+    public void doAfterStories() {
+        LOG.debug( "=================== End: " + TraverseStateMachine.class.getSimpleName() );
+    }
 
     @Given("an unused state machine")
     public void aStateMachineExists() {

@@ -7,8 +7,8 @@ package org.suggs.libs.statemachine.integration;
 import org.suggs.libs.statemachine.State;
 import org.suggs.libs.statemachine.StateMachine;
 import org.suggs.libs.statemachine.StateMachineContext;
-import org.suggs.libs.statemachine.StateTransitionEvent;
 import org.suggs.libs.statemachine.StateMachineException;
+import org.suggs.libs.statemachine.StateTransitionEvent;
 import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
 
 import javax.annotation.Resource;
@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -53,19 +54,22 @@ public class StateMachineConnectionIntegrationTest {
     @Resource(name = "connectedState")
     protected State connectedState;
 
-    /** */
     @BeforeClass
     public static void doBeforeClass() {
-        LOG.debug( "===================" + StateMachineConnectionIntegrationTest.class.getSimpleName() );
+        LOG.debug( "=================== Start: "
+                   + StateMachineConnectionIntegrationTest.class.getSimpleName() );
     }
 
-    /** */
+    @AfterClass
+    public static void doAfterClass() {
+        LOG.debug( "=================== End: " + StateMachineConnectionIntegrationTest.class.getSimpleName() );
+    }
+
     @Before
     public void doBefore() {
         LOG.debug( "------------------- " );
     }
 
-    /** */
     @After
     public void doAfter() {
         LOG.debug( "------------------- " );
