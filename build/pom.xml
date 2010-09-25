@@ -22,7 +22,7 @@
     </scm>
     
     <properties>
-        <jbehave.version>3.0</jbehave.version>
+        <jbehave.version>3.0.1</jbehave.version>
         <log4j.version>1.2.12</log4j.version>
         <jbehave.ignoreFailureInStories>false</jbehave.ignoreFailureInStories>
         <jbehave.ignoreFailureInView>false</jbehave.ignoreFailureInView>
@@ -331,7 +331,7 @@
                                     <artifactItem>
                                         <groupId>org.jbehave.site</groupId>
                                         <artifactId>jbehave-site-resources</artifactId>
-                                        <version>${jbehave.version}</version>
+                                        <version>3.0</version>
                                         <type>zip</type>
                                         <outputDirectory>${project.build.directory}/jbehave-reports/view</outputDirectory>
                                     </artifactItem>
