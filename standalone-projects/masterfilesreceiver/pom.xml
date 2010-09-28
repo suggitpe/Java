@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <!-- high level main project details -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ubs.reporting</groupId>
+    <artifactId>masterfiles-receiver</artifactId>
+    <packaging>jar</packaging>
+    <name>Masterfiles Receiver</name>
+    <version>1.0-SNAPSHOT</version>
+    <description>Masterfiles Receiver stand alone</description>
+    <url>http://www.ubs.com</url>
+    <inceptionYear>2010</inceptionYear>
+
+    <!-- Mailing lists -->
+    <mailingLists>
+    </mailingLists>
+
+    <developers>
+    </developers>
+
+    <contributors>
+    </contributors>
+
+    <organization>
+    </organization>
+
+    <profiles>
+    </profiles>
+
+    <modules>
+    </modules>
+
+    <build>
+        <testResources>
+            <testResource>
+                <directory>${orca.test.home}</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <!--  -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <useSystemClassLoader>true</useSystemClassLoader>
+                    <trimStackTrace>false</trimStackTrace>
+                    <argLine>${test.jvm.args}</argLine>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+    </repositories>
+
+    <pluginRepositories>
+    </pluginRepositories>
+
+    <reporting>
+    </reporting>
+
+    <dependencies>
+        <!-- main compile time dependencies -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.jms</groupId>
+            <artifactId>jms</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+			<groupId>com.tibco.ems</groupId>
+			<artifactId>tibjms</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!--
+        This is where we define all of the application dependencies
+        version requirements
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.7</version>
+            </dependency>
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>2.4</version>
+            </dependency>
+            <!-- external jars -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.12</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.jms</groupId>
+                <artifactId>jms</artifactId>
+                <version>1.1</version>
+            </dependency>
+            <dependency>
+			    <groupId>com.tibco.ems</groupId>
+			    <artifactId>tibjms</artifactId>
+			    <version>5.1.3</version>
+		    </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
