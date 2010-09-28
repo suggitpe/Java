@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Trading Account Entity
+ * Persistable domain class for a Trading Account.
  * 
  * @author suggitpe
  * @version 1.0 28 Sep 2010
@@ -25,6 +25,7 @@ public class TradingAccount extends AbstractTradingAccount {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TradingAccount.class );
+    private static final long serialVersionUID = -6968568761822911880L;
 
     @Column(name = "STATUS_UPDT_DATE")
     private Date statusUpdateDate;

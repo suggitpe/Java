@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Trading Account Cross Reference Entity
+ * Persistable domain class for a Trading Account Cross Reference.
  * 
  * @author suggitpe
  * @version 1.0 28 Sep 2010
@@ -25,6 +25,7 @@ public class TradingAccountCrossReference extends AbstractTradingAccount {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TradingAccountCrossReference.class );
+    private static final long serialVersionUID = -7228437206417707676L;
 
     @Column(name = "ALT_IDENTIFIER_ID")
     private String altIdentifierId;

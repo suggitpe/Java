@@ -11,16 +11,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * TODO Write javadoc for AbstractTradingAccount
+ * Abstract persistable domain class for all Trading Account entities.
  * 
  * @author suggitpe
  * @version 1.0 28 Sep 2010
  */
 @MappedSuperclass
-public class AbstractTradingAccount extends AbstractStagedEntity {
+public abstract class AbstractTradingAccount extends AbstractStagedEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( AbstractTradingAccount.class );
+    private static final long serialVersionUID = 7887200668321427985L;
 
     @Column(name = "TRADING_ACC_NK")
     private String tradingAccountNK;

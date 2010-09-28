@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Trading Account Contra Entity Entity
+ * Persistable domain class for a Trading Account Contra Entity.
  * 
  * @author suggitpe
  * @version 1.0 28 Sep 2010
@@ -25,6 +25,7 @@ public class TradingAccountContraEntity extends AbstractTradingAccount {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TradingAccountContraEntity.class );
+    private static final long serialVersionUID = 2195591707838457891L;
 
     @Column(name = "CONTR_ENTITY_ID")
     private Integer contraEntityId;

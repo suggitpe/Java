@@ -11,16 +11,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * TODO Write javadoc for AbstractLegalEntity
+ * Abstract persistable domain class for all Legal Entity classes.
  * 
  * @author suggitpe
  * @version 1.0 28 Sep 2010
  */
 @MappedSuperclass
-public class AbstractLegalEntity extends AbstractStagedEntity {
+public abstract class AbstractLegalEntity extends AbstractStagedEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( AbstractLegalEntity.class );
+    private static final long serialVersionUID = -3860102942085240160L;
 
     @Column(name = "LE_DOMAIN")
     private String legalEntityDomain;

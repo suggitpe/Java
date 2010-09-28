@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Legal Entity Cross Reference Entity
+ * Persistable domain class for a Legal Entity Cross Reference.
  * 
  * @author suggitpe
  * @version 1.0 28 Sep 2010
@@ -25,6 +25,7 @@ public class LegalEntityCrossReference extends AbstractLegalEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntityCrossReference.class );
+    private static final long serialVersionUID = -2062542258852852912L;
 
     @Column(name = "ALT_IDENTIFIER_ID")
     private String altIdId;

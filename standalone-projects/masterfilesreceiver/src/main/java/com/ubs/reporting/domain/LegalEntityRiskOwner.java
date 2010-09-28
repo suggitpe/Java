@@ -12,7 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Legal Entity Risk Owner
+ * Persistable domain class for a Legal Entity Risk Owner.
  * 
  * @author suggitpe
  * @version 1.0 28 Sep 2010
@@ -23,6 +23,7 @@ public class LegalEntityRiskOwner extends AbstractLegalEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntityRiskOwner.class );
+    private static final long serialVersionUID = -9119178129773249781L;
 
     @Column(name = "RISK_OWNER_TYPE")
     private String riskOwnerType;
