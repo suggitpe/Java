@@ -1,0 +1,5 @@
+1. SQL has no:
+    1a. RI
+    1b. Indexes
+    1c. not null statements
+    1d. details around table spaces
