@@ -43,6 +43,10 @@
     <category name="org.springframework">
         <priority value="info" />
     </category>
+    
+    <category name="com.ubs">
+        <priority value="debug" />
+    </category>
 
     <root>
         <priority value="debug" />
