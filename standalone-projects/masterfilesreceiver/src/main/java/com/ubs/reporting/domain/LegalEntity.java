@@ -90,4 +90,11 @@ public class LegalEntity extends AbstractLegalEntity {
     @Column(name = "LEGACY_ID")
     private String legacyId;
 
+    /**
+     * Constructs a new instance.
+     */
+    public LegalEntity( LegalEntityKey aLegalEntityKey, String aLegalName ) {
+        super( aLegalEntityKey, aLegalName );
+    }
+
 }

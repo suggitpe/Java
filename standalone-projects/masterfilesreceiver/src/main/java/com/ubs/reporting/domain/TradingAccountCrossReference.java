@@ -44,4 +44,11 @@ public class TradingAccountCrossReference extends AbstractTradingAccount {
 
     @Column(name = "ALT_IDENTIFIER_BLOCKED")
     private String altIdentifierBlocked;
+
+    /**
+     * Constructs a new instance.
+     */
+    public TradingAccountCrossReference( TradingAccountKey aTradingAccountKey, String aTradingAccountNK ) {
+        super( aTradingAccountKey, aTradingAccountNK );
+    }
 }

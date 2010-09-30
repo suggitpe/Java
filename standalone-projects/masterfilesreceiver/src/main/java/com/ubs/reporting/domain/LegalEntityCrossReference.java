@@ -42,4 +42,11 @@ public class LegalEntityCrossReference extends AbstractLegalEntity {
     @Column(name = "ALT_IDENTIFIER_STATUS")
     private String altIdStatus;
 
+    /**
+     * Constructs a new instance.
+     */
+    public LegalEntityCrossReference( LegalEntityKey aLegalEntityKey, String aLegalName ) {
+        super( aLegalEntityKey, aLegalName );
+    }
+
 }

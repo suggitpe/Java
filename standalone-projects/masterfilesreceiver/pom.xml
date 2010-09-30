@@ -5,11 +5,11 @@
     <!-- high level main project details -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ubs.reporting</groupId>
-    <artifactId>masterfiles-receiver</artifactId>
+    <artifactId>jms-to-db-persister</artifactId>
     <packaging>jar</packaging>
-    <name>Masterfiles Receiver</name>
+    <name>JMS to Database Persister</name>
     <version>1.0-SNAPSHOT</version>
-    <description>Masterfiles Receiver stand alone</description>
+    <description>Tool that will allow you to receive a message from a JMS durable/queue and persist the contents to a database.</description>
     <url>http://www.ubs.com</url>
     <inceptionYear>2010</inceptionYear>
 
@@ -137,6 +137,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -151,6 +156,22 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <!-- This is where we define all of the application dependencies version requirements -->
@@ -175,6 +196,11 @@
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.12</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.5.8</version>
             </dependency>
             <dependency>
                 <groupId>javax.jms</groupId>
@@ -215,6 +241,21 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>2.5.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-c3p0</artifactId>
+                <version>3.3.2.GA</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc14</artifactId>
+                <version>10.2.0.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>3.4.GA</version>
             </dependency>
 
         </dependencies>

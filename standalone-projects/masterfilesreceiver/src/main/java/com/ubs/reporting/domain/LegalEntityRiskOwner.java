@@ -43,4 +43,11 @@ public class LegalEntityRiskOwner extends AbstractLegalEntity {
     @Column(name = "OWNING_GROUP_CODE")
     private String owningGroupCode;
 
+    /**
+     * Constructs a new instance.
+     */
+    public LegalEntityRiskOwner( LegalEntityKey aLegalEntityKey, String aLegalName ) {
+        super( aLegalEntityKey, aLegalName );
+    }
+
 }

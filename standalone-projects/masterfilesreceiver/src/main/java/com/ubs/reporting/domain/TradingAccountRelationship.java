@@ -41,4 +41,11 @@ public class TradingAccountRelationship extends AbstractTradingAccount {
 
     @Column(name = "RELATIONSHIP_STATUS")
     private String relationshipStatus;
+
+    /**
+     * Constructs a new instance.
+     */
+    public TradingAccountRelationship( TradingAccountKey aTradingAccountKey, String aTradingAccountNK ) {
+        super( aTradingAccountKey, aTradingAccountNK );
+    }
 }

@@ -41,4 +41,11 @@ public class TradingAccountContraEntity extends AbstractTradingAccount {
 
     @Column(name = "CONTR_ENTITY_STATUS")
     private String contraEntityStatus;
+
+    /**
+     * Constructs a new instance.
+     */
+    public TradingAccountContraEntity( TradingAccountKey aTradingAccountKey, String aTradingAccountNK ) {
+        super( aTradingAccountKey, aTradingAccountNK );
+    }
 }

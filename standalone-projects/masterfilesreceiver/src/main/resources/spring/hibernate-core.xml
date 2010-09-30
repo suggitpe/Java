@@ -22,7 +22,7 @@
     
     <!-- Properties -->
     <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:db.properties" />
+        <property name="location" value="classpath:jms-to-db-persister.properties" />
     </bean>
     
     <!-- 

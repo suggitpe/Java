@@ -74,4 +74,11 @@ public class TradingAccount extends AbstractTradingAccount {
 
     @Column(name = "ADDRESS_LINE4")
     private String addressLine4;
+
+    /**
+     * Constructs a new instance.
+     */
+    public TradingAccount( TradingAccountKey aTradingAccountKey, String aTradingAccountNK ) {
+        super( aTradingAccountKey, aTradingAccountNK );
+    }
 }

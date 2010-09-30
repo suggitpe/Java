@@ -1,5 +1,6 @@
 1. SQL has no:
     1a. RI
-    1b. Indexes
+    1b. Indexes/constraints
     1c. not null statements
     1d. details around table spaces
+2. Build out Domain tests
