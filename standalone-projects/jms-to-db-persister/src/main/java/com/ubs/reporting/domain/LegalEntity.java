@@ -91,16 +91,638 @@ public class LegalEntity extends AbstractLegalEntity {
     private String legacyId;
 
     /**
-     * Constructs a new instance.
-     * Created for Hibernate only.
+     * Constructs a new instance. Created for Hibernate only.
      */
     protected LegalEntity() {}
 
     /**
      * Constructs a new instance.
      */
+    public LegalEntity( LegalEntityKey aLegalEntityKey, String aLegalName, String aCountryDomicile,
+                        String aCountryIncorporation, String aClassCode, String aClassType,
+                        Date aLegalEntityStatusUpdateDate, String aLegalEntityStatus, String aClientClass,
+                        String aHasCollateralFlag, String aCountryOfRisk, String aIsConfidentialFlag,
+                        String aInternationalRatingCode, Date aInternationalRatingReviewDate,
+                        String aPortfolioSegment, String aRatingApproach, String aBoeCode, String aBoeType,
+                        String aCaCode, String aCaType, String aCtCode, String aCtType, String aLegacyId ) {
+        super( aLegalEntityKey, aLegalName );
+        countryDomicile = aCountryDomicile;
+        countryIncorporation = aCountryIncorporation;
+        classCode = aClassCode;
+        classType = aClassType;
+        legalEntityStatusUpdateDate = aLegalEntityStatusUpdateDate;
+        legalEntityStatus = aLegalEntityStatus;
+        clientClass = aClientClass;
+        hasCollateral = aHasCollateralFlag;
+        countryOfRisk = aCountryOfRisk;
+        isConfidential = aIsConfidentialFlag;
+        internationalRatingCode = aInternationalRatingCode;
+        internationalRatingReviewDate = aInternationalRatingReviewDate;
+        portfolioSegment = aPortfolioSegment;
+        ratingApproach = aRatingApproach;
+        boeCode = aBoeCode;
+        boeType = aBoeType;
+        caCode = aCaCode;
+        caType = aCaType;
+        ctCode = aCtCode;
+        ctType = aCtType;
+        legacyId = aLegacyId;
+    }
+
     public LegalEntity( LegalEntityKey aLegalEntityKey, String aLegalName ) {
         super( aLegalEntityKey, aLegalName );
+    }
+
+    /**
+     * Returns the value of countryDomicile.
+     * 
+     * @return Returns the countryDomicile.
+     */
+    public String getCountryDomicile() {
+        return countryDomicile;
+    }
+
+    /**
+     * Sets the countryDomicile field to the specified value.
+     * 
+     * @param aCountryDomicile
+     *            The countryDomicile to set.
+     */
+    public void setCountryDomicile( String aCountryDomicile ) {
+        countryDomicile = aCountryDomicile;
+    }
+
+    /**
+     * Returns the value of countryIncorporation.
+     * 
+     * @return Returns the countryIncorporation.
+     */
+    public String getCountryIncorporation() {
+        return countryIncorporation;
+    }
+
+    /**
+     * Sets the countryIncorporation field to the specified value.
+     * 
+     * @param aCountryIncorporation
+     *            The countryIncorporation to set.
+     */
+    public void setCountryIncorporation( String aCountryIncorporation ) {
+        countryIncorporation = aCountryIncorporation;
+    }
+
+    /**
+     * Returns the value of classCode.
+     * 
+     * @return Returns the classCode.
+     */
+    public String getClassCode() {
+        return classCode;
+    }
+
+    /**
+     * Sets the classCode field to the specified value.
+     * 
+     * @param aClassCode
+     *            The classCode to set.
+     */
+    public void setClassCode( String aClassCode ) {
+        classCode = aClassCode;
+    }
+
+    /**
+     * Returns the value of classType.
+     * 
+     * @return Returns the classType.
+     */
+    public String getClassType() {
+        return classType;
+    }
+
+    /**
+     * Sets the classType field to the specified value.
+     * 
+     * @param aClassType
+     *            The classType to set.
+     */
+    public void setClassType( String aClassType ) {
+        classType = aClassType;
+    }
+
+    /**
+     * Returns the value of legalEntityStatusUpdateDate.
+     * 
+     * @return Returns the legalEntityStatusUpdateDate.
+     */
+    public Date getLegalEntityStatusUpdateDate() {
+        return legalEntityStatusUpdateDate;
+    }
+
+    /**
+     * Sets the legalEntityStatusUpdateDate field to the specified value.
+     * 
+     * @param aLegalEntityStatusUpdateDate
+     *            The legalEntityStatusUpdateDate to set.
+     */
+    public void setLegalEntityStatusUpdateDate( Date aLegalEntityStatusUpdateDate ) {
+        legalEntityStatusUpdateDate = aLegalEntityStatusUpdateDate;
+    }
+
+    /**
+     * Returns the value of legalEntityStatus.
+     * 
+     * @return Returns the legalEntityStatus.
+     */
+    public String getLegalEntityStatus() {
+        return legalEntityStatus;
+    }
+
+    /**
+     * Sets the legalEntityStatus field to the specified value.
+     * 
+     * @param aLegalEntityStatus
+     *            The legalEntityStatus to set.
+     */
+    public void setLegalEntityStatus( String aLegalEntityStatus ) {
+        legalEntityStatus = aLegalEntityStatus;
+    }
+
+    /**
+     * Returns the value of clientClass.
+     * 
+     * @return Returns the clientClass.
+     */
+    public String getClientClass() {
+        return clientClass;
+    }
+
+    /**
+     * Sets the clientClass field to the specified value.
+     * 
+     * @param aClientClass
+     *            The clientClass to set.
+     */
+    public void setClientClass( String aClientClass ) {
+        clientClass = aClientClass;
+    }
+
+    /**
+     * Returns the value of hasCollateral.
+     * 
+     * @return Returns the hasCollateral.
+     */
+    public String getHasCollateral() {
+        return hasCollateral;
+    }
+
+    /**
+     * Sets the hasCollateral field to the specified value.
+     * 
+     * @param aHasCollateral
+     *            The hasCollateral to set.
+     */
+    public void setHasCollateral( String aHasCollateral ) {
+        hasCollateral = aHasCollateral;
+    }
+
+    /**
+     * Returns the value of countryOfRisk.
+     * 
+     * @return Returns the countryOfRisk.
+     */
+    public String getCountryOfRisk() {
+        return countryOfRisk;
+    }
+
+    /**
+     * Sets the countryOfRisk field to the specified value.
+     * 
+     * @param aCountryOfRisk
+     *            The countryOfRisk to set.
+     */
+    public void setCountryOfRisk( String aCountryOfRisk ) {
+        countryOfRisk = aCountryOfRisk;
+    }
+
+    /**
+     * Returns the value of isConfidential.
+     * 
+     * @return Returns the isConfidential.
+     */
+    public String getIsConfidential() {
+        return isConfidential;
+    }
+
+    /**
+     * Sets the isConfidential field to the specified value.
+     * 
+     * @param aIsConfidential
+     *            The isConfidential to set.
+     */
+    public void setIsConfidential( String aIsConfidential ) {
+        isConfidential = aIsConfidential;
+    }
+
+    /**
+     * Returns the value of internationalRatingCode.
+     * 
+     * @return Returns the internationalRatingCode.
+     */
+    public String getInternationalRatingCode() {
+        return internationalRatingCode;
+    }
+
+    /**
+     * Sets the internationalRatingCode field to the specified value.
+     * 
+     * @param aInternationalRatingCode
+     *            The internationalRatingCode to set.
+     */
+    public void setInternationalRatingCode( String aInternationalRatingCode ) {
+        internationalRatingCode = aInternationalRatingCode;
+    }
+
+    /**
+     * Returns the value of internationalRatingReviewDate.
+     * 
+     * @return Returns the internationalRatingReviewDate.
+     */
+    public Date getInternationalRatingReviewDate() {
+        return internationalRatingReviewDate;
+    }
+
+    /**
+     * Sets the internationalRatingReviewDate field to the specified value.
+     * 
+     * @param aInternationalRatingReviewDate
+     *            The internationalRatingReviewDate to set.
+     */
+    public void setInternationalRatingReviewDate( Date aInternationalRatingReviewDate ) {
+        internationalRatingReviewDate = aInternationalRatingReviewDate;
+    }
+
+    /**
+     * Returns the value of portfolioSegment.
+     * 
+     * @return Returns the portfolioSegment.
+     */
+    public String getPortfolioSegment() {
+        return portfolioSegment;
+    }
+
+    /**
+     * Sets the portfolioSegment field to the specified value.
+     * 
+     * @param aPortfolioSegment
+     *            The portfolioSegment to set.
+     */
+    public void setPortfolioSegment( String aPortfolioSegment ) {
+        portfolioSegment = aPortfolioSegment;
+    }
+
+    /**
+     * Returns the value of ratingApproach.
+     * 
+     * @return Returns the ratingApproach.
+     */
+    public String getRatingApproach() {
+        return ratingApproach;
+    }
+
+    /**
+     * Sets the ratingApproach field to the specified value.
+     * 
+     * @param aRatingApproach
+     *            The ratingApproach to set.
+     */
+    public void setRatingApproach( String aRatingApproach ) {
+        ratingApproach = aRatingApproach;
+    }
+
+    /**
+     * Returns the value of boeCode.
+     * 
+     * @return Returns the boeCode.
+     */
+    public String getBoeCode() {
+        return boeCode;
+    }
+
+    /**
+     * Sets the boeCode field to the specified value.
+     * 
+     * @param aBoeCode
+     *            The boeCode to set.
+     */
+    public void setBoeCode( String aBoeCode ) {
+        boeCode = aBoeCode;
+    }
+
+    /**
+     * Returns the value of boeType.
+     * 
+     * @return Returns the boeType.
+     */
+    public String getBoeType() {
+        return boeType;
+    }
+
+    /**
+     * Sets the boeType field to the specified value.
+     * 
+     * @param aBoeType
+     *            The boeType to set.
+     */
+    public void setBoeType( String aBoeType ) {
+        boeType = aBoeType;
+    }
+
+    /**
+     * Returns the value of caCode.
+     * 
+     * @return Returns the caCode.
+     */
+    public String getCaCode() {
+        return caCode;
+    }
+
+    /**
+     * Sets the caCode field to the specified value.
+     * 
+     * @param aCaCode
+     *            The caCode to set.
+     */
+    public void setCaCode( String aCaCode ) {
+        caCode = aCaCode;
+    }
+
+    /**
+     * Returns the value of caType.
+     * 
+     * @return Returns the caType.
+     */
+    public String getCaType() {
+        return caType;
+    }
+
+    /**
+     * Sets the caType field to the specified value.
+     * 
+     * @param aCaType
+     *            The caType to set.
+     */
+    public void setCaType( String aCaType ) {
+        caType = aCaType;
+    }
+
+    /**
+     * Returns the value of ctCode.
+     * 
+     * @return Returns the ctCode.
+     */
+    public String getCtCode() {
+        return ctCode;
+    }
+
+    /**
+     * Sets the ctCode field to the specified value.
+     * 
+     * @param aCtCode
+     *            The ctCode to set.
+     */
+    public void setCtCode( String aCtCode ) {
+        ctCode = aCtCode;
+    }
+
+    /**
+     * Returns the value of ctType.
+     * 
+     * @return Returns the ctType.
+     */
+    public String getCtType() {
+        return ctType;
+    }
+
+    /**
+     * Sets the ctType field to the specified value.
+     * 
+     * @param aCtType
+     *            The ctType to set.
+     */
+    public void setCtType( String aCtType ) {
+        ctType = aCtType;
+    }
+
+    /**
+     * Returns the value of legacyId.
+     * 
+     * @return Returns the legacyId.
+     */
+    public String getLegacyId() {
+        return legacyId;
+    }
+
+    /**
+     * Sets the legacyId field to the specified value.
+     * 
+     * @param aLegacyId
+     *            The legacyId to set.
+     */
+    public void setLegacyId( String aLegacyId ) {
+        legacyId = aLegacyId;
+    }
+
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ( ( boeCode == null ) ? 0 : boeCode.hashCode() );
+        result = prime * result + ( ( boeType == null ) ? 0 : boeType.hashCode() );
+        result = prime * result + ( ( caCode == null ) ? 0 : caCode.hashCode() );
+        result = prime * result + ( ( caType == null ) ? 0 : caType.hashCode() );
+        result = prime * result + ( ( classCode == null ) ? 0 : classCode.hashCode() );
+        result = prime * result + ( ( classType == null ) ? 0 : classType.hashCode() );
+        result = prime * result + ( ( clientClass == null ) ? 0 : clientClass.hashCode() );
+        result = prime * result + ( ( countryDomicile == null ) ? 0 : countryDomicile.hashCode() );
+        result = prime * result + ( ( countryIncorporation == null ) ? 0 : countryIncorporation.hashCode() );
+        result = prime * result + ( ( countryOfRisk == null ) ? 0 : countryOfRisk.hashCode() );
+        result = prime * result + ( ( ctCode == null ) ? 0 : ctCode.hashCode() );
+        result = prime * result + ( ( ctType == null ) ? 0 : ctType.hashCode() );
+        result = prime * result + ( ( hasCollateral == null ) ? 0 : hasCollateral.hashCode() );
+        result = prime * result
+                 + ( ( internationalRatingCode == null ) ? 0 : internationalRatingCode.hashCode() );
+        result = prime
+                 * result
+                 + ( ( internationalRatingReviewDate == null ) ? 0 : internationalRatingReviewDate.hashCode() );
+        result = prime * result + ( ( isConfidential == null ) ? 0 : isConfidential.hashCode() );
+        result = prime * result + ( ( legacyId == null ) ? 0 : legacyId.hashCode() );
+        result = prime * result + ( ( legalEntityStatus == null ) ? 0 : legalEntityStatus.hashCode() );
+        result = prime * result
+                 + ( ( legalEntityStatusUpdateDate == null ) ? 0 : legalEntityStatusUpdateDate.hashCode() );
+        result = prime * result + ( ( portfolioSegment == null ) ? 0 : portfolioSegment.hashCode() );
+        result = prime * result + ( ( ratingApproach == null ) ? 0 : ratingApproach.hashCode() );
+        return result;
+    }
+
+    /**
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals( Object obj ) {
+        if ( this == obj )
+            return true;
+        if ( !super.equals( obj ) )
+            return false;
+        if ( getClass() != obj.getClass() )
+            return false;
+        LegalEntity other = (LegalEntity) obj;
+        if ( boeCode == null ) {
+            if ( other.boeCode != null )
+                return false;
+        }
+        else if ( !boeCode.equals( other.boeCode ) )
+            return false;
+        if ( boeType == null ) {
+            if ( other.boeType != null )
+                return false;
+        }
+        else if ( !boeType.equals( other.boeType ) )
+            return false;
+        if ( caCode == null ) {
+            if ( other.caCode != null )
+                return false;
+        }
+        else if ( !caCode.equals( other.caCode ) )
+            return false;
+        if ( caType == null ) {
+            if ( other.caType != null )
+                return false;
+        }
+        else if ( !caType.equals( other.caType ) )
+            return false;
+        if ( classCode == null ) {
+            if ( other.classCode != null )
+                return false;
+        }
+        else if ( !classCode.equals( other.classCode ) )
+            return false;
+        if ( classType == null ) {
+            if ( other.classType != null )
+                return false;
+        }
+        else if ( !classType.equals( other.classType ) )
+            return false;
+        if ( clientClass == null ) {
+            if ( other.clientClass != null )
+                return false;
+        }
+        else if ( !clientClass.equals( other.clientClass ) )
+            return false;
+        if ( countryDomicile == null ) {
+            if ( other.countryDomicile != null )
+                return false;
+        }
+        else if ( !countryDomicile.equals( other.countryDomicile ) )
+            return false;
+        if ( countryIncorporation == null ) {
+            if ( other.countryIncorporation != null )
+                return false;
+        }
+        else if ( !countryIncorporation.equals( other.countryIncorporation ) )
+            return false;
+        if ( countryOfRisk == null ) {
+            if ( other.countryOfRisk != null )
+                return false;
+        }
+        else if ( !countryOfRisk.equals( other.countryOfRisk ) )
+            return false;
+        if ( ctCode == null ) {
+            if ( other.ctCode != null )
+                return false;
+        }
+        else if ( !ctCode.equals( other.ctCode ) )
+            return false;
+        if ( ctType == null ) {
+            if ( other.ctType != null )
+                return false;
+        }
+        else if ( !ctType.equals( other.ctType ) )
+            return false;
+        if ( hasCollateral == null ) {
+            if ( other.hasCollateral != null )
+                return false;
+        }
+        else if ( !hasCollateral.equals( other.hasCollateral ) )
+            return false;
+        if ( internationalRatingCode == null ) {
+            if ( other.internationalRatingCode != null )
+                return false;
+        }
+        else if ( !internationalRatingCode.equals( other.internationalRatingCode ) )
+            return false;
+        if ( internationalRatingReviewDate == null ) {
+            if ( other.internationalRatingReviewDate != null )
+                return false;
+        }
+        else if ( !internationalRatingReviewDate.equals( other.internationalRatingReviewDate ) )
+            return false;
+        if ( isConfidential == null ) {
+            if ( other.isConfidential != null )
+                return false;
+        }
+        else if ( !isConfidential.equals( other.isConfidential ) )
+            return false;
+        if ( legacyId == null ) {
+            if ( other.legacyId != null )
+                return false;
+        }
+        else if ( !legacyId.equals( other.legacyId ) )
+            return false;
+        if ( legalEntityStatus == null ) {
+            if ( other.legalEntityStatus != null )
+                return false;
+        }
+        else if ( !legalEntityStatus.equals( other.legalEntityStatus ) )
+            return false;
+        if ( legalEntityStatusUpdateDate == null ) {
+            if ( other.legalEntityStatusUpdateDate != null )
+                return false;
+        }
+        else if ( !legalEntityStatusUpdateDate.equals( other.legalEntityStatusUpdateDate ) )
+            return false;
+        if ( portfolioSegment == null ) {
+            if ( other.portfolioSegment != null )
+                return false;
+        }
+        else if ( !portfolioSegment.equals( other.portfolioSegment ) )
+            return false;
+        if ( ratingApproach == null ) {
+            if ( other.ratingApproach != null )
+                return false;
+        }
+        else if ( !ratingApproach.equals( other.ratingApproach ) )
+            return false;
+        return true;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "LegalEntity [countryDomicile=" + countryDomicile + ", countryIncorporation="
+               + countryIncorporation + ", classCode=" + classCode + ", classType=" + classType
+               + ", legalEntityStatusUpdateDate=" + legalEntityStatusUpdateDate + ", legalEntityStatus="
+               + legalEntityStatus + ", clientClass=" + clientClass + ", hasCollateral=" + hasCollateral
+               + ", countryOfRisk=" + countryOfRisk + ", isConfidential=" + isConfidential
+               + ", internationalRatingCode=" + internationalRatingCode + ", internationalRatingReviewDate="
+               + internationalRatingReviewDate + ", portfolioSegment=" + portfolioSegment
+               + ", ratingApproach=" + ratingApproach + ", boeCode=" + boeCode + ", boeType=" + boeType
+               + ", caCode=" + caCode + ", caType=" + caType + ", ctCode=" + ctCode + ", ctType=" + ctType
+               + ", legacyId=" + legacyId + "]";
     }
 
 }

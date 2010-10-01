@@ -37,6 +37,7 @@ import static org.junit.Assert.assertThat;
 public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializable, E> {
 
     private static final Log LOG = LogFactory.getLog( AbstractSimpleHibernateIntegrationTest.class );
+    private static final long TEST_TIMEOUT = 10000;
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionfactory;
@@ -115,7 +116,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      */
     protected void doInitialVerificationForCreateTest( Session aSession, E aExpected, E aResult ) {}
 
-    @Test
+    @Test(timeout = TEST_TIMEOUT)
     public void basicCreateOperationCreatesCorrectObject() {
         LOG.info( "Testing the create CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
@@ -160,7 +161,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      */
     protected void doInitialVerificationForReadTest( Session aSession, E aExpected, E aResult ) {}
 
-    @Test
+    @Test(timeout = TEST_TIMEOUT)
     public void basicReadOperationsInstantiatesCorrectObject() {
         LOG.info( "Testing the read CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
@@ -211,7 +212,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      */
     protected void doInitialVerificationForUpdateTest( Session aSession, E aExpected, E aResult ) {}
 
-    @Test
+    @Test(timeout = TEST_TIMEOUT)
     public void basicUpdateOperationsUpdatesCorrectObject() {
         LOG.info( "Testing the update CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
@@ -261,7 +262,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      */
     protected void doInitialVerificationForDeleteTest( Session aSession, E aDeleted ) {}
 
-    @Test
+    @Test(timeout = TEST_TIMEOUT)
     public void basicDeleteOperationsDeletesCorrectObject() {
         LOG.info( "Testing the delete CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {

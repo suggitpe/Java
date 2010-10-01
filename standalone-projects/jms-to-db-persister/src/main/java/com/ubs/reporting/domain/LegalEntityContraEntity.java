@@ -216,8 +216,8 @@ public class LegalEntityContraEntity extends AbstractLegalEntity {
             if ( other.contraEntityUpdateDate != null )
                 return false;
         }
-        // I have switched off the equals on the actual dates because the
-        // returned one is different to the one we persisted (Hibernate issuette).
+        else if ( !contraEntityUpdateDate.equals( other.contraEntityUpdateDate ) )
+            return false;
         return true;
     }
 

@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest;
+import com.ubs.reporting.support.TestUtils;
 
 import org.springframework.test.context.ContextConfiguration;
 
@@ -30,7 +31,7 @@ public class LegalEntityContraEntityHibernateIntegrationTest extends AbstractSim
      */
     @Override
     protected void cleanUpData( Session aSession ) {
-        aSession.createQuery( "delete from LegalEntityContra where legalEntityDomain ='TEST_DOMAIN'" )
+        aSession.createQuery( "delete from LegalEntityContraEntity where legalEntityKey.legalEntityDomain ='TEST_DOMAIN'" )
             .executeUpdate();
     }
 
@@ -48,7 +49,13 @@ public class LegalEntityContraEntityHibernateIntegrationTest extends AbstractSim
      */
     @Override
     protected LegalEntityContraEntity createEntityTemplate( LegalEntityKey aKey, Session aSession ) {
-        return new LegalEntityContraEntity( aKey, "Test Legal Name" );
+        return new LegalEntityContraEntity( aKey,
+                                            "Test Legal Name",
+                                            Integer.valueOf( 12345 ),
+                                            "A Contra Domain",
+                                            "Contra Name",
+                                            TestUtils.createDateFrom_ddmmyyyy( "10121973" ),
+                                            "Some status" );
     }
 
     /**
@@ -64,6 +71,6 @@ public class LegalEntityContraEntityHibernateIntegrationTest extends AbstractSim
      */
     @Override
     protected String createEntitySearchHql() {
-        return "from LegalEntityContraEntity where legalEntityDomain = 'TEST_DOMAIN'";
+        return "from LegalEntityContraEntity where legalEntityKey.legalEntityDomain = 'TEST_DOMAIN'";
     }
 }
