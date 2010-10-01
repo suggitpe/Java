@@ -35,6 +35,11 @@ public class LegalEntityKey implements Serializable {
     private Integer legalEntityVersion;
 
     /**
+     * Constructs a new instance. Created for Hibernate only.
+     */
+    protected LegalEntityKey() {}
+
+    /**
      * Constructs a new instance.
      */
     public LegalEntityKey( Integer aLegalEntityId, String aLegalEntityDomain, Integer alegalEntityVersion ) {

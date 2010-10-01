@@ -31,6 +31,11 @@ public abstract class AbstractLegalEntity {
     private String legalName;
 
     /**
+     * Constructs a new instance. Created for Hibernate only.
+     */
+    protected AbstractLegalEntity() {}
+
+    /**
      * Constructs a new instance.
      */
     public AbstractLegalEntity( LegalEntityKey aLegalEntityKey, String aLegalName ) {

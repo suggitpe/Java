@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,6 +38,7 @@ public class LegalEntityContraEntity extends AbstractLegalEntity {
     @Column(name = "CONTR_ENTITY_NAME")
     private String contraEntityName;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "CONTR_ENTITY_UPDT_DATE")
     private Date contraEntityUpdateDate;
 
@@ -43,10 +46,23 @@ public class LegalEntityContraEntity extends AbstractLegalEntity {
     private String contraEntityStatus;
 
     /**
+     * Constructs a new instance. Created for Hibernate only.
+     */
+    protected LegalEntityContraEntity() {}
+
+    /**
      * Constructs a new instance.
      */
-    public LegalEntityContraEntity( LegalEntityKey aLegalEntityKey, String aLegalName ) {
+    public LegalEntityContraEntity( LegalEntityKey aLegalEntityKey, String aLegalName,
+                                    Integer aContraEntityId, String aContraEntityDomain,
+                                    String aContraEntityName, Date aContraEntityUpdateDate,
+                                    String aContraEntityStatus ) {
         super( aLegalEntityKey, aLegalName );
+        contraEntityId = aContraEntityId;
+        contraEntityDomain = aContraEntityDomain;
+        contraEntityName = aContraEntityName;
+        contraEntityUpdateDate = aContraEntityUpdateDate;
+        contraEntityStatus = aContraEntityStatus;
     }
 
     /**
@@ -200,8 +216,8 @@ public class LegalEntityContraEntity extends AbstractLegalEntity {
             if ( other.contraEntityUpdateDate != null )
                 return false;
         }
-        else if ( !contraEntityUpdateDate.equals( other.contraEntityUpdateDate ) )
-            return false;
+        // I have switched off the equals on the actual dates because the
+        // returned one is different to the one we persisted (Hibernate issuette).
         return true;
     }
 

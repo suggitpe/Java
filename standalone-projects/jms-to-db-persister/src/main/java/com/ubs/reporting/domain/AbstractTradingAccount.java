@@ -31,6 +31,11 @@ public abstract class AbstractTradingAccount {
     private String tradingAccountNK;
 
     /**
+     * Constructs a new instance. For hibernate use only.
+     */
+    protected AbstractTradingAccount() {}
+
+    /**
      * Constructs a new instance.
      */
     public AbstractTradingAccount( TradingAccountKey aTradingAccountKey, String aTradingAccountNK ) {

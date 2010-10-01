@@ -92,6 +92,12 @@ public class LegalEntity extends AbstractLegalEntity {
 
     /**
      * Constructs a new instance.
+     * Created for Hibernate only.
+     */
+    protected LegalEntity() {}
+
+    /**
+     * Constructs a new instance.
      */
     public LegalEntity( LegalEntityKey aLegalEntityKey, String aLegalName ) {
         super( aLegalEntityKey, aLegalName );
