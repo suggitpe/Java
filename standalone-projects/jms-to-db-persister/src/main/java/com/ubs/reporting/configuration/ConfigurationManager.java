@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 public final class ConfigurationManager {
 
     private static final Log LOG = LogFactory.getLog( ConfigurationManager.class );
-    private static final String PROP_FILE = "masterfiles-receiver.properties";
+    private static final String PROP_FILE = "jms-to-db-persister.properties";
 
     // here we pop all of the properties that we wish to manage
     /** */

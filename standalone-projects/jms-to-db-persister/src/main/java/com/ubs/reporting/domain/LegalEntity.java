@@ -98,6 +98,13 @@ public class LegalEntity extends AbstractLegalEntity {
     /**
      * Constructs a new instance.
      */
+    public LegalEntity( LegalEntityKey aLegalEntityKey, String aLegalName ) {
+        super( aLegalEntityKey, aLegalName );
+    }
+
+    /**
+     * Constructs a new instance.
+     */
     public LegalEntity( LegalEntityKey aLegalEntityKey, String aLegalName, String aCountryDomicile,
                         String aCountryIncorporation, String aClassCode, String aClassType,
                         Date aLegalEntityStatusUpdateDate, String aLegalEntityStatus, String aClientClass,
@@ -105,7 +112,7 @@ public class LegalEntity extends AbstractLegalEntity {
                         String aInternationalRatingCode, Date aInternationalRatingReviewDate,
                         String aPortfolioSegment, String aRatingApproach, String aBoeCode, String aBoeType,
                         String aCaCode, String aCaType, String aCtCode, String aCtType, String aLegacyId ) {
-        super( aLegalEntityKey, aLegalName );
+        this( aLegalEntityKey, aLegalName );
         countryDomicile = aCountryDomicile;
         countryIncorporation = aCountryIncorporation;
         classCode = aClassCode;
@@ -127,10 +134,6 @@ public class LegalEntity extends AbstractLegalEntity {
         ctCode = aCtCode;
         ctType = aCtType;
         legacyId = aLegacyId;
-    }
-
-    public LegalEntity( LegalEntityKey aLegalEntityKey, String aLegalName ) {
-        super( aLegalEntityKey, aLegalName );
     }
 
     /**

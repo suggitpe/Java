@@ -53,11 +53,18 @@ public class LegalEntityContraEntity extends AbstractLegalEntity {
     /**
      * Constructs a new instance.
      */
+    public LegalEntityContraEntity( LegalEntityKey aLegalEntityKey, String aLegalName ) {
+        super( aLegalEntityKey, aLegalName );
+    }
+
+    /**
+     * Constructs a new instance.
+     */
     public LegalEntityContraEntity( LegalEntityKey aLegalEntityKey, String aLegalName,
                                     Integer aContraEntityId, String aContraEntityDomain,
                                     String aContraEntityName, Date aContraEntityUpdateDate,
                                     String aContraEntityStatus ) {
-        super( aLegalEntityKey, aLegalName );
+        this( aLegalEntityKey, aLegalName );
         contraEntityId = aContraEntityId;
         contraEntityDomain = aContraEntityDomain;
         contraEntityName = aContraEntityName;
