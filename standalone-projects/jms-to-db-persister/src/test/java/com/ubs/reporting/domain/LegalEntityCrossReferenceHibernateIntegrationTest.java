@@ -20,7 +20,7 @@ import org.hibernate.Session;
  * @author suggitpe
  * @version 1.0 1 Oct 2010
  */
-@ContextConfiguration(locations = { "classpath:spring/it-legalentitycrossreference-hibernate.xml" })
+@ContextConfiguration(locations = { "classpath:spring/hibernate-masterfiles.xml" })
 public class LegalEntityCrossReferenceHibernateIntegrationTest extends AbstractSimpleHibernateIntegrationTest<LegalEntityKey, LegalEntityCrossReference> {
 
     @SuppressWarnings("unused")

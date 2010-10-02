@@ -19,7 +19,7 @@ import org.hibernate.Session;
  * @author suggitpe
  * @version 1.0 1 Oct 2010
  */
-@ContextConfiguration(locations = { "classpath:spring/it-legalentityriskowner-hibernate.xml" })
+@ContextConfiguration(locations = { "classpath:spring/hibernate-masterfiles.xml" })
 public class LegalEntityRiskOwnerHibernateIntegrationTest extends AbstractSimpleHibernateIntegrationTest<LegalEntityKey, LegalEntityRiskOwner> {
 
     @SuppressWarnings("unused")

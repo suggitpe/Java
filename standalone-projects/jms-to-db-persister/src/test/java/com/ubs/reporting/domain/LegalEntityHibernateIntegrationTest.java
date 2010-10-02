@@ -20,7 +20,7 @@ import org.hibernate.Session;
  * @author suggitpe
  * @version 1.0 28 Sep 2010
  */
-@ContextConfiguration(locations = { "classpath:spring/it-legalentity-hibernate.xml" })
+@ContextConfiguration(locations = { "classpath:spring/hibernate-masterfiles.xml" })
 public class LegalEntityHibernateIntegrationTest extends AbstractSimpleHibernateIntegrationTest<LegalEntityKey, LegalEntity> {
 
     @SuppressWarnings("unused")
