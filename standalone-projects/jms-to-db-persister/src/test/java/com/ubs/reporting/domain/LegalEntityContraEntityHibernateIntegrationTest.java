@@ -49,13 +49,13 @@ public class LegalEntityContraEntityHibernateIntegrationTest extends AbstractSim
      */
     @Override
     protected LegalEntityContraEntity createEntityTemplate( LegalEntityKey aKey, Session aSession ) {
-        return new LegalEntityContraEntity( aKey,
-                                            "Test Legal Name",
-                                            Integer.valueOf( 12345 ),
-                                            "A Contra Domain",
-                                            "Contra Name",
-                                            TestUtils.createDateFrom_ddmmyyyy( "10121973" ),
-                                            "Some status" );
+        LegalEntityContraEntity entityToReturn = new LegalEntityContraEntity( aKey, "Test Legal Name" );
+        entityToReturn.setContraEntityId( Integer.valueOf( 12345 ) );
+        entityToReturn.setContraEntityDomain( "A Contra Domain" );
+        entityToReturn.setContraEntityName( "Contra Name" );
+        entityToReturn.setContraEntityUpdateDate( TestUtils.createDateFrom_ddmmyyyy( "10121973" ) );
+        entityToReturn.setContraEntityStatus( "Some status" );
+        return entityToReturn;
     }
 
     /**

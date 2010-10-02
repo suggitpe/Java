@@ -65,6 +65,7 @@ public class LegalEntityContraEntity extends AbstractLegalEntity {
                                     String aContraEntityName, Date aContraEntityUpdateDate,
                                     String aContraEntityStatus ) {
         this( aLegalEntityKey, aLegalName );
+
         contraEntityId = aContraEntityId;
         contraEntityDomain = aContraEntityDomain;
         contraEntityName = aContraEntityName;

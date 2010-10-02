@@ -64,6 +64,7 @@ public class LegalEntityCrossReference extends AbstractLegalEntity {
                                       String aAltIdDomain, String aAltIdDomainCode, Date aAltIdStatusDate,
                                       String aAltIdStatus ) {
         this( aLegalEntityKey, aLegalName );
+
         altIdId = aAltIdId;
         altIdDomain = aAltIdDomain;
         altIdDomainCode = aAltIdDomainCode;

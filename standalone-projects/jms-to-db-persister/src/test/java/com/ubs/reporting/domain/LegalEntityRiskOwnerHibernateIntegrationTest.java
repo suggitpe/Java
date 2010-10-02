@@ -48,14 +48,14 @@ public class LegalEntityRiskOwnerHibernateIntegrationTest extends AbstractSimple
      */
     @Override
     protected LegalEntityRiskOwner createEntityTemplate( LegalEntityKey aKey, Session aSession ) {
-        return new LegalEntityRiskOwner( aKey,
-                                         "Some legal name",
-                                         "type",
-                                         "role",
-                                         "code",
-                                         "description",
-                                         "contact",
-                                         "owning group code" );
+        LegalEntityRiskOwner entityToReturn = new LegalEntityRiskOwner( aKey, "Some legal name" );
+        entityToReturn.setRiskOwnerType( "type" );
+        entityToReturn.setRiskOwnerRole( "role" );
+        entityToReturn.setRiskOwnerCode( "code" );
+        entityToReturn.setRiskOwnerDescription( "description" );
+        entityToReturn.setPrimaryContact( "contact" );
+        entityToReturn.setOwningGroupCode( "owning group code" );
+        return entityToReturn;
     }
 
     /**

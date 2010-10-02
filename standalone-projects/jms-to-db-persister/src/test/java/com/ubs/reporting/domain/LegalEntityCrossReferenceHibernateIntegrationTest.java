@@ -49,13 +49,13 @@ public class LegalEntityCrossReferenceHibernateIntegrationTest extends AbstractS
      */
     @Override
     protected LegalEntityCrossReference createEntityTemplate( LegalEntityKey aKey, Session aSession ) {
-        return new LegalEntityCrossReference( aKey,
-                                              "Some legal name",
-                                              "An alternate ID",
-                                              "alternate domain",
-                                              "alt id domain code",
-                                              TestUtils.createDateFrom_ddmmyyyy( "01012008" ),
-                                              "some status" );
+        LegalEntityCrossReference entityToReturn = new LegalEntityCrossReference( aKey, "Some legal name" );
+        entityToReturn.setAltIdId( "An alternate ID" );
+        entityToReturn.setAltIdDomain( "alternate domain" );
+        entityToReturn.setAltIdDomainCode( "alt id domain code" );
+        entityToReturn.setAltIdStatusDate( TestUtils.createDateFrom_ddmmyyyy( "01012008" ) );
+        entityToReturn.setAltIdStatus( "some status" );
+        return entityToReturn;
     }
 
     /**

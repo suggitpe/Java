@@ -14,6 +14,10 @@
                 <value>com.ubs.reporting.domain.LegalEntityCrossReference</value>
                 <value>com.ubs.reporting.domain.LegalEntityContraEntity</value>
                 <value>com.ubs.reporting.domain.LegalEntityRiskOwner</value>
+                <value>com.ubs.reporting.domain.TradingAccount</value>
+                <value>com.ubs.reporting.domain.TradingAccountContraEntity</value>
+                <value>com.ubs.reporting.domain.TradingAccountCrossReference</value>
+                <value>com.ubs.reporting.domain.TradingAccountRelationship</value>
             </list>
         </property>
     </bean>

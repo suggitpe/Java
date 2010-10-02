@@ -37,6 +37,11 @@ public class TradingAccountKey implements Serializable {
     /**
      * Constructs a new instance.
      */
+    protected TradingAccountKey() {}
+
+    /**
+     * Constructs a new instance.
+     */
     public TradingAccountKey( Integer aTradingAccountId, String aTradingAccountDomain,
                               Integer aTradingAccountVersion ) {
         tradingAccountId = aTradingAccountId;

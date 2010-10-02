@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -39,6 +41,7 @@ public class LegalEntity extends AbstractLegalEntity {
     @Column(name = "INDUSTRY_CLASS_TYPE")
     private String classType;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "LE_STATUS_UPDT_DATE")
     private Date legalEntityStatusUpdateDate;
 
@@ -60,6 +63,7 @@ public class LegalEntity extends AbstractLegalEntity {
     @Column(name = "INTL_RATING_CODE")
     private String internationalRatingCode;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "INTL_RATING_REVIEW_DATE")
     private Date internationalRatingReviewDate;
 
@@ -113,6 +117,7 @@ public class LegalEntity extends AbstractLegalEntity {
                         String aPortfolioSegment, String aRatingApproach, String aBoeCode, String aBoeType,
                         String aCaCode, String aCaType, String aCtCode, String aCtType, String aLegacyId ) {
         this( aLegalEntityKey, aLegalName );
+
         countryDomicile = aCountryDomicile;
         countryIncorporation = aCountryIncorporation;
         classCode = aClassCode;

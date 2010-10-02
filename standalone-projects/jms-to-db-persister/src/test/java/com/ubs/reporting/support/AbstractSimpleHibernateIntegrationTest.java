@@ -350,6 +350,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             trans.commit();
         }
         catch ( Exception e ) {
+            e.printStackTrace();
             trans.rollback();
             session.close();
             Assert.fail( "Exception caught in 'beforeTest' execution, transaction rolled back" );
@@ -364,6 +365,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             trans.commit();
         }
         catch ( Exception e ) {
+            e.printStackTrace();
             trans.rollback();
             session.close();
             Assert.fail( "Exception caught in 'executeTest' execution, transaction rolled back" );
@@ -378,6 +380,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             trans.commit();
         }
         catch ( Exception e ) {
+            e.printStackTrace();
             trans.rollback();
             session.close();
             Assert.fail( "Exception caught in 'verifyTest' execution, transaction rolled back" );
