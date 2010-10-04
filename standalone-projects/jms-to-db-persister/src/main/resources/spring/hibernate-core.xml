@@ -25,9 +25,7 @@
         <property name="location" value="classpath:jms-to-db-persister.properties" />
     </bean>
     
-    <!-- 
-    <bean id="timestampInterceptor" class="org.suggs.sandbox.hibernate.support.TimestampAuditingInterceptor"/>
-    -->
+    <bean id="auditInterceptor" class="com.ubs.reporting.domain.support.StagedAuditHibernateInterceptor"/>
     
     <!-- hibernate session details .. including mappings -->
     <bean id="abstractSessionFactoryBean" abstract="true" >
@@ -42,9 +40,7 @@
                 <prop key="hibernate.show_sql">false</prop>
             </props>
         </property>
-        <!-- 
-        <property name="entityInterceptor" ref="timestampInterceptor"/>
-        -->
+        <property name="entityInterceptor" ref="auditInterceptor"/>
     </bean>
 
 </beans>
