@@ -4,37 +4,49 @@
  */
 package com.ubs.reporting.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.ubs.reporting.domain.support.StagedAuditInfo;
+import com.ubs.reporting.domain.support.StagedAuditable;
+
 /**
- * Abstract persistable domain class for all Staged Entities.
+ * Abstract persistable domain class for all Staged Entities. The key reason for this is that this class
+ * allows us to do things to all classes, such as timestamps etc.
  * 
  * @author suggitpe
  * @version 1.0 28 Sep 2010
  */
 @MappedSuperclass
-public abstract class AbstractStagedEntity implements Serializable {
+public abstract class AbstractStagedEntity implements StagedAuditable {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( AbstractStagedEntity.class );
-    private static final long serialVersionUID = 7750670266771915516L;
 
-    @Column(name = "STG_EFFECTIVE_DATE")
-    private Date stagingEffectiveDate;
+    @Embedded
+    private StagedAuditInfo stagedAuditInfo = new StagedAuditInfo();
 
-    @Column(name = "STG_LOAD_DATE")
-    private Date stagingLoadDate;
+    /**
+     * Returns the value of stagedAuditInfo.
+     * 
+     * @return Returns the stagedAuditInfo.
+     */
+    @Override
+    public StagedAuditInfo getStagedAuditInfo() {
+        return stagedAuditInfo;
+    }
 
-    @Column(name = "STG_LOAD_ID")
-    private Integer stagingLoadId;
+    /**
+     * Sets the stagedAuditInfo field to the specified value.
+     * 
+     * @param aStagedAuditInfo
+     *            The stagedAuditInfo to set.
+     */
+    public void setStagedAuditInfo( StagedAuditInfo aStagedAuditInfo ) {
+        stagedAuditInfo = aStagedAuditInfo;
+    }
 
-    @Column(name = "STG_JOB_RUN_ID")
-    private Integer stagingJobRunId;
 }

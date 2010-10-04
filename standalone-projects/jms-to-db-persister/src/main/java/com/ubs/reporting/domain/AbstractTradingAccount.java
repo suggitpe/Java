@@ -18,11 +18,10 @@ import org.apache.commons.logging.LogFactory;
  * @version 1.0 28 Sep 2010
  */
 @MappedSuperclass
-public abstract class AbstractTradingAccount {
+public abstract class AbstractTradingAccount extends AbstractStagedEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( AbstractTradingAccount.class );
-    private static final long serialVersionUID = 7887200668321427985L;
 
     @Id
     private TradingAccountKey tradingAccountKey;

@@ -27,7 +27,6 @@ public class TradingAccountContraEntity extends AbstractTradingAccount {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TradingAccountContraEntity.class );
-    private static final long serialVersionUID = 2195591707838457891L;
 
     @Column(name = "CONTR_ENTITY_ID")
     private Integer contraEntityId;

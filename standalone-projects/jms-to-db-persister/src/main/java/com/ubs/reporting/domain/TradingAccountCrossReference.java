@@ -27,7 +27,6 @@ public class TradingAccountCrossReference extends AbstractTradingAccount {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TradingAccountCrossReference.class );
-    private static final long serialVersionUID = -7228437206417707676L;
 
     @Column(name = "ALT_IDENTIFIER_ID")
     private String altIdentifierId;

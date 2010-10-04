@@ -18,11 +18,10 @@ import org.apache.commons.logging.LogFactory;
  * @version 1.0 28 Sep 2010
  */
 @MappedSuperclass
-public abstract class AbstractLegalEntity {
+public abstract class AbstractLegalEntity extends AbstractStagedEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( AbstractLegalEntity.class );
-    private static final long serialVersionUID = -3860102942085240160L;
 
     @Id
     private LegalEntityKey legalEntityKey;

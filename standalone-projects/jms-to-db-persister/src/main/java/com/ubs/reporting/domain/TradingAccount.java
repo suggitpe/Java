@@ -27,7 +27,6 @@ public class TradingAccount extends AbstractTradingAccount {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TradingAccount.class );
-    private static final long serialVersionUID = -6968568761822911880L;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "STATUS_UPDT_DATE")

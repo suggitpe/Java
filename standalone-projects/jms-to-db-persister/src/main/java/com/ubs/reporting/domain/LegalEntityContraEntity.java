@@ -27,7 +27,6 @@ public class LegalEntityContraEntity extends AbstractLegalEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntityContraEntity.class );
-    private static final long serialVersionUID = -8628034557666992483L;
 
     @Column(name = "CONTR_ENTITY_ID")
     private Integer contraEntityId;

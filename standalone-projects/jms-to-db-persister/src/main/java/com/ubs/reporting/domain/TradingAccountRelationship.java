@@ -27,7 +27,6 @@ public class TradingAccountRelationship extends AbstractTradingAccount {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TradingAccountRelationship.class );
-    private static final long serialVersionUID = 8666474208057036840L;
 
     @Column(name = "RELATIONSHIP_ID")
     private String relationshipId;

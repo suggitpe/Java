@@ -27,7 +27,6 @@ public class LegalEntity extends AbstractLegalEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntity.class );
-    private static final long serialVersionUID = -7139519712382348754L;
 
     @Column(name = "COUNTRY_DOMICILE")
     private String countryDomicile;

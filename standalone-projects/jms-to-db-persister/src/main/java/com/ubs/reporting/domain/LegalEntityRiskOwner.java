@@ -23,7 +23,6 @@ public class LegalEntityRiskOwner extends AbstractLegalEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntityRiskOwner.class );
-    private static final long serialVersionUID = -9119178129773249781L;
 
     @Column(name = "RISK_OWNER_TYPE")
     private String riskOwnerType;
