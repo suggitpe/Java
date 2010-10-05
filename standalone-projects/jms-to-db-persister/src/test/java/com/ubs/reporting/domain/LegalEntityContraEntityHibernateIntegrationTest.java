@@ -26,6 +26,10 @@ public class LegalEntityContraEntityHibernateIntegrationTest extends AbstractSim
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntityContraEntityHibernateIntegrationTest.class );
 
+    public static LegalEntityContraEntity buildLegalEntityContraEntity( LegalEntityKey aKey, Session aSession ) {
+        return new LegalEntityContraEntityHibernateIntegrationTest().createEntityTemplate( aKey, aSession );
+    }
+
     /**
      * @see com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)
      */

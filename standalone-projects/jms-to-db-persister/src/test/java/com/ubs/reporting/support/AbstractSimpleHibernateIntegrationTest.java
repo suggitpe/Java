@@ -37,7 +37,7 @@ import static org.junit.Assert.assertThat;
 public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializable, E> {
 
     private static final Log LOG = LogFactory.getLog( AbstractSimpleHibernateIntegrationTest.class );
-    private static final long TEST_TIMEOUT = 10000;
+    protected static final long TEST_TIMEOUT = 10000;
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionfactory;

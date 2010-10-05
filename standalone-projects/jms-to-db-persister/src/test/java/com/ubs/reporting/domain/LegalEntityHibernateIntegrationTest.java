@@ -6,13 +6,18 @@ package com.ubs.reporting.domain;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 import com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest;
+import com.ubs.reporting.support.HibernateIntegrationTestCallback;
 import com.ubs.reporting.support.TestUtils;
 
 import org.springframework.test.context.ContextConfiguration;
 
 import org.hibernate.Session;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 /**
  * Hibernate integration test for a LegalEntity object.
@@ -23,7 +28,6 @@ import org.hibernate.Session;
 @ContextConfiguration(locations = { "classpath:spring/hibernate-masterfiles.xml" })
 public class LegalEntityHibernateIntegrationTest extends AbstractSimpleHibernateIntegrationTest<LegalEntityKey, LegalEntity> {
 
-    @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntityHibernateIntegrationTest.class );
 
     /**
@@ -31,6 +35,12 @@ public class LegalEntityHibernateIntegrationTest extends AbstractSimpleHibernate
      */
     @Override
     protected void cleanUpData( Session aSession ) {
+        aSession.createQuery( "delete from LegalEntityContraEntity where legalEntityKey.legalEntityDomain ='TEST_DOMAIN'" )
+            .executeUpdate();
+        aSession.createQuery( "delete from LegalEntityCrossReference where legalEntityKey.legalEntityDomain ='TEST_DOMAIN'" )
+            .executeUpdate();
+        aSession.createQuery( "delete from LegalEntityRiskOwner where legalEntityKey.legalEntityDomain ='TEST_DOMAIN'" )
+            .executeUpdate();
         aSession.createQuery( "delete from LegalEntity where legalEntityKey.legalEntityDomain ='TEST_DOMAIN'" )
             .executeUpdate();
     }
@@ -88,5 +98,40 @@ public class LegalEntityHibernateIntegrationTest extends AbstractSimpleHibernate
     @Override
     protected String createEntitySearchHql() {
         return "from LegalEntity where legalEntityKey.legalEntityDomain = 'TEST_DOMAIN'";
+    }
+
+    @Test(timeout = TEST_TIMEOUT)
+    public void canPersistLegalEntityWithAssociatedRiskOwner() {
+        runGenericTest( new HibernateIntegrationTestCallback() {
+
+            LegalEntityKey key = createKeyTemplate();
+            LegalEntity entity = null;
+
+            @Override
+            public void beforeTest( Session aSession ) {
+                entity = createEntityTemplate( key, aSession );
+                LegalEntityRiskOwner riskOwner = LegalEntityRiskOwnerHibernateIntegrationTest.buildRiskOwner( key,
+                                                                                                              aSession );
+                entity.addRiskOwner( riskOwner );
+                verifyEntityCount( aSession, 0L );
+            }
+
+            @Override
+            public void executeTest( Session aSession ) {
+                LOG.debug( "Persiting: " + entity );
+                aSession.save( entity );
+                LOG.debug( "Entity now saved into the db ... good" );
+            }
+
+            @Override
+            public void verifyTest( Session aSession ) {
+                verifyEntityCount( aSession, 1L );
+                LegalEntity result = (LegalEntity) aSession.createQuery( createEntitySearchHql() )
+                    .uniqueResult();
+                doInitialVerificationForCreateTest( aSession, entity, result );
+                verifyResult( entity, result );
+                assertThat( Long.valueOf( result.getRiskOwners().size() ), equalTo( Long.valueOf( 1L ) ) );
+            }
+        } );
     }
 }

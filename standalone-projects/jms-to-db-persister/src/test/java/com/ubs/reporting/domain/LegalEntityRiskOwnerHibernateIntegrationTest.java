@@ -25,6 +25,10 @@ public class LegalEntityRiskOwnerHibernateIntegrationTest extends AbstractSimple
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntityRiskOwnerHibernateIntegrationTest.class );
 
+    public static LegalEntityRiskOwner buildRiskOwner( LegalEntityKey aKey, Session aSession ) {
+        return new LegalEntityRiskOwnerHibernateIntegrationTest().createEntityTemplate( aKey, aSession );
+    }
+
     /**
      * @see com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)
      */

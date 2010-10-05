@@ -26,6 +26,11 @@ public class LegalEntityCrossReferenceHibernateIntegrationTest extends AbstractS
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntityCrossReferenceHibernateIntegrationTest.class );
 
+    public static LegalEntityCrossReference buildLegalEntityCrossreference( LegalEntityKey aKey,
+                                                                            Session aSession ) {
+        return new LegalEntityCrossReferenceHibernateIntegrationTest().createEntityTemplate( aKey, aSession );
+    }
+
     /**
      * @see com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)
      */

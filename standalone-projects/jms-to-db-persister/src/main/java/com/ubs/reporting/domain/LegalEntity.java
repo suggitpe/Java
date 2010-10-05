@@ -5,9 +5,15 @@
 package com.ubs.reporting.domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +33,36 @@ public class LegalEntity extends AbstractLegalEntity {
 
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( LegalEntity.class );
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumns({
+                  @JoinColumn(name = LegalEntityKey.ID_COLUMN_NAME,
+                      referencedColumnName = LegalEntityKey.ID_COLUMN_NAME),
+                  @JoinColumn(name = LegalEntityKey.DOMAIN_COLUMN_NAME,
+                      referencedColumnName = LegalEntityKey.DOMAIN_COLUMN_NAME),
+                  @JoinColumn(name = LegalEntityKey.VERSION_COLUMN_NAME,
+                      referencedColumnName = LegalEntityKey.VERSION_COLUMN_NAME) })
+    private Set<LegalEntityRiskOwner> riskOwners = new HashSet<LegalEntityRiskOwner>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumns({
+                  @JoinColumn(name = LegalEntityKey.ID_COLUMN_NAME,
+                      referencedColumnName = LegalEntityKey.ID_COLUMN_NAME),
+                  @JoinColumn(name = LegalEntityKey.DOMAIN_COLUMN_NAME,
+                      referencedColumnName = LegalEntityKey.DOMAIN_COLUMN_NAME),
+                  @JoinColumn(name = LegalEntityKey.VERSION_COLUMN_NAME,
+                      referencedColumnName = LegalEntityKey.VERSION_COLUMN_NAME) })
+    private Set<LegalEntityCrossReference> crossReference = new HashSet<LegalEntityCrossReference>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumns({
+                  @JoinColumn(name = LegalEntityKey.ID_COLUMN_NAME,
+                      referencedColumnName = LegalEntityKey.ID_COLUMN_NAME),
+                  @JoinColumn(name = LegalEntityKey.DOMAIN_COLUMN_NAME,
+                      referencedColumnName = LegalEntityKey.DOMAIN_COLUMN_NAME),
+                  @JoinColumn(name = LegalEntityKey.VERSION_COLUMN_NAME,
+                      referencedColumnName = LegalEntityKey.VERSION_COLUMN_NAME) })
+    private Set<LegalEntityContraEntity> contraEntity = new HashSet<LegalEntityContraEntity>();
 
     @Column(name = "COUNTRY_DOMICILE")
     private String countryDomicile;
@@ -138,6 +174,93 @@ public class LegalEntity extends AbstractLegalEntity {
         ctCode = aCtCode;
         ctType = aCtType;
         legacyId = aLegacyId;
+    }
+
+    /**
+     * Returns the value of riskOwners.
+     * 
+     * @return Returns the riskOwners.
+     */
+    public Set<LegalEntityRiskOwner> getRiskOwners() {
+        return riskOwners;
+    }
+
+    /**
+     * Sets the riskOwners field to the specified value.
+     * 
+     * @param aRiskOwners
+     *            The riskOwners to set.
+     */
+    public void setRiskOwners( Set<LegalEntityRiskOwner> aRiskOwners ) {
+        riskOwners = aRiskOwners;
+    }
+
+    /**
+     * Adds a riskOwner to the collection of risk owners.
+     * 
+     * @param aRiskOwner
+     *            The riskOwner to add.
+     */
+    public void addRiskOwner( LegalEntityRiskOwner aRiskOwner ) {
+        riskOwners.add( aRiskOwner );
+    }
+
+    /**
+     * Returns the value of crossReference.
+     * 
+     * @return Returns the crossReference.
+     */
+    public Set<LegalEntityCrossReference> getCrossReference() {
+        return crossReference;
+    }
+
+    /**
+     * Sets the crossReference field to the specified value.
+     * 
+     * @param aCrossReference
+     *            The crossReference to set.
+     */
+    public void setCrossReference( Set<LegalEntityCrossReference> aCrossReference ) {
+        crossReference = aCrossReference;
+    }
+
+    /**
+     * Adds a crossReference to the collection of cross references.
+     * 
+     * @param aCrossReference
+     *            The crossReference to add.
+     */
+    public void addCrossReference( LegalEntityCrossReference aCrossReference ) {
+        crossReference.add( aCrossReference );
+    }
+
+    /**
+     * Returns the value of contraEntity.
+     * 
+     * @return Returns the contraEntity.
+     */
+    public Set<LegalEntityContraEntity> getContraEntity() {
+        return contraEntity;
+    }
+
+    /**
+     * Sets the contraEntity field to the specified value.
+     * 
+     * @param aContraEntity
+     *            The contraEntity to set.
+     */
+    public void setContraEntity( Set<LegalEntityContraEntity> aContraEntity ) {
+        contraEntity = aContraEntity;
+    }
+
+    /**
+     * Adds a contraEntity to the collection of contra entites.
+     * 
+     * @param aContraEntity
+     *            The contraEntity to add.
+     */
+    public void addContraEntity( LegalEntityContraEntity aContraEntity ) {
+        contraEntity.add( aContraEntity );
     }
 
     /**

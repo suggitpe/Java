@@ -25,13 +25,17 @@ public class LegalEntityKey implements Serializable {
     private static final Log LOG = LogFactory.getLog( LegalEntityKey.class );
     private static final long serialVersionUID = -668455016806443178L;
 
-    @Column(name = "LE_ID")
+    protected static final String ID_COLUMN_NAME = "LE_ID";
+    protected static final String DOMAIN_COLUMN_NAME = "LE_DOMAIN";
+    protected static final String VERSION_COLUMN_NAME = "LE_VERSION";
+
+    @Column(name = ID_COLUMN_NAME)
     private Integer legalEntityId;
 
-    @Column(name = "LE_DOMAIN")
+    @Column(name = DOMAIN_COLUMN_NAME)
     private String legalEntityDomain;
 
-    @Column(name = "LE_VERSION")
+    @Column(name = VERSION_COLUMN_NAME)
     private Integer legalEntityVersion;
 
     /**
