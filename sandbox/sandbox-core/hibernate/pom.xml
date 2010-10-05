@@ -58,6 +58,11 @@
             <artifactId>hibernate-commons-annotations</artifactId>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>3.4.0.GA</version>
+        </dependency>
 
         <!-- tests -->
         <dependency>
