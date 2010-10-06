@@ -6,12 +6,12 @@ package com.ubs.reporting.receiver.impl;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
 import javax.naming.Context;
+import javax.naming.NamingException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.ubs.reporting.receiver.MessagePersister;
 
 /**
  * Messsage receiver
@@ -21,11 +21,9 @@ import com.ubs.reporting.receiver.MessagePersister;
  */
 public class JmsMessageReceiver {
 
-    @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( JmsMessageReceiver.class );
 
     private Context initialContext;
-    private MessagePersister messagePersister;
 
     /**
      * @param aInitialContext
@@ -35,14 +33,16 @@ public class JmsMessageReceiver {
         initialContext = aInitialContext;
     }
 
-    public void processMessages() {
+    public void processMessages() throws JMSException, NamingException {
         Connection connection = createConnection();
+        connection.start();
     }
 
-    private Connection createConnection() {
+    private Connection createConnection() throws JMSException, NamingException {
         LOG.debug( "Starting JMS Client" );
-        ConnectionFactory connectionFactory = null;
-        return null;
+        ConnectionFactory connectionFactory = (ConnectionFactory) initialContext.lookup( "" );
+        Connection connection = connectionFactory.createConnection();
+        return connection;
     }
 
 }
