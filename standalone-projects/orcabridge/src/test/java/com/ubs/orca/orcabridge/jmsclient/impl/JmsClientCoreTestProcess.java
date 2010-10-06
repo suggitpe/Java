@@ -64,11 +64,7 @@ public class JmsClientCoreTestProcess {
         mockAction = ctrl.createMock( IJmsAction.class );
         mockDestination = ctrl.createMock( Destination.class );
 
-        jmsClientCore = new JmsClientCore();
-        jmsClientCore.setInitialContext( mockInitialContext );
-        jmsClientCore.setDestinationName( DEST_NAME );
-        jmsClientCore.setConnectionFactoryName( CONNFACT_NAME );
-        jmsClientCore.afterPropertiesSet();
+        jmsClientCore = new JmsClientCore( mockInitialContext, CONNFACT_NAME, DEST_NAME );
     }
 
     /**

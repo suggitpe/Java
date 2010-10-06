@@ -15,9 +15,6 @@ import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This is the core orca callback that we are passing to the OrcaClient. It is called each time a new message
  * is received onto the sink client token.<br/>
@@ -27,19 +24,17 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 9 Nov 2009
  */
-public class OrcaSingleMessageReaderCallback implements IOrcaSinkSingleMsgCallback, InitializingBean {
+public class OrcaSingleMessageReaderCallback implements IOrcaSinkSingleMsgCallback {
 
     private IMessageProcessor messageProcessor;
 
     private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReaderCallback.class );
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( messageProcessor,
-                        "No message processor has been set on the OrcaSingleMessageReaderCallback." );
+    public OrcaSingleMessageReaderCallback( IMessageProcessor aMessageProcessor ) {
+        messageProcessor = aMessageProcessor;
     }
 
     /**

@@ -58,9 +58,7 @@ public class OrcaMessageSenderTest {
         mockOrcaClient = ctrl.createMock( IOrcaClient.class );
         mockOrcaMessage = ctrl.createMock( IConversationMessage.class );
 
-        sender = new OrcaMessageSender();
-        sender.setOrcaClient( mockOrcaClient );
-        sender.afterPropertiesSet();
+        sender = new OrcaMessageSender( mockOrcaClient );
     }
 
     /**

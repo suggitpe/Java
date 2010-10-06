@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-<beans>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <bean id="jmsClientCore" class="com.ubs.orca.orcabridge.jmsclient.impl.JmsClientCore">
-        <property name="initialContext">
+        <constructor-arg>
             <bean class="javax.naming.InitialContext">
                 <constructor-arg type="java.util.Hashtable" ref="contextHash" />
             </bean>
-        </property>
-        <property name="connectionFactoryName" value="TestConnectionFactory" />
-        <property name="destinationName" value="TestDestination" />
+        </constructor-arg>
+        <constructor-arg index="1" value="TestConnectionFactory"/>
+        <constructor-arg index="2" value="TestDestination"/>
     </bean>
 
     <bean id="contextHash" class="java.util.Hashtable">

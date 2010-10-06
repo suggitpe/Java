@@ -14,27 +14,23 @@ import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 import com.ubs.orca.orcabridge.jmsclient.impl.JmsSenderAction;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * Class to send messages to a JMS destination.
  * 
  * @author suggitpe
  * @version 1.0 29 Oct 2009
  */
-public class JmsMessageSender implements IMessageProcessor, InitializingBean {
+public class JmsMessageSender implements IMessageProcessor {
 
     private static final Log LOG = LogFactory.getLog( JmsMessageSender.class );
 
     private IJmsClient jmsClientCore;
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( jmsClientCore, "Must set the client core on the JMS message sender" );
+    public JmsMessageSender( IJmsClient aJmsClient ) {
+        jmsClientCore = aJmsClient;
     }
 
     /**

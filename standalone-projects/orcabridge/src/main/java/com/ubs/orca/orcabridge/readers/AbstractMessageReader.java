@@ -10,15 +10,13 @@ import org.apache.commons.logging.LogFactory;
 import com.ubs.orca.orcabridge.IMessageReader;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * Abstract class that will manage the message reader interaction with the message processors.
  * 
  * @author suggitpe
  * @version 1.0 22 Sep 2009
  */
-public abstract class AbstractMessageReader implements IMessageReader, InitializingBean {
+public abstract class AbstractMessageReader implements IMessageReader {
 
     private static final Log LOG = LogFactory.getLog( AbstractMessageReader.class );
     static final String STATE_UNINITIALISED = "Uninintialised";
@@ -28,24 +26,6 @@ public abstract class AbstractMessageReader implements IMessageReader, Initializ
     static final String STATE_STOPPED = "Stopped";
 
     private String state = STATE_UNINITIALISED;
-
-    /**
-     * Verifies that the message processor has been set on the class
-     * 
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        doAfterPropertiesSet();
-    }
-
-    /**
-     * This application is a spring enabled application. To enable us to verify injected properties down the
-     * hierarchy we have an abstract method to call down the stack.
-     * 
-     * @throws Exception
-     */
-    protected abstract void doAfterPropertiesSet();
 
     /**
      * @see com.ubs.orca.orcabridge.IMessageReader#startReader()

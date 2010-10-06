@@ -60,13 +60,10 @@ public class JmsReaderUnitTest {
         mockJmsClient = ctrl.createMock( IJmsClient.class );
         mockJmsCallback = ctrl.createMock( IJmsClientSingleMsgCallback.class );
 
-        jmsReader = new JmsSingleMessageReader();
-        jmsReader.setJmsClient( mockJmsClient );
-        jmsReader.setDurableName( DURABLE_NAME );
-        jmsReader.setMessageSelector( MESSAGE_SELECTOR );
-        jmsReader.setJmsCallback( mockJmsCallback );
-
-        jmsReader.afterPropertiesSet();
+        jmsReader = new JmsSingleMessageReader( mockJmsClient,
+                                                mockJmsCallback,
+                                                DURABLE_NAME,
+                                                MESSAGE_SELECTOR );
     }
 
     /**

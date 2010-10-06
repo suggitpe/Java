@@ -54,10 +54,7 @@ public class JmsReaderCallbackUnitTest {
         ctrl = createControl();
         mockMessageProcessor = ctrl.createMock( IMessageProcessor.class );
 
-        jmsCallback = new JmsSingleMessageReaderCallback();
-        jmsCallback.setMessageProcessor( mockMessageProcessor );
-
-        jmsCallback.afterPropertiesSet();
+        jmsCallback = new JmsSingleMessageReaderCallback( mockMessageProcessor );
     }
 
     /**

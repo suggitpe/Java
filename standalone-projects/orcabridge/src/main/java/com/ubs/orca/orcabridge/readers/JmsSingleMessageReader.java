@@ -14,8 +14,6 @@ import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 import com.ubs.orca.orcabridge.jmsclient.impl.JmsDurableReaderAction;
 
-import org.springframework.util.Assert;
-
 /**
  * Message reader class that will read a single message from a JMS source and pass it on to a message
  * processor.
@@ -30,18 +28,18 @@ public class JmsSingleMessageReader extends AbstractMessageReader {
     private IJmsClient jmsClient;
     private String durableName;
     private String messageSelector;
-
     private IJmsClientSingleMsgCallback jmsCallback;
 
     /**
-     * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    protected void doAfterPropertiesSet() {
-        Assert.notNull( jmsClient, "No JMS client has been set on the JMS reader" );
-        Assert.notNull( durableName, "No durable name has been set on the JMS reader" );
-        Assert.notNull( messageSelector, "No message selector has been set on the JMS reader" );
-        Assert.notNull( jmsCallback, "No JMS callback has been set on the JMS reader" );
+    public JmsSingleMessageReader( IJmsClient aJmsClient,
+                                   IJmsClientSingleMsgCallback aJmsClientSingleMsgCallback,
+                                   String aDurableName, String aMessageSelector ) {
+        jmsClient = aJmsClient;
+        jmsCallback = aJmsClientSingleMsgCallback;
+        durableName = aDurableName;
+        messageSelector = aMessageSelector;
     }
 
     /**

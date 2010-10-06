@@ -51,10 +51,7 @@ public class OrcaReaderUnitTest {
         ctrl = createControl();
         mockOrcaClient = ctrl.createMock( IOrcaClient.class );
 
-        orcaReader = new OrcaSingleMessageReader();
-        orcaReader.setOrcaClient( mockOrcaClient );
-
-        orcaReader.afterPropertiesSet();
+        orcaReader = new OrcaSingleMessageReader( mockOrcaClient );
     }
 
     /**

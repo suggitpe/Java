@@ -15,9 +15,6 @@ import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This is the callback class that will be passed into the JMSClient so that we can pass the message received
  * back to the message processor.
@@ -25,19 +22,17 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 9 Nov 2009
  */
-public class JmsSingleMessageReaderCallback implements IJmsClientSingleMsgCallback, InitializingBean {
+public class JmsSingleMessageReaderCallback implements IJmsClientSingleMsgCallback {
 
     private static final Log LOG = LogFactory.getLog( JmsSingleMessageReaderCallback.class );
 
     private IMessageProcessor messageProcessor;
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( messageProcessor,
-                        "No message processor has been set on the JmsSingleMessageReaderCallback" );
+    public JmsSingleMessageReaderCallback( IMessageProcessor aMessageProcessor ) {
+        messageProcessor = aMessageProcessor;
     }
 
     /**

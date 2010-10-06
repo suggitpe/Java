@@ -19,16 +19,13 @@ import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
 import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This class represents the core JMS processing logic for the JMS clients.
  * 
  * @author suggitpe
  * @version 1.0 29 Sep 2009
  */
-public class JmsClientCore implements IJmsClient, InitializingBean {
+public class JmsClientCore implements IJmsClient {
 
     private static final Log LOG = LogFactory.getLog( JmsClientCore.class );
 
@@ -40,13 +37,12 @@ public class JmsClientCore implements IJmsClient, InitializingBean {
     private Destination destination;
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( initialContext, "Must set the initial context on the JMS client core" );
-        Assert.notNull( connectionFactoryName, "Must set the connection factory name on the JMS client core" );
-        Assert.notNull( destinationName, "Must set the destination name on the JMS client core" );
+    public JmsClientCore( Context aInitialContext, String aConnectionFactoryName, String aDestinationName ) {
+        initialContext = aInitialContext;
+        connectionFactoryName = aConnectionFactoryName;
+        destinationName = aDestinationName;
     }
 
     /**

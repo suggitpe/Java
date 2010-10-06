@@ -15,27 +15,23 @@ import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.OrcaBridgeMessageConversionException;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * Class to send messages to an Orca Token.
  * 
  * @author suggitpe
  * @version 1.0 29 Oct 2009
  */
-public class OrcaMessageSender implements IMessageProcessor, InitializingBean {
+public class OrcaMessageSender implements IMessageProcessor {
 
     private static final Log LOG = LogFactory.getLog( OrcaMessageSender.class );
 
     private IOrcaClient orcaClient;
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( orcaClient, "No Orca client has been set on the Orca Message Sender" );
+    public OrcaMessageSender( IOrcaClient aOrcaClient ) {
+        orcaClient = aOrcaClient;
     }
 
     /**

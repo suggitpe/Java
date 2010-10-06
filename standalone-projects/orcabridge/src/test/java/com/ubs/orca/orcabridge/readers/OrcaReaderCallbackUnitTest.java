@@ -53,11 +53,7 @@ public class OrcaReaderCallbackUnitTest {
         ctrl = createControl();
         mockMessageProcessor = ctrl.createMock( IMessageProcessor.class );
 
-        orcaCallback = new OrcaSingleMessageReaderCallback();
-        orcaCallback.setMessageProcessor( mockMessageProcessor );
-
-        orcaCallback.afterPropertiesSet();
-
+        orcaCallback = new OrcaSingleMessageReaderCallback( mockMessageProcessor );
     }
 
     /**

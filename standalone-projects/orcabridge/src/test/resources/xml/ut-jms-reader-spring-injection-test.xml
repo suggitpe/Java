@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-<beans>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <bean id="jmsReader" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReader">
-        <property name="jmsClient">
+        <constructor-arg>
             <bean class="com.ubs.orca.orcabridge.support.JmsClientTestStub" />
-        </property>
-        <property name="durableName" value="testDurable" />
-        <property name="messageSelector" value="test selector" />
-        <property name="jmsCallback" ref="callback" />
+        </constructor-arg>
+        <constructor-arg ref="callback"/>
+        <constructor-arg index="2" value="testDurable"/>
+        <constructor-arg index="3" value="test selector"/>
     </bean>
 
     <bean id="callback" class="com.ubs.orca.orcabridge.readers.JmsSingleMessageReaderCallback">
-        <property name="messageProcessor">
+        <constructor-arg>
             <bean class="com.ubs.orca.orcabridge.support.MessageProcessorTestStub" />
-        </property>
+        </constructor-arg>
     </bean>
 
 </beans>

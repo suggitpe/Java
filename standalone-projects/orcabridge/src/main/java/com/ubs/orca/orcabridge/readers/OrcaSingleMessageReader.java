@@ -11,8 +11,6 @@ import com.ubs.orca.client.api.IOrcaClient;
 import com.ubs.orca.client.api.OrcaException;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 
-import org.springframework.util.Assert;
-
 /**
  * Message reader class that will extract a message from the Orca source and will pass it to a message
  * processor.
@@ -27,11 +25,10 @@ public class OrcaSingleMessageReader extends AbstractMessageReader {
     private IOrcaClient orcaClient;
 
     /**
-     * @see com.ubs.orca.orcabridge.readers.AbstractMessageReader#doAfterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void doAfterPropertiesSet() {
-        Assert.notNull( orcaClient, "No Orca client has been set on the Orca Single Message Reader" );
+    public OrcaSingleMessageReader( IOrcaClient aOrcaClient ) {
+        orcaClient = aOrcaClient;
     }
 
     /**

@@ -56,10 +56,7 @@ public class JmsMessageSenderTest {
         mockJmsClient = ctrl.createMock( IJmsClient.class );
         mockMessageFacade = ctrl.createMock( IMessageFacade.class );
 
-        sender = new JmsMessageSender();
-        sender.setJmsClient( mockJmsClient );
-
-        sender.afterPropertiesSet();
+        sender = new JmsMessageSender( mockJmsClient );
     }
 
     /**
