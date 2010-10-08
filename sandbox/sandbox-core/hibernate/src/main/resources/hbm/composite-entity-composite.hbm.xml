@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.suggs.sandbox.hibernate.compositeentity.CompositeEntity" table="COMPOSITE_ENTITY_COMP">
+    
+        <id name="id"
+    
+        <property name="compositeText" column="COMP_TEXT"/>
+        <property name="compositeInteger" column="COMP_INT"/>
+    </class>
+        
+</hibernate-mapping>

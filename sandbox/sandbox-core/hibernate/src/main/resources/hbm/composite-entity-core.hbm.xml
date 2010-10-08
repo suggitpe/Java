@@ -16,9 +16,9 @@
             <property name="createDate" column="CREATE_DATE" />
             <property name="updateDate" column="UPDATE_DATE" />
         </component>
-
+        
         <property name="someText" column="SOME_TEXT" />
-
+        
         <component name="compositeEntity" class="org.suggs.sandbox.hibernate.compositeentity.CompositeEntity">
             <property name="compositeText" column="COMP_TEXT" />
             <property name="compositeInteger" column="COMP_INT" />

@@ -14,9 +14,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.MenuManager;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This class implements the IMenuFactory and will manage the construction of menus. This implementation is
  * really simple so as to provide the high level interface for refactoring later on.
@@ -24,18 +21,16 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 16 Sep 2008
  */
-public class MenuFactory implements IMenuFactory, InitializingBean {
+public class MenuFactory implements IMenuFactory {
 
     private static final Log LOG = LogFactory.getLog( MenuFactory.class );
     private IActionManager actionManager;
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( actionManager,
-                        "An action manager object must be injected into the MenuFactory object.  Please revise Spring XML" );
+    public MenuFactory( IActionManager aActionManager ) {
+        actionManager = aActionManager;
     }
 
     /**

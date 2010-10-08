@@ -13,16 +13,13 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This action will allow you to update an existing connection within the connection store.
  * 
  * @author suggitpe
  * @version 1.0 16 Jan 2009
  */
-public class EditConnectionAction extends Action implements InitializingBean {
+public class EditConnectionAction extends Action {
 
     private IConnectionStore connectionStore;
     private String connectionToEdit;
@@ -35,9 +32,10 @@ public class EditConnectionAction extends Action implements InitializingBean {
     /**
      * Constructs a new instance.
      */
-    public EditConnectionAction() {
+    public EditConnectionAction( IConnectionStore aConnectionStore ) {
         super();
         setText( "&Edit ConnectionContext" );
+        connectionStore = aConnectionStore;
     }
 
     /**
@@ -52,14 +50,6 @@ public class EditConnectionAction extends Action implements InitializingBean {
         setText( "&Edit " + aConnectionToEdit );
         connectionStore = aConnStr;
         connectionToEdit = aConnectionToEdit;
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( connectionStore, "No connection store set on the create connection wizard" );
     }
 
     /**

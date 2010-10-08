@@ -20,16 +20,13 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Display;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This action is responsible for the creation of new connections
  * 
  * @author suggitpe
  * @version 1.0 15 Sep 2008
  */
-public class CreateConnectionAction extends Action implements InitializingBean {
+public class CreateConnectionAction extends Action {
 
     private static final Log LOG = LogFactory.getLog( CreateConnectionAction.class );
 
@@ -38,18 +35,11 @@ public class CreateConnectionAction extends Action implements InitializingBean {
     /**
      * Constructs a new instance.
      */
-    public CreateConnectionAction() {
+    public CreateConnectionAction( IConnectionStore aConnectionStore ) {
         super( "&Create ConnectionContext" );
         setToolTipText( "Create new connection" );
         setImageDescriptor( ImageManager.getImageDescriptor( ImageManager.IMAGE_CONN_NEW_CONN ) );
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( connectionStore, "No connection store set on the create connection wizard" );
+        connectionStore = aConnectionStore;
     }
 
     /**

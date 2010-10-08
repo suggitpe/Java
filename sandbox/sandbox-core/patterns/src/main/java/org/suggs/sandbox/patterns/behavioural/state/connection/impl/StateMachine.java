@@ -11,16 +11,13 @@ import org.suggs.sandbox.patterns.behavioural.state.connection.IStateMachineEven
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This class is responsible for allowing a client to step through the states in the state machine.
  * 
  * @author suggitpe
  * @version 1.0 10 Aug 2009
  */
-public class StateMachine implements IStateMachine, InitializingBean {
+public class StateMachine implements IStateMachine {
 
     // static logger
     private static final Log LOG = LogFactory.getLog( StateMachine.class );
@@ -35,14 +32,6 @@ public class StateMachine implements IStateMachine, InitializingBean {
     public StateMachine( IState aState ) {
         LOG.debug( "Creating new state machine" );
         currentState = aState;
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( currentState, "Current state for the state manchine must be set upon construction" );
     }
 
     /**

@@ -32,16 +32,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This class is the main JAXB implementation of the xml connection manager.
  * 
  * @author suggitpe
  * @version 1.0 29 Sep 2008
  */
-public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager, InitializingBean {
+public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager {
 
     private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManager.class );
 
@@ -59,16 +56,14 @@ public class JaxbXmlConnectionStoreManager implements IXmlConnectionStoreManager
             throw new IllegalStateException( "Unable to create JAXB context in ConnectionContext Store Manager",
                                              je );
         }
-
     }
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( fileManager, "The file manager cannot be null, this needs to be injected" );
-        Assert.notNull( persistentFile, "The name of the persisten file cannot be null" );
+    public JaxbXmlConnectionStoreManager( IFileManager aFileManager, String aPersistentFilename ) {
+        fileManager = aFileManager;
+        persistentFile = aPersistentFilename;
     }
 
     /**

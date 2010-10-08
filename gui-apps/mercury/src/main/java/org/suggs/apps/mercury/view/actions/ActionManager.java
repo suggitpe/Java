@@ -10,27 +10,22 @@ import java.util.Map;
 
 import org.eclipse.jface.action.IAction;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This class is used to manage the configured actions that are available for use by the Mercury application.
  * 
  * @author suggitpe
  * @version 1.0 16 Sep 2008
  */
-public class ActionManager implements InitializingBean, IActionManager {
+public class ActionManager implements IActionManager {
 
     private Map<String, IAction> actionMap;
     public static final String BEAN_NAME = "actionManager";
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( actionMap,
-                        "Action Map has not been initialised in the ActionManager.  Please update Spring XML." );
+    public ActionManager( Map<String, IAction> aActionMap ) {
+        actionMap = aActionMap;
     }
 
     /**

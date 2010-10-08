@@ -15,8 +15,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * Class used to encapsulate a the state of the context. It is used by the state machine to derive meaning to
  * the current state of a state machine context.
@@ -24,7 +22,7 @@ import org.springframework.beans.factory.InitializingBean;
  * @author suggitpe
  * @version 1.0 10 Aug 2009
  */
-public class State implements IState, InitializingBean {
+public class State implements IState {
 
     private static final Log LOG = LogFactory.getLog( State.class );
 
@@ -41,12 +39,6 @@ public class State implements IState, InitializingBean {
         super();
         stateName = aStateName;
     }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {}
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)

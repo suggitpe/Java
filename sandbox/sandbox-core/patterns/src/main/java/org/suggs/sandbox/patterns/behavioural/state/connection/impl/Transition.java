@@ -10,13 +10,11 @@ import org.suggs.sandbox.patterns.behavioural.state.connection.ITransition;
 import org.suggs.sandbox.patterns.behavioural.state.connection.ITransitionEvent;
 import org.suggs.sandbox.patterns.behavioural.state.connection.ITransitionGuard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
 
 /**
  * Class to encapsulate the transition route between two states. This class is responsible for all evaluation
@@ -25,15 +23,15 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 10 Aug 2009
  */
-public class Transition implements ITransition, InitializingBean {
+public class Transition implements ITransition {
 
     private static final Log LOG = LogFactory.getLog( Transition.class );
 
     private String name;
     private IState startState;
     private IState endState;
-    private List<ITransitionEvent> transitionEvents;
-    private List<ITransitionGuard> transitionGuards;
+    private List<ITransitionEvent> transitionEvents = new ArrayList<ITransitionEvent>();
+    private List<ITransitionGuard> transitionGuards = new ArrayList<ITransitionGuard>();
 
     /**
      * Constructs a new instance.
@@ -49,15 +47,6 @@ public class Transition implements ITransition, InitializingBean {
         name = aName;
         startState = aStartState;
         endState = aEndState;
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( transitionEvents, "Transition Events cannot be null on a Transition object" );
-        Assert.notNull( transitionGuards, "Transition Guards cannot be null on a Transition object" );
     }
 
     /**

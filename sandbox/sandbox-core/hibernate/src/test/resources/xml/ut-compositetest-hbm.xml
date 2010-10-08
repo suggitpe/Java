@@ -10,7 +10,8 @@
         parent="abstractSessionFactoryBean">
         <property name="mappingResources">
             <list>
-                <value>hbm/composite-entity.hbm.xml</value>
+                <value>hbm/composite-entity-core.hbm.xml</value>
+                <value>hbm/composite-entity-composite.hbm.xml</value>
             </list>
         </property>
     </bean>

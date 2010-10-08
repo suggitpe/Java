@@ -15,16 +15,13 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This action will manage the removal of a connection from the connection store.
  * 
  * @author suggitpe
  * @version 1.0 14 Jan 2009
  */
-public class RemoveConnectionAction extends Action implements InitializingBean {
+public class RemoveConnectionAction extends Action {
 
     private IConnectionStore connectionStore;
     private String connectionToRemove;
@@ -38,9 +35,10 @@ public class RemoveConnectionAction extends Action implements InitializingBean {
     /**
      * Constructs a new instance.
      */
-    public RemoveConnectionAction() {
+    public RemoveConnectionAction( IConnectionStore aConnectionStore ) {
         super();
         setText( "&Remove ConnectionContext" );
+        connectionStore = aConnectionStore;
     }
 
     /**
@@ -55,14 +53,6 @@ public class RemoveConnectionAction extends Action implements InitializingBean {
         connectionStore = aConnStr;
         connectionToRemove = aConnectionToRemove;
         setText( "&Remove " + aConnectionToRemove );
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( connectionStore, "No connection store set on the create connection wizard" );
     }
 
     /**

@@ -15,16 +15,13 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.ToolBarManager;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * Builder class that is responsible for the contruction of the toolbars used in the application
  * 
  * @author suggitpe
  * @version 1.0 16 Sep 2008
  */
-public class ToolBarFactory implements IToolBarFactory, InitializingBean {
+public class ToolBarFactory implements IToolBarFactory {
 
     private static final Log LOG = LogFactory.getLog( ToolBarFactory.class );
 
@@ -32,12 +29,10 @@ public class ToolBarFactory implements IToolBarFactory, InitializingBean {
     private boolean showToolbar;
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( actionManager,
-                        "An action manager object must be injected into the ToolBarFactory object.  Please revise Spring XML" );
+    public ToolBarFactory( IActionManager aActionManager ) {
+        actionManager = aActionManager;
     }
 
     /**

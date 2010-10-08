@@ -13,16 +13,13 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This class decorates an existing implementation of an IXmlConnectionStoreManager with a cache mechanism.
  * 
  * @author suggitpe
  * @version 1.0 2 Oct 2008
  */
-public class CachedXmlConnectionStoreManagerDecorator implements InitializingBean, IXmlConnectionStoreManager {
+public class CachedXmlConnectionStoreManagerDecorator implements IXmlConnectionStoreManager {
 
     private static final Log LOG = LogFactory.getLog( CachedXmlConnectionStoreManagerDecorator.class );
 
@@ -30,12 +27,10 @@ public class CachedXmlConnectionStoreManagerDecorator implements InitializingBea
     private Map<String, ConnectionDetails> cache;
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public final void afterPropertiesSet() {
-        Assert.notNull( xmlConnectionStoreManager,
-                        "Must set an xml connectionstore manager to cache the data with" );
+    public CachedXmlConnectionStoreManagerDecorator( IXmlConnectionStoreManager aXmlConnectionStoreManager ) {
+        xmlConnectionStoreManager = aXmlConnectionStoreManager;
     }
 
     /**

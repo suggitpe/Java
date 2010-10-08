@@ -17,9 +17,6 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This is a DAO implementation from which we can manage the underlying XML storage. This delegates to an XML
  * persistence layer.
@@ -27,7 +24,7 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 22 Sep 2008
  */
-public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean {
+public class XmlConnectionStoreDao implements IConnectionStore {
 
     private static final Log LOG = LogFactory.getLog( XmlConnectionStoreDao.class );
 
@@ -35,11 +32,10 @@ public class XmlConnectionStoreDao implements IConnectionStore, InitializingBean
     private List<IConnectionStoreChangeListener> listeners = new ArrayList<IConnectionStoreChangeListener>();
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public final void afterPropertiesSet() {
-        Assert.notNull( xmlStore, "Must set the xml store on the xml connection store dao" );
+    public XmlConnectionStoreDao( IXmlConnectionStoreManager aXmlConnectionStoreManager ) {
+        xmlStore = aXmlConnectionStoreManager;
     }
 
     /**

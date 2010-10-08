@@ -19,22 +19,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class to test the cached xml connection store decorator. The
- * main things that this test will do is to make sure that the
- * decorator actually uses the cache rather than going to the
- * persistent store.
+ * Test class to test the cached xml connection store decorator. The main things that this test will do is to
+ * make sure that the decorator actually uses the cache rather than going to the persistent store.
  * 
  * @author suggitpe
  * @version 1.0 2 Oct 2008
  */
-public class CachedXmlConnectionStoreManagerDecoratorUnitTest
-{
+public class CachedXmlConnectionStoreManagerDecoratorUnitTest {
 
     private static final Log LOG = LogFactory.getLog( CachedXmlConnectionStoreManagerDecoratorUnitTest.class );
 
-    private CachedXmlConnectionStoreManagerDecorator mDecorator_;
-    private IXmlConnectionStoreManager mMock_;
-    private Map<String, ConnectionDetails> mMapMock_;
+    private CachedXmlConnectionStoreManagerDecorator decorator;
+    private IXmlConnectionStoreManager mockConnectionStoreManager;
+    private Map<String, ConnectionDetails> mapMock;
 
     /**
      * This is called before the execution of each test
@@ -43,134 +40,121 @@ public class CachedXmlConnectionStoreManagerDecoratorUnitTest
      */
     @SuppressWarnings("unchecked")
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         LOG.debug( "------------------- CachedXmlConnectionStoreManagerDecoratorTest" );
-        mDecorator_ = new CachedXmlConnectionStoreManagerDecorator();
 
         LOG.debug( "Creating mock for IXmlConnectionStoreManager" );
         // create the mocks
-        mMock_ = EasyMock.createStrictMock( IXmlConnectionStoreManager.class );
-        mDecorator_.setConnectionStoreManager( mMock_ );
-        mMapMock_ = EasyMock.createStrictMock( Map.class );
+        mockConnectionStoreManager = EasyMock.createStrictMock( IXmlConnectionStoreManager.class );
+        decorator.setConnectionStoreManager( mockConnectionStoreManager );
+        mapMock = EasyMock.createStrictMock( Map.class );
+        decorator = new CachedXmlConnectionStoreManagerDecorator( mockConnectionStoreManager );
     }
 
     /**
-     * In this test we want to verify that if we call the/ decorator a
-     * few times that we only ever call the persistent/ store once (ie
-     * it uses the cache).
+     * In this test we want to verify that if we call the/ decorator a few times that we only ever call the
+     * persistent/ store once (ie it uses the cache).
      * 
      * @throws ConnectionStoreException
      */
     @Test
-    public void testReadConectionData() throws ConnectionStoreException
-    {
+    public void testReadConectionData() throws ConnectionStoreException {
         // ------- MOCK PREP
-        EasyMock.expect( mMock_.readConnectionData() ).andReturn( mMapMock_ ).times( 1 );
+        EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
 
         // ------- MOCK LOAD
-        EasyMock.replay( mMock_ );
-        EasyMock.replay( mMapMock_ );
+        EasyMock.replay( mockConnectionStoreManager );
+        EasyMock.replay( mapMock );
 
         // ------- TEST EXEC
-        try
-        {
-            mDecorator_.readConnectionData();
-            mDecorator_.readConnectionData();
-            mDecorator_.readConnectionData();
+        try {
+            decorator.readConnectionData();
+            decorator.readConnectionData();
+            decorator.readConnectionData();
         }
-        catch ( ConnectionStoreException ce )
-        {
+        catch ( ConnectionStoreException ce ) {
             String err = "";
             LOG.error( err, ce );
             Assert.fail( err );
         }
 
         // ------- MOCK VERIFY
-        EasyMock.verify( mMock_ );
-        EasyMock.verify( mMapMock_ );
+        EasyMock.verify( mockConnectionStoreManager );
+        EasyMock.verify( mapMock );
 
         LOG.debug( "Test has correctly read the connection data three times" );
     }
 
     /**
-     * This test will read a new map from the store, then save down
-     * the same one again to test the cache is being used correctly
-     * (ie only reads once)
+     * This test will read a new map from the store, then save down the same one again to test the cache is
+     * being used correctly (ie only reads once)
      * 
      * @throws ConnectionStoreException
      */
     @Test
-    public void testSaveConectionData() throws ConnectionStoreException
-    {
+    public void testSaveConectionData() throws ConnectionStoreException {
         // ------- MOCK PREP
-        mMock_.saveConnectionData( mMapMock_ );
+        mockConnectionStoreManager.saveConnectionData( mapMock );
         EasyMock.expectLastCall().times( 1 );
 
         // ------- MOCK LOAD
-        EasyMock.replay( mMock_ );
-        EasyMock.replay( mMapMock_ );
+        EasyMock.replay( mockConnectionStoreManager );
+        EasyMock.replay( mapMock );
 
         // ------- TEST EXEC
-        try
-        {
-            mDecorator_.saveConnectionData( mMapMock_ );
+        try {
+            decorator.saveConnectionData( mapMock );
         }
-        catch ( ConnectionStoreException ce )
-        {
+        catch ( ConnectionStoreException ce ) {
             String err = "";
             LOG.error( err, ce );
             Assert.fail( err );
         }
 
-        mDecorator_.readConnectionData();
+        decorator.readConnectionData();
 
         // ------- MOCK VERIFY
-        EasyMock.verify( mMock_ );
-        EasyMock.verify( mMapMock_ );
+        EasyMock.verify( mockConnectionStoreManager );
+        EasyMock.verify( mapMock );
 
         LOG.debug( "Test has correctly saved and then read the map without going to the underlying store" );
     }
 
     /**
-     * This test will read a new map from the store, then save down
-     * the same one again to test the cache is being used correctly
-     * (ie only reads once)
+     * This test will read a new map from the store, then save down the same one again to test the cache is
+     * being used correctly (ie only reads once)
      * 
      * @throws ConnectionStoreException
      */
     @Test
-    public void testSaveAfterReadConectionData() throws ConnectionStoreException
-    {
+    public void testSaveAfterReadConectionData() throws ConnectionStoreException {
         // ------- MOCK PREP
-        EasyMock.expect( mMock_.readConnectionData() ).andReturn( mMapMock_ ).times( 1 );
-        mMock_.saveConnectionData( mMapMock_ );
+        EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
+        mockConnectionStoreManager.saveConnectionData( mapMock );
         EasyMock.expectLastCall().times( 1 );
 
         // ------- MOCK LOAD
-        EasyMock.replay( mMock_ );
-        EasyMock.replay( mMapMock_ );
+        EasyMock.replay( mockConnectionStoreManager );
+        EasyMock.replay( mapMock );
 
         // ------- TEST EXEC
-        Map<String, ConnectionDetails> map = mDecorator_.readConnectionData();
-        try
-        {
-            mDecorator_.saveConnectionData( map );
+        Map<String, ConnectionDetails> map = decorator.readConnectionData();
+        try {
+            decorator.saveConnectionData( map );
         }
-        catch ( ConnectionStoreException ce )
-        {
+        catch ( ConnectionStoreException ce ) {
             String err = "";
             LOG.error( err, ce );
             Assert.fail( err );
         }
 
-        Map<String, ConnectionDetails> map2 = mDecorator_.readConnectionData();
+        Map<String, ConnectionDetails> map2 = decorator.readConnectionData();
         Assert.assertEquals( map, map2 );
         Assert.assertSame( map, map2 );
 
         // ------- MOCK VERIFY
-        EasyMock.verify( mMock_ );
-        EasyMock.verify( mMapMock_ );
+        EasyMock.verify( mockConnectionStoreManager );
+        EasyMock.verify( mapMock );
 
         LOG.debug( "Test has correctly read, saved and then re-read the map" );
     }
