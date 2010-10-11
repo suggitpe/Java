@@ -17,27 +17,22 @@ import javax.naming.NamingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * Adapter for the EMS middleware implementation.
  * 
  * @author suggitpe
  * @version 1.0 3 Aug 2007
  */
-public class EmsConnectionAdapter implements IConnectionAdapter, InitializingBean {
+public class EmsConnectionAdapter implements IConnectionAdapter {
 
     private static final Log LOG = LogFactory.getLog( EmsConnectionAdapter.class );
     private String initialontextFactory;
 
     /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     * Constructs a new instance.
      */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( initialontextFactory,
-                        "Muct inject the initial context factory into the Ems Connection Adapter" );
+    public EmsConnectionAdapter( String aInitialContextFactory ) {
+        initialontextFactory = aInitialContextFactory;
     }
 
     /**

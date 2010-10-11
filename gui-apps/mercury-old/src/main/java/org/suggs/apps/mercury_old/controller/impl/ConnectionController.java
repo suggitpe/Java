@@ -23,25 +23,19 @@ import javax.swing.JOptionPane;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This is the main controller for theconnection part of the GUI.
  * 
  * @author suggitpe
  * @version 1.0 12 Jul 2007
  */
-public class ConnectionController implements InitializingBean, IConnectionController {
+public class ConnectionController implements IConnectionController {
 
     private static final Log LOG = LogFactory.getLog( ConnectionController.class );
     private static final ImageIcon IMG = new ImageIcon( "jms.gif" );
 
-    // models
     private IConnectionStore connStoreModel;
     private IConnectionManager connManagerModel;
-
-    // views
     private ConnectionButtons buttonsView;
     private ConnectionManagerPanel connManagerView;
     private ConnectionStorePanel connStoreView;
@@ -86,18 +80,6 @@ public class ConnectionController implements InitializingBean, IConnectionContro
         buttonsView.addTestActionListener( createTestConnActionListener() );
         buttonsView.addConnectActionListener( createConnectActionListener() );
         buttonsView.addDisconnectActionListener( createDisconnectActionListener() );
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( connStoreModel, "Must set the connection store in the connection controller" );
-        Assert.notNull( connManagerModel, "Must set the connection manager in the connection controller" );
-        Assert.notNull( buttonsView, "Must set the buttons view in the connection controller" );
-        Assert.notNull( connStoreView, "Must set the connection store view in the connection controller" );
-        Assert.notNull( connManagerView, "Must set the connection manager view in the connection controller" );
     }
 
     /**

@@ -27,16 +27,13 @@ import javax.swing.table.TableColumn;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * Panel to represent the connection store.
  * 
  * @author suggitpe
  * @version 1.0 9 Jul 2007
  */
-public class ConnectionStorePanel extends AbstractGridbagPanel implements InitializingBean, Observer {
+public class ConnectionStorePanel extends AbstractGridbagPanel implements Observer {
 
     private static final long serialVersionUID = -8438244491631849283L;
     private static final Log LOG = LogFactory.getLog( ConnectionStorePanel.class );
@@ -48,14 +45,6 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
     private final JTextField portText = new JTextField();
     private final JTable metaDataTable = new JTable();
     private final JScrollPane metaDataPane = new JScrollPane( metaDataTable );
-
-    /**
-     * Constructs a new instance.
-     */
-    @SuppressWarnings("unused")
-    private ConnectionStorePanel() {
-        throw new IllegalStateException();
-    }
 
     /**
      * Constructs a new instance.
@@ -190,14 +179,6 @@ public class ConnectionStorePanel extends AbstractGridbagPanel implements Initia
         serverText.setText( aDtls.getHostname() );
         portText.setText( aDtls.getPort() );
         typeCombo.setSelectedItem( aDtls.getType() );
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( connectionStore, "Must set the connection store into the connection manager panel" );
     }
 
     /**

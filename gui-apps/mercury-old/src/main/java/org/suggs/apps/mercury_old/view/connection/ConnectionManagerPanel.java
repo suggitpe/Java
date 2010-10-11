@@ -24,16 +24,13 @@ import javax.swing.border.EmptyBorder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This class will manage the user interaction with the Connection manager object.
  * 
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public class ConnectionManagerPanel extends AbstractGridbagPanel implements InitializingBean, Observer {
+public class ConnectionManagerPanel extends AbstractGridbagPanel implements Observer {
 
     private static final long serialVersionUID = 4835953967437214080L;
     private static final Log LOG = LogFactory.getLog( ConnectionManagerPanel.class );
@@ -202,14 +199,6 @@ public class ConnectionManagerPanel extends AbstractGridbagPanel implements Init
             destinations.addItem( item );
         }
         destinations.setEditable( true );
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( connMgr, "Must set the connection manager into the connection manager panel" );
     }
 
     // ============== GETTERS AND SETTERS ============

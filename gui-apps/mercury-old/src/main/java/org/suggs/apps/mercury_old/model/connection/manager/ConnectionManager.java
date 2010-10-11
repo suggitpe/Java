@@ -20,16 +20,13 @@ import javax.jms.JMSException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * Implementation of the jms connection manager interface
  * 
  * @author suggitpe
  * @version 1.0 22 Jun 2007
  */
-public class ConnectionManager extends Observable implements IConnectionManager, InitializingBean {
+public class ConnectionManager extends Observable implements IConnectionManager {
 
     private static final Log LOG = LogFactory.getLog( ConnectionManager.class );
 
@@ -40,16 +37,9 @@ public class ConnectionManager extends Observable implements IConnectionManager,
     /**
      * Constructs a new instance.
      */
-    public ConnectionManager() {
+    public ConnectionManager( Map<String, IConnectionAdapter> aMapOfConnectionAdapters ) {
         super();
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( adapters, "Must inject a map of adapters into the connection manager" );
+        adapters = aMapOfConnectionAdapters;
     }
 
     /**

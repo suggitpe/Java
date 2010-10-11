@@ -18,9 +18,6 @@ import java.util.TreeSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * Implementation of the IJmsConnectionStore. This implementation will use an XML file stored in the users
  * home directory (in a .jmshelper dir), for the persistence of the connection details.
@@ -28,7 +25,7 @@ import org.springframework.util.Assert;
  * @author suggitpe
  * @version 1.0 2 Jul 2007
  */
-public class ConnectionStore extends Observable implements IConnectionStore, InitializingBean {
+public class ConnectionStore extends Observable implements IConnectionStore {
 
     private static final Log LOG = LogFactory.getLog( ConnectionStore.class );
 
@@ -40,17 +37,12 @@ public class ConnectionStore extends Observable implements IConnectionStore, Ini
     /**
      * Constructs a new instance.
      */
-    public ConnectionStore() {
-        super();
+    public ConnectionStore( IPersistenceLayer aPersistenceLayer ) {
+        persistenceLayer = aPersistenceLayer;
+        initialise();
     }
 
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( persistenceLayer, "Must inject a persisztence layer into the connection store" );
-
+    private void initialise() {
         persistenceLayer.verifyPersistenceLayer();
         try {
             Map<String, IConnectionDetails> cs = persistenceLayer.readPersistenceLayer();

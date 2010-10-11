@@ -26,16 +26,13 @@ import javax.swing.UIManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-
 /**
  * This class manages the construction of the main GUI itself along with the placement of teh main panels
  * 
  * @author suggitpe
  * @version 1.0 21 Jun 2007
  */
-public class MercuryApplication implements IMercuryApp, InitializingBean {
+public class MercuryApplication implements IMercuryApp {
 
     private static final Log LOG = LogFactory.getLog( MercuryApplication.class );
 
@@ -47,21 +44,13 @@ public class MercuryApplication implements IMercuryApp, InitializingBean {
     /**
      * Constructs a new instance.
      */
-    public MercuryApplication() {
+    public MercuryApplication( ConnectionController aConnectionController, JPanel aConnectionStorePanel,
+                               JPanel aConnectionManagerPanel, JPanel aConnectionButtons ) {
         super();
-    }
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
-    @Override
-    public void afterPropertiesSet() {
-        Assert.notNull( connectionStorePanel, "There must be a connection store panel set in the main gui" );
-        Assert.notNull( connectionButtons,
-                        "There must be a connection store buttons panel set in the main gui" );
-        Assert.notNull( connectionManagerPanel,
-                        "There must be a connection manager panel set in the main gui" );
-        Assert.notNull( connectionController, "There must be a connection controller set in the main gui" );
+        connectionController = aConnectionController;
+        connectionStorePanel = aConnectionStorePanel;
+        connectionManagerPanel = aConnectionManagerPanel;
+        connectionButtons = aConnectionButtons;
     }
 
     /**
