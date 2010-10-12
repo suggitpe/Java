@@ -5,7 +5,6 @@
 package org.suggs.sandbox.hibernate.support;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -21,8 +20,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
@@ -66,30 +63,6 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      *            to access the hibernate layer.
      */
     protected abstract void cleanUpData( Session aSession );
-
-    /**
-     * Test to create the schema for the entities under test. This is a helper method to make life easier all
-     * round.
-     */
-    @Test
-    public void createSchema() {
-        LOG.debug( "Creating schema for class under test" );
-        AnnotationConfiguration cfg = new AnnotationConfiguration();
-        cfg.configure( "hibernate.cfg.xml" );
-        for ( Class<?> clazz : getEntityListForSchemaCreation() ) {
-            cfg.addAnnotatedClass( clazz );
-        }
-        SchemaExport export = new SchemaExport( cfg );
-        export.setDelimiter( ";" );
-        export.create( true, false );
-    }
-
-    /**
-     * Builds a collection of classes to create the schema for.
-     * 
-     * @return all classes to create a schema from.
-     */
-    protected abstract List<Class<?>> getEntityListForSchemaCreation();
 
     /**
      * This method allows you to create additional dependent objects in the database

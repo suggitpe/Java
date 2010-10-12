@@ -7,9 +7,6 @@ package org.suggs.sandbox.hibernate.compositekeys;
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 import org.suggs.sandbox.hibernate.support.HibernateIntegrationTestCallback;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 
 import org.springframework.test.context.ContextConfiguration;
@@ -37,16 +34,6 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
     @Override
     protected void cleanUpData( Session aSession ) {
         aSession.createQuery( "delete from EntityObject" ).executeUpdate();
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityList()
-     */
-    @Override
-    protected List<Class<?>> getEntityListForSchemaCreation() {
-        List<Class<?>> entityClassses = new ArrayList<Class<?>>();
-        entityClassses.add( EntityObject.class );
-        return entityClassses;
     }
 
     /**

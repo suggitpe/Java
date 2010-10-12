@@ -6,9 +6,6 @@ package org.suggs.sandbox.hibernate.entityrelationships.onetoone;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.test.context.ContextConfiguration;
 
 import org.hibernate.Session;
@@ -71,17 +68,6 @@ public class RelationshipsOneToOneTest extends AbstractSimpleHibernateIntegratio
     protected Long createKeyTemplate() {
         // this is actually not needed for this entity.
         return null;
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityListForSchemaCreation()
-     */
-    @Override
-    protected List<Class<?>> getEntityListForSchemaCreation() {
-        List<Class<?>> entityClassses = new ArrayList<Class<?>>();
-        entityClassses.add( OneToOneEntity.class );
-        entityClassses.add( OneToOneOtherEntity.class );
-        return entityClassses;
     }
 
     /**

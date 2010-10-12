@@ -7,9 +7,7 @@ package org.suggs.sandbox.hibernate.timestamps;
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 import org.suggs.sandbox.hibernate.support.HibernateIntegrationTestCallback;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -62,17 +60,6 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
 
         aSession.createQuery( childDelete ).executeUpdate();
         aSession.createQuery( parentDelete ).executeUpdate();
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityList()
-     */
-    @Override
-    protected List<Class<?>> getEntityListForSchemaCreation() {
-        List<Class<?>> entityClassses = new ArrayList<Class<?>>();
-        entityClassses.add( TimestampedEntity.class );
-        entityClassses.add( TimestampedChildEntity.class );
-        return entityClassses;
     }
 
     /**

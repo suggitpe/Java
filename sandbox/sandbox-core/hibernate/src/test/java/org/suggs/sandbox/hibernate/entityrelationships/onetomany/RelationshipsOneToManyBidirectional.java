@@ -6,9 +6,6 @@ package org.suggs.sandbox.hibernate.entityrelationships.onetomany;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Ignore;
@@ -85,17 +82,6 @@ public class RelationshipsOneToManyBidirectional extends AbstractSimpleHibernate
     @Override
     protected Long createKeyTemplate() {
         return null;
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityListForSchemaCreation()
-     */
-    @Override
-    protected List<Class<?>> getEntityListForSchemaCreation() {
-        List<Class<?>> entityClassses = new ArrayList<Class<?>>();
-        entityClassses.add( OneToManyBidirectionalEntity.class );
-        entityClassses.add( OneToManyBidirectionalOtherEntity.class );
-        return entityClassses;
     }
 
     /**

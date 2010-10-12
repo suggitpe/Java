@@ -6,9 +6,6 @@ package org.suggs.sandbox.hibernate.entityrelationships.manytomany;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -78,17 +75,6 @@ public class RelationshipsManyToManyUnidirectional extends AbstractSimpleHiberna
     @Override
     protected Long createKeyTemplate() {
         return null;
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityListForSchemaCreation()
-     */
-    @Override
-    protected List<Class<?>> getEntityListForSchemaCreation() {
-        List<Class<?>> entityClassses = new ArrayList<Class<?>>();
-        entityClassses.add( ManyToManyUnidirectionalEntity.class );
-        entityClassses.add( ManyToManyUnidirectionalOtherEntity.class );
-        return entityClassses;
     }
 
     /**

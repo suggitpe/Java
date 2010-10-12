@@ -6,9 +6,6 @@ package org.suggs.sandbox.hibernate.compositeentity;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,16 +28,6 @@ public abstract class AbstractCompositeEntityTest extends AbstractSimpleHibernat
     @Override
     protected void cleanUpData( Session aSession ) {
         aSession.createQuery( "delete from CoreEntity" ).executeUpdate();
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityListForSchemaCreation()
-     */
-    @Override
-    protected List<Class<?>> getEntityListForSchemaCreation() {
-        List<Class<?>> entityClassses = new ArrayList<Class<?>>();
-        entityClassses.add( CoreEntity.class );
-        return entityClassses;
     }
 
     /**

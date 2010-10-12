@@ -6,9 +6,6 @@ package org.suggs.sandbox.hibernate.basicentity;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.Session;
 
 /**
@@ -53,16 +50,6 @@ public abstract class AbstractHibernateMessageIntegrationTest extends AbstractSi
         // leaving as null means that we are using sequences. Realy this could b e done better as it is
         // confusing.
         return null;
-    }
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#getEntityListForSchemaCreation()
-     */
-    @Override
-    protected List<Class<?>> getEntityListForSchemaCreation() {
-        List<Class<?>> entityClassses = new ArrayList<Class<?>>();
-        entityClassses.add( Message.class );
-        return entityClassses;
     }
 
     /**
