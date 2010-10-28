@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_org_suggs_roo_pizzashop_domain_Pizza" items="${pizzas}" z="bODl9dLPArv6Gxu9lIJmaMi/OnU=">
+        <table:table data="${pizzas}" id="l_org_suggs_roo_pizzashop_domain_Pizza" path="/pizzas" z="d6jDMqHysAVB4DRy6G7NF3pizjg=">
+            <table:column id="c_org_suggs_roo_pizzashop_domain_Pizza_name" property="name" z="6DOHau+5UZc5aF3WoxumVZzvHI0="/>
+            <table:column id="c_org_suggs_roo_pizzashop_domain_Pizza_price" property="price" z="I1eRgSpJ1aEsyjr7h09CUDofUTE="/>
+            <table:column id="c_org_suggs_roo_pizzashop_domain_Pizza_toppings" property="toppings" z="4dCAGJdoXokUG+DvoQvJE+PVu6s="/>
+            <table:column id="c_org_suggs_roo_pizzashop_domain_Pizza_base" property="base" z="if4u0rZl5aS6Zf78J90fT050vKQ="/>
+        </table:table>
+    </page:list>
+</div>
