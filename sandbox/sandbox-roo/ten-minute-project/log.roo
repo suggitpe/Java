@@ -1,0 +1,11 @@
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-22 17:50:38
+project --topLevelPackage com.tenminutes
+persistence setup --provider HIBERNATE --database ORACLE --databaseName XE --userName suggitpe --password 782103 --hostName localhost
+dependency remove --groupId com.oracle --artifactId ojdbc14 --version 10.2.0.2
+dependency add --groupId com.oracle --artifactId ojdbc14 --version 10.2.0.3.0
+entity --class ~.Timer --testAutomatically 
+field string --fieldName message --notNull 
+controller all --package ~.web
+selenium test --controller ~.web.TimerController
+perform tests
+perform package
