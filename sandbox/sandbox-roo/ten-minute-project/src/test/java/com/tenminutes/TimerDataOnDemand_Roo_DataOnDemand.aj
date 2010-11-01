@@ -41,10 +41,17 @@ privileged aspect TimerDataOnDemand_Roo_DataOnDemand {
     }
     
     public void TimerDataOnDemand.init() {
+        data = com.tenminutes.Timer.findTimerEntries(0, 10);
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'Timer' illegally returned null");
+        if (!data.isEmpty()) {
+            return;
+        }
+        
         data = new java.util.ArrayList<com.tenminutes.Timer>();
         for (int i = 0; i < 10; i++) {
             com.tenminutes.Timer obj = getNewTransientTimer(i);
             obj.persist();
+            obj.flush();
             data.add(obj);
         }
     }
