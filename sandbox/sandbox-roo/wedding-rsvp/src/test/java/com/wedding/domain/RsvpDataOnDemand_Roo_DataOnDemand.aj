@@ -57,10 +57,17 @@ privileged aspect RsvpDataOnDemand_Roo_DataOnDemand {
     }
     
     public void RsvpDataOnDemand.init() {
+        data = com.wedding.domain.Rsvp.findRsvpEntries(0, 10);
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'Rsvp' illegally returned null");
+        if (!data.isEmpty()) {
+            return;
+        }
+        
         data = new java.util.ArrayList<com.wedding.domain.Rsvp>();
         for (int i = 0; i < 10; i++) {
             com.wedding.domain.Rsvp obj = getNewTransientRsvp(i);
             obj.persist();
+            obj.flush();
             data.add(obj);
         }
     }

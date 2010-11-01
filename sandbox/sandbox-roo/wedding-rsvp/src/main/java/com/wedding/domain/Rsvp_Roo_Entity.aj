@@ -8,6 +8,7 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ import javax.persistence.Version;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect Rsvp_Roo_Entity {
+    
+    declare @type: Rsvp: @Entity;
     
     @PersistenceContext
     transient EntityManager Rsvp.entityManager;
