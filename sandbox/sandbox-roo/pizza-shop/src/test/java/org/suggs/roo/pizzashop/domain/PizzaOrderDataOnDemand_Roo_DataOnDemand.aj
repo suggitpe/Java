@@ -48,10 +48,17 @@ privileged aspect PizzaOrderDataOnDemand_Roo_DataOnDemand {
     }
     
     public void PizzaOrderDataOnDemand.init() {
+        data = org.suggs.roo.pizzashop.domain.PizzaOrder.findPizzaOrderEntries(0, 10);
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'PizzaOrder' illegally returned null");
+        if (!data.isEmpty()) {
+            return;
+        }
+        
         data = new java.util.ArrayList<org.suggs.roo.pizzashop.domain.PizzaOrder>();
         for (int i = 0; i < 10; i++) {
             org.suggs.roo.pizzashop.domain.PizzaOrder obj = getNewTransientPizzaOrder(i);
             obj.persist();
+            obj.flush();
             data.add(obj);
         }
     }

@@ -3,14 +3,12 @@ package org.suggs.roo.pizzashop.domain;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.roo.addon.entity.RooEntity;
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @RooJavaBean
 @RooToString
 @RooEntity
-@Entity
 public class Base {
 
     @NotNull

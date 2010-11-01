@@ -3,7 +3,6 @@ package org.suggs.roo.pizzashop.domain;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.roo.addon.entity.RooEntity;
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -11,13 +10,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Set;
+import org.suggs.roo.pizzashop.domain.Pizza;
+import java.util.HashSet;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
 
 @RooJavaBean
 @RooToString
 @RooEntity
-@Entity
 public class PizzaOrder {
 
     @NotNull
@@ -34,5 +34,5 @@ public class PizzaOrder {
     private Date deliveryDate;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<org.suggs.roo.pizzashop.domain.Pizza> pizzas = new java.util.HashSet<org.suggs.roo.pizzashop.domain.Pizza>();
+    private Set<Pizza> pizzas = new HashSet<Pizza>();
 }

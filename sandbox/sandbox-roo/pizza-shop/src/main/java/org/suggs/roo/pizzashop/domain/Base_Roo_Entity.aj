@@ -7,6 +7,7 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.suggs.roo.pizzashop.domain.Base;
 
 privileged aspect Base_Roo_Entity {
+    
+    declare @type: Base: @Entity;
     
     @PersistenceContext
     transient EntityManager Base.entityManager;

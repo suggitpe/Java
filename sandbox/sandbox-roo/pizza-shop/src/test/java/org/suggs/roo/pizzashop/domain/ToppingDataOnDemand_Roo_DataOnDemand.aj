@@ -41,10 +41,17 @@ privileged aspect ToppingDataOnDemand_Roo_DataOnDemand {
     }
     
     public void ToppingDataOnDemand.init() {
+        data = org.suggs.roo.pizzashop.domain.Topping.findToppingEntries(0, 10);
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'Topping' illegally returned null");
+        if (!data.isEmpty()) {
+            return;
+        }
+        
         data = new java.util.ArrayList<org.suggs.roo.pizzashop.domain.Topping>();
         for (int i = 0; i < 10; i++) {
             org.suggs.roo.pizzashop.domain.Topping obj = getNewTransientTopping(i);
             obj.persist();
+            obj.flush();
             data.add(obj);
         }
     }

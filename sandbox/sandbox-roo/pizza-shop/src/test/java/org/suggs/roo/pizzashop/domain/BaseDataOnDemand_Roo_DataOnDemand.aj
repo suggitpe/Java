@@ -41,10 +41,17 @@ privileged aspect BaseDataOnDemand_Roo_DataOnDemand {
     }
     
     public void BaseDataOnDemand.init() {
+        data = org.suggs.roo.pizzashop.domain.Base.findBaseEntries(0, 10);
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'Base' illegally returned null");
+        if (!data.isEmpty()) {
+            return;
+        }
+        
         data = new java.util.ArrayList<org.suggs.roo.pizzashop.domain.Base>();
         for (int i = 0; i < 10; i++) {
             org.suggs.roo.pizzashop.domain.Base obj = getNewTransientBase(i);
             obj.persist();
+            obj.flush();
             data.add(obj);
         }
     }
