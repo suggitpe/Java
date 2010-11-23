@@ -46,9 +46,9 @@ public class CachedXmlConnectionStoreManagerDecoratorUnitTest {
         LOG.debug( "Creating mock for IXmlConnectionStoreManager" );
         // create the mocks
         mockConnectionStoreManager = EasyMock.createStrictMock( IXmlConnectionStoreManager.class );
+        decorator = new CachedXmlConnectionStoreManagerDecorator( mockConnectionStoreManager );
         decorator.setConnectionStoreManager( mockConnectionStoreManager );
         mapMock = EasyMock.createStrictMock( Map.class );
-        decorator = new CachedXmlConnectionStoreManagerDecorator( mockConnectionStoreManager );
     }
 
     /**
