@@ -15,6 +15,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
+
 /**
  * TODO Write javadoc for SchemaCreatorTest
  * 
@@ -23,90 +26,71 @@ import org.junit.Test;
  */
 public class SchemaCreatorTest {
 
-    @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( SchemaCreatorTest.class );
+    private static final String LOCAL_PACKAGE = "org.suggs.sandbox.hibernate";
 
     @Test
     public void findEntitiesAndCreateDdl() throws Exception {
-        String localPackageDir = getLocalPackageDirectory();
-        Enumeration<URL> urls = getClass().getClassLoader().getResources( localPackageDir );
-        while ( urls.hasMoreElements() ) {
-            URL url = urls.nextElement();
-            LOG.debug( url.toString() );
+        List<File> directories = getListOfSearchDirectories();
+        List<Class<?>> classes = new ArrayList<Class<?>>();
+        for ( File dir : directories ) {
+            classes.addAll( findClassesWithinDirectory( dir, LOCAL_PACKAGE ) );
         }
 
-        LOG.debug( "Local packge is [" + localPackageDir + "]" );
+        String sql = createDdlFromEntityClasses( classes );
+        LOG.debug( "Created DDL as:\n" + sql );
+    }
+
+    private List<File> getListOfSearchDirectories() throws IOException {
+        String localPackageDir = getLocalPackageDirectory();
+        Enumeration<URL> urls = getClass().getClassLoader().getResources( localPackageDir );
+        List<File> directories = new ArrayList<File>();
+        while ( urls.hasMoreElements() ) {
+            URL url = urls.nextElement();
+            directories.add( new File( url.getFile() ) );
+        }
+        return directories;
     }
 
     private String getLocalPackageDirectory() {
-        String localPackage = getLocalPackageName();
-        return localPackage.replace( '.', '/' );
+        return LOCAL_PACKAGE.replace( '.', '/' );
     }
 
-    private String getLocalPackageName() {
-        String retValue = getClass().getName();
-
-        int lastIndexOfDot = retValue.lastIndexOf( '.' );
-        retValue = retValue.substring( 0, lastIndexOfDot );
-
-        return retValue;
-    }
-
-    /**
-     * Scans all classes accessible from the context class loader which belong to the given package and
-     * subpackages.
-     * 
-     * @param packageName
-     *            The base package
-     * @return The classes
-     * @throws ClassNotFoundException
-     * @throws IOException
-     */
-    private static Class[] getClasses( String packageName ) throws ClassNotFoundException, IOException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        assert classLoader != null;
-        String path = packageName.replace( '.', '/' );
-        Enumeration<URL> resources = classLoader.getResources( path );
-        List<File> dirs = new ArrayList<File>();
-        while ( resources.hasMoreElements() ) {
-            URL resource = resources.nextElement();
-            dirs.add( new File( resource.getFile() ) );
-        }
-        ArrayList<Class> classes = new ArrayList<Class>();
-        for ( File directory : dirs ) {
-            classes.addAll( findClasses( directory, packageName ) );
-        }
-        return classes.toArray( new Class[classes.size()] );
-    }
-
-    /**
-     * Recursive method used to find all classes in a given directory and subdirs.
-     * 
-     * @param directory
-     *            The base directory
-     * @param packageName
-     *            The package name for classes found inside the base directory
-     * @return The classes
-     * @throws ClassNotFoundException
-     */
-    private static List<Class> findClasses( File directory, String packageName )
+    private List<Class<?>> findClassesWithinDirectory( File aDirectory, String aPackageName )
                     throws ClassNotFoundException {
-        List<Class> classes = new ArrayList<Class>();
-        if ( !directory.exists() ) {
-            return classes;
+        List<Class<?>> clazzList = new ArrayList<Class<?>>();
+        if ( !aDirectory.exists() ) {
+            return clazzList;
         }
-        File[] files = directory.listFiles();
+
+        File[] files = aDirectory.listFiles();
         for ( File file : files ) {
             if ( file.isDirectory() ) {
-                assert !file.getName().contains( "." );
-                classes.addAll( findClasses( file, packageName + "." + file.getName() ) );
+                clazzList.addAll( findClassesWithinDirectory( file, aPackageName + "." + file.getName() ) );
             }
             else if ( file.getName().endsWith( ".class" ) ) {
-                classes.add( Class.forName( packageName + '.'
-                                            + file.getName().substring( 0, file.getName().length() - 6 ) ) );
+                String fullClassName = aPackageName + "." + file.getName();
+                clazzList.add( Class.forName( fullClassName.substring( 0, fullClassName.length() - 6 ) ) );
             }
         }
-        return classes;
+
+        return clazzList;
     }
 
+    private String createDdlFromEntityClasses( List<Class<?>> aClasses ) {
+        StringBuilder builder = new StringBuilder();
+        LOG.debug( "Generating DDL" );
+        builder.append( "-- ############################\n" );
+        AnnotationConfiguration annotationCfg = new AnnotationConfiguration();
+        annotationCfg.configure();
+        for ( Class<?> clazz : aClasses ) {
+            annotationCfg.addAnnotatedClass( clazz );
+        }
+
+        SchemaExport export = new SchemaExport( annotationCfg );
+        export.setDelimiter( ";" );
+        export.create( true, false );
+
+        return builder.toString();
+    }
 }
