@@ -36,12 +36,15 @@ public class Category extends AbstractPersistentBaseClass {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_PARENT")
-    private Category parentCat;
+    private Category parentCategory;
 
     @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY)
     private Set<Category> childCats = new HashSet<Category>();
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories", targetEntity = org.suggs.sandbox.hibernate.caveatEmptor.Item.class, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE },
+        mappedBy = "categories",
+        targetEntity = org.suggs.sandbox.hibernate.caveatEmptor.Item.class,
+        fetch = FetchType.LAZY)
     private Set<Item> items = new HashSet<Item>();
 
     /**
@@ -142,7 +145,7 @@ public class Category extends AbstractPersistentBaseClass {
      * @return the parent category
      */
     public Category getParentCategory() {
-        return parentCat;
+        return parentCategory;
     }
 
     /**
@@ -152,7 +155,7 @@ public class Category extends AbstractPersistentBaseClass {
      *            the parent category
      */
     public void setParentCategory( Category aCategory ) {
-        parentCat = aCategory;
+        parentCategory = aCategory;
     }
 
 }

@@ -19,15 +19,17 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 /**
- * TODO Write javadoc for SchemaCreatorTest
+ * Test class that will iterate through the entire project and will hunt out all Entity classes and then
+ * create the DDL for them.
  * 
  * @author suggitpe
  * @version 1.0 13 Oct 2010
  */
-public class SchemaCreatorTest {
+public final class SchemaCreatorTest {
 
     private static final Log LOG = LogFactory.getLog( SchemaCreatorTest.class );
     private static final String LOCAL_PACKAGE = "org.suggs.sandbox.hibernate";
+    private static final String OUTPUT_FILENAME = "created-schema.sql";
 
     @Test
     public void findEntitiesAndCreateDdl() throws Exception {
@@ -37,8 +39,8 @@ public class SchemaCreatorTest {
             classes.addAll( findClassesWithinDirectory( dir, LOCAL_PACKAGE ) );
         }
 
-        String sql = createDdlFromEntityClasses( classes );
-        LOG.debug( "Created DDL as:\n" + sql );
+        createDdlFromEntityClasses( classes );
+        LOG.debug( "DDL Creation complete" );
     }
 
     private List<File> getListOfSearchDirectories() throws IOException {
@@ -77,10 +79,8 @@ public class SchemaCreatorTest {
         return clazzList;
     }
 
-    private String createDdlFromEntityClasses( List<Class<?>> aClasses ) {
-        StringBuilder builder = new StringBuilder();
+    private void createDdlFromEntityClasses( List<Class<?>> aClasses ) {
         LOG.debug( "Generating DDL" );
-        builder.append( "-- ############################\n" );
         AnnotationConfiguration annotationCfg = new AnnotationConfiguration();
         annotationCfg.configure();
         for ( Class<?> clazz : aClasses ) {
@@ -88,9 +88,8 @@ public class SchemaCreatorTest {
         }
 
         SchemaExport export = new SchemaExport( annotationCfg );
+        export.setOutputFile( OUTPUT_FILENAME );
         export.setDelimiter( ";" );
         export.create( true, false );
-
-        return builder.toString();
     }
 }
