@@ -13,6 +13,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -23,6 +28,8 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 3 Dec 2010
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:xml/ut-databse-distributedmutex.xml" })
 public class DatabaseDistributedMutexTest {
 
     private static final Log LOG = LogFactory.getLog( DatabaseDistributedMutexTest.class );
@@ -34,6 +41,7 @@ public class DatabaseDistributedMutexTest {
     private static final Boolean OUT = Boolean.FALSE;
 
     private static volatile List<Boolean> callList;
+    private static volatile JdbcTemplate jdbcTemplate;
 
     @Before
     public void onSetup() {
@@ -97,11 +105,32 @@ public class DatabaseDistributedMutexTest {
 
     @SuppressWarnings("boxing")
     private void assessOrderVersusExpected( String aFailureComment, Boolean[] aExpectedOrder ) {
-        assertThat( callList.size(), equalTo( aExpectedOrder.length ) );
+        assertThat( "Expected number of mutex safe calls does not match the actual:",
+                    callList.size(),
+                    equalTo( aExpectedOrder.length ) );
         for ( int i = 0; i < callList.size(); ++i ) {
             assertThat( "Entry [" + i + "] should have been [" + aExpectedOrder[i] + "] but was actually ["
                         + callList.get( i ) + "]", callList.get( i ), equalTo( aExpectedOrder[i] ) );
         }
+    }
+
+    /**
+     * Returns the value of jdbcTemplate.
+     * 
+     * @return Returns the jdbcTemplate.
+     */
+    public static JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
+
+    /**
+     * Sets the jdbcTemplate field to the specified value.
+     * 
+     * @param aJdbcTemplate
+     *            The jdbcTemplate to set.
+     */
+    public static void setJdbcTemplate( JdbcTemplate aJdbcTemplate ) {
+        jdbcTemplate = aJdbcTemplate;
     }
 
     private static class WorkerThread extends Thread {
@@ -116,7 +145,7 @@ public class DatabaseDistributedMutexTest {
 
         @Override
         public void run() {
-            DistributedMutex mutex = new DatabaseDistributedMutex();
+            DistributedMutex mutex = new DatabaseDistributedMutex( jdbcTemplate );
             mutex.synchronise( synchronisationContext );
             callList.add( IN );
             LOG.debug( "WorkerThread [" + name + "] entered mutex" );
