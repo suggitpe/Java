@@ -27,8 +27,8 @@ public class LockMutexDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    private static final String COUNT_ROWS_IN_TABLE = "select count(*) from LOCK_MUTEX";
-    private static final String ID_EXISTS = "select 1 from LOCK_MUTEX where id = ?";
+    private static final String COUNT_ROWS_IN_TABLE = "select count(*) from TEST_TABLE";
+    private static final String ID_EXISTS = "select 1 from TEST_TABLE where id = ?";
 
     public LockMutexDao( final JdbcTemplate aJdbcTemplate ) {
         jdbcTemplate = aJdbcTemplate;

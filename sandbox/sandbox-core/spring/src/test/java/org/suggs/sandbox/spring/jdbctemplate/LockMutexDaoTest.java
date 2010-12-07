@@ -37,18 +37,29 @@ public class LockMutexDaoTest {
 
     private LockMutexDao dao;
 
-    private static final String CLEAR_MUTEX_TABLE = "delete from LOCK_MUTEX";
-    private static final String ADD_TEST_DATA = "insert into LOCK_MUTEX values(?)";
+    private static final String DROP_TEST_TABLE = "drop table TEST_TABLE";
+    private static final String CREATE_TEST_TABLE = "create table TEST_TABLE (ID NUMBER NOT NULL)";
+    private static final String ADD_TEST_DATA = "insert into TEST_TABLE values(?)";
 
     @SuppressWarnings("boxing")
     @Before
     public void onSetup() {
+
         if ( jdbcTemplate == null ) {
             throw new IllegalStateException( "Null jdbctemplate in test suite" );
         }
         dao = new LockMutexDao( jdbcTemplate );
 
-        jdbcTemplate.update( CLEAR_MUTEX_TABLE );
+        try {
+
+            jdbcTemplate.execute( DROP_TEST_TABLE );
+        }
+        catch ( Exception sqlException ) {
+            sqlException.printStackTrace();
+            LOG.debug( "Table does not exit so cannot drop it" );
+        }
+
+        jdbcTemplate.execute( CREATE_TEST_TABLE );
         jdbcTemplate.update( ADD_TEST_DATA, new Object[] { 1234 } );
         jdbcTemplate.update( ADD_TEST_DATA, new Object[] { 4567 } );
     }
