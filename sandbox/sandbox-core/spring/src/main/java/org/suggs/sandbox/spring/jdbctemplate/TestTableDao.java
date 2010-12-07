@@ -1,5 +1,5 @@
 /*
- * LockMutexDao.java created on 6 Dec 2010 19:41:04 by suggitpe for project sandbox-spring
+ * TestTableDao.java created on 6 Dec 2010 19:41:04 by suggitpe for project sandbox-spring
  * 
  */
 package org.suggs.sandbox.spring.jdbctemplate;
@@ -20,17 +20,17 @@ import org.springframework.jdbc.core.RowMapper;
  * @author suggitpe
  * @version 1.0 6 Dec 2010
  */
-public class LockMutexDao {
+public class TestTableDao {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( LockMutexDao.class );
+    private static final Log LOG = LogFactory.getLog( TestTableDao.class );
 
     private JdbcTemplate jdbcTemplate;
 
     private static final String COUNT_ROWS_IN_TABLE = "select count(*) from TEST_TABLE";
     private static final String ID_EXISTS = "select 1 from TEST_TABLE where id = ?";
 
-    public LockMutexDao( final JdbcTemplate aJdbcTemplate ) {
+    public TestTableDao( final JdbcTemplate aJdbcTemplate ) {
         jdbcTemplate = aJdbcTemplate;
     }
 

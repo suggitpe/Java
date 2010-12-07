@@ -1,5 +1,5 @@
 /*
- * LockMutexDaoTest.java created on 6 Dec 2010 19:43:21 by suggitpe for project sandbox-spring
+ * TestTableDaoTest.java created on 6 Dec 2010 19:43:21 by suggitpe for project sandbox-spring
  * 
  */
 package org.suggs.sandbox.spring.jdbctemplate;
@@ -20,22 +20,21 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Test suite for the LockMutexDao class.
+ * Test suite for the TestTableDao class.
  * 
  * @author suggitpe
  * @version 1.0 6 Dec 2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/database.xml" })
-public class LockMutexDaoTest {
+public class TestTableDaoTest {
 
-    @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( LockMutexDaoTest.class );
+    private static final Log LOG = LogFactory.getLog( TestTableDaoTest.class );
 
     @Resource(name = "jdbcTemplate")
     protected JdbcTemplate jdbcTemplate;
 
-    private LockMutexDao dao;
+    private TestTableDao dao;
 
     private static final String DROP_TEST_TABLE = "drop table TEST_TABLE";
     private static final String CREATE_TEST_TABLE = "create table TEST_TABLE (ID NUMBER NOT NULL)";
@@ -48,7 +47,7 @@ public class LockMutexDaoTest {
         if ( jdbcTemplate == null ) {
             throw new IllegalStateException( "Null jdbctemplate in test suite" );
         }
-        dao = new LockMutexDao( jdbcTemplate );
+        dao = new TestTableDao( jdbcTemplate );
 
         try {
 
