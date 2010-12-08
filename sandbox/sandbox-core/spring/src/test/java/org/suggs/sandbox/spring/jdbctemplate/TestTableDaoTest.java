@@ -62,8 +62,8 @@ public class TestTableDaoTest {
         }
 
         jdbcTemplate.execute( CREATE_TEST_TABLE );
-        jdbcTemplate.update( ADD_TEST_DATA, new Object[] { 1234 } );
-        jdbcTemplate.update( ADD_TEST_DATA, new Object[] { 4567 } );
+        jdbcTemplate.update( ADD_TEST_DATA, 1234 );
+        jdbcTemplate.update( ADD_TEST_DATA, 4567 );
 
         LOG.debug( "--------------------- test" );
     }
