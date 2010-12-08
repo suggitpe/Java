@@ -27,8 +27,9 @@ public class TestTableDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    private static final String COUNT_ROWS_IN_TABLE = "select count(*) from TEST_TABLE";
-    private static final String ID_EXISTS = "select 1 from TEST_TABLE where id = ?";
+    public static final String TABLE_NAME = "TEST_TABLE";
+    private static final String COUNT_ROWS_IN_TABLE = "select count(*) from " + TABLE_NAME;
+    private static final String ID_EXISTS = "select 1 from " + TABLE_NAME + " where id = ?";
 
     public TestTableDao( final JdbcTemplate aJdbcTemplate ) {
         jdbcTemplate = aJdbcTemplate;

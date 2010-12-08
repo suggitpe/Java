@@ -16,6 +16,11 @@
         <priority value="debug" />
     </category>
 
+    <category name="org.springframework.jdbc.datasource">
+        <priority value="info" />
+    </category>
+    
+    
     <category name="org.springframework">
         <priority value="info" />
     </category>

@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,14 +37,16 @@ public class TestTableDaoTest {
 
     private TestTableDao dao;
 
-    private static final String DROP_TEST_TABLE = "drop table TEST_TABLE";
-    private static final String CREATE_TEST_TABLE = "create table TEST_TABLE (ID NUMBER NOT NULL)";
-    private static final String ADD_TEST_DATA = "insert into TEST_TABLE values(?)";
+    private static final String DROP_TEST_TABLE = "drop table " + TestTableDao.TABLE_NAME;
+    private static final String CREATE_TEST_TABLE = "create table " + TestTableDao.TABLE_NAME
+                                                    + " (ID NUMBER NOT NULL)";
+    private static final String ADD_TEST_DATA = "insert into " + TestTableDao.TABLE_NAME + " values(?)";
 
     @SuppressWarnings("boxing")
     @Before
     public void onSetup() {
 
+        LOG.debug( "--------------------- setup " );
         if ( jdbcTemplate == null ) {
             throw new IllegalStateException( "Null jdbctemplate in test suite" );
         }
@@ -61,6 +64,13 @@ public class TestTableDaoTest {
         jdbcTemplate.execute( CREATE_TEST_TABLE );
         jdbcTemplate.update( ADD_TEST_DATA, new Object[] { 1234 } );
         jdbcTemplate.update( ADD_TEST_DATA, new Object[] { 4567 } );
+
+        LOG.debug( "--------------------- test" );
+    }
+
+    @After
+    public void onTeardown() {
+        LOG.debug( "--------------------- end" );
     }
 
     @SuppressWarnings("boxing")
