@@ -167,6 +167,7 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
         } );
     }
 
+    @SuppressWarnings("unused")
     @Test
     /**
      * This test has been written from scratch to try and isolate a specific problem 
