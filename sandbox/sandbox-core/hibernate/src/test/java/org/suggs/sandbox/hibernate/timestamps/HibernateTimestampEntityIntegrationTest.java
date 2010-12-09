@@ -9,14 +9,16 @@ import org.suggs.sandbox.hibernate.support.HibernateIntegrationTestCallback;
 
 import java.util.Calendar;
 
+import junit.framework.Assert;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import org.springframework.test.context.ContextConfiguration;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
@@ -32,7 +34,6 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-timestamps.xml" })
 public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, TimestampedEntity> {
 
-    @SuppressWarnings("unused")
     private static Log LOG = LogFactory.getLog( HibernateTimestampEntityIntegrationTest.class );
 
     private static final String WHERE_CLAUSE = "someString in ('deleteMe', 'altered')";
@@ -43,7 +44,6 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
      * 
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#basicCreateOperationCreatesCorrectObject()
      */
-    @Ignore
     @Test
     @Override
     public void basicCreateOperationCreatesCorrectObject() {}
@@ -167,4 +167,128 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
         } );
     }
 
+    @Test
+    /**
+     * This test has been written from scratch to try and isolate a specific problem 
+     * with interceptor execution between flush and commit.
+     */
+    public void interceptorIsCalledDuringFlush() {
+        LOG.debug( "............................." );
+        LOG.debug( "WRITING OBJECT TO DATABASE" );
+        LOG.debug( "............................." );
+
+        Long id = null;
+        Session session = sessionfactory.openSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+
+            try {
+                TimestampedEntity entity = createEntityTemplate( createKeyTemplate(), session );
+                LOG.debug( entity );
+
+                LOG.debug( "calling save" );
+                session.save( entity );
+                LOG.debug( "called save" );
+                LOG.debug( entity );
+
+                id = entity.getId();
+
+                LOG.debug( "............................." );
+                LOG.debug( "Calling flush" );
+                session.flush();
+                LOG.debug( "............................." );
+                LOG.debug( "Calling commit" );
+                transaction.commit();
+                LOG.debug( "............................." );
+            }
+            finally {
+                if ( !transaction.wasCommitted() ) {
+                    transaction.rollback();
+                }
+            }
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+            Assert.fail( "Exception caught somewhere" );
+        }
+        finally {
+            if ( session.isOpen() ) {
+                session.close();
+            }
+        }
+
+        LOG.debug( "............................." );
+        LOG.debug( "READING and FLUSHING UNCHANGED OBJECmplateT" );
+        LOG.debug( "............................." );
+
+        session = sessionfactory.openSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+
+            try {
+                TimestampedEntity entity = (TimestampedEntity) session.get( TimestampedEntity.class, id );
+
+                LOG.debug( "............................." );
+                LOG.debug( "Calling flush" );
+                session.flush();
+                LOG.debug( "............................." );
+                LOG.debug( "Calling commit" );
+                transaction.commit();
+                LOG.debug( "............................." );
+
+            }
+            finally {
+                if ( !transaction.wasCommitted() ) {
+                    transaction.rollback();
+                }
+            }
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+            Assert.fail( "failed in the update part of teh test" );
+        }
+        finally {
+            if ( session.isOpen() ) {
+                session.close();
+            }
+        }
+
+        LOG.debug( "............................." );
+        LOG.debug( "UPDATING OBJECT FROM DATABASE" );
+        LOG.debug( "............................." );
+
+        session = sessionfactory.openSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+
+            try {
+                TimestampedEntity entity = (TimestampedEntity) session.get( TimestampedEntity.class, id );
+                entity.setSomeString( "altered" );
+
+                LOG.debug( "............................." );
+                LOG.debug( "Calling flush" );
+                session.flush();
+                LOG.debug( "............................." );
+                LOG.debug( "Calling commit" );
+                transaction.commit();
+                LOG.debug( "............................." );
+
+            }
+            finally {
+                if ( !transaction.wasCommitted() ) {
+                    transaction.rollback();
+                }
+            }
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+            Assert.fail( "failed in the update part of teh test" );
+        }
+        finally {
+            if ( session.isOpen() ) {
+                session.close();
+            }
+        }
+
+    }
 }

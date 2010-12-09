@@ -39,7 +39,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
     private static final Log LOG = LogFactory.getLog( AbstractSimpleHibernateIntegrationTest.class );
 
     @Resource(name = "sessionFactory")
-    private SessionFactory sessionfactory;
+    protected SessionFactory sessionfactory;
 
     /**
      * Runs prior to test execution.
