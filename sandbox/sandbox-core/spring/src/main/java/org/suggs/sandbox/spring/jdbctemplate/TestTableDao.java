@@ -6,13 +6,15 @@ package org.suggs.sandbox.spring.jdbctemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
  * DAO over the top of the Lock Mutex table in the database.
@@ -25,45 +27,44 @@ public class TestTableDao {
     @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( TestTableDao.class );
 
-    private JdbcTemplate jdbcTemplate;
+    private NamedParameterJdbcTemplate jdbcTemplate;
 
     public static final String TABLE_NAME = "TEST_TABLE";
     private static final String COUNT_ROWS_IN_TABLE = "select count(*) from " + TABLE_NAME;
-    private static final String ID_EXISTS = "select 1 from " + TABLE_NAME + " where id = ?";
+    private static final String ID_EXISTS = "select 1 from " + TABLE_NAME + " where id = :id";
 
-    public TestTableDao( final JdbcTemplate aJdbcTemplate ) {
+    public TestTableDao( final NamedParameterJdbcTemplate aJdbcTemplate ) {
         jdbcTemplate = aJdbcTemplate;
     }
 
-    @SuppressWarnings("boxing")
     public int countLockEntries() {
-        List<Integer> results = jdbcTemplate.query( COUNT_ROWS_IN_TABLE, new RowMapper<Integer>() {
+        List<Integer> results = jdbcTemplate.query( COUNT_ROWS_IN_TABLE,
+                                                    new HashMap<String, String>(),
+                                                    new RowMapper<Integer>() {
+
+                                                        @Override
+                                                        public Integer mapRow( ResultSet aRs, int aRowNum )
+                                                                        throws SQLException {
+                                                            return Integer.valueOf( aRs.getInt( 1 ) );
+                                                        }
+                                                    } );
+        return results.get( 0 ).intValue();
+    }
+
+    public boolean idExistsInLock( int aId ) {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put( "id", Integer.toString( aId ) );
+        List<Integer> results = jdbcTemplate.query( ID_EXISTS, params, new RowMapper<Integer>() {
 
             @Override
             public Integer mapRow( ResultSet aRs, int aRowNum ) throws SQLException {
                 return new Integer( aRs.getInt( 1 ) );
             }
         } );
-        return results.get( 0 );
-    }
-
-    @SuppressWarnings("boxing")
-    public boolean idExistsInLock( int aId ) {
-        List<Integer> results = jdbcTemplate.query( ID_EXISTS,
-                                                    new Object[] { aId },
-                                                    new RowMapper<Integer>() {
-
-                                                        @Override
-                                                        public Integer mapRow( ResultSet aRs, int aRowNum )
-                                                                        throws SQLException {
-                                                            return new Integer( aRs.getInt( 1 ) );
-                                                        }
-                                                    } );
 
         if ( results.size() > 0 ) {
             return true;
         }
         return false;
     }
-
 }

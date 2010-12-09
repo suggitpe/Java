@@ -4,6 +4,9 @@
  */
 package org.suggs.sandbox.spring.jdbctemplate;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
@@ -13,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -33,16 +36,17 @@ public class TestTableDaoTest {
     private static final Log LOG = LogFactory.getLog( TestTableDaoTest.class );
 
     @Resource(name = "jdbcTemplate")
-    protected JdbcTemplate jdbcTemplate;
+    protected NamedParameterJdbcTemplate jdbcTemplate;
 
     private TestTableDao dao;
 
     private static final String DROP_TEST_TABLE = "drop table " + TestTableDao.TABLE_NAME;
     private static final String CREATE_TEST_TABLE = "create table " + TestTableDao.TABLE_NAME
                                                     + " (ID NUMBER NOT NULL)";
-    private static final String ADD_TEST_DATA = "insert into " + TestTableDao.TABLE_NAME + " values(?)";
+    private static final String ADD_TEST_DATA = "insert into " + TestTableDao.TABLE_NAME + " values( :id )";
 
-    @SuppressWarnings("boxing")
+    private static final Map<String, String> EMPTY_MAP = new HashMap<String, String>();
+
     @Before
     public void onSetup() {
 
@@ -54,16 +58,21 @@ public class TestTableDaoTest {
 
         try {
 
-            jdbcTemplate.execute( DROP_TEST_TABLE );
+            jdbcTemplate.update( DROP_TEST_TABLE, EMPTY_MAP );
         }
         catch ( Exception sqlException ) {
             sqlException.printStackTrace();
             LOG.debug( "Table does not exit so cannot drop it" );
         }
 
-        jdbcTemplate.execute( CREATE_TEST_TABLE );
-        jdbcTemplate.update( ADD_TEST_DATA, 1234 );
-        jdbcTemplate.update( ADD_TEST_DATA, 4567 );
+        jdbcTemplate.update( CREATE_TEST_TABLE, EMPTY_MAP );
+        Map<String, String> params = new HashMap<String, String>();
+        params.put( "id", "1234" );
+        jdbcTemplate.update( ADD_TEST_DATA, params );
+
+        params.clear();
+        params.put( "id", "4567" );
+        jdbcTemplate.update( ADD_TEST_DATA, params );
 
         LOG.debug( "--------------------- test" );
     }
