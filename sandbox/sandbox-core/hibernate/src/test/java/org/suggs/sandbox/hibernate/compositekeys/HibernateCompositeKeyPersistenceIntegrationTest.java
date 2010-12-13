@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
@@ -102,9 +103,9 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
         } );
     }
 
-    @Test
-    public void createEntityWithNullKeyInTable() {
-        runGenericTest( new HibernateIntegrationTestCallback() {
+    @Test(expected = HibernateException.class)
+    public void createEntityWithNullKeyInTableThrowsException() {
+        runGenericTest( false, new HibernateIntegrationTestCallback() {
 
             EntityKey key = createKeyTemplate();
             EntityObject object = null;
@@ -158,9 +159,9 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
      * This test highlights and issue with the way that Hibernate deals with null values in keys. If this test
      * ever fails it means that now Hibernate deals with null values in composite keys.
      */
-    @Test
-    public void retrieveEntityWithNullKeyFromTableWithGetReturnsNull_HibernateIssue() {
-        runGenericTest( new HibernateIntegrationTestCallback() {
+    @Test(expected = HibernateException.class)
+    public void retrieveEntityWithNullKeyFromTableWithGetReturnsNull_HibernateIssueAndThrowsException() {
+        runGenericTest( false, new HibernateIntegrationTestCallback() {
 
             EntityKey key = createKeyTemplate();
             EntityObject object = null;
@@ -190,9 +191,9 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
      * This test highlights and issue with the way that Hibernate deals with null values in keys. If this test
      * ever fails it means that now Hibernate deals with null values in composite keys.
      */
-    @Test
-    public void retrieveEntityWithNullKeyFromTableWithCriteriaReturnsNull_HibernateIssue() {
-        runGenericTest( new HibernateIntegrationTestCallback() {
+    @Test(expected = HibernateException.class)
+    public void retrieveEntityWithNullKeyFromTableWithCriteriaReturnsNull_HibernateIssueAndThrowsException() {
+        runGenericTest( false, new HibernateIntegrationTestCallback() {
 
             EntityKey key = createKeyTemplate();
             EntityObject object = null;
@@ -226,9 +227,9 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
      * This test highlights and issue with the way that Hibernate deals with null values in keys. If this test
      * ever fails it means that now Hibernate deals with null values in composite keys.
      */
-    @Test
-    public void retrieveEntityWithNullKeyFromTableWithQbeReturnsNull_HibernateIssue() {
-        runGenericTest( new HibernateIntegrationTestCallback() {
+    @Test(expected = HibernateException.class)
+    public void retrieveEntityWithNullKeyFromTableWithQbeReturnsNull_HibernateIssueAndThrowsException() {
+        runGenericTest( false, new HibernateIntegrationTestCallback() {
 
             EntityKey key = createKeyTemplate();
             EntityObject object = null;
@@ -262,9 +263,9 @@ public class HibernateCompositeKeyPersistenceIntegrationTest extends AbstractSim
      * This test highlights and issue with the way that Hibernate deals with null values in keys. If this test
      * ever fails it means that now Hibernate deals with null values in composite keys.
      */
-    @Test
-    public void retrieveEntityWithNullKeyFromTableWithHqlReturnsNull_HibernateIssue() {
-        runGenericTest( new HibernateIntegrationTestCallback() {
+    @Test(expected = HibernateException.class)
+    public void retrieveEntityWithNullKeyFromTableWithHqlReturnsNull_HibernateIssueAndThrowsException() {
+        runGenericTest( false, new HibernateIntegrationTestCallback() {
 
             EntityKey key = createKeyTemplate();
             EntityObject object = null;
