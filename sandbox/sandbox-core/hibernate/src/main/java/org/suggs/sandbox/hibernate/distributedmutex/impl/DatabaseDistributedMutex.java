@@ -26,7 +26,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
  */
 public class DatabaseDistributedMutex implements DistributedMutex {
 
-    @SuppressWarnings("unused")
     private static final Log LOG = LogFactory.getLog( DatabaseDistributedMutex.class );
 
     private JdbcTemplate jdbcTemplate;
@@ -72,13 +71,14 @@ public class DatabaseDistributedMutex implements DistributedMutex {
         disabled = isDisabled;
     }
 
-    private ResultSetExtractor resultSetExractor = new ResultSetExtractor() {
+    private ResultSetExtractor<Boolean> resultSetExractor = new ResultSetExtractor<Boolean>() {
 
         @Override
-        public Object extractData( ResultSet aResultSet ) throws SQLException, DataAccessException {
+        public Boolean extractData( ResultSet aResultSet ) throws SQLException, DataAccessException {
             for ( ; aResultSet.next(); ) {
                 return Boolean.TRUE;
             }
+            LOG.error( "Failed to acquire lock on mutex" );
             throw new IllegalStateException( "Unable to acquire mutex for ID" );
         }
     };

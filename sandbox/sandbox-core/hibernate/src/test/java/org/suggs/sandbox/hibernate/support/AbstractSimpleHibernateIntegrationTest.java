@@ -340,6 +340,15 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      * @param aCallback
      */
     protected void runGenericTest( HibernateIntegrationTestCallback aCallback ) {
+        runGenericTest( true, aCallback );
+    }
+
+    /**
+     * Provides a basic framework for running a Hibernate integration test against a database.
+     * 
+     * @param aCallback
+     */
+    protected void runGenericTest( boolean isFailOnException, HibernateIntegrationTestCallback aCallback ) {
         Session session = sessionfactory.openSession();
 
         Transaction trans = session.beginTransaction();
@@ -351,7 +360,9 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         catch ( Exception e ) {
             trans.rollback();
             session.close();
-            Assert.fail( "Exception caught in 'beforeTest' execution, transaction rolled back" );
+            if ( isFailOnException ) {
+                Assert.fail( "Exception caught in 'beforeTest' execution, transaction rolled back" );
+            }
         }
 
         session.clear();
@@ -365,7 +376,10 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         catch ( Exception e ) {
             trans.rollback();
             session.close();
-            Assert.fail( "Exception caught in 'executeTest' execution, transaction rolled back" );
+            if ( isFailOnException ) {
+                Assert.fail( "Exception of type [" + e.getClass().getName()
+                             + "] caught in 'executeTest' execution, transaction rolled back" );
+            }
         }
 
         session.clear();
@@ -379,7 +393,9 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         catch ( Exception e ) {
             trans.rollback();
             session.close();
-            Assert.fail( "Exception caught in 'verifyTest' execution, transaction rolled back" );
+            if ( isFailOnException ) {
+                Assert.fail( "Exception caught in 'verifyTest' execution, transaction rolled back" );
+            }
         }
 
         session.close();

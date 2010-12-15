@@ -15,7 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 /**
@@ -81,7 +81,7 @@ public final class SchemaCreatorTest {
 
     private void createDdlFromEntityClasses( List<Class<?>> aClasses ) {
         LOG.debug( "Generating DDL" );
-        AnnotationConfiguration annotationCfg = new AnnotationConfiguration();
+        Configuration annotationCfg = new Configuration();
         annotationCfg.configure();
         for ( Class<?> clazz : aClasses ) {
             annotationCfg.addAnnotatedClass( clazz );
