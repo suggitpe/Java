@@ -38,12 +38,13 @@ public class DatabaseDistributedMutexTest {
     private static final Log LOG = LogFactory.getLog( DatabaseDistributedMutexTest.class );
     private static final int MUTEX_CONTEXT_1 = 123456;
     private static final int MUTEX_CONTEXT_2 = 456789;
-    private static final long SLEEP_TIME = 1000L;
+    private static final long SLEEP_TIME = 500L;
 
     private static final Boolean IN = Boolean.TRUE;
     private static final Boolean OUT = Boolean.FALSE;
 
-    private static volatile List<Boolean> callList;
+    private static List<Boolean> callList;
+    private Object callListLock = new Object();
 
     private static final String INSERT_LOCK = "insert into LOCK_MUTEX values (?)";
 
@@ -53,7 +54,7 @@ public class DatabaseDistributedMutexTest {
     @SuppressWarnings("boxing")
     @Before
     public void onSetup() {
-        LOG.debug( "----------------------------- set up " );
+        LOG.debug( "####################################" );
         callList = new ArrayList<Boolean>();
         jdbcTemplate.update( "delete from LOCK_MUTEX" );
         jdbcTemplate.update( INSERT_LOCK, new Object[] { MUTEX_CONTEXT_1 } );
@@ -68,7 +69,7 @@ public class DatabaseDistributedMutexTest {
 
     @Test
     public void oneThreadSynchronisesOnAnId() {
-        WorkerThread worker1 = new WorkerThread( jdbcTemplate, "worker 1", MUTEX_CONTEXT_1 );
+        WorkerThread worker1 = new WorkerThread( "worker 1", MUTEX_CONTEXT_1 );
         worker1.start();
         while ( worker1.isAlive() ) {
             try {
@@ -84,8 +85,8 @@ public class DatabaseDistributedMutexTest {
 
     @Test
     public void twoThreadsSynchroniseOnAnId() {
-        WorkerThread worker1 = new WorkerThread( jdbcTemplate, "worker 1", MUTEX_CONTEXT_1 );
-        WorkerThread worker2 = new WorkerThread( jdbcTemplate, "worker 2", MUTEX_CONTEXT_1 );
+        WorkerThread worker1 = new WorkerThread( "worker 1", MUTEX_CONTEXT_1 );
+        WorkerThread worker2 = new WorkerThread( "worker 2", MUTEX_CONTEXT_1 );
         worker1.start();
         worker2.start();
 
@@ -104,8 +105,8 @@ public class DatabaseDistributedMutexTest {
 
     @Test
     public void twoThreadsDoNotSynchroniseOnDifferentIds() {
-        WorkerThread worker1 = new WorkerThread( jdbcTemplate, "worker 1", MUTEX_CONTEXT_1 );
-        WorkerThread worker2 = new WorkerThread( jdbcTemplate, "worker 2", MUTEX_CONTEXT_2 );
+        WorkerThread worker1 = new WorkerThread( "worker 1", MUTEX_CONTEXT_1 );
+        WorkerThread worker2 = new WorkerThread( "worker 2", MUTEX_CONTEXT_2 );
         worker1.start();
         worker2.start();
 
@@ -126,9 +127,13 @@ public class DatabaseDistributedMutexTest {
         assertThat( "Expected number of mutex safe calls does not match the actual:",
                     callList.size(),
                     equalTo( aExpectedOrder.length ) );
-        for ( int i = 0; i < callList.size(); ++i ) {
-            assertThat( "Entry [" + i + "] should have been [" + aExpectedOrder[i] + "] but was actually ["
-                        + callList.get( i ) + "]", callList.get( i ), equalTo( aExpectedOrder[i] ) );
+        synchronized ( callListLock ) {
+            for ( int i = 0; i < callList.size(); ++i ) {
+                assertThat( "Entry [" + i + "] should have been [" + aExpectedOrder[i]
+                                            + "] but was actually [" + callList.get( i ) + "]",
+                            callList.get( i ),
+                            equalTo( aExpectedOrder[i] ) );
+            }
         }
     }
 
@@ -151,32 +156,35 @@ public class DatabaseDistributedMutexTest {
         jdbcTemplate = aJdbcTemplate;
     }
 
-    private static class WorkerThread extends Thread {
+    private class WorkerThread extends Thread {
 
         private String name;
         private int synchronisationContext;
-        private volatile JdbcTemplate jdbcTemplate;
 
-        public WorkerThread( JdbcTemplate aJdbcTemplate, String aName, int aSynchronisationContext ) {
+        public WorkerThread( String aName, int aSynchronisationContext ) {
             name = aName;
-            jdbcTemplate = aJdbcTemplate;
             synchronisationContext = aSynchronisationContext;
         }
 
         @Override
         public void run() {
             DistributedMutex mutex = new DatabaseDistributedMutex( jdbcTemplate );
+            LOG.debug( "WorkerThread [" + name + "] entering mutex ..." );
             mutex.synchronise( synchronisationContext );
-            callList.add( IN );
-            LOG.debug( "WorkerThread [" + name + "] entered mutex" );
+            synchronized ( callListLock ) {
+                callList.add( IN );
+            }
+            LOG.debug( "WorkerThread [" + name + "] entered mutex ... small sleep" );
             try {
                 Thread.sleep( SLEEP_TIME );
             }
             catch ( InterruptedException e ) {
                 // nadda
             }
-            LOG.debug( "WorkerThread [" + name + "] exiting mutex" );
-            callList.add( OUT );
+            LOG.debug( "WorkerThread [" + name + "] exiting mutex ... all done" );
+            synchronized ( callListLock ) {
+                callList.add( OUT );
+            }
         }
     }
 
