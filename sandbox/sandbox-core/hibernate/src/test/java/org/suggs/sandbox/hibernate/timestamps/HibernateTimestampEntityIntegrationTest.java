@@ -275,10 +275,19 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
                 LOG.debug( "............................." );
                 LOG.debug( "Calling flush" );
                 session.flush();
+                assertThat( entity.getVersion(), equalTo( Integer.valueOf( 1 ) ) );
+
+                entity.setSomeInteger( Integer.valueOf( 23 ) );
+                session.flush();
+
                 LOG.debug( "............................." );
                 LOG.debug( "Calling commit" );
                 transaction.commit();
                 LOG.debug( "............................." );
+                assertThat( entity.getVersion(), equalTo( Integer.valueOf( 2 ) ) );
+
+                session.flush();
+                assertThat( entity.getVersion(), equalTo( Integer.valueOf( 2 ) ) );
 
             }
             finally {

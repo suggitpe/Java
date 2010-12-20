@@ -13,7 +13,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * TODO Write javadoc for LockMutex
+ * This is set up as a hibernate pojo only so that the generic schema generation test can build up the schema
+ * for this test.
  * 
  * @author suggitpe
  * @version 1.0 3 Dec 2010

@@ -30,6 +30,7 @@ public class DatabaseDistributedMutex implements DistributedMutex {
 
     private JdbcTemplate jdbcTemplate;
     private static final String LOCK_SQL = "select 1 from LOCK_MUTEX where ID = ? for update";
+    private static final int QUERY_TIMEOUT = 500;
 
     private boolean disabled = false;
 
@@ -44,6 +45,7 @@ public class DatabaseDistributedMutex implements DistributedMutex {
             throw new IllegalArgumentException( "Must initialise the Database Distributed Mutex with a valid JDBC Template" );
         }
         jdbcTemplate = aJdbcTemplate;
+        jdbcTemplate.setQueryTimeout( QUERY_TIMEOUT );
     }
 
     /**
@@ -63,23 +65,23 @@ public class DatabaseDistributedMutex implements DistributedMutex {
             }
         };
 
-        jdbcTemplate.query( LOCK_SQL, preparedStatementSetter, resultSetExractor );
-
+        jdbcTemplate.query( LOCK_SQL, preparedStatementSetter, resultSetExtractor );
     }
 
-    public void setDisable( boolean isDisabled ) {
-        disabled = isDisabled;
-    }
-
-    private ResultSetExtractor<Boolean> resultSetExractor = new ResultSetExtractor<Boolean>() {
+    private ResultSetExtractor<Integer> resultSetExtractor = new ResultSetExtractor<Integer>() {
 
         @Override
-        public Boolean extractData( ResultSet aResultSet ) throws SQLException, DataAccessException {
+        public Integer extractData( ResultSet aResultSet ) throws SQLException, DataAccessException {
             for ( ; aResultSet.next(); ) {
-                return Boolean.TRUE;
+                return Integer.valueOf( 1 );
             }
             LOG.error( "Failed to acquire lock on mutex" );
             throw new IllegalStateException( "Unable to acquire mutex for ID" );
         }
     };
+
+    public void setDisable( boolean isDisabled ) {
+        disabled = isDisabled;
+    }
+
 }

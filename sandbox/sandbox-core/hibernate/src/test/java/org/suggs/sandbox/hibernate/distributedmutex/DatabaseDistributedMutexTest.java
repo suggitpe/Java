@@ -6,6 +6,8 @@ package org.suggs.sandbox.hibernate.distributedmutex;
 
 import org.suggs.sandbox.hibernate.distributedmutex.impl.DatabaseDistributedMutex;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -47,6 +51,7 @@ public class DatabaseDistributedMutexTest {
     private Object callListLock = new Object();
 
     private static final String INSERT_LOCK = "insert into LOCK_MUTEX values (?)";
+    private static final String LOCK_COUNT = "select l.*, lt.name from v$lock l, v$lock_type lt where l.type = lt.type and l.type in ('TM','TX')";
 
     @Resource(name = "jdbcTemplate")
     protected volatile JdbcTemplate jdbcTemplate;
@@ -73,6 +78,7 @@ public class DatabaseDistributedMutexTest {
         worker1.start();
         while ( worker1.isAlive() ) {
             try {
+                debugLockCount();
                 Thread.sleep( 100L );
             }
             catch ( InterruptedException e ) {
@@ -92,6 +98,7 @@ public class DatabaseDistributedMutexTest {
 
         while ( worker1.isAlive() && worker2.isAlive() ) {
             try {
+                debugLockCount();
                 Thread.sleep( 100L );
             }
             catch ( InterruptedException e ) {
@@ -112,6 +119,7 @@ public class DatabaseDistributedMutexTest {
 
         while ( worker1.isAlive() && worker2.isAlive() ) {
             try {
+                debugLockCount();
                 Thread.sleep( 100L );
             }
             catch ( InterruptedException e ) {
@@ -156,6 +164,38 @@ public class DatabaseDistributedMutexTest {
         jdbcTemplate = aJdbcTemplate;
     }
 
+    private void debugLockCount() {
+        if ( jdbcTemplate == null ) {
+            throw new IllegalStateException( "No jdbcTemplate defined in the test" );
+        }
+
+        LockBean bean = jdbcTemplate.query( LOCK_COUNT, resultSetExtractor );
+        LOG.debug( "Lock details are: " + bean.toString() );
+
+    }
+
+    private ResultSetExtractor<LockBean> resultSetExtractor = new ResultSetExtractor<LockBean>() {
+
+        @Override
+        public LockBean extractData( ResultSet aResultSet ) throws SQLException, DataAccessException {
+            return new LockBean();
+            // aResultSet.next();
+            // for ( ; aResultSet.next(); ) {
+            // aResultSet.get
+
+            // }
+            // LOG.error( "Failed to acquire lock on mutex" );
+            // throw new IllegalStateException( "Unable to acquire mutex for ID" );
+        }
+    };
+
+    private static class LockBean {
+
+    }
+
+    // #####################################################
+    // ## ---------------- WORKER THREAD ---------------- ##
+    // #####################################################
     private class WorkerThread extends Thread {
 
         private String name;
