@@ -82,6 +82,7 @@ public final class SchemaCreatorTest {
     private void createDdlFromEntityClasses( List<Class<?>> aClasses ) {
         LOG.debug( "Generating DDL" );
         Configuration annotationCfg = new Configuration();
+        annotationCfg.setProperty( "hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect" );
         annotationCfg.configure();
         for ( Class<?> clazz : aClasses ) {
             annotationCfg.addAnnotatedClass( clazz );
