@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -72,6 +73,7 @@ public class DatabaseDistributedMutexTest {
         LOG.debug( "----------------------------- end" );
     }
 
+    @Ignore
     @Test
     public void oneThreadSynchronisesOnAnId() {
         WorkerThread worker1 = new WorkerThread( "worker 1", MUTEX_CONTEXT_1 );
@@ -89,6 +91,7 @@ public class DatabaseDistributedMutexTest {
                                    new Boolean[] { IN, OUT } );
     }
 
+    @Ignore
     @Test
     public void twoThreadsSynchroniseOnAnId() {
         WorkerThread worker1 = new WorkerThread( "worker 1", MUTEX_CONTEXT_1 );
@@ -110,6 +113,7 @@ public class DatabaseDistributedMutexTest {
                                    new Boolean[] { IN, OUT, IN, OUT } );
     }
 
+    @Ignore
     @Test
     public void twoThreadsDoNotSynchroniseOnDifferentIds() {
         WorkerThread worker1 = new WorkerThread( "worker 1", MUTEX_CONTEXT_1 );
