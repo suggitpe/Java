@@ -73,7 +73,6 @@ public class DatabaseDistributedMutexTest {
         LOG.debug( "----------------------------- end" );
     }
 
-    @Ignore
     @Test
     public void oneThreadSynchronisesOnAnId() {
         WorkerThread worker1 = new WorkerThread( "worker 1", MUTEX_CONTEXT_1 );
@@ -180,6 +179,7 @@ public class DatabaseDistributedMutexTest {
 
     private ResultSetExtractor<LockBean> resultSetExtractor = new ResultSetExtractor<LockBean>() {
 
+        @SuppressWarnings("unused")
         @Override
         public LockBean extractData( ResultSet aResultSet ) throws SQLException, DataAccessException {
             return new LockBean();
