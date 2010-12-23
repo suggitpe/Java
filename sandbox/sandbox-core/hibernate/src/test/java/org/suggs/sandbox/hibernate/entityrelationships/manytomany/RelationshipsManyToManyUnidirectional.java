@@ -6,8 +6,8 @@ package org.suggs.sandbox.hibernate.entityrelationships.manytomany;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.test.context.ContextConfiguration;
 
@@ -23,7 +23,7 @@ import org.hibernate.Session;
 public class RelationshipsManyToManyUnidirectional extends AbstractSimpleHibernateIntegrationTest<Long, ManyToManyUnidirectionalEntity> {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( RelationshipsManyToManyUnidirectional.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RelationshipsManyToManyUnidirectional.class );
 
     /**
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)

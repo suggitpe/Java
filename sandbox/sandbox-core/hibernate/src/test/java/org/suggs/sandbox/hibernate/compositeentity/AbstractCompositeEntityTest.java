@@ -6,8 +6,8 @@ package org.suggs.sandbox.hibernate.compositeentity;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.hibernate.Session;
 
@@ -20,7 +20,7 @@ import org.hibernate.Session;
 public abstract class AbstractCompositeEntityTest extends AbstractSimpleHibernateIntegrationTest<Long, CoreEntity> {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( AbstractCompositeEntityTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractCompositeEntityTest.class );
 
     /**
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)

@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is set up as a hibernate pojo only so that the generic schema generation test can build up the schema
@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 public class LockMutex {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( LockMutex.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LockMutex.class );
 
     @Id
     @Column(name = "ID")

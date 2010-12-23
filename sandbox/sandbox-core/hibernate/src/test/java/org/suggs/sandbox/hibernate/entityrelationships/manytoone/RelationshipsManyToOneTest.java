@@ -6,8 +6,8 @@ package org.suggs.sandbox.hibernate.entityrelationships.manytoone;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.test.context.ContextConfiguration;
 
@@ -24,7 +24,7 @@ import org.hibernate.criterion.Restrictions;
 @ContextConfiguration(locations = { "classpath:xml/ut-relationships-manytoone.xml" })
 public class RelationshipsManyToOneTest extends AbstractSimpleHibernateIntegrationTest<Long, ManyToOneEntity> {
 
-    private static final Log LOG = LogFactory.getLog( RelationshipsManyToOneTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RelationshipsManyToOneTest.class );
 
     private static final String WHERE_CLAUSE = "data in ('Some data', 'Updated data')";
     private static final String TEST_HQL = "from ManyToOneEntity where " + WHERE_CLAUSE;

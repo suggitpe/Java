@@ -13,13 +13,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -40,7 +40,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-databse-distributedmutex.xml" })
 public class DatabaseDistributedMutexTest {
 
-    private static final Log LOG = LogFactory.getLog( DatabaseDistributedMutexTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DatabaseDistributedMutexTest.class );
     private static final int MUTEX_CONTEXT_1 = 123456;
     private static final int MUTEX_CONTEXT_2 = 456789;
     private static final long SLEEP_TIME = 500L;

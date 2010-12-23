@@ -13,9 +13,9 @@ import java.util.Calendar;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.Session;
@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
  */
 public class BadlyImplementedInterceptorTest extends HibernateTimestampEntityIntegrationTest {
 
-    private static final Log LOG = LogFactory.getLog( BadlyImplementedInterceptorTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( BadlyImplementedInterceptorTest.class );
 
     @SuppressWarnings("boxing")
     @Test

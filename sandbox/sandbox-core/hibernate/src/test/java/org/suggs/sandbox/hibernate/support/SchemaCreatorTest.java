@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
@@ -27,7 +27,7 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
  */
 public final class SchemaCreatorTest {
 
-    private static final Log LOG = LogFactory.getLog( SchemaCreatorTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SchemaCreatorTest.class );
     private static final String LOCAL_PACKAGE = "org.suggs.sandbox.hibernate";
     private static final String OUTPUT_FILENAME = "created-schema.sql";
 

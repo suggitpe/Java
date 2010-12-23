@@ -6,11 +6,11 @@ package org.suggs.sandbox.hibernate.nullsaferestrictions;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.hibernate.criterion.Restrictions;
 
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertThat;
  */
 public class NullSafeRestrictionsTest {
 
-    private static final Log LOG = LogFactory.getLog( NullSafeRestrictionsTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( NullSafeRestrictionsTest.class );
     private static final Method[] RESTRICTIONS_METHODS = Restrictions.class.getDeclaredMethods();
     private static final Method[] NULLSAFERESTRICTIONS_METHODS = NullSafeRestrictions.class.getDeclaredMethods();
 

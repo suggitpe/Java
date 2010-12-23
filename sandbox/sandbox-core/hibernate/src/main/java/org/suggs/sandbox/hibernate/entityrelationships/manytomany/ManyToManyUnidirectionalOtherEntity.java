@@ -11,8 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Child entity for the one to many unidirectional example.
@@ -28,7 +28,7 @@ public class ManyToManyUnidirectionalOtherEntity extends EntityBase {
     private static final long serialVersionUID = 3433617405071711428L;
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( ManyToManyUnidirectionalOtherEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ManyToManyUnidirectionalOtherEntity.class );
 
     @Column(name = "OTHER_DATA", length = 64)
     private String otherData;

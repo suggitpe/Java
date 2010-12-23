@@ -11,9 +11,9 @@ import java.util.Calendar;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.test.context.ContextConfiguration;
 
@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-timestamps.xml" })
 public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, TimestampedEntity> {
 
-    private static Log LOG = LogFactory.getLog( HibernateTimestampEntityIntegrationTest.class );
+    private static Logger LOG = LoggerFactory.getLogger( HibernateTimestampEntityIntegrationTest.class );
 
     private static final String WHERE_CLAUSE = "someString in ('deleteMe', 'altered')";
     private static final String TEST_HQL = "from TimestampedEntity where " + WHERE_CLAUSE;
@@ -185,12 +185,12 @@ public class HibernateTimestampEntityIntegrationTest extends AbstractSimpleHiber
 
             try {
                 TimestampedEntity entity = createEntityTemplate( createKeyTemplate(), session );
-                LOG.debug( entity );
+                LOG.debug( entity.toString() );
 
                 LOG.debug( "calling save" );
                 session.save( entity );
                 LOG.debug( "called save" );
-                LOG.debug( entity );
+                LOG.debug( entity.toString() );
 
                 id = entity.getId();
 

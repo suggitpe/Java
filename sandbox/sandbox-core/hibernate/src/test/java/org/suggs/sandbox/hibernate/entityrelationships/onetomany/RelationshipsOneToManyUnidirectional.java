@@ -8,11 +8,11 @@ import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTes
 
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.test.context.ContextConfiguration;
 
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertThat;
 public class RelationshipsOneToManyUnidirectional extends AbstractSimpleHibernateIntegrationTest<Long, OneToManyUnidirectionalEntity> {
 
     // @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( RelationshipsOneToManyUnidirectional.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RelationshipsOneToManyUnidirectional.class );
 
     private static final String WHERE_CLAUSE = "data in ('Some data', 'Updated data')";
     private static final String TEST_HQL = "from OneToManyUnidirectionalEntity where " + WHERE_CLAUSE;

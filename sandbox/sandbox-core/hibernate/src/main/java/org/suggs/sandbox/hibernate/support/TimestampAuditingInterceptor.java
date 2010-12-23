@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.type.Type;
@@ -24,7 +24,7 @@ import org.hibernate.type.Type;
 public class TimestampAuditingInterceptor extends EmptyInterceptor {
 
     private static final long serialVersionUID = 4974715372205680154L;
-    private static final Log LOG = LogFactory.getLog( TimestampAuditingInterceptor.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TimestampAuditingInterceptor.class );
     private static final String AUDIT_PROPERTY_NAME = "timestampAuditInfo";
 
     private enum AUDIT_TYPE {

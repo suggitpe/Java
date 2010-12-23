@@ -10,8 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,7 +26,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
  */
 public class DatabaseDistributedMutex implements DistributedMutex {
 
-    private static final Log LOG = LogFactory.getLog( DatabaseDistributedMutex.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DatabaseDistributedMutex.class );
 
     private JdbcTemplate jdbcTemplate;
     private static final String LOCK_SQL = "select 1 from LOCK_MUTEX where ID = ? for update";

@@ -6,6 +6,9 @@ package org.suggs.sandbox.hibernate.basicentity;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.hibernate.Session;
 
 /**
@@ -16,7 +19,7 @@ import org.hibernate.Session;
  */
 public abstract class AbstractHibernateMessageIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, Message> {
 
-    // private static final Log LOG = LogFactory.getLog( AbstractHibernateMessageIntegrationTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractHibernateMessageIntegrationTest.class );
 
     /**
      * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)

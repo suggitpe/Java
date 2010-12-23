@@ -23,8 +23,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.util.Assert;
 
@@ -39,7 +39,7 @@ import org.springframework.util.Assert;
 @SequenceGenerator(name = "CE_SEQ_STR", sequenceName = "CE_USER_SEQ")
 public class User extends AbstractPersistentBaseClass {
 
-    private static final Log LOG = LogFactory.getLog( User.class );
+    private static final Logger LOG = LoggerFactory.getLogger( User.class );
 
     @Column(name = "USER_FIRST_NAME", nullable = false, length = 64)
     private String firstName;
@@ -63,16 +63,16 @@ public class User extends AbstractPersistentBaseClass {
     private Date created;
 
     @Embedded
-    @AttributeOverrides( { @AttributeOverride(name = "street", column = @Column(name = "USER_HOME_STREET")),
-                          @AttributeOverride(name = "city", column = @Column(name = "USER_HOME_CITY")),
-                          @AttributeOverride(name = "zipCode", column = @Column(name = "USER_HOME_ZIPCODE")) })
+    @AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "USER_HOME_STREET")),
+                         @AttributeOverride(name = "city", column = @Column(name = "USER_HOME_CITY")),
+                         @AttributeOverride(name = "zipCode", column = @Column(name = "USER_HOME_ZIPCODE")) })
     private Address homeAddress;
 
     @Embedded
-    @AttributeOverrides( {
-                          @AttributeOverride(name = "street", column = @Column(name = "USER_BILLING_STREET")),
-                          @AttributeOverride(name = "city", column = @Column(name = "USER_BILLING_CITY")),
-                          @AttributeOverride(name = "zipCode", column = @Column(name = "USER_BILLING_ZIPCODE")) })
+    @AttributeOverrides({
+                         @AttributeOverride(name = "street", column = @Column(name = "USER_BILLING_STREET")),
+                         @AttributeOverride(name = "city", column = @Column(name = "USER_BILLING_CITY")),
+                         @AttributeOverride(name = "zipCode", column = @Column(name = "USER_BILLING_ZIPCODE")) })
     private Address billingAddress;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

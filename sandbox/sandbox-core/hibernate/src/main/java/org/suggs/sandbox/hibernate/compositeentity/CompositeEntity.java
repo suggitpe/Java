@@ -7,8 +7,8 @@ package org.suggs.sandbox.hibernate.compositeentity;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for CompositeEntity
@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
 public class CompositeEntity {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( CompositeEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CompositeEntity.class );
 
     @Column(name = "COMP_TEXT", nullable = false, length = 255)
     private String compositeText;

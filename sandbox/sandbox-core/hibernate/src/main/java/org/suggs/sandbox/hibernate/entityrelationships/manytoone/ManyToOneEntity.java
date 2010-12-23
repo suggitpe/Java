@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Core entity for the many to one example.
@@ -31,7 +31,7 @@ public class ManyToOneEntity extends EntityBase {
     private static final long serialVersionUID = -9088262117318600146L;
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( ManyToOneEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ManyToOneEntity.class );
 
     @Column(name = "DATA", length = 64)
     private String data;

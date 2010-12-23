@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Really basic entity that allows us to verify how the persistence level works at a basic level.
@@ -26,7 +26,7 @@ public class ReallyBasicEntity extends EntityBase {
     private static final long serialVersionUID = 3654518492764839027L;
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( ReallyBasicEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ReallyBasicEntity.class );
 
     @Column(name = "STRING_FIELD")
     private String stringField;

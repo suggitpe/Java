@@ -6,11 +6,11 @@ package org.suggs.sandbox.hibernate.support;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -29,7 +29,7 @@ import org.hibernate.Transaction;
 @ContextConfiguration(locations = { "classpath:xml/ut-basicconnection.xml" })
 public class BasicConnectWithTransactionTest {
 
-    private static final Log LOG = LogFactory.getLog( BasicConnectWithTransactionTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( BasicConnectWithTransactionTest.class );
 
     @Resource(name = "sessionFactory")
     protected SessionFactory sessionfactory;

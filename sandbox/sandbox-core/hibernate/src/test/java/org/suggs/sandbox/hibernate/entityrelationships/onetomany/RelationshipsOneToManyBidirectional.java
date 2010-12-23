@@ -6,10 +6,10 @@ package org.suggs.sandbox.hibernate.entityrelationships.onetomany;
 
 import org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.test.context.ContextConfiguration;
 
@@ -25,7 +25,7 @@ import org.hibernate.Session;
 public class RelationshipsOneToManyBidirectional extends AbstractSimpleHibernateIntegrationTest<Long, OneToManyBidirectionalEntity> {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( RelationshipsOneToManyBidirectional.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RelationshipsOneToManyBidirectional.class );
 
     private static final String WHERE_CLAUSE = "data in ('Some data', 'Updated data')";
     private static final String TEST_HQL = "from OneToManyBidirectionalEntity where " + WHERE_CLAUSE;

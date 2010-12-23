@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
@@ -29,7 +29,7 @@ import org.hibernate.type.Type;
  */
 public class RestrictionsMethodExecutionComparitor {
 
-    private static final Log LOG = LogFactory.getLog( RestrictionsMethodExecutionComparitor.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RestrictionsMethodExecutionComparitor.class );
 
     private Method baseLine;
     private Method testee;

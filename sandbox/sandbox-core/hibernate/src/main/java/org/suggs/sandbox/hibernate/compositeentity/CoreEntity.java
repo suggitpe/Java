@@ -12,8 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Entity that contains a composite entity
@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 public class CoreEntity extends EntityBase {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( CoreEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CoreEntity.class );
 
     private static final long serialVersionUID = 4104349939216946228L;
 

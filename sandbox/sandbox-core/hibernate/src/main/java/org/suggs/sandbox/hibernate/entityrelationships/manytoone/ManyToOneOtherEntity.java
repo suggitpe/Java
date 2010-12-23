@@ -11,8 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Other entity for the many to one example.
@@ -28,7 +28,7 @@ public class ManyToOneOtherEntity extends EntityBase {
     private static final long serialVersionUID = 633961392988152259L;
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( ManyToOneOtherEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ManyToOneOtherEntity.class );
 
     @Column(name = "OTHER_DATA", length = 64)
     private String otherData;
