@@ -9,8 +9,6 @@ import org.suggs.sandbox.jbehave.support.SuggsMostUsefulConfiguration;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.io.CasePreservingResolver;
@@ -19,6 +17,8 @@ import org.jbehave.core.io.StoryPathResolver;
 import org.jbehave.core.junit.JUnitStory;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InstanceStepsFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for ICanToggleACell
@@ -29,7 +29,7 @@ import org.jbehave.core.steps.InstanceStepsFactory;
 public class ICanToggleACell extends JUnitStory {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( ICanToggleACell.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ICanToggleACell.class );
 
     public ICanToggleACell() {}
 

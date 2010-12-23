@@ -8,9 +8,9 @@ import javax.naming.NamingException;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tibco.tibjms.admin.TibjmsAdmin;
 import com.tibco.tibjms.admin.TibjmsAdminException;
@@ -23,7 +23,7 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
  */
 public class TestTibcoConnectionProperties {
 
-    private static final Log LOG = LogFactory.getLog( TestTibcoConnectionProperties.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TestTibcoConnectionProperties.class );
 
     /**
      * Tests the connection details class

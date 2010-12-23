@@ -4,9 +4,9 @@
  */
 package org.suggs.sandbox.jms;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test to verify that we can subscribe to a topic on a known broker.
@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class TestSubscribeToTopic {
 
-    private static final Log LOG = LogFactory.getLog( TestSubscribeToTopic.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TestSubscribeToTopic.class );
 
     /**
      * @throws Exception

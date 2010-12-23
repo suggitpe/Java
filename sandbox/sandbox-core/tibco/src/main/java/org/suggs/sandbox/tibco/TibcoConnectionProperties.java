@@ -12,8 +12,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Singleton class that encapsulates the access to the configuration file.
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class TibcoConnectionProperties {
 
-    private static final Log LOG = LogFactory.getLog( TibcoConnectionProperties.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TibcoConnectionProperties.class );
     private static final String PROP_FILE = "tibco_connection.properties";
 
     private static TibcoConnectionProperties instance;

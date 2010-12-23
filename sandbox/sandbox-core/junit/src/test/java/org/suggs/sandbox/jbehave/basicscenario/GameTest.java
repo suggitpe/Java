@@ -4,10 +4,10 @@
  */
 package org.suggs.sandbox.jbehave.basicscenario;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
  */
 public class GameTest {
 
-    private static final Log LOG = LogFactory.getLog( GameTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GameTest.class );
 
     private Game toggleGame;
 

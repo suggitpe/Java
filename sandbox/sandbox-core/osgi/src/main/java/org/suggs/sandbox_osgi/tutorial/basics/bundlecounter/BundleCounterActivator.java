@@ -4,12 +4,12 @@
  */
 package org.suggs.sandbox_osgi.tutorial.basics.bundlecounter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Bundle that will count the number of active bundles in the OSGI framework
@@ -19,7 +19,7 @@ import org.osgi.framework.BundleListener;
  */
 public class BundleCounterActivator implements BundleActivator, BundleListener {
 
-    private static final Log LOG = LogFactory.getLog( BundleCounterActivator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( BundleCounterActivator.class );
     private BundleContext context;
 
     /**

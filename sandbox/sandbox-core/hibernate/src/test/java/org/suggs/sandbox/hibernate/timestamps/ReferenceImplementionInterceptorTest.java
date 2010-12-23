@@ -6,7 +6,6 @@ package org.suggs.sandbox.hibernate.timestamps;
 
 import org.suggs.sandbox.hibernate.support.TimestampAuditInfo;
 import org.suggs.sandbox.hibernate.support.TimestampAuditable;
-import org.suggs.sandbox.hibernate.timestamps.BadlyImplementedInterceptorTest.BadlyImplementedInterceptor;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -39,8 +38,8 @@ public class ReferenceImplementionInterceptorTest extends HibernateTimestampEnti
 
     @SuppressWarnings("boxing")
     @Test
-    public void newObjectVersionIsUpdatedAfterBadInterceptor() {
-        Session session = sessionfactory.openSession( new BadlyImplementedInterceptor() );
+    public void newObjectVersionIsUpdatedAfterRefImplInterceptor() {
+        Session session = sessionfactory.openSession( new ReferenceImplementionInterceptor() );
 
         Long id = Long.valueOf( 0L );
         try {
@@ -79,7 +78,7 @@ public class ReferenceImplementionInterceptorTest extends HibernateTimestampEnti
             }
         }
 
-        session = sessionfactory.openSession( new BadlyImplementedInterceptor() );
+        session = sessionfactory.openSession( new ReferenceImplementionInterceptor() );
 
         try {
             Transaction transaction = session.beginTransaction();

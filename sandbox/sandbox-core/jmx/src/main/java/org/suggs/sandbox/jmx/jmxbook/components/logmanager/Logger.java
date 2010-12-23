@@ -15,8 +15,7 @@ import javax.management.MBeanRegistration;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of a logging mechanism.
@@ -26,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Logger implements LoggerMBean, MBeanRegistration {
 
-    private static final Log LOG = LogFactory.getLog( Logger.class );
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger( Logger.class );
     static final int ALL = 3;
     static final int ERRORS = 2;
     static final int NONE = 1;

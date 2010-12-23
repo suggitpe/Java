@@ -4,14 +4,14 @@
  */
 package org.suggs.sandbox.swt.layout.rowlayout;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple example to show the use of the RowData object on widgets
@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public final class SimpleRowDataExample {
 
-    private static final Log LOG = LogFactory.getLog( SimpleRowDataExample.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SimpleRowDataExample.class );
 
     private SimpleRowDataExample() {}
 

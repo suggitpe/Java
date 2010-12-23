@@ -8,8 +8,8 @@ import org.suggs.sandbox.mvc.temperatureguage.model.TemperatureModel;
 import org.suggs.sandbox.mvc.temperatureguage.view.CelsiusGUI;
 import org.suggs.sandbox.mvc.temperatureguage.view.FarenheightGUI;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Temperature guage impl for a MVC demo
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class TemperatureGuage {
 
-    private static final Log LOG = LogFactory.getLog( TemperatureGuage.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TemperatureGuage.class );
 
     private TemperatureGuage() {}
 

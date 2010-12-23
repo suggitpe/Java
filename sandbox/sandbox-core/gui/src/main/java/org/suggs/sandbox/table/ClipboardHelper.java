@@ -12,8 +12,8 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to house a collection of clipboard manipulation methods - used in the Table sandlbox
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class ClipboardHelper {
 
-    private static final Log LOG = LogFactory.getLog( ClipboardHelper.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ClipboardHelper.class );
 
     private ClipboardHelper() {}
 

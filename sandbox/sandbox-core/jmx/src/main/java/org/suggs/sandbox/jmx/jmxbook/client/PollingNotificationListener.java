@@ -15,8 +15,8 @@ import javax.management.Notification;
 import javax.management.NotificationListener;
 import javax.management.ObjectName;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is a JMX notification listener. The core functionality is to connect to the MBean server ad then
@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PollingNotificationListener implements NotificationListener {
 
-    private static final Log LOG = LogFactory.getLog( PollingNotificationListener.class );
+    private static final Logger LOG = LoggerFactory.getLogger( PollingNotificationListener.class );
 
     /**
      * Constructs a new instance.

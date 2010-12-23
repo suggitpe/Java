@@ -7,8 +7,8 @@ package org.suggs.sandbox.tibco;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tibco.tibjms.admin.TibjmsAdmin;
 import com.tibco.tibjms.admin.TibjmsAdminException;
@@ -21,7 +21,7 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
  */
 public final class TibcoAdminConnectionProperties {
 
-    private static final Log LOG = LogFactory.getLog( TibcoAdminConnectionProperties.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TibcoAdminConnectionProperties.class );
     private static final String PROP_FILE = "tibco_connection.properties";
 
     private static TibcoAdminConnectionProperties instance;

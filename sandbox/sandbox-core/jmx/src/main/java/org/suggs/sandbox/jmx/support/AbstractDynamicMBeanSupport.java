@@ -19,8 +19,8 @@ import javax.management.MBeanInfo;
 import javax.management.MBeanOperationInfo;
 import javax.management.MBeanParameterInfo;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a utility base class for creating dynamic MBeans.
@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class AbstractDynamicMBeanSupport implements DynamicMBean {
 
-    private static final Log LOG = LogFactory.getLog( AbstractDynamicMBeanSupport.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractDynamicMBeanSupport.class );
 
     private Map<String, MBeanAttributeInfo> attributes = new Hashtable<String, MBeanAttributeInfo>();
     private Map<Constructor<?>, MBeanConstructorInfo> constructors = new Hashtable<Constructor<?>, MBeanConstructorInfo>();

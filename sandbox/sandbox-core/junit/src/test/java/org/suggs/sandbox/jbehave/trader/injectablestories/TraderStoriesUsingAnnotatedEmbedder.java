@@ -7,9 +7,9 @@ package org.suggs.sandbox.jbehave.trader.injectablestories;
 import org.suggs.sandbox.jbehave.support.AbstractInjectableStoryEmbedder;
 import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.annotations.UsingSteps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Execute trader stories using the annotation runner.
@@ -22,7 +22,7 @@ import org.jbehave.core.annotations.UsingSteps;
 public class TraderStoriesUsingAnnotatedEmbedder extends AbstractInjectableStoryEmbedder {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TraderStoriesUsingAnnotatedEmbedder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TraderStoriesUsingAnnotatedEmbedder.class );
 
     @Override
     protected String doGetStoryRegex() {

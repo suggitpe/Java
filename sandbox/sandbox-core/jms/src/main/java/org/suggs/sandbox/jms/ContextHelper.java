@@ -10,8 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The sole purpose of this class is to provide a mechanism by which we can create the initial context into
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class ContextHelper {
 
-    private static final Log LOG = LogFactory.getLog( ContextHelper.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ContextHelper.class );
 
     private ContextHelper() {}
 
@@ -35,8 +35,8 @@ public final class ContextHelper {
      */
     static InitialContext createInitialContext() throws NamingException {
         Hashtable<String, String> env = new Hashtable<String, String>();
-        env.put( Context.INITIAL_CONTEXT_FACTORY, ConfigManager.instance()
-            .getProperty( ConfigManager.CONTEXT_FACTORY ) );
+        env.put( Context.INITIAL_CONTEXT_FACTORY,
+                 ConfigManager.instance().getProperty( ConfigManager.CONTEXT_FACTORY ) );
         env.put( Context.PROVIDER_URL, ConfigManager.instance().getProperty( ConfigManager.PROVIDER_URL ) );
         String user = ConfigManager.instance().getProperty( ConfigManager.USERNAME );
         if ( user != null && !user.equals( "" ) ) {

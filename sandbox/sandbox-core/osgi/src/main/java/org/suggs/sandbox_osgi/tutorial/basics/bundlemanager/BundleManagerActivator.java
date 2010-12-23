@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A class that will actively monitor an external jar file and will update the OSGI framework with that bundle
@@ -26,7 +26,7 @@ import org.osgi.framework.BundleException;
  */
 public class BundleManagerActivator implements BundleActivator {
 
-    private static final Log LOG = LogFactory.getLog( BundleManagerActivator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( BundleManagerActivator.class );
     private static final long INTERVAL = 5000;
     private static final String BUND_LOC = "src/main/resources/";
 

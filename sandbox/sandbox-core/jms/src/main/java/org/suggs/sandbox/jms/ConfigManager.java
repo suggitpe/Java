@@ -7,8 +7,8 @@ package org.suggs.sandbox.jms;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Wrapper class to encapsulate the configuration file.
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class ConfigManager {
 
-    private static final Log LOG = LogFactory.getLog( ConfigManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConfigManager.class );
     private static final String PROP_FILE = "tibco_connection.properties";
 
     // here we pop all of the properties that we wish to manage

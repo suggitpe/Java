@@ -15,8 +15,8 @@ import javax.naming.InitialContext;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a very simple publisher class, that will send a text message to a topic on a broker.
@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SimplePublisher {
 
-    private static final Log LOG = LogFactory.getLog( SimplePublisher.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SimplePublisher.class );
 
     /**
      * @param destName

@@ -6,14 +6,14 @@ package org.suggs.sandbox.swt.fileexplorer;
 
 import java.io.File;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.program.Program;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This action will allow us to open a file/directory
@@ -23,7 +23,7 @@ import org.eclipse.swt.program.Program;
  */
 public class OpenAction extends Action implements ISelectionChangedListener {
 
-    private static final Log LOG = LogFactory.getLog( OpenAction.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OpenAction.class );
 
     private Explorer explorer;
 

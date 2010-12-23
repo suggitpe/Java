@@ -17,8 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract class for the temperature guage demol
@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class AbstractTemperatureGUI implements Observer {
 
-    private static final Log LOG = LogFactory.getLog( AbstractTemperatureGUI.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractTemperatureGUI.class );
 
     private String label;
     private TemperatureModel model;

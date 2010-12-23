@@ -8,8 +8,6 @@ import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.io.CasePreservingResolver;
@@ -18,6 +16,8 @@ import org.jbehave.core.io.StoryPathResolver;
 import org.jbehave.core.junit.JUnitStory;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InstanceStepsFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract class to maintain the key facets of the story. This will only allow us to run one story at a time.
@@ -28,7 +28,7 @@ import org.jbehave.core.steps.InstanceStepsFactory;
 public abstract class TraderStory extends JUnitStory {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TraderStory.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TraderStory.class );
 
     /**
      * Constructs a new instance.

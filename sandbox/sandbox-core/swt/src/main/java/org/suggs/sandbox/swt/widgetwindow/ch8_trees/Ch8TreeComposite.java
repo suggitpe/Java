@@ -7,14 +7,14 @@ package org.suggs.sandbox.swt.widgetwindow.ch8_trees;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * simple class to show how a tree is composed with a content handler and a tree viewer. This is all about
@@ -25,7 +25,7 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class Ch8TreeComposite extends Composite {
 
-    private static final Log LOG = LogFactory.getLog( Ch8TreeComposite.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Ch8TreeComposite.class );
     private static final int[] SELECTION_STYLE = { SWT.SINGLE, SWT.MULTI };
     private static final int[] CHECK_STYLE = { SWT.NONE, SWT.CHECK };
 

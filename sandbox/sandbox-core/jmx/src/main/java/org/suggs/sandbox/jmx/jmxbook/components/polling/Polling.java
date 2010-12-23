@@ -9,8 +9,8 @@ import javax.management.MBeanNotificationInfo;
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Runnable polling MBean impl
@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Polling extends NotificationBroadcasterSupport implements PollingMBean, Runnable {
 
-    private static final Log LOG = LogFactory.getLog( Polling.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Polling.class );
 
     private boolean stop = true;
     private int index = 0;

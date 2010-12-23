@@ -7,14 +7,14 @@ package org.suggs.sandbox.swt.fileexplorer;
 import java.io.File;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This action will copy all of the absolute paths of the selected files into the clipboard
@@ -24,7 +24,7 @@ import org.eclipse.swt.dnd.Transfer;
  */
 public class CopyFileNamesToClipboardAction extends Action {
 
-    private static final Log LOG = LogFactory.getLog( CopyFileNamesToClipboardAction.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CopyFileNamesToClipboardAction.class );
 
     private Explorer window;
 

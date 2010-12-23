@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder.simple;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Base class that will print a value (three) when instantiated.
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SuperClass {
 
-    private static final Log LOG = LogFactory.getLog( SuperClass.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SuperClass.class );
 
     /**
      * Constructs a new instance.

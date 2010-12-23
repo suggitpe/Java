@@ -7,8 +7,8 @@ package org.suggs.sandbox.oddsandsods.initialisationorder.basic;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to show how all of the differing construction options take order
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TestClass {
 
-    private static final Log LOG = LogFactory.getLog( TestClass.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TestClass.class );
     static final ReferenceClass REF = new ReferenceClass( "static member" );
     static final List<ReferenceClass> LIST = new ArrayList<ReferenceClass>();
 

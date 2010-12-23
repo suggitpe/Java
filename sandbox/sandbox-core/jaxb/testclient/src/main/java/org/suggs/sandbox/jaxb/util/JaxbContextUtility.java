@@ -18,8 +18,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 /**
@@ -31,7 +31,7 @@ import org.xml.sax.SAXException;
  */
 public final class JaxbContextUtility {
 
-    private static final Log LOG = LogFactory.getLog( JaxbContextUtility.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JaxbContextUtility.class );
 
     private static final JaxbContextUtility INSTANCE = new JaxbContextUtility();
 

@@ -19,6 +19,7 @@ import org.hibernate.Session;
  */
 public abstract class AbstractHibernateMessageIntegrationTest extends AbstractSimpleHibernateIntegrationTest<Long, Message> {
 
+    @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( AbstractHibernateMessageIntegrationTest.class );
 
     /**

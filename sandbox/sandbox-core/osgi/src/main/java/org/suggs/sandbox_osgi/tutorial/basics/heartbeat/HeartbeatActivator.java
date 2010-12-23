@@ -5,10 +5,10 @@ package org.suggs.sandbox_osgi.tutorial.basics.heartbeat;
  * 
  */
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Activator that will spawn a new thread to pump out a heartbeat (ie logging)
@@ -18,7 +18,7 @@ import org.osgi.framework.BundleContext;
  */
 public class HeartbeatActivator implements BundleActivator {
 
-    private static final Log LOG = LogFactory.getLog( HeartbeatActivator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HeartbeatActivator.class );
     private static final long SLEEP_TIME = 5000;
     private Thread thread;
 

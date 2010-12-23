@@ -4,8 +4,6 @@
  */
 package org.suggs.sandbox.jbehave.support;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.failures.PassingUponPendingStep;
 import org.jbehave.core.failures.RethrowingFailure;
@@ -20,6 +18,8 @@ import org.jbehave.core.steps.MarkUnmatchedStepsAsPending;
 import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.core.steps.StepFinder;
 import org.jbehave.paranamer.NullParanamer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a useful configuration that should/could be used throughout the jbehave stories that I employ.
@@ -30,7 +30,7 @@ import org.jbehave.paranamer.NullParanamer;
 public class SuggsMostUsefulConfiguration extends Configuration {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( SuggsMostUsefulConfiguration.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SuggsMostUsefulConfiguration.class );
 
     /**
      * Constructs a new instance.

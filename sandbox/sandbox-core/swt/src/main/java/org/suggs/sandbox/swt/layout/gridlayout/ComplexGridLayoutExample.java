@@ -4,8 +4,6 @@
  */
 package org.suggs.sandbox.swt.layout.gridlayout;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
@@ -25,6 +23,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class aims to show a varying range of layouts and SWT widgets that can be aranged on a GUI canvas
@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Text;
  */
 public final class ComplexGridLayoutExample {
 
-    private static final Log LOG = LogFactory.getLog( ComplexGridLayoutExample.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ComplexGridLayoutExample.class );
 
     private static Display display;
     private static Shell shell;
@@ -197,7 +197,7 @@ public final class ComplexGridLayoutExample {
                     buff.append( "\t" ).append( s ).append( "\n" );
                 }
 
-                LOG.info( buff );
+                LOG.info( buff.toString() );
             }
         } );
 

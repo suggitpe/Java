@@ -7,9 +7,9 @@ package org.suggs.sandbox.jbehave.basicscenario.injectablestories;
 import org.suggs.sandbox.jbehave.basicscenario.steps.GridSteps;
 import org.suggs.sandbox.jbehave.support.AbstractInjectableStoryEmbedder;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.annotations.UsingSteps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Annotated version of the game of life story.
@@ -21,7 +21,7 @@ import org.jbehave.core.annotations.UsingSteps;
 public class ICanToggleACellUsingAnnotatedStory extends AbstractInjectableStoryEmbedder {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( ICanToggleACellUsingAnnotatedStory.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ICanToggleACellUsingAnnotatedStory.class );
 
     /**
      * @see org.suggs.sandbox.jbehave.support.AbstractInjectableStoryEmbedder#doGetStoryRegex()

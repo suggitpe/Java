@@ -6,13 +6,13 @@ package org.suggs.sandbox.jbehave.trader.steps;
 
 import org.suggs.sandbox.jbehave.trader.Stock;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
 public class TraderSteps {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TraderSteps.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TraderSteps.class );
 
     private Stock stock;
 

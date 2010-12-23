@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder.basic;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for ReferenceClass
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class ReferenceClass {
 
-    private static final Log LOG = LogFactory.getLog( ReferenceClass.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ReferenceClass.class );
 
     /**
      * Constructs a new instance.

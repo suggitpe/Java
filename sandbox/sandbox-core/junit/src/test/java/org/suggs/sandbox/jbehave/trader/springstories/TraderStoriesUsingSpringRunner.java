@@ -7,8 +7,6 @@ package org.suggs.sandbox.jbehave.trader.springstories;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;
 import org.jbehave.core.annotations.UsingEmbedder;
@@ -20,6 +18,8 @@ import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Execute the stories using a spring junt4 runner
@@ -34,7 +34,7 @@ import org.junit.runner.RunWith;
 public class TraderStoriesUsingSpringRunner extends InjectableEmbedder {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TraderStoriesUsingSpringRunner.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TraderStoriesUsingSpringRunner.class );
 
     /**
      * @see org.jbehave.core.Embeddable#run()

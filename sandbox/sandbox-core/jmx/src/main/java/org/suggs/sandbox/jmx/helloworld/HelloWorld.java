@@ -7,8 +7,8 @@ package org.suggs.sandbox.jmx.helloworld;
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Hello World MBean implementation
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class HelloWorld extends NotificationBroadcasterSupport implements HelloWorldMBean {
 
-    private static final Log LOG = LogFactory.getLog( HelloWorld.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HelloWorld.class );
 
     private String greeting;
 

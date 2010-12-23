@@ -4,13 +4,13 @@
  */
 package org.suggs.sandbox.swt.layout.gridlayout;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This example show us a very simple way to create a grid layout based dialog.
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public final class SimpleGridLayoutExample {
 
-    private static final Log LOG = LogFactory.getLog( SimpleGridLayoutExample.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SimpleGridLayoutExample.class );
 
     private SimpleGridLayoutExample() {}
 

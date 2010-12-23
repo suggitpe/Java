@@ -4,8 +4,6 @@
  */
 package org.suggs.sandbox.swt.treesntables.tableviewer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -19,6 +17,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for PlayerViewer
@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.TableColumn;
  */
 public class PlayerViewer extends ApplicationWindow {
 
-    private static final Log LOG = LogFactory.getLog( PlayerViewer.class );
+    private static final Logger LOG = LoggerFactory.getLogger( PlayerViewer.class );
 
     /**
      * Constructs a new instance.

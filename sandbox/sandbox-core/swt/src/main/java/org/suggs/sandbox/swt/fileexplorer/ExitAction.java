@@ -4,11 +4,11 @@
  */
 package org.suggs.sandbox.swt.fileexplorer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.window.ApplicationWindow;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the action class for exiting the main application.
@@ -18,7 +18,7 @@ import org.eclipse.jface.window.ApplicationWindow;
  */
 public class ExitAction extends Action {
 
-    private static final Log LOG = LogFactory.getLog( ExitAction.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ExitAction.class );
 
     private ApplicationWindow appWin;
 

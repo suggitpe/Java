@@ -4,13 +4,13 @@
  */
 package org.suggs.sandbox.swt.layout.rowlayout;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This example is a very simple implementation of the RowLayout
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public final class SimpleRowLayoutExample {
 
-    private static final Log LOG = LogFactory.getLog( SimpleRowLayoutExample.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SimpleRowLayoutExample.class );
 
     private SimpleRowLayoutExample() {}
 

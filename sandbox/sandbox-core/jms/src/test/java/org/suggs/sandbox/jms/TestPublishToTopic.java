@@ -4,9 +4,9 @@
  */
 package org.suggs.sandbox.jms;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test to verify that we can send to a topic on a known broker.
@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class TestPublishToTopic {
 
-    private static final Log LOG = LogFactory.getLog( TestPublishToTopic.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TestPublishToTopic.class );
 
     /**
      * @throws Exception

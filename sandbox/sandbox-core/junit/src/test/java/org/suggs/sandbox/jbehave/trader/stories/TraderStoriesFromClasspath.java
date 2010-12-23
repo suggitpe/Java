@@ -11,8 +11,6 @@ import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.io.CodeLocations;
@@ -21,6 +19,8 @@ import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InstanceStepsFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Allows us to run a collection of stories.
@@ -31,7 +31,7 @@ import org.jbehave.core.steps.InstanceStepsFactory;
 public class TraderStoriesFromClasspath extends JUnitStories {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TraderStoriesFromClasspath.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TraderStoriesFromClasspath.class );
 
     @Override
     public List<CandidateSteps> candidateSteps() {

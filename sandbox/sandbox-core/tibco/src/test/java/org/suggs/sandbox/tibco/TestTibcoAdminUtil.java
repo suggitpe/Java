@@ -6,9 +6,9 @@ package org.suggs.sandbox.tibco;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for TestTibcoAdminUtil
@@ -18,7 +18,7 @@ import org.junit.Test;
  */
 public class TestTibcoAdminUtil {
 
-    private static final Log LOG = LogFactory.getLog( TestTibcoAdminUtil.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TestTibcoAdminUtil.class );
 
     @Test
     public void testGetConectionFactories() {

@@ -18,8 +18,8 @@ import javax.management.remote.JMXConnectorServer;
 import javax.management.remote.JMXConnectorServerFactory;
 import javax.management.remote.JMXServiceURL;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.jdmk.comm.HtmlAdaptorServer;
 
@@ -31,7 +31,7 @@ import com.sun.jdmk.comm.HtmlAdaptorServer;
  */
 public class JmxBookAgent {
 
-    private static final Log LOG = LogFactory.getLog( JmxBookAgent.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmxBookAgent.class );
 
     private MBeanServer server;
 

@@ -8,10 +8,10 @@ import org.suggs.sandbox.swt.widgetwindow.ch11_wizards.wizardpages.ChooseDirecto
 import org.suggs.sandbox.swt.widgetwindow.ch11_wizards.wizardpages.DirectoryPage;
 import org.suggs.sandbox.swt.widgetwindow.ch11_wizards.wizardpages.SummaryPage;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author suggitpe
@@ -19,7 +19,7 @@ import org.eclipse.jface.wizard.Wizard;
  */
 public class ProjectWizard extends Wizard {
 
-    private static final Log LOG = LogFactory.getLog( ProjectWizard.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ProjectWizard.class );
 
     /**
      * Constructs a new instance.

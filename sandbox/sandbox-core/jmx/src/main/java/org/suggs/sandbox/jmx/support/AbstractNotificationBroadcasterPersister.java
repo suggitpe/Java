@@ -12,8 +12,8 @@ import java.sql.SQLException;
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract base class that adds in the functionality to persist notifications before they are broadcasted.
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class AbstractNotificationBroadcasterPersister extends NotificationBroadcasterSupport {
 
-    private static final Log LOG = LogFactory.getLog( AbstractNotificationBroadcasterPersister.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractNotificationBroadcasterPersister.class );
     private static final String NOTIF_INSERT_SQL = "insert into notifications (message, sequence_number, source, timestamp, type, user_data values (?,?,?,?,?,?)";
 
     private Connection connection;

@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.jbehave.basicscenario;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for Game
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Game {
 
-    private static final Log LOG = LogFactory.getLog( Game.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Game.class );
 
     private char[][] grid;
 

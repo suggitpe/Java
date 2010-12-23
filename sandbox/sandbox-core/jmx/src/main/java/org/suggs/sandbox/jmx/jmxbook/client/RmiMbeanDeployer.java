@@ -14,8 +14,8 @@ import javax.management.MBeanServerConnection;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class that will allow you to connect to an MBean server and deploy an MBean.
@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class RmiMbeanDeployer {
 
-    private static final Log LOG = LogFactory.getLog( RmiMbeanDeployer.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RmiMbeanDeployer.class );
 
     private RmiMbeanDeployer() {}
 

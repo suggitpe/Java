@@ -18,8 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to represent a Table Menu
@@ -217,13 +217,12 @@ public class TableMenu extends JFrame {
         this.setContentPane( getJContentPane() );
         this.setTitle( "Application" );
     }
-
 }
 
 class ExampleTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -8613734897280274338L;
-    private static final Log LOG = LogFactory.getLog( ExampleTableModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ExampleTableModel.class );
 
     private static class Item {
 

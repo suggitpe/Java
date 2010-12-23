@@ -10,8 +10,8 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * MBean managed property manager
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PropertyManager implements PropertyManagerMBean {
 
-    private static final Log LOG = LogFactory.getLog( PropertyManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( PropertyManager.class );
     private Properties properties;
 
     // non static initialiser

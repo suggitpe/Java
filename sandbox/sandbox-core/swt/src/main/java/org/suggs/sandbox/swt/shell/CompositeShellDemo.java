@@ -4,13 +4,13 @@
  */
 package org.suggs.sandbox.swt.shell;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for CompositeShellDemo
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public final class CompositeShellDemo {
 
-    private static final Log LOG = LogFactory.getLog( CompositeShellDemo.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CompositeShellDemo.class );
 
     private CompositeShellDemo() {}
 

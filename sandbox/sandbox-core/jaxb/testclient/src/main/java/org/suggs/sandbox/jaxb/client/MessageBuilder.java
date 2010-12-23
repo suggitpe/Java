@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.jaxb.client;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for MessageBuilder
@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
 public final class MessageBuilder {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( MessageBuilder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MessageBuilder.class );
 
     private MessageBuilder() {}
 

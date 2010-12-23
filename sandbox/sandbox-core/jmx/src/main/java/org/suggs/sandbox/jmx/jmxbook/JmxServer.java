@@ -10,8 +10,8 @@ import org.suggs.sandbox.jmx.jmxbook.config.JmxBookConfig;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to wrap up the execution of the jmx book agent
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class JmxServer {
 
-    private static final Log LOG = LogFactory.getLog( JmxServer.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmxServer.class );
 
     private JmxServer() {}
 

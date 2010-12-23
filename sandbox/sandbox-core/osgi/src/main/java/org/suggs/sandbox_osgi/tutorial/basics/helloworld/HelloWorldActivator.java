@@ -4,10 +4,10 @@
  */
 package org.suggs.sandbox_osgi.tutorial.basics.helloworld;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Activator for the Hello World stuff
@@ -17,7 +17,7 @@ import org.osgi.framework.BundleContext;
  */
 public class HelloWorldActivator implements BundleActivator {
 
-    private static final Log LOG = LogFactory.getLog( HelloWorldActivator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HelloWorldActivator.class );
 
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)

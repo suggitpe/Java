@@ -6,11 +6,11 @@ package org.suggs.sandbox.jbehave.basicscenario.steps;
 
 import org.suggs.sandbox.jbehave.basicscenario.Game;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
 public class GridSteps {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( GridSteps.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GridSteps.class );
 
     private Game game;
 

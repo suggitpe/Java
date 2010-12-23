@@ -11,8 +11,8 @@ import javax.management.Notification;
 import javax.management.NotificationListener;
 import javax.management.ObjectName;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.jdmk.comm.HtmlAdaptorServer;
 
@@ -24,7 +24,7 @@ import com.sun.jdmk.comm.HtmlAdaptorServer;
  */
 public class HelloAgent implements NotificationListener {
 
-    private static final Log LOG = LogFactory.getLog( HelloAgent.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HelloAgent.class );
     private static final int ADAPTER_PORT = 9092;
 
     private MBeanServer server;

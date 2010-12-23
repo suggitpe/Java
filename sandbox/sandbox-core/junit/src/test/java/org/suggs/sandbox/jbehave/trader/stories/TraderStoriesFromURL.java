@@ -7,12 +7,12 @@ package org.suggs.sandbox.jbehave.trader.stories;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.io.CodeLocations;
 import org.jbehave.core.io.LoadFromURL;
 import org.jbehave.core.io.StoryFinder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Modification to the classpath located story finder in that it uses a URL to locate the stories.
@@ -22,7 +22,7 @@ import org.jbehave.core.io.StoryFinder;
  */
 public class TraderStoriesFromURL extends TraderStoriesFromClasspath {
 
-    private static final Log LOG = LogFactory.getLog( TraderStoriesFromURL.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TraderStoriesFromURL.class );
 
     @Override
     public Configuration configuration() {

@@ -4,13 +4,13 @@
  */
 package org.suggs.sandbox.swt.layout.filllayout;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This example is a very simple implementation of the FillLayout
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public final class SimpleFillLayoutExample {
 
-    private static final Log LOG = LogFactory.getLog( SimpleFillLayoutExample.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SimpleFillLayoutExample.class );
 
     private SimpleFillLayoutExample() {}
 

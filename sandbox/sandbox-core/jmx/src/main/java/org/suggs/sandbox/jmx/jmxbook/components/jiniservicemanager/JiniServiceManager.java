@@ -30,8 +30,8 @@ import javax.management.MBeanNotificationInfo;
 import javax.management.MBeanOperationInfo;
 import javax.management.MBeanParameterInfo;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to manage JINI services. This is to be used only as an example dynamic bean class rather than a fully
@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class JiniServiceManager implements DynamicMBean {
 
-    private static final Log LOG = LogFactory.getLog( JiniServiceManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JiniServiceManager.class );
     private static final String JINI_INTERFACE_NAME = "org.suggs.sandbox.jmx.jmxbook.components.jiniservicemanager.IManagedJiniService";
 
     private IManagedJiniService serviceRef;

@@ -12,8 +12,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * MBean class to encapsulate a datasource functionality
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DBSource implements DBSourceMBean {
 
-    private static final Log LOG = LogFactory.getLog( DBSource.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DBSource.class );
 
     private DataSource dataSource;
     private boolean commit = false;

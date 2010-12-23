@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Singleton class to encapsulate the properties for the JmxBook application
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class JmxBookConfig {
 
-    private static final Log LOG = LogFactory.getLog( JmxBookConfig.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmxBookConfig.class );
 
     private static JmxBookConfig instance;
 

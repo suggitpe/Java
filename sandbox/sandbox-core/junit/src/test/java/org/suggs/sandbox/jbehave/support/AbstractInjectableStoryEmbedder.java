@@ -10,8 +10,6 @@ import org.suggs.sandbox.jbehave.support.AbstractInjectableStoryEmbedder.MyRegex
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;
 import org.jbehave.core.annotations.UsingEmbedder;
@@ -24,6 +22,8 @@ import org.jbehave.core.parsers.RegexPrefixCapturingPatternParser;
 import org.jbehave.core.steps.ParameterConverters.DateConverter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract class that will maintain all of the basic configuration for an injectable embedder.
@@ -40,7 +40,7 @@ import org.junit.runner.RunWith;
 public abstract class AbstractInjectableStoryEmbedder extends InjectableEmbedder {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( AbstractInjectableStoryEmbedder.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractInjectableStoryEmbedder.class );
 
     private static final String STORY_LOCATION = CodeLocations.codeLocationFromPath( "src/test/resources" )
         .getFile();

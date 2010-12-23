@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.jbehave.trader;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to represent
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Stock {
 
-    private static final Log LOG = LogFactory.getLog( Stock.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Stock.class );
 
     private String stockName;
     private Double threshold;
