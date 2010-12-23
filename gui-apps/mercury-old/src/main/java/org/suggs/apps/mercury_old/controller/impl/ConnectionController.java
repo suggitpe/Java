@@ -20,8 +20,8 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the main controller for theconnection part of the GUI.
@@ -31,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ConnectionController implements IConnectionController {
 
-    private static final Log LOG = LogFactory.getLog( ConnectionController.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConnectionController.class );
     private static final ImageIcon IMG = new ImageIcon( "jms.gif" );
 
     private IConnectionStore connStoreModel;

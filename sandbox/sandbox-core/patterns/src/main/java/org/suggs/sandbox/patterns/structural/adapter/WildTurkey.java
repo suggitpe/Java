@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.structural.adapter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to represent a turkey
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WildTurkey implements ITurkey {
 
-    private static final Log LOG = LogFactory.getLog( WildTurkey.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WildTurkey.class );
 
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.ITurkey#fly()

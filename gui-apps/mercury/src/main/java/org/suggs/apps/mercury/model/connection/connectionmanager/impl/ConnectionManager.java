@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the main impl of the IConnectionManager code. The main aim of this class is to provide the glue in
@@ -31,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class ConnectionManager implements IConnectionManager, IConnectionStoreChangeListener {
 
-    private static final Log LOG = LogFactory.getLog( ConnectionManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConnectionManager.class );
 
     private static IConnectionManager instance;
     private IConnectionStore connStore;

@@ -6,8 +6,8 @@ package com.ubs.orca.orcabridge.processors;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,7 +32,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-orca-message-sender-spring-injection-test.xml" })
 public class OrcaMessageSenderSpringInjectionTest {
 
-    private static final Log LOG = LogFactory.getLog( OrcaMessageSenderSpringInjectionTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OrcaMessageSenderSpringInjectionTest.class );
 
     @Resource(name = "orcaMessageSender")
     private IMessageProcessor orcaMessageSender;

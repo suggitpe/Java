@@ -12,8 +12,8 @@ import org.suggs.sandbox.patterns.structural.decorator.beveragedecorator.Mocha;
 import org.suggs.sandbox.patterns.structural.decorator.beveragedecorator.SteamedMilk;
 import org.suggs.sandbox.patterns.structural.decorator.beveragedecorator.WhippedMilk;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test;
  */
 public class DecoratorTestCase extends AbstractPatternTestCase {
 
-    private static final Log LOG = LogFactory.getLog( DecoratorTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DecoratorTestCase.class );
 
     @Test
     public void testNormalEspresso() {

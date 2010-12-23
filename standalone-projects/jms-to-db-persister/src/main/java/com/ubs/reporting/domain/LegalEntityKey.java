@@ -9,8 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the composite key for a Legal Entity.
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 public class LegalEntityKey implements Serializable {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( LegalEntityKey.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LegalEntityKey.class );
     private static final long serialVersionUID = -668455016806443178L;
 
     protected static final String ID_COLUMN_NAME = "LE_ID";

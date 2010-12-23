@@ -11,8 +11,8 @@ import java.util.Map;
 
 import javax.xml.transform.Templates;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is an extension of the parent XSLT helper in that it overrides the getTemplates method to
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CachedXsltTransformerUtil extends XsltTransformerUtil {
 
-    private static final Log LOG = LogFactory.getLog( CachedXsltTransformerUtil.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CachedXsltTransformerUtil.class );
 
     private Map<String, Templates> templateCache = new HashMap<String, Templates>();
 

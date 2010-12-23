@@ -9,8 +9,8 @@ import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IState;
 
 import java.util.Random;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * State to represent when the gumball machine has a quarter.
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 public class HasQuarterState implements IState {
 
     private static final long serialVersionUID = -3183850881728001111L;
-    private static final Log LOG = LogFactory.getLog( HasQuarterState.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HasQuarterState.class );
     private GumballMachine gumballMachine;
     private Random randomWinner = new Random( System.currentTimeMillis() );
 

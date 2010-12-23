@@ -12,8 +12,8 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Runnable class that allows us to run the underlying server implementation.
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class GumballMachineServer {
 
-    private static final Log LOG = LogFactory.getLog( GumballMachineServer.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GumballMachineServer.class );
 
     private static final int DEF_INVENTORY = 10;
     private static final int RMI_REG_PORT = 7234;

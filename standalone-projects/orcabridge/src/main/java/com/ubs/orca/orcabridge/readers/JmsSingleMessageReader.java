@@ -4,8 +4,8 @@
  */
 package com.ubs.orca.orcabridge.readers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.OrcaBridgeException;
 import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
@@ -23,7 +23,7 @@ import com.ubs.orca.orcabridge.jmsclient.impl.JmsDurableReaderAction;
  */
 public class JmsSingleMessageReader extends AbstractMessageReader {
 
-    private static final Log LOG = LogFactory.getLog( JmsSingleMessageReader.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsSingleMessageReader.class );
 
     private IJmsClient jmsClient;
     private String durableName;

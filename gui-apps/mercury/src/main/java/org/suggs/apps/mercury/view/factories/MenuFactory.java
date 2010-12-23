@@ -10,8 +10,8 @@ import org.suggs.apps.mercury.view.IMenuFactory;
 import org.suggs.apps.mercury.view.actions.ActionManager;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jface.action.MenuManager;
 
 /**
@@ -23,7 +23,7 @@ import org.eclipse.jface.action.MenuManager;
  */
 public class MenuFactory implements IMenuFactory {
 
-    private static final Log LOG = LogFactory.getLog( MenuFactory.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MenuFactory.class );
     private IActionManager actionManager;
 
     /**

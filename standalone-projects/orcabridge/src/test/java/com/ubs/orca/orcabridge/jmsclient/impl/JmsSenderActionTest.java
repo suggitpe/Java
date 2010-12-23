@@ -10,8 +10,8 @@ import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.Before;
@@ -34,7 +34,7 @@ import static org.easymock.EasyMock.expectLastCall;
  */
 public class JmsSenderActionTest {
 
-    private static final Log LOG = LogFactory.getLog( JmsSenderActionTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsSenderActionTest.class );
 
     private IMocksControl ctrl;
     private IJmsAction jmsSenderAction;

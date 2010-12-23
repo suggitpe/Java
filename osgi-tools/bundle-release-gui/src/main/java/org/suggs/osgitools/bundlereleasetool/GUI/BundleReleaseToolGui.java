@@ -44,8 +44,8 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Main frame for the release tool GUI.
@@ -55,7 +55,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class BundleReleaseToolGui {
 
-    private static final Log LOG = LogFactory.getLog( BundleReleaseToolGui.class );
+    private static final Logger LOG = LoggerFactory.getLogger( BundleReleaseToolGui.class );
 
     private JFrame desktopFrame = new JFrame( "Bundle release tool" );
     private boolean exitOnClose;

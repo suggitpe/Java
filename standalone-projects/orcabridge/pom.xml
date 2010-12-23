@@ -110,16 +110,16 @@
 
     <!-- this is where we define the high level dependencies (ie those that are not project specific) -->
     <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
         <!-- main compile time dependencies -->
         <dependency>
             <groupId>jmock</groupId>
             <artifactId>jmock</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.ubs.orca</groupId>
@@ -161,6 +161,11 @@
             <artifactId>log4j</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- -->
         <dependency>
             <groupId>junit</groupId>
@@ -177,6 +182,16 @@
     <!-- This is where we define all of the application dependencies version requirements -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.6.1</version>
+            </dependency>
             <dependency>
                 <groupId>jmock</groupId>
                 <artifactId>jmock</artifactId>

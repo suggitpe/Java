@@ -18,8 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Persistable domain class for a Legal Entity.
@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
 public class LegalEntity extends AbstractLegalEntity {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( LegalEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LegalEntity.class );
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumns({

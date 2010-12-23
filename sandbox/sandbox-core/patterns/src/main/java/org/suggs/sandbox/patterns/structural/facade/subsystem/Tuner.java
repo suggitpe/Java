@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.structural.facade.subsystem;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a tuner
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Tuner {
 
-    private static final Log LOG = LogFactory.getLog( Tuner.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Tuner.class );
 
     public void off() {
         LOG.debug( "Tuner off" );

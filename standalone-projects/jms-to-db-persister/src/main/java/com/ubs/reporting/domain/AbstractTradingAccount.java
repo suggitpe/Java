@@ -8,8 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract persistable domain class for all Trading Account entities.
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 public abstract class AbstractTradingAccount extends AbstractStagedEntity {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( AbstractTradingAccount.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractTradingAccount.class );
 
     @Id
     private TradingAccountKey tradingAccountKey;

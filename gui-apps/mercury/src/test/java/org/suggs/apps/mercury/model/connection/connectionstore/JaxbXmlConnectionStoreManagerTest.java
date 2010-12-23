@@ -15,8 +15,8 @@ import java.util.Map;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +29,7 @@ import org.junit.Test;
  */
 public class JaxbXmlConnectionStoreManagerTest {
 
-    private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManagerTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JaxbXmlConnectionStoreManagerTest.class );
     private JaxbXmlConnectionStoreManager connectionStoreManager;
     private IFileManager mockFileManager;
 

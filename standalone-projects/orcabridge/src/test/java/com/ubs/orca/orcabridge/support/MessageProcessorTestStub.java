@@ -4,8 +4,8 @@
  */
 package com.ubs.orca.orcabridge.support;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.IMessageProcessor;
@@ -18,7 +18,7 @@ import com.ubs.orca.orcabridge.IMessageProcessor;
  */
 public class MessageProcessorTestStub implements IMessageProcessor {
 
-    private static final Log LOG = LogFactory.getLog( MessageProcessorTestStub.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MessageProcessorTestStub.class );
 
     /**
      * @see com.ubs.orca.orcabridge.IMessageProcessor#processMessage(com.ubs.orca.orcabridge.IMessageFacade)

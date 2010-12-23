@@ -4,8 +4,8 @@
  */
 package com.ubs.orca.orcabridge.readers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.client.api.IOrcaClient;
 import com.ubs.orca.client.api.OrcaException;
@@ -20,7 +20,7 @@ import com.ubs.orca.orcabridge.OrcaBridgeException;
  */
 public class OrcaSingleMessageReader extends AbstractMessageReader {
 
-    private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReader.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OrcaSingleMessageReader.class );
 
     private IOrcaClient orcaClient;
 

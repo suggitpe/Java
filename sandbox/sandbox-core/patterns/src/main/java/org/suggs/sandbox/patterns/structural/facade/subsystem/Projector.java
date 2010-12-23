@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.structural.facade.subsystem;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the screen
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Projector {
 
-    private static final Log LOG = LogFactory.getLog( Projector.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Projector.class );
 
     public void wideScreenMode() {
         LOG.debug( "Projector in wide screen" );

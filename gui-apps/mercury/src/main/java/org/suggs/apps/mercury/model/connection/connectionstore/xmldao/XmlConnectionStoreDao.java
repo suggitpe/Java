@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a DAO implementation from which we can manage the underlying XML storage. This delegates to an XML
@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class XmlConnectionStoreDao implements IConnectionStore {
 
-    private static final Log LOG = LogFactory.getLog( XmlConnectionStoreDao.class );
+    private static final Logger LOG = LoggerFactory.getLogger( XmlConnectionStoreDao.class );
 
     private IXmlConnectionStoreManager xmlStore;
     private List<IConnectionStoreChangeListener> listeners = new ArrayList<IConnectionStoreChangeListener>();

@@ -17,8 +17,8 @@ import org.suggs.apps.mercury.view.wizards.createconnection.pages.WelcomePage;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
@@ -30,7 +30,7 @@ import org.eclipse.jface.wizard.Wizard;
  */
 public class CreateConnectionWizard extends Wizard {
 
-    private static final Log LOG = LogFactory.getLog( CreateConnectionWizard.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CreateConnectionWizard.class );
     private ConnectionDetails connDetails;
 
     public static final String CONN_NAME = "ConnectionContext Name";

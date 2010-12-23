@@ -12,8 +12,8 @@ import org.suggs.sandbox.patterns.behavioural.state.connection.TransitionManager
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class used to encapsulate a the state of the context. It is used by the state machine to derive meaning to
@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class State implements IState {
 
-    private static final Log LOG = LogFactory.getLog( State.class );
+    private static final Logger LOG = LoggerFactory.getLogger( State.class );
 
     private String stateName;
     private List<ITransition> transitions;

@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.behavioural.command.receivers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a garage door
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GarageDoor {
 
-    private static final Log LOG = LogFactory.getLog( GarageDoor.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GarageDoor.class );
     private String location;
 
     /**

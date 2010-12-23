@@ -15,8 +15,8 @@ import java.util.Set;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +29,7 @@ import org.junit.Test;
  */
 public class XmlConnectionStoreDaoTest {
 
-    private static final Log LOG = LogFactory.getLog( XmlConnectionStoreDaoTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( XmlConnectionStoreDaoTest.class );
 
     private XmlConnectionStoreDao connectionStoreDao;
     private IXmlConnectionStoreManager mockConnectionStoreManager;

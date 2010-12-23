@@ -19,8 +19,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.validation.SchemaFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
@@ -36,7 +36,7 @@ import org.xml.sax.SAXParseException;
  */
 public class DomParserUtil implements IDomParserUtil {
 
-    private static final Log LOG = LogFactory.getLog( DomParserUtil.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DomParserUtil.class );
 
     private Object lock = new Object();
     private Map<String, DocumentBuilder> builderMap = new HashMap<String, DocumentBuilder>();

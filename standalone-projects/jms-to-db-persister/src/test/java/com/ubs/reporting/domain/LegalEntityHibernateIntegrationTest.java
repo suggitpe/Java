@@ -4,8 +4,8 @@
  */
 package com.ubs.reporting.domain;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 import com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest;
@@ -28,7 +28,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:spring/hibernate-masterfiles.xml" })
 public class LegalEntityHibernateIntegrationTest extends AbstractSimpleHibernateIntegrationTest<LegalEntityKey, LegalEntity> {
 
-    private static final Log LOG = LogFactory.getLog( LegalEntityHibernateIntegrationTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LegalEntityHibernateIntegrationTest.class );
 
     /**
      * @see com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)

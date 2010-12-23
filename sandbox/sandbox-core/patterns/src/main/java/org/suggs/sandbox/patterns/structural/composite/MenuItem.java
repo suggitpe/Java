@@ -8,8 +8,8 @@ import org.suggs.sandbox.patterns.structural.composite.iterators.NullIterator;
 
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Concrete implementation of a menu component.
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MenuItem extends AbstractMenuComponent {
 
-    private static final Log LOG = LogFactory.getLog( MenuItem.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MenuItem.class );
     private String name;
     private String description;
     private boolean vegetarian;

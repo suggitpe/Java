@@ -13,8 +13,8 @@ import org.suggs.sandbox.patterns.behavioural.state.connection.ITransitionGuard;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the transition route between two states. This class is responsible for all evaluation
@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Transition implements ITransition {
 
-    private static final Log LOG = LogFactory.getLog( Transition.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Transition.class );
 
     private String name;
     private IState startState;

@@ -8,8 +8,8 @@ import org.suggs.apps.mercury.model.util.image.ImageManager;
 
 import java.io.InputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class MercuryImageCanvas extends Canvas {
 
-    private static final Log LOG = LogFactory.getLog( MercuryImageCanvas.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MercuryImageCanvas.class );
     private static final String IMG = "images/mercury.png";
 
     /**

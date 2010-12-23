@@ -10,8 +10,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This invocation handler disallows calls to everything other than the 'set hot or not' method on the person
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class NonOwnerInvocationHandler implements InvocationHandler {
 
-    private static final Log LOG = LogFactory.getLog( NonOwnerInvocationHandler.class );
+    private static final Logger LOG = LoggerFactory.getLogger( NonOwnerInvocationHandler.class );
     private IPerson person;
 
     /**

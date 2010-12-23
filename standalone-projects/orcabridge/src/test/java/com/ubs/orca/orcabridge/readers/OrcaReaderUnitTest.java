@@ -4,8 +4,8 @@
  */
 package com.ubs.orca.orcabridge.readers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -29,7 +29,7 @@ import static org.junit.Assert.fail;
  */
 public class OrcaReaderUnitTest {
 
-    private static final Log LOG = LogFactory.getLog( OrcaReaderUnitTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OrcaReaderUnitTest.class );
     private IMocksControl ctrl;
     private OrcaSingleMessageReader orcaReader;
     private IOrcaClient mockOrcaClient;

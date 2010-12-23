@@ -4,8 +4,8 @@
  */
 package com.ubs.reporting.conffguration;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 import com.ubs.reporting.configuration.ConfigurationManager;
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertThat;
  */
 public class ConfigurationManagerTest {
 
-    private static final Log LOG = LogFactory.getLog( ConfigurationManagerTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConfigurationManagerTest.class );
 
     @Test
     public void doesNotThrowExceptionOnInitialRead() {

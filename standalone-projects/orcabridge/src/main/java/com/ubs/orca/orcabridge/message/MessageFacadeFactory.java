@@ -6,8 +6,8 @@ package com.ubs.orca.orcabridge.message;
 
 import javax.jms.Message;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.common.bus.IOrcaMessage;
 import com.ubs.orca.orcabridge.IMessageFacade;
@@ -20,7 +20,7 @@ import com.ubs.orca.orcabridge.IMessageFacade;
  */
 public final class MessageFacadeFactory {
 
-    private static final Log LOG = LogFactory.getLog( MessageFacadeFactory.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MessageFacadeFactory.class );
 
     /*
      * We have hideen this as we do not want people to create any instances of this class

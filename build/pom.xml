@@ -20,7 +20,7 @@
 
     <scm>
     </scm>
-    
+
     <properties>
         <jbehave.version>3.1.2</jbehave.version>
         <log4j.version>1.2.12</log4j.version>
@@ -376,9 +376,11 @@
     <!-- this is where we define the high level Scribe dependencies (ie those that are not project specific) -->
     <dependencies>
         <!-- main compile time dependencies -->
+        <!-- <dependency> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> <scope>compile</scope> 
+            </dependency> -->
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -507,6 +509,11 @@
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.6.1</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>

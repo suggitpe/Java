@@ -6,8 +6,8 @@ package org.suggs.sandbox.patterns.structural.composite;
 
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The client in the relationship.
@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Waitress {
 
-    private static final Log LOG = LogFactory.getLog( Waitress.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Waitress.class );
     private IMenuComponent allMenus;
 
     /**

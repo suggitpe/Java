@@ -6,8 +6,8 @@ package com.ubs.orca.orcabridge.readers;
 
 import javax.jms.Message;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,7 +31,7 @@ import static org.junit.Assert.fail;
  */
 public class JmsReaderCallbackUnitTest {
 
-    private static final Log LOG = LogFactory.getLog( JmsReaderCallbackUnitTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsReaderCallbackUnitTest.class );
 
     private IMocksControl ctrl;
     private JmsSingleMessageReaderCallback jmsCallback;

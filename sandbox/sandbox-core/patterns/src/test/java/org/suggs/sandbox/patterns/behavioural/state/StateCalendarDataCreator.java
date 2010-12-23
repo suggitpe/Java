@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test class to create a collection of sample data to be used by a different test.
@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 public class StateCalendarDataCreator {
 
     // static logger
-    private static final Log LOG = LogFactory.getLog( StateCalendarDataCreator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateCalendarDataCreator.class );
 
     private static final String DEFAULT_FILE = "data.ser";
     private static final Calendar dateCreator = Calendar.getInstance();

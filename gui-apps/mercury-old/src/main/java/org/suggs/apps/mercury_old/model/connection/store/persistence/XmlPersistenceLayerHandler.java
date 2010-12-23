@@ -9,8 +9,8 @@ import org.suggs.apps.mercury_old.MercuryRuntimeException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -24,7 +24,7 @@ import org.xml.sax.SAXParseException;
  */
 final class XmlPersistenceLayerHandler implements EntityResolver, ErrorHandler {
 
-    private static final Log LOG = LogFactory.getLog( XmlPersistenceLayerHandler.class );
+    private static final Logger LOG = LoggerFactory.getLogger( XmlPersistenceLayerHandler.class );
 
     private boolean failOnError = true;
 

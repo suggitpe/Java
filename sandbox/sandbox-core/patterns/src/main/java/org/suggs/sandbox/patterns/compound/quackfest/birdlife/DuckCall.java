@@ -8,8 +8,8 @@ import org.suggs.sandbox.patterns.compound.quackfest.IQuackable;
 import org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver;
 import org.suggs.sandbox.patterns.compound.quackfest.observer.Observable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Duck call (the type that hunters use) implementation
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DuckCall implements IQuackable {
 
-    private static final Log LOG = LogFactory.getLog( DuckCall.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DuckCall.class );
     private Observable observable;
 
     /**

@@ -6,8 +6,8 @@ package org.suggs.sandbox.patterns.behavioural.command.invokers;
 
 import org.suggs.sandbox.patterns.behavioural.command.ICommand;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Sophisticated command invoker that contains collections of commands
@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RemoteControl {
 
-    private static final Log LOG = LogFactory.getLog( RemoteControl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RemoteControl.class );
 
     private static final int NUM_CMDS = 7;
 

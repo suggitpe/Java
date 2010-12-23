@@ -11,8 +11,8 @@ import java.io.IOException;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -29,7 +29,7 @@ import org.junit.Test;
 public class FileManagerIntegrationTest
 {
 
-    private static final Log LOG = LogFactory.getLog( FileManagerIntegrationTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FileManagerIntegrationTest.class );
     private IFileManager mFileManager_;
     private static final String TEST_ROOT = "/tmp";
     private static final String TEST_DIR = TEST_ROOT + "/test/filetest";

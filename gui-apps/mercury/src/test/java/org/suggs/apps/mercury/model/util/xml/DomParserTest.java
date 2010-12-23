@@ -13,8 +13,8 @@ import java.io.IOException;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,7 @@ import org.w3c.dom.NodeList;
 public class DomParserTest
 {
 
-    private static final Log LOG = LogFactory.getLog( DomParserTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DomParserTest.class );
     private static final String TEST_ROOT = "/tmp";
     private static final String TEST_DIR = TEST_ROOT + "/test/xmltest";
     private static final String TEST_FILE = TEST_DIR + "/dummyXml.xml";

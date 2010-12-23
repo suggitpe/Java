@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a helper class used solely as a home for the builder methods used by the connection store manager.
@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class JaxbXmlConnectionStoreManagerHelper {
 
-    private static final Log LOG = LogFactory.getLog( JaxbXmlConnectionStoreManagerHelper.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JaxbXmlConnectionStoreManagerHelper.class );
 
     /**
      * Hidden constructs a new instance.

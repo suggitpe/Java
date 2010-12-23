@@ -12,8 +12,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * File persistence helper class.
@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 public final class FileLoader {
 
     // static logger
-    private static final Log LOG = LogFactory.getLog( FileLoader.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FileLoader.class );
 
     private FileLoader() {}
 

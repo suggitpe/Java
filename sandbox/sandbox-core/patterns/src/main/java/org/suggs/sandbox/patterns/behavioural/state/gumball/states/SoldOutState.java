@@ -7,8 +7,8 @@ package org.suggs.sandbox.patterns.behavioural.state.gumball.states;
 import org.suggs.sandbox.patterns.behavioural.state.gumball.GumballMachine;
 import org.suggs.sandbox.patterns.behavioural.state.gumball.IState;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * State to represent the gumball machine is out of gumballs
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SoldOutState implements IState {
 
-    private static final Log LOG = LogFactory.getLog( SoldOutState.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SoldOutState.class );
 
     @SuppressWarnings("unused")
     private GumballMachine gumballMachine;

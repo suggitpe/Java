@@ -9,8 +9,8 @@ import org.suggs.sandbox.patterns.behavioural.state.appointments.StateGui;
 
 import java.io.File;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for StateCalendarGuiTest
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 public class StateCalendarGuiTest {
 
     // static logger
-    private static final Log LOG = LogFactory.getLog( StateCalendarGuiTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateCalendarGuiTest.class );
 
     /**
      * Main method

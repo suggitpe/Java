@@ -14,8 +14,8 @@ import org.suggs.apps.mercury.view.panels.MainWindow;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.window.ApplicationWindow;
@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class MercuryMain extends ApplicationWindow {
 
-    private static final Log LOG = LogFactory.getLog( MercuryMain.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MercuryMain.class );
 
     /**
      * Constructs a new instance.

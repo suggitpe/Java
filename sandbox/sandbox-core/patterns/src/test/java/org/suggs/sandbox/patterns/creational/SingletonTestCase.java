@@ -7,8 +7,8 @@ package org.suggs.sandbox.patterns.creational;
 import org.suggs.sandbox.patterns.AbstractPatternTestCase;
 import org.suggs.sandbox.patterns.creational.singleton.SingletonImpl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 /**
@@ -19,7 +19,7 @@ import org.junit.Test;
  */
 public class SingletonTestCase extends AbstractPatternTestCase {
 
-    private static final Log LOG = LogFactory.getLog( SingletonTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SingletonTestCase.class );
 
     @Test
     public void testSingletonCreate() {

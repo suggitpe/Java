@@ -7,8 +7,8 @@ package org.suggs.sandbox.patterns.structural.proxy.remoteproxy.states;
 import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.GumballMachine;
 import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IState;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * State to represent when the client is a winner of an extra gumball
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 public class WinnerState implements IState {
 
     private static final long serialVersionUID = 1610977684883232090L;
-    private static final Log LOG = LogFactory.getLog( WinnerState.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WinnerState.class );
     private GumballMachine gumballMachine;
 
     /**

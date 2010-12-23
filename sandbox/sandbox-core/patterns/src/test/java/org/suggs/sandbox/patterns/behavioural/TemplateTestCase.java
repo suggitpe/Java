@@ -9,8 +9,8 @@ import org.suggs.sandbox.patterns.behavioural.template.untemplatized.CaffeineBev
 import org.suggs.sandbox.patterns.behavioural.template.untemplatized.Coffee;
 import org.suggs.sandbox.patterns.behavioural.template.untemplatized.Tea;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 /**
@@ -21,7 +21,7 @@ import org.junit.Test;
  */
 public class TemplateTestCase extends AbstractPatternTestCase {
 
-    private static final Log LOG = LogFactory.getLog( TemplateTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TemplateTestCase.class );
 
     @Test
     public void testNonTemplatized() {

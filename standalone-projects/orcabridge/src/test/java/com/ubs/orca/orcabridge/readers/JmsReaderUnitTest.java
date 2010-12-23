@@ -4,8 +4,8 @@
  */
 package com.ubs.orca.orcabridge.readers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,7 +32,7 @@ import static org.junit.Assert.fail;
  */
 public class JmsReaderUnitTest {
 
-    private static final Log LOG = LogFactory.getLog( JmsReaderUnitTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsReaderUnitTest.class );
 
     private static final String DURABLE_NAME = "TestDurable";
     private static final String MESSAGE_SELECTOR = "test selector";

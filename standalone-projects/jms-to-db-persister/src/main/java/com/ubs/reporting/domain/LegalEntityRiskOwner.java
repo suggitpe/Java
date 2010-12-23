@@ -8,8 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Persistable domain class for a Legal Entity Risk Owner.
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 public class LegalEntityRiskOwner extends AbstractLegalEntity {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( LegalEntityRiskOwner.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LegalEntityRiskOwner.class );
 
     @Column(name = "RISK_OWNER_TYPE")
     private String riskOwnerType;

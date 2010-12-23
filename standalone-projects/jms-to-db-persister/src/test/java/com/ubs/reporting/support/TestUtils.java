@@ -9,8 +9,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Set of static utility classes for testing only.
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 public final class TestUtils {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TestUtils.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TestUtils.class );
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat( "ddMMyyyy" );
 
     /**

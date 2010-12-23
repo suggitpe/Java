@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Client application that will remotely call up the monitor object.
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class GumballMachineClient {
 
-    private static final Log LOG = LogFactory.getLog( GumballMachineClient.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GumballMachineClient.class );
 
     private GumballMachineClient() {}
 
@@ -37,7 +37,7 @@ public final class GumballMachineClient {
             try {
                 IGumballMachineRemote machine = (IGumballMachineRemote) Naming.lookup( locations[i] );
                 monitors[i] = new GumballMonitor( machine );
-                LOG.debug( monitors[i] );
+                LOG.debug( monitors[i].toString() );
             }
             catch ( IOException ioe ) {
                 LOG.error( "REmote excption caught when trying to lookup [" + locations[i] + "]", ioe );

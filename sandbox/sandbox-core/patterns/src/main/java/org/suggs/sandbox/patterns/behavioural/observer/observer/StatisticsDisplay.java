@@ -8,8 +8,8 @@ import org.suggs.sandbox.patterns.behavioural.observer.IDisplayElement;
 import org.suggs.sandbox.patterns.behavioural.observer.IObserver;
 import org.suggs.sandbox.patterns.behavioural.observer.ISubject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Statistics display to show another observer for the pattern.
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class StatisticsDisplay implements IObserver, IDisplayElement {
 
-    private static final Log LOG = LogFactory.getLog( StatisticsDisplay.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StatisticsDisplay.class );
 
     private ISubject observable;
 

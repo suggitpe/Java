@@ -10,8 +10,8 @@ import org.suggs.apps.mercury.view.wizards.createconnection.CreateConnectionWiza
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -40,7 +40,7 @@ import org.eclipse.swt.widgets.TableColumn;
  */
 public class ConnectionDataSummaryPage extends AbstractCreateConnectionPage {
 
-    private static final Log LOG = LogFactory.getLog( ConnectionDataSummaryPage.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConnectionDataSummaryPage.class );
     public static final String PAGE_NAME = "ConnectionDataSummaryPage";
 
     private TableViewer viewer;

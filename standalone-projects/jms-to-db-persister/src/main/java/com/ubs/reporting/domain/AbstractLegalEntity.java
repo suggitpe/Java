@@ -8,8 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract persistable domain class for all Legal Entity classes.
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 public abstract class AbstractLegalEntity extends AbstractStagedEntity {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( AbstractLegalEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractLegalEntity.class );
 
     @Id
     private LegalEntityKey legalEntityKey;

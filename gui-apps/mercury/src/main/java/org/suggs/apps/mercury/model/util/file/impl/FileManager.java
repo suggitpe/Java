@@ -15,8 +15,8 @@ import java.io.StringWriter;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This implementation is the basic implementation that uses the NIO channels for persistence and retrieval.
@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class FileManager implements IFileManager {
 
-    private static final Log LOG = LogFactory.getLog( FileManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FileManager.class );
     private static final String CHARSET = "UTF-8";
 
     /**

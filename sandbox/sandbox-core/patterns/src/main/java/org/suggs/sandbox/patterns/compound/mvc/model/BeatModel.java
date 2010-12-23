@@ -22,8 +22,8 @@ import javax.sound.midi.Sequencer;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Concrete implementation of the beat model
@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BeatModel implements IBeatModel, MetaEventListener {
 
-    private static final Log LOG = LogFactory.getLog( BeatModel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( BeatModel.class );
 
     private Sequencer sequencer;
     private List<IBeatObserver> beatObservers = new ArrayList<IBeatObserver>();

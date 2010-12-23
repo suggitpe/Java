@@ -8,8 +8,8 @@ import org.suggs.sandbox.patterns.behavioural.state.connection.IState;
 import org.suggs.sandbox.patterns.behavioural.state.connection.IStateMachine;
 import org.suggs.sandbox.patterns.behavioural.state.connection.IStateMachineEventContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is responsible for allowing a client to step through the states in the state machine.
@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
 public class StateMachine implements IStateMachine {
 
     // static logger
-    private static final Log LOG = LogFactory.getLog( StateMachine.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateMachine.class );
     private IState currentState;
 
     /**

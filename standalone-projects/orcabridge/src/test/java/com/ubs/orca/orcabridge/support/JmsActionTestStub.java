@@ -3,8 +3,8 @@ package com.ubs.orca.orcabridge.support;
 import javax.jms.Destination;
 import javax.jms.Session;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
 
@@ -16,7 +16,7 @@ import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
  */
 public class JmsActionTestStub implements IJmsAction {
 
-    private static final Log LOG = LogFactory.getLog( JmsActionTestStub.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsActionTestStub.class );
 
     /**
      * @see com.ubs.orca.orcabridge.jmsclient.IJmsAction#actionInTransaction(javax.jms.Session,

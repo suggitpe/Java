@@ -22,9 +22,9 @@ import org.suggs.sandbox.patterns.behavioural.command.receivers.GarageDoor;
 import org.suggs.sandbox.patterns.behavioural.command.receivers.Light;
 import org.suggs.sandbox.patterns.behavioural.command.receivers.Stereo;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test case for the command pattern
@@ -34,7 +34,7 @@ import org.junit.Test;
  */
 public class CommandTestCase extends AbstractPatternTestCase {
 
-    private static final Log LOG = LogFactory.getLog( CommandTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CommandTestCase.class );
 
     @Test
     public void testSimpleRemoteControl() {
@@ -58,7 +58,7 @@ public class CommandTestCase extends AbstractPatternTestCase {
     @Test
     public void testRemoteControl() {
         RemoteControl ctrl = buildRemoteControl();
-        LOG.debug( ctrl );
+        LOG.debug( ctrl.toString() );
     }
 
     @Test

@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Persistable domain class for a Trading Account Cross Reference.
@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 public class TradingAccountCrossReference extends AbstractTradingAccount {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TradingAccountCrossReference.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TradingAccountCrossReference.class );
 
     @Column(name = "ALT_IDENTIFIER_ID")
     private String altIdentifierId;

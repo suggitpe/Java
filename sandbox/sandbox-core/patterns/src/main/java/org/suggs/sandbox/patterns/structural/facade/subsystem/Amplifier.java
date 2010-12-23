@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.structural.facade.subsystem;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the amplifier
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Amplifier {
 
-    private static final Log LOG = LogFactory.getLog( Amplifier.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Amplifier.class );
 
     public void setVolume( int i ) {
         LOG.debug( "Amplifier volume to [" + i + "]" );

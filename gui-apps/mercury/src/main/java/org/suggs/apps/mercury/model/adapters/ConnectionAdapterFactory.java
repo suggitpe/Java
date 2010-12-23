@@ -4,8 +4,8 @@
  */
 package org.suggs.apps.mercury.model.adapters;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This factory will provide the mechanism for creating the correct
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class ConnectionAdapterFactory {
 
-    private static final Log LOG = LogFactory.getLog( ConnectionAdapterFactory.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConnectionAdapterFactory.class );
 
     /**
      * Constructs a new instance.

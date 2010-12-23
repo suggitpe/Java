@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.structural.adapter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A mallard duck class
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MallardDuck implements IDuck {
 
-    private static final Log LOG = LogFactory.getLog( MallardDuck.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MallardDuck.class );
 
     /**
      * @see org.suggs.sandbox.patterns.structural.adapter.IDuck#fly()

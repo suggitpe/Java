@@ -14,8 +14,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Adapter for the EMS middleware implementation.
@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class EmsConnectionAdapter implements IConnectionAdapter {
 
-    private static final Log LOG = LogFactory.getLog( EmsConnectionAdapter.class );
+    private static final Logger LOG = LoggerFactory.getLogger( EmsConnectionAdapter.class );
     private String initialontextFactory;
 
     /**

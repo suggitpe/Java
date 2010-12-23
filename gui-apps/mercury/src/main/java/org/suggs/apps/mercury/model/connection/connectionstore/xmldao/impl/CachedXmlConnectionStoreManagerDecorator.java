@@ -10,8 +10,8 @@ import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnec
 
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class decorates an existing implementation of an IXmlConnectionStoreManager with a cache mechanism.
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CachedXmlConnectionStoreManagerDecorator implements IXmlConnectionStoreManager {
 
-    private static final Log LOG = LogFactory.getLog( CachedXmlConnectionStoreManagerDecorator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CachedXmlConnectionStoreManagerDecorator.class );
 
     private IXmlConnectionStoreManager xmlConnectionStoreManager;
     private Map<String, ConnectionDetails> cache;

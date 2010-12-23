@@ -7,8 +7,8 @@ package org.suggs.sandbox.patterns.structural.proxy.remoteproxy.states;
 import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.GumballMachine;
 import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IState;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * State to represent when there is no quarter in the gumball machine.
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 public class NoQuarterState implements IState {
 
     private static final long serialVersionUID = 4949649418578126010L;
-    private static final Log LOG = LogFactory.getLog( NoQuarterState.class );
+    private static final Logger LOG = LoggerFactory.getLogger( NoQuarterState.class );
     private GumballMachine gumballMachine;
 
     /**

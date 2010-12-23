@@ -10,8 +10,8 @@ import javax.jms.JMSException;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Messsage receiver
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class JmsMessageReceiver {
 
-    private static final Log LOG = LogFactory.getLog( JmsMessageReceiver.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsMessageReceiver.class );
 
     private Context initialContext;
 

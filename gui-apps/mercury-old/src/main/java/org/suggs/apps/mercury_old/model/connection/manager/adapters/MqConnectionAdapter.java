@@ -11,8 +11,8 @@ import java.util.Map;
 
 import javax.naming.Context;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO this class needs to be implemented. This is the connection adaopter for the MQ connections.
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MqConnectionAdapter implements IConnectionAdapter {
 
-    private static final Log LOG = LogFactory.getLog( MqConnectionAdapter.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MqConnectionAdapter.class );
 
     /**
      * @see org.suggs.apps.mercury_old.model.connection.manager.IConnectionAdapter#createJmsContext(org.suggs.apps.mercury_old.model.connection.IConnectionDetails)

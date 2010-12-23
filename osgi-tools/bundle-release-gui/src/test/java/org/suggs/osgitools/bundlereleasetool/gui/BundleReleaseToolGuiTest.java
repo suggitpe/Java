@@ -13,8 +13,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test class so that we can open and test the GUI operations
@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 public class BundleReleaseToolGuiTest {
 
     // static logger
-    private static final Log LOG = LogFactory.getLog( BundleReleaseToolGuiTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( BundleReleaseToolGuiTest.class );
 
     /**
      * This is just so we can easily test it (not worth building a JUnit for a Swing layer)

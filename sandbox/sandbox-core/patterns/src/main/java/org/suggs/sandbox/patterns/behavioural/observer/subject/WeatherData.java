@@ -10,8 +10,8 @@ import org.suggs.sandbox.patterns.behavioural.observer.ISubject;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the subject object that will be observed by the collection of observers (of which there may be
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WeatherData implements ISubject {
 
-    private static final Log LOG = LogFactory.getLog( WeatherData.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WeatherData.class );
 
     private List<IObserver> observers = new ArrayList<IObserver>();
 

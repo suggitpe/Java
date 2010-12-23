@@ -6,8 +6,8 @@ package org.suggs.sandbox.patterns.behavioural.command.invokers;
 
 import org.suggs.sandbox.patterns.behavioural.command.ICommand;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple implementation where only one command is allowed
@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SimpleRemoteControl {
 
-    private static final Log LOG = LogFactory.getLog( SimpleRemoteControl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SimpleRemoteControl.class );
 
     private ICommand slot;
 

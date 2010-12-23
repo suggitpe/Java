@@ -10,8 +10,8 @@ import org.suggs.sandbox.patterns.behavioural.state.gumball.states.SoldOutState;
 import org.suggs.sandbox.patterns.behavioural.state.gumball.states.SoldState;
 import org.suggs.sandbox.patterns.behavioural.state.gumball.states.WinnerState;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * State machine for a gumball machine object
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GumballMachine {
 
-    private static final Log LOG = LogFactory.getLog( GumballMachine.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GumballMachine.class );
 
     private IState soldOutState;
     private IState noQuarterState;

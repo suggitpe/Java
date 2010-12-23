@@ -13,8 +13,8 @@ import org.suggs.sandbox.patterns.structural.facade.subsystem.Screen;
 import org.suggs.sandbox.patterns.structural.facade.subsystem.TheatreLights;
 import org.suggs.sandbox.patterns.structural.facade.subsystem.Tuner;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the facade class that will simplify the interface to the home theatre subsystem.
@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class HomeTheatreFacade {
 
-    private static final Log LOG = LogFactory.getLog( HomeTheatreFacade.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HomeTheatreFacade.class );
 
     private Amplifier amplifier;
     private CdPlayer cdPlayer;

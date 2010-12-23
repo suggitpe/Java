@@ -10,8 +10,8 @@ import javax.jms.JMSException;
 import javax.jms.Session;
 import javax.naming.Context;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,7 +32,7 @@ import static org.easymock.EasyMock.expectLastCall;
  */
 public class JmsClientCoreTestProcess {
 
-    private static final Log LOG = LogFactory.getLog( JmsClientCoreTestProcess.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsClientCoreTestProcess.class );
 
     private IMocksControl ctrl;
     private JmsClientCore jmsClientCore;

@@ -8,8 +8,8 @@ import org.suggs.sandbox.patterns.behavioural.observer.IDisplayElement;
 import org.suggs.sandbox.patterns.behavioural.observer.IObserver;
 import org.suggs.sandbox.patterns.behavioural.observer.ISubject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A display object that will show the current measurements taken by the weather data object
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CurrentConditionsDisplay implements IObserver, IDisplayElement {
 
-    private static final Log LOG = LogFactory.getLog( CurrentConditionsDisplay.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CurrentConditionsDisplay.class );
 
     private float temperature;
     private float humidity;

@@ -9,8 +9,8 @@ import org.suggs.apps.mercury.model.util.xml.IXmlSerialiser;
 
 import java.io.StringWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Node;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
@@ -26,7 +26,7 @@ import org.w3c.dom.ls.LSSerializer;
  */
 public class XmlSerialiser implements IXmlSerialiser {
 
-    private static final Log LOG = LogFactory.getLog( XmlSerialiser.class );
+    private static final Logger LOG = LoggerFactory.getLogger( XmlSerialiser.class );
 
     /**
      * @see org.suggs.apps.mercury.model.util.xml.IXmlSerialiser#serialiseXmlToString(org.w3c.dom.Node)

@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -17,7 +17,7 @@ import org.junit.BeforeClass;
  */
 public abstract class AbstractPatternTestCase {
 
-    private static final Log LOG = LogFactory.getLog( "Test Base" );
+    private static final Logger LOG = LoggerFactory.getLogger( "Test Base" );
 
     @BeforeClass
     public static void doubleLine() {

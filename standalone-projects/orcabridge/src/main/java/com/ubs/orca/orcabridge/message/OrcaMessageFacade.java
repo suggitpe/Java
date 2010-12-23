@@ -7,8 +7,8 @@ package com.ubs.orca.orcabridge.message;
 import javax.jms.Message;
 import javax.jms.Session;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.client.api.IConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
@@ -23,7 +23,7 @@ import com.ubs.orca.orcabridge.IMessageFacade;
  */
 class OrcaMessageFacade implements IMessageFacade {
 
-    private static final Log LOG = LogFactory.getLog( OrcaMessageFacade.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OrcaMessageFacade.class );
 
     private final IOrcaMessage orcaMessage;
 

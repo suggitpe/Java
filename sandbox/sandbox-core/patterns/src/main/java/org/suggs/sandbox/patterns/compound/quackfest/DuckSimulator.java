@@ -11,8 +11,8 @@ import org.suggs.sandbox.patterns.compound.quackfest.decorator.QuackCounter;
 import org.suggs.sandbox.patterns.compound.quackfest.factory.AbstractDuckFactory;
 import org.suggs.sandbox.patterns.compound.quackfest.observer.Quackologist;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simulator for a duck
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DuckSimulator {
 
-    private static final Log LOG = LogFactory.getLog( DuckSimulator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DuckSimulator.class );
 
     /**
      * Simulation main

@@ -9,8 +9,8 @@ import org.suggs.sandbox.patterns.behavioural.state.connection.IStateMachine;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,7 +28,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class StateConnctionTestCase extends AbstractPatternTestCase {
 
     // static logger
-    private static final Log LOG = LogFactory.getLog( StateConnctionTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateConnctionTestCase.class );
 
     @Resource(name = "stateMachine")
     IStateMachine stateMachine;

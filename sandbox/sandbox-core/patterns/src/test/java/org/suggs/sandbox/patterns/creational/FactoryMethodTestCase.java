@@ -13,8 +13,8 @@ import org.suggs.sandbox.patterns.creational.factory.pizzastore.FooPizzaStore;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 /**
@@ -25,7 +25,7 @@ import org.junit.Test;
  */
 public class FactoryMethodTestCase extends AbstractPatternTestCase {
 
-    private static final Log LOG = LogFactory.getLog( FactoryMethodTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FactoryMethodTestCase.class );
 
     @Test
     public void testFooPizzaStore() {

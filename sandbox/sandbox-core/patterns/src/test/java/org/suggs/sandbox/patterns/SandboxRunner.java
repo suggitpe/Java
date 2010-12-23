@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.runner.Description;
 import org.junit.runner.Request;
 import org.junit.runner.Runner;
@@ -19,7 +19,7 @@ import org.junit.runner.notification.RunNotifier;
  */
 public class SandboxRunner extends Runner {
 
-    private static final Log LOG = LogFactory.getLog( SandboxRunner.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SandboxRunner.class );
     private final Runner delegate;
 
     /**

@@ -24,8 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableColumn;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Panel to represent the connection store.
@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
 public class ConnectionStorePanel extends AbstractGridbagPanel implements Observer {
 
     private static final long serialVersionUID = -8438244491631849283L;
-    private static final Log LOG = LogFactory.getLog( ConnectionStorePanel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConnectionStorePanel.class );
     private ConnectionStore connectionStore;
     private final JTextField statusText = new JTextField();
     private final JTextField nameText = new JTextField();

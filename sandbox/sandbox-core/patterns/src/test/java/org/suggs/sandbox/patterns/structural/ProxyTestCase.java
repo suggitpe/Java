@@ -9,8 +9,8 @@ import org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.IPerson;
 import org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.PersonImpl;
 import org.suggs.sandbox.patterns.structural.proxy.dynamicproxy.PersonProxyHelper;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 /**
@@ -21,7 +21,7 @@ import org.junit.Test;
  */
 public class ProxyTestCase extends AbstractPatternTestCase {
 
-    private static final Log LOG = LogFactory.getLog( ProxyTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ProxyTestCase.class );
 
     @Test
     public void testPersonOwnerProxy() {

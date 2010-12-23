@@ -4,8 +4,8 @@
  */
 package com.ubs.orca.orcabridge.processors;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.IMessageProcessor;
@@ -22,7 +22,7 @@ import com.ubs.orca.orcabridge.jmsclient.impl.JmsSenderAction;
  */
 public class JmsMessageSender implements IMessageProcessor {
 
-    private static final Log LOG = LogFactory.getLog( JmsMessageSender.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsMessageSender.class );
 
     private IJmsClient jmsClientCore;
 

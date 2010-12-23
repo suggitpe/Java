@@ -9,8 +9,8 @@ import org.suggs.sandbox.patterns.creational.factory.PizzaStoreException;
 import org.suggs.sandbox.patterns.creational.factory.pizza.BarCheesePizza;
 import org.suggs.sandbox.patterns.creational.factory.pizza.BarHamPizza;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Concrete pizza store object that implements the createPizza factory method.
@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BarPizzaStore extends AbstractPizzaStore {
 
-    private static final Log LOG = LogFactory.getLog( BarPizzaStore.class );
+    private static final Logger LOG = LoggerFactory.getLogger( BarPizzaStore.class );
 
     /**
      * @see org.suggs.sandbox.patterns.creational.factory.pizzastore.AbstractPizzaStore#createPizza(java.lang.String)

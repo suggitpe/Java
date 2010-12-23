@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.behavioural.template.templatized;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate templatized coffee.
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Coffee extends CaffeineBeverage {
 
-    private static final Log LOG = LogFactory.getLog( Coffee.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Coffee.class );
 
     /**
      * @see org.suggs.sandbox.patterns.behavioural.template.templatized.CaffeineBeverage#brew()

@@ -17,8 +17,8 @@ import javax.jms.Connection;
 import javax.jms.ConnectionMetaData;
 import javax.jms.JMSException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of the jms connection manager interface
@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ConnectionManager extends Observable implements IConnectionManager {
 
-    private static final Log LOG = LogFactory.getLog( ConnectionManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConnectionManager.class );
 
     private EConnectionState connectionState = EConnectionState.INITIAL;
     private Connection connection;

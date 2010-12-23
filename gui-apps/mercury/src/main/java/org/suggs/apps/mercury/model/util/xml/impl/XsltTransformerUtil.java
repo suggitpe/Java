@@ -19,11 +19,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
-
-import org.springframework.util.xml.SimpleTransformErrorListener;
 
 /**
  * This class is there to help manage transformation of XML through known xslt.
@@ -33,7 +31,7 @@ import org.springframework.util.xml.SimpleTransformErrorListener;
  */
 public class XsltTransformerUtil implements IXsltTransformerUtil {
 
-    private static final Log LOG = LogFactory.getLog( XsltTransformerUtil.class );
+    private static final Logger LOG = LoggerFactory.getLogger( XsltTransformerUtil.class );
 
     /**
      * @see org.suggs.apps.mercury.model.util.xml.IXsltTransformerUtil#transformXmlToDom(byte[],
@@ -88,7 +86,7 @@ public class XsltTransformerUtil implements IXsltTransformerUtil {
         }
 
         TransformerFactory fact = TransformerFactory.newInstance();
-        fact.setErrorListener( new SimpleTransformErrorListener( LOG ) );
+        // fact.setErrorListener( new SimpleTransformErrorListener( LOG. ) );
         // fact.setURIResolver( this );
 
         InputStream is = getClass().getClassLoader().getResourceAsStream( aXsltName );

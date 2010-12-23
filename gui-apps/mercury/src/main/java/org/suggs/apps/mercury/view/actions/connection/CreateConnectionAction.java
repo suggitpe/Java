@@ -10,8 +10,8 @@ import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStore;
 import org.suggs.apps.mercury.model.util.image.ImageManager;
 import org.suggs.apps.mercury.view.wizards.createconnection.CreateConnectionWizard;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class CreateConnectionAction extends Action {
 
-    private static final Log LOG = LogFactory.getLog( CreateConnectionAction.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CreateConnectionAction.class );
 
     private IConnectionStore connectionStore;
 

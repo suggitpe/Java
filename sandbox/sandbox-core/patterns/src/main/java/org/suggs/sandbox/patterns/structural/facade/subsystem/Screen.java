@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.structural.facade.subsystem;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a screen
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Screen {
 
-    private static final Log LOG = LogFactory.getLog( Screen.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Screen.class );
 
     public void down() {
         LOG.debug( "Screen down" );

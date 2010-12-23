@@ -7,8 +7,8 @@ package org.suggs.sandbox.patterns.behavioural.state.gumball.states;
 import org.suggs.sandbox.patterns.behavioural.state.gumball.GumballMachine;
 import org.suggs.sandbox.patterns.behavioural.state.gumball.IState;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * State to represent when the client is a winner of an extra gumball
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WinnerState implements IState {
 
-    private static final Log LOG = LogFactory.getLog( WinnerState.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WinnerState.class );
     private GumballMachine gumballMachine;
 
     /**

@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.structural.adapter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Adapter class that implements the Duck interface for an ITurkey object
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TurkeyAdapter implements IDuck {
 
-    private static final Log LOG = LogFactory.getLog( TurkeyAdapter.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TurkeyAdapter.class );
     private ITurkey turkey;
 
     /**

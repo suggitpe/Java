@@ -6,8 +6,8 @@ package com.ubs.orca.orcabridge.readers;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-orca-reader-spring-injection-test.xml" })
 public class OrcaReaderSpringInjectionTest {
 
-    private static final Log LOG = LogFactory.getLog( OrcaReaderSpringInjectionTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OrcaReaderSpringInjectionTest.class );
 
     @Resource(name = "orcaReader")
     private IMessageReader orcaReader;

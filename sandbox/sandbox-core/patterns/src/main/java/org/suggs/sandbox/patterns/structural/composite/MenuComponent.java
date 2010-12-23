@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The menu composite class.
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MenuComponent extends AbstractMenuComponent {
 
-    private static final Log LOG = LogFactory.getLog( MenuComponent.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MenuComponent.class );
     private List<IMenuComponent> menuComps = new ArrayList<IMenuComponent>();
     private String name;
     private String description;

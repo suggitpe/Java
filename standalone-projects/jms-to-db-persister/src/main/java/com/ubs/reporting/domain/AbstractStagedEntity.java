@@ -7,8 +7,8 @@ package com.ubs.reporting.domain;
 import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.reporting.domain.support.StagedAuditInfo;
 import com.ubs.reporting.domain.support.StagedAuditable;
@@ -24,7 +24,7 @@ import com.ubs.reporting.domain.support.StagedAuditable;
 public abstract class AbstractStagedEntity implements StagedAuditable {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( AbstractStagedEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractStagedEntity.class );
 
     @Embedded
     private StagedAuditInfo stagedAuditInfo = new StagedAuditInfo();

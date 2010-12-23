@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the management of all of the transitions. This could allow for externally altered
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class TransitionManager {
 
-    private static final Log LOG = LogFactory.getLog( TransitionManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TransitionManager.class );
     private static final TransitionManager instance = new TransitionManager();
     private Map<String, Map<String, ITransition>> transitionMap = new HashMap<String, Map<String, ITransition>>();
 

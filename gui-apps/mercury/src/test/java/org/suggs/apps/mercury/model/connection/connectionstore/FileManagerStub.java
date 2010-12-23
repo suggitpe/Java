@@ -8,8 +8,8 @@ import org.suggs.apps.mercury.model.util.file.IFileManager;
 
 import java.io.File;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a stub of a file manager interface that will take the persisted string and return it back again in
@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class FileManagerStub implements IFileManager {
 
-    private static final Log LOG = LogFactory.getLog( FileManagerStub.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FileManagerStub.class );
     private String data;
 
     /**

@@ -6,8 +6,8 @@ package org.suggs.apps.mercury.view.actions.file;
 
 import org.suggs.apps.mercury.model.util.image.ImageManager;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jface.action.Action;
 import org.eclipse.swt.widgets.Display;
 
@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class ExitAction extends Action {
 
-    private static final Log LOG = LogFactory.getLog( ExitAction.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ExitAction.class );
 
     /**
      * Constructs a new instance.

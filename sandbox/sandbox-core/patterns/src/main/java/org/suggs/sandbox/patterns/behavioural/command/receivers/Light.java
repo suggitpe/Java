@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.behavioural.command.receivers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a Light
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Light {
 
-    private static final Log LOG = LogFactory.getLog( Light.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Light.class );
     private String location;
 
     /**

@@ -11,8 +11,8 @@ import javax.jms.Session;
 import javax.jms.Topic;
 import javax.jms.TopicSubscriber;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClientSingleMsgCallback;
@@ -26,7 +26,7 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  */
 public class JmsDurableReaderAction implements IJmsAction {
 
-    private static final Log LOG = LogFactory.getLog( JmsDurableReaderAction.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsDurableReaderAction.class );
     private IJmsClientSingleMsgCallback clientCallback;
     private String durableName;
     private String durableMessageSelector;

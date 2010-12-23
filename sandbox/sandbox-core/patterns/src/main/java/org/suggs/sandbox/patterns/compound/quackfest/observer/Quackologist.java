@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.compound.quackfest.observer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Observer of quackObservables
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Quackologist implements IObserver {
 
-    private static final Log LOG = LogFactory.getLog( Quackologist.class );
+    private static final Logger LOG = LoggerFactory.getLogger( Quackologist.class );
 
     /**
      * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver#update(org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable)

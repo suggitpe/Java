@@ -1,7 +1,7 @@
 package com.ubs.orca.orcabridge.support;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
@@ -14,7 +14,7 @@ import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
  */
 public class JmsClientTestStub implements IJmsClient {
 
-    private static final Log LOG = LogFactory.getLog( JmsClientTestStub.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsClientTestStub.class );
 
     /**
      * @see com.ubs.orca.orcabridge.jmsclient.IJmsClient#connect()

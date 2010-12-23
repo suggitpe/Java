@@ -4,8 +4,8 @@
  */
 package com.ubs.reporting.domain;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest;
 import com.ubs.reporting.support.TestUtils;
@@ -24,7 +24,7 @@ import org.hibernate.Session;
 public class TradingAccountCrossReferenceHibernateIntegrationTest extends AbstractSimpleHibernateIntegrationTest<TradingAccountKey, TradingAccountCrossReference> {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TradingAccountCrossReferenceHibernateIntegrationTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TradingAccountCrossReferenceHibernateIntegrationTest.class );
 
     /**
      * @see com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)

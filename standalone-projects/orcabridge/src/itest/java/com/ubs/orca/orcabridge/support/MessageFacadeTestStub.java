@@ -8,8 +8,8 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.client.api.IConversation;
 import com.ubs.orca.client.api.IConversationMessage;
@@ -29,7 +29,7 @@ import com.ubs.orca.orcabridge.OrcaBridgeMessageConversionException;
 public class MessageFacadeTestStub implements IMessageFacade
 {
 
-    private static final Log LOG = LogFactory.getLog( MessageFacadeTestStub.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MessageFacadeTestStub.class );
 
     private static final String MSG_BODY = "This is a test message created by the Message Facade Test Stub";
 

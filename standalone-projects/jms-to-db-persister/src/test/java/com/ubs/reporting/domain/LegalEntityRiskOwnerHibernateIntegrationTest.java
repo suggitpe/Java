@@ -4,8 +4,8 @@
  */
 package com.ubs.reporting.domain;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.reporting.support.AbstractSimpleHibernateIntegrationTest;
 
@@ -23,7 +23,7 @@ import org.hibernate.Session;
 public class LegalEntityRiskOwnerHibernateIntegrationTest extends AbstractSimpleHibernateIntegrationTest<LegalEntityKey, LegalEntityRiskOwner> {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( LegalEntityRiskOwnerHibernateIntegrationTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LegalEntityRiskOwnerHibernateIntegrationTest.class );
 
     public static LegalEntityRiskOwner buildRiskOwner( LegalEntityKey aKey, Session aSession ) {
         return new LegalEntityRiskOwnerHibernateIntegrationTest().createEntityTemplate( aKey, aSession );

@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.structural.facade.subsystem;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a CD player
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CdPlayer {
 
-    private static final Log LOG = LogFactory.getLog( CdPlayer.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CdPlayer.class );
 
     public void off() {
         LOG.debug( "CD player off" );

@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.behavioural.template.untemplatized;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a caffeinated beverage. In this method we define that all subclassses must implement a
@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class CaffeineBeverage {
 
-    private static final Log LOG = LogFactory.getLog( CaffeineBeverage.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CaffeineBeverage.class );
 
     /**
      * Prepare a beverage.

@@ -6,8 +6,8 @@ package com.ubs.orca.orcabridge.support;
 
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.client.agent.replay.IReplayObserver;
 import com.ubs.orca.client.api.IConversation;
@@ -30,7 +30,7 @@ import com.ubs.orca.destinationfinder.IDestinationFinder;
  */
 public class OrcaClientTestStub implements IOrcaClient {
 
-    private static final Log LOG = LogFactory.getLog( OrcaClientTestStub.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OrcaClientTestStub.class );
 
     /**
      * @see com.ubs.orca.client.api.IOrcaClient#connect()

@@ -8,8 +8,8 @@ import org.suggs.sandbox.patterns.creational.factory.IPizza;
 
 import java.util.Arrays;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract implementation of the pizza
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class AbstractPizza implements IPizza {
 
-    private static final Log LOG = LogFactory.getLog( AbstractPizza.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractPizza.class );
 
     private String[] toppings;
 

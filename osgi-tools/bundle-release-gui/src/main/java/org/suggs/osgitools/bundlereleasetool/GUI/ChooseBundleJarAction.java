@@ -9,8 +9,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class will manage the choosing of a file and then making that file available to the caller.
@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ChooseBundleJarAction extends Thread {
 
-    private static final Log LOG = LogFactory.getLog( ChooseBundleJarAction.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ChooseBundleJarAction.class );
 
     private String bundleJar;
 

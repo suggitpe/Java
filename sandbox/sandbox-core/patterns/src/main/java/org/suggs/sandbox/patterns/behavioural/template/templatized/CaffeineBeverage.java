@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.behavioural.template.templatized;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a templatized caffeinated beverage
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class CaffeineBeverage {
 
-    private static final Log LOG = LogFactory.getLog( CaffeineBeverage.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CaffeineBeverage.class );
 
     /**
      * Prepare a beverage.

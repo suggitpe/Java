@@ -9,8 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the composite key for a Trading Account.
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 public class TradingAccountKey implements Serializable {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( TradingAccountKey.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TradingAccountKey.class );
     private static final long serialVersionUID = 4313529050644550568L;
 
     @Column(name = "TRADING_ACC_ID")

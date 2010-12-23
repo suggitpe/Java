@@ -7,9 +7,9 @@ package org.suggs.sandbox.patterns.behavioural.state;
 import org.suggs.sandbox.patterns.AbstractPatternTestCase;
 import org.suggs.sandbox.patterns.behavioural.state.gumball.GumballMachine;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test case for the command pattern
@@ -19,7 +19,7 @@ import org.junit.Test;
  */
 public class StateGumballTestCase extends AbstractPatternTestCase {
 
-    private static final Log LOG = LogFactory.getLog( StateGumballTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateGumballTestCase.class );
 
     /**
      * Standard test to test the gumball state machine
@@ -28,24 +28,24 @@ public class StateGumballTestCase extends AbstractPatternTestCase {
     public void testGumballMachine() {
         GumballMachine gm = new GumballMachine( 5 );
 
-        LOG.debug( gm );
+        LOG.debug( gm.toString() );
         LOG.debug( "***" );
 
         gm.insertQuarter();
         gm.turnCrank();
-        LOG.debug( gm );
+        LOG.debug( gm.toString() );
         LOG.debug( "***" );
 
         gm.turnCrank();
-        LOG.debug( gm );
+        LOG.debug( gm.toString() );
         LOG.debug( "***" );
 
         gm.insertQuarter();
-        LOG.debug( gm );
+        LOG.debug( gm.toString() );
         LOG.debug( "***" );
 
         gm.ejectQuarter();
-        LOG.debug( gm );
+        LOG.debug( gm.toString() );
         LOG.debug( "***" );
 
         gm.insertQuarter();
@@ -54,7 +54,7 @@ public class StateGumballTestCase extends AbstractPatternTestCase {
 
         gm.insertQuarter();
         gm.turnCrank();
-        LOG.debug( gm );
+        LOG.debug( gm.toString() );
         LOG.debug( "***" );
 
         gm.insertQuarter();
@@ -63,7 +63,7 @@ public class StateGumballTestCase extends AbstractPatternTestCase {
 
         gm.insertQuarter();
         gm.turnCrank();
-        LOG.debug( gm );
+        LOG.debug( gm.toString() );
         LOG.debug( "***" );
     }
 

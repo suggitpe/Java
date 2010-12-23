@@ -8,8 +8,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for CalendarEditor
@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
 public class CalendarEditor {
 
     // static logger
-    private static final Log LOG = LogFactory.getLog( CalendarEditor.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CalendarEditor.class );
 
     private IState currentState;
     private File appointmentsFile;

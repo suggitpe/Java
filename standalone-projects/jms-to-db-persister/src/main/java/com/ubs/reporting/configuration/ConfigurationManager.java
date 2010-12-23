@@ -7,8 +7,8 @@ package com.ubs.reporting.configuration;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Wrapper class to encapsulate the configuration file.
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class ConfigurationManager {
 
-    private static final Log LOG = LogFactory.getLog( ConfigurationManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConfigurationManager.class );
     private static final String PROP_FILE = "jms-to-db-persister.properties";
 
     // here we pop all of the properties that we wish to manage

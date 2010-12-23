@@ -21,8 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class will manage the user interaction with the Connection manager object.
@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
 public class ConnectionManagerPanel extends AbstractGridbagPanel implements Observer {
 
     private static final long serialVersionUID = 4835953967437214080L;
-    private static final Log LOG = LogFactory.getLog( ConnectionManagerPanel.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConnectionManagerPanel.class );
     private ConnectionManager connMgr;
     private final JTextField status = new JTextField();
     private final JComboBox type = new JComboBox();

@@ -11,8 +11,8 @@ import java.io.UnsupportedEncodingException;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -29,7 +29,7 @@ import org.w3c.dom.NodeList;
 public class XsltTransformerUtilTest
 {
 
-    private static final Log LOG = LogFactory.getLog( XsltTransformerUtilTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( XsltTransformerUtilTest.class );
     private IXsltTransformerUtil mXsltUtil_;
 
     /**

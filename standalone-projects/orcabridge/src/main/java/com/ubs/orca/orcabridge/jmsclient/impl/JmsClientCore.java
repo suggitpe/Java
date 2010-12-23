@@ -12,8 +12,8 @@ import javax.jms.Session;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.jmsclient.IJmsAction;
 import com.ubs.orca.orcabridge.jmsclient.IJmsClient;
@@ -27,7 +27,7 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  */
 public class JmsClientCore implements IJmsClient {
 
-    private static final Log LOG = LogFactory.getLog( JmsClientCore.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsClientCore.class );
 
     private Context initialContext;
     private String connectionFactoryName;

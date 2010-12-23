@@ -11,8 +11,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Auditable information used in conjunction with a Staged Entity.
@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 public class StagedAuditInfo {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( StagedAuditInfo.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StagedAuditInfo.class );
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "STG_LOAD_DATE")

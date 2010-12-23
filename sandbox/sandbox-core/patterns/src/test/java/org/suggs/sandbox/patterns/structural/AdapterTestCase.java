@@ -10,8 +10,8 @@ import org.suggs.sandbox.patterns.structural.adapter.MallardDuck;
 import org.suggs.sandbox.patterns.structural.adapter.TurkeyAdapter;
 import org.suggs.sandbox.patterns.structural.adapter.WildTurkey;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 /**
@@ -22,7 +22,7 @@ import org.junit.Test;
  */
 public class AdapterTestCase extends AbstractPatternTestCase {
 
-    private static final Log LOG = LogFactory.getLog( AdapterTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AdapterTestCase.class );
 
     @Test
     public void testTurkeyAdapter() {

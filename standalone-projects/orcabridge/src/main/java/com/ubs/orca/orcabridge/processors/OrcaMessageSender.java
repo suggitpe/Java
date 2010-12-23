@@ -4,8 +4,8 @@
  */
 package com.ubs.orca.orcabridge.processors;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.client.api.IConversationMessage;
 import com.ubs.orca.client.api.IOrcaClient;
@@ -23,7 +23,7 @@ import com.ubs.orca.orcabridge.OrcaBridgeMessageConversionException;
  */
 public class OrcaMessageSender implements IMessageProcessor {
 
-    private static final Log LOG = LogFactory.getLog( OrcaMessageSender.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OrcaMessageSender.class );
 
     private IOrcaClient orcaClient;
 

@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.behavioural.command.receivers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a Ceiling fan
@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CeilingFan {
 
-    private static final Log LOG = LogFactory.getLog( CeilingFan.class );
+    private static final Logger LOG = LoggerFactory.getLogger( CeilingFan.class );
     private String speed;
     private String location;
 

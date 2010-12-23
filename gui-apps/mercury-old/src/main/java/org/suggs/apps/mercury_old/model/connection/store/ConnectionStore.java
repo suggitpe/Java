@@ -15,8 +15,8 @@ import java.util.Observable;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of the IJmsConnectionStore. This implementation will use an XML file stored in the users
@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ConnectionStore extends Observable implements IConnectionStore {
 
-    private static final Log LOG = LogFactory.getLog( ConnectionStore.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ConnectionStore.class );
 
     private String storeState = "Unsaved";
     private Map<String, IConnectionDetails> connStore = new HashMap<String, IConnectionDetails>();

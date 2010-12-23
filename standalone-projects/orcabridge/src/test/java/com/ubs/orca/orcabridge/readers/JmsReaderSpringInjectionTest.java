@@ -6,8 +6,8 @@ package com.ubs.orca.orcabridge.readers;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -33,7 +33,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/ut-jms-reader-spring-injection-test.xml" })
 public class JmsReaderSpringInjectionTest {
 
-    private static final Log LOG = LogFactory.getLog( JmsReaderSpringInjectionTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsReaderSpringInjectionTest.class );
 
     @Resource(name = "jmsReader")
     private IMessageReader jmsReader;

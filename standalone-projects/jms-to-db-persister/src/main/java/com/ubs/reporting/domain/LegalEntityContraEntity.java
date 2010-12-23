@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Persistable domain class for a Legal Entity Contra Entity.
@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 public class LegalEntityContraEntity extends AbstractLegalEntity {
 
     @SuppressWarnings("unused")
-    private static final Log LOG = LogFactory.getLog( LegalEntityContraEntity.class );
+    private static final Logger LOG = LoggerFactory.getLogger( LegalEntityContraEntity.class );
 
     @Column(name = "CONTR_ENTITY_ID")
     private Integer contraEntityId;

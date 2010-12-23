@@ -4,8 +4,8 @@
  */
 package org.suggs.apps.mercury_old;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -20,7 +20,7 @@ import org.springframework.core.io.ClassPathResource;
  */
 public final class GuiLoader {
 
-    private static final Log LOG = LogFactory.getLog( GuiLoader.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GuiLoader.class );
     private static final String DEFAULT_CFG_FILE = "xml/gui-loader.xml";
 
     /**

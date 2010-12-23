@@ -10,8 +10,8 @@ import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.IMessageFacade;
 import com.ubs.orca.orcabridge.OrcaBridgeMessageConversionException;
@@ -26,7 +26,7 @@ import com.ubs.orca.orcabridge.jmsclient.JmsClientException;
  */
 public class JmsSenderAction implements IJmsAction {
 
-    private static final Log LOG = LogFactory.getLog( JmsSenderAction.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsSenderAction.class );
 
     private final IMessageFacade messageFacade;
 

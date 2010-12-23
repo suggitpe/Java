@@ -8,8 +8,8 @@ import org.suggs.sandbox.patterns.compound.quackfest.IQuackable;
 import org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver;
 import org.suggs.sandbox.patterns.compound.quackfest.observer.Observable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Rubber duck implementation
@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RubberDuck implements IQuackable {
 
-    private static final Log LOG = LogFactory.getLog( RubberDuck.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RubberDuck.class );
     private Observable observable;
 
     /**

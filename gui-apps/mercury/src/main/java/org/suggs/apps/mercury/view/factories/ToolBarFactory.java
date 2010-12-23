@@ -10,8 +10,8 @@ import org.suggs.apps.mercury.view.IToolBarFactory;
 import org.suggs.apps.mercury.view.actions.ActionManager;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.ToolBarManager;
 
@@ -23,7 +23,7 @@ import org.eclipse.jface.action.ToolBarManager;
  */
 public class ToolBarFactory implements IToolBarFactory {
 
-    private static final Log LOG = LogFactory.getLog( ToolBarFactory.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ToolBarFactory.class );
 
     private IActionManager actionManager;
     private boolean showToolbar;

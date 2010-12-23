@@ -4,8 +4,8 @@
  */
 package com.ubs.orca.orcabridge.readers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.client.api.IAttributesConversationMessage;
 import com.ubs.orca.client.api.IOrcaSinkSingleMsgCallback;
@@ -28,7 +28,7 @@ public class OrcaSingleMessageReaderCallback implements IOrcaSinkSingleMsgCallba
 
     private IMessageProcessor messageProcessor;
 
-    private static final Log LOG = LogFactory.getLog( OrcaSingleMessageReaderCallback.class );
+    private static final Logger LOG = LoggerFactory.getLogger( OrcaSingleMessageReaderCallback.class );
 
     /**
      * Constructs a new instance.

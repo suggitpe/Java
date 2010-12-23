@@ -11,8 +11,8 @@ import javax.jms.Session;
 import javax.jms.Topic;
 import javax.jms.TopicSubscriber;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -34,7 +34,7 @@ import static org.easymock.EasyMock.expectLastCall;
  */
 public class JmsDurableReaderActionTest {
 
-    private static final Log LOG = LogFactory.getLog( JmsDurableReaderActionTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsDurableReaderActionTest.class );
 
     private IMocksControl ctrl;
     private IJmsAction jmsReceiverAction;

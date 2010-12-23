@@ -23,8 +23,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class manages the construction of the main GUI itself along with the placement of teh main panels
@@ -34,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MercuryApplication implements IMercuryApp {
 
-    private static final Log LOG = LogFactory.getLog( MercuryApplication.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MercuryApplication.class );
 
     private JPanel connectionStorePanel;
     private JPanel connectionManagerPanel;

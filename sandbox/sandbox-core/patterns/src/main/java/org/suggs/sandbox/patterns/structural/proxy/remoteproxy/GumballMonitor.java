@@ -6,8 +6,8 @@ package org.suggs.sandbox.patterns.structural.proxy.remoteproxy;
 
 import java.rmi.RemoteException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to act as the RMI client in the proxy pattern.
@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GumballMonitor {
 
-    private static final Log LOG = LogFactory.getLog( GumballMonitor.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GumballMonitor.class );
     private IGumballMachineRemote gumballMachine;
 
     /**

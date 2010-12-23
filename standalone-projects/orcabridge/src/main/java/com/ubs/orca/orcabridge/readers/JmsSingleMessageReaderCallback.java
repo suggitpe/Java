@@ -6,8 +6,8 @@ package com.ubs.orca.orcabridge.readers;
 
 import javax.jms.Message;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.IMessageProcessor;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
@@ -24,7 +24,7 @@ import com.ubs.orca.orcabridge.message.MessageFacadeFactory;
  */
 public class JmsSingleMessageReaderCallback implements IJmsClientSingleMsgCallback {
 
-    private static final Log LOG = LogFactory.getLog( JmsSingleMessageReaderCallback.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsSingleMessageReaderCallback.class );
 
     private IMessageProcessor messageProcessor;
 

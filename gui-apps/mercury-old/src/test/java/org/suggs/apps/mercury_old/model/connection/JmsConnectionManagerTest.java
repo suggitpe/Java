@@ -6,8 +6,8 @@ package org.suggs.apps.mercury_old.model.connection;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = { "classpath:xml/ut-model-connection-JmsConnMgrTest.xml" })
 public class JmsConnectionManagerTest {
 
-    private static final Log LOG = LogFactory.getLog( JmsConnectionManagerTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( JmsConnectionManagerTest.class );
 
     @Resource
     protected String portNum;

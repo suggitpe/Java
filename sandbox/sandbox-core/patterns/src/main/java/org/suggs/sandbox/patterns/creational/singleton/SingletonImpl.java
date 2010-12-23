@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.patterns.creational.singleton;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is an implementation of the Singleton pattern for demonstration only. Internally I have fleshed out
@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class SingletonImpl {
 
-    private static final Log LOG = LogFactory.getLog( SingletonImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( SingletonImpl.class );
 
     /**
      * The single instance of the class.This is a static instance so that it can be instantiated by a static

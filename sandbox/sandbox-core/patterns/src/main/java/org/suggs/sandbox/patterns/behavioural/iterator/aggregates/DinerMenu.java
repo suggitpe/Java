@@ -9,8 +9,8 @@ import org.suggs.sandbox.patterns.behavioural.iterator.IMenu;
 import org.suggs.sandbox.patterns.behavioural.iterator.MenuItem;
 import org.suggs.sandbox.patterns.behavioural.iterator.iterators.DinerMenuIterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Menu for a diner.
@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DinerMenu implements IMenu {
 
-    private static final Log LOG = LogFactory.getLog( DinerMenu.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DinerMenu.class );
 
     private static final int MAX_ITEMS = 6;
     private int numItems = 0;

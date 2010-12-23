@@ -13,8 +13,8 @@ import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.states.WinnerStat
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * State machine for a gumball machine object. This is a remote object so that clients can interface with it.
@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 public class GumballMachine extends UnicastRemoteObject implements IGumballMachineRemote {
 
     private static final long serialVersionUID = 4200893775209124128L;
-    private static final Log LOG = LogFactory.getLog( GumballMachine.class );
+    private static final Logger LOG = LoggerFactory.getLogger( GumballMachine.class );
 
     private IState soldOutState;
     private IState noQuarterState;

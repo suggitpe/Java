@@ -4,8 +4,8 @@
  */
 package com.ubs.orca.orcabridge.readers;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ubs.orca.orcabridge.IMessageReader;
 import com.ubs.orca.orcabridge.OrcaBridgeException;
@@ -18,7 +18,7 @@ import com.ubs.orca.orcabridge.OrcaBridgeException;
  */
 public abstract class AbstractMessageReader implements IMessageReader {
 
-    private static final Log LOG = LogFactory.getLog( AbstractMessageReader.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractMessageReader.class );
     static final String STATE_UNINITIALISED = "Uninintialised";
     static final String STATE_STARTING = "Starting";
     static final String STATE_RUNNING = "Running";

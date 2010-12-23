@@ -6,8 +6,8 @@ package com.ubs.orca.orcabridge.message;
 
 import javax.jms.Message;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,7 +27,7 @@ import static org.junit.Assert.assertThat;
  */
 public class MessageFacadeFactoryTest {
 
-    private static final Log LOG = LogFactory.getLog( MessageFacadeFactoryTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MessageFacadeFactoryTest.class );
 
     /** */
     @BeforeClass
