@@ -124,9 +124,6 @@ public class BadlyImplementedInterceptorTest extends HibernateTimestampEntityInt
         @Override
         public boolean onFlushDirty( Object aEntity, Serializable aId, Object[] aCurrentState,
                                      Object[] aPreviousState, String[] aPropertyNames, Type[] aTypes ) {
-            if ( isNotEntityAuditable( aEntity ) ) {
-                return false;
-            }
             Timestamp date = getDateTimeNow();
             TimestampAuditInfo auditInfo = ( (TimestampAuditable) aEntity ).getTimestampAuditInfo();
 
@@ -134,7 +131,7 @@ public class BadlyImplementedInterceptorTest extends HibernateTimestampEntityInt
                 LOG.debug( "BAD BAD BAD: Auditing existing entity with update date of [" + date + "]" );
             }
             auditInfo.setUpdateDate( date );
-            return true;
+            return false;
         }
 
         /**
@@ -144,9 +141,6 @@ public class BadlyImplementedInterceptorTest extends HibernateTimestampEntityInt
         @Override
         public boolean onSave( Object aEntity, Serializable aId, Object[] aCurrentState,
                                String[] aPropertyNames, Type[] aTypes ) {
-            if ( isNotEntityAuditable( aEntity ) ) {
-                return false;
-            }
             Timestamp date = getDateTimeNow();
             TimestampAuditInfo auditInfo = ( (TimestampAuditable) aEntity ).getTimestampAuditInfo();
             if ( LOG.isDebugEnabled() ) {
@@ -156,11 +150,7 @@ public class BadlyImplementedInterceptorTest extends HibernateTimestampEntityInt
 
             auditInfo.setCreateDate( date );
             auditInfo.setUpdateDate( date );
-            return true;
-        }
-
-        private boolean isNotEntityAuditable( Object aEntity ) {
-            return !( aEntity instanceof TimestampAuditable );
+            return false;
         }
 
         private Timestamp getDateTimeNow() {
