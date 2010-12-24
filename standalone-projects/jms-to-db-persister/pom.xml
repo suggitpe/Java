@@ -89,8 +89,8 @@
     <dependencies>
         <!-- main compile time dependencies -->
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -113,13 +113,6 @@
             <artifactId>persistence-api</artifactId>
             <scope>compile</scope>
         </dependency>
-        <!-- 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-commons-annotations</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -195,11 +188,6 @@
                 <version>2.4</version>
             </dependency>
             <dependency>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-                <version>1.1</version>
-            </dependency>
-            <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.12</version>
@@ -207,7 +195,12 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.5.8</version>
+                <version>1.6.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.6.1</version>
             </dependency>
             <dependency>
                 <groupId>javax.jms</groupId>

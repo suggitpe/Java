@@ -10,14 +10,14 @@ import org.suggs.libs.statemachine.impl.StateTransitionManager;
 
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.easymock.EasyMock.createControl;
 import static org.easymock.EasyMock.expect;
@@ -108,7 +108,7 @@ public class StateTransitionManagerTest {
         collection = StateTransitionManager.instance().getListOfTransitionsForState( mockStateOne );
         assertThat( 1, equalTo( collection.size() ) );
         LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state transition" );
-        LOG.debug( StateTransitionManager.instance() );
+        LOG.debug( StateTransitionManager.instance().toString() );
 
         assertThat( mockTransitionOne, equalTo( collection.iterator().next() ) );
 
@@ -131,7 +131,7 @@ public class StateTransitionManagerTest {
             .getListOfTransitionsForState( mockStateOne );
 
         assertThat( 0, equalTo( collection.size() ) );
-        LOG.debug( StateTransitionManager.instance() );
+        LOG.debug( StateTransitionManager.instance().toString() );
 
         ctrl.verify();
     }
@@ -214,7 +214,7 @@ public class StateTransitionManagerTest {
         StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo );
         StateTransitionManager.instance().addTransitionToManager( mockTransitionThree );
         StateTransitionManager.instance().addTransitionToManager( mockTransitionFour );
-        LOG.debug( StateTransitionManager.instance() );
+        LOG.debug( StateTransitionManager.instance().toString() );
 
         Collection<StateTransition> collection = StateTransitionManager.instance()
             .getListOfTransitionsForState( mockStateOne );

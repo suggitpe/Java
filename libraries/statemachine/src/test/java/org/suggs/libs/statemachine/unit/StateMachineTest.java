@@ -10,12 +10,12 @@ import org.suggs.libs.statemachine.StateMachineContext;
 import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.impl.StateMachineImpl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.easymock.EasyMock.createControl;
 import static org.easymock.EasyMock.createMock;
@@ -59,7 +59,7 @@ public class StateMachineTest {
     public void toStringOutput() {
         StateMachineImpl stateMachine = new StateMachineImpl( mockInitialState );
         stateMachine.setCurrentState( mockNewState );
-        LOG.debug( stateMachine );
+        LOG.debug( stateMachine.toString() );
     }
 
     /**
