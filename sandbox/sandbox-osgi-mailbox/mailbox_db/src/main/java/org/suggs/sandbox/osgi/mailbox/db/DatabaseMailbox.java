@@ -10,8 +10,8 @@ import org.suggs.sandbox.osgi.mailbox.api.Message;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of the Mailbox api that uses a database file for its
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
 public class DatabaseMailbox implements Mailbox
 {
 
-    private static final Log LOG = LogFactory.getLog( DatabaseMailbox.class );
+    private static final Logger LOG = LoggerFactory.getLogger( DatabaseMailbox.class );
     private static final long[] EMPTY = new long[0];
     @SuppressWarnings("unused")
     private DataSource mDatasource_;

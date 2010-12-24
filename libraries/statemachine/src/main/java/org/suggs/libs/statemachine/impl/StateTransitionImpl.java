@@ -14,8 +14,8 @@ import org.suggs.libs.statemachine.StateMachineException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The purpose of this class is to encapsulate a transition between two states. It understands that it has a
@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class StateTransitionImpl implements StateTransition {
 
-    private static final Log LOG = LogFactory.getLog( StateTransitionImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateTransitionImpl.class );
 
     private final String stateTransitionName;
     private final State startingState;

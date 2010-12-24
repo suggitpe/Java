@@ -14,8 +14,8 @@ import org.suggs.libs.statemachine.jbehave.springstories.TraverseStateMachine;
 
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jbehave.core.annotations.AfterStories;
 import org.jbehave.core.annotations.BeforeStories;
 import org.jbehave.core.annotations.Given;
@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
  */
 public class StateMachineSteps {
 
-    private static final Log LOG = LogFactory.getLog( StateMachineSteps.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateMachineSteps.class );
 
     protected StateMachine stateMachine;
 

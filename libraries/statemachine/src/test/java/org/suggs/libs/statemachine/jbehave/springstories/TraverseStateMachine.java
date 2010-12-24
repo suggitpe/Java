@@ -7,8 +7,8 @@ package org.suggs.libs.statemachine.jbehave.springstories;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;
 import org.jbehave.core.annotations.UsingEmbedder;
@@ -33,7 +33,7 @@ import org.junit.runner.RunWith;
 @UsingSpring(resources = { "classpath:xml/jbehave-configuration.xml", "classpath:xml/state-machine-steps.xml" })
 public class TraverseStateMachine extends InjectableEmbedder {
 
-    private static final Log LOG = LogFactory.getLog( TraverseStateMachine.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TraverseStateMachine.class );
 
     /**
      * @see org.jbehave.core.Embeddable#run()

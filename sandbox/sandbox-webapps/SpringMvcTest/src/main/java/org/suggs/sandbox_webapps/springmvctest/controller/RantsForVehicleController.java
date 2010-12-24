@@ -15,8 +15,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,17 +28,15 @@ import org.springframework.web.servlet.mvc.AbstractCommandController;
  * @author suggitpe
  * @version 1.0 24 Jan 2008
  */
-public class RantsForVehicleController extends AbstractCommandController
-{
+public class RantsForVehicleController extends AbstractCommandController {
 
-    private static final Log LOG = LogFactory.getLog( RantsForVehicleController.class );
+    private static final Logger LOG = LoggerFactory.getLogger( RantsForVehicleController.class );
     private IRantService mRantService_;
 
     /**
      * Constructs a new instance.
      */
-    public RantsForVehicleController()
-    {
+    public RantsForVehicleController() {
         LOG.debug( "Creating rants for vehicle controller" );
         setCommandClass( Vehicle.class );
         setCommandName( "Vehicle" );
@@ -51,9 +49,8 @@ public class RantsForVehicleController extends AbstractCommandController
      */
     @SuppressWarnings("unchecked")
     @Override
-    protected ModelAndView handle( HttpServletRequest request, HttpServletResponse response,
-                                   Object command, BindException errors ) throws Exception
-    {
+    protected ModelAndView handle( HttpServletRequest request, HttpServletResponse response, Object command,
+                                   BindException errors ) throws Exception {
         Vehicle v = (Vehicle) command;
         List<Rant> l = mRantService_.getRantsForVehicle( v );
         Map model = errors.getModel();
@@ -68,8 +65,7 @@ public class RantsForVehicleController extends AbstractCommandController
      * @param aSvc
      *            the rant service to set
      */
-    public void setRantService( RantService aSvc )
-    {
+    public void setRantService( RantService aSvc ) {
         mRantService_ = aSvc;
     }
 }

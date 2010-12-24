@@ -8,8 +8,8 @@ import org.suggs.sandbox.osgi.mailbox.api.Mailbox;
 
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -22,7 +22,7 @@ import org.osgi.framework.BundleContext;
 public class WelcomeMailboxActivator implements BundleActivator
 {
 
-    private static final Log LOG = LogFactory.getLog( WelcomeMailboxActivator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WelcomeMailboxActivator.class );
 
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)

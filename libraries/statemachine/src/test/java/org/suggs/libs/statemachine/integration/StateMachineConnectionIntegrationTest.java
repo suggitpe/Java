@@ -13,8 +13,8 @@ import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -40,7 +40,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = { "classpath:xml/it-state-machine-connection-test-statemachine.xml" })
 public class StateMachineConnectionIntegrationTest {
 
-    private static final Log LOG = LogFactory.getLog( StateMachineConnectionIntegrationTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateMachineConnectionIntegrationTest.class );
 
     @Resource(name = "stateMachine")
     protected StateMachine stateMachine;

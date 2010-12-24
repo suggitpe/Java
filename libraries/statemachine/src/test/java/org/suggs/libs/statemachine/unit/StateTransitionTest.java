@@ -15,8 +15,8 @@ import org.suggs.libs.statemachine.impl.StateTransitionImpl;
 import org.suggs.libs.statemachine.support.FalseGuardStub;
 import org.suggs.libs.statemachine.support.TrueGuardStub;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -41,7 +41,7 @@ import static org.junit.Assert.fail;
  */
 public class StateTransitionTest {
 
-    private static final Log LOG = LogFactory.getLog( StateTransitionTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateTransitionTest.class );
 
     private IMocksControl ctrl;
 

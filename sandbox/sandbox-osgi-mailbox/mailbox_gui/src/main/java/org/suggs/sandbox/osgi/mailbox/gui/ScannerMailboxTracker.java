@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
@@ -30,7 +30,7 @@ import org.osgi.util.tracker.ServiceTracker;
 public class ScannerMailboxTracker extends ServiceTracker
 {
 
-    private static final Log LOG = LogFactory.getLog( ScannerMailboxTracker.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ScannerMailboxTracker.class );
 
     private final JTabbedPane mTabbedPane_;
     private final BundleContext mCtx_;

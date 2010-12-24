@@ -9,8 +9,8 @@ import org.suggs.libs.statemachine.StateMachine;
 import org.suggs.libs.statemachine.StateMachineContext;
 import org.suggs.libs.statemachine.StateMachineException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of the StateMachine interface. This implementation will delegate all transition evaluation
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class StateMachineImpl implements StateMachine {
 
-    private static final Log LOG = LogFactory.getLog( StateMachineImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateMachineImpl.class );
 
     private State initialState;
     private State currentState;

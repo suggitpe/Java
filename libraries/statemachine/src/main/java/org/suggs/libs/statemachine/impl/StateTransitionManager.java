@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is used to store all of the state transitions in a single accessible place. Realistically it is
@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class StateTransitionManager {
 
-    private static final Log LOG = LogFactory.getLog( StateTransitionManager.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateTransitionManager.class );
     private static final StateTransitionManager INSTANCE = new StateTransitionManager();
     private final Map<String, Map<String, StateTransition>> transitionMap = new HashMap<String, Map<String, StateTransition>>();
 

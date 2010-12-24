@@ -9,8 +9,8 @@ import org.suggs.sandbox.osgi.mailbox.api.Mailbox;
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -26,7 +26,7 @@ import org.osgi.framework.ServiceRegistration;
 public class FileMailboxActivator implements BundleActivator
 {
 
-    private static final Log LOG = LogFactory.getLog( FileMailboxActivator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( FileMailboxActivator.class );
     private Thread mThread_;
     private final long THREAD_SLEEP = 5000;
 

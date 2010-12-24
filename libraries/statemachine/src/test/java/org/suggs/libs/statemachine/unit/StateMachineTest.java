@@ -10,8 +10,8 @@ import org.suggs.libs.statemachine.StateMachineContext;
 import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.impl.StateMachineImpl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,7 +32,7 @@ import static org.junit.Assert.assertThat;
  */
 public class StateMachineTest {
 
-    private static final Log LOG = LogFactory.getLog( StateMachineTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateMachineTest.class );
 
     private IMocksControl ctrl;
     private State mockInitialState;

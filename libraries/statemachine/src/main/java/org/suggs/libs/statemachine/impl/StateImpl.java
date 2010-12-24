@@ -13,8 +13,8 @@ import org.suggs.libs.statemachine.StateMachineException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This main purpose of this class is to act as the source of state information of the state machine. It is
@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class StateImpl implements State {
 
-    private static final Log LOG = LogFactory.getLog( StateImpl.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateImpl.class );
 
     private final String stateName;
     private Action entryAction;

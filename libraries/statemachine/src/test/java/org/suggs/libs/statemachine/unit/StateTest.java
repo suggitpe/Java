@@ -12,8 +12,8 @@ import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.impl.StateImpl;
 import org.suggs.libs.statemachine.impl.StateTransitionManager;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -36,7 +36,7 @@ import static org.junit.Assert.assertThat;
  */
 public class StateTest {
 
-    private static final Log LOG = LogFactory.getLog( StateTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateTest.class );
     private IMocksControl ctrl;
 
     private StateMachineContext mockContext;

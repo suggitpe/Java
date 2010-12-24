@@ -7,8 +7,8 @@ package org.suggs.libs.statemachine.support;
 import org.suggs.libs.statemachine.StateMachineContext;
 import org.suggs.libs.statemachine.StateTransitionGuard;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Stub implementation of the state transition guard that always returns true
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TrueGuardStub implements StateTransitionGuard {
 
-    private static final Log LOG = LogFactory.getLog( TrueGuardStub.class );
+    private static final Logger LOG = LoggerFactory.getLogger( TrueGuardStub.class );
 
     /**
      * @see org.suggs.libs.statemachine.StateTransitionGuard#evaluateGuard(org.suggs.libs.statemachine.StateMachineContext)

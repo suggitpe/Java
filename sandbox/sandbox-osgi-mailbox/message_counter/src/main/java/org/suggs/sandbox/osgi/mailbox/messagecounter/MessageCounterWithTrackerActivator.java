@@ -7,8 +7,8 @@ package org.suggs.sandbox.osgi.mailbox.messagecounter;
 import org.suggs.sandbox.osgi.mailbox.api.Mailbox;
 import org.suggs.sandbox.osgi.mailbox.api.MailboxException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -23,7 +23,7 @@ import org.osgi.util.tracker.ServiceTracker;
 public class MessageCounterWithTrackerActivator implements BundleActivator
 {
 
-    private static final Log LOG = LogFactory.getLog( MessageCounterWithTrackerActivator.class );
+    private static final Logger LOG = LoggerFactory.getLogger( MessageCounterWithTrackerActivator.class );
     private ServiceTracker mTracker_;
 
     /**

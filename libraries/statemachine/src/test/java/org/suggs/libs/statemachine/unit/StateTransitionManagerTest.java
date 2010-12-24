@@ -10,8 +10,8 @@ import org.suggs.libs.statemachine.impl.StateTransitionManager;
 
 import java.util.Collection;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.easymock.IMocksControl;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -32,7 +32,7 @@ import static org.junit.Assert.assertThat;
  */
 public class StateTransitionManagerTest {
 
-    private static final Log LOG = LogFactory.getLog( StateTransitionManagerTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateTransitionManagerTest.class );
 
     private IMocksControl ctrl;
     private State mockStateOne;
