@@ -11,14 +11,21 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import javax.annotation.Resource;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.type.Type;
 
@@ -32,9 +39,14 @@ import static org.junit.Assert.assertThat;
  * @author suggitpe
  * @version 1.0 22 Dec 2010
  */
-public class BadlyImplementedInterceptorTest extends HibernateTimestampEntityIntegrationTest {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:xml/ut-timestamps.xml" })
+public final class BadlyImplementedInterceptorTest {
 
     private static final Logger LOG = LoggerFactory.getLogger( BadlyImplementedInterceptorTest.class );
+
+    @Resource(name = "sessionFactory")
+    protected SessionFactory sessionfactory;
 
     @SuppressWarnings("boxing")
     @Test
@@ -46,7 +58,7 @@ public class BadlyImplementedInterceptorTest extends HibernateTimestampEntityInt
             Transaction transaction = session.beginTransaction();
 
             try {
-                TimestampedEntity entity = createEntityTemplate( createKeyTemplate(), session );
+                TimestampedEntity entity = TimestampTestHelper.createTimestampEntity();
                 session.save( entity );
                 id = entity.getId();
 
