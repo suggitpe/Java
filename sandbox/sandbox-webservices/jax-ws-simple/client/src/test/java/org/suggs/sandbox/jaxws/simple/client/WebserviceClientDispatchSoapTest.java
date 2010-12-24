@@ -6,8 +6,8 @@ package org.suggs.sandbox.jaxws.simple.client;
 
 import org.suggs.sandbox.jaxws.simple.client.impl.HelloWorldDispatchSoapClient;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Tests the calling of a webservice using the dispatch cource mechanism
@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebserviceClientDispatchSoapTest extends AbstractWebserviceClientTest {
 
-    private static final Log LOG = LogFactory.getLog( WebserviceClientDispatchSoapTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WebserviceClientDispatchSoapTest.class );
 
     /**
      * @see org.suggs.sandbox.jaxws.simple.client.AbstractWebserviceClientTest#doCreateClientCallback()

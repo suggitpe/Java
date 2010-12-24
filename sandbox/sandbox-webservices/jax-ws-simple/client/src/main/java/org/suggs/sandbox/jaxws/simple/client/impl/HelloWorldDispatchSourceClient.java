@@ -26,8 +26,8 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.ws.Dispatch;
 import javax.xml.ws.Service;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for HelloWorldDispatchSourceClient
@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class HelloWorldDispatchSourceClient {
 
-    private static final Log LOG = LogFactory.getLog( HelloWorldDispatchSourceClient.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HelloWorldDispatchSourceClient.class );
 
     public String callWebService( String aName ) {
         QName serviceQName = new QName( HelloWorldBindings.WS_TARGET_NS, HelloWorldBindings.WS_NAME );

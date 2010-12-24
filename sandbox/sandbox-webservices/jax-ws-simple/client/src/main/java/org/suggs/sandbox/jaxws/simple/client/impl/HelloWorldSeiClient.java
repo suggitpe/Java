@@ -13,8 +13,8 @@ import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.WebServiceClient;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Client that will call a wesbervice
@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class HelloWorldSeiClient {
 
-    private static final Log LOG = LogFactory.getLog( HelloWorldSeiClient.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HelloWorldSeiClient.class );
     private WebServiceClient webServiceClient = HelloWorldService.class.getAnnotation( WebServiceClient.class );
 
     public String callWebService( String aName ) {

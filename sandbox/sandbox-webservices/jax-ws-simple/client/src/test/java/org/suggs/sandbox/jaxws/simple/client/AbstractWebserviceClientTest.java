@@ -4,8 +4,8 @@
  */
 package org.suggs.sandbox.jaxws.simple.client;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
  */
 public abstract class AbstractWebserviceClientTest {
 
-    private static final Log LOG = LogFactory.getLog( AbstractWebserviceClientTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( AbstractWebserviceClientTest.class );
     private static final String NAME = "Pete";
     private static final String RESPONSE = "Hello " + NAME + "!";
 

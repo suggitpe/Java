@@ -6,8 +6,8 @@ package org.suggs.sandbox.jaxws.simple.client;
 
 import org.suggs.sandbox.jaxws.simple.client.impl.HelloWorldSeiClient;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test class for the SEI Webservice
@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebserviceClientSeiTest extends AbstractWebserviceClientTest {
 
-    private static final Log LOG = LogFactory.getLog( WebserviceClientSeiTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( WebserviceClientSeiTest.class );
 
     /**
      * @see org.suggs.sandbox.jaxws.simple.client.AbstractWebserviceClientTest#doCreateClientCallback()
