@@ -21,6 +21,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -42,7 +43,7 @@ public final class TimestampInterceptorTest {
      * This test has been written from scratch to try and isolate a specific problem with interceptor
      * execution between flush and commit.
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({ "unused", "boxing" })
     @Test
     public void interceptorIsCalledDuringFlush() {
         LOG.debug( "............................." );
@@ -56,21 +57,25 @@ public final class TimestampInterceptorTest {
 
             try {
                 TimestampedEntity entity = TimestampTestHelper.createTimestampEntity();
-                LOG.debug( entity.toString() );
 
-                LOG.debug( "calling save" );
+                assertThat( entity.getVersion(), nullValue() );
+                LOG.debug( "--- Calling save [" + entity + "]" );
+                // we expect that the interceptor is called here
                 session.save( entity );
-                LOG.debug( "called save" );
+                assertThat( entity.getVersion(), equalTo( 0 ) );
+                LOG.debug( "--- Called save [" + entity + "]" );
                 LOG.debug( entity.toString() );
 
                 id = entity.getId();
 
                 LOG.debug( "............................." );
-                LOG.debug( "Calling flush" );
+                LOG.debug( "--- Calling flush [" + entity + "]" );
                 session.flush();
+                assertThat( entity.getVersion(), equalTo( 0 ) );
                 LOG.debug( "............................." );
-                LOG.debug( "Calling commit" );
+                LOG.debug( "--- Calling commit [" + entity + "]" );
                 transaction.commit();
+                assertThat( entity.getVersion(), equalTo( 0 ) );
                 LOG.debug( "............................." );
             }
             finally {
@@ -90,7 +95,7 @@ public final class TimestampInterceptorTest {
         }
 
         LOG.debug( "............................." );
-        LOG.debug( "READING and FLUSHING UNCHANGED OBJECmplateT" );
+        LOG.debug( "READING and FLUSHING UNCHANGED OBJECT" );
         LOG.debug( "............................." );
 
         session = sessionfactory.openSession();

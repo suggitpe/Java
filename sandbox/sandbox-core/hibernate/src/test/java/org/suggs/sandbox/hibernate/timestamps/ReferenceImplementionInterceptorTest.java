@@ -30,7 +30,6 @@ import org.hibernate.Transaction;
 import org.hibernate.type.Type;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -91,41 +90,6 @@ public class ReferenceImplementionInterceptorTest {
         }
 
         session = sessionfactory.openSession( new ReferenceImplementionInterceptor() );
-
-        try {
-            Transaction transaction = session.beginTransaction();
-
-            try {
-                TimestampedEntity entity = (TimestampedEntity) session.get( TimestampedEntity.class, id );
-                entity.setSomeString( "altered" );
-
-                LOG.debug( "............................." );
-                LOG.debug( "Calling flush" );
-                session.flush();
-                assertThat( entity.getVersion(), equalTo( 1 ) );
-                assertThat( entity.getTimestampAuditInfo().getCreateDate(),
-                            not( equalTo( entity.getTimestampAuditInfo().getUpdateDate() ) ) );
-                LOG.debug( "............................." );
-                LOG.debug( "Calling commit" );
-                transaction.commit();
-                LOG.debug( "............................." );
-                assertThat( entity.getVersion(), equalTo( 1 ) );
-            }
-            finally {
-                if ( !transaction.wasCommitted() ) {
-                    transaction.rollback();
-                }
-            }
-        }
-        catch ( Exception e ) {
-            e.printStackTrace();
-            Assert.fail( "failed in the update part of teh test" );
-        }
-        finally {
-            if ( session.isOpen() ) {
-                session.close();
-            }
-        }
 
     }
 

@@ -6,7 +6,7 @@ package org.suggs.sandbox.hibernate.support;
 
 import javax.annotation.Resource;
 
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -34,6 +34,11 @@ public class BasicConnectWithTransactionTest {
     @Resource(name = "sessionFactory")
     protected SessionFactory sessionfactory;
 
+    @Before
+    public void onSetup() {
+        LOG.debug( "----------------------" );
+    }
+
     @Test
     public void performBasicConnectTest() {
         executeBasicAtomicOperation( new AtomicOperationCallback() {
@@ -50,22 +55,43 @@ public class BasicConnectWithTransactionTest {
         } );
     }
 
-    @Ignore
     @Test
     public void performBasicSaveProcess() {
         executeBasicAtomicOperation( new AtomicOperationCallback() {
 
             @Override
             public void performAtomicOperation( Session aSession ) {
-                ReallyBasicEntity entity = new ReallyBasicEntity();
-                entity.setStringField( "String Data" );
+                ReallyBasicEntity entity = new ReallyBasicEntity( "String Data", 345 );
                 Long id = (Long) aSession.save( entity );
                 LOG.debug( "Created really basic entity with ID of [" + id + "]" );
             }
         } );
     }
 
-    public void executeBasicAtomicOperation( AtomicOperationCallback aCallback ) {
+    @Test
+    public void performBasicCreateFlushUpdateFlush() {
+        executeBasicAtomicOperation( new AtomicOperationCallback() {
+
+            @Override
+            public void performAtomicOperation( Session aSession ) {
+                ReallyBasicEntity entity = new ReallyBasicEntity( "Some String", 999 );
+                Long id = (Long) aSession.save( entity );
+
+                LOG.debug( "Created really basic entity with ID of [" + id + "] ... flushing" );
+                aSession.flush();
+
+                LOG.debug( "Flushed object, about to update and then flush again" );
+                entity.setIntField( 888 );
+                aSession.flush();
+
+                LOG.debug( "Flushed object, about to update and then flush again" );
+                entity.setStringField( "rah rah rah" );
+                aSession.flush();
+            }
+        } );
+    }
+
+    private void executeBasicAtomicOperation( AtomicOperationCallback aCallback ) {
         Session session = sessionfactory.openSession();
         try {
             Transaction transaction = session.beginTransaction();
@@ -77,16 +103,18 @@ public class BasicConnectWithTransactionTest {
                 LOG.info( ">>>>>>> Flush called" );
             }
             catch ( Exception ex ) {
-                LOG.error( "Rolling back transaction" );
+                LOG.error( "Rolling back transaction", ex );
                 transaction.rollback();
             }
             finally {
                 if ( !transaction.wasRolledBack() ) {
-                    LOG.info( "Commiting transaction - well pretending to anyway" );
-                    transaction.rollback();
+                    LOG.info( "Commiting transaction" );
+                    transaction.commit();
                 }
             }
-
+        }
+        catch ( Exception exc ) {
+            LOG.error( "Caught issues", exc );
         }
         finally {
             session.close();

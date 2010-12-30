@@ -45,17 +45,14 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
     @Override
     public boolean onFlushDirty( Object aEntity, Serializable aId, Object[] aCurrentState,
                                  Object[] aPreviousState, String[] aPropertyNames, Type[] aTypes ) {
-        if ( isNotEntityAuditable( aEntity ) ) {
+        if ( !isEntityAuditable( aEntity ) ) {
             return false;
         }
         Timestamp date = getDateTimeNow();
-        TimestampAuditInfo auditInfo = ( (TimestampAuditable) aEntity ).getTimestampAuditInfo();
-
         if ( LOG.isDebugEnabled() ) {
-            LOG.debug( "Auditing existing entity with update date of [" + date + "]" );
+            LOG.debug( "Auditing (onFlushDirty) existing entity with update date of [" + date + "]" );
         }
         updateDateProperty( aCurrentState, aPropertyNames, AUDIT_TYPE.UPDATED_ON, date );
-        auditInfo.setUpdateDate( date );
         return true;
     }
 
@@ -66,25 +63,20 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
     @Override
     public boolean onSave( Object aEntity, Serializable aId, Object[] aCurrentState, String[] aPropertyNames,
                            Type[] aTypes ) {
-        if ( isNotEntityAuditable( aEntity ) ) {
+        if ( !isEntityAuditable( aEntity ) ) {
             return false;
         }
         Timestamp date = getDateTimeNow();
-        TimestampAuditInfo auditInfo = ( (TimestampAuditable) aEntity ).getTimestampAuditInfo();
         if ( LOG.isDebugEnabled() ) {
-            LOG.debug( "Auditing new entity with create date and update date of [" + date + "]" );
+            LOG.debug( "Auditing (onSave) new entity with create date and update date of [" + date + "]" );
         }
-
-        auditInfo.setCreateDate( date );
         updateDateProperty( aCurrentState, aPropertyNames, AUDIT_TYPE.CREATED_ON, date );
-
-        auditInfo.setUpdateDate( date );
         updateDateProperty( aCurrentState, aPropertyNames, AUDIT_TYPE.UPDATED_ON, date );
         return true;
     }
 
-    private boolean isNotEntityAuditable( Object aEntity ) {
-        return !( aEntity instanceof TimestampAuditable );
+    private boolean isEntityAuditable( Object aEntity ) {
+        return aEntity instanceof TimestampAuditable;
     }
 
     private Timestamp getDateTimeNow() {
