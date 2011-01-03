@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.hibernate.support;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
@@ -28,64 +30,78 @@ public class ReallyBasicEntity extends EntityBase {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReallyBasicEntity.class );
 
-    @Column(name = "STRING_FIELD", length = 50)
-    private String stringField;
+    @Column(name = "SOME_STRING", length = 50)
+    private String someString;
 
-    @Column(name = "INT_FIELD")
-    private int intField;
+    @Column(name = "SOME_INT")
+    private int someInteger;
+
+    @Column(name = "SOME_DATE")
+    private Date someDate;
 
     public ReallyBasicEntity() {}
 
-    public ReallyBasicEntity( String aString, int aInt ) {
-        stringField = aString;
-        intField = aInt;
+    public ReallyBasicEntity( String aString, int aInt, Date aDate ) {
+        someString = aString;
+        someInteger = aInt;
+        someDate = aDate;
     }
 
     /**
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return super.toString() + ": ReallyBasicEntity [stringField=" + stringField + ", intField="
-               + intField + "]";
-    }
-
-    /**
-     * Returns the value of stringField.
+     * Returns the value of someString.
      * 
-     * @return Returns the stringField.
+     * @return Returns the someString.
      */
-    public String getStringField() {
-        return stringField;
+    public String getSomeString() {
+        return someString;
     }
 
     /**
-     * Sets the stringField field to the specified value.
+     * Sets the someString field to the specified value.
      * 
-     * @param aStringField
-     *            The stringField to set.
+     * @param aSomeString
+     *            The someString to set.
      */
-    public void setStringField( String aStringField ) {
-        stringField = aStringField;
+    public void setSomeString( String aSomeString ) {
+        someString = aSomeString;
     }
 
     /**
-     * Returns the value of intField.
+     * Returns the value of someInteger.
      * 
-     * @return Returns the intField.
+     * @return Returns the someInteger.
      */
-    public int getIntField() {
-        return intField;
+    public int getSomeInteger() {
+        return someInteger;
     }
 
     /**
-     * Sets the intField field to the specified value.
+     * Sets the someInteger field to the specified value.
      * 
-     * @param aIntField
-     *            The intField to set.
+     * @param aSomeInteger
+     *            The someInteger to set.
      */
-    public void setIntField( int aIntField ) {
-        intField = aIntField;
+    public void setSomeInteger( int aSomeInteger ) {
+        someInteger = aSomeInteger;
+    }
+
+    /**
+     * Returns the value of someDate.
+     * 
+     * @return Returns the someDate.
+     */
+    public Date getSomeDate() {
+        return someDate;
+    }
+
+    /**
+     * Sets the someDate field to the specified value.
+     * 
+     * @param aSomeDate
+     *            The someDate to set.
+     */
+    public void setSomeDate( Date aSomeDate ) {
+        someDate = aSomeDate;
     }
 
     /**
@@ -95,8 +111,9 @@ public class ReallyBasicEntity extends EntityBase {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + intField;
-        result = prime * result + ( ( stringField == null ) ? 0 : stringField.hashCode() );
+        result = prime * result + ( ( someDate == null ) ? 0 : someDate.hashCode() );
+        result = prime * result + someInteger;
+        result = prime * result + ( ( someString == null ) ? 0 : someString.hashCode() );
         return result;
     }
 
@@ -112,15 +129,30 @@ public class ReallyBasicEntity extends EntityBase {
         if ( getClass() != obj.getClass() )
             return false;
         ReallyBasicEntity other = (ReallyBasicEntity) obj;
-        if ( intField != other.intField )
-            return false;
-        if ( stringField == null ) {
-            if ( other.stringField != null )
+        if ( someDate == null ) {
+            if ( other.someDate != null )
                 return false;
         }
-        else if ( !stringField.equals( other.stringField ) )
+        else if ( !someDate.equals( other.someDate ) )
+            return false;
+        if ( someInteger != other.someInteger )
+            return false;
+        if ( someString == null ) {
+            if ( other.someString != null )
+                return false;
+        }
+        else if ( !someString.equals( other.someString ) )
             return false;
         return true;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return super.toString() + " ReallyBasicEntity [someString=" + someString + ", someInteger="
+               + someInteger + ", someDate=" + someDate + "]";
     }
 
 }

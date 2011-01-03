@@ -4,9 +4,13 @@
  */
 package org.suggs.sandbox.hibernate.support;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -39,6 +43,7 @@ public class BasicConnectWithTransactionTest {
         LOG.debug( "----------------------" );
     }
 
+    @Ignore
     @Test
     public void performBasicConnectTest() {
         executeBasicAtomicOperation( new AtomicOperationCallback() {
@@ -55,13 +60,14 @@ public class BasicConnectWithTransactionTest {
         } );
     }
 
+    @Ignore
     @Test
     public void performBasicSaveProcess() {
         executeBasicAtomicOperation( new AtomicOperationCallback() {
 
             @Override
             public void performAtomicOperation( Session aSession ) {
-                ReallyBasicEntity entity = new ReallyBasicEntity( "String Data", 345 );
+                ReallyBasicEntity entity = new ReallyBasicEntity( "String Data", 345, getOldDate() );
                 Long id = (Long) aSession.save( entity );
                 LOG.debug( "Created really basic entity with ID of [" + id + "]" );
             }
@@ -74,21 +80,35 @@ public class BasicConnectWithTransactionTest {
 
             @Override
             public void performAtomicOperation( Session aSession ) {
-                ReallyBasicEntity entity = new ReallyBasicEntity( "Some String", 999 );
+                ReallyBasicEntity entity = new ReallyBasicEntity( "Some String", 999, getOldDate() );
                 Long id = (Long) aSession.save( entity );
 
-                LOG.debug( "Created really basic entity with ID of [" + id + "] ... flushing" );
+                LOG.debug( "-- Created really basic entity with ID of [" + id + "] ... flushing" );
+                aSession.flush();
+                LOG.debug( "Entity [" + entity + "] should now be in the database" );
+
+                LOG.debug( "-- Flushed object, about to update and then flush again" );
+                entity.setSomeString( "rah rah rah" );
                 aSession.flush();
 
-                LOG.debug( "Flushed object, about to update and then flush again" );
-                entity.setIntField( 888 );
-                aSession.flush();
-
-                LOG.debug( "Flushed object, about to update and then flush again" );
-                entity.setStringField( "rah rah rah" );
+                LOG.debug( "-- Flushed object, about to update and then flush again" );
+                entity.setSomeInteger( 3456 );
                 aSession.flush();
             }
         } );
+    }
+
+    // gets the date as of 01/01/2010
+    private Date getOldDate() {
+        Calendar c = Calendar.getInstance();
+        c.set( Calendar.YEAR, 2010 );
+        c.set( Calendar.MONTH, 0 );
+        c.set( Calendar.DAY_OF_MONTH, 1 );
+        c.set( Calendar.HOUR, 0 );
+        c.set( Calendar.MINUTE, 0 );
+        c.set( Calendar.SECOND, 0 );
+        c.set( Calendar.MILLISECOND, 0 );
+        return c.getTime();
     }
 
     private void executeBasicAtomicOperation( AtomicOperationCallback aCallback ) {

@@ -6,6 +6,8 @@ package org.suggs.sandbox.hibernate.threadsafety;
 
 import org.suggs.sandbox.hibernate.support.ReallyBasicEntity;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.junit.Before;
@@ -45,7 +47,9 @@ public class HibernateThreadSafetySessionTests {
     public void onSetup() {
         LOG.debug( "-------------------------- setup start" );
         objectId = null;
-        ReallyBasicEntity entity = new ReallyBasicEntity( "This is a string", 25 );
+        ReallyBasicEntity entity = new ReallyBasicEntity( "This is a string",
+                                                          25,
+                                                          new Date( System.currentTimeMillis() ) );
         Session session = sessionfactory.openSession();
         try {
             Transaction trans = session.beginTransaction();
@@ -87,7 +91,7 @@ public class HibernateThreadSafetySessionTests {
                     throw new IllegalStateException();
                 }
                 ReallyBasicEntity entity = (ReallyBasicEntity) session.get( ReallyBasicEntity.class, objectId );
-                entity.setStringField( "rah rah rah" );
+                entity.setSomeString( "rah rah rah" );
                 session.flush();
             }
             catch ( Exception inner ) {
@@ -128,7 +132,7 @@ public class HibernateThreadSafetySessionTests {
             Transaction trans = session.beginTransaction();
             try {
                 LOG.debug( "Updating the entity stord in the local thread" );
-                reallyBasicEntity.setStringField( "doo be doo" );
+                reallyBasicEntity.setSomeString( "doo be doo" );
 
                 while ( readerThread.isAlive() ) {
                     Thread.sleep( 500 );
