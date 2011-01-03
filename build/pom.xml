@@ -24,7 +24,7 @@
     <properties>
         <jbehave.version>3.1.2</jbehave.version>
         <log4j.version>1.2.12</log4j.version>
-        <spring.version>3.0.4.RELEASE</spring.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
         <jbehave.ignoreFailureInStories>false</jbehave.ignoreFailureInStories>
         <jbehave.ignoreFailureInView>false</jbehave.ignoreFailureInView>
         <jbehave.generateViewAfterStories>true</jbehave.generateViewAfterStories>
