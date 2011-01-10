@@ -9,9 +9,7 @@ import org.suggs.sandbox.spring.distributedmutex.impl.DatabaseDistributedMutex;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -52,7 +50,6 @@ public class DatabaseDistributedMutexTest {
 
     private static List<Boolean> callList;
     private Object callListLock = new Object();
-    private static final Map<String, String> EMPTY_MAP = new HashMap<String, String>();
 
     private static final String DROP_TEST_TABLE = "drop table " + DatabaseDistributedMutex.TABLE_NAME;
     private static final String CREATE_TEST_TABLE = "create table " + DatabaseDistributedMutex.TABLE_NAME
@@ -72,14 +69,14 @@ public class DatabaseDistributedMutexTest {
 
         try {
 
-            jdbcTemplate.update( DROP_TEST_TABLE, EMPTY_MAP );
+            jdbcTemplate.execute( DROP_TEST_TABLE );
         }
         catch ( Exception sqlException ) {
             sqlException.printStackTrace();
             LOG.debug( "Table does not exit so cannot drop it" );
         }
 
-        jdbcTemplate.update( CREATE_TEST_TABLE, EMPTY_MAP );
+        jdbcTemplate.execute( CREATE_TEST_TABLE );
 
         LOG.debug( "####################################" );
         callList = new ArrayList<Boolean>();
