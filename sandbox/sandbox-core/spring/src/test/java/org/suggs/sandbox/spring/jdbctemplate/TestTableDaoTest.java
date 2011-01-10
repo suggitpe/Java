@@ -35,7 +35,7 @@ public class TestTableDaoTest {
 
     private static final Logger LOG = LoggerFactory.getLogger( TestTableDaoTest.class );
 
-    @Resource(name = "jdbcTemplate")
+    @Resource(name = "namedParameterJdbcTemplate")
     protected NamedParameterJdbcTemplate jdbcTemplate;
 
     private TestTableDao dao;
