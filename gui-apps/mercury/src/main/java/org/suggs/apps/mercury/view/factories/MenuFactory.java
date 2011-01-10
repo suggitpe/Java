@@ -5,14 +5,13 @@
 package org.suggs.apps.mercury.view.factories;
 
 import org.suggs.apps.mercury.ContextProvider;
-import org.suggs.apps.mercury.view.IActionManager;
 import org.suggs.apps.mercury.view.IMenuFactory;
 import org.suggs.apps.mercury.view.actions.ActionManager;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.eclipse.jface.action.MenuManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.eclipse.jface.action.MenuManager;
 
 /**
  * This class implements the IMenuFactory and will manage the construction of menus. This implementation is
@@ -24,14 +23,11 @@ import org.eclipse.jface.action.MenuManager;
 public class MenuFactory implements IMenuFactory {
 
     private static final Logger LOG = LoggerFactory.getLogger( MenuFactory.class );
-    private IActionManager actionManager;
 
     /**
      * Constructs a new instance.
      */
-    public MenuFactory( IActionManager aActionManager ) {
-        actionManager = aActionManager;
-    }
+    public MenuFactory() {}
 
     /**
      * @see org.suggs.apps.mercury.view.IMenuFactory#createMenuManager(java.lang.String)
@@ -81,16 +77,6 @@ public class MenuFactory implements IMenuFactory {
         help.add( mgr.getAction( "CONNECTION_DEBUG" ) );
 
         return main;
-    }
-
-    /**
-     * Setter for the action manager
-     * 
-     * @param aActionManager
-     *            the action manager to set
-     */
-    public final void setActionManager( IActionManager aActionManager ) {
-        actionManager = aActionManager;
     }
 
 }

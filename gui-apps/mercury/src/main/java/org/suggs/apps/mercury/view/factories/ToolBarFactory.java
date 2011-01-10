@@ -5,15 +5,14 @@
 package org.suggs.apps.mercury.view.factories;
 
 import org.suggs.apps.mercury.ContextProvider;
-import org.suggs.apps.mercury.view.IActionManager;
 import org.suggs.apps.mercury.view.IToolBarFactory;
 import org.suggs.apps.mercury.view.actions.ActionManager;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.ToolBarManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Builder class that is responsible for the contruction of the toolbars used in the application
@@ -25,15 +24,12 @@ public class ToolBarFactory implements IToolBarFactory {
 
     private static final Logger LOG = LoggerFactory.getLogger( ToolBarFactory.class );
 
-    private IActionManager actionManager;
     private boolean showToolbar;
 
     /**
      * Constructs a new instance.
      */
-    public ToolBarFactory( IActionManager aActionManager ) {
-        actionManager = aActionManager;
-    }
+    public ToolBarFactory() {}
 
     /**
      * @see org.suggs.apps.mercury.view.IToolBarFactory#createToolbar(java.lang.String, int)
@@ -74,16 +70,6 @@ public class ToolBarFactory implements IToolBarFactory {
         main.add( new Separator() );
 
         return main;
-    }
-
-    /**
-     * Setter for the action manager
-     * 
-     * @param aActionManager
-     *            the action manager
-     */
-    public final void setActionManager( IActionManager aActionManager ) {
-        actionManager = aActionManager;
     }
 
     /**
