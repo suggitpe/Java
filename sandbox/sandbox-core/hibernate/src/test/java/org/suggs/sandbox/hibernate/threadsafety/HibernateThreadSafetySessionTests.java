@@ -24,6 +24,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
+
 /**
  * Tests that Hibernate is a thread safe implementation.
  * 
@@ -43,6 +47,9 @@ public class HibernateThreadSafetySessionTests {
     private Long objectId;
     private ReallyBasicEntity reallyBasicEntity;
 
+    /*
+     * This is just here to seed the database with an entry so we can then do something with it.
+     */
     @Before
     public void onSetup() {
         LOG.debug( "-------------------------- setup start" );
@@ -83,6 +90,8 @@ public class HibernateThreadSafetySessionTests {
     @Test
     public void hibernateOnlyUpdatesChangedFields() {
 
+        String update = "rah rah rah";
+
         Session session = sessionfactory.openSession();
         try {
             Transaction trans = session.beginTransaction();
@@ -91,8 +100,15 @@ public class HibernateThreadSafetySessionTests {
                     throw new IllegalStateException();
                 }
                 ReallyBasicEntity entity = (ReallyBasicEntity) session.get( ReallyBasicEntity.class, objectId );
-                entity.setSomeString( "rah rah rah" );
+                assertThat( entity.getTimestampAuditInfo().getCreateDate(),
+                            equalTo( entity.getTimestampAuditInfo().getUpdateDate() ) );
+
+                entity.setSomeString( update );
                 session.flush();
+
+                assertThat( entity.getSomeString(), equalTo( update ) );
+                assertThat( entity.getTimestampAuditInfo().getCreateDate(),
+                            not( equalTo( entity.getTimestampAuditInfo().getUpdateDate() ) ) );
             }
             catch ( Exception inner ) {
                 LOG.debug( "rollback !!!!" );
@@ -138,7 +154,6 @@ public class HibernateThreadSafetySessionTests {
                     Thread.sleep( 500 );
                 }
                 session.flush();
-
             }
             catch ( Exception inner ) {
                 LOG.error( "exception caught with the transaction", inner );
@@ -175,7 +190,9 @@ public class HibernateThreadSafetySessionTests {
                                                                                 objectId );
                     reallyBasicEntity = entity;
                     LOG.debug( "Read back in object [" + reallyBasicEntity + "]" );
+
                     try {
+                        // wait for the main thread to actually update this object
                         Thread.sleep( SLEEP_TIME );
                     }
                     catch ( InterruptedException ie ) {

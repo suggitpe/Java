@@ -18,7 +18,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TimestampAuditInfo {
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", updatable = false)
     private Timestamp createDate;
 
     @Column(name = "update_date")

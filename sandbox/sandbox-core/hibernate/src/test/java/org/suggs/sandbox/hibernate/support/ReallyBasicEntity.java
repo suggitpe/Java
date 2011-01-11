@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0 22 Dec 2010
  */
 @Entity
+@org.hibernate.annotations.Entity(dynamicUpdate = true)
 @Table(name = "BASIC_ENTITY")
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "BASIC_ENTITY_SQ")
 public class ReallyBasicEntity extends EntityBase {
