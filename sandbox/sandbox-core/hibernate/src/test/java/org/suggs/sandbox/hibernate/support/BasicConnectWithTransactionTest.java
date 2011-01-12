@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.hibernate.support;
 
+import org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity;
+
 import java.util.Calendar;
 import java.util.Date;
 

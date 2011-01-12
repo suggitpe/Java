@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.hibernate.threadsafety;
 
-import org.suggs.sandbox.hibernate.support.ReallyBasicEntity;
+import org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity;
 
 import java.util.Date;
 

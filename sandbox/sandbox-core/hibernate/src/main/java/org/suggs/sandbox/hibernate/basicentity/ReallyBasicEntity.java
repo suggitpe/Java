@@ -2,7 +2,9 @@
  * ReallyBasicEntity.java created on 22 Dec 2010 18:55:55 by suggitpe for project sandbox-hibernate
  * 
  */
-package org.suggs.sandbox.hibernate.support;
+package org.suggs.sandbox.hibernate.basicentity;
+
+import org.suggs.sandbox.hibernate.support.EntityBase;
 
 import java.util.Date;
 
