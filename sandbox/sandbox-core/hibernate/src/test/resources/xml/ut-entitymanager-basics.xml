@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!-- Properties -->
+    <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:db.properties" />
+    </bean>
+
+    <bean id="jpaProperties" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
+                <entry key="hibernate.connection.url" value="${suggs.jdbc.url}"/>
+                <entry key="hibernate.connection.username" value="${suggs.jdbc.username}"/>
+                <entry key="hibernate.connection.password" value="${suggs.jdbc.password}"/>
+                <entry key="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+                <entry key="hibernate.connection.release_mode" value="on_close"/>
+                <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+                <entry key="hibernate.cache.use_second_level_cache" value="false"/>
+                <entry key="hibernate.show_sql" value="false"/>
+                <entry key="hibernate.generate_statistics" value="true"/>
+                <entry key="hibernate.hbm2ddl.auto" value="update"/>
+                <entry key="hibernate.ejb.interceptor" value="org.suggs.sandbox.hibernate.support.TimestampAuditingInterceptor"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    
+</beans>
