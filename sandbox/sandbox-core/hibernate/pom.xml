@@ -76,12 +76,12 @@
             <artifactId>javassist</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-c3p0</artifactId> <scope>test</scope> </dependency> -->
         <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--<dependency> <groupId>commons-dbcp</groupId> <artifactId>commons-dbcp</artifactId> <scope>test</scope> </dependency> -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-commons-annotations</artifactId>

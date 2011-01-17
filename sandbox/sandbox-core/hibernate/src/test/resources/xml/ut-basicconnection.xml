@@ -10,7 +10,7 @@
         parent="abstractSessionFactoryBean">
         <property name="annotatedClasses">
             <list>
-                <value>org.suggs.sandbox.hibernate.support.ReallyBasicEntity</value>
+                <value>org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity</value>
             </list>
         </property>
     </bean>
