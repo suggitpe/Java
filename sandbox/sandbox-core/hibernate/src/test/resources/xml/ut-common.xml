@@ -9,31 +9,30 @@
         /> <property name="url" value="${suggs.jdbc.url}" /> <property name="username" value="${suggs.jdbc.username}" /> <property 
         name="password" value="${suggs.jdbc.password}" /> </bean> </property> </bean> -->
 
-
     <!-- C3P0 datasource -->
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy"> <property name="targetDataSource"> 
+        <bean class="com.mchange.v2.c3p0.ComboPooledDataSource"> <property name="driverClass" value="oracle.jdbc.OracleDriver" /> 
+        <property name="jdbcUrl" value="${suggs.jdbc.url}" /> <property name="user" value="${suggs.jdbc.username}" /> <property name="password" 
+        value="${suggs.jdbc.password}" /> <property name="initialPoolSize" value="1" /> <property name="minPoolSize" value="1" /> 
+        <property name="maxPoolSize" value="2" /> <property name="maxIdleTime" value="5" /> <property name="autoCommitOnClose" value="false" 
+        /> </bean> </property> </bean> -->
+
+    <!-- COMMONS-DBCP datasource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
         <property name="targetDataSource">
-            <bean class="com.mchange.v2.c3p0.ComboPooledDataSource">
-                <property name="driverClass" value="oracle.jdbc.OracleDriver" />
-                <property name="jdbcUrl" value="${suggs.jdbc.url}" />
-                <property name="user" value="${suggs.jdbc.username}" />
+            <bean class="org.apache.commons.dbcp.BasicDataSource">
+                <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+                <property name="url" value="${suggs.jdbc.url}" />
+                <property name="username" value="${suggs.jdbc.username}" />
                 <property name="password" value="${suggs.jdbc.password}" />
-                <property name="initialPoolSize" value="1" />
-                <property name="minPoolSize" value="1" />
-                <property name="maxPoolSize" value="2" />
-                <property name="maxIdleTime" value="5" />
-                <property name="autoCommitOnClose" value="false" />
+                <property name="initialSize" value="1" />
+                <property name="maxActive" value="3" />
+                <property name="maxIdle" value="2" />
             </bean>
         </property>
     </bean>
 
-
-    <!-- COMMONS-DBCP datasource -->
-    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy"> <property name="targetDataSource"> 
-        <bean class="org.apache.commons.dbcp.BasicDataSource"> <property name="driverClassName" value="oracle.jdbc.OracleDriver" 
-        /> <property name="url" value="${suggs.jdbc.url}" /> <property name="username" value="${suggs.jdbc.username}" /> <property 
-        name="password" value="${suggs.jdbc.password}" /> <property name="initialSize" value="1" /> <property name="maxActive" value="3" 
-        /> <property name="maxIdle" value="2" /> </bean> </property> </bean> --><!-- Properties -->
+    <!-- Properties -->
     <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:db.properties" />
     </bean>

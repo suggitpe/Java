@@ -26,7 +26,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * Test suite that utilises Entity Manager in the most basic of ways.
+ * Test suite that utilises Entity Manager in the most basic of ways. This is assuming a J2SE implementation
+ * and also that the entitymanager has been configured programatically.
  * 
  * @author suggitpe
  * @version 1.0 12 Jan 2011
@@ -41,7 +42,9 @@ public class EntityManagerBasicsTest {
     private EntityManager entityManager;
 
     @Resource
-    private Map<?, ?> jpaProperties;
+    private Map<String, String> jpaProperties;
+
+    private static Long ENTITY_ID = Long.valueOf( 0l );
 
     @Before
     public void onSetup() {
@@ -54,13 +57,47 @@ public class EntityManagerBasicsTest {
     }
 
     @Test
-    public void savesBasicEntityCorrectly() {
+    public void createBasicEntityCorrectly() {
+        LOG.debug( "Testing that I can save an object correctly" );
         EntityTransaction trans = entityManager.getTransaction();
         trans.begin();
 
         ReallyBasicEntity entity = new ReallyBasicEntity( "Test String", 9999, Calendar.getInstance()
             .getTime() );
         entityManager.persist( entity );
+
+        ENTITY_ID = entity.getId();
+
+        trans.commit();
+    }
+
+    @Test
+    public void readBasicEntityCorrectly() {
+        LOG.debug( "Testing that I can read an object correctly" );
+        ReallyBasicEntity entity = entityManager.find( ReallyBasicEntity.class, ENTITY_ID );
+        LOG.debug( entity.toString() );
+    }
+
+    @Test
+    public void updateBasicEntityCorrectly() {
+        LOG.debug( "Testing that I can update an object correctly" );
+        EntityTransaction trans = entityManager.getTransaction();
+        trans.begin();
+
+        ReallyBasicEntity entity = entityManager.find( ReallyBasicEntity.class, ENTITY_ID );
+        entity.setSomeString( "updated string" );
+
+        trans.commit();
+    }
+
+    @Test
+    public void deleteBasicEntityCorrectly() {
+        LOG.debug( "Testing that I can delete an object correctly" );
+        EntityTransaction trans = entityManager.getTransaction();
+        trans.begin();
+
+        ReallyBasicEntity entity = entityManager.find( ReallyBasicEntity.class, ENTITY_ID );
+        entityManager.remove( entity );
 
         trans.commit();
     }
