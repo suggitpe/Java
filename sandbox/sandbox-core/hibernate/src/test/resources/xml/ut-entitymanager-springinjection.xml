@@ -14,6 +14,11 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="persistenceUnitName" value="${suggs.jpa.persistencename}" />
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.ejb.interceptor" value="org.suggs.sandbox.hibernate.support.TimestampAuditingInterceptor"/>
+            </map>
+        </property>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="false" />
@@ -28,6 +33,7 @@
     </bean>
 
     <tx:annotation-driven />
+    
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 </beans>
