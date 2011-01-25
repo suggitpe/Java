@@ -104,7 +104,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
     protected abstract String createEntitySearchHql();
 
     /**
-     * Over loadable method that allows us to perform per validation activities.
+     * Overloadable method that allows us to perform per validation activities.
      * 
      * @param aSession
      *            the session from which you can (if needed) get access to the database

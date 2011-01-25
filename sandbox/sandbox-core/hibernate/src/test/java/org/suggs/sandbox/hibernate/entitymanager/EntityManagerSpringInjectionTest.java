@@ -74,7 +74,7 @@ public class EntityManagerSpringInjectionTest {
     public void injectedEntityManagerFactoryQueriesCorrectly() {
         EntityManager mgr = entityManagerFactory.createEntityManager();
         try {
-            Query q = mgr.createQuery( "from ReallyBasicEntity" );
+            Query q = mgr.createQuery( "from ReallyBasicEntity", ReallyBasicEntity.class );
             Collection<?> result = q.getResultList();
             LOG.debug( result.toString() );
         }
