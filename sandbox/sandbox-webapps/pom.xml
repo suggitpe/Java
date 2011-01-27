@@ -29,11 +29,11 @@
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
-						<manifestFile>${basedir}/WebContent/META-INF/MANIFEST.MF</manifestFile>
+						<manifestFile>${basedir}/src/main/webapp/META-INF/MANIFEST.MF</manifestFile>
 					</archive>
 					<webResources>
 						<resource>
-							<directory>${basedir}/WebContent</directory>
+							<directory>${basedir}/src/main/webapp</directory>
 						</resource>
 					</webResources>
 				</configuration>
