@@ -59,4 +59,12 @@ public class ReallyBasicEntityIntegrationTest extends AbstractEntityManagerInteg
     protected ReallyBasicEntity createEntityTemplate( Long aKey ) {
         return new ReallyBasicEntity( "foo", 8899, Calendar.getInstance().getTime() );
     }
+
+    /**
+     * @see org.suggs.sandbox.hibernate.support.AbstractEntityManagerIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
+     */
+    @Override
+    protected void updateEntityForUpdateTest( ReallyBasicEntity aEntity ) {
+        aEntity.setSomeString( "bar" );
+    }
 }

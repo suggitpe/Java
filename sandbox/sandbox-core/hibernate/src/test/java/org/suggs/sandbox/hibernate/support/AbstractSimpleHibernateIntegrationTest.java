@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
  * @version 1.0 25 Mar 2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializable, E> {
+public abstract class AbstractSimpleHibernateIntegrationTest<PK extends Serializable, T> {
 
     private static final Logger LOG = LoggerFactory.getLogger( AbstractSimpleHibernateIntegrationTest.class );
 
@@ -77,7 +77,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      * 
      * @return a Key that relates to the entity
      */
-    protected abstract K createKeyTemplate();
+    protected abstract PK createKeyTemplate();
 
     /**
      * Create a peristent entity for the tests.
@@ -88,13 +88,13 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      *            so that other depdendent objects can be looked up
      * @return a persistent entity
      */
-    protected abstract E createEntityTemplate( K aKey, Session aSession );
+    protected abstract T createEntityTemplate( PK aKey, Session aSession );
 
     /**
      * This is needed so that we can delegate down to the implementing test to perform the underlying update
      * to the persisted entity. This is used in the update test (CRUD).
      */
-    protected abstract void updateEntityForUpdateTest( E aEntity );
+    protected abstract void updateEntityForUpdateTest( T aEntity );
 
     /**
      * Creates the HQL string for retrieval of the persisted entities.
@@ -113,15 +113,15 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      * @param aResult
      *            the actualt result
      */
-    protected void doInitialVerificationForCreateTest( Session aSession, E aExpected, E aResult ) {}
+    protected void doInitialVerificationForCreateTest( Session aSession, T aExpected, T aResult ) {}
 
     @Test
     public void basicCreateOperationCreatesCorrectObject() {
         LOG.info( "Testing the create CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            K key = createKeyTemplate();
-            E entity = null;
+            PK key = createKeyTemplate();
+            T entity = null;
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -141,7 +141,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             @Override
             public void verifyTest( Session aSession ) {
                 verifyEntityCount( aSession, 1L );
-                E result = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                T result = (T) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
                 doInitialVerificationForCreateTest( aSession, entity, result );
                 verifyResult( entity, result );
             }
@@ -158,16 +158,16 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      * @param aResult
      *            the actualt result
      */
-    protected void doInitialVerificationForReadTest( Session aSession, E aExpected, E aResult ) {}
+    protected void doInitialVerificationForReadTest( Session aSession, T aExpected, T aResult ) {}
 
     @Test
     public void basicReadOperationsInstantiatesCorrectObject() {
         LOG.info( "Testing the read CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            K key = createKeyTemplate();
-            E entity = null;
-            E readEntity = null;
+            PK key = createKeyTemplate();
+            T entity = null;
+            T readEntity = null;
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -183,7 +183,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             @Override
             public void executeTest( Session aSession ) {
                 if ( key != null ) {
-                    readEntity = (E) aSession.get( entity.getClass(), key );
+                    readEntity = (T) aSession.get( entity.getClass(), key );
                 }
             }
 
@@ -209,16 +209,16 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      * @param aResult
      *            the actualt result
      */
-    protected void doInitialVerificationForUpdateTest( Session aSession, E aExpected, E aResult ) {}
+    protected void doInitialVerificationForUpdateTest( Session aSession, T aExpected, T aResult ) {}
 
     @Test
     public void basicUpdateOperationsUpdatesCorrectObject() {
         LOG.info( "Testing the update CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            K key = createKeyTemplate();
-            E entity = null;
-            E clone = null;
+            PK key = createKeyTemplate();
+            T entity = null;
+            T clone = null;
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -234,7 +234,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             @SuppressWarnings("unchecked")
             @Override
             public void executeTest( Session aSession ) {
-                entity = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                entity = (T) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
                 updateEntityForUpdateTest( entity );
                 aSession.save( entity );
             }
@@ -242,7 +242,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             @SuppressWarnings("unchecked")
             @Override
             public void verifyTest( Session aSession ) {
-                entity = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                entity = (T) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
                 doInitialVerificationForUpdateTest( aSession, clone, entity );
                 assertThat( entity, not( nullValue() ) );
                 assertThat( entity, not( sameInstance( clone ) ) );
@@ -259,15 +259,15 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
      * @param aDeleted
      *            the actual deleted entity.
      */
-    protected void doInitialVerificationForDeleteTest( Session aSession, E aDeleted ) {}
+    protected void doInitialVerificationForDeleteTest( Session aSession, T aDeleted ) {}
 
     @Test
     public void basicDeleteOperationsDeletesCorrectObject() {
         LOG.info( "Testing the delete CRUD operation ..." );
         runGenericTest( new HibernateIntegrationTestCallback() {
 
-            K key = createKeyTemplate();
-            E entity = null;
+            PK key = createKeyTemplate();
+            T entity = null;
 
             @Override
             public void beforeTest( Session aSession ) {
@@ -282,7 +282,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
             @SuppressWarnings("unchecked")
             @Override
             public void executeTest( Session aSession ) {
-                E entityToDelete = (E) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
+                T entityToDelete = (T) aSession.createQuery( createEntitySearchHql() ).uniqueResult();
                 aSession.delete( entityToDelete );
             }
 
@@ -301,7 +301,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<K extends Serializa
         LOG.debug( aCountOfEntities + " rows in the database ... good" );
     }
 
-    protected void verifyResult( E expected, E result ) {
+    protected void verifyResult( T expected, T result ) {
         assertThat( result, not( nullValue() ) );
         assertThat( result, not( sameInstance( expected ) ) );
         assertThat( result, equalTo( expected ) );
