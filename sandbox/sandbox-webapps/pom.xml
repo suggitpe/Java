@@ -29,7 +29,6 @@
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
-						<manifestFile>${basedir}/src/main/webapp/META-INF/MANIFEST.MF</manifestFile>
 					</archive>
 					<webResources>
 						<resource>
