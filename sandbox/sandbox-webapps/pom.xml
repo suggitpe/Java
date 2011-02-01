@@ -37,6 +37,10 @@
 					</webResources>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
