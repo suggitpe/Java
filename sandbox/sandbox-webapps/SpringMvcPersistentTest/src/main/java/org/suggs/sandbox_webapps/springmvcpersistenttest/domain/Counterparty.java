@@ -6,6 +6,7 @@ package org.suggs.sandbox_webapps.springmvcpersistenttest.domain;
 
 import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support.AbstractEntityBase;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -42,9 +43,26 @@ public class Counterparty extends AbstractEntityBase {
     @Column(name = "LEGAL_NAME", nullable = false, length = 255)
     private String counterpartyLegalName;
 
+    @Column(name = "EXTERNAL_ID")
+    private Integer externalId;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "COUNTERPARTY_ID")
-    private Set<CounterpartyContact> counterpartyContacts;
+    private Set<CounterpartyContact> counterpartyContacts = new HashSet<CounterpartyContact>();
+
+    /**
+     * Constructs a new instance.
+     */
+    public Counterparty() {}
+
+    /**
+     * Constructs a new instance.
+     */
+    public Counterparty( String aName, String aLegalName, Integer aExternalId ) {
+        counterpartyName = aName;
+        counterpartyLegalName = aLegalName;
+        externalId = aExternalId;
+    }
 
     /**
      * Returns the value of counterpartyName.
@@ -85,6 +103,25 @@ public class Counterparty extends AbstractEntityBase {
     }
 
     /**
+     * Returns the value of externalId.
+     * 
+     * @return Returns the externalId.
+     */
+    public Integer getExternalId() {
+        return externalId;
+    }
+
+    /**
+     * Sets the externalId field to the specified value.
+     * 
+     * @param aExternalId
+     *            The externalId to set.
+     */
+    public void setExternalId( Integer aExternalId ) {
+        externalId = aExternalId;
+    }
+
+    /**
      * Returns the value of counterpartyContacts.
      * 
      * @return Returns the counterpartyContacts.
@@ -113,6 +150,7 @@ public class Counterparty extends AbstractEntityBase {
         result = prime * result + ( ( counterpartyContacts == null ) ? 0 : counterpartyContacts.hashCode() );
         result = prime * result + ( ( counterpartyLegalName == null ) ? 0 : counterpartyLegalName.hashCode() );
         result = prime * result + ( ( counterpartyName == null ) ? 0 : counterpartyName.hashCode() );
+        result = prime * result + ( ( externalId == null ) ? 0 : externalId.hashCode() );
         return result;
     }
 
@@ -146,6 +184,12 @@ public class Counterparty extends AbstractEntityBase {
         }
         else if ( !counterpartyName.equals( other.counterpartyName ) )
             return false;
+        if ( externalId == null ) {
+            if ( other.externalId != null )
+                return false;
+        }
+        else if ( !externalId.equals( other.externalId ) )
+            return false;
         return true;
     }
 
@@ -156,10 +200,12 @@ public class Counterparty extends AbstractEntityBase {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append( super.toString() );
-        builder.append( " Counterparty [counterpartyName=" );
+        builder.append( "Counterparty [counterpartyName=" );
         builder.append( counterpartyName );
         builder.append( ", counterpartyLegalName=" );
         builder.append( counterpartyLegalName );
+        builder.append( ", externalId=" );
+        builder.append( externalId );
         builder.append( ", counterpartyContacts=" );
         builder.append( counterpartyContacts );
         builder.append( "]" );

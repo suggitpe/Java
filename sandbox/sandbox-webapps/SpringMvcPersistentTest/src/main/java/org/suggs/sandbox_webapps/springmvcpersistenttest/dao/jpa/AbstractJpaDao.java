@@ -3,7 +3,6 @@ package org.suggs.sandbox_webapps.springmvcpersistenttest.dao.jpa;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.GenericDao;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,35 +17,29 @@ import org.springframework.transaction.annotation.Transactional;
  * all use. You should only need to extend this class when your require custom CRUD logic.
  */
 @Transactional
-public abstract class AbstractJpaDao<T, PK extends Serializable> implements GenericDao<T, PK> {
+public abstract class AbstractJpaDao<PK extends Serializable, T> implements GenericDao<PK, T> {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( AbstractJpaDao.class );
 
+    @PersistenceContext
     protected EntityManager entityManager;
+
     protected Class<T> persistentClass;
 
-    @PersistenceContext
-    public void setEntityManager( EntityManager entityManager ) {
-        this.entityManager = entityManager;
-    }
-
+    /**
+     * Constructs a new instance.
+     * 
+     * @param persistentClass
+     */
     public AbstractJpaDao( final Class<T> persistentClass ) {
         this.persistentClass = persistentClass;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Transactional(readOnly = true)
-    @Override
-    public List<T> getAll() {
-        return entityManager.createQuery( "Select t from " + persistentClass.getSimpleName() + " t" )
-            .getResultList();
     }
 
     @Transactional(readOnly = true)
     @Override
     public T get( PK id ) {
-        return entityManager.find( this.persistentClass, id );
+        return entityManager.find( persistentClass, id );
     }
 
     @Override
@@ -55,16 +48,8 @@ public abstract class AbstractJpaDao<T, PK extends Serializable> implements Gene
     }
 
     @Override
-    public T saveOrUpdate( T object ) {
-        T entity = entityManager.merge( object );
-        entityManager.flush();
-        return entity;
-    }
-
-    @Override
     public void save( T object ) {
         entityManager.persist( object );
-        entityManager.flush();
     }
 
     @Override
@@ -72,4 +57,7 @@ public abstract class AbstractJpaDao<T, PK extends Serializable> implements Gene
         entityManager.remove( object );
     }
 
+    public void setEntityManager( EntityManager entityManager ) {
+        this.entityManager = entityManager;
+    }
 }
