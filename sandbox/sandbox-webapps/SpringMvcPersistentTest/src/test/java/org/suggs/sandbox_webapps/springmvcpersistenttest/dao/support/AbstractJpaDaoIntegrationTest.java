@@ -8,7 +8,6 @@ import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.GenericDao;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support.AbstractEntityBase;
 
 import java.io.Serializable;
-
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,10 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -89,6 +85,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             @Override
             public void executeTest() {
                 daoUnderTest.save( entity );
+                LOG.debug( "Called save for object [" + entity + "]" );
             }
 
             @Override
@@ -110,25 +107,25 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             T entity = null;
             T readEntity = null;
 
+            @SuppressWarnings("unchecked")
             @Override
             public void beforeTest() {
                 entity = createEntityTemplate( key );
                 verifyEntityCount( 0L );
 
                 entityManager.persist( entity );
+                // if using a surrogate key, then we need to keep a ref to the key
+                if ( key == null && entity instanceof AbstractEntityBase ) {
+                    Serializable id = ( (AbstractEntityBase) entity ).getId();
+                    key = (PK) id;
+                }
                 verifyEntityCount( 1L );
             }
 
-            @SuppressWarnings("unchecked")
             @Override
             public void executeTest() {
-                if ( entity instanceof AbstractEntityBase ) {
-                    Long id = ( (AbstractEntityBase) entity ).getId();
-                    readEntity = daoUnderTest.get( (PK) id );
-                }
-                else {
-                    readEntity = daoUnderTest.get( key );
-                }
+                readEntity = daoUnderTest.get( key );
+                LOG.debug( "Read object [" + readEntity + "] from database" );
             }
 
             @Override
@@ -163,6 +160,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             public void executeTest() {
                 entity = (T) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
                 updateEntityForUpdateTest( entity );
+                LOG.debug( "Updated object [" + entity + "]" );
             }
 
             @SuppressWarnings("unchecked")
@@ -201,6 +199,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
                 @SuppressWarnings("unchecked")
                 T entityToDelete = (T) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
                 daoUnderTest.remove( entityToDelete );
+                LOG.debug( "Removed object [" + entityToDelete + "]" );
             }
 
             @Override

@@ -6,6 +6,7 @@ package org.suggs.sandbox_webapps.springmvcpersistenttest.dao;
 
 import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.support.AbstractJpaDaoIntegrationTest;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.Counterparty;
+import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.CounterpartyContact;
 
 import javax.persistence.EntityManager;
 
@@ -26,13 +27,14 @@ public class CounterpartyDaoTest extends AbstractJpaDaoIntegrationTest<Long, Cou
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( CounterpartyDaoTest.class );
 
-    private static final String DELETE_SQL = "delete Counterparty where externalId = :intValue";
+    private static final String DELETE_COUNTERPARTY = "delete Counterparty where externalId = :intValue";
+    private static final String DELETE_CONTACT_SQL = "delete from counterparty_contact cc where exists (select 1 from counterparty c where c.id = cc.counterparty_id and c.external_id = :intValue)";
 
     @Override
     protected void cleanUpData( EntityManager aEntityManager ) {
-        aEntityManager.createQuery( DELETE_SQL )
-            .setParameter( "intValue", Integer.valueOf( 1234 ) )
-            .executeUpdate();
+        Integer id = Integer.valueOf( 1234 );
+        aEntityManager.createNativeQuery( DELETE_CONTACT_SQL ).setParameter( "intValue", id ).executeUpdate();
+        aEntityManager.createQuery( DELETE_COUNTERPARTY ).setParameter( "intValue", id ).executeUpdate();
     }
 
     /**
@@ -44,11 +46,13 @@ public class CounterpartyDaoTest extends AbstractJpaDaoIntegrationTest<Long, Cou
     }
 
     /**
-     * @see org.suggs.sandbox_webapps.springmvcpersistenttest.dao.support.AbstractJpaDaoIntegrationTest#createEntityTemplate(java.lang.Object)
+     * @see org.suggs.sandbox_webapps.springmvcpersistenttest.dao.support.AbstractJpaDaoIntegrationTest#createEntityTemplate(java.io.Serializable)
      */
     @Override
     protected Counterparty createEntityTemplate( Long aKey ) {
+        CounterpartyContact contact = new CounterpartyContact( "Peter", "Suggitt", "020 7567 2449" );
         Counterparty entity = new Counterparty( "name", "legal name", Integer.valueOf( 1234 ) );
+        entity.addCounterpartyContact( contact );
         return entity;
     }
 
