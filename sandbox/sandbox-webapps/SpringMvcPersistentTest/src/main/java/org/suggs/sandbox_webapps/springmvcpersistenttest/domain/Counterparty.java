@@ -157,7 +157,6 @@ public final class Counterparty extends AbstractEntityBase {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ( ( counterpartyContacts == null ) ? 0 : counterpartyContacts.hashCode() );
         result = prime * result + ( ( counterpartyLegalName == null ) ? 0 : counterpartyLegalName.hashCode() );
         result = prime * result + ( ( counterpartyName == null ) ? 0 : counterpartyName.hashCode() );
         result = prime * result + ( ( externalId == null ) ? 0 : externalId.hashCode() );
@@ -176,12 +175,6 @@ public final class Counterparty extends AbstractEntityBase {
         if ( getClass() != obj.getClass() )
             return false;
         Counterparty other = (Counterparty) obj;
-        if ( counterpartyContacts == null ) {
-            if ( other.counterpartyContacts != null )
-                return false;
-        }
-        else if ( !counterpartyContacts.equals( other.counterpartyContacts ) )
-            return false;
         if ( counterpartyLegalName == null ) {
             if ( other.counterpartyLegalName != null )
                 return false;

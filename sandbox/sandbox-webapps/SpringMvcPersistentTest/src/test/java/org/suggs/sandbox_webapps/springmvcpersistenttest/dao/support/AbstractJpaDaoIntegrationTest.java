@@ -29,7 +29,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Abstract test that provides tests for the basic DAO operations. The key thing that this class also does is
  * to ensure that any persistent classes are verified for correctness between persistence and reading.
- * 
+ *
  * @author suggitpe
  * @version 1.0 24 Jan 2011
  */
@@ -92,7 +92,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             public void verifyTest() {
                 verifyEntityCount( 1L );
                 @SuppressWarnings("unchecked")
-                T result = (T) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
+                T result = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
                 verifyResult( entity, result );
             }
         } );
@@ -116,8 +116,8 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
                 entityManager.persist( entity );
                 // if using a surrogate key, then we need to keep a ref to the key
                 if ( key == null && entity instanceof AbstractEntityBase ) {
-                    Serializable id = ( (AbstractEntityBase) entity ).getId();
-                    key = (PK) id;
+                    Serializable id = ( ( AbstractEntityBase ) entity ).getId();
+                    key = ( PK ) id;
                 }
                 verifyEntityCount( 1L );
             }
@@ -134,6 +134,42 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
                 verifyResult( entity, readEntity );
             }
         } );
+    }
+
+    @Test
+    public void basicExistsOperationFindsObject() {
+        LOG.info( "Testing the exists CRUD function" );
+        runGenericTest( new EntityManagerIntegrationTestCallback() {
+
+            PK key = createKeyTemplate();
+            T entity = null;
+            T readEntity = null;
+
+            @Override
+            public void beforeTest() {
+                entity = createEntityTemplate( key );
+                verifyEntityCount( 0L );
+
+                entityManager.persist( entity );
+                // if using a surrogate key, then we need to keep a ref to the key
+                if ( key == null && entity instanceof AbstractEntityBase ) {
+                    Serializable id = ( ( AbstractEntityBase ) entity ).getId();
+                    key = ( PK ) id;
+                }
+                verifyEntityCount( 1L );
+            }
+
+            @Override
+            public void executeTest() {
+                boolean exists  = daoUnderTest.exists( key );
+                assertThat( Boolean.valueOf(exists), equalTo( Boolean.TRUE ) );
+            }
+
+            @Override
+            public void verifyTest() {
+            }
+        } );
+
     }
 
     @Test
@@ -158,7 +194,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             @SuppressWarnings("unchecked")
             @Override
             public void executeTest() {
-                entity = (T) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
+                entity = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
                 updateEntityForUpdateTest( entity );
                 LOG.debug( "Updated object [" + entity + "]" );
             }
@@ -166,7 +202,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             @SuppressWarnings("unchecked")
             @Override
             public void verifyTest() {
-                entity = (T) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
+                entity = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
                 assertThat( entity, not( nullValue() ) );
                 assertThat( entity, not( sameInstance( clone ) ) );
                 assertThat( entity, not( equalTo( clone ) ) );
@@ -197,7 +233,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             @Override
             public void executeTest() {
                 @SuppressWarnings("unchecked")
-                T entityToDelete = (T) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
+                T entityToDelete = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
                 daoUnderTest.remove( entityToDelete );
                 LOG.debug( "Removed object [" + entityToDelete + "]" );
             }
@@ -236,8 +272,8 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
     }
 
     protected void verifyEntityCount( long aCountOfEntities ) {
-        Long count = (Long) entityManager.createQuery( "select count(*) " + createEntitySearchHql() )
-            .getSingleResult();
+        Long count = ( Long ) entityManager.createQuery( "select count(*) " + createEntitySearchHql() )
+                .getSingleResult();
         assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
         LOG.debug( aCountOfEntities + " rows in the database ... good" );
     }
