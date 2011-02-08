@@ -4,14 +4,13 @@
  */
 package org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.sql.Timestamp;
 
 /**
  * Embeddable audit bean that holds all of the timestamp audit information.
- * 
+ *
  * @author suggitpe
  * @version 1.0 31 Mar 2010
  */
@@ -26,7 +25,7 @@ public class TimestampAuditInfo {
 
     /**
      * Returns the value of createDate.
-     * 
+     *
      * @return Returns the createDate.
      */
     public Timestamp getCreateDate() {
@@ -35,9 +34,8 @@ public class TimestampAuditInfo {
 
     /**
      * Sets the createDate field to the specified value.
-     * 
-     * @param aCreateDate
-     *            The createDate to set.
+     *
+     * @param aCreateDate The createDate to set.
      */
     public void setCreateDate( Timestamp aCreateDate ) {
         createDate = aCreateDate;
@@ -45,7 +43,7 @@ public class TimestampAuditInfo {
 
     /**
      * Returns the value of updateDate.
-     * 
+     *
      * @return Returns the updateDate.
      */
     public Timestamp getUpdateDate() {
@@ -54,9 +52,8 @@ public class TimestampAuditInfo {
 
     /**
      * Sets the updateDate field to the specified value.
-     * 
-     * @param aUpdateDate
-     *            The updateDate to set.
+     *
+     * @param aUpdateDate The updateDate to set.
      */
     public void setUpdateDate( Timestamp aUpdateDate ) {
         updateDate = aUpdateDate;
@@ -94,18 +91,16 @@ public class TimestampAuditInfo {
             return false;
         if ( getClass() != obj.getClass() )
             return false;
-        TimestampAuditInfo other = (TimestampAuditInfo) obj;
+        TimestampAuditInfo other = ( TimestampAuditInfo ) obj;
         if ( createDate == null ) {
             if ( other.createDate != null )
                 return false;
-        }
-        else if ( !createDate.equals( other.createDate ) )
+        } else if ( !createDate.equals( other.createDate ) )
             return false;
         if ( updateDate == null ) {
             if ( other.updateDate != null )
                 return false;
-        }
-        else if ( !updateDate.equals( other.updateDate ) )
+        } else if ( !updateDate.equals( other.updateDate ) )
             return false;
         return true;
     }

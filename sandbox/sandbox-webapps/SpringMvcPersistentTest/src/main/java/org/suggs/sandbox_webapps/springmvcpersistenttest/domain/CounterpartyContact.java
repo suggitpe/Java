@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 @Entity
 @Table(name = "COUNTERPARTY_CONTACT")
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "COUNTERPARTY_CONTACT_SQ")
-public class CounterpartyContact extends AbstractEntityBase {
+public final class CounterpartyContact extends AbstractEntityBase {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( CounterpartyContact.class );
@@ -44,6 +44,20 @@ public class CounterpartyContact extends AbstractEntityBase {
 
     @Column(name = "TELEPHONE", nullable = false, length = 255)
     private String contactTelephone;
+
+    /**
+     * Constructs a new instance.
+     */
+    public CounterpartyContact() {}
+
+    /**
+     * Constructs a new instance.
+     */
+    public CounterpartyContact( String aFirstName, String aLastName, String aTelephoneNumber ) {
+        contactFirstName = aFirstName;
+        contactLastName = aLastName;
+        contactTelephone = aTelephoneNumber;
+    }
 
     /**
      * Returns the value of contactFirstName.

@@ -5,18 +5,12 @@
 package org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
 
 /**
  * Abstract base class for IDs, optimistic locking version and create/update dates.
- * 
+ *
  * @author suggitpe
  * @version 1.0 26 Mar 2010
  */
@@ -39,7 +33,7 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
 
     /**
      * Returns the value of id.
-     * 
+     *
      * @return Returns the id.
      */
     public Long getId() {
@@ -48,9 +42,8 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
 
     /**
      * Sets the id field to the specified value.
-     * 
-     * @param aId
-     *            The id to set.
+     *
+     * @param aId The id to set.
      */
     public void setId( Long aId ) {
         id = aId;
@@ -58,7 +51,7 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
 
     /**
      * Returns the value of version.
-     * 
+     *
      * @return Returns the version.
      */
     public Integer getVersion() {
@@ -67,9 +60,8 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
 
     /**
      * Sets the version field to the specified value.
-     * 
-     * @param aVersion
-     *            The version to set.
+     *
+     * @param aVersion The version to set.
      */
     public void setVersion( Integer aVersion ) {
         version = aVersion;
@@ -85,9 +77,8 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
 
     /**
      * Sets the timestampAuditInfo field to the specified value.
-     * 
-     * @param aTimestampAuditInfo
-     *            The timestampAuditInfo to set.
+     *
+     * @param aTimestampAuditInfo The timestampAuditInfo to set.
      */
     public void setTimestampAuditInfo( TimestampAuditInfo aTimestampAuditInfo ) {
         timestampAuditInfo = aTimestampAuditInfo;
@@ -99,7 +90,7 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
     @Override
     public String toString() {
         return "AbstractEntityBase [id=" + id + ", version=" + version + ", timestampAuditInfo="
-               + timestampAuditInfo + "]";
+                + timestampAuditInfo + "]";
     }
 
     /**
@@ -110,7 +101,6 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
         final int prime = 31;
         int result = 1;
         result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
-        result = prime * result + ( ( timestampAuditInfo == null ) ? 0 : timestampAuditInfo.hashCode() );
         result = prime * result + ( ( version == null ) ? 0 : version.hashCode() );
         return result;
     }
@@ -127,24 +117,21 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
             return false;
         if ( getClass() != obj.getClass() )
             return false;
-        AbstractEntityBase other = (AbstractEntityBase) obj;
+        AbstractEntityBase other = ( AbstractEntityBase ) obj;
         if ( id == null ) {
             if ( other.id != null )
                 return false;
-        }
-        else if ( !id.equals( other.id ) )
+        } else if ( !id.equals( other.id ) )
             return false;
         if ( timestampAuditInfo == null ) {
             if ( other.timestampAuditInfo != null )
                 return false;
-        }
-        else if ( !timestampAuditInfo.equals( other.timestampAuditInfo ) )
+        } else if ( !timestampAuditInfo.equals( other.timestampAuditInfo ) )
             return false;
         if ( version == null ) {
             if ( other.version != null )
                 return false;
-        }
-        else if ( !version.equals( other.version ) )
+        } else if ( !version.equals( other.version ) )
             return false;
         return true;
     }

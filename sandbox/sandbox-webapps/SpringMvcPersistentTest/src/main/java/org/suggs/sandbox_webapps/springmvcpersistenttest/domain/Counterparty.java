@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 @Entity
 @Table(name = "COUNTERPARTY")
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "COUNTERPARTY_SQ")
-public class Counterparty extends AbstractEntityBase {
+public final class Counterparty extends AbstractEntityBase {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( Counterparty.class );
@@ -138,6 +138,16 @@ public class Counterparty extends AbstractEntityBase {
      */
     public void setCounterpartyContacts( Set<CounterpartyContact> aCounterpartyContacts ) {
         counterpartyContacts = aCounterpartyContacts;
+    }
+
+    /**
+     * Adds a counterparty contact
+     * 
+     * @param aCounterpartyContact
+     *            The counterpartyContact to add
+     */
+    public void addCounterpartyContact( CounterpartyContact aCounterpartyContact ) {
+        counterpartyContacts.add( aCounterpartyContact );
     }
 
     /**
