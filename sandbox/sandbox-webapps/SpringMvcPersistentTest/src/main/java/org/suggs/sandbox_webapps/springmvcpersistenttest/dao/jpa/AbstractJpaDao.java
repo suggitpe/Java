@@ -1,16 +1,13 @@
 package org.suggs.sandbox_webapps.springmvcpersistenttest.dao.jpa;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.GenericDao;
-
-import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.transaction.annotation.Transactional;
+import java.io.Serializable;
 
 /**
  * This class serves as the Base class for all other DAOs - namely to hold common CRUD methods that they might
@@ -29,8 +26,6 @@ public abstract class AbstractJpaDao<PK extends Serializable, T> implements Gene
 
     /**
      * Constructs a new instance.
-     * 
-     * @param persistentClass
      */
     public AbstractJpaDao( final Class<T> persistentClass ) {
         this.persistentClass = persistentClass;
@@ -57,7 +52,4 @@ public abstract class AbstractJpaDao<PK extends Serializable, T> implements Gene
         entityManager.remove( object );
     }
 
-    public void setEntityManager( EntityManager entityManager ) {
-        this.entityManager = entityManager;
-    }
 }

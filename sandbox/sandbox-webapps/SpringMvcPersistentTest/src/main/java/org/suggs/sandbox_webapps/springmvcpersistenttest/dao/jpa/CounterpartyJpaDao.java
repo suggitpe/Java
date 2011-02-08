@@ -4,14 +4,13 @@
  */
 package org.suggs.sandbox_webapps.springmvcpersistenttest.dao.jpa;
 
-import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.Counterparty;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.Counterparty;
 
 /**
  * DAO for counterparty object.
- * 
+ *
  * @author suggitpe
  * @version 1.0 4 Feb 2011
  */
