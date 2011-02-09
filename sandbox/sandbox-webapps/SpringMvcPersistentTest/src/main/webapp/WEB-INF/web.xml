@@ -28,11 +28,7 @@
     
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/roadrantz-service.xml
-            /WEB-INF/roadrantz-data.xml
-            /WEB-INF/roadrantz-security.xml
-        </param-value>
+        <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
     
     <!-- <filter></filter> -->
