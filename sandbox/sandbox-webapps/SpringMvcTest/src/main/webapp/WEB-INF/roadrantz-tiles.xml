@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tiles-definitions>
+    
+    <!-- This is the default template that we will use -->
+    <definition name="template"
+        page="/WEB-INF/view/jsp/template/rantzTemplate.jsp">
+        <put name="title" value="RoadRantz"/>
+        <put name="header" values="/WEB-INF/view/jsp/header.jsp"/>
+        <put name="content" values="/WEB-INF/view/jsp/defaultContentPage.jsp"/>
+        <put name="footer" values="/WEB-INF/view/jsp/footer.jsp"/>
+    </definition>
+    
+    <!-- home page -->
+    <definition name="home" extends="template">
+        <put name="title" value="Welcome to RoadRantz!!!"/>
+        <put name="content" value="/WEB-INF/view/jsp/home.jsp"/>
+    </definition>
+    
+</tiles-definitions>

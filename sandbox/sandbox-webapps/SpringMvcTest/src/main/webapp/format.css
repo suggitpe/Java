@@ -1,0 +1,18 @@
+BODY {
+    font-family: tahoma;
+    font-size: 10pt;
+    background-color: lightblue;
+    color: navy;
+}
+
+TABLE {
+    border: 0px solid black;
+    font-family: tahoma;
+    font-size: 10pt;
+}
+
+.error {
+    color: #ff0000;
+    font-weight: bold;
+}
+    
