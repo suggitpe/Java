@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<h ha ?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -11,12 +11,23 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:test.properties</value>
+                <value>classpath:real.properties</value>
             </list>
         </property>
     </bean>
 
-    <bean id="datasource" class="">
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
+        <property name="targetDataSource">
+            <bean class="org.apache.commons.dbcp.BasicDataSource">
+                <property name="driverClassName" value="${jdbc.driverclassname}" />
+                <property name="url" value="${jdbc.url}" />
+                <property name="username" value="${jdbc.username}" />
+                <property name="password" value="${jdbc.password}" />
+                <property name="initialSize" value="1" />
+                <property name="maxActive" value="3" />
+                <property name="maxIdle" value="2" />
+            </bean>
+        </property>
 
     </bean>
 

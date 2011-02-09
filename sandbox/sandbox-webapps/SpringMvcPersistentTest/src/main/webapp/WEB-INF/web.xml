@@ -31,10 +31,7 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
     
-    <!-- <filter></filter> -->
-    <!-- <filter-mapping></filter-mapping> -->
-    
-    <!-- ===========================================    
+    <!-- ===========================================
          ================= LISTENERS ===============    
          =========================================== -->
     <listener>
@@ -46,7 +43,7 @@
          ================= SERVLETS ================    
          =========================================== -->
     <servlet>
-        <servlet-name>persistme</servlet-name>
+        <servlet-name>data-access</servlet-name>
         <servlet-class>
             org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>    
@@ -56,29 +53,8 @@
          ============= SERVLET MAPPING =============    
          =========================================== -->
     <servlet-mapping>
-        <servlet-name>persistme</servlet-name>
+        <servlet-name>data-access</servlet-name>
         <url-pattern>*.htm</url-pattern>
     </servlet-mapping>
-    
-    <!-- <session-config></session-config> -->   
-    <!-- <mime-mapping></mime-mapping> -->
-    <!-- <welcome-file-list></welcome-file-list> -->   
-    <!-- <error-page></error-page> -->
-    <!-- <jsp-config></jsp-config> -->
-    <!-- <resource-env-ref></resource-env-ref> --> 
-    <!-- <resource-ref></resource-ref> -->
-    <!-- <security-constraint></security-constraint> --> 
-    <!-- <login-config></login-config> -->
-    <!-- <security-role></security-role> -->   
-    <!-- <env-entry></env-entry> -->   
-    <!-- <ejb-ref></ejb-ref> -->
-    <!-- <ejb-local-ref></ejb-local-ref> -->   
-    <!-- <service-ref></service-ref> -->
-    <!-- <message-destination-ref></message-destination-ref> -->   
-    <!-- <message-destination></message-destination> -->
-    <!-- <local-encoding-mapping-list></local-encoding-mapping-list> -->   
-      
-    
-    
     
 </web-app>

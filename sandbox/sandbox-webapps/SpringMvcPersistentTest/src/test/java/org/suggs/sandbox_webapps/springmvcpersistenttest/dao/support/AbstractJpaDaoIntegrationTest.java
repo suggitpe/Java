@@ -161,8 +161,8 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
             @Override
             public void executeTest() {
-                boolean exists  = daoUnderTest.exists( key );
-                assertThat( Boolean.valueOf(exists), equalTo( Boolean.TRUE ) );
+                boolean exists = daoUnderTest.exists( key );
+                assertThat( Boolean.valueOf( exists ), equalTo( Boolean.TRUE ) );
             }
 
             @Override
