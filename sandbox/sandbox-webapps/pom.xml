@@ -16,6 +16,8 @@
 
     <modules>
         <module>SpringMvcTest</module>
+        <module>SpringMvcPersistentTest</module>
+        <module>DefaultMavenWebapp</module>
     </modules>
 
     <build>
