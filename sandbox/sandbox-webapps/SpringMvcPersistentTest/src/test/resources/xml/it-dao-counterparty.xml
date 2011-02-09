@@ -9,7 +9,7 @@
             http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
     <!-- import all of the common bean refs -->
-    <import resource="common-database.xml" />
+    <import resource="it-common.xml" />
     
     <bean id="dao" class="org.suggs.sandbox_webapps.springmvcpersistenttest.dao.jpa.CounterpartyJpaDao"/>
 

@@ -10,4 +10,12 @@
 
     <import resource="applicationContext-resources.xml"/>
 
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:real.properties</value>
+            </list>
+        </property>
+    </bean>
+
 </beans>
