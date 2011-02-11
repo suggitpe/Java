@@ -48,6 +48,11 @@
     <!-- ============================================
     ============= DISPATCHER SERVLET ================
     ============================================= -->
+    <servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/static/*</url-pattern>
+	</servlet-mapping>
+
     <servlet>
         <servlet-name>data-access</servlet-name>
         <servlet-class>
@@ -60,5 +65,9 @@
         <servlet-name>data-access</servlet-name>
         <url-pattern>/data-access/*</url-pattern>
     </servlet-mapping>
+
+    <welcome-file-list>
+		<welcome-file></welcome-file>
+	</welcome-file-list>
 
 </web-app>

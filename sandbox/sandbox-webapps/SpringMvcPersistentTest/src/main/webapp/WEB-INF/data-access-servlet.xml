@@ -14,12 +14,26 @@
             http://www.springframework.org/schema/aop
             http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-
+    <!-- Component scan for all annotated components and mappings -->
     <context:component-scan base-package="org.suggs.sandbox_webapps.springmvcpersistenttest.service"/>
 
+    <!-- hanlder for annotation driven controllers etc -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 
+    <!-- updates all view requests with the dir and postfix for jsps -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp"/>
+
+    <!-- spring managed exception screens -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.web.servlet.PageNotFound">pageNotFound</prop>
+				<prop key="org.springframework.dao.DataAccessException">dataAccessFailure</prop>
+				<prop key="org.springframework.transaction.TransactionException">dataAccessFailure</prop>
+			</props>
+		</property>
+	</bean>
+
 
 </beans>
