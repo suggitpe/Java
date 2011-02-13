@@ -426,6 +426,7 @@
             <artifactId>easymock</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <!-- This is where we define all of the application dependencies version requirements -->
@@ -476,6 +477,12 @@
                 <artifactId>mockito-all</artifactId>
                 <version>1.8.2</version>
             </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium</artifactId>
+                <version>2.0b1</version>
+            </dependency>
+
 
             <!-- external jars -->
             <dependency>
