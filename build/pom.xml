@@ -354,7 +354,7 @@
                                         <artifactId>jbehave-site-resources</artifactId>
                                         <version>3.1.1</version>
                                         <type>zip</type>
-                                        <outputDirectory>${project.build.directory}/jbehave-reports/view</outputDirectory>
+                                        <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
                                     </artifactItem>
                                     <artifactItem>
                                         <groupId>org.jbehave</groupId>
@@ -362,7 +362,7 @@
                                         <version>${jbehave.version}</version>
                                         <classifier>resources</classifier>
                                         <type>zip</type>
-                                        <outputDirectory>${project.build.directory}/jbehave-reports/view</outputDirectory>
+                                        <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
                                     </artifactItem>
                                 </artifactItems>
                             </configuration>
