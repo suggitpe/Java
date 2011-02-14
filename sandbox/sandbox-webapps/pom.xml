@@ -56,7 +56,6 @@
             <artifactId>standard</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium</artifactId>
