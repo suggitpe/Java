@@ -1,6 +1,7 @@
 package org.suggs.sandbox_webapps.springmvcpersistenttest.dao;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Generic DAO (Data Access Object) with common methods to CRUD POJOs.
@@ -25,6 +26,14 @@ public interface GenericDao<PK extends Serializable, T> {
      * @return true if object exists, else false
      */
     boolean exists( PK id );
+
+    /**
+     * Gets all objects of this type. <strong>Be bloomin careful with this impl as it
+     * will fetch everything from teh database</strong>
+     *
+     * @return a list of all objects.
+     */
+    List<T> getAll();
 
     /**
      * Persists an object to the database.

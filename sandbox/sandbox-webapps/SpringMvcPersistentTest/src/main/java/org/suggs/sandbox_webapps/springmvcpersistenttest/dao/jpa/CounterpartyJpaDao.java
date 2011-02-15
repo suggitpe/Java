@@ -4,9 +4,11 @@
  */
 package org.suggs.sandbox_webapps.springmvcpersistenttest.dao.jpa;
 
+import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.CounterpartyDao;
+import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.Counterparty;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.Counterparty;
 
 /**
  * DAO for counterparty object.
@@ -14,7 +16,7 @@ import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.Counterparty;
  * @author suggitpe
  * @version 1.0 4 Feb 2011
  */
-public class CounterpartyJpaDao extends AbstractJpaDao<Long, Counterparty> {
+public class CounterpartyJpaDao extends AbstractJpaDao<Long, Counterparty> implements CounterpartyDao {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( CounterpartyJpaDao.class );

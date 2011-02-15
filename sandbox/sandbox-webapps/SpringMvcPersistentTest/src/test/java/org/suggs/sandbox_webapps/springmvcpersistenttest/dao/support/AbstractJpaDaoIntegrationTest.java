@@ -8,6 +8,7 @@ import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.GenericDao;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support.AbstractEntityBase;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -171,6 +172,34 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
         } );
 
     }
+
+    @Test
+    public void getAllOperationReturnsTableContents() {
+        LOG.info( "Testing the getAll function" );
+        runGenericTest( new EntityManagerIntegrationTestCallback() {
+
+            List<T> results = null;
+
+            @Override
+            public void beforeTest() {
+                verifyEntityCount( 0L );
+                entityManager.persist( createEntityTemplate( createKeyTemplate() ) );
+                verifyEntityCount( 1L );
+            }
+
+            @Override
+            public void executeTest() {
+                results = daoUnderTest.getAll();
+            }
+
+            @Override
+            public void verifyTest() {
+                assertThat( Integer.valueOf( results.size() ), equalTo( Integer.valueOf( 1 ) ) );
+
+            }
+        } );
+    }
+
 
     @Test
     public void basicUpdateOperationsUpdatesCorrectObject() {
