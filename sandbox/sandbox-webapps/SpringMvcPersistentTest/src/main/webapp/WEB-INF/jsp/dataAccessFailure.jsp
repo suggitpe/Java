@@ -1,19 +1,21 @@
-<%@ include file="/WEB-INF/jsp/includes.jsp" %>
-<%@ include file="/WEB-INF/jsp/header.jsp" %>
+<%@ include file="/WEB-INF/jsp/include/includes.jsp" %>
+<%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
 <%
-Exception ex = (Exception) request.getAttribute("exception");
+    Exception ex = ( Exception ) request.getAttribute( "exception" );
 %>
 
-<h2>Data access failure: <%= ex.getMessage() %></h2>
+<h2>Data access failure: <%= ex.getMessage() %>
+</h2>
+
 <p/>
 
 <%
-ex.printStackTrace(new java.io.PrintWriter(out));
+    ex.printStackTrace( new java.io.PrintWriter( out ) );
 %>
 
 <p/>
 <br/>
-<a href="<spring:url value="/" htmlEscape="true" />">Home</a>
+<a href="<spring:url value="/" htmlEscape="true"/>">Home</a>
 
-<%@ include file="/WEB-INF/jsp/footer.jsp" %>
+<%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

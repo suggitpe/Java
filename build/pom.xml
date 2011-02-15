@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <!-- high level main project details -->
     <modelVersion>4.0.0</modelVersion>
@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <name>Suggs parent</name>
     <version>1.0-SNAPSHOT</version>
-    <description> Generic maven config for Suggs home project work
+    <description>Generic maven config for Suggs home project work
     </description>
     <url>http://www.suggs.org.uk</url>
     <inceptionYear>2007</inceptionYear>
@@ -211,7 +211,7 @@
                         <warSourceDirectory>${basedir}/src/main/resources/webapp</warSourceDirectory>
                     </configuration>
                 </plugin>
-                
+
                 <!-- TOMCAT PLUGIN -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -289,7 +289,8 @@
                             <configuration>
                                 <skip>false</skip>
                                 <scope>test</scope>
-                                <annotatedEmbedderRunnerClass>org.jbehave.core.junit.AnnotatedEmbedderRunner</annotatedEmbedderRunnerClass>
+                                <annotatedEmbedderRunnerClass>org.jbehave.core.junit.AnnotatedEmbedderRunner
+                                </annotatedEmbedderRunnerClass>
                                 <includes>
                                     <include>**/injectablestories/*.java</include>
                                 </includes>
@@ -307,7 +308,9 @@
                             <configuration>
                                 <skip>false</skip>
                                 <scope>test</scope>
-                                <annotatedEmbedderRunnerClass>org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner</annotatedEmbedderRunnerClass>
+                                <annotatedEmbedderRunnerClass>
+                                    org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner
+                                </annotatedEmbedderRunnerClass>
                                 <includes>
                                     <include>**/springstories/*.java</include>
                                 </includes>
@@ -609,6 +612,16 @@
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
                 <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.7.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>1.3.1</version>
             </dependency>
 
             <dependency>
