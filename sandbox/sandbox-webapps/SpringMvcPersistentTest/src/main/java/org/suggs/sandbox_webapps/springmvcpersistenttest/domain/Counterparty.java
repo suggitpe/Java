@@ -8,22 +8,14 @@ import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support.Abstract
 
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Domain entity for a Counterparty.
- * 
+ *
  * @author suggitpe
  * @version 1.0 2 Feb 2011
  */
@@ -53,7 +45,8 @@ public final class Counterparty extends AbstractEntityBase {
     /**
      * Constructs a new instance.
      */
-    public Counterparty() {}
+    public Counterparty() {
+    }
 
     /**
      * Constructs a new instance.
@@ -66,7 +59,7 @@ public final class Counterparty extends AbstractEntityBase {
 
     /**
      * Returns the value of counterpartyName.
-     * 
+     *
      * @return Returns the counterpartyName.
      */
     public String getCounterpartyName() {
@@ -75,9 +68,8 @@ public final class Counterparty extends AbstractEntityBase {
 
     /**
      * Sets the counterpartyName field to the specified value.
-     * 
-     * @param aCounterpartyName
-     *            The counterpartyName to set.
+     *
+     * @param aCounterpartyName The counterpartyName to set.
      */
     public void setCounterpartyName( String aCounterpartyName ) {
         counterpartyName = aCounterpartyName;
@@ -85,7 +77,7 @@ public final class Counterparty extends AbstractEntityBase {
 
     /**
      * Returns the value of counterpartyLegalName.
-     * 
+     *
      * @return Returns the counterpartyLegalName.
      */
     public String getCounterpartyLegalName() {
@@ -94,9 +86,8 @@ public final class Counterparty extends AbstractEntityBase {
 
     /**
      * Sets the counterpartyLegalName field to the specified value.
-     * 
-     * @param aCounterpartyLegalName
-     *            The counterpartyLegalName to set.
+     *
+     * @param aCounterpartyLegalName The counterpartyLegalName to set.
      */
     public void setCounterpartyLegalName( String aCounterpartyLegalName ) {
         counterpartyLegalName = aCounterpartyLegalName;
@@ -104,7 +95,7 @@ public final class Counterparty extends AbstractEntityBase {
 
     /**
      * Returns the value of externalId.
-     * 
+     *
      * @return Returns the externalId.
      */
     public Integer getExternalId() {
@@ -113,9 +104,8 @@ public final class Counterparty extends AbstractEntityBase {
 
     /**
      * Sets the externalId field to the specified value.
-     * 
-     * @param aExternalId
-     *            The externalId to set.
+     *
+     * @param aExternalId The externalId to set.
      */
     public void setExternalId( Integer aExternalId ) {
         externalId = aExternalId;
@@ -123,7 +113,7 @@ public final class Counterparty extends AbstractEntityBase {
 
     /**
      * Returns the value of counterpartyContacts.
-     * 
+     *
      * @return Returns the counterpartyContacts.
      */
     public Set<CounterpartyContact> getCounterpartyContacts() {
@@ -132,9 +122,8 @@ public final class Counterparty extends AbstractEntityBase {
 
     /**
      * Sets the counterpartyContacts field to the specified value.
-     * 
-     * @param aCounterpartyContacts
-     *            The counterpartyContacts to set.
+     *
+     * @param aCounterpartyContacts The counterpartyContacts to set.
      */
     public void setCounterpartyContacts( Set<CounterpartyContact> aCounterpartyContacts ) {
         counterpartyContacts = aCounterpartyContacts;
@@ -142,9 +131,8 @@ public final class Counterparty extends AbstractEntityBase {
 
     /**
      * Adds a counterparty contact
-     * 
-     * @param aCounterpartyContact
-     *            The counterpartyContact to add
+     *
+     * @param aCounterpartyContact The counterpartyContact to add
      */
     public void addCounterpartyContact( CounterpartyContact aCounterpartyContact ) {
         counterpartyContacts.add( aCounterpartyContact );
@@ -174,24 +162,21 @@ public final class Counterparty extends AbstractEntityBase {
             return false;
         if ( getClass() != obj.getClass() )
             return false;
-        Counterparty other = (Counterparty) obj;
+        Counterparty other = ( Counterparty ) obj;
         if ( counterpartyLegalName == null ) {
             if ( other.counterpartyLegalName != null )
                 return false;
-        }
-        else if ( !counterpartyLegalName.equals( other.counterpartyLegalName ) )
+        } else if ( !counterpartyLegalName.equals( other.counterpartyLegalName ) )
             return false;
         if ( counterpartyName == null ) {
             if ( other.counterpartyName != null )
                 return false;
-        }
-        else if ( !counterpartyName.equals( other.counterpartyName ) )
+        } else if ( !counterpartyName.equals( other.counterpartyName ) )
             return false;
         if ( externalId == null ) {
             if ( other.externalId != null )
                 return false;
-        }
-        else if ( !externalId.equals( other.externalId ) )
+        } else if ( !externalId.equals( other.externalId ) )
             return false;
         return true;
     }
@@ -209,8 +194,6 @@ public final class Counterparty extends AbstractEntityBase {
         builder.append( counterpartyLegalName );
         builder.append( ", externalId=" );
         builder.append( externalId );
-        builder.append( ", counterpartyContacts=" );
-        builder.append( counterpartyContacts );
         builder.append( "]" );
         return builder.toString();
     }
