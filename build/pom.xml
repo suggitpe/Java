@@ -639,6 +639,8 @@
                 <artifactId>jini-core</artifactId>
                 <version>2.1</version>
             </dependency>
+
+            <!-- Eclipse: swt/jface/osgi -->
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>swt</artifactId>
@@ -674,21 +676,32 @@
                 <artifactId>equinox.common</artifactId>
                 <version>3.6.0</version>
             </dependency>
+
+
+            <!-- Servlet -->
             <dependency>
                 <groupId>javax.servlet</groupId>
-                <artifactId>jstl</artifactId>
-                <version>1.2</version>
+                <artifactId>com.springsource.javax.servlet</artifactId>
+                <version>2.5.0</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>2.5</version>
+                <artifactId>com.springsource.javax.servlet.jsp</artifactId>
+                <version>2.1.0</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>taglibs</groupId>
-                <artifactId>standard</artifactId>
+                <groupId>javax.servlet</groupId>
+                <artifactId>com.springsource.javax.servlet.jsp.jstl</artifactId>
+                <version>1.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.taglibs</groupId>
+                <artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
                 <version>1.1.2</version>
             </dependency>
+
             <dependency>
                 <groupId>commons-digester</groupId>
                 <artifactId>commons-digester</artifactId>
@@ -733,11 +746,6 @@
                 <groupId>oro</groupId>
                 <artifactId>oro</artifactId>
                 <version>2.0.8</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>jsp-api</artifactId>
-                <version>2.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.axis</groupId>
