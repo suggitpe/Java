@@ -68,10 +68,12 @@
             <artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
             <scope>compile</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium</artifactId>
             <scope>test</scope>
         </dependency>
+        -->
     </dependencies>
 </project>
