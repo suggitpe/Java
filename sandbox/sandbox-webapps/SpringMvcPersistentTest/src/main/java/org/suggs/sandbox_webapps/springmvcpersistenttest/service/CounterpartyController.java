@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,8 +31,18 @@ public class CounterpartyController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView handleCounterparties() {
+        LOG.debug( "fetching all counterparties" );
         ModelAndView mav = new ModelAndView();
         mav.addObject( "counterparties", counterpartyDao.getAll() );
         return mav;
     }
+
+    @RequestMapping(value = "/{counterpartyId}", method = RequestMethod.GET)
+    public ModelAndView findCounterparty( @PathVariable("counterpartyId") String aCounterpartyId ) {
+        LOG.debug( "fetching counterpatry " + aCounterpartyId );
+        ModelAndView mav = new ModelAndView( "counterparties/show" );
+        mav.addObject( counterpartyDao.get( Long.valueOf( aCounterpartyId ) ) );
+        return mav;
+    }
+
 }

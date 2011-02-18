@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Time: 07:39
  */
 @Controller
+@RequestMapping("/")
 public class DefaultController {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( DefaultController.class );
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String welcome() {
         return "welcome";
     }

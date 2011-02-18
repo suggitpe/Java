@@ -38,7 +38,7 @@ public final class Counterparty extends AbstractEntityBase {
     @Column(name = "EXTERNAL_ID")
     private Integer externalId;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "COUNTERPARTY_ID")
     private Set<CounterpartyContact> counterpartyContacts = new HashSet<CounterpartyContact>();
 
