@@ -17,7 +17,7 @@
     <c:forEach var="cp" items="${counterparties}">
         <tr>
             <td>
-                <spring:url value="counterparties/{counterpartyId}" var="cpUrl">
+                <spring:url value="/counterparties/{counterpartyId}" var="cpUrl">
                     <spring:param name="counterpartyId" value="${cp.id}"/>
                 </spring:url>
                 <a href="${fn:escapeXml(cpUrl)}">${cp.counterpartyLegalName}</a>
