@@ -1,15 +1,22 @@
 package org.suggs.sandbox_webapps.springmvcpersistenttest.service;
 
 import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.CounterpartyDao;
+import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.Counterparty;
+import org.suggs.sandbox_webapps.springmvcpersistenttest.validators.CounterpartyValidator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -38,11 +45,33 @@ public class CounterpartyController {
     }
 
     @RequestMapping(value = "/{counterpartyId}", method = RequestMethod.GET)
-    public ModelAndView findCounterparty( @PathVariable("counterpartyId") String aCounterpartyId ) {
+    public ModelAndView findCounterparty( @PathVariable("counterpartyId") Long aCounterpartyId ) {
         LOG.debug( "fetching counterpatry " + aCounterpartyId );
         ModelAndView mav = new ModelAndView( "counterparties/show" );
-        mav.addObject( counterpartyDao.get( Long.valueOf( aCounterpartyId ) ) );
+        mav.addObject( counterpartyDao.get( aCounterpartyId ) );
         return mav;
     }
 
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String setupNewForm( Model aModel ) {
+        Counterparty counterparty = new Counterparty();
+        aModel.addAttribute( counterparty );
+        return "counterparties/form";
+    }
+
+
+    @Transactional
+    @RequestMapping(value = "/new", method =
+            RequestMethod.POST)
+    public String processSubmitNew( @ModelAttribute Counterparty counterparty, BindingResult aResult, SessionStatus aStatus ) {
+        new CounterpartyValidator().validate( counterparty, aResult );
+        if ( aResult.hasErrors() ) {
+            return "counterparties/form";
+        } else {
+            counterpartyDao.save( counterparty );
+            aStatus.setComplete();
+            return "redirect:/counterparties/";
+            //return "redirect:/counterparties/" + counterparty.getId();
+        }
+    }
 }

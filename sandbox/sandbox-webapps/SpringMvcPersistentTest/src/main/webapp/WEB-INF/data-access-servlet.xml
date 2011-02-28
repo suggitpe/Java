@@ -37,19 +37,22 @@
         </property>
     </bean>
 
-    <!-- updates all view requests with the dir and postfix for jsps -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/jsp/"
-          p:suffix=".jsp"/>
-
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="mediaTypes">
             <map>
                 <entry key="json" value="application/json"/>
                 <entry key="xml" value="application/xml"/>
+                <entry key="html" value="text/html"/>
                 <!--
                 <entry key="csv" value="application/csv"/>
                 -->
             </map>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/jsp/"
+                      p:suffix=".jsp"/>
+            </list>
         </property>
         <property name="defaultViews">
             <list>
@@ -72,11 +75,14 @@
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
+                <!--
                 <prop key="org.springframework.web.servlet.PageNotFound">pageNotFound</prop>
                 <prop key="org.springframework.dao.DataAccessException">dataAccessFailure</prop>
                 <prop key="org.springframework.transaction.TransactionException">dataAccessFailure</prop>
+                -->
             </props>
         </property>
+        <property name="defaultErrorView" value="error-codes/general-error"/>
     </bean>
 
 

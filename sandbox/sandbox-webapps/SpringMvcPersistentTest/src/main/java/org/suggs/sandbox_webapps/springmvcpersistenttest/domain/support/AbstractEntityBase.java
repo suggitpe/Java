@@ -5,8 +5,8 @@
 package org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  * Abstract base class for IDs, optimistic locking version and create/update dates.
@@ -65,6 +65,10 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
      */
     public void setVersion( Integer aVersion ) {
         version = aVersion;
+    }
+
+    public boolean isNew() {
+        return ( id == null );
     }
 
     /**
