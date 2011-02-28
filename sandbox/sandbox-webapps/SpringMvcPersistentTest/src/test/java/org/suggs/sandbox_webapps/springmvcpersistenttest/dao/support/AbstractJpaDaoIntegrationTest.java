@@ -162,8 +162,8 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
             @Override
             public void executeTest() {
-                boolean exists = daoUnderTest.exists( key );
-                assertThat( Boolean.valueOf( exists ), equalTo( Boolean.TRUE ) );
+                boolean existsKey = Boolean.valueOf( daoUnderTest.exists( key ) );
+                assertThat( existsKey, is( equalTo( Boolean.TRUE ) ) );
             }
 
             @Override
@@ -194,8 +194,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
             @Override
             public void verifyTest() {
-                assertThat( Integer.valueOf( results.size() ), equalTo( Integer.valueOf( 1 ) ) );
-
+                assertThat( Integer.valueOf( results.size() ), is( equalTo( Integer.valueOf( 1 ) ) ) );
             }
         } );
     }
@@ -232,9 +231,9 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             @Override
             public void verifyTest() {
                 entity = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
-                assertThat( entity, not( nullValue() ) );
-                assertThat( entity, not( sameInstance( clone ) ) );
-                assertThat( entity, not( equalTo( clone ) ) );
+                assertThat( entity, is( not( nullValue() ) ) );
+                assertThat( entity, is( not( sameInstance( clone ) ) ) );
+                assertThat( entity, is( not( equalTo( clone ) ) ) );
             }
 
         } );
@@ -303,14 +302,14 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
     protected void verifyEntityCount( long aCountOfEntities ) {
         Long count = ( Long ) entityManager.createQuery( "select count(*) " + createEntitySearchHql() )
                 .getSingleResult();
-        assertThat( count, equalTo( Long.valueOf( aCountOfEntities ) ) );
+        assertThat( count, is( equalTo( Long.valueOf( aCountOfEntities ) ) ) );
         LOG.debug( aCountOfEntities + " rows in the database ... good" );
     }
 
     protected void verifyResult( T expected, T result ) {
-        assertThat( result, not( nullValue() ) );
-        assertThat( result, not( sameInstance( expected ) ) );
-        assertThat( result, equalTo( expected ) );
+        assertThat( result, is( not( nullValue() ) ) );
+        assertThat( result, is( not( sameInstance( expected ) ) ) );
+        assertThat( result, is( equalTo( expected ) ) );
         LOG.debug( "Objects of type [" + result.getClass().getSimpleName() + "] match up ... good" );
         LOG.debug( "Object debug:" + result );
     }

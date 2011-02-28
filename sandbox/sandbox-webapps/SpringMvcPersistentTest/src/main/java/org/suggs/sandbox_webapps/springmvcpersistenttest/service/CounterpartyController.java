@@ -9,13 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/counterparties")
+@SessionAttributes(types = Counterparty.class)
 public class CounterpartyController {
 
     @SuppressWarnings("unused")
@@ -60,7 +57,6 @@ public class CounterpartyController {
     }
 
 
-    @Transactional
     @RequestMapping(value = "/new", method =
             RequestMethod.POST)
     public String processSubmitNew( @ModelAttribute Counterparty counterparty, BindingResult aResult, SessionStatus aStatus ) {
