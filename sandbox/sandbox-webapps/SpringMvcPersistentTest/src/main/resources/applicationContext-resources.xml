@@ -46,11 +46,11 @@
         </property>
     </bean>
 
-    <bean id="txMgr" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <tx:annotation-driven transaction-manager="txMgr"/>
+    <tx:annotation-driven transaction-manager="txManager"/>
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 

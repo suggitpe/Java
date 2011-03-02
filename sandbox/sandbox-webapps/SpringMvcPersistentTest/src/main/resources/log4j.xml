@@ -54,7 +54,7 @@
     </category>
 
     <category name="org.springframework.orm">
-        <priority value="debug"/>
+        <priority value="trace"/>
     </category>
 
     <category name="org.springframework.web">
