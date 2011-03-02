@@ -43,6 +43,7 @@ public abstract class AbstractJpaDao<PK extends Serializable, T> implements Gene
 
     @Transactional(readOnly = true)
     @Override
+    @SuppressWarnings("unchecked")
     public List<T> getAll() {
         return entityManager.createQuery( "select t from " + persistentClass.getSimpleName() + " t" ).getResultList();
     }

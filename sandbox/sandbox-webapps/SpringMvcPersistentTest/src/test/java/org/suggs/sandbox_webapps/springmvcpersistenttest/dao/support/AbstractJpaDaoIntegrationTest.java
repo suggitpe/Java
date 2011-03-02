@@ -24,7 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -35,7 +35,7 @@ import static org.junit.Assert.assertThat;
  * @version 1.0 24 Jan 2011
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration(defaultRollback = false, transactionManager = "txManager")
 @Transactional
 public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> {
 
@@ -147,6 +147,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             T readEntity = null;
 
             @Override
+            @SuppressWarnings("unchecked")
             public void beforeTest() {
                 entity = createEntityTemplate( key );
                 verifyEntityCount( 0L );
@@ -162,7 +163,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
             @Override
             public void executeTest() {
-                boolean existsKey = Boolean.valueOf( daoUnderTest.exists( key ) );
+                Boolean existsKey = Boolean.valueOf( daoUnderTest.exists( key ) );
                 assertThat( existsKey, is( equalTo( Boolean.TRUE ) ) );
             }
 
@@ -193,8 +194,9 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             }
 
             @Override
+            @SuppressWarnings("boxing")
             public void verifyTest() {
-                assertThat( Integer.valueOf( results.size() ), is( equalTo( Integer.valueOf( 1 ) ) ) );
+                assertThat( Integer.valueOf( results.size() ), is( greaterThan( 1 ) ) );
             }
         } );
     }

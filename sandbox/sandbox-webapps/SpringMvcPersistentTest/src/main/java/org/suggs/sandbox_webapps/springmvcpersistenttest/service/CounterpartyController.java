@@ -72,7 +72,7 @@ public class CounterpartyController {
     }
 
     @RequestMapping(value = "/{counterpartyId}/edit", method = RequestMethod.GET)
-    public String setupEditForm( @PathVariable("counterpartyId") long aCounterpartyId, Model aModel ) {
+    public String setupEditForm( @PathVariable("counterpartyId") Long aCounterpartyId, Model aModel ) {
         Counterparty cp = counterpartyDao.get( aCounterpartyId );
         aModel.addAttribute( cp );
         return "counterparties/form";
@@ -85,9 +85,7 @@ public class CounterpartyController {
             return "counterparties/form";
         } else {
             counterpartyDao.save( counterparty );
-            ;
             aStatus.setComplete();
-            ;
             return "redirect:/counterparties/";
             //return "redirect:/counterparties/" + counterparty.getId();
         }
