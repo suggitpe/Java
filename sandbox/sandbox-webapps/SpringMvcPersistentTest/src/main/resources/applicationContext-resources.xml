@@ -39,18 +39,19 @@
         </property>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="false"/>
+                <property name="showSql" value="${jpa.show-sql}"/>
                 <property name="generateDdl" value="${jpa.generate-ddl}"/>
                 <property name="database" value="${jpa.database}"/>
             </bean>
         </property>
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <bean id="txMgr" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="txMgr"/>
+
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
 </beans>

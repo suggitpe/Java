@@ -70,4 +70,28 @@ public class CounterpartyController {
             //return "redirect:/counterparties/" + counterparty.getId();
         }
     }
+
+    @RequestMapping(value = "/{counterpartyId}/edit", method = RequestMethod.GET)
+    public String setupEditForm( @PathVariable("counterpartyId") long aCounterpartyId, Model aModel ) {
+        Counterparty cp = counterpartyDao.get( aCounterpartyId );
+        aModel.addAttribute( cp );
+        return "counterparties/form";
+    }
+
+    @RequestMapping(value = "/{counterpartyId}/edit", method = RequestMethod.POST)
+    public String processSubmitEdit( @ModelAttribute Counterparty counterparty, BindingResult aBindingResult, SessionStatus aStatus ) {
+        new CounterpartyValidator().validate( counterparty, aBindingResult );
+        if ( aBindingResult.hasErrors() ) {
+            return "counterparties/form";
+        } else {
+            counterpartyDao.save( counterparty );
+            ;
+            aStatus.setComplete();
+            ;
+            return "redirect:/counterparties/";
+            //return "redirect:/counterparties/" + counterparty.getId();
+        }
+    }
+
+
 }

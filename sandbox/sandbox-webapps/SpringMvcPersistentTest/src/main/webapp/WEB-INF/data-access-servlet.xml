@@ -18,8 +18,7 @@
             http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <!-- Component scan for all annotated components and mappings -->
-    <context:component-scan base-package="org.suggs.sandbox_webapps.springmvcpersistenttest.service"/>
-    <context:component-scan base-package="org.suggs.sandbox_webapps.springmvcpersistenttest.dao.jpa"/>
+    <context:component-scan base-package="org.suggs.sandbox_webapps.springmvcpersistenttest"/>
 
     <!-- hanlder for annotation driven controllers etc -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">

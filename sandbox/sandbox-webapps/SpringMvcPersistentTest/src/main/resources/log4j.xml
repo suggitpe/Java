@@ -4,23 +4,27 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
     <appender name="ConsoleAppender"
-        class="org.apache.log4j.ConsoleAppender">
+              class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
-                value="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-10.10t | %-20.20c{1} | %-6p - %m %n" />
+                   value="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-10.10t | %-20.20c{1} | %-6p - %m %n"/>
         </layout>
     </appender>
 
     <category name="oracle">
-        <priority value="trace" />
+        <priority value="trace"/>
     </category>
 
     <category name="org.apache.commons">
-        <priority value="warn" />
+        <priority value="warn"/>
     </category>
 
     <category name="org.hibernate">
-        <priority value="warn" />
+        <priority value="warn"/>
+    </category>
+
+    <category name="org.hibernate.transaction">
+        <priority value="trace"/>
     </category>
 
     <!--
@@ -39,23 +43,27 @@
     <category name="org.hibernate.SQL">
         <priority value="debug" />
     </category>
-    
+
     <category name="com.mchange.v2">
         <priority value="info" />
     </category>
 
     -->
     <category name="org.springframework">
-        <priority value="info" />
+        <priority value="info"/>
+    </category>
+
+    <category name="org.springframework.orm">
+        <priority value="debug"/>
     </category>
 
     <category name="org.springframework.web">
-        <priority value="trace" />
+        <priority value="debug"/>
     </category>
 
     <root>
-        <priority value="debug" />
-        <appender-ref ref="ConsoleAppender" />
+        <priority value="debug"/>
+        <appender-ref ref="ConsoleAppender"/>
     </root>
 
 </log4j:configuration>
