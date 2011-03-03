@@ -66,8 +66,7 @@ public class CounterpartyController {
         } else {
             counterpartyDao.save( counterparty );
             aStatus.setComplete();
-            return "redirect:/counterparties/";
-            //return "redirect:/counterparties/" + counterparty.getId();
+            return "redirect:/counterparties/" + counterparty.getId();
         }
     }
 
@@ -86,8 +85,7 @@ public class CounterpartyController {
         } else {
             counterpartyDao.save( counterparty );
             aStatus.setComplete();
-            return "redirect:/counterparties/";
-            //return "redirect:/counterparties/" + counterparty.getId();
+            return "redirect:/counterparties/" + counterparty.getId();
         }
     }
 

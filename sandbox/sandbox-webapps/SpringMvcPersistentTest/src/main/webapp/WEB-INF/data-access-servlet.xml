@@ -17,6 +17,8 @@
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+    <import resource="classpath:applicationContext.xml"/>
+
     <!-- Component scan for all annotated components and mappings -->
     <context:component-scan base-package="org.suggs.sandbox_webapps.springmvcpersistenttest"/>
 
