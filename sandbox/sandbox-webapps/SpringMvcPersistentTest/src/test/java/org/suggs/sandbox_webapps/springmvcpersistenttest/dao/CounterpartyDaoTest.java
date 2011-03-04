@@ -17,7 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 /**
  * Test for the Counterparty DAO object.
- * 
+ *
  * @author suggitpe
  * @version 1.0 3 Feb 2011
  */
@@ -65,10 +65,19 @@ public class CounterpartyDaoTest extends AbstractJpaDaoIntegrationTest<Long, Cou
     }
 
     /**
-     * @see org.suggs.sandbox_webapps.springmvcpersistenttest.dao.support.AbstractJpaDaoIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
+     * @see org.suggs.sandbox_webapps.springmvcpersistenttest.dao.support.AbstractJpaDaoIntegrationTest#updateEntityForUpdateTest(org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support.AbstractEntityBase)
      */
     @Override
     protected void updateEntityForUpdateTest( Counterparty aEntity ) {
-        aEntity.setCounterpartyLegalName( "New legal name" );
+        aEntity.setCounterpartyLegalName( "New legal name for update" );
     }
+
+    /**
+     * @see org.suggs.sandbox_webapps.springmvcpersistenttest.dao.support.AbstractJpaDaoIntegrationTest#updateEntityForMergeTest(org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support.AbstractEntityBase)
+     */
+    @Override
+    protected void updateEntityForMergeTest( Counterparty aEntity ) {
+        aEntity.setCounterpartyLegalName( "New legal name for merge" );
+    }
+
 }

@@ -1,5 +1,7 @@
 package org.suggs.sandbox_webapps.springmvcpersistenttest.dao;
 
+import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support.AbstractEntityBase;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  * @author suggitpe
  * @version 1.0 3 Feb 2011
  */
-public interface GenericDao<PK extends Serializable, T> {
+public interface GenericDao<PK extends Serializable, T extends AbstractEntityBase> {
 
     /**
      * Getter by ID
@@ -41,6 +43,14 @@ public interface GenericDao<PK extends Serializable, T> {
      * @param object the object to save to the database
      */
     void save( T object );
+
+    /**
+     * Merges object with a persistent object
+     *
+     * @param object the object to merge from
+     * @return returns the resulting object from the merge operation.
+     */
+    T merge( T object );
 
     /**
      * Removes an object from the database.

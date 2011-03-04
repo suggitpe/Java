@@ -16,11 +16,12 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Domain entity for a Counterparty Contact.
- * 
+ *
  * @author suggitpe
  * @version 1.0 2 Feb 2011
  */
 @Entity
+@org.hibernate.annotations.Entity(dynamicUpdate = true)
 @Table(name = "COUNTERPARTY_CONTACT")
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "COUNTERPARTY_CONTACT_SQ")
 public final class CounterpartyContact extends AbstractEntityBase {
@@ -48,7 +49,8 @@ public final class CounterpartyContact extends AbstractEntityBase {
     /**
      * Constructs a new instance.
      */
-    public CounterpartyContact() {}
+    public CounterpartyContact() {
+    }
 
     /**
      * Constructs a new instance.
@@ -61,7 +63,7 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Returns the value of contactFirstName.
-     * 
+     *
      * @return Returns the contactFirstName.
      */
     public String getContactFirstName() {
@@ -70,9 +72,8 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Sets the contactFirstName field to the specified value.
-     * 
-     * @param aContactFirstName
-     *            The contactFirstName to set.
+     *
+     * @param aContactFirstName The contactFirstName to set.
      */
     public void setContactFirstName( String aContactFirstName ) {
         contactFirstName = aContactFirstName;
@@ -80,7 +81,7 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Returns the value of contactLastName.
-     * 
+     *
      * @return Returns the contactLastName.
      */
     public String getContactLastName() {
@@ -89,9 +90,8 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Sets the contactLastName field to the specified value.
-     * 
-     * @param aContactLastName
-     *            The contactLastName to set.
+     *
+     * @param aContactLastName The contactLastName to set.
      */
     public void setContactLastName( String aContactLastName ) {
         contactLastName = aContactLastName;
@@ -99,7 +99,7 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Returns the value of contactAddress.
-     * 
+     *
      * @return Returns the contactAddress.
      */
     public String getContactAddress() {
@@ -108,9 +108,8 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Sets the contactAddress field to the specified value.
-     * 
-     * @param aContactAddress
-     *            The contactAddress to set.
+     *
+     * @param aContactAddress The contactAddress to set.
      */
     public void setContactAddress( String aContactAddress ) {
         contactAddress = aContactAddress;
@@ -118,7 +117,7 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Returns the value of contactPostcode.
-     * 
+     *
      * @return Returns the contactPostcode.
      */
     public String getContactPostcode() {
@@ -127,9 +126,8 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Sets the contactPostcode field to the specified value.
-     * 
-     * @param aContactPostcode
-     *            The contactPostcode to set.
+     *
+     * @param aContactPostcode The contactPostcode to set.
      */
     public void setContactPostcode( String aContactPostcode ) {
         contactPostcode = aContactPostcode;
@@ -137,7 +135,7 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Returns the value of contactTelephone.
-     * 
+     *
      * @return Returns the contactTelephone.
      */
     public String getContactTelephone() {
@@ -146,9 +144,8 @@ public final class CounterpartyContact extends AbstractEntityBase {
 
     /**
      * Sets the contactTelephone field to the specified value.
-     * 
-     * @param aContactTelephone
-     *            The contactTelephone to set.
+     *
+     * @param aContactTelephone The contactTelephone to set.
      */
     public void setContactTelephone( String aContactTelephone ) {
         contactTelephone = aContactTelephone;
@@ -180,36 +177,31 @@ public final class CounterpartyContact extends AbstractEntityBase {
             return false;
         if ( getClass() != obj.getClass() )
             return false;
-        CounterpartyContact other = (CounterpartyContact) obj;
+        CounterpartyContact other = ( CounterpartyContact ) obj;
         if ( contactAddress == null ) {
             if ( other.contactAddress != null )
                 return false;
-        }
-        else if ( !contactAddress.equals( other.contactAddress ) )
+        } else if ( !contactAddress.equals( other.contactAddress ) )
             return false;
         if ( contactFirstName == null ) {
             if ( other.contactFirstName != null )
                 return false;
-        }
-        else if ( !contactFirstName.equals( other.contactFirstName ) )
+        } else if ( !contactFirstName.equals( other.contactFirstName ) )
             return false;
         if ( contactLastName == null ) {
             if ( other.contactLastName != null )
                 return false;
-        }
-        else if ( !contactLastName.equals( other.contactLastName ) )
+        } else if ( !contactLastName.equals( other.contactLastName ) )
             return false;
         if ( contactPostcode == null ) {
             if ( other.contactPostcode != null )
                 return false;
-        }
-        else if ( !contactPostcode.equals( other.contactPostcode ) )
+        } else if ( !contactPostcode.equals( other.contactPostcode ) )
             return false;
         if ( contactTelephone == null ) {
             if ( other.contactTelephone != null )
                 return false;
-        }
-        else if ( !contactTelephone.equals( other.contactTelephone ) )
+        } else if ( !contactTelephone.equals( other.contactTelephone ) )
             return false;
         return true;
     }

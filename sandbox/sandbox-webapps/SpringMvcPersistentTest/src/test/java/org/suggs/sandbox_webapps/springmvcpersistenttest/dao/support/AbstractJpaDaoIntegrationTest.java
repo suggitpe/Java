@@ -37,7 +37,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(defaultRollback = false, transactionManager = "txManager")
 @Transactional
-public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> {
+public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T extends AbstractEntityBase> {
 
     private static final Logger LOG = LoggerFactory.getLogger( AbstractJpaDaoIntegrationTest.class );
 
@@ -57,6 +57,8 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
     protected abstract void updateEntityForUpdateTest( T aEntity );
 
+    protected abstract void updateEntityForMergeTest( T aEntity );
+
     @Before
     public void onSetup() {
         LOG.debug( "--------------------- Before setup" );
@@ -70,7 +72,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
     }
 
     @Test
-    public void basicCreateOperationCreatesCorrectObject() {
+    public void persistsObjects() {
         LOG.info( "Testing the create CRUD function" );
         runGenericTest( new EntityManagerIntegrationTestCallback() {
 
@@ -85,22 +87,24 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
             @Override
             public void executeTest() {
+                LOG.debug( ">>>> Calling save" );
                 daoUnderTest.save( entity );
                 LOG.debug( "Called save for object [" + entity + "]" );
             }
 
             @Override
+            @SuppressWarnings("unchecked")
             public void verifyTest() {
                 verifyEntityCount( 1L );
-                @SuppressWarnings("unchecked")
                 T result = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
                 verifyResult( entity, result );
             }
         } );
     }
 
+
     @Test
-    public void basicReadOperationsInstantiatesCorrectObject() {
+    public void readsObjects() {
         LOG.info( "Testing the read CRUD function" );
         runGenericTest( new EntityManagerIntegrationTestCallback() {
 
@@ -116,8 +120,8 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
                 entityManager.persist( entity );
                 // if using a surrogate key, then we need to keep a ref to the key
-                if ( key == null && entity instanceof AbstractEntityBase ) {
-                    Serializable id = ( ( AbstractEntityBase ) entity ).getId();
+                if ( key == null ) {
+                    Serializable id = entity.getId();
                     key = ( PK ) id;
                 }
                 verifyEntityCount( 1L );
@@ -125,6 +129,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
             @Override
             public void executeTest() {
+                LOG.debug( ">>>> Calling get" );
                 readEntity = daoUnderTest.get( key );
                 LOG.debug( "Read object [" + readEntity + "] from database" );
             }
@@ -138,7 +143,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
     }
 
     @Test
-    public void basicExistsOperationFindsObject() {
+    public void identifiesExistingObjects() {
         LOG.info( "Testing the exists CRUD function" );
         runGenericTest( new EntityManagerIntegrationTestCallback() {
 
@@ -154,8 +159,8 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
                 entityManager.persist( entity );
                 // if using a surrogate key, then we need to keep a ref to the key
-                if ( key == null && entity instanceof AbstractEntityBase ) {
-                    Serializable id = ( ( AbstractEntityBase ) entity ).getId();
+                if ( key == null ) {
+                    Serializable id = entity.getId();
                     key = ( PK ) id;
                 }
                 verifyEntityCount( 1L );
@@ -163,6 +168,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
             @Override
             public void executeTest() {
+                LOG.debug( ">>>> Calling exists" );
                 Boolean existsKey = Boolean.valueOf( daoUnderTest.exists( key ) );
                 assertThat( existsKey, is( equalTo( Boolean.TRUE ) ) );
             }
@@ -175,7 +181,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
     }
 
     @Test
-    public void getAllOperationReturnsTableContents() {
+    public void retrievesAllObjects() {
         LOG.info( "Testing the getAll function" );
         runGenericTest( new EntityManagerIntegrationTestCallback() {
 
@@ -190,20 +196,21 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
 
             @Override
             public void executeTest() {
+                LOG.debug( ">>>> Calling getAll" );
                 results = daoUnderTest.getAll();
             }
 
             @Override
             @SuppressWarnings("boxing")
             public void verifyTest() {
-                assertThat( Integer.valueOf( results.size() ), is( greaterThan( 1 ) ) );
+                assertThat( results.size(), is( greaterThan( 0 ) ) );
             }
         } );
     }
 
 
     @Test
-    public void basicUpdateOperationsUpdatesCorrectObject() {
+    public void updatesObjects() {
         LOG.info( "Testing the update CRUD function" );
         runGenericTest( new EntityManagerIntegrationTestCallback() {
 
@@ -227,6 +234,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
                 entity = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
                 updateEntityForUpdateTest( entity );
                 LOG.debug( "Updated object [" + entity + "]" );
+                LOG.debug( ">>>> Allowing persistence mechanism to figure out that it needs an update" );
             }
 
             @SuppressWarnings("unchecked")
@@ -243,7 +251,52 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
     }
 
     @Test
-    public void basicDeleteOperationsDeletesCorrectObject() {
+    public void mergesObjectsWithPersistentObjects() {
+        LOG.debug( "Testing the merge CRUD function" );
+        runGenericTest( new EntityManagerIntegrationTestCallback() {
+
+            PK key = createKeyTemplate();
+            T originalEntity = null;
+            T resultOfMerge = null;
+            T resultInDatabase = null;
+
+            @Override
+            public void beforeTest() {
+                originalEntity = createEntityTemplate( key );
+                verifyEntityCount( 0L );
+
+                entityManager.persist( originalEntity );
+                verifyEntityCount( 1L );
+            }
+
+            @Override
+            @SuppressWarnings("unchecked")
+            public void executeTest() {
+                T entityToMerge = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
+                entityManager.detach( entityToMerge );
+                updateEntityForMergeTest( entityToMerge );
+                LOG.debug( ">>>> Calling merge" );
+                resultOfMerge = daoUnderTest.merge( entityToMerge );
+            }
+
+            @Override
+            @SuppressWarnings("unchecked")
+            public void verifyTest() {
+                resultInDatabase = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
+                assertThat( resultInDatabase, is( not( nullValue() ) ) );
+                assertThat( originalEntity, is( not( sameInstance( resultInDatabase ) ) ) );
+                assertThat( originalEntity, is( not( equalTo( resultInDatabase ) ) ) );
+
+                assertThat( resultOfMerge, is( not( sameInstance( resultInDatabase ) ) ) );
+                assertThat( resultOfMerge, is( equalTo( resultInDatabase ) ) );
+            }
+
+        } );
+
+    }
+
+    @Test
+    public void deletesObjects() {
 
         LOG.info( "Testing the delete CRUD function" );
         runGenericTest( new EntityManagerIntegrationTestCallback() {
@@ -264,6 +317,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T> 
             public void executeTest() {
                 @SuppressWarnings("unchecked")
                 T entityToDelete = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
+                LOG.debug( ">>>> Calling remove" );
                 daoUnderTest.remove( entityToDelete );
                 LOG.debug( "Removed object [" + entityToDelete + "]" );
             }

@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0 2 Feb 2011
  */
 @Entity
+@org.hibernate.annotations.Entity(dynamicUpdate = true)
 @Table(name = "COUNTERPARTY")
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "COUNTERPARTY_SQ")
 public final class Counterparty extends AbstractEntityBase {

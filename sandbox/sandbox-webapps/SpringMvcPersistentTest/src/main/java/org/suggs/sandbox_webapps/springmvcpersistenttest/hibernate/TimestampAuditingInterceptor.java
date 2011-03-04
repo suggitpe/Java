@@ -20,7 +20,7 @@ import org.hibernate.type.Type;
 /**
  * Class to intercept all object persists and updates them with a create_date/update_date time stamps just
  * before the actual persistence process.
- * 
+ *
  * @author suggitpe
  * @version 1.0 31 Mar 2010
  */
@@ -53,7 +53,7 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
         }
         Timestamp date = getDateTimeNow();
         if ( LOG.isDebugEnabled() ) {
-            LOG.debug( "Auditing (onFlushDirty) existing entity with update date of [" + date + "]" );
+            LOG.debug( "Auditing (onFlushDirty) existing [" + aEntity.getClass().getSimpleName() + "] entity with update date of [" + date + "]" );
         }
         updateDateProperty( aCurrentState, aPropertyNames, AUDIT_TYPE.UPDATED_ON, date );
         return true;
@@ -71,7 +71,7 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
         }
         Timestamp date = getDateTimeNow();
         if ( LOG.isDebugEnabled() ) {
-            LOG.debug( "Auditing (onSave) new entity with create date and update date of [" + date + "]" );
+            LOG.debug( "Auditing (onSave) new [" + aEntity.getClass().getSimpleName() + "] entity with create date and update date of [" + date + "]" );
         }
         updateDateProperty( aCurrentState, aPropertyNames, AUDIT_TYPE.CREATED_ON, date );
         updateDateProperty( aCurrentState, aPropertyNames, AUDIT_TYPE.UPDATED_ON, date );
@@ -91,11 +91,10 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
                                      Timestamp aValue ) {
         for ( int i = 0; i < aPropertyNames.length; ++i ) {
             if ( AUDIT_PROPERTY_NAME.equals( aPropertyNames[i] ) ) {
-                TimestampAuditInfo info = (TimestampAuditInfo) aCurrentState[i];
+                TimestampAuditInfo info = ( TimestampAuditInfo ) aCurrentState[i];
                 if ( type == AUDIT_TYPE.CREATED_ON ) {
                     info.setCreateDate( aValue );
-                }
-                else if ( type == AUDIT_TYPE.UPDATED_ON ) {
+                } else if ( type == AUDIT_TYPE.UPDATED_ON ) {
                     info.setUpdateDate( aValue );
                 }
                 return;

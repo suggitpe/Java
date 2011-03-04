@@ -1,6 +1,7 @@
 package org.suggs.sandbox_webapps.springmvcpersistenttest.dao.jpa;
 
 import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.GenericDao;
+import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support.AbstractEntityBase;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * all use. You should only need to extend this class when your require custom CRUD logic.
  */
 @Transactional
-public abstract class AbstractJpaDao<PK extends Serializable, T> implements GenericDao<PK, T> {
+public abstract class AbstractJpaDao<PK extends Serializable, T extends AbstractEntityBase> implements GenericDao<PK, T> {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( AbstractJpaDao.class );
@@ -57,6 +58,11 @@ public abstract class AbstractJpaDao<PK extends Serializable, T> implements Gene
     @Override
     public void save( T object ) {
         entityManager.persist( object );
+    }
+
+    @Override
+    public T merge( T object ) {
+        return entityManager.merge( object );
     }
 
     @Override
