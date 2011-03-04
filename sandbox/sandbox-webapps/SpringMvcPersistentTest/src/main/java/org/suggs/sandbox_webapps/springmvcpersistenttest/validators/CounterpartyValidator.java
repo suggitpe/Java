@@ -9,7 +9,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 
 /**
- * TODO: Justify why you have written this class
+ * Validation class to ensure that for a given Counterparty object created from user input, we have
+ * the right level/content of information.
  * <p/>
  * User: suggitpe
  * Date: 25/02/11

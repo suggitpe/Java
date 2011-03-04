@@ -16,7 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * TODO: Justify why you have written this class
+ * Controller class for Counterparties that will map the relevant URL to some core function and then back to a new URL.
  * <p/>
  * User: suggitpe
  * Date: 15/02/11
