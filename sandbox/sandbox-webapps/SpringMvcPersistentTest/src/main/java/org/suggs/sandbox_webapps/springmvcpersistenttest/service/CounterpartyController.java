@@ -83,7 +83,7 @@ public class CounterpartyController {
         if ( aBindingResult.hasErrors() ) {
             return "counterparties/form";
         } else {
-            counterpartyDao.save( counterparty );
+            counterpartyDao.merge( counterparty );
             aStatus.setComplete();
             return "redirect:/counterparties/" + counterparty.getId();
         }
