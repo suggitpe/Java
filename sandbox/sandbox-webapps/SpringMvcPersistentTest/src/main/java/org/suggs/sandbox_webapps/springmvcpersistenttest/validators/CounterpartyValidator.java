@@ -26,9 +26,11 @@ public class CounterpartyValidator {
         if ( !StringUtils.hasLength( aCounterparty.getCounterpartyName() ) ) {
             aErrors.rejectValue( "counterpartyName", "required", "required" );
         }
+
         if ( !StringUtils.hasLength( aCounterparty.getCounterpartyLegalName() ) ) {
             aErrors.rejectValue( "counterpartyLegalName", "required", "required" );
         }
+
         if ( aCounterparty.getExternalId() == null || aCounterparty.getExternalId().equals( Integer.valueOf( 0 ) ) ) {
             aErrors.rejectValue( "externalId", "required", "required" );
         }

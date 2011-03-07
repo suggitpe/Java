@@ -63,8 +63,7 @@ public class CounterpartyController {
     }
 
 
-    @RequestMapping(value = "/new", method =
-            RequestMethod.POST)
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String processSubmitNew( @ModelAttribute Counterparty counterparty, BindingResult aResult, SessionStatus aStatus ) {
         new CounterpartyValidator().validate( counterparty, aResult );
         if ( aResult.hasErrors() ) {

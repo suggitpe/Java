@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/jsp/include/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
+
 <c:choose>
     <c:when test="${counterparty.new}"><c:set var="method" value="post"/></c:when>
     <c:otherwise><c:set var="method" value="put"/></c:otherwise>

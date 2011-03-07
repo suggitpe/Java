@@ -3,6 +3,7 @@ package org.suggs.sandbox_webapps.springmvcpersistenttest.service;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.CounterpartyDao;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.Counterparty;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.CounterpartyContact;
+import org.suggs.sandbox_webapps.springmvcpersistenttest.validators.CounterpartyContactValidator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,11 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  * Controller class for counterparty contacts.
@@ -41,10 +41,22 @@ public class ContactsController {
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String setupNewForm( @PathVariable("counterpartyId") Long aCounterpartyId, Model aModel ) {
-        Counterparty counterparty = counterpartyDao.get( aCounterpartyId );
         CounterpartyContact contact = new CounterpartyContact();
-        counterparty.addCounterpartyContact( contact );
         aModel.addAttribute( "contact", contact );
+        return "contacts/form";
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String processSubmitNew( @PathVariable("counterpartyId") Long aCounterpartyId, @ModelAttribute("contact") CounterpartyContact contact, BindingResult aResult, SessionStatus aStatus ) {
+        new CounterpartyContactValidator().validate( contact, aResult );
+        if ( aResult.hasErrors() ) {
+            return "contacts/form";
+        } else {
+            Counterparty counterparty = counterpartyDao.get( aCounterpartyId );
+            counterparty.addCounterpartyContact( contact );
+            counterpartyDao.merge( counterparty );
+            aStatus.setComplete();
+        }
         return "contacts/form";
     }
 
