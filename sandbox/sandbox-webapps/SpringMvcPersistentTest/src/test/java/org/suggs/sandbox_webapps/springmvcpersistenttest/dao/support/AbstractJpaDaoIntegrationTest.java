@@ -129,7 +129,7 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T e
 
             @Override
             public void executeTest() {
-                LOG.debug( ">>>> Calling get" );
+                LOG.debug( ">>>> Calling get with key [" + key + "]" );
                 readEntity = daoUnderTest.get( key );
                 LOG.debug( "Read object [" + readEntity + "] from database" );
             }
@@ -363,9 +363,9 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T e
     }
 
     protected void verifyResult( T expected, T result ) {
-        assertThat( result, is( not( nullValue() ) ) );
-        assertThat( result, is( not( sameInstance( expected ) ) ) );
-        assertThat( result, is( equalTo( expected ) ) );
+        assertThat( "Resultant object is null", result, is( not( nullValue() ) ) );
+        assertThat( "Resultant object is same instance as expected", result, is( not( sameInstance( expected ) ) ) );
+        assertThat( "resultant object is not equal to expected object", result, is( equalTo( expected ) ) );
         LOG.debug( "Objects of type [" + result.getClass().getSimpleName() + "] match up ... good" );
         LOG.debug( "Object debug:" + result );
     }

@@ -62,6 +62,17 @@ public final class CounterpartyContact extends AbstractEntityBase {
     }
 
     /**
+     * Constructs a new instance.
+     */
+    public CounterpartyContact( String aFirstName, String aLastName, String aAddress, String aPostcode, String aTelephoneNumber ) {
+        contactFirstName = aFirstName;
+        contactLastName = aLastName;
+        contactAddress = aAddress;
+        contactPostcode = aPostcode;
+        contactTelephone = aTelephoneNumber;
+    }
+
+    /**
      * Returns the value of contactFirstName.
      *
      * @return Returns the contactFirstName.
