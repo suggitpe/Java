@@ -3,7 +3,7 @@
 
 <h2>Counterparty Detail: ${counterparty.counterpartyLegalName}</h2>
 
-<p/>
+<p></p>
 
 <table>
     <tr>
@@ -31,12 +31,6 @@
             </spring:url>
             <a href="${fn:escapeXml(editUrl)}">Edit Counterparty</a>
         </td>
-        <td>
-            <spring:url value="{cpId}/contacts/new" var="addUrl">
-                <spring:param name="cpId" value="${counterparty.id}"/>
-            </spring:url>
-            <a href="${fn:escapeXml(addUrl)}">Add New Contact</a>
-        </td>
     </tr>
 </table>
 
@@ -48,6 +42,7 @@
     <th>Address</th>
     <th>Postcode</th>
     <th>Telephone</th>
+    <th>Actions</th>
     </thead>
     <c:forEach var="contact" items="${counterparty.counterpartyContacts}">
         <tr>
@@ -55,8 +50,25 @@
             <td>${contact.contactAddress}</td>
             <td>${contact.contactPostcode}</td>
             <td>${contact.contactTelephone}</td>
+            <td>
+                <spring:url var="editUrl" value="{cpId}/contacts/{contactId}/edit">
+                    <spring:param name="cpId" value="${counterparty.id}"/>
+                    <spring:param name="contactId" value="${contact.id}"/>
+                </spring:url>
+                <a href="${fn:escapeXml(editUrl)}">Edit</a>
+            </td>
         </tr>
     </c:forEach>
+</table>
+<table class="table-buttons">
+    <tr>
+        <td>
+            <spring:url value="{cpId}/contacts/new" var="addUrl">
+                <spring:param name="cpId" value="${counterparty.id}"/>
+            </spring:url>
+            <a href="${fn:escapeXml(addUrl)}">Add New Contact</a>
+        </td>
+    </tr>
 </table>
 
 

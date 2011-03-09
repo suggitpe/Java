@@ -1,5 +1,6 @@
 package org.suggs.sandbox_webapps.springmvcpersistenttest.service;
 
+import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.CounterpartyContactDao;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.dao.CounterpartyDao;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.Counterparty;
 import org.suggs.sandbox_webapps.springmvcpersistenttest.domain.CounterpartyContact;
@@ -19,9 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 /**
  * Controller class for counterparty contacts.
  * <p/>
- * User: suggitpe
- * Date: 04/03/11
- * Time: 19:21
+ * User: suggitpe Date: 04/03/11 Time: 19:21
  */
 
 @Controller
@@ -34,13 +33,16 @@ public class ContactsController {
     @Autowired
     private CounterpartyDao counterpartyDao;
 
+    @Autowired
+    private CounterpartyContactDao counterpartyContactDao;
+
     @InitBinder
     public void setAllowedFields( WebDataBinder dataBinder ) {
         dataBinder.setDisallowedFields( "id" );
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String setupNewForm( @PathVariable("counterpartyId") Long aCounterpartyId, Model aModel ) {
+    public String setupNewForm( Model aModel ) {
         CounterpartyContact contact = new CounterpartyContact();
         aModel.addAttribute( "contact", contact );
         return "contacts/form";
@@ -51,13 +53,45 @@ public class ContactsController {
         new CounterpartyContactValidator().validate( contact, aResult );
         if ( aResult.hasErrors() ) {
             return "contacts/form";
-        } else {
+        }
+        else {
             Counterparty counterparty = counterpartyDao.get( aCounterpartyId );
             counterparty.addCounterpartyContact( contact );
             counterpartyDao.merge( counterparty );
             aStatus.setComplete();
+            return "redirect:/counterparties/" + counterparty.getId();
         }
-        return "contacts/form";
     }
+
+    /**
+     @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.GET)
+     public String setupEditForm( @PathVariable("counterpartyId") Long aCounterpartyId, @PathVariable("contactId") Long aContactId, Model aModel ) {
+     LOG.debug("#### in setupEditForm with cpId=["+aCounterpartyId+"] and contactid=["+aContactId+"]");
+
+     Counterparty counterparty = counterpartyDao.get(aCounterpartyId);
+     aModel.addAttribute( counterparty );
+
+
+     CounterpartyContact counterpartyContact = counterpartyContactDao.get( aContactId );
+     aModel.addAttribute( counterpartyContact );
+
+     return "contacts/form";
+     }
+
+     @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.POST)
+     public String processSubmitEdit( @ModelAttribute CounterpartyContact counterpartyContact, BindingResult aBindingResult, SessionStatus aStatus ) {
+     LOG.debug("contacts ctrl: processSubmit");
+     new CounterpartyContactValidator().validate( counterpartyContact, aBindingResult );
+
+     if ( aBindingResult.hasErrors() ) {
+     return "contacts/form";
+     }
+     else {
+     counterpartyContactDao.merge( counterpartyContact );
+     aStatus.setComplete();
+     return "redirect:/counterparties/";
+     }
+     }
+     */
 
 }
