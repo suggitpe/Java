@@ -192,27 +192,32 @@ public final class CounterpartyContact extends AbstractEntityBase {
         if ( contactAddress == null ) {
             if ( other.contactAddress != null )
                 return false;
-        } else if ( !contactAddress.equals( other.contactAddress ) )
+        }
+        else if ( !contactAddress.equals( other.contactAddress ) )
             return false;
         if ( contactFirstName == null ) {
             if ( other.contactFirstName != null )
                 return false;
-        } else if ( !contactFirstName.equals( other.contactFirstName ) )
+        }
+        else if ( !contactFirstName.equals( other.contactFirstName ) )
             return false;
         if ( contactLastName == null ) {
             if ( other.contactLastName != null )
                 return false;
-        } else if ( !contactLastName.equals( other.contactLastName ) )
+        }
+        else if ( !contactLastName.equals( other.contactLastName ) )
             return false;
         if ( contactPostcode == null ) {
             if ( other.contactPostcode != null )
                 return false;
-        } else if ( !contactPostcode.equals( other.contactPostcode ) )
+        }
+        else if ( !contactPostcode.equals( other.contactPostcode ) )
             return false;
         if ( contactTelephone == null ) {
             if ( other.contactTelephone != null )
                 return false;
-        } else if ( !contactTelephone.equals( other.contactTelephone ) )
+        }
+        else if ( !contactTelephone.equals( other.contactTelephone ) )
             return false;
         return true;
     }

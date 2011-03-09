@@ -9,12 +9,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 
 /**
- * Validation class to ensure that for a given Counterparty object created from user input, we have
- * the right level/content of information.
+ * Validation class to ensure that for a given Counterparty object created from user input, we have the right
+ * level/content of information.
  * <p/>
- * User: suggitpe
- * Date: 25/02/11
- * Time: 19:19
+ * User: suggitpe Date: 25/02/11 Time: 19:19
  */
 
 public class CounterpartyValidator {

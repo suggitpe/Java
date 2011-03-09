@@ -125,17 +125,20 @@ public abstract class AbstractEntityBase implements TimestampAuditable, Serializ
         if ( id == null ) {
             if ( other.id != null )
                 return false;
-        } else if ( !id.equals( other.id ) )
+        }
+        else if ( !id.equals( other.id ) )
             return false;
         if ( timestampAuditInfo == null ) {
             if ( other.timestampAuditInfo != null )
                 return false;
-        } else if ( !timestampAuditInfo.equals( other.timestampAuditInfo ) )
+        }
+        else if ( !timestampAuditInfo.equals( other.timestampAuditInfo ) )
             return false;
         if ( version == null ) {
             if ( other.version != null )
                 return false;
-        } else if ( !version.equals( other.version ) )
+        }
+        else if ( !version.equals( other.version ) )
             return false;
         return true;
     }

@@ -4,9 +4,9 @@
  */
 package org.suggs.sandbox_webapps.springmvcpersistenttest.domain.support;
 
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import java.sql.Timestamp;
 
 /**
  * Embeddable audit bean that holds all of the timestamp audit information.
@@ -95,12 +95,14 @@ public class TimestampAuditInfo {
         if ( createDate == null ) {
             if ( other.createDate != null )
                 return false;
-        } else if ( !createDate.equals( other.createDate ) )
+        }
+        else if ( !createDate.equals( other.createDate ) )
             return false;
         if ( updateDate == null ) {
             if ( other.updateDate != null )
                 return false;
-        } else if ( !updateDate.equals( other.updateDate ) )
+        }
+        else if ( !updateDate.equals( other.updateDate ) )
             return false;
         return true;
     }

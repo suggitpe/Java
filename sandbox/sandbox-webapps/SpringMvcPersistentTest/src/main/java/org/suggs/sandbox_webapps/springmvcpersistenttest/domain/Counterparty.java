@@ -167,17 +167,20 @@ public final class Counterparty extends AbstractEntityBase {
         if ( counterpartyLegalName == null ) {
             if ( other.counterpartyLegalName != null )
                 return false;
-        } else if ( !counterpartyLegalName.equals( other.counterpartyLegalName ) )
+        }
+        else if ( !counterpartyLegalName.equals( other.counterpartyLegalName ) )
             return false;
         if ( counterpartyName == null ) {
             if ( other.counterpartyName != null )
                 return false;
-        } else if ( !counterpartyName.equals( other.counterpartyName ) )
+        }
+        else if ( !counterpartyName.equals( other.counterpartyName ) )
             return false;
         if ( externalId == null ) {
             if ( other.externalId != null )
                 return false;
-        } else if ( !externalId.equals( other.externalId ) )
+        }
+        else if ( !externalId.equals( other.externalId ) )
             return false;
         return true;
     }

@@ -28,8 +28,8 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 /**
- * Abstract test that provides tests for the basic DAO operations. The key thing that this class also does is
- * to ensure that any persistent classes are verified for correctness between persistence and reading.
+ * Abstract test that provides tests for the basic DAO operations. The key thing that this class also does is to ensure
+ * that any persistent classes are verified for correctness between persistence and reading.
  *
  * @author suggitpe
  * @version 1.0 24 Jan 2011

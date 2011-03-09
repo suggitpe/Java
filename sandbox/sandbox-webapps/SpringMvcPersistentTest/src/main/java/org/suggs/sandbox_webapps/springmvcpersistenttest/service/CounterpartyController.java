@@ -19,9 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Controller class for Counterparties that will map the relevant URL to some core function and then back to a new URL.
  * <p/>
- * User: suggitpe
- * Date: 15/02/11
- * Time: 14:34
+ * User: suggitpe Date: 15/02/11 Time: 14:34
  */
 @Controller
 @RequestMapping("/counterparties")
@@ -68,7 +66,8 @@ public class CounterpartyController {
         new CounterpartyValidator().validate( counterparty, aResult );
         if ( aResult.hasErrors() ) {
             return "counterparties/form";
-        } else {
+        }
+        else {
             counterpartyDao.save( counterparty );
             aStatus.setComplete();
             return "redirect:/counterparties/" + counterparty.getId();
@@ -87,7 +86,8 @@ public class CounterpartyController {
         new CounterpartyValidator().validate( counterparty, aBindingResult );
         if ( aBindingResult.hasErrors() ) {
             return "counterparties/form";
-        } else {
+        }
+        else {
             counterpartyDao.merge( counterparty );
             aStatus.setComplete();
             return "redirect:/counterparties/" + counterparty.getId();
