@@ -7,17 +7,12 @@
          id="WebApp_ID"
          version="2.5">
 
-    <welcome-file-list>
-        <welcome-file>home.htm</welcome-file>
-    </welcome-file-list>
-
     <!-- <icon></icon> -->
     <display-name>SpringMvcPersistentTest</display-name>
     <description>This is a test spring MVC web app solely for the purposes of
         working with spring MVC and JPA
     </description>
 
-    <!-- <distributable></distributable> -->
 
     <!-- ===========================================
     ============= INITIAL CONTEXT FOR APP ==========
@@ -26,24 +21,6 @@
         <param-name>AdminEmail</param-name>
         <param-value>me@suggs.org.uk</param-value>
     </context-param>
-
-    <!-- ==========================================
-    ===================== LISTENERS ===============
-    =========================================== -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext.xml</param-value>
-    </context-param>
-
-    <!--
-    <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-    </listener>
-   -->
 
     <!-- ============================================
     ============= DISPATCHER SERVLET ================
