@@ -53,5 +53,10 @@ public abstract class AbstractValidatorTest<V extends Validator, T> {
         assertThat( validObject, is( equalTo( shouldBeSuccessfulValidation ) ) );
     }
 
+    @Test
+    public void ensuresCorrectAssignability() {
+        assertThat( validator.supports( itemForValidation.getClass() ), is( Boolean.TRUE ) );
+    }
+
 
 }
