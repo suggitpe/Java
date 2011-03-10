@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 /**
  * Validation class to ensure that for a given Counterparty Contact object created from user input, we have the right
@@ -15,29 +16,38 @@ import org.springframework.validation.Errors;
  * User: suggitpe Date: 25/02/11 Time: 19:19
  */
 
-public class CounterpartyContactValidator {
+public class CounterpartyContactValidator implements Validator {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( CounterpartyContactValidator.class );
 
-    public void validate( CounterpartyContact aContact, Errors aErrors ) {
-        if ( !StringUtils.hasLength( aContact.getContactFirstName() ) ) {
+    @Override
+    public boolean supports( Class<?> clazz ) {
+        return CounterpartyContact.class.isAssignableFrom( clazz );
+    }
+
+    @Override
+    public void validate( Object aObject, Errors aErrors ) {
+
+        CounterpartyContact contact = ( CounterpartyContact ) aObject;
+
+        if ( !StringUtils.hasLength( contact.getContactFirstName() ) ) {
             aErrors.rejectValue( "contactFirstName", "required", "required" );
         }
 
-        if ( !StringUtils.hasLength( aContact.getContactLastName() ) ) {
+        if ( !StringUtils.hasLength( contact.getContactLastName() ) ) {
             aErrors.rejectValue( "contactLastName", "required", "required" );
         }
 
-        if ( !StringUtils.hasLength( aContact.getContactAddress() ) ) {
+        if ( !StringUtils.hasLength( contact.getContactAddress() ) ) {
             aErrors.rejectValue( "contactAddress", "required", "required" );
         }
 
-        if ( !StringUtils.hasLength( aContact.getContactPostcode() ) ) {
+        if ( !StringUtils.hasLength( contact.getContactPostcode() ) ) {
             aErrors.rejectValue( "contactPostcode", "required", "required" );
         }
 
-        if ( !StringUtils.hasLength( aContact.getContactTelephone() ) ) {
+        if ( !StringUtils.hasLength( contact.getContactTelephone() ) ) {
             aErrors.rejectValue( "contactTelephone", "required", "required" );
         }
     }
