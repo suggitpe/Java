@@ -94,5 +94,10 @@ public class CounterpartyController {
         }
     }
 
+    @RequestMapping(value = "/{counterpartyId}/edit", method = RequestMethod.DELETE)
+    public String processDeleteCounterparty( @PathVariable("counterpartyId") Long aCounterpartyId ) {
+        counterpartyDao.remove( aCounterpartyId );
+        return "redirect:/counterparties";
+    }
 
 }

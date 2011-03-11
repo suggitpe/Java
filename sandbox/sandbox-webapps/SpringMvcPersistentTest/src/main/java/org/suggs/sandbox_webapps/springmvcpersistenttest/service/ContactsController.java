@@ -83,7 +83,6 @@ public class ContactsController {
 
     @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.DELETE)
     public String processDeleteContact( @PathVariable("counterpartyId") Long aCounterpartyId, @PathVariable("contactId") Long aContactId ) {
-        LOG.debug( "############ DELETING contact id=[" + aContactId + "]" );
         counterpartyContactDao.remove( aContactId );
         return "redirect:/counterparties/" + aCounterpartyId;
     }

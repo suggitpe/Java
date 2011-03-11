@@ -43,11 +43,14 @@
                 </c:choose>
             </td>
         </tr>
-
-
     </table>
-
 </form:form>
+
+<c:if test="${!counterparty.new}">
+    <form:form method="delete">
+        <p class="submit"><input type="submit" value="Delete Counterparty"/></p>
+    </form:form>
+</c:if>
 
 
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
