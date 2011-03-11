@@ -305,21 +305,24 @@ public abstract class AbstractJpaDaoIntegrationTest<PK extends Serializable, T e
             T entity = null;
 
             @Override
+            @SuppressWarnings("unchecked")
             public void beforeTest() {
                 entity = createEntityTemplate( key );
                 verifyEntityCount( 0L );
 
                 entityManager.persist( entity );
+                if ( key == null ) {
+                    Serializable id = entity.getId();
+                    key = ( PK ) id;
+                }
                 verifyEntityCount( 1L );
             }
 
             @Override
             public void executeTest() {
-                @SuppressWarnings("unchecked")
-                T entityToDelete = ( T ) entityManager.createQuery( createEntitySearchHql() ).getSingleResult();
-                LOG.debug( ">>>> Calling remove" );
-                daoUnderTest.remove( entityToDelete );
-                LOG.debug( "Removed object [" + entityToDelete + "]" );
+                LOG.debug( ">>>> Calling remove for key [" + key + "]" );
+                daoUnderTest.remove( key );
+                LOG.debug( "Removed object with id [" + key + "]" );
             }
 
             @Override

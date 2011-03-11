@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * This class serves as the Base class for all other DAOs - namely to hold common CRUD methods that they might
- * all use. You should only need to extend this class when your require custom CRUD logic.
+ * This class serves as the Base class for all other DAOs - namely to hold common CRUD methods that they might all use.
+ * You should only need to extend this class when your require custom CRUD logic.
  */
 @Transactional
 public abstract class AbstractJpaDao<PK extends Serializable, T extends AbstractEntityBase> implements GenericDao<PK, T> {
@@ -66,7 +66,8 @@ public abstract class AbstractJpaDao<PK extends Serializable, T extends Abstract
     }
 
     @Override
-    public void remove( T object ) {
+    public void remove( PK id ) {
+        T object = get( id );
         entityManager.remove( object );
     }
 

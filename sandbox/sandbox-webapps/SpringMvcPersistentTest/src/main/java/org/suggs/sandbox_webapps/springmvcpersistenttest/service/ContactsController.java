@@ -39,12 +39,12 @@ public class ContactsController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String setupNewForm( Model aModel ) {
         CounterpartyContact contact = new CounterpartyContact();
-        aModel.addAttribute( "contact", contact );
+        aModel.addAttribute( "counterpartyContact", contact );
         return "contacts/form";
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String processSubmitNew( @PathVariable("counterpartyId") Long aCounterpartyId, @ModelAttribute("contact") CounterpartyContact contact, BindingResult aResult, SessionStatus aStatus ) {
+    public String processSubmitNew( @PathVariable("counterpartyId") Long aCounterpartyId, @ModelAttribute("counterpartyContact") CounterpartyContact contact, BindingResult aResult, SessionStatus aStatus ) {
         new CounterpartyContactValidator().validate( contact, aResult );
         if ( aResult.hasErrors() ) {
             return "contacts/form";
@@ -60,23 +60,17 @@ public class ContactsController {
 
     @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.GET)
     public String setupEditForm( @PathVariable("counterpartyId") Long aCounterpartyId, @PathVariable("contactId") Long aContactId, Model aModel ) {
-        LOG.debug( "#### in setupEditForm with cpId=[" + aCounterpartyId + "] and contactId=[" + aContactId + "]" );
-
         Counterparty counterparty = counterpartyDao.get( aCounterpartyId );
         aModel.addAttribute( "counterparty", counterparty );
 
-
         CounterpartyContact counterpartyContact = counterpartyContactDao.get( aContactId );
         aModel.addAttribute( "counterpartyContact", counterpartyContact );
-
         return "contacts/form";
     }
 
     @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.POST)
     public String processSubmitEdit( @PathVariable("counterpartyId") Long aCounterpartyId, @ModelAttribute CounterpartyContact contact, BindingResult aBindingResult, SessionStatus aStatus ) {
-        LOG.debug( "#### in processSubmitEdit with cpId=[" + aCounterpartyId + "] & contact=[" + contact + "]" );
         new CounterpartyContactValidator().validate( contact, aBindingResult );
-
         if ( aBindingResult.hasErrors() ) {
             return "contacts/form";
         }
@@ -85,6 +79,13 @@ public class ContactsController {
             aStatus.setComplete();
             return "redirect:/counterparties/" + aCounterpartyId;
         }
+    }
+
+    @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.DELETE)
+    public String processDeleteContact( @PathVariable("counterpartyId") Long aCounterpartyId, @PathVariable("contactId") Long aContactId ) {
+        LOG.debug( "############ DELETING contact id=[" + aContactId + "]" );
+        counterpartyContactDao.remove( aContactId );
+        return "redirect:/counterparties/" + aCounterpartyId;
     }
 
 }

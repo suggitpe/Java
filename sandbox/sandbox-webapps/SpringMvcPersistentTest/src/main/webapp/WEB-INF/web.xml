@@ -23,6 +23,20 @@
     </context-param>
 
     <!-- ============================================
+    =================== FILTERS =====================
+    ============================================= -->
+    <!-- This is used to expose hidden/embedded posts, e.g. delete -->
+    <filter>
+        <filter-name>httpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>httpMethodFilter</filter-name>
+        <servlet-name>data-access</servlet-name>
+    </filter-mapping>
+
+    <!-- ============================================
     ============= DISPATCHER SERVLET ================
     ============================================= -->
     <servlet-mapping>

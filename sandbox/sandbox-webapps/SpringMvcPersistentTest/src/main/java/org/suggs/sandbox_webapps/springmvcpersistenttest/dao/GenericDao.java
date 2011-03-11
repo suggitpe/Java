@@ -58,7 +58,7 @@ public interface GenericDao<PK extends Serializable, T extends AbstractEntityBas
     /**
      * Removes an object from the database.
      *
-     * @param object the object to remove
+     * @param id the id of the object to remove
      */
-    void remove( T object );
+    void remove( PK id );
 }
