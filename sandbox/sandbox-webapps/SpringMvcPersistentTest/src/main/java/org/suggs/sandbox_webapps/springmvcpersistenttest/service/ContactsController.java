@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -25,6 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping("/counterparties/{counterpartyId}/contacts")
+@SessionAttributes(types = CounterpartyContact.class)
 public class ContactsController {
 
     @SuppressWarnings("unused")
@@ -35,11 +35,6 @@ public class ContactsController {
 
     @Autowired
     private CounterpartyContactDao counterpartyContactDao;
-
-    @InitBinder
-    public void setAllowedFields( WebDataBinder dataBinder ) {
-        dataBinder.setDisallowedFields( "id" );
-    }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String setupNewForm( Model aModel ) {
@@ -63,35 +58,33 @@ public class ContactsController {
         }
     }
 
-    /**
-     @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.GET)
-     public String setupEditForm( @PathVariable("counterpartyId") Long aCounterpartyId, @PathVariable("contactId") Long aContactId, Model aModel ) {
-     LOG.debug("#### in setupEditForm with cpId=["+aCounterpartyId+"] and contactid=["+aContactId+"]");
+    @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.GET)
+    public String setupEditForm( @PathVariable("counterpartyId") Long aCounterpartyId, @PathVariable("contactId") Long aContactId, Model aModel ) {
+        LOG.debug( "#### in setupEditForm with cpId=[" + aCounterpartyId + "] and contactId=[" + aContactId + "]" );
 
-     Counterparty counterparty = counterpartyDao.get(aCounterpartyId);
-     aModel.addAttribute( counterparty );
+        Counterparty counterparty = counterpartyDao.get( aCounterpartyId );
+        aModel.addAttribute( "counterparty", counterparty );
 
 
-     CounterpartyContact counterpartyContact = counterpartyContactDao.get( aContactId );
-     aModel.addAttribute( counterpartyContact );
+        CounterpartyContact counterpartyContact = counterpartyContactDao.get( aContactId );
+        aModel.addAttribute( "counterpartyContact", counterpartyContact );
 
-     return "contacts/form";
-     }
+        return "contacts/form";
+    }
 
-     @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.POST)
-     public String processSubmitEdit( @ModelAttribute CounterpartyContact counterpartyContact, BindingResult aBindingResult, SessionStatus aStatus ) {
-     LOG.debug("contacts ctrl: processSubmit");
-     new CounterpartyContactValidator().validate( counterpartyContact, aBindingResult );
+    @RequestMapping(value = "/{contactId}/edit", method = RequestMethod.POST)
+    public String processSubmitEdit( @PathVariable("counterpartyId") Long aCounterpartyId, @ModelAttribute CounterpartyContact contact, BindingResult aBindingResult, SessionStatus aStatus ) {
+        LOG.debug( "#### in processSubmitEdit with cpId=[" + aCounterpartyId + "] & contact=[" + contact + "]" );
+        new CounterpartyContactValidator().validate( contact, aBindingResult );
 
-     if ( aBindingResult.hasErrors() ) {
-     return "contacts/form";
-     }
-     else {
-     counterpartyContactDao.merge( counterpartyContact );
-     aStatus.setComplete();
-     return "redirect:/counterparties/";
-     }
-     }
-     */
+        if ( aBindingResult.hasErrors() ) {
+            return "contacts/form";
+        }
+        else {
+            counterpartyContactDao.merge( contact );
+            aStatus.setComplete();
+            return "redirect:/counterparties/" + aCounterpartyId;
+        }
+    }
 
 }

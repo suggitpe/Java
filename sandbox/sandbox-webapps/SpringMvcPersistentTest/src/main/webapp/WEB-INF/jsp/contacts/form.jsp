@@ -2,14 +2,13 @@
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
 <c:choose>
-    <c:when test="${contact.new}"><c:set var="method" value="post"/></c:when>
+    <c:when test="${counterpartyContact.new}"><c:set var="method" value="post"/></c:when>
     <c:otherwise><c:set var="method" value="put"/></c:otherwise>
 </c:choose>
 
-<h2><c:if test="${contact.new}">New </c:if>Counterparty contact:</h2>
+<h2><c:if test="${counterpartyContact.new}">New</c:if>Counterparty contact:</h2>
 
-
-<form:form modelAttribute="contact" method="${method}">
+<form:form modelAttribute="counterpartyContact" method="${method}">
     <table>
         <tr>
             <th>
@@ -49,7 +48,7 @@
         <tr>
             <td>
                 <c:choose>
-                    <c:when test="${contact.new}">
+                    <c:when test="${counterpartyContact.new}">
                         <p class="submit"><input type="submit" value="Add Contact"/></p>
                     </c:when>
                     <c:otherwise>
