@@ -3,7 +3,7 @@
 
 <c:choose>
     <c:when test="${counterpartyContact.new}"><c:set var="method" value="post"/></c:when>
-    <c:otherwise><c:set var="method" value="put"/></c:otherwise>
+    <c:otherwise><c:set var="method" value="post"/></c:otherwise>
 </c:choose>
 
 <h2><c:if test="${counterpartyContact.new}">New</c:if>Counterparty contact:</h2>
