@@ -22,7 +22,7 @@
     </scm>
 
     <properties>
-        <jbehave.version>3.1.2</jbehave.version>
+        <jbehave.version>3.2</jbehave.version>
         <log4j.version>1.2.12</log4j.version>
         <spring.version>3.0.5.RELEASE</spring.version>
         <jbehave.ignoreFailureInStories>false</jbehave.ignoreFailureInStories>
@@ -264,44 +264,7 @@
                     <groupId>org.jbehave</groupId>
                     <artifactId>jbehave-maven-plugin</artifactId>
                     <version>${jbehave.version}</version>
-                    <!-- <version>3.1-SNAPSHOT</version> -->
                     <executions>
-                        <execution>
-                            <id>find-and-run-embeddable-stories</id>
-                            <phase>integration-test</phase>
-                            <configuration>
-                                <includes>
-                                    <include>**/stories/*.java</include>
-                                </includes>
-                                <skip>false</skip>
-                                <scope>test</scope>
-                                <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
-                                <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
-                                <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
-                            </configuration>
-                            <goals>
-                                <goal>run-stories-as-embeddables</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>find-and-run-annotated-stories</id>
-                            <phase>integration-test</phase>
-                            <configuration>
-                                <skip>false</skip>
-                                <scope>test</scope>
-                                <annotatedEmbedderRunnerClass>org.jbehave.core.junit.AnnotatedEmbedderRunner
-                                </annotatedEmbedderRunnerClass>
-                                <includes>
-                                    <include>**/injectablestories/*.java</include>
-                                </includes>
-                                <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
-                                <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
-                                <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
-                            </configuration>
-                            <goals>
-                                <goal>run-with-annotated-embedder</goal>
-                            </goals>
-                        </execution>
                         <execution>
                             <id>find-and-run-spring-stories</id>
                             <phase>integration-test</phase>
@@ -312,7 +275,7 @@
                                     org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner
                                 </annotatedEmbedderRunnerClass>
                                 <includes>
-                                    <include>**/springstories/*.java</include>
+                                    <include>**/stories/*.java</include>
                                 </includes>
                                 <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
                                 <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
@@ -405,18 +368,23 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.jbehave</groupId>
             <artifactId>jbehave-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -446,19 +414,30 @@
                 <version>${jbehave.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.jbehave.web</groupId>
+                <artifactId>jbehave-web-selenium</artifactId>
+                <version>${jbehave.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.jbehave</groupId>
                 <artifactId>jbehave-spring</artifactId>
                 <version>${jbehave.version}</version>
             </dependency>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.8.1</version>
-            </dependency>
-            <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-all</artifactId>
                 <version>1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hamcrest</groupId>
+                        <artifactId>hamcrest-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.easymock</groupId>
@@ -481,9 +460,9 @@
                 <version>1.8.5</version>
             </dependency>
             <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium</artifactId>
-                <version>2.0b1</version>
+                <groupId>org.seleniumhq.webdriver</groupId>
+                <artifactId>webdriver-firefox</artifactId>
+                <version>0.9.7376</version>
             </dependency>
 
 
