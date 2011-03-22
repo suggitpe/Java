@@ -2,8 +2,9 @@
  * TraverseStateMachine.java created on 7 Sep 2010 18:30:46 by suggitpe for project state-machine-lib
  * 
  */
-package org.suggs.libs.statemachine.jbehave.springstories;
+package org.suggs.libs.statemachine.jbehave.stories;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class TraverseStateMachine extends InjectableEmbedder {
     @Override
     public void run() throws Throwable {
         List<String> paths = createStoryPaths();
-        LOG.debug( "Running [" + this.getClass().getSimpleName() + "] with stories [" + paths + "]" );
+        LOG.info( "Running [" + this.getClass().getSimpleName() + "] with stories [" + paths + "]" );
         injectedEmbedder().runStoriesAsPaths( paths );
     }
 
@@ -51,7 +52,8 @@ public class TraverseStateMachine extends InjectableEmbedder {
      */
     private List<String> createStoryPaths() {
         String storyLocation = CodeLocations.codeLocationFromPath( "src/test/resources" ).getFile();
-        LOG.debug( "Running stories from [" + storyLocation + "]" );
+        URL codeUrl = CodeLocations.codeLocationFromClass( this.getClass() );
+        LOG.info( "Running stories from [" + storyLocation + "]" );
         StoryFinder finder = new StoryFinder();
         return finder.findPaths( storyLocation,
                                  Arrays.asList( "**/*.story" ),

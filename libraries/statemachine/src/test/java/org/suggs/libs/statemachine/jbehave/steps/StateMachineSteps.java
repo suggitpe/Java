@@ -10,7 +10,7 @@ import org.suggs.libs.statemachine.StateMachineContext;
 import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.StateTransitionEvent;
 import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
-import org.suggs.libs.statemachine.jbehave.springstories.TraverseStateMachine;
+import org.suggs.libs.statemachine.jbehave.stories.TraverseStateMachine;
 
 import java.util.Map;
 

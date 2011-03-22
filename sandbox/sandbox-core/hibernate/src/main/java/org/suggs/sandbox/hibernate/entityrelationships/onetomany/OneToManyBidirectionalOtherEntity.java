@@ -31,7 +31,7 @@ public class OneToManyBidirectionalOtherEntity extends EntityBase {
 
     @ManyToOne
     @JoinColumn(name = "PARENT_ID")
-    private OneToManyBidirectionalOtherEntity parent;
+    private OneToManyBidirectionalEntity parent;
 
     /**
      * Returns the value of otherData.
@@ -57,7 +57,7 @@ public class OneToManyBidirectionalOtherEntity extends EntityBase {
      * 
      * @return Returns the parent.
      */
-    public OneToManyBidirectionalOtherEntity getParent() {
+    public OneToManyBidirectionalEntity getParent() {
         return parent;
     }
 
@@ -67,7 +67,7 @@ public class OneToManyBidirectionalOtherEntity extends EntityBase {
      * @param aParent
      *            The parent to set.
      */
-    public void setParent( OneToManyBidirectionalOtherEntity aParent ) {
+    public void setParent( OneToManyBidirectionalEntity aParent ) {
         parent = aParent;
     }
 

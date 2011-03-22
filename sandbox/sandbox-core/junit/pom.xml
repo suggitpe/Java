@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <artifactId>sandbox-core-parent</artifactId>
@@ -13,21 +13,97 @@
     <artifactId>sandbox-junit</artifactId>
     <packaging>jar</packaging>
     <name>Sandbox - JUnit</name>
-    
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.jbehave</groupId>
                 <artifactId>jbehave-maven-plugin</artifactId>
+                <version>${jbehave.core.version}</version>
+                <executions>
+                    <execution>
+                        <id>find-and-run-embeddable-stories</id>
+                        <phase>integration-test</phase>
+                        <configuration>
+                            <includes>
+                                <include>**/stories/*.java</include>
+                            </includes>
+                            <skip>false</skip>
+                            <scope>test</scope>
+                            <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
+                            <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
+                            <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
+                        </configuration>
+                        <goals>
+                            <goal>run-stories-as-embeddables</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>find-and-run-annotated-stories</id>
+                        <phase>integration-test</phase>
+                        <configuration>
+                            <skip>false</skip>
+                            <scope>test</scope>
+                            <annotatedEmbedderRunnerClass>org.jbehave.core.junit.AnnotatedEmbedderRunner
+                            </annotatedEmbedderRunnerClass>
+                            <includes>
+                                <include>**/injectablestories/*.java</include>
+                            </includes>
+                            <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
+                            <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
+                            <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
+                        </configuration>
+                        <goals>
+                            <goal>run-with-annotated-embedder</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>find-and-run-spring-stories</id>
+                        <phase>integration-test</phase>
+                        <configuration>
+                            <skip>false</skip>
+                            <scope>test</scope>
+                            <annotatedEmbedderRunnerClass>
+                                org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner
+                            </annotatedEmbedderRunnerClass>
+                            <includes>
+                                <include>**/springstories/*.java</include>
+                            </includes>
+                            <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
+                            <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
+                            <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
+                        </configuration>
+                        <goals>
+                            <goal>run-with-annotated-embedder</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                        <version>${log4j.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jbehave</groupId>
+                        <artifactId>jbehave-spring</artifactId>
+                        <version>${jbehave.core.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <version>${slf4j.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
             </plugin>
-            <plugin> 
-                <groupId>org.easyb</groupId> 
-                <artifactId>maven-easyb-plugin</artifactId> 
-            </plugin> 
+            <plugin>
+                <groupId>org.easyb</groupId>
+                <artifactId>maven-easyb-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
