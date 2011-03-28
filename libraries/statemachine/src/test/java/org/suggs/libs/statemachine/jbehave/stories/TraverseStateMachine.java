@@ -8,8 +8,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;
 import org.jbehave.core.annotations.UsingEmbedder;
@@ -21,10 +19,12 @@ import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Story implementation for the State Machine Tests.
- * 
+ *
  * @author suggitpe
  * @version 1.0 7 Sep 2010
  */
@@ -37,27 +37,27 @@ public class TraverseStateMachine extends InjectableEmbedder {
     private static final Logger LOG = LoggerFactory.getLogger( TraverseStateMachine.class );
 
     /**
+     * This is the core executable method in the process
      * @see org.jbehave.core.Embeddable#run()
      */
     @Test
     @Override
-    public void run() throws Throwable {
+    public void run() throws Exception {
         List<String> paths = createStoryPaths();
+        if( paths == null || paths.isEmpty() ){
+            throw new IllegalStateException( "No story paths found for state machine" );
+        }
         LOG.info( "Running [" + this.getClass().getSimpleName() + "] with stories [" + paths + "]" );
         injectedEmbedder().runStoriesAsPaths( paths );
     }
 
-    /**
-     * @return
-     */
     private List<String> createStoryPaths() {
-        String storyLocation = CodeLocations.codeLocationFromPath( "src/test/resources" ).getFile();
-        URL codeUrl = CodeLocations.codeLocationFromClass( this.getClass() );
+        String storyLocation = CodeLocations.codeLocationFromClass( this.getClass() ).getFile();
         LOG.info( "Running stories from [" + storyLocation + "]" );
         StoryFinder finder = new StoryFinder();
         return finder.findPaths( storyLocation,
-                                 Arrays.asList( "**/*.story" ),
-                                 Arrays.asList( "" ),
-                                 "file:" + storyLocation );
+                Arrays.asList( "**/*.story" ),
+                Arrays.asList( "" ),
+                "file:" + storyLocation );
     }
 }
