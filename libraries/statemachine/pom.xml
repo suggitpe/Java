@@ -29,19 +29,19 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jbehave</groupId>
-            <artifactId>jbehave-spring</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <artifactId>spring-core</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <artifactId>spring-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-spring</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
