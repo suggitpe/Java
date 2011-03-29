@@ -7,20 +7,18 @@ package org.suggs.libs.statemachine.unit;
 import org.suggs.libs.statemachine.StateTransitionEvent;
 import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertFalse;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 /**
  * Test suite for the state transition event implementation.
- * 
+ *
  * @author suggitpe
  * @version 1.0 2 Sep 2009
  */
@@ -55,8 +53,8 @@ public class StateTransitionEventTest {
     @Test
     public void equalsFalseForNullAndDifferentObject() {
         StateTransitionEventImpl eventA = new StateTransitionEventImpl( "event A" );
-        assertFalse( eventA.equals( null ) );
-        assertFalse( eventA.equals( new String( "Boom!" ) ) );
+        assertThat( eventA, notNullValue() );
+        assertThat( eventA, not(equalTo( new StateTransitionEventImpl( "Boom!" ) ) ));
     }
 
     @SuppressWarnings("boxing")

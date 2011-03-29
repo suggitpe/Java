@@ -4,46 +4,33 @@
  */
 package org.suggs.libs.statemachine.unit;
 
-import org.suggs.libs.statemachine.State;
-import org.suggs.libs.statemachine.StateMachineContext;
-import org.suggs.libs.statemachine.StateTransition;
-import org.suggs.libs.statemachine.StateTransitionEvent;
-import org.suggs.libs.statemachine.StateMachineException;
+import org.suggs.libs.statemachine.*;
 import org.suggs.libs.statemachine.impl.StateImpl;
 import org.suggs.libs.statemachine.impl.StateTransitionEventImpl;
 import org.suggs.libs.statemachine.impl.StateTransitionImpl;
 import org.suggs.libs.statemachine.support.FalseGuardStub;
 import org.suggs.libs.statemachine.support.TrueGuardStub;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static org.easymock.EasyMock.createControl;
-import static org.easymock.EasyMock.expect;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.sameInstance;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Test suite for the state transition implementation.
- * 
+ *
  * @author suggitpe
  * @version 1.0 1 Sep 2009
  */
 public class StateTransitionTest {
 
     private static final Logger LOG = LoggerFactory.getLogger( StateTransitionTest.class );
-
-    private IMocksControl ctrl;
 
     private State startState;
     private State endState;
@@ -59,15 +46,14 @@ public class StateTransitionTest {
     @Before
     public void doBefore() {
         LOG.debug( "------------------- " );
-        ctrl = createControl();
-        startState = ctrl.createMock( State.class );
-        endState = ctrl.createMock( State.class );
-        context = ctrl.createMock( StateMachineContext.class );
+        startState = mock( State.class );
+        endState = mock( State.class );
+        context = mock( StateMachineContext.class );
     }
 
     /**
-     * Simply tests that the attributes of the transition set at the time of the construction are correctly
-     * kept throughout.
+     * Simply tests that the attributes of the transition set at the time of the construction are correctly kept
+     * throughout.
      */
     @Test
     public void transitionDataSetisSameWhenGetLater() {
@@ -87,11 +73,11 @@ public class StateTransitionTest {
     @Test
     public void hashcodeWorksForSameObjectContents() {
         StateTransitionImpl trans1a = new StateTransitionImpl( "stateTransition1",
-                                                               new StateImpl( "testStartState" ),
-                                                               new StateImpl( "testEndState" ) );
+                new StateImpl( "testStartState" ),
+                new StateImpl( "testEndState" ) );
         StateTransitionImpl trans1b = new StateTransitionImpl( "stateTransition1",
-                                                               new StateImpl( "testStartState" ),
-                                                               new StateImpl( "testEndState" ) );
+                new StateImpl( "testStartState" ),
+                new StateImpl( "testEndState" ) );
         assertThat( trans1a.hashCode(), equalTo( trans1b.hashCode() ) );
     }
 
@@ -99,26 +85,26 @@ public class StateTransitionTest {
     @Test
     public void hashcodeFailsForifferentObjectContents() {
         StateTransitionImpl trans1a = new StateTransitionImpl( "stateTransition1",
-                                                               new StateImpl( "testStartState" ),
-                                                               new StateImpl( "testEndState" ) );
+                new StateImpl( "testStartState" ),
+                new StateImpl( "testEndState" ) );
         StateTransitionImpl trans1b = new StateTransitionImpl( "stateTransition2",
-                                                               new StateImpl( "testStartState" ),
-                                                               new StateImpl( "testEndState" ) );
+                new StateImpl( "testStartState" ),
+                new StateImpl( "testEndState" ) );
         StateTransitionImpl trans1c = new StateTransitionImpl( "stateTransition1",
-                                                               new StateImpl( "testStartState1" ),
-                                                               new StateImpl( "testEndState" ) );
+                new StateImpl( "testStartState1" ),
+                new StateImpl( "testEndState" ) );
         StateTransitionImpl trans1d = new StateTransitionImpl( "stateTransition1",
-                                                               new StateImpl( "testStartState" ),
-                                                               new StateImpl( "testEndState1" ) );
+                new StateImpl( "testStartState" ),
+                new StateImpl( "testEndState1" ) );
         StateTransitionImpl trans1e = new StateTransitionImpl( null,
-                                                               new StateImpl( "testStartState" ),
-                                                               new StateImpl( "testEndState" ) );
+                new StateImpl( "testStartState" ),
+                new StateImpl( "testEndState" ) );
         StateTransitionImpl trans1f = new StateTransitionImpl( "stateTransition1",
-                                                               null,
-                                                               new StateImpl( "testEndState" ) );
+                null,
+                new StateImpl( "testEndState" ) );
         StateTransitionImpl trans1g = new StateTransitionImpl( "stateTransition1",
-                                                               new StateImpl( "testStartState" ),
-                                                               null );
+                new StateImpl( "testStartState" ),
+                null );
         trans1g.setTransitionEvents( null );
         trans1g.setTransitionGuards( null );
         assertThat( trans1b.hashCode(), not( equalTo( trans1a.hashCode() ) ) );
@@ -152,8 +138,8 @@ public class StateTransitionTest {
         assertThat( trans1a, equalTo( trans1b ) );
         assertThat( trans1a, not( equalTo( trans2 ) ) );
 
-        assertFalse( trans1a.equals( null ) );
-        assertFalse( trans1a.equals( new String() ) );
+        assertThat( trans1a, notNullValue() );
+        assertThat( trans1a, instanceOf( StateTransition.class ) );
         assertTrue( trans1a.equals( trans1a ) );
 
         LOG.debug( "StateTransition1a: " + trans1a );
@@ -166,15 +152,15 @@ public class StateTransitionTest {
         StateImpl state2 = new StateImpl( "startState2" );
 
         assertThat( new StateTransitionImpl( "test1", state1, state2 ),
-                    equalTo( new StateTransitionImpl( "test1", state1, state2 ) ) );
+                equalTo( new StateTransitionImpl( "test1", state1, state2 ) ) );
 
         // test equals for null
         assertThat( new StateTransitionImpl( "test1", state1, state2 ),
-                    not( equalTo( new StateTransitionImpl( "test1", state1, null ) ) ) );
+                not( equalTo( new StateTransitionImpl( "test1", state1, null ) ) ) );
         assertThat( new StateTransitionImpl( "test1", state1, state2 ),
-                    not( equalTo( new StateTransitionImpl( "test1", null, state2 ) ) ) );
+                not( equalTo( new StateTransitionImpl( "test1", null, state2 ) ) ) );
         assertThat( new StateTransitionImpl( "test1", state1, state2 ),
-                    not( equalTo( new StateTransitionImpl( null, state1, state2 ) ) ) );
+                not( equalTo( new StateTransitionImpl( null, state1, state2 ) ) ) );
     }
 
     @Test
@@ -184,12 +170,12 @@ public class StateTransitionTest {
 
         // test equals for diff states
         assertThat( new StateTransitionImpl( "test1", state1, state2 ),
-                    not( equalTo( new StateTransitionImpl( "test1", state2, state2 ) ) ) );
+                not( equalTo( new StateTransitionImpl( "test1", state2, state2 ) ) ) );
         assertThat( new StateTransitionImpl( "test2", state1, state2 ),
-                    not( equalTo( new StateTransitionImpl( "test1", state2, state2 ) ) ) );
+                not( equalTo( new StateTransitionImpl( "test1", state2, state2 ) ) ) );
 
         assertThat( new StateTransitionImpl( "test2", state1, state2 ),
-                    not( equalTo( new StateTransitionImpl( "test1", state1, state2 ) ) ) );
+                not( equalTo( new StateTransitionImpl( "test1", state1, state2 ) ) ) );
 
         StateTransitionImpl test = new StateTransitionImpl( "test1", state1, state2 );
         test.setTransitionEvents( null );
@@ -204,10 +190,9 @@ public class StateTransitionTest {
 
     /**
      * Tests that when a null context is passed into the evaluation method, that an exception is thrown.
-     * 
-     * @throws StateMachineException
-     *             from the evaluation call. We expect that an exception is thrown during the execution of
-     *             this test.
+     *
+     * @throws StateMachineException from the evaluation call. We expect that an exception is thrown during the
+     *                               execution of this test.
      */
     @Test(expected = StateMachineException.class)
     public void transitionEvaluationForNullContext() throws StateMachineException {
@@ -220,11 +205,10 @@ public class StateTransitionTest {
     }
 
     /**
-     * Tests that when an event context with a matching transition event is passed into the transition, it
-     * will state that the transition is valid.
-     * 
-     * @throws StateMachineException
-     *             this should not happen for this test
+     * Tests that when an event context with a matching transition event is passed into the transition, it will state
+     * that the transition is valid.
+     *
+     * @throws StateMachineException this should not happen for this test
      */
     @SuppressWarnings("boxing")
     @Test
@@ -233,23 +217,17 @@ public class StateTransitionTest {
         StateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
         target.addTransitionEvent( evt );
 
-        expect( context.getStateTransitionEvent() ).andReturn( new StateTransitionEventImpl( "testEvent" ) )
-            .anyTimes();
-
-        ctrl.replay();
+        when( context.getStateTransitionEvent() ).thenReturn( new StateTransitionEventImpl( "testEvent" ) );
 
         boolean result = target.evaluateTransitionValidity( context );
         LOG.debug( "For the valid event [" + evt + "] we are expecting true and we got [" + result + "]" );
         assertThat( result, is( true ) );
-
-        ctrl.verify();
     }
 
     /**
      * Tests that when a state transition is evaluated with no events that it will evaluate to true.
-     * 
-     * @throws StateMachineException
-     *             this should not happen for this test
+     *
+     * @throws StateMachineException this should not happen for this test
      */
     @SuppressWarnings("boxing")
     @Test
@@ -258,23 +236,17 @@ public class StateTransitionTest {
 
         StateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
 
-        expect( context.getStateTransitionEvent() ).andReturn( evt ).anyTimes();
-
-        ctrl.replay();
+        when( context.getStateTransitionEvent() ).thenReturn( evt );
 
         boolean result = target.evaluateTransitionValidity( context );
         LOG.debug( "For no set transition events we are expecting true and we got [" + result + "]" );
         assertThat( result, is( true ) );
-
-        ctrl.verify();
     }
 
     /**
-     * Tests that when a state transition has events that do not match with the context event that it will
-     * return false
-     * 
-     * @throws StateMachineException
-     *             this should not happen for this test
+     * Tests that when a state transition has events that do not match with the context event that it will return false
+     *
+     * @throws StateMachineException this should not happen for this test
      */
     @SuppressWarnings("boxing")
     @Test
@@ -283,25 +255,18 @@ public class StateTransitionTest {
         StateTransitionEvent evt = new StateTransitionEventImpl( "testEvent" );
         target.addTransitionEvent( evt );
 
-        expect( context.getStateTransitionEvent() ).andReturn( new StateTransitionEventImpl( "notMatchingEvent" ) )
-            .anyTimes();
-
-        ctrl.replay();
+        when( context.getStateTransitionEvent() ).thenReturn( new StateTransitionEventImpl( "notMatchingEvent" ) );
 
         boolean result = target.evaluateTransitionValidity( context );
         LOG.debug( "For the invalid event [" + evt + "] we are expecting false and we got [" + result + "]" );
 
         assertThat( result, is( false ) );
-
-        ctrl.verify();
     }
 
     /**
-     * Tests that if the event collection on the state transition is null then we return true (similar to no
-     * events)
-     * 
-     * @throws StateMachineException
-     *             this should not happen for this test
+     * Tests that if the event collection on the state transition is null then we return true (similar to no events)
+     *
+     * @throws StateMachineException this should not happen for this test
      */
     @SuppressWarnings("boxing")
     @Test
@@ -309,22 +274,18 @@ public class StateTransitionTest {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition", startState, endState );
         target.setTransitionEvents( null );
 
-        expect( context.getStateTransitionEvent() ).andReturn( new StateTransitionEventImpl( "notMatchingEvent" ) )
-            .anyTimes();
-
-        ctrl.replay();
+        when( context.getStateTransitionEvent() ).thenReturn( new StateTransitionEventImpl( "notMatchingEvent" ) );
 
         boolean result = target.evaluateTransitionValidity( context );
         LOG.debug( "For transition events we are expecting true and we got [" + result + "]" );
         assertThat( result, is( true ) );
-
-        ctrl.verify();
     }
 
     /**
      * Tests that when we evaluate a state transition with a valid guard that it evaluates to true.
-     * 
-     * @throws StateMachineException
+     *
+     * @throws StateMachineException when evaluating the transaction validity
+     *
      */
     @SuppressWarnings("boxing")
     @Test
@@ -332,20 +293,16 @@ public class StateTransitionTest {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition", startState, endState );
         target.addTransitionGuard( new TrueGuardStub() );
 
-        ctrl.replay();
-
         boolean result = target.evaluateTransitionValidity( context );
         LOG.debug( "For transition guards we are expecting true and we got [" + result + "]" );
         assertThat( result, is( true ) );
-
-        ctrl.verify();
     }
 
     /**
-     * Tests that when we evaluate a state transition with one valid guard and one invalid guard that it
-     * evaluates false.
-     * 
-     * @throws StateMachineException
+     * Tests that when we evaluate a state transition with one valid guard and one invalid guard that it evaluates
+     * false.
+     *
+     * @throws StateMachineException when evaluating the transition validity
      */
     @SuppressWarnings("boxing")
     @Test
@@ -354,38 +311,31 @@ public class StateTransitionTest {
         target.addTransitionGuard( new FalseGuardStub() );
         target.addTransitionGuard( new TrueGuardStub() );
 
-        ctrl.replay();
-
         boolean result = target.evaluateTransitionValidity( context );
         LOG.debug( "For transition guards we are expecting false and we got [" + result + "]" );
         assertThat( result, is( false ) );
-
-        ctrl.verify();
     }
 
     /**
      * Tests that if we evaluiate a state transition with no guards that it evaluates to true
-     * 
-     * @throws StateMachineException
+     *
+     * @throws StateMachineException when evaluating the transition validity
      */
     @SuppressWarnings("boxing")
     @Test
     public void transitionEventEvaluationForNoGuards() throws StateMachineException {
-        ctrl.replay();
 
         StateTransitionImpl target = new StateTransitionImpl( "testTransition", startState, endState );
 
         boolean result = target.evaluateTransitionValidity( context );
         LOG.debug( "For no transition guards we are expecting true and we got [" + result + "]" );
         assertThat( result, is( true ) );
-
-        ctrl.verify();
     }
 
     /**
      * Tests that when we evaluate a state transition with only invalid guards that it evaluates to false
-     * 
-     * @throws StateMachineException
+     *
+     * @throws StateMachineException when evaluating the transition validity
      */
     @SuppressWarnings("boxing")
     @Test
@@ -394,18 +344,15 @@ public class StateTransitionTest {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition", startState, endState );
         target.addTransitionGuard( new FalseGuardStub() );
 
-        ctrl.replay();
         boolean result = target.evaluateTransitionValidity( context );
         LOG.debug( "For no valid transition guards we are expecting false and we got [" + result + "]" );
         assertThat( result, is( false ) );
-
-        ctrl.verify();
     }
 
     /**
      * Tests that when the guard collection is null that we return true
-     * 
-     * @throws StateMachineException
+     *
+     * @throws StateMachineException when evaluating the transition validity
      */
     @SuppressWarnings("boxing")
     @Test
@@ -414,12 +361,9 @@ public class StateTransitionTest {
         StateTransitionImpl target = new StateTransitionImpl( "testTransition", startState, endState );
         target.setTransitionGuards( null );
 
-        ctrl.replay();
         boolean result = target.evaluateTransitionValidity( context );
         LOG.debug( "For null transition guards we are expecting true and we got [" + result + "]" );
         assertThat( result, is( true ) );
-
-        ctrl.verify();
     }
 
 }

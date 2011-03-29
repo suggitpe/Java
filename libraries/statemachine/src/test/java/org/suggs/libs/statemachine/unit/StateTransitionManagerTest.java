@@ -10,23 +10,21 @@ import org.suggs.libs.statemachine.impl.StateTransitionManager;
 
 import java.util.Collection;
 
-import org.easymock.IMocksControl;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.easymock.EasyMock.createControl;
-import static org.easymock.EasyMock.expect;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Test suite for the transition manager.
- * 
+ *
  * @author suggitpe
  * @version 1.0 24 Aug 2009
  */
@@ -34,7 +32,6 @@ public class StateTransitionManagerTest {
 
     private static final Logger LOG = LoggerFactory.getLogger( StateTransitionManagerTest.class );
 
-    private IMocksControl ctrl;
     private State mockStateOne;
     private State mockStateTwo;
     private StateTransition mockTransitionOne;
@@ -59,13 +56,12 @@ public class StateTransitionManagerTest {
         LOG.debug( "------------------- " );
         LOG.debug( "Clearing all transitions from manager" );
         StateTransitionManager.instance().clearTransitionsFromTransitionManager();
-        ctrl = createControl();
-        mockStateOne = ctrl.createMock( State.class );
-        mockStateTwo = ctrl.createMock( State.class );
-        mockTransitionOne = ctrl.createMock( StateTransition.class );
-        mockTransitionTwo = ctrl.createMock( StateTransition.class );
-        mockTransitionThree = ctrl.createMock( StateTransition.class );
-        mockTransitionFour = ctrl.createMock( StateTransition.class );
+        mockStateOne = mock( State.class );
+        mockStateTwo = mock( State.class );
+        mockTransitionOne = mock( StateTransition.class );
+        mockTransitionTwo = mock( StateTransition.class );
+        mockTransitionThree = mock( StateTransition.class );
+        mockTransitionFour = mock( StateTransition.class );
     }
 
     /**
@@ -84,21 +80,19 @@ public class StateTransitionManagerTest {
     }
 
     /**
-     * Tests that we can add a transition to a the transition manager and then retrieve the same transition
-     * through a separate call to the transition manager.
+     * Tests that we can add a transition to a the transition manager and then retrieve the same transition through a
+     * separate call to the transition manager.
      */
     @SuppressWarnings("boxing")
     @Test
     public void addAndRetrieveSameTransitionForState() {
-        expect( mockStateOne.getStateName() ).andReturn( "testState" ).anyTimes();
+        when( mockStateOne.getStateName() ).thenReturn( "testState" );
 
-        expect( mockTransitionOne.getStartingState() ).andReturn( mockStateOne ).anyTimes();
-        expect( mockTransitionOne.getTransitionName() ).andReturn( "testTransition" ).anyTimes();
-
-        ctrl.replay();
+        when( mockTransitionOne.getStartingState() ).thenReturn( mockStateOne );
+        when( mockTransitionOne.getTransitionName() ).thenReturn( "testTransition" );
 
         Collection<StateTransition> collection = StateTransitionManager.instance()
-            .getListOfTransitionsForState( mockStateOne );
+                .getListOfTransitionsForState( mockStateOne );
         assertThat( 0, equalTo( collection.size() ) );
         LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state transition" );
 
@@ -111,8 +105,6 @@ public class StateTransitionManagerTest {
         LOG.debug( StateTransitionManager.instance().toString() );
 
         assertThat( mockTransitionOne, equalTo( collection.iterator().next() ) );
-
-        ctrl.verify();
     }
 
     /**
@@ -121,19 +113,15 @@ public class StateTransitionManagerTest {
     @SuppressWarnings("boxing")
     @Test
     public void retrieveNoTransition() {
-        expect( mockStateOne.getStateName() ).andReturn( "testState" ).anyTimes();
-
-        ctrl.replay();
+        when( mockStateOne.getStateName() ).thenReturn( "testState" );
 
         LOG.debug( "Calling StateTransitionManager with state=[" + mockStateOne.getStateName()
-                   + "] argument so expecting no transitions to be returned" );
+                + "] argument so expecting no transitions to be returned" );
         Collection<StateTransition> collection = StateTransitionManager.instance()
-            .getListOfTransitionsForState( mockStateOne );
+                .getListOfTransitionsForState( mockStateOne );
 
         assertThat( 0, equalTo( collection.size() ) );
         LOG.debug( StateTransitionManager.instance().toString() );
-
-        ctrl.verify();
     }
 
     /**
@@ -146,26 +134,21 @@ public class StateTransitionManagerTest {
     }
 
     /**
-     * Tests that when two transitions with the same name are loaded for the same state that an exception is
-     * thrown.
+     * Tests that when two transitions with the same name are loaded for the same state that an exception is thrown.
      */
     @Test(expected = IllegalStateException.class)
     public void exceptionThrownWhenTwoTransitionsForSameStateLoaded() {
-        expect( mockTransitionOne.getStartingState() ).andReturn( mockStateOne ).anyTimes();
-        expect( mockStateOne.getStateName() ).andReturn( "testState" ).anyTimes();
-        expect( mockTransitionOne.getTransitionName() ).andReturn( "testTransition" ).anyTimes();
-        expect( mockTransitionOne.getStartingState() ).andReturn( mockStateOne ).anyTimes();
+        when( mockTransitionOne.getStartingState() ).thenReturn( mockStateOne );
+        when( mockStateOne.getStateName() ).thenReturn( "testState" );
+        when( mockTransitionOne.getTransitionName() ).thenReturn( "testTransition" );
+        when( mockTransitionOne.getStartingState() ).thenReturn( mockStateOne );
 
-        expect( mockTransitionTwo.getStartingState() ).andReturn( mockStateOne ).anyTimes();
-        expect( mockTransitionTwo.getStartingState() ).andReturn( mockStateOne ).anyTimes();
-
-        ctrl.replay();
+        when( mockTransitionTwo.getTransitionName() ).thenReturn( "testTransition" );
+        when( mockTransitionTwo.getStartingState() ).thenReturn( mockStateOne );
 
         LOG.debug( "Loading Mock transitions" );
         StateTransitionManager.instance().addTransitionToManager( mockTransitionOne );
         StateTransitionManager.instance().addTransitionToManager( mockTransitionTwo );
-
-        ctrl.verify();
     }
 
     /**
@@ -187,27 +170,25 @@ public class StateTransitionManagerTest {
     }
 
     /**
-     * Tests that for a number of state transitions loaded for a given state that it will return multiple
-     * state transitions associated with that state.
+     * Tests that for a number of state transitions loaded for a given state that it will return multiple state
+     * transitions associated with that state.
      */
     @SuppressWarnings("boxing")
     @Test
     public void addAndRetrieveMultipleTransitionForState() {
-        expect( mockTransitionOne.getStartingState() ).andReturn( mockStateOne ).anyTimes();
-        expect( mockStateOne.getStateName() ).andReturn( "testState1" ).anyTimes();
-        expect( mockTransitionOne.getTransitionName() ).andReturn( "testTransition1" ).anyTimes();
+        when( mockTransitionOne.getStartingState() ).thenReturn( mockStateOne );
+        when( mockStateOne.getStateName() ).thenReturn( "testState1" );
+        when( mockTransitionOne.getTransitionName() ).thenReturn( "testTransition1" );
 
-        expect( mockTransitionTwo.getStartingState() ).andReturn( mockStateOne ).anyTimes();
-        expect( mockTransitionTwo.getTransitionName() ).andReturn( "testTransition2" ).anyTimes();
+        when( mockTransitionTwo.getStartingState() ).thenReturn( mockStateOne );
+        when( mockTransitionTwo.getTransitionName() ).thenReturn( "testTransition2" );
 
-        expect( mockTransitionThree.getStartingState() ).andReturn( mockStateOne ).anyTimes();
-        expect( mockTransitionThree.getTransitionName() ).andReturn( "testTransition3" ).anyTimes();
+        when( mockTransitionThree.getStartingState() ).thenReturn( mockStateOne );
+        when( mockTransitionThree.getTransitionName() ).thenReturn( "testTransition3" );
 
-        expect( mockTransitionFour.getStartingState() ).andReturn( mockStateTwo ).anyTimes();
-        expect( mockStateTwo.getStateName() ).andReturn( "testState2" ).anyTimes();
-        expect( mockTransitionFour.getTransitionName() ).andReturn( "testTransition4" ).anyTimes();
-
-        ctrl.replay();
+        when( mockTransitionFour.getStartingState() ).thenReturn( mockStateTwo );
+        when( mockStateTwo.getStateName() ).thenReturn( "testState2" );
+        when( mockTransitionFour.getTransitionName() ).thenReturn( "testTransition4" );
 
         LOG.debug( "Loading Mock transitions" );
         StateTransitionManager.instance().addTransitionToManager( mockTransitionOne );
@@ -217,20 +198,17 @@ public class StateTransitionManagerTest {
         LOG.debug( StateTransitionManager.instance().toString() );
 
         Collection<StateTransition> collection = StateTransitionManager.instance()
-            .getListOfTransitionsForState( mockStateOne );
-        Assert.assertEquals( 3, collection.size() );
+                .getListOfTransitionsForState( mockStateOne );
+        assertThat( collection.size(), equalTo(3) );
         LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state 1" );
 
         collection = StateTransitionManager.instance().getListOfTransitionsForState( mockStateTwo );
-        Assert.assertEquals( 1, collection.size() );
+        assertThat( collection.size(), equalTo(1) );
         LOG.debug( "Retrieved [" + collection.size() + "] transitions for mocked state 2" );
 
         collection = StateTransitionManager.instance().getAllTransitions();
         assertThat( 4, equalTo( collection.size() ) );
-        Assert.assertEquals( 4, collection.size() );
         LOG.debug( "Retrieved [" + collection.size() + "] transitions for all states" );
-
-        ctrl.verify();
     }
 
 }

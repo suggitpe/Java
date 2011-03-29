@@ -10,23 +10,20 @@ import org.suggs.libs.statemachine.StateMachineContext;
 import org.suggs.libs.statemachine.StateMachineException;
 import org.suggs.libs.statemachine.impl.StateMachineImpl;
 
-import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.easymock.EasyMock.createControl;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Test suite for the state machine implementation.
- * 
+ *
  * @author suggitpe
  * @version 1.0 26 Aug 2009
  */
@@ -34,7 +31,6 @@ public class StateMachineTest {
 
     private static final Logger LOG = LoggerFactory.getLogger( StateMachineTest.class );
 
-    private IMocksControl ctrl;
     private State mockInitialState;
     private State mockNewState;
     private StateMachineContext mockContext;
@@ -49,10 +45,9 @@ public class StateMachineTest {
     @Before
     public void doBefore() {
         LOG.debug( "------------------- " );
-        ctrl = createControl();
-        mockInitialState = ctrl.createMock( State.class );
-        mockNewState = createMock( State.class );
-        mockContext = ctrl.createMock( StateMachineContext.class );
+        mockInitialState = mock( State.class );
+        mockNewState = mock( State.class );
+        mockContext = mock( StateMachineContext.class );
     }
 
     @Test
@@ -63,14 +58,13 @@ public class StateMachineTest {
     }
 
     /**
-     * Tests that when we create a state machine with a state and then call the getter for the state that the
-     * same one is returned.
+     * Tests that when we create a state machine with a state and then call the getter for the state that the same one
+     * is returned.
      */
     @Test
     public void stateMachineInitiation() {
-        expect( mockInitialState.getStateName() ).andReturn( "InitialState" ).anyTimes();
 
-        ctrl.replay();
+        when( mockInitialState.getStateName() ).thenReturn( "InitialState" );
 
         StateMachine stateMachine = new StateMachineImpl( mockInitialState );
         State curState = stateMachine.getCurrentState();
@@ -78,75 +72,55 @@ public class StateMachineTest {
         LOG.debug( "Expecting that the state machine is in the correct initial state" );
         assertThat( mockInitialState, equalTo( curState ) );
 
-        ctrl.verify();
     }
 
     /**
-     * Tests that when SM calls step on a state and the state returns with a new state, that we actually
-     * transition to that new state.
-     * 
-     * @throws StateMachineException
+     * Tests that when SM calls step on a state and the state returns with a new state, that we actually transition to
+     * that new state.
+     *
+     * @throws StateMachineException from the state machine step call
      */
     @Test
     public void stepResultsInNewCurrentState() throws StateMachineException {
-        expect( mockInitialState.step( mockContext ) ).andReturn( mockNewState );
-        expect( mockNewState.step( mockContext ) ).andReturn( mockNewState );
-        mockInitialState.executeExitAction( mockContext );
-        expectLastCall().once();
-        mockNewState.executeEntryAction( mockContext );
-        expectLastCall().once();
-
-        ctrl.replay();
-
-        LOG.debug( "I don't care about this" );
+        when( mockInitialState.step( mockContext ) ).thenReturn( mockNewState );
+        when( mockNewState.step( mockContext ) ).thenReturn( mockNewState );
 
         StateMachine stateMachine = new StateMachineImpl( mockInitialState );
         stateMachine.step( mockContext );
 
         LOG.debug( "Expecting that the state machine has transitioned to the new state due to new state returned." );
         assertThat( stateMachine.getCurrentState(), equalTo( mockNewState ) );
-
-        ctrl.verify();
     }
 
     /**
      * Tests that when a step call returns the same object that we do not then transition to a new state.
-     * 
-     * @throws StateMachineException
+     *
+     * @throws StateMachineException from the state machine step call
      */
     @Test
     public void noStepResultsInSameCurrentState() throws StateMachineException {
-        expect( mockInitialState.step( mockContext ) ).andReturn( mockInitialState );
-
-        ctrl.replay();
+        when( mockInitialState.step( mockContext ) ).thenReturn( mockInitialState );
 
         StateMachine stateMachine = new StateMachineImpl( mockInitialState );
         stateMachine.step( mockContext );
 
         LOG.debug( "Expecting that the state machine has remained in the initial state due to same state returned" );
         assertThat( stateMachine.getCurrentState(), equalTo( mockInitialState ) );
-
-        ctrl.verify();
     }
 
     /**
      * Tests that when a step call returns a null object that we do not then transition to a new state.
-     * 
-     * @throws StateMachineException
-     *             from the call to step
+     *
+     * @throws StateMachineException from the call to step
      */
     @Test
     public void nullStepResultsInSameCurrentState() throws StateMachineException {
-        expect( mockInitialState.step( mockContext ) ).andReturn( null );
-
-        ctrl.replay();
+        when( mockInitialState.step( mockContext ) ).thenReturn( null );
 
         StateMachine stateMachine = new StateMachineImpl( mockInitialState );
         stateMachine.step( mockContext );
 
         LOG.debug( "Expecting that the state machine remains in the initial state due to NULL step result" );
         assertThat( stateMachine.getCurrentState(), equalTo( mockInitialState ) );
-
-        ctrl.verify();
     }
 }

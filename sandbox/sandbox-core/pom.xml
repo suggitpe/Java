@@ -31,4 +31,11 @@
         <module>tibco</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
