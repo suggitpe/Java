@@ -18,8 +18,8 @@ import org.hibernate.EmptyInterceptor;
 import org.hibernate.type.Type;
 
 /**
- * Class to intercept all object persists and updates them with a create_date/update_date time stamps just
- * before the actual persistence process.
+ * Class to intercept all object persists and updates them with a create_date/update_date time stamps just before the
+ * actual persistence process.
  *
  * @author suggitpe
  * @version 1.0 31 Mar 2010
@@ -42,8 +42,8 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
     }
 
     /**
-     * @see org.hibernate.EmptyInterceptor#onFlushDirty(java.lang.Object, java.io.Serializable,
-     *      java.lang.Object[], java.lang.Object[], java.lang.String[], org.hibernate.type.Type[])
+     * @see org.hibernate.EmptyInterceptor#onFlushDirty(java.lang.Object, java.io.Serializable, java.lang.Object[],
+     *      java.lang.Object[], java.lang.String[], org.hibernate.type.Type[])
      */
     @Override
     public boolean onFlushDirty( Object aEntity, Serializable aId, Object[] aCurrentState,
@@ -94,7 +94,8 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
                 TimestampAuditInfo info = ( TimestampAuditInfo ) aCurrentState[i];
                 if ( type == AUDIT_TYPE.CREATED_ON ) {
                     info.setCreateDate( aValue );
-                } else if ( type == AUDIT_TYPE.UPDATED_ON ) {
+                }
+                else if ( type == AUDIT_TYPE.UPDATED_ON ) {
                     info.setUpdateDate( aValue );
                 }
                 return;

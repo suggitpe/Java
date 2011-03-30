@@ -17,7 +17,6 @@ public interface GenericDao<PK extends Serializable, T extends AbstractEntityBas
      * Getter by ID
      *
      * @param id the id of teh object to get
-     *
      * @return an object or null
      */
     T get( PK id );
@@ -26,7 +25,6 @@ public interface GenericDao<PK extends Serializable, T extends AbstractEntityBas
      * Checks to see if a particular object exists in the database.
      *
      * @param id the id of the object to look for
-     *
      * @return true if object exists, else false
      */
     boolean exists( PK id );
@@ -50,7 +48,6 @@ public interface GenericDao<PK extends Serializable, T extends AbstractEntityBas
      * Merges object with a persistent object
      *
      * @param object the object to merge from
-     *
      * @return returns the resulting object from the merge operation.
      */
     T merge( T object );
