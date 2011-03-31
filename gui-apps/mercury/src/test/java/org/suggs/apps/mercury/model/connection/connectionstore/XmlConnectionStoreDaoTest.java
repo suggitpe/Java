@@ -4,6 +4,8 @@
  */
 package org.suggs.apps.mercury.model.connection.connectionstore;
 
+import junit.framework.Assert;
+
 import org.suggs.apps.mercury.model.connection.ConnectionDetails;
 import org.suggs.apps.mercury.model.connection.connectionstore.IConnectionStoreChangeListener.ConnectionStoreEvent;
 import org.suggs.apps.mercury.model.connection.connectionstore.xmldao.IXmlConnectionStoreManager;
@@ -13,17 +15,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.Assert;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This test class is used to test the XmlConnectionStore DAO objects.
- * 
+ *
  * @author suggitpe
  * @version 1.0 24 Sep 2008
  */
@@ -37,7 +37,7 @@ public class XmlConnectionStoreDaoTest {
 
     /**
      * This is run before each test is run
-     * 
+     *
      * @throws Exception
      */
     @Before
@@ -49,7 +49,7 @@ public class XmlConnectionStoreDaoTest {
 
     /**
      * This test will test that the correct list of connection names is returned
-     * 
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -85,9 +85,8 @@ public class XmlConnectionStoreDaoTest {
     }
 
     /**
-     * This test will test that the correct list of connection names is returned for an empty list of
-     * connections
-     * 
+     * This test will test that the correct list of connection names is returned for an empty list of connections
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -114,9 +113,9 @@ public class XmlConnectionStoreDaoTest {
     }
 
     /**
-     * This test should delete the named connection that we specify here. Here we want to check that if we
-     * call delete then we end calling the get list of names and then the save them down again
-     * 
+     * This test should delete the named connection that we specify here. Here we want to check that if we call delete
+     * then we end calling the get list of names and then the save them down again
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -127,8 +126,8 @@ public class XmlConnectionStoreDaoTest {
         EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
 
         EasyMock.expect( new Boolean( mapMock.containsKey( TO_DELETE ) ) )
-            .andReturn( new Boolean( true ) )
-            .times( 1 );
+                .andReturn( new Boolean( true ) )
+                .times( 1 );
 
         mapMock.remove( TO_DELETE );
         EasyMock.expectLastCall().andReturn( mapMock ).times( 1 );
@@ -158,9 +157,9 @@ public class XmlConnectionStoreDaoTest {
     }
 
     /**
-     * This test should delete the named connection that we specify here. Here we want to check that if we
-     * call delete then we end up with an exception being thrown.
-     * 
+     * This test should delete the named connection that we specify here. Here we want to check that if we call delete
+     * then we end up with an exception being thrown.
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -171,8 +170,8 @@ public class XmlConnectionStoreDaoTest {
         EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
 
         EasyMock.expect( new Boolean( mapMock.containsKey( TO_DELETE ) ) )
-            .andReturn( new Boolean( false ) )
-            .times( 1 );
+                .andReturn( new Boolean( false ) )
+                .times( 1 );
 
         // ------- MOCK LOAD
         EasyMock.replay( mockConnectionStoreManager );
@@ -182,7 +181,7 @@ public class XmlConnectionStoreDaoTest {
         try {
             connectionStoreDao.deleteNamedConnection( TO_DELETE );
             LOG.error( "Suceeded in deleting connection with name [" + TO_DELETE
-                       + "] .. this is bad as the connection does not exist" );
+                    + "] .. this is bad as the connection does not exist" );
             Assert.fail( "Succeeded in deleting connection with the name [" + TO_DELETE + "]" );
         }
         catch ( ConnectionStoreException e ) {
@@ -198,7 +197,7 @@ public class XmlConnectionStoreDaoTest {
 
     /**
      * here we simply want to find out of the connection exists or not in the persistent store
-     * 
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -230,7 +229,7 @@ public class XmlConnectionStoreDaoTest {
 
     /**
      * here we simply want to find out of the connection exists or not in the persistent store
-     * 
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -249,7 +248,7 @@ public class XmlConnectionStoreDaoTest {
         // ------- TEST EXEC
         boolean exists = connectionStoreDao.doesConnectionExist( DONT_FIND_ME );
         LOG.debug( "ConnectionContext exists test for connection [" + DONT_FIND_ME + "] returns [" + exists
-                   + "]" );
+                + "]" );
         if ( exists ) {
             Assert.fail( "The connection [" + DONT_FIND_ME + "] should not exist" );
         }
@@ -264,7 +263,7 @@ public class XmlConnectionStoreDaoTest {
     /**
      * in this test we want to check that when we try and load a valid connection details that it is retrieved
      * correctly
-     * 
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -274,8 +273,8 @@ public class XmlConnectionStoreDaoTest {
         // ------- MOCK PREP
         EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
         EasyMock.expect( new Boolean( mapMock.containsKey( LOAD_ME ) ) )
-            .andReturn( new Boolean( true ) )
-            .times( 1 );
+                .andReturn( new Boolean( true ) )
+                .times( 1 );
         EasyMock.expect( mapMock.get( LOAD_ME ) ).andReturn( testConn ).times( 1 );
 
         // ------- MOCK LOAD
@@ -304,9 +303,9 @@ public class XmlConnectionStoreDaoTest {
     }
 
     /**
-     * here we want to test that if we try and load a connection parameters with no valid connections defined
-     * that we throw an exception
-     * 
+     * here we want to test that if we try and load a connection parameters with no valid connections defined that we
+     * throw an exception
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -315,8 +314,8 @@ public class XmlConnectionStoreDaoTest {
         // ------- MOCK PREP
         EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
         EasyMock.expect( new Boolean( mapMock.containsKey( LOAD_ME ) ) )
-            .andReturn( new Boolean( false ) )
-            .times( 1 );
+                .andReturn( new Boolean( false ) )
+                .times( 1 );
 
         // ------- MOCK LOAD
         EasyMock.replay( mockConnectionStoreManager );
@@ -328,7 +327,7 @@ public class XmlConnectionStoreDaoTest {
             got = connectionStoreDao.loadConnectionParameters( LOAD_ME );
 
             String err = "Failed to throw connection store exception when loading connection [" + LOAD_ME
-                         + "]";
+                    + "]";
             LOG.error( err );
             Assert.fail( err );
         }
@@ -347,7 +346,7 @@ public class XmlConnectionStoreDaoTest {
 
     /**
      * This test will verify that the listeners are added and removed when the api call is made.
-     * 
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -359,8 +358,8 @@ public class XmlConnectionStoreDaoTest {
         EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
 
         EasyMock.expect( new Boolean( mapMock.containsKey( TO_DELETE ) ) )
-            .andReturn( new Boolean( true ) )
-            .times( 1 );
+                .andReturn( new Boolean( true ) )
+                .times( 1 );
 
         mapMock.remove( TO_DELETE );
         EasyMock.expectLastCall().andReturn( mapMock ).times( 1 );
@@ -368,8 +367,8 @@ public class XmlConnectionStoreDaoTest {
         mockConnectionStoreManager.saveConnectionData( mapMock );
         EasyMock.expectLastCall().times( 1 );
 
-        mockList.handleConnectionStoreChange( (String) EasyMock.anyObject(),
-                                              (ConnectionStoreEvent) EasyMock.anyObject() );
+        mockList.handleConnectionStoreChange( ( String ) EasyMock.anyObject(),
+                ( ConnectionStoreEvent ) EasyMock.anyObject() );
         EasyMock.expectLastCall().times( 1 );
 
         // ------- MOCK LOAD
@@ -398,7 +397,7 @@ public class XmlConnectionStoreDaoTest {
 
     /**
      * This test will verify that the listeners are added and removed when the api call is made.
-     * 
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -410,8 +409,8 @@ public class XmlConnectionStoreDaoTest {
         EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
 
         EasyMock.expect( new Boolean( mapMock.containsKey( TO_DELETE ) ) )
-            .andReturn( new Boolean( true ) )
-            .times( 1 );
+                .andReturn( new Boolean( true ) )
+                .times( 1 );
 
         mapMock.remove( TO_DELETE );
         EasyMock.expectLastCall().andReturn( mapMock ).times( 1 );
@@ -446,7 +445,7 @@ public class XmlConnectionStoreDaoTest {
 
     /**
      * In this test we ensure that we can save the data down to the persistent store correctly
-     * 
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -456,8 +455,8 @@ public class XmlConnectionStoreDaoTest {
         // ------- MOCK PREP
         EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
         EasyMock.expect( new Boolean( mapMock.containsKey( NEW_CONN ) ) )
-            .andReturn( new Boolean( false ) )
-            .times( 1 );
+                .andReturn( new Boolean( false ) )
+                .times( 1 );
         EasyMock.expect( mapMock.put( NEW_CONN, conn ) ).andReturn( conn ).times( 1 );
         mockConnectionStoreManager.saveConnectionData( mapMock );
         EasyMock.expectLastCall().times( 1 );
@@ -484,9 +483,9 @@ public class XmlConnectionStoreDaoTest {
     }
 
     /**
-     * In this test we ensure that if we try and resave over the top of an existing connection that we throw
-     * the correct exception
-     * 
+     * In this test we ensure that if we try and resave over the top of an existing connection that we throw the correct
+     * exception
+     *
      * @throws ConnectionStoreException
      */
     @Test
@@ -496,8 +495,8 @@ public class XmlConnectionStoreDaoTest {
         // ------- MOCK PREP
         EasyMock.expect( mockConnectionStoreManager.readConnectionData() ).andReturn( mapMock ).times( 1 );
         EasyMock.expect( new Boolean( mapMock.containsKey( NEW_CONN ) ) )
-            .andReturn( new Boolean( true ) )
-            .times( 1 );
+                .andReturn( new Boolean( true ) )
+                .times( 1 );
 
         // ------- MOCK LOAD
         EasyMock.replay( mockConnectionStoreManager );
