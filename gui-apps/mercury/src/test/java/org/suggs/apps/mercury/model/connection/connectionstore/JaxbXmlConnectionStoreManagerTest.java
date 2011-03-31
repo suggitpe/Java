@@ -44,8 +44,8 @@ public class JaxbXmlConnectionStoreManagerTest {
      * This test will ensure that the xml connection store manager will read data from the persistent store,
      * transform it from the String clob and then return it in a form that is understood
      * 
-     * @throws ConnectionStoreException
-     * @throws IOException
+     * @throws ConnectionStoreException ignore, this is a test only
+     * @throws IOException ignore, this is a test only
      */
     @Test
     public void testReadConnectionData() throws ConnectionStoreException, IOException {
@@ -71,8 +71,8 @@ public class JaxbXmlConnectionStoreManagerTest {
      * Test that when we pass in a valid map of data into the manager that the correct amount of xml is
      * generated.
      * 
-     * @throws ConnectionStoreException
-     * @throws IOException
+     * @throws ConnectionStoreException ignore, this is a test only
+     * @throws IOException ignore, this is a test only
      */
     @Test
     public void testSaveConnectionDataWithValidData() throws ConnectionStoreException, IOException {
@@ -100,8 +100,8 @@ public class JaxbXmlConnectionStoreManagerTest {
      * correct form into the clob when passed only partial information (this is an empty map). Here we ensure
      * that even though the data is empty that we can ensure that not exceptions are thrown.
      * 
-     * @throws ConnectionStoreException
-     * @throws IOException
+     * @throws ConnectionStoreException ignore, this is a test only
+     * @throws IOException ignore, this is a test only
      */
     @Test
     public void testSaveConnectionDataWithEmptyData() throws ConnectionStoreException, IOException {
@@ -125,7 +125,7 @@ public class JaxbXmlConnectionStoreManagerTest {
     /**
      * This test will ensure that if we pass in a null map of data then an exception is thrown.
      * 
-     * @throws ConnectionStoreException
+     * @throws ConnectionStoreException ignore, this is a test only
      */
     @Test(expected = ConnectionStoreException.class)
     public void testSaveConnectionDataWithNullData() throws ConnectionStoreException {
@@ -145,7 +145,7 @@ public class JaxbXmlConnectionStoreManagerTest {
     /**
      * This is the be all and end all of tests for the Jaxb implementation
      * 
-     * @throws ConnectionStoreException
+     * @throws ConnectionStoreException ignore, this is a test only
      */
     @Test
     public void testReadAndWriteConnectionData() throws ConnectionStoreException {
@@ -176,9 +176,6 @@ public class JaxbXmlConnectionStoreManagerTest {
     // ##########################################
     // /////////////// HELPERS //////////////////
     // ##########################################
-    /**
-     * This little helper will centralise the construction of a set of connections that can be used as needed.
-     */
     private void populateMapWithDetails( Map<String, ConnectionDetails> map ) {
         ConnectionDetails d1 = new ConnectionDetails( "CONN_1", "EMS" );
         d1.setPort( 123 );
