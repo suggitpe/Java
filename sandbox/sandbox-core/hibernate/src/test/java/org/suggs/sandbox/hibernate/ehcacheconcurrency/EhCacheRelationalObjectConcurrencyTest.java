@@ -1,11 +1,14 @@
 package org.suggs.sandbox.hibernate.ehcacheconcurrency;
 
-import org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity;
+import org.suggs.sandbox.hibernate.basicentity.BasicRelationshipEntity;
+import org.suggs.sandbox.hibernate.basicentity.BasicRelationshipOtherEntity;
 
-import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 import javax.annotation.Resource;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,41 +26,45 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 /**
- * Proves that the ehCache implementation is safe for use in concurrent processing of transactional data.
+ * TODO: Justify why you have written this class
  * <p/>
- * User: suggitpe Date: 31/03/11 Time: 20:09
+ * User: suggitpe Date: 01/04/11 Time: 15:10
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-ehcache-concurrency.xml" })
-public class EhCacheSimpleObjectConcurrencyTest {
+public class EhCacheRelationalObjectConcurrencyTest {
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( EhCacheSimpleObjectConcurrencyTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( EhCacheRelationalObjectConcurrencyTest.class );
 
     @Resource(name = "sessionFactory")
     protected SessionFactory sessionFactory;
 
     private Long idForTest;
+    private Long relatedIdForTest;
     private final ReentrantLock lock = new ReentrantLock();
 
     @Before
     public void onSetup() {
-        LOG.debug( "---------- Setting up basic entity into the database" );
+        LOG.debug( "---------- Setting up basic relationship entity into the database" );
         idForTest = null;
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            ReallyBasicEntity entity = new ReallyBasicEntity( "Some string", 12345, new Date( System.currentTimeMillis() ) );
+            BasicRelationshipEntity entity = new BasicRelationshipEntity( "Something of interest" );
+            BasicRelationshipOtherEntity other = new BasicRelationshipOtherEntity( "something else" );
+            entity.addOther( other );
+
             session.save( entity );
             idForTest = entity.getId();
+            relatedIdForTest = other.getId();
             transaction.commit();
             session.evict( entity );
         }
         catch ( Exception exception ) {
             transaction.rollback();
-            throw new IllegalStateException( "Failed to create persistent object in setup" );
+            throw new IllegalStateException( "Failed to create persistent objects in setup" );
         }
         finally {
             session.close();
@@ -66,7 +73,7 @@ public class EhCacheSimpleObjectConcurrencyTest {
     }
 
     @After
-    public void onTeardown() {
+    public void onTearDown() {
         LOG.debug( "---------- Test complete" );
     }
 
@@ -74,25 +81,27 @@ public class EhCacheSimpleObjectConcurrencyTest {
     public void readExistingEntityFromCache() {
         LOG.debug( "Reading entity with ID [" + idForTest + "] from the database" );
         Session session = sessionFactory.openSession();
-        ReallyBasicEntity readEntity = ( ReallyBasicEntity ) session.get( ReallyBasicEntity.class, idForTest );
+        BasicRelationshipEntity readEntity = ( BasicRelationshipEntity ) session.get( BasicRelationshipEntity.class, idForTest );
         LOG.debug( "Retrieved object [" + readEntity + "]" );
         assertThat( readEntity, notNullValue() );
-        // TODO: how do I assert that it did not come from a database
+
+        BasicRelationshipOtherEntity other = readEntity.getOthers().iterator().next();
+        LOG.debug( "Retrieved other object [" + other + "]" );
+        assertThat( other, Matchers.<Object>notNullValue() );
     }
 
     @Test
-    public void twoThreadsDoNotInterfereWithEachOthersSimpleObjects() throws InterruptedException {
-
+    public void twoThreadsDoNotInterfereWithEachOthersRelatedObjects() throws InterruptedException {
         LOG.debug( "Starting two threads: one reader and one writer" );
-        Thread reader = new Thread( new SimpleObjectReaderThread(), "reader" );
-        Thread writer = new Thread( new SimpleObjectWriterThread(), "writer" );
+        Thread reader = new Thread( new RelationalObjectReader(), "reader" );
+        Thread writer = new Thread( new RelatedObjectWriter(), "writer" );
         reader.start();
         writer.start();
         writer.join();
         reader.join();
     }
 
-    class SimpleObjectReaderThread implements Runnable {
+    class RelationalObjectReader implements Runnable {
 
         @Override
         public void run() {
@@ -101,7 +110,11 @@ public class EhCacheSimpleObjectConcurrencyTest {
             Transaction transaction = session.beginTransaction();
             try {
                 LOG.debug( "Reader thread: reading entity" );
-                ReallyBasicEntity entity = ( ReallyBasicEntity ) session.get( ReallyBasicEntity.class, idForTest );
+                BasicRelationshipEntity entity = ( BasicRelationshipEntity ) session.get( BasicRelationshipEntity.class, idForTest );
+                Set<BasicRelationshipOtherEntity> others = entity.getOthers();
+                for( Iterator<BasicRelationshipOtherEntity> iter = others.iterator(); iter.hasNext() ; ){
+                    BasicRelationshipOtherEntity other = iter.next();
+                }
 
                 unlock();
                 lock();
@@ -125,7 +138,7 @@ public class EhCacheSimpleObjectConcurrencyTest {
         }
     }
 
-    class SimpleObjectWriterThread implements Runnable {
+    class RelatedObjectWriter implements Runnable {
 
         @Override
         public void run() {
@@ -135,8 +148,8 @@ public class EhCacheSimpleObjectConcurrencyTest {
             Transaction transaction = session.beginTransaction();
             try {
                 LOG.debug( "Writer thread: reading entity" );
-                ReallyBasicEntity entity = ( ReallyBasicEntity ) session.get( ReallyBasicEntity.class, idForTest );
-                entity.setSomeString( "Updated String" );
+                BasicRelationshipOtherEntity entity = ( BasicRelationshipOtherEntity ) session.get( BasicRelationshipOtherEntity.class, relatedIdForTest );
+                entity.setStringData( "Updated string data" );
 
                 unlock();
                 lock();
@@ -181,4 +194,5 @@ public class EhCacheSimpleObjectConcurrencyTest {
         catch ( InterruptedException e ) {
         }
     }
+
 }

@@ -27,8 +27,15 @@ public class BasicRelationshipOtherEntity extends EntityBase {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( BasicRelationshipOtherEntity.class );
 
-    @Column(name = "string_data", length = 64)
+    @Column(name = "STRING_DATA", length = 64)
     private String stringData;
+
+    public BasicRelationshipOtherEntity() {
+    }
+
+    public BasicRelationshipOtherEntity( String aString ) {
+        stringData = aString;
+    }
 
     public String getStringData() {
         return stringData;
@@ -53,5 +60,12 @@ public class BasicRelationshipOtherEntity extends EntityBase {
     @Override
     public int hashCode() {
         return stringData != null ? stringData.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", BasicRelationshipOtherEntity{" +
+                "stringData='" + stringData + '\'' +
+                '}';
     }
 }

@@ -27,13 +27,26 @@ public class BasicRelationshipEntity extends EntityBase {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( BasicRelationshipEntity.class );
 
-
-    @Column(name = "string_data", length = 64)
+    @Column(name = "STRING_DATA", length = 64)
     private String stringData;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_ID")
     private Set<BasicRelationshipOtherEntity> others = new HashSet<BasicRelationshipOtherEntity>();
+
+    /**
+     *  Ctor
+     */
+    public BasicRelationshipEntity() {
+    }
+
+    /**
+     * Ctor
+     * @param aStringData string data
+     */
+    public BasicRelationshipEntity( String aStringData ) {
+        stringData = aStringData;
+    }
 
     public String getStringData() {
         return stringData;
@@ -75,5 +88,12 @@ public class BasicRelationshipEntity extends EntityBase {
         result = 31 * result + ( stringData != null ? stringData.hashCode() : 0 );
         result = 31 * result + ( others != null ? others.hashCode() : 0 );
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +", BasicRelationshipEntity{" +
+                "stringData='" + stringData + '\'' +
+                '}';
     }
 }
