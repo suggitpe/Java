@@ -30,10 +30,10 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-ehcache-concurrency.xml" })
-public class EhCacheConcurrencyTest {
+public class EhCacheSimpleObjectConcurrencyTest {
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( EhCacheConcurrencyTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( EhCacheSimpleObjectConcurrencyTest.class );
 
     @Resource(name = "sessionFactory")
     protected SessionFactory sessionFactory;
@@ -165,7 +165,7 @@ public class EhCacheConcurrencyTest {
     private void unlock() {
         LOG.debug( "...unlocking " + Thread.currentThread().getName() );
         lock.unlock();
-        sleep(10);
+        sleep( 10 );
         Thread.yield();
         LOG.debug( "...unlocked " + Thread.currentThread().getName() );
     }
