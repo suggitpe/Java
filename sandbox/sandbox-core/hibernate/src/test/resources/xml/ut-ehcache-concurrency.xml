@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+    <!-- COMMONS-DBCP datasource -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
+        <property name="targetDataSource">
+            <bean class="org.apache.commons.dbcp.BasicDataSource">
+                <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+                <property name="url" value="${suggs.jdbc.url}"/>
+                <property name="username" value="${suggs.jdbc.username}"/>
+                <property name="password" value="${suggs.jdbc.password}"/>
+                <property name="initialSize" value="1"/>
+                <property name="maxActive" value="3"/>
+                <property name="maxIdle" value="2"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- Properties -->
+    <bean id="propertyPlaceholderConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:db.properties"/>
+    </bean>
+
+    <bean id="timestampInterceptor" class="org.suggs.sandbox.hibernate.support.TimestampAuditingInterceptor"/>
+
+
+    <!-- hibernate session details .. including mappings -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="useTransactionAwareDataSource" value="true"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="hibernate.connection.release_mode">on_close</prop>
+                <prop key="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.generate_statistics">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <property name="entityInterceptor" ref="timestampInterceptor"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity</value>
+                <value>org.suggs.sandbox.hibernate.basicentity.BasicRelationshipEntity</value>
+                <value>org.suggs.sandbox.hibernate.basicentity.BasicRelationshipOtherEntity</value>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

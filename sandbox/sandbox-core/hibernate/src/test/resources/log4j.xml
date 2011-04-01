@@ -55,6 +55,10 @@
         <priority value="info" />
     </category>
 
+    <category name="net.sf.ehcache">
+        <priority value="trace" />
+    </category>
+
     <root>
         <priority value="debug" />
         <appender-ref ref="ConsoleAppender" />

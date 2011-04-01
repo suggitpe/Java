@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * Really basic entity that allows us to verify how the persistence level works at a basic level.
  * 
@@ -23,6 +26,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0 22 Dec 2010
  */
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.hibernate.annotations.Entity(dynamicUpdate = true)
 @Table(name = "BASIC_ENTITY")
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "BASIC_ENTITY_SQ")
