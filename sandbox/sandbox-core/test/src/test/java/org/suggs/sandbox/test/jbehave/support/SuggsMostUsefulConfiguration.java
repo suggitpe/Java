@@ -2,7 +2,7 @@
  * SuggsMostUsefulConfiguration.java created on 15 Sep 2010 19:57:51 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.support;
+package org.suggs.sandbox.test.jbehave.support;
 
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.failures.PassingUponPendingStep;

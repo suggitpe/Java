@@ -2,10 +2,10 @@
  * AbstractInjectableStoryEmbedder.java created on 16 Sep 2010 19:32:21 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.support;
+package org.suggs.sandbox.test.jbehave.support;
 
-import org.suggs.sandbox.jbehave.support.AbstractInjectableStoryEmbedder.MyDateConverter;
-import org.suggs.sandbox.jbehave.support.AbstractInjectableStoryEmbedder.MyRegexPrefixCapturingPatternParser;
+import org.suggs.sandbox.test.jbehave.support.AbstractInjectableStoryEmbedder.MyDateConverter;
+import org.suggs.sandbox.test.jbehave.support.AbstractInjectableStoryEmbedder.MyRegexPrefixCapturingPatternParser;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;

@@ -9,6 +9,6 @@
             http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
             
             
-    <bean id="traderSteps" class="org.suggs.sandbox.jbehave.trader.steps.TraderSteps"/>
+    <bean id="traderSteps" class="org.suggs.sandbox.test.jbehave.trader.steps.TraderSteps"/>
 
 </beans>

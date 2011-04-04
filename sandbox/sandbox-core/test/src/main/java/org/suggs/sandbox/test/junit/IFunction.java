@@ -1,4 +1,4 @@
-package org.suggs.sandbox.junit;
+package org.suggs.sandbox.test.junit;
 
 /**
  * Interface to define an executable function following the Command pattern

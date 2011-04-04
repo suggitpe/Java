@@ -2,9 +2,9 @@
  * GridSteps.java created on 24 Aug 2010 07:28:04 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.basicscenario.steps;
+package org.suggs.sandbox.test.jbehave.basicscenario.steps;
 
-import org.suggs.sandbox.jbehave.basicscenario.Game;
+import org.suggs.sandbox.test.jbehave.basicscenario.Game;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;

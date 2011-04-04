@@ -2,9 +2,9 @@
  * TraderStory.java created on 2 Sep 2010 07:25:59 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.support;
+package org.suggs.sandbox.test.jbehave.support;
 
-import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
+import org.suggs.sandbox.test.jbehave.trader.steps.TraderSteps;
 
 import java.util.List;
 

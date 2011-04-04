@@ -2,7 +2,7 @@
  * Game.java created on 24 Aug 2010 07:36:14 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.basicscenario;
+package org.suggs.sandbox.test.jbehave.basicscenario;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

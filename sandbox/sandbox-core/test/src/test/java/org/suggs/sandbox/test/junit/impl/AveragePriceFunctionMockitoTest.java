@@ -2,9 +2,9 @@
  * AveragePriceFunctionMockitoTest.java created on 20 Nov 2009 19:33:09 by suggitpe for project SandBox - JUnit
  * 
  */
-package org.suggs.sandbox.junit.impl;
+package org.suggs.sandbox.test.junit.impl;
 
-import org.suggs.sandbox.junit.IDoubleDaoService;
+import org.suggs.sandbox.test.junit.IDoubleDaoService;
 
 import java.util.Date;
 

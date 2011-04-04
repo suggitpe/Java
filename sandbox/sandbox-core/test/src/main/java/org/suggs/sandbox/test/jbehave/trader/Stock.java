@@ -2,7 +2,7 @@
  * Stock.java created on 2 Sep 2010 07:26:40 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.trader;
+package org.suggs.sandbox.test.jbehave.trader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

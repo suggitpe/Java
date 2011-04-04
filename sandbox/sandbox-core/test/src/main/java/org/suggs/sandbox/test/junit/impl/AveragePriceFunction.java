@@ -2,11 +2,11 @@
  * AveragePriceFunction.java created on 20 Nov 2009 19:23:13 by suggitpe for project SandBox - JUnit
  * 
  */
-package org.suggs.sandbox.junit.impl;
+package org.suggs.sandbox.test.junit.impl;
 
-import org.suggs.sandbox.junit.DoubleDaoException;
-import org.suggs.sandbox.junit.IDoubleDaoService;
-import org.suggs.sandbox.junit.IFunction;
+import org.suggs.sandbox.test.junit.DoubleDaoException;
+import org.suggs.sandbox.test.junit.IDoubleDaoService;
+import org.suggs.sandbox.test.junit.IFunction;
 
 import java.util.Date;
 

@@ -2,10 +2,10 @@
  * TraderStoriesUsingAnnotatedEmbedder.java created on 7 Sep 2010 19:46:56 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.trader.injectablestories;
+package org.suggs.sandbox.test.jbehave.trader.injectablestories;
 
-import org.suggs.sandbox.jbehave.support.AbstractInjectableStoryEmbedder;
-import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
+import org.suggs.sandbox.test.jbehave.support.AbstractInjectableStoryEmbedder;
+import org.suggs.sandbox.test.jbehave.trader.steps.TraderSteps;
 
 import org.jbehave.core.annotations.UsingSteps;
 import org.slf4j.Logger;

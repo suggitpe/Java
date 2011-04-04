@@ -2,7 +2,7 @@
  * GameTest.java created on 25 Aug 2010 20:00:52 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.basicscenario;
+package org.suggs.sandbox.test.jbehave.basicscenario;
 
 import org.junit.Before;
 import org.junit.Test;

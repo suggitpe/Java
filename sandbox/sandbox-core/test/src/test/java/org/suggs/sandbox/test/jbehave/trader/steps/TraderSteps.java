@@ -2,9 +2,9 @@
  * TraderSteps.java created on 2 Sep 2010 07:15:03 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.trader.steps;
+package org.suggs.sandbox.test.jbehave.trader.steps;
 
-import org.suggs.sandbox.jbehave.trader.Stock;
+import org.suggs.sandbox.test.jbehave.trader.Stock;
 
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Given;

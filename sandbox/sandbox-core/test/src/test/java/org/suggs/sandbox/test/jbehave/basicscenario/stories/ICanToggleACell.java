@@ -2,10 +2,10 @@
  * ICanToggleACell.java created on 24 Aug 2010 19:23:27 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.basicscenario.stories;
+package org.suggs.sandbox.test.jbehave.basicscenario.stories;
 
-import org.suggs.sandbox.jbehave.basicscenario.steps.GridSteps;
-import org.suggs.sandbox.jbehave.support.SuggsMostUsefulConfiguration;
+import org.suggs.sandbox.test.jbehave.basicscenario.steps.GridSteps;
+import org.suggs.sandbox.test.jbehave.support.SuggsMostUsefulConfiguration;
 
 import java.util.List;
 

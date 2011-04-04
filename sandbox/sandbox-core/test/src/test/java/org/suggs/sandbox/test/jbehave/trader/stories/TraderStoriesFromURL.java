@@ -2,7 +2,7 @@
  * TraderStoriesFromURL.java created on 7 Sep 2010 19:39:52 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.trader.stories;
+package org.suggs.sandbox.test.jbehave.trader.stories;
 
 import java.util.Arrays;
 import java.util.List;

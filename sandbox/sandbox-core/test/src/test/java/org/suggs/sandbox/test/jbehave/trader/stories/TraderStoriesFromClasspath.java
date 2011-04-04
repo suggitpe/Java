@@ -2,11 +2,11 @@
  * TraderStoriesFromClasspath.java created on 7 Sep 2010 19:09:58 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.trader.stories;
+package org.suggs.sandbox.test.jbehave.trader.stories;
 
-import org.suggs.sandbox.jbehave.support.SuggsMostUsefulConfiguration;
-import org.suggs.sandbox.jbehave.support.SuggsParamterConverters;
-import org.suggs.sandbox.jbehave.trader.steps.TraderSteps;
+import org.suggs.sandbox.test.jbehave.support.SuggsMostUsefulConfiguration;
+import org.suggs.sandbox.test.jbehave.support.SuggsParamterConverters;
+import org.suggs.sandbox.test.jbehave.trader.steps.TraderSteps;
 
 import java.util.Arrays;
 import java.util.List;

@@ -2,10 +2,10 @@
  * ICanToggleACellUsingAnnotatedStory.java created on 16 Sep 2010 19:38:48 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.basicscenario.injectablestories;
+package org.suggs.sandbox.test.jbehave.basicscenario.injectablestories;
 
-import org.suggs.sandbox.jbehave.basicscenario.steps.GridSteps;
-import org.suggs.sandbox.jbehave.support.AbstractInjectableStoryEmbedder;
+import org.suggs.sandbox.test.jbehave.basicscenario.steps.GridSteps;
+import org.suggs.sandbox.test.jbehave.support.AbstractInjectableStoryEmbedder;
 
 import org.jbehave.core.annotations.UsingSteps;
 import org.slf4j.Logger;

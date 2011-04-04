@@ -2,7 +2,7 @@
  * HamcrestTest.java created on 9 Feb 2010 12:15:55 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.junit;
+package org.suggs.sandbox.test.junit;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,10 +2,10 @@
  * DaoException.java created on 19 May 2010 07:16:17 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.junit;
+package org.suggs.sandbox.test.junit;
 
 /**
- * TODO Write javadoc for DaoException
+ * DAO exception class.
  * 
  * @author suggitpe
  * @version 1.0 19 May 2010

@@ -2,7 +2,7 @@
  * TraderStoriesUsingSpringRunner.java created on 17 Sep 2010 07:22:23 by suggitpe for project sandbox-junit
  * 
  */
-package org.suggs.sandbox.jbehave.trader.springstories;
+package org.suggs.sandbox.test.jbehave.trader.springstories;
 
 import java.util.Arrays;
 import java.util.List;
