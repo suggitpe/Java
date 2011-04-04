@@ -10,9 +10,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>test-parent</artifactId>
+    <artifactId>test-runtimes-parent</artifactId>
     <packaging>pom</packaging>
-    <name>Test Parent</name>
+    <name>Test Runtimes Parent</name>
 
     <modules>
         <module>felix-runtime</module>
