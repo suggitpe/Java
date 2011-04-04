@@ -21,13 +21,13 @@
         <module>jaxb</module>
         <module>jms</module>
         <module>jmx</module>
-        <module>junit</module>
         <module>oddsandsods</module>
         <module>osgi</module>
         <module>patterns</module>
         <module>sandbox</module>
         <module>spring</module>
         <module>swt</module>
+        <module>test</module>
         <module>tibco</module>
     </modules>
 

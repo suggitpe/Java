@@ -10,9 +10,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-junit</artifactId>
+    <artifactId>sandbox-test</artifactId>
     <packaging>jar</packaging>
-    <name>Sandbox - JUnit</name>
+    <name>Sandbox - Test</name>
 
     <build>
         <plugins>
