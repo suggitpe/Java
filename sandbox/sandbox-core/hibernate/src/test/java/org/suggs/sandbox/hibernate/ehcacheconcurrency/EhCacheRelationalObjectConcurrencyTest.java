@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 import javax.annotation.Resource;
 
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -87,7 +86,7 @@ public class EhCacheRelationalObjectConcurrencyTest {
 
         BasicRelationshipOtherEntity other = readEntity.getOthers().iterator().next();
         LOG.debug( "Retrieved other object [" + other + "]" );
-        assertThat( other, Matchers.<Object>notNullValue() );
+        assertThat( other, notNullValue() );
     }
 
     @Test
