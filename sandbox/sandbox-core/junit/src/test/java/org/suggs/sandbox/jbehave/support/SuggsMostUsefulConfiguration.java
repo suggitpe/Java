@@ -17,13 +17,13 @@ import org.jbehave.core.reporters.PrintStreamStepdocReporter;
 import org.jbehave.core.steps.MarkUnmatchedStepsAsPending;
 import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.core.steps.StepFinder;
-import org.jbehave.paranamer.NullParanamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.thoughtworks.paranamer.NullParanamer;
 
 /**
  * This is a useful configuration that should/could be used throughout the jbehave stories that I employ.
- * 
+ *
  * @author suggitpe
  * @version 1.0 15 Sep 2010
  */
