@@ -1,15 +1,14 @@
 package org.suggs.sandbox.hibernate.ehcacheconcurrency;
 
+import edu.umd.cs.mtc.MultithreadedTestCase;
+import edu.umd.cs.mtc.TestFramework;
+
 import org.suggs.sandbox.hibernate.basicentity.BasicRelationshipEntity;
 import org.suggs.sandbox.hibernate.basicentity.BasicRelationshipOtherEntity;
+import org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.locks.ReentrantLock;
 import javax.annotation.Resource;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -39,159 +38,117 @@ public class EhCacheRelationalObjectConcurrencyTest {
     @Resource(name = "sessionFactory")
     protected SessionFactory sessionFactory;
 
-    private Long idForTest;
-    private Long relatedIdForTest;
-    private final ReentrantLock lock = new ReentrantLock();
+    private Long idForTest = null;
+    private Long relatedIdForTest = null;
 
-    @Before
-    public void onSetup() {
-        LOG.debug( "---------- Setting up basic relationship entity into the database" );
-        idForTest = null;
+    private void seedDatabaseWithEntity() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            BasicRelationshipEntity entity = new BasicRelationshipEntity( "Something of interest" );
+            BasicRelationshipEntity entity = new BasicRelationshipEntity( "something else" );
             BasicRelationshipOtherEntity other = new BasicRelationshipOtherEntity( "something else" );
             entity.addOther( other );
-
             session.save( entity );
+
             idForTest = entity.getId();
             relatedIdForTest = other.getId();
+
             transaction.commit();
             session.evict( entity );
         }
         catch ( Exception exception ) {
             transaction.rollback();
-            throw new IllegalStateException( "Failed to create persistent objects in setup" );
+            throw new IllegalStateException( "Failed to create persistent object in setup" );
         }
         finally {
             session.close();
         }
-        LOG.debug( "---------- Setting up complete executing test" );
-    }
-
-    @After
-    public void onTearDown() {
-        LOG.debug( "---------- Test complete" );
     }
 
     @Test
-    public void readExistingEntityFromCache() {
-        LOG.debug( "Reading entity with ID [" + idForTest + "] from the database" );
-        Session session = sessionFactory.openSession();
-        BasicRelationshipEntity readEntity = ( BasicRelationshipEntity ) session.get( BasicRelationshipEntity.class, idForTest );
-        LOG.debug( "Retrieved object [" + readEntity + "]" );
-        assertThat( readEntity, notNullValue() );
-
-        BasicRelationshipOtherEntity other = readEntity.getOthers().iterator().next();
-        LOG.debug( "Retrieved other object [" + other + "]" );
-        assertThat( other, notNullValue() );
+    public void twoThreadsDoNotInterfereWithEachOthersRelationalObjects() throws Throwable {
+        TestFramework.runManyTimes( new RelationalObjectConcurrencyTest(), 25 );
     }
 
-    @Test
-    public void twoThreadsDoNotInterfereWithEachOthersRelatedObjects() throws InterruptedException {
-        LOG.debug( "Starting two threads: one reader and one writer" );
-        Thread reader = new Thread( new RelationalObjectReader(), "reader" );
-        Thread writer = new Thread( new RelatedObjectWriter(), "writer" );
-        reader.start();
-        writer.start();
-        writer.join();
-        reader.join();
-    }
-
-    class RelationalObjectReader implements Runnable {
+    class RelationalObjectConcurrencyTest extends MultithreadedTestCase {
 
         @Override
-        public void run() {
-            lock();
+        public void initialize() {
+            LOG.debug( "---------- initialise start" );
+            seedDatabaseWithEntity();
+            LOG.debug( "---------- test start" );
+        }
+
+        @SuppressWarnings("unused")
+        public void threadReader() {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
+            waitForTick( 1 );
+
             try {
-                LOG.debug( "Reader thread: reading entity" );
                 BasicRelationshipEntity entity = ( BasicRelationshipEntity ) session.get( BasicRelationshipEntity.class, idForTest );
-                Set<BasicRelationshipOtherEntity> others = entity.getOthers();
-                for( Iterator<BasicRelationshipOtherEntity> iter = others.iterator(); iter.hasNext() ; ){
-                    BasicRelationshipOtherEntity other = iter.next();
+                for( BasicRelationshipOtherEntity other: entity.getOthers() ){
+                    other.getStringData();
                 }
-
-                unlock();
-                lock();
-
                 session.flush();
+                waitForTick( 2 );
 
-                unlock();
-                lock();
-
-                LOG.debug( "Committing ..." );
                 transaction.commit();
             }
             catch ( Exception exception ) {
-                exception.printStackTrace();
+                String err = "Failure from reader thread";
+                LOG.error( err, exception );
                 transaction.rollback();
+                fail( err );
             }
             finally {
                 session.close();
-                unlock();
             }
         }
-    }
 
-    class RelatedObjectWriter implements Runnable {
-
-        @Override
-        public void run() {
-            Thread.yield();
-            lock();
+        @SuppressWarnings("unused")
+        public void threadWriter() {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
-            try {
-                LOG.debug( "Writer thread: reading entity" );
-                BasicRelationshipOtherEntity entity = ( BasicRelationshipOtherEntity ) session.get( BasicRelationshipOtherEntity.class, relatedIdForTest );
-                entity.setStringData( "Updated string data" );
+            waitForTick( 1 );
 
-                unlock();
-                lock();
+            try {
+                BasicRelationshipOtherEntity entity = ( BasicRelationshipOtherEntity ) session.get( BasicRelationshipOtherEntity.class, idForTest );
+                entity.setStringData( "Some string data");
 
                 session.flush();
+                waitForTick( 2 );
 
-                unlock();
-                lock();
-
-                LOG.debug( "Committing ..." );
+                entity.setStringData( "Updated again" );
                 transaction.commit();
             }
             catch ( Exception exception ) {
-                exception.printStackTrace();
+                String err = "Failure from reader thread";
+                LOG.error( err, exception );
                 transaction.rollback();
+                fail( err );
             }
             finally {
                 session.close();
-                unlock();
             }
         }
-    }
 
-    private void lock() {
-        LOG.debug( "...locking " + Thread.currentThread().getName() );
-        lock.lock();
-        LOG.debug( "...locked " + Thread.currentThread().getName() );
-    }
-
-    private void unlock() {
-        LOG.debug( "...unlocking " + Thread.currentThread().getName() );
-        lock.unlock();
-        sleep( 10 );
-        Thread.yield();
-        LOG.debug( "...unlocked " + Thread.currentThread().getName() );
-    }
-
-    private void sleep( long millis ) {
-        try {
-            Thread.sleep( millis );
+        @Override
+        public void finish() {
+            LOG.debug( "---------- finish start" );
+            Session session = sessionFactory.openSession();
+            try {
+                BasicRelationshipEntity entity = ( BasicRelationshipEntity ) session.get( BasicRelationshipEntity.class, idForTest );
+                assertThat( entity.getVersion(), equalTo( 0 ) );
+                BasicRelationshipOtherEntity other = ( BasicRelationshipOtherEntity ) session.get( BasicRelationshipOtherEntity.class, relatedIdForTest );
+                assertThat( other.getVersion(), equalTo( 2 ) );
+            }
+            finally {
+                session.close();
+            }
+            LOG.debug( "---------- finish end" );
         }
-        catch ( InterruptedException e ) {
-        }
-    }
 
+    }
 }

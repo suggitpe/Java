@@ -92,6 +92,11 @@
             <artifactId>hibernate-commons-annotations</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>edu.umd.cs.mtc</groupId>
+            <artifactId>multithreadedtc</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

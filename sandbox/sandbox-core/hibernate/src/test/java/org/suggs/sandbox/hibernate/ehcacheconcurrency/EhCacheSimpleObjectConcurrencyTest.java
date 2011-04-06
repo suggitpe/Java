@@ -1,13 +1,13 @@
 package org.suggs.sandbox.hibernate.ehcacheconcurrency;
 
+import edu.umd.cs.mtc.MultithreadedTestCase;
+import edu.umd.cs.mtc.TestFramework;
+
 import org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity;
 
 import java.util.Date;
-import java.util.concurrent.locks.ReentrantLock;
 import javax.annotation.Resource;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -38,13 +38,9 @@ public class EhCacheSimpleObjectConcurrencyTest {
     @Resource(name = "sessionFactory")
     protected SessionFactory sessionFactory;
 
-    private Long idForTest;
-    private final ReentrantLock lock = new ReentrantLock();
+    private Long idForTest = null;
 
-    @Before
-    public void onSetup() {
-        LOG.debug( "---------- Setting up basic entity into the database" );
-        idForTest = null;
+    private void seedDatabaseWithEntity() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -62,123 +58,95 @@ public class EhCacheSimpleObjectConcurrencyTest {
         finally {
             session.close();
         }
-        LOG.debug( "---------- Setting up complete executing test" );
-    }
-
-    @After
-    public void onTeardown() {
-        LOG.debug( "---------- Test complete" );
     }
 
     @Test
-    public void readExistingEntityFromCache() {
-        LOG.debug( "Reading entity with ID [" + idForTest + "] from the database" );
-        Session session = sessionFactory.openSession();
-        ReallyBasicEntity readEntity = ( ReallyBasicEntity ) session.get( ReallyBasicEntity.class, idForTest );
-        LOG.debug( "Retrieved object [" + readEntity + "]" );
-        assertThat( readEntity, notNullValue() );
-        // TODO: how do I assert that it did not come from a database
+    public void twoThreadsDoNotInterfereWithEachOthersSimpleObjects() throws Throwable {
+        TestFramework.runManyTimes( new SimpleObjectConcurrencyTest(), 25 );
     }
 
-    @Test
-    public void twoThreadsDoNotInterfereWithEachOthersSimpleObjects() throws InterruptedException {
-
-        LOG.debug( "Starting two threads: one reader and one writer" );
-        Thread reader = new Thread( new SimpleObjectReaderThread(), "reader" );
-        Thread writer = new Thread( new SimpleObjectWriterThread(), "writer" );
-        reader.start();
-        writer.start();
-        writer.join();
-        reader.join();
-    }
-
-    class SimpleObjectReaderThread implements Runnable {
+    /**
+     * MTC test that will test two threads interaction with ehCache with the following thread order:
+     * <p/>
+     * <ol>
+     * <li>Tick0: Reader & writer threads set up</li>
+     * <li>Tick1: Reader reads and flushes, writer reads, updates and flushes</li>
+     * <li>Tick2: Writer does another update and then both threads try and commit</li>
+     * </ol>
+     */
+    private class SimpleObjectConcurrencyTest extends MultithreadedTestCase {
 
         @Override
-        public void run() {
-            lock();
+        public void initialize() {
+            LOG.debug( "---------- initialise start" );
+            seedDatabaseWithEntity();
+            LOG.debug( "---------- test start" );
+        }
+
+        @SuppressWarnings("unused")
+        public void threadReader() {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
+            waitForTick( 1 );
+
             try {
-                LOG.debug( "Reader thread: reading entity" );
                 ReallyBasicEntity entity = ( ReallyBasicEntity ) session.get( ReallyBasicEntity.class, idForTest );
-
-                unlock();
-                lock();
-
                 session.flush();
 
-                unlock();
-                lock();
+                waitForTick( 2 );
 
-                LOG.debug( "Committing ..." );
                 transaction.commit();
             }
             catch ( Exception exception ) {
-                exception.printStackTrace();
+                String err = "Failure from reader thread";
+                LOG.error( err, exception );
                 transaction.rollback();
+                fail( err );
             }
             finally {
                 session.close();
-                unlock();
             }
         }
-    }
 
-    class SimpleObjectWriterThread implements Runnable {
-
-        @Override
-        public void run() {
-            Thread.yield();
-            lock();
+        @SuppressWarnings("unused")
+        public void threadWriter() {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
-            try {
-                LOG.debug( "Writer thread: reading entity" );
-                ReallyBasicEntity entity = ( ReallyBasicEntity ) session.get( ReallyBasicEntity.class, idForTest );
-                entity.setSomeString( "Updated String" );
+            waitForTick( 1 );
 
-                unlock();
-                lock();
+            try {
+                ReallyBasicEntity entity = ( ReallyBasicEntity ) session.get( ReallyBasicEntity.class, idForTest );
+                entity.setSomeString( "Updated string" );
 
                 session.flush();
+                waitForTick( 2 );
 
-                unlock();
-                lock();
-
-                LOG.debug( "Committing ..." );
+                entity.setSomeString( "Updated again" );
                 transaction.commit();
             }
             catch ( Exception exception ) {
-                exception.printStackTrace();
+                String err = "Failure from reader thread";
+                LOG.error( err, exception );
                 transaction.rollback();
+                fail( err );
             }
             finally {
                 session.close();
-                unlock();
             }
         }
-    }
 
-    private void lock() {
-        LOG.debug( "...locking " + Thread.currentThread().getName() );
-        lock.lock();
-        LOG.debug( "...locked " + Thread.currentThread().getName() );
-    }
-
-    private void unlock() {
-        LOG.debug( "...unlocking " + Thread.currentThread().getName() );
-        lock.unlock();
-        sleep( 10 );
-        Thread.yield();
-        LOG.debug( "...unlocked " + Thread.currentThread().getName() );
-    }
-
-    private void sleep( long millis ) {
-        try {
-            Thread.sleep( millis );
-        }
-        catch ( InterruptedException e ) {
+        @Override
+        public void finish() {
+            LOG.debug( "---------- finish start" );
+            Session session = sessionFactory.openSession();
+            try {
+                ReallyBasicEntity entity = ( ReallyBasicEntity ) session.get( ReallyBasicEntity.class, idForTest );
+                assertThat( entity.getVersion(), equalTo( 2 ) );
+            }
+            finally {
+                session.close();
+            }
+            LOG.debug( "---------- finish end" );
         }
     }
 }
