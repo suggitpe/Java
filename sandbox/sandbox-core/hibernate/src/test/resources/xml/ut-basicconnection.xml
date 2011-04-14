@@ -13,9 +13,9 @@
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
         parent="abstractSessionFactoryBean">
-        <property name="annotatedClasses">
+        <property name="packagesToScan">
             <list>
-                <value>org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity</value>
+                <value>org.suggs.sandbox.hibernate.basicentity</value>
             </list>
         </property>
     </bean>

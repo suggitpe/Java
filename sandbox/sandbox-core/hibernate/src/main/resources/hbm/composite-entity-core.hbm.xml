@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="org.suggs.sandbox.hibernate.compositeentity.CoreEntity" table="COMPOSITE_ENTITY">
@@ -10,18 +11,18 @@
             </generator>
         </id>
 
-        <version name="version" column="VERSION" />
+        <version name="version" column="VERSION"/>
 
         <component name="timestampAuditInfo" class="org.suggs.sandbox.hibernate.support.TimestampAuditInfo">
-            <property name="createDate" column="CREATE_DATE" />
-            <property name="updateDate" column="UPDATE_DATE" />
+            <property name="createDate" column="CREATE_DATE"/>
+            <property name="updateDate" column="UPDATE_DATE"/>
         </component>
-        
-        <property name="someText" column="SOME_TEXT" />
-        
+
+        <property name="someText" column="SOME_TEXT"/>
+
         <component name="compositeEntity" class="org.suggs.sandbox.hibernate.compositeentity.CompositeEntity">
-            <property name="compositeText" column="COMP_TEXT" />
-            <property name="compositeInteger" column="COMP_INT" />
+            <property name="compositeText" column="COMP_TEXT"/>
+            <property name="compositeInteger" column="COMP_INT"/>
         </component>
 
     </class>

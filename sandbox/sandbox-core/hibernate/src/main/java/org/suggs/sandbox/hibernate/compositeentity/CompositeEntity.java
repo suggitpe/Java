@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.hibernate.compositeentity;
 
+import org.suggs.sandbox.hibernate.support.EntityBase;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -17,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0 22 Sep 2010
  */
 @Embeddable
-public class CompositeEntity {
+public class CompositeEntity extends EntityBase {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( CompositeEntity.class );

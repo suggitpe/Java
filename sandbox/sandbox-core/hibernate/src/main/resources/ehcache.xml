@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <!--
+        maxElementsInMemory: maximum number of objects held in memory (0 == no limit).
+        eternal: if true objects do not get expired.
+        timeToIdleSeconds: idle time of an object before expiration.
+        timeToLiveSeconds: time of an object before expiration.
+        overflowToDisk: switch to allow overflowing from memory to disk cache.
+        maxElementsOnDisk: max number of elements held within the disk cache.
+        diskPersistent: whether disk store persists between VM restarts.
+        diskExpiryThreadIntervalSeconds: thread run interval for disk sweeping.
+        memoryStoreEvictionPolicy: defines the eviction policy used when reaching maxElementsInMemory
+            - LRU: Last Recently Used (default)
+            - FIFO: First In First Out
+            - LFU: Less frequently Used
+        statistics: defines whether statistics are collected
+
+    -->
+
+    <defaultCache
+            maxElementsInMemory="1000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="true"
+            maxElementsOnDisk="0"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"
+            statistics="true"
+            />
+
+    <!--
+    <cache name="org.suggs.sandbox.hibernate.basicentity.BasicRelationshipEntity"
+           maxElementsInMemory="0"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           overflowToDisk="true"/>
+           -->
+
+</ehcache>

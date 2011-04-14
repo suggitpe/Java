@@ -1,25 +1,26 @@
 <?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	
-	<class name="org.suggs.sandbox.hibernate.basicentity.Message" table="MESSAGES">
-		<!-- -->
-		<id name="id" column="ID">
+
+    <class name="org.suggs.sandbox.hibernate.basicentity.Message" table="MESSAGES">
+        <!-- -->
+        <id name="id" column="ID">
             <generator class="sequence">
                 <param name="sequence">MESSAGE_SQ</param>
             </generator>
-		</id>
-        
+        </id>
+
         <version name="version" column="VERSION"/>
-        
+
         <component name="timestampAuditInfo" class="org.suggs.sandbox.hibernate.support.TimestampAuditInfo">
             <property name="createDate" column="CREATE_DATE"/>
             <property name="updateDate" column="UPDATE_DATE"/>
         </component>
-        
-		<property name="text" column="MESSAGE_TEXT"/>
-        
-		<many-to-one name="nextMessage" cascade="all" column="NEXT_MESSAGE_ID"/>
-	</class>
-	
+
+        <property name="text" column="MESSAGE_TEXT"/>
+
+        <many-to-one name="nextMessage" cascade="all" column="NEXT_MESSAGE_ID"/>
+    </class>
+
 </hibernate-mapping>

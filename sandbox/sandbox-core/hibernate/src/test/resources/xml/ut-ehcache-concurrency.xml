@@ -43,17 +43,16 @@
                 <prop key="hibernate.connection.release_mode">on_close</prop>
                 <prop key="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</prop>
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.generate_statistics">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
         </property>
         <property name="entityInterceptor" ref="timestampInterceptor"/>
-        <property name="annotatedClasses">
+        <property name="packagesToScan">
             <list>
-                <value>org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity</value>
-                <value>org.suggs.sandbox.hibernate.basicentity.BasicRelationshipEntity</value>
-                <value>org.suggs.sandbox.hibernate.basicentity.BasicRelationshipOtherEntity</value>
+                <value>org.suggs.sandbox.hibernate.basicentity</value>
             </list>
         </property>
     </bean>
