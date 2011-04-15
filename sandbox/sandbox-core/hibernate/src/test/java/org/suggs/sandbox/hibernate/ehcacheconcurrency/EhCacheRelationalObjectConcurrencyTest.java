@@ -68,7 +68,7 @@ public class EhCacheRelationalObjectConcurrencyTest {
 
     @Test
     public void twoThreadsDoNotInterfereWithEachOthersRelationalObjects() throws Throwable {
-        TestFramework.runManyTimes( new RelationalObjectConcurrencyTest(), 25 );
+        TestFramework.runManyTimes( new RelationalObjectConcurrencyTest(), 20 );
     }
 
     class RelationalObjectConcurrencyTest extends MultithreadedTestCase {

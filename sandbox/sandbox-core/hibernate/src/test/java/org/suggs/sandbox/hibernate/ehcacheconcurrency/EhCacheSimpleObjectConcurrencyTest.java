@@ -87,9 +87,8 @@ public class EhCacheSimpleObjectConcurrencyTest {
     }
 
     @Test
-    @Ignore
     public void twoThreadsDoNotInterfereWithEachOthersSimpleObjects() throws Throwable {
-        TestFramework.runManyTimes( new SimpleObjectConcurrencyTest(), 1 );
+        TestFramework.runManyTimes( new SimpleObjectConcurrencyTest(), 20 );
     }
 
     /**

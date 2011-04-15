@@ -19,7 +19,7 @@
                 <entry key="hibernate.ejb.interceptor"
                        value="org.suggs.sandbox.hibernate.support.TimestampAuditingInterceptor"/>
                 <entry key="hibernate.cache.region.factory_class" value="net.sf.ehcache.hibernate.EhCacheRegionFactory"/>
-                <entry key="hibernate.cache.use_second_level_cache" value="true"/>
+                <entry key="hibernate.cache.use_second_level_cache" value="false"/>
                 <entry key="hibernate.cache.use_query_cache" value="false"/>
             </map>
         </property>

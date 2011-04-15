@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0 22 Sep 2010
  */
 @Embeddable
-public class CompositeEntity extends EntityBase {
+public class CompositeEntity{
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( CompositeEntity.class );

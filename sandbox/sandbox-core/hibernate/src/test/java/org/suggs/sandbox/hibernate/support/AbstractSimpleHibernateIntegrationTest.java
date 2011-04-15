@@ -304,6 +304,7 @@ public abstract class AbstractSimpleHibernateIntegrationTest<PK extends Serializ
     protected void verifyResult( T expected, T result ) {
         assertThat( result, not( nullValue() ) );
         assertThat( result, not( sameInstance( expected ) ) );
+        assertThat( result.hashCode(), equalTo( expected.hashCode()));
         assertThat( result, equalTo( expected ) );
         LOG.debug( "Objects of type [" + result.getClass().getSimpleName() + "] match up ... good" );
         LOG.debug( "Object debug:" + result );

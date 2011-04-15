@@ -45,7 +45,6 @@ public class BasicConnectWithTransactionTest {
         LOG.debug( "----------------------" );
     }
 
-    @Ignore
     @Test
     public void performBasicConnectTest() {
         executeBasicAtomicOperation( new AtomicOperationCallback() {
@@ -62,7 +61,6 @@ public class BasicConnectWithTransactionTest {
         } );
     }
 
-    @Ignore
     @Test
     public void performBasicSaveProcess() {
         executeBasicAtomicOperation( new AtomicOperationCallback() {
