@@ -8,13 +8,11 @@ import org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity;
 
 import java.util.Calendar;
 import java.util.Collection;
-
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,9 +22,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static junit.framework.Assert.fail;
+
 /**
  * Test suite that shows how we can spring inject an entity manager into our application
- * 
+ *
  * @author suggitpe
  * @version 1.0 18 Jan 2011
  */
@@ -36,71 +36,51 @@ public class EntityManagerSpringInjectionTest {
 
     private static final Logger LOG = LoggerFactory.getLogger( EntityManagerSpringInjectionTest.class );
 
-    @Resource
+    @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
+
+    private EntityManager entityManager;
 
     @Before
     public void onSetup() {
         LOG.debug( "============================" );
         if ( entityManagerFactory == null ) {
-            throw new IllegalStateException();
+            fail( "Failed to inject EntityManager" );
         }
-    }
 
-    @After
-    public void onTeardown() {
-        entityManagerFactory.close();
+        if ( entityManager == null ) {
+            entityManager = entityManagerFactory.createEntityManager();
+        }
     }
 
     @Test
     public void injectedEntityManagerCanSaveObject() {
-        EntityManager mgr = entityManagerFactory.createEntityManager();
-        try {
-            mgr.getTransaction().begin();
-            ReallyBasicEntity entity = new ReallyBasicEntity( "foo", 999, Calendar.getInstance().getTime() );
-            mgr.persist( entity );
+        entityManager.getTransaction().begin();
+        ReallyBasicEntity entity = new ReallyBasicEntity( "foo", 999, Calendar.getInstance().getTime() );
+        entityManager.persist( entity );
 
-            mgr.flush();
+        entityManager.flush();
 
-            mgr.getTransaction().commit();
-        }
-        finally {
-            mgr.close();
-        }
-
+        entityManager.getTransaction().commit();
     }
 
     @Test
     public void injectedEntityManagerFactoryQueriesCorrectly() {
-        EntityManager mgr = entityManagerFactory.createEntityManager();
-        try {
-            Query q = mgr.createQuery( "from ReallyBasicEntity", ReallyBasicEntity.class );
-            Collection<?> result = q.getResultList();
-            LOG.debug( result.toString() );
-        }
-        finally {
-            mgr.close();
-        }
+        Query q = entityManager.createQuery( "from ReallyBasicEntity", ReallyBasicEntity.class );
+        Collection<?> result = q.getResultList();
+        LOG.debug( result.toString() );
     }
 
     @Test
     public void injectedEntityManagerCanDeleteTableContents() {
-        EntityManager mgr = entityManagerFactory.createEntityManager();
-        try {
-            mgr.getTransaction().begin();
-            Query q = mgr.createQuery( "from ReallyBasicEntity" );
-            Collection<?> result = q.getResultList();
-            LOG.debug( "Deleting [" + result.size() + "] entries from ReallyBasicEntity" );
-            for ( Object e : result ) {
-                LOG.debug( e.toString() );
-                mgr.remove( e );
-            }
-            mgr.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        Query q = entityManager.createQuery( "from ReallyBasicEntity" );
+        Collection<?> result = q.getResultList();
+        LOG.debug( "Deleting [" + result.size() + "] entries from ReallyBasicEntity" );
+        for ( Object e : result ) {
+            LOG.debug( e.toString() );
+            entityManager.remove( e );
         }
-        finally {
-            mgr.close();
-        }
-
+        entityManager.getTransaction().commit();
     }
-
 }
