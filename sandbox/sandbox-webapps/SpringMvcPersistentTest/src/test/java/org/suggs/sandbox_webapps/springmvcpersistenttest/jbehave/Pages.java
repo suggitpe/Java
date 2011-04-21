@@ -18,24 +18,24 @@ public final class Pages {
     private static final Logger LOG = LoggerFactory.getLogger( Pages.class );
 
     private final WebDriverProvider driverProvider;
-    private Home home;
-    private PingTest pingTest;
+    private HomePage homePage;
+    private PingTestPage pingTestPage;
 
     public Pages( WebDriverProvider aDriverProvider ) {
         driverProvider = aDriverProvider;
     }
 
-    public Home home() {
-        if ( home == null ) {
-            home = new Home( driverProvider );
+    public HomePage home() {
+        if ( homePage == null ) {
+            homePage = new HomePage( driverProvider );
         }
-        return home;
+        return homePage;
     }
 
-    public PingTest pingTest() {
-        if ( pingTest == null ) {
-            pingTest = new PingTest( driverProvider );
+    public PingTestPage pingTest() {
+        if ( pingTestPage == null ) {
+            pingTestPage = new PingTestPage( driverProvider );
         }
-        return pingTest;
+        return pingTestPage;
     }
 }

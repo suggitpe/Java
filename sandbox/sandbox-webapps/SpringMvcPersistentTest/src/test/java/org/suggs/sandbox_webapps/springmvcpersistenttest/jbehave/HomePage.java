@@ -12,13 +12,13 @@ import org.slf4j.LoggerFactory;
  * Time: 07:53
  */
 
-public final class Home extends AbstractPage{
+public final class HomePage extends AbstractPage{
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( Home.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HomePage.class );
 
 
-    public Home(WebDriverProvider aProvider){
+    public HomePage( WebDriverProvider aProvider ){
         super(aProvider);
     }
 }

@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
  * Time: 07:22
  */
 
-public final class PingTest extends AbstractPage{
+public final class PingTestPage extends AbstractPage{
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( PingTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( PingTestPage.class );
 
-    public PingTest(WebDriverProvider aProvider){
+    public PingTestPage( WebDriverProvider aProvider ){
         super(aProvider);
     }
 }
