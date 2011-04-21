@@ -1,4 +1,4 @@
-package org.suggs.sandbox_webapps.springmvcpersistenttest.jbehave;
+package org.suggs.sandbox_webapps.springmvcpersistenttest.jbehave.pages;
 
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.slf4j.Logger;
