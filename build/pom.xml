@@ -213,7 +213,17 @@
                     <artifactId>maven-war-plugin</artifactId>
                     <version>2.1</version>
                     <configuration>
-                        <warSourceDirectory>${basedir}/src/main/resources/webapp</warSourceDirectory>
+                        <archive>
+                            <manifest>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                        </archive>
+                        <webResources>
+                            <resource>
+                                <directory>${basedir}/src/main/webapp</directory>
+                            </resource>
+                        </webResources>
                     </configuration>
                 </plugin>
 
@@ -450,6 +460,11 @@
             <dependency>
                 <groupId>org.seleniumhq.webdriver</groupId>
                 <artifactId>webdriver-firefox</artifactId>
+                <version>0.9.7376</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.webdriver</groupId>
+                <artifactId>webdriver-support</artifactId>
                 <version>0.9.7376</version>
             </dependency>
 
