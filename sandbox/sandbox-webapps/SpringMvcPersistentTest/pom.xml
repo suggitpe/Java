@@ -129,6 +129,12 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>org.jbehave.web</groupId>
+            <artifactId>jbehave-web-selenium</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--
+        <dependency>
             <groupId>org.seleniumhq.webdriver</groupId>
             <artifactId>webdriver-firefox</artifactId>
             <scope>test</scope>
@@ -138,6 +144,7 @@
             <artifactId>webdriver-support</artifactId>
             <scope>test</scope>
         </dependency>
+        -->
     </dependencies>
 
 </project>

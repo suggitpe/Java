@@ -54,12 +54,5 @@
             <artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
             <scope>compile</scope>
         </dependency>
-        <!--
-        -->
-        <dependency>
-            <groupId>org.jbehave.web</groupId>
-            <artifactId>jbehave-web-selenium</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 </project>
