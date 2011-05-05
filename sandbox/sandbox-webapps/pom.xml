@@ -15,8 +15,9 @@
     <name>WebApps Sandbox Parent</name>
 
     <modules>
-        <module>spring-mvc-persistent-webapp</module>
         <module>default-maven-webapp</module>
+        <module>selenium-test-webapp</module>
+        <module>spring-mvc-persistent-webapp</module>
     </modules>
 
     <build>
