@@ -263,7 +263,6 @@
                     <version>1.1</version>
                     <configuration>
                         <port>9099</port>
-                        <fork>true</fork>
                     </configuration>
                     <executions>
                         <execution>
@@ -272,6 +271,9 @@
                             <goals>
                                 <goal>run-war</goal>
                             </goals>
+                            <configuration>
+                                <fork>true</fork>
+                            </configuration>
                         </execution>
                         <execution>
                             <id>stop-container</id>
