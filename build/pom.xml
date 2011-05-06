@@ -110,13 +110,42 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.5</version>
                     <configuration>
-                        <useSystemClassLoader>true</useSystemClassLoader>
-                        <trimStackTrace>false</trimStackTrace>
-                        <argLine>${test.jvm.args}</argLine>
-                        <includes>
-                            <include>**/*Test.java</include>
-                        </includes>
+                        <skip>true</skip>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>standard-tests</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <skip>false</skip>
+                                <useSystemClassLoader>true</useSystemClassLoader>
+                                <trimStackTrace>false</trimStackTrace>
+                                <argLine>${test.jvm.args}</argLine>
+                                <includes>
+                                    <include>**/*Test.java</include>
+                                </includes>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>web-tests</id>
+                            <phase>integration-test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <skip>false</skip>
+                                <useSystemClassLoader>true</useSystemClassLoader>
+                                <trimStackTrace>false</trimStackTrace>
+                                <argLine>${test.jvm.args}</argLine>
+                                <includes>
+                                    <include>**/*TestWeb.java</include>
+                                </includes>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <!-- SONAR PLUGIN -->
@@ -234,7 +263,24 @@
                     <version>1.1</version>
                     <configuration>
                         <port>9099</port>
+                        <fork>true</fork>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>start-container</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>run-war</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>stop-container</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>shutdown</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <!-- GROOVY PLUGIN -->
@@ -460,6 +506,11 @@
             <dependency>
                 <groupId>org.seleniumhq.webdriver</groupId>
                 <artifactId>webdriver-firefox</artifactId>
+                <version>0.9.7376</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.webdriver</groupId>
+                <artifactId>webdriver-htmlunit</artifactId>
                 <version>0.9.7376</version>
             </dependency>
             <dependency>
