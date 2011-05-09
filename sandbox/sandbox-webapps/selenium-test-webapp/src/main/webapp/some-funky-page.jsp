@@ -8,7 +8,7 @@
 
 <p>This is where the funky logic that will make your eyes blead will reside.</p>
 
-<a id="homeLink" href="/" >Home</a>
+<a id="homeLink" href="index.jsp">Home</a>
 
 </body>
 </html>
