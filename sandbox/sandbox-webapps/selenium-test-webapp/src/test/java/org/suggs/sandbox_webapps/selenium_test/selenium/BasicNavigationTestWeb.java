@@ -48,10 +48,14 @@ public class BasicNavigationTestWeb {
     }
 
     @Test
-    public void navigateToFunkyPage() {
+    public void navigateToFunkyPageAndThenBackToHome() {
         LOG.info( "Navigating to funky page" );
         webDriver.findElement( By.id( "funkyLink" ) ).click();
         LOG.info( "Verifying that we have the right page" );
         assertThat( webDriver.getTitle(), equalTo( FUNKY_URL_TITLE ) );
+
+        LOG.info( "Navigating back to home" );
+        webDriver.findElement( By.id( "homeLink" ) ).click();
+        assertThat( webDriver.getTitle(), equalTo( BASE_URL_TITLE ) );
     }
 }
