@@ -17,6 +17,7 @@
     <modules>
         <module>default-maven-webapp</module>
         <module>selenium-test-webapp</module>
+        <module>jbehaveweb-test-webapp</module>
         <module>spring-mvc-persistent-webapp</module>
     </modules>
 
