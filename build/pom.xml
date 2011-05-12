@@ -327,6 +327,17 @@
                     <groupId>org.jbehave</groupId>
                     <artifactId>jbehave-maven-plugin</artifactId>
                     <version>${jbehave.core.version}</version>
+                    <configuration>
+                        <systemProperties>
+                            <property>
+                                <name>java.awt.headless</name>
+                                <value>true</value>
+                            </property>
+                        </systemProperties>
+                        <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
+                        <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
+                        <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
+                    </configuration>
                     <executions>
                         <execution>
                             <id>find-and-run-spring-stories</id>
@@ -340,18 +351,23 @@
                                 <includes>
                                     <include>**/stories/*.java</include>
                                 </includes>
-                                <systemProperties>
-                                    <property>
-                                        <name>java.awt.headless</name>
-                                        <value>true</value>
-                                    </property>
-                                </systemProperties>
-                                <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
-                                <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
-                                <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
                             </configuration>
                             <goals>
                                 <goal>run-with-annotated-embedder</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>find-and-run-web-stories</id>
+                            <phase>integration-test</phase>
+                            <configuration>
+                                <skip>false</skip>
+                                <scope>test</scope>
+                                <includes>
+                                    <include>**/web_stories/*.java</include>
+                                </includes>
+                            </configuration>
+                            <goals>
+                                <goal>run-stories-as-embeddables</goal>
                             </goals>
                         </execution>
                     </executions>
