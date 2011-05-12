@@ -328,12 +328,6 @@
                     <artifactId>jbehave-maven-plugin</artifactId>
                     <version>${jbehave.core.version}</version>
                     <configuration>
-                        <systemProperties>
-                            <property>
-                                <name>java.awt.headless</name>
-                                <value>true</value>
-                            </property>
-                        </systemProperties>
                         <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
                         <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
                         <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
@@ -351,6 +345,12 @@
                                 <includes>
                                     <include>**/stories/*.java</include>
                                 </includes>
+                                <systemProperties>
+                                    <property>
+                                        <name>java.awt.headless</name>
+                                        <value>true</value>
+                                    </property>
+                                </systemProperties>
                             </configuration>
                             <goals>
                                 <goal>run-with-annotated-embedder</goal>
@@ -365,6 +365,12 @@
                                 <includes>
                                     <include>**/web_stories/*.java</include>
                                 </includes>
+                                <systemProperties>
+                                    <property>
+                                        <name>browser</name>
+                                        <value>htmlunit</value>
+                                    </property>
+                                </systemProperties>
                             </configuration>
                             <goals>
                                 <goal>run-stories-as-embeddables</goal>

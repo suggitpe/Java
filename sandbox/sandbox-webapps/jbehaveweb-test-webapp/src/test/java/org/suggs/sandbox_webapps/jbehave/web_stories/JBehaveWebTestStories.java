@@ -11,6 +11,7 @@ import org.jbehave.core.io.CodeLocations;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
+import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InstanceStepsFactory;
@@ -38,7 +39,17 @@ public class JBehaveWebTestStories extends JUnitStories {
     private WebDriverProvider driverProvider = new PropertyWebDriverProvider();
     private Pages pages = new Pages( driverProvider );
     private SeleniumContext context = new SeleniumContext();
-    private ContextView contextView = new LocalFrameContextView().sized( 500, 500 );
+    //private ContextView contextView = new LocalFrameContextView().sized( 500, 100 );
+    private ContextView contextView = new ContextView() {
+        @Override
+        public void show( String message ) {
+            LOG.info( message );
+        }
+
+        @Override
+        public void close() {
+        }
+    };
 
     @Override
     public Configuration configuration() {
@@ -50,7 +61,8 @@ public class JBehaveWebTestStories extends JUnitStories {
                 .useStoryLoader( new LoadFromClasspath( embeddableClass ) )
                 .useStoryReporterBuilder( new StoryReporterBuilder()
                         .withCodeLocation( CodeLocations.codeLocationFromClass( embeddableClass ) )
-                        .withDefaultFormats() );
+                        .withDefaultFormats()
+                        .withFormats( Format.TXT, Format.HTML, Format.XML ) );
     }
 
     @Override

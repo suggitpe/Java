@@ -18,8 +18,27 @@ public class Pages {
     private static final Logger LOG = LoggerFactory.getLogger( Pages.class );
 
     private final WebDriverProvider driverProvider;
+    private HomePage homePage;
+    private FunkyPage funkyPage;
 
     public Pages( WebDriverProvider aDriverProvider ) {
         driverProvider = aDriverProvider;
+    }
+
+    public HomePage home() {
+        if ( homePage == null ) {
+            homePage = new HomePage( driverProvider );
+        }
+        return homePage;
+    }
+
+    public FunkyPage funkyPage() {
+        if ( funkyPage == null ) {
+            funkyPage = new FunkyPage( driverProvider );
+        }
+        return funkyPage;
+    }
+
+    public void closeBrowser() {
     }
 }
