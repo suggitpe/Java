@@ -13,3 +13,9 @@ When user opens funky page
 Then funky page is shown
 When user returns to home page
 Then Home page is shown
+
+Scenario: foo
+
+Given user is on Home page
+When user makes a foolish error
+Then the web app does not fall over
