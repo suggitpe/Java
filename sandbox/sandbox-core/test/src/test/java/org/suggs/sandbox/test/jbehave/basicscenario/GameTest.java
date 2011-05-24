@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.test.jbehave.basicscenario;
 
+import org.suggs.sandbox.test.basicscenario.Game;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;

@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.test.jbehave.basicscenario.steps;
 
-import org.suggs.sandbox.test.jbehave.basicscenario.Game;
+import org.suggs.sandbox.test.basicscenario.Game;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;

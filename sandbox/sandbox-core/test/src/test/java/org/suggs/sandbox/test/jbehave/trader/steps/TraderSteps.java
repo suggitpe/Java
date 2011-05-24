@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.test.jbehave.trader.steps;
 
-import org.suggs.sandbox.test.jbehave.trader.Stock;
+import org.suggs.sandbox.test.trader.Stock;
 
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Given;
