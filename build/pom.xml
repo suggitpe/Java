@@ -315,9 +315,15 @@
                     <version>0.9.7-1</version>
                     <executions>
                         <execution>
+                            <id>find-and-run-easyb-stories</id>
+                            <phase>integration-test</phase>
                             <goals>
                                 <goal>test</goal>
                             </goals>
+                            <configuration>
+                                <storyType>html</storyType>
+                                <storyReport>${project.build.directory}/easyb/stories.html</storyReport>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
