@@ -312,7 +312,7 @@
                 <plugin>
                     <groupId>org.easyb</groupId>
                     <artifactId>maven-easyb-plugin</artifactId>
-                    <version>0.9.7-1</version>
+                    <version>1.2</version>
                     <executions>
                         <execution>
                             <id>find-and-run-easyb-stories</id>
@@ -437,7 +437,6 @@
         </pluginManagement>
 
         <plugins>
-            <!-- <plugin> <groupId>org.easyb</groupId> <artifactId>maven-easyb-plugin</artifactId> </plugin> -->
         </plugins>
     </build>
 
