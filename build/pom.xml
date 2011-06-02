@@ -308,26 +308,6 @@
                     </configuration>
                 </plugin>
 
-                <!-- EASYB PLUGIN -->
-                <plugin>
-                    <groupId>org.easyb</groupId>
-                    <artifactId>maven-easyb-plugin</artifactId>
-                    <version>1.2</version>
-                    <executions>
-                        <execution>
-                            <id>find-and-run-easyb-stories</id>
-                            <phase>integration-test</phase>
-                            <goals>
-                                <goal>test</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <storyType>html</storyType>
-                        <storyReport>${project.build.directory}/easyb/stories.html</storyReport>
-                    </configuration>
-                </plugin>
-
                 <!-- JBEHAVE -->
                 <plugin>
                     <groupId>org.jbehave</groupId>
