@@ -2,9 +2,9 @@ Trader is alerted of status
 
 Narrative:
 Description I want to track the prices of stocks so that I can trade more effectively.  As such I need to be alerted when stock prices go above a threshold.
-In order to ensure that I am aware of price movements in Equities
-As a trader
-I want to monitor stock prices against thresholds
+In order that I make a profit
+As a person who likes to dabble in the stock market
+I want to monitor stock market prices against thresholds
 
 Scenario: when a stock price is below the threshold, the alert will be off 
 Given a stock of symbol STK1 and a threshold of 10.0

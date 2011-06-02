@@ -62,7 +62,6 @@ public class Game {
         else {
             grid[aRow][aColumn] = '.';
         }
-        LOG.debug( "\n" + asString() );
     }
 
 }
