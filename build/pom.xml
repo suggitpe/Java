@@ -186,23 +186,6 @@
                     </configuration>
                 </plugin>
 
-                <!-- FITNESS PLUGIN -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>fitnesse-maven-plugin</artifactId>
-                    <version>1.0</version>
-                    <configuration>
-                        <!-- Fitnesse servers list -->
-                        <fitnesses>
-                            <fitnesse>
-                                <hostName>myServer</hostName>
-                                <port>8070</port>
-                                <pageName>mySuitePage</pageName>
-                            </fitnesse>
-                        </fitnesses>
-                    </configuration>
-                </plugin>
-
                 <!-- JETTY PLUGIN -->
                 <plugin>
                     <groupId>org.mortbay.jetty</groupId>
@@ -283,29 +266,6 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-
-                <!-- GROOVY PLUGIN -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>groovy-maven-plugin</artifactId>
-                    <version>1.0-alpha-1</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>generateStubs</goal>
-                                <goal>compile</goal>
-                                <goal>generateTestStubs</goal>
-                                <goal>testCompile</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <debug>false</debug>
-                        <verbose>true</verbose>
-                        <stacktrace>true</stacktrace>
-                        <defaultScriptExtension>.groovy</defaultScriptExtension>
-                    </configuration>
                 </plugin>
 
                 <!-- JBEHAVE -->
@@ -477,11 +437,6 @@
     <!-- This is where we define all of the application dependencies version requirements -->
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-all</artifactId>
-                <version>1.7.4</version>
-            </dependency>
             <dependency>
                 <groupId>org.jbehave</groupId>
                 <artifactId>jbehave-core</artifactId>

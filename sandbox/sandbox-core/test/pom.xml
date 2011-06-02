@@ -113,6 +113,22 @@
                     <storyReport>${project.build.directory}/easyb/stories.html</storyReport>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>fitnesse-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <!-- Fitnesse servers list -->
+                    <fitnesses>
+                        <fitnesse>
+                            <hostName>myServer</hostName>
+                            <port>8070</port>
+                            <pageName>mySuitePage</pageName>
+                        </fitnesse>
+                    </fitnesses>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
