@@ -91,10 +91,12 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.easyb</groupId>
                 <artifactId>maven-easyb-plugin</artifactId>
@@ -113,6 +115,7 @@
                     <storyReport>${project.build.directory}/easyb/stories.html</storyReport>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>fitnesse-maven-plugin</artifactId>
@@ -129,6 +132,25 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.concordion</groupId>
+                <artifactId>maven-concordion-plugin</artifactId>
+                <version>1.0.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <concordion.output.dir>${project.build.directory}/concordion</concordion.output.dir>
+                    </systemPropertyVariables>
+                    <includes>
+                        <include>**/*Scenario.java</include>
+                        <include>**/Scenario*.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -151,6 +173,16 @@
         <dependency>
             <groupId>edu.umd.cs.mtc</groupId>
             <artifactId>multithreadedtc</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.concordion</groupId>
+            <artifactId>concordion</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.agileinsider</groupId>
+            <artifactId>concordion-plus</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
