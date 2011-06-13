@@ -1,6 +1,8 @@
 package org.suggs.sandbox.test.concordion.helloworld;
 
 import org.concordion.integration.junit3.ConcordionTestCase;
+import org.concordion.integration.junit4.ConcordionRunner;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,12 +14,13 @@ import org.slf4j.LoggerFactory;
  * Time: 07:01
  */
 
-public class HelloWorldTest extends ConcordionTestCase {
+@RunWith(ConcordionRunner.class)
+public class HelloWorldScenario extends ConcordionTestCase {
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( HelloWorldTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger( HelloWorldScenario.class );
 
-    public String getGreeting(){
+    public String getGreeting() {
         return "Hello World!";
     }
 }

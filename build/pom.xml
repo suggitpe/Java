@@ -85,6 +85,7 @@
                 <filtering>false</filtering>
                 <includes>
                     <include>**/*.story</include>
+                    <include>**/*.html</include>
                 </includes>
             </testResource>
         </testResources>
@@ -487,6 +488,11 @@
                 <groupId>org.concordion</groupId>
                 <artifactId>concordion</artifactId>
                 <version>1.4.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.concordion</groupId>
+                <artifactId>concordion-extensions</artifactId>
+                <version>1.0.1</version>
             </dependency>
             <dependency>
                 <groupId>org.agileinsider</groupId>

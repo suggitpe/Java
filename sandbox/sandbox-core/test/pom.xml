@@ -142,6 +142,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <skip>false</skip>
                     <systemPropertyVariables>
                         <concordion.output.dir>${project.build.directory}/concordion</concordion.output.dir>
                     </systemPropertyVariables>
@@ -178,6 +179,11 @@
         <dependency>
             <groupId>org.concordion</groupId>
             <artifactId>concordion</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.concordion</groupId>
+            <artifactId>concordion-extensions</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
