@@ -27,16 +27,6 @@
     </p>
 </div>
 
-<div class="scenario" cp:scenario="Single text example that fails">
-    <h3>Text based scenario that fails</h3>
-
-    <p>
-        The full name <span ccdn:execute="#result=split(#TEXT)">John Smith</span>
-        will be broken into first name <span ccdn:assertEquals="#result.firstName">Jonny</span>
-        and last name <span ccdn:assertEquals="#result.lastName">Boy</span>
-    </p>
-</div>
-
 <div class="scenario" cp:scenario="Table based scenario">
     <h3>Table based examples</h3>
 
@@ -62,12 +52,6 @@
 <div class="scenario" cp:ignore="This is still work in progress">
     <h3>Just ignore me!</h3>
     <p>This could really be any old junk at this point</p>
-</div>
-
-<div class="scenario" cp:scenario="Expected broken scenario">
-    <h3>Ooops I did it again</h3>
-    <p>The full name <span ccdn:execute="#result=splitTwiceAndWizz(#TEXT)">John Smith</span>
-        can be converted into something unrealistic</p>
 </div>
 
 </body>
