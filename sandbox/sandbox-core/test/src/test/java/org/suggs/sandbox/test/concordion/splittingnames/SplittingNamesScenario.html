@@ -16,13 +16,36 @@
     </p>
 
     <div class="example">
-        <h3>Example</h3>
+        <h3>Text based Exampl</h3>
 
         <p>
             The full name <span ccdn:execute="#result=split(#TEXT)">John Smith</span>
             will be broken into first name <span ccdn:assertEquals="#result.firstName">John</span>
             and last name <span ccdn:assertEquals="#result.lastName">Smith</span>
         </p>
+
+    </div>
+
+    <div class="example">
+        <h3>Table based example</h3>
+
+        <table ccdn:execute="#result=split(#fullName)">
+            <tr>
+                <th ccdn:set="#fullName">Full Name</th>
+                <th ccdn:assertEquals="#result.firstName">First Name</th>
+                <th ccdn:assertEquals="#result.lastName">Last Name</th>
+            </tr>
+            <tr>
+                <td>John Smith</td>
+                <td>John</td>
+                <td>Smith</td>
+            </tr>
+            <tr>
+                <td>David Peterson</td>
+                <td>David</td>
+                <td>Peterson</td>
+            </tr>
+        </table>
 
     </div>
 
