@@ -1,4 +1,4 @@
-<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<html xmlns:ccdn="http://www.concordion.org/2007/concordion">
 <head>
     <link href="../concordion.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -15,19 +15,19 @@
 
         <p>Given these users:</p>
 
-        <table concordion:execute="setUpUser(#username)">
+        <table ccdn:execute="setUpUser(#username)">
 
-            <tr><th concordion:set="#username">Username</th></tr>
+            <tr><th ccdn:set="#username">Username</th></tr>
             <tr><td>john.lennon</td></tr>
             <tr><td>ringo.starr</td></tr>
             <tr><td>george.harrison</td></tr>
             <tr><td>paul.mccartney</td></tr>
         </table>
 
-        <p>Searching for "<b concordion:set="#searchString">arr</b> " will return:</p>
+        <p>Searching for "<b ccdn:set="#searchString">arr</b> " will return:</p>
 
-        <table concordion:verifyRows="#username : getSearchResultsFor(#searchString)">
-            <tr><th concordion:assertEquals="#username">Matching Usernames:</th></tr>
+        <table ccdn:verifyRows="#username : getSearchResultsFor(#searchString)">
+            <tr><th ccdn:assertEquals="#username">Matching Usernames:</th></tr>
             <tr><td>george.harrison</td></tr>
             <tr><td>ringo.starr</td></tr>
         </table>

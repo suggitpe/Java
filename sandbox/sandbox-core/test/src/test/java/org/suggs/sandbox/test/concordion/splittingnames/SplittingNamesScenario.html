@@ -1,4 +1,4 @@
-<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<html xmlns:ccdn="http://www.concordion.org/2007/concordion">
 <head>
     <link href="../concordion.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -19,9 +19,9 @@
         <h3>Example</h3>
 
         <p>
-            The full name <span concordion:execute="#result=split(#TEXT)">John Smith</span>
-            will be broken into first name <span concordion:assertEquals="#result.firstName">John</span>
-            and last name <span concordion:assertEquals="#result.lastName">Smith</span>
+            The full name <span ccdn:execute="#result=split(#TEXT)">John Smith</span>
+            will be broken into first name <span ccdn:assertEquals="#result.firstName">John</span>
+            and last name <span ccdn:assertEquals="#result.lastName">Smith</span>
         </p>
 
     </div>
