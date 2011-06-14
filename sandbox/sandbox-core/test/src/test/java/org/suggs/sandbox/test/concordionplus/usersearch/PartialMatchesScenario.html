@@ -1,0 +1,38 @@
+<html xmlns:ccdn="http://www.concordion.org/2007/concordion" xmlns:cp="http://www.agileinsider.org/concordion/plus">
+<head>
+    <link href="../concordion.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h1>Partial Matches</h1>
+
+    <p>
+        Username searches return partial matches, i.e. all usernames containing
+        the search string are returned.
+    </p>
+
+    <div class="scenario" cp:scenario="Partial Matches Scenario">
+        <h3>Example</h3>
+
+        <p>Given these users:</p>
+
+        <table ccdn:execute="setUpUser(#username)">
+
+            <tr><th ccdn:set="#username">Username</th></tr>
+            <tr><td>john.lennon</td></tr>
+            <tr><td>ringo.starr</td></tr>
+            <tr><td>george.harrison</td></tr>
+            <tr><td>paul.mccartney</td></tr>
+        </table>
+
+        <p>Searching for "<b ccdn:set="#searchString">arr</b> " will return:</p>
+
+        <table ccdn:verifyRows="#username : getSearchResultsFor(#searchString)">
+            <tr><th ccdn:assertEquals="#username">Matching Usernames:</th></tr>
+            <tr><td>george.harrison</td></tr>
+            <tr><td>ringo.starr</td></tr>
+        </table>
+
+    </div>
+
+</body>
+</html>
