@@ -24,7 +24,7 @@ public class ICanToggleACellUsingAnnotatedStory extends AbstractInjectableStoryE
     private static final Logger LOG = LoggerFactory.getLogger( ICanToggleACellUsingAnnotatedStory.class );
 
     /**
-     * @see org.suggs.sandbox.jbehave.support.AbstractInjectableStoryEmbedder#doGetStoryRegex()
+     * @see org.suggs.sandbox.test.jbehave.support.AbstractInjectableStoryEmbedder#doGetStoryRegex()
      */
     @Override
     protected String doGetStoryRegex() {
