@@ -24,6 +24,7 @@
     <properties>
         <log4j.version>1.2.16</log4j.version>
         <slf4j.version>1.6.1</slf4j.version>
+        <selenium.version>2.0b3</selenium.version>
         <spring.version>3.0.5.RELEASE</spring.version>
         <jbehave.core.version>3.3</jbehave.core.version>
         <jbehave.web.version>3.3</jbehave.web.version>
@@ -469,19 +470,29 @@
                 <version>1.01</version>
             </dependency>
             <dependency>
-                <groupId>org.seleniumhq.webdriver</groupId>
-                <artifactId>webdriver-firefox</artifactId>
-                <version>0.9.7376</version>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-firefox-driver</artifactId>
+                <version>${selenium.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.seleniumhq.webdriver</groupId>
-                <artifactId>webdriver-htmlunit</artifactId>
-                <version>0.9.7376</version>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-htmlunit-driver</artifactId>
+                <version>${selenium.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.seleniumhq.webdriver</groupId>
-                <artifactId>webdriver-support</artifactId>
-                <version>0.9.7376</version>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-support</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-api</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-remote-control</artifactId>
+                <version>${selenium.version}</version>
             </dependency>
 
             <dependency>
