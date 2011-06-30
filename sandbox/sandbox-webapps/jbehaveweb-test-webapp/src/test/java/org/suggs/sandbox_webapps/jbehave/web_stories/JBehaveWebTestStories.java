@@ -59,10 +59,7 @@ public class JBehaveWebTestStories extends JUnitStories {
                 .useWebDriverProvider( driverProvider )
                 .useStepMonitor( new SeleniumStepMonitor( contextView, context, new SilentStepMonitor() ) )
                 .useStoryLoader( new LoadFromClasspath( embeddableClass ) )
-                .useStoryReporterBuilder( new StoryReporterBuilder()
-                        .withCodeLocation( CodeLocations.codeLocationFromClass( embeddableClass ) )
-                        .withDefaultFormats()
-                        .withFormats( Format.TXT, Format.HTML, Format.XML ) );
+                .useStoryReporterBuilder( buildStoryReporterBuilder( embeddableClass ) );
     }
 
     @Override
@@ -76,5 +73,13 @@ public class JBehaveWebTestStories extends JUnitStories {
     @Override
     protected List<String> storyPaths() {
         return new StoryFinder().findPaths( codeLocationFromClass( this.getClass() ).getFile(), asList( "**/*.story" ), null );
+    }
+
+    private StoryReporterBuilder buildStoryReporterBuilder( Class<?> aEmbeddableClass ) {
+        return new StoryReporterBuilder()
+                .withCodeLocation( CodeLocations.codeLocationFromClass( aEmbeddableClass ) )
+                .withDefaultFormats()
+                .withFormats( Format.TXT, Format.HTML, Format.XML );
+
     }
 }
