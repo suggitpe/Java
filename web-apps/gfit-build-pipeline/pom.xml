@@ -3,18 +3,14 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <artifactId>suggs-parent</artifactId>
+        <artifactId>webapps-parent</artifactId>
         <groupId>org.suggs</groupId>
-        <relativePath>../build</relativePath>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <artifactId>gfit-build-pipeline</artifactId>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>webapps-parent</artifactId>
-    <packaging>pom</packaging>
-    <name>WebApps Parent</name>
+    <packaging>war</packaging>
+    <name>GFIT Build Pipeline</name>
 
-    <modules>
-        <module>gfit-build-pipeline</module>
-    </modules>
 </project>
