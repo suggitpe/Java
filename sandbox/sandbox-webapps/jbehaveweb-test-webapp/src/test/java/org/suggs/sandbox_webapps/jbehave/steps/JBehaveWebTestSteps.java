@@ -2,15 +2,12 @@ package org.suggs.sandbox_webapps.jbehave.steps;
 
 import org.suggs.sandbox_webapps.jbehave.pages.Pages;
 
-import org.jbehave.core.annotations.AfterScenario;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * Steps bindings for the stories into JBehave.
  * <p/>
  * User: suggitpe
  * Date: 12/05/11
@@ -26,6 +23,11 @@ public class JBehaveWebTestSteps {
 
     public JBehaveWebTestSteps( Pages aPages ) {
         pages = aPages;
+    }
+
+    @AfterScenario
+    public void closeBrowser() {
+        pages.closeBrowser();
     }
 
     @Given("user is on Home page")
@@ -53,9 +55,16 @@ public class JBehaveWebTestSteps {
         pages.home().pageIsShown();
     }
 
-    @AfterScenario
-    public void closeBrowser() {
-        pages.closeBrowser();
+    @When("user makes a foolish error")
+    @Pending
+    public void whenUserMakesAFoolishError() {
+        // PENDING
+    }
+
+    @Then("the web app does not fall over")
+    @Pending
+    public void thenTheWebAppDoesNotFallOver() {
+        // PENDING
     }
 
 

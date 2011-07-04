@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * Class to encapsulate the core features of the Funky Page.
  * <p/>
  * User: suggitpe
  * Date: 12/05/11

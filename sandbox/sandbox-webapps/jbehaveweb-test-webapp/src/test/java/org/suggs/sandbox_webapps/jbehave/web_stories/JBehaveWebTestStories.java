@@ -24,7 +24,7 @@ import static java.util.Arrays.asList;
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 
 /**
- * TODO: Justify why you have written this class
+ * Main class for building the jbehave web context.
  * <p/>
  * User: suggitpe
  * Date: 10/05/11

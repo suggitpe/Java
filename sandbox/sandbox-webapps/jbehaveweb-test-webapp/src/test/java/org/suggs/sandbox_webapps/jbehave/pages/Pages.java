@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * Simple class that act as a singleton to the page objects in the system.
  * <p/>
  * User: suggitpe
  * Date: 12/05/11
