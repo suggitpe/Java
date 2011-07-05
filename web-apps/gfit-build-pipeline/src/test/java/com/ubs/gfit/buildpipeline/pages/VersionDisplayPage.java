@@ -18,7 +18,7 @@ public final class VersionDisplayPage extends AbstractPage {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( VersionDisplayPage.class );
 
-    private static final String VERSION_DISPLAY_PAGE_TITLE = "Release Management";
+    private static final String VERSION_DISPLAY_PAGE_TITLE = "Version Page";
     private static final String RETURN_TO_RM_PAGE_LINK = "ReturnToReleasemanagement";
     private static final String VERSION_NUMBER_ID = "VersionNumberId";
 

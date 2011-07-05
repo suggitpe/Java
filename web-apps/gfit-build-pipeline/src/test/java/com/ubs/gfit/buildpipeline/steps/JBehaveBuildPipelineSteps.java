@@ -36,14 +36,12 @@ public final class JBehaveBuildPipelineSteps {
     }
 
     @Given("user is on release management page")
-    @Pending
     public void givenUserIsOnReleaseManagementPage() {
         pages.releaseManagementPage().open();
         pages.releaseManagementPage().pageIsShown();
     }
 
     @When("user requests a new release")
-    @Pending
     public void whenUserRequestsANewRelease() {
         pages.releaseManagementPage().requestNewRelease();
     }

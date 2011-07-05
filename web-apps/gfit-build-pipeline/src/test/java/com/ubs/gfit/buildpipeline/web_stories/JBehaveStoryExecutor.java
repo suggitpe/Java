@@ -42,7 +42,7 @@ public final class JBehaveStoryExecutor extends JUnitStories {
     private ContextView contextView = new ContextView() {
         @Override
         public void show( String message ) {
-            LOG.info( message );
+            LOG.info( "Context update: " + message );
         }
 
         @Override
