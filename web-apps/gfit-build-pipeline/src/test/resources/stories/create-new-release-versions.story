@@ -10,6 +10,6 @@ Given user is on release management page
 When user requests a new release
 Then a unique identifier is displayed on a new page
 When user returns to release management page 
-and requests a new release
+And requests a new release
 Then a different unique identifier is displayed on a new page
 

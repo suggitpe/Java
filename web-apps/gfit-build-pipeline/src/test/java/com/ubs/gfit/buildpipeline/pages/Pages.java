@@ -47,4 +47,6 @@ public class Pages {
         return versionDisplayPage;
     }
 
+    public void closeBrowser() {
+    }
 }
