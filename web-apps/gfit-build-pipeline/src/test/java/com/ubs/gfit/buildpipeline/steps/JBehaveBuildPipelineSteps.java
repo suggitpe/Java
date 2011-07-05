@@ -76,4 +76,19 @@ public final class JBehaveBuildPipelineSteps {
         assertThat( initialId, not( equalTo( secondId ) ) );
     }
 
+    @Given("no pre-requisites")
+    public void givenNoPrerequisites() {
+    }
+
+    @When("user opens home page")
+    public void whenUserOpensHomePage() {
+        pages.homePage().open();
+    }
+
+    @Then("home page is displayed to the user")
+    public void thenHomePageIsDisplayedToTheUser() {
+        pages.homePage().pageIsShown();
+    }
+
+
 }
