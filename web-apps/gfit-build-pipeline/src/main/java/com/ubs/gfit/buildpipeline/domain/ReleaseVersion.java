@@ -18,7 +18,7 @@ public final class ReleaseVersion {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersion.class );
 
-    private int version;
+    private int version = 0;
     private String description;
     private Map<String, String> componentVersions;
 
@@ -36,6 +36,10 @@ public final class ReleaseVersion {
 
     public void setVersion( int aVersion ) {
         version = aVersion;
+    }
+
+    public boolean isNew() {
+        return ( version == 0 );
     }
 
     public String getDescription() {

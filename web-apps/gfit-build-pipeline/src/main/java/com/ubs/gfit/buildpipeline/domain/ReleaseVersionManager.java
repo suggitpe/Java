@@ -20,6 +20,7 @@ public final class ReleaseVersionManager {
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionManager.class );
 
     private static ReleaseVersionManager instance = new ReleaseVersionManager();
+    private int lastVersion = 0;
 
     private List<ReleaseVersion> versions = new ArrayList<ReleaseVersion>();
 
@@ -28,13 +29,15 @@ public final class ReleaseVersionManager {
     }
 
     public void createVersion( ReleaseVersion aVersion ) {
+        if ( aVersion.isNew() ) {
+            aVersion.setVersion( ++lastVersion );
+        }
         versions.add( aVersion );
     }
 
     public List<ReleaseVersion> getAllReleaseVersions() {
         return versions;
     }
-
 
 
 }

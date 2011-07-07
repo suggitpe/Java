@@ -42,7 +42,6 @@ public final class JBehaveBuildPipelineSteps {
     }
 
     @When("user requests a new release")
-    @Pending
     public void whenUserRequestsANewRelease() {
         pages.releaseManagementPage().requestNewRelease();
     }
