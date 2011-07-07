@@ -26,7 +26,7 @@ public final class ReleaseManagementPage extends AbstractPage {
     }
 
     public void open() {
-        get( BASE_URL + "/release-management.jsp" );
+        get( BASE_URL + "/release-management" );
     }
 
     public void pageIsShown() {

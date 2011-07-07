@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.domain.ReleaseVersion;
 import com.ubs.gfit.buildpipeline.domain.ReleaseVersionManager;
-import com.ubs.gfit.buildpipeline.validtors.ReleaseVersionValidator;
+import com.ubs.gfit.buildpipeline.validators.ReleaseVersionValidator;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/release-management")
-public class ReleaseManagementController {
+public final class ReleaseManagementController {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseManagementController.class );

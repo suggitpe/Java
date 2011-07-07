@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/")
-public class DefaultController {
+public final class DefaultController {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( DefaultController.class );

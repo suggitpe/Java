@@ -1,4 +1,4 @@
-package com.ubs.gfit.buildpipeline.validtors;
+package com.ubs.gfit.buildpipeline.validators;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import org.springframework.validation.Validator;
  * Time: 10:44
  */
 
-public class ReleaseVersionValidator implements Validator {
+public final class ReleaseVersionValidator implements Validator {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionValidator.class );

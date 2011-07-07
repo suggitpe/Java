@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * Time: 07:52
  */
 
-public class ReleaseVersionManager {
+public final class ReleaseVersionManager {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionManager.class );
