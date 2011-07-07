@@ -23,7 +23,7 @@ import static java.util.Arrays.asList;
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 
 /**
- * TODO: Justify why you have written this class
+ * Class that will execute the JBehave tests in the correct way using the correct framework interactions.
  * <p/>
  * User: suggitpe
  * Date: 04/07/11

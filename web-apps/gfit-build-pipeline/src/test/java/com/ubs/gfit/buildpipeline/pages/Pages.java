@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
  * Time: 18:50
  */
 
-public class Pages {
+public final class Pages {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( Pages.class );
