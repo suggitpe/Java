@@ -27,7 +27,7 @@ public final class HomePage extends AbstractPage {
         get( BASE_URL );
     }
 
-    public void pageIsShown(){
+    public void isShown(){
         foundTitle( HOME_PAGE_TITLE );
     }
 

@@ -29,7 +29,7 @@ public final class ReleaseManagementPage extends AbstractPage {
         get( BASE_URL + "/release-management" );
     }
 
-    public void pageIsShown() {
+    public void isShown() {
         foundTitle( RELEASE_MANAGEMENT_PAGE_TITLE );
     }
 

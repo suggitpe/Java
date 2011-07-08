@@ -20,7 +20,7 @@ public final class Pages {
     private final WebDriverProvider webDriverProvider;
     private HomePage homePage;
     private ReleaseManagementPage releaseManagementPage;
-    private VersionDisplayPage versionDisplayPage;
+    private ReleaseVersionForm releaseVersionForm;
 
     public Pages( WebDriverProvider aWebDriverProvider ) {
         webDriverProvider = aWebDriverProvider;
@@ -40,13 +40,14 @@ public final class Pages {
         return releaseManagementPage;
     }
 
-    public VersionDisplayPage versionDisplayPage() {
-        if ( versionDisplayPage == null ) {
-            versionDisplayPage = new VersionDisplayPage( webDriverProvider );
+    public ReleaseVersionForm releaseVersionForm() {
+        if ( releaseVersionForm == null ) {
+            releaseVersionForm = new ReleaseVersionForm( webDriverProvider );
         }
-        return versionDisplayPage;
+        return releaseVersionForm;
     }
 
     public void closeBrowser() {
     }
+
 }

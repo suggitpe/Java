@@ -24,7 +24,7 @@
     <tr>
         <td colspan="2" align="centre">
             <spring:url value="/release-management/new" var="addUrl"/>
-            <a href="${fn:escapeXml(addUrl)}">New Release Version</a>
+            <a id="newVersionLink" href="${fn:escapeXml(addUrl)}">New Release Version</a>
         </td>
     </tr>
 </table>
