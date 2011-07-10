@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.domain.ReleaseVersion;
 
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -28,7 +29,9 @@ public final class ReleaseVersionValidator implements Validator {
     @Override
     public void validate(Object aObject, Errors aErrors){
         ReleaseVersion version = (ReleaseVersion) aObject;
+
+        if ( !StringUtils.hasLength( version.getDescription() ) ) {
+            aErrors.rejectValue( "Description", "required", "required" );
+        }
     }
-
-
 }

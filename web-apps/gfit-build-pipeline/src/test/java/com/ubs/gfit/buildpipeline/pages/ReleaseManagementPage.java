@@ -2,6 +2,7 @@ package com.ubs.gfit.buildpipeline.pages;
 
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,5 +36,16 @@ public final class ReleaseManagementPage extends AbstractPage {
 
     public void requestNewRelease() {
         findElement( By.id( NEW_RELEASE_ID ) ).click();
+    }
+
+    public int findVersionWithDescription( String aDescription ) {
+        WebElement element = findElement( By.xpath( "//table[@id='releasesTable']//tr[@id='" + aDescription + "']//td[@class='rvVersion']" ) );
+        LOG.info( "Found version [" + element.getText() + "] from description [" + aDescription + "]" );
+        try {
+            return Integer.valueOf( element.getText() ).intValue();
+        }
+        catch ( NumberFormatException nfe ) {
+            throw new IllegalStateException( "Failed to convert version [" + element.getText() + "] into integer" );
+        }
     }
 }

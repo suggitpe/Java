@@ -5,6 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.pages.Pages;
 
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertThat;
+
 /**
  * Class to define the steps that are mapped to the JBehave story
  * <p/>
@@ -48,7 +52,6 @@ public final class JBehaveBuildPipelineSteps {
     @Given("user is on Release Management page")
     public void givenUserIsOnReleaseManagementPage() {
         pages.releaseManagementPage().open();
-        pages.releaseManagementPage().isShown();
     }
 
     @When("user requests a new release")
@@ -62,36 +65,25 @@ public final class JBehaveBuildPipelineSteps {
     }
 
     @When("the user enters a release version comment of $description")
-    public void whenTheUserEntersAReleaseVersionCommentOfFoo( @Named("description" )String aDescription) {
-        pages.releaseVersionForm().addDescription(aDescription);
+    public void whenTheUserEntersAReleaseVersionCommentOfFoo( @Named("description") String aDescription ) {
+        pages.releaseVersionForm().addDescription( aDescription );
     }
 
-    /**
-     @Then("a unique identifier is displayed on a new page")
-     @Pending public void thenAUniqueIdentifierIsDisplayedOnANewPage() {
-     pages.releaseManagementPage().isShown();
-     initialId = pages.releaseManagementPage().uniqueIdentifierIsDisplayed();
-     }
+    @When("clicks Add New Release Version")
+    public void whenClicksAddNewReleaseVersion() {
+        pages.releaseVersionForm().completeNew();
+    }
 
+    @Then("the release management page is shown")
+    public void thenTheReleaseManagementPageIsShown() {
+        pages.releaseManagementPage().isShown();
+    }
 
-     @When("user returns to release management page")
-     @Pending public void whenUserReturnsToReleaseManagementPage() {
-     pages.versionDisplayPage().returnToReleaseManagementPage();
-     pages.releaseManagementPage().isShown();
-     }
-
-     @When("requests a new release")
-     @Pending public void whenRequestsANewRelease() {
-     pages.releaseManagementPage().requestNewRelease();
-     }
-
-     @Then("a different unique identifier is displayed on a new page")
-     @Pending public void thenADifferentUniqueIdentifierIsDisplayedOnANewPage() {
-     secondId = pages.versionDisplayPage().uniqueIdentifierIsDisplayed();
-     assertThat( initialId, not( equalTo( secondId ) ) );
-     }
-
-     */
+    @Then("a unique identifier is displayed for the release described as $description")
+    public void thenAUniqueIdentifierIsDisplayedForTheReleaseDescribedAsFoo( @Named("description") String aDescription ) {
+        int version = pages.releaseManagementPage().findVersionWithDescription( aDescription );
+        assertThat( version, not( equalTo( 0 ) ) );
+    }
 
 
 }

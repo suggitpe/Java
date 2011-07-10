@@ -6,17 +6,19 @@
 <body>
 
 <h2>Release Management</h2>
+
 <p/>
+
 <h3>Defined Releases</h3>
-<table>
+<table id="releasesTable">
     <thead>
     <th>Release ID</th>
     <th>Description</th>
     </thead>
     <c:forEach var="rv" items="${releaseVersions}">
-        <tr>
-            <td>${rv.version}</td>
-            <td>${rv.description}</td>
+        <tr id="${rv.description}">
+            <td class="rvVersion">${rv.version}</td>
+            <td class="rvDescription">${rv.description}</td>
         </tr>
     </c:forEach>
 </table>

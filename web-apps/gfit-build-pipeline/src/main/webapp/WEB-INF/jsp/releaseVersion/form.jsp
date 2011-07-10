@@ -18,18 +18,17 @@
         <tr>
             <th>
                 Description: <form:errors path="description" ccsClass="errors"/>
-                <br/>
-                <form:input path="description" size="30" maxlength="180"/>
+                <form:input id="descriptionField" path="description" size="30" maxlength="180"/>
             </th>
         </tr>
         <tr>
             <td>
                 <c:choose>
                     <c:when test="${releaseVersion.new}">
-                        <p class="submit"><input type="submit" value="Add New Release Version"/></p>
+                        <p class="submit"><input id="addButton" type="submit" value="Add New Release Version"/></p>
                     </c:when>
                     <c:otherwise>
-                        <p class="submit"><input type="submit" value="Update Release Version"/></p>
+                        <p class="submit"><input id="updateButton" type="submit" value="Update Release Version"/></p>
                     </c:otherwise>
                 </c:choose>
             </td>
@@ -39,7 +38,7 @@
 
 <c:if test="${!releaseVersion.new}">
     <form:form method="delete">
-        <p class="submit"><input type="submit" value="Delete Release Version"/></p>
+        <p class="submit"><input id="deleteButton" type="submit" value="Delete Release Version"/></p>
     </form:form>
 </c:if>
 
