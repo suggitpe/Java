@@ -1,9 +1,5 @@
 <%@ include file="/WEB-INF/jsp/includes/includes.jsp" %>
-<html>
-<head>
-    <title>Release Version</title>
-</head>
-<body>
+<%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
 
 <c:choose>
     <c:when test="${releaseVersion.new}"><c:set var="method" value="post"/></c:when>
@@ -42,5 +38,4 @@
     </form:form>
 </c:if>
 
-</body>
-</html>
+<%@ include file="/WEB-INF/jsp/includes/footer.jsp" %>

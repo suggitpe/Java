@@ -46,15 +46,6 @@ abstract class AbstractPage extends WebDriverPage {
         findElement( By.id( "home" ) ).click();
     }
 
-    public void foundTitle( String aSoughtTitle ) {
-        foundTitle( getTitle(), aSoughtTitle );
-    }
-
-    public void foundTitle( String aActualTitle, String aSoughtTitle ) {
-        LOG.info( "Checking that actual title[" + aActualTitle + "] matches with correct title[" + aSoughtTitle + "]" );
-        assertThat( aSoughtTitle, equalTo( aActualTitle ) );
-    }
-
     public void returnToHomePage() {
         findElement( By.id( "homeLink" ) ).click();
     }

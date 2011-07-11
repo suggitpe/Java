@@ -1,9 +1,5 @@
 <%@ include file="/WEB-INF/jsp/includes/includes.jsp" %>
-<html>
-<head>
-    <title>Release Management</title>
-</head>
-<body>
+<%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
 
 <h2>Release Management</h2>
 
@@ -31,5 +27,5 @@
     </tr>
 </table>
 
-</body>
-</html>
+<%@ include file="/WEB-INF/jsp/includes/footer.jsp" %>
+

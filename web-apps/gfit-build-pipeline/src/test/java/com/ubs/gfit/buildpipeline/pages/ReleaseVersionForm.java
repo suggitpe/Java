@@ -29,7 +29,7 @@ public final class ReleaseVersionForm extends AbstractPage {
     }
 
     public void isShown() {
-        foundTitle( FORM_TITLE );
+        //foundTitle( FORM_TITLE );
     }
 
     public void addDescription( String aDescription ) {

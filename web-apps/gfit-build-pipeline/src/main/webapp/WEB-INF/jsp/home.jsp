@@ -1,10 +1,8 @@
 <%@ include file="/WEB-INF/jsp/includes/includes.jsp" %>
-<html>
-<head>
-    <title>GFIT Build Pipeline</title>
-</head>
-<body>
-<div>There is no home page yet</div>
+<%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
+
+<p>There is no home page yet</p>
 <a href="release-management">release-management</a>
-</body>
-</html>
+
+<%@ include file="/WEB-INF/jsp/includes/footer.jsp" %>
+
