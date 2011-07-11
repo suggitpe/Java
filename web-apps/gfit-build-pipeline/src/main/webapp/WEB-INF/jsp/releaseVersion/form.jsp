@@ -7,7 +7,7 @@
 </c:choose>
 
 
-<h2><c:if test="${releaseVersion.new}">New </c:if>Release Version</h2>
+<h2 id="title"><c:if test="${releaseVersion.new}">New </c:if>Release Version</h2>
 
 <form:form modelAttribute="releaseVersion" method="${method}">
     <table>

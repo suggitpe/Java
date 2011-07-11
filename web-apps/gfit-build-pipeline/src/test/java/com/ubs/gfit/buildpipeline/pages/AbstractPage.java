@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.internal.matchers.StringContains.containsString;
 
@@ -49,4 +49,12 @@ abstract class AbstractPage extends WebDriverPage {
     public void returnToHomePage() {
         findElement( By.id( "homeLink" ) ).click();
     }
+
+    public void isShown() {
+        String pageTitle = findElement( By.id( "title" ) ).getText();
+        LOG.info( "Checking that the title ["+pageTitle+"] is equal to the expected [" + expectedPageTitle() + "]" );
+        assertThat( pageTitle, equalTo( expectedPageTitle() ) );
+    }
+
+    protected abstract String expectedPageTitle();
 }

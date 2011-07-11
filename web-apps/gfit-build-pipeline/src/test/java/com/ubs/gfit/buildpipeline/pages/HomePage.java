@@ -1,6 +1,7 @@
 package com.ubs.gfit.buildpipeline.pages;
 
 import org.jbehave.web.selenium.WebDriverProvider;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +25,14 @@ public final class HomePage extends AbstractPage {
         super( aWebDriverProvider );
     }
 
+    protected String expectedPageTitle(){
+        return "Home";
+    }
+
     public void open(){
         get( BASE_URL );
     }
 
-    public void isShown(){
-        findElement( By.id( "title" ));
 
-
-        //foundTitle( HOME_PAGE_TITLE );
-    }
 
 }

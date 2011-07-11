@@ -28,8 +28,8 @@ public final class ReleaseVersionForm extends AbstractPage {
         super( aWebDriverProvider );
     }
 
-    public void isShown() {
-        //foundTitle( FORM_TITLE );
+    protected String expectedPageTitle(){
+        return "New Release Version";
     }
 
     public void addDescription( String aDescription ) {

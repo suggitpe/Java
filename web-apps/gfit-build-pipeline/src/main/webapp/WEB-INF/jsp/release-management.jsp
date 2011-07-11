@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/includes/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
 
-<h2>Release Management</h2>
+<h2 id="title">Release Management</h2>
 
 <p/>
 
