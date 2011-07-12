@@ -30,9 +30,8 @@ public final class ReleaseManagementPage extends AbstractPage {
         get( BASE_URL + "/release-management" );
     }
 
-
-    protected String expectedPageTitle(){
-        return "Release Management";
+    protected String expectedPageTitle() {
+        return RELEASE_MANAGEMENT_PAGE_TITLE;
     }
 
     public void requestNewRelease() {

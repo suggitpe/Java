@@ -19,14 +19,14 @@ public final class HomePage extends AbstractPage {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( HomePage.class );
 
-    public static final String HOME_PAGE_TITLE = "GFIT Build Pipeline";
+    public static final String HOME_PAGE_TITLE = "Home";
 
     public HomePage( WebDriverProvider aWebDriverProvider ) {
         super( aWebDriverProvider );
     }
 
     protected String expectedPageTitle(){
-        return "Home";
+        return HOME_PAGE_TITLE;
     }
 
     public void open(){

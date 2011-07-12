@@ -18,7 +18,7 @@ public final class ReleaseVersionForm extends AbstractPage {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionForm.class );
 
-    private static final String FORM_TITLE = "Release Version";
+    private static final String FORM_TITLE = "New Release Version";
     private static final String DESC_FIELD = "descriptionField";
     private static final String NEW_BUTTON = "addButton";
     private static final String UPDATE_BUTTON = "updateButton";
@@ -29,7 +29,7 @@ public final class ReleaseVersionForm extends AbstractPage {
     }
 
     protected String expectedPageTitle(){
-        return "New Release Version";
+        return FORM_TITLE;
     }
 
     public void addDescription( String aDescription ) {
