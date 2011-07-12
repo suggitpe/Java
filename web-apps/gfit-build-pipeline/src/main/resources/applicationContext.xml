@@ -17,4 +17,8 @@
         </property>
     </bean>
 
+    <bean id="componentVersionService" class="com.ubs.gfit.buildpipeline.domain.ComponentVersionService">
+
+    </bean>
+
 </beans>

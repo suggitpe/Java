@@ -1,4 +1,4 @@
-package com.ubs.gfit.buildpipeline.service;
+package com.ubs.gfit.buildpipeline.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

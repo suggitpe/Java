@@ -1,11 +1,13 @@
-package com.ubs.gfit.buildpipeline.service;
+package com.ubs.gfit.buildpipeline.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.ubs.gfit.buildpipeline.domain.ComponentVersionService;
 import com.ubs.gfit.buildpipeline.domain.ReleaseVersion;
 import com.ubs.gfit.buildpipeline.domain.ReleaseVersionManager;
 import com.ubs.gfit.buildpipeline.validators.ReleaseVersionValidator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +31,9 @@ public final class ReleaseManagementController {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseManagementController.class );
 
+    @Autowired
+    private ComponentVersionService componentVersionService;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView handleReleaseVersions() {
         LOG.debug( "getting all of the release versions" );
@@ -41,16 +46,19 @@ public final class ReleaseManagementController {
     public String newReleaseRequest( Model aModel ) {
         ReleaseVersion version = new ReleaseVersion();
         aModel.addAttribute( version );
+        aModel.addAttribute( componentVersionService );
         return "releaseVersion/form";
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String processReleaseRequest( @ModelAttribute ReleaseVersion releaseVersion, BindingResult aResult, SessionStatus aStatus ) {
         new ReleaseVersionValidator().validate( releaseVersion, aResult );
+        LOG.info("Validating object ["+releaseVersion+"]" );
         if ( aResult.hasErrors() ) {
             return "releaseVersion/form";
         }
         else {
+            LOG.info("Writing object ["+releaseVersion+"]" );
             ReleaseVersionManager.instance().createVersion( releaseVersion );
             aStatus.setComplete();
             return "redirect:/release-management";
