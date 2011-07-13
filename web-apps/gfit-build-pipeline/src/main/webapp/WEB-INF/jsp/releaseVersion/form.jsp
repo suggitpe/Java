@@ -1,3 +1,5 @@
+<%@ page import="com.ubs.gfit.buildpipeline.domain.component.Component" %>
+<%@ page import="com.ubs.gfit.buildpipeline.domain.component.ComponentVersionService" %>
 <%@ include file="/WEB-INF/jsp/includes/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
 
@@ -6,16 +8,30 @@
     <c:otherwise><c:set var="method" value="post"/></c:otherwise>
 </c:choose>
 
-
 <h2 id="title"><c:if test="${releaseVersion.new}">New </c:if>Release Version</h2>
 
 <form:form modelAttribute="releaseVersion" method="${method}">
     <table>
+
+        <c:forEach items="<%= Component.values() %>" var="componentName">
+            <tr>
+                <td>${componentName} version: <form:errors path="componentVersions[${componentName}]"/></td>
+                <td>
+                    <form:select path="componentVersions[${componentName}]">
+                        <form:option value="NONE" label="--- Select ---"/>
+                        <form:options items="<%= ComponentVersionService.instance().getComponentVersions() %>"/>
+                    </form:select>
+                </td>
+            </tr>
+        </c:forEach>
+
         <tr>
-            <th>
+            <td>
                 Description: <form:errors path="description" ccsClass="errors"/>
+            </td>
+            <td>
                 <form:input id="descriptionField" path="description" size="30" maxlength="180"/>
-            </th>
+            </td>
         </tr>
         <tr>
             <td>

@@ -1,4 +1,4 @@
-package com.ubs.gfit.buildpipeline.domain;
+package com.ubs.gfit.buildpipeline.domain.releaseversion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Acts as a service provider of all release versions.
+ * Acts as a provider of all release versions, this should be teh core interface with the persistence mechanism..
  * <p/>
  * User: suggitpe
  * Date: 06/07/11

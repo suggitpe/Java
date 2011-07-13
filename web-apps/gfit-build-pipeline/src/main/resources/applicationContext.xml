@@ -17,8 +17,10 @@
         </property>
     </bean>
 
-    <bean id="componentVersionService" class="com.ubs.gfit.buildpipeline.domain.ComponentVersionService">
-
+    <bean id="componentVersionService" class="com.ubs.gfit.buildpipeline.domain.component.impl.DirectorySearchingComponentVersionLocatorTest">
+        <property name="componentInstallDirectory" value="${component.install.dir}"/>
     </bean>
+
+    <bean id="" class="com.ubs.gfit.buildpipeline.domain.releaseversion.ReleaseVersionManager"
 
 </beans>

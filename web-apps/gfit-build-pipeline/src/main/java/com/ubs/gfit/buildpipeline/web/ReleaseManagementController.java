@@ -2,9 +2,9 @@ package com.ubs.gfit.buildpipeline.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.domain.ComponentVersionService;
-import com.ubs.gfit.buildpipeline.domain.ReleaseVersion;
-import com.ubs.gfit.buildpipeline.domain.ReleaseVersionManager;
+import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionService;
+import com.ubs.gfit.buildpipeline.domain.releaseversion.ReleaseVersion;
+import com.ubs.gfit.buildpipeline.domain.releaseversion.ReleaseVersionManager;
 import com.ubs.gfit.buildpipeline.validators.ReleaseVersionValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;

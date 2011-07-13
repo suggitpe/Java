@@ -1,6 +1,6 @@
-package com.ubs.gfit.buildpipeline.domain;
+package com.ubs.gfit.buildpipeline.domain.releaseversion;
 
-import java.util.Map;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public final class ReleaseVersion {
 
     private int version = 0;
     private String description;
-    private Map<String, String> componentVersions;
+    private Map<String, String> componentVersions = new HashMap<String, String>( );
 
     public ReleaseVersion() {
     }
@@ -30,16 +30,16 @@ public final class ReleaseVersion {
         description = aDescription;
     }
 
+    public boolean isNew() {
+        return ( version == 0 );
+    }
+
     public int getVersion() {
         return version;
     }
 
     public void setVersion( int aVersion ) {
         version = aVersion;
-    }
-
-    public boolean isNew() {
-        return ( version == 0 );
     }
 
     public String getDescription() {

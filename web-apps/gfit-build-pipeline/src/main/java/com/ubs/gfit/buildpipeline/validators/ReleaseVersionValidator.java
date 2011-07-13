@@ -2,7 +2,7 @@ package com.ubs.gfit.buildpipeline.validators;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.domain.ReleaseVersion;
+import com.ubs.gfit.buildpipeline.domain.releaseversion.ReleaseVersion;
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -27,11 +27,17 @@ public final class ReleaseVersionValidator implements Validator {
     }
 
     @Override
-    public void validate(Object aObject, Errors aErrors){
-        ReleaseVersion version = (ReleaseVersion) aObject;
+    public void validate( Object aObject, Errors aErrors ) {
+        ReleaseVersion version = ( ReleaseVersion ) aObject;
 
         if ( !StringUtils.hasLength( version.getDescription() ) ) {
-            aErrors.rejectValue( "Description", "required", "required" );
+            aErrors.rejectValue( "description", "required", "required" );
         }
+
+ //       for ( Component componentName : Component.values()){
+ //           if( !StringUtils.hasLength( version.getComponentVersions().get( componentName) )){
+ //               aErrors.rejectValue( "componentVersions[" + componentName.name() + "]", "required", "required");
+ //           }
+ //       }
     }
 }
