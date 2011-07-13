@@ -35,6 +35,7 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
     @Override
     public ComponentVersionWrapper getComponentVersions() {
         File file = new File( componentInstallDirectory );
+
         if ( !file.exists() ) {
             throw new IllegalStateException( "Cannot find directory [" + componentInstallDirectory + "]" );
         }
@@ -44,8 +45,7 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
         for ( File compDir : file.listFiles( DIRECTORY_FILTER ) ) {
             if ( isDirectoryGglComponent( compDir ) ) {
                 for ( File verDir : compDir.listFiles( DIRECTORY_FILTER ) ) {
-                    LOG.info( "Looking at comp[" + compDir.getName() + "] version [" + verDir.getName() + "]" );
-                    wrapper.addVersion( Component.valueOf( compDir.getName()), verDir.getName());
+                    wrapper.addVersion( Component.valueOf( compDir.getName() ), verDir.getName() );
                 }
             }
         }
@@ -61,6 +61,10 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
             return false;
         }
         return true;
+    }
+
+    public String getComponentInstallDirectory() {
+        return componentInstallDirectory;
     }
 
     public void setComponentInstallDirectory( String aComponentInstallDirectory ) {

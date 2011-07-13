@@ -5,8 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.pages.Pages;
 
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -49,40 +49,49 @@ public final class JBehaveBuildPipelineSteps {
         pages.homePage().isShown();
     }
 
+
     @Given("user is on Release Management page")
     public void givenUserIsOnReleaseManagementPage() {
         pages.releaseManagementPage().open();
     }
 
-    @When("user requests a new release")
-    public void whenUserRequestsANewRelease() {
+    @When("user creates a new release with a description of $description")
+    public void whenUserRequestsANewReleaseWithADescriptionOfFoo( @Named("description") String aDescription ) {
         pages.releaseManagementPage().requestNewRelease();
-    }
-
-    @Then("the new release version form is shown")
-    public void thenTheNewReleaseFormIsShown() {
         pages.releaseVersionForm().isShown();
-    }
-
-    @When("the user enters a release version comment of $description")
-    public void whenTheUserEntersAReleaseVersionCommentOfFoo( @Named("description") String aDescription ) {
         pages.releaseVersionForm().addDescription( aDescription );
-    }
-
-    @When("clicks Add New Release Version")
-    public void whenClicksAddNewReleaseVersion() {
         pages.releaseVersionForm().completeNew();
-    }
-
-    @Then("the release management page is shown")
-    public void thenTheReleaseManagementPageIsShown() {
         pages.releaseManagementPage().isShown();
     }
 
-    @Then("a unique identifier is displayed for the release described as $description")
-    public void thenAUniqueIdentifierIsDisplayedForTheReleaseDescribedAsFoo( @Named("description") String aDescription ) {
+    @Then("a new release is displayed with a description of $description")
+    public void thenANewReleaseIsDisplayedWithADescriptionOfFoo( @Named("description") String aDescription ) {
         int version = pages.releaseManagementPage().findVersionWithDescription( aDescription );
         assertThat( version, not( equalTo( 0 ) ) );
+    }
+
+    @Then("the release number of $description1 is different to the release number of $description2")
+    public void thenTheReleaseNumberOfFooIsDifferentToTheReleaseNumberOfBar( @Named("description1") String aDescription1,
+                                                                             @Named("description2") String aDescription2 ) {
+        int version1 = pages.releaseManagementPage().findVersionWithDescription( aDescription1 );
+        int version2 = pages.releaseManagementPage().findVersionWithDescription( aDescription2 );
+        assertThat( version1, not( equalTo( version2 ) ) );
+    }
+
+    @When("user requests a new release")
+    public void whenUserRequestsANewRelease() {
+        pages.releaseManagementPage().requestNewRelease();
+        pages.releaseVersionForm().isShown();
+    }
+
+    @Then("a number of component versions can be selected to that parent version")
+    @Pending
+    public void thenANumberOfComponentVersionsCanBeSelectedToThatParentVersion() {
+    }
+
+    @Then("they are forced to select a test version")
+    @Pending
+    public void thenTheyAreForcedToSelectATestVersion() {
     }
 
 

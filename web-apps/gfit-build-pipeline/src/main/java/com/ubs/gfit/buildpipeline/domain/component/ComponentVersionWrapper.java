@@ -27,6 +27,10 @@ public class ComponentVersionWrapper {
         return componentVersions.get( aComponent );
     }
 
+    public Map<Component, List<String>> getComponentVersions(){
+        return componentVersions;
+    }
+
     public void setVersionsForComponent( Component aComponent, List<String> aListOfVersions ) {
         if ( componentVersions.containsKey( aComponent ) ) {
             componentVersions.remove( aComponent );

@@ -5,20 +5,16 @@ In order to support GLL package construction
 As a build & release manager
 I want to be able to create unique identifiers
 
-Scenario: User can create unique identifiers from Release Management page
+Scenario: User can create a new version
 Given user is on Release Management page
-When user requests a new release
-Then the new release version form is shown
-When the user enters a release version comment of Foo
-And clicks Add New Release Version
-Then the release management page is shown
-And a unique identifier is displayed for the release described as Foo
-When user requests a new release
-Then the new release version form is shown
-When the user enters a release version comment of Bar
-And clicks Add New Release Version
-Then the release management page is shown
-And a unique identifier is displayed for the release described as Bar
+When user creates a new release with a description of CrazyNewRelease
+Then a new release is displayed with a description of CrazyNewRelease
+
+Scenario: User can create a new version with a unique release number
+Given user is on Release Management page
+When user creates a new release with a description of Foo
+And user creates a new release with a description of Bar
+Then the release number of Foo is different to the release number of Bar
 
 Scenario: User can choose versions of components that make up the GGL release version
 Given user is on Release Management page

@@ -46,7 +46,7 @@ public final class ReleaseManagementController {
     public String newReleaseRequest( Model aModel ) {
         ReleaseVersion version = new ReleaseVersion();
         aModel.addAttribute( version );
-        aModel.addAttribute( componentVersionService );
+        aModel.addAttribute( "componentVersionWrapper", componentVersionService.getComponentVersions() );
         return "releaseVersion/form";
     }
 

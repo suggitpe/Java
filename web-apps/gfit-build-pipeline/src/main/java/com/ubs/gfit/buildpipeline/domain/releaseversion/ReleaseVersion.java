@@ -25,11 +25,6 @@ public final class ReleaseVersion {
     public ReleaseVersion() {
     }
 
-    public ReleaseVersion( int aVersion, String aDescription ) {
-        version = aVersion;
-        description = aDescription;
-    }
-
     public boolean isNew() {
         return ( version == 0 );
     }
