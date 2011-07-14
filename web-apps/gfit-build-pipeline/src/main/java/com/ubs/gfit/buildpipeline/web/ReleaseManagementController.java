@@ -46,7 +46,7 @@ public final class ReleaseManagementController {
     public String newReleaseRequest( Model aModel ) {
         ReleaseVersion version = new ReleaseVersion();
         aModel.addAttribute( version );
-        aModel.addAttribute( "componentVersionWrapper", componentVersionService.getComponentVersions() );
+        aModel.addAttribute( "componentVersionsBean", componentVersionService.getComponentVersions() );
         return "releaseVersion/form";
     }
 
@@ -55,7 +55,7 @@ public final class ReleaseManagementController {
         new ReleaseVersionValidator().validate( releaseVersion, aResult );
         LOG.info("Validating object ["+releaseVersion+"]" );
         if ( aResult.hasErrors() ) {
-            aModel.addAttribute( "componentVersionWrapper", componentVersionService.getComponentVersions() );
+            aModel.addAttribute( "componentVersionsBean", componentVersionService.getComponentVersions() );
             return "releaseVersion/form";
         }
         else {

@@ -11,7 +11,7 @@
 
 <form:form modelAttribute="releaseVersion" method="${method}">
     <table>
-        <c:set var="versions" value="${componentVersionWrapper.componentVersions}"/>
+        <c:set var="versions" value="${componentVersionsBean.componentVersions}"/>
 
         <c:forEach items="<%= Component.values() %>" var="componentName">
             <tr>
