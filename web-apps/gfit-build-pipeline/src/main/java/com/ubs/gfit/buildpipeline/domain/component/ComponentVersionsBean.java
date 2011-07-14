@@ -16,10 +16,10 @@ import org.slf4j.LoggerFactory;
  * Time: 08:17
  */
 
-public class ComponentVersionWrapper {
+public class ComponentVersionsBean {
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( ComponentVersionWrapper.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ComponentVersionsBean.class );
 
     private Map<Component, List<String>> componentVersions = new HashMap<Component, List<String>>();
 

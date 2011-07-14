@@ -51,10 +51,11 @@ public final class ReleaseManagementController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String processReleaseRequest( @ModelAttribute ReleaseVersion releaseVersion, BindingResult aResult, SessionStatus aStatus ) {
+    public String processReleaseRequest( Model aModel, @ModelAttribute ReleaseVersion releaseVersion, BindingResult aResult, SessionStatus aStatus ) {
         new ReleaseVersionValidator().validate( releaseVersion, aResult );
         LOG.info("Validating object ["+releaseVersion+"]" );
         if ( aResult.hasErrors() ) {
+            aModel.addAttribute( "componentVersionWrapper", componentVersionService.getComponentVersions() );
             return "releaseVersion/form";
         }
         else {

@@ -8,7 +8,7 @@
 <h3>Defined Releases</h3>
 <table id="releasesTable">
     <thead>
-    <th>Release ID</th>
+    <th>GGL Version</th>
     <th>Description</th>
     </thead>
     <c:forEach var="rv" items="${releaseVersions}">

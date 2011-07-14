@@ -3,15 +3,13 @@ package com.ubs.gfit.buildpipeline.domain.component.impl;
 import java.io.File;
 import java.io.IOException;
 
-import org.hamcrest.core.IsNot;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.domain.component.Component;
-import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionWrapper;
+import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionsBean;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -51,15 +49,15 @@ public class DirectorySearchingComponentVersionLocatorTest {
         locator.setComponentInstallDirectory( BASE_DIR );
     }
 
-    @Test(expected = Exception.class)
-    public void shouldThrowExceptionWhenDirectoryDoesNotExist() {
+    @Test(expected = RuntimeException.class)
+    public void shouldThrowRuntimeExceptionWhenDirectoryDoesNotExist() {
         locator.setComponentInstallDirectory( "/foo/bar" );
         locator.getComponentVersions();
     }
 
     @Test
     public void shouldReadTestDirectoryVersions() {
-        ComponentVersionWrapper wrapper = locator.getComponentVersions();
+        ComponentVersionsBean wrapper = locator.getComponentVersions();
         assertThat(wrapper.getVersionsForComponent( Component.CAL) , is(not( nullValue() )));
         assertThat( locator.getComponentVersions().getVersionsForComponent( Component.CAL ).size(), equalTo( 4 ) );
         assertThat( locator.getComponentVersions().getVersionsForComponent( Component.FDD ).size(), equalTo( 1 ) );

@@ -26,3 +26,13 @@ Given user is on Release Management page
 When user requests a new release
 Then they are forced to select a test version
 
+Scenario: Test pack association is not treated in the same as components
+
+Scenario: Be able to see whats in each version
+
+Scenario: Be able to see a history of past versions and their contents
+
+Scenario: Be able to run test packs
+
+Scenario: Be able to see the status of each version (installed)
+

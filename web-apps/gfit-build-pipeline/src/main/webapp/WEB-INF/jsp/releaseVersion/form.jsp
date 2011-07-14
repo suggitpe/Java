@@ -19,7 +19,7 @@
                 <td>
                     <form:select path="componentVersions[${componentName}]">
                         <form:option value="NONE" label="--- Select ---"/>
-                        <form:options items="${versions}"/>
+                        <form:options items="${versions[componentName]}"/>
                     </form:select>
                 </td>
             </tr>

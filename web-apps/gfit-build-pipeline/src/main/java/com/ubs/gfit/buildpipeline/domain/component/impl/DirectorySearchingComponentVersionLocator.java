@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.domain.component.Component;
 import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionService;
-import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionWrapper;
+import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionsBean;
 
 /**
  * Simple class that will read from a file structure and build up a picture of all of the application versions that are
@@ -33,14 +33,14 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
     };
 
     @Override
-    public ComponentVersionWrapper getComponentVersions() {
+    public ComponentVersionsBean getComponentVersions() {
         File file = new File( componentInstallDirectory );
 
         if ( !file.exists() ) {
             throw new IllegalStateException( "Cannot find directory [" + componentInstallDirectory + "]" );
         }
 
-        ComponentVersionWrapper wrapper = new ComponentVersionWrapper();
+        ComponentVersionsBean wrapper = new ComponentVersionsBean();
 
         for ( File compDir : file.listFiles( DIRECTORY_FILTER ) ) {
             if ( isDirectoryGglComponent( compDir ) ) {

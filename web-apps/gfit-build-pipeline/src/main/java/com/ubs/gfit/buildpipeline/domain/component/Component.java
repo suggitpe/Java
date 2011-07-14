@@ -1,5 +1,7 @@
 package com.ubs.gfit.buildpipeline.domain.component;
 
+import sun.text.resources.FormatData_ro_RO;
+
 /**
  * Enumeration of the GGL components that have a version.
  * <p/>
@@ -10,6 +12,7 @@ package com.ubs.gfit.buildpipeline.domain.component;
 
 public enum Component {
     CAL,
+    CAL_FDR,
     FDD,
     FBI,
     FDR,
@@ -17,5 +20,6 @@ public enum Component {
     MOUSETRAP,
     CARD,
     RAM,
-    TEST_SUITE
+    ACCEPTANCE_TEST,
+    TEST_PACK
 }

@@ -1,7 +1,5 @@
 package com.ubs.gfit.buildpipeline.domain.component;
 
-import java.util.List;
-
 /**
  * Service that will provide the means to find out all of the versions of a component.
  * <p/>
@@ -11,5 +9,5 @@ import java.util.List;
  */
 public interface ComponentVersionService {
 
-    ComponentVersionWrapper getComponentVersions( );
+    ComponentVersionsBean getComponentVersions( );
 }

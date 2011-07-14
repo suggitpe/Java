@@ -34,10 +34,5 @@ public final class ReleaseVersionValidator implements Validator {
             aErrors.rejectValue( "description", "required", "required" );
         }
 
- //       for ( Component componentName : Component.values()){
- //           if( !StringUtils.hasLength( version.getComponentVersions().get( componentName) )){
- //               aErrors.rejectValue( "componentVersions[" + componentName.name() + "]", "required", "required");
- //           }
- //       }
     }
 }
