@@ -38,6 +38,10 @@ public final class ReleaseManagementPage extends AbstractPage {
         findElement( By.id( NEW_RELEASE_ID ) ).click();
     }
 
+    public WebElement findLinkForReleaseVersionDesription( String aDescription ) {
+        return findElement( By.xpath( "//table[@id='releasesTable']//tr[@id='" + aDescription + "']//td[@class='rvVersion']//a" ) );
+    }
+
     public int findVersionWithDescription( String aDescription ) {
         WebElement element = findElement( By.xpath( "//table[@id='releasesTable']//tr[@id='" + aDescription + "']//td[@class='rvVersion']" ) );
         LOG.info( "Found version [" + element.getText() + "] from description [" + aDescription + "]" );
@@ -48,4 +52,5 @@ public final class ReleaseManagementPage extends AbstractPage {
             throw new IllegalStateException( "Failed to convert version [" + element.getText() + "] into integer" );
         }
     }
+
 }

@@ -28,7 +28,7 @@ public final class ReleaseVersionForm extends AbstractPage {
         super( aWebDriverProvider );
     }
 
-    protected String expectedPageTitle(){
+    protected String expectedPageTitle() {
         return FORM_TITLE;
     }
 

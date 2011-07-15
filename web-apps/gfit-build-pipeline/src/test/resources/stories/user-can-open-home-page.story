@@ -9,3 +9,5 @@ Scenario: User opens home page
 Given no pre-requisites
 When user opens home page
 Then home page is displayed to the user
+
+

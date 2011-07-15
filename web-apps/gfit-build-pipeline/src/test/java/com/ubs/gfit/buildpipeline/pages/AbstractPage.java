@@ -52,7 +52,7 @@ abstract class AbstractPage extends WebDriverPage {
 
     public void isShown() {
         String pageTitle = findElement( By.id( "title" ) ).getText();
-        LOG.info( "Checking that the title ["+pageTitle+"] is equal to the expected [" + expectedPageTitle() + "]" );
+        LOG.info( "Checking that the title [" + pageTitle + "] is equal to the expected [" + expectedPageTitle() + "]" );
         assertThat( pageTitle, equalTo( expectedPageTitle() ) );
     }
 

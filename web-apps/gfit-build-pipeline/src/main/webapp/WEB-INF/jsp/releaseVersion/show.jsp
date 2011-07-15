@@ -10,7 +10,7 @@
     </tr>
     <tr>
         <th>Description</th>
-        <td>${releaseVersion.description}</td>
+        <td id="description">${releaseVersion.description}</td>
     </tr>
     <tr>
         <th>Create Date</th>

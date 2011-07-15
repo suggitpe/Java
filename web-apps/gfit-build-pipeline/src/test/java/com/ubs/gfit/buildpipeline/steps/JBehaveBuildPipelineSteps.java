@@ -91,12 +91,13 @@ public final class JBehaveBuildPipelineSteps {
 
     @When("user opens release with a description of $description")
     public void whenUserOpensReleaseWithADescriptionOfViewable( @Named("description") String aDescription ) {
-        pages.releaseVersionShow().isShown();
+        pages.releaseManagementPage().findLinkForReleaseVersionDesription( aDescription ).click();
     }
 
-    @Then("the user can see the contents of the release")
-    @Pending
-    public void thenTheUserCanSeeTheContentsOfTheRelease() {
+    @Then("the user can see the contents of the release described as $description")
+    public void thenTheUserCanSeeTheContentsOfTheRelease(@Named( "description") String aDescription) {
+        pages.releaseVersionShow().isShown();
+        pages.releaseVersionShow().ensureDescribes( aDescription );
     }
 
 }

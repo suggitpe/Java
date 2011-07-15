@@ -12,10 +12,14 @@
     </appender>
 
     <category name="org.springframework">
-        <priority value="debug"/>
+        <priority value="info"/>
     </category>
 
     <category name="org.jbehave">
+        <priority value="info"/>
+    </category>
+
+    <category name="org.openqa.selenium">
         <priority value="debug"/>
     </category>
 
