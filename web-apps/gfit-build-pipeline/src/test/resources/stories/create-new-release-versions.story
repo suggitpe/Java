@@ -12,9 +12,21 @@ Then a new release is displayed with a description of CrazyNewRelease
 
 Scenario: User can create a new version with a unique release number
 Given user is on Release Management page
-When user creates a new release with a description of Foo
-And user creates a new release with a description of Bar
+And an existing release with a description of Foo
+When user creates a new release with a description of Bar
 Then the release number of Foo is different to the release number of Bar
+
+Scenario: User can view release content
+Given user is on Release Management page
+And an existing release with a description of Viewable
+When user opens release with a description of Viewable
+Then the user can see the contents of the release
+
+Scenario: User can alter release content
+Given user is on Release Management page
+And an existing release with a description of Viewable
+When user opens release with a description of Viewable
+Then the user can change the description to Altered
 
 Scenario: User can choose versions of components that make up the GGL release version
 Given user is on Release Management page
@@ -27,8 +39,6 @@ When user requests a new release
 Then they are forced to select a test version
 
 Scenario: Test pack association is not treated in the same as components
-
-Scenario: Be able to see whats in each version
 
 Scenario: Be able to see a history of past versions and their contents
 

@@ -21,6 +21,7 @@ public final class Pages {
     private HomePage homePage;
     private ReleaseManagementPage releaseManagementPage;
     private ReleaseVersionForm releaseVersionForm;
+    private ReleaseVersionShow releaseVersionShow;
 
     public Pages( WebDriverProvider aWebDriverProvider ) {
         webDriverProvider = aWebDriverProvider;
@@ -45,6 +46,13 @@ public final class Pages {
             releaseVersionForm = new ReleaseVersionForm( webDriverProvider );
         }
         return releaseVersionForm;
+    }
+
+    public ReleaseVersionShow releaseVersionShow() {
+        if ( releaseVersionShow == null ) {
+            releaseVersionShow = new ReleaseVersionShow( webDriverProvider );
+        }
+        return releaseVersionShow;
     }
 
     public void closeBrowser() {

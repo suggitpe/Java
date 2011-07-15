@@ -64,6 +64,11 @@ public final class JBehaveBuildPipelineSteps {
         pages.releaseManagementPage().isShown();
     }
 
+    @Given("an existing release with a description of $description")
+    public void givenAnExistingReleaseWithADescriptionOfViewable( @Named("description") String aDescription ) {
+        whenUserRequestsANewReleaseWithADescriptionOfFoo( aDescription );
+    }
+
     @Then("a new release is displayed with a description of $description")
     public void thenANewReleaseIsDisplayedWithADescriptionOfFoo( @Named("description") String aDescription ) {
         int version = pages.releaseManagementPage().findVersionWithDescription( aDescription );
@@ -84,15 +89,14 @@ public final class JBehaveBuildPipelineSteps {
         pages.releaseVersionForm().isShown();
     }
 
-    @Then("a number of component versions can be selected to that parent version")
-    @Pending
-    public void thenANumberOfComponentVersionsCanBeSelectedToThatParentVersion() {
+    @When("user opens release with a description of $description")
+    public void whenUserOpensReleaseWithADescriptionOfViewable( @Named("description") String aDescription ) {
+        pages.releaseVersionShow().isShown();
     }
 
-    @Then("they are forced to select a test version")
+    @Then("the user can see the contents of the release")
     @Pending
-    public void thenTheyAreForcedToSelectATestVersion() {
+    public void thenTheUserCanSeeTheContentsOfTheRelease() {
     }
-
 
 }

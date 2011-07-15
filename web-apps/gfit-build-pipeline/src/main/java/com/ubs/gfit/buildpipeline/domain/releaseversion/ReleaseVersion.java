@@ -1,6 +1,8 @@
 package com.ubs.gfit.buildpipeline.domain.releaseversion;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,22 +20,23 @@ public final class ReleaseVersion {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersion.class );
 
-    private int version = 0;
+    private String version = "NEW";
     private String description;
-    private Map<String, String> componentVersions = new HashMap<String, String>( );
+    private Date createDate;
+    private Map<String, String> componentVersions = new HashMap<String, String>();
 
     public ReleaseVersion() {
     }
 
     public boolean isNew() {
-        return ( version == 0 );
+        return ( version.equals( "NEW" ) );
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion( int aVersion ) {
+    public void setVersion( String aVersion ) {
         version = aVersion;
     }
 
@@ -43,6 +46,14 @@ public final class ReleaseVersion {
 
     public void setDescription( String aDescription ) {
         description = aDescription;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate( Date aDate ) {
+        createDate = aDate;
     }
 
     public Map<String, String> getComponentVersions() {
@@ -56,36 +67,5 @@ public final class ReleaseVersion {
     public void addComponentVersion( String aComponentName, String aVersion ) {
         componentVersions.put( aComponentName, aVersion );
     }
-
-    @Override
-    public boolean equals( Object o ) {
-        if ( this == o ) return true;
-        if ( o == null || getClass() != o.getClass() ) return false;
-
-        ReleaseVersion that = ( ReleaseVersion ) o;
-
-        if ( version != that.version ) return false;
-        if ( componentVersions != null ? !componentVersions.equals( that.componentVersions ) : that.componentVersions != null )
-            return false;
-        if ( description != null ? !description.equals( that.description ) : that.description != null ) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = version;
-        result = 31 * result + ( description != null ? description.hashCode() : 0 );
-        result = 31 * result + ( componentVersions != null ? componentVersions.hashCode() : 0 );
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "ReleaseVersion{" +
-                "version=" + version +
-                ", description='" + description + '\'' +
-                ", componentVersions=" + componentVersions +
-                '}';
-    }
 }
+

@@ -10,11 +10,16 @@
     <thead>
     <th>GGL Version</th>
     <th>Description</th>
+    <th>Create Date</th>
     </thead>
     <c:forEach var="rv" items="${releaseVersions}">
         <tr id="${rv.description}">
-            <td class="rvVersion">${rv.version}</td>
-            <td class="rvDescription">${rv.description}</td>
+            <spring:url value="/release-management/{versionNumber}" var="rvUrl">
+                <spring:param name="versionNumber" value="${rv.version}"/>
+            </spring:url>
+            <td class="rvVersion"><a href="${fn:escapeXml(rvUrl)}">${rv.version}</a></td>
+            <td class="rvDescription"><a href="${fn:escapeXml(rvUrl)}">${rv.description}</a></td>
+            <td>${rv.createDate}</td>
         </tr>
     </c:forEach>
 </table>

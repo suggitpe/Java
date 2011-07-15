@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
@@ -53,17 +54,25 @@ public final class ReleaseManagementController {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String processReleaseRequest( Model aModel, @ModelAttribute ReleaseVersion releaseVersion, BindingResult aResult, SessionStatus aStatus ) {
         new ReleaseVersionValidator().validate( releaseVersion, aResult );
-        LOG.info("Validating object ["+releaseVersion+"]" );
+        LOG.info( "Validating object [" + releaseVersion + "]" );
         if ( aResult.hasErrors() ) {
             aModel.addAttribute( "componentVersionsBean", componentVersionService.getComponentVersions() );
             return "releaseVersion/form";
         }
         else {
-            LOG.info("Writing object ["+releaseVersion+"]" );
+            LOG.info( "Writing object [" + releaseVersion + "]" );
             ReleaseVersionManager.instance().createVersion( releaseVersion );
             aStatus.setComplete();
             return "redirect:/release-management";
         }
+    }
+
+    @RequestMapping(value = "/{releaseVersion}", method = RequestMethod.GET)
+    public ModelAndView showReleaseVersion( @PathVariable("releaseVersion") String aReleaseVersion ) {
+        LOG.debug( "Fetching release version ["+aReleaseVersion+"]");
+        ModelAndView mav = new ModelAndView("releaseVersion/show" );
+        mav.addObject( ReleaseVersionManager.instance().getVersion( aReleaseVersion));
+        return mav;
     }
 
 

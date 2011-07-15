@@ -1,13 +1,12 @@
 package com.ubs.gfit.buildpipeline.domain.releaseversion;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Acts as a provider of all release versions, this should be teh core interface with the persistence mechanism..
+ * Acts as a provider of all release versions, this should be the core interface with the persistence mechanism..
  * <p/>
  * User: suggitpe
  * Date: 06/07/11
@@ -22,7 +21,7 @@ public final class ReleaseVersionManager {
     private static ReleaseVersionManager instance = new ReleaseVersionManager();
     private int lastVersion = 0;
 
-    private List<ReleaseVersion> versions = new ArrayList<ReleaseVersion>();
+    private Map<String, ReleaseVersion> versions = new HashMap<String, ReleaseVersion>();
 
     public static ReleaseVersionManager instance() {
         return instance;
@@ -30,13 +29,17 @@ public final class ReleaseVersionManager {
 
     public void createVersion( ReleaseVersion aVersion ) {
         if ( aVersion.isNew() ) {
-            aVersion.setVersion( ++lastVersion );
+            aVersion.setVersion( Integer.toString( ++lastVersion ));
+            aVersion.setCreateDate( new Date(System.currentTimeMillis()) );
         }
-        versions.add( aVersion );
+        versions.put( aVersion.getVersion(), aVersion );
+    }
+    public ReleaseVersion getVersion(String aVersion){
+        return versions.get( aVersion);
     }
 
-    public List<ReleaseVersion> getAllReleaseVersions() {
-        return versions;
+    public Collection<ReleaseVersion> getAllReleaseVersions() {
+        return versions.values();
     }
 
 
