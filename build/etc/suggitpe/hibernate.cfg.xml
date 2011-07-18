@@ -22,7 +22,6 @@
         -->
         
         <!-- show sql debug -->
-        <!-- -->
         <!--
         <property name="show_sql">true</property>
         -->
