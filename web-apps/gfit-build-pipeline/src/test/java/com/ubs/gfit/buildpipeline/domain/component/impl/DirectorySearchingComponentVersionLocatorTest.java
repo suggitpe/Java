@@ -8,14 +8,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.domain.component.Component;
 import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionsBean;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 /**
- * TODO: Justify why you have written this class
+ * Test class for the DirectorySearchingComponentVersionLocator class
  * <p/>
  * User: suggitpe
  * Date: 12/07/11
@@ -58,8 +57,8 @@ public class DirectorySearchingComponentVersionLocatorTest {
     @Test
     public void shouldReadTestDirectoryVersions() {
         ComponentVersionsBean wrapper = locator.getComponentVersions();
-        assertThat(wrapper.getVersionsForComponent( Component.CAL) , is(not( nullValue() )));
-        assertThat( locator.getComponentVersions().getVersionsForComponent( Component.CAL ).size(), equalTo( 4 ) );
-        assertThat( locator.getComponentVersions().getVersionsForComponent( Component.FDD ).size(), equalTo( 1 ) );
+        assertThat(wrapper.getVersionsForComponent( "CAL") , is(not( nullValue() )));
+        assertThat( locator.getComponentVersions().getVersionsForComponent( "CAL" ).size(), equalTo( 4 ) );
+        assertThat( locator.getComponentVersions().getVersionsForComponent( "FDD" ).size(), equalTo( 1 ) );
     }
 }

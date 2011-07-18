@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * Time: 10:41
  */
 
-public final class ReleaseVersion {
+public final class ReleaseVersion implements Comparable<ReleaseVersion> {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersion.class );
@@ -26,6 +26,12 @@ public final class ReleaseVersion {
     private Map<String, String> componentVersions = new HashMap<String, String>();
 
     public ReleaseVersion() {
+    }
+
+    @Override
+    public int compareTo( ReleaseVersion aOtherVersion ) {
+        // note the - to reverse the order
+        return -( createDate.compareTo( aOtherVersion.getCreateDate() ) );
     }
 
     public boolean isNew() {

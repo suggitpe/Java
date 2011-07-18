@@ -5,7 +5,6 @@ import java.io.FileFilter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.domain.component.Component;
 import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionService;
 import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionsBean;
 
@@ -43,24 +42,12 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
         ComponentVersionsBean wrapper = new ComponentVersionsBean();
 
         for ( File compDir : file.listFiles( DIRECTORY_FILTER ) ) {
-            if ( isDirectoryGglComponent( compDir ) ) {
-                for ( File verDir : compDir.listFiles( DIRECTORY_FILTER ) ) {
-                    wrapper.addVersion( Component.valueOf( compDir.getName() ), verDir.getName() );
-                }
+            for ( File verDir : compDir.listFiles( DIRECTORY_FILTER ) ) {
+                wrapper.addVersion( compDir.getName(), verDir.getName() );
             }
         }
 
         return wrapper;
-    }
-
-    private boolean isDirectoryGglComponent( File aDirectory ) {
-        try {
-            Component.valueOf( aDirectory.getName() );
-        }
-        catch ( IllegalArgumentException iae ) {
-            return false;
-        }
-        return true;
     }
 
     public String getComponentInstallDirectory() {

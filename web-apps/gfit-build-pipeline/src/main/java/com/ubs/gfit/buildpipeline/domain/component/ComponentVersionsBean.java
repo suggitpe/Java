@@ -1,9 +1,6 @@
 package com.ubs.gfit.buildpipeline.domain.component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,24 +18,30 @@ public class ComponentVersionsBean {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ComponentVersionsBean.class );
 
-    private Map<Component, List<String>> componentVersions = new HashMap<Component, List<String>>();
+    private Map<String, List<String>> componentVersions = new HashMap<String, List<String>>();
 
-    public List<String> getVersionsForComponent( Component aComponent ) {
+    public List<String> getVersionsForComponent( String aComponent ) {
         return componentVersions.get( aComponent );
     }
 
-    public Map<Component, List<String>> getComponentVersions(){
+    public Map<String, List<String>> getComponentVersions() {
         return componentVersions;
     }
 
-    public void setVersionsForComponent( Component aComponent, List<String> aListOfVersions ) {
+    public List<String> getComponentNames() {
+        List<String> keys = new ArrayList<String> ( componentVersions.keySet() );
+        Collections.sort( keys);
+        return keys;
+    }
+
+    public void setVersionsForComponent( String aComponent, List<String> aListOfVersions ) {
         if ( componentVersions.containsKey( aComponent ) ) {
             componentVersions.remove( aComponent );
         }
         componentVersions.put( aComponent, aListOfVersions );
     }
 
-    public void addVersion( Component aComponent, String aVersion ) {
+    public void addVersion( String aComponent, String aVersion ) {
         if ( !componentVersions.containsKey( aComponent ) ) {
             componentVersions.put( aComponent, new ArrayList<String>() );
         }

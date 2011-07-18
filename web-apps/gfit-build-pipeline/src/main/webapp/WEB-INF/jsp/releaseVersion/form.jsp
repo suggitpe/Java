@@ -1,4 +1,3 @@
-<%@ page import="com.ubs.gfit.buildpipeline.domain.component.Component" %>
 <%@ include file="/WEB-INF/jsp/includes/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
 
@@ -11,15 +10,13 @@
 
 <form:form modelAttribute="releaseVersion" method="${method}">
     <table>
-        <c:set var="versions" value="${componentVersionsBean.componentVersions}"/>
-
-        <c:forEach items="<%= Component.values() %>" var="componentName">
+        <c:forEach items="${componentVersionsBean.componentNames}" var="componentName">
             <tr>
                 <td>${componentName} version: <form:errors path="componentVersions[${componentName}]"/></td>
                 <td>
                     <form:select path="componentVersions[${componentName}]">
                         <form:option value="NONE" label="--- Select ---"/>
-                        <form:options items="${versions[componentName]}"/>
+                        <form:options items="${componentVersionsBean.componentVersions[componentName]}"/>
                     </form:select>
                 </td>
             </tr>

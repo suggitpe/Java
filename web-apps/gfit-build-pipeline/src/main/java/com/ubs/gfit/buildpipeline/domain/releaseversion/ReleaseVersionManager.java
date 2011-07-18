@@ -29,17 +29,20 @@ public final class ReleaseVersionManager {
 
     public void createVersion( ReleaseVersion aVersion ) {
         if ( aVersion.isNew() ) {
-            aVersion.setVersion( Integer.toString( ++lastVersion ));
-            aVersion.setCreateDate( new Date(System.currentTimeMillis()) );
+            aVersion.setVersion( Integer.toString( ++lastVersion ) );
+            aVersion.setCreateDate( new Date( System.currentTimeMillis() ) );
         }
         versions.put( aVersion.getVersion(), aVersion );
     }
-    public ReleaseVersion getVersion(String aVersion){
-        return versions.get( aVersion);
+
+    public ReleaseVersion getVersion( String aVersion ) {
+        return versions.get( aVersion );
     }
 
-    public Collection<ReleaseVersion> getAllReleaseVersions() {
-        return versions.values();
+    public List<ReleaseVersion> getAllReleaseVersions() {
+        List<ReleaseVersion> values = new ArrayList<ReleaseVersion>( versions.values() );
+        Collections.sort( values );
+        return values;
     }
 
 
