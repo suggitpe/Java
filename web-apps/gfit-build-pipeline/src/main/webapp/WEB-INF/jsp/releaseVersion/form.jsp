@@ -42,13 +42,15 @@
                 </c:choose>
             </td>
         </tr>
+        <tr>
+            <td>
+                <c:if test="${!releaseVersion.new}">
+                    <form:form method="delete">
+                        <p class="submit"><input type="submit" value="Delete Release Version"/></p>
+                    </form:form>
+                </c:if>
+            </td>
+        </tr>
     </table>
 </form:form>
-
-<c:if test="${!releaseVersion.new}">
-    <form:form method="delete">
-        <p class="submit"><input id="deleteButton" type="submit" value="Delete Release Version"/></p>
-    </form:form>
-</c:if>
-
 <%@ include file="/WEB-INF/jsp/includes/footer.jsp" %>

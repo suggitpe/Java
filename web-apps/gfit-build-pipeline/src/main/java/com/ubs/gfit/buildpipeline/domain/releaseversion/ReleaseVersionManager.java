@@ -27,11 +27,12 @@ public final class ReleaseVersionManager {
         return instance;
     }
 
-    public void createVersion( ReleaseVersion aVersion ) {
+    public void addVersion( ReleaseVersion aVersion ) {
         if ( aVersion.isNew() ) {
             aVersion.setVersion( Integer.toString( ++lastVersion ) );
             aVersion.setCreateDate( new Date( System.currentTimeMillis() ) );
         }
+        LOG.debug( "Adding a new version [" + aVersion + "]" );
         versions.put( aVersion.getVersion(), aVersion );
     }
 
@@ -45,5 +46,7 @@ public final class ReleaseVersionManager {
         return values;
     }
 
-
+    public void remove( String aReleaseVersion ) {
+        versions.remove( aReleaseVersion );
+    }
 }

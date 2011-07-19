@@ -23,6 +23,16 @@
         </tr>
     </c:forEach>
 </table>
+<table class="table-buttons">
+    <tr>
+        <td colspan="2" align="centre">
+            <spring:url value="{rvId}/edit" var="editUrl">
+                <spring:param name="rvId" value="${releaseVersion.version}"/>
+            </spring:url>
+            <a href="${fn:escapeXml(editUrl)}">Edit version</a>
+        </td>
+    </tr>
+</table>
 
 
 <%@ include file="/WEB-INF/jsp/includes/footer.jsp" %>

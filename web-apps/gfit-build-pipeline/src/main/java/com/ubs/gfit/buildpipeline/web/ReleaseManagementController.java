@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/release-management")
+@SessionAttributes(types = ReleaseVersion.class)
 public final class ReleaseManagementController {
 
     @SuppressWarnings("unused")
@@ -37,7 +35,7 @@ public final class ReleaseManagementController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView handleReleaseVersions() {
-        LOG.debug( "getting all of the release versions" );
+        LOG.debug( "Getting all of the release versions" );
         ModelAndView mav = new ModelAndView();
         mav.addObject( "releaseVersions", ReleaseVersionManager.instance().getAllReleaseVersions() );
         return mav;
@@ -45,6 +43,7 @@ public final class ReleaseManagementController {
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newReleaseRequest( Model aModel ) {
+        LOG.debug( "Getting a new release version form" );
         ReleaseVersion version = new ReleaseVersion();
         aModel.addAttribute( version );
         aModel.addAttribute( "componentVersionsBean", componentVersionService.getComponentVersions() );
@@ -53,15 +52,14 @@ public final class ReleaseManagementController {
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String processReleaseRequest( Model aModel, @ModelAttribute ReleaseVersion releaseVersion, BindingResult aResult, SessionStatus aStatus ) {
+        LOG.debug( "Posting a new release version form" );
         new ReleaseVersionValidator().validate( releaseVersion, aResult );
-        LOG.info( "Validating object [" + releaseVersion + "]" );
         if ( aResult.hasErrors() ) {
             aModel.addAttribute( "componentVersionsBean", componentVersionService.getComponentVersions() );
             return "releaseVersion/form";
         }
         else {
-            LOG.info( "Writing object [" + releaseVersion + "]" );
-            ReleaseVersionManager.instance().createVersion( releaseVersion );
+            ReleaseVersionManager.instance().addVersion( releaseVersion );
             aStatus.setComplete();
             return "redirect:/release-management";
         }
@@ -69,11 +67,40 @@ public final class ReleaseManagementController {
 
     @RequestMapping(value = "/{releaseVersion}", method = RequestMethod.GET)
     public ModelAndView showReleaseVersion( @PathVariable("releaseVersion") String aReleaseVersion ) {
-        LOG.debug( "Fetching release version ["+aReleaseVersion+"]");
-        ModelAndView mav = new ModelAndView("releaseVersion/show" );
-        mav.addObject( ReleaseVersionManager.instance().getVersion( aReleaseVersion));
+        LOG.debug( "Getting a single release version for [" + aReleaseVersion + "]" );
+        ModelAndView mav = new ModelAndView( "releaseVersion/show" );
+        mav.addObject( ReleaseVersionManager.instance().getVersion( aReleaseVersion ) );
         return mav;
     }
 
+    @RequestMapping(value = "/{releaseVersion}/edit", method = RequestMethod.GET)
+    public String setupEditForm( @PathVariable("releaseVersion") String aReleaseVersion, Model aModel ) {
+        LOG.debug( "Getting a edit release version form for [" + aReleaseVersion + "]" );
+        ReleaseVersion version = ReleaseVersionManager.instance().getVersion( aReleaseVersion );
+        aModel.addAttribute( version );
+        aModel.addAttribute( "componentVersionsBean", componentVersionService.getComponentVersions() );
+        return "releaseVersion/form";
+    }
+
+    @RequestMapping(value = "/{releaseVersion}/edit", method = RequestMethod.POST)
+    public String processSubmitEdit( Model aModel, @ModelAttribute ReleaseVersion releaseVersion, BindingResult aBindingResult, SessionStatus aStatus ) {
+        LOG.debug( "Posting a edit release version form for [" + releaseVersion + "]" );
+        new ReleaseVersionValidator().validate( releaseVersion, aBindingResult );
+        if ( aBindingResult.hasErrors() ) {
+            aModel.addAttribute( "componentVersionsBean", componentVersionService.getComponentVersions() );
+            return "releaseVersion/form";
+        }
+        else {
+            ReleaseVersionManager.instance().addVersion( releaseVersion );
+            aStatus.setComplete();
+            return "redirect:/release-management/" + releaseVersion.getVersion();
+        }
+    }
+
+    @RequestMapping( value = "/{releaseVersion}/edit", method = RequestMethod.DELETE)
+    public String processDeleteReleaseVersion(@PathVariable("releaseVersion") String aReleaseVersion){
+        ReleaseVersionManager.instance().remove(aReleaseVersion);
+        return "redirect:/release-management";
+    }
 
 }
