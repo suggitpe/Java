@@ -25,7 +25,6 @@
         <!--
         <property name="show_sql">true</property>
         -->
-        <!-- -->
         
         <!-- Enable Hibernate's automatic session context management -->
         <!--
