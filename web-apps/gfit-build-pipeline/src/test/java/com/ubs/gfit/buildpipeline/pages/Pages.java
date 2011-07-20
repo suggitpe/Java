@@ -56,6 +56,7 @@ public final class Pages {
     }
 
     public void closeBrowser() {
+        webDriverProvider.get().close();
     }
 
 }

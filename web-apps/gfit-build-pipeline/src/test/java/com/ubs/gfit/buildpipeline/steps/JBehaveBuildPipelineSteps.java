@@ -30,7 +30,7 @@ public final class JBehaveBuildPipelineSteps {
         pages = aPages;
     }
 
-    @AfterScenario
+    @AfterStories
     public void closeBrowser() {
         pages.closeBrowser();
     }
@@ -49,7 +49,6 @@ public final class JBehaveBuildPipelineSteps {
         pages.homePage().isShown();
     }
 
-
     @Given("user is on Release Management page")
     public void givenUserIsOnReleaseManagementPage() {
         pages.releaseManagementPage().open();
@@ -57,7 +56,6 @@ public final class JBehaveBuildPipelineSteps {
 
     @When("user creates a new release with a description of $description")
     public void whenUserRequestsANewReleaseWithADescriptionOf( @Named("description") String aDescription ) {
-        pages.releaseManagementPage().open();
         pages.releaseManagementPage().requestNewRelease();
         pages.releaseVersionForm().isShown();
         pages.releaseVersionForm().addDescription( aDescription );
@@ -67,6 +65,7 @@ public final class JBehaveBuildPipelineSteps {
 
     @Given("an existing release with a description of $description")
     public void givenAnExistingReleaseWithADescriptionOf( @Named("description") String aDescription ) {
+        pages.releaseManagementPage().open();
         whenUserRequestsANewReleaseWithADescriptionOf( aDescription );
     }
 
@@ -96,7 +95,7 @@ public final class JBehaveBuildPipelineSteps {
     }
 
     @Then("the user can see the contents of the release described as $description")
-    public void thenTheUserCanSeeTheContentsOfTheRelease(@Named( "description") String aDescription) {
+    public void thenTheUserCanSeeTheContentsOfTheRelease( @Named("description") String aDescription ) {
         pages.releaseVersionShow().isShown();
         pages.releaseVersionShow().ensureDescribes( aDescription );
     }
