@@ -2,10 +2,11 @@ package com.ubs.gfit.buildpipeline.pages;
 
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 
@@ -32,7 +33,22 @@ public final class ReleaseVersionShow extends AbstractPage {
     }
 
     public void ensureDescribes( String aDescription ) {
+        LOG.debug( "Checking that the description of the release is [" + aDescription + "]" );
         String description = findElement( By.id( "description" ) ).getText();
         assertThat( description, equalTo( aDescription ) );
+    }
+
+    public void editRelease() {
+        LOG.debug( "Editing the release" );
+        WebElement elem = findElement( By.id( "editReleaseVersionLink" ) );
+        assertThat( elem, is( notNullValue() ) );
+        elem.click();
+    }
+
+    public String getVersion() {
+        String version = findElement( By.id( "releaseVersion" ) ).getText();
+        LOG.debug( "Extract version as [" + version + "]" );
+        assertThat( version, is( notNullValue() ) );
+        return version;
     }
 }

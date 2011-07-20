@@ -1,3 +1,4 @@
+<%--suppress HtmlUnknownTarget --%>
 <%@ include file="/WEB-INF/jsp/includes/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
 

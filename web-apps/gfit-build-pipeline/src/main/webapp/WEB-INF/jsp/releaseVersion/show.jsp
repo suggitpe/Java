@@ -6,7 +6,7 @@
 <table>
     <tr>
         <th>Release Version</th>
-        <td>${releaseVersion.version}</td>
+        <td id="releaseVersion">${releaseVersion.version}</td>
     </tr>
     <tr>
         <th>Description</th>
@@ -29,7 +29,7 @@
             <spring:url value="{rvId}/edit" var="editUrl">
                 <spring:param name="rvId" value="${releaseVersion.version}"/>
             </spring:url>
-            <a href="${fn:escapeXml(editUrl)}">Edit version</a>
+            <a id="editReleaseVersionLink" href="${fn:escapeXml(editUrl)}">Edit version</a>
         </td>
     </tr>
 </table>

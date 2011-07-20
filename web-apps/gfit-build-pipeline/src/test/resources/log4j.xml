@@ -23,6 +23,10 @@
         <priority value="debug"/>
     </category>
 
+    <category name="com.ubs.gfit.buildpipeline.pages">
+        <priority value="debug"/>
+    </category>
+
     <root>
         <priority value="info"/>
         <appender-ref ref="ConsoleAppender"/>
