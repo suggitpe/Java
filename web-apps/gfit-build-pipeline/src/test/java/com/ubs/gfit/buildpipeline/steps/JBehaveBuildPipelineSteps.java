@@ -56,7 +56,8 @@ public final class JBehaveBuildPipelineSteps {
     }
 
     @When("user creates a new release with a description of $description")
-    public void whenUserRequestsANewReleaseWithADescriptionOfFoo( @Named("description") String aDescription ) {
+    public void whenUserRequestsANewReleaseWithADescriptionOf( @Named("description") String aDescription ) {
+        pages.releaseManagementPage().open();
         pages.releaseManagementPage().requestNewRelease();
         pages.releaseVersionForm().isShown();
         pages.releaseVersionForm().addDescription( aDescription );
@@ -65,8 +66,8 @@ public final class JBehaveBuildPipelineSteps {
     }
 
     @Given("an existing release with a description of $description")
-    public void givenAnExistingReleaseWithADescriptionOfViewable( @Named("description") String aDescription ) {
-        whenUserRequestsANewReleaseWithADescriptionOfFoo( aDescription );
+    public void givenAnExistingReleaseWithADescriptionOf( @Named("description") String aDescription ) {
+        whenUserRequestsANewReleaseWithADescriptionOf( aDescription );
     }
 
     @Then("a new release is displayed with a description of $description")
