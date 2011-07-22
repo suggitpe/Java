@@ -49,4 +49,9 @@ public final class ReleaseVersionManager {
     public void remove( String aReleaseVersion ) {
         versions.remove( aReleaseVersion );
     }
+
+    public void deleteAllReleaseVersions() {
+        LOG.warn( "Removing all release versions");
+        versions.clear();
+    }
 }
