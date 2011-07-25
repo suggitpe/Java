@@ -33,7 +33,7 @@ public final class ReleaseManagementPage extends AbstractPage {
     }
 
     public void open() {
-        get( BASE_URL + "/release-management" );
+        getWebDriver().get( BASE_URL + "/release-management" );
     }
 
     protected String expectedPageTitle() {
@@ -41,11 +41,11 @@ public final class ReleaseManagementPage extends AbstractPage {
     }
 
     public void requestNewRelease() {
-        findElement( By.id( NEW_RELEASE_ID ) ).click();
+        getWebDriver().findElement( By.id( NEW_RELEASE_ID ) ).click();
     }
 
     private WebElement getLinkForReleaseVersionDescription( String aDescription ) {
-        return findElement( By.xpath( "//table[@id='releasesTable']//tr[@id='" + aDescription + "']//td[@class='rvVersion']//a" ) );
+        return getWebDriver().findElement( By.xpath( "//table[@id='releasesTable']//tr[@id='" + aDescription + "']//td[@class='rvVersion']//a" ) );
     }
 
     public WebElement findLinkForReleaseVersionDesription( String aDescription ) {
@@ -55,7 +55,7 @@ public final class ReleaseManagementPage extends AbstractPage {
     }
 
     public String findVersionWithDescription( String aDescription ) {
-        WebElement element = findElement( By.xpath( "//table[@id='releasesTable']//tr[@id='" + aDescription + "']//td[@class='rvVersion']" ) );
+        WebElement element = getWebDriver().findElement( By.xpath( "//table[@id='releasesTable']//tr[@id='" + aDescription + "']//td[@class='rvVersion']" ) );
         LOG.info( "Found version [" + element.getText() + "] from description [" + aDescription + "]" );
         assertThat( element, is( notNullValue() ) );
         return element.getText();

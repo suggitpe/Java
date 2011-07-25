@@ -3,6 +3,7 @@ package com.ubs.gfit.buildpipeline.pages;
 import org.jbehave.web.selenium.WebDriverPage;
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +32,7 @@ abstract class AbstractPage extends WebDriverPage {
     }
 
     public void found( String aText ) {
-        found( getPageSource(), aText );
+        found( getWebDriver().getPageSource(), aText );
     }
 
     public void found( String aPageSource, String aText ) {
@@ -43,17 +44,21 @@ abstract class AbstractPage extends WebDriverPage {
     }
 
     public void returnToHome() {
-        findElement( By.id( "home" ) ).click();
+        getWebDriver().findElement( By.id( "home" ) ).click();
     }
 
     public void returnToHomePage() {
-        findElement( By.id( "homeLink" ) ).click();
+        getWebDriver().findElement( By.id( "homeLink" ) ).click();
     }
 
     public void isShown() {
-        String pageTitle = findElement( By.id( "title" ) ).getText();
+        String pageTitle = getWebDriver().findElement( By.id( "title" ) ).getText();
         LOG.info( "Checking that the title [" + pageTitle + "] is equal to the expected [" + expectedPageTitle() + "]" );
         assertThat( pageTitle, equalTo( expectedPageTitle() ) );
+    }
+
+    protected WebDriver getWebDriver(){
+        return webDriver();
     }
 
     protected abstract String expectedPageTitle();

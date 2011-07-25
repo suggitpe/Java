@@ -37,31 +37,31 @@ public final class ReleaseVersionForm extends AbstractPage {
     }
 
     public void setDescription( String aDescription ) {
-        WebElement descElem = findElement( By.id( DESC_FIELD ) );
+        WebElement descElem = getWebDriver().findElement( By.id( DESC_FIELD ) );
         descElem.clear();
         descElem.sendKeys( aDescription );
         LOG.debug( "Updated description to [" + descElem.getText() + "]" );
     }
 
     public void completeNew() {
-        findElement( By.id( NEW_BUTTON ) ).click();
+        getWebDriver().findElement( By.id( NEW_BUTTON ) ).click();
     }
 
     public void completeUpdate() {
-        findElement( By.id( UPDATE_BUTTON ) ).click();
+        getWebDriver().findElement( By.id( UPDATE_BUTTON ) ).click();
     }
 
     public void completeDelete() {
-        findElement( By.id( DELETE_BUTTON ) ).click();
+        getWebDriver().findElement( By.id( DELETE_BUTTON ) ).click();
     }
 
     public void isShownInNewForm() {
-        String pageTitle = findElement( By.id( "title" ) ).getText();
+        String pageTitle = getWebDriver().findElement( By.id( "title" ) ).getText();
         assertThat( pageTitle, equalTo( "New " + FORM_TITLE ) );
     }
 
     public void isShownInEditForm() {
-        String pageTitle = findElement( By.id( "title" ) ).getText();
+        String pageTitle = getWebDriver().findElement( By.id( "title" ) ).getText();
         assertThat( pageTitle, equalTo( "Edit " + FORM_TITLE ) );
     }
 }

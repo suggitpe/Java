@@ -34,19 +34,19 @@ public final class ReleaseVersionShow extends AbstractPage {
 
     public void ensureDescribes( String aDescription ) {
         LOG.debug( "Checking that the description of the release is [" + aDescription + "]" );
-        String description = findElement( By.id( "description" ) ).getText();
+        String description = getWebDriver().findElement( By.id( "description" ) ).getText();
         assertThat( description, equalTo( aDescription ) );
     }
 
     public void editRelease() {
         LOG.debug( "Editing the release" );
-        WebElement elem = findElement( By.id( "editReleaseVersionLink" ) );
+        WebElement elem = getWebDriver().findElement( By.id( "editReleaseVersionLink" ) );
         assertThat( elem, is( notNullValue() ) );
         elem.click();
     }
 
     public String getVersion() {
-        String version = findElement( By.id( "releaseVersion" ) ).getText();
+        String version = getWebDriver().findElement( By.id( "releaseVersion" ) ).getText();
         LOG.debug( "Extract version as [" + version + "]" );
         assertThat( version, is( notNullValue() ) );
         return version;

@@ -28,7 +28,7 @@ public final class HomePage extends AbstractPage {
     }
 
     public void open() {
-        get( BASE_URL );
+        getWebDriver().get( BASE_URL );
     }
 
 
