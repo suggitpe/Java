@@ -1,7 +1,5 @@
 package com.ubs.gfit.buildpipeline.pages;
 
-import org.jbehave.web.selenium.WebDriverPage;
-import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -19,16 +17,17 @@ import static org.junit.internal.matchers.StringContains.containsString;
  * Time: 18:58
  */
 
-abstract class AbstractPage extends WebDriverPage {
+abstract class AbstractPage {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( AbstractPage.class );
 
 
     protected static final String BASE_URL = "http://localhost:9099/gfit-build-pipeline";
+    private WebDriver webDriver;
 
-    AbstractPage( WebDriverProvider aWebDriver ) {
-        super( aWebDriver );
+    AbstractPage( WebDriver aWebDriver ) {
+        webDriver = aWebDriver;
     }
 
     public void found( String aText ) {
@@ -57,8 +56,8 @@ abstract class AbstractPage extends WebDriverPage {
         assertThat( pageTitle, equalTo( expectedPageTitle() ) );
     }
 
-    protected WebDriver getWebDriver(){
-        return webDriver();
+    protected WebDriver getWebDriver() {
+        return webDriver;
     }
 
     protected abstract String expectedPageTitle();

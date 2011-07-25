@@ -1,7 +1,7 @@
 package com.ubs.gfit.buildpipeline.pages;
 
-import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public final class ReleaseVersionForm extends AbstractPage {
     private static final String UPDATE_BUTTON = "updateButton";
     private static final String DELETE_BUTTON = "deleteButton";
 
-    public ReleaseVersionForm( WebDriverProvider aWebDriver ) {
+    public ReleaseVersionForm( WebDriver aWebDriver ) {
         super( aWebDriver );
     }
 

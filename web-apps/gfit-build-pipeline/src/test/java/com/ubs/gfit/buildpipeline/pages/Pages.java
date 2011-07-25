@@ -29,28 +29,28 @@ public final class Pages {
 
     public HomePage homePage() {
         if ( homePage == null ) {
-            homePage = new HomePage( webDriver );
+            homePage = new HomePage( webDriver.get() );
         }
         return homePage;
     }
 
     public ReleaseManagementPage releaseManagementPage() {
         if ( releaseManagementPage == null ) {
-            releaseManagementPage = new ReleaseManagementPage( webDriver );
+            releaseManagementPage = new ReleaseManagementPage( webDriver.get() );
         }
         return releaseManagementPage;
     }
 
     public ReleaseVersionForm releaseVersionForm() {
         if ( releaseVersionForm == null ) {
-            releaseVersionForm = new ReleaseVersionForm( webDriver );
+            releaseVersionForm = new ReleaseVersionForm( webDriver.get() );
         }
         return releaseVersionForm;
     }
 
     public ReleaseVersionShow releaseVersionShow() {
         if ( releaseVersionShow == null ) {
-            releaseVersionShow = new ReleaseVersionShow( webDriver );
+            releaseVersionShow = new ReleaseVersionShow( webDriver.get() );
         }
         return releaseVersionShow;
     }

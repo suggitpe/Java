@@ -1,8 +1,8 @@
 package com.ubs.gfit.buildpipeline.pages;
 
-import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public final class ReleaseManagementPage extends AbstractPage {
     private static final String RELEASE_MANAGEMENT_PAGE_TITLE = "Release Management";
     private static final String NEW_RELEASE_ID = "newVersionLink";
 
-    public ReleaseManagementPage( WebDriverProvider aWebDriver ) {
+    public ReleaseManagementPage( WebDriver aWebDriver ) {
         super( aWebDriver );
     }
 

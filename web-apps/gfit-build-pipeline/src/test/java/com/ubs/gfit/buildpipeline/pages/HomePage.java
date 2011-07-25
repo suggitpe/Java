@@ -1,6 +1,6 @@
 package com.ubs.gfit.buildpipeline.pages;
 
-import org.jbehave.web.selenium.WebDriverProvider;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +19,7 @@ public final class HomePage extends AbstractPage {
 
     public static final String HOME_PAGE_TITLE = "Home";
 
-    public HomePage( WebDriverProvider aWebDriver ) {
+    public HomePage( WebDriver aWebDriver ) {
         super( aWebDriver );
     }
 

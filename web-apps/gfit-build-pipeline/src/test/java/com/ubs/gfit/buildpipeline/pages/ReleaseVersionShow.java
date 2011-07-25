@@ -1,7 +1,7 @@
 package com.ubs.gfit.buildpipeline.pages;
 
-import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public final class ReleaseVersionShow extends AbstractPage {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionShow.class );
 
-    public ReleaseVersionShow( WebDriverProvider aWebDriver ) {
+    public ReleaseVersionShow( WebDriver aWebDriver ) {
         super( aWebDriver );
     }
 
