@@ -19,8 +19,8 @@ public final class HomePage extends AbstractPage {
 
     public static final String HOME_PAGE_TITLE = "Home";
 
-    public HomePage( WebDriverProvider aWebDriver ) {
-        super( aWebDriver );
+    public HomePage( WebDriverProvider aWebDriverProvider ) {
+        super( aWebDriverProvider );
     }
 
     protected String expectedPageTitle() {

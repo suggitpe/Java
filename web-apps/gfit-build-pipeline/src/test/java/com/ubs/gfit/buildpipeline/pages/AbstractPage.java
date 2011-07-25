@@ -26,8 +26,8 @@ abstract class AbstractPage extends WebDriverPage {
 
     protected static final String BASE_URL = "http://localhost:9099/gfit-build-pipeline";
 
-    AbstractPage( WebDriverProvider aWebDriver ) {
-        super( aWebDriver );
+    AbstractPage( WebDriverProvider aWebDriverProvider ) {
+        super( aWebDriverProvider );
     }
 
     public void found( String aText ) {

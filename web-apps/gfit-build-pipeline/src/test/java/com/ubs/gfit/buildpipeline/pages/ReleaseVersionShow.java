@@ -23,8 +23,8 @@ public final class ReleaseVersionShow extends AbstractPage {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionShow.class );
 
-    public ReleaseVersionShow( WebDriverProvider aWebDriver ) {
-        super( aWebDriver );
+    public ReleaseVersionShow( WebDriverProvider aWebDriverProvider ) {
+        super( aWebDriverProvider );
     }
 
     @Override

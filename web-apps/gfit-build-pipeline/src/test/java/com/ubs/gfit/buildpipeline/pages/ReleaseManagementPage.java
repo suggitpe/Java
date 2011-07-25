@@ -28,8 +28,8 @@ public final class ReleaseManagementPage extends AbstractPage {
     private static final String RELEASE_MANAGEMENT_PAGE_TITLE = "Release Management";
     private static final String NEW_RELEASE_ID = "newVersionLink";
 
-    public ReleaseManagementPage( WebDriverProvider aWebDriver ) {
-        super( aWebDriver );
+    public ReleaseManagementPage( WebDriverProvider aWebDriverProvider ) {
+        super( aWebDriverProvider );
     }
 
     public void open() {
