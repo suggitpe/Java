@@ -17,46 +17,46 @@ public final class Pages {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( Pages.class );
 
-    private final WebDriverProvider webDriverProvider;
+    private final WebDriverProvider webDriver;
     private HomePage homePage;
     private ReleaseManagementPage releaseManagementPage;
     private ReleaseVersionForm releaseVersionForm;
     private ReleaseVersionShow releaseVersionShow;
 
-    public Pages( WebDriverProvider aWebDriverProvider ) {
-        webDriverProvider = aWebDriverProvider;
+    public Pages( WebDriverProvider aWebDriver ) {
+        webDriver = aWebDriver;
     }
 
     public HomePage homePage() {
         if ( homePage == null ) {
-            homePage = new HomePage( webDriverProvider );
+            homePage = new HomePage( webDriver );
         }
         return homePage;
     }
 
     public ReleaseManagementPage releaseManagementPage() {
         if ( releaseManagementPage == null ) {
-            releaseManagementPage = new ReleaseManagementPage( webDriverProvider );
+            releaseManagementPage = new ReleaseManagementPage( webDriver );
         }
         return releaseManagementPage;
     }
 
     public ReleaseVersionForm releaseVersionForm() {
         if ( releaseVersionForm == null ) {
-            releaseVersionForm = new ReleaseVersionForm( webDriverProvider );
+            releaseVersionForm = new ReleaseVersionForm( webDriver );
         }
         return releaseVersionForm;
     }
 
     public ReleaseVersionShow releaseVersionShow() {
         if ( releaseVersionShow == null ) {
-            releaseVersionShow = new ReleaseVersionShow( webDriverProvider );
+            releaseVersionShow = new ReleaseVersionShow( webDriver );
         }
         return releaseVersionShow;
     }
 
     public void closeBrowser() {
-        webDriverProvider.get().close();
+        webDriver.get().close();
     }
 
 }

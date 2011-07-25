@@ -28,8 +28,8 @@ public final class ReleaseVersionForm extends AbstractPage {
     private static final String UPDATE_BUTTON = "updateButton";
     private static final String DELETE_BUTTON = "deleteButton";
 
-    public ReleaseVersionForm( WebDriverProvider aWebDriverProvider ) {
-        super( aWebDriverProvider );
+    public ReleaseVersionForm( WebDriverProvider aWebDriver ) {
+        super( aWebDriver );
     }
 
     protected String expectedPageTitle() {
