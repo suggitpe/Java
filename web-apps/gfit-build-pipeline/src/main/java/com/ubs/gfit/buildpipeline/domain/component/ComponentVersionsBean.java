@@ -18,30 +18,38 @@ public class ComponentVersionsBean {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ComponentVersionsBean.class );
 
-    private Map<String, List<String>> componentVersions = new HashMap<String, List<String>>();
+    private Map<ComponentBean, List<String>> componentVersions = new HashMap<ComponentBean, List<String>>();
 
     public List<String> getVersionsForComponent( String aComponent ) {
-        return componentVersions.get( aComponent );
+        return componentVersions.get( new ComponentBean( aComponent ) );
     }
 
-    public Map<String, List<String>> getComponentVersions() {
+    public Map<ComponentBean, List<String>> getComponentVersions() {
         return componentVersions;
     }
 
-    public List<String> getComponentNames() {
-        List<String> keys = new ArrayList<String> ( componentVersions.keySet() );
+    public List<ComponentBean> getComponents() {
+        return getComponents( false );
+    }
+
+    public List<ComponentBean> getTestComponents() {
+        return getComponents( true );
+    }
+
+    private List<ComponentBean> getComponents( boolean isTestSuite ) {
+        List<ComponentBean> keys = new ArrayList<ComponentBean>( componentVersions.keySet() );
         Collections.sort( keys);
         return keys;
     }
 
-    public void setVersionsForComponent( String aComponent, List<String> aListOfVersions ) {
+    public void setVersionsForComponent( ComponentBean aComponent, List<String> aListOfVersions ) {
         if ( componentVersions.containsKey( aComponent ) ) {
             componentVersions.remove( aComponent );
         }
         componentVersions.put( aComponent, aListOfVersions );
     }
 
-    public void addVersion( String aComponent, String aVersion ) {
+    public void addVersion( ComponentBean aComponent, String aVersion ) {
         if ( !componentVersions.containsKey( aComponent ) ) {
             componentVersions.put( aComponent, new ArrayList<String>() );
         }

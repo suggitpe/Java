@@ -2,9 +2,12 @@ package com.ubs.gfit.buildpipeline.domain.component.impl;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.ubs.gfit.buildpipeline.domain.component.ComponentBean;
 import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionService;
 import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionsBean;
 
@@ -23,6 +26,7 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
     private static final Logger LOG = LoggerFactory.getLogger( DirectorySearchingComponentVersionLocator.class );
 
     private String componentInstallDirectory;
+    private List<String> testComponents = new ArrayList<String>();
 
     private static final FileFilter DIRECTORY_FILTER = new FileFilter() {
         @Override
@@ -43,11 +47,19 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
 
         for ( File compDir : file.listFiles( DIRECTORY_FILTER ) ) {
             for ( File verDir : compDir.listFiles( DIRECTORY_FILTER ) ) {
-                wrapper.addVersion( compDir.getName(), verDir.getName() );
+                wrapper.addVersion( new ComponentBean( compDir.getName(),
+                        isTestSuite( compDir.getName() ) ), verDir.getName() );
             }
         }
 
         return wrapper;
+    }
+
+    private boolean isTestSuite( String aName ) {
+        if ( testComponents.contains( aName ) ) {
+            return true;
+        }
+        return false;
     }
 
     public String getComponentInstallDirectory() {
@@ -56,5 +68,17 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
 
     public void setComponentInstallDirectory( String aComponentInstallDirectory ) {
         componentInstallDirectory = aComponentInstallDirectory;
+    }
+
+    public List<String> getTestComponents() {
+        return testComponents;
+    }
+
+    public void setTestComponents( List<String> aTestComponents ) {
+        testComponents = aTestComponents;
+    }
+
+    public void addTestComponent( String aTestComponent ) {
+        testComponents.add( aTestComponent );
     }
 }

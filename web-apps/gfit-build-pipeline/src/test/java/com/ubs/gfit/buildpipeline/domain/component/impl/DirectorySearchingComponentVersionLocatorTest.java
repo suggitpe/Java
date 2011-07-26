@@ -2,6 +2,7 @@ package com.ubs.gfit.buildpipeline.domain.component.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -39,6 +40,10 @@ public class DirectorySearchingComponentVersionLocatorTest {
         new File( BASE_DIR + "/CAL/1.4" ).mkdirs();
         new File( BASE_DIR + "/FDD/1.1" ).mkdirs();
         new File( BASE_DIR + "/OTHER/1.1" ).mkdirs();
+        new File( BASE_DIR + "/TestSuite/1.1" ).mkdirs();
+        new File( BASE_DIR + "/TestSuite/1.2" ).mkdirs();
+        new File( BASE_DIR + "/TestSuite/1.3" ).mkdirs();
+        new File( BASE_DIR + "/TestSuite/1.4" ).mkdirs();
         new File( BASE_DIR + "/foo.txt" ).createNewFile();
     }
 
@@ -46,6 +51,7 @@ public class DirectorySearchingComponentVersionLocatorTest {
     public void onSetup() {
         locator = new DirectorySearchingComponentVersionLocator();
         locator.setComponentInstallDirectory( BASE_DIR );
+        locator.addTestComponent( "TestSuite");
     }
 
     @Test(expected = RuntimeException.class)

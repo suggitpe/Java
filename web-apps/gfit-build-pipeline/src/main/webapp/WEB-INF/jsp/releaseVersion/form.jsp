@@ -13,13 +13,13 @@
         <td>
             <form:form modelAttribute="releaseVersion" method="${method}">
                 <table>
-                    <c:forEach items="${componentVersionsBean.componentNames}" var="componentName">
+                    <c:forEach items="${componentVersionsBean.components}" var="componentBean">
                         <tr>
-                            <td>${componentName} version: <form:errors path="componentVersions[${componentName}]"/></td>
+                            <td>${componentBean.componentName} version: <form:errors path="componentVersions[${componentBean}]"/></td>
                             <td>
-                                <form:select path="componentVersions[${componentName}]">
+                                <form:select path="componentVersions[${componentBean.componentName}]">
                                     <form:option value="NONE" label="--- Select ---"/>
-                                    <form:options items="${componentVersionsBean.componentVersions[componentName]}"/>
+                                    <form:options items="${componentVersionsBean.componentVersions[componentBean]}"/>
                                 </form:select>
                             </td>
                         </tr>

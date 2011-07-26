@@ -19,6 +19,7 @@
 
     <bean id="componentVersionService" class="com.ubs.gfit.buildpipeline.domain.component.impl.DirectorySearchingComponentVersionLocator">
         <property name="componentInstallDirectory" value="${component.install.dir}"/>
+        <property name="testComponents" value="${component.testsuites}"/>
     </bean>
 
 
