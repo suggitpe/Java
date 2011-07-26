@@ -1,14 +1,12 @@
-package com.ubs.gfit.buildpipeline.steps;
+package com.ubs.gfit.buildpipeline.jbehave;
 
 import org.jbehave.core.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.pages.Pages;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -128,7 +126,7 @@ public final class JBehaveBuildPipelineSteps {
     @Then("no release exists with a description of $description")
     public void thenNoReleaseExistsWithADescriptionOf( @Named("description") String aDescription ) {
         pages.releaseManagementPage().open();
-        pages.releaseManagementPage().assertNoReleaseWithDescriptionOf(aDescription);
+        pages.releaseManagementPage().assertNoReleaseWithDescriptionOf( aDescription );
     }
 
 

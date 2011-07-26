@@ -1,4 +1,4 @@
-package com.ubs.gfit.buildpipeline.web_stories;
+package com.ubs.gfit.buildpipeline.jbehave.web_stories;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.web.selenium.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.ubs.gfit.buildpipeline.jbehave.JBehaveBuildPipelineSteps;
 import com.ubs.gfit.buildpipeline.pages.Pages;
-import com.ubs.gfit.buildpipeline.steps.JBehaveBuildPipelineSteps;
 
 import static java.util.Arrays.asList;
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
@@ -77,7 +77,7 @@ public final class JBehaveStoryExecutor extends JUnitStories {
         return new StoryReporterBuilder()
                 .withCodeLocation( CodeLocations.codeLocationFromClass( aEmbeddableClass ) )
                 .withDefaultFormats()
-                .withFormats( Format.TXT, Format.HTML, Format.XML );
+                .withFormats( Format.HTML );
 
     }
 }
