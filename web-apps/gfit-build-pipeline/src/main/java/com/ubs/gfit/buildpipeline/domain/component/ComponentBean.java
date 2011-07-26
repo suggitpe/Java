@@ -64,7 +64,6 @@ public final class ComponentBean implements Comparable<ComponentBean> {
     @Override
     public int hashCode() {
         int result = componentName != null ? componentName.hashCode() : 0;
-        result = 31 * result + ( isTestSuite != null ? isTestSuite.hashCode() : 0 );
         return result;
     }
 

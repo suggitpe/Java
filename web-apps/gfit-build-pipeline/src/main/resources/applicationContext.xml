@@ -17,9 +17,15 @@
         </property>
     </bean>
 
-    <bean id="componentVersionService" class="com.ubs.gfit.buildpipeline.domain.component.impl.DirectorySearchingComponentVersionLocator">
+    <bean id="componentVersionService"
+          class="com.ubs.gfit.buildpipeline.domain.component.impl.DirectorySearchingComponentVersionLocator">
         <property name="componentInstallDirectory" value="${component.install.dir}"/>
-        <property name="testComponents" value="${component.testsuites}"/>
+        <property name="testComponents">
+            <bean class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToSet">
+                <constructor-arg type="java.lang.String" value="${component.testsuites}"/>
+            </bean>
+        </property>
+
     </bean>
 
 

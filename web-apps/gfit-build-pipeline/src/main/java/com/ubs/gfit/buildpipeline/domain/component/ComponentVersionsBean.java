@@ -2,10 +2,9 @@ package com.ubs.gfit.buildpipeline.domain.component;
 
 import java.util.*;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Component;
 
 /**
  * Class to encapsulate the available component versions.
@@ -31,23 +30,25 @@ public class ComponentVersionsBean {
     }
 
     public List<ComponentBean> getComponents() {
-        return getComponents( false );
+        LOG.debug("Getting components" );
+        return getComponentsWithTestSuiteFlag( false );
     }
 
-    public List<ComponentBean> getTestComponents() {
-        return getComponents( true );
+    public List<ComponentBean> getTestSuites() {
+        LOG.debug("Getting test suites" );
+        return getComponentsWithTestSuiteFlag( true );
     }
 
-    private List<ComponentBean> getComponents( boolean isTestSuite ) {
+    private List<ComponentBean> getComponentsWithTestSuiteFlag( final Boolean aTestSuiteFlagToMatch ) {
         List<ComponentBean> keys = new ArrayList<ComponentBean>( componentVersions.keySet() );
-        List<ComponentBean> good = new ArrayList<ComponentBean>( );
-        for( ComponentBean bean : keys ){
-            if( bean.isTestSuite() ){
-                good.add( bean);
+        CollectionUtils.filter( keys, new org.apache.commons.collections.Predicate() {
+            @Override
+            public boolean evaluate( Object object ) {
+                return ( ( ComponentBean ) object ).isTestSuite() == aTestSuiteFlagToMatch;
             }
-        }
-        Collections.sort( good);
-        return good;
+        } );
+        Collections.sort( keys );
+        return keys;
     }
 
     public void setVersionsForComponent( ComponentBean aComponent, List<String> aListOfVersions ) {

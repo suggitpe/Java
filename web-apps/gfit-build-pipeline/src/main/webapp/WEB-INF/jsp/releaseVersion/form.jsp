@@ -33,6 +33,19 @@
                             <form:input id="descriptionField" path="description" size="30" maxlength="180"/>
                         </td>
                     </tr>
+
+                    <c:forEach items="${componentVersionsBean.testSuites}" var="testSuiteBean">
+                        <tr>
+                            <td>${testSuiteBean.componentName} version: <form:errors path="componentVersions[${testSuiteBean}]"/></td>
+                            <td>
+                                <form:select path="componentVersions[${testSuiteBean.componentName}]">
+                                    <form:option value="NONE" label="--- Select ---"/>
+                                    <form:options items="${componentVersionsBean.componentVersions[testSuiteBean]}"/>
+                                </form:select>
+                            </td>
+                        </tr>
+                    </c:forEach>
+
                     <tr>
                         <td>
                             <c:choose>

@@ -1,14 +1,16 @@
 package com.ubs.gfit.buildpipeline.domain.component.impl;
 
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.ubs.gfit.buildpipeline.domain.component.ComponentBean;
 import com.ubs.gfit.buildpipeline.domain.component.ComponentVersionsBean;
 
 import static org.hamcrest.Matchers.*;
@@ -33,7 +35,7 @@ public class DirectorySearchingComponentVersionLocatorTest {
 
     @BeforeClass
     public static void setupTestDirectories() throws IOException {
-        LOG.debug( "Creating test directories");
+        LOG.debug( "Creating test directories" );
         new File( BASE_DIR + "/CAL/1.1" ).mkdirs();
         new File( BASE_DIR + "/CAL/1.2" ).mkdirs();
         new File( BASE_DIR + "/CAL/1.3" ).mkdirs();
@@ -51,7 +53,7 @@ public class DirectorySearchingComponentVersionLocatorTest {
     public void onSetup() {
         locator = new DirectorySearchingComponentVersionLocator();
         locator.setComponentInstallDirectory( BASE_DIR );
-        locator.addTestComponent( "TestSuite");
+        locator.addTestComponent( "TestSuite" );
     }
 
     @Test(expected = RuntimeException.class)
@@ -63,8 +65,26 @@ public class DirectorySearchingComponentVersionLocatorTest {
     @Test
     public void shouldReadTestDirectoryVersions() {
         ComponentVersionsBean wrapper = locator.getComponentVersions();
-        assertThat(wrapper.getVersionsForComponent( "CAL") , is(not( nullValue() )));
-        assertThat( locator.getComponentVersions().getVersionsForComponent( "CAL" ).size(), equalTo( 4 ) );
-        assertThat( locator.getComponentVersions().getVersionsForComponent( "FDD" ).size(), equalTo( 1 ) );
+        assertThat( wrapper.getVersionsForComponent( "CAL" ), is( not( nullValue() ) ) );
+        assertThat( wrapper.getVersionsForComponent( "CAL" ).size(), equalTo( 4 ) );
+        assertThat( wrapper.getVersionsForComponent( "FDD" ).size(), equalTo( 1 ) );
+    }
+
+    @Test
+    public void shouldAllowDiscreteRetrievalOfComponents() {
+        List<ComponentBean> components = locator.getComponentVersions().getComponents();
+        for( ComponentBean bean: components){
+            LOG.info( "Checking that bean ["+bean+"] is not a test suite" );
+            assertThat("Bean ["+bean+"] is not a component",  bean.isTestSuite(), is( false ));
+        }
+    }
+
+    @Test
+    public void shouldAllowDiscreteRetrievalOfTestSuites() {
+        List<ComponentBean> suites = locator.getComponentVersions().getTestSuites();
+        for( ComponentBean bean: suites){
+            LOG.info( "Checking that bean ["+bean+"] is a test suite" );
+            assertThat("Bean ["+bean+"] is not a test suite",  bean.isTestSuite(), is( true ));
+        }
     }
 }

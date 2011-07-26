@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +28,7 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
     private static final Logger LOG = LoggerFactory.getLogger( DirectorySearchingComponentVersionLocator.class );
 
     private String componentInstallDirectory;
-    private List<String> testComponents = new ArrayList<String>();
+    private Set<String> testComponents = new TreeSet<String>();
 
     private static final FileFilter DIRECTORY_FILTER = new FileFilter() {
         @Override
@@ -70,11 +72,7 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
         componentInstallDirectory = aComponentInstallDirectory;
     }
 
-    public List<String> getTestComponents() {
-        return testComponents;
-    }
-
-    public void setTestComponents( List<String> aTestComponents ) {
+    public void setTestComponents( Set<String> aTestComponents ) {
         testComponents = aTestComponents;
     }
 
