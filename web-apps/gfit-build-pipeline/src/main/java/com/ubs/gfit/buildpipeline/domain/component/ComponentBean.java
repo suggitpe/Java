@@ -41,7 +41,7 @@ public final class ComponentBean implements Comparable<ComponentBean> {
         componentName = aComponentName;
     }
 
-    public Boolean getTestSuite() {
+    public Boolean isTestSuite() {
         return isTestSuite;
     }
 

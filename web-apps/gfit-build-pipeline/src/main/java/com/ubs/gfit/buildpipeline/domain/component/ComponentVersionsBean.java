@@ -5,6 +5,8 @@ import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Class to encapsulate the available component versions.
  * <p/>
@@ -38,8 +40,14 @@ public class ComponentVersionsBean {
 
     private List<ComponentBean> getComponents( boolean isTestSuite ) {
         List<ComponentBean> keys = new ArrayList<ComponentBean>( componentVersions.keySet() );
-        Collections.sort( keys);
-        return keys;
+        List<ComponentBean> good = new ArrayList<ComponentBean>( );
+        for( ComponentBean bean : keys ){
+            if( bean.isTestSuite() ){
+                good.add( bean);
+            }
+        }
+        Collections.sort( good);
+        return good;
     }
 
     public void setVersionsForComponent( ComponentBean aComponent, List<String> aListOfVersions ) {
