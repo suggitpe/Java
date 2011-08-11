@@ -17,7 +17,7 @@ import org.jbehave.web.selenium.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.jbehave.JBehaveBuildPipelineSteps;
-import com.ubs.gfit.buildpipeline.pages.Pages;
+import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
 
 import static java.util.Arrays.asList;
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
@@ -36,7 +36,7 @@ public final class JBehaveStoryExecutor extends JUnitStories {
     private static final Logger LOG = LoggerFactory.getLogger( JBehaveStoryExecutor.class );
 
     private WebDriverProvider driverProvider = new PropertyWebDriverProvider();
-    private Pages pages = new Pages( driverProvider );
+    private JbehavePages pages = new JbehavePages( driverProvider );
     private SeleniumContext context = new SeleniumContext();
     //private ContextView contextView = new LocalFrameContextView().sized( 500, 100 );
     private ContextView contextView = new ContextView() {

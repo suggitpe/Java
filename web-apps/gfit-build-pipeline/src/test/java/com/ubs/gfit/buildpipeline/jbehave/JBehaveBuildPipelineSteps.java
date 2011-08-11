@@ -3,7 +3,6 @@ package com.ubs.gfit.buildpipeline.jbehave;
 import org.jbehave.core.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.pages.Pages;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -22,9 +21,9 @@ public final class JBehaveBuildPipelineSteps {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( JBehaveBuildPipelineSteps.class );
 
-    private Pages pages;
+    private JbehavePages pages;
 
-    public JBehaveBuildPipelineSteps( Pages aPages ) {
+    public JBehaveBuildPipelineSteps( JbehavePages aPages ) {
         pages = aPages;
     }
 
