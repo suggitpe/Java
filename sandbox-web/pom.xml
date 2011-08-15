@@ -10,25 +10,13 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sandbox-core-parent</artifactId>
+    <artifactId>sandbox-web-parent</artifactId>
     <packaging>pom</packaging>
-    <name>Sandbox Core Parent</name>
+    <name>Sandbox Web Parent</name>
 
     <modules>
-        <module>gui</module>
-        <module>hibernate</module>
-        <module>hibernate-search</module>
-        <module>jaxb</module>
-        <module>jms</module>
-        <module>jmx</module>
-        <module>oddsandsods</module>
-        <module>osgi</module>
-        <module>patterns</module>
-        <module>sandbox</module>
-        <module>spring</module>
-        <module>swt</module>
-        <module>test</module>
-        <module>tibco</module>
+        <module>sandbox-webapps</module>
+        <module>sandbox-webservices</module>
     </modules>
 
     <dependencies>
