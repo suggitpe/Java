@@ -4,6 +4,7 @@ import org.jbehave.core.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
@@ -43,7 +44,7 @@ public final class JBehaveBuildPipelineSteps {
 
     @Then("home page is displayed to the user")
     public void thenHomePageIsDisplayedToTheUser() {
-        pages.homePage().isShown();
+        assertThat( pages.homePage().isShown(), is( true ) );
     }
 
     @Given("user is on Release Management page")

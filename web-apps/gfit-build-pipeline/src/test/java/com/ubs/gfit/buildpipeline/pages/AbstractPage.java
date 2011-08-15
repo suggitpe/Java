@@ -50,10 +50,10 @@ abstract class AbstractPage {
         getWebDriver().findElement( By.id( "homeLink" ) ).click();
     }
 
-    public void isShown() {
+    public boolean isShown() {
         String pageTitle = getWebDriver().findElement( By.id( "title" ) ).getText();
         LOG.info( "Checking that the title [" + pageTitle + "] is equal to the expected [" + expectedPageTitle() + "]" );
-        assertThat( pageTitle, equalTo( expectedPageTitle() ) );
+        return pageTitle.equals( expectedPageTitle() );
     }
 
     protected WebDriver getWebDriver() {
