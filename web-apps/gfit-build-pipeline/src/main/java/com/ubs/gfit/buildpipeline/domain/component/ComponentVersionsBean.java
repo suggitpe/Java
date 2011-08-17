@@ -2,7 +2,6 @@ package com.ubs.gfit.buildpipeline.domain.component;
 
 import java.util.*;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,23 +29,22 @@ public class ComponentVersionsBean {
     }
 
     public List<ComponentBean> getComponents() {
-        LOG.debug("Getting components" );
+        LOG.debug( "Getting components" );
         return getComponentsWithTestSuiteFlag( false );
     }
 
     public List<ComponentBean> getTestSuites() {
-        LOG.debug("Getting test suites" );
+        LOG.debug( "Getting test suites" );
         return getComponentsWithTestSuiteFlag( true );
     }
 
     private List<ComponentBean> getComponentsWithTestSuiteFlag( final Boolean aTestSuiteFlagToMatch ) {
         List<ComponentBean> keys = new ArrayList<ComponentBean>( componentVersions.keySet() );
-        CollectionUtils.filter( keys, new org.apache.commons.collections.Predicate() {
-            @Override
-            public boolean evaluate( Object object ) {
-                return ( ( ComponentBean ) object ).isTestSuite() == aTestSuiteFlagToMatch;
+        for( Iterator<ComponentBean> iter = keys.iterator(); iter.hasNext(); ){
+            if(iter.next().isTestSuite() != aTestSuiteFlagToMatch){
+                iter.remove();
             }
-        } );
+        }
         Collections.sort( keys );
         return keys;
     }

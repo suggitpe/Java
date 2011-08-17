@@ -8,7 +8,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * TODO: Justify why you have written this class
+ * Basic Test to prove that the application is up and running and can be accessed.  Treat this as a litmus test for the
+ * application being deployed and accessible.
  * <p/>
  * User: suggitpe
  * Date: 11/08/11
@@ -21,10 +22,9 @@ public final class UserCanOpenHomePageTestWeb {
     private static final Logger LOG = LoggerFactory.getLogger( UserCanOpenHomePageTestWeb.class );
 
     @Test
-    public void shouldOpenHomePage() {
+    public void shouldBeAbleToAccessApplication() {
         SeleniumPages pages = new SeleniumPages();
         pages.homePage().open();
-        assertThat( pages.homePage().isShown(), is(true) );
-        pages.homePage().isShown();
+        assertThat( pages.homePage().isShown(), is( true ) );
     }
 }
