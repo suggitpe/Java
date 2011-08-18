@@ -7,7 +7,7 @@ import com.ubs.gfit.buildpipeline.jbehave.steps.AbstractBuildPipelineSteps;
 import com.ubs.gfit.buildpipeline.jbehave.steps.UserCanCreateNewReleaseVersionsSteps;
 
 /**
- * TODO: Justify why you have written this class
+ * Executor class for the new release version story
  * <p/>
  * User: suggitpe
  * Date: 18/08/11

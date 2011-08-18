@@ -13,7 +13,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * TODO: Justify why you have written this class
+ * Steps class for the create new version story.
  * <p/>
  * User: suggitpe
  * Date: 18/08/11

@@ -7,7 +7,7 @@ import com.ubs.gfit.buildpipeline.jbehave.steps.AbstractBuildPipelineSteps;
 import com.ubs.gfit.buildpipeline.jbehave.steps.UserCanViewAndAlterReleaseContentSteps;
 
 /**
- * TODO: Justify why you have written this class
+ * Executor class for the view and alter story.
  * <p/>
  * User: suggitpe
  * Date: 18/08/11

@@ -7,7 +7,7 @@ import com.ubs.gfit.buildpipeline.jbehave.steps.AbstractBuildPipelineSteps;
 import com.ubs.gfit.buildpipeline.jbehave.steps.UserCanAccessApplicationSteps;
 
 /**
- * TODO: Justify why you have written this class
+ * Executor for the application access story.
  * <p/>
  * User: suggitpe
  * Date: 17/08/11
