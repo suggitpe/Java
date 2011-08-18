@@ -10,19 +10,19 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * TODO: Justify why you have written this class
+ * Steps class for the basic scenario.
  * <p/>
  * User: suggitpe
  * Date: 17/08/11
  * Time: 19:26
  */
 
-public final class UserCanAccessApplictionSteps extends AbstractBuildPipelineSteps {
+public final class UserCanAccessApplicationSteps extends AbstractBuildPipelineSteps {
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( UserCanAccessApplictionSteps.class );
+    private static final Logger LOG = LoggerFactory.getLogger( UserCanAccessApplicationSteps.class );
 
-    public UserCanAccessApplictionSteps( JbehavePages aPages ) {
+    public UserCanAccessApplicationSteps( JbehavePages aPages ) {
         super( aPages );
     }
 
@@ -33,7 +33,6 @@ public final class UserCanAccessApplictionSteps extends AbstractBuildPipelineSte
 
     @Then("the application is available")
     public void thenHomePageIsDisplayedToTheUser() {
-        LOG.debug( "homePage shown = [" + pages().homePage().isShown() + "]" );
         assertThat( pages().homePage().isShown(), is( true ) );
     }
 }

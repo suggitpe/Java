@@ -4,28 +4,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
 import com.ubs.gfit.buildpipeline.jbehave.steps.AbstractBuildPipelineSteps;
-import com.ubs.gfit.buildpipeline.jbehave.steps.UserCanAccessApplicationSteps;
+import com.ubs.gfit.buildpipeline.jbehave.steps.UserCanCreateNewReleaseVersionsSteps;
 
 /**
  * TODO: Justify why you have written this class
  * <p/>
  * User: suggitpe
- * Date: 17/08/11
- * Time: 19:19
+ * Date: 18/08/11
+ * Time: 19:23
  */
 
-public final class UserCanAccessApplicationExecutor extends AbstractJBehaveStoryExecutor {
+public final class UserCanCreateNewReleaseVersionsExecutor extends AbstractJBehaveStoryExecutor {
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( UserCanAccessApplicationExecutor.class );
+    private static final Logger LOG = LoggerFactory.getLogger( UserCanCreateNewReleaseVersionsExecutor.class );
 
     @Override
     protected String createStoryLocation() {
-        return "**/user-can-access-application.story";
+        return "**/user-can-create-new-release-versions.story";
     }
 
     @Override
     protected AbstractBuildPipelineSteps createSteps( JbehavePages aPagesObject ) {
-        return new UserCanAccessApplicationSteps( aPagesObject );
+        return new UserCanCreateNewReleaseVersionsSteps(aPagesObject);
     }
 }

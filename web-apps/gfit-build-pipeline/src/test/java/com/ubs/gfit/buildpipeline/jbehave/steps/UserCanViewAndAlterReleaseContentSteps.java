@@ -3,53 +3,26 @@ package com.ubs.gfit.buildpipeline.jbehave.steps;
 import org.jbehave.core.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Class to define the steps that are mapped to the JBehave story
+ * Steps class for viewing and altering release content
  * <p/>
  * User: suggitpe
- * Date: 04/07/11
- * Time: 19:09
+ * Date: 18/08/11
+ * Time: 07:35
  */
 
-public final class JBehaveBuildPipelineSteps extends AbstractBuildPipelineSteps{
+public final class UserCanViewAndAlterReleaseContentSteps extends AbstractBuildPipelineSteps{
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( JBehaveBuildPipelineSteps.class );
+    private static final Logger LOG = LoggerFactory.getLogger( UserCanViewAndAlterReleaseContentSteps.class );
 
-    public JBehaveBuildPipelineSteps( JbehavePages aPages ) {
+    public UserCanViewAndAlterReleaseContentSteps( JbehavePages aPages ) {
         super( aPages );
-    }
-
-    @When("I try to access the application")
-    public void whenUserOpensHomePage() {
-        pages().homePage().open();
-    }
-
-    @Then("the application is accessible")
-    public void thenHomePageIsDisplayedToTheUser() {
-        assertThat( pages().homePage().isShown(), is( true ) );
-    }
-
-    @Given("user is on Release Management page")
-    public void givenUserIsOnReleaseManagementPage() {
-        pages().releaseManagementPage().open();
-    }
-
-    @When("user creates a new release with a description of $description")
-    public void whenUserRequestsANewReleaseWithADescriptionOf( @Named("description") String aDescription ) {
-        pages().releaseManagementPage().requestNewRelease();
-        pages().releaseVersionForm().isShownInNewForm();
-        pages().releaseVersionForm().setDescription( aDescription );
-        pages().releaseVersionForm().completeNew();
-        pages().releaseManagementPage().isShown();
     }
 
     @Given("an existing release with a description of $description")
@@ -58,24 +31,17 @@ public final class JBehaveBuildPipelineSteps extends AbstractBuildPipelineSteps{
         whenUserRequestsANewReleaseWithADescriptionOf( aDescription );
     }
 
-    @Then("a new release is displayed with a description of $description")
-    public void thenANewReleaseIsDisplayedWithADescriptionOf( @Named("description") String aDescription ) {
-        String version = pages().releaseManagementPage().findVersionWithDescription( aDescription );
-        assertThat( version, not( equalTo( "NEW" ) ) );
+    @Given("user is on Release Management page")
+    public void givenUserIsOnReleaseManagementPage() {
+        pages().releaseManagementPage().open();
     }
 
-    @Then("the release number of $description1 is different to the release number of $description2")
-    public void thenTheReleaseNumberIsDifferentToTheOtherReleaseNumber( @Named("description1") String aDescription1,
-                                                                        @Named("description2") String aDescription2 ) {
-        String version1 = pages().releaseManagementPage().findVersionWithDescription( aDescription1 );
-        String version2 = pages().releaseManagementPage().findVersionWithDescription( aDescription2 );
-        assertThat( version1, not( equalTo( version2 ) ) );
-    }
-
-    @When("user requests a new release")
-    public void whenUserRequestsANewRelease() {
+    public void whenUserRequestsANewReleaseWithADescriptionOf( @Named("description") String aDescription ) {
         pages().releaseManagementPage().requestNewRelease();
         pages().releaseVersionForm().isShownInNewForm();
+        pages().releaseVersionForm().setDescription( aDescription );
+        pages().releaseVersionForm().completeNew();
+        pages().releaseManagementPage().isShown();
     }
 
     @When("user opens release with a description of $description")
@@ -115,6 +81,7 @@ public final class JBehaveBuildPipelineSteps extends AbstractBuildPipelineSteps{
     }
 
     @Then("no release exists with a description of $description")
+    @Pending
     public void thenNoReleaseExistsWithADescriptionOf( @Named("description") String aDescription ) {
         pages().releaseManagementPage().open();
         pages().releaseManagementPage().assertNoReleaseWithDescriptionOf( aDescription );
