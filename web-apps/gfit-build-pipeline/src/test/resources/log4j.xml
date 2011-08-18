@@ -27,6 +27,10 @@
         <priority value="debug"/>
     </category>
 
+    <category name="com.ubs.gfit.buildpipeline.jbehave">
+        <priority value="debug"/>
+    </category>
+
     <root>
         <priority value="info"/>
         <appender-ref ref="ConsoleAppender"/>

@@ -33,6 +33,7 @@ public final class UserCanAccessApplictionSteps extends AbstractBuildPipelineSte
 
     @Then("the application is available")
     public void thenHomePageIsDisplayedToTheUser() {
+        LOG.debug( "homePage shown = [" + pages().homePage().isShown() + "]" );
         assertThat( pages().homePage().isShown(), is( true ) );
     }
 }

@@ -1,5 +1,6 @@
 package com.ubs.gfit.buildpipeline.jbehave.steps;
 
+import org.jbehave.core.annotations.AfterStories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
@@ -25,6 +26,11 @@ public abstract class AbstractBuildPipelineSteps {
 
     protected JbehavePages pages() {
         return pages;
+    }
+
+    @AfterStories
+    public void closeBrowser() {
+        pages().closeBrowser();
     }
 
 

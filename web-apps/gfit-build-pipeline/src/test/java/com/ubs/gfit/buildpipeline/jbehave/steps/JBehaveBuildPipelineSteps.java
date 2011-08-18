@@ -28,11 +28,6 @@ public final class JBehaveBuildPipelineSteps extends AbstractBuildPipelineSteps{
         super( aPages );
     }
 
-    @AfterStories
-    public void closeBrowser() {
-        pages().closeBrowser();
-    }
-
     @When("I try to access the application")
     public void whenUserOpensHomePage() {
         pages().homePage().open();
