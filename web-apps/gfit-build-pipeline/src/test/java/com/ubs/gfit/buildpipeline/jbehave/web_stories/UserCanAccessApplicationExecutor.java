@@ -2,7 +2,7 @@ package com.ubs.gfit.buildpipeline.jbehave.web_stories;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
+import com.ubs.gfit.buildpipeline.pages.JbehavePages;
 import com.ubs.gfit.buildpipeline.jbehave.steps.AbstractBuildPipelineSteps;
 import com.ubs.gfit.buildpipeline.jbehave.steps.UserCanAccessApplicationSteps;
 

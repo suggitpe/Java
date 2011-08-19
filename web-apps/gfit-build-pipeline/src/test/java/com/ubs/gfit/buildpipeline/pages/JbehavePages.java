@@ -1,10 +1,9 @@
-package com.ubs.gfit.buildpipeline.jbehave;
+package com.ubs.gfit.buildpipeline.pages;
 
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.pages.AbstractPages;
 
 /**
  * Builder class for all page objects.

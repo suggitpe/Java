@@ -6,7 +6,7 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
+import com.ubs.gfit.buildpipeline.pages.JbehavePages;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -31,11 +31,15 @@ public final class UserCanCreateNewReleaseVersionsSteps extends AbstractBuildPip
 
     @Given("user is on Release Management page")
     public void givenUserIsOnReleaseManagementPage() {
+        //remove
+
         pages().releaseManagementPage().open();
     }
 
     @When("user creates a new release with a description of $description")
     public void whenUserRequestsANewReleaseWithADescriptionOf( @Named("description") String aDescription ) {
+        //createNewRelease().withDescription(aDescription);
+
         pages().releaseManagementPage().requestNewRelease();
         pages().releaseVersionForm().isShownInNewForm();
         pages().releaseVersionForm().setDescription( aDescription );
@@ -45,12 +49,15 @@ public final class UserCanCreateNewReleaseVersionsSteps extends AbstractBuildPip
 
     @Then("a new release is displayed with a description of $description")
     public void thenANewReleaseIsDisplayedWithADescriptionOf( @Named("description") String aDescription ) {
+
         String version = pages().releaseManagementPage().findVersionWithDescription( aDescription );
         assertThat( version, not( equalTo( "NEW" ) ) );
     }
 
     @Given("an existing release with a description of $description")
     public void givenAnExistingReleaseWithADescriptionOf( @Named("description") String aDescription ) {
+        //createNewRelease().withDescription(aDescription);
+
         pages().releaseManagementPage().open();
         whenUserRequestsANewReleaseWithADescriptionOf( aDescription );
     }
@@ -65,6 +72,8 @@ public final class UserCanCreateNewReleaseVersionsSteps extends AbstractBuildPip
 
     @When("user requests a new release")
     public void whenUserRequestsANewRelease() {
+        //createNewRelease();
+
         pages().releaseManagementPage().requestNewRelease();
         pages().releaseVersionForm().isShownInNewForm();
     }

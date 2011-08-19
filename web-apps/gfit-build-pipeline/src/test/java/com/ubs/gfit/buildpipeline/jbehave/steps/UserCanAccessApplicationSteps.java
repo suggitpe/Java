@@ -4,7 +4,7 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
+import com.ubs.gfit.buildpipeline.pages.JbehavePages;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -27,12 +27,12 @@ public final class UserCanAccessApplicationSteps extends AbstractBuildPipelineSt
     }
 
     @When("I try to access the application")
-    public void whenUserOpensHomePage() {
-        pages().homePage().open();
+    public void whenUserOpensTheApplication() {
+        openApplication();
     }
 
     @Then("the application is available")
-    public void thenHomePageIsDisplayedToTheUser() {
-        assertThat( pages().homePage().isShown(), is( true ) );
+    public void thenApplicationIsDisplayedToTheUser() {
+        assertApplicationIsShown();
     }
 }

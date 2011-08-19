@@ -3,7 +3,8 @@ package com.ubs.gfit.buildpipeline.jbehave.steps;
 import org.jbehave.core.annotations.AfterStories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
+import com.ubs.gfit.buildpipeline.dsl.DSL;
+import com.ubs.gfit.buildpipeline.pages.JbehavePages;
 
 /**
  * Abstract class for all JBehave steps implementations
@@ -13,7 +14,7 @@ import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
  * Time: 19:28
  */
 
-public abstract class AbstractBuildPipelineSteps {
+public abstract class AbstractBuildPipelineSteps extends DSL {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( AbstractBuildPipelineSteps.class );
@@ -21,6 +22,7 @@ public abstract class AbstractBuildPipelineSteps {
     private JbehavePages pages;
 
     public AbstractBuildPipelineSteps( JbehavePages aPages ) {
+        super( aPages );
         pages = aPages;
     }
 

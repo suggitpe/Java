@@ -4,6 +4,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ubs.gfit.buildpipeline.dsl.DSL;
+import com.ubs.gfit.buildpipeline.pages.SeleniumPages;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -16,15 +19,18 @@ import static org.junit.Assert.assertThat;
  * Time: 18:35
  */
 
-public final class UserCanOpenHomePageTestWeb {
+public final class UserCanOpenHomePageTestWeb extends DSL {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( UserCanOpenHomePageTestWeb.class );
 
+    public UserCanOpenHomePageTestWeb(){
+        super( new SeleniumPages());
+    }
+
     @Test
     public void shouldBeAbleToAccessApplication() {
-        SeleniumPages pages = new SeleniumPages();
-        pages.homePage().open();
-        assertThat( pages.homePage().isShown(), is( true ) );
+        openApplication();
+        assertApplicationIsShown();
     }
 }

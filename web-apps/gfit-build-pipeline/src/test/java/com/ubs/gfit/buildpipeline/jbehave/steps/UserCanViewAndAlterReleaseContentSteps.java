@@ -3,7 +3,7 @@ package com.ubs.gfit.buildpipeline.jbehave.steps;
 import org.jbehave.core.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
+import com.ubs.gfit.buildpipeline.pages.JbehavePages;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
@@ -27,6 +27,8 @@ public final class UserCanViewAndAlterReleaseContentSteps extends AbstractBuildP
 
     @Given("an existing release with a description of $description")
     public void givenAnExistingReleaseWithADescriptionOf( @Named("description") String aDescription ) {
+        //createRelease().withDescription(aDescription);
+
         pages().releaseManagementPage().open();
         pages().releaseManagementPage().requestNewRelease();
         pages().releaseVersionForm().isShownInNewForm();
@@ -37,17 +39,23 @@ public final class UserCanViewAndAlterReleaseContentSteps extends AbstractBuildP
 
     @Given("user is on Release Management page")
     public void givenUserIsOnReleaseManagementPage() {
+        // remove
+
         pages().releaseManagementPage().open();
     }
 
     @When("user opens release with a description of $description")
     public void whenUserOpensReleaseWithADescriptionOf( @Named("description") String aDescription ) {
+        // openRelease().withDescription(aDescription);
+
         pages().releaseManagementPage().findLinkForReleaseVersionDesription( aDescription ).click();
         pages().releaseVersionShow().isShown();
     }
 
     @Then("the user can see the contents of the release described as $description")
     public void thenTheUserCanSeeTheContentsOfTheRelease( @Named("description") String aDescription ) {
+        // getCuurentRelease()
+
         pages().releaseVersionShow().isShown();
         pages().releaseVersionShow().ensureDescribes( aDescription );
     }

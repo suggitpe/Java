@@ -16,7 +16,7 @@ import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.web.selenium.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ubs.gfit.buildpipeline.jbehave.JbehavePages;
+import com.ubs.gfit.buildpipeline.pages.JbehavePages;
 import com.ubs.gfit.buildpipeline.jbehave.steps.AbstractBuildPipelineSteps;
 
 import static java.util.Arrays.asList;

@@ -1,4 +1,4 @@
-package com.ubs.gfit.buildpipeline.selenium;
+package com.ubs.gfit.buildpipeline.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
@@ -6,7 +6,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.thoughtworks.selenium.Selenium;
-import com.ubs.gfit.buildpipeline.pages.AbstractPages;
 
 /**
  * Class to build out the selenium webdriver implementation.

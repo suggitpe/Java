@@ -1,4 +1,4 @@
-package com.ubs.gfit.buildpipeline.pages;
+package com.ubs.gfit.buildpipeline.pages.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
