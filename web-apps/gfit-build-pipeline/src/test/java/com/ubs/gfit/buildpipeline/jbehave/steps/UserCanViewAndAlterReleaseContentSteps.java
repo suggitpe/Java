@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
  * Time: 07:35
  */
 
-public final class UserCanViewAndAlterReleaseContentSteps extends AbstractBuildPipelineSteps{
+public final class UserCanViewAndAlterReleaseContentSteps extends AbstractBuildPipelineSteps {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( UserCanViewAndAlterReleaseContentSteps.class );
@@ -28,20 +28,16 @@ public final class UserCanViewAndAlterReleaseContentSteps extends AbstractBuildP
     @Given("an existing release with a description of $description")
     public void givenAnExistingReleaseWithADescriptionOf( @Named("description") String aDescription ) {
         pages().releaseManagementPage().open();
-        whenUserRequestsANewReleaseWithADescriptionOf( aDescription );
-    }
-
-    @Given("user is on Release Management page")
-    public void givenUserIsOnReleaseManagementPage() {
-        pages().releaseManagementPage().open();
-    }
-
-    public void whenUserRequestsANewReleaseWithADescriptionOf( @Named("description") String aDescription ) {
         pages().releaseManagementPage().requestNewRelease();
         pages().releaseVersionForm().isShownInNewForm();
         pages().releaseVersionForm().setDescription( aDescription );
         pages().releaseVersionForm().completeNew();
         pages().releaseManagementPage().isShown();
+    }
+
+    @Given("user is on Release Management page")
+    public void givenUserIsOnReleaseManagementPage() {
+        pages().releaseManagementPage().open();
     }
 
     @When("user opens release with a description of $description")
