@@ -30,7 +30,7 @@ public abstract class DSL {
         pages.homePage().open();
     }
 
-    public void assertApplicationIsShown() {
+    public void checkApplicationIsShown() {
         assertThat( pages.homePage().isShown(), is( true ) );
     }
 }

@@ -2,12 +2,7 @@ package com.ubs.gfit.buildpipeline.jbehave.steps;
 
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.pages.JbehavePages;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * Steps class for the basic scenario.
@@ -18,9 +13,6 @@ import static org.junit.Assert.assertThat;
  */
 
 public final class UserCanAccessApplicationSteps extends AbstractBuildPipelineSteps {
-
-    @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( UserCanAccessApplicationSteps.class );
 
     public UserCanAccessApplicationSteps( JbehavePages aPages ) {
         super( aPages );
@@ -33,6 +25,6 @@ public final class UserCanAccessApplicationSteps extends AbstractBuildPipelineSt
 
     @Then("the application is available")
     public void thenApplicationIsDisplayedToTheUser() {
-        assertApplicationIsShown();
+        checkApplicationIsShown();
     }
 }
