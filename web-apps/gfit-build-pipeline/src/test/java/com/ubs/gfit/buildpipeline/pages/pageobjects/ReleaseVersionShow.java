@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 
 
 /**
- * Class to encapsulate the Release ReleaseVersion display page.
+ * Class to encapsulate the Release ReleaseVersionImpl display page.
  * <p/>
  * User: suggitpe
  * Date: 15/07/11
@@ -30,7 +30,7 @@ public final class ReleaseVersionShow extends AbstractPage {
 
     @Override
     protected String expectedPageTitle() {
-        return "Release ReleaseVersion Summary";
+        return "Release ReleaseVersionImpl Summary";
     }
 
     public void ensureDescribes( String aDescription ) {

@@ -2,8 +2,13 @@ package com.ubs.gfit.buildpipeline.driver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.ubs.gfit.buildpipeline.dsl.ComponentVersion;
 import com.ubs.gfit.buildpipeline.dsl.ReleaseVersion;
 import com.ubs.gfit.buildpipeline.pages.SeleniumPages;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 
 /**
  * TODO: Justify why you have written this class
@@ -20,17 +25,43 @@ public final class Application {
 
     private SeleniumPages pages = new SeleniumPages();
 
-    public String getDescriptionFor( ReleaseVersion aVersion ) {
-        pages.releaseVersionShow().openWithVersion( aVersion.getVersionNumber() );
+    public void openApplication() {
+        pages.homePage().open();
+    }
+
+    public boolean checkApplicationIsOpen() {
+        return pages.homePage().isShown();
+    }
+
+    public String getDescriptionFor( String aVersionNumber ) {
+        pages.releaseVersionShow().openWithVersion( aVersionNumber );
         return pages.releaseVersionShow().getDescription();
     }
 
-    public ReleaseVersion createReleaseFor( ReleaseVersion aVersion ) {
+    public ReleaseVersionImpl createReleaseVersion( String aDescription ) {
         pages.releaseVersionForm().openForNew();
-        pages.releaseVersionForm().setDescription( aVersion.getDescriptionForNewReleaseVersion() );
+        pages.releaseVersionForm().setDescription( aDescription );
         pages.releaseVersionForm().completeNew();
         String versionNumber = pages.releaseVersionShow().getVersion();
-        aVersion.setVersionNumber(versionNumber);
-        return aVersion;
+
+        ReleaseVersionImpl releaseVersion = new ReleaseVersionImpl( this );
+        releaseVersion.setVersionNumber( versionNumber );
+        return releaseVersion;
+    }
+
+    public ReleaseVersionImpl createReleaseVersion() {
+        return createReleaseVersion( "Foo" );
+    }
+
+
+    public ReleaseVersion createReleaseVersion( ComponentVersion aComponentVersion1 ) {
+        pages.releaseVersionForm().openForNew();
+        pages.releaseVersionForm().setDescription( "Foo");
+        pages.releaseVersionForm().completeNew();
+        String versionNumber = pages.releaseVersionShow().getVersion();
+
+        ReleaseVersionImpl releaseVersion = new ReleaseVersionImpl( this );
+        releaseVersion.setVersionNumber( versionNumber );
+        return releaseVersion;
     }
 }

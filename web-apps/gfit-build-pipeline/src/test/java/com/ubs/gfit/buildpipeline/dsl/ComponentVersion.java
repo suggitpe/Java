@@ -15,4 +15,8 @@ public final class ComponentVersion {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ComponentVersion.class );
+
+    public String getVersionNumber() {
+        throw new UnsupportedOperationException();
+    }
 }

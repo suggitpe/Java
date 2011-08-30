@@ -3,10 +3,6 @@ package com.ubs.gfit.buildpipeline.dsl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.driver.Application;
-import com.ubs.gfit.buildpipeline.pages.AbstractPages;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * High level class to contain the dsl for the testing.
@@ -21,37 +17,29 @@ public abstract class DSL {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( DSL.class );
 
-    private AbstractPages pages;
+    private Application application = new Application();
 
-    public DSL( AbstractPages aPagesObject ) {
-        pages = aPagesObject;
+    protected void openApplication() {
+        application.openApplication();
     }
 
-    public void openApplication() {
-        pages.homePage().open();
+    protected boolean applicationIsOpen() {
+        return application.checkApplicationIsOpen();
     }
 
-    public void checkApplicationIsShown() {
-        assertThat( pages.homePage().isShown(), is( true ) );
-    }
-
-    protected ReleaseVersion createVersionBuilder() {
-        return new ReleaseVersion( application() );
-    }
-
-    private Application application() {
-        return new Application();
-    }
-
-    protected Component createComponent( String aAComponent ) {
+    protected Component createComponent( String aComponent ) {
         throw new UnsupportedOperationException();
     }
 
     protected ReleaseVersion createReleaseWithDescription( String aDescription ) {
-        return createVersionBuilder().withDescription( aDescription ).build();
+        return application.createReleaseVersion( aDescription );
     }
 
     protected ReleaseVersion createRelease() {
-        return createVersionBuilder().build();
+        return application.createReleaseVersion();
+    }
+
+    protected ReleaseVersion createReleaseWithComponentVersion( ComponentVersion aComponentVersion ) {
+        return application.createReleaseVersion( aComponentVersion );
     }
 }

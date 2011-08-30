@@ -8,7 +8,6 @@ import com.ubs.gfit.buildpipeline.dsl.Component;
 import com.ubs.gfit.buildpipeline.dsl.ComponentVersion;
 import com.ubs.gfit.buildpipeline.dsl.DSL;
 import com.ubs.gfit.buildpipeline.dsl.ReleaseVersion;
-import com.ubs.gfit.buildpipeline.pages.SeleniumPages;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,10 +25,6 @@ public final class UserCanCreateReleaseVersionsTestWeb extends DSL {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( UserCanCreateReleaseVersionsTestWeb.class );
-
-    public UserCanCreateReleaseVersionsTestWeb() {
-        super( new SeleniumPages() );
-    }
 
     @Test
     public void shouldBeAbleToAddDescriptionToRelease() {
@@ -51,9 +46,9 @@ public final class UserCanCreateReleaseVersionsTestWeb extends DSL {
         Component component = createComponent( "aComponent" );
         ComponentVersion componentVersion1 = component.addVersion( "1.2" );
         ComponentVersion componentVersion2 = component.addVersion( "1.3" );
-        ReleaseVersion releaseVersion = createVersionBuilder().withComponentVersions( componentVersion1 );
+        ReleaseVersion releaseVersion = createReleaseWithComponentVersion( componentVersion1 );
+        assertThat( releaseVersion.getVersionOfComponent( component ), equalTo( componentVersion1.getVersionNumber() ) );
     }
-
 
 
 }

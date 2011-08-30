@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Class to encapsulate the Release ReleaseVersion Form.
+ * Class to encapsulate the Release ReleaseVersionImpl Form.
  * <p/>
  * User: suggitpe
  * Date: 07/07/11
@@ -22,7 +22,7 @@ public final class ReleaseVersionForm extends AbstractPage {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionForm.class );
 
-    private static final String FORM_TITLE = "Release ReleaseVersion";
+    private static final String FORM_TITLE = "Release ReleaseVersionImpl";
     private static final String DESC_FIELD = "descriptionField";
     private static final String NEW_BUTTON = "addButton";
     private static final String UPDATE_BUTTON = "updateButton";

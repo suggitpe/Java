@@ -106,7 +106,7 @@ public final class ReleaseVersion implements Comparable<ReleaseVersion> {
 
     @Override
     public String toString() {
-        return "ReleaseVersion{" +
+        return "ReleaseVersionImpl{" +
                 "version='" + version + '\'' +
                 ", description='" + description + '\'' +
                 ", createDate=" + createDate +

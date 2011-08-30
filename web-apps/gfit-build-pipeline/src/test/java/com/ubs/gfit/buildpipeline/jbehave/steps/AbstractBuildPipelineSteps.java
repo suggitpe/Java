@@ -22,7 +22,7 @@ public abstract class AbstractBuildPipelineSteps extends DSL {
     private JbehavePages pages;
 
     public AbstractBuildPipelineSteps( JbehavePages aPages ) {
-        super( aPages );
+        //super( aPages );
         pages = aPages;
     }
 

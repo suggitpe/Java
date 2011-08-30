@@ -9,7 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
- * Validates that a ReleaseVersion is true and complete.
+ * Validates that a ReleaseVersionImpl is true and complete.
  * <p/>
  * User: suggitpe
  * Date: 06/07/11
