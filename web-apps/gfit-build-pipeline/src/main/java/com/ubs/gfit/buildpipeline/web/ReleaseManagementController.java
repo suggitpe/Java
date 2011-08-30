@@ -61,7 +61,7 @@ public final class ReleaseManagementController {
         else {
             ReleaseVersionManager.instance().addVersion( releaseVersion );
             aStatus.setComplete();
-            return "redirect:/release-management";
+            return "redirect:/release-management/"+ releaseVersion.getVersion();
         }
     }
 

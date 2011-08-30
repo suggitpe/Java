@@ -2,6 +2,7 @@ package com.ubs.gfit.buildpipeline.dsl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.ubs.gfit.buildpipeline.driver.Application;
 import com.ubs.gfit.buildpipeline.pages.AbstractPages;
 
 import static org.hamcrest.Matchers.is;
@@ -32,5 +33,25 @@ public abstract class DSL {
 
     public void checkApplicationIsShown() {
         assertThat( pages.homePage().isShown(), is( true ) );
+    }
+
+    protected ReleaseVersion createVersionBuilder() {
+        return new ReleaseVersion( application() );
+    }
+
+    private Application application() {
+        return new Application();
+    }
+
+    protected Component createComponent( String aAComponent ) {
+        throw new UnsupportedOperationException();
+    }
+
+    protected ReleaseVersion createReleaseWithDescription( String aDescription ) {
+        return createVersionBuilder().withDescription( aDescription ).build();
+    }
+
+    protected ReleaseVersion createRelease() {
+        return createVersionBuilder().build();
     }
 }

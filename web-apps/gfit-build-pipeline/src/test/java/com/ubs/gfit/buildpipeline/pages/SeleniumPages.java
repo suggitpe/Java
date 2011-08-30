@@ -21,7 +21,7 @@ public final class SeleniumPages extends AbstractPages {
     private static final Logger LOG = LoggerFactory.getLogger( SeleniumPages.class );
 
     private final WebDriver webDriver = new HtmlUnitDriver( true );
-    private final Selenium selenium = new WebDriverBackedSelenium(webDriver, "http://foo");
+    private final Selenium selenium = new WebDriverBackedSelenium( webDriver, "http://foo" );
 
 
     @Override
@@ -29,3 +29,4 @@ public final class SeleniumPages extends AbstractPages {
         return webDriver;
     }
 }
+

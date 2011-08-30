@@ -27,7 +27,7 @@ public final class UserCanViewAndAlterReleaseContentSteps extends AbstractBuildP
 
     @Given("an existing release with a description of $description")
     public void givenAnExistingReleaseWithADescriptionOf( @Named("description") String aDescription ) {
-        //createRelease().withDescription(aDescription);
+        //createVersionBuilder().withDescription(aDescription);
 
         pages().releaseManagementPage().open();
         pages().releaseManagementPage().requestNewRelease();

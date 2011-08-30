@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Class to encapsulate the Release Version Form.
+ * Class to encapsulate the Release ReleaseVersion Form.
  * <p/>
  * User: suggitpe
  * Date: 07/07/11
@@ -22,7 +22,7 @@ public final class ReleaseVersionForm extends AbstractPage {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionForm.class );
 
-    private static final String FORM_TITLE = "Release Version";
+    private static final String FORM_TITLE = "Release ReleaseVersion";
     private static final String DESC_FIELD = "descriptionField";
     private static final String NEW_BUTTON = "addButton";
     private static final String UPDATE_BUTTON = "updateButton";
@@ -40,7 +40,6 @@ public final class ReleaseVersionForm extends AbstractPage {
         WebElement descElem = getWebDriver().findElement( By.id( DESC_FIELD ) );
         descElem.clear();
         descElem.sendKeys( aDescription );
-        LOG.debug( "Updated description to [" + descElem.getText() + "]" );
     }
 
     public void completeNew() {
@@ -63,5 +62,9 @@ public final class ReleaseVersionForm extends AbstractPage {
     public void isShownInEditForm() {
         String pageTitle = getWebDriver().findElement( By.id( "title" ) ).getText();
         assertThat( pageTitle, equalTo( "Edit " + FORM_TITLE ) );
+    }
+
+    public void openForNew() {
+        getWebDriver().navigate().to( BASE_URL + "/release-management/new" );
     }
 }

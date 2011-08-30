@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 
 
 /**
- * Class to encapsulate the Release Version display page.
+ * Class to encapsulate the Release ReleaseVersion display page.
  * <p/>
  * User: suggitpe
  * Date: 15/07/11
@@ -23,13 +23,14 @@ public final class ReleaseVersionShow extends AbstractPage {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionShow.class );
 
+
     public ReleaseVersionShow( WebDriver aWebDriver ) {
         super( aWebDriver );
     }
 
     @Override
     protected String expectedPageTitle() {
-        return "Release Version Summary";
+        return "Release ReleaseVersion Summary";
     }
 
     public void ensureDescribes( String aDescription ) {
@@ -47,8 +48,18 @@ public final class ReleaseVersionShow extends AbstractPage {
 
     public String getVersion() {
         String version = getWebDriver().findElement( By.id( "releaseVersion" ) ).getText();
-        LOG.debug( "Extract version as [" + version + "]" );
+        LOG.debug( "Extracted version as [" + version + "]" );
         assertThat( version, is( notNullValue() ) );
         return version;
+    }
+
+
+
+    public void openWithVersion( String aVersionNumber ) {
+        getWebDriver().navigate().to( BASE_URL + "/release-management/" + aVersionNumber );
+    }
+
+    public String getDescription() {
+        return getWebDriver().findElement( By.id("description" )).getText();
     }
 }
