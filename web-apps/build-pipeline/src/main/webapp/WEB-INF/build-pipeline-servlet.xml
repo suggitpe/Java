@@ -14,7 +14,7 @@
     <import resource="classpath:applicationContext.xml"/>
 
     <!-- Component scan for all annotated components and mappings -->
-    <context:component-scan base-package="com.ubs.gfit.buildpipeline"/>
+    <context:component-scan base-package="org.suggs.webapps.buildpipeline"/>
 
     <!-- hanlder for annotation driven controllers etc -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">

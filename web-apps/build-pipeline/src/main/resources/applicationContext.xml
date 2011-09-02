@@ -18,7 +18,7 @@
     </bean>
 
     <bean id="componentVersionService"
-          class="com.ubs.gfit.buildpipeline.domain.component.impl.DirectorySearchingComponentVersionLocator">
+          class="org.suggs.webapps.buildpipeline.domain.component.impl.DirectorySearchingComponentVersionLocator">
         <property name="componentInstallDirectory" value="${component.install.dir}"/>
         <property name="testComponents">
             <bean class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToSet">

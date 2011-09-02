@@ -23,11 +23,11 @@
         <priority value="debug"/>
     </category>
 
-    <category name="com.ubs.gfit.buildpipeline.pages">
+    <category name="org.suggs.webapps.buildpipeline.pages">
         <priority value="debug"/>
     </category>
 
-    <category name="com.ubs.gfit.buildpipeline.jbehave">
+    <category name="org.suggs.webapps.buildpipeline.jbehave">
         <priority value="debug"/>
     </category>
 
