@@ -15,7 +15,7 @@
     <name>WebApps Parent</name>
 
     <modules>
-        <module>gfit-build-pipeline</module>
+        <module>build-pipeline</module>
     </modules>
 
     <build>
