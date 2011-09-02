@@ -42,6 +42,11 @@ public final class ReleaseVersionForm extends AbstractPage {
         descElem.sendKeys( aDescription );
     }
 
+    public void setComponentVersion( String aComponentName, String aVersionNumber ) {
+        LOG.debug( "Looking for element [componentVersions" + aComponentName + "]" );
+        WebElement elem = getWebDriver().findElement( By.id( "componentVersions" + aComponentName ) );
+    }
+
     public void completeNew() {
         getWebDriver().findElement( By.id( NEW_BUTTON ) ).click();
     }

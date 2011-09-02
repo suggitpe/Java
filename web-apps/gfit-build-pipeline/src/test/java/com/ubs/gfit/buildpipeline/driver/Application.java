@@ -1,14 +1,17 @@
 package com.ubs.gfit.buildpipeline.driver;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Properties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ubs.gfit.buildpipeline.dsl.ComponentVersion;
 import com.ubs.gfit.buildpipeline.dsl.ReleaseVersion;
 import com.ubs.gfit.buildpipeline.pages.SeleniumPages;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 
 /**
  * TODO: Justify why you have written this class
@@ -53,10 +56,10 @@ public final class Application {
         return createReleaseVersion( "Foo" );
     }
 
-
-    public ReleaseVersion createReleaseVersion( ComponentVersion aComponentVersion1 ) {
+    public ReleaseVersion createReleaseVersion( ComponentVersion aComponentVersion ) {
         pages.releaseVersionForm().openForNew();
-        pages.releaseVersionForm().setDescription( "Foo");
+        pages.releaseVersionForm().setDescription( "Foo" );
+        pages.releaseVersionForm().setComponentVersion( aComponentVersion.getComponent().getName(), aComponentVersion.getVersionNumber() );
         pages.releaseVersionForm().completeNew();
         String versionNumber = pages.releaseVersionShow().getVersion();
 
@@ -64,4 +67,20 @@ public final class Application {
         releaseVersion.setVersionNumber( versionNumber );
         return releaseVersion;
     }
+
+    public ComponentImpl createInstalledComponent( String aComponentName ) {
+        try {
+            File componentInstallDir = new File( readComponentInstallDirectory() );
+            if ( !componentInstallDir.exists() ) {
+                throw new IllegalStateException( "Cannot read application component install dir" );
+            }
+            return createFreshComponentDirectory( aComponentName, componentInstallDir );
+        }
+        catch ( IOException ioe ) {
+            throw new IllegalStateException( "Unable to create installed component" );
+        }
+    }
+
+
+
 }

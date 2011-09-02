@@ -1,7 +1,7 @@
 package com.ubs.gfit.buildpipeline.dsl;
 
 /**
- * TODO: Justify why you have written this class
+ * Abstraction of what we need from a release version.
  * <p/>
  * User: suggitpe
  * Date: 30/08/11

@@ -50,6 +50,7 @@ public abstract class AbstractPages {
         return releaseVersionForm;
     }
 
+
     public ReleaseVersionShow releaseVersionShow() {
         if ( releaseVersionShow == null ) {
             releaseVersionShow = new ReleaseVersionShow( getWebDriver() );

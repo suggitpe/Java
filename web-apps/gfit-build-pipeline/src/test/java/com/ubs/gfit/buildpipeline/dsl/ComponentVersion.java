@@ -16,7 +16,19 @@ public final class ComponentVersion {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ComponentVersion.class );
 
+    private Component component;
+    private String versionNumber;
+
+    public ComponentVersion( Component aComponent, String aVersionNumber ) {
+        component = aComponent;
+        versionNumber = aVersionNumber;
+    }
+
     public String getVersionNumber() {
-        throw new UnsupportedOperationException();
+        return versionNumber;
+    }
+
+    public Component getComponent() {
+        return component;
     }
 }

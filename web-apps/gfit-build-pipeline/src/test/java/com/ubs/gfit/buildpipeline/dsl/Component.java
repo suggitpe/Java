@@ -1,8 +1,5 @@
 package com.ubs.gfit.buildpipeline.dsl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * TODO: Justify why you have written this class
  * <p/>
@@ -11,12 +8,10 @@ import org.slf4j.LoggerFactory;
  * Time: 14:37
  */
 
-public final class Component {
+public interface Component {
 
-    @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( Component.class );
 
-    public ComponentVersion addVersion( String s ) {
-        throw new UnsupportedOperationException();
-    }
+    public ComponentVersion addVersion( String aComponentVersionNumber );
+
+    public String getName();
 }

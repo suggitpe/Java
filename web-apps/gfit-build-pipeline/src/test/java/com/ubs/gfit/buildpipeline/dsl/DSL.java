@@ -27,8 +27,8 @@ public abstract class DSL {
         return application.checkApplicationIsOpen();
     }
 
-    protected Component createComponent( String aComponent ) {
-        throw new UnsupportedOperationException();
+    protected Component createComponent( String aComponentName ) {
+        return application.createInstalledComponent(aComponentName);
     }
 
     protected ReleaseVersion createReleaseWithDescription( String aDescription ) {

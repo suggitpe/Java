@@ -41,9 +41,8 @@ public final class UserCanCreateReleaseVersionsTestWeb extends DSL {
     }
 
     @Test
-    @Ignore
     public void shouldBeAbleToSelectVersionOfComponents() {
-        Component component = createComponent( "aComponent" );
+        Component component = createComponent( "SomeFunkyComponent" );
         ComponentVersion componentVersion1 = component.addVersion( "1.2" );
         ComponentVersion componentVersion2 = component.addVersion( "1.3" );
         ReleaseVersion releaseVersion = createReleaseWithComponentVersion( componentVersion1 );
