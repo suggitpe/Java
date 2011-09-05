@@ -1,8 +1,5 @@
 package org.suggs.webapps.buildpipeline.dsl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * TODO: Justify why you have written this class
  * <p/>
@@ -11,24 +8,9 @@ import org.slf4j.LoggerFactory;
  * Time: 14:36
  */
 
-public final class ComponentVersion {
+public interface ComponentVersion {
 
-    @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( ComponentVersion.class );
+    public String getVersionNumber();
 
-    private Component component;
-    private String versionNumber;
-
-    public ComponentVersion( Component aComponent, String aVersionNumber ) {
-        component = aComponent;
-        versionNumber = aVersionNumber;
-    }
-
-    public String getVersionNumber() {
-        return versionNumber;
-    }
-
-    public Component getComponent() {
-        return component;
-    }
+    public Component getComponent();
 }

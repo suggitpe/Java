@@ -22,7 +22,7 @@ abstract class AbstractPage {
     private static final Logger LOG = LoggerFactory.getLogger( AbstractPage.class );
 
 
-    protected static final String BASE_URL = "http://localhost:9099/gfit-build-pipeline";
+    protected static final String BASE_URL = "http://localhost:9099/build-pipeline";
     private WebDriver webDriver;
 
     AbstractPage( WebDriver aWebDriver ) {

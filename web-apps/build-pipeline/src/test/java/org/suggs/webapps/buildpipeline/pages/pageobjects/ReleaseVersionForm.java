@@ -1,5 +1,7 @@
 package org.suggs.webapps.buildpipeline.pages.pageobjects;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,6 +47,9 @@ public final class ReleaseVersionForm extends AbstractPage {
     public void setComponentVersion( String aComponentName, String aVersionNumber ) {
         LOG.debug( "Looking for element [componentVersions" + aComponentName + "]" );
         WebElement elem = getWebDriver().findElement( By.id( "componentVersions" + aComponentName ) );
+
+
+        throw new NotImplementedException();
     }
 
     public void completeNew() {

@@ -1,11 +1,7 @@
 package org.suggs.webapps.buildpipeline.driver;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FilenameFilter;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,21 +22,14 @@ public final class FileUtils {
     private FileUtils() {
     }
 
-    static ComponentImpl createFreshComponentDirectory( String aComponentName, File aComponentInstallDir ) {
-        deleteComponentDirectoryIfExists( aComponentName, aComponentInstallDir );
-        File newComponentDirectory = new File( aComponentInstallDir.getAbsolutePath() + File.separator + aComponentName );
+    static File createFreshDirectory( String aNewDirectory, File aParentDirectory ) {
+        deleteComponentDirectoryIfExists( aNewDirectory, aParentDirectory );
+        File newComponentDirectory = new File( aParentDirectory.getAbsolutePath() + File.separator + aNewDirectory );
         newComponentDirectory.mkdir();
         if ( !newComponentDirectory.exists() || !newComponentDirectory.isDirectory() ) {
-            throw new IllegalStateException( "Failed to create component install directory [" + aComponentName + "] in [" + aComponentInstallDir.getAbsolutePath() + "]" );
+            throw new IllegalStateException( "Failed to create component install directory [" + aNewDirectory + "] in [" + aParentDirectory.getAbsolutePath() + "]" );
         }
-        return new ComponentImpl( newComponentDirectory );
-    }
-
-    static String readComponentInstallDirectory() throws IOException {
-        URL url = ClassLoader.getSystemResource( "real.properties" );
-        Properties properties = new Properties();
-        properties.load( new FileInputStream( new File( url.getFile() ) ) );
-        return properties.getProperty( "component.install.dir" );
+        return newComponentDirectory;
     }
 
     private static void deleteComponentDirectoryIfExists( final String aDirectoryToDelete, File aComponentInstallDir ) {

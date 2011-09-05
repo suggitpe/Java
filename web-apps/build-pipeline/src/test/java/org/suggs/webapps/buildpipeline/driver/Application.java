@@ -5,7 +5,10 @@ import org.suggs.webapps.buildpipeline.dsl.ReleaseVersion;
 import org.suggs.webapps.buildpipeline.pages.SeleniumPages;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,17 +70,27 @@ public final class Application {
 
     public ComponentImpl createInstalledComponent( String aComponentName ) {
         try {
-            File componentInstallDir = new File( FileUtils.readComponentInstallDirectory() );
+            File componentInstallDir = new File( readComponentInstallDirectory() );
             if ( !componentInstallDir.exists() ) {
                 throw new IllegalStateException( "Cannot read application component install dir" );
             }
-            return FileUtils.createFreshComponentDirectory( aComponentName, componentInstallDir );
+            return new ComponentImpl( this, FileUtils.createFreshDirectory( aComponentName, componentInstallDir ) );
         }
         catch ( IOException ioe ) {
             throw new IllegalStateException( "Unable to create installed component" );
         }
     }
 
+    private String readComponentInstallDirectory() throws IOException {
+        URL url = ClassLoader.getSystemResource( "real.properties" );
+        Properties properties = new Properties();
+        properties.load( new FileInputStream( new File( url.getFile() ) ) );
+        return properties.getProperty( "component.install.dir" );
+    }
 
 
+    public ComponentVersionImpl createInstalledComponentVersion( ComponentImpl aComponent, String aComponentVersionNumber ) {
+        File versionInstallDirectory = FileUtils.createFreshDirectory( aComponentVersionNumber, aComponent.getComponentInstallDirectory() );
+        return new ComponentVersionImpl( aComponent, aComponentVersionNumber, versionInstallDirectory );
+    }
 }

@@ -20,19 +20,27 @@ public final class ComponentImpl implements Component {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ComponentImpl.class );
-    File componentInstallDirectory;
+    private File componentInstallDirectory;
+    private Application applicationContext;
 
-    public ComponentImpl(File aComponentInstallDirectory){
+    public ComponentImpl( Application aApplicationContext, File aComponentInstallDirectory ) {
+        applicationContext = aApplicationContext;
         componentInstallDirectory = aComponentInstallDirectory;
     }
 
     @Override
     public ComponentVersion addVersion( String aComponentVersionNumber ) {
-        throw new UnsupportedOperationException();
+        return applicationContext.createInstalledComponentVersion( this, aComponentVersionNumber );
     }
 
     @Override
     public String getName() {
         return componentInstallDirectory.getName();
     }
+
+    public File getComponentInstallDirectory(){
+        return componentInstallDirectory;
+    }
+
+
 }
