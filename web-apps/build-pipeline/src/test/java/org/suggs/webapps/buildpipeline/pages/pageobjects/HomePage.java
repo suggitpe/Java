@@ -3,6 +3,7 @@ package org.suggs.webapps.buildpipeline.pages.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.thoughtworks.selenium.Selenium;
 
 /**
  * Class to represent the Home Page of the webapp
@@ -19,8 +20,8 @@ public final class HomePage extends AbstractPage {
 
     public static final String HOME_PAGE_TITLE = "Home";
 
-    public HomePage( WebDriver aWebDriver ) {
-        super( aWebDriver );
+    public HomePage( Selenium aSelenium ) {
+        super( aSelenium );
     }
 
     protected String expectedPageTitle() {
@@ -28,7 +29,7 @@ public final class HomePage extends AbstractPage {
     }
 
     public void open() {
-        getWebDriver().get( BASE_URL );
+        getSelenium().open( BASE_URL );
     }
 
 

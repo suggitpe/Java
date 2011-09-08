@@ -1,5 +1,6 @@
 package org.suggs.webapps.buildpipeline.driver;
 
+import org.suggs.webapps.buildpipeline.dsl.Component;
 import org.suggs.webapps.buildpipeline.dsl.ComponentVersion;
 import org.suggs.webapps.buildpipeline.dsl.ReleaseVersion;
 import org.suggs.webapps.buildpipeline.pages.SeleniumPages;
@@ -14,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * Class to manage the interaction with the Application under test.
  * <p/>
  * User: suggitpe
  * Date: 30/08/11
@@ -40,6 +41,12 @@ public final class Application {
         pages.releaseVersionShow().openWithVersion( aVersionNumber );
         return pages.releaseVersionShow().getDescription();
     }
+
+    public String getComponentVersionFor( String aVersionNumber, Component aComponent ) {
+        pages.releaseVersionShow().openWithVersion( aVersionNumber );
+        return pages.releaseVersionShow().getComponentVersion( aComponent );
+    }
+
 
     public ReleaseVersionImpl createReleaseVersion( String aDescription ) {
         pages.releaseVersionForm().openForNew();
@@ -93,4 +100,5 @@ public final class Application {
         File versionInstallDirectory = FileUtils.createFreshDirectory( aComponentVersionNumber, aComponent.getComponentInstallDirectory() );
         return new ComponentVersionImpl( aComponent, aComponentVersionNumber, versionInstallDirectory );
     }
+
 }

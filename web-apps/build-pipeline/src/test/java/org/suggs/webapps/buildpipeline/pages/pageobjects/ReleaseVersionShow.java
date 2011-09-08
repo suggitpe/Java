@@ -1,10 +1,10 @@
 package org.suggs.webapps.buildpipeline.pages.pageobjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.suggs.webapps.buildpipeline.dsl.Component;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.thoughtworks.selenium.Selenium;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -24,8 +24,8 @@ public final class ReleaseVersionShow extends AbstractPage {
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionShow.class );
 
 
-    public ReleaseVersionShow( WebDriver aWebDriver ) {
-        super( aWebDriver );
+    public ReleaseVersionShow( Selenium aSelenium ) {
+        super( aSelenium );
     }
 
     @Override
@@ -35,31 +35,33 @@ public final class ReleaseVersionShow extends AbstractPage {
 
     public void ensureDescribes( String aDescription ) {
         LOG.debug( "Checking that the description of the release is [" + aDescription + "]" );
-        String description = getWebDriver().findElement( By.id( "description" ) ).getText();
+        String description = getSelenium().getText( "id=description" );
         assertThat( description, equalTo( aDescription ) );
     }
 
     public void editRelease() {
         LOG.debug( "Editing the release" );
-        WebElement elem = getWebDriver().findElement( By.id( "editReleaseVersionLink" ) );
-        assertThat( elem, is( notNullValue() ) );
-        elem.click();
+        getSelenium().click( "editReleaseVersionLink" );
     }
 
     public String getVersion() {
-        String version = getWebDriver().findElement( By.id( "releaseVersion" ) ).getText();
+        String version = getSelenium().getText( "releaseVersion" );
         LOG.debug( "Extracted version as [" + version + "]" );
         assertThat( version, is( notNullValue() ) );
         return version;
     }
 
 
-
     public void openWithVersion( String aVersionNumber ) {
-        getWebDriver().navigate().to( BASE_URL + "/release-management/" + aVersionNumber );
+        LOG.info( "Opening form for version [" + aVersionNumber + "]" );
+        getSelenium().open( BASE_URL + "/release-management/" + aVersionNumber );
     }
 
     public String getDescription() {
-        return getWebDriver().findElement( By.id("description" )).getText();
+        return getSelenium().getText( "id=description" );
+    }
+
+    public String getComponentVersion( Component aComponent ) {
+        return getSelenium().getText( "id=" + aComponent + "Version" );
     }
 }

@@ -1,9 +1,10 @@
 package org.suggs.webapps.buildpipeline.pages.pageobjects;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.thoughtworks.selenium.Selenium;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.internal.matchers.StringContains.containsString;
@@ -23,14 +24,14 @@ abstract class AbstractPage {
 
 
     protected static final String BASE_URL = "http://localhost:9099/build-pipeline";
-    private WebDriver webDriver;
+    private Selenium selenium;
 
-    AbstractPage( WebDriver aWebDriver ) {
-        webDriver = aWebDriver;
+    AbstractPage( Selenium aSelenium ) {
+        selenium = aSelenium;
     }
 
     public void found( String aText ) {
-        found( getWebDriver().getPageSource(), aText );
+        found( getSelenium().getHtmlSource(), aText );
     }
 
     public void found( String aPageSource, String aText ) {
@@ -42,21 +43,21 @@ abstract class AbstractPage {
     }
 
     public void returnToHome() {
-        getWebDriver().findElement( By.id( "home" ) ).click();
+        getSelenium().click( "id=home" );
     }
 
     public void returnToHomePage() {
-        getWebDriver().findElement( By.id( "homeLink" ) ).click();
+        getSelenium().click( "id=homeLink" );
     }
 
     public boolean isShown() {
-        String pageTitle = getWebDriver().findElement( By.id( "title" ) ).getText();
+        String pageTitle = getSelenium().getText( "id=title");
         LOG.info( "Checking that the title [" + pageTitle + "] is equal to the expected [" + expectedPageTitle() + "]" );
         return pageTitle.equals( expectedPageTitle() );
     }
 
-    protected WebDriver getWebDriver() {
-        return webDriver;
+    protected Selenium getSelenium() {
+        return selenium;
     }
 
     protected abstract String expectedPageTitle();

@@ -1,14 +1,10 @@
 package org.suggs.webapps.buildpipeline.pages.pageobjects;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.thoughtworks.selenium.Selenium;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -24,14 +20,14 @@ public final class ReleaseVersionForm extends AbstractPage {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( ReleaseVersionForm.class );
 
-    private static final String FORM_TITLE = "Release ReleaseVersionImpl";
+    private static final String FORM_TITLE = "Release Version";
     private static final String DESC_FIELD = "descriptionField";
     private static final String NEW_BUTTON = "addButton";
     private static final String UPDATE_BUTTON = "updateButton";
     private static final String DELETE_BUTTON = "deleteButton";
 
-    public ReleaseVersionForm( WebDriver aWebDriver ) {
-        super( aWebDriver );
+    public ReleaseVersionForm( Selenium aSelenium ) {
+        super( aSelenium );
     }
 
     protected String expectedPageTitle() {
@@ -39,42 +35,38 @@ public final class ReleaseVersionForm extends AbstractPage {
     }
 
     public void setDescription( String aDescription ) {
-        WebElement descElem = getWebDriver().findElement( By.id( DESC_FIELD ) );
-        descElem.clear();
-        descElem.sendKeys( aDescription );
+        getSelenium().type( "id=" + DESC_FIELD, aDescription );
     }
 
     public void setComponentVersion( String aComponentName, String aVersionNumber ) {
-        LOG.debug( "Looking for element [componentVersions" + aComponentName + "]" );
-        WebElement elem = getWebDriver().findElement( By.id( "componentVersions" + aComponentName ) );
-
-
-        throw new NotImplementedException();
+        LOG.debug( "Setting version of component [" + aComponentName + "] to [" + aVersionNumber + "]" );
+        getSelenium().select( "id=componentVersions" + aComponentName, aVersionNumber );
     }
 
     public void completeNew() {
-        getWebDriver().findElement( By.id( NEW_BUTTON ) ).click();
+        getSelenium().click( "id=" + NEW_BUTTON );
     }
 
     public void completeUpdate() {
-        getWebDriver().findElement( By.id( UPDATE_BUTTON ) ).click();
+        getSelenium().click( "id=" + UPDATE_BUTTON );
     }
 
     public void completeDelete() {
-        getWebDriver().findElement( By.id( DELETE_BUTTON ) ).click();
+        getSelenium().click( "id=" + DELETE_BUTTON );
     }
 
-    public void isShownInNewForm() {
-        String pageTitle = getWebDriver().findElement( By.id( "title" ) ).getText();
-        assertThat( pageTitle, equalTo( "New " + FORM_TITLE ) );
+    public boolean isShownInNewForm() {
+        String pageTitle = getSelenium().getText( "id=title" );
+        return pageTitle.equals( "New " + FORM_TITLE );
     }
 
-    public void isShownInEditForm() {
-        String pageTitle = getWebDriver().findElement( By.id( "title" ) ).getText();
-        assertThat( pageTitle, equalTo( "Edit " + FORM_TITLE ) );
+    public boolean isShownInEditForm() {
+        String pageTitle = getSelenium().getText( "id=title" );
+        return pageTitle.equals( "Edit " + FORM_TITLE );
     }
 
     public void openForNew() {
-        getWebDriver().navigate().to( BASE_URL + "/release-management/new" );
+        getSelenium().open( BASE_URL + "/release-management/new" );
+        assertThat( isShownInNewForm(), is( true ) );
     }
 }

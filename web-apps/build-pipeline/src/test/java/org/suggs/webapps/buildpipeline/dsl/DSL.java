@@ -29,15 +29,15 @@ public abstract class DSL {
     }
 
     protected Component createComponent( String aComponentName ) {
-        return application.createInstalledComponent(aComponentName);
-    }
-
-    protected ReleaseVersion createReleaseWithDescription( String aDescription ) {
-        return application.createReleaseVersion( aDescription );
+        return application.createInstalledComponent( aComponentName );
     }
 
     protected ReleaseVersion createRelease() {
         return application.createReleaseVersion();
+    }
+
+    protected ReleaseVersion createReleaseWithDescription( String aDescription ) {
+        return application.createReleaseVersion( aDescription );
     }
 
     protected ReleaseVersion createReleaseWithComponentVersion( ComponentVersion aComponentVersion ) {

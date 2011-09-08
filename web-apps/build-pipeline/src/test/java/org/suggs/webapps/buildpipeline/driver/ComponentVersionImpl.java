@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * Class to encapsulate a Component version.
  * <p/>
  * User: suggitpe
  * Date: 02/09/11

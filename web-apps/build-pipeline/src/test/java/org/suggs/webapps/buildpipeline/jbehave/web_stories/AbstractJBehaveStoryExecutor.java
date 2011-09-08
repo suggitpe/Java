@@ -5,6 +5,8 @@ import org.suggs.webapps.buildpipeline.pages.JbehavePages;
 
 import java.util.List;
 
+import javax.naming.Context;
+
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.io.CodeLocations;

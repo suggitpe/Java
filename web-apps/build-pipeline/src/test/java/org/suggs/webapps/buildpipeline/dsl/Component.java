@@ -1,7 +1,7 @@
 package org.suggs.webapps.buildpipeline.dsl;
 
 /**
- * TODO: Justify why you have written this class
+ * Represents a component within the architecture that is being built.
  * <p/>
  * User: suggitpe
  * Date: 30/08/11

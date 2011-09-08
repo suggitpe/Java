@@ -1,13 +1,13 @@
 package org.suggs.webapps.buildpipeline.selenium;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.suggs.webapps.buildpipeline.dsl.Component;
 import org.suggs.webapps.buildpipeline.dsl.ComponentVersion;
 import org.suggs.webapps.buildpipeline.dsl.DSL;
 import org.suggs.webapps.buildpipeline.dsl.ReleaseVersion;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
@@ -44,7 +44,7 @@ public final class UserCanCreateReleaseVersionsTestWeb extends DSL {
     public void shouldBeAbleToSelectVersionOfComponents() {
         Component component = createComponent( "SomeFunkyComponent" );
         ComponentVersion componentVersion1 = component.addVersion( "1.2" );
-        ComponentVersion componentVersion2 = component.addVersion( "1.3" );
+        component.addVersion( "1.3" );
         ReleaseVersion releaseVersion = createReleaseWithComponentVersion( componentVersion1 );
         assertThat( releaseVersion.getVersionOfComponent( component ), equalTo( componentVersion1.getVersionNumber() ) );
     }

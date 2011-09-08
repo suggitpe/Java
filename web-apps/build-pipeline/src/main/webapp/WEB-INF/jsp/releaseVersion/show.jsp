@@ -19,7 +19,7 @@
     <c:forEach items="${releaseVersion.componentVersions}" var="componentVersions">
         <tr>
             <th>${componentVersions.key}</th>
-            <td>${componentVersions.value}</td>
+            <td id="${componentVersions.key}Version">${componentVersions.value}</td>
         </tr>
     </c:forEach>
 </table>

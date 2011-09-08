@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * Class to encapsulate a Component.
  * <p/>
  * User: suggitpe
  * Date: 31/08/11
@@ -40,6 +40,11 @@ public final class ComponentImpl implements Component {
 
     public File getComponentInstallDirectory(){
         return componentInstallDirectory;
+    }
+
+    @Override
+    public String toString(){
+        return getName();
     }
 
 

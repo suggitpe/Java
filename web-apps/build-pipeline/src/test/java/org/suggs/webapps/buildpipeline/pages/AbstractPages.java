@@ -6,8 +6,10 @@ import org.suggs.webapps.buildpipeline.pages.pageobjects.ReleaseVersionForm;
 import org.suggs.webapps.buildpipeline.pages.pageobjects.ReleaseVersionShow;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverBackedSelenium;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.thoughtworks.selenium.Selenium;
 
 /**
  * Abstract class that contains all of the abstract page implementation.
@@ -30,23 +32,27 @@ public abstract class AbstractPages {
 
     protected abstract WebDriver getWebDriver();
 
+    protected Selenium getSelenium(){
+        return new WebDriverBackedSelenium( getWebDriver(), "http://foo" );
+    }
+
     public HomePage homePage() {
         if ( homePage == null ) {
-            homePage = new HomePage( getWebDriver() );
+            homePage = new HomePage( getSelenium() );
         }
         return homePage;
     }
 
     public ReleaseManagementPage releaseManagementPage() {
         if ( releaseManagementPage == null ) {
-            releaseManagementPage = new ReleaseManagementPage( getWebDriver() );
+            releaseManagementPage = new ReleaseManagementPage( getSelenium() );
         }
         return releaseManagementPage;
     }
 
     public ReleaseVersionForm releaseVersionForm() {
         if ( releaseVersionForm == null ) {
-            releaseVersionForm = new ReleaseVersionForm( getWebDriver() );
+            releaseVersionForm = new ReleaseVersionForm( getSelenium() );
         }
         return releaseVersionForm;
     }
@@ -54,7 +60,7 @@ public abstract class AbstractPages {
 
     public ReleaseVersionShow releaseVersionShow() {
         if ( releaseVersionShow == null ) {
-            releaseVersionShow = new ReleaseVersionShow( getWebDriver() );
+            releaseVersionShow = new ReleaseVersionShow( getSelenium() );
         }
         return releaseVersionShow;
     }

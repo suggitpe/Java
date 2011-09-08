@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * This class manages the interaction with the filesystem only.
  * <p/>
  * User: suggitpe
  * Date: 01/09/11

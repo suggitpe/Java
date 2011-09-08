@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * Class to encapsulate a release version.
  * <p/>
  * User: suggitpe
  * Date: 30/08/11
@@ -33,7 +33,7 @@ public final class ReleaseVersionImpl implements ReleaseVersion {
 
     @Override
     public String getVersionOfComponent( Component aComponent ) {
-        throw new UnsupportedOperationException();
+        return application.getComponentVersionFor( versionNumber, aComponent );
     }
 
     public void setVersionNumber( String aVersionNumber ) {

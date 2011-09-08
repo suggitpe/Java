@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +29,8 @@ public class BasicNavigationTestWeb {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( BasicNavigationTestWeb.class );
 
-    //private final WebDriver webDriver = new FirefoxDriver();
-    private final WebDriver webDriver = new HtmlUnitDriver( true );
+    private final WebDriver webDriver = new FirefoxDriver();
+    //private final WebDriver webDriver = new HtmlUnitDriver( true );
 
     private final Selenium selenium = new WebDriverBackedSelenium( webDriver, BASE_URL );
 
