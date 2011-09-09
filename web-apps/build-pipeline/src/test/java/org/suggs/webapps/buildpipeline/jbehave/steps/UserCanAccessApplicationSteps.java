@@ -1,9 +1,13 @@
 package org.suggs.webapps.buildpipeline.jbehave.steps;
 
+import org.suggs.webapps.buildpipeline.dsl.DSL;
 import org.suggs.webapps.buildpipeline.pages.JbehavePages;
 
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * Steps class for the basic scenario.
@@ -19,13 +23,13 @@ public final class UserCanAccessApplicationSteps extends AbstractBuildPipelineSt
         super( aPages );
     }
 
-    @When("I try to access the application")
+    @When("I open the application")
     public void whenUserOpensTheApplication() {
-        //openApplication();
+        openApplication();
     }
 
     @Then("the application is available")
     public void thenApplicationIsDisplayedToTheUser() {
-        //checkApplicationIsShown();
+        assertThat(applicationIsOpen(), is(true));
     }
 }

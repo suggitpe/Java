@@ -1,8 +1,8 @@
 package org.suggs.webapps.buildpipeline.selenium;
 
 import org.suggs.webapps.buildpipeline.dsl.DSL;
+import org.suggs.webapps.buildpipeline.pages.SeleniumPages;
 
-import org.hamcrest.core.Is;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -18,6 +18,10 @@ import static org.junit.Assert.assertThat;
  */
 
 public final class UserCanAccessApplicationTestWeb extends DSL {
+
+    public UserCanAccessApplicationTestWeb() {
+        super( new SeleniumPages() );
+    }
 
     @Test
     public void shouldBeAbleToAccessApplication() {

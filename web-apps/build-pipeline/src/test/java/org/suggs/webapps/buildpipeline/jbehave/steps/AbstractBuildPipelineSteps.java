@@ -20,20 +20,8 @@ public abstract class AbstractBuildPipelineSteps extends DSL {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( AbstractBuildPipelineSteps.class );
 
-    private JbehavePages pages;
-
     public AbstractBuildPipelineSteps( JbehavePages aPages ) {
-        //super( aPages );
-        pages = aPages;
-    }
-
-    protected JbehavePages pages() {
-        return pages;
-    }
-
-    @AfterStories
-    public void closeBrowser() {
-        pages().closeBrowser();
+        super( aPages );
     }
 
 

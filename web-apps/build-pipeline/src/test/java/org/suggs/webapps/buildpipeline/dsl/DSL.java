@@ -1,6 +1,8 @@
 package org.suggs.webapps.buildpipeline.dsl;
 
 import org.suggs.webapps.buildpipeline.driver.Application;
+import org.suggs.webapps.buildpipeline.pages.Pages;
+import org.suggs.webapps.buildpipeline.pages.SeleniumPages;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +20,11 @@ public abstract class DSL {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( DSL.class );
 
-    private Application application = new Application();
+    private Application application;
+
+    public DSL( Pages aPagesObject ){
+        application = new Application( aPagesObject);
+    }
 
     protected void openApplication() {
         application.openApplication();

@@ -19,7 +19,7 @@ import com.thoughtworks.selenium.Selenium;
  * Time: 18:18
  */
 
-public abstract class AbstractPages {
+public abstract class AbstractPages implements Pages {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( AbstractPages.class );
@@ -36,6 +36,7 @@ public abstract class AbstractPages {
         return new WebDriverBackedSelenium( getWebDriver(), "http://foo" );
     }
 
+    @Override
     public HomePage homePage() {
         if ( homePage == null ) {
             homePage = new HomePage( getSelenium() );
@@ -43,6 +44,7 @@ public abstract class AbstractPages {
         return homePage;
     }
 
+    @Override
     public ReleaseManagementPage releaseManagementPage() {
         if ( releaseManagementPage == null ) {
             releaseManagementPage = new ReleaseManagementPage( getSelenium() );
@@ -50,6 +52,7 @@ public abstract class AbstractPages {
         return releaseManagementPage;
     }
 
+    @Override
     public ReleaseVersionForm releaseVersionForm() {
         if ( releaseVersionForm == null ) {
             releaseVersionForm = new ReleaseVersionForm( getSelenium() );
@@ -58,6 +61,7 @@ public abstract class AbstractPages {
     }
 
 
+    @Override
     public ReleaseVersionShow releaseVersionShow() {
         if ( releaseVersionShow == null ) {
             releaseVersionShow = new ReleaseVersionShow( getSelenium() );

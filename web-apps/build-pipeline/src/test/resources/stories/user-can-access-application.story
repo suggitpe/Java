@@ -6,7 +6,7 @@ As a build & release manager
 I want to be able to check that the application is available
 
 Scenario: User opens home page
-When I try to access the application
+When I open the application
 Then the application is available
 
 

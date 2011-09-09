@@ -3,7 +3,7 @@ package org.suggs.webapps.buildpipeline.driver;
 import org.suggs.webapps.buildpipeline.dsl.Component;
 import org.suggs.webapps.buildpipeline.dsl.ComponentVersion;
 import org.suggs.webapps.buildpipeline.dsl.ReleaseVersion;
-import org.suggs.webapps.buildpipeline.pages.SeleniumPages;
+import org.suggs.webapps.buildpipeline.pages.Pages;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +27,11 @@ public final class Application {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( Application.class );
 
-    private SeleniumPages pages = new SeleniumPages();
+    private Pages pages;
+
+    public Application( Pages aPages ) {
+        pages = aPages;
+    }
 
     public void openApplication() {
         pages.homePage().open();
