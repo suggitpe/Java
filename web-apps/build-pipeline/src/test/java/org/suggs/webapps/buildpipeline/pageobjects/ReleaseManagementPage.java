@@ -1,4 +1,4 @@
-package org.suggs.webapps.buildpipeline.pages.pageobjects;
+package org.suggs.webapps.buildpipeline.pageobjects;
 
 import org.hamcrest.CoreMatchers;
 import org.slf4j.Logger;

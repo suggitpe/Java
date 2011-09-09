@@ -1,4 +1,4 @@
-package org.suggs.webapps.buildpipeline.pages.pageobjects;
+package org.suggs.webapps.buildpipeline.pageobjects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

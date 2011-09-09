@@ -2,7 +2,6 @@ package org.suggs.webapps.buildpipeline.dsl;
 
 import org.suggs.webapps.buildpipeline.driver.Application;
 import org.suggs.webapps.buildpipeline.pages.Pages;
-import org.suggs.webapps.buildpipeline.pages.SeleniumPages;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

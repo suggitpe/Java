@@ -1,4 +1,4 @@
-package org.suggs.webapps.buildpipeline.pages.pageobjects;
+package org.suggs.webapps.buildpipeline.pageobjects;
 
 import org.suggs.webapps.buildpipeline.dsl.Component;
 

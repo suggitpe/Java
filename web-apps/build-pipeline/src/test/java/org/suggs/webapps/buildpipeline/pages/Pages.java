@@ -1,12 +1,12 @@
 package org.suggs.webapps.buildpipeline.pages;
 
-import org.suggs.webapps.buildpipeline.pages.pageobjects.HomePage;
-import org.suggs.webapps.buildpipeline.pages.pageobjects.ReleaseManagementPage;
-import org.suggs.webapps.buildpipeline.pages.pageobjects.ReleaseVersionForm;
-import org.suggs.webapps.buildpipeline.pages.pageobjects.ReleaseVersionShow;
+import org.suggs.webapps.buildpipeline.pageobjects.HomePage;
+import org.suggs.webapps.buildpipeline.pageobjects.ReleaseManagementPage;
+import org.suggs.webapps.buildpipeline.pageobjects.ReleaseVersionForm;
+import org.suggs.webapps.buildpipeline.pageobjects.ReleaseVersionShow;
 
 /**
- * TODO: Justify why you have written this class
+ * High level behaviour of the Pages objects.
  * <p/>
  * User: suggitpe
  * Date: 09/09/11

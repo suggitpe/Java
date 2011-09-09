@@ -1,9 +1,10 @@
-package org.suggs.webapps.buildpipeline.pages;
+package org.suggs.webapps.buildpipeline.pages.impl;
 
-import org.suggs.webapps.buildpipeline.pages.pageobjects.HomePage;
-import org.suggs.webapps.buildpipeline.pages.pageobjects.ReleaseManagementPage;
-import org.suggs.webapps.buildpipeline.pages.pageobjects.ReleaseVersionForm;
-import org.suggs.webapps.buildpipeline.pages.pageobjects.ReleaseVersionShow;
+import org.suggs.webapps.buildpipeline.pages.Pages;
+import org.suggs.webapps.buildpipeline.pageobjects.HomePage;
+import org.suggs.webapps.buildpipeline.pageobjects.ReleaseManagementPage;
+import org.suggs.webapps.buildpipeline.pageobjects.ReleaseVersionForm;
+import org.suggs.webapps.buildpipeline.pageobjects.ReleaseVersionShow;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;

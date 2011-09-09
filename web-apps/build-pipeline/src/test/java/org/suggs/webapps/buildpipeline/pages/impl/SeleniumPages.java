@@ -1,7 +1,6 @@
-package org.suggs.webapps.buildpipeline.pages;
+package org.suggs.webapps.buildpipeline.pages.impl;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

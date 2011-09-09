@@ -1,10 +1,9 @@
-package org.suggs.webapps.buildpipeline.pages;
+package org.suggs.webapps.buildpipeline.pages.impl;
 
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.thoughtworks.selenium.Selenium;
 
 /**
  * Builder class for all page objects.

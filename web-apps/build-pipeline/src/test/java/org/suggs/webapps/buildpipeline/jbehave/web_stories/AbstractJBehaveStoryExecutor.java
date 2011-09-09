@@ -1,11 +1,9 @@
 package org.suggs.webapps.buildpipeline.jbehave.web_stories;
 
 import org.suggs.webapps.buildpipeline.jbehave.steps.AbstractBuildPipelineSteps;
-import org.suggs.webapps.buildpipeline.pages.JbehavePages;
+import org.suggs.webapps.buildpipeline.pages.impl.JbehavePages;
 
 import java.util.List;
-
-import javax.naming.Context;
 
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;

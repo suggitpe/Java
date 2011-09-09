@@ -1,7 +1,7 @@
 package org.suggs.webapps.buildpipeline.selenium;
 
 import org.suggs.webapps.buildpipeline.dsl.DSL;
-import org.suggs.webapps.buildpipeline.pages.SeleniumPages;
+import org.suggs.webapps.buildpipeline.pages.impl.SeleniumPages;
 
 import org.junit.Test;
 

@@ -1,7 +1,5 @@
-package org.suggs.webapps.buildpipeline.pages.pageobjects;
+package org.suggs.webapps.buildpipeline.pageobjects;
 
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.thoughtworks.selenium.Selenium;

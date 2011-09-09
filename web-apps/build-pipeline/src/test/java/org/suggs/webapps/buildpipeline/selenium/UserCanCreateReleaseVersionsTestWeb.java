@@ -4,7 +4,7 @@ import org.suggs.webapps.buildpipeline.dsl.Component;
 import org.suggs.webapps.buildpipeline.dsl.ComponentVersion;
 import org.suggs.webapps.buildpipeline.dsl.DSL;
 import org.suggs.webapps.buildpipeline.dsl.ReleaseVersion;
-import org.suggs.webapps.buildpipeline.pages.SeleniumPages;
+import org.suggs.webapps.buildpipeline.pages.impl.SeleniumPages;
 
 import org.junit.Test;
 import org.slf4j.Logger;

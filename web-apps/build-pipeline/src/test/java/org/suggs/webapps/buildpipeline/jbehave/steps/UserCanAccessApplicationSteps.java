@@ -1,7 +1,6 @@
 package org.suggs.webapps.buildpipeline.jbehave.steps;
 
-import org.suggs.webapps.buildpipeline.dsl.DSL;
-import org.suggs.webapps.buildpipeline.pages.JbehavePages;
+import org.suggs.webapps.buildpipeline.pages.impl.JbehavePages;
 
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
