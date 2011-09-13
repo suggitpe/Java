@@ -11,7 +11,7 @@
     <artifactId>build-pipeline</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
-    <name>GFIT Build Pipeline</name>
+    <name>Build Pipeline</name>
 
     <dependencies>
         <!--
@@ -26,16 +26,24 @@
             <artifactId>jbehave-web-selenium</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <scope>test</scope>
         </dependency>
-        -->
+        <dependency>
+            <groupId>org.seleniumhq.webdriver</groupId>
+            <artifactId>webdriver-htmlunit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.webdriver</groupId>
+            <artifactId>webdriver-firefox</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-firefox-driver</artifactId>
+            <artifactId>selenium-api</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

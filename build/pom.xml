@@ -480,13 +480,18 @@
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-firefox-driver</artifactId>
+                <artifactId>selenium-api</artifactId>
                 <version>2.3.1</version>
             </dependency>
             <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-support</artifactId>
-                <version>2.3.1</version>
+                <groupId>org.seleniumhq.webdriver</groupId>
+                <artifactId>webdriver-htmlunit</artifactId>
+                <version>0.9.7376</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.webdriver</groupId>
+                <artifactId>webdriver-firefox</artifactId>
+                <version>0.9.7376</version>
             </dependency>
 
             <dependency>
