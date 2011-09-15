@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Class to build out the selenium webdriver implementation.
  * <p/>
- * User: suggitpe
- * Date: 11/08/11
- * Time: 18:16
+ * User: suggitpe Date: 11/08/11 Time: 18:16
  */
 
 public final class SeleniumPages extends AbstractPages {
@@ -18,7 +16,9 @@ public final class SeleniumPages extends AbstractPages {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( SeleniumPages.class );
 
+    //private final WebDriver webDriver = new ChromeDriver( );
     private final WebDriver webDriver = new HtmlUnitDriver( true );
+    //private final WebDriver webDriver = new FirefoxDriver();
 
     @Override
     protected WebDriver getWebDriver() {

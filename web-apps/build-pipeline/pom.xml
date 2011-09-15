@@ -22,13 +22,13 @@
         </dependency>
         -->
         <dependency>
-            <groupId>org.jbehave.web</groupId>
-            <artifactId>jbehave-web-selenium</artifactId>
+            <groupId>org.seleniumhq.webdriver</groupId>
+            <artifactId>webdriver-firefox</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
+            <groupId>org.seleniumhq.webdriver</groupId>
+            <artifactId>webdriver-chrome</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -37,8 +37,13 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.webdriver</groupId>
-            <artifactId>webdriver-firefox</artifactId>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave.web</groupId>
+            <artifactId>jbehave-web-selenium</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
