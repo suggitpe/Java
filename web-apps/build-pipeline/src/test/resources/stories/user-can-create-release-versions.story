@@ -5,26 +5,20 @@ In order to support GLL package construction
 As a build & release manager
 I want to be able to create unique identifiers
 
-Scenario: User can create a new version
-Given user is on Release Management page
-When user creates a new release with a description of CrazyNewRelease
-Then a new release is displayed with a description of CrazyNewRelease
+Scenario: should be able to add a description to a release
+When I create a new release with a description of NewSooperDooperRelease
+Then a new release is created with a description of NewSooperDooperRelease
 
-Scenario: User can create a new version with a unique release number
-Given user is on Release Management page
-And an existing release with a description of Foo
-When user creates a new release with a description of Bar
-Then the release number of Foo is different to the release number of Bar
+Scenario: should assign a unique id to the release
+Given an existing release
+When I create a new release
+Then the version numbers of the releases are different
 
-Scenario: User can choose versions of components that make up the GGL release version
-Given user is on Release Management page
-When user requests a new release
-Then a number of component versions can be selected to that parent version
-
-Scenario: Tests are treated as a component
-Given user is on Release Management page
-When user requests a new release
-Then they are forced to select a test version
+Scenario: should be able to assign a component version to a release
+Given an existing version 1.1 of component MyNewComponent
+And an existing version 1.2 of component MyNewComponent
+When I create a new release with version 1.2 of component MyNewComponent
+Then the release should contain a version 1.2 of component MyNewComponent
 
 Scenario: Test pack association is not treated in the same as components
 
