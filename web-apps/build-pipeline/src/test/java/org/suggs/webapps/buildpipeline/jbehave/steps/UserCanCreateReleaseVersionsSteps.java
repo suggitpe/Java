@@ -72,6 +72,7 @@ public class UserCanCreateReleaseVersionsSteps extends AbstractBuildPipelineStep
 
     @When("I create a new release with version $componentversion of component $componentName")
     public void whenICreateANewReleaseWithVersionOfComponent( @Named("componentVersion") String aComponentVersion, @Named("componentName") String aComponentName ) {
+        assertThat( component.getName(), is( equalTo( aComponentName ) ) );
         componentVersion = component.addVersion( aComponentVersion );
         releaseVersion = createReleaseWithComponentVersion( componentVersion );
     }

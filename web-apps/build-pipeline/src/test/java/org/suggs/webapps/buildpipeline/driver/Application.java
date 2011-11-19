@@ -17,9 +17,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Class to manage the interaction with the Application under test.
  * <p/>
- * User: suggitpe
- * Date: 30/08/11
- * Time: 14:55
+ * User: suggitpe Date: 30/08/11 Time: 14:55
  */
 
 public final class Application {
@@ -93,7 +91,11 @@ public final class Application {
     }
 
     private String readComponentInstallDirectory() throws IOException {
-        URL url = ClassLoader.getSystemResource( "real.properties" );
+        URL url = this.getClass().getClassLoader().getSystemResource( "real.properties" );
+        if ( url == null ) {
+            LOG.error( "Could not find real.properties" );
+        }
+        LOG.info("Reading in file ["+url.getPath()+"]" );
         Properties properties = new Properties();
         properties.load( new FileInputStream( new File( url.getFile() ) ) );
         return properties.getProperty( "component.install.dir" );
