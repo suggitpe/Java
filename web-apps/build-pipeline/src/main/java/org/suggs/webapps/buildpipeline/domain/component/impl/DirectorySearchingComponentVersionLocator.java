@@ -40,7 +40,7 @@ public class DirectorySearchingComponentVersionLocator implements ComponentVersi
         File file = new File( componentInstallDirectory );
 
         if ( !file.exists() ) {
-            throw new IllegalStateException( "Cannot find directory [" + componentInstallDirectory + "]" );
+            throw new IllegalStateException( "Cannot find directory [" + componentInstallDirectory + "] try mkdir -p " + componentInstallDirectory );
         }
 
         ComponentVersionsBean wrapper = new ComponentVersionsBean();

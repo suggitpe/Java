@@ -42,8 +42,8 @@ public abstract class AbstractJBehaveStoryExecutor extends JUnitStories {
     //private ContextView contextView = new LocalFrameContextView().sized( 500, 100 );
     private ContextView contextView = new ContextView() {
         @Override
-        public void show( String message ) {
-            LOG.info( "Context update: " + message );
+        public void show( String scenario, String step ) {
+            LOG.info( "Context update: scenario [" + scenario + "], step [" + step +"]" );
         }
 
         @Override

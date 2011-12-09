@@ -17,7 +17,7 @@
     </category>
     
     <category name="org.jbehave">
-        <priority value="debug" />
+        <priority value="info" />
     </category>
 
     <root>
