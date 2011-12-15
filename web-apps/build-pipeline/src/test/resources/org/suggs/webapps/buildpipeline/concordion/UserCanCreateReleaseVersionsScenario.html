@@ -1,0 +1,48 @@
+<html xmlns:ccdn="http://www.concordion.org/2007/concordion" xmlns:cp="http://www.agileinsider.org/concordion/plus">
+<head>
+    <link href="../concordion.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<h1>Users can create new release versions</h1>
+
+<p>
+    As a Release Manager<br/>
+    I need to create new releasable versions of my underlying application<br/>
+    So that I can release them into any environment in a simple manner<br/>
+</p>
+
+<div class="scenario" cp:scenario="Add description to the release">
+    <h3>Can add a description to a release</h3>
+    <p ccdn:execute="#releaseVersion=createReleaseWithDescription(#description)">
+        When I create a release and give it a description of '
+        <span ccdn:set="#description">This is my release</span>',<br/>
+        Then it should associate the description
+        '<span ccdn:assertEquals="#releaseVersion.getDescription()">This is my release</span>' with the release.
+    </p>
+
+</div>
+
+<div class="scenario" cp:scenario="Assigns a unique release version to the release">
+    <h3>Assigns unique versions to releases</h3>
+    <p>
+        When I <span ccdn:execute="#version1=createRelease()">create a release</span>
+        and <span ccdn:execute="#version2=createRelease()">create another release</span>,<br/>
+        Then the version numbers given to them are not the same #version2.
+    </p>
+
+</div>
+
+<div class="scenario" cp:scenario="Select version of components">
+    <h3>Allow selection of a component</h3>
+    <p>
+        Given a component <span ccdn:set="createComponent">'Cool component'</span> with versions 1.2 and 1.3,<br/>
+        When I create a release with version 1.2 of Cool Component,<br/>
+        Then I <br/>
+
+    </p>
+
+</div>
+
+</body>
+</html>

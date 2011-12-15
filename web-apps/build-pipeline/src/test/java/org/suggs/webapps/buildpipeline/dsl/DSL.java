@@ -25,27 +25,27 @@ public abstract class DSL {
         application = new Application( aPagesObject);
     }
 
-    protected void openApplication() {
+    public void openApplication() {
         application.openApplication();
     }
 
-    protected boolean applicationIsOpen() {
+    public boolean applicationIsOpen() {
         return application.checkApplicationIsOpen();
     }
 
-    protected Component createComponent( String aComponentName ) {
+    public Component createComponent( String aComponentName ) {
         return application.createInstalledComponent( aComponentName );
     }
 
-    protected ReleaseVersion createRelease() {
+    public ReleaseVersion createRelease() {
         return application.createReleaseVersion();
     }
 
-    protected ReleaseVersion createReleaseWithDescription( String aDescription ) {
+    public ReleaseVersion createReleaseWithDescription( String aDescription ) {
         return application.createReleaseVersion( aDescription );
     }
 
-    protected ReleaseVersion createReleaseWithComponentVersion( ComponentVersion aComponentVersion ) {
+    public ReleaseVersion createReleaseWithComponentVersion( ComponentVersion aComponentVersion ) {
         return application.createReleaseVersion( aComponentVersion );
     }
 }

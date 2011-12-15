@@ -1,0 +1,26 @@
+<html xmlns:ccdn="http://www.concordion.org/2007/concordion" xmlns:cp="http://www.agileinsider.org/concordion/plus">
+<head>
+    <link href="../concordion.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<h1>Users can access the application</h1>
+
+<p>
+    As a [person who cares]<br/>
+    I need to know that I can access the application from a web browser<br/>
+    So that I can be assured that the application is fully deployed and operational
+</p>
+
+<div class="scenario" cp:scenario="Access the application">
+    <h3>I can access the application scenario</h3>
+    <p>
+        When the <span ccdn:execute="openApplication()">application is accessed</span>
+        through a web browser front end, the user can
+        <span ccdn:assertTrue="applicationIsOpen()">see the home page</span>.
+    </p>
+
+</div>
+
+</body>
+</html>
