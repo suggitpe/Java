@@ -22,7 +22,7 @@ public final class FileUtils {
     private FileUtils() {
     }
 
-    static File createFreshDirectory( String aNewDirectory, File aParentDirectory ) {
+    static File createDirectoryReplacingIfNecessary( String aNewDirectory, File aParentDirectory ) {
         deleteComponentDirectoryIfExists( aNewDirectory, aParentDirectory );
         File newComponentDirectory = new File( aParentDirectory.getAbsolutePath() + File.separator + aNewDirectory );
         newComponentDirectory.mkdir();

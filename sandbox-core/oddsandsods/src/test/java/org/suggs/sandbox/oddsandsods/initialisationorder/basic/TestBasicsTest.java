@@ -4,6 +4,8 @@
  */
 package org.suggs.sandbox.oddsandsods.initialisationorder.basic;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
 /**
@@ -13,13 +15,13 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public class TestBasics {
+public class TestBasicsTest extends TestCase {
 
     /**
      * 
      */
     @Test
-    public void testBasics() {
+    public void shouldCreateNewClass() {
         @SuppressWarnings("unused")
         TestClass clazz = new TestClass();
     }

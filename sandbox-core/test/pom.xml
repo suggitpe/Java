@@ -14,6 +14,16 @@
     <packaging>jar</packaging>
     <name>Sandbox - Test</name>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>com.codecreate.maven.plugins</groupId>
+                <artifactId>testdox-maven-plugin</artifactId>
+                <version>1.0.1</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
     <build>
         <plugins>
             <plugin>

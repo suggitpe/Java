@@ -83,7 +83,7 @@ public final class Application {
             if ( !componentInstallDir.exists() ) {
                 throw new IllegalStateException( "Cannot read application component install dir" );
             }
-            return new ComponentImpl( this, FileUtils.createFreshDirectory( aComponentName, componentInstallDir ) );
+            return new ComponentImpl( this, FileUtils.createDirectoryReplacingIfNecessary( aComponentName, componentInstallDir ) );
         }
         catch ( IOException ioe ) {
             throw new IllegalStateException( "Unable to create installed component" );
@@ -103,7 +103,7 @@ public final class Application {
 
 
     public ComponentVersionImpl createInstalledComponentVersion( ComponentImpl aComponent, String aComponentVersionNumber ) {
-        File versionInstallDirectory = FileUtils.createFreshDirectory( aComponentVersionNumber, aComponent.getComponentInstallDirectory() );
+        File versionInstallDirectory = FileUtils.createDirectoryReplacingIfNecessary( aComponentVersionNumber, aComponent.getComponentInstallDirectory() );
         return new ComponentVersionImpl( aComponent, aComponentVersionNumber, versionInstallDirectory );
     }
 

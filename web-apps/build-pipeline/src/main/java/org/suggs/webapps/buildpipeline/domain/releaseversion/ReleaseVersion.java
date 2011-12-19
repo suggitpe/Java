@@ -10,9 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Class to represent a release version of an application (be that a single component or multiple components).
  * <p/>
- * User: suggitpe
- * Date: 06/07/11
- * Time: 10:41
+ * User: suggitpe Date: 06/07/11 Time: 10:41
  */
 
 public final class ReleaseVersion implements Comparable<ReleaseVersion> {
@@ -43,8 +41,12 @@ public final class ReleaseVersion implements Comparable<ReleaseVersion> {
         return version;
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
     public void setVersion( String aVersion ) {
-        LOG.info("Setting version" );
         version = aVersion;
     }
 
@@ -53,7 +55,6 @@ public final class ReleaseVersion implements Comparable<ReleaseVersion> {
     }
 
     public void setDescription( String aDescription ) {
-        LOG.info("Setting desc" );
         description = aDescription;
     }
 
@@ -62,8 +63,7 @@ public final class ReleaseVersion implements Comparable<ReleaseVersion> {
     }
 
     public void setCreateDate( Date aDate ) {
-        LOG.info("Setting date" );
-        createDate = aDate;
+        createDate = ( Date ) aDate.clone();
     }
 
     public Map<String, String> getComponentVersions() {

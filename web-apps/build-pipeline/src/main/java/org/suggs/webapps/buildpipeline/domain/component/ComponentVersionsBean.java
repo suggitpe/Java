@@ -29,12 +29,10 @@ public class ComponentVersionsBean {
     }
 
     public List<ComponentBean> getComponents() {
-        LOG.debug( "Getting components" );
         return getComponentsWithTestSuiteFlag( false );
     }
 
     public List<ComponentBean> getTestSuites() {
-        LOG.debug( "Getting test suites" );
         return getComponentsWithTestSuiteFlag( true );
     }
 
