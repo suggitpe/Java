@@ -1,9 +1,8 @@
 package org.suggs.webapps.buildpipeline.jbehave.web_stories;
 
-import org.suggs.webapps.buildpipeline.jbehave.steps.AbstractBuildPipelineSteps;
 import org.suggs.webapps.buildpipeline.jbehave.steps.UserCanCreateReleaseVersionsSteps;
-import org.suggs.webapps.buildpipeline.pages.impl.JbehavePages;
 
+import org.jbehave.core.annotations.UsingSteps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +12,8 @@ import org.slf4j.LoggerFactory;
  * User: suggitpe Date: 15/09/11 Time: 18:14
  */
 
-public class UserCanCreateReleaseVersionsExecutor extends AbstractJBehaveStoryExecutor {
+@UsingSteps( instances = {UserCanCreateReleaseVersionsSteps.class})
+public class UserCanCreateReleaseVersionsExecutor extends AbstractStoryEmbedder {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( UserCanCreateReleaseVersionsExecutor.class );
@@ -23,8 +23,4 @@ public class UserCanCreateReleaseVersionsExecutor extends AbstractJBehaveStoryEx
         return "**/user-can-create-release-versions.story";
     }
 
-    @Override
-    protected AbstractBuildPipelineSteps createSteps( JbehavePages aPagesObject ) {
-        return new UserCanCreateReleaseVersionsSteps( aPagesObject );
-    }
 }

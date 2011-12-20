@@ -2,8 +2,9 @@ package org.suggs.webapps.buildpipeline.jbehave.steps;
 
 import org.suggs.webapps.buildpipeline.dsl.Component;
 import org.suggs.webapps.buildpipeline.dsl.ComponentVersion;
+import org.suggs.webapps.buildpipeline.dsl.DSL;
 import org.suggs.webapps.buildpipeline.dsl.ReleaseVersion;
-import org.suggs.webapps.buildpipeline.pages.impl.JbehavePages;
+import org.suggs.webapps.buildpipeline.pages.impl.SeleniumPages;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
@@ -23,7 +24,7 @@ import static org.junit.Assert.assertThat;
  * User: suggitpe Date: 15/09/11 Time: 18:16
  */
 
-public class UserCanCreateReleaseVersionsSteps extends AbstractBuildPipelineSteps {
+public class UserCanCreateReleaseVersionsSteps extends DSL{
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( UserCanCreateReleaseVersionsSteps.class );
@@ -33,8 +34,8 @@ public class UserCanCreateReleaseVersionsSteps extends AbstractBuildPipelineStep
     private Component component;
     private ComponentVersion componentVersion;
 
-    public UserCanCreateReleaseVersionsSteps( JbehavePages aPagesObject ) {
-        super( aPagesObject );
+    public UserCanCreateReleaseVersionsSteps() {
+        super(new SeleniumPages());
     }
 
     @When("I create a new release with a description of $description")
