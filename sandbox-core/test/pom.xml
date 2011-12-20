@@ -54,8 +54,7 @@
                         <configuration>
                             <skip>false</skip>
                             <scope>test</scope>
-                            <annotatedEmbedderRunnerClass>org.jbehave.core.junit.AnnotatedEmbedderRunner
-                            </annotatedEmbedderRunnerClass>
+                            <annotatedEmbedderRunnerClass>org.jbehave.core.junit.AnnotatedEmbedderRunner</annotatedEmbedderRunnerClass>
                             <includes>
                                 <include>**/injectablestories/*.java</include>
                             </includes>

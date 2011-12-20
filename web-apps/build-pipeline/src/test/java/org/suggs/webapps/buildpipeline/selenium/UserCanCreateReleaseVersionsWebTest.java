@@ -22,12 +22,12 @@ import static org.junit.Assert.assertThat;
  * Time: 07:11
  */
 
-public final class UserCanCreateReleaseVersionsTestWeb extends DSL {
+public final class UserCanCreateReleaseVersionsWebTest extends DSL {
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( UserCanCreateReleaseVersionsTestWeb.class );
+    private static final Logger LOG = LoggerFactory.getLogger( UserCanCreateReleaseVersionsWebTest.class );
 
-    public UserCanCreateReleaseVersionsTestWeb() {
+    public UserCanCreateReleaseVersionsWebTest() {
         super( new SeleniumPages() );
     }
 

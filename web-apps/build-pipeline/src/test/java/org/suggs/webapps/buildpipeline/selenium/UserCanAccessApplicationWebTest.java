@@ -17,9 +17,9 @@ import static org.junit.Assert.assertThat;
  * Time: 18:35
  */
 
-public final class UserCanAccessApplicationTestWeb extends DSL {
+public final class UserCanAccessApplicationWebTest extends DSL {
 
-    public UserCanAccessApplicationTestWeb() {
+    public UserCanAccessApplicationWebTest() {
         super( new SeleniumPages() );
     }
 

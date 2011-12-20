@@ -15,8 +15,12 @@
         <priority value="info" />
     </category>
     
+    <category name="freemarker">
+        <priority value="info" />
+    </category>
+
     <root>
-        <priority value="debug" />
+        <priority value="info" />
         <appender-ref ref="ConsoleAppender" />
     </root>
 

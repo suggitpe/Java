@@ -15,7 +15,11 @@
     <category name="org.springframework">
         <priority value="info" />
     </category>
-    
+
+    <category name="freemarker">
+        <priority value="info" />
+    </category>
+
     <category name="org.jbehave">
         <priority value="info" />
     </category>

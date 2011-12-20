@@ -2,9 +2,8 @@
  * TraverseStateMachine.java created on 7 Sep 2010 18:30:46 by suggitpe for project state-machine-lib
  * 
  */
-package org.suggs.libs.statemachine.jbehave.stories;
+package org.suggs.libs.statemachine.jbehave.spring_stories;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,13 +46,13 @@ public class TraverseStateMachine extends InjectableEmbedder {
         if( paths == null || paths.isEmpty() ){
             throw new IllegalStateException( "No story paths found for state machine" );
         }
-        LOG.info( "Running [" + this.getClass().getSimpleName() + "] with stories [" + paths + "]" );
+        LOG.info( "Running [" + this.getClass().getSimpleName() + "] with spring_stories [" + paths + "]" );
         injectedEmbedder().runStoriesAsPaths( paths );
     }
 
     private List<String> createStoryPaths() {
         String storyLocation = CodeLocations.codeLocationFromClass( this.getClass() ).getFile();
-        LOG.info( "Running stories from [" + storyLocation + "]" );
+        LOG.info( "Running spring_stories from [" + storyLocation + "]" );
         StoryFinder finder = new StoryFinder();
         return finder.findPaths( storyLocation,
                 Arrays.asList( "**/*.story" ),
