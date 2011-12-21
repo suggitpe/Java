@@ -91,11 +91,11 @@ public final class Application {
     }
 
     private String readComponentInstallDirectory() throws IOException {
-        URL url = this.getClass().getClassLoader().getSystemResource( "real.properties" );
+        URL url = this.getClass().getClassLoader().getResource( "real.properties" );
         if ( url == null ) {
             LOG.error( "Could not find real.properties" );
         }
-        LOG.info("Reading in file ["+url.getPath()+"]" );
+        LOG.info( "Reading in file [" + url.getPath() + "]" );
         Properties properties = new Properties();
         properties.load( new FileInputStream( new File( url.getFile() ) ) );
         return properties.getProperty( "component.install.dir" );
