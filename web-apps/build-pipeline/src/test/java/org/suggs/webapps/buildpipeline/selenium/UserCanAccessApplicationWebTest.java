@@ -24,7 +24,7 @@ public final class UserCanAccessApplicationWebTest extends DSL {
     }
 
     @Test
-    public void shouldBeAbleToAccessApplication() {
+    public void shouldBeAbleToAccessApplicationFromABrowser() {
         openApplication();
         assertThat( applicationIsOpen(), is( true ) );
     }

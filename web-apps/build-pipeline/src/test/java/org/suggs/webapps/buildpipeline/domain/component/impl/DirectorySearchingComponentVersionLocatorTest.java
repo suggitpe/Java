@@ -78,7 +78,7 @@ public class DirectorySearchingComponentVersionLocatorTest {
     }
 
     @Test
-    public void shouldAllowDiscreteRetrievalOfTestSuites() {
+    public void shouldAllowDiscreteRetrievalOfTestSuitesBasedOnThoseAvailable() {
         List<ComponentBean> suites = locator.getComponentVersions().getTestSuites();
         for ( ComponentBean bean : suites ) {
             LOG.info( "Checking that bean [" + bean + "] is a test suite" );

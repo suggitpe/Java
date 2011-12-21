@@ -19,7 +19,7 @@ public final class UserCanAccessApplicationExecutor extends AbstractStoryEmbedde
     private static final Logger LOG = LoggerFactory.getLogger( UserCanAccessApplicationExecutor.class );
 
     @Override
-    protected String createStoryLocation() {
+    protected String createStoryIncludes() {
         return "**/user-can-access-application.story";
     }
 }

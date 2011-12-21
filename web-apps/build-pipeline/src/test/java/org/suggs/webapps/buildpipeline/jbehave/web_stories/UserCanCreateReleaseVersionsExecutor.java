@@ -20,7 +20,7 @@ public class UserCanCreateReleaseVersionsExecutor extends AbstractStoryEmbedder 
     private static final Logger LOG = LoggerFactory.getLogger( UserCanCreateReleaseVersionsExecutor.class );
 
     @Override
-    protected String createStoryLocation() {
+    protected String createStoryIncludes() {
         return "**/user-can-create-release-versions.story";
     }
 

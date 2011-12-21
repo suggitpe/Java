@@ -1,6 +1,7 @@
 package org.suggs.webapps.buildpipeline.jbehave.support;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;
@@ -40,18 +41,27 @@ public abstract class AbstractStoryEmbedder extends InjectableEmbedder {
     @Override
     public void run() throws Throwable {
         StoryFinder finder = new StoryFinder();
-        injectedEmbedder().runStoriesAsPaths( finder.findPaths( STORY_LOCATION,
-                Arrays.asList( createStoryLocation() ),
-                Arrays.asList( "" ),
-                "file:" + STORY_LOCATION ) );
+        List<String> urls = finder.findPaths( STORY_LOCATION,
+                Arrays.asList( createStoryIncludes() ),
+                Arrays.asList( createStoryExcludes() ),
+                "file:" + STORY_LOCATION );
+        injectedEmbedder().runStoriesAsPaths( urls );
     }
 
 
     /**
-     * This is the key templated method call.  This will satisfy the regex we are looking for to find teh relevant
-     * stories.
+     * This is the delegation to the test class to provide the search string to find the stories.
      *
      * @return
      */
-    protected abstract String createStoryLocation();
+    protected abstract String createStoryIncludes();
+
+    /**
+     * This is an optional overridable method to state any excludes.
+     *
+     * @return
+     */
+    protected String createStoryExcludes(){
+        return "";
+    }
 }
