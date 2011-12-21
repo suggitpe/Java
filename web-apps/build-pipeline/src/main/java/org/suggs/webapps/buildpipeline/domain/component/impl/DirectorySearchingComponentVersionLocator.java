@@ -1,5 +1,9 @@
 package org.suggs.webapps.buildpipeline.domain.component.impl;
 
+import org.suggs.webapps.buildpipeline.domain.component.ComponentBean;
+import org.suggs.webapps.buildpipeline.domain.component.ComponentVersionService;
+import org.suggs.webapps.buildpipeline.domain.component.ComponentVersionsBean;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Set;
@@ -7,17 +11,12 @@ import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.suggs.webapps.buildpipeline.domain.component.ComponentBean;
-import org.suggs.webapps.buildpipeline.domain.component.ComponentVersionService;
-import org.suggs.webapps.buildpipeline.domain.component.ComponentVersionsBean;
 
 /**
  * Simple class that will read from a file structure and build up a picture of all of the application versions that are
  * installed.
  * <p/>
- * User: suggitpe
- * Date: 12/07/11
- * Time: 07:27
+ * User: suggitpe Date: 12/07/11 Time: 07:27
  */
 
 public class DirectorySearchingComponentVersionLocator implements ComponentVersionService {

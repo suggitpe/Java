@@ -71,6 +71,12 @@
 
     <build>
         <plugins>
+            <!--
+            <plugin>
+                <groupId>com.googlecode.robotframework-maven-plugin</groupId>
+                <artifactId>robotframework-maven-plugin</artifactId>
+            </plugin>
+            -->
             <plugin>
                 <groupId>org.jbehave</groupId>
                 <artifactId>jbehave-maven-plugin</artifactId>

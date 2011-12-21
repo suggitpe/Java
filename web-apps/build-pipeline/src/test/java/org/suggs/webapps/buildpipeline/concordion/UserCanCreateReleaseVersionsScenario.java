@@ -12,14 +12,14 @@ import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 /**
- * TODO: Justify why you have written this class
+ * Concordion fixture for the create releaes tests.
  * <p/>
  * User: suggitpe Date: 12/12/11 Time: 7:14 PM
  */
+
 @RunWith(ConcordionPlus.class)
 public class UserCanCreateReleaseVersionsScenario extends DSL {
 

@@ -19,10 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Controller class to handle the release management aspects
  * <p/>
- * User: suggitpe
- * Date: 06/07/11
- * Time: 07:48
+ * User: suggitpe Date: 06/07/11 Time: 07:48
  */
+
 @Controller
 @RequestMapping("/release-management")
 @SessionAttributes(types = ReleaseVersion.class)
@@ -62,7 +61,7 @@ public final class ReleaseManagementController {
         else {
             ReleaseVersionManager.instance().addVersion( releaseVersion );
             aStatus.setComplete();
-            return "redirect:/release-management/"+ releaseVersion.getVersion();
+            return "redirect:/release-management/" + releaseVersion.getVersion();
         }
     }
 
@@ -98,9 +97,9 @@ public final class ReleaseManagementController {
         }
     }
 
-    @RequestMapping( value = "/{releaseVersion}/edit", method = RequestMethod.DELETE)
-    public String processDeleteReleaseVersion(@PathVariable("releaseVersion") String aReleaseVersion){
-        ReleaseVersionManager.instance().remove(aReleaseVersion);
+    @RequestMapping(value = "/{releaseVersion}/edit", method = RequestMethod.DELETE)
+    public String processDeleteReleaseVersion( @PathVariable("releaseVersion") String aReleaseVersion ) {
+        ReleaseVersionManager.instance().remove( aReleaseVersion );
         return "redirect:/release-management";
     }
 

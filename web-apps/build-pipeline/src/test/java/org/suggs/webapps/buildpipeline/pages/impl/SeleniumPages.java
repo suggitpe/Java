@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
  * <p/>
  * User: suggitpe Date: 11/08/11 Time: 18:16
  */
-
 public final class SeleniumPages extends AbstractPages {
 
     @SuppressWarnings("unused")

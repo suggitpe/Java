@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Controller class for the administration space within the application.
  * <p/>
- * User: suggitpe
- * Date: 19/07/11
- * Time: 19:41
+ * User: suggitpe Date: 19/07/11 Time: 19:41
  */
 
 @Controller
@@ -29,8 +27,8 @@ public class AdministrationController {
         return "administration";
     }
 
-    @RequestMapping(value = "deleteAllVersions", method=RequestMethod.GET)
-    public String deleteAllReleaseVersions(){
+    @RequestMapping(value = "deleteAllVersions", method = RequestMethod.GET)
+    public String deleteAllReleaseVersions() {
         ReleaseVersionManager.instance().deleteAllReleaseVersions();
         return "redirect:/administration";
     }

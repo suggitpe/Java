@@ -1,6 +1,7 @@
 package org.suggs.webapps.buildpipeline.jbehave.web_stories;
 
 import org.suggs.webapps.buildpipeline.jbehave.steps.UserCanAccessApplicationSteps;
+import org.suggs.webapps.buildpipeline.jbehave.support.AbstractStoryEmbedder;
 
 import org.jbehave.core.annotations.UsingSteps;
 import org.slf4j.Logger;

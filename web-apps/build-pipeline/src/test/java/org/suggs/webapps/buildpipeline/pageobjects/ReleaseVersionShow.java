@@ -9,15 +9,11 @@ import com.thoughtworks.selenium.Selenium;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
-
 /**
  * Class to encapsulate the Release ReleaseVersionImpl display page.
  * <p/>
- * User: suggitpe
- * Date: 15/07/11
- * Time: 08:44
+ * User: suggitpe Date: 15/07/11 Time: 08:44
  */
-
 public final class ReleaseVersionShow extends AbstractPage {
 
     @SuppressWarnings("unused")

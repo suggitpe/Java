@@ -1,13 +1,14 @@
 package org.suggs.webapps.buildpipeline.jbehave.web_stories;
 
 import org.suggs.webapps.buildpipeline.jbehave.steps.UserCanCreateReleaseVersionsSteps;
+import org.suggs.webapps.buildpipeline.jbehave.support.AbstractStoryEmbedder;
 
 import org.jbehave.core.annotations.UsingSteps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * Executor for the release creation stories.
  * <p/>
  * User: suggitpe Date: 15/09/11 Time: 18:14
  */

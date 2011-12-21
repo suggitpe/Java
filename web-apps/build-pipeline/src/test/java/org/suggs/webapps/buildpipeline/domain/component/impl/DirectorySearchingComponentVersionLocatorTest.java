@@ -19,9 +19,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Test class for the DirectorySearchingComponentVersionLocator class
  * <p/>
- * User: suggitpe
- * Date: 12/07/11
- * Time: 19:24
+ * User: suggitpe Date: 12/07/11 Time: 19:24
  */
 
 public class DirectorySearchingComponentVersionLocatorTest {
@@ -73,18 +71,18 @@ public class DirectorySearchingComponentVersionLocatorTest {
     @Test
     public void shouldAllowDiscreteRetrievalOfComponentsBasedOnThoseAvailable() {
         List<ComponentBean> components = locator.getComponentVersions().getComponents();
-        for( ComponentBean bean: components){
-            LOG.info( "Checking that bean ["+bean+"] is not a test suite" );
-            assertThat("Bean ["+bean+"] is not a component",  bean.isTestSuite(), is( false ));
+        for ( ComponentBean bean : components ) {
+            LOG.info( "Checking that bean [" + bean + "] is not a test suite" );
+            assertThat( "Bean [" + bean + "] is not a component", bean.isTestSuite(), is( false ) );
         }
     }
 
     @Test
     public void shouldAllowDiscreteRetrievalOfTestSuites() {
         List<ComponentBean> suites = locator.getComponentVersions().getTestSuites();
-        for( ComponentBean bean: suites){
-            LOG.info( "Checking that bean ["+bean+"] is a test suite" );
-            assertThat("Bean ["+bean+"] is not a test suite",  bean.isTestSuite(), is( true ));
+        for ( ComponentBean bean : suites ) {
+            LOG.info( "Checking that bean [" + bean + "] is a test suite" );
+            assertThat( "Bean [" + bean + "] is not a test suite", bean.isTestSuite(), is( true ) );
         }
     }
 }

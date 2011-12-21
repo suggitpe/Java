@@ -5,16 +5,14 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
  * Test class for the ComponentVerionsBean.
  * <p/>
- * User: suggitpe
- * Date: 26/07/11
- * Time: 14:23
+ * User: suggitpe Date: 26/07/11 Time: 14:23
  */
 
 public final class ComponentVersionsBeanTest {

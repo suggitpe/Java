@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Class to encapsulate the available component versions.
  * <p/>
- * User: suggitpe
- * Date: 12/07/11
- * Time: 08:17
+ * User: suggitpe Date: 12/07/11 Time: 08:17
  */
 
 public class ComponentVersionsBean {
@@ -38,8 +36,8 @@ public class ComponentVersionsBean {
 
     private List<ComponentBean> getComponentsWithTestSuiteFlag( final Boolean aTestSuiteFlagToMatch ) {
         List<ComponentBean> keys = new ArrayList<ComponentBean>( componentVersions.keySet() );
-        for( Iterator<ComponentBean> iter = keys.iterator(); iter.hasNext(); ){
-            if(iter.next().isTestSuite() != aTestSuiteFlagToMatch){
+        for ( Iterator<ComponentBean> iter = keys.iterator(); iter.hasNext(); ) {
+            if ( iter.next().isTestSuite() != aTestSuiteFlagToMatch ) {
                 iter.remove();
             }
         }

@@ -8,9 +8,7 @@ import org.suggs.webapps.buildpipeline.pageobjects.ReleaseVersionShow;
 /**
  * High level behaviour of the Pages objects.
  * <p/>
- * User: suggitpe
- * Date: 09/09/11
- * Time: 18:28
+ * User: suggitpe Date: 09/09/11 Time: 18:28
  */
 public interface Pages {
 

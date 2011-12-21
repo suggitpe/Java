@@ -121,6 +121,9 @@
                         <excludes>
                             <exlude>**/*WebTest.java</exlude>
                         </excludes>
+                        <systemPropertyVariables>
+                            <concordion.output.dir>${project.build.directory}/concordion</concordion.output.dir>
+                        </systemPropertyVariables>
                     </configuration>
                 </plugin>
 
@@ -259,6 +262,22 @@
                             <phase>post-integration-test</phase>
                             <goals>
                                 <goal>shutdown</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- ROBOT FRAMEWORK-->
+                <plugin>
+                    <groupId>com.googlecode.robotframework-maven-plugin</groupId>
+                    <artifactId>robotframework-maven-plugin</artifactId>
+                    <version>1.1.1</version>
+                    <executions>
+                        <execution>
+                            <id>Run Robot Framework</id>
+                            <phase>integration-test</phase>
+                            <goals>
+                                <goal>run</goal>
                             </goals>
                         </execution>
                     </executions>

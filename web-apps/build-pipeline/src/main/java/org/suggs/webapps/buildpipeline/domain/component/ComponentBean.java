@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Class to represent a component including any metadata that may come with it..
  * <p/>
- * User: suggitpe
- * Date: 26/07/11
- * Time: 07:18
+ * User: suggitpe Date: 26/07/11 Time: 07:18
  */
 
 public final class ComponentBean implements Comparable<ComponentBean> {

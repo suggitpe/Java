@@ -32,7 +32,7 @@ public final class UserCanCreateReleaseVersionsWebTest extends DSL {
     }
 
     @Test
-    public void shouldBeAbleToAddDescriptionToRelease() {
+    public void shouldBeAbleToAddDescriptionToReleaseSoThatPeopleCanEasilyReadIt() {
         String basicRelease = "BasicRelease";
         ReleaseVersion releaseVersion = createReleaseWithDescription( basicRelease );
         assertThat( releaseVersion.getDescription(), equalTo( basicRelease ) );

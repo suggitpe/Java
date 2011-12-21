@@ -1,10 +1,10 @@
 package org.suggs.webapps.buildpipeline.pages.impl;
 
-import org.suggs.webapps.buildpipeline.pages.Pages;
 import org.suggs.webapps.buildpipeline.pageobjects.HomePage;
 import org.suggs.webapps.buildpipeline.pageobjects.ReleaseManagementPage;
 import org.suggs.webapps.buildpipeline.pageobjects.ReleaseVersionForm;
 import org.suggs.webapps.buildpipeline.pageobjects.ReleaseVersionShow;
+import org.suggs.webapps.buildpipeline.pages.Pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
@@ -15,11 +15,8 @@ import com.thoughtworks.selenium.Selenium;
 /**
  * Abstract class that contains all of the abstract page implementation.
  * <p/>
- * User: suggitpe
- * Date: 11/08/11
- * Time: 18:18
+ * User: suggitpe Date: 11/08/11 Time: 18:18
  */
-
 public abstract class AbstractPages implements Pages {
 
     @SuppressWarnings("unused")
@@ -33,7 +30,7 @@ public abstract class AbstractPages implements Pages {
 
     protected abstract WebDriver getWebDriver();
 
-    protected Selenium getSelenium(){
+    protected Selenium getSelenium() {
         return new WebDriverBackedSelenium( getWebDriver(), "http://foo" );
     }
 

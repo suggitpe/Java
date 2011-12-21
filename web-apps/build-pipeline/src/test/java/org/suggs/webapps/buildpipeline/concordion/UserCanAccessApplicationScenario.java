@@ -1,7 +1,6 @@
 package org.suggs.webapps.buildpipeline.concordion;
 
 import org.suggs.webapps.buildpipeline.dsl.DSL;
-import org.suggs.webapps.buildpipeline.pages.Pages;
 import org.suggs.webapps.buildpipeline.pages.impl.SeleniumPages;
 
 import org.agileinsider.concordion.junit.ConcordionPlus;
@@ -10,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO: Justify why you have written this class
+ * Concordion fixture class for the user access tests.
  * <p/>
  * User: suggitpe Date: 12/12/11 Time: 7:30 AM
  */

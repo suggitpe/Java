@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Acts as a provider of all release versions, this should be the core interface with the persistence mechanism..
  * <p/>
- * User: suggitpe
- * Date: 06/07/11
- * Time: 07:52
+ * User: suggitpe Date: 06/07/11 Time: 07:52
  */
 
 public final class ReleaseVersionManager {
@@ -51,7 +49,7 @@ public final class ReleaseVersionManager {
     }
 
     public void deleteAllReleaseVersions() {
-        LOG.warn( "Removing all release versions");
+        LOG.warn( "Removing all release versions" );
         versions.clear();
     }
 }

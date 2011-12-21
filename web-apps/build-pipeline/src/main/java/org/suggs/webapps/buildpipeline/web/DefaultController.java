@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 /**
- * Used as the initial default controller for the webapp.  This allows for some simple text like operations and binds
- * to the welcome page.
+ * Used as the initial default controller for the webapp.  This allows for some simple text like operations and binds to
+ * the welcome page.
  * <p/>
  * <p/>
  * User: suggitpe Date: 06/07/11 Time: 07:39
  */
+
 @Controller
 @RequestMapping("/")
 public final class DefaultController {

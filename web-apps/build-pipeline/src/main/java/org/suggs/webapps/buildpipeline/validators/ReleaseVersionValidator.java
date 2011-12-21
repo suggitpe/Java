@@ -12,9 +12,7 @@ import org.springframework.validation.Validator;
 /**
  * Validates that a ReleaseVersionImpl is true and complete.
  * <p/>
- * User: suggitpe
- * Date: 06/07/11
- * Time: 10:44
+ * User: suggitpe Date: 06/07/11 Time: 10:44
  */
 
 public final class ReleaseVersionValidator implements Validator {
