@@ -25,6 +25,7 @@
         <log4j.version>1.2.16</log4j.version>
         <slf4j.version>1.6.1</slf4j.version>
         <spring.version>3.0.5.RELEASE</spring.version>
+        <selenium.version>2.13.0</selenium.version>
         <jbehave.core.version>3.5.4</jbehave.core.version>
         <jbehave.web.version>3.4.3</jbehave.web.version>
         <jbehave.site.version>3.1.1</jbehave.site.version>
@@ -332,10 +333,14 @@
                                         <name>browser</name>
                                         <value>htmlunit</value>
                                     </property>
+                                    <property>
+                                        <name>java.awt.headless</name>
+                                        <value>true</value>
+                                    </property>
                                 </systemProperties>
                             </configuration>
                             <goals>
-                                <goal>run-stories-as-embeddables</goal>
+                                <goal>run-with-annotated-embedder</goal>
                             </goals>
                         </execution>
                     </executions>
@@ -484,12 +489,12 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>2.13.0</version>
+                <version>${selenium.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-api</artifactId>
-                <version>2.13.0</version>
+                <version>${selenium.version}</version>
             </dependency>
             <!--
             <dependency>

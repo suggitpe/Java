@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
  * User: suggitpe Date: 12/21/11 Time: 7:23 AM
  */
 
-public class DateParameterConverter extends ParameterConverters.DateConverter {
+public class BuildPipelineDateParameterConverter extends ParameterConverters.DateConverter {
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( DateParameterConverter.class );
+    private static final Logger LOG = LoggerFactory.getLogger( BuildPipelineDateParameterConverter.class );
 
-    public DateParameterConverter() {
+    public BuildPipelineDateParameterConverter() {
         super( new SimpleDateFormat( "dd-MM-yyyy" ) );
     }
 
