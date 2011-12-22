@@ -499,23 +499,6 @@
                 <artifactId>selenium-api</artifactId>
                 <version>${selenium.version}</version>
             </dependency>
-            <!--
-            <dependency>
-                <groupId>org.seleniumhq.webdriver</groupId>
-                <artifactId>webdriver-htmlunit</artifactId>
-                <version>0.9.7376</version>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.webdriver</groupId>
-                <artifactId>webdriver-firefox</artifactId>
-                <version>0.9.7376</version>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.webdriver</groupId>
-                <artifactId>webdriver-chrome</artifactId>
-                <version>0.9.7376</version>
-            </dependency>
-            -->
             <dependency>
                 <groupId>org.concordion</groupId>
                 <artifactId>concordion</artifactId>
@@ -531,6 +514,12 @@
                 <artifactId>concordion-plus</artifactId>
                 <version>1.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.natpryce</groupId>
+                <artifactId>make-it-easy</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+
 
             <!-- external jars -->
             <dependency>
