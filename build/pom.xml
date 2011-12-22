@@ -137,6 +137,9 @@
                             <include>**/*Scenario.java</include>
                             <include>**/*WebTest.java</include>
                         </includes>
+                        <systemPropertyVariables>
+                            <concordion.output.dir>${project.build.directory}/concordion</concordion.output.dir>
+                        </systemPropertyVariables>
                     </configuration>
                     <executions>
                         <execution>
