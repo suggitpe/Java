@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
  * <p/>
  * User: suggitpe Date: 17/08/11 Time: 19:19
  */
+
 @UsingSteps(instances = { UserCanAccessApplicationSteps.class })
 public final class UserCanAccessApplicationExecutor extends AbstractStoryEmbedder {
 

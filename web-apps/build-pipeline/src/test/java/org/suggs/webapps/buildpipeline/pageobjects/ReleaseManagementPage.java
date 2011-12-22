@@ -11,9 +11,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Class to represent the release management page.
  * <p/>
- * User: suggitpe
- * Date: 04/07/11
- * Time: 18:57
+ * User: suggitpe Date: 04/07/11 Time: 18:57
  */
 
 public final class ReleaseManagementPage extends AbstractPage {

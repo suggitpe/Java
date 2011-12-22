@@ -10,9 +10,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Class to encapsulate the Release ReleaseVersionImpl Form.
  * <p/>
- * User: suggitpe
- * Date: 07/07/11
- * Time: 19:34
+ * User: suggitpe Date: 07/07/11 Time: 19:34
  */
 
 public final class ReleaseVersionForm extends AbstractPage {

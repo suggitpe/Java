@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Class to encapsulate a release version.
  * <p/>
- * User: suggitpe
- * Date: 30/08/11
- * Time: 14:26
+ * User: suggitpe Date: 30/08/11 Time: 14:26
  */
 
 public final class ReleaseVersionImpl implements ReleaseVersion {

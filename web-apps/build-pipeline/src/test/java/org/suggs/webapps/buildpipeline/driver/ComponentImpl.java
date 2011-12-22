@@ -11,9 +11,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Class to encapsulate a Component.
  * <p/>
- * User: suggitpe
- * Date: 31/08/11
- * Time: 20:19
+ * User: suggitpe Date: 31/08/11 Time: 20:19
  */
 
 public final class ComponentImpl implements Component {
@@ -38,12 +36,12 @@ public final class ComponentImpl implements Component {
         return componentInstallDirectory.getName();
     }
 
-    public File getComponentInstallDirectory(){
+    public File getComponentInstallDirectory() {
         return componentInstallDirectory;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return getName();
     }
 

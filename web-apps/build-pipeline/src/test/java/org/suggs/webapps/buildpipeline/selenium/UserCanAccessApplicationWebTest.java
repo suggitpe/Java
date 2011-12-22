@@ -12,9 +12,7 @@ import static org.junit.Assert.assertThat;
  * Basic Test to prove that the application is up and running and can be accessed.  Treat this as a litmus test for the
  * application being deployed and accessible.
  * <p/>
- * User: suggitpe
- * Date: 11/08/11
- * Time: 18:35
+ * User: suggitpe Date: 11/08/11 Time: 18:35
  */
 
 public final class UserCanAccessApplicationWebTest extends DSL {

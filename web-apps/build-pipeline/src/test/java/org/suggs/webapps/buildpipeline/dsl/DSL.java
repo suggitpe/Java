@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 /**
  * High level class to contain the dsl for the testing.
  * <p/>
- * User: suggitpe
- * Date: 19/08/11
- * Time: 19:50
+ * User: suggitpe Date: 19/08/11 Time: 19:50
  */
 
 public abstract class DSL {
@@ -21,8 +19,8 @@ public abstract class DSL {
 
     private Application application;
 
-    public DSL( Pages aPagesObject ){
-        application = new Application( aPagesObject);
+    public DSL( Pages aPagesObject ) {
+        application = new Application( aPagesObject );
     }
 
     public void openApplication() {

@@ -11,9 +11,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Class to encapsulate a Component version.
  * <p/>
- * User: suggitpe
- * Date: 02/09/11
- * Time: 18:12
+ * User: suggitpe Date: 02/09/11 Time: 18:12
  */
 
 public final class ComponentVersionImpl implements ComponentVersion {

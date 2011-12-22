@@ -10,9 +10,7 @@ import static org.junit.internal.matchers.StringContains.containsString;
 /**
  * Abstract page class that all pages will derive from.
  * <p/>
- * User: suggitpe
- * Date: 04/07/11
- * Time: 18:58
+ * User: suggitpe Date: 04/07/11 Time: 18:58
  */
 
 abstract class AbstractPage {
@@ -49,7 +47,7 @@ abstract class AbstractPage {
     }
 
     public boolean isShown() {
-        String pageTitle = getSelenium().getText( "id=title");
+        String pageTitle = getSelenium().getText( "id=title" );
         LOG.info( "Checking that the title [" + pageTitle + "] is equal to the expected [" + expectedPageTitle() + "]" );
         return pageTitle.equals( expectedPageTitle() );
     }

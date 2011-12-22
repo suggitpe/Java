@@ -17,9 +17,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Test suite for creating release versions.
  * <p/>
- * User: suggitpe
- * Date: 22/08/11
- * Time: 07:11
+ * User: suggitpe Date: 22/08/11 Time: 07:11
  */
 
 public final class UserCanCreateReleaseVersionsWebTest extends DSL {

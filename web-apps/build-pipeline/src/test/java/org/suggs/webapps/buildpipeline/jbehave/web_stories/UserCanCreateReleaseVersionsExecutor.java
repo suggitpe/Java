@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * User: suggitpe Date: 15/09/11 Time: 18:14
  */
 
-@UsingSteps( instances = {UserCanCreateReleaseVersionsSteps.class})
+@UsingSteps(instances = { UserCanCreateReleaseVersionsSteps.class })
 public class UserCanCreateReleaseVersionsExecutor extends AbstractStoryEmbedder {
 
     @SuppressWarnings("unused")

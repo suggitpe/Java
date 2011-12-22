@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
  * User: suggitpe Date: 15/09/11 Time: 18:16
  */
 
-public class UserCanCreateReleaseVersionsSteps extends DSL{
+public class UserCanCreateReleaseVersionsSteps extends DSL {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( UserCanCreateReleaseVersionsSteps.class );
@@ -35,7 +35,7 @@ public class UserCanCreateReleaseVersionsSteps extends DSL{
     private ComponentVersion componentVersion;
 
     public UserCanCreateReleaseVersionsSteps() {
-        super(new SeleniumPages());
+        super( new SeleniumPages() );
     }
 
     @When("I create a new release with a description of $description")

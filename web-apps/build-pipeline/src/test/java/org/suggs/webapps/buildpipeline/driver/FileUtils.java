@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This class manages the interaction with the filesystem only.
  * <p/>
- * User: suggitpe
- * Date: 01/09/11
- * Time: 19:18
+ * User: suggitpe Date: 01/09/11 Time: 19:18
  */
 
 public final class FileUtils {

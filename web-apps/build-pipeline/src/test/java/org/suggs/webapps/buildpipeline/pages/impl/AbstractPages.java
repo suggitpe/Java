@@ -17,6 +17,7 @@ import com.thoughtworks.selenium.Selenium;
  * <p/>
  * User: suggitpe Date: 11/08/11 Time: 18:18
  */
+
 public abstract class AbstractPages implements Pages {
 
     @SuppressWarnings("unused")

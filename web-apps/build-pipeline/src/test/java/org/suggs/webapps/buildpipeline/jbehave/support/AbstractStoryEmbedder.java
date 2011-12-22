@@ -27,8 +27,7 @@ import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 
 @RunWith(AnnotatedEmbedderRunner.class)
 @UsingEmbedder(embedder = Embedder.class)
-@Configure(storyControls = BuildPipelineStoryControls.class,
-        storyLoader = BuildPipelineStoryLoader.class,
+@Configure(storyLoader = LoadFromURL.class,
         stepPatternParser = RegexPrefixCapturingPatternParser.class,
         storyReporterBuilder = BuildPipelineStoryReporterBuilder.class,
         parameterConverters = { BuildPipelineDateParameterConverter.class })
@@ -47,7 +46,6 @@ public abstract class AbstractStoryEmbedder extends InjectableEmbedder {
                 Arrays.asList( createStoryIncludes() ),
                 Arrays.asList( createStoryExcludes() ), "file:" + STORY_LOCATION );
         LOG.info( "Running stories: [" + urls + "]" );
-        injectedEmbedder().configuration().useStoryLoader( new BuildPipelineStoryLoader());
         injectedEmbedder().runStoriesAsPaths( urls );
     }
 

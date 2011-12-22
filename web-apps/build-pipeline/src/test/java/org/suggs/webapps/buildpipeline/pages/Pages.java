@@ -10,6 +10,7 @@ import org.suggs.webapps.buildpipeline.pageobjects.ReleaseVersionShow;
  * <p/>
  * User: suggitpe Date: 09/09/11 Time: 18:28
  */
+
 public interface Pages {
 
     HomePage homePage();
