@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * MBean managed property manager
- * 
+ *
  * @author suggitpe
  * @version 1.0 20 Feb 2008
  */
@@ -31,8 +31,7 @@ public class PropertyManager implements PropertyManagerMBean {
 
     /**
      * Constructs a new instance.
-     * 
-     * @param aPath
+     * @param aPath path to a property file.
      */
     public PropertyManager( String aPath ) {
         LOG.debug( "Loading property file [" + aPath + "]" );
@@ -66,7 +65,7 @@ public class PropertyManager implements PropertyManagerMBean {
     /**
      * @see org.suggs.sandbox.jmx.jmxbook.components.propertymanager.PropertyManagerMBean#keys()
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings("unchecked")
     @Override
     public Enumeration keys() {
         return properties.keys();

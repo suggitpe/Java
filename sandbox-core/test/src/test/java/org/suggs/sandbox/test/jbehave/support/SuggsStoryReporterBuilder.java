@@ -7,13 +7,8 @@ package org.suggs.sandbox.test.jbehave.support;
 import java.util.Properties;
 
 import org.jbehave.core.reporters.FilePrintStreamFactory;
+import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
-
-import static org.jbehave.core.reporters.StoryReporterBuilder.Format.CONSOLE;
-import static org.jbehave.core.reporters.StoryReporterBuilder.Format.HTML;
-import static org.jbehave.core.reporters.StoryReporterBuilder.Format.STATS;
-import static org.jbehave.core.reporters.StoryReporterBuilder.Format.TXT;
-import static org.jbehave.core.reporters.StoryReporterBuilder.Format.XML;
 
 /**
  * Class to provide some level of consistency over the format of final reports for JBehave.
@@ -30,7 +25,11 @@ public class SuggsStoryReporterBuilder extends StoryReporterBuilder {
         Properties viewResources = new Properties();
         viewResources.put( "decorateNonHtml", "true" );
         this.withPathResolver( new FilePrintStreamFactory.ResolveToSimpleName() );
-        this.withFormats( CONSOLE, TXT, HTML, XML, STATS );
+        this.withFormats (
+                org.jbehave.core.reporters.Format.HTML,
+                org.jbehave.core.reporters.Format.TXT,
+                org.jbehave.core.reporters.Format.XML,
+                org.jbehave.core.reporters.Format.STATS );
         this.withViewResources( viewResources );
         this.withFailureTrace( false );
     }
