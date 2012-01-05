@@ -161,6 +161,12 @@
                     </includes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.googlecode.robotframework-maven-plugin</groupId>
+                <artifactId>robotframework-maven-plugin</artifactId>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -203,6 +209,11 @@
         <dependency>
             <groupId>com.natpryce</groupId>
             <artifactId>make-it-easy</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.robotframework</groupId>
+            <artifactId>robotframework</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
