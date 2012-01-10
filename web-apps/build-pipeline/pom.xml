@@ -13,6 +13,9 @@
     <packaging>war</packaging>
     <name>Build Pipeline</name>
 
+    <build>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -63,8 +66,5 @@
             <artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-    </build>
 
 </project>
