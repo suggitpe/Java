@@ -25,7 +25,6 @@
         <module>patterns</module>
         <module>sandbox</module>
         <module>spring</module>
-        <module>swt</module>
         <module>test</module>
         <module>tibco</module>
     </modules>
