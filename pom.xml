@@ -14,13 +14,6 @@
     <url>http://www.suggs.org.uk</url>
     <inceptionYear>2007</inceptionYear>
 
-    <!-- Mailing lists -->
-    <mailingLists>
-    </mailingLists>
-
-    <scm>
-    </scm>
-
     <properties>
         <log4j.version>1.2.16</log4j.version>
         <slf4j.version>1.6.1</slf4j.version>
@@ -47,24 +40,10 @@
         </developer>
     </developers>
 
-    <!-- -->
-    <contributors>
-    </contributors>
-
     <!-- here we define our own organsation (entered into the jar/ear manifests) -->
     <organization>
         <name>suggs.org</name>
     </organization>
-
-    <!-- -->
-    <profiles>
-    </profiles>
-
-    <!-- This links up the main pom to the module poms -->
-    <modules>
-        <!-- <module>../gui_apps</module> <module>../libraries</module> <module>../sandbox</module> <module>../sandbox_eclipse</module> 
-            <module>../sandbox_ejb</module> <module>../sandbox_osgi_mailbox</module> <module>../sandbox_webapps</module> <module>../web_apps</module> -->
-    </modules>
 
     <build>
         <testResources>
@@ -111,7 +90,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.11</version>
+                    <version>2.12</version>
                     <configuration>
                         <trimStackTrace>false</trimStackTrace>
                         <argLine>${test.jvm.args}</argLine>
@@ -131,7 +110,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.11</version>
+                    <version>2.12</version>
                     <configuration>
                         <includes>
                             <include>**/*Scenario.java</include>
@@ -186,107 +165,6 @@
                         <removeOldOutput>true</removeOldOutput>
                         <strict>true</strict>
                         <verbose>false</verbose>
-                    </configuration>
-                </plugin>
-
-                <!-- JETTY PLUGIN -->
-                <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jetty-maven-plugin</artifactId>
-                    <version>8.0.4.v20111024</version>
-                    <configuration>
-                        <jettyXml>${project.build.testOutputDirectory}/jetty-config.xml</jettyXml>
-                        <webAppConfig>
-                            <contextPath>/${project.artifactId}</contextPath>
-                        </webAppConfig>
-                     <stopKey>foo</stopKey>
-                     <stopPort>10099</stopPort>
-                 </configuration>
-                 <executions>
-                     <execution>
-                         <id>start-jetty</id>
-                         <phase>pre-integration-test</phase>
-                         <goals>
-                             <goal>run-war</goal>
-                         </goals>
-                         <configuration>
-                             <scanIntervalSeconds>0</scanIntervalSeconds>
-                             <daemon>true</daemon>
-                         </configuration>
-                     </execution>
-                     <execution>
-                         <id>stop-jetty</id>
-                         <phase>post-integration-test</phase>
-                         <goals>
-                             <goal>stop</goal>
-                         </goals>
-                     </execution>
-                 </executions>
-             </plugin>
-
-             <!-- TOMCAT PLUGIN -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>tomcat-maven-plugin</artifactId>
-                    <version>1.1</version>
-                    <configuration>
-                        <port>9099</port>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>start-container</id>
-                            <phase>pre-integration-test</phase>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                            <configuration>
-                                <fork>true</fork>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>stop-container</id>
-                            <phase>post-integration-test</phase>
-                            <goals>
-                                <goal>shutdown</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <!-- JAX-WS PLUGIN -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>jaxws-maven-plugin</artifactId>
-                    <version>1.10</version>
-                    <configuration>
-                        <verbose>true</verbose>
-                        <!-- wsimport cfg -->
-                        <wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory>
-                        <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
-                        <!-- wsgen cfg -->
-                        <genWsdl>true</genWsdl>
-                        <resourceDestDir>${basedir}/src/main/resources/wsdl</resourceDestDir>
-                        <sei/>
-                    </configuration>
-                </plugin>
-
-                <!-- WAR PLUGIN -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.1.1</version>
-                    <configuration>
-                        <archive>
-                            <manifest>
-                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            </manifest>
-                        </archive>
-                        <webResources>
-                            <resource>
-                                <directory>${basedir}/src/main/webapp</directory>
-                            </resource>
-                        </webResources>
                     </configuration>
                 </plugin>
 
@@ -436,17 +314,9 @@
     <pluginRepositories>
     </pluginRepositories>
 
-    <!-- this is where we define the additional report to run as the main build -->
-    <!-- <reporting> <plugins> <plugin> <artifactId>maven-javadoc-plugin</artifactId> <configuration> <source>1.6</source> 
-        <doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet> <docletArtifact> <groupId>gr.spinellis</groupId> <artifactId>UmlGraph</artifactId> 
-        <version>4.6</version> </docletArtifact> <additionalParam> -inferrel -inferdep -hide java.* -collpackages java.util.* -attributes 
-        -operations -enumerations -enumconstants </additionalParam> </configuration> </plugin> </plugins> </reporting> -->
-
     <!-- this is where we define the high level Scribe dependencies (ie those that are not project specific) -->
     <dependencies>
         <!-- main compile time dependencies -->
-        <!-- <dependency> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> <scope>compile</scope> 
-            </dependency> -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
