@@ -133,12 +133,14 @@
                     <!-- Fitnesse servers list -->
                     <fitnesses>
                         <fitnesse>
-                            <hostName>myServer</hostName>
-                            <port>8070</port>
-                            <pageName>mySuitePage</pageName>
+                            <hostName>localhost</hostName>
+                            <port>6767</port>
+                            <pageName>FitNesse.SuiteAcceptanceTests.MyTest</pageName>
                         </fitnesse>
                     </fitnesses>
+                    <failOnError>false</failOnError>
                 </configuration>
+
             </plugin>
 
             <plugin>
