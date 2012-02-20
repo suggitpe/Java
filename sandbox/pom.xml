@@ -14,7 +14,6 @@
     <name>Sandbox Core Parent</name>
 
     <modules>
-        <module>gui</module>
         <module>hibernate</module>
         <module>hibernate-search</module>
         <module>jaxb</module>
