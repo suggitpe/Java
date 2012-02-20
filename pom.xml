@@ -40,6 +40,10 @@
         </developer>
     </developers>
 
+    <modules>
+        <module>libraries</module>
+    </modules>
+
     <!-- here we define our own organsation (entered into the jar/ear manifests) -->
     <organization>
         <name>suggs.org</name>
@@ -553,70 +557,7 @@
                 <version>2.1</version>
             </dependency>
 
-            <!-- Eclipse: swt/jface/osgi -->
-            <dependency>
-                <groupId>org.eclipse</groupId>
-                <artifactId>swt</artifactId>
-                <version>3.6.1</version>
-            </dependency>
-            <!--
-            <dependency>
-                <groupId>org.eclipse.swt.win32.win32</groupId>
-                <artifactId>x86</artifactId>
-                <version>3.6.0</version>
-            </dependency>
-            -->
-            <dependency>
-                <groupId>org.eclipse</groupId>
-                <artifactId>swt.gtk.linux.x86</artifactId>
-                <version>3.6.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse</groupId>
-                <artifactId>jface</artifactId>
-                <version>3.6.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse</groupId>
-                <artifactId>core.commands</artifactId>
-                <version>3.6.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse</groupId>
-                <artifactId>core.runtime</artifactId>
-                <version>3.6.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse</groupId>
-                <artifactId>equinox.common</artifactId>
-                <version>3.6.0</version>
-            </dependency>
-
-
             <!-- Servlet -->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>com.springsource.javax.servlet</artifactId>
-                <version>2.5.0</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>com.springsource.javax.servlet.jsp</artifactId>
-                <version>2.1.0</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>com.springsource.javax.servlet.jsp.jstl</artifactId>
-                <version>1.2.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.taglibs</groupId>
-                <artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
-                <version>1.1.2</version>
-            </dependency>
-
             <dependency>
                 <groupId>commons-digester</groupId>
                 <artifactId>commons-digester</artifactId>
@@ -636,21 +577,6 @@
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
                 <version>1.2.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tiles</groupId>
-                <artifactId>tiles-api</artifactId>
-                <version>2.2.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tiles</groupId>
-                <artifactId>tiles-core</artifactId>
-                <version>2.2.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tiles</groupId>
-                <artifactId>tiles-jsp</artifactId>
-                <version>2.2.2</version>
             </dependency>
             <dependency>
                 <groupId>oro</groupId>
