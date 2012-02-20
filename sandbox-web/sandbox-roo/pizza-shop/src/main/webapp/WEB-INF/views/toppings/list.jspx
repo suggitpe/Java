@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
-    <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_org_suggs_roo_pizzashop_domain_Topping" items="${toppings}" z="DaxCnvm5JW8Z2RARgoiCUpucmhU=">
-        <table:table data="${toppings}" id="l_org_suggs_roo_pizzashop_domain_Topping" path="/toppings" z="bgkrwJz4NH1u2tYJ0obvjwVNWNI=">
-            <table:column id="c_org_suggs_roo_pizzashop_domain_Topping_name" property="name" z="6WyXpnlGE9lgQAk81kxfqW87XxQ="/>
-        </table:table>
-    </page:list>
-</div>

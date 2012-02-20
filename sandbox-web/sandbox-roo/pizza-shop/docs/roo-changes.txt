@@ -1,7 +1,0 @@
-1. Execute roo commands
-2. Update the master POM to set the port number on the tomcat plugin
-<configuration>
-    <port>8686</port>
-</configuration>
-3. Update the selenium tests so that they use the right port number (src/main/webapp/selenium)
-

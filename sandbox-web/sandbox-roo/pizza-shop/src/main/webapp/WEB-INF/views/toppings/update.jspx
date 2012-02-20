@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-    <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu_org_suggs_roo_pizzashop_domain_Topping" modelAttribute="topping" path="/toppings" z="S9wG3iAth/aXh6EhxrlzZRjxmkw=">
-        <field:input field="name" id="c_org_suggs_roo_pizzashop_domain_Topping_name" min="2" required="true" z="LBy5ASqEh1npbip2rHb7GmxELjg="/>
-    </form:update>
-</div>

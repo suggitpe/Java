@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
-    <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_org_suggs_roo_pizzashop_domain_Base" object="${base}" path="/bases" z="7X1as+NbJVHj8ZqfMwOUP8o5TJ4=">
-        <field:display field="name" id="s_org_suggs_roo_pizzashop_domain_Base_name" object="${base}" z="MLbUvg6eq5qZ7VaYVwIXwtwRCM0="/>
-    </page:show>
-</div>
