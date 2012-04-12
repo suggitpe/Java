@@ -7,7 +7,7 @@
     <groupId>org.suggs</groupId>
     <artifactId>suggs-parent</artifactId>
     <packaging>pom</packaging>
-    <name>Suggs parent</name>
+    <name>Suggs Java Core Parent</name>
     <version>1.0-SNAPSHOT</version>
     <description>Generic maven config for Suggs home project work
     </description>
@@ -297,6 +297,22 @@
                     </executions>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>fitnesse-maven-plugin</artifactId>
+                    <version>1.0</version>
+                    <configuration>
+                        <failOnError>true</failOnError>
+                        <fitnesses>
+                            <fitness>
+                                <hostname>localhost</hostname>
+                                <port>6767</port>
+                            </fitness>
+                        </fitnesses>
+                    </configuration>
+                </plugin>
+
+
             </plugins>
         </pluginManagement>
 
@@ -414,6 +430,11 @@
                 <groupId>org.robotframework</groupId>
                 <artifactId>robotframework</artifactId>
                 <version>2.6.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fitnesse</groupId>
+                <artifactId>fitnesse</artifactId>
+                <version>20111025</version>
             </dependency>
 
             <!-- external jars -->
@@ -539,10 +560,17 @@
             </dependency>
 
             <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derby</artifactId>
+                <version>10.8.2.2</version>
+            </dependency>
+            <!--
+            <dependency>
                 <groupId>com.oracle</groupId>
                 <artifactId>ojdbc14</artifactId>
                 <version>10.2.0.3.0</version>
             </dependency>
+            -->
             <dependency>
                 <groupId>com.sun.jdmk</groupId>
                 <artifactId>jmxtools</artifactId>

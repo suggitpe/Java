@@ -27,7 +27,7 @@
     <bean id="dataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
         <property name="targetDataSource">
             <bean class="org.apache.commons.dbcp.BasicDataSource">
-                <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+                <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
                 <property name="url" value="${suggs.jdbc.url}" />
                 <property name="username" value="${suggs.jdbc.username}" />
                 <property name="password" value="${suggs.jdbc.password}" />
@@ -53,7 +53,7 @@
         <property name="useTransactionAwareDataSource" value="true" />
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
                 <prop key="hibernate.connection.release_mode">on_close</prop>
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
                 <prop key="hibernate.cache.use_second_level_cache">false</prop>

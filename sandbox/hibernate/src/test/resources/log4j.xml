@@ -28,20 +28,19 @@
     </category>
 
     <category name="org.hibernate.event">
-        <priority value="debug" />
+        <priority value="info" />
     </category>
 
     <category name="org.hibernate.persister">
         <priority value="info" />
-        <!-- <priority value="trace" /> -->
     </category>
 
     <category name="org.hibernate.tool">
-        <priority value="debug" />
+        <priority value="info" />
     </category>
     
     <category name="org.hibernate.SQL">
-        <priority value="debug" />
+        <priority value="info" />
     </category>
     
     <category name="com.mchange.v2">
@@ -57,11 +56,11 @@
     </category>
 
     <category name="net.sf.ehcache">
-        <priority value="trace" />
+        <priority value="info" />
     </category>
 
     <root>
-        <priority value="debug" />
+        <priority value="info" />
         <appender-ref ref="ConsoleAppender" />
     </root>
 

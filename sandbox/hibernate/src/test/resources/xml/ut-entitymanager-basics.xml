@@ -13,11 +13,11 @@
     <bean id="jpaProperties" class="java.util.HashMap">
         <constructor-arg>
             <map>
-                <entry key="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
+                <entry key="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
                 <entry key="hibernate.connection.url" value="${suggs.jdbc.url}"/>
                 <entry key="hibernate.connection.username" value="${suggs.jdbc.username}"/>
                 <entry key="hibernate.connection.password" value="${suggs.jdbc.password}"/>
-                <entry key="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+                <entry key="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
                 <entry key="hibernate.connection.release_mode" value="on_close"/>
                 <entry key="hibernate.cache.use_second_level_cache" value="false"/>
                 <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
