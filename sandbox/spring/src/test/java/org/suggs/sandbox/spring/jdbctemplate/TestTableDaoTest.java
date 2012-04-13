@@ -42,7 +42,7 @@ public class TestTableDaoTest {
 
     private static final String DROP_TEST_TABLE = "drop table " + TestTableDao.TABLE_NAME;
     private static final String CREATE_TEST_TABLE = "create table " + TestTableDao.TABLE_NAME
-                                                    + " (ID NUMBER NOT NULL)";
+                                                    + " (ID INTEGER NOT NULL)";
     private static final String ADD_TEST_DATA = "insert into " + TestTableDao.TABLE_NAME + " values( :id )";
 
     private static final Map<String, String> EMPTY_MAP = new HashMap<String, String>();
@@ -61,7 +61,6 @@ public class TestTableDaoTest {
             jdbcTemplate.update( DROP_TEST_TABLE, EMPTY_MAP );
         }
         catch ( Exception sqlException ) {
-            sqlException.printStackTrace();
             LOG.debug( "Table does not exit so cannot drop it" );
         }
 
