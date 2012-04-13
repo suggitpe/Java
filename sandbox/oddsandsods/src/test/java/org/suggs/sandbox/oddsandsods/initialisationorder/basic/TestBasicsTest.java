@@ -15,7 +15,7 @@ import org.junit.Test;
  * @author suggitpe
  * @version 1.0 21 Sep 2007
  */
-public class TestBasicsTest extends TestCase {
+public class TestBasicsTest {
 
     /**
      * 
