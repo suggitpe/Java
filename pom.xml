@@ -442,6 +442,12 @@
                 <groupId>com.natpryce</groupId>
                 <artifactId>make-it-easy</artifactId>
                 <version>3.1.0</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit-dep</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- external jars -->
