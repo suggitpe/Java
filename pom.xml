@@ -15,12 +15,12 @@
     <inceptionYear>2007</inceptionYear>
 
     <properties>
-        <log4j.version>1.2.16</log4j.version>
-        <slf4j.version>1.6.6</slf4j.version>
-        <spring.version>3.0.5.RELEASE</spring.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j.version>1.7.2</slf4j.version>
+        <spring.version>3.1.1.RELEASE</spring.version>
         <selenium.version>2.13.0</selenium.version>
-        <jbehave.core.version>3.5.4</jbehave.core.version>
-        <jbehave.web.version>3.4.3</jbehave.web.version>
+        <jbehave.core.version>3.7.5</jbehave.core.version>
+        <jbehave.web.version>3.5.5</jbehave.web.version>
         <jbehave.site.version>3.1.1</jbehave.site.version>
         <jbehave.ignoreFailureInStories>true</jbehave.ignoreFailureInStories>
         <jbehave.ignoreFailureInView>false</jbehave.ignoreFailureInView>
@@ -63,6 +63,7 @@
                     <include>**/*.html</include>
                     <include>**/*.properties</include>
                     <include>**/*.story</include>
+                    <include>**/*.feature</include>
                 </includes>
             </testResource>
             <testResource>
@@ -370,6 +371,12 @@
                 <groupId>org.jbehave</groupId>
                 <artifactId>jbehave-core</artifactId>
                 <version>${jbehave.core.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit-dep</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.jbehave.web</groupId>
@@ -384,7 +391,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.8.2</version>
+                <version>4.11</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
@@ -409,7 +416,7 @@
             <dependency>
                 <groupId>org.concordion</groupId>
                 <artifactId>concordion</artifactId>
-                <version>1.4.2</version>
+                <version>1.4.3</version>
             </dependency>
             <dependency>
                 <groupId>org.concordion</groupId>
@@ -419,32 +426,22 @@
             <dependency>
                 <groupId>org.agileinsider</groupId>
                 <artifactId>concordion-plus</artifactId>
-                <version>1.0</version>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-java</artifactId>
-                <version>1.0.4</version>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-junit</artifactId>
-                <version>1.0.4</version>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
                 <groupId>com.natpryce</groupId>
                 <artifactId>make-it-easy</artifactId>
                 <version>3.1.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.robotframework</groupId>
-                <artifactId>robotframework</artifactId>
-                <version>2.6.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.fitnesse</groupId>
-                <artifactId>fitnesse</artifactId>
-                <version>20111025</version>
             </dependency>
 
             <!-- external jars -->
@@ -526,27 +523,17 @@
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
-                <version>3.6.5.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-annotations</artifactId>
-                <version>3.5.6-Final</version>
+                <version>4.1.10.Final</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-search</artifactId>
-                <version>3.4.0.Final</version>
+                <version>4.2.0.Final</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
-                <version>3.6.5.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-commons-annotations</artifactId>
-                <version>3.2.0.Final</version>
+                <version>4.1.10.Final</version>
             </dependency>
             <dependency>
                 <groupId>commons-dbcp</groupId>

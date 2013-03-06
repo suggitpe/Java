@@ -54,7 +54,8 @@
                         <configuration>
                             <skip>false</skip>
                             <scope>test</scope>
-                            <annotatedEmbedderRunnerClass>org.jbehave.core.junit.AnnotatedEmbedderRunner</annotatedEmbedderRunnerClass>
+                            <annotatedEmbedderRunnerClass>org.jbehave.core.junit.AnnotatedEmbedderRunner
+                            </annotatedEmbedderRunnerClass>
                             <includes>
                                 <include>**/injectablestories/*.java</include>
                             </includes>
@@ -125,24 +126,6 @@
                 </configuration>
             </plugin>
 
-            <!--
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>fitnesse-maven-plugin</artifactId>
-                <version>1.0</version>
-                <configuration>
-                    <fitnesses>
-                        <fitnesse>
-                            <hostName>localhost</hostName>
-                            <port>6767</port>
-                            <pageName>FitNesse.SuiteAcceptanceTests.MyTest</pageName>
-                        </fitnesse>
-                    </fitnesses>
-                    <failOnError>false</failOnError>
-                </configuration>
-            </plugin>
-            -->
-
             <plugin>
                 <groupId>org.concordion</groupId>
                 <artifactId>maven-concordion-plugin</artifactId>
@@ -160,16 +143,10 @@
                     <includes>
                         <include>**/*Scenario.java</include>
                         <include>**/Scenario*.java</include>
+                        <include>**/*Feature.java</include>
                     </includes>
                 </configuration>
             </plugin>
-
-            <!--
-            <plugin>
-                <groupId>com.googlecode.robotframework-maven-plugin</groupId>
-                <artifactId>robotframework-maven-plugin</artifactId>
-            </plugin>
-            -->
 
         </plugins>
     </build>
@@ -223,16 +200,6 @@
         <dependency>
             <groupId>com.natpryce</groupId>
             <artifactId>make-it-easy</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.robotframework</groupId>
-            <artifactId>robotframework</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.fitnesse</groupId>
-            <artifactId>fitnesse</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
