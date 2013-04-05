@@ -13,6 +13,6 @@ public class FileStatusReader implements StatusReader {
 
     @Override
     public State readState() {
-
+        return new State();
     }
 }
