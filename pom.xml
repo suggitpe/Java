@@ -28,54 +28,12 @@
     </properties>
 
     <!-- team developers -->
-    <developers>
-        <developer>
-            <id>suggitpe</id>
-            <name>Peter Suggitt</name>
-            <email>me@suggs.org.uk</email>
-            <roles>
-                <role>Design and Development</role>
-            </roles>
-            <timezone>0</timezone>
-        </developer>
-    </developers>
-
     <modules>
-        <module>libraries</module>
         <module>sandbox</module>
     </modules>
 
     <!-- here we define our own organsation (entered into the jar/ear manifests) -->
-    <organization>
-        <name>suggs.org</name>
-    </organization>
-
     <build>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>false</filtering>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.xsl</include>
-                    <include>**/*.xsd</include>
-                    <include>**/*.sql</include>
-                    <include>**/*.html</include>
-                    <include>**/*.properties</include>
-                    <include>**/*.story</include>
-                    <include>**/*.feature</include>
-                </includes>
-            </testResource>
-            <testResource>
-                <!-- This is needed so that the spring_stories can be used within the jbehave test exec -->
-                <directory>src/test/java</directory>
-                <filtering>false</filtering>
-                <includes>
-                    <include>**/*.story</include>
-                    <include>**/*.html</include>
-                </includes>
-            </testResource>
-        </testResources>
 
         <pluginManagement>
             <plugins>
@@ -133,12 +91,6 @@
                 </plugin>
 
                 <!-- SONAR PLUGIN -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>2.0</version>
-                </plugin>
-
                 <!-- JAXB PLUGIN -->
                 <plugin>
                     <groupId>org.jvnet.jaxb2.maven2</groupId>
@@ -170,96 +122,6 @@
                     </configuration>
                 </plugin>
 
-                <!-- ROBOT FRAMEWORK-->
-                <plugin>
-                    <groupId>com.googlecode.robotframework-maven-plugin</groupId>
-                    <artifactId>robotframework-maven-plugin</artifactId>
-                    <version>1.1.1</version>
-                    <executions>
-                        <execution>
-                            <id>Run Robot Framework</id>
-                            <phase>integration-test</phase>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <!-- JBEHAVE -->
-                <plugin>
-                    <groupId>org.jbehave</groupId>
-                    <artifactId>jbehave-maven-plugin</artifactId>
-                    <version>${jbehave.core.version}</version>
-                    <configuration>
-                        <ignoreFailureInStories>${jbehave.ignoreFailureInStories}</ignoreFailureInStories>
-                        <ignoreFailureInView>${jbehave.ignoreFailureInView}</ignoreFailureInView>
-                        <generateViewAfterStories>${jbehave.generateViewAfterStories}</generateViewAfterStories>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>find-and-run-spring-stories</id>
-                            <phase>integration-test</phase>
-                            <configuration>
-                                <skip>false</skip>
-                                <scope>test</scope>
-                                <annotatedEmbedderRunnerClass>
-                                    org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner
-                                </annotatedEmbedderRunnerClass>
-                                <includes>
-                                    <include>**/spring_stories/*.java</include>
-                                </includes>
-                                <systemProperties>
-                                    <property>
-                                        <name>java.awt.headless</name>
-                                        <value>true</value>
-                                    </property>
-                                </systemProperties>
-                            </configuration>
-                            <goals>
-                                <goal>run-with-annotated-embedder</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>find-and-run-annotated-web-stories</id>
-                            <phase>integration-test</phase>
-                            <configuration>
-                                <skip>false</skip>
-                                <scope>test</scope>
-                                <annotatedEmbedderRunnerClass>org.jbehave.core.junit.AnnotatedEmbedderRunner
-                                </annotatedEmbedderRunnerClass>
-                                <includes>
-                                    <include>**/web_stories/*.java</include>
-                                </includes>
-                                <systemProperties>
-                                    <property>
-                                        <name>browser</name>
-                                        <value>htmlunit</value>
-                                    </property>
-                                    <property>
-                                        <name>java.awt.headless</name>
-                                        <value>true</value>
-                                    </property>
-                                </systemProperties>
-                            </configuration>
-                            <goals>
-                                <goal>run-with-annotated-embedder</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>log4j</groupId>
-                            <artifactId>log4j</artifactId>
-                            <version>${log4j.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-log4j12</artifactId>
-                            <version>${slf4j.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
 
                 <!-- DEPENDENCY PLUGIN -->
                 <plugin>
@@ -298,22 +160,6 @@
                     </executions>
                 </plugin>
 
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>fitnesse-maven-plugin</artifactId>
-                    <version>1.0</version>
-                    <configuration>
-                        <failOnError>true</failOnError>
-                        <fitnesses>
-                            <fitness>
-                                <hostname>localhost</hostname>
-                                <port>6767</port>
-                            </fitness>
-                        </fitnesses>
-                    </configuration>
-                </plugin>
-
-
             </plugins>
         </pluginManagement>
 
@@ -324,13 +170,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-    </repositories>
-
-    <!-- this is where we define the location of standard and local Maven plugins -->
-    <pluginRepositories>
-    </pluginRepositories>
 
     <!-- this is where we define the high level Scribe dependencies (ie those that are not project specific) -->
     <dependencies>
