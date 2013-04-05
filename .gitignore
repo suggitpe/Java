@@ -1,8 +1,4 @@
 target/
+.gradle/
 .idea/
 *.iml
-*.ipr
-*.iws
-.settings
-.classpath
-.project

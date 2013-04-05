@@ -1,0 +1,32 @@
+allprojects {
+    defaultTasks 'clean', 'build'
+
+    apply plugin: 'maven'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    buildDir = 'target'
+    version = '1.0-SNAPSHOT'
+    group = 'org.suggs.sandbox'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+}
+
+subprojects { subprojects ->
+
+    dependencies {
+        compile "org.slf4j:slf4j-api:$slf4jVersion"
+
+        runtime "org.slf4j:slf4j-log4j12:$slf4jVersion"
+        runtime "log4j:log4j:$log4jVersion"
+
+        testCompile "junit:junit:$junitVersion"
+        testCompile "org.mockito:mockito-all:1.9.5"
+    }
+
+}
+
