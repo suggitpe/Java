@@ -27,13 +27,17 @@ subprojects { subprojects ->
     }
 }
 
-project("sandbox:guice"){
-    dependencies{
+project("sandbox:guice") {
+    dependencies {
     }
 }
 
-project("sandbox:hibernate"){
-    dependencies{
+project("sandbox:hibernate") {
+    dependencies {
         compile "org.hibernate:hibernate-core:$hibernateVersion"
+
+        testCompile "org.springframework:spring-test:$springVersion"
+        testCompile "org.springframework:spring-orm:$springVersion"
+        testCompile "com.googlecode.multithreadedtc:multithreadedtc:1.01"
     }
 }

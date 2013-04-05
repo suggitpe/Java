@@ -13,21 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 
 import org.hibernate.Session;
 
-/**
- * Test class for the many to many unidirectional example.
- * 
- * @author suggitpe
- * @version 1.0 22 Apr 2010
- */
 @ContextConfiguration(locations = { "classpath:xml/ut-relationships-manytomany-unidirectional.xml" })
 public class RelationshipsManyToManyUnidirectional extends AbstractSimpleHibernateIntegrationTest<Long, ManyToManyUnidirectionalEntity> {
 
-    @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( RelationshipsManyToManyUnidirectional.class );
-
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)
-     */
     @Override
     protected void cleanUpData( Session aSession ) {
         String cleanEntity = "delete from ManyToManyUnidirectionalEntity";
@@ -39,18 +27,11 @@ public class RelationshipsManyToManyUnidirectional extends AbstractSimpleHiberna
         aSession.createQuery( cleanEntity ).executeUpdate();
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntitySearchHql()
-     */
     @Override
     protected String createEntitySearchHql() {
         return "from ManyToManyUnidirectionalEntity where data in ('Some data','Updated data')";
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntityTemplate(java.io.Serializable,
-     *      org.hibernate.Session)
-     */
     @Override
     protected ManyToManyUnidirectionalEntity createEntityTemplate( Long aKey, Session aSession ) {
 
@@ -69,17 +50,11 @@ public class RelationshipsManyToManyUnidirectional extends AbstractSimpleHiberna
         return entity;
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createKeyTemplate()
-     */
     @Override
     protected Long createKeyTemplate() {
         return null;
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
-     */
     @Override
     protected void updateEntityForUpdateTest( ManyToManyUnidirectionalEntity aEntity ) {
         aEntity.setData( "Updated data" );

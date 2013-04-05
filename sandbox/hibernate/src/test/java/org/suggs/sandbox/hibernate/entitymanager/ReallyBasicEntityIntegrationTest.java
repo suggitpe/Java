@@ -4,67 +4,42 @@
  */
 package org.suggs.sandbox.hibernate.entitymanager;
 
+import org.springframework.test.context.ContextConfiguration;
 import org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity;
 import org.suggs.sandbox.hibernate.support.AbstractEntityManagerIntegrationTest;
 
+import javax.persistence.EntityManager;
 import java.util.Calendar;
 
-import javax.persistence.EntityManager;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.test.context.ContextConfiguration;
-
-/**
- * TODO Write javadoc for ReallyBasicEntityIntegrationTest
- * 
- * @author suggitpe
- * @version 1.0 24 Jan 2011
- */
-@ContextConfiguration(locations = { "classpath:xml/ut-entitymanager-springinjection.xml" })
+@ContextConfiguration(locations = {"classpath:xml/ut-entitymanager-springinjection.xml"})
 public class ReallyBasicEntityIntegrationTest extends AbstractEntityManagerIntegrationTest<Long, ReallyBasicEntity> {
 
-    @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( ReallyBasicEntityIntegrationTest.class );
     private static final String DELETE_SQL = "delete ReallyBasicEntity where someInteger = :intValue";
 
     @Override
-    protected void cleanUpData( EntityManager aEntityManager ) {
-        aEntityManager.createQuery( DELETE_SQL )
-            .setParameter( "intValue", Integer.valueOf( 8899 ) )
-            .executeUpdate();
+    protected void cleanUpData(EntityManager aEntityManager) {
+        aEntityManager.createQuery(DELETE_SQL)
+                .setParameter("intValue", 8899)
+                .executeUpdate();
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractEntityManagerIntegrationTest#createKeyTemplate()
-     */
     @Override
     protected Long createKeyTemplate() {
         return null;
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractEntityManagerIntegrationTest#createEntitySearchHql()
-     */
     @Override
     protected String createEntitySearchHql() {
         return "from ReallyBasicEntity where someInteger = 8899";
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractEntityManagerIntegrationTest#createEntityTemplate(java.io.Serializable)
-     */
     @Override
-    protected ReallyBasicEntity createEntityTemplate( Long aKey ) {
-        return new ReallyBasicEntity( "foo", 8899, Calendar.getInstance().getTime() );
+    protected ReallyBasicEntity createEntityTemplate(Long aKey) {
+        return new ReallyBasicEntity("foo", 8899, Calendar.getInstance().getTime());
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractEntityManagerIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
-     */
     @Override
-    protected void updateEntityForUpdateTest( ReallyBasicEntity aEntity ) {
-        aEntity.setSomeString( "bar" );
+    protected void updateEntityForUpdateTest(ReallyBasicEntity aEntity) {
+        aEntity.setSomeString("bar");
     }
 }

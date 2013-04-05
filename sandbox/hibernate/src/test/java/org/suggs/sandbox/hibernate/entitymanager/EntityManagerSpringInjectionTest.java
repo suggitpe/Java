@@ -4,23 +4,21 @@
  */
 package org.suggs.sandbox.hibernate.entitymanager;
 
-import org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity;
-
-import java.util.Calendar;
-import java.util.Collection;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.suggs.sandbox.hibernate.basicentity.ReallyBasicEntity;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
+import java.util.Calendar;
+import java.util.Collection;
 
 import static junit.framework.Assert.fail;
 
@@ -31,10 +29,10 @@ import static junit.framework.Assert.fail;
  * @version 1.0 18 Jan 2011
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:xml/ut-entitymanager-springinjection.xml" })
+@ContextConfiguration(locations = {"classpath:xml/ut-entitymanager-springinjection.xml"})
 public class EntityManagerSpringInjectionTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger( EntityManagerSpringInjectionTest.class );
+    private static final Logger LOG = LoggerFactory.getLogger(EntityManagerSpringInjectionTest.class);
 
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
@@ -43,12 +41,12 @@ public class EntityManagerSpringInjectionTest {
 
     @Before
     public void onSetup() {
-        LOG.debug( "============================" );
-        if ( entityManagerFactory == null ) {
-            fail( "Failed to inject EntityManager" );
+        LOG.debug("============================");
+        if (entityManagerFactory == null) {
+            fail("Failed to inject EntityManager");
         }
 
-        if ( entityManager == null ) {
+        if (entityManager == null) {
             entityManager = entityManagerFactory.createEntityManager();
         }
     }
@@ -56,8 +54,8 @@ public class EntityManagerSpringInjectionTest {
     @Test
     public void injectedEntityManagerCanSaveObject() {
         entityManager.getTransaction().begin();
-        ReallyBasicEntity entity = new ReallyBasicEntity( "foo", 999, Calendar.getInstance().getTime() );
-        entityManager.persist( entity );
+        ReallyBasicEntity entity = new ReallyBasicEntity("foo", 999, Calendar.getInstance().getTime());
+        entityManager.persist(entity);
 
         entityManager.flush();
 
@@ -66,20 +64,20 @@ public class EntityManagerSpringInjectionTest {
 
     @Test
     public void injectedEntityManagerFactoryQueriesCorrectly() {
-        Query q = entityManager.createQuery( "from ReallyBasicEntity", ReallyBasicEntity.class );
+        Query q = entityManager.createQuery("from ReallyBasicEntity", ReallyBasicEntity.class);
         Collection<?> result = q.getResultList();
-        LOG.debug( result.toString() );
+        LOG.debug(result.toString());
     }
 
     @Test
     public void injectedEntityManagerCanDeleteTableContents() {
         entityManager.getTransaction().begin();
-        Query q = entityManager.createQuery( "from ReallyBasicEntity" );
+        Query q = entityManager.createQuery("from ReallyBasicEntity");
         Collection<?> result = q.getResultList();
-        LOG.debug( "Deleting [" + result.size() + "] entries from ReallyBasicEntity" );
-        for ( Object e : result ) {
-            LOG.debug( e.toString() );
-            entityManager.remove( e );
+        LOG.debug("Deleting [" + result.size() + "] entries from ReallyBasicEntity");
+        for (Object e : result) {
+            LOG.debug(e.toString());
+            entityManager.remove(e);
         }
         entityManager.getTransaction().commit();
     }

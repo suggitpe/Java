@@ -15,12 +15,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-/**
- * Test class for the many to one example.
- * 
- * @author suggitpe
- * @version 1.0 20 Apr 2010
- */
 @ContextConfiguration(locations = { "classpath:xml/ut-relationships-manytoone.xml" })
 public class RelationshipsManyToOneTest extends AbstractSimpleHibernateIntegrationTest<Long, ManyToOneEntity> {
 
@@ -29,9 +23,6 @@ public class RelationshipsManyToOneTest extends AbstractSimpleHibernateIntegrati
     private static final String WHERE_CLAUSE = "data in ('Some data', 'Updated data')";
     private static final String TEST_HQL = "from ManyToOneEntity where " + WHERE_CLAUSE;
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)
-     */
     @Override
     protected void cleanUpData( Session aSession ) {
         String otherDelete = " delete from ManyToOneOtherEntity where otherData = 'blah blah blah'";
@@ -41,19 +32,11 @@ public class RelationshipsManyToOneTest extends AbstractSimpleHibernateIntegrati
         aSession.createQuery( otherDelete ).executeUpdate();
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntitySearchHql()
-     */
     @Override
     protected String createEntitySearchHql() {
         return TEST_HQL;
     }
 
-    /**
-     * Here we create the dependent ManToOneOtherEntity objects.
-     * 
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createDependentObjectsForTest(org.hibernate.Session)
-     */
     @Override
     protected void createDependentObjectsForTest( Session aSession ) {
         LOG.debug( "Creating depdendent objects in the database" );
@@ -62,10 +45,6 @@ public class RelationshipsManyToOneTest extends AbstractSimpleHibernateIntegrati
         aSession.save( other );
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntityTemplate(java.io.Serializable,
-     *      org.hibernate.Session)
-     */
     @Override
     protected ManyToOneEntity createEntityTemplate( Long aKey, Session aSession ) {
         Criteria cr = aSession.createCriteria( ManyToOneOtherEntity.class );
@@ -78,18 +57,12 @@ public class RelationshipsManyToOneTest extends AbstractSimpleHibernateIntegrati
         return entity;
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createKeyTemplate()
-     */
     @Override
     protected Long createKeyTemplate() {
         // this is actually not needed for this entity.
         return null;
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
-     */
     @Override
     protected void updateEntityForUpdateTest( ManyToOneEntity aEntity ) {
         aEntity.setData( "Updated data" );

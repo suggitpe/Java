@@ -21,34 +21,19 @@ import org.hibernate.Session;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-/**
- * Test class for the one to many unidirectional example.
- * 
- * @author suggitpe
- * @version 1.0 21 Apr 2010
- */
 @ContextConfiguration(locations = { "classpath:xml/ut-relationships-onetomany-unidirectional.xml" })
 public class RelationshipsOneToManyUnidirectional extends AbstractSimpleHibernateIntegrationTest<Long, OneToManyUnidirectionalEntity> {
 
-    // @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger( RelationshipsOneToManyUnidirectional.class );
 
     private static final String WHERE_CLAUSE = "data in ('Some data', 'Updated data')";
     private static final String TEST_HQL = "from OneToManyUnidirectionalEntity where " + WHERE_CLAUSE;
 
-    /**
-     * TODO: clear up this test to work out why it fails.
-     * 
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#basicCreateOperationCreatesCorrectObject()
-     */
     @Ignore
     @Test
     @Override
     public void basicCreateOperationCreatesCorrectObject() {}
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#cleanUpData(org.hibernate.Session)
-     */
     @Override
     protected void cleanUpData( Session aSession ) {
         String otherDelete = " delete from OneToManyUnidirectionalOtherEntity o where id in (select id from OneToManyUnidirectionalEntity where "
@@ -59,9 +44,6 @@ public class RelationshipsOneToManyUnidirectional extends AbstractSimpleHibernat
         aSession.createQuery( entityDelete ).executeUpdate();
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntitySearchHql()
-     */
     @Override
     protected String createEntitySearchHql() {
         return TEST_HQL;
@@ -115,10 +97,6 @@ public class RelationshipsOneToManyUnidirectional extends AbstractSimpleHibernat
         LOG.debug( "============================" );
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createEntityTemplate(java.io.Serializable,
-     *      org.hibernate.Session)
-     */
     @Override
     protected OneToManyUnidirectionalEntity createEntityTemplate( Long aKey, Session aSession ) {
         OneToManyUnidirectionalOtherEntity other = new OneToManyUnidirectionalOtherEntity();
@@ -130,17 +108,11 @@ public class RelationshipsOneToManyUnidirectional extends AbstractSimpleHibernat
         return entity;
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#createKeyTemplate()
-     */
     @Override
     protected Long createKeyTemplate() {
         return null;
     }
 
-    /**
-     * @see org.suggs.sandbox.hibernate.support.AbstractSimpleHibernateIntegrationTest#updateEntityForUpdateTest(java.lang.Object)
-     */
     @Override
     protected void updateEntityForUpdateTest( OneToManyUnidirectionalEntity aEntity ) {
         aEntity.setData( "Updated data" );
