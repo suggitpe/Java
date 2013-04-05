@@ -1,31 +1,19 @@
 package org.suggs.sandbox.hibernate.basicentity;
 
-import org.suggs.sandbox.hibernate.support.EntityBase;
-
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.suggs.sandbox.hibernate.support.EntityBase;
 
-/**
- * TODO: Justify why you have written this class
- * <p/>
- * User: suggitpe Date: 01/04/11 Time: 14:46
- */
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "BASIC_RELATIONSHIP_ENTITY")
 @SequenceGenerator(name = "ENTITYBASE_SEQ_STR", sequenceName = "BASIC_RELATION_ENTITY_SQ")
+@SuppressWarnings("unused")
 public class BasicRelationshipEntity extends EntityBase {
-
-    @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( BasicRelationshipEntity.class );
 
     @Column(name = "STRING_DATA", length = 64)
     private String stringData;
@@ -34,17 +22,10 @@ public class BasicRelationshipEntity extends EntityBase {
     @JoinColumn(name = "PARENT_ID")
     private Set<BasicRelationshipOtherEntity> others = new HashSet<BasicRelationshipOtherEntity>();
 
-    /**
-     *  Ctor
-     */
     public BasicRelationshipEntity() {
     }
 
-    /**
-     * Ctor
-     * @param aStringData string data
-     */
-    public BasicRelationshipEntity( String aStringData ) {
+    public BasicRelationshipEntity(String aStringData) {
         stringData = aStringData;
     }
 
@@ -52,7 +33,7 @@ public class BasicRelationshipEntity extends EntityBase {
         return stringData;
     }
 
-    public void setStringData( String aStringData ) {
+    public void setStringData(String aStringData) {
         stringData = aStringData;
     }
 
@@ -60,24 +41,24 @@ public class BasicRelationshipEntity extends EntityBase {
         return others;
     }
 
-    public void setOthers( Set<BasicRelationshipOtherEntity> aOthers ) {
+    public void setOthers(Set<BasicRelationshipOtherEntity> aOthers) {
         others = aOthers;
     }
 
-    public void addOther( BasicRelationshipOtherEntity aOther ) {
-        others.add( aOther );
+    public void addOther(BasicRelationshipOtherEntity aOther) {
+        others.add(aOther);
     }
 
     @Override
-    public boolean equals( Object o ) {
-        if ( this == o ) return true;
-        if ( o == null || getClass() != o.getClass() ) return false;
-        if ( !super.equals( o ) ) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-        BasicRelationshipEntity that = ( BasicRelationshipEntity ) o;
+        BasicRelationshipEntity that = (BasicRelationshipEntity) o;
 
-        if ( others != null ? !others.equals( that.others ) : that.others != null ) return false;
-        if ( stringData != null ? !stringData.equals( that.stringData ) : that.stringData != null ) return false;
+        if (others != null ? !others.equals(that.others) : that.others != null) return false;
+        if (stringData != null ? !stringData.equals(that.stringData) : that.stringData != null) return false;
 
         return true;
     }
@@ -85,14 +66,14 @@ public class BasicRelationshipEntity extends EntityBase {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + ( stringData != null ? stringData.hashCode() : 0 );
-        result = 31 * result + ( others != null ? others.hashCode() : 0 );
+        result = 31 * result + (stringData != null ? stringData.hashCode() : 0);
+        result = 31 * result + (others != null ? others.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return super.toString() +", BasicRelationshipEntity{" +
+        return super.toString() + ", BasicRelationshipEntity{" +
                 "stringData='" + stringData + '\'' +
                 '}';
     }

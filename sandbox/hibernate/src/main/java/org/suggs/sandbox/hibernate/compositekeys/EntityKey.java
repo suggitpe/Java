@@ -4,18 +4,13 @@
  */
 package org.suggs.sandbox.hibernate.compositekeys;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
-/**
- * Class to represent a high level composite key.
- * 
- * @author suggitpe
- * @version 1.0 18 Mar 2010
- */
+
 @Embeddable
+@SuppressWarnings("unused")
 public class EntityKey implements Serializable {
 
     private static final long serialVersionUID = -7663697310519488607L;
@@ -29,106 +24,64 @@ public class EntityKey implements Serializable {
     @Column(name = "KEY_THREE", length = 64, nullable = false)
     private String keyThree;
 
-    /**
-     * Returns the value of keyOne.
-     * 
-     * @return Returns the keyOne.
-     */
     public String getKeyOne() {
         return keyOne;
     }
 
-    /**
-     * Sets the keyOne field to the specified value.
-     * 
-     * @param aKeyOne
-     *            The keyOne to set.
-     */
-    public void setKeyOne( String aKeyOne ) {
+    public void setKeyOne(String aKeyOne) {
         keyOne = aKeyOne;
     }
 
-    /**
-     * Returns the value of keyTwo.
-     * 
-     * @return Returns the keyTwo.
-     */
     public String getKeyTwo() {
         return keyTwo;
     }
 
-    /**
-     * Sets the keyTwo field to the specified value.
-     * 
-     * @param aKeyTwo
-     *            The keyTwo to set.
-     */
-    public void setKeyTwo( String aKeyTwo ) {
+    public void setKeyTwo(String aKeyTwo) {
         keyTwo = aKeyTwo;
     }
 
-    /**
-     * Returns the value of keyThree.
-     * 
-     * @return Returns the keyThree.
-     */
     public String getKeyThree() {
         return keyThree;
     }
 
-    /**
-     * Sets the keyThree field to the specified value.
-     * 
-     * @param aKeyThree
-     *            The keyThree to set.
-     */
-    public void setKeyThree( String aKeyThree ) {
+    public void setKeyThree(String aKeyThree) {
         keyThree = aKeyThree;
     }
 
-    /**
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ( ( keyOne == null ) ? 0 : keyOne.hashCode() );
-        result = prime * result + ( ( keyThree == null ) ? 0 : keyThree.hashCode() );
-        result = prime * result + ( ( keyTwo == null ) ? 0 : keyTwo.hashCode() );
+        result = prime * result + ((keyOne == null) ? 0 : keyOne.hashCode());
+        result = prime * result + ((keyThree == null) ? 0 : keyThree.hashCode());
+        result = prime * result + ((keyTwo == null) ? 0 : keyTwo.hashCode());
         return result;
     }
 
-    /**
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     @SuppressWarnings("PMD.IfStmtsMustUseBraces")
-    public boolean equals( Object obj ) {
-        if ( this == obj )
+    public boolean equals(Object obj) {
+        if (this == obj)
             return true;
-        if ( obj == null )
+        if (obj == null)
             return false;
-        if ( getClass() != obj.getClass() )
+        if (getClass() != obj.getClass())
             return false;
         EntityKey other = (EntityKey) obj;
-        if ( keyOne == null ) {
-            if ( other.keyOne != null )
+        if (keyOne == null) {
+            if (other.keyOne != null)
                 return false;
-        }
-        else if ( !keyOne.equals( other.keyOne ) )
+        } else if (!keyOne.equals(other.keyOne))
             return false;
-        if ( keyThree == null ) {
-            if ( other.keyThree != null )
+        if (keyThree == null) {
+            if (other.keyThree != null)
                 return false;
-        }
-        else if ( !keyThree.equals( other.keyThree ) )
+        } else if (!keyThree.equals(other.keyThree))
             return false;
-        if ( keyTwo == null ) {
-            if ( other.keyTwo != null )
+        if (keyTwo == null) {
+            if (other.keyTwo != null)
                 return false;
-        }
-        else if ( !keyTwo.equals( other.keyTwo ) )
+        } else if (!keyTwo.equals(other.keyTwo))
             return false;
         return true;
     }

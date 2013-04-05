@@ -7,13 +7,8 @@ package org.suggs.sandbox.hibernate.caveatEmptor;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/**
- * Address class .. to be used within other classes
- * 
- * @author suggitpe
- * @version 1.0 2 Jul 2007
- */
 @Embeddable
+@SuppressWarnings("unused")
 public class Address {
 
     @Column(length = 64, nullable = false)
@@ -25,66 +20,36 @@ public class Address {
     @Column(length = 25, nullable = false)
     private String zipCode;
 
-    /**
-     * Constructs a new instance.
-     */
     public Address() {
-        super();
     }
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aStreet
-     * @param aCity
-     * @param aZip
-     */
-    public Address( String aStreet, String aCity, String aZip ) {
-        super();
+    public Address(String aStreet, String aCity, String aZip) {
         street = aStreet;
         city = aCity;
         zipCode = aZip;
     }
 
-    /**
-     * @return city
-     */
     public String getCity() {
         return city;
     }
 
-    /**
-     * @param aCity
-     */
-    public void setCity( String aCity ) {
+    public void setCity(String aCity) {
         city = aCity;
     }
 
-    /**
-     * @return street
-     */
     public String getStreet() {
         return street;
     }
 
-    /**
-     * @param aStreet
-     */
-    public void setStreet( String aStreet ) {
+    public void setStreet(String aStreet) {
         street = aStreet;
     }
 
-    /**
-     * @return zip code`
-     */
     public String getZipCode() {
         return zipCode;
     }
 
-    /**
-     * @param aZipCode
-     */
-    public void setZipCode( String aZipCode ) {
+    public void setZipCode(String aZipCode) {
         zipCode = aZipCode;
     }
 }

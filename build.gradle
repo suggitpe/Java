@@ -1,4 +1,4 @@
-allprojects {
+allprojects { projects ->
     defaultTasks 'clean', 'build'
 
     apply plugin: 'maven'
@@ -13,11 +13,9 @@ allprojects {
         mavenLocal()
         mavenCentral()
     }
-
 }
 
 subprojects { subprojects ->
-
     dependencies {
         compile "org.slf4j:slf4j-api:$slf4jVersion"
 
@@ -27,6 +25,15 @@ subprojects { subprojects ->
         testCompile "junit:junit:$junitVersion"
         testCompile "org.mockito:mockito-all:$mockitoVersion"
     }
-
 }
 
+project("sandbox:guice"){
+    dependencies{
+    }
+}
+
+project("sandbox:hibernate"){
+    dependencies{
+        compile "org.hibernate:hibernate-core:$hibernateVersion"
+    }
+}
