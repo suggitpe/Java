@@ -4,7 +4,6 @@
  */
 package org.suggs.sandbox.hibernate.timestamps;
 
-import junit.framework.Assert;
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,6 +23,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import static junit.framework.Assert.fail;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
@@ -46,20 +46,20 @@ public class HibernateInterceptorImplementationComparisonIntegrationTest {
 
     @Test
     public void testReferenceImplentation() {
-        Long id = saveEntityWithFlush(sessionfactory.openSession(new ReferenceImplementionInterceptor()));
-        updateEntityWithFlush(sessionfactory.openSession(new ReferenceImplementionInterceptor()), id);
+        Long id = saveEntityWithFlush(sessionfactory.withOptions().interceptor(new ReferenceImplementionInterceptor()).openSession());
+        updateEntityWithFlush(sessionfactory.withOptions().interceptor(new ReferenceImplementionInterceptor()).openSession(), id);
     }
 
     @Test
     public void testBadImplentation() {
-        Long id = saveEntityWithFlush(sessionfactory.openSession(new BadlyImplementedInterceptor()));
-        updateEntityWithFlush(sessionfactory.openSession(new BadlyImplementedInterceptor()), id);
+        Long id = saveEntityWithFlush(sessionfactory.withOptions().interceptor(new BadlyImplementedInterceptor()).openSession());
+        updateEntityWithFlush(sessionfactory.withOptions().interceptor(new BadlyImplementedInterceptor()).openSession(), id);
     }
 
     @Test
     public void testCombinationImplentation() {
-        Long id = saveEntityWithFlush(sessionfactory.openSession(new CombinationImplementionInterceptor()));
-        updateEntityWithFlush(sessionfactory.openSession(new CombinationImplementionInterceptor()), id);
+        Long id = saveEntityWithFlush(sessionfactory.withOptions().interceptor(new CombinationImplementionInterceptor()).openSession());
+        updateEntityWithFlush(sessionfactory.withOptions().interceptor(new CombinationImplementionInterceptor()).openSession(), id);
     }
 
     @SuppressWarnings("boxing")
@@ -92,7 +92,7 @@ public class HibernateInterceptorImplementationComparisonIntegrationTest {
             }
         } catch (Exception e) {
             LOG.error("Problems in the save process", e);
-            Assert.fail("Exception thrown in the save process somewhere");
+            fail("Exception thrown in the save process somewhere");
         } finally {
             if (aSession.isOpen()) {
                 aSession.close();
@@ -135,7 +135,7 @@ public class HibernateInterceptorImplementationComparisonIntegrationTest {
             }
         } catch (Exception e) {
             LOG.error("Problems in the save process", e);
-            Assert.fail("Exception thrown in the update process somewhere");
+            fail("Exception thrown in the update process somewhere");
         } finally {
             if (aSession.isOpen()) {
                 aSession.close();

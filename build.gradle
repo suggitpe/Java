@@ -36,6 +36,9 @@ project("sandbox:hibernate") {
     dependencies {
         compile "org.hibernate:hibernate-core:$hibernateVersion"
 
+        runtime "org.springframework:spring-context:$springVersion"
+        runtime "commons-dbcp:commons-dbcp:1.4"
+
         testCompile "org.springframework:spring-test:$springVersion"
         testCompile "org.springframework:spring-orm:$springVersion"
         testCompile "com.googlecode.multithreadedtc:multithreadedtc:1.01"
