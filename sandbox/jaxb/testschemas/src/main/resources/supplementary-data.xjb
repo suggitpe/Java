@@ -8,7 +8,7 @@
             generateIsSetMethod="true"
             underscoreBinding="asCharInWord" />
 
-    <jxb:bindings node="/xs:schema" schemaLocation="scribe-supplementary-data.xsd" >
+    <jxb:bindings node="/xs:schema" schemaLocation="supplementary-data.xsd" >
         <jxb:schemaBindings>
             <jxb:package name="com.ubs.firc.scribe.message.supplementary"/>
         </jxb:schemaBindings>
