@@ -13,11 +13,32 @@ allprojects { projects ->
         mavenLocal()
         mavenCentral()
     }
+
+
 }
 
 subprojects { subprojects ->
 
+    configurations { xjc }
+
+
+    task xjc(dependsOn: processResources) {
+        doLast {
+            sourceSets.main.output.classesDir.mkdirs()
+
+            ant.taskdef(name: 'xjc',
+                    classname: 'com.sun.tools.xjc.XJCTask',
+                    classpath: configurations.xjc.asPath)
+
+            ant.xjc(destdir: sourceSets.main.output.classesDir,
+                    schema: "$sourceSets.main.output.resourcesDir/scribe-supplementary-data.xsd",
+                    binding: "$sourceSets.main.output.resourcesDir/schema-bindings.xjb")
+        }
+    }
+
     dependencies {
+        xjc "com.sun.xml.bind:jaxb-xjc:2.2.2"
+
         compile "org.slf4j:slf4j-api:$slf4jVersion"
 
         runtime "org.slf4j:slf4j-log4j12:$slf4jVersion"
@@ -49,27 +70,7 @@ project("sandbox:hibernate") {
 project("sandbox:jaxb") {
     subprojects { subprojects ->
 
-        ext.jaxbTargetDir = file("${buildDir}/generated-sources")
-        sourceSets.main.java.srcDirs += jaxbTargetDir
 
-        configurations { xjc }
-
-
-
-        dependencies { xjc "com.sun.xml.bind:jaxb-xjc:2.2.2" }
-
-        task xjc(dependsOn: processResources) {
-
-            doLast {
-                jaxbTargetDir.mkdirs()
-                ant.taskdef(name: 'xjc',
-                        classname: 'com.sun.tools.xjc.XJCTask',
-                        classpath: configurations.xjc.asPath)
-                ant.xjc(destdir: jaxbTargetDir,
-                        schema: "src/main/resources/scribe-supplementary-data.xsd",
-                        binding: "src/main/resources/schema-bindings.xjb")
-            }
-        }
 
     }
 }
