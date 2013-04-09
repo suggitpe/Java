@@ -46,19 +46,17 @@ project("sandbox:hibernate") {
     }
 }
 
-project("sandbox:jaxb"){
+project("sandbox:jaxb") {
     subprojects { subprojects ->
 
-        sourceSets.main.java.srcDirs += "${buildDir}/generated-sources"
-        def jaxbTargetDir = file("${buildDir}/generated-sources")
+        ext.jaxbTargetDir = file("${buildDir}/generated-sources")
+        sourceSets.main.java.srcDirs += jaxbTargetDir
 
-        configurations {
-            xjc
-        }
+        configurations { xjc }
 
-        dependencies {
-            xjc "com.sun.xml.bind:jaxb-xjc:2.2.2"
-        }
+
+
+        dependencies { xjc "com.sun.xml.bind:jaxb-xjc:2.2.2" }
 
         task xjc(dependsOn: processResources) {
 
@@ -69,7 +67,7 @@ project("sandbox:jaxb"){
                         classpath: configurations.xjc.asPath)
                 ant.xjc(destdir: jaxbTargetDir,
                         schema: "src/main/resources/scribe-supplementary-data.xsd",
-                        binding: "src/main/resources/schema-bindings.xjb" )
+                        binding: "src/main/resources/schema-bindings.xjb")
             }
         }
 
