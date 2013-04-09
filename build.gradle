@@ -13,24 +13,25 @@ allprojects { projects ->
         mavenLocal()
         mavenCentral()
     }
-
-
 }
 
 subprojects { subprojects ->
 
-    configurations { xjc }
+    def genDir = "$buildDir/generated-src"
+    sourceSets.main.java.srcDirs += genDir
 
+    configurations { xjc }
 
     task xjc(dependsOn: processResources) {
         doLast {
-            sourceSets.main.output.classesDir.mkdirs()
+
+            file(genDir).mkdirs()
 
             ant.taskdef(name: 'xjc',
                     classname: 'com.sun.tools.xjc.XJCTask',
                     classpath: configurations.xjc.asPath)
 
-            ant.xjc(destdir: sourceSets.main.output.classesDir,
+            ant.xjc(destdir: genDir,
                     schema: "$sourceSets.main.output.resourcesDir/supplementary-data.xsd",
                     binding: "$sourceSets.main.output.resourcesDir/supplementary-data.xjb")
         }
