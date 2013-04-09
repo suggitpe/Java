@@ -73,7 +73,7 @@ public class JaxbContextUtilityTest {
         String xml = createValidDummyDataXml();
         DummyData data = JaxbContextUtility.instance().unmarshalObject( xml,
                                                                         DummyData.class,
-                                                                        "xsd/dummy-data.xsd" );
+                "dummy-data.xsd");
         assertThat( data, not( nullValue() ) );
     }
 
@@ -95,7 +95,7 @@ public class JaxbContextUtilityTest {
     public void unmarshallerThrowsExceptionWhenNonCompliantXmlToSchema() throws JAXBException {
         JaxbContextUtility.instance().unmarshalObject( SIMPLE_XML_OBJECT,
                                                        DummyData.class,
-                                                       "xsd/dummy-data.xsd" );
+                "dummy-data.xsd");
     }
 
     @Test(expected = IllegalArgumentException.class)

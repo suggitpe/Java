@@ -73,17 +73,9 @@ project("sandbox:hibernate") {
     }
 }
 
-project("sandbox:jaxb:testschemas") {
-
-    compileJava.dependsOn xjc
-
-}
-
-project("sandbox:jaxb:testclient") {
-
-
-    dependencies {
-        compile project(":sandbox:jaxb:testschemas")
+project("sandbox:jaxb") {
+    subprojects {
+        compileJava.dependsOn xjc
     }
 }
 
