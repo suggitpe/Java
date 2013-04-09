@@ -1,3 +1,8 @@
 include "sandbox:guice",
-        "sandbox:hibernate"
+        "sandbox:hibernate",
+        "sandbox:jaxb:testclient",
+        "sandbox:jaxb:testschemas",
+        "sandbox:jms",
+        "sandbox:jmx",
+        "sandbox:oddsandsods"
 
