@@ -17,7 +17,7 @@ allprojects { projects ->
 
 subprojects { subprojects ->
 
-    def genDir = "$buildDir/generated-src"
+    ext.genDir = "$buildDir/generated-src"
     sourceSets.main.java.srcDirs += genDir
 
     configurations { xjc }
