@@ -31,9 +31,14 @@ subprojects { subprojects ->
                     classname: 'com.sun.tools.xjc.XJCTask',
                     classpath: configurations.xjc.asPath)
 
-            ant.xjc(destdir: genDir,
-                    schema: "$sourceSets.main.output.resourcesDir/supplementary-data.xsd",
-                    binding: "$sourceSets.main.output.resourcesDir/supplementary-data.xjb")
+            sourceSets.main.output.resourcesDir.listFiles().each { File file ->
+                if (file.isFile() && file.name.endsWith("xsd")) {
+                    ext.fileName = file.name.split("\\.")[0]
+                    ant.xjc(destdir: genDir,
+                            schema: "$sourceSets.main.output.resourcesDir/${fileName}.xsd",
+                            binding: "$sourceSets.main.output.resourcesDir/${fileName}.xjb")
+                }
+            }
         }
     }
 
