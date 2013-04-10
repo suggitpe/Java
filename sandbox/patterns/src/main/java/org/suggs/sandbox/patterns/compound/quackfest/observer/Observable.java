@@ -10,28 +10,16 @@ import java.util.List;
 /**
  * Class to encapsulate the observable nature of the quackable objects. This manages the logic for all of the
  * behaviour that is required for being observabnle.
- * 
- * @author suggitpe
- * @version 1.0 19 Sep 2007
  */
 public class Observable implements IQuackObservable {
 
     private List<IObserver> observers = new ArrayList<IObserver>();
     private IQuackObservable duck;
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aDuck
-     *            the observable duck
-     */
     public Observable( IQuackObservable aDuck ) {
         duck = aDuck;
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
-     */
     @Override
     public void notifyObservers() {
         for ( IObserver o : observers ) {
@@ -39,9 +27,6 @@ public class Observable implements IQuackObservable {
         }
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
-     */
     @Override
     public void registerObserver( IObserver observer ) {
         observers.add( observer );

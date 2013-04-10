@@ -10,9 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This is an implementation of the Singleton pattern for demonstration only. Internally I have fleshed out
  * some of the issues to emphasise and also to discuss other approaches to the features of the pattern.
- * 
- * @author suggitpe
- * @version 1.0 24 Aug 2007
+
  */
 public final class SingletonImpl {
 
@@ -38,8 +36,6 @@ public final class SingletonImpl {
      * This is the key method in the pattern. Here we have the double locked approach to avoiding the
      * inefficient synchronised calls. Theoretically this impl of the pattern will only fall into synchronised
      * issues when we first call the instance method.
-     * 
-     * @return the singleton instance of the class
      */
     public static final SingletonImpl instance() {
         if ( instance == null ) {
@@ -54,11 +50,6 @@ public final class SingletonImpl {
         return instance;
     }
 
-    /**
-     * Getter for the construction time
-     * 
-     * @return the construction time in milles
-     */
     public long getConstructionTime() {
         return constructionDateTime;
     }

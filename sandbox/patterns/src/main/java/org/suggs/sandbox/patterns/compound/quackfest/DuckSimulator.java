@@ -16,19 +16,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Simulator for a duck
- * 
- * @author suggitpe
- * @version 1.0 18 Sep 2007
  */
 public class DuckSimulator {
 
     private static final Logger LOG = LoggerFactory.getLogger( DuckSimulator.class );
 
-    /**
-     * Simulation main
-     * 
-     * @param aFact
-     */
     public void simulate( AbstractDuckFactory aFact ) {
 
         Flock duckFlock = new Flock();
@@ -58,7 +50,6 @@ public class DuckSimulator {
         LOG.debug( "Total number of quacks was [" + QuackCounter.getQuacks() + "]" );
     }
 
-    /** @param aQuackable */
     public void simulate( IQuackable aQuackable ) {
         aQuackable.quack();
     }

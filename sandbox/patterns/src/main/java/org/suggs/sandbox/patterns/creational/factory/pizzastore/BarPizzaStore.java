@@ -14,17 +14,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Concrete pizza store object that implements the createPizza factory method.
- * 
- * @author suggitpe
- * @version 1.0 22 Aug 2007
  */
 public class BarPizzaStore extends AbstractPizzaStore {
 
     private static final Logger LOG = LoggerFactory.getLogger( BarPizzaStore.class );
 
-    /**
-     * @see org.suggs.sandbox.patterns.creational.factory.pizzastore.AbstractPizzaStore#createPizza(java.lang.String)
-     */
     @Override
     protected IPizza createPizza( String aType ) throws PizzaStoreException {
         LOG.debug( "Creating a Bar based pizza" );

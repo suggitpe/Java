@@ -9,9 +9,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Impl for a goose (not IQuackable)
- * 
- * @author suggitpe
- * @version 1.0 18 Sep 2007
  */
 public class Goose {
 

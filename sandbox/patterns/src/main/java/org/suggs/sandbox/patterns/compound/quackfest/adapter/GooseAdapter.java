@@ -11,45 +11,28 @@ import org.suggs.sandbox.patterns.compound.quackfest.observer.Observable;
 
 /**
  * Adapter to enable the Goose objec to fit the IQuackable interface
- * 
- * @author suggitpe
- * @version 1.0 18 Sep 2007
  */
 public class GooseAdapter implements IQuackable {
 
     private Goose goose;
     private Observable observable;
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aGoose
-     */
     public GooseAdapter( Goose aGoose ) {
         goose = aGoose;
         observable = new Observable( this );
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.compound.quackfest.IQuackable#quack()
-     */
     @Override
     public void quack() {
         goose.honk();
         notifyObservers();
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
-     */
     @Override
     public void notifyObservers() {
         observable.notifyObservers();
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
-     */
     @Override
     public void registerObserver( IObserver observer ) {
         observable.registerObserver( observer );

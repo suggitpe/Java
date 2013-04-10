@@ -12,27 +12,15 @@ import java.util.List;
 
 /**
  * Composite object to hold all of the quackable birdlife
- * 
- * @author suggitpe
- * @version 1.0 19 Sep 2007
  */
 public class Flock implements IQuackable {
 
     private List<IQuackable> flock = new ArrayList<IQuackable>();
 
-    /**
-     * Add another quackable to the existing list
-     * 
-     * @param aQuackable
-     *            the quackable object to add
-     */
     public void add( IQuackable aQuackable ) {
         flock.add( aQuackable );
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.compound.quackfest.IQuackable#quack()
-     */
     @Override
     public void quack() {
         for ( IQuackable q : flock ) {
@@ -40,9 +28,6 @@ public class Flock implements IQuackable {
         }
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#notifyObservers()
-     */
     @Override
     public void notifyObservers() {
         for ( IQuackable q : flock ) {
@@ -50,9 +35,6 @@ public class Flock implements IQuackable {
         }
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.compound.quackfest.observer.IQuackObservable#registerObserver(org.suggs.sandbox.patterns.compound.quackfest.observer.IObserver)
-     */
     @Override
     public void registerObserver( IObserver observer ) {
         for ( IQuackable q : flock ) {
