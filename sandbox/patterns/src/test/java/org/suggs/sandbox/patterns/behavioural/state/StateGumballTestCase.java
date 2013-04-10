@@ -4,7 +4,7 @@
  */
 package org.suggs.sandbox.patterns.behavioural.state;
 
-import org.suggs.sandbox.patterns.AbstractPatternTestCase;
+import org.suggs.sandbox.patterns.AbstractPatternTest;
 import org.suggs.sandbox.patterns.behavioural.state.gumball.GumballMachine;
 
 import org.junit.Test;
@@ -13,17 +13,12 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Test case for the command pattern
- * 
- * @author suggitpe
- * @version 1.0 29 Aug 2007
+ *
  */
-public class StateGumballTestCase extends AbstractPatternTestCase {
+public class StateGumballTestCase extends AbstractPatternTest {
 
     private static final Logger LOG = LoggerFactory.getLogger( StateGumballTestCase.class );
 
-    /**
-     * Standard test to test the gumball state machine
-     */
     @Test
     public void testGumballMachine() {
         GumballMachine gm = new GumballMachine( 5 );

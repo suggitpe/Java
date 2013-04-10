@@ -14,21 +14,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * TODO Write javadoc for StateCalendarGuiTest
- * 
- * @author suggitpe
- * @version 1.0 5 Aug 2009
  */
 public class StateCalendarGuiTest {
 
-    // static logger
     private static final Logger LOG = LoggerFactory.getLogger( StateCalendarGuiTest.class );
 
-    /**
-     * Main method
-     * 
-     * @param args
-     *            cmd line arguments
-     */
     public static void main( String[] args ) {
         LOG.debug( "Example of the state pattern" );
 
