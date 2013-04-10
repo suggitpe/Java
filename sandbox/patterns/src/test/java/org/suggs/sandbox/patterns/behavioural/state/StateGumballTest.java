@@ -15,9 +15,9 @@ import org.slf4j.LoggerFactory;
  * Test case for the command pattern
  *
  */
-public class StateGumballTestCase extends AbstractPatternTest {
+public class StateGumballTest extends AbstractPatternTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger( StateGumballTestCase.class );
+    private static final Logger LOG = LoggerFactory.getLogger( StateGumballTest.class );
 
     @Test
     public void testGumballMachine() {
