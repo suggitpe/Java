@@ -9,20 +9,17 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the lights within a theatre
- * 
- * @author suggitpe
- * @version 1.0 3 Sep 2007
  */
 public class TheatreLights {
 
-    private static final Logger LOG = LoggerFactory.getLogger( TheatreLights.class );
+    private static final Logger LOG = LoggerFactory.getLogger(TheatreLights.class);
 
-    public void dim( int i ) {
-        LOG.debug( "Dimming lights to [" + i + "]" );
+    public void dim(int i) {
+        LOG.debug("Dimming lights to [" + i + "]");
     }
 
     public void off() {
-        LOG.debug( "Lights off" );
+        LOG.debug("Lights off");
     }
 
 }

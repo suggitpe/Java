@@ -9,16 +9,13 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a tuner
- * 
- * @author suggitpe
- * @version 1.0 3 Sep 2007
  */
 public class Tuner {
 
-    private static final Logger LOG = LoggerFactory.getLogger( Tuner.class );
+    private static final Logger LOG = LoggerFactory.getLogger(Tuner.class);
 
     public void off() {
-        LOG.debug( "Tuner off" );
+        LOG.debug("Tuner off");
     }
 
 }

@@ -11,36 +11,20 @@ import java.lang.reflect.Proxy;
 
 /**
  * Helper class for the construction of proxy objects
- * 
- * @author suggitpe
- * @version 1.0 18 Sep 2007
  */
 public final class PersonProxyHelper {
 
-    private PersonProxyHelper() {}
-
-    /**
-     * Creates a dynamic proxy for the IPerson interface using the Owner Invocation Hanler
-     * 
-     * @param aPerson
-     *            the person object to create a proxy for
-     * @return a new IPerson proxy
-     */
-    public static final IPerson getOwnerProxy( IPerson aPerson ) {
-        return (IPerson) Proxy.newProxyInstance( aPerson.getClass().getClassLoader(), aPerson.getClass()
-            .getInterfaces(), new OwnerInvocationHandler( aPerson ) );
+    private PersonProxyHelper() {
     }
 
-    /**
-     * Creates a dynamic proxy for the IPerson interface using a NonOwner Invocation handler
-     * 
-     * @param aPerson
-     *            the object to create a proxy for
-     * @return the proxy object
-     */
-    public static final IPerson getNonOwnerProxy( IPerson aPerson ) {
-        return (IPerson) Proxy.newProxyInstance( aPerson.getClass().getClassLoader(), aPerson.getClass()
-            .getInterfaces(), new NonOwnerInvocationHandler( aPerson ) );
+    public static final IPerson getOwnerProxy(IPerson aPerson) {
+        return (IPerson) Proxy.newProxyInstance(aPerson.getClass().getClassLoader(), aPerson.getClass()
+                .getInterfaces(), new OwnerInvocationHandler(aPerson));
+    }
+
+    public static final IPerson getNonOwnerProxy(IPerson aPerson) {
+        return (IPerson) Proxy.newProxyInstance(aPerson.getClass().getClassLoader(), aPerson.getClass()
+                .getInterfaces(), new NonOwnerInvocationHandler(aPerson));
     }
 
 }

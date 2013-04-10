@@ -9,24 +9,21 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a CD player
- * 
- * @author suggitpe
- * @version 1.0 3 Sep 2007
  */
 public class CdPlayer {
 
-    private static final Logger LOG = LoggerFactory.getLogger( CdPlayer.class );
+    private static final Logger LOG = LoggerFactory.getLogger(CdPlayer.class);
 
     public void off() {
-        LOG.debug( "CD player off" );
+        LOG.debug("CD player off");
     }
 
     public void eject() {
-        LOG.debug( "CD player eject" );
+        LOG.debug("CD player eject");
     }
 
     public void stop() {
-        LOG.debug( "CD player stop" );
+        LOG.debug("CD player stop");
     }
 
 }

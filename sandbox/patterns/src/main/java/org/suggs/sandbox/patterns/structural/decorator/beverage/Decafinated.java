@@ -8,22 +8,13 @@ import org.suggs.sandbox.patterns.structural.decorator.AbstractBeverage;
 
 /**
  * Decafinated Coffee beverage
- * 
- * @author suggitpe
- * @version 1.0 29 Aug 2007
  */
 public class Decafinated extends AbstractBeverage {
 
-    /**
-     * Constructs a new instance.
-     */
     public Decafinated() {
-        setDescription( "Decafinated" );
+        setDescription("Decafinated");
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#cost()
-     */
     @Override
     public double cost() {
         return 1.05;

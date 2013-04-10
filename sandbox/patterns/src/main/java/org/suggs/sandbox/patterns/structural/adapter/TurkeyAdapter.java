@@ -9,27 +9,16 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Adapter class that implements the Duck interface for an ITurkey object
- * 
- * @author suggitpe
- * @version 1.0 31 Aug 2007
  */
 public class TurkeyAdapter implements IDuck {
 
     private static final Logger LOG = LoggerFactory.getLogger( TurkeyAdapter.class );
     private ITurkey turkey;
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aTurkey
-     */
     public TurkeyAdapter( ITurkey aTurkey ) {
         turkey = aTurkey;
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.structural.adapter.IDuck#fly()
-     */
     @Override
     public void fly() {
         LOG.debug( "Adapting the turkey fly" );
@@ -38,9 +27,6 @@ public class TurkeyAdapter implements IDuck {
         }
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.structural.adapter.IDuck#quack()
-     */
     @Override
     public void quack() {
         LOG.debug( "Adapting the turkey gobble in quack" );

@@ -9,20 +9,17 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate a screen
- * 
- * @author suggitpe
- * @version 1.0 3 Sep 2007
  */
 public class Screen {
 
-    private static final Logger LOG = LoggerFactory.getLogger( Screen.class );
+    private static final Logger LOG = LoggerFactory.getLogger(Screen.class);
 
     public void down() {
-        LOG.debug( "Screen down" );
+        LOG.debug("Screen down");
     }
 
     public void up() {
-        LOG.debug( "Screen up" );
+        LOG.debug("Screen up");
     }
 
 }

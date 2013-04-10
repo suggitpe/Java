@@ -9,25 +9,16 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Class to represent a turkey
- * 
- * @author suggitpe
- * @version 1.0 31 Aug 2007
  */
 public class WildTurkey implements ITurkey {
 
     private static final Logger LOG = LoggerFactory.getLogger( WildTurkey.class );
 
-    /**
-     * @see org.suggs.sandbox.patterns.structural.adapter.ITurkey#fly()
-     */
     @Override
     public void fly() {
         LOG.debug( "I'm flying a short distance" );
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.structural.adapter.ITurkey#gobble()
-     */
     @Override
     public void gobble() {
         LOG.debug( "Gobble gobble" );

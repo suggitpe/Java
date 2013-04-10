@@ -8,22 +8,13 @@ import org.suggs.sandbox.patterns.structural.decorator.AbstractBeverage;
 
 /**
  * House Blend Coffee beverage
- * 
- * @author suggitpe
- * @version 1.0 29 Aug 2007
  */
 public class HouseBlend extends AbstractBeverage {
 
-    /**
-     * Constructs a new instance.
-     */
     public HouseBlend() {
-        setDescription( "House Blend Coffee" );
+        setDescription("House Blend Coffee");
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.structural.decorator.IBeverage#cost()
-     */
     @Override
     public double cost() {
         return 0.89;

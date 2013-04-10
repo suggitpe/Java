@@ -9,32 +9,29 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the amplifier
- * 
- * @author suggitpe
- * @version 1.0 3 Sep 2007
  */
 public class Amplifier {
 
-    private static final Logger LOG = LoggerFactory.getLogger( Amplifier.class );
+    private static final Logger LOG = LoggerFactory.getLogger(Amplifier.class);
 
-    public void setVolume( int i ) {
-        LOG.debug( "Amplifier volume to [" + i + "]" );
+    public void setVolume(int i) {
+        LOG.debug("Amplifier volume to [" + i + "]");
     }
 
     public void setSurroundSound() {
-        LOG.debug( "Amplifier to surround sound" );
+        LOG.debug("Amplifier to surround sound");
     }
 
-    public void setDvd( String movie ) {
-        LOG.debug( "Amplifier setting DVD to [" + movie + "]" );
+    public void setDvd(String movie) {
+        LOG.debug("Amplifier setting DVD to [" + movie + "]");
     }
 
     public void on() {
-        LOG.debug( "Amplifier on" );
+        LOG.debug("Amplifier on");
     }
 
     public void off() {
-        LOG.debug( "Amplifier off" );
+        LOG.debug("Amplifier off");
     }
 
 }

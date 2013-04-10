@@ -9,24 +9,21 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the popcorn machine
- * 
- * @author suggitpe
- * @version 1.0 3 Sep 2007
  */
 public class PopcornMachine {
 
-    private static final Logger LOG = LoggerFactory.getLogger( PopcornMachine.class );
+    private static final Logger LOG = LoggerFactory.getLogger(PopcornMachine.class);
 
     public void pop() {
-        LOG.debug( "popping ...." );
+        LOG.debug("popping ....");
     }
 
     public void on() {
-        LOG.debug( "Popcorn machine on" );
+        LOG.debug("Popcorn machine on");
     }
 
     public void off() {
-        LOG.debug( "Popcorn machine off" );
+        LOG.debug("Popcorn machine off");
     }
 
 }

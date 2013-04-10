@@ -4,53 +4,38 @@
  */
 package org.suggs.sandbox.patterns.structural.composite;
 
-import java.util.Iterator;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Iterator;
+
 /**
  * The client in the relationship.
- * 
- * @author suggitpe
- * @version 1.0 7 Sep 2007
  */
 public class Waitress {
 
-    private static final Logger LOG = LoggerFactory.getLogger( Waitress.class );
+    private static final Logger LOG = LoggerFactory.getLogger(Waitress.class);
     private IMenuComponent allMenus;
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aComponent
-     *            the menu component
-     */
-    public Waitress( IMenuComponent aComponent ) {
+    public Waitress(IMenuComponent aComponent) {
         allMenus = aComponent;
     }
 
-    /**
-     * Print the content of all the menus
-     */
     public void printMenu() {
         allMenus.print();
     }
 
-    /**
-     * Using the composite iterator, print out the vegetarian menu.
-     */
     public void printVegetarianMenu() {
         Iterator<?> iter = allMenus.createIterator();
-        LOG.debug( "\nVEGETARIAN MENU\n-----------------" );
-        while ( iter.hasNext() ) {
+        LOG.debug("\nVEGETARIAN MENU\n-----------------");
+        while (iter.hasNext()) {
             IMenuComponent comp = (IMenuComponent) iter.next();
             try {
-                if ( comp.isVegetarian() ) {
+                if (comp.isVegetarian()) {
                     comp.print();
                 }
+            } catch (UnsupportedOperationException e) {
             }
-            catch ( UnsupportedOperationException e ) {}
         }
 
     }

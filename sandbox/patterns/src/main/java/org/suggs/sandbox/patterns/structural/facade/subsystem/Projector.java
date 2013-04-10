@@ -9,24 +9,21 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Class to encapsulate the screen
- * 
- * @author suggitpe
- * @version 1.0 3 Sep 2007
  */
 public class Projector {
 
-    private static final Logger LOG = LoggerFactory.getLogger( Projector.class );
+    private static final Logger LOG = LoggerFactory.getLogger(Projector.class);
 
     public void wideScreenMode() {
-        LOG.debug( "Projector in wide screen" );
+        LOG.debug("Projector in wide screen");
     }
 
     public void on() {
-        LOG.debug( "Projector on" );
+        LOG.debug("Projector on");
     }
 
     public void off() {
-        LOG.debug( "Projector off" );
+        LOG.debug("Projector off");
     }
 
 }
