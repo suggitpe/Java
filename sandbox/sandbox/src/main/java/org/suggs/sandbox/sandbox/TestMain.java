@@ -13,9 +13,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This class should be used only for doing on the fly tests where necessary.
- * 
- * @author suggitpe
- * @version 1.0 4 Jun 2009
  */
 public final class TestMain {
 
@@ -24,12 +21,6 @@ public final class TestMain {
 
     private TestMain() {}
 
-    /**
-     * Main method called through the underling main from init
-     * 
-     * @param args
-     *            the args from the command line
-     */
     public static void main( String[] args ) {
         testTokeniser();
 
@@ -54,8 +45,6 @@ public final class TestMain {
 
     private static void testTokeniser() {
         LOG.debug( "Testing tokeniser" );
-        // System.out.println( System.getProperty(
-        // "subversion.native.library" ) );
         String path = System.getProperty( "java.library.path" );
 
         StringTokenizer t = new StringTokenizer( path, ":" );

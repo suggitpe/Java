@@ -13,7 +13,7 @@
     </appender>
 
     <category name="org.springframework.jdbc">
-        <priority value="debug" />
+        <priority value="info" />
     </category>
 
     <category name="org.springframework.jdbc.datasource">

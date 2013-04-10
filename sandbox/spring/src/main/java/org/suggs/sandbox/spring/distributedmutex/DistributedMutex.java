@@ -6,9 +6,6 @@ package org.suggs.sandbox.spring.distributedmutex;
 
 /**
  * Class that will allow for a distributed logical mutex to be applied based on a given ID.
- * 
- * @author suggitpe
- * @version 1.0 3 Dec 2010
  */
 public interface DistributedMutex {
 

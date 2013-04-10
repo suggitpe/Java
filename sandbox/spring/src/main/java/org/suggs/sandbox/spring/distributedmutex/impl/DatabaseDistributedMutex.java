@@ -20,9 +20,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 /**
  * Distributed Mutex implementation that utliised a database entry to form the mutex context.
- * 
- * @author suggitpe
- * @version 1.0 3 Dec 2010
  */
 public class DatabaseDistributedMutex implements DistributedMutex {
 
@@ -35,12 +32,6 @@ public class DatabaseDistributedMutex implements DistributedMutex {
 
     private boolean disabled = false;
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aJdbcTemplate
-     *            a jdbctemplate that has access to the database
-     */
     public DatabaseDistributedMutex( JdbcTemplate aJdbcTemplate ) {
         if ( aJdbcTemplate == null ) {
             throw new IllegalArgumentException( "Must initialise the Database Distributed Mutex with a valid JDBC Template" );
@@ -49,9 +40,6 @@ public class DatabaseDistributedMutex implements DistributedMutex {
         jdbcTemplate.setQueryTimeout( QUERY_TIMEOUT );
     }
 
-    /**
-     * @see org.suggs.sandbox.spring.distributedmutex.DistributedMutex#synchronise(int)
-     */
     @Override
     public void synchronise( final int aId ) {
         if ( disabled ) {

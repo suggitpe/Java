@@ -18,9 +18,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
  * DAO over the top of the Lock Mutex table in the database.
- * 
- * @author suggitpe
- * @version 1.0 6 Dec 2010
  */
 public class TestTableDao {
 

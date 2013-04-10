@@ -108,7 +108,13 @@ project("sandbox:patterns") {
 
 project("sandbox:spring") {
     dependencies {
-        compile "org.springframework:spring-beans:$springVersion"
+        compile "org.springframework:spring-jdbc:$springVersion"
+        compile "org.springframework:spring-context:$springVersion"
+
+        testCompile "org.springframework:spring-test:$springVersion"
+
+        runtime "commons-dbcp:commons-dbcp:1.4"
+        runtime "org.hsqldb:hsqldb:2.2.8"
     }
 }
 
