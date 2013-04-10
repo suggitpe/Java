@@ -7,6 +7,7 @@ package org.suggs.sandbox.tibco;
 import javax.naming.NamingException;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class TestTibcoConnectionProperties {
 
     private static final Logger LOG = LoggerFactory.getLogger( TestTibcoConnectionProperties.class );
 
+    @Ignore
     @Test
     public void testTibcoConnection() {
         LOG.debug( "Creating instance of Tibco Conection Details" );
@@ -36,6 +38,7 @@ public class TestTibcoConnectionProperties {
         }
     }
 
+    @Ignore
     @Test
     public void testTibcoAdminConnection() {
         try {
