@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Simple pojo to wrap a balance object.
- * <p/>
- * User: suggitpe Date: 1/10/12 Time: 6:57 PM
  */
 
 public class Balance {

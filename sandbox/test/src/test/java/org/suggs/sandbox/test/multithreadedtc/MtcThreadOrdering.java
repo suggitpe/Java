@@ -16,8 +16,6 @@ import static org.junit.Assert.assertThat;
 /**
  * Example of MTC using ticks and locks against a number of threads.  A tick happens when all threads are blocked.  The
  * advancement of a tick happens automatically.
- * <p/>
- * User: suggitpe Date: 05/04/11 Time: 07:57
  */
 
 public class MtcThreadOrdering extends MultithreadedTestCase {

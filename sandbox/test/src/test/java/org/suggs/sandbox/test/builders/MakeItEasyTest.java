@@ -17,14 +17,8 @@ import static org.suggs.sandbox.test.builders.makeiteasy.BalanceMaker.*;
 
 /**
  * Test class to demonstrate how to use the make it easy tool set.
- * <p/>
- * User: suggitpe Date: 1/11/12 Time: 10:37 AM
  */
-
 public class MakeItEasyTest {
-
-    @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( MakeItEasyTest.class );
 
     private static final String NAME = "foobar";
     private static final String CURRENCY = "CHF";

@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is a simple pojo that will be used to demonstrate how to build objects from traditionalbuilders.
- * <p/>
- * User: suggitpe Date: 1/10/12 Time: 6:02 PM
  */
 
 public class Posting {

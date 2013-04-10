@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Builder for balance objects.
- * <p/>
- * User: suggitpe Date: 1/10/12 Time: 7:09 PM
  */
 
 public class BalanceBuilder implements Builder<Balance> {

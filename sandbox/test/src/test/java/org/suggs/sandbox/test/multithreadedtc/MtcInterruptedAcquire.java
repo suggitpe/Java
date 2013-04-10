@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Example of the MTC waiting for ticks against locks.
- * <p/>
- * User: suggitpe Date: 05/04/11 Time: 07:48
  */
 
 public class MtcInterruptedAcquire extends MultithreadedTestCase {

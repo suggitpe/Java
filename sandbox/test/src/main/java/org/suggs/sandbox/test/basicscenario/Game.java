@@ -7,21 +7,12 @@ package org.suggs.sandbox.test.basicscenario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * TODO Write javadoc for Game
- * 
- * @author suggitpe
- * @version 1.0 24 Aug 2010
- */
 public class Game {
 
     private static final Logger LOG = LoggerFactory.getLogger( Game.class );
 
     private char[][] grid;
 
-    /**
-     * Constructs a new instance.
-     */
     public Game( int aWidth, int aHeight ) {
         buildGrid( aWidth, aHeight );
     }

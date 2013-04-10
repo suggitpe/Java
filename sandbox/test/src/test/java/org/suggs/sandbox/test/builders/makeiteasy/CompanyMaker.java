@@ -12,8 +12,6 @@ import static com.natpryce.makeiteasy.Property.newProperty;
 
 /**
  * Nat Pryce maker for Companies.
- * <p/>
- * User: suggitpe Date: 1/11/12 Time: 6:54 PM
  */
 
 public final class CompanyMaker {

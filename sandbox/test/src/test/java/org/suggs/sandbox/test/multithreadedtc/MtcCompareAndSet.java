@@ -19,8 +19,6 @@ import static org.junit.Assert.assertThat;
  * with 1 so only the one thread will run and update, followed by the other, followed by teh finishing state where teh
  * integer is 3.<p/> Test cases need to have a method for each thread called threadx and then a initialize and a
  * finish.
- * <p/>
- * User: suggitpe Date: 05/04/11 Time: 07:32
  */
 
 public class MtcCompareAndSet extends MultithreadedTest {

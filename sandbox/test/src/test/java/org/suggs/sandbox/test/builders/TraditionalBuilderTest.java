@@ -16,8 +16,6 @@ import static org.suggs.sandbox.test.builders.traditionalbuilders.PostingBuilder
 
 /**
  * Test class to demonstrate the use of the traditional builder pattern to create data objects for testing.
- * <p/>
- * User: suggitpe Date: 1/10/12 Time: 7:08 PM
  */
 
 public class TraditionalBuilderTest {

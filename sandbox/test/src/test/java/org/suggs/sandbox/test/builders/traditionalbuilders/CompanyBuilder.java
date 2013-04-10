@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Builder for company objects.
- * <p/>
- * User: suggitpe Date: 1/10/12 Time: 7:09 PM
  */
 
 public class CompanyBuilder implements Builder<Company> {

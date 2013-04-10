@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Builder for posting pojo objects.
- * <p/>
- * User: suggitpe Date: 1/10/12 Time: 7:10 PM
  */
 
 public class PostingBuilder implements Builder<Posting> {

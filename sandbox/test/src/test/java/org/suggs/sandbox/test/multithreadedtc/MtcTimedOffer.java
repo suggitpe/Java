@@ -15,8 +15,6 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Example odf using the MTC clock freeze to force a timeout within a thread.
- * <p/>
- * User: suggitpe Date: 05/04/11 Time: 09:11
  */
 
 public class MtcTimedOffer extends MultithreadedTestCase {

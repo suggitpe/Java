@@ -12,8 +12,6 @@ import static com.natpryce.makeiteasy.Property.newProperty;
 
 /**
  * Nat Pryce maker for postings.
- * <p/>
- * User: suggitpe Date: 1/11/12 Time: 10:44 AM
  */
 
 public final class PostingMaker {
