@@ -34,11 +34,6 @@ public class FacadeTest extends AbstractPatternTest {
         facade.shutDownTheatre();
     }
 
-    /**
-     * Builds a new facade object
-     * 
-     * @return
-     */
     private HomeTheatreFacade createFacade() {
         return new HomeTheatreFacade( new Amplifier(),
                                       new CdPlayer(),

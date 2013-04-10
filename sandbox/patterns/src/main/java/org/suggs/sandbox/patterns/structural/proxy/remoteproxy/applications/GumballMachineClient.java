@@ -16,9 +16,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Client application that will remotely call up the monitor object.
- * 
- * @author suggitpe
- * @version 1.0 12 Sep 2007
  */
 public final class GumballMachineClient {
 
@@ -26,9 +23,6 @@ public final class GumballMachineClient {
 
     private GumballMachineClient() {}
 
-    /**
-     * @param args
-     */
     public static void main( String[] args ) {
         String[] locations = { "//localhost:7234/gumballMachine" };
         GumballMonitor[] monitors = new GumballMonitor[locations.length];

@@ -16,16 +16,9 @@ public abstract class AbstractPatternTest {
 
     private static final Logger LOG = LoggerFactory.getLogger( "Test Base" );
 
-    @BeforeClass
-    public static void doubleLine() {
-        LOG.info( "=================================" );
-    }
-
     @Before
     public void singleLine() throws Exception {
-        LOG.info( "---------------------------------" );
         LOG.info( "Executing: " + getClass().getSimpleName() );
-        LOG.info( "---------------------------------" );
     }
 
 }

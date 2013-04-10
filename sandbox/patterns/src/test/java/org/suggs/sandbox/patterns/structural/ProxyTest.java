@@ -62,13 +62,6 @@ public class ProxyTest extends AbstractPatternTest {
                    + bobProxy.getHotOrNotRating() + "]" );
     }
 
-    /**
-     * Method to get a person object from the persistence layer
-     * 
-     * @param aName
-     *            the name of the person
-     * @return the person from the persistence layer
-     */
     private IPerson getPersonFromPersistenceLayer( String aName ) {
         PersonImpl ret = new PersonImpl();
 

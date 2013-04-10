@@ -33,11 +33,6 @@ public class CompositeTest extends AbstractPatternTest {
         w.printVegetarianMenu();
     }
 
-    /**
-     * Builds a complete menu composite
-     * 
-     * @return the complete menu composite class structure
-     */
     private IMenuComponent buildMenus() {
         // build top level menu
         IMenuComponent allMenus = new MenuComponent( "ALL MENUS", "All the menus" );

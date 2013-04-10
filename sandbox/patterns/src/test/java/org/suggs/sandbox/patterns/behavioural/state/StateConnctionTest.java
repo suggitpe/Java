@@ -19,7 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Test class to test the State Connection package
- *
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:xml/ut-state-connection-test-case.xml" })

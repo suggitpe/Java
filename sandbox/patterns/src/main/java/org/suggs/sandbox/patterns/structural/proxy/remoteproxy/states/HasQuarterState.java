@@ -14,9 +14,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * State to represent when the gumball machine has a quarter.
- * 
- * @author suggitpe
- * @version 1.0 10 Sep 2007
  */
 public class HasQuarterState implements IState {
 
@@ -25,44 +22,26 @@ public class HasQuarterState implements IState {
     private GumballMachine gumballMachine;
     private Random randomWinner = new Random( System.currentTimeMillis() );
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aMachine
-     *            the gumball machine
-     */
     public HasQuarterState( GumballMachine aMachine ) {
         gumballMachine = aMachine;
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
-     */
     @Override
     public void dispense() {
         LOG.warn( "No gumball dispensed" );
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
-     */
     @Override
     public void ejectQuarter() {
         LOG.info( "Quarter returned" );
         gumballMachine.setState( gumballMachine.getNoQuarterState() );
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
-     */
     @Override
     public void insertQuarter() {
         LOG.warn( "You cannot insert another quarter" );
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
-     */
     @Override
     public void turnCrank() {
         LOG.info( "You have turned the crank" );

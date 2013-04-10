@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public final class ConfigManager {
 
     private static final Logger LOG = LoggerFactory.getLogger( ConfigManager.class );
-    private static final String PROP_FILE = "tibco_connection.properties";
+    private static final String PROP_FILE = "connection.properties";
 
     // here we pop all of the properties that we wish to manage
     /** */
@@ -27,9 +27,9 @@ public final class ConfigManager {
     /** */
     public static final String PROVIDER_URL = "provider.url";
     /** */
-    public static final String USERNAME = "tibco.username";
+    public static final String USERNAME = "username";
     /** */
-    public static final String PASSWORD = "tibco.password";
+    public static final String PASSWORD = "password";
     /** */
     public static final String TOPIC_CONN_FACT = "topic.connectionfactory";
     /** */

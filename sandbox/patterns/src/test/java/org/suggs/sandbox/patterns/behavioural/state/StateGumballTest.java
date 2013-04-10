@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Test case for the command pattern
- *
  */
 public class StateGumballTest extends AbstractPatternTest {
 

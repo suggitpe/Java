@@ -12,9 +12,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * State to represent when the client is a winner of an extra gumball
- * 
- * @author suggitpe
- * @version 1.0 10 Sep 2007
  */
 public class WinnerState implements IState {
 
@@ -22,19 +19,10 @@ public class WinnerState implements IState {
     private static final Logger LOG = LoggerFactory.getLogger( WinnerState.class );
     private GumballMachine gumballMachine;
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aMachine
-     *            the gumball machine
-     */
     public WinnerState( GumballMachine aMachine ) {
         gumballMachine = aMachine;
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
-     */
     @Override
     public void dispense() {
         // this is where we get the good news
@@ -56,25 +44,16 @@ public class WinnerState implements IState {
         }
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
-     */
     @Override
     public void ejectQuarter() {
         LOG.warn( "WE are way beyond ejecting quarters now" );
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
-     */
     @Override
     public void insertQuarter() {
         LOG.warn( "In the middle of a vend at the moment" );
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
-     */
     @Override
     public void turnCrank() {
         LOG.warn( "Crank has already been truned" );

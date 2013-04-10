@@ -4,66 +4,41 @@
  */
 package org.suggs.sandbox.patterns.structural.proxy.remoteproxy.states;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.GumballMachine;
 import org.suggs.sandbox.patterns.structural.proxy.remoteproxy.IState;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * State to represent the gumball machine is out of gumballs
- * 
- * @author suggitpe
- * @version 1.0 10 Sep 2007
  */
 public class SoldOutState implements IState {
 
     private static final long serialVersionUID = -6406267581898956016L;
-    private static final Logger LOG = LoggerFactory.getLogger( SoldOutState.class );
+    private static final Logger LOG = LoggerFactory.getLogger(SoldOutState.class);
 
     @SuppressWarnings("unused")
-    private GumballMachine gumballMachine;
-
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aMachine
-     *            the gumball machine
-     */
-    public SoldOutState( GumballMachine aMachine ) {
-        gumballMachine = aMachine;
+    public SoldOutState(GumballMachine aMachine) {
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#dispense()
-     */
     @Override
     public void dispense() {
-        LOG.warn( "Nothing to dispense" );
+        LOG.warn("Nothing to dispense");
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#ejectQuarter()
-     */
     @Override
     public void ejectQuarter() {
-        LOG.warn( "No quarter in the machine to eject" );
+        LOG.warn("No quarter in the machine to eject");
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#insertQuarter()
-     */
     @Override
     public void insertQuarter() {
-        LOG.warn( "No allowing you toi insert a quarter as the machine is empty" );
+        LOG.warn("No allowing you toi insert a quarter as the machine is empty");
     }
 
-    /**
-     * @see org.suggs.sandbox.patterns.behavioural.state.gumball.IState#turnCrank()
-     */
     @Override
     public void turnCrank() {
-        LOG.warn( "Sorry the machine is empty and so we cannot turn the crank" );
+        LOG.warn("Sorry the machine is empty and so we cannot turn the crank");
     }
 
 }
