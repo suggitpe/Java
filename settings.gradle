@@ -1,9 +1,14 @@
 include "sandbox:guice",
         "sandbox:hibernate",
+        "sandbox:hibernate-search",
         "sandbox:jaxb:testclient",
         "sandbox:jaxb:testschemas",
         "sandbox:jms",
         "sandbox:jmx",
         "sandbox:oddsandsods",
-        "sandbox:patterns"
+        "sandbox:patterns",
+        "sandbox:sandbox",
+        "sandbox:spring",
+        "sandbox:test",
+        "sandbox:tibco"
 
