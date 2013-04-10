@@ -14,9 +14,6 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
 
 /**
  * Utility class to help get various admin data from the EMS broker
- * 
- * @author suggitpe
- * @version 1.0 7 Aug 2008
  */
 public final class TibcoAdminUtil {
 

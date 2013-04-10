@@ -17,9 +17,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Singleton class that encapsulates the access to the configuration file.
- * 
- * @author suggitpe
- * @version 1.0 5 Aug 2008
  */
 public final class TibcoConnectionProperties {
 
@@ -34,18 +31,10 @@ public final class TibcoConnectionProperties {
         instance = new TibcoConnectionProperties();
     }
 
-    /**
-     * Instance implementation from which we can get the
-     * 
-     * @return the instance of the singleton
-     */
     public static TibcoConnectionProperties instance() {
         return instance;
     }
 
-    /**
-     * Constructs a new instance.
-     */
     private TibcoConnectionProperties() {
         data = new Properties();
         try {
@@ -60,48 +49,22 @@ public final class TibcoConnectionProperties {
         }
     }
 
-    /**
-     * Getter for the context factory
-     * 
-     * @return the context factory value
-     */
     public String getContextFactory() {
         return data.getProperty( "context.factory" );
     }
 
-    /**
-     * Getter for the provider URL
-     * 
-     * @return the provider URL
-     */
     public String getProviderUrl() {
         return data.getProperty( "provider.url" );
     }
 
-    /**
-     * Getter for the user name.
-     * 
-     * @return the user name.
-     */
     public String getUsername() {
         return data.getProperty( "tibco.username" );
     }
 
-    /**
-     * Getter for the password.
-     * 
-     * @return the password.
-     */
     public String getPassword() {
         return data.getProperty( "tibco.pasword" );
     }
 
-    /**
-     * Helper method to put together the initial context environment together.
-     * 
-     * @return a hashtable of the relevant properties for the Tibco Initial Context
-     * @throws NamingException
-     */
     public InitialContext getInitialContext() throws NamingException {
         Hashtable<String, String> env = new Hashtable<String, String>();
         env.put( Context.INITIAL_CONTEXT_FACTORY, getContextFactory() );

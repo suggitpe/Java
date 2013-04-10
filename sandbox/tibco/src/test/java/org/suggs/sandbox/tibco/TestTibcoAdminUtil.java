@@ -10,12 +10,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * TODO Write javadoc for TestTibcoAdminUtil
- * 
- * @author suggitpe
- * @version 1.0 7 Aug 2008
- */
 public class TestTibcoAdminUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger( TestTibcoAdminUtil.class );

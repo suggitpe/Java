@@ -15,9 +15,6 @@ import com.tibco.tibjms.admin.TibjmsAdminException;
 
 /**
  * Helper class to manage the creation of a Tibco Admin hook
- * 
- * @author suggitpe
- * @version 1.0 6 Aug 2008
  */
 public final class TibcoAdminConnectionProperties {
 
@@ -33,18 +30,10 @@ public final class TibcoAdminConnectionProperties {
         instance = new TibcoAdminConnectionProperties();
     }
 
-    /**
-     * Instance implementation from which we can get the
-     * 
-     * @return the instance of the singleton
-     */
     public static TibcoAdminConnectionProperties instance() {
         return instance;
     }
 
-    /**
-     * Constructs a new instance.
-     */
     private TibcoAdminConnectionProperties() {
 
         data = new Properties();
@@ -60,38 +49,18 @@ public final class TibcoAdminConnectionProperties {
         }
     }
 
-    /**
-     * Getter for the provider URL
-     * 
-     * @return the provider URL
-     */
     public String getProviderUrl() {
         return data.getProperty( "provider.url" );
     }
 
-    /**
-     * Getter for the user name.
-     * 
-     * @return the user name.
-     */
     public String getUsername() {
         return data.getProperty( "tibco.username" );
     }
 
-    /**
-     * Getter for the password.
-     * 
-     * @return the password.
-     */
     public String getPassword() {
         return data.getProperty( "tibco.pasword" );
     }
 
-    /**
-     * Returns a local instance of the tibco JMS admin object
-     * 
-     * @return a tibco jms admin object
-     */
     public TibjmsAdmin getAdmin() {
         synchronized ( this ) {
             if ( admin == null ) {

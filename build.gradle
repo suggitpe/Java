@@ -125,4 +125,14 @@ project("sandbox:test") {
     }
 }
 
+project("sandbox:tibco"){
+    dependencies{
+        compile "com.tibco.ems:tibjmsadmin:5.1.3"
+
+        runtime "javax.jms:jms:1.1"
+        runtime "com.tibco.ems:tibjms:5.1.3"
+    }
+
+}
+
 
