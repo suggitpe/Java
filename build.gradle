@@ -83,7 +83,7 @@ project("sandbox:jms") {
     dependencies {
         compile "javax.jms:jms:1.1"
 
-        runtime "org.apache.activemq:activemq-all:5.8.0"
+        testCompile("org.apache.activemq:activemq-all:5.8.0") { exclude group: "org.slf4j" }
     }
 }
 
@@ -99,4 +99,12 @@ project("sandbox:oddsandsods") {
     }
 
 }
+
+project("sandbox:patterns") {
+    dependencies {
+        testCompile "org.springframework:spring-test:$springVersion"
+        testCompile "org.springframework:spring-context:$springVersion"
+    }
+}
+
 

@@ -4,5 +4,6 @@ include "sandbox:guice",
         "sandbox:jaxb:testschemas",
         "sandbox:jms",
         "sandbox:jmx",
-        "sandbox:oddsandsods"
+        "sandbox:oddsandsods",
+        "sandbox:patterns"
 
