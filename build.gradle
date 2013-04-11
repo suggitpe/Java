@@ -65,6 +65,7 @@ project("sandbox:hibernate") {
 
         runtime "org.springframework:spring-context:$springVersion"
         runtime "commons-dbcp:commons-dbcp:1.4"
+        runtime "org.hsqldb:hsqldb:2.2.8"
 
         testCompile "org.springframework:spring-test:$springVersion"
         testCompile "org.springframework:spring-orm:$springVersion"
@@ -82,7 +83,8 @@ project("sandbox:jms") {
     dependencies {
         compile "javax.jms:jms:1.1"
 
-        testCompile("org.apache.activemq:activemq-all:5.8.0") { exclude group: "org.slf4j" }
+        //testCompile("org.apache.activemq:activemq-all:5.8.0") { exclude group: "org.slf4j" }
+        testCompile "org.apache.activemq:activemq-core:$activeMqVersion"
     }
 }
 

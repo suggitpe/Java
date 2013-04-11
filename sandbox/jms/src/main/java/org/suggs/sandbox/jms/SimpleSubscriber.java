@@ -19,19 +19,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Simple subscriber mechanism for creating a durable and then retrieving messages from that durable.
- * 
- * @author suggitpe
- * @version 1.0 16 Apr 2009
  */
 public class SimpleSubscriber {
 
     private static final Logger LOG = LoggerFactory.getLogger( SimpleSubscriber.class );
 
-    /**
-     * @param aDestName
-     * @throws NamingException
-     * @throws JMSException
-     */
     public void subscribeToTopic( String aDestName ) throws NamingException, JMSException {
         InitialContext ctx = ContextHelper.createInitialContext();
 
@@ -43,6 +35,7 @@ public class SimpleSubscriber {
         String pass = ConfigManager.instance().getProperty( ConfigManager.PASSWORD );
 
         Connection conn = fact.createConnection( user, pass );
+        conn.setClientID("foobar");
 
         try {
             Session sess = conn.createSession( true, Session.CLIENT_ACKNOWLEDGE );

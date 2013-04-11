@@ -12,29 +12,17 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Wrapper class to encapsulate the configuration file.
- * 
- * @author suggitpe
- * @version 1.0 15 Apr 2009
  */
 public final class ConfigManager {
 
     private static final Logger LOG = LoggerFactory.getLogger( ConfigManager.class );
     private static final String PROP_FILE = "connection.properties";
-
-    // here we pop all of the properties that we wish to manage
-    /** */
     public static final String CONTEXT_FACTORY = "context.factory";
-    /** */
     public static final String PROVIDER_URL = "provider.url";
-    /** */
     public static final String USERNAME = "username";
-    /** */
     public static final String PASSWORD = "password";
-    /** */
     public static final String TOPIC_CONN_FACT = "topic.connectionfactory";
-    /** */
     public static final String SUBSCR_MSG_SELECTOR = "subscriber.message.selector";
-    /** */
     public static final String SUBSCR_DURABLE = "subscriber.durable.name";
 
     private static ConfigManager instance;
@@ -45,18 +33,10 @@ public final class ConfigManager {
         instance = new ConfigManager();
     }
 
-    /**
-     * Instance implementation from which we can get the
-     * 
-     * @return the instance of the singleton
-     */
     public static ConfigManager instance() {
         return instance;
     }
 
-    /**
-     * Constructs a new instance.
-     */
     private ConfigManager() {
         data = new Properties();
         try {
@@ -71,13 +51,6 @@ public final class ConfigManager {
         }
     }
 
-    /**
-     * Accessor method to the underlying properties, does not allow for null properties
-     * 
-     * @param aPropName
-     *            the name of the property to set
-     * @return the configuration property that the name relates to
-     */
     public String getProperty( String aPropName ) {
         String ret = data.getProperty( aPropName );
         if ( ret == null ) {
@@ -86,13 +59,6 @@ public final class ConfigManager {
         return ret;
     }
 
-    /**
-     * Accessor method to the underlying properties
-     * 
-     * @param aPropName
-     *            the name of the property to set
-     * @return the configuration property that the name relates to
-     */
     public String getNullableProperty( String aPropName ) {
         return data.getProperty( aPropName );
     }

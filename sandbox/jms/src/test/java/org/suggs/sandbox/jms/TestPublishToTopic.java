@@ -4,30 +4,48 @@
  */
 package org.suggs.sandbox.jms;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.broker.BrokerContext;
+import org.apache.activemq.broker.BrokerFactory;
+import org.apache.activemq.broker.BrokerService;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Test to verify that we can send to a topic on a known broker.
- * 
- * @author suggitpe
- * @version 1.0 15 Apr 2009
- */
+import javax.jms.Connection;
+import javax.jms.Session;
+import javax.jms.Topic;
+import java.util.Map;
+
 public class TestPublishToTopic {
 
-    private static final Logger LOG = LoggerFactory.getLogger( TestPublishToTopic.class );
+    private static final Logger LOG = LoggerFactory.getLogger(TestPublishToTopic.class);
+    public static final String TEST_TOPIC = "dynamicTopics/TestTopic";
+    public static final String BIND_ADDRESS = "tcp://localhost:61616";
+    private BrokerService broker;
 
-    /**
-     * @throws Exception
-     */
+    @Before
+    public void setupTopic() throws Exception {
+        broker = new BrokerService();
+        broker.setPersistent(false);
+        broker.addConnector(BIND_ADDRESS);
+        broker.start();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        broker.stop();
+    }
+
     @Test
     public void testSendTextMessageToTopic() throws Exception {
         SimplePublisher p = new SimplePublisher();
 
-        LOG.debug( "Testing that we can send to a Topic" );
+        LOG.debug("Testing that we can send to a Topic");
 
-        p.sendMessageToTopic( "TestTopic" );
+        p.sendMessageToTopic(TEST_TOPIC);
     }
 
 }

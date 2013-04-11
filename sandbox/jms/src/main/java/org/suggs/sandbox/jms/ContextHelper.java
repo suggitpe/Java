@@ -16,9 +16,6 @@ import org.slf4j.LoggerFactory;
 /**
  * The sole purpose of this class is to provide a mechanism by which we can create the initial context into
  * the broker.
- * 
- * @author suggitpe
- * @version 1.0 16 Apr 2009
  */
 public final class ContextHelper {
 
@@ -26,13 +23,6 @@ public final class ContextHelper {
 
     private ContextHelper() {}
 
-    /**
-     * Helper to create an initial context based on the
-     * 
-     * @return the initial context
-     * @throws NamingException
-     *             if there is a problem creating the initial context
-     */
     static InitialContext createInitialContext() throws NamingException {
         Hashtable<String, String> env = new Hashtable<String, String>();
         env.put( Context.INITIAL_CONTEXT_FACTORY,

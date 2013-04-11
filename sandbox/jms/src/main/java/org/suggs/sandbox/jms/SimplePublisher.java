@@ -20,20 +20,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is a very simple publisher class, that will send a text message to a topic on a broker.
- * 
- * @author suggitpe
- * @version 1.0 15 Apr 2009
  */
 public class SimplePublisher {
 
     private static final Logger LOG = LoggerFactory.getLogger( SimplePublisher.class );
 
-    /**
-     * @param destName
-     * @throws NamingException
-     * @throws NameNotFoundException
-     * @throws JMSException
-     */
     public void sendMessageToTopic( String destName ) throws NamingException, NameNotFoundException,
                     JMSException {
         InitialContext ctx = ContextHelper.createInitialContext();
