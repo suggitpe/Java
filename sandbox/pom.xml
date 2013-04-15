@@ -14,18 +14,7 @@
     <name>Sandbox Core Parent</name>
 
     <modules>
-        <module>guice</module>
         <module>hibernate</module>
-        <module>hibernate-search</module>
-        <module>jaxb</module>
-        <module>jms</module>
-        <module>jmx</module>
-        <module>oddsandsods</module>
-        <module>patterns</module>
-        <module>sandbox</module>
-        <module>spring</module>
-        <module>test</module>
-        <module>tibco</module>
     </modules>
 
     <dependencies>
