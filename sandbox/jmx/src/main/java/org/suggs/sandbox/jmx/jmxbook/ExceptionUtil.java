@@ -4,46 +4,38 @@
  */
 package org.suggs.sandbox.jmx.jmxbook;
 
-import javax.management.MBeanException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.management.MBeanException;
+
 /**
  * Class to manage the printing of an exception stack
- * 
- * @author suggitpe
- * @version 1.0 13 Feb 2008
  */
 public final class ExceptionUtil {
 
-    private static final Logger LOG = LoggerFactory.getLogger( ExceptionUtil.class );
+    private static final Logger LOG = LoggerFactory.getLogger(ExceptionUtil.class);
 
-    private ExceptionUtil() {}
+    private ExceptionUtil() {
+    }
 
-    /**
-     * print exceptuion utility for exceptions caught
-     * 
-     * @param e
-     *            the exception to print
-     */
-    public static final void printException( Exception e ) {
-        LOG.debug( "============ [Exception] ==============" );
-        LOG.error( e.toString() );
-        if ( e instanceof MBeanException ) {
+    public static final void printException(Exception e) {
+        LOG.debug("============ [Exception] ==============");
+        LOG.error(e.toString());
+        if (e instanceof MBeanException) {
             boolean hasEmbeddedException = true;
             Exception embeddedExc = e;
-            while ( hasEmbeddedException ) {
-                embeddedExc = ( (MBeanException) embeddedExc ).getTargetException();
-                LOG.debug( "-------- [Embedded Exception] ---------" );
+            while (hasEmbeddedException) {
+                embeddedExc = ((MBeanException) embeddedExc).getTargetException();
+                LOG.debug("-------- [Embedded Exception] ---------");
 
-                LOG.error( embeddedExc.toString() );
+                LOG.error(embeddedExc.toString());
 
-                if ( !( embeddedExc instanceof MBeanException ) ) {
+                if (!(embeddedExc instanceof MBeanException)) {
                     hasEmbeddedException = false;
                 }
             }
         }
-        LOG.debug( "==========================" );
+        LOG.debug("==========================");
     }
 }

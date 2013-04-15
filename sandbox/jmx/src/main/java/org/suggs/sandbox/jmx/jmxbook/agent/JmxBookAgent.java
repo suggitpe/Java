@@ -25,9 +25,6 @@ import com.sun.jdmk.comm.HtmlAdaptorServer;
 
 /**
  * JMX Agent for the JmxBook project.
- * 
- * @author suggitpe
- * @version 1.0 13 Feb 2008
  */
 public class JmxBookAgent {
 
@@ -35,9 +32,6 @@ public class JmxBookAgent {
 
     private MBeanServer server;
 
-    /**
-     * Constructs a new instance.
-     */
     public JmxBookAgent() {
         LOG.debug( "Creating MBean server " );
         String svrName = JmxBookConfig.getInstance().getCfgProperty( JmxBookConfig.MBEAN_SERVERNAME );
@@ -53,9 +47,6 @@ public class JmxBookAgent {
         LOG.info( "JMX Book started" );
     }
 
-    /**
-     * Instantiate and start an HTML adapter for this agent
-     */
     private boolean startHtmlAdapter() {
         int httpPort;
         try {
@@ -88,9 +79,6 @@ public class JmxBookAgent {
         return true;
     }
 
-    /**
-     * Instantiate and start a RMI Connector for this agent
-     */
     private boolean startRmiConnector() {
 
         String rmiUrl = JmxBookConfig.getInstance().getRmiUrl();

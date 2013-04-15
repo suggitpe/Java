@@ -17,9 +17,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * MBean class to encapsulate a datasource functionality
- * 
- * @author suggitpe
- * @version 1.0 20 Feb 2008
  */
 public class DBSource implements DBSourceMBean {
 
@@ -28,19 +25,10 @@ public class DBSource implements DBSourceMBean {
     private DataSource dataSource;
     private boolean commit = false;
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param jndiName
-     *            the jndi name of the resource
-     */
     public DBSource( String jndiName ) {
         resetDataSource( jndiName );
     }
 
-    /**
-     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#resetDataSource(java.lang.String)
-     */
     @Override
     public final void resetDataSource( String name ) {
         LOG.debug( "Setting the datasource with name [" + name + "]" );
@@ -53,9 +41,6 @@ public class DBSource implements DBSourceMBean {
         }
     }
 
-    /**
-     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#getConnection()
-     */
     @Override
     public Connection getConnection() {
         Connection ret;
@@ -71,17 +56,11 @@ public class DBSource implements DBSourceMBean {
         return null;
     }
 
-    /**
-     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#getAutoCommit()
-     */
     @Override
     public boolean getAutoCommit() {
         return commit;
     }
 
-    /**
-     * @see org.suggs.sandbox.jmx.jmxbook.components.dbmanager.DBSourceMBean#setAutoCommit(boolean)
-     */
     @Override
     public void setAutoCommit( boolean aCommit ) {
         commit = aCommit;

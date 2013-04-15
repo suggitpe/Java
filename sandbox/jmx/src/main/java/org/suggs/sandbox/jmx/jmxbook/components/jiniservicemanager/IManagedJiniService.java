@@ -8,27 +8,10 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-/**
- * TODO Write javadoc for ManagedJiniService
- * 
- * @author suggitpe
- * @version 1.0 25 Feb 2008
- */
 public interface IManagedJiniService extends Remote {
 
-    /**
-     * @param aEntry
-     * @throws RemoteException
-     */
-    public void addEntries( List<?> aEntry ) throws RemoteException;
+    public void addEntries(List<?> aEntry) throws RemoteException;
 
-    /**
-     * MOdifies an existing set of entries
-     * 
-     * @param aOldEntries
-     * @param aNewEntries
-     * @throws RemoteException
-     */
-    public void modifyEntries( List<?> aOldEntries, List<?> aNewEntries ) throws RemoteException;
+    public void modifyEntries(List<?> aOldEntries, List<?> aNewEntries) throws RemoteException;
 
 }

@@ -19,9 +19,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Class that will allow you to connect to an MBean server and deploy an MBean.
- * 
- * @author suggitpe
- * @version 1.0 15 Feb 2008
  */
 public final class RmiMbeanDeployer {
 
@@ -29,9 +26,6 @@ public final class RmiMbeanDeployer {
 
     private RmiMbeanDeployer() {}
 
-    /**
-     * deploys the hello wworld mbean to the mbean server
-     */
     public static void deployHelloWorldBean() {
         LOG.debug( "Deploying hello world mbean" );
         try {
@@ -56,9 +50,6 @@ public final class RmiMbeanDeployer {
         }
     }
 
-    /**
-     * Constructs a new instance.
-     */
     public static void deployPropertyManager() {
         LOG.debug( "Running the property manager setup application" );
         try {
@@ -90,9 +81,6 @@ public final class RmiMbeanDeployer {
         }
     }
 
-    /**
-     * Deploys the logger
-     */
     public static void deployLogger() {
         LOG.debug( "Running the logger setup application" );
         try {
@@ -149,9 +137,6 @@ public final class RmiMbeanDeployer {
         }
     }
 
-    /**
-     * Deploys the example Model mbean.
-     */
     private static void deployModelMBeanExample() {
         try {
             LOG.debug( "Deploying the exposable model mbean " );
@@ -195,12 +180,6 @@ public final class RmiMbeanDeployer {
 
     }
 
-    /**
-     * Main method
-     * 
-     * @param aArgs
-     *            runtime args
-     */
     public static void main( String[] aArgs ) {
 
         LOG.debug( "Deploying hello world bean" );

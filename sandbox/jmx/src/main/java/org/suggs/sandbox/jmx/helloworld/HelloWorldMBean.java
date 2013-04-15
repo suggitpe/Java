@@ -6,30 +6,13 @@ package org.suggs.sandbox.jmx.helloworld;
 
 /**
  * MBean interface for a simple Hello world bean
- * 
- * @author suggitpe
- * @version 1.0 11 Feb 2008
  */
 public interface HelloWorldMBean {
 
-    /**
-     * Setter for the greeting
-     * 
-     * @param aGreeting
-     *            the greeting to set
-     */
     void setGreeting( String aGreeting );
 
-    /**
-     * Getter for the greeting
-     * 
-     * @return the greeting
-     */
     String getGreeting();
 
-    /**
-     * Prints the greeting
-     */
     void printGreeting();
 
 }

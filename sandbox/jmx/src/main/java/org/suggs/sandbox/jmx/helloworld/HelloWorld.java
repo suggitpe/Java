@@ -12,9 +12,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Hello World MBean implementation
- * 
- * @author suggitpe
- * @version 1.0 11 Feb 2008
  */
 public class HelloWorld extends NotificationBroadcasterSupport implements HelloWorldMBean {
 
@@ -22,42 +19,24 @@ public class HelloWorld extends NotificationBroadcasterSupport implements HelloW
 
     private String greeting;
 
-    /**
-     * Constructs a new instance.
-     */
     public HelloWorld() {
         greeting = "Hello I am a standard MBean impl";
     }
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aGreeting
-     *            the greeting to set
-     */
     public HelloWorld( String aGreeting ) {
         greeting = aGreeting;
     }
 
-    /**
-     * @see org.suggs.sandbox.jmx.helloworld.HelloWorldMBean#getGreeting()
-     */
     @Override
     public String getGreeting() {
         return greeting;
     }
 
-    /**
-     * @see org.suggs.sandbox.jmx.helloworld.HelloWorldMBean#printGreeting()
-     */
     @Override
     public void printGreeting() {
         LOG.info( "Greeting on JMX managed object is [" + greeting + "]" );
     }
 
-    /**
-     * @see org.suggs.sandbox.jmx.helloworld.HelloWorldMBean#setGreeting(java.lang.String)
-     */
     @Override
     public void setGreeting( String aGreeting ) {
         greeting = aGreeting;

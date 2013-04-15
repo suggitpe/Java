@@ -22,17 +22,11 @@ import org.slf4j.LoggerFactory;
  * This class is a JMX notification listener. The core functionality is to connect to the MBean server ad then
  * register with a managed object to receive notifications.The MBean server acts as a proxy between the
  * listener and the underlying object that is publishing the notifications.
- * 
- * @author suggitpe
- * @version 1.0 28 Feb 2008
  */
 public class PollingNotificationListener implements NotificationListener {
 
     private static final Logger LOG = LoggerFactory.getLogger( PollingNotificationListener.class );
 
-    /**
-     * Constructs a new instance.
-     */
     public PollingNotificationListener() {
         try {
 
@@ -54,21 +48,12 @@ public class PollingNotificationListener implements NotificationListener {
         }
     }
 
-    /**
-     * @see javax.management.NotificationListener#handleNotification(javax.management.Notification,
-     *      java.lang.Object)
-     */
     @Override
     public void handleNotification( Notification notification, Object handback ) {
         String type = notification.getType();
         LOG.debug( "Notif of type " + type );
     }
 
-    /**
-     * Start the main thread
-     * 
-     * @param args
-     */
     public static void main( String[] args ) {
         LOG.debug( "Starting a new polling notification listener" );
         @SuppressWarnings("unused")

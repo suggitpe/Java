@@ -90,6 +90,8 @@ project("sandbox:jms") {
 
 project("sandbox:jmx") {
     dependencies {
+        compile "net.jini:jini-core:2.1"
+        compile "com.sun.jdmk:jmxtools:1.2.1"
 
     }
 }

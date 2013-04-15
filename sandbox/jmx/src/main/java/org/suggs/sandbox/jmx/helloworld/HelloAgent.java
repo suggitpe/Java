@@ -18,9 +18,6 @@ import com.sun.jdmk.comm.HtmlAdaptorServer;
 
 /**
  * JMX Agent class for the HelloWorld MBean
- * 
- * @author suggitpe
- * @version 1.0 11 Feb 2008
  */
 public class HelloAgent implements NotificationListener {
 
@@ -29,18 +26,12 @@ public class HelloAgent implements NotificationListener {
 
     private MBeanServer server;
 
-    /**
-     * Constructs a new instance.
-     */
     public HelloAgent() {
         LOG.debug( "Creating the MBean server ..." );
         // create an instance of an MBean Server
         server = MBeanServerFactory.createMBeanServer( "HelloAgent" );
     }
 
-    /**
-     * Method to run the underlying agent
-     */
     public void runAgent() {
 
         // create the HTML adapter
@@ -73,21 +64,11 @@ public class HelloAgent implements NotificationListener {
         }
     }
 
-    /**
-     * @see javax.management.NotificationListener#handleNotification(javax.management.Notification,
-     *      java.lang.Object)
-     */
     @Override
     public void handleNotification( Notification notif, Object handback ) {
         LOG.debug( "Receiving notification: [" + notif.getType() + "], [" + notif.getMessage() + "]" );
     }
 
-    /**
-     * Main method
-     * 
-     * @param aArgs
-     *            args
-     */
     public static void main( String[] aArgs ) {
         LOG.debug( "Creating a new Hello Agent" );
         HelloAgent agent = new HelloAgent();

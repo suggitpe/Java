@@ -18,9 +18,6 @@ import org.slf4j.LoggerFactory;
 /**
  * This is a simple bean class that we will expose through a model mbean. This class also contains a static
  * method from whihc you can create the model mbean info object.
- * 
- * @author suggitpe
- * @version 1.0 23 Apr 2008
  */
 public class ExposableBean implements Serializable {
 
@@ -28,37 +25,19 @@ public class ExposableBean implements Serializable {
     private static final long serialVersionUID = 4094088490297464163L;
     private String myAttribute;
 
-    /**
-     * Constructs a new instance.
-     */
     public ExposableBean() {}
 
-    /**
-     * Getter for the internal attribute
-     * 
-     * @return the internal attribute
-     */
     public String getMyAttribute() {
         return myAttribute;
     }
 
-    /**
-     * Prints the internal attribute to the stdout
-     */
     public void printMyAttribute() {
         LOG.debug( myAttribute );
     }
 
-    /**
-     * Creates a model mbean info object for the exposable bean class.
-     * 
-     * @return the model mbean info object
-     */
     public static ModelMBeanInfo buildModelMBeanInfo() {
         ModelMBeanInfoBuilder builder = new ModelMBeanInfoBuilder();
 
-        // ** ATTRIBUTE **
-        // create the attribute descriptor
         Descriptor attDesc = builder.buildAttributeDescriptor( "MyAttribute",
                                                                null,
                                                                "always",

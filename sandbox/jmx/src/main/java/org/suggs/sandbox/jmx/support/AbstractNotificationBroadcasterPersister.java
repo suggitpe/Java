@@ -17,9 +17,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Abstract base class that adds in the functionality to persist notifications before they are broadcasted.
- * 
- * @author suggitpe
- * @version 1.0 29 Feb 2008
  */
 public abstract class AbstractNotificationBroadcasterPersister extends NotificationBroadcasterSupport {
 
@@ -29,41 +26,18 @@ public abstract class AbstractNotificationBroadcasterPersister extends Notificat
     private Connection connection;
     private boolean enable = false;
 
-    /**
-     * Constructs a new instance.
-     * 
-     * @param aConnection
-     *            a database connection
-     */
     public AbstractNotificationBroadcasterPersister( Connection aConnection ) {
         connection = aConnection;
     }
 
-    /**
-     * Accessor to the enable attribute
-     * 
-     * @param aEnable
-     *            whether to enable the persistence or not
-     */
     public void setStorage( boolean aEnable ) {
         enable = aEnable;
     }
 
-    /**
-     * Accessor to the storage flag
-     * 
-     * @return the enable attribute to denote whether to enable storage or not.
-     */
     public boolean getStorage() {
         return enable;
     }
 
-    /**
-     * Really this should use an injected interface to a DAO and thus aggregate this away from this
-     * implementation.
-     * 
-     * @see javax.management.NotificationBroadcasterSupport#sendNotification(javax.management.Notification)
-     */
     @Override
     public void sendNotification( Notification aNotification ) {
         PreparedStatement stmt = null;
