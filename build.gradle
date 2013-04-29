@@ -1,5 +1,8 @@
 allprojects { projects ->
     defaultTasks 'clean', 'build'
+}
+
+subprojects { subprojects ->
 
     apply plugin: 'maven'
     apply plugin: 'java'
@@ -13,9 +16,11 @@ allprojects { projects ->
         mavenLocal()
         mavenCentral()
     }
-}
 
-subprojects { subprojects ->
+    idea.module{
+        downloadSources = true
+    }
+
 
     ext.genDir = "$buildDir/generated-src"
     sourceSets.main.java.srcDirs += genDir
