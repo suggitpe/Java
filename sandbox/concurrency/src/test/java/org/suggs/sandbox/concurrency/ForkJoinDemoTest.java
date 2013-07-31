@@ -15,12 +15,12 @@ public class ForkJoinDemoTest {
     @Test
     public void usesParallelLoadingToPopulateArray() {
 
-        int[] theChuffingArrayToFill = new int[ARRAY_SIZE];
+        int[] theArrayToFill = new int[ARRAY_SIZE];
 
         ForkJoinPool threadPool = new ForkJoinPool();
-        threadPool.invoke(new ArrayFillerTask(0, theChuffingArrayToFill.length, theChuffingArrayToFill));
+        threadPool.invoke(new ArrayFillerTask(0, theArrayToFill.length, theArrayToFill));
 
-        assertThat(theCountOfEmptyBoxesIn(theChuffingArrayToFill), is(ZERO));
+        assertThat(theCountOfEmptyBoxesIn(theArrayToFill), is(ZERO));
     }
 
     private int theCountOfEmptyBoxesIn(int[] aArray) {

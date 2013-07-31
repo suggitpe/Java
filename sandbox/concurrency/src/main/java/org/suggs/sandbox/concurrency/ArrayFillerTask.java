@@ -2,9 +2,6 @@ package org.suggs.sandbox.concurrency;
 
 import java.util.Random;
 import java.util.concurrent.RecursiveAction;
-import java.util.logging.Logger;
-
-import static java.util.Arrays.asList;
 
 public class ArrayFillerTask extends RecursiveAction {
 
@@ -35,8 +32,8 @@ public class ArrayFillerTask extends RecursiveAction {
 
     private void divideAndConquer() {
         int midPointOfTheArray = ((endingPositionOfSubArray - startingPositionOfSubArray) / 2) + startingPositionOfSubArray;
-        invokeAll(asList(new ArrayFillerTask(startingPositionOfSubArray, midPointOfTheArray, theArray),
-                new ArrayFillerTask(midPointOfTheArray, endingPositionOfSubArray, theArray)));
+        invokeAll(new ArrayFillerTask(startingPositionOfSubArray, midPointOfTheArray, theArray),
+                new ArrayFillerTask(midPointOfTheArray, endingPositionOfSubArray, theArray));
     }
 
     private void populateTheArrayPortionWithCrap() {
