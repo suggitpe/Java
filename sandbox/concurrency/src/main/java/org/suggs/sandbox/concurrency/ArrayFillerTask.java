@@ -40,5 +40,6 @@ public class ArrayFillerTask extends RecursiveAction {
         for (int i = startingPositionOfSubArray; i < endingPositionOfSubArray; ++i) {
             theArray[i] = new Random().nextInt();
         }
+
     }
 }
