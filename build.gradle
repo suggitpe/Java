@@ -14,7 +14,6 @@ subprojects { subprojects ->
     apply plugin: 'java'
 
     buildDir = 'target'
-    version = '1.0-SNAPSHOT'
     group = 'org.suggs.sandbox'
 
     repositories {
@@ -22,36 +21,7 @@ subprojects { subprojects ->
         mavenCentral()
     }
 
-    ext.genDir = "$buildDir/generated-src"
-    sourceSets.main.java.srcDirs += genDir
-
-    configurations {
-        xjc
-    }
-
-    task xjc(dependsOn: processResources) {
-        doLast {
-
-            file(genDir).mkdirs()
-
-            ant.taskdef(
-                    name: 'xjc',
-                    classname: 'com.sun.tools.xjc.XJCTask',
-                    classpath: configurations.xjc.asPath)
-
-            sourceSets.main.output.resourcesDir.eachFileMatch(~/.*\.xsd/) { File file ->
-                def fileName = file.name.split("\\.")[0]
-                ant.xjc(destdir: genDir,
-                        schema: "$sourceSets.main.output.resourcesDir/${fileName}.xsd",
-                        binding: "$sourceSets.main.output.resourcesDir/${fileName}.xjb")
-
-            }
-        }
-    }
-
     dependencies {
-        xjc libs.jaxb_xjc
-
         compile libs.slf4jApi
 
         runtime libs.slf4jLog4j,
@@ -83,6 +53,7 @@ project("sandbox:hibernate") {
 
 project("sandbox:jaxb") {
     subprojects {
+        apply from: "$rootDir/gradle/jaxb.gradle"
         compileJava.dependsOn xjc
     }
 }

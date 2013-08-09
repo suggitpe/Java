@@ -1,0 +1,43 @@
+ext.genDir = "$buildDir/generated-src"
+sourceSets.main.java.srcDirs += genDir
+
+configurations {
+    xjc
+}
+
+dependencies {
+    xjc libs.jaxb_xjc
+}
+
+task xjc(dependsOn: processResources) {
+    doLast {
+
+        file(genDir).mkdirs()
+
+        ant.taskdef(
+                name: 'xjc',
+                classname: 'com.sun.tools.xjc.XJCTask',
+                classpath: configurations.xjc.asPath)
+
+        fileTree(dir: sourceSets.main.output.resourcesDir, include: '**/*.xsd').each { schemaFile ->
+            def bindingFile = findMatchingBindingFileFrom(schemaFile)
+            if (bindingFile.exists()) {
+                logger.info("Generating Java from schema ${schemaFile} and binding ${bindingFile}")
+                ant.xjc(destDir: genDir, schema: schemaFile, binding: bindingFile)
+            } else {
+                logger.info("Generating Java from schema ${schemaFile}")
+                ant.xjc(destDir: genDir, schema: schemaFile)
+            }
+        }
+    }
+}
+
+def findMatchingBindingFileFrom(def schemaFile) {
+    def fs = File.separatorChar
+    def bindingFilename = schemaFile.absolutePath
+            .replace("${fs}xsd${fs}", "${fs}xjb${fs}")
+            .replace(".xsd", ".xjb")
+    logger.debug("foo")
+    file(bindingFilename)
+
+}
