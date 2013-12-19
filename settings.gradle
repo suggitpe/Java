@@ -10,6 +10,7 @@ include 'sandbox:guice',
         'sandbox:patterns',
         'sandbox:sandbox',
         'sandbox:spring',
+        'sandbox:spring-integration',
         'sandbox:test',
         'sandbox:tibco'
 

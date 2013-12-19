@@ -100,6 +100,17 @@ project("sandbox:spring") {
     }
 }
 
+project("sandbox:spring-integration") {
+    dependencies {
+        compile libs.spring.integration_core,
+                libs.spring.integration_jms,
+                libs.spring.integration_jpa
+
+        testCompile libs.spring.integration_test
+
+    }
+}
+
 project("sandbox:test") {
     dependencies {
         testCompile libs.test.mtc

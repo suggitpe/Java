@@ -2,6 +2,7 @@ ext {
 
     slf4jVersion = '1.7.2'
     springVersion = '3.2.2.RELEASE'
+    springIntegrationVersion = '3.0.0.RELEASE'
 
 
     libs = [
@@ -36,7 +37,11 @@ ext {
                     context: "org.springframework:spring-context:$springVersion",
                     test: "org.springframework:spring-test:$springVersion",
                     orm: "org.springframework:spring-orm:$springVersion",
-                    jdbc: "org.springframework:spring-jdbc:$springVersion"
+                    jdbc: "org.springframework:spring-jdbc:$springVersion",
+                    integration_core: "org.springframework.integration:spring-integration-core:$springIntegrationVersion",
+                    integration_jms: "org.springframework.integration:spring-integration-jms:$springIntegrationVersion",
+                    integration_jpa: "org.springframework.integration:spring-integration-jpa:$springIntegrationVersion",
+                    integration_test: "org.springframework.integration:spring-integration-test:$springIntegrationVersion"
             ]
 
     ]
