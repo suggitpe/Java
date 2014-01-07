@@ -16,7 +16,7 @@ subprojects { subprojects ->
     group = 'org.suggs.sandbox'
 
     repositories {
-        mavenLocal()
+        jcenter()
         mavenCentral()
     }
 
@@ -126,8 +126,8 @@ project('sandbox:tibco') {
     }
 }
 
-project('sandbox:active-mq'){
-    dependencies{
+project('sandbox:active-mq') {
+    dependencies {
         compile libs.activemq
     }
 }
