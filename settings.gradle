@@ -12,5 +12,6 @@ include 'sandbox:guice',
         'sandbox:spring',
         'sandbox:spring-integration',
         'sandbox:test',
-        'sandbox:tibco'
+        'sandbox:tibco',
+        'sandbox:active-mq'
 

@@ -33,6 +33,7 @@ ext {
             hibernate: [
                     core: 'org.hibernate:hibernate-core:4.2.0.Final'
             ],
+
             spring: [
                     context: "org.springframework:spring-context:$springVersion",
                     test: "org.springframework:spring-test:$springVersion",
