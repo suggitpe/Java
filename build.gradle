@@ -13,7 +13,6 @@ subprojects { subprojects ->
     apply from: "$rootDir/gradle/ide.gradle"
     apply plugin: 'java'
 
-    buildDir = 'target'
     group = 'org.suggs.sandbox'
 
     repositories {
