@@ -2,14 +2,18 @@ package org.suggs.sandbox.activemq;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.suggs.sandbox.activemq.ActiveMqBrokerUtility.createARunningAmqBrokerOnAnyAvailablePort;
-import static org.suggs.sandbox.activemq.ActiveMqBrokerUtility.createAStoppedAmqBrokerOnAnyAvailablePort;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.suggs.sandbox.activemq.ActiveMqBrokerUtility.*;
 
 
 public class ActiveMqBrokerUtilityTest {
 
+    private static final String DESTINATION = "dynamicQueues/DestinationQueue";
     private ActiveMqBrokerUtility activeMqBroker;
     private static final String MESSAGE = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " +
             "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim " +
@@ -29,14 +33,35 @@ public class ActiveMqBrokerUtilityTest {
     }
 
     @Test
-    public void doesNotThrowExceptionWhenUnstartedServiceIsStopped() throws Exception {
-        ActiveMqBrokerUtility amqBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
-        amqBroker.stopTheRunningAmqBroker();
+    public void createsAStoppedBroker() throws Exception {
+        ActiveMqBrokerUtility stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
+        assertThat(stoppedBroker.isBrokerRunning(), is(false));
+    }
+
+    @Test
+    public void doesNotThrowAnExceptionWhenAttemptingToStopAStoppedBroker() throws Exception {
+        ActiveMqBrokerUtility stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
+        stoppedBroker.stopTheRunningAmqBroker();
     }
 
     @Test
     public void createsARunningBroker() throws Exception {
-        ActiveMqBrokerUtility amqBroker = createARunningAmqBrokerOnAnyAvailablePort();
-        amqBroker.stopTheRunningAmqBroker();
+        assertThat(activeMqBroker.isBrokerRunning(), is(true));
+    }
+
+    @Ignore
+    @Test
+    public void connectsToAnAlreadyRunningBroker() throws Exception {
+        ActiveMqBrokerUtility otherBroker = connectToAnExistingBrokerOn(activeMqBroker.getBrokerUrl());
+        assertThat(otherBroker.isBrokerRunning(), is(true));
+        assertThat(activeMqBroker.isBrokerRunning(), is(true));
+        assertThat(otherBroker.getBrokerUrl(), equalTo(activeMqBroker.getBrokerUrl()));
+    }
+
+    @Test
+    public void readsAndWritesMessagesToADestinmation() throws Exception {
+        activeMqBroker.withDestination(DESTINATION).writeMessage(MESSAGE);
+        String theReadMessage = activeMqBroker.withDestination(DESTINATION).readMessage();
+        assertThat(theReadMessage, is(equalTo(MESSAGE)));
     }
 }

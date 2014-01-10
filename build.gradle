@@ -1,5 +1,10 @@
 allprojects { projects ->
+    apply plugin: 'idea'
     defaultTasks 'clean', 'build'
+
+    idea.module {
+        downloadSources = true
+    }
 }
 
 task wrapper(type: Wrapper) {

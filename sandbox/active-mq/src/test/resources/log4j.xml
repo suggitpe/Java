@@ -12,8 +12,8 @@
         </layout>
     </appender>
 
-    <category name="org.springframework">
-        <priority value="info"/>
+    <category name="org.apache.activemq">
+        <priority value="warn"/>
     </category>
 
     <root>

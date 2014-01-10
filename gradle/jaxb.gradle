@@ -39,5 +39,4 @@ def findMatchingBindingFileFrom(def schemaFile) {
             .replace(".xsd", ".xjb")
     logger.debug("foo")
     file(bindingFilename)
-
 }
