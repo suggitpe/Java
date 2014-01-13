@@ -12,7 +12,7 @@ import java.util.Hashtable;
 
 import static org.suggs.sandbox.activemq.SocketFinder.findNextAvailablePortBetween;
 
-public class ActiveMqBrokerUtility {
+public class ActiveMqBrokerUtility implements BrokerUtility {
 
     public static final int ONE_MEGABYTE = 1024 * 1024 * 8;
     private static final Logger LOG = LoggerFactory.getLogger(ActiveMqBrokerUtility.class);
@@ -24,15 +24,15 @@ public class ActiveMqBrokerUtility {
     private final String brokerUrl;
     private BrokerService brokerService;
 
-    public static ActiveMqBrokerUtility createAStoppedAmqBrokerOnAnyAvailablePort() throws Exception {
+    public static BrokerUtility createAStoppedAmqBrokerOnAnyAvailablePort() throws Exception {
         return new ActiveMqBrokerUtility(DEFAULT_HOST + findNextAvailablePortBetween(DEFAULT_PORT, MAX_PORT_NUMBER));
     }
 
-    public static ActiveMqBrokerUtility createARunningAmqBrokerOnAnyAvailablePort() throws Exception {
+    public static BrokerUtility createARunningAmqBrokerOnAnyAvailablePort() throws Exception {
         return createAStoppedAmqBrokerOnAnyAvailablePort().startBroker();
     }
 
-    public static ActiveMqBrokerUtility connectToAnExistingBrokerOn(String aBrokerUrl) throws Exception {
+    public static BrokerUtility connectToAnExistingBrokerOn(String aBrokerUrl) throws Exception {
         return new ActiveMqBrokerUtility(aBrokerUrl);
     }
 

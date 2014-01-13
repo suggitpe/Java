@@ -14,7 +14,7 @@ import static org.suggs.sandbox.activemq.ActiveMqBrokerUtility.*;
 public class ActiveMqBrokerUtilityTest {
 
     private static final String DESTINATION = "dynamicQueues/DestinationQueue";
-    private ActiveMqBrokerUtility activeMqBroker;
+    private BrokerUtility activeMqBroker;
     private static final String MESSAGE = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " +
             "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim " +
             "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
@@ -34,13 +34,13 @@ public class ActiveMqBrokerUtilityTest {
 
     @Test
     public void createsAStoppedBroker() throws Exception {
-        ActiveMqBrokerUtility stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
+        BrokerUtility stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
         assertThat(stoppedBroker.isBrokerRunning(), is(false));
     }
 
     @Test
     public void doesNotThrowAnExceptionWhenAttemptingToStopAStoppedBroker() throws Exception {
-        ActiveMqBrokerUtility stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
+        BrokerUtility stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
         stoppedBroker.stopTheRunningAmqBroker();
     }
 
@@ -52,7 +52,7 @@ public class ActiveMqBrokerUtilityTest {
     @Ignore
     @Test
     public void connectsToAnAlreadyRunningBroker() throws Exception {
-        ActiveMqBrokerUtility otherBroker = connectToAnExistingBrokerOn(activeMqBroker.getBrokerUrl());
+        BrokerUtility otherBroker = connectToAnExistingBrokerOn(activeMqBroker.getBrokerUrl());
         assertThat(otherBroker.isBrokerRunning(), is(true));
         assertThat(activeMqBroker.isBrokerRunning(), is(true));
         assertThat(otherBroker.getBrokerUrl(), equalTo(activeMqBroker.getBrokerUrl()));
