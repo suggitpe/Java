@@ -14,8 +14,6 @@ import javax.persistence.*;
 @SuppressWarnings("unused")
 public class CoreEntity extends EntityBase {
 
-    private static final long serialVersionUID = 4104349939216946228L;
-
     @Column(name = "SOME_TEXT", nullable = false, length = 255)
     private String someText;
 

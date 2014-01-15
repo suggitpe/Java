@@ -14,8 +14,6 @@ import javax.persistence.*;
 @SuppressWarnings("unused")
 public class OneToOneEntity extends EntityBase {
 
-    private static final long serialVersionUID = 1508093850397301800L;
-
     @Column(name = "data", length = 64)
     private String data;
 

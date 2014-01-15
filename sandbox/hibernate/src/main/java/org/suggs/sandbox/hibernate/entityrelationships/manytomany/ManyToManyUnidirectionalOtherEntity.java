@@ -17,8 +17,6 @@ import javax.persistence.Table;
 @SuppressWarnings("unused")
 public class ManyToManyUnidirectionalOtherEntity extends EntityBase {
 
-    private static final long serialVersionUID = 3433617405071711428L;
-
     @Column(name = "OTHER_DATA", length = 64)
     private String otherData;
 

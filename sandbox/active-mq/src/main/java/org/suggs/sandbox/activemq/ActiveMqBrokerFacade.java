@@ -40,7 +40,7 @@ public class ActiveMqBrokerFacade implements BrokerFacade {
 
     private ActiveMqBrokerFacade(String aBrokerUrl) throws Exception {
         brokerUrl = aBrokerUrl;
-        LOG.debug("Connected to AMQ broker on [" + brokerUrl + "]");
+        LOG.debug("Connected to AMQ broker on [{}]", brokerUrl);
     }
 
     public String getBrokerUrl() {

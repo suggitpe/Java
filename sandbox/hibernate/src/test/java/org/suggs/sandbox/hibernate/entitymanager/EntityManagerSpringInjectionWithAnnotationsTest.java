@@ -61,7 +61,7 @@ public class EntityManagerSpringInjectionWithAnnotationsTest {
         ReallyBasicEntity entity = new ReallyBasicEntity("foo", TEST_INT, Calendar.getInstance()
                 .getTime());
         entityManager.persist(entity);
-        LOG.debug("Entity persisted with ID [" + entity.getId() + "]");
+        LOG.debug("Entity persisted with ID [{}]", entity.getId());
         ID = entity.getId();
     }
 
@@ -70,7 +70,7 @@ public class EntityManagerSpringInjectionWithAnnotationsTest {
         if (ID == null) {
             throw new IllegalArgumentException("Expecting ID to have been populated prior to this test execution");
         }
-        LOG.debug("Single Update operation with ID [" + ID + "]");
+        LOG.debug("Single Update operation with ID [{}]", ID);
         ReallyBasicEntity entity = entityManager.find(ReallyBasicEntity.class, ID);
         entity.setSomeString("oooaaarrrggghhh");
     }

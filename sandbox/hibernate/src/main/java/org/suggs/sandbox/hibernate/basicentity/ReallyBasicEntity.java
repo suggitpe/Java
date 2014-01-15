@@ -24,10 +24,6 @@ import java.util.Date;
 @SuppressWarnings("unused")
 public class ReallyBasicEntity extends EntityBase {
 
-    private static final long serialVersionUID = 3654518492764839027L;
-
-    private static final Logger LOG = LoggerFactory.getLogger(ReallyBasicEntity.class);
-
     @Column(name = "SOME_STRING", length = 50)
     private String someString;
 

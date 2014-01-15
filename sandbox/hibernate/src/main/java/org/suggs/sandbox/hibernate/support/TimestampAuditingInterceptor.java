@@ -19,7 +19,6 @@ import java.util.Calendar;
  */
 public class TimestampAuditingInterceptor extends EmptyInterceptor {
 
-    private static final long serialVersionUID = 4974715372205680154L;
     private static final Logger LOG = LoggerFactory.getLogger(TimestampAuditingInterceptor.class);
     private static final String AUDIT_PROPERTY_NAME = "timestampAuditInfo";
 
@@ -39,7 +38,7 @@ public class TimestampAuditingInterceptor extends EmptyInterceptor {
         }
         Timestamp date = getDateTimeNow();
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Auditing (onFlushDirty) existing entity with update date of [" + date + "]");
+            LOG.debug("Auditing (onFlushDirty) existing entity with update date of [{}]", date);
         }
         updateDateProperty(aCurrentState, aPropertyNames, AUDIT_TYPE.UPDATED_ON, date);
         return true;

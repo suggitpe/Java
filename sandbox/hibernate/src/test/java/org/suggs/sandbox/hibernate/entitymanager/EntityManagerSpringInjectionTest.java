@@ -74,7 +74,7 @@ public class EntityManagerSpringInjectionTest {
         entityManager.getTransaction().begin();
         Query q = entityManager.createQuery("from ReallyBasicEntity");
         Collection<?> result = q.getResultList();
-        LOG.debug("Deleting [" + result.size() + "] entries from ReallyBasicEntity");
+        LOG.debug("Deleting [{}] entries from ReallyBasicEntity", result.size());
         for (Object e : result) {
             LOG.debug(e.toString());
             entityManager.remove(e);

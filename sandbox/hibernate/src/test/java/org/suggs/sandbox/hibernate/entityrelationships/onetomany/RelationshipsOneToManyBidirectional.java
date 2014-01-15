@@ -19,9 +19,6 @@ import org.hibernate.Session;
 @ContextConfiguration(locations = { "classpath:xml/ut-relationships-onetomany-bidirectional.xml" })
 public class RelationshipsOneToManyBidirectional extends AbstractSimpleHibernateIntegrationTest<Long, OneToManyBidirectionalEntity> {
 
-    @SuppressWarnings("unused")
-    private static final Logger LOG = LoggerFactory.getLogger( RelationshipsOneToManyBidirectional.class );
-
     private static final String WHERE_CLAUSE = "data in ('Some data', 'Updated data')";
     private static final String TEST_HQL = "from OneToManyBidirectionalEntity where " + WHERE_CLAUSE;
 

@@ -15,8 +15,6 @@ import java.io.Serializable;
 @SuppressWarnings("unused")
 public class EntityObject implements Serializable {
 
-    private static final long serialVersionUID = 4390402943883172225L;
-
     @Id
     private EntityKey key;
 

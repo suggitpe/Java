@@ -19,11 +19,11 @@ public class JmsPersistenceFacade {
         initialContext = anInitialContext;
         connectionFactory = (QueueConnectionFactory) initialContext.lookup("ConnectionFactory");
         destination = (Destination) initialContext.lookup(aDestinationName);
-        LOG.debug("Created JMS Utility against [" + destination + "]");
+        LOG.debug("Created JMS Utility against [{}]", destination);
     }
 
     public void writeMessage(final String aMessage) {
-        LOG.debug("Writing message [" + aMessage + "] to [" + destination.toString() + "]");
+        LOG.debug("Writing message [{}] to [{}]", aMessage, destination);
         runCallBackInSession(new JmsCallback() {
             @Override
             public void runInSession(Session aSession) {
@@ -41,7 +41,7 @@ public class JmsPersistenceFacade {
     }
 
     public String readMessage() {
-        LOG.debug("Reading message from [" + destination + "]");
+        LOG.debug("Reading message from [{}]", destination);
         final StringBuffer buffer = new StringBuffer();
         runCallBackInSession(new JmsCallback() {
             @Override

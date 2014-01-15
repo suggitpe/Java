@@ -16,8 +16,6 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public class OneToManyBidirectionalEntity extends EntityBase {
 
-    private static final long serialVersionUID = 7473160465608010893L;
-
     @Column(name = "data", length = 64)
     private String data;
 

@@ -16,8 +16,6 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public class ManyToManyUnidirectionalEntity extends EntityBase {
 
-    private static final long serialVersionUID = 7068247834908660250L;
-
     @Column(name = "DATA", length = 64)
     private String data;
 

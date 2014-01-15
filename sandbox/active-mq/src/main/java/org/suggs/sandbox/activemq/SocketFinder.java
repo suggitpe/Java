@@ -18,8 +18,7 @@ public class SocketFinder {
                 return port;
             }
         }
-        throw new IllegalStateException("Unable to find an available port between ["
-                + lowerPort + "] and [" + higherPort + "]");
+        throw new IllegalStateException("Unable to find an available port between [" + lowerPort + "] and [" + higherPort + "]");
     }
 
     private static boolean isPortAvailable(int port) {

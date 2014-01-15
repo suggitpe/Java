@@ -40,9 +40,9 @@ public class NullSafeRestrictionsTest {
     @SuppressWarnings("boxing")
     @Test
     public void bothImplementationsHaveTheSameNumberOfMethods() {
-        LOG.debug("Test that both implementations have the same number of methods. Restrictions=["
-                + RESTRICTIONS_METHODS.length + "] NullsafeRestrictions=["
-                + NULLSAFERESTRICTIONS_METHODS.length + "]");
+        LOG.debug("Test that both implementations have the same number of methods. Restrictions=[{}] NullsafeRestrictions=[{}]",
+                RESTRICTIONS_METHODS.length,
+                NULLSAFERESTRICTIONS_METHODS.length);
         assertThat(RESTRICTIONS_METHODS.length, equalTo(NULLSAFERESTRICTIONS_METHODS.length));
     }
 

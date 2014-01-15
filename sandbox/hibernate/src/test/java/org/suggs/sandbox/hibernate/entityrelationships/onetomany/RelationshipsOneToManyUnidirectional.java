@@ -80,10 +80,10 @@ public class RelationshipsOneToManyUnidirectional extends AbstractSimpleHibernat
         OneToManyUnidirectionalOtherEntity resEnt = res.iterator().next();
         OneToManyUnidirectionalOtherEntity expEnt = exp.iterator().next();
 
-        LOG.debug( "act contains actEnt = " + exp.contains( expEnt ) ); // false
-        LOG.debug( "act contains resEnt = " + exp.contains( resEnt ) ); // false
-        LOG.debug( "res contains actEnt = " + res.contains( expEnt ) ); // true
-        LOG.debug( "res contains resEnt = " + res.contains( resEnt ) ); // true
+        LOG.debug( "act contains actEnt = {}", exp.contains( expEnt ) ); // false
+        LOG.debug( "act contains resEnt = {}", exp.contains( resEnt ) ); // false
+        LOG.debug( "res contains actEnt = {}", res.contains( expEnt ) ); // true
+        LOG.debug( "res contains resEnt = {}", res.contains( resEnt ) ); // true
 
         // get in debug and do a persistent set diff on them both
 
