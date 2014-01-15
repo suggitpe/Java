@@ -8,13 +8,13 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.suggs.sandbox.activemq.ActiveMqBrokerUtility.*;
+import static org.suggs.sandbox.activemq.ActiveMqBrokerFacade.*;
 
 
-public class ActiveMqBrokerUtilityTest {
+public class ActiveMqBrokerFacadeTest {
 
     private static final String DESTINATION = "dynamicQueues/DestinationQueue";
-    private BrokerUtility activeMqBroker;
+    private BrokerFacade activeMqBroker;
     private static final String MESSAGE = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " +
             "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim " +
             "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
@@ -34,13 +34,13 @@ public class ActiveMqBrokerUtilityTest {
 
     @Test
     public void createsAStoppedBroker() throws Exception {
-        BrokerUtility stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
+        BrokerFacade stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
         assertThat(stoppedBroker.isBrokerRunning(), is(false));
     }
 
     @Test
     public void doesNotThrowAnExceptionWhenAttemptingToStopAStoppedBroker() throws Exception {
-        BrokerUtility stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
+        BrokerFacade stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
         stoppedBroker.stopTheRunningAmqBroker();
     }
 
@@ -52,7 +52,7 @@ public class ActiveMqBrokerUtilityTest {
     @Ignore
     @Test
     public void connectsToAnAlreadyRunningBroker() throws Exception {
-        BrokerUtility otherBroker = connectToAnExistingBrokerOn(activeMqBroker.getBrokerUrl());
+        BrokerFacade otherBroker = connectToAnExistingBrokerOn(activeMqBroker.getBrokerUrl());
         assertThat(otherBroker.isBrokerRunning(), is(true));
         assertThat(activeMqBroker.isBrokerRunning(), is(true));
         assertThat(otherBroker.getBrokerUrl(), equalTo(activeMqBroker.getBrokerUrl()));

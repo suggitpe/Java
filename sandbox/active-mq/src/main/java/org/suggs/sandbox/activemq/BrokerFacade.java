@@ -1,8 +1,8 @@
 package org.suggs.sandbox.activemq;
 
-public interface BrokerUtility {
+public interface BrokerFacade {
 
-    JmsUtility withDestination(String destination) throws Exception;
+    JmsPersistenceFacade withDestination(String destination) throws Exception;
 
     void stopTheRunningAmqBroker() throws Exception;
 
@@ -10,5 +10,5 @@ public interface BrokerUtility {
 
     String getBrokerUrl();
 
-    BrokerUtility startBroker() throws Exception;
+    BrokerFacade startBroker() throws Exception;
 }

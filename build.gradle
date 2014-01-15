@@ -28,8 +28,7 @@ subprojects { subprojects ->
     dependencies {
         compile libs.slf4jApi
 
-        runtime libs.slf4jLog4j,
-                libs.log4j
+        runtime libs.logback
 
         testCompile libs.test.junit,
                 libs.test.mockito

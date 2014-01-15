@@ -12,10 +12,10 @@ import java.util.Hashtable;
 
 import static org.suggs.sandbox.activemq.SocketFinder.findNextAvailablePortBetween;
 
-public class ActiveMqBrokerUtility implements BrokerUtility {
+public class ActiveMqBrokerFacade implements BrokerFacade {
 
     public static final int ONE_MEGABYTE = 1024 * 1024 * 8;
-    private static final Logger LOG = LoggerFactory.getLogger(ActiveMqBrokerUtility.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ActiveMqBrokerFacade.class);
 
     private static final int DEFAULT_PORT = 61616;
     private static final int MAX_PORT_NUMBER = 70000;
@@ -24,16 +24,16 @@ public class ActiveMqBrokerUtility implements BrokerUtility {
     private final String brokerUrl;
     private BrokerService brokerService;
 
-    public static BrokerUtility createAStoppedAmqBrokerOnAnyAvailablePort() throws Exception {
-        return new ActiveMqBrokerUtility(DEFAULT_HOST + findNextAvailablePortBetween(DEFAULT_PORT, MAX_PORT_NUMBER));
+    public static BrokerFacade createAStoppedAmqBrokerOnAnyAvailablePort() throws Exception {
+        return new ActiveMqBrokerFacade(DEFAULT_HOST + findNextAvailablePortBetween(DEFAULT_PORT, MAX_PORT_NUMBER));
     }
 
-    public static BrokerUtility createARunningAmqBrokerOnAnyAvailablePort() throws Exception {
+    public static BrokerFacade createARunningAmqBrokerOnAnyAvailablePort() throws Exception {
         return createAStoppedAmqBrokerOnAnyAvailablePort().startBroker();
     }
 
-    public static BrokerUtility connectToAnExistingBrokerOn(String aBrokerUrl) throws Exception {
-        return new ActiveMqBrokerUtility(aBrokerUrl);
+    public static BrokerFacade connectToAnExistingBrokerOn(String aBrokerUrl) throws Exception {
+        return new ActiveMqBrokerFacade(aBrokerUrl);
     }
 
     public String getBrokerUrl() {
@@ -44,7 +44,7 @@ public class ActiveMqBrokerUtility implements BrokerUtility {
         return brokerService.isStarted();
     }
 
-    private ActiveMqBrokerUtility(String aBrokerUrl) throws Exception {
+    private ActiveMqBrokerFacade(String aBrokerUrl) throws Exception {
         brokerUrl = aBrokerUrl;
         buildBroker();
         LOG.debug("Connected to AMQ broker on [" + brokerUrl + "]");
@@ -60,7 +60,7 @@ public class ActiveMqBrokerUtility implements BrokerUtility {
         systemUsage.getTempUsage().setLimit(ONE_MEGABYTE);
     }
 
-    public ActiveMqBrokerUtility startBroker() throws Exception {
+    public ActiveMqBrokerFacade startBroker() throws Exception {
         LOG.debug("Starting broker...");
         brokerService.start();
         return this;
@@ -74,8 +74,8 @@ public class ActiveMqBrokerUtility implements BrokerUtility {
         brokerService.waitUntilStopped();
     }
 
-    public JmsUtility withDestination(String destination) throws Exception {
-        return new JmsUtility(createJndiContext(), destination);
+    public JmsPersistenceFacade withDestination(String destination) throws Exception {
+        return new JmsPersistenceFacade(createJndiContext(), destination);
     }
 
     private Context createJndiContext() throws NamingException {

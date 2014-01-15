@@ -1,15 +1,21 @@
 package org.suggs.sandbox.activemq;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 
 public class SocketFinder {
 
+    private static final Logger LOG = LoggerFactory.getLogger(SocketFinder.class);
+
     public static int findNextAvailablePortBetween(int lowerPort, int higherPort) throws IOException {
-        for (int i = lowerPort; i < higherPort; i++) {
-            if (isPortAvailable(i)) {
-                return i;
+        for (int port = lowerPort; port < higherPort; port++) {
+            if (isPortAvailable(port)) {
+                LOG.debug("Found that port {} is free", port);
+                return port;
             }
         }
         throw new IllegalStateException("Unable to find an available port between ["
