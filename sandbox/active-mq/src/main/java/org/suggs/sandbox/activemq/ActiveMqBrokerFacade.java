@@ -25,15 +25,22 @@ public class ActiveMqBrokerFacade implements BrokerFacade {
     private BrokerService brokerService;
 
     public static BrokerFacade createAStoppedAmqBrokerOnAnyAvailablePort() throws Exception {
-        return new ActiveMqBrokerFacade(DEFAULT_HOST + findNextAvailablePortBetween(DEFAULT_PORT, MAX_PORT_NUMBER));
+        ActiveMqBrokerFacade activeMqBrokerFacade = new ActiveMqBrokerFacade(DEFAULT_HOST + findNextAvailablePortBetween(DEFAULT_PORT, MAX_PORT_NUMBER));
+        activeMqBrokerFacade.buildAStoppedBroker();
+        return activeMqBrokerFacade;
     }
 
     public static BrokerFacade createARunningAmqBrokerOnAnyAvailablePort() throws Exception {
         return createAStoppedAmqBrokerOnAnyAvailablePort().startBroker();
     }
 
-    public static BrokerFacade connectToAnExistingBrokerOn(String aBrokerUrl) throws Exception {
+    public static BrokerFacade bindToAnExistingBrokerOn(String aBrokerUrl) throws Exception {
         return new ActiveMqBrokerFacade(aBrokerUrl);
+    }
+
+    private ActiveMqBrokerFacade(String aBrokerUrl) throws Exception {
+        brokerUrl = aBrokerUrl;
+        LOG.debug("Connected to AMQ broker on [" + brokerUrl + "]");
     }
 
     public String getBrokerUrl() {
@@ -44,13 +51,7 @@ public class ActiveMqBrokerFacade implements BrokerFacade {
         return brokerService.isStarted();
     }
 
-    private ActiveMqBrokerFacade(String aBrokerUrl) throws Exception {
-        brokerUrl = aBrokerUrl;
-        buildBroker();
-        LOG.debug("Connected to AMQ broker on [" + brokerUrl + "]");
-    }
-
-    private void buildBroker() throws Exception {
+    private void buildAStoppedBroker() throws Exception {
         brokerService = new BrokerService();
         brokerService.addConnector(brokerUrl);
         brokerService.setPersistent(false);
