@@ -24,12 +24,12 @@ public class JmsPersistenceFacade {
 
     public void writeMessage(final String aMessage) {
         LOG.debug("Writing message [{}] to [{}]", aMessage, destination);
-        runCallBackInSession(aSession -> {
+        runCallBackInSession(session -> {
             MessageProducer producer = null;
             try {
-                producer = aSession.createProducer(destination);
-                producer.send(aSession.createTextMessage(aMessage));
-                aSession.commit();
+                producer = session.createProducer(destination);
+                producer.send(session.createTextMessage(aMessage));
+                session.commit();
                 producer.close();
             } catch (JMSException jmse) {
                 throw new IllegalStateException("Failed to send message to JMS broker", jmse);
@@ -40,9 +40,9 @@ public class JmsPersistenceFacade {
     public String readMessage() {
         LOG.debug("Reading message from [{}]", destination);
         StringBuffer buffer = new StringBuffer();
-        runCallBackInSession(aSession -> {
+        runCallBackInSession(session -> {
             try {
-                MessageConsumer consumer = aSession.createConsumer(destination);
+                MessageConsumer consumer = session.createConsumer(destination);
                 String message = extractTextFromMessage(consumer.receiveNoWait());
                 buffer.append(message);
                 consumer.close();
