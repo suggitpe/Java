@@ -2,6 +2,7 @@ package org.suggs.sandbox.activemq;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -49,6 +50,7 @@ public class ActiveMqBrokerFacadeTest {
     }
 
     @Test
+    @Ignore
     public void connectsToAnAlreadyRunningBroker() throws Exception {
         BrokerFacade otherBroker = bindToAnExistingBrokerOn(activeMqBroker.getBrokerUrl());
         assertThat(otherBroker.isBrokerRunning(), is(true));

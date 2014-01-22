@@ -24,36 +24,30 @@ public class JmsPersistenceFacade {
 
     public void writeMessage(final String aMessage) {
         LOG.debug("Writing message [{}] to [{}]", aMessage, destination);
-        runCallBackInSession(new JmsCallback() {
-            @Override
-            public void runInSession(Session aSession) {
-                MessageProducer producer = null;
-                try {
-                    producer = aSession.createProducer(destination);
-                    producer.send(aSession.createTextMessage(aMessage));
-                    aSession.commit();
-                    producer.close();
-                } catch (JMSException jmse) {
-                    throw new IllegalStateException("Failed to send message to JMS broker", jmse);
-                }
+        runCallBackInSession(aSession -> {
+            MessageProducer producer = null;
+            try {
+                producer = aSession.createProducer(destination);
+                producer.send(aSession.createTextMessage(aMessage));
+                aSession.commit();
+                producer.close();
+            } catch (JMSException jmse) {
+                throw new IllegalStateException("Failed to send message to JMS broker", jmse);
             }
         });
     }
 
     public String readMessage() {
         LOG.debug("Reading message from [{}]", destination);
-        final StringBuffer buffer = new StringBuffer();
-        runCallBackInSession(new JmsCallback() {
-            @Override
-            public void runInSession(Session aSession) {
-                try {
-                    MessageConsumer consumer = aSession.createConsumer(destination);
-                    String message = extractTextFromMessage(consumer.receiveNoWait());
-                    buffer.append(message);
-                    consumer.close();
-                } catch (JMSException e) {
-                    throw new IllegalStateException("Failed to consume message from JMS broker");
-                }
+        StringBuffer buffer = new StringBuffer();
+        runCallBackInSession(aSession -> {
+            try {
+                MessageConsumer consumer = aSession.createConsumer(destination);
+                String message = extractTextFromMessage(consumer.receiveNoWait());
+                buffer.append(message);
+                consumer.close();
+            } catch (JMSException e) {
+                throw new IllegalStateException("Failed to consume message from JMS broker");
             }
         });
         return buffer.toString();
@@ -80,6 +74,7 @@ public class JmsPersistenceFacade {
         }
     }
 
+    @FunctionalInterface
     private interface JmsCallback {
         void runInSession(Session aSession);
     }
