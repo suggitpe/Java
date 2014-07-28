@@ -67,7 +67,7 @@ public class ActiveMqBrokerFacade implements BrokerFacade {
         return this;
     }
 
-    public void stopTheRunningAmqBroker() throws Exception {
+    public void stopTheRunningBroker() throws Exception {
         if (brokerService == null) {
             return;
         }

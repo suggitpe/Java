@@ -4,7 +4,7 @@ public interface BrokerFacade {
 
     JmsPersistenceFacade withDestination(String destination) throws Exception;
 
-    void stopTheRunningAmqBroker() throws Exception;
+    void stopTheRunningBroker() throws Exception;
 
     boolean isBrokerRunning() throws Exception;
 

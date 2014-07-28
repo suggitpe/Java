@@ -29,7 +29,7 @@ public class ActiveMqBrokerFacadeTest {
 
     @After
     public void tearDown() throws Exception {
-        activeMqBroker.stopTheRunningAmqBroker();
+        activeMqBroker.stopTheRunningBroker();
     }
 
     @Test
@@ -41,7 +41,7 @@ public class ActiveMqBrokerFacadeTest {
     @Test
     public void doesNotThrowAnExceptionWhenAttemptingToStopAStoppedBroker() throws Exception {
         BrokerFacade stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
-        stoppedBroker.stopTheRunningAmqBroker();
+        stoppedBroker.stopTheRunningBroker();
     }
 
     @Test
