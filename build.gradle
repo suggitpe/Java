@@ -20,6 +20,8 @@ subprojects { subprojects ->
 
     group = 'org.suggs.sandbox'
 
+    sourceCompatibility = 1.8
+
     repositories {
         jcenter()
         mavenCentral()
@@ -31,7 +33,8 @@ subprojects { subprojects ->
         runtime libs.logback
 
         testCompile libs.test.junit,
-                libs.test.mockito
+                libs.test.mockito,
+                libs.test.assertj
     }
 }
 
