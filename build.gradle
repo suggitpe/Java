@@ -9,7 +9,7 @@ allprojects { projects ->
 
 task wrapper(type: Wrapper) {
     description = 'Generates gradlew scripts for NIX and win envs'
-    gradleVersion = '1.10'
+    gradleVersion = '2.1'
 }
 
 subprojects { subprojects ->
