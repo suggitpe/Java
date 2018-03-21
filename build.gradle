@@ -7,10 +7,7 @@ allprojects { projects ->
     }
 }
 
-task wrapper(type: Wrapper) {
-    description = 'Generates gradlew scripts for NIX and win envs'
-    gradleVersion = '4.5.1'
-}
+
 
 subprojects { subprojects ->
 
@@ -36,6 +33,11 @@ subprojects { subprojects ->
                 libs.test.mockito,
                 libs.test.assertj
     }
+}
+
+task wrapper(type: Wrapper) {
+    description = 'Generates gradlew scripts for NIX and win envs'
+    gradleVersion = '4.5.1'
 }
 
 project('sandbox:guice') {
