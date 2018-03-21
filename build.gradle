@@ -1,18 +1,10 @@
 allprojects { projects ->
-    apply plugin: 'idea'
     defaultTasks 'clean', 'build'
-
-    idea.module {
-        downloadSources = true
-    }
 }
-
-
 
 subprojects { subprojects ->
 
     apply from: "$rootDir/gradle/libraries.gradle"
-    apply from: "$rootDir/gradle/ide.gradle"
     apply plugin: 'java'
 
     group = 'org.suggs.sandbox'
