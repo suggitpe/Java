@@ -75,7 +75,7 @@ public class ActiveMqBrokerFacade implements BrokerFacade {
         brokerService.waitUntilStopped();
     }
 
-    public JmsPersistenceFacade withDestination(String destination) throws Exception {
+    public JmsPersistenceFacade forDestination(String destination) throws Exception {
         return new JmsPersistenceFacade(createJndiContext(), destination);
     }
 

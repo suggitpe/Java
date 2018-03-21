@@ -5,9 +5,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.suggs.sandbox.activemq.ActiveMqBrokerFacade.*;
 
 
@@ -35,7 +33,7 @@ public class ActiveMqBrokerFacadeTest {
     @Test
     public void createsAStoppedBroker() throws Exception {
         BrokerFacade stoppedBroker = createAStoppedAmqBrokerOnAnyAvailablePort();
-        assertThat(stoppedBroker.isBrokerRunning(), is(false));
+        assertThat(stoppedBroker.isBrokerRunning()).isFalse();
     }
 
     @Test
@@ -46,22 +44,22 @@ public class ActiveMqBrokerFacadeTest {
 
     @Test
     public void createsARunningBroker() throws Exception {
-        assertThat(activeMqBroker.isBrokerRunning(), is(true));
+        assertThat(activeMqBroker.isBrokerRunning()).isTrue();
     }
 
     @Test
     @Ignore
     public void connectsToAnAlreadyRunningBroker() throws Exception {
         BrokerFacade otherBroker = bindToAnExistingBrokerOn(activeMqBroker.getBrokerUrl());
-        assertThat(otherBroker.isBrokerRunning(), is(true));
-        assertThat(activeMqBroker.isBrokerRunning(), is(true));
-        assertThat(otherBroker.getBrokerUrl(), equalTo(activeMqBroker.getBrokerUrl()));
+        assertThat(otherBroker.isBrokerRunning()).isTrue();
+        assertThat(activeMqBroker.isBrokerRunning()).isTrue();
+        assertThat(otherBroker.getBrokerUrl()).isEqualTo(activeMqBroker.getBrokerUrl());
     }
 
     @Test
     public void readsAndWritesMessagesToADestinmation() throws Exception {
-        activeMqBroker.withDestination(DESTINATION).writeMessage(MESSAGE);
-        String theReadMessage = activeMqBroker.withDestination(DESTINATION).readMessage();
-        assertThat(theReadMessage, is(equalTo(MESSAGE)));
+        activeMqBroker.forDestination(DESTINATION).sendMessage(MESSAGE);
+        String theReadMessage = activeMqBroker.forDestination(DESTINATION).readMessage();
+        assertThat(theReadMessage).isEqualTo(MESSAGE);
     }
 }

@@ -22,7 +22,7 @@ public class JmsPersistenceFacade {
         LOG.debug("Created JMS Utility against [{}]", destination);
     }
 
-    public void writeMessage(final String aMessage) {
+    public void sendMessage(final String aMessage) throws JMSException {
         LOG.debug("Writing message [{}] to [{}]", aMessage, destination);
         runCallBackInSession(session -> {
             MessageProducer producer = null;
@@ -37,7 +37,7 @@ public class JmsPersistenceFacade {
         });
     }
 
-    public String readMessage() {
+    public String readMessage() throws JMSException {
         LOG.debug("Reading message from [{}]", destination);
         StringBuffer buffer = new StringBuffer();
         runCallBackInSession(session -> {
@@ -61,16 +61,28 @@ public class JmsPersistenceFacade {
         throw new IllegalStateException("No valid message received");
     }
 
-    private void runCallBackInSession(JmsCallback aCallback) {
+    private void runCallBackInSession(JmsCallback aCallback) throws JMSException {
+        Connection connection = null;
         try {
-            Connection connection = connectionFactory.createConnection();
+            connection = connectionFactory.createConnection();
             connection.start();
-            Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
+            executeInConnection(aCallback, connection);
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
+
+    private void executeInConnection(JmsCallback aCallback, Connection connection) throws JMSException {
+        Session session = null;
+        try {
+            session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
             aCallback.runInSession(session);
-            session.close();
-            connection.close();
-        } catch (JMSException jmse) {
-            throw new IllegalStateException("Issues when trying to execute against JMS broker", jmse);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 

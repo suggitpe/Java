@@ -2,7 +2,7 @@ package org.suggs.sandbox.activemq;
 
 public interface BrokerFacade {
 
-    JmsPersistenceFacade withDestination(String destination) throws Exception;
+    JmsPersistenceFacade forDestination(String destination) throws Exception;
 
     void stopTheRunningBroker() throws Exception;
 
