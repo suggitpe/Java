@@ -21,10 +21,10 @@ ext {
             activemq: 'org.apache.activemq:activemq-all:5.10.0',
 
             test: [
-                    junit: 'junit:junit:4.11',
-                    mockito: 'org.mockito:mockito-all:1.9.5',
+                    junit: 'junit:junit:4.12',
+                    mockito: 'org.mockito:mockito-core:2.16.0',
                     mtc: 'com.googlecode.multithreadedtc:multithreadedtc:1.01',
-                    makeiteasy: 'com.natpryce:make-it-easy:3.1.0',
+                    makeiteasy: 'com.natpryce:make-it-easy:4.0.1',
                     assertj: 'org.assertj:assertj-core:1.6.1'
             ],
 
