@@ -1,0 +1,4 @@
+dependencies {
+    testCompile libs.test.mtc
+    testCompile(libs.test.makeiteasy) { exclude group: "junit" }
+}

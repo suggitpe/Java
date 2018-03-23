@@ -1,0 +1,6 @@
+dependencies {
+    compile libs.tibjmsadmin
+
+    runtime libs.jms,
+            libs.tibjms
+}

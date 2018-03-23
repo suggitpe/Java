@@ -1,5 +1,6 @@
 include 'guice',
         'concurrency',
+        'encryption',
         'hibernate',
         'hibernate-search',
         'jaxb:testclient',

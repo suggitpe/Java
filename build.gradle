@@ -12,8 +12,8 @@ subprojects { subprojects ->
     sourceCompatibility = 1.8
 
     repositories {
-        jcenter()
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
@@ -30,105 +30,4 @@ subprojects { subprojects ->
 task wrapper(type: Wrapper) {
     description = 'Generates gradlew scripts for NIX and win envs'
     gradleVersion = '4.5.1'
-}
-
-project('sandbox:guice') {
-    dependencies {
-    }
-}
-
-project('sandbox:hibernate') {
-    dependencies {
-        compile libs.hibernate.core
-
-        runtime libs.spring.context,
-                libs.commons.dbcp,
-                libs.hsqldb
-
-        testCompile libs.spring.test,
-                libs.spring.orm,
-                libs.test.mtc
-    }
-}
-
-project('sandbox:jaxb') {
-    subprojects {
-        apply from: "$rootDir/gradle/jaxb.gradle"
-        compileJava.dependsOn xjc
-    }
-}
-
-project('sandbox:jms') {
-    dependencies {
-        compile libs.jms
-
-        testCompile libs.activemq
-    }
-}
-
-project('sandbox:jmx') {
-    dependencies {
-        compile libs.jini,
-                libs.jmxtools
-
-    }
-}
-
-project('sandbox:oddsandsods') {
-    dependencies {
-        compile libs.log4j
-    }
-
-}
-
-project('sandbox:patterns') {
-    dependencies {
-        testCompile libs.spring.test,
-                libs.spring.context
-    }
-}
-
-project('sandbox:spring') {
-    dependencies {
-        compile libs.spring.jdbc
-        libs.spring.context
-
-        testCompile libs.spring.context
-
-        runtime libs.commons.dbcp,
-                libs.hsqldb
-    }
-}
-
-project('sandbox:spring-integration') {
-    dependencies {
-        compile libs.spring.integration_core,
-                libs.spring.integration_jms,
-                libs.spring.integration_jpa
-
-        testCompile libs.spring.integration_test
-
-    }
-}
-
-project('sandbox:test') {
-    dependencies {
-        testCompile libs.test.mtc
-        testCompile(libs.test.makeiteasy) { exclude group: "junit" }
-    }
-}
-
-project('sandbox:tibco') {
-    dependencies {
-        compile libs.tibjmsadmin
-
-        runtime libs.jms,
-                libs.tibjms
-    }
-}
-
-project('sandbox:active-mq') {
-    dependencies {
-        compile libs.activemq
-    }
 }

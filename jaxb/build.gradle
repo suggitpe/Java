@@ -1,0 +1,4 @@
+subprojects {
+    apply from: "$rootDir/gradle/jaxb.gradle"
+    compileJava.dependsOn xjc
+}

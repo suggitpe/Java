@@ -1,0 +1,4 @@
+dependencies {
+    testCompile libs.spring.test,
+            libs.spring.context
+}

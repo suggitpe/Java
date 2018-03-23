@@ -1,0 +1,8 @@
+dependencies {
+    compile libs.spring.integration_core,
+            libs.spring.integration_jms,
+            libs.spring.integration_jpa
+
+    testCompile libs.spring.integration_test
+
+}

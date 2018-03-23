@@ -1,0 +1,9 @@
+dependencies {
+    compile libs.spring.jdbc
+    libs.spring.context
+
+    testCompile libs.spring.context
+
+    runtime libs.commons.dbcp,
+            libs.hsqldb
+}

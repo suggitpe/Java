@@ -1,0 +1,11 @@
+dependencies {
+    compile libs.hibernate.core
+
+    runtime libs.spring.context,
+            libs.commons.dbcp,
+            libs.hsqldb
+
+    testCompile libs.spring.test,
+            libs.spring.orm,
+            libs.test.mtc
+}
